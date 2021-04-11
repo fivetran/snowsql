@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches:
+    tags:
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - name: build
+        run: |
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker buildx build --file Dockerfile.build --output out --platform linux/amd64 .
+          # for linux/arm64 it is very slow and we can't use it now
+
+      - name: move file
+        run: |
+          mkdir -p linux_x86_64
+          mv out/linux/amd64/remote_server_executable linux_x86_64
+          echo '' > nothing.txt
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          if-no-files-found: error
+          path: |
+            nothing.txt
+            linux_x86_64/
+          # linux_arm_64/
+          # nothing.txt needs to preserve directory structure
+
+  build-macos:
+    runs-on: macos-11
+  
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+          
+      - name: build
+        run: npx @bazel/bazelisk build --copt "-O3" --config=clang //zetasql/local_service:remote_server_executable
+
+      - name: move file
+        run: |
+          mkdir -p darwin_x86_64
+          mv bazel-bin/zetasql/local_service/remote_server_executable darwin_x86_64
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          if-no-files-found: error
+          path: |
+            darwin_x86_64/
+            **/*.proto

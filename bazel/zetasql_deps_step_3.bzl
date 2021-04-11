@@ -29,4 +29,3 @@ def zetasql_deps_step_3():
         java = True,
         cc = True,
     )
-    google_common_workspace_rules()
