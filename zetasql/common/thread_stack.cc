@@ -41,6 +41,9 @@
 #include "absl/strings/str_format.h"
 #include "absl/strings/string_view.h"
 
+// extern "C" ABSL_ATTRIBUTE_WEAK bool gwpsan_get_stack_limits(std::uintptr_t* lo,
+//                                                             std::uintptr_t* hi);
+
 ABSL_FLAG(size_t, zetasql_enough_stack_bytes,
           PTHREAD_STACK_MIN, "Error if available stack falls below this"
 );
@@ -105,6 +108,10 @@ ThreadStackEstimatedUsage ThreadStackStats::ResetPeakStackUsedBytes() {
   return reset;
 }
 void ThreadStackStats::ThreadStackUpdateAvailableBytes() {
+  // if (gwpsan_get_stack_limits) {
+  //   // Stack bounds can change under gwpsan, so update them every time.
+  //   gwpsan_get_stack_limits(&thread_stack_low_, &thread_stack_high_);
+  // }
   // Using a temporary on the stack to guess the stack location doesn't work
   // in asan + opt mode.
   std::uintptr_t stack_ptr =
