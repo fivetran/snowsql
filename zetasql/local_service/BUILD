@@ -216,6 +216,19 @@ cc_library(
 )
 
 cc_binary(
+    name = "remote_server_executable",
+    srcs = [
+        "remote_server.cc",
+    ],
+    linkstatic = 1,
+    visibility = ["//visibility:public"],
+    deps = [
+        ":local_service_grpc",
+        "@com_github_grpc_grpc//:grpc++",
+    ],
+)
+
+cc_binary(
     name = "liblocal_service_jni.so",
     linkshared = 1,
     deps = [":local_service_jni"],
