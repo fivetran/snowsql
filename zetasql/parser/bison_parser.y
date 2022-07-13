@@ -832,6 +832,7 @@ using zetasql::ASTDropStatement;
 %token KW_TABLESAMPLE "TABLESAMPLE"
 %token KW_THEN "THEN"
 %token KW_TO "TO"
+%token KW_TOP "TOP"
 %token KW_TRUE "TRUE"
 %token KW_UNBOUNDED "UNBOUNDED"
 %token KW_UNION "UNION"
