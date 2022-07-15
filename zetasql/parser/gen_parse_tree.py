@@ -8319,6 +8319,21 @@ def main(argv):
       ])
 
   gen.AddNode(
+      name='ASTTop',
+      tag_id=337,
+      parent='ASTNode',
+      fields=[
+          Field(
+              'top',
+              'ASTExpression',
+              tag_id=2,
+              field_loader=FieldLoaderMethod.REQUIRED,
+              comment="""
+          The TOP value. Never NULL.
+              """),
+      ])
+
+  gen.AddNode(
       name='ASTTtlClause',
       tag_id=348,
       parent='ASTNode',
