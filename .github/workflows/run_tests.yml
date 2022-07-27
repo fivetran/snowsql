@@ -30,6 +30,9 @@ jobs:
           path: "~/.cache/bazel"
           key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
+      - name: Bazel build
+        run: bazel build //...
+
       - name: Run analyzer tests
         run: |
           bazel test --test_output=all //zetasql/analyzer:container_hash_equals_test
