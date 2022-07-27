@@ -7,21 +7,43 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: macos-latest
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Install Bazel
-        uses: abhinavsingh/setup-bazel@v3
+      - name: set environment variable with bazel version
+        run: echo "BAZEL_VERSION=$(cat .bazelversion)" >> $GITHUB_ENV
+
+      - name: Setup bazelisk
+        uses: bazelbuild/setup-bazelisk@v2
+    
+      - name: Mount bazel cache
+        uses: actions/cache@v3
         with:
-          version: 4.0.0
+          path: "~/.cache/bazel"
+          key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
-      # - name: Build
-      #   run: bazel build //zetasql/parser:all -c dbg --spawn_strategy=local
+      - name: Run analyzer tests
+        run: |
+          bazel test --test_output=all //zetasql/analyzer:container_hash_equals_test
+          bazel test --test_output=all //zetasql/analyzer:resolver_test
+          bazel test --test_output=all //zetasql/analyzer:analyzer_test
+          bazel test --test_output=all //zetasql/analyzer:filter_fields_path_validator_test
+          bazel test --test_output=all //zetasql/analyzer:substitute_test
+          bazel test --test_output=all //zetasql/analyzer:input_argument_type_resolver_helper_test
+          bazel test --test_output=all //zetasql/analyzer:analyzer_test_options_test
 
-      - name: Run analyzer test
-        run: bazel test --test_output=all //zetasql/analyzer:container_hash_equals_test
-
-      - name: Run parser test
-        run: bazel test --test_output=all //zetasql/parser:parse_tree_errors_test
+      - name: Run parser tests
+        run: |
+          bazel test --test_output=all //zetasql/parser:flex_istream_test
+          bazel test --test_output=all //zetasql/parser:parse_tree_test
+          bazel test --test_output=all //zetasql/parser:parse_tree_errors_test
+          bazel test --test_output=all //zetasql/parser:unparser_test
+          bazel test --test_output=all //zetasql/parser:keywords_test
