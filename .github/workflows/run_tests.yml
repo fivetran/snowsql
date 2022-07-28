@@ -10,7 +10,12 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            cache-path: ~/.cache/bazel
+
+          - os: macos-latest
+            cache-path: /private/var/tmp
 
     runs-on: ${{ matrix.os }}
 
@@ -27,7 +32,7 @@ jobs:
       - name: Mount bazel cache
         uses: actions/cache@v3
         with:
-          path: "~/.cache/bazel"
+          path: "${{ matrix.cache-path }}"
           key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
       - name: Bazel build
