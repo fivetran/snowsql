@@ -13,13 +13,13 @@ jobs:
         include:
           - os: ubuntu-latest
             cache-path: ~/.cache/bazel
-            build-command: bazel build //zetasql/parser/...
-            test-command: bazel test //zetasql/parser/...
+            build-command: bazel build //zetasql/...
+            test-command: bazel test //zetasql/...
 
           - os: macos-latest
             cache-path: /private/var/tmp
-            build-command: bazel build //zetasql/parser/... --features=-supports_dynamic_linker
-            test-command: bazel test //zetasql/parser/... --features=-supports_dynamic_linker
+            build-command: bazel build //zetasql/... --features=-supports_dynamic_linker
+            test-command: bazel test //zetasql/... --features=-supports_dynamic_linker
 
     runs-on: ${{ matrix.os }}
 
