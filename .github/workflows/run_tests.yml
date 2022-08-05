@@ -13,12 +13,12 @@ jobs:
         include:
           - os: ubuntu-latest
             cache-path: ~/.cache/bazel
-            build-command: bazel build //zetasql/...
+            build-command: bazel build //zetasql/local_service:libremote_server.so
             test-command: bazel test //zetasql/...
 
           - os: macos-latest
             cache-path: /private/var/tmp
-            build-command: bazel build //zetasql/... --features=-supports_dynamic_linker
+            build-command: bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
             test-command: bazel test //zetasql/... --features=-supports_dynamic_linker
 
     runs-on: ${{ matrix.os }}
