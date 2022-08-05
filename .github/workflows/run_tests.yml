@@ -13,9 +13,13 @@ jobs:
         include:
           - os: ubuntu-latest
             cache-path: ~/.cache/bazel
+            build-command: bazel build //zetasql/parser/...
+            test-command: bazel test //zetasql/parser/...
 
           - os: macos-latest
             cache-path: /private/var/tmp
+            build-command: bazel build //zetasql/parser/... --features=-supports_dynamic_linker
+            test-command: bazel test //zetasql/parser/... --features=-supports_dynamic_linker
 
     runs-on: ${{ matrix.os }}
 
@@ -36,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
       - name: Bazel build
-        run: bazel build ...
+        run: ${{ matrix.build-command }}
 
       - name: Run bazel tests
-        run: bazel test ...
+        run: ${{ matrix.test-command }}
