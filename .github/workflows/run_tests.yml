@@ -14,12 +14,24 @@ jobs:
           - os: ubuntu-latest
             cache-path: ~/.cache/bazel
             build-command: bazel build //zetasql/local_service:libremote_server.so
-            test-command: bazel test //zetasql/...
+            test-command: |
+              bazel test //zetasql/analyzer/...
+              bazel test //zetasql/base/...
+              bazel test //zetasql/common/...
+              bazel test //zetasql/compliance/...
+              bazel test //zetasql/local_service/...
+              bazel test //zetasql/parser/...
 
           - os: macos-latest
             cache-path: /private/var/tmp
             build-command: bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
-            test-command: bazel test //zetasql/... --features=-supports_dynamic_linker
+            test-command: |
+              bazel test //zetasql/analyzer/... --features=-supports_dynamic_linker
+              bazel test //zetasql/base/... --features=-supports_dynamic_linker
+              bazel test //zetasql/common/... --features=-supports_dynamic_linker
+              bazel test //zetasql/compliance/... --features=-supports_dynamic_linker
+              bazel test //zetasql/local_service/... --features=-supports_dynamic_linker
+              bazel test //zetasql/parser/... --features=-supports_dynamic_linker
 
     runs-on: ${{ matrix.os }}
 
