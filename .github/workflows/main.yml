@@ -13,6 +13,7 @@ jobs:
         include:
           - os: ubuntu-latest
             build-command: bazel build //zetasql/local_service:libremote_server.so
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
             test-command: |
               bazel test //zetasql/analyzer/...
               bazel test //zetasql/base/...
@@ -23,6 +24,7 @@ jobs:
 
           - os: macos-latest
             build-command: bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
             test-command: | # Temporary skip 2 tests for MacOS
               bazel test --features=-supports_dynamic_linker -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
               bazel test --features=-supports_dynamic_linker //zetasql/base/...
@@ -62,3 +64,18 @@ jobs:
 
       - name: Bazel test
         run: ${{ matrix.test-command }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}
+          path: ${{ matrix.lib-path }}
+
+  release:
+    needs: ["build"]
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: TODO
