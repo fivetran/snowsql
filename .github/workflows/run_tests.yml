@@ -39,8 +39,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: set environment variable with bazel version
+      - name: Set environment variable with bazel version
         run: echo "BAZEL_VERSION=$(cat .bazelversion)" >> $GITHUB_ENV
+
+      - name: Set environment variable with user name
+        if: matrix.os == 'macos-latest'
+        run: echo "USER_NAME=$(whoami)" >> $GITHUB_ENV
 
       - name: Setup bazelisk
         uses: bazelbuild/setup-bazelisk@v2
@@ -48,11 +52,11 @@ jobs:
       - name: Mount bazel cache
         uses: actions/cache@v3
         with:
-          path: "${{ matrix.cache-path }}"
+          path: "${{ matrix.cache-path }}/_bazel_${{ env.USER_NAME }}"
           key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
       - name: Bazel build
         run: ${{ matrix.build-command }}
 
-      - name: Run bazel tests
+      - name: Bazel test
         run: ${{ matrix.test-command }}
