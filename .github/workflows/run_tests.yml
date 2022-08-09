@@ -7,12 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  build:
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
-            cache-path: ~/.cache/bazel
             build-command: bazel build //zetasql/local_service:libremote_server.so
             test-command: |
               bazel test //zetasql/analyzer/...
@@ -23,7 +22,6 @@ jobs:
               bazel test //zetasql/parser/...
 
           - os: macos-latest
-            cache-path: /private/var/tmp
             build-command: bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
             test-command: | # Temporary skip 2 tests for MacOS
               bazel test --features=-supports_dynamic_linker -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
@@ -42,9 +40,13 @@ jobs:
       - name: Set environment variable with bazel version
         run: echo "BAZEL_VERSION=$(cat .bazelversion)" >> $GITHUB_ENV
 
-      - name: Set environment variable with user name
+      - name: Set environment variable with cache path (ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: echo "CACHE_PATH=~/.cache/bazel" >> $GITHUB_ENV
+
+      - name: Set environment variable with cache path (macos)
         if: matrix.os == 'macos-latest'
-        run: echo "USER_NAME=$(whoami)" >> $GITHUB_ENV
+        run: echo "CACHE_PATH=/private/var/tmp/_bazel_$(whoami)" >> $GITHUB_ENV
 
       - name: Setup bazelisk
         uses: bazelbuild/setup-bazelisk@v2
@@ -52,7 +54,7 @@ jobs:
       - name: Mount bazel cache
         uses: actions/cache@v3
         with:
-          path: "${{ matrix.cache-path }}/_bazel_${{ env.USER_NAME }}"
+          path: "${{ env.CACHE_PATH }}"
           key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
       - name: Bazel build
