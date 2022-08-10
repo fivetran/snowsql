@@ -33,10 +33,10 @@ cc_proto_library(
     deps = [":options_proto"],
 )
 
-# java_proto_library(
-#     name = "options_java_proto",
-#     deps = [":options_proto"],
-# )
+java_proto_library(
+    name = "options_java_proto",
+    deps = [":options_proto"],
+)
 
 proto_library(
     name = "simple_catalog_proto",
@@ -55,10 +55,10 @@ cc_proto_library(
     deps = [":simple_catalog_proto"],
 )
 
-# java_proto_library(
-#     name = "simple_catalog_java_proto",
-#     deps = [":simple_catalog_proto"],
-# )
+java_proto_library(
+    name = "simple_catalog_java_proto",
+    deps = [":simple_catalog_proto"],
+)
 
 proto_library(
     name = "function_proto",
@@ -81,10 +81,10 @@ cc_proto_library(
     deps = [":function_proto"],
 )
 
-# java_proto_library(
-#     name = "function_java_proto",
-#     deps = [":function_proto"],
-# )
+java_proto_library(
+    name = "function_java_proto",
+    deps = [":function_proto"],
+)
 
 proto_library(
     name = "internal_error_location_proto",
@@ -107,7 +107,7 @@ cc_proto_library(
     deps = [":anon_output_with_report_proto"],
 )
 
-# java_proto_library(
-#     name = "anon_output_with_report_java_proto",
-#     deps = [":anon_output_with_report_proto"],
-# )
+java_proto_library(
+    name = "anon_output_with_report_java_proto",
+    deps = [":anon_output_with_report_proto"],
+)

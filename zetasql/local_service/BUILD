@@ -15,7 +15,7 @@
 #
 
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
-# load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
+load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
 
 # ZetaSQL Server
 package(default_visibility = ["//zetasql/base:zetasql_implementation"])
@@ -189,21 +189,21 @@ cc_test(
     ],
 )
 
-# java_proto_library(
-#     name = "local_service_java_proto",
-#     deps = [":local_service_proto"],
-# )
+java_proto_library(
+    name = "local_service_java_proto",
+    deps = [":local_service_proto"],
+)
 
-# java_grpc_library(
-#     name = "local_service_java_grpc",
-#     srcs = [":local_service_proto"],
-#     deps = [
-#         ":local_service_java_proto",
-#         "//zetasql/proto:options_java_proto",
-#         "//zetasql/public:parse_resume_location_java_proto",
-#         "//zetasql/public:simple_table_java_proto",
-#     ],
-# )
+java_grpc_library(
+    name = "local_service_java_grpc",
+    srcs = [":local_service_proto"],
+    deps = [
+        ":local_service_java_proto",
+        "//zetasql/proto:options_java_proto",
+        "//zetasql/public:parse_resume_location_java_proto",
+        "//zetasql/public:simple_table_java_proto",
+    ],
+)
 
 cc_library(
     name = "local_service_jni",

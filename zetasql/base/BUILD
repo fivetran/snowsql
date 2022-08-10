@@ -23,8 +23,8 @@ package(
 package_group(
     name = "zetasql_implementation",
     packages = [
-        # "//java/...",
-        # "//javatests/...",
+        "//java/...",
+        "//javatests/...",
         "//zetasql/...",
     ],
 )

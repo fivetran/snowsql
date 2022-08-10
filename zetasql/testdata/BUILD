@@ -51,11 +51,11 @@ cc_proto_library(
     deps = [":bad_test_schema_proto"],
 )
 
-# java_proto_library(
-#     name = "bad_test_schema_java_proto",
-#     testonly = 1,
-#     deps = [":bad_test_schema_proto"],
-# )
+java_proto_library(
+    name = "bad_test_schema_java_proto",
+    testonly = 1,
+    deps = [":bad_test_schema_proto"],
+)
 
 proto_library(
     name = "test_schema_proto",
@@ -75,10 +75,10 @@ cc_proto_library(
     deps = [":test_schema_proto"],
 )
 
-# java_proto_library(
-#     name = "test_schema_java_proto",
-#     deps = [":test_schema_proto"],
-# )
+java_proto_library(
+    name = "test_schema_java_proto",
+    deps = [":test_schema_proto"],
+)
 
 proto_library(
     name = "test_proto3_proto",
@@ -105,10 +105,10 @@ cc_proto_library(
     deps = [":test_proto3_proto"],
 )
 
-# java_proto_library(
-#     name = "test_proto3_java_proto",
-#     deps = [":test_proto3_proto"],
-# )
+java_proto_library(
+    name = "test_proto3_java_proto",
+    deps = [":test_proto3_proto"],
+)
 
 proto_library(
     name = "test_packageless_proto",
@@ -125,11 +125,11 @@ cc_proto_library(
     deps = [":test_packageless_proto"],
 )
 
-# java_proto_library(
-#     name = "test_packageless_java_proto",
-#     testonly = 1,
-#     deps = [":test_packageless_proto"],
-# )
+java_proto_library(
+    name = "test_packageless_java_proto",
+    testonly = 1,
+    deps = [":test_packageless_proto"],
+)
 
 proto_library(
     name = "ambiguous_has_proto",
@@ -145,11 +145,11 @@ cc_proto_library(
     deps = [":ambiguous_has_proto"],
 )
 
-# java_proto_library(
-#     name = "ambiguous_has_java_proto",
-#     testonly = 1,
-#     deps = [":ambiguous_has_proto"],
-# )
+java_proto_library(
+    name = "ambiguous_has_java_proto",
+    testonly = 1,
+    deps = [":ambiguous_has_proto"],
+)
 
 cc_library(
     name = "sample_annotation",
