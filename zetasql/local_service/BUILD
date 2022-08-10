@@ -205,18 +205,18 @@ cc_test(
 #     ],
 # )
 
-# cc_library(
-#     name = "local_service_jni",
-#     srcs = ["local_service_jni.cc"],
-#     hdrs = ["local_service_jni.h"],
-#     linkstatic = 1,
-#     deps = [
-#         ":local_service_grpc",
-#         "//zetasql/jdk:jni",
-#         "@com_github_grpc_grpc//:grpc++",
-#     ],
-#     alwayslink = 1,
-# )
+cc_library(
+    name = "local_service_jni",
+    srcs = ["local_service_jni.cc"],
+    hdrs = ["local_service_jni.h"],
+    linkstatic = 1,
+    deps = [
+        ":local_service_grpc",
+        "//zetasql/jdk:jni",
+        "@com_github_grpc_grpc//:grpc++",
+    ],
+    alwayslink = 1,
+)
 
 cc_library(
     name = "remote_server",
@@ -229,17 +229,17 @@ cc_library(
     alwayslink = 1,
 )
 
-# cc_binary(
-#     name = "liblocal_service_jni.so",
-#     linkshared = 1,
-#     deps = [":local_service_jni"],
-# )
+cc_binary(
+    name = "liblocal_service_jni.so",
+    linkshared = 1,
+    deps = [":local_service_jni"],
+)
 
-# cc_binary(
-#     name = "liblocal_service_jni.dylib",
-#     linkshared = 1,
-#     deps = [":local_service_jni"],
-# )
+cc_binary(
+    name = "liblocal_service_jni.dylib",
+    linkshared = 1,
+    deps = [":local_service_jni"],
+)
 
 cc_binary(
     name = "libremote_server.so",
