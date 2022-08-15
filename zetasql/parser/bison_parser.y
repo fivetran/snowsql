@@ -4447,7 +4447,7 @@ select:
     opt_select_as_clause select_list opt_from_clause opt_clauses_following_from
       {
         auto* select =
-            MAKE_NODE(ASTSelect, @$, {$2, $4, $6, $7, $8, $9.where, $9.group_by,
+            MAKE_NODE(ASTSelect, @$, {$2, $3, $4, $6, $7, $8, $9.where, $9.group_by,
                                       $9.having, $9.qualify, $9.window});
         select->set_distinct($5 == AllOrDistinctKeyword::kDistinct);
         $$ = select;

@@ -8043,6 +8043,24 @@ ResolvedArgumentRef(y)
               ignorable=IGNORABLE_DEFAULT)
       ])
 
+  gen.AddNode(
+      name='ResolvedTopScan',
+      tag_id=205,
+      parent='ResolvedScan',
+      comment="""
+      Constrains the maximum number of rows returned by a statement or subquery.
+
+      The argument to TOP <int64> must be non-negative
+      integer literal or (possibly casted) query parameter.  Query
+      parameter value must be checked at run-time by ZetaSQL compliant
+      backend systems.
+              """,
+      fields=[
+          Field(
+              'input_scan', 'ResolvedScan', tag_id=2, propagate_order=True),
+          Field('top', 'ResolvedExpr', tag_id=3)
+      ])
+
   gen.Generate(
       input_file_paths=input_templates,
       output_file_paths=output_files,
