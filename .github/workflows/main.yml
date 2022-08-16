@@ -15,29 +15,15 @@ jobs:
             bazel-cache-path: ~/.cache/bazel
             build-command: bazel build //zetasql/local_service:libremote_server.so
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            test-command: |
-              bazel test //zetasql/analyzer/...
-              bazel test //zetasql/base/...
-              bazel test //zetasql/common/...
-              bazel test //zetasql/compliance/...
-              bazel test //zetasql/local_service/...
-              bazel test //zetasql/parser/...
+            artifacts-archive: libremote_server.so.tar.gz
 
           - os: macos-latest
             bazel-cache-path: /private/var/tmp/_bazel_*
-            build-command: bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
+            build-command: |
+              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
+              install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: | # Temporary skip 2 tests for MacOS
-              bazel test --features=-supports_dynamic_linker -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
-              bazel test --features=-supports_dynamic_linker //zetasql/base/...
-              bazel test --features=-supports_dynamic_linker //zetasql/common/...
-              bazel test --features=-supports_dynamic_linker //zetasql/compliance/...
-              bazel test --features=-supports_dynamic_linker -- //zetasql/local_service/... \
-                -//zetasql/local_service:libremote_server.so \
-                -//zetasql/local_service:liblocal_service_jni.so \
-                -//zetasql/local_service:liblocal_service_jni.dylib \
-                -//zetasql/local_service:local_service_jni
-              bazel test --features=-supports_dynamic_linker //zetasql/parser/...
+            artifacts-archive: libremote_server.dylib.tar.gz
 
     runs-on: ${{ matrix.os }}
 
@@ -64,17 +50,70 @@ jobs:
       - name: Bazel build
         run: ${{ matrix.build-command }}
 
-      - name: Bazel test
-        run: ${{ matrix.test-command }}
+      - name: Archive build artifacts
+        run: tar -cvz -f ${{ matrix.artifacts-archive }} -C ${{ matrix.lib-path }}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}
-          path: ${{ matrix.lib-path }}
+          path: ${{ matrix.artifacts-archive }}
+
+  test:
+    needs: build
+
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            bazel-cache-path: ~/.cache/bazel
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
+            test-command: |
+              bazel test //zetasql/analyzer/...
+              bazel test //zetasql/base/...
+              bazel test //zetasql/common/...
+              bazel test //zetasql/compliance/...
+              bazel test //zetasql/local_service/...
+              bazel test //zetasql/parser/...
+
+          - os: macos-latest
+            bazel-cache-path: /private/var/tmp/_bazel_*
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
+            test-command: | # Temporary skip 2 tests for MacOS
+              bazel test --features=-supports_dynamic_linker -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
+              bazel test --features=-supports_dynamic_linker //zetasql/base/...
+              bazel test --features=-supports_dynamic_linker //zetasql/common/...
+              bazel test --features=-supports_dynamic_linker //zetasql/compliance/...
+              bazel test --features=-supports_dynamic_linker -- //zetasql/local_service/... \
+                -//zetasql/local_service:libremote_server.so \
+                -//zetasql/local_service:liblocal_service_jni.so \
+                -//zetasql/local_service:liblocal_service_jni.dylib \
+                -//zetasql/local_service:local_service_jni
+              bazel test --features=-supports_dynamic_linker //zetasql/parser/...
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Mount bazel cache
+        id: mount-bazel-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ matrix.bazel-cache-path }}
+            ./bazel-bin
+            ./bazel-out
+            ./bazel-snowsql
+          key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
+
+      - name: Fail if cache not hit
+        if: steps.mount-bazel-cache.outputs.cache-hit != 'true'
+        run: exit 1
+
+      - name: Bazel test
+        run: ${{ matrix.test-command }}
 
   release:
-    needs: ["build"]
+    needs: ["build", "test"]
     if: startsWith(github.ref, 'refs/tags/v')
 
     runs-on: ubuntu-latest
