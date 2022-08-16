@@ -3824,6 +3824,9 @@ absl::Status Validator::ValidateResolvedScanOrdering(const ResolvedScan* scan) {
     case RESOLVED_LIMIT_OFFSET_SCAN:
       input_scan = scan->GetAs<ResolvedLimitOffsetScan>()->input_scan();
       break;
+    case RESOLVED_TOP_SCAN:
+      input_scan = scan->GetAs<ResolvedTopScan>()->input_scan();
+      break;
     case RESOLVED_WITH_SCAN:
       input_scan = scan->GetAs<ResolvedWithScan>()->query();
       break;
