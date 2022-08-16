@@ -12,6 +12,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
+            bazel-cache-path: ~/.cache/bazel
             build-command: bazel build //zetasql/local_service:libremote_server.so
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
             test-command: |
@@ -23,6 +24,7 @@ jobs:
               bazel test //zetasql/parser/...
 
           - os: macos-latest
+            bazel-cache-path: /private/var/tmp/_bazel_*
             build-command: bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
             test-command: | # Temporary skip 2 tests for MacOS
@@ -46,21 +48,17 @@ jobs:
       - name: Set environment variable with bazel version
         run: echo "BAZEL_VERSION=$(cat .bazelversion)" >> $GITHUB_ENV
 
-      - name: Set environment variable with cache path (ubuntu)
-        if: matrix.os == 'ubuntu-latest'
-        run: echo "CACHE_PATH=~/.cache/bazel" >> $GITHUB_ENV
-
-      - name: Set environment variable with cache path (macos)
-        if: matrix.os == 'macos-latest'
-        run: echo "CACHE_PATH=/private/var/tmp/_bazel_$(whoami)" >> $GITHUB_ENV
-
       - name: Setup bazelisk
         uses: bazelbuild/setup-bazelisk@v2
     
       - name: Mount bazel cache
         uses: actions/cache@v3
         with:
-          path: "${{ env.CACHE_PATH }}"
+          path: |
+            ${{ matrix.bazel-cache-path }}
+            ./bazel-bin
+            ./bazel-out
+            ./bazel-snowsql
           key: ${{ runner.os }}-${{ env.BAZEL_VERSION }}-bazel
 
       - name: Bazel build
