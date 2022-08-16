@@ -1907,6 +1907,19 @@ absl::Status Validator::ValidateResolvedLimitOffsetScan(
   return absl::OkStatus();
 }
 
+absl::Status Validator::ValidateResolvedTopScan(
+    const ResolvedTopScan* scan,
+    const std::set<ResolvedColumn>& visible_parameters) {
+  PushErrorContext push(this, scan);
+
+  VALIDATOR_RET_CHECK(scan->top() != nullptr);
+  ZETASQL_RETURN_IF_ERROR(ValidateArgumentIsInt64Constant(scan->top()));
+
+  ZETASQL_RETURN_IF_ERROR(ValidateResolvedScan(scan->input_scan(),
+                                       visible_parameters));
+  return absl::OkStatus();
+}
+
 absl::Status Validator::ValidateResolvedProjectScan(
     const ResolvedProjectScan* scan,
     const std::set<ResolvedColumn>& visible_parameters) {
@@ -3682,6 +3695,10 @@ absl::Status Validator::ValidateResolvedScan(
     case RESOLVED_LIMIT_OFFSET_SCAN:
       scan_subtype_status = ValidateResolvedLimitOffsetScan(
           scan->GetAs<ResolvedLimitOffsetScan>(), visible_parameters);
+      break;
+    case RESOLVED_TOP_SCAN:
+      scan_subtype_status = ValidateResolvedTopScan(
+          scan->GetAs<ResolvedTopScan>(), visible_parameters);
       break;
     case RESOLVED_WITH_SCAN:
       scan_subtype_status = ValidateResolvedWithScan(
