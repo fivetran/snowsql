@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
@@ -63,6 +64,7 @@ jobs:
     needs: build
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
@@ -111,6 +113,13 @@ jobs:
 
       - name: Bazel test
         run: ${{ matrix.test-command }}
+
+      - name: Upload test logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test logs ${{ matrix.os }}
+          path: ./bazel-testlogs/*
 
   release:
     needs: ["build", "test"]
