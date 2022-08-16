@@ -51,7 +51,7 @@ jobs:
         run: ${{ matrix.build-command }}
 
       - name: Archive build artifacts
-        run: tar -cvz -f ${{ matrix.artifacts-archive }} -C ${{ matrix.lib-path }}
+        run: tar -cvz -f ${{ matrix.artifacts-archive }} ${{ matrix.lib-path }}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
