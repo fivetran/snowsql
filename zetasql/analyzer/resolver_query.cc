@@ -4565,7 +4565,7 @@ absl::Status Resolver::ResolveFromClauseAndCreateScan(
     for (int i = 0; i < select->num_children(); ++i) {
       const ASTNode* child = select->child(i);
       if (child != select->select_list() && child != select->select_as() &&
-          child != select->hint()) {
+          child != select->hint() && child != select->top()) {
         ZETASQL_RET_CHECK_FAIL() << "Select without FROM clause has child of type "
                          << child->GetNodeKindString()
                          << " that wasn't caught with an error";
