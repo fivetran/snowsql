@@ -84,7 +84,6 @@ class QueryExpression {
   bool CanSetLimitClause() const;
   bool CanSetOffsetClause() const;
   bool CanSetTopClause() const;
-  bool CanSetTopClause() const;
   bool CanSetWithAnonymizationClause() const;
   bool CanSetPivotClause() const;
   bool CanSetUnpivotClause() const;
