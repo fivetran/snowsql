@@ -88,13 +88,11 @@ std::string QueryExpression::GetSQLQuery() const {
                         ? ""
                         : absl::StrCat(anonymization_options_, " "),
                     query_hints_.empty() ? "" : absl::StrCat(query_hints_, " "),
+                    top_.empty() ? "" : absl::StrCat("TOP ", top_, " "),
                     select_as_modifier_.empty()
                         ? ""
                         : absl::StrCat(select_as_modifier_, " "),
-                    JoinListWithAliases(select_list_, ", "),
-                    top_.empty()
-                        ? ""
-                        : absl::StrCat(" TOP ", top_));
+                    JoinListWithAliases(select_list_, ", "));
   }
 
   if (!set_op_scan_list_.empty()) {
