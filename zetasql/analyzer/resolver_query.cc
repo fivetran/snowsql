@@ -791,14 +791,19 @@ absl::Status Resolver::AddRemainingScansForSelect(
         std::move(*current_scan));
   }
 
-  if (limit_offset != nullptr) {
-    ZETASQL_RETURN_IF_ERROR(ResolveLimitOffsetScan(
-        limit_offset, std::move(*current_scan), current_scan));
+  if (top != nullptr && limit_offset != nullptr) {
+    return MakeSqlErrorAt(limit_offset)
+           << "TOP and LIMIT are not allowed in one query";
   }
 
   if (top != nullptr) {
     ZETASQL_RETURN_IF_ERROR(ResolveTopScan(
         top, std::move(*current_scan), current_scan));
+  }
+
+  if (limit_offset != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(ResolveLimitOffsetScan(
+        limit_offset, std::move(*current_scan), current_scan));
   }
 
   // Check here, because if there is SELECT AS STRUCT or SELECT AS PROTO
