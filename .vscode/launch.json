@@ -5,17 +5,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      // "preLaunchTask": "Bazel Build (Debug)",
-      "name": "CodeLLDB",
+      "name": "Execute query",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/bazel-bin/${relativeFileDirname}/${fileBasenameNoExtension}",
+      "program": "${workspaceFolder}/bazel-bin/zetasql/tools/execute_query/execute_query",
       "args": ["select 1 + 1;"],
       "sourceMap": {
         ".": "${workspaceFolder}"
-      },      
-      // "stopOnEntry": true,
-      "preRunCommands": ["breakpoint set -f ${workspaceFolder}/zetasql/tools/execute_query/execute_query.cc -l 95", "breakpoint list --verbose"]
+      }
+    },
+    {
+      "name": "Execute test",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/bazel-bin/zetasql/analyzer/analyzer_aggregation_test",
+      "args": [
+        "--test_file=./zetasql/analyzer/testdata/aggregation.test"
+      ],
+      "sourceMap": {
+        ".": "${workspaceFolder}"
+      }
     }
   ]
 }
