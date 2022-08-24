@@ -226,6 +226,7 @@ constexpr KeywordInfoPOD kAllKeywords[] = {
     {"not", KW_NOT, kReserved},
     {"null", KW_NULL, kReserved},
     {"nulls", KW_NULLS, kReserved},
+    {"number", KW_NUMBER},
     {"numeric", KW_NUMERIC},
     {"of", KW_OF, kReserved},
     {"offset", KW_OFFSET},
