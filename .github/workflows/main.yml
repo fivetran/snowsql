@@ -16,7 +16,6 @@ jobs:
             bazel-cache-path: ~/.cache/bazel
             build-command: bazel build //zetasql/local_service:libremote_server.so
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            artifacts-archive: libremote_server.so.tar.gz
 
           - os: macos-latest
             bazel-cache-path: /private/var/tmp/_bazel_*
@@ -24,7 +23,6 @@ jobs:
               bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            artifacts-archive: libremote_server.dylib.tar.gz
 
     outputs:
       bazel-version: ${{ steps.set-bazel-version.outputs.bazel-version }}
@@ -58,13 +56,13 @@ jobs:
         run: ${{ matrix.build-command }}
 
       - name: Archive build artifacts
-        run: tar -cvzf ${{ matrix.artifacts-archive }} ${{ matrix.lib-path }}
+        run: tar -cvzf ${{ matrix.lib-path }}.tar.gz ${{ matrix.lib-path }}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}
-          path: ${{ matrix.artifacts-archive }}
+          path: ${{ matrix.lib-path }}.tar.gz
 
   test:
     needs: build
