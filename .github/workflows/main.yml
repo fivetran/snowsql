@@ -13,9 +13,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build //zetasql/local_service:libremote_server.so \
-              --remote_cache=https://storage.googleapis.com/bazel-snowsql \
-              --google_credentials=service_account_credentials.json
+            build-command: bazel build //zetasql/local_service:libremote_server.so --remote_cache=https://storage.googleapis.com/bazel-snowsql --google_credentials=service_account_credentials.json
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
             test-command: |
               bazel test //zetasql/analyzer/...
@@ -27,9 +25,7 @@ jobs:
 
           - os: macos-11
             build-command: |
-              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker \
-                --remote_cache=https://storage.googleapis.com/bazel-snowsql \
-                --google_credentials=service_account_credentials.json
+              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker --remote_cache=https://storage.googleapis.com/bazel-snowsql --google_credentials=service_account_credentials.json
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
             test-command: | # Temporary skip 2 tests for MacOS
