@@ -7,72 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-test:
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            bazel-cache-path: ~/.cache/bazel
             build-command: bazel build //zetasql/local_service:libremote_server.so
-            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-
-          - os: macos-latest
-            bazel-cache-path: /private/var/tmp/_bazel_*
-            build-command: |
-              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
-              install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
-            lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-
-    outputs:
-      bazel-version: ${{ steps.set-bazel-version.outputs.bazel-version }}
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set environment variable with bazel version
-        id: set-bazel-version
-        run: |
-          echo "::set-output name=bazel-version::$(cat .bazelversion)"
-          echo $(cat .bazelversion)
-
-      - name: Setup bazelisk
-        uses: bazelbuild/setup-bazelisk@v2
-    
-      - name: Mount bazel cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ${{ matrix.bazel-cache-path }}
-            ./bazel-bin
-            ./bazel-out
-            ./bazel-snowsql
-          key: ${{ runner.os }}-${{ steps.set-bazel-version.outputs.bazel-version }}-bazel
-
-      - name: Bazel build
-        run: ${{ matrix.build-command }}
-
-      - name: Archive build artifacts
-        run: tar -cvzf ${{ matrix.lib-path }}.tar.gz ${{ matrix.lib-path }}
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ runner.os }}
-          path: ${{ matrix.lib-path }}.tar.gz
-
-  test:
-    needs: build
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            bazel-cache-path: ~/.cache/bazel
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
             test-command: |
               bazel test //zetasql/analyzer/...
@@ -83,7 +24,9 @@ jobs:
               bazel test //zetasql/parser/...
 
           - os: macos-latest
-            bazel-cache-path: /private/var/tmp/_bazel_*
+            build-command: |
+              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker
+              install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
             test-command: | # Temporary skip 2 tests for MacOS
               bazel test --features=-supports_dynamic_linker -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
@@ -103,20 +46,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Mount bazel cache
-        id: mount-bazel-cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ${{ matrix.bazel-cache-path }}
-            ./bazel-bin
-            ./bazel-out
-            ./bazel-snowsql
-          key: ${{ runner.os }}-${{ needs.build.outputs.bazel-version }}-bazel
+      - name: Setup bazelisk
+        uses: bazelbuild/setup-bazelisk@v2
 
-      - name: Fail if cache not hit
-        if: steps.mount-bazel-cache.outputs.cache-hit != 'true'
-        run: exit 1
+      - name: Bazel build
+        run: ${{ matrix.build-command }}
 
       - name: Bazel test
         run: ${{ matrix.test-command }}
+
+      - name: Archive build artifacts
+        run: tar -cvzf ${{ matrix.lib-path }}.tar.gz ${{ matrix.lib-path }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}
+          path: ${{ matrix.lib-path }}.tar.gz
