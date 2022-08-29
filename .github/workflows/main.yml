@@ -25,7 +25,7 @@ jobs:
               bazel test //zetasql/local_service/...
               bazel test //zetasql/parser/...
 
-          - os: macos-latest
+          - os: macos-11
             build-command: |
               bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker \
                 --remote_cache=https://storage.googleapis.com/bazel-snowsql \
@@ -49,13 +49,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Install Python 2
-        if: matrix.os == 'macos-latest'
-        run: |
-          brew install python@2
-          which python
-          python --version
 
       - name: Setup bazelisk
         uses: bazelbuild/setup-bazelisk@v2
