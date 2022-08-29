@@ -46,6 +46,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install Python 2
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install python@2
+          which python
+          python --version
+
       - name: Setup bazelisk
         uses: bazelbuild/setup-bazelisk@v2
 
