@@ -49,6 +49,7 @@ jobs:
       - name: Install Python 2
         if: matrix.os == 'macos-latest'
         run: |
+          brew update
           brew install python@2
           which python
           python --version
