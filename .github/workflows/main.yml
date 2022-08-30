@@ -48,11 +48,9 @@ jobs:
 
       - name: Install Python 2
         if: matrix.os == 'macos-latest'
-        run: |
-          brew update
-          brew install python@2
-          which python
-          python --version
+        uses: actions/setup-python@v4
+        with:
+          python-version: '2.7.18'
 
       - name: Setup bazelisk
         uses: bazelbuild/setup-bazelisk@v2
