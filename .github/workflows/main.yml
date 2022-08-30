@@ -51,9 +51,9 @@ jobs:
         run: |
           brew update
           brew install pyenv
-          echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-          echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+          echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+          echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+          echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
           exec "$SHELL"
           pyenv install 2.7.18
           pyenv global 2.7.18
