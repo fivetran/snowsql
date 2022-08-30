@@ -46,23 +46,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install Python 2
-        if: matrix.os == 'macos-latest'
-        run: |
-          brew update
-          brew install pyenv
-          echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-          echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-          echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-          exec "$SHELL"
-          pyenv install 2.7.18
-          pyenv global 2.7.18
-          exec "$SHELL"
-          which python
-          python --version
-
-      - name: Setup bazelisk
-        uses: bazelbuild/setup-bazelisk@v2
+      - name: Install Bazel
+        uses: abhinavsingh/setup-bazel@v3
+        with:
+          version: 4.0.0
 
       - name: Prepare Google service account credentials
         run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
