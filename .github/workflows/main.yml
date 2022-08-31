@@ -1,40 +1,72 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches:
+    tags:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'  
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: macos-latest
+  build-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            build-command: bazel build //zetasql/local_service:libremote_server.so --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
+            test-command: |
+              bazel test //zetasql/analyzer/...
+              bazel test //zetasql/base/...
+              bazel test //zetasql/common/...
+              bazel test //zetasql/compliance/...
+              bazel test //zetasql/local_service/...
+              bazel test //zetasql/parser/...
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+          - os: macos-latest
+            build-command: |
+              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+              install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
+            test-command: | # Temporary skip 2 tests for MacOS
+              bazel test --features=-supports_dynamic_linker -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
+              bazel test --features=-supports_dynamic_linker //zetasql/base/...
+              bazel test --features=-supports_dynamic_linker //zetasql/common/...
+              bazel test --features=-supports_dynamic_linker //zetasql/compliance/...
+              bazel test --features=-supports_dynamic_linker -- //zetasql/local_service/... \
+                -//zetasql/local_service:libremote_server.so \
+                -//zetasql/local_service:liblocal_service_jni.so \
+                -//zetasql/local_service:liblocal_service_jni.dylib \
+                -//zetasql/local_service:local_service_jni
+              bazel test --features=-supports_dynamic_linker //zetasql/parser/...
+
+    runs-on: ${{ matrix.os }}
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-          
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Install Bazel
         uses: abhinavsingh/setup-bazel@v3
         with:
           version: 4.0.0
 
-      # Runs a set of commands using the runners shell
-      - name: Build
-        run: bazel build ...
+      - name: Prepare Google service account credentials
+        run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
+        env:
+          GCS_SERVICE_ACCOUNT: ${{ secrets.GCS_SERVICE_ACCOUNT }}
+
+      - name: Bazel build
+        run: ${{ matrix.build-command }}
+
+      - name: Bazel test
+        run: ${{ matrix.test-command }}
+
+      - name: Archive build artifacts
+        run: tar -cvzf ${{ matrix.lib-path }}.tar.gz ${{ matrix.lib-path }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}
+          path: ${{ matrix.lib-path }}.tar.gz
