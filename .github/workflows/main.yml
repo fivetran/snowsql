@@ -7,58 +7,66 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
+  build-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            build-command: bazel build //zetasql/local_service:libremote_server.so --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
+            test-command: |
+              bazel test //zetasql/analyzer/...
+              bazel test //zetasql/base/...
+              bazel test //zetasql/common/...
+              bazel test //zetasql/compliance/...
+              bazel test //zetasql/local_service/...
+              bazel test //zetasql/parser/...
+
+          - os: macos-latest
+            build-command: |
+              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker --config=clang --copt "-O3" --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+              install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
+            test-command: | # Temporary skip 2 tests for MacOS
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/base/...
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/common/...
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/compliance/...
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" -- //zetasql/local_service/... \
+                -//zetasql/local_service:libremote_server.so \
+                -//zetasql/local_service:liblocal_service_jni.so \
+                -//zetasql/local_service:liblocal_service_jni.dylib \
+                -//zetasql/local_service:local_service_jni
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/parser/...
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: set up QEMU
-        uses: docker/setup-qemu-action@v2
+      - name: Install Bazel
+        uses: abhinavsingh/setup-bazel@v3
+        with:
+          version: 4.1.0
 
-      - name: set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Prepare Google service account credentials
+        run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
+        env:
+          GCS_SERVICE_ACCOUNT: ${{ secrets.GCS_SERVICE_ACCOUNT }}
 
-      - name: available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
+      - name: Bazel build
+        run: ${{ matrix.build-command }}
 
-      - name: build
-        run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker buildx build --output out --platform linux/amd64 .
-          # for linux/arm64 it is very slow and we can't use it now
+      - name: Bazel test
+        run: ${{ matrix.test-command }}
 
-      - name: upload artifacts
+      - name: Archive build artifacts
+        run: tar -cvzf ${{ matrix.lib-path }}.tar.gz ${{ matrix.lib-path }}
+
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
-          path: |
-            out/linux/amd64
-            out/linux/arm64
-
-  build-macos:
-    runs-on: macos-latest
-
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: build
-        run: |
-          npx @bazel/bazelisk build --copt "-O3" --config=clang //zetasql/local_service:libremote_server.dylib
-          install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
-
-      - name: move file to out folder
-        run: |
-          mkdir -p out/darwin/x86_64
-          mv bazel-bin/zetasql/local_service/libremote_server.dylib out/darwin/x86_64
-
-      - name: upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifacts
-          path: |
-            out/darwin/x86_64
-            **/*.proto
+          name: ${{ runner.os }}
+          path: ${{ matrix.lib-path }}.tar.gz
