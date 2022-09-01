@@ -1,0 +1,37 @@
+# This file includes tests for parsing type names outside of queries.
+[default mode=type]
+[default no_run_unparser]
+
+[language_features={{|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS}}]
+number
+--
+ALTERNATION GROUPS:
+    <empty>
+    NUMERIC_TYPE
+    V_1_3_DECIMAL_ALIAS
+--
+ERROR: Type not found: number [at 1:1]
+number
+^
+--
+ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
+--
+NUMERIC
+==
+
+[language_features={{|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS}}]
+array<number>
+--
+ALTERNATION GROUPS:
+    <empty>
+    NUMERIC_TYPE
+    V_1_3_DECIMAL_ALIAS
+--
+ERROR: Type not found: number [at 1:7]
+array<number>
+      ^
+--
+ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
+--
+ARRAY<NUMERIC>
+==
