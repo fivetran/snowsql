@@ -871,57 +871,35 @@ array<numeric>
 ==
 
 [language_features={{|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS}}]
-{{decimal|number}}
+decimal
 --
 ALTERNATION GROUPS:
-    decimal
-    NUMERIC_TYPE,decimal
-    V_1_3_DECIMAL_ALIAS,decimal
+    <empty>
+    NUMERIC_TYPE
+    V_1_3_DECIMAL_ALIAS
 --
 ERROR: Type not found: decimal [at 1:1]
 decimal
 ^
 --
-ALTERNATION GROUPS:
-    number
-    NUMERIC_TYPE,number
-    V_1_3_DECIMAL_ALIAS,number
---
-ERROR: Type not found: number [at 1:1]
-number
-^
---
-ALTERNATION GROUPS:
-    NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS,decimal
-    NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS,number
+ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
 NUMERIC
 ==
 
 [language_features={{|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS}}]
-array<{{decimal|number}}>
+array<decimal>
 --
 ALTERNATION GROUPS:
-    decimal
-    NUMERIC_TYPE,decimal
-    V_1_3_DECIMAL_ALIAS,decimal
+    <empty>
+    NUMERIC_TYPE
+    V_1_3_DECIMAL_ALIAS
 --
 ERROR: Type not found: decimal [at 1:7]
 array<decimal>
       ^
 --
-ALTERNATION GROUPS:
-    number
-    NUMERIC_TYPE,number
-    V_1_3_DECIMAL_ALIAS,number
---
-ERROR: Type not found: number [at 1:7]
-array<number>
-      ^
---
-ALTERNATION GROUPS:
-    NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS,decimal
-    NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS,number
+ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
 ARRAY<NUMERIC>
 ==
