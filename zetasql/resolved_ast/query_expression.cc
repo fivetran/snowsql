@@ -351,8 +351,7 @@ bool QueryExpression::CanSetLimitClause() const {
 bool QueryExpression::CanSetOffsetClause() const { return !HasOffsetClause(); }
 
 bool QueryExpression::CanSetTopClause() const {
-  return HasSelectClause() && !HasTopClause() && !HasLimitClause() &&
-      !HasOffsetClause();
+  return !HasTopClause() && !HasLimitClause() && !HasOffsetClause();
 }
 
 bool QueryExpression::CanSetPivotClause() const { return !HasPivotClause(); }
