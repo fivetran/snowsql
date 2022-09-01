@@ -566,6 +566,7 @@ no { return BisonParserImpl::token::KW_NO; }
 not { return BisonParserImpl::token::KW_NOT; }
 null { return BisonParserImpl::token::KW_NULL; }
 nulls { return BisonParserImpl::token::KW_NULLS; }
+number { return BisonParserImpl::token::KW_NUMBER; }
 numeric { return BisonParserImpl::token::KW_NUMERIC; }
 of { return BisonParserImpl::token::KW_OF; }
 offset { return BisonParserImpl::token::KW_OFFSET; }
