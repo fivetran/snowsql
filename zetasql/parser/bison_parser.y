@@ -715,6 +715,7 @@ using namespace zetasql::parser_internal;
 %token KW_MIN "MIN"
 %token KW_MODEL "MODEL"
 %token KW_MODULE "MODULE"
+%token KW_NUMBER "NUMBER"
 %token KW_NUMERIC "NUMERIC"
 %token KW_OFFSET "OFFSET"
 %token KW_ONLY "ONLY"
@@ -8296,6 +8297,7 @@ integer_literal:
 numeric_literal_prefix:
     "NUMERIC"
     | "DECIMAL"
+    | "NUMBER"
     ;
 
 numeric_literal:
@@ -8517,6 +8519,7 @@ keyword_as_identifier:
     | "MIN"
     | "MODEL"
     | "MODULE"
+    | "NUMBER"
     | "NUMERIC"
     | "OFFSET"
     | "ONLY"
