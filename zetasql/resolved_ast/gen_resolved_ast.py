@@ -8045,7 +8045,7 @@ ResolvedArgumentRef(y)
 
   gen.AddNode(
       name='ResolvedTopScan',
-      tag_id=205,
+      tag_id=100000,
       parent='ResolvedScan',
       comment="""
       Constrains the maximum number of rows returned by a statement or subquery.

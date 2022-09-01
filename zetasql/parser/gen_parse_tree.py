@@ -39,7 +39,7 @@ from zetasql.parser.generator_utils import ScalarType
 from zetasql.parser.generator_utils import Trim
 from zetasql.parser.generator_utils import UpperCamelCase
 
-NEXT_NODE_TAG_ID = 355
+NEXT_NODE_TAG_ID = 356
 
 ROOT_NODE_NAME = 'ASTNode'
 
@@ -8324,7 +8324,7 @@ def main(argv):
 
   gen.AddNode(
       name='ASTTop',
-      tag_id=337,
+      tag_id=355,
       parent='ASTNode',
       fields=[
           Field(
