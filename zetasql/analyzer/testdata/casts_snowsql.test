@@ -1,0 +1,28 @@
+[language_features={{NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
+select cast("99999999999999999999999999999.999999999" as NUMBER),
+       cast("-99999999999999999999999999999.999999999" as NUMBER)
+--
+ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col2#2 AS `$col2` [NUMERIC]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[$col1#1, $col2#2]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=NUMERIC, value=99999999999999999999999999999.999999999, has_explicit_type=TRUE)
+    | +-$col2#2 := Literal(type=NUMERIC, value=-99999999999999999999999999999.999999999, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+    NUMERIC_TYPE
+    V_1_3_DECIMAL_ALIAS
+    <empty>
+--
+ERROR: Type not found: NUMBER [at 1:58]
+select cast("99999999999999999999999999999.999999999" as NUMBER),
+                                                         ^
+==
