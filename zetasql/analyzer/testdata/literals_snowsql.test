@@ -1,0 +1,46 @@
+[language_features={{NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
+SELECT NUMBER '1'
+--
+ALTERNATION GROUPS:
+    NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
+    NUMERIC_TYPE
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [NUMERIC]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=NUMERIC, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+    V_1_3_DECIMAL_ALIAS
+    <empty>
+--
+ERROR: NUMBER literals are not supported [at 1:8]
+SELECT NUMBER '1'
+       ^
+==
+
+[language_features={{NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
+SELECT NUMBER ''
+--
+ALTERNATION GROUPS:
+    NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
+    NUMERIC_TYPE
+--
+ERROR: Invalid NUMBER literal: "" [at 1:8]
+SELECT NUMBER ''
+       ^
+--
+ALTERNATION GROUPS:
+    V_1_3_DECIMAL_ALIAS
+    <empty>
+--
+ERROR: NUMBER literals are not supported [at 1:8]
+SELECT NUMBER ''
+       ^
+==

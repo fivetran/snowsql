@@ -752,7 +752,7 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
   ResolveFunctionFails("CAST(1 as BIGINT)", "Type not found: BIGINT");
   ResolveFunctionFails("CAST(1 as SMALLINT)", "Type not found: SMALLINT");
   ResolveFunctionFails("CAST(1 as real)", "Type not found: real");
-  ResolveFunctionFails("CAST(1 as NUMBER)", "Type not found: NUMBER");
+//   ResolveFunctionFails("CAST(1 as NUMBER)", "Type not found: NUMBER");
   ResolveFunctionFails("CAST(b'0' as binary)", "Type not found: binary");
   ResolveFunctionFails("CAST(b'0' as BLOB)", "Type not found: BLOB");
   ResolveFunctionFails("CAST('foo' as CHAR)", "Type not found: CHAR");

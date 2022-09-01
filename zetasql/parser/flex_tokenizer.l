@@ -568,6 +568,7 @@ not{whitespace}(between|in|like|distinct)[^A-Z_0-9] {
 }
 null { return BisonParserImpl::token::KW_NULL; }
 nulls { return BisonParserImpl::token::KW_NULLS; }
+number { return BisonParserImpl::token::KW_NUMBER; }
 numeric { return BisonParserImpl::token::KW_NUMERIC; }
 of { return BisonParserImpl::token::KW_OF; }
 offset { return BisonParserImpl::token::KW_OFFSET; }
