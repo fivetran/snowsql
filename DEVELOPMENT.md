@@ -26,6 +26,10 @@ bazel test //zetasql/parser/... --features=-supports_dynamic_linker
 ```
 bazel build //zetasql/analyzer:all --features=-supports_dynamic_linker -c dbg --spawn_strategy=local
 ```
+or
+```
+bazel build //zetasql/analyzer:resolver_test --features=-supports_dynamic_linker -c dbg --spawn_strategy=local
+```
 ### Add command to `Execute test` configuration in `launch.json`
 ```
 ./bazel-bin/zetasql/analyzer/analyzer_aggregation_test --test_file=./zetasql/analyzer/testdata/aggregation.test

@@ -10,12 +10,13 @@
       "request": "launch",
       "program": "${workspaceFolder}/bazel-bin/zetasql/tools/execute_query/execute_query",
       "args": ["select 1 + 1;"],
+      // "args": ["SELECT cast('12345' as NUMBER) int"],
       "sourceMap": {
         ".": "${workspaceFolder}"
       }
     },
     {
-      "name": "Execute test",
+      "name": "Execute analyzer test",
       "type": "lldb",
       "request": "launch",
       "program": "${workspaceFolder}/bazel-bin/zetasql/analyzer/analyzer_aggregation_test",
@@ -25,6 +26,15 @@
       "sourceMap": {
         ".": "${workspaceFolder}"
       }
-    }
+    },
+    {
+      "name": "Execute resolver test",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/bazel-bin/zetasql/analyzer/resolver_test",
+      "sourceMap": {
+        ".": "${workspaceFolder}"
+      }
+    },
   ]
 }

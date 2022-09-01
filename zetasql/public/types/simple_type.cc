@@ -121,6 +121,7 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"geography", {TYPE_GEOGRAPHY}},
       {"numeric", {TYPE_NUMERIC}},
       {"decimal", {TYPE_NUMERIC, false, FEATURE_V_1_3_DECIMAL_ALIAS}},
+      {"number", {TYPE_NUMERIC, false, FEATURE_V_1_3_DECIMAL_ALIAS}},
       {"bignumeric", {TYPE_BIGNUMERIC}},
       {"bigdecimal", {TYPE_BIGNUMERIC, false, FEATURE_V_1_3_DECIMAL_ALIAS}},
       {"json", {TYPE_JSON}},
