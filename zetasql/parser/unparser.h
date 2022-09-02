@@ -300,6 +300,7 @@ class Unparser : public ParseTreeVisitor {
   void visitASTUsingClause(const ASTUsingClause* node, void* data) override;
   void visitASTWhereClause(const ASTWhereClause* node, void* data) override;
   void visitASTRollup(const ASTRollup* node, void* data) override;
+  void visitASTGroupingSets(const ASTGroupingSets* node, void* data) override;
   void visitASTGeneratedColumnInfo(const ASTGeneratedColumnInfo* node,
                                    void* data) override;
   void visitASTGroupingItem(const ASTGroupingItem* node, void* data) override;

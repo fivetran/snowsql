@@ -39,7 +39,7 @@ from zetasql.parser.generator_utils import ScalarType
 from zetasql.parser.generator_utils import Trim
 from zetasql.parser.generator_utils import UpperCamelCase
 
-NEXT_NODE_TAG_ID = 365
+NEXT_NODE_TAG_ID = 366
 
 ROOT_NODE_NAME = 'ASTNode'
 
@@ -1330,6 +1330,10 @@ def main(argv):
               'rollup',
               'ASTRollup',
               tag_id=3),
+          Field(
+              'grouping_sets',
+              'ASTGroupingSets',
+              tag_id=4),
       ])
 
   gen.AddNode(
@@ -8495,6 +8499,18 @@ def main(argv):
               tag_id=4,
               getter_is_override=True,
               field_loader=FieldLoaderMethod.OPTIONAL),
+      ])
+
+  gen.AddNode(
+      name='ASTGroupingSets',
+      tag_id=365,
+      parent='ASTNode',
+      fields=[
+          Field(
+              'expressions',
+              'ASTExpression',
+              tag_id=2,
+              field_loader=FieldLoaderMethod.REST_AS_REPEATED),
       ])
 
   gen.Generate(output_path, template_path=template_path)

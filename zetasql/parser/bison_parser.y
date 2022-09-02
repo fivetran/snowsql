@@ -5644,7 +5644,7 @@ rollup_list:
 grouping_sets_list:
     "GROUPING" "SETS" "(" expression
       {
-        $$ = MAKE_NODE(ASTRollup, @$, {$4});
+        $$ = MAKE_NODE(ASTGroupingSets, @$, {$4});
       }
     | grouping_sets_list "," expression
       {

@@ -443,7 +443,8 @@ absl::Status Resolver::AddAggregateScan(
           column_list, std::move(*current_scan),
           query_resolution_info->release_group_by_columns_to_compute(),
           query_resolution_info->release_aggregate_columns_to_compute(),
-          std::move(grouping_set_list), std::move(rollup_column_list));
+          std::move(grouping_set_list), std::move(rollup_column_list),
+          /*grouping_sets_column_list*/{});
   // If the feature is not enabled, any collation annotation that might exist on
   // the grouping expressions is ignored.
   if (language().LanguageFeatureEnabled(FEATURE_V_1_3_COLLATION_SUPPORT)) {

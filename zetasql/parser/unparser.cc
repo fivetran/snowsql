@@ -1546,13 +1546,25 @@ void Unparser::visitASTRollup(const ASTRollup* node, void* data) {
   print(")");
 }
 
+void Unparser::visitASTGroupingSets(const ASTGroupingSets* node, void* data) {
+  print("GROUPING SETS(");
+  UnparseVectorWithSeparator(node->expressions(), data, ",");
+  print(")");
+}
+
 void Unparser::visitASTGroupingItem(const ASTGroupingItem* node, void* data) {
   if (node->expression() != nullptr) {
     ZETASQL_DCHECK(node->rollup() == nullptr);
     node->expression()->Accept(this, data);
   } else {
-    ZETASQL_DCHECK(node->rollup() != nullptr);
-    node->rollup()->Accept(this, data);
+    ZETASQL_DCHECK(node->rollup() != nullptr || node->grouping_sets() != nullptr);
+    if (node->rollup() != nullptr) {
+      ZETASQL_DCHECK(node->rollup() != nullptr);
+      node->rollup()->Accept(this, data);
+    } else {
+      ZETASQL_DCHECK(node->grouping_sets() != nullptr);
+      node->grouping_sets()->Accept(this, data);
+    }
   }
 }
 

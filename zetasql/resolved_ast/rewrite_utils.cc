@@ -653,7 +653,8 @@ LikeAnyAllSubqueryScanBuilder::BuildAggregateScan(
                                    /*group_by_list=*/{},
                                    std::move(aggregate_list),
                                    /*grouping_set_list=*/{},
-                                   /*rollup_column_list=*/{});
+                                   /*rollup_column_list=*/{},
+                                   /*grouping_sets_column_list=*/{});
 }
 
 absl::StatusOr<std::unique_ptr<const ResolvedAggregateFunctionCall>>
