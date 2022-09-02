@@ -256,7 +256,7 @@ TEST(ParserTest, DontAddNewReservedKeywords) {
   //
   // New reserved keywords should generally be marked as conditionally reserved
   // instead, so that engines desiring backward compatibility can opt out.
-  EXPECT_EQ(95 /* CAUTION */, num_reserved);
+  EXPECT_EQ(96 /* CAUTION */, num_reserved);
 }
 
 }  // namespace

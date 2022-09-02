@@ -2636,6 +2636,30 @@ absl::Status SQLBuilder::VisitResolvedLimitOffsetScan(
   return absl::OkStatus();
 }
 
+absl::Status SQLBuilder::VisitResolvedTopScan(const ResolvedTopScan* node) {
+  ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<QueryFragment> input_result,
+                   ProcessNode(node->input_scan()));
+  std::unique_ptr<QueryExpression> query_expression(
+      input_result->query_expression.release());
+
+  if (node->top() != nullptr) {
+    if (!query_expression->CanSetTopClause()) {
+      ZETASQL_RETURN_IF_ERROR(
+          WrapQueryExpression(node->input_scan(), query_expression.get()));
+    }
+    ZETASQL_ASSIGN_OR_RETURN(
+        std::unique_ptr<QueryFragment> result,
+        ProcessNode(node->top()->node_kind() != RESOLVED_CAST
+                        ? node->top()
+                        : node->top()->GetAs<ResolvedCast>()->expr()));
+    ZETASQL_RET_CHECK(query_expression->TrySetTopClause(result->GetSQL()));
+  }
+  ZETASQL_RETURN_IF_ERROR(
+      AddSelectListIfNeeded(node->column_list(), query_expression.get()));
+  PushSQLForQueryExpression(node, query_expression.release());
+  return absl::OkStatus();
+}
+
 std::pair<std::string, std::string> GetOpTypePair(
     ResolvedRecursiveScan::RecursiveSetOperationType op_type) {
   switch (op_type) {

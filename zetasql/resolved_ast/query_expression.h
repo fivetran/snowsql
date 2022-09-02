@@ -66,6 +66,7 @@ class QueryExpression {
                            const std::string& order_by_hints);
   bool TrySetLimitClause(const std::string& limit);
   bool TrySetOffsetClause(const std::string& offset);
+  bool TrySetTopClause(const std::string& top);
   bool TrySetWithAnonymizationClause(const std::string& anonymization_options);
   bool TrySetPivotClause(const std::string& pivot);
   bool TrySetUnpivotClause(const std::string& unpivot);
@@ -82,6 +83,7 @@ class QueryExpression {
   bool CanSetOrderByClause() const;
   bool CanSetLimitClause() const;
   bool CanSetOffsetClause() const;
+  bool CanSetTopClause() const;
   bool CanSetWithAnonymizationClause() const;
   bool CanSetPivotClause() const;
   bool CanSetUnpivotClause() const;
@@ -97,6 +99,7 @@ class QueryExpression {
   bool HasOrderByClause() const { return !order_by_list_.empty(); }
   bool HasLimitClause() const { return !limit_.empty(); }
   bool HasOffsetClause() const { return !offset_.empty(); }
+  bool HasTopClause() const { return !top_.empty(); }
   bool HasPivotClause() const { return !pivot_.empty(); }
   bool HasUnpivotClause() const { return !unpivot_.empty(); }
   bool HasWithAnonymizationClause() const {
@@ -191,6 +194,7 @@ class QueryExpression {
 
   std::string limit_;
   std::string offset_;
+  std::string top_;
 
   std::string anonymization_options_;
   std::string pivot_;

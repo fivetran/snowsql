@@ -832,6 +832,7 @@ using zetasql::ASTDropStatement;
 %token KW_TABLESAMPLE "TABLESAMPLE"
 %token KW_THEN "THEN"
 %token KW_TO "TO"
+%token KW_TOP "TOP"
 %token KW_TRUE "TRUE"
 %token KW_UNBOUNDED "UNBOUNDED"
 %token KW_UNION "UNION"
@@ -1337,6 +1338,7 @@ using zetasql::ASTDropStatement;
 %type <node> opt_sample_clause_suffix
 %type <node> opt_select_as_clause
 %type <node> opt_table_element_list
+%type <node> opt_top_clause
 %type <node> opt_transaction_mode_list
 %type <node> opt_transform_clause
 %type <node> opt_ttl_clause
@@ -4439,25 +4441,35 @@ query_primary_maybe_expression:
 
 select:
     "SELECT" opt_hint
+    opt_top_clause
     opt_with_anonymization
     opt_all_or_distinct
     opt_select_as_clause select_list opt_from_clause opt_clauses_following_from
       {
         auto* select =
-            MAKE_NODE(ASTSelect, @$, {$2, $3, $5, $6, $7, $8.where, $8.group_by,
-                                      $8.having, $8.qualify, $8.window});
-        select->set_distinct($4 == AllOrDistinctKeyword::kDistinct);
+            MAKE_NODE(ASTSelect, @$, {$2, $3, $4, $6, $7, $8, $9.where, $9.group_by,
+                                      $9.having, $9.qualify, $9.window});
+        select->set_distinct($5 == AllOrDistinctKeyword::kDistinct);
         $$ = select;
       }
     | "SELECT" opt_hint
+      opt_top_clause
       opt_with_anonymization
       opt_all_or_distinct
       opt_select_as_clause "FROM"
       {
         YYERROR_AND_ABORT_AT(
-            @6,
+            @7,
             "Syntax error: SELECT list must not be empty");
       }
+    ;
+
+opt_top_clause:
+    "TOP" possibly_cast_int_literal_or_parameter
+      {
+        $$ = MAKE_NODE(ASTTop, @$, {$2});
+      }
+    | /* Nothing */ { $$ = nullptr; }
     ;
 
 opt_with_anonymization:
@@ -8289,6 +8301,7 @@ reserved_keyword_rule:
     | "TABLESAMPLE"
     | "THEN"
     | "TO"
+    | "TOP"
     | "TRUE"
     | "UNBOUNDED"
     | "UNION"

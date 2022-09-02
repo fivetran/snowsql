@@ -64,6 +64,7 @@ void QueryExpression::ClearAllClauses() {
   order_by_hints_.clear();
   limit_.clear();
   offset_.clear();
+  top_.clear();
   anonymization_options_.clear();
   with_recursive_ = false;
   pivot_.clear();
@@ -87,6 +88,7 @@ std::string QueryExpression::GetSQLQuery() const {
                         ? ""
                         : absl::StrCat(anonymization_options_, " "),
                     query_hints_.empty() ? "" : absl::StrCat(query_hints_, " "),
+                    top_.empty() ? "" : absl::StrCat("TOP ", top_, " "),
                     select_as_modifier_.empty()
                         ? ""
                         : absl::StrCat(select_as_modifier_, " "),
@@ -287,6 +289,14 @@ bool QueryExpression::TrySetOffsetClause(const std::string& offset) {
   return true;
 }
 
+bool QueryExpression::TrySetTopClause(const std::string& top) {
+  if (!CanSetTopClause()) {
+    return false;
+  }
+  top_ = top;
+  return true;
+}
+
 bool QueryExpression::TrySetWithAnonymizationClause(
     const std::string& anonymization_options) {
   if (!CanSetWithAnonymizationClause()) {
@@ -339,6 +349,10 @@ bool QueryExpression::CanSetLimitClause() const {
   return !HasLimitClause() && !HasOffsetClause();
 }
 bool QueryExpression::CanSetOffsetClause() const { return !HasOffsetClause(); }
+
+bool QueryExpression::CanSetTopClause() const {
+  return !HasTopClause() && !HasLimitClause() && !HasOffsetClause();
+}
 
 bool QueryExpression::CanSetPivotClause() const { return !HasPivotClause(); }
 
