@@ -365,6 +365,7 @@ static absl::flat_hash_map<ASTNodeKind, std::string> CreateNodeNamesMap() {
   map[AST_TABLE_PATH_EXPRESSION] = "TablePathExpression";
   map[AST_TABLE_SUBQUERY] = "TableSubquery";
   map[AST_TEMPLATED_PARAMETER_TYPE] = "TemplatedParameterType";
+  map[AST_TOP] = "Top",
   map[AST_TRANSACTION_ISOLATION_LEVEL] = "TransactionIsolationLevel";
   map[AST_TRANSACTION_MODE_LIST] = "TransactionModeList";
   map[AST_TRANSACTION_READ_WRITE_MODE] = "TransactionReadWriteMode";

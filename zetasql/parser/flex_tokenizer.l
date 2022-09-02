@@ -654,6 +654,7 @@ then { return BisonParserImpl::token::KW_THEN; }
 time { return BisonParserImpl::token::KW_TIME; }
 timestamp { return BisonParserImpl::token::KW_TIMESTAMP; }
 to { return BisonParserImpl::token::KW_TO; }
+top { return BisonParserImpl::token::KW_TOP; }
 transaction { return BisonParserImpl::token::KW_TRANSACTION; }
 transform { return BisonParserImpl::token::KW_TRANSFORM; }
 treat { return BisonParserImpl::token::KW_TREAT; }

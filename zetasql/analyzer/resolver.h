@@ -1834,6 +1834,7 @@ class Resolver {
   absl::Status AddRemainingScansForSelect(
       const ASTSelect* select, const ASTOrderBy* order_by,
       const ASTLimitOffset* limit_offset,
+      const ASTTop* top,
       const NameScope* having_and_order_by_scope,
       std::unique_ptr<const ResolvedExpr>* resolved_having_expr,
       std::unique_ptr<const ResolvedExpr>* resolved_qualify_expr,
@@ -2356,6 +2357,18 @@ class Resolver {
       const ASTLimitOffset* limit_offset,
       std::unique_ptr<const ResolvedScan> input_scan_in,
       std::unique_ptr<const ResolvedScan>* output);
+
+  // Resolves the given LIMIT or OFFSET clause <ast_expr> and stores the
+  // resolved expression in <resolved_expr>.
+  absl::Status ResolveTopExpr(
+    const ASTExpression* ast_expr, const char* clause_name,
+    ExprResolutionInfo* expr_resolution_info,
+    std::unique_ptr<const ResolvedExpr>* resolved_expr);
+
+  absl::Status ResolveTopScan(
+    const ASTTop* top,
+    std::unique_ptr<const ResolvedScan> input_scan,
+    std::unique_ptr<const ResolvedScan>* output);
 
   // Translates the enum representing an IGNORE NULLS or RESPECT NULLS modifier.
   ResolvedNonScalarFunctionCallBase::NullHandlingModifier
