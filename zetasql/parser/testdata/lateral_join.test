@@ -8,7 +8,7 @@ QueryStatement [0-138]
         SelectColumn [7-8]
           Star(*) [7-8]
       FromClause [9-117]
-        Join(COMMA) [30-117]
+        Join(COMMA, LATERAL) [30-117]
           TablePathExpression [14-30]
             PathExpression [14-25]
               Identifier(departments) [14-25]
@@ -41,4 +41,17 @@ QueryStatement [0-138]
         PathExpression [127-138]
           Identifier(employee_id) [127-138]
 --
+SELECT
+  *
+FROM
+  departments AS d, LATERAL
+  (
+    SELECT
+      *
+    FROM
+      employees AS e
+    WHERE
+      e.department_id = d.department_id
+  ) AS iv2
+ORDER BY employee_id
 ==
