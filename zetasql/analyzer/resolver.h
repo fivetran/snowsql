@@ -1658,6 +1658,7 @@ class Resolver {
       bool has_from_clause,
       const std::shared_ptr<const NameList>& from_clause_name_list,
       QueryResolutionInfo* query_resolution_info,
+      IdString query_alias, bool force_new_columns_for_projected_outputs,
       const Type* inferred_type_for_query = nullptr);
 
   // Performs first pass analysis on a SELECT list expression.
@@ -1669,6 +1670,7 @@ class Resolver {
       const std::shared_ptr<const NameList>& from_clause_name_list,
       int ast_select_column_idx, bool has_from_clause,
       QueryResolutionInfo* query_resolution_info,
+      std::shared_ptr<NameList> select_name_list,
       const Type* inferred_type = nullptr);
 
   // Finishes resolving the SelectColumnStateList after first pass
@@ -1687,6 +1689,12 @@ class Resolver {
       bool force_new_columns_for_projected_outputs,
       QueryResolutionInfo* query_resolution_info,
       SelectColumnStateList* select_column_state_list);
+
+  void FinalizeSelectColumnState(
+      IdString query_alias,
+      bool force_new_columns_for_projected_outputs,
+      QueryResolutionInfo* query_resolution_info,
+      const std::unique_ptr<SelectColumnState>& select_column_state);
 
   // Performs second pass analysis on the SELECT list expressions, re-resolving
   // expressions against GROUP BY scope if necessary.  After this pass, each
