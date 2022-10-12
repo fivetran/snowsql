@@ -1975,7 +1975,8 @@ absl::Status Resolver::ResolveReturningClause(
   ZETASQL_RETURN_IF_ERROR(ResolveSelectListExprsFirstPass(select_list, from_scan_scope,
                                                   /*has_from_clause=*/true,
                                                   from_clause_name_list,
-                                                  query_resolution_info.get()));
+                                                  query_resolution_info.get(),
+                                                  *new IdString(), nullptr));
 
   if (query_resolution_info->HasGroupByOrAggregation()) {
     return MakeSqlErrorAt(ast_node)
