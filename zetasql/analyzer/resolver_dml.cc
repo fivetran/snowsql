@@ -1976,7 +1976,7 @@ absl::Status Resolver::ResolveReturningClause(
                                                   /*has_from_clause=*/true,
                                                   from_clause_name_list,
                                                   query_resolution_info.get(),
-                                                  *new IdString(), nullptr));
+                                                  target_alias, /*force_new_columns_for_projected_outputs=*/false));
 
   if (query_resolution_info->HasGroupByOrAggregation()) {
     return MakeSqlErrorAt(ast_node)
@@ -1996,10 +1996,13 @@ absl::Status Resolver::ResolveReturningClause(
       query_resolution_info->select_column_state_list();
   ZETASQL_RET_CHECK_NE(select_column_state_list, nullptr);
 
-  FinalizeSelectColumnStateList(
-      select_list, target_alias,
-      /*force_new_columns_for_projected_outputs=*/false,
-      query_resolution_info.get(), select_column_state_list);
+  //
+  // todo: Moved to ResolveSelectListExprsFirstPass
+  //
+  // FinalizeSelectColumnStateList(
+  //     select_list, target_alias,
+  //     /*force_new_columns_for_projected_outputs=*/false,
+  //     query_resolution_info.get(), select_column_state_list);
 
   // build up the output name list
   auto output_name_list = std::make_shared<NameList>();
