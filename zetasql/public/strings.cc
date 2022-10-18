@@ -20,6 +20,7 @@
 
 #include <iterator>
 #include <string>
+#include <regex>
 
 #include "zetasql/base/logging.h"
 #include "zetasql/common/errors.h"
@@ -1055,11 +1056,15 @@ absl::Status ParseIdentifierPath(absl::string_view str,
 }
 
 bool IsInternalAlias(const std::string& alias) {
-  return !alias.empty() && alias[0] == '$';
+  std::regex e ("\\$[0-9]+");
+  bool ex = std::regex_match(alias, e);
+  return !alias.empty() && alias[0] == '$' && !std::regex_match(alias, e);
 }
 
 bool IsInternalAlias(IdString alias) {
-  return !alias.empty() && alias[0] == '$';
+  std::regex e ("\\$[0-9]+");
+  bool ex = std::regex_match(alias.ToString(), e);
+  return !alias.empty() && alias[0] == '$' && !std::regex_match(alias.ToString(), e);
 }
 
 bool IsKeyword(absl::string_view str) {

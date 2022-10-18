@@ -1194,8 +1194,18 @@ absl::Status Resolver::ResolveSelect(
   ZETASQL_RETURN_IF_ERROR(ResolveFromClauseAndCreateScan(
       select, order_by, external_scope, &scan, &from_clause_name_list));
 
-  std::unique_ptr<const NameScope> from_scan_scope(
+  std::unique_ptr<const NameScope> from_clause_scan_scope(
       new NameScope(external_scope, from_clause_name_list));
+
+  std::shared_ptr<NameList> from_clause_aliases_name_list(new NameList);
+  std::unique_ptr<NameScope> from_scan_scope;
+
+  for (int i = 0; i < from_clause_name_list->columns().size(); i++) {
+    IdString alias = MakeIdString(absl::StrCat("$", i + 1));
+    from_clause_aliases_name_list->AddColumn(alias, from_clause_name_list->columns().at(i).column,
+        from_clause_name_list->columns().at(i).is_explicit);
+  }
+  from_clause_scan_scope->CopyNameScopeWithOverridingNames(from_clause_aliases_name_list, &from_scan_scope);
 
   // The WHERE clause depends only on the FROM clause, so we resolve it before
   // looking at the SELECT-list or GROUP BY.

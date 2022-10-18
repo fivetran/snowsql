@@ -249,6 +249,8 @@ bqtext                          {bqtext_0}{bq}
 identifier                      {unquoted_identifier}|{bqtext}
 generalized_identifier          {unquoted_generalized_identifier}|{bqtext}
 unterminated_escaped_identifier {bqtext_0}
+column_number_identifier        "$"{decimal_digits}
+column_default_identifier       "$"col{decimal_digits}
 
 /* C-style comments using slash+star.
    cs_ prefix is for "c-style comment", shortened to avoid long lines.
@@ -1021,6 +1023,14 @@ zone { return BisonParserImpl::token::KW_ZONE; }
 <DOT_IDENTIFIER>.         {
   yy_pop_state();
   SET_RETURN_PREFIX_LENGTH(0);
+}
+
+{column_number_identifier}         {
+  return BisonParserImpl::token::IDENTIFIER;
+}
+
+{column_default_identifier}         {
+  return BisonParserImpl::token::IDENTIFIER;
 }
 
  /* Catchall rule. This rule should also work in exclusive tokenizer states such
