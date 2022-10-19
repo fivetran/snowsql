@@ -1,0 +1,18 @@
+SELECT 0.23 AS probability, 100 * probability
+--
+QueryStmt
++-output_column_list=
+| +-$query.probability#1 AS probability [DOUBLE]
+| +-$query.$col2#2 AS `$col2` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[probability#1, $col2#2]
+    +-expr_list=
+    | +-probability#1 := Literal(type=DOUBLE, value=0.23)
+    | +-$col2#2 :=
+    |   +-FunctionCall(ZetaSQL:$multiply(DOUBLE, DOUBLE) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=100)
+    |     +-ColumnRef(type=DOUBLE, column=$query.probability#1)
+    +-input_scan=
+      +-SingleRowScan
+==
