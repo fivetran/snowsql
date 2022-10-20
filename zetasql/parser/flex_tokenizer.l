@@ -630,6 +630,7 @@ search { return BisonParserImpl::token::KW_SEARCH; }
 security { return BisonParserImpl::token::KW_SECURITY; }
 select { return BisonParserImpl::token::KW_SELECT; }
 set { return BisonParserImpl::token::KW_SET; }
+sets { return BisonParserImpl::token::KW_SETS; }
 show { return BisonParserImpl::token::KW_SHOW; }
 simple { return BisonParserImpl::token::KW_SIMPLE; }
 some { return BisonParserImpl::token::KW_SOME; }
