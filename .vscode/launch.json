@@ -10,6 +10,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/bazel-bin/zetasql/tools/execute_query/execute_query",
       "args": ["select 1 + 1;"],
+      // "args": ["SELECT * FROM (VALUES (1), (2), (3), (4)) OFFSET 1 ROW FETCH FIRST 2 ROWS;"],
       // "args": ["select * from (select a as a_1, a * 2 as a_2 from UNNEST(GENERATE_ARRAY(1, 10)) a) GROUP BY GROUPING SETS (a_1, a_2);"],
       // "args": ["SELECT cast('12345' as NUMBER) int"],
       // "args": ["SELECT TOP 5 * FROM UNNEST(GENERATE_ARRAY(0, 11));"],

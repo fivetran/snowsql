@@ -831,6 +831,7 @@ using zetasql::ASTDropStatement;
 %token KW_MERGE "MERGE"
 %token KW_NATURAL "NATURAL"
 %token KW_NEW "NEW"
+%token KW_NEXT "NEXT"
 %token KW_NO "NO"
 %token KW_NOT "NOT"
 %token KW_NULL "NULL"
@@ -5759,8 +5760,14 @@ qualify_clause_nonreserved:
     ;
 
 opt_limit_offset_clause:
-    "LIMIT" possibly_cast_int_literal_or_parameter
     "OFFSET" possibly_cast_int_literal_or_parameter
+    "FETCH" possibly_cast_int_literal_or_parameter
+      {
+        // todo: change
+        $$ = MAKE_NODE(ASTLimitOffset, @$, {$4, $2});
+      }
+    | "LIMIT" possibly_cast_int_literal_or_parameter
+      "OFFSET" possibly_cast_int_literal_or_parameter
       {
         $$ = MAKE_NODE(ASTLimitOffset, @$, {$2, $4});
       }
