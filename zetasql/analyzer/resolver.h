@@ -2370,6 +2370,18 @@ class Resolver {
     std::unique_ptr<const ResolvedScan> input_scan,
     std::unique_ptr<const ResolvedScan>* output);
 
+  // Resolves the given OFFSET or FETCH clause <ast_expr> and stores the
+  // resolved expression in <resolved_expr>.
+  absl::Status ResolveOffsetOrFetchExpr(
+    const ASTExpression* ast_expr, const char* clause_name,
+    ExprResolutionInfo* expr_resolution_info,
+    std::unique_ptr<const ResolvedExpr>* resolved_expr);
+
+  absl::Status ResolveOffsetFetchScan(
+    const ASTOffsetFetch* offset_fetch,
+    std::unique_ptr<const ResolvedScan> input_scan,
+    std::unique_ptr<const ResolvedScan>* output);
+
   // Translates the enum representing an IGNORE NULLS or RESPECT NULLS modifier.
   ResolvedNonScalarFunctionCallBase::NullHandlingModifier
   ResolveNullHandlingModifier(

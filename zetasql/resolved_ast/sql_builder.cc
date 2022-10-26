@@ -2690,6 +2690,12 @@ absl::Status SQLBuilder::VisitResolvedTopScan(const ResolvedTopScan* node) {
   return absl::OkStatus();
 }
 
+absl::Status SQLBuilder::VisitResolvedOffsetFetchScan(
+    const ResolvedOffsetFetchScan* node) {
+  // todo:
+  return absl::OkStatus();
+}
+
 std::pair<std::string, std::string> GetOpTypePair(
     ResolvedRecursiveScan::RecursiveSetOperationType op_type) {
   switch (op_type) {
