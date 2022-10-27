@@ -2390,6 +2390,30 @@ Algebrizer::AlgebrizeTopScan(const ResolvedTopScan* scan) {
   }
 }
 
+absl::StatusOr<std::unique_ptr<RelationalOp>>
+Algebrizer::AlgebrizeOffsetFetchScan(const ResolvedOffsetFetchScan* scan) {
+  ZETASQL_RET_CHECK(scan->offset() != nullptr);
+  ZETASQL_RET_CHECK(scan->fetch() != nullptr);
+
+  ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<ValueExpr> offset,
+                   AlgebrizeExpression(scan->offset()));
+  ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<ValueExpr> fetch,
+                   AlgebrizeExpression(scan->fetch()));
+
+  if (algebrizer_options_.allow_order_by_limit_operator &&
+      scan->input_scan()->node_kind() == RESOLVED_ORDER_BY_SCAN) {
+    const ResolvedOrderByScan* input_scan =
+        scan->input_scan()->GetAs<ResolvedOrderByScan>();
+    return AlgebrizeOrderByScan(input_scan, std::move(fetch),
+                                std::move(offset));
+  } else {
+    ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<RelationalOp> input,
+                     AlgebrizeScan(scan->input_scan()));
+    return LimitOp::Create(std::move(fetch), std::move(offset),
+                           std::move(input), scan->is_ordered());
+  }
+}
+
 absl::Status Algebrizer::AddFilterConjunctsTo(
     const ResolvedExpr* expr,
     std::vector<std::unique_ptr<FilterConjunctInfo>>* conjunct_infos) {
