@@ -4467,6 +4467,11 @@ absl::StatusOr<std::unique_ptr<RelationalOp>> Algebrizer::AlgebrizeScan(
                                    scan->GetAs<ResolvedTopScan>()));
       break;
     }
+    case RESOLVED_OFFSET_FETCH_SCAN: {
+      ZETASQL_ASSIGN_OR_RETURN(rel_op, AlgebrizeOffsetFetchScan(
+                                   scan->GetAs<ResolvedOffsetFetchScan>()));
+      break;
+    }
     case RESOLVED_WITH_SCAN: {
       ZETASQL_ASSIGN_OR_RETURN(rel_op,
                        AlgebrizeWithScan(scan->GetAs<ResolvedWithScan>()));
