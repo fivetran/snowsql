@@ -4516,7 +4516,7 @@ absl::Status Resolver::ResolveOffsetFetchScan(
   std::unique_ptr<const ResolvedExpr> fetch_expr;
   ZETASQL_RETURN_IF_ERROR(ResolveOffsetOrFetchExpr(offset_fetch->fetch(),
                                            /*clause_name=*/"FETCH",
-                                           &expr_resolution_info, &offset_expr));
+                                           &expr_resolution_info, &fetch_expr));
   
 
   const std::vector<ResolvedColumn>& column_list = input_scan->column_list();
