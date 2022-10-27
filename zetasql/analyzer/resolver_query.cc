@@ -169,8 +169,8 @@ absl::Status Resolver::ResolveQueryAfterWith(
     // If we just have a single SELECT, then we treat that specially so
     // we can resolve the ORDER BY and LIMIT directly inside that SELECT.
     return ResolveSelect(query->query_expr()->GetAsOrDie<ASTSelect>(),
-                         query->order_by(), query->limit_offset(), scope,
-                         query_alias, force_new_columns_for_projected_outputs,
+                         query->order_by(), query->limit_offset(), query->offset_fetch(),
+                         scope, query_alias, force_new_columns_for_projected_outputs,
                          inferred_type_for_query, output, output_name_list);
   }
 
@@ -586,6 +586,7 @@ absl::Status Resolver::AddRemainingScansForSelect(
     const ASTSelect* select, const ASTOrderBy* order_by,
     const ASTLimitOffset* limit_offset,
     const ASTTop* top,
+    const ASTOffsetFetch* offset_fetch,
     const NameScope* having_and_order_by_scope,
     std::unique_ptr<const ResolvedExpr>* resolved_having_expr,
     std::unique_ptr<const ResolvedExpr>* resolved_qualify_expr,
@@ -803,9 +804,14 @@ absl::Status Resolver::AddRemainingScansForSelect(
         std::move(*current_scan));
   }
 
-  if (top != nullptr && limit_offset != nullptr) {
+  if (limit_offset != nullptr && top != nullptr) {
     return MakeSqlErrorAt(limit_offset)
-           << "TOP and LIMIT are not allowed in one query";
+           << "Duplicate LIMIT: LIMIT";
+  }
+
+  if (offset_fetch != nullptr && (limit_offset != nullptr || top != nullptr)) {
+    return MakeSqlErrorAt(offset_fetch)
+           << "Duplicate LIMIT: FETCH";
   }
 
   if (top != nullptr) {
@@ -816,6 +822,11 @@ absl::Status Resolver::AddRemainingScansForSelect(
   if (limit_offset != nullptr) {
     ZETASQL_RETURN_IF_ERROR(ResolveLimitOffsetScan(
         limit_offset, std::move(*current_scan), current_scan));
+  }
+
+  if (offset_fetch != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(ResolveOffsetFetchScan(
+        offset_fetch, std::move(*current_scan), current_scan));
   }
 
   // Check here, because if there is SELECT AS STRUCT or SELECT AS PROTO
@@ -1052,7 +1063,8 @@ absl::Status Resolver::ResolveQueryExpression(
     case AST_SELECT:
       return ResolveSelect(query_expr->GetAsOrDie<ASTSelect>(),
                            /*order_by=*/nullptr,
-                           /*limit_offset=*/nullptr, scope, query_alias,
+                           /*limit_offset=*/nullptr,
+                           /*offset_fetch=*/nullptr, scope, query_alias,
                            force_new_columns_for_projected_outputs,
                            inferred_type_for_query, output, output_name_list);
 
@@ -1193,8 +1205,9 @@ static absl::Status ValidateAnonymizationSetup(const LanguageOptions& language,
 // For a more detailed discussion, see (broken link).
 absl::Status Resolver::ResolveSelect(
     const ASTSelect* select, const ASTOrderBy* order_by,
-    const ASTLimitOffset* limit_offset, const NameScope* external_scope,
-    IdString query_alias, bool force_new_columns_for_projected_outputs,
+    const ASTLimitOffset* limit_offset, const ASTOffsetFetch* offset_fetch,
+    const NameScope* external_scope, IdString query_alias,
+    bool force_new_columns_for_projected_outputs,
     const Type* inferred_type_for_query,
     std::unique_ptr<const ResolvedScan>* output,
     std::shared_ptr<const NameList>* output_name_list) {
@@ -1458,7 +1471,8 @@ absl::Status Resolver::ResolveSelect(
   // The current <scan> covers the FROM and WHERE clauses.  The remaining
   // scans are built on top of the current <scan>.
   ZETASQL_RETURN_IF_ERROR(AddRemainingScansForSelect(
-      select, order_by, limit_offset, select->top(), having_and_order_by_scope.get(),
+      select, order_by, limit_offset, select->top(),
+      offset_fetch, having_and_order_by_scope.get(),
       &resolved_having_expr, &resolved_qualify_expr,
       query_resolution_info.get(), output_name_list, &scan));
 
