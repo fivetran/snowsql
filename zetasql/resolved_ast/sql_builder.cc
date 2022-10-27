@@ -2692,7 +2692,42 @@ absl::Status SQLBuilder::VisitResolvedTopScan(const ResolvedTopScan* node) {
 
 absl::Status SQLBuilder::VisitResolvedOffsetFetchScan(
     const ResolvedOffsetFetchScan* node) {
-  // todo:
+  ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<QueryFragment> input_result,
+                   ProcessNode(node->input_scan()));
+  std::unique_ptr<QueryExpression> query_expression(
+      input_result->query_expression.release());
+
+  if (node->offset() != nullptr) {
+    if (!query_expression->CanSetOffsetClause()) {
+      ZETASQL_RETURN_IF_ERROR(
+          WrapQueryExpression(node->input_scan(), query_expression.get()));
+    }
+    ZETASQL_ASSIGN_OR_RETURN(
+        std::unique_ptr<QueryFragment> result,
+        // If offset is a ResolvedCast, it means that the original offset in the
+        // query is a literal or parameter with a type other than int64_t and
+        // hence, analyzer has added a cast on top of it. We should skip this
+        // cast here to avoid returning CAST(CAST ...)).
+        ProcessNode(node->offset()->node_kind() != RESOLVED_CAST
+                        ? node->offset()
+                        : node->offset()->GetAs<ResolvedCast>()->expr()));
+    ZETASQL_RET_CHECK(query_expression->TrySetOffsetClause(result->GetSQL()));
+  }
+  if (node->fetch() != nullptr) {
+    if (!query_expression->CanSetFetchClause()) {
+      ZETASQL_RETURN_IF_ERROR(
+          WrapQueryExpression(node->input_scan(), query_expression.get()));
+    }
+    ZETASQL_ASSIGN_OR_RETURN(
+        std::unique_ptr<QueryFragment> result,
+        ProcessNode(node->fetch()->node_kind() != RESOLVED_CAST
+                        ? node->fetch()
+                        : node->fetch()->GetAs<ResolvedCast>()->expr()));
+    ZETASQL_RET_CHECK(query_expression->TrySetFetchClause(result->GetSQL()));
+  }
+  ZETASQL_RETURN_IF_ERROR(
+      AddSelectListIfNeeded(node->column_list(), query_expression.get()));
+  PushSQLForQueryExpression(node, query_expression.release());
   return absl::OkStatus();
 }
 
