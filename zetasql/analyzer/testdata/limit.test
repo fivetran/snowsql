@@ -70,9 +70,9 @@ select key from KeyValue offset 5;
 
 select key from KeyValue order by 1 offset 5;
 --
-ERROR: Syntax error: Expected end of input but got keyword OFFSET [at 1:37]
+ERROR: Syntax error: Expected keyword FETCH but got ";" [at 1:45]
 select key from KeyValue order by 1 offset 5;
-                                    ^
+                                            ^
 ==
 
 SELECT Key, Value
@@ -493,9 +493,9 @@ QueryStmt
 # Offset without limit is invalid.
 select key from KeyValue order by 1 offset 5;
 --
-ERROR: Syntax error: Expected end of input but got keyword OFFSET [at 1:37]
+ERROR: Syntax error: Expected keyword FETCH but got ";" [at 1:45]
 select key from KeyValue order by 1 offset 5;
-                                    ^
+                                            ^
 ==
 
 select key FROM KeyValue ORDER BY 1 {{LIMIT|LIMIT 1 OFFSET}} 18446744073709551615;

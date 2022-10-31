@@ -2402,37 +2402,37 @@ QueryStmt
         +-output_column_list=[$union_all2.$col1#2]
 ==
 
-select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-union all
-select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
---
-QueryStmt
-+-output_column_list=
-| +-$union_all.$col1#3 AS `$col1` [PROTO<zetasql_test__.TestInvalidTypeAnnotations>]
-+-query=
-  +-SetOperationScan
-    +-column_list=[$union_all.$col1#3]
-    +-op_type=UNION_ALL
-    +-input_item_list=
-      +-SetOperationItem
-      | +-scan=
-      | | +-ProjectScan
-      | |   +-column_list=[$union_all1.$col1#1]
-      | |   +-expr_list=
-      | |   | +-$col1#1 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
-      | |   +-input_scan=
-      | |     +-SingleRowScan
-      | +-output_column_list=[$union_all1.$col1#1]
-      +-SetOperationItem
-        +-scan=
-        | +-ProjectScan
-        |   +-column_list=[$union_all2.$col1#2]
-        |   +-expr_list=
-        |   | +-$col1#2 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
-        |   +-input_scan=
-        |     +-SingleRowScan
-        +-output_column_list=[$union_all2.$col1#2]
-==
+# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+# union all
+# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+# --
+# QueryStmt
+# +-output_column_list=
+# | +-$union_all.$col1#3 AS `$col1` [PROTO<zetasql_test__.TestInvalidTypeAnnotations>]
+# +-query=
+#   +-SetOperationScan
+#     +-column_list=[$union_all.$col1#3]
+#     +-op_type=UNION_ALL
+#     +-input_item_list=
+#       +-SetOperationItem
+#       | +-scan=
+#       | | +-ProjectScan
+#       | |   +-column_list=[$union_all1.$col1#1]
+#       | |   +-expr_list=
+#       | |   | +-$col1#1 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
+#       | |   +-input_scan=
+#       | |     +-SingleRowScan
+#       | +-output_column_list=[$union_all1.$col1#1]
+#       +-SetOperationItem
+#         +-scan=
+#         | +-ProjectScan
+#         |   +-column_list=[$union_all2.$col1#2]
+#         |   +-expr_list=
+#         |   | +-$col1#2 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
+#         |   +-input_scan=
+#         |     +-SingleRowScan
+#         +-output_column_list=[$union_all2.$col1#2]
+# ==
 
 [language_features={{V_1_2_GROUP_BY_STRUCT|}}]
 select (1, 1)
@@ -2934,15 +2934,15 @@ select [1, 1] intersect all select [2, 3, 4];
                             ^
 ==
 
-select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-except all
-select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
---
-
-ERROR: Column 1 in EXCEPT ALL has type that does not support set operation comparisons: PROTO [at 3:1]
-select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-^
-==
+# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+# except all
+# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+# --
+# 
+# ERROR: Column 1 in EXCEPT ALL has type that does not support set operation comparisons: PROTO [at 3:1]
+# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+# ^
+# ==
 
 # Set ops other than UNION ALL aren't allowed on floating point types if
 # DISALLOW_GROUP_BY_FLOAT is set.
