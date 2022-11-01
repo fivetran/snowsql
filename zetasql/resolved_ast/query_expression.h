@@ -61,7 +61,8 @@ class QueryExpression {
       const std::string& query_hints);
   bool TrySetGroupByClause(const std::map<int, std::string>& group_by_list,
                            const std::string& group_by_hints,
-                           const std::vector<int>& rollup_column_id_list);
+                           const std::vector<int>& rollup_column_id_list,
+                           const std::vector<int>& grouping_sets_column_id_list);
   bool TrySetOrderByClause(const std::vector<std::string>& order_by_list,
                            const std::string& order_by_hints);
   bool TrySetLimitClause(const std::string& limit);
@@ -186,6 +187,7 @@ class QueryExpression {
   // string representations of these columns. Will be non-empty only if the
   // query used ROLLUP.
   std::vector<int> rollup_column_id_list_;
+  std::vector<int> grouping_sets_column_id_list_;
 
   std::string group_by_hints_;
 

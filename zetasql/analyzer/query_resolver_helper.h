@@ -127,6 +127,10 @@ struct QueryGroupByAndAggregateInfo {
   // not use ROLLUP. Stores unowned pointers from <group_by_columns_to_compute>.
   std::vector<const ResolvedComputedColumn*> rollup_column_list;
 
+  // Columns in the ROLLUP list, or an empty vector if the query does
+  // not use ROLLUP. Stores unowned pointers from <group_by_columns_to_compute>.
+  std::vector<const ResolvedComputedColumn*> grouping_sets_column_list;
+
   // Aggregate function calls that must be computed.
   // This is built up as expressions are resolved.  During expression
   // resolution, aggregate functions are moved into <aggregate_columns_> and
@@ -366,6 +370,8 @@ class QueryResolutionInfo {
   // Does not transfer ownership.
   void AddRollupColumn(const ResolvedComputedColumn* column);
 
+  void AddGroupingSetsColumn(const ResolvedComputedColumn* column);
+
   // Returns the grouping sets and list of rollup columns for queries that use
   // GROUP BY ROLLUP.  This clears columns previously added via AddRollupColumn.
   void ReleaseGroupingSetsAndRollupList(
@@ -373,6 +379,12 @@ class QueryResolutionInfo {
           grouping_set_list,
       std::vector<std::unique_ptr<const ResolvedColumnRef>>*
           rollup_column_list);
+
+  void ReleaseGroupingSetsAndGroupByGroupingSetsList(
+      std::vector<std::unique_ptr<const ResolvedGroupingSet>>*
+          grouping_set_list,
+      std::vector<std::unique_ptr<const ResolvedColumnRef>>*
+          grouping_sets_column_list);
 
   // Resets all state related to group by and aggregation context.  This
   // is invoked before processing DISTINCT, since DISTINCT processing
@@ -413,6 +425,10 @@ class QueryResolutionInfo {
   // Returns whether or not the query includes a GROUP BY ROLLUP.
   bool HasGroupByRollup() const {
     return !group_by_info_.rollup_column_list.empty();
+  }
+
+  bool HasGroupByGroupingSets() const {
+    return !group_by_info_.grouping_sets_column_list.empty();
   }
 
   // Returns whether or not the query includes analytic functions.

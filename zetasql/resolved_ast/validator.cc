@@ -1381,6 +1381,13 @@ absl::Status Validator::ValidateResolvedAggregateScan(
     VALIDATOR_RET_CHECK(scan->rollup_column_list().empty());
   }
 
+  if (!scan->grouping_sets_column_list().empty()) {
+    for (const auto& column_ref : scan->grouping_sets_column_list()) {
+      // Mark as accessed.
+      column_ref->column();
+    }
+  }
+
   std::set<ResolvedColumn> visible_columns;
   ZETASQL_RETURN_IF_ERROR(AddColumnsFromComputedColumnList(
       scan->group_by_list(), &visible_columns));
