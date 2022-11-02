@@ -2851,13 +2851,16 @@ absl::Status Resolver::ResolveSelectListExprsFirstPass(
         has_from_clause, query_resolution_info, select_name_list,
         inferred_type_for_query));
 
-    FinalizeSelectColumnState(query_alias,
-                              force_new_columns_for_projected_outputs,
-                              query_resolution_info,
-                              query_resolution_info->select_column_state_list()->select_column_state_list().back());
+    if (!query_resolution_info->HasGroupByOrAggregation() &&
+        !query_resolution_info->HasAnalytic()) {
+      FinalizeSelectColumnState(query_alias,
+                                force_new_columns_for_projected_outputs,
+                                query_resolution_info,
+                                query_resolution_info->select_column_state_list()->select_column_state_list().back());
 
-    select_name_list->AddColumn(query_resolution_info->select_column_state_list()->select_column_state_list().back()->alias,
-        query_resolution_info->select_column_state_list()->select_column_state_list().back()->resolved_select_column, false);
+      select_name_list->AddColumn(query_resolution_info->select_column_state_list()->select_column_state_list().back()->alias,
+          query_resolution_info->select_column_state_list()->select_column_state_list().back()->resolved_select_column, false);
+    }
   }
   return absl::OkStatus();
 }
