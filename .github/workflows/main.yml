@@ -47,7 +47,7 @@ jobs:
 
       - name: build
         run: |
-          npx @bazel/bazelisk build --copt "-O3" //zetasql/local_service:libremote_server.dylib
+          npx @bazel/bazelisk build --copt "-O3" --config=clang //zetasql/local_service:libremote_server.dylib
           install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
 
       - name: move file to out folder

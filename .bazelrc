@@ -21,6 +21,8 @@ build --action_env=BAZEL_CXXOPTS="-std=c++17"
 
 # By default, we don't suppress any warnings, to get clang-specific warning
 # suppression you can invoke with --config=clang
+build:clang --cxxopt="-std=c++17"
+build:clang --host_cxxopt="-std=c++17"
 build:clang --cxxopt=-Wno-deprecated-declarations
 build:clang --cxxopt=-Wno-range-loop-analysis
 build:clang --cxxopt=-Wno-inconsistent-missing-override
