@@ -1499,6 +1499,13 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
         &correlated_columns_sets, &num_names_consumed, &target));
     resolved_to_target = num_names_consumed > 0;
   }
+  if (num_names_consumed == 0 && expr_resolution_info->select_name_scope != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(expr_resolution_info->select_name_scope->LookupNamePath(
+        path_expr, expr_resolution_info->clause_name,
+        expr_resolution_info->is_post_distinct(), in_strict_mode(),
+        &correlated_columns_sets, &num_names_consumed, &target));
+    resolved_to_target = num_names_consumed > 0;
+  }
   if (resolved_to_target) {
     // We resolved (at least part of) the prefix path to a NameTarget.  Create
     // a ResolvedExpr for the resolved part of the name path.  We will

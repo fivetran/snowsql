@@ -146,6 +146,17 @@ struct ExprResolutionInfo {
   ExprResolutionInfo(const NameScope* name_scope_in,
                      const NameScope* aggregate_name_scope_in,
                      const NameScope* analytic_name_scope_in,
+                     const NameScope* select_name_scope_in,
+                     bool allows_aggregation_in, bool allows_analytic_in,
+                     bool use_post_grouping_columns_in,
+                     const char* clause_name_in,
+                     QueryResolutionInfo* query_resolution_info_in,
+                     const ASTExpression* top_level_ast_expr_in = nullptr,
+                     IdString column_alias_in = IdString());
+
+  ExprResolutionInfo(const NameScope* name_scope_in,
+                     const NameScope* aggregate_name_scope_in,
+                     const NameScope* analytic_name_scope_in,
                      bool allows_aggregation_in, bool allows_analytic_in,
                      bool use_post_grouping_columns_in,
                      const char* clause_name_in,
@@ -159,6 +170,12 @@ struct ExprResolutionInfo {
   // Currently used for initially resolving select list columns, and
   // resolving LIMIT with an empty NameScope, so never resolves against
   // post-grouping columns.
+  ExprResolutionInfo(const NameScope* name_scope_in,
+                     const NameScope* select_name_scope_in,
+                     QueryResolutionInfo* query_resolution_info_in,
+                     const ASTExpression* top_level_ast_expr_in = nullptr,
+                     IdString column_alias_in = IdString());
+
   ExprResolutionInfo(const NameScope* name_scope_in,
                      QueryResolutionInfo* query_resolution_info_in,
                      const ASTExpression* top_level_ast_expr_in = nullptr,
@@ -209,6 +226,10 @@ struct ExprResolutionInfo {
   // NameScope to use while resolving any analytic function arguments that
   // are in this expression.
   const NameScope* const analytic_name_scope = nullptr;
+
+  // NameScope to use while resolving any select columns that
+  // are in this expression.
+  const NameScope* const select_name_scope = nullptr;
 
   // Indicates whether this expression allows aggregations.
   const bool allows_aggregation;

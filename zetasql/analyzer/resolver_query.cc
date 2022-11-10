@@ -2815,12 +2815,11 @@ absl::Status Resolver::ResolveSelectColumnFirstPass(
   IdString select_column_alias =
       ComputeSelectColumnAlias(ast_select_column, ast_select_column_idx);
 
-  std::unique_ptr<NameScope> select_scope;
-  from_scan_scope->CopyNameScopeWithOverridingNames(select_name_list, &select_scope);
+  const NameScope* select_scope = new NameScope(nullptr, select_name_list);
 
   // Save stack space for nested SELECT list subqueries.
   std::unique_ptr<ExprResolutionInfo> expr_resolution_info(
-      new ExprResolutionInfo(select_scope.get(), query_resolution_info,
+      new ExprResolutionInfo(from_scan_scope, select_scope, query_resolution_info,
                              ast_select_expr, select_column_alias));
   std::unique_ptr<const ResolvedExpr> resolved_expr;
   ZETASQL_RETURN_IF_ERROR(ResolveExpr(ast_select_expr, expr_resolution_info.get(),
