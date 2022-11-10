@@ -1260,16 +1260,17 @@ absl::Status Resolver::ResolveSelect(
   if (select->select_as() == nullptr) {
     inferred_type_for_select_list = inferred_type_for_query;
   }
+
+  query_resolution_info->set_has_group_by(select->group_by() != nullptr);
+  query_resolution_info->set_has_having(select->having() != nullptr);
+  query_resolution_info->set_has_order_by(order_by != nullptr);
+
   ZETASQL_RETURN_IF_ERROR(ResolveSelectListExprsFirstPass(
       select->select_list(), from_scan_scope.get(),
       select->from_clause() != nullptr, from_clause_name_list,
       query_resolution_info.get(),
       query_alias, force_new_columns_for_projected_outputs,
       inferred_type_for_select_list));
-
-  query_resolution_info->set_has_group_by(select->group_by() != nullptr);
-  query_resolution_info->set_has_having(select->having() != nullptr);
-  query_resolution_info->set_has_order_by(order_by != nullptr);
 
   // Return an appropriate error for anonymization queries that don't perform
   // aggregation.
