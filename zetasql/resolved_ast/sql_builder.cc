@@ -110,8 +110,7 @@ std::string SQLBuilder::GetColumnAlias(const ResolvedColumn& column) {
     return zetasql_base::FindOrDie(computed_column_alias_, column.column_id());
   }
 
-  const std::string alias = column.name().empty() || IsInternalAlias(column.name())
-      ? GenerateUniqueAliasName() : column.name();
+  const std::string alias = GenerateUniqueAliasName();
   zetasql_base::InsertOrDie(&computed_column_alias_, column.column_id(), alias);
   return alias;
 }
