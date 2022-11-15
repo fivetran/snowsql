@@ -1544,6 +1544,7 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
         ResolvedColumn resolved_column = target.column();
         auto resolved_column_ref = MakeColumnRefWithCorrelation(
             resolved_column, correlated_columns_sets, access_flags);
+        resolved_column.resolved_column_refs->push_back(resolved_column_ref.get());
         MaybeRecordParseLocation(path_expr, resolved_column_ref.get());
         resolved_expr = std::move(resolved_column_ref);
         if (expr_resolution_info->query_resolution_info != nullptr &&

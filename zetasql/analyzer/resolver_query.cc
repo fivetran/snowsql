@@ -1261,16 +1261,23 @@ absl::Status Resolver::ResolveSelect(
     inferred_type_for_select_list = inferred_type_for_query;
   }
 
-  query_resolution_info->set_has_group_by(select->group_by() != nullptr);
-  query_resolution_info->set_has_having(select->having() != nullptr);
-  query_resolution_info->set_has_order_by(order_by != nullptr);
-
   ZETASQL_RETURN_IF_ERROR(ResolveSelectListExprsFirstPass(
       select->select_list(), from_scan_scope.get(),
       select->from_clause() != nullptr, from_clause_name_list,
       query_resolution_info.get(),
       query_alias, force_new_columns_for_projected_outputs,
       inferred_type_for_select_list));
+
+  query_resolution_info->set_has_group_by(select->group_by() != nullptr);
+  query_resolution_info->set_has_having(select->having() != nullptr);
+  query_resolution_info->set_has_order_by(order_by != nullptr);
+
+  if (query_resolution_info->HasGroupByOrAggregation() ||
+      query_resolution_info->HasAnalytic()) {
+    for (int i = 0; i < query_resolution_info->select_column_state_list()->select_column_state_list().size(); i++) {
+      query_resolution_info->select_column_state_list()->select_column_state_list().at(i)->resolved_select_column.Clear();
+    }
+  }
 
   // Return an appropriate error for anonymization queries that don't perform
   // aggregation.
@@ -1350,13 +1357,10 @@ absl::Status Resolver::ResolveSelect(
     // resolving the ORDER BY (which can contain analytic functions).
     // Fix this.
 
-    //
-    // todo: Moved to ResolveSelectListExprsFirstPass
-    //
-    // FinalizeSelectColumnStateList(select->select_list(), query_alias,
-    //                               force_new_columns_for_projected_outputs,
-    //                               query_resolution_info.get(),
-    //                               select_column_state_list);
+    FinalizeSelectColumnStateList(select->select_list(), query_alias,
+                                  force_new_columns_for_projected_outputs,
+                                  query_resolution_info.get(),
+                                  select_column_state_list);
   }
 
   // Resolve the SELECT list against what comes out of the GROUP BY.
@@ -1991,6 +1995,10 @@ void Resolver::FinalizeSelectColumnState(
     const ResolvedColumn& select_column =
         select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
             ->column();
+    // todo: update deps
+    for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
+      select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+    }
     select_column_state->resolved_select_column = select_column;
   } else {
     ResolvedColumn select_column(
@@ -2007,6 +2015,10 @@ void Resolver::FinalizeSelectColumnState(
     // get PROJECTed.
     query_resolution_info->select_list_columns_to_compute()->push_back(
         std::move(resolved_computed_column));
+    // todo: update deps
+    for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
+      select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+    }
     select_column_state->resolved_select_column = select_column;
   }
 }
@@ -2851,16 +2863,14 @@ absl::Status Resolver::ResolveSelectListExprsFirstPass(
         has_from_clause, query_resolution_info, select_name_list,
         inferred_type_for_query));
 
-    if (!query_resolution_info->HasGroupByOrAggregation() &&
-        !query_resolution_info->HasAnalytic()) {
-      FinalizeSelectColumnState(query_alias,
-                                force_new_columns_for_projected_outputs,
-                                query_resolution_info,
-                                query_resolution_info->select_column_state_list()->select_column_state_list().back());
+    const std::unique_ptr<SelectColumnState>& select_column_state =
+        query_resolution_info->select_column_state_list()->select_column_state_list().back();
+    ResolvedColumn select_column(
+        -1, query_alias, select_column_state->alias,
+        select_column_state->resolved_expr->annotated_type());
 
-      select_name_list->AddColumn(query_resolution_info->select_column_state_list()->select_column_state_list().back()->alias,
-          query_resolution_info->select_column_state_list()->select_column_state_list().back()->resolved_select_column, false);
-    }
+    select_column_state->resolved_select_column = select_column;
+    select_name_list->AddColumn(select_column_state->alias, select_column, true);
   }
   return absl::OkStatus();
 }
