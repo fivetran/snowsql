@@ -1499,13 +1499,6 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
         &correlated_columns_sets, &num_names_consumed, &target));
     resolved_to_target = num_names_consumed > 0;
   }
-  if (num_names_consumed == 0 && expr_resolution_info->select_name_scope != nullptr) {
-    ZETASQL_RETURN_IF_ERROR(expr_resolution_info->select_name_scope->LookupNamePath(
-        path_expr, expr_resolution_info->clause_name,
-        expr_resolution_info->is_post_distinct(), in_strict_mode(),
-        &correlated_columns_sets, &num_names_consumed, &target));
-    resolved_to_target = num_names_consumed > 0;
-  }
   if (resolved_to_target) {
     // We resolved (at least part of) the prefix path to a NameTarget.  Create
     // a ResolvedExpr for the resolved part of the name path.  We will
@@ -1657,6 +1650,33 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
     // function arguments (for CREATE FUNCTION statements only).
     ZETASQL_RETURN_IF_ERROR(MaybeResolvePathExpressionAsFunctionArgumentRef(
         path_expr, &resolved_expr, &num_names_consumed));
+  }
+
+  if (num_names_consumed == 0 && expr_resolution_info->select_name_scope != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(expr_resolution_info->select_name_scope->LookupNamePath(
+        path_expr, expr_resolution_info->clause_name,
+        expr_resolution_info->is_post_distinct(), in_strict_mode(),
+        &correlated_columns_sets, &num_names_consumed, &target));
+    resolved_to_target = num_names_consumed > 0;
+  }
+  if (resolved_to_target) {
+    switch (target.kind()) {
+      case NameTarget::EXPLICIT_COLUMN:
+      case NameTarget::IMPLICIT_COLUMN: {
+        ResolvedColumn resolved_column = target.column();
+        auto resolved_column_ref = MakeColumnRefWithCorrelation(
+            resolved_column, correlated_columns_sets, access_flags);
+        resolved_column.resolved_column_refs->push_back(resolved_column_ref.get());
+        MaybeRecordParseLocation(path_expr, resolved_column_ref.get());
+        resolved_expr = std::move(resolved_column_ref);
+        if (expr_resolution_info->query_resolution_info != nullptr &&
+            !expr_resolution_info->is_post_distinct()) {
+          ZETASQL_RETURN_IF_ERROR(ValidateColumnForAggregateOrAnalyticSupport(
+              resolved_column, first_name, path_expr, expr_resolution_info));
+        }
+        break;
+      }
+    }
   }
 
   if (num_names_consumed == 0) {

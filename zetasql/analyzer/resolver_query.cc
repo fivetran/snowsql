@@ -1272,13 +1272,6 @@ absl::Status Resolver::ResolveSelect(
   query_resolution_info->set_has_having(select->having() != nullptr);
   query_resolution_info->set_has_order_by(order_by != nullptr);
 
-  if (query_resolution_info->HasGroupByOrAggregation() ||
-      query_resolution_info->HasAnalytic()) {
-    for (int i = 0; i < query_resolution_info->select_column_state_list()->select_column_state_list().size(); i++) {
-      query_resolution_info->select_column_state_list()->select_column_state_list().at(i)->resolved_select_column.Clear();
-    }
-  }
-
   // Return an appropriate error for anonymization queries that don't perform
   // aggregation.
   // This check is required because we have to wait until after resolving the
