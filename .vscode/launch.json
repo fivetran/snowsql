@@ -10,6 +10,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/bazel-bin/zetasql/tools/execute_query/execute_query",
       "args": ["select 1 + 1;"],
+      // ["SELECT 12.5 as key, key * COUNT(*) FROM (SELECT * FROM UNNEST(GENERATE_ARRAY(1, 5)));"],
       // ["SELECT 0.23 AS probability, 100 * probability as probability_out"],
       // ["WITH table1 AS (SELECT 0.23 AS number) SELECT (1 - number) AS probability from table1"],
       // "args": ["select * from UNNEST(GENERATE_ARRAY(0, 11)) as u, LATERAL (select * from UNNEST(GENERATE_ARRAY(0, 11)) as t where u = t);"],
