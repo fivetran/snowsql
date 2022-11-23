@@ -59,7 +59,8 @@ enum FunctionSignatureId {
 
   // Snowflake FunctionSignatureIds are assigned in ranges:
   //
-  // 100100-100199 Snowflake Bitwise functions     (NextId: 100109)
+  // 100000-100099 Snowflake Aggregate functions     (NextId: 100001)
+  // 100100-100199 Snowflake Bitwise functions       (NextId: 100109)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1158,6 +1159,9 @@ enum FunctionSignatureId {
 
   // Range functions
   FN_RANGE = 2605;  // RANGE(T start, T end) -> range
+
+  // Snowflake Aggregate functions
+  APPROX_TOP_K_ACCUMULATE = 100000;      // approx_top_count
 
   // Snowflake Bitwise functions
   FN_BIT_AND_SAME_ARGS = 100100;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
