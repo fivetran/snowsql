@@ -477,6 +477,11 @@ bool HasIntervalTypeArgument(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments);
 
+// Returns true if it is possible to cast all input arguments to INTEGER.
+bool HasAllIntegerCastingArguments(
+    const FunctionSignature& matched_signature,
+    const std::vector<InputArgumentType>& arguments);
+
 // Returns true if FN_CONCAT_STRING function can coerce argument of given type
 // to STRING.
 bool CanStringConcatCoerceFrom(const zetasql::Type* arg_type);
@@ -744,6 +749,13 @@ void GetFilterFieldsFunction(TypeFactory* type_factory,
 void GetRangeFunctions(TypeFactory* type_factory,
                        const ZetaSQLBuiltinFunctionOptions& options,
                        NameToFunctionMap* functions);
+
+/* Snowflake specific functions START */
+void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
+                                    const ZetaSQLBuiltinFunctionOptions& options,
+                                    NameToFunctionMap* functions);
+
+/* Snowflake specific functions END */
 
 }  // namespace zetasql
 

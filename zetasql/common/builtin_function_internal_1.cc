@@ -1688,6 +1688,20 @@ bool HasIntervalTypeArgument(
   return false;
 }
 
+// Returns true if it is possible to cast all input arguments to INTEGER.
+bool HasAllIntegerCastingArguments(
+    const FunctionSignature& matched_signature,
+    const std::vector<InputArgumentType>& arguments) {
+  for (const InputArgumentType& argument : arguments) {
+    if (argument.type()->kind() != TYPE_NUMERIC
+            // todo: add more types
+            || argument.type()->kind() != TYPE_BIGNUMERIC) {
+      return false;
+    }
+  }
+  return true;
+}
+
 // Compute the result type for TOP_COUNT and TOP_SUM.
 // The output type is
 //   ARRAY<
