@@ -1,0 +1,50 @@
+SELECT BITXOR(1234, 1234) AS bit_xor
+--
+QueryStmt
++-output_column_list=
+| +-$query.bit_xor#1 AS bit_xor [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.bit_xor#1]
+    +-expr_list=
+    | +-bit_xor#1 :=
+    |   +-FunctionCall(ZetaSQL:bitxor(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+SELECT BITXOR('1234', '1234') AS bit_xor
+--
+QueryStmt
++-output_column_list=
+| +-$query.bit_xor#1 AS bit_xor [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.bit_xor#1]
+    +-expr_list=
+    | +-bit_xor#1 :=
+    |   +-FunctionCall(ZetaSQL:bitxor(STRING, STRING) -> INT64)
+    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+SELECT BITXOR(1234, '1234') AS bit_xor
+--
+QueryStmt
++-output_column_list=
+| +-$query.bit_xor#1 AS bit_xor [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.bit_xor#1]
+    +-expr_list=
+    | +-bit_xor#1 :=
+    |   +-FunctionCall(ZetaSQL:bitxor(INT64, STRING) -> INT64)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+==

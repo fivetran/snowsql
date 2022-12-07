@@ -3672,4 +3672,32 @@ void GetRangeFunctions(TypeFactory* type_factory,
                      &RangeFunctionPreResolutionArgumentConstraint));
 }
 
+/* Snowflake specific functions START */
+void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
+                                    const ZetaSQLBuiltinFunctionOptions& options,
+                                    NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+
+  FunctionSignatureOptions has_all_integer_casting_arguments;
+  has_all_integer_casting_arguments.set_constraints(&HasAllIntegerCastingArguments);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+
+  // BITXOR( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  const FunctionOptions fn_options;
+  InsertFunction(functions, options, "bitxor", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_XOR_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_XOR_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  fn_options);
+}
+/* Snowflake specific functions END */
+
 }  // namespace zetasql

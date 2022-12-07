@@ -1155,6 +1155,7 @@ enum FunctionSignatureId {
   // Range functions
   FN_RANGE = 2605;  // RANGE(T start, T end) -> range
 
-  // Snowflake Aggregate functions
-  FN_BIT_XOR_INTEGER = 100001;            // bitxor
+  // Snowflake Bitwise functions
+  FN_BIT_XOR_SAME_ARGS = 100001;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_XOR_DIFF_ARGS = 100002;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
 }
