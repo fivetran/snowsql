@@ -1407,36 +1407,36 @@ SELECT SUM(DISTINCT uint64_val), bool_val FROM TableAllTypes
 ARRAY<STRUCT<UINT64, bool_val BOOL>>[{78, false}, {47, true}]
 ==
 # ----------------------------------------------------------------------------
-# BIT_AND
+# BIT_AND_BQ
 # ----------------------------------------------------------------------------
 [name=aggregation_distinct_bit_and_1]
-SELECT BIT_AND(DISTINCT CAST(x as uint64)), BIT_AND(DISTINCT CAST(x as int64)),
-       BIT_AND(DISTINCT CAST(x as uint32)), BIT_AND(DISTINCT CAST(x as int32))
+SELECT bit_and_bq(DISTINCT CAST(x as uint64)), bit_and_bq(DISTINCT CAST(x as int64)),
+       bit_and_bq(DISTINCT CAST(x as uint32)), bit_and_bq(DISTINCT CAST(x as int32))
 FROM ((SELECT 5 x) UNION ALL (SELECT 5) UNION ALL (SELECT 21))
 --
 ARRAY<STRUCT<UINT64, INT64, UINT32, INT32>>[{5, 5, 5, 5}]
 ==
 [name=aggregation_distinct_bit_and_2]
-SELECT BIT_AND(DISTINCT int32_val), BIT_AND(DISTINCT int64_val),
-       BIT_AND(DISTINCT uint32_val), BIT_AND(DISTINCT uint64_val)
+SELECT bit_and_bq(DISTINCT int32_val), bit_and_bq(DISTINCT int64_val),
+       bit_and_bq(DISTINCT uint32_val), bit_and_bq(DISTINCT uint64_val)
 FROM TableAllTypes
 --
 ARRAY<STRUCT<INT32, INT64, UINT32, UINT64>>[{0, 0, 0, 0}]
 ==
 [name=aggregation_distinct_bit_and_3]
-SELECT BIT_AND(DISTINCT int32_val), BIT_AND(DISTINCT uint32_val),
-       BIT_AND(DISTINCT int64_val), BIT_AND(DISTINCT uint64_val)
+SELECT bit_and_bq(DISTINCT int32_val), bit_and_bq(DISTINCT uint32_val),
+       bit_and_bq(DISTINCT int64_val), bit_and_bq(DISTINCT uint64_val)
 FROM TableAllNull
 --
 ARRAY<STRUCT<INT32, UINT32, INT64, UINT64>>[{NULL, NULL, NULL, NULL}]
 ==
 [name=aggregation_distinct_bit_and_4]
-SELECT BIT_AND(DISTINCT val) FROM TableEmpty
+SELECT bit_and_bq(DISTINCT val) FROM TableEmpty
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_distinct_bit_and_group_by]
-SELECT BIT_AND(DISTINCT int32_val), row_id
+SELECT bit_and_bq(DISTINCT int32_val), row_id
 FROM TableAllTypes GROUP BY row_id ORDER BY row_id
 --
 ARRAY<STRUCT<INT32, row_id INT64>>[
@@ -1463,45 +1463,45 @@ ARRAY<STRUCT<INT32, row_id INT64>>[
 ]
 ==
 [name=aggregation_distinct_bit_and_group_by_and_having]
-SELECT BIT_AND(DISTINCT int32_val), bool_val FROM TableAllTypes
-  GROUP BY bool_val HAVING bool_val AND BIT_AND(DISTINCT int32_val) > 0
+SELECT bit_and_bq(DISTINCT int32_val), bool_val FROM TableAllTypes
+  GROUP BY bool_val HAVING bool_val AND bit_and_bq(DISTINCT int32_val) > 0
     ORDER BY bool_val
 --
 ARRAY<STRUCT<INT32, bool_val BOOL>>[{1, true}]
 ==
 
 # ----------------------------------------------------------------------------
-# BIT_OR
+# BIT_OR_BQ
 # ----------------------------------------------------------------------------
 [name=aggregation_distinct_bit_or_1]
-SELECT BIT_OR(DISTINCT CAST(x as uint64)), BIT_OR(DISTINCT CAST(x as int64)),
-       BIT_OR(DISTINCT CAST(x as uint32)), BIT_OR(DISTINCT CAST(x as int32))
+SELECT BIT_OR_BQ(DISTINCT CAST(x as uint64)), BIT_OR_BQ(DISTINCT CAST(x as int64)),
+       BIT_OR_BQ(DISTINCT CAST(x as uint32)), BIT_OR_BQ(DISTINCT CAST(x as int32))
 FROM ((SELECT 1 x) UNION ALL (SELECT 2) UNION ALL (SELECT 3)
       UNION ALL (SELECT 2))
 --
 ARRAY<STRUCT<UINT64, INT64, UINT32, INT32>>[{3, 3, 3, 3}]
 ==
 [name=aggregation_distinct_bit_or_2]
-SELECT BIT_OR(DISTINCT int32_val), BIT_OR(DISTINCT int64_val),
-       BIT_OR(DISTINCT uint32_val), BIT_OR(DISTINCT uint64_val)
+SELECT BIT_OR_BQ(DISTINCT int32_val), BIT_OR_BQ(DISTINCT int64_val),
+       BIT_OR_BQ(DISTINCT uint32_val), BIT_OR_BQ(DISTINCT uint64_val)
 FROM TableAllTypes
 --
 ARRAY<STRUCT<INT32, INT64, UINT32, UINT64>>[{-1, -1, 63, 63}]
 ==
 [name=aggregation_distinct_bit_or_3]
-SELECT BIT_OR(DISTINCT int32_val), BIT_OR(DISTINCT uint32_val),
-       BIT_OR(DISTINCT int64_val), BIT_OR(DISTINCT uint64_val)
+SELECT BIT_OR_BQ(DISTINCT int32_val), BIT_OR_BQ(DISTINCT uint32_val),
+       BIT_OR_BQ(DISTINCT int64_val), BIT_OR_BQ(DISTINCT uint64_val)
 FROM TableAllNull
 --
 ARRAY<STRUCT<INT32, UINT32, INT64, UINT64>>[{NULL, NULL, NULL, NULL}]
 ==
 [name=aggregation_distinct_bit_or_4]
-SELECT BIT_OR(DISTINCT val) FROM TableEmpty
+SELECT BIT_OR_BQ(DISTINCT val) FROM TableEmpty
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_distinct_bit_or_group_by]
-SELECT BIT_OR(DISTINCT int32_val), row_id
+SELECT BIT_OR_BQ(DISTINCT int32_val), row_id
 FROM TableAllTypes GROUP BY row_id ORDER BY row_id
 --
 ARRAY<STRUCT<INT32, row_id INT64>>[
@@ -1528,37 +1528,37 @@ ARRAY<STRUCT<INT32, row_id INT64>>[
 ]
 ==
 # ----------------------------------------------------------------------------
-# BIT_XOR
+# BIT_XOR_BQ
 # ----------------------------------------------------------------------------
 [name=aggregation_distinct_bit_xor_1]
-SELECT BIT_XOR(DISTINCT CAST(x as uint64)), BIT_XOR(DISTINCT CAST(x as int64)),
-       BIT_XOR(DISTINCT CAST(x as uint32)), BIT_XOR(DISTINCT CAST(x as int32))
+SELECT BIT_XOR_BQ(DISTINCT CAST(x as uint64)), BIT_XOR_BQ(DISTINCT CAST(x as int64)),
+       BIT_XOR_BQ(DISTINCT CAST(x as uint32)), BIT_XOR_BQ(DISTINCT CAST(x as int32))
 FROM ((SELECT 8 x) UNION ALL (SELECT 16) UNION ALL (SELECT 16)
       UNION ALL (SELECT 8))
 --
 ARRAY<STRUCT<UINT64, INT64, UINT32, INT32>>[{24, 24, 24, 24}]
 ==
 [name=aggregation_distinct_bit_xor_2]
-SELECT BIT_XOR(DISTINCT int32_val), BIT_XOR(DISTINCT int64_val),
-       BIT_XOR(DISTINCT uint32_val), BIT_XOR(DISTINCT uint64_val)
+SELECT BIT_XOR_BQ(DISTINCT int32_val), BIT_XOR_BQ(DISTINCT int64_val),
+       BIT_XOR_BQ(DISTINCT uint32_val), BIT_XOR_BQ(DISTINCT uint64_val)
 FROM TableAllTypes
 --
 ARRAY<STRUCT<INT32, INT64, UINT32, UINT64>>[{-22, -2, 60, 24}]
 ==
 [name=aggregation_distinct_bit_xor_3]
-SELECT BIT_XOR(DISTINCT int32_val), BIT_XOR(DISTINCT uint32_val),
-       BIT_XOR(DISTINCT int64_val), BIT_XOR(DISTINCT uint64_val)
+SELECT BIT_XOR_BQ(DISTINCT int32_val), BIT_XOR_BQ(DISTINCT uint32_val),
+       BIT_XOR_BQ(DISTINCT int64_val), BIT_XOR_BQ(DISTINCT uint64_val)
 FROM TableAllNull
 --
 ARRAY<STRUCT<INT32, UINT32, INT64, UINT64>>[{NULL, NULL, NULL, NULL}]
 ==
 [name=aggregation_distinct_bit_xor_4]
-SELECT BIT_XOR(DISTINCT val) FROM TableEmpty
+SELECT BIT_XOR_BQ(DISTINCT val) FROM TableEmpty
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_distinct_bit_xor_group_by]
-SELECT BIT_XOR(DISTINCT int32_val), row_id
+SELECT BIT_XOR_BQ(DISTINCT int32_val), row_id
 FROM TableAllTypes GROUP BY row_id ORDER BY row_id
 --
 ARRAY<STRUCT<INT32, row_id INT64>>[

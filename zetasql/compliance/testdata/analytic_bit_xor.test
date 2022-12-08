@@ -47,7 +47,7 @@ ARRAY<STRUCT<row_id INT64, int_val INT32>>[
 ]
 ==
 [name=bit_xor_unbounded]
-SELECT t.row_id, bit_xor(t.int_val)
+SELECT t.row_id, bit_xor_bq(t.int_val)
 OVER()
 FROM TestTable t
 ORDER BY row_id
@@ -76,7 +76,7 @@ ARRAY<STRUCT<row_id INT64, INT32>>[
 ]
 ==
 [name=bit_xor_one_preceding_one_following]
-SELECT t.row_id, bit_xor(t.int_val)
+SELECT t.row_id, bit_xor_bq(t.int_val)
 OVER(ORDER BY row_id ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)
 FROM TestTable t
 ORDER BY row_id
@@ -105,7 +105,7 @@ ARRAY<STRUCT<row_id INT64, INT32>>[
 ]
 ==
 [name=bit_xor_current_row_unbounded_following]
-SELECT t.row_id, bit_xor(t.int_val)
+SELECT t.row_id, bit_xor_bq(t.int_val)
 OVER(ORDER BY row_id ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING)
 FROM TestTable t
 ORDER BY row_id
@@ -134,7 +134,7 @@ ARRAY<STRUCT<row_id INT64, INT32>>[
 ]
 ==
 [name=bit_xor_unbounded_preceding_current_row]
-SELECT t.row_id, bit_xor(t.int_val)
+SELECT t.row_id, bit_xor_bq(t.int_val)
 OVER(ORDER BY row_id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
 FROM TestTable t
 ORDER BY row_id

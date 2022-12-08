@@ -751,9 +751,9 @@ void GetRangeFunctions(TypeFactory* type_factory,
                        NameToFunctionMap* functions);
 
 /* Snowflake specific functions START */
-void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
-                                    const ZetaSQLBuiltinFunctionOptions& options,
-                                    NameToFunctionMap* functions);
+void GetSnowflakeBitwiseFunctions(TypeFactory* type_factory,
+                                  const ZetaSQLBuiltinFunctionOptions& options,
+                                  NameToFunctionMap* functions);
 
 /* Snowflake specific functions END */
 
