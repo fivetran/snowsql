@@ -1,7 +1,7 @@
 #
 # BITAND( <expr1> , <expr2> )
 #
-SELECT BITAND(1234, '1234') AS bit_and
+SELECT {{BITAND|BIT_AND}}(1234, '1234') AS bit_and
 --
 QueryStmt
 +-output_column_list=
@@ -21,7 +21,7 @@ QueryStmt
 #
 # BITNOT( <expr> )
 #
-SELECT BITNOT(1234) AS bit_not
+SELECT {{BITNOT|BIT_NOT}}(1234) AS bit_not
 --
 QueryStmt
 +-output_column_list=
@@ -40,7 +40,7 @@ QueryStmt
 #
 # BITOR( <expr1> , <expr2> )
 #
-SELECT BITOR(1234, '1234') AS bit_or
+SELECT {{BITOR|BIT_OR}}(1234, '1234') AS bit_or
 --
 QueryStmt
 +-output_column_list=
@@ -60,7 +60,7 @@ QueryStmt
 #
 # BITSHIFTLEFT( <expr1> , <n> )
 #
-SELECT BITSHIFTLEFT(1234, 4) AS bit_shift_left
+SELECT {{BITSHIFTLEFT|BIT_SHIFTLEFT}}(1234, 4) AS bit_shift_left
 --
 QueryStmt
 +-output_column_list=
@@ -80,7 +80,7 @@ QueryStmt
 #
 # BITSHIFTRIGHT( <expr1> , <n> )
 #
-SELECT BITSHIFTRIGHT(1234, 4) AS bit_shift_right
+SELECT {{BITSHIFTRIGHT|BIT_SHIFTRIGHT}}(1234, 4) AS bit_shift_right
 --
 QueryStmt
 +-output_column_list=
@@ -100,7 +100,7 @@ QueryStmt
 #
 # BITXOR( <expr1> , <expr2> )
 #
-SELECT BITXOR(1234, 1234) AS bit_xor
+SELECT {{BITXOR|BIT_XOR}}(1234, 1234) AS bit_xor
 --
 QueryStmt
 +-output_column_list=
@@ -117,7 +117,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT BITXOR('1234', '1234') AS bit_xor
+SELECT {{BITXOR|BIT_XOR}}('1234', '1234') AS bit_xor
 --
 QueryStmt
 +-output_column_list=
@@ -134,7 +134,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT BITXOR(1234, '1234') AS bit_xor
+SELECT {{BITXOR|BIT_XOR}}(1234, '1234') AS bit_xor
 --
 QueryStmt
 +-output_column_list=
@@ -151,7 +151,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT BITXOR(1234, null) AS bit_xor
+SELECT {{BITXOR|BIT_XOR}}(1234, null) AS bit_xor
 --
 QueryStmt
 +-output_column_list=
@@ -168,7 +168,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT BITXOR(null, null) AS bit_xor
+SELECT {{BITXOR|BIT_XOR}}(null, null) AS bit_xor
 --
 QueryStmt
 +-output_column_list=
