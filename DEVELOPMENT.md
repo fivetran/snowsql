@@ -43,3 +43,10 @@ bazel build //zetasql/analyzer:resolver_test --features=-supports_dynamic_linker
 `Snowflake`: An `ARRAY` contains 0 or more pieces of data. Each value in an `ARRAY` is of type `VARIANT`. A `VARIANT` can store a value of any other type, including `OBJECT` and `ARRAY`.
 
 `BigQuery`: An `ARRAY` is an ordered list consisting of zero or more values of the same data type. `ARRAY`s of `ARRAY`s are not allowed.
+
+## Functions
+
+### Show Snowflake functions signatures
+Show all Snowflake functions: `SHOW FUNCTIONS`
+
+Example: `APPROX_TOP_K_ACCUMULATE(ANY, NUMBER) RETURN OBJECT`
