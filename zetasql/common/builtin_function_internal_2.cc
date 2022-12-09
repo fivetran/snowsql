@@ -1706,7 +1706,12 @@ void GetApproxFunctions(TypeFactory* type_factory,
       functions, options, "approx_top_k_accumulate", AGGREGATE,
       {{ARG_TYPE_ANY_1,  // Return type will be overridden.
         {{ARG_TYPE_ANY_1, supports_grouping},
-         {int64_type, non_null_positive_non_agg}},
+         {int64_type,
+          FunctionArgumentTypeOptions()
+              .set_is_not_aggregate()
+              .set_must_be_non_null()
+              .set_min_value(1)
+              .set_max_value(100000)}},
         APPROX_TOP_K_ACCUMULATE,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
