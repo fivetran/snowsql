@@ -214,6 +214,8 @@ class TypeFactory {
   const Type* get_numeric();
   const Type* get_bignumeric();
   const Type* get_json();
+  const Type* get_variant();
+  const Type* get_object();
 
   // Return a Type object for a simple type.  This works for all
   // non-parameterized scalar types.  Enums, arrays, structs and protos must
@@ -622,6 +624,10 @@ const ArrayType* JsonArrayType();
 const RangeType* DateRangeType();
 const RangeType* DatetimeRangeType();
 const RangeType* TimestampRangeType();
+
+// SnowflakeTypes
+const Type* VariantType();
+const Type* ObjectType();
 
 // Accessor for the ZetaSQL enum Type (functions::DateTimestampPart)
 // that represents date parts in function signatures.  Intended

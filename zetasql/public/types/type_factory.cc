@@ -297,6 +297,8 @@ const Type* TypeFactory::get_geography() { return types::GeographyType(); }
 const Type* TypeFactory::get_numeric() { return types::NumericType(); }
 const Type* TypeFactory::get_bignumeric() { return types::BigNumericType(); }
 const Type* TypeFactory::get_json() { return types::JsonType(); }
+const Type* TypeFactory::get_variant() { return types::VariantType(); }
+const Type* TypeFactory::get_object() { return types::ObjectType(); }
 
 const Type* TypeFactory::MakeSimpleType(TypeKind kind) {
   ZETASQL_CHECK(Type::IsSimpleType(kind)) << kind;
@@ -988,6 +990,16 @@ static const Type* s_json_type() {
   return s_json_type;
 }
 
+static const Type* s_variant_type() {
+  static const Type* s_variant_type = new SimpleType(s_type_factory(), TYPE_VARIANT);
+  return s_variant_type;
+}
+
+static const Type* s_object_type() {
+  static const Type* s_object_type = new SimpleType(s_type_factory(), TYPE_OBJECT);
+  return s_object_type;
+}
+
 static const EnumType* s_date_part_enum_type() {
   static const EnumType* s_date_part_enum_type = [] {
     const EnumType* enum_type;
@@ -1142,6 +1154,18 @@ static const ArrayType* s_json_array_type() {
   return s_json_array_type;
 }
 
+static const ArrayType* s_variant_array_type() {
+  static const ArrayType* s_variant_array_type =
+      MakeArrayType(s_type_factory()->get_variant());
+  return s_variant_array_type;
+}
+
+static const ArrayType* s_object_array_type() {
+  static const ArrayType* s_object_array_type =
+      MakeArrayType(s_type_factory()->get_object());
+  return s_object_array_type;
+}
+
 }  // namespace
 
 namespace types {
@@ -1164,6 +1188,9 @@ const Type* GeographyType() { return s_geography_type(); }
 const Type* NumericType() { return s_numeric_type(); }
 const Type* BigNumericType() { return s_bignumeric_type(); }
 const Type* JsonType() { return s_json_type(); }
+const Type* VariantType() { return s_variant_type(); }
+const Type* ObjectType() { return s_object_type(); }
+
 const StructType* EmptyStructType() { return s_empty_struct_type(); }
 const EnumType* DatePartEnumType() { return s_date_part_enum_type(); }
 const EnumType* NormalizeModeEnumType() { return s_normalize_mode_enum_type(); }
@@ -1195,6 +1222,10 @@ const ArrayType* NumericArrayType() { return s_numeric_array_type(); }
 const ArrayType* BigNumericArrayType() { return s_bignumeric_array_type(); }
 
 const ArrayType* JsonArrayType() { return s_json_array_type(); }
+
+const ArrayType* VariantArrayType() { return s_variant_array_type(); }
+
+const ArrayType* ObjectArrayType() { return s_object_array_type(); }
 
 const Type* TypeFromSimpleTypeKind(TypeKind type_kind) {
   switch (type_kind) {
