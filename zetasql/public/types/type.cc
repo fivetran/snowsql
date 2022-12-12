@@ -142,6 +142,13 @@ static const auto& GetTypeKindInfoMap() {
            {"INTERVAL",           27,          27,    true }},
           {TYPE_RANGE,
            {"RANGE",              29,          29,   false }},
+
+          // Snowflake types
+          {TYPE_VARIANT,
+           {"VARIANT",          1000,          30,   false }},
+          {TYPE_OBJECT,
+           {"OBJECT",           1001,          31,   false }},
+
           // clang-format on
           // When a new entry is added here, update
           // TypeTest::VerifyCostAndSpecificity.
