@@ -1746,6 +1746,45 @@ absl::StatusOr<const Type*> ComputeResultTypeForNearestNeighborsStruct(
   return result_type;
 }
 
+// Compute the result type for TOP_K_ACCUMULATE.
+// The output type is
+//   STRUCT<`counters` <INT_64>,
+//          `datatype` <STRING>,
+//          `precision` <INT_64>,
+//          `scale` <INT_64>,
+//          `state` <ARRAY<
+//              STRUCT<
+//                  `value` <arguments[0].type()>,
+//                  `<field2_name>` <arguments[1].type()>
+//              > > >
+//          `type` <STRING> >
+absl::StatusOr<const Type*> ComputeResultTypeForTopAccumulateStruct(
+    const std::string& field2_name, Catalog* catalog, TypeFactory* type_factory,
+    CycleDetector* cycle_detector,
+    const FunctionSignature& /*signature*/,
+    const std::vector<InputArgumentType>& arguments,
+    const AnalyzerOptions& analyzer_options) {
+  ZETASQL_RET_CHECK_EQ(arguments.size(), 2);
+
+  const Type* element_type;
+  ZETASQL_RETURN_IF_ERROR(type_factory->MakeStructType(
+      {{"value", arguments[0].type()}, {field2_name, arguments[1].type()}},
+      &element_type));
+  const Type* array_type;
+  ZETASQL_RETURN_IF_ERROR(type_factory->MakeArrayType(element_type, &array_type));
+
+  const Type* result_type;
+  ZETASQL_RETURN_IF_ERROR(type_factory->MakeStructType(
+      {{"counters", types::Int64Type()},
+       {"datatype", types::StringType()},
+       {"precision", types::Int64Type()},
+       {"scale", types::Int64Type()},
+       {"state", array_type},
+       {"type", types::StringType()}},
+      &result_type));
+  return result_type;
+}
+
 static bool FunctionIsDisabled(const ZetaSQLBuiltinFunctionOptions& options,
                                const FunctionOptions& function_options) {
   const LanguageOptions& language_options = options.language_options;

@@ -509,6 +509,25 @@ absl::StatusOr<const Type*> ComputeResultTypeForNearestNeighborsStruct(
     const std::vector<InputArgumentType>& arguments,
     const AnalyzerOptions& analyzer_options);
 
+// Compute the result type for TOP_K_ACCUMULATE.
+// The output type is
+//   STRUCT<`counters` <INT_64>,
+//          `datatype` <STRING>,
+//          `precision` <INT_64>,
+//          `scale` <INT_64>,
+//          `state` <ARRAY<
+//              STRUCT<
+//                  `value` <arguments[0].type()>,
+//                  `<field2_name>` <arguments[1].type()>
+//              > > >
+//          `type` <STRING> >
+absl::StatusOr<const Type*> ComputeResultTypeForTopAccumulateStruct(
+    const std::string& field2_name, Catalog* catalog, TypeFactory* type_factory,
+    CycleDetector* cycle_detector,
+    const FunctionSignature& /*signature*/,
+    const std::vector<InputArgumentType>& arguments,
+    const AnalyzerOptions& analyzer_options);
+
 void InsertCreatedFunction(NameToFunctionMap* functions,
                            const ZetaSQLBuiltinFunctionOptions& options,
                            Function* function_in);

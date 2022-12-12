@@ -1699,7 +1699,34 @@ void GetApproxFunctions(TypeFactory* type_factory,
       DefaultAggregateFunctionOptions().set_compute_result_type_callback(
           absl::bind_front(&ComputeResultTypeForTopStruct, "sum")));
 
+  /* -------------------------------- */
   /* Snowflake Approx functions begin */
+  /* -------------------------------- */
+
+  // APPROX_TOP_K
+  InsertFunction(
+      functions, options, "approx_top_k", AGGREGATE,
+      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+        {{ARG_TYPE_ANY_1, supports_grouping},
+         {int64_type,
+          FunctionArgumentTypeOptions()
+              .set_cardinality(FunctionArgumentType::OPTIONAL)
+              .set_is_not_aggregate()
+              .set_min_value(1)
+              .set_max_value(100000)
+              .set_default(Value::Int64(1))},
+         {int64_type,
+          FunctionArgumentTypeOptions()
+              .set_cardinality(FunctionArgumentType::OPTIONAL)
+              .set_is_not_aggregate()
+              .set_max_value(100000)
+              .set_default(Value::Int64(10000))}},
+        APPROX_TOP_K,
+        FunctionSignatureOptions()
+            .set_uses_operation_collation()
+            .set_rejects_collation()}},
+      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
+          absl::bind_front(&ComputeResultTypeForTopStruct, "count")));
 
   // APPROX_TOP_K_ACCUMULATE
   InsertFunction(
@@ -1717,9 +1744,11 @@ void GetApproxFunctions(TypeFactory* type_factory,
             .set_uses_operation_collation()
             .set_rejects_collation()}},
       DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopStruct, "count")));
+          absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
 
+  /* ------------------------------ */
   /* Snowflake Approx functions end */
+  /* ------------------------------ */
 }
 
 void GetStatisticalFunctions(TypeFactory* type_factory,
