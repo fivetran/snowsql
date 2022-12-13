@@ -1693,13 +1693,13 @@ bool HasAllIntegerCastingArguments(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments) {
   for (const InputArgumentType& argument : arguments) {
-    if (argument.type()->kind() == TYPE_INT32
-            && argument.type()->kind() == TYPE_UINT32
-            && argument.type()->kind() == TYPE_INT64
-            && argument.type()->kind() == TYPE_UINT64
-            && argument.type()->kind() == TYPE_NUMERIC
-            && argument.type()->kind() == TYPE_BIGNUMERIC
-            && argument.type()->kind() == TYPE_STRING) {
+    if (argument.type()->kind() != TYPE_INT32
+            && argument.type()->kind() != TYPE_UINT32
+            && argument.type()->kind() != TYPE_INT64
+            && argument.type()->kind() != TYPE_UINT64
+            && argument.type()->kind() != TYPE_NUMERIC
+            && argument.type()->kind() != TYPE_BIGNUMERIC
+            && argument.type()->kind() != TYPE_STRING) {
       return false;
     }
   }
