@@ -1694,16 +1694,16 @@ bool HasAllIntegerCastingArguments(
     const std::vector<InputArgumentType>& arguments) {
   for (const InputArgumentType& argument : arguments) {
     if (argument.type()->kind() == TYPE_INT32
-            || argument.type()->kind() == TYPE_UINT32
-            || argument.type()->kind() == TYPE_INT64
-            || argument.type()->kind() == TYPE_UINT64
-            || argument.type()->kind() == TYPE_NUMERIC
-            || argument.type()->kind() == TYPE_BIGNUMERIC
-            || argument.type()->kind() == TYPE_STRING) {
-      return true;
+            && argument.type()->kind() == TYPE_UINT32
+            && argument.type()->kind() == TYPE_INT64
+            && argument.type()->kind() == TYPE_UINT64
+            && argument.type()->kind() == TYPE_NUMERIC
+            && argument.type()->kind() == TYPE_BIGNUMERIC
+            && argument.type()->kind() == TYPE_STRING) {
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 // Compute the result type for TOP_COUNT and TOP_SUM.
