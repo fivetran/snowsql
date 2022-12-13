@@ -1598,6 +1598,7 @@ void GetApproxFunctions(TypeFactory* type_factory,
   const Type* double_type = type_factory->get_double();
   const Type* numeric_type = type_factory->get_numeric();
   const Type* bignumeric_type = type_factory->get_bignumeric();
+  const Type* interval_type = type_factory->get_interval();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
 
@@ -1621,6 +1622,8 @@ void GetApproxFunctions(TypeFactory* type_factory,
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
   FunctionSignatureOptions has_bignumeric_type_argument;
   has_bignumeric_type_argument.set_constraints(&HasBigNumericTypeArgument);
+  FunctionSignatureOptions has_all_average_calculable_arguments;
+  has_all_average_calculable_arguments.set_constraints(&HasAllAverageCalculableArguments);
 
   InsertFunction(functions, options, "approx_count_distinct", AGGREGATE,
                  {{int64_type,
@@ -1721,7 +1724,7 @@ void GetApproxFunctions(TypeFactory* type_factory,
               .set_is_not_aggregate()
               .set_max_value(100000)
               .set_default(Value::Int64(10000))}},
-        APPROX_TOP_K,
+        FN_APPROX_TOP_K,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
             .set_rejects_collation()}},
@@ -1739,12 +1742,45 @@ void GetApproxFunctions(TypeFactory* type_factory,
               .set_must_be_non_null()
               .set_min_value(1)
               .set_max_value(100000)}},
-        APPROX_TOP_K_ACCUMULATE,
+        FN_APPROX_TOP_K_ACCUMULATE,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
             .set_rejects_collation()}},
       DefaultAggregateFunctionOptions().set_compute_result_type_callback(
           absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
+
+  // REGR_AVGX
+  InsertFunction(
+      functions, options, "regr_avgx", AGGREGATE,
+      {{ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
+       {ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_AVGY
+  InsertFunction(
+      functions, options, "regr_avgy", AGGREGATE,
+      {{ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
+       {ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_COUNT
+  InsertFunction(
+      functions, options, "regr_count", AGGREGATE,
+      {{int64_type,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
+       {int64_type,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
+      DefaultAggregateFunctionOptions());
 
   /* ------------------------------ */
   /* Snowflake Approx functions end */

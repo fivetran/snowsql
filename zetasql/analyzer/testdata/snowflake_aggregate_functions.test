@@ -61,3 +61,99 @@ QueryStmt
                       +-end_expr=
                         +-WindowFrameExpr(boundary_type=UNBOUNDED FOLLOWING)
 ==
+
+# REGR_AVGX
+select regr_avgx(KitchenSink.int64_val, KitchenSink.uint64_val)
+from TestTable
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-$agg1#4 :=
+            +-AggregateFunctionCall(ZetaSQL:regr_avgx(INT64, UINT64) -> INT64)
+              +-GetProtoField
+              | +-type=INT64
+              | +-expr=
+              | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+              | +-field_descriptor=int64_val
+              | +-default_value=0
+              +-GetProtoField
+                +-type=UINT64
+                +-expr=
+                | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                +-field_descriptor=uint64_val
+                +-default_value=0
+==
+
+# REGR_AVGY
+select regr_avgy(KitchenSink.int64_val, KitchenSink.uint64_val)
+from TestTable
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-$agg1#4 :=
+            +-AggregateFunctionCall(ZetaSQL:regr_avgy(INT64, UINT64) -> INT64)
+              +-GetProtoField
+              | +-type=INT64
+              | +-expr=
+              | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+              | +-field_descriptor=int64_val
+              | +-default_value=0
+              +-GetProtoField
+                +-type=UINT64
+                +-expr=
+                | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                +-field_descriptor=uint64_val
+                +-default_value=0
+==
+
+# REGR_COUNT
+select regr_count(KitchenSink.int64_val, KitchenSink.uint64_val)
+from TestTable
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-$agg1#4 :=
+            +-AggregateFunctionCall(ZetaSQL:regr_count(INT64, UINT64) -> INT64)
+              +-GetProtoField
+              | +-type=INT64
+              | +-expr=
+              | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+              | +-field_descriptor=int64_val
+              | +-default_value=0
+              +-GetProtoField
+                +-type=UINT64
+                +-expr=
+                | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                +-field_descriptor=uint64_val
+                +-default_value=0
+==

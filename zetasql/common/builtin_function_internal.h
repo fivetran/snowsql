@@ -482,6 +482,10 @@ bool HasAllIntegerCastingArguments(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments);
 
+bool HasAllAverageCalculableArguments(
+    const FunctionSignature& matched_signature,
+    const std::vector<InputArgumentType>& arguments);
+
 // Returns true if FN_CONCAT_STRING function can coerce argument of given type
 // to STRING.
 bool CanStringConcatCoerceFrom(const zetasql::Type* arg_type);
