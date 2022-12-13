@@ -522,7 +522,7 @@ FunctionMap::FunctionMap() {
     RegisterFunction(FunctionKind::kBitwiseRightShift, "$bitwise_right_shift",
                      "BitwiseRightShift");
     RegisterFunction(FunctionKind::kBitwiseXor, "$bitwise_xor", "BitwiseXor");
-    RegisterFunction(FunctionKind::kBitAnd, "bit_and_bq", "BitAnd");
+    RegisterFunction(FunctionKind::kBitAnd, "bit_and", "BitAnd");
     RegisterFunction(FunctionKind::kBitOr, "bit_or", "BitOr");
     RegisterFunction(FunctionKind::kBitXor, "bit_xor", "BitXor");
     RegisterFunction(FunctionKind::kBitCount, "bit_count", "BitCount");
