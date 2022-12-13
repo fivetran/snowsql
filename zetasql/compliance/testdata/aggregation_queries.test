@@ -1786,87 +1786,87 @@ SELECT bit_and(CAST(x as int32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 ARRAY<STRUCT<INT32>>[{NULL}]
 ==
 [name=aggregation_24]
-SELECT bit_and(CAST(x as int64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_and_bq(CAST(x as int64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_25]
-SELECT bit_and(CAST(x as uint32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_and_bq(CAST(x as uint32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]
 ==
 [name=aggregation_26]
-SELECT bit_and(CAST(x as uint64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_and_bq(CAST(x as uint64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<UINT64>>[{NULL}]
 ==
 [name=aggregation_27]
-SELECT bit_and(x) FROM (SELECT CAST(NULL AS int32) x);
+SELECT bit_and_bq(x) FROM (SELECT CAST(NULL AS int32) x);
 --
 ARRAY<STRUCT<INT32>>[{NULL}]
 ==
 [name=aggregation_28]
-SELECT bit_and(x) FROM (SELECT CAST(NULL AS int64) x);
+SELECT bit_and_bq(x) FROM (SELECT CAST(NULL AS int64) x);
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_29]
-SELECT bit_and(x) FROM (SELECT CAST(NULL AS uint32) x);
+SELECT bit_and_bq(x) FROM (SELECT CAST(NULL AS uint32) x);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]
 ==
 [name=aggregation_30]
-SELECT bit_and(x) FROM (SELECT CAST(NULL AS uint64) x);
+SELECT bit_and_bq(x) FROM (SELECT CAST(NULL AS uint64) x);
 --
 ARRAY<STRUCT<UINT64>>[{NULL}]
 ==
 [name=aggregation_31]
-SELECT bit_and(CAST(x as int32)) FROM (SELECT 5 x);
+SELECT bit_and_bq(CAST(x as int32)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<INT32>>[{5}]
 ==
 [name=aggregation_32]
-SELECT bit_and(CAST(x as int64)) FROM (SELECT 5 x);
+SELECT bit_and_bq(CAST(x as int64)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<INT64>>[{5}]
 ==
 [name=aggregation_33]
-SELECT bit_and(CAST(x as uint32)) FROM (SELECT 5 x);
+SELECT bit_and_bq(CAST(x as uint32)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<UINT32>>[{5}]
 ==
 [name=aggregation_34]
-SELECT bit_and(CAST(x as uint64)) FROM (SELECT 5 x);
+SELECT bit_and_bq(CAST(x as uint64)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<UINT64>>[{5}]
 ==
 [name=aggregation_35]
-SELECT bit_and(CAST(x as int32)) FROM
+SELECT bit_and_bq(CAST(x as int32)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<INT32>>[{4}]
 ==
 [name=aggregation_36]
-SELECT bit_and(CAST(x as int64)) FROM
+SELECT bit_and_bq(CAST(x as int64)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<INT64>>[{4}]
 ==
 [name=aggregation_37]
-SELECT bit_and(CAST(x as uint32)) FROM
+SELECT bit_and_bq(CAST(x as uint32)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<UINT32>>[{4}]
 ==
 [name=aggregation_38]
-SELECT bit_and(CAST(x as uint64)) FROM
+SELECT bit_and_bq(CAST(x as uint64)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<UINT64>>[{4}]
 ==
 # BIT_AND should work with GROUP BY.
 [name=aggregation_39]
-SELECT id, bit_and(x) FROM
+SELECT id, bit_and_bq(x) FROM
 (SELECT "a" id, 3 x UNION ALL SELECT "a", 5 UNION ALL
  SELECT "b" id, 5 x UNION ALL SELECT "b", 6)
 GROUP BY id
@@ -1875,95 +1875,95 @@ ARRAY<STRUCT<id STRING, INT64>>[{"a", 1}, {"b", 4}]
 ==
 
 # ----------------------------------------------------------------------------
-# BIT_OR
+# BIT_OR_BQ
 # ----------------------------------------------------------------------------
 [name=aggregation_40]
-SELECT bit_or(CAST(x as int32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_or_bq(CAST(x as int32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<INT32>>[{NULL}]
 ==
 [name=aggregation_41]
-SELECT bit_or(CAST(x as int64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_or_bq(CAST(x as int64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_42]
-SELECT bit_or(CAST(x as uint32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_or_bq(CAST(x as uint32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]
 ==
 [name=aggregation_43]
-SELECT bit_or(CAST(x as uint64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_or_bq(CAST(x as uint64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<UINT64>>[{NULL}]
 ==
 [name=aggregation_44]
-SELECT bit_or(x) FROM (SELECT CAST(NULL AS int32) x);
+SELECT bit_or_bq(x) FROM (SELECT CAST(NULL AS int32) x);
 --
 ARRAY<STRUCT<INT32>>[{NULL}]
 ==
 [name=aggregation_45]
-SELECT bit_or(x) FROM (SELECT CAST(NULL AS int64) x);
+SELECT bit_or_bq(x) FROM (SELECT CAST(NULL AS int64) x);
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_46]
-SELECT bit_or(x) FROM (SELECT CAST(NULL AS uint32) x);
+SELECT bit_or_bq(x) FROM (SELECT CAST(NULL AS uint32) x);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]
 ==
 [name=aggregation_47]
-SELECT bit_or(x) FROM (SELECT CAST(NULL AS uint64) x);
+SELECT bit_or_bq(x) FROM (SELECT CAST(NULL AS uint64) x);
 --
 ARRAY<STRUCT<UINT64>>[{NULL}]
 ==
 [name=aggregation_48]
-SELECT bit_or(CAST(x as int32)) FROM (SELECT 5 x);
+SELECT bit_or_bq(CAST(x as int32)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<INT32>>[{5}]
 ==
 [name=aggregation_49]
-SELECT bit_or(CAST(x as int64)) FROM (SELECT 5 x);
+SELECT bit_or_bq(CAST(x as int64)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<INT64>>[{5}]
 ==
 [name=aggregation_50]
-SELECT bit_or(CAST(x as uint32)) FROM (SELECT 5 x);
+SELECT bit_or_bq(CAST(x as uint32)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<UINT32>>[{5}]
 ==
 [name=aggregation_51]
-SELECT bit_or(CAST(x as uint64)) FROM (SELECT 5 x);
+SELECT bit_or_bq(CAST(x as uint64)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<UINT64>>[{5}]
 ==
 [name=aggregation_52]
-SELECT bit_or(CAST(x as int32)) FROM
+SELECT bit_or_bq(CAST(x as int32)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<INT32>>[{7}]
 ==
 [name=aggregation_53]
-SELECT bit_or(CAST(x as int64)) FROM
+SELECT bit_or_bq(CAST(x as int64)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<INT64>>[{7}]
 ==
 [name=aggregation_54]
-SELECT bit_or(CAST(x as uint32)) FROM
+SELECT bit_or_bq(CAST(x as uint32)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<UINT32>>[{7}]
 ==
 [name=aggregation_55]
-SELECT bit_or(CAST(x as uint64)) FROM
+SELECT bit_or_bq(CAST(x as uint64)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<UINT64>>[{7}]
 ==
-# BIT_OR should work with GROUP BY.
+# BIT_OR_BQ should work with GROUP BY.
 [name=aggregation_56]
-SELECT id, bit_or(x) FROM
+SELECT id, bit_or_bq(x) FROM
 (SELECT "a" id, 3 x UNION ALL SELECT "a", 5 UNION ALL
  SELECT "b" id, 5 x UNION ALL SELECT "b", 6)
 GROUP BY id
@@ -1972,95 +1972,95 @@ ARRAY<STRUCT<id STRING, INT64>>[{"a", 7}, {"b", 7}]
 ==
 
 # ----------------------------------------------------------------------------
-# BIT_XOR
+# BIT_XOR_BQ
 # ----------------------------------------------------------------------------
 [name=aggregation_57]
-SELECT bit_xor(CAST(x as int32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_xor_bq(CAST(x as int32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<INT32>>[{NULL}]
 ==
 [name=aggregation_58]
-SELECT bit_xor(CAST(x as int64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_xor_bq(CAST(x as int64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_59]
-SELECT bit_xor(CAST(x as uint32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_xor_bq(CAST(x as uint32)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]
 ==
 [name=aggregation_60]
-SELECT bit_xor(CAST(x as uint64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
+SELECT bit_xor_bq(CAST(x as uint64)) FROM (SELECT 1 x FROM (SELECT 1) WHERE false);
 --
 ARRAY<STRUCT<UINT64>>[{NULL}]
 ==
 [name=aggregation_61]
-SELECT bit_xor(x) FROM (SELECT CAST(NULL AS int32) x);
+SELECT bit_xor_bq(x) FROM (SELECT CAST(NULL AS int32) x);
 --
 ARRAY<STRUCT<INT32>>[{NULL}]
 ==
 [name=aggregation_62]
-SELECT bit_xor(x) FROM (SELECT CAST(NULL AS int64) x);
+SELECT bit_xor_bq(x) FROM (SELECT CAST(NULL AS int64) x);
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_63]
-SELECT bit_xor(x) FROM (SELECT CAST(NULL AS uint32) x);
+SELECT bit_xor_bq(x) FROM (SELECT CAST(NULL AS uint32) x);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]
 ==
 [name=aggregation_64]
-SELECT bit_xor(x) FROM (SELECT CAST(NULL AS uint64) x);
+SELECT bit_xor_bq(x) FROM (SELECT CAST(NULL AS uint64) x);
 --
 ARRAY<STRUCT<UINT64>>[{NULL}]
 ==
 [name=aggregation_65]
-SELECT bit_xor(CAST(x as int32)) FROM (SELECT 5 x);
+SELECT bit_xor_bq(CAST(x as int32)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<INT32>>[{5}]
 ==
 [name=aggregation_66]
-SELECT bit_xor(CAST(x as int64)) FROM (SELECT 5 x);
+SELECT bit_xor_bq(CAST(x as int64)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<INT64>>[{5}]
 ==
 [name=aggregation_67]
-SELECT bit_xor(CAST(x as uint32)) FROM (SELECT 5 x);
+SELECT bit_xor_bq(CAST(x as uint32)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<UINT32>>[{5}]
 ==
 [name=aggregation_68]
-SELECT bit_xor(CAST(x as uint64)) FROM (SELECT 5 x);
+SELECT bit_xor_bq(CAST(x as uint64)) FROM (SELECT 5 x);
 --
 ARRAY<STRUCT<UINT64>>[{5}]
 ==
 [name=aggregation_69]
-SELECT bit_xor(CAST(x as int32)) FROM
+SELECT bit_xor_bq(CAST(x as int32)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<INT32>>[{3}]
 ==
 [name=aggregation_70]
-SELECT bit_xor(CAST(x as int64)) FROM
+SELECT bit_xor_bq(CAST(x as int64)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<INT64>>[{3}]
 ==
 [name=aggregation_71]
-SELECT bit_xor(CAST(x as uint32)) FROM
+SELECT bit_xor_bq(CAST(x as uint32)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<UINT32>>[{3}]
 ==
 [name=aggregation_72]
-SELECT bit_xor(CAST(x as uint64)) FROM
+SELECT bit_xor_bq(CAST(x as uint64)) FROM
 (SELECT NULL x UNION ALL SELECT 5 UNION ALL SELECT 6);
 --
 ARRAY<STRUCT<UINT64>>[{3}]
 ==
-# BIT_XOR should work with GROUP BY.
+# BIT_XOR_BQ should work with GROUP BY.
 [name=aggregation_73]
-SELECT id, bit_xor(x) FROM
+SELECT id, bit_xor_bq(x) FROM
 (SELECT "a" id, 3 x UNION ALL SELECT "a", 5 UNION ALL
  SELECT "b" id, 5 x UNION ALL SELECT "b", 6)
 GROUP BY id
@@ -2340,7 +2340,7 @@ ARRAY<STRUCT<JSON>>[{NULL}]
 # ----------------------------------------------------------------------------
 [name=aggregation_zero_rows_1]
 SELECT COUNT(val), COUNT(*), SUM(val), AVG(val), MIN(val), MAX(val),
-       ANY_VALUE(val), ARRAY_AGG(val), BIT_AND(val), BIT_OR(val), BIT_XOR(val),
+       ANY_VALUE(val), ARRAY_AGG(val), BIT_AND_BQ(val), BIT_OR_BQ(val), BIT_XOR_BQ(val),
        LOGICAL_AND(CAST(val AS bool)), LOGICAL_OR(CAST(val AS bool)),
        STRING_AGG(CAST(val AS string)), STRING_AGG(CAST(val AS string), "X")
 FROM TableEmpty

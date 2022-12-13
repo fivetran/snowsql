@@ -3672,4 +3672,88 @@ void GetRangeFunctions(TypeFactory* type_factory,
                      &RangeFunctionPreResolutionArgumentConstraint));
 }
 
+/* Snowflake specific functions START */
+void GetSnowflakeBitwiseFunctions(TypeFactory* type_factory,
+                                  const ZetaSQLBuiltinFunctionOptions& options,
+                                  NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+
+  FunctionSignatureOptions has_all_integer_casting_arguments;
+  has_all_integer_casting_arguments.set_constraints(&HasAllIntegerCastingArguments);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+
+  // BITAND( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitand", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_AND_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_AND_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_and"));
+
+  // BITNOT( <expr> )
+  //   <expr> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitnot", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1},
+                   FN_BIT_NOT,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_not"));
+
+  // BITOR( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitor", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_OR_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_OR_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_or"));
+
+  // BITSHIFTLEFT( <expr1> , <n> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <n> The number of bits to shift by.
+  InsertFunction(functions, options, "bitshiftleft", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, int64_type},
+                   FN_BIT_SHIFT_LEFT,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_shiftleft"));
+
+  // BITSHIFTRIGHT( <expr1> , <n> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <n> The number of bits to shift by.
+  InsertFunction(functions, options, "bitshiftright", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, int64_type},
+                   FN_BIT_BIT_SHIFT_RIGHT,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_shiftright"));
+
+  // BITXOR( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitxor", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_XOR_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_XOR_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_xor"));
+}
+/* Snowflake specific functions END */
+
 }  // namespace zetasql

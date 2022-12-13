@@ -57,6 +57,10 @@ enum FunctionSignatureId {
   // 2600-2699 More misc functions.           (NextId: 2606)
   // 2700-2799 Aggregate functions II         (NextId: 2701)
 
+  // Snowflake FunctionSignatureIds are assigned in ranges:
+  //
+  // 100100-100199 Snowflake Bitwise functions     (NextId: 100109)
+
   // enum value                       // Related function name
   // ----------                       // ---------------------
   FN_ADD_DOUBLE = 2;                       // $add
@@ -1154,4 +1158,15 @@ enum FunctionSignatureId {
 
   // Range functions
   FN_RANGE = 2605;  // RANGE(T start, T end) -> range
+
+  // Snowflake Bitwise functions
+  FN_BIT_AND_SAME_ARGS = 100100;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_AND_DIFF_ARGS = 100101;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
+  FN_BIT_NOT = 100102;                  // bitnot(ARG_TYPE_ANY) -> INT64
+  FN_BIT_OR_SAME_ARGS = 100103;         // bitor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_OR_DIFF_ARGS = 100104;         // bitor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
+  FN_BIT_SHIFT_LEFT = 100105;           // bitshiftleft(ARG_TYPE_ANY_1, INT64) -> INT64
+  FN_BIT_BIT_SHIFT_RIGHT = 100106;      // bitshiftright(ARG_TYPE_ANY_1, INT64) -> INT64
+  FN_BIT_XOR_SAME_ARGS = 100107;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_XOR_DIFF_ARGS = 100108;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
 }

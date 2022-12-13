@@ -1440,21 +1440,21 @@ void GetAggregateFunctions(TypeFactory* type_factory,
                   {interval_type, {interval_type}, FN_AVG_INTERVAL}},
                  DefaultAggregateFunctionOptions());
 
-  InsertFunction(functions, options, "bit_and", AGGREGATE,
+  InsertFunction(functions, options, "bit_and_bq", AGGREGATE,
                  {{int32_type, {int32_type}, FN_BIT_AND_INT32},
                   {int64_type, {int64_type}, FN_BIT_AND_INT64},
                   {uint32_type, {uint32_type}, FN_BIT_AND_UINT32},
                   {uint64_type, {uint64_type}, FN_BIT_AND_UINT64}},
                  DefaultAggregateFunctionOptions());
 
-  InsertFunction(functions, options, "bit_or", AGGREGATE,
+  InsertFunction(functions, options, "bit_or_bq", AGGREGATE,
                  {{int32_type, {int32_type}, FN_BIT_OR_INT32},
                   {int64_type, {int64_type}, FN_BIT_OR_INT64},
                   {uint32_type, {uint32_type}, FN_BIT_OR_UINT32},
                   {uint64_type, {uint64_type}, FN_BIT_OR_UINT64}},
                  DefaultAggregateFunctionOptions());
 
-  InsertFunction(functions, options, "bit_xor", AGGREGATE,
+  InsertFunction(functions, options, "bit_xor_bq", AGGREGATE,
                  {{int32_type, {int32_type}, FN_BIT_XOR_INT32},
                   {int64_type, {int64_type}, FN_BIT_XOR_INT64},
                   {uint32_type, {uint32_type}, FN_BIT_XOR_UINT32},

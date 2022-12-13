@@ -148,9 +148,9 @@ ARRAY<STRUCT<x INT64, _100 ARRAY<>, y_101 ARRAY<>, _103 ARRAY<>, y_null ARRAY<>>
 [name=pivot_bitfns]
 SELECT * FROM (SELECT x, y, z FROM t1)
   PIVOT(
-    BIT_AND(z - 1000) AS pivot_bit_and,
-    BIT_OR(z - 1000) AS pivot_bit_or,
-    BIT_XOR(z - 1000) AS pivot_bit_xor
+    BIT_AND_BQ(z - 1000) AS pivot_bit_and,
+    BIT_OR_BQ(z - 1000) AS pivot_bit_or,
+    BIT_XOR_BQ(z - 1000) AS pivot_bit_xor
     FOR y IN (100, 101, 103 AS yy103yy, NULL, NULL AS yyNULLyy));
 --
 ARRAY<STRUCT<

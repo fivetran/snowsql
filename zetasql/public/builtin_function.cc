@@ -146,6 +146,11 @@ absl::Status GetZetaSQLFunctionsAndTypes(
   if (options.language_options.LanguageFeatureEnabled(FEATURE_RANGE_TYPE)) {
     GetRangeFunctions(type_factory, options, functions);
   }
+
+  /* Snowflake functions START */
+  GetSnowflakeBitwiseFunctions(type_factory, options, functions);
+  /* Snowflake functions END */
+
   return absl::OkStatus();
 }
 
