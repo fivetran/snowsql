@@ -736,20 +736,20 @@ void GetConditionalFunctions(TypeFactory* type_factory,
       FunctionOptions().set_post_resolution_argument_constraint(
           absl::bind_front(&CheckArgumentsSupportEquality, "NULLIF")));
 
+  // ZEROIFNULL(expr): if expr is not null, returns expr, else 0.
+  InsertFunction(
+      functions, options, "zeroifnull", SCALAR,
+      {{ZeroIfNullSig(int32_type, FN_ZEROIFNULL_INT32),
+        ZeroIfNullSig(uint32_type, FN_ZEROIFNULL_UINT32),
+        ZeroIfNullSig(float_type, FN_ZEROIFNULL_FLOAT),
+        ZeroIfNullSig(int64_type, FN_ZEROIFNULL_INT64),
+        ZeroIfNullSig(uint64_type, FN_ZEROIFNULL_UINT64),
+        ZeroIfNullSig(double_type, FN_ZEROIFNULL_DOUBLE),
+        ZeroIfNullSig(numeric_type, FN_ZEROIFNULL_NUMERIC),
+        ZeroIfNullSig(bignumeric_type, FN_ZEROIFNULL_BIGNUMERIC)}});
+
   if (options.language_options.LanguageFeatureEnabled(
           FEATURE_V_1_4_NULLIFZERO_ZEROIFNULL)) {
-    // ZEROIFNULL(expr): if expr is not null, returns expr, else 0.
-    InsertFunction(
-        functions, options, "zeroifnull", SCALAR,
-        {{ZeroIfNullSig(int32_type, FN_ZEROIFNULL_INT32),
-          ZeroIfNullSig(uint32_type, FN_ZEROIFNULL_UINT32),
-          ZeroIfNullSig(float_type, FN_ZEROIFNULL_FLOAT),
-          ZeroIfNullSig(int64_type, FN_ZEROIFNULL_INT64),
-          ZeroIfNullSig(uint64_type, FN_ZEROIFNULL_UINT64),
-          ZeroIfNullSig(double_type, FN_ZEROIFNULL_DOUBLE),
-          ZeroIfNullSig(numeric_type, FN_ZEROIFNULL_NUMERIC),
-          ZeroIfNullSig(bignumeric_type, FN_ZEROIFNULL_BIGNUMERIC)}});
-
     // NULLIFZERO(expr): NULL if expr = 0 otherwise returns expr.
     InsertFunction(
         functions, options, "nullifzero", SCALAR,
@@ -4029,5 +4029,708 @@ void GetFilterFieldsFunction(TypeFactory* type_factory,
                    empty_signatures, fn_options);
   }
 }
+
+/* Snowflake specific functions START */
+
+void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
+                                    const ZetaSQLBuiltinFunctionOptions& options,
+                                    NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+  const Type* numeric_type = type_factory->get_numeric();
+  const Type* bool_type = type_factory->get_bool();
+  const Type* bytes_type = type_factory->get_bytes();
+  const Type* float_type = type_factory->get_float();
+  const Type* string_type = type_factory->get_string();
+
+  const Function::Mode AGGREGATE = Function::AGGREGATE;
+  const FunctionArgumentType::ArgumentCardinality REPEATED =
+        FunctionArgumentType::REPEATED;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  FunctionArgumentTypeOptions supports_grouping;
+  supports_grouping.set_must_support_grouping();
+
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
+
+  // APPROX_TOP_K
+  InsertFunction(
+      functions, options, "approx_top_k", AGGREGATE,
+      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+        {{ARG_TYPE_ANY_1, supports_grouping},
+         {int64_type,
+          FunctionArgumentTypeOptions()
+              .set_cardinality(OPTIONAL)
+              .set_is_not_aggregate()
+              .set_min_value(1)
+              .set_max_value(100000)
+              .set_default(Value::Int64(1))},
+         {int64_type,
+          FunctionArgumentTypeOptions()
+              .set_cardinality(OPTIONAL)
+              .set_is_not_aggregate()
+              .set_max_value(100000)
+              .set_default(Value::Int64(10000))}},
+        FN_APPROX_TOP_K,
+        FunctionSignatureOptions()
+            .set_uses_operation_collation()
+            .set_rejects_collation()}},
+      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
+          absl::bind_front(&ComputeResultTypeForTopStruct, "count")));
+
+  // APPROX_TOP_K_ACCUMULATE
+  InsertFunction(
+      functions, options, "approx_top_k_accumulate", AGGREGATE,
+      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+        {{ARG_TYPE_ANY_1, supports_grouping},
+         {int64_type,
+          FunctionArgumentTypeOptions()
+              .set_is_not_aggregate()
+              .set_must_be_non_null()
+              .set_min_value(1)
+              .set_max_value(100000)}},
+        FN_APPROX_TOP_K_ACCUMULATE,
+        FunctionSignatureOptions()
+            .set_uses_operation_collation()
+            .set_rejects_collation()}},
+      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
+          absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
+
+  // APPROX_TOP_K_COMBINE
+  InsertFunction(
+      functions, options, "approx_top_k_combine", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, OPTIONAL}}, FN_APPROX_TOP_K_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_TOP_K_ESTIMATE
+  InsertFunction(
+      functions, options, "approx_top_k_estimate", AGGREGATE,
+      {{ARG_ARRAY_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, OPTIONAL}}, FN_APPROX_TOP_K_ESTIMATE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROXIMATE_JACCARD_INDEX
+  InsertFunction(
+      functions, options, "approximate_jaccard_index", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROXIMATE_JACCARD_INDEX}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROXIMATE_SIMILARITY
+  InsertFunction(
+      functions, options, "approximate_similarity", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROXIMATE_SIMILARITY}},
+      DefaultAggregateFunctionOptions());
+
+  // BITAND_AGG
+  InsertFunction(
+      functions, options, "bitand_agg", AGGREGATE,
+      {{numeric_type, {numeric_type}, FN_BITAND_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BITOR_AGG
+  InsertFunction(
+      functions, options, "bitor_agg", AGGREGATE,
+      {{numeric_type, {numeric_type}, FN_BITOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BITXOR_AGG
+  InsertFunction(
+      functions, options, "bitxor_agg", AGGREGATE,
+      {{numeric_type, {numeric_type}, FN_BITXOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BOOLAND_AGG
+  InsertFunction(
+      functions, options, "booland_agg", AGGREGATE,
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLAND_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BOOLOR_AGG
+  InsertFunction(
+      functions, options, "boolor_agg", AGGREGATE,
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BOOLXOR_AGG
+  InsertFunction(
+      functions, options, "boolxor_agg", AGGREGATE,
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLXOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // GROUPING_ID
+  InsertFunction(
+      functions, options, "grouping_id", AGGREGATE,
+      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_GROUPING_ID}},
+      DefaultAggregateFunctionOptions());
+
+  // HASH_AGG
+  InsertFunction(
+      functions, options, "hash_agg", AGGREGATE,
+      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_HASH_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL
+  InsertFunction(
+      functions, options, "hll", AGGREGATE,
+      {{int64_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, OPTIONAL}}, FN_HLL}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL_ACCUMULATE
+  InsertFunction(
+      functions, options, "hll_accumulate", AGGREGATE,
+      {{bytes_type, {ARG_TYPE_ANY_1}, FN_HLL_ACCUMULATE}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL_COMBINE
+  InsertFunction(
+      functions, options, "hll_combine", AGGREGATE,
+      {{bytes_type, {ARG_TYPE_ANY_1}, FN_HLL_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL_ESTIMATE
+  InsertFunction(
+      functions, options, "hll_estimate", AGGREGATE,
+      {{numeric_type, {ARG_TYPE_ANY_1}, FN_HLL_ESTIMATE}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL_EXPORT  
+  InsertFunction(
+      functions, options, "hll_export", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_HLL_EXPORT}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL_IMPORT  
+  InsertFunction(
+      functions, options, "hll_import", AGGREGATE,
+      {{bytes_type, {ARG_TYPE_ANY_1}, FN_HLL_IMPORT}},
+      DefaultAggregateFunctionOptions());
+
+  // KURTOSIS  
+  InsertFunction(
+      functions, options, "kurtosis", AGGREGATE,
+      {{float_type, {ARG_TYPE_ANY_1}, FN_KURTOSIS}},
+      DefaultAggregateFunctionOptions());
+
+  // LISTAGG  
+  InsertFunction(
+      functions, options, "listagg", AGGREGATE,
+      {{string_type, {ARG_TYPE_ANY_1, {string_type, OPTIONAL}}, FN_LISTAGG}},
+      DefaultAggregateFunctionOptions());
+
+  // MEDIAN  
+  InsertFunction(
+      functions, options, "median", AGGREGATE,
+      {{float_type, {ARG_TYPE_ANY_1}, FN_MEDIAN}},
+      DefaultAggregateFunctionOptions());
+
+  // MINHASH  
+  InsertFunction(
+      functions, options, "minhash", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {{int64_type,
+          FunctionArgumentTypeOptions()
+              .set_min_value(1)
+              .set_max_value(1024)}, ARG_TYPE_ANY_1}, FN_MINHASH}},
+      DefaultAggregateFunctionOptions());
+
+  // MINHASH_COMBINE  
+  InsertFunction(
+      functions, options, "minhash_combine", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_MINHASH_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
+  // MODE  
+  InsertFunction(
+      functions, options, "mode", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_MODE}},
+      DefaultAggregateFunctionOptions());
+
+  // OBJECT_AGG  
+  InsertFunction(
+      functions, options, "object_agg", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2}, FN_OBJECT_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_AVGX
+  InsertFunction(
+      functions, options, "regr_avgx", AGGREGATE,
+      {{ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_REGR_AVGX_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_AVGY
+  InsertFunction(
+      functions, options, "regr_avgy", AGGREGATE,
+      {{ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_REGR_AVGX_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {ARG_TYPE_ANY_1,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_COUNT
+  InsertFunction(
+      functions, options, "regr_count", AGGREGATE,
+      {{int64_type,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_REGR_AVGX_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {int64_type,
+        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_INTERCEPT
+  InsertFunction(
+      functions, options, "regr_intercept", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_REGR_INTERCEPT}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_R2
+  InsertFunction(
+      functions, options, "regr_r2", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_REGR_R2}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_SLOPE
+  InsertFunction(
+      functions, options, "regr_slope", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_REGR_SLOPE}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_SXX
+  InsertFunction(
+      functions, options, "regr_sxx", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_REGR_SXX}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE
+  InsertFunction(
+      functions, options, "approx_percentile", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2}, FN_APPROX_PERCENTILE}},
+      DefaultAggregateFunctionOptions());
+
+  // REGR_SYY
+  InsertFunction(
+      functions, options, "regr_syy", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_REGR_SYY}},
+      DefaultAggregateFunctionOptions());
+
+  // SKEW
+  InsertFunction(
+      functions, options, "skew", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_SKEW}},
+      DefaultAggregateFunctionOptions());
+
+  // VARIANCE_POP
+  InsertFunction(
+      functions, options, "variance_pop", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_VARIANCE_POP}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE_ACCUMULATE
+  InsertFunction(
+      functions, options, "approx_percentile_accumulate", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROX_PERCENTILE_ACCUMULATE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE_COMBINE
+  InsertFunction(
+      functions, options, "approx_percentile_combine", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROX_PERCENTILE_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE_ESTIMATE
+  InsertFunction(
+      functions, options, "approx_percentile_estimate", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_APPROX_PERCENTILE_ESTIMATE}},
+      DefaultAggregateFunctionOptions());
+}
+
+void GetSnowflakeBitwiseFunctions(TypeFactory* type_factory,
+                                  const ZetaSQLBuiltinFunctionOptions& options,
+                                  NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+
+  FunctionSignatureOptions has_all_integer_casting_arguments;
+  has_all_integer_casting_arguments.set_constraints(&HasAllIntegerCastingArguments);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+
+  // BITAND( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitand", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_AND_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_AND_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_and"));
+
+  // BITNOT( <expr> )
+  //   <expr> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitnot", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1},
+                   FN_BIT_NOT,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_not"));
+
+  // BITOR( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitor", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_OR_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_OR_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_or"));
+
+  // BITSHIFTLEFT( <expr1> , <n> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <n> The number of bits to shift by.
+  InsertFunction(functions, options, "bitshiftleft", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, int64_type},
+                   FN_BIT_SHIFT_LEFT,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_shiftleft"));
+
+  // BITSHIFTRIGHT( <expr1> , <n> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <n> The number of bits to shift by.
+  InsertFunction(functions, options, "bitshiftright", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, int64_type},
+                   FN_BIT_BIT_SHIFT_RIGHT,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_shiftright"));
+
+  // BITXOR( <expr1> , <expr2> )
+  //   <expr1> This expression must evaluate to a data type that can be cast to INTEGER.
+  //   <expr2> This expression must evaluate to a data type that can be cast to INTEGER.
+  InsertFunction(functions, options, "bitxor", SCALAR,
+                 {{int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+                   FN_BIT_XOR_SAME_ARGS,
+                   has_all_integer_casting_arguments},
+                  {int64_type,
+                   {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+                   FN_BIT_XOR_DIFF_ARGS,
+                   has_all_integer_casting_arguments}},
+                  FunctionOptions().set_alias_name("bit_xor"));
+}
+
+void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
+                                                const ZetaSQLBuiltinFunctionOptions& options,
+                                                NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+  const Type* double_type = type_factory->get_double();
+
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  // BOOLAND
+  InsertFunction(
+      functions, options, "booland", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_BOOLAND_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_BOOLAND_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // BOOLNOT
+  InsertFunction(
+      functions, options, "boolnot", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1},
+        FN_BOOLNOT, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // BOOLOR
+  InsertFunction(
+      functions, options, "boolor", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_BOOLOR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_BOOLOR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // BOOLXOR
+  InsertFunction(
+      functions, options, "boolxor", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_BOOLXOR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_BOOLXOR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+}
+
+void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
+                                     const ZetaSQLBuiltinFunctionOptions& options,
+                                     NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+  const Type* int64_type = type_factory->get_int64();
+  const Type* uint64_type = type_factory->get_uint64();
+  const Type* double_type = type_factory->get_double();
+  const Type* numeric_type = type_factory->get_numeric();
+  const Type* bignumeric_type = type_factory->get_bignumeric();
+  const Type* string_type = type_factory->get_string();
+  const Type* date_type = type_factory->get_date();
+  const Type* time_type = type_factory->get_time();
+
+  FunctionSignatureOptions has_numeric_type_argument;
+  has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
+  FunctionSignatureOptions has_bignumeric_type_argument;
+  has_bignumeric_type_argument.set_constraints(&HasBigNumericTypeArgument);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  // TO_BOOLEAN
+  // Let INT32 -> INT64, UINT32 -> UINT64, and FLOAT -> DOUBLE.
+  InsertFunction(
+      functions, options, "to_boolean", SCALAR,
+      {{bool_type, {int64_type}, FN_TO_BOOLEAN_INT64},
+       {bool_type, {uint64_type}, FN_TO_BOOLEAN_UINT64},
+       {bool_type, {double_type}, FN_TO_BOOLEAN_DOUBLE},
+       {bool_type, {numeric_type}, FN_TO_BOOLEAN_NUMERIC, has_numeric_type_argument},
+       {bool_type, {bignumeric_type}, FN_TO_BOOLEAN_BIGNUMERIC, has_bignumeric_type_argument},
+       {bool_type, {string_type}, FN_TO_BOOLEAN_STRING},
+       {bool_type, {bool_type}, FN_TO_BOOLEAN_BOOL}});
+
+  // TRY_TO_BOOLEAN
+  InsertFunction(
+      functions, options, "try_to_boolean", SCALAR,
+      {{bool_type, {string_type}, FN_TRY_TO_BOOLEAN_STRING},
+       {bool_type, {bool_type}, FN_TRY_TO_BOOLEAN_BOOL}});
+
+  // TO_DOUBLE
+  // Let INT32 -> INT64, UINT32 -> UINT64, and FLOAT -> DOUBLE.
+  InsertFunction(
+      functions, options, "to_double", SCALAR,
+      {{double_type, {int64_type}, FN_TO_DOUBLE_INT64},
+       {double_type, {uint64_type}, FN_TO_DOUBLE_UINT64},
+       {double_type, {double_type}, FN_TO_DOUBLE_DOUBLE},
+       {double_type, {numeric_type}, FN_TO_DOUBLE_NUMERIC, has_numeric_type_argument},
+       {double_type, {bignumeric_type}, FN_TO_DOUBLE_BIGNUMERIC, has_bignumeric_type_argument},
+       {double_type, {string_type, {string_type, OPTIONAL}}, FN_TO_DOUBLE_STRING},
+       {double_type, {bool_type}, FN_TO_DOUBLE_BOOL}});
+
+  // TRY_TO_DOUBLE
+  InsertFunction(
+      functions, options, "try_to_double", SCALAR,
+      {{double_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_DOUBLE}});
+
+  // TRY_TO_DATE
+  InsertFunction(
+      functions, options, "try_to_date", SCALAR,
+      {{date_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_DATE}});
+
+  // TRY_TO_TIME
+  InsertFunction(
+      functions, options, "try_to_time", SCALAR,
+      {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
+}
+
+void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
+                                         const ZetaSQLBuiltinFunctionOptions& options,
+                                         NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+  const Type* string_type = type_factory->get_string();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
+
+  // RANDOM
+  InsertFunction(
+      functions, options, "random", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_RANDOM, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // RANDSTR
+  InsertFunction(
+      functions, options, "randstr", SCALAR,
+      {{string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_RANDSTR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_RANDSTR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ1
+  InsertFunction(
+      functions, options, "seq1", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ1, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ2
+  InsertFunction(
+      functions, options, "seq2", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ2, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ4
+  InsertFunction(
+      functions, options, "seq4", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ4, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ8
+  InsertFunction(
+      functions, options, "seq8", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ8, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+}
+
+void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
+                                          const ZetaSQLBuiltinFunctionOptions& options,
+                                          NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+  const Type* string_type = type_factory->get_string();
+  const Type* int64_type = type_factory->get_int64();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  // BASE64_DECODE_STRING
+  InsertFunction(
+      functions, options, "base64_decode_string", SCALAR,
+      {{string_type, {string_type, {string_type, OPTIONAL}}, FN_BASE64_DECODE_STRING}},
+      fn_options);
+
+  // TRY_BASE64_DECODE_STRING
+  InsertFunction(
+      functions, options, "try_base64_decode_string", SCALAR,
+      {{string_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_BASE64_DECODE_STRING}},
+      fn_options);
+
+  // CONTAINS
+  InsertFunction(
+      functions, options, "contains", SCALAR,
+      {{bool_type, {string_type, string_type}, FN_CONTAINS}},
+      fn_options);
+
+  // ENDSWITH
+  InsertFunction(
+      functions, options, "endswith", SCALAR,
+      {{bool_type, {string_type, string_type}, FN_ENDSWITH}},
+      fn_options);
+
+  // INSERT
+  InsertFunction(
+      functions, options, "insert", SCALAR,
+      {{string_type, {string_type, int64_type, int64_type, string_type}, FN_INSERT}},
+      fn_options);
+}
+
+void GetSnowflakeStringFunctions(TypeFactory* type_factory,
+                                 const ZetaSQLBuiltinFunctionOptions& options,
+                                 NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+  const Type* int64_type = type_factory->get_int64();
+  const Type* string_type = type_factory->get_string();
+
+  const ArrayType* string_array_type = types::StringArrayType();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+  const FunctionOptions fn_options;
+
+  // REGEXP_COUNT
+  InsertFunction(
+      functions, options, "regexp_count", SCALAR,
+      {{int64_type,
+        {string_type, string_type, {int64_type, OPTIONAL}, {string_type, OPTIONAL}},
+        FN_REGEXP_COUNT}},
+      fn_options);
+
+  // REGEXP_LIKE
+  InsertFunction(
+      functions, options, "regexp_like", SCALAR,
+      {{bool_type,
+        {string_type, string_type, {string_type, OPTIONAL}},
+        FN_REGEXP_LIKE}},
+      FunctionOptions().set_alias_name("rlike"));
+
+  // REGEXP_SUBSTR_ALL
+  InsertFunction(
+      functions, options, "regexp_substr_all", SCALAR,
+      {{string_array_type,
+        {string_type, string_type, {int64_type, OPTIONAL},
+         {int64_type, OPTIONAL}, {string_type, OPTIONAL}, {int64_type, OPTIONAL}},
+        FN_REGEXP_SUBSTR_ALL}},
+      fn_options);
+}
+
+void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
+                                      const ZetaSQLBuiltinFunctionOptions& options,
+                                      NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+  const Type* string_type = type_factory->get_string();
+  const Type* date_type = type_factory->get_date();
+  const Type* datetime_type = type_factory->get_datetime();
+  const Type* timestamp_type = type_factory->get_timestamp();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  // ADD_MONTHS
+  InsertFunction(
+      functions, options, "add_months", SCALAR,
+      {{date_type, {date_type, int64_type}, FN_ADD_MONTHS_DATE},
+       {datetime_type, {datetime_type, int64_type}, FN_ADD_MONTHS_DATETIME},
+       {timestamp_type, {timestamp_type, int64_type}, FN_ADD_MONTHS_TIMESTAMP}},
+      fn_options);
+
+  // DAYNAME
+  InsertFunction(
+      functions, options, "dayname", SCALAR,
+      {{string_type, {date_type}, FN_DAYNAME_DATE},
+       {string_type, {datetime_type}, FN_DAYNAME_DATETIME},
+       {string_type, {timestamp_type}, FN_DAYNAME_TIMESTAMP}},
+      fn_options);
+
+  // MONTHNAME
+  InsertFunction(
+      functions, options, "monthname", SCALAR,
+      {{string_type, {date_type}, FN_MONTHNAME_DATE},
+       {string_type, {datetime_type}, FN_MONTHNAME_DATETIME},
+       {string_type, {timestamp_type}, FN_MONTHNAME_TIMESTAMP}},
+      fn_options);
+
+  // NEXT_DAY
+  InsertFunction(
+      functions, options, "next_day", SCALAR,
+      {{date_type, {date_type, string_type}, FN_NEXT_DAY_DATE},
+       {date_type, {datetime_type, string_type}, FN_NEXT_DAY_DATETIME},
+       {date_type, {timestamp_type, string_type}, FN_NEXT_DAY_TIMESTAMP}},
+      fn_options);
+}
+
+/* Snowflake specific functions END */
 
 }  // namespace zetasql

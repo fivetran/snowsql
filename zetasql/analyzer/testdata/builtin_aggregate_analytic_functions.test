@@ -1137,10 +1137,10 @@ QueryStmt
                         +-WindowFrameExpr(boundary_type=UNBOUNDED FOLLOWING)
 ==
 
-select {{bit_and(key)|bit_or(key)| bit_xor(key)}} over ()
+select {{bit_and_bq(key)|bit_or_bq(key)| bit_xor_bq(key)}} over ()
 from keyvalue
 --
-ALTERNATION GROUP: bit_and(key)
+ALTERNATION GROUP: bit_and_bq(key)
 --
 QueryStmt
 +-output_column_list=
@@ -1157,7 +1157,7 @@ QueryStmt
           +-AnalyticFunctionGroup
             +-analytic_function_list=
               +-$analytic1#4 :=
-                +-AnalyticFunctionCall(ZetaSQL:bit_and(INT64) -> INT64)
+                +-AnalyticFunctionCall(ZetaSQL:bit_and_bq(INT64) -> INT64)
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
                   +-window_frame=
                     +-WindowFrame(frame_unit=ROWS)
@@ -1166,7 +1166,7 @@ QueryStmt
                       +-end_expr=
                         +-WindowFrameExpr(boundary_type=UNBOUNDED FOLLOWING)
 --
-ALTERNATION GROUP: bit_or(key)
+ALTERNATION GROUP: bit_or_bq(key)
 --
 QueryStmt
 +-output_column_list=
@@ -1183,7 +1183,7 @@ QueryStmt
           +-AnalyticFunctionGroup
             +-analytic_function_list=
               +-$analytic1#4 :=
-                +-AnalyticFunctionCall(ZetaSQL:bit_or(INT64) -> INT64)
+                +-AnalyticFunctionCall(ZetaSQL:bit_or_bq(INT64) -> INT64)
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
                   +-window_frame=
                     +-WindowFrame(frame_unit=ROWS)
@@ -1192,7 +1192,7 @@ QueryStmt
                       +-end_expr=
                         +-WindowFrameExpr(boundary_type=UNBOUNDED FOLLOWING)
 --
-ALTERNATION GROUP:  bit_xor(key)
+ALTERNATION GROUP:  bit_xor_bq(key)
 --
 QueryStmt
 +-output_column_list=
@@ -1209,7 +1209,7 @@ QueryStmt
           +-AnalyticFunctionGroup
             +-analytic_function_list=
               +-$analytic1#4 :=
-                +-AnalyticFunctionCall(ZetaSQL:bit_xor(INT64) -> INT64)
+                +-AnalyticFunctionCall(ZetaSQL:bit_xor_bq(INT64) -> INT64)
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
                   +-window_frame=
                     +-WindowFrame(frame_unit=ROWS)
