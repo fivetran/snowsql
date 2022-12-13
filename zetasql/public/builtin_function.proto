@@ -59,6 +59,17 @@ enum FunctionSignatureId {
   // 2800-2899 Differential Privacy functions (NextId: 2832)
   // 2900-2999 Range functions                (NextId: 2921)
 
+  // Snowflake FunctionSignatureIds are assigned in ranges:
+  //
+  // 100000-100099 Snowflake Aggregate functions                (NextId: 100008)
+  // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
+  // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
+  // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
+  // 100400-100499 Snowflake Data generation functions          (NextId: 100407)
+  // 100500-100599 Snowflake String and binary functions        (NextId: 100505)
+  // 100600-100699 Snowflake String functions                   (NextId: 100603)
+  // 100700-100799 Snowflake Date and time functions            (NextId: 100712)
+
   // enum value                       // Related function name
   // ----------                       // ---------------------
   FN_ADD_DOUBLE = 2;                       // $add
@@ -1282,4 +1293,127 @@ enum FunctionSignatureId {
   FN_RANGE_CONTAINS_RANGE = 2919;
   // range_contains(range<T>, T) -> bool
   FN_RANGE_CONTAINS_ELEMENT = 2920;
+
+  // Snowflake Aggregate functions
+  FN_APPROX_TOP_K = 100000;                 // approx_top_k
+  FN_APPROX_TOP_K_ACCUMULATE = 100001;      // approx_top_k_accumulate
+  FN_REGR_AVGX_SAME_ARGS = 100002;          // regr_avgx (ARG_TYPE_ANY_1, ARG_TYPE_ANY_1)
+  FN_REGR_AVGX_DIFF_ARGS = 100003;          // regr_avgx (ARG_TYPE_ANY_1, ARG_TYPE_ANY_2)
+  FN_REGR_AVGY_SAME_ARGS = 100004;          // regr_avgy (ARG_TYPE_ANY_1, ARG_TYPE_ANY_1)
+  FN_REGR_AVGY_DIFF_ARGS = 100005;          // regr_avgy (ARG_TYPE_ANY_1, ARG_TYPE_ANY_2)
+  FN_REGR_COUNT_SAME_ARGS = 100006;         // regr_count (ARG_TYPE_ANY_1, ARG_TYPE_ANY_1)
+  FN_REGR_COUNT_DIFF_ARGS = 100007;         // regr_count (ARG_TYPE_ANY_1, ARG_TYPE_ANY_2)
+  FN_APPROX_PERCENTILE = 100008;            // approx_percentile(FLOAT, FLOAT) -> FLOAT
+  FN_APPROX_PERCENTILE_ACCUMULATE = 100009; // approx_percentile_accumulate(FLOAT) -> OBJECT
+  FN_APPROX_PERCENTILE_COMBINE = 100010;    // approx_percentile_combine(OBJECT) -> OBJECT
+  FN_APPROX_PERCENTILE_ESTIMATE = 100011;   // approx_percentile_estimate(OBJECT, FLOAT) -> FLOAT
+  FN_APPROX_TOP_K_COMBINE = 100012;         // approx_top_k_combine(OBJECT [, NUMBER]) -> OBJECT
+  FN_APPROX_TOP_K_ESTIMATE = 100013;        // approx_top_k_estimate(OBJECT [, NUMBER]) -> ARRAY
+  FN_APPROXIMATE_JACCARD_INDEX = 100014;    // approximate_jaccard_index(VARIANT) -> FLOAT
+  FN_APPROXIMATE_SIMILARITY = 100015;       // approximate_similarity(VARIANT) -> FLOAT
+  FN_BITAND_AGG = 100016;                   // bitand_agg(NUMBER) -> NUMBER
+  FN_BITOR_AGG = 100017;                    // bitor_agg(NUMBER) -> NUMBER
+  FN_BITXOR_AGG = 100018;                   // bitxor_agg(NUMBER) -> NUMBER
+  FN_BOOLAND_AGG = 100019;                  // booland_agg(NUMBER) -> BOOL
+  FN_BOOLOR_AGG = 100020;                   // boolor_agg(NUMBER) -> BOOL
+  FN_BOOLXOR_AGG = 100021;                  // boolxor_agg(NUMBER) -> BOOL
+  FN_GROUPING_ID = 100022;                  // grouping_id(ANY) -> NUMBER
+  FN_HASH_AGG = 100023;                     // hash_agg(ANY) -> NUMBER
+  FN_HLL = 100024;                          // hll(ANY) -> INT64
+  FN_HLL_ACCUMULATE = 100025;               // hll_accumulate(ANY) -> BYTES
+  FN_HLL_COMBINE = 100026;                  // hll_combine(ANY) -> BYTES
+  FN_HLL_ESTIMATE = 100027;                 // hll_estimate(BYTES) -> NUMBER
+  FN_HLL_EXPORT = 100028;                   // hll_export(BYTES) -> OBJECT
+  FN_HLL_IMPORT = 100029;                   // hll_import(OBJECT) -> BYTES
+  FN_KURTOSIS = 100030;                     // kurtosis(FLOAT) -> FLOAT
+  FN_LISTAGG = 100031;                      // listagg(ANY, VARCHAR) -> VARCHAR
+  FN_MEDIAN = 100032;                       // median(NUMBER) -> FLOAT
+  FN_MINHASH = 100033;                      // minhash(NUMBER, ANY) -> BYTES
+  FN_MINHASH_COMBINE = 100034;              // minhash_combine(ANY) -> ANY
+  FN_MODE = 100035;                         // mode(ANY) -> ANY
+  FN_OBJECT_AGG = 100036;                   // object_agg(ANY, ANY) -> OBJECT
+  FN_REGR_INTERCEPT = 100037;               // regr_intercept(FLOAT, FLOAT) -> FLOAT
+  FN_REGR_R2 = 100038;                      // regr_r2(FLOAT, FLOAT) -> FLOAT
+  FN_REGR_SLOPE = 100039;                   // regr_slope(FLOAT, FLOAT) -> FLOAT
+  FN_REGR_SXX = 100040;                     // regr_sxx(FLOAT, FLOAT) -> FLOAT
+  FN_REGR_SYY = 100041;                     // regr_syy(FLOAT, FLOAT) -> FLOAT
+  FN_SKEW = 100042;                         // skew(FLOAT) -> FLOAT
+  FN_VARIANCE_POP = 100043;                 // variance_pop(FLOAT) -> FLOAT
+
+  // Snowflake Bitwise functions
+  FN_BIT_AND_SAME_ARGS = 100100;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_AND_DIFF_ARGS = 100101;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
+  FN_BIT_NOT = 100102;                  // bitnot(ARG_TYPE_ANY) -> INT64
+  FN_BIT_OR_SAME_ARGS = 100103;         // bitor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_OR_DIFF_ARGS = 100104;         // bitor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
+  FN_BIT_SHIFT_LEFT = 100105;           // bitshiftleft(ARG_TYPE_ANY_1, INT64) -> INT64
+  FN_BIT_BIT_SHIFT_RIGHT = 100106;      // bitshiftright(ARG_TYPE_ANY_1, INT64) -> INT64
+  FN_BIT_XOR_SAME_ARGS = 100107;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
+  FN_BIT_XOR_DIFF_ARGS = 100108;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
+
+  // Snowflake Conditional expression functions
+  FN_BOOLAND_SAME_ARGS = 100200;        // booland(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
+  FN_BOOLAND_DIFF_ARGS = 100201;        // booland(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
+  FN_BOOLNOT = 100202;                  // boolnot(ARG_TYPE_ANY_1) -> bool
+  FN_BOOLOR_SAME_ARGS = 100203;         // boolor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
+  FN_BOOLOR_DIFF_ARGS = 100204;         // boolor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
+  FN_BOOLXOR_SAME_ARGS = 100205;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
+  FN_BOOLXOR_DIFF_ARGS = 100206;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
+  FN_ZEROIFNULL = 100207;               // zeroifnull(ARG_TYPE_ANY_1) -> double
+
+  // Snowflake Conversion functions
+  FN_TO_BOOLEAN_INT64 = 100300;           // to_boolean(INT64) -> bool
+  FN_TO_BOOLEAN_UINT64 = 100301;          // to_boolean(UINT64) -> bool
+  FN_TO_BOOLEAN_DOUBLE = 100302;          // to_boolean(DOUBLE) -> bool
+  FN_TO_BOOLEAN_NUMERIC = 100303;         // to_boolean(NUMERIC) -> bool
+  FN_TO_BOOLEAN_BIGNUMERIC = 100304;      // to_boolean(BIGNUMERIC) -> bool
+  FN_TO_BOOLEAN_STRING = 100305;          // to_boolean(STRING) -> bool
+  FN_TO_BOOLEAN_BOOL = 100306;            // to_boolean(BOOL) -> bool
+  FN_TRY_TO_BOOLEAN_STRING = 100307;      // try_to_boolean(STRING) -> bool
+  FN_TRY_TO_BOOLEAN_BOOL = 100308;        // try_to_boolean(BOOL) -> bool
+  FN_TO_DOUBLE_INT64 = 100309;            // to_double(INT64) -> DOUBLE
+  FN_TO_DOUBLE_UINT64 = 100310;           // to_double(UINT64) -> DOUBLE
+  FN_TO_DOUBLE_DOUBLE = 100311;           // to_double(DOUBLE) -> DOUBLE
+  FN_TO_DOUBLE_NUMERIC = 100312;          // to_double(NUMERIC) -> DOUBLE
+  FN_TO_DOUBLE_BIGNUMERIC = 100313;       // to_double(BIGNUMERIC) -> DOUBLE
+  FN_TO_DOUBLE_STRING = 100314;           // to_double(STRING, <STRING>) -> DOUBLE
+  FN_TO_DOUBLE_BOOL = 100315;             // to_double(BOOL) -> DOUBLE
+  FN_TRY_TO_DOUBLE = 100316;              // try_to_double(STRING, <STRING>) -> DOUBLE
+  FN_TRY_TO_DATE = 100317;                // try_to_date(STRING, <STRING>) -> DATE
+  FN_TRY_TO_TIME = 100318;                // try_to_time(STRING, <STRING>) -> TIME
+
+  // Snowflake Data generation functions
+  FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
+  FN_RANDSTR_SAME_ARGS = 100401;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> STRING
+  FN_RANDSTR_DIFF_ARGS = 100402;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> STRING
+  FN_SEQ1 = 100403;                     // SEQ1( [0|1] ) -> INT64
+  FN_SEQ2 = 100404;                     // SEQ2( [0|1] ) -> INT64
+  FN_SEQ4 = 100405;                     // SEQ4( [0|1] ) -> INT64
+  FN_SEQ8 = 100406;                     // SEQ8( [0|1] ) -> INT64
+
+  // Snowflake String and binary functions
+  FN_BASE64_DECODE_STRING = 100500;           // BASE64_DECODE_STRING(STRING, <STRING>) -> STRING
+  FN_TRY_BASE64_DECODE_STRING = 100501;       // TRY_BASE64_DECODE_STRING(STRING, <STRING>) -> STRING
+  FN_CONTAINS = 100502;                       // CONTAINS(STRING, STRING) -> BOOL
+  FN_ENDSWITH = 100503;                       // ENDSWITH(STRING, STRING) -> BOOL
+  FN_INSERT = 100504;                         // INSERT(STRING, INT64, INT64, STRING) -> STRING
+
+  // Snowflake String functions
+  FN_REGEXP_COUNT = 100600;               // REGEXP_COUNT(STRING, STRING, <INT64>, <STRING>) -> INT64
+  FN_REGEXP_LIKE = 100601;                // REGEXP_LIKE(STRING, STRING, <STRING>) -> BOOLEAN
+  FN_REGEXP_SUBSTR_ALL = 100602;          // REGEXP_SUBSTR_ALL(STRING, STRING, <INT64>, <INT64>, <STRING>, <INT64>) -> ARRAY<STRING>
+
+  // Snowflake Date and time functions
+  FN_ADD_MONTHS_DATE = 100700;                 // ADD_MONTHS(DATE, INT64) -> DATE
+  FN_ADD_MONTHS_DATETIME = 100701;             // ADD_MONTHS(DATETIME, INT64) -> DATETIME
+  FN_ADD_MONTHS_TIMESTAMP = 100702;            // ADD_MONTHS(TIMESTAMP, INT64) -> TIMESTAMP
+  FN_DAYNAME_DATE = 100703;                    // DAYNAME(DATE) -> STRING
+  FN_DAYNAME_DATETIME = 100704;                // DAYNAME(DATETIME) -> STRING
+  FN_DAYNAME_TIMESTAMP = 100705;               // DAYNAME(TIMESTAMP) -> STRING
+  FN_MONTHNAME_DATE = 100706;                  // MONTHNAME(DATE) -> STRING
+  FN_MONTHNAME_DATETIME = 100707;              // MONTHNAME(DATETIME) -> STRING
+  FN_MONTHNAME_TIMESTAMP = 100708;             // MONTHNAME(TIMESTAMP) -> STRING
+  FN_NEXT_DAY_DATE = 100709;                   // NEXT_DAY(DATE, VARCHAR) -> DATE
+  FN_NEXT_DAY_DATETIME = 100710;               // NEXT_DAY(DATETIME, VARCHAR) -> DATE
+  FN_NEXT_DAY_TIMESTAMP = 100711;              // NEXT_DAY(TIMESTAMP, VARCHAR) -> DATE
 }
