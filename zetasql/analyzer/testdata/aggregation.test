@@ -1607,18 +1607,18 @@ select
   max(KitchenSink.test_enum),
   string_agg(KitchenSink.string_val),
   string_agg(KitchenSink.bytes_val),
-  bit_and(KitchenSink.int32_val),
-  bit_and(KitchenSink.int64_val),
-  bit_and(KitchenSink.uint32_val),
-  bit_and(KitchenSink.uint64_val),
-  bit_or(KitchenSink.int32_val),
-  bit_or(KitchenSink.int64_val),
-  bit_or(KitchenSink.uint32_val),
-  bit_or(KitchenSink.uint64_val),
-  bit_xor(KitchenSink.int32_val),
-  bit_xor(KitchenSink.int64_val),
-  bit_xor(KitchenSink.uint32_val),
-  bit_xor(KitchenSink.uint64_val),
+  bit_and_bq(KitchenSink.int32_val),
+  bit_and_bq(KitchenSink.int64_val),
+  bit_and_bq(KitchenSink.uint32_val),
+  bit_and_bq(KitchenSink.uint64_val),
+  bit_or_bq(KitchenSink.int32_val),
+  bit_or_bq(KitchenSink.int64_val),
+  bit_or_bq(KitchenSink.uint32_val),
+  bit_or_bq(KitchenSink.uint64_val),
+  bit_xor_bq(KitchenSink.int32_val),
+  bit_xor_bq(KitchenSink.int64_val),
+  bit_xor_bq(KitchenSink.uint32_val),
+  bit_xor_bq(KitchenSink.uint64_val),
   logical_and(KitchenSink.bool_val),
   logical_or(KitchenSink.bool_val)
 from TestTable
@@ -1775,7 +1775,7 @@ QueryStmt
           |     +-field_descriptor=bytes_val
           |     +-default_value=b""
           +-$agg15#18 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_and(INT32) -> INT32)
+          | +-AggregateFunctionCall(ZetaSQL:bit_and_bq(INT32) -> INT32)
           |   +-GetProtoField
           |     +-type=INT32
           |     +-expr=
@@ -1783,7 +1783,7 @@ QueryStmt
           |     +-field_descriptor=int32_val
           |     +-default_value=77
           +-$agg16#19 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_and(INT64) -> INT64)
+          | +-AggregateFunctionCall(ZetaSQL:bit_and_bq(INT64) -> INT64)
           |   +-GetProtoField
           |     +-type=INT64
           |     +-expr=
@@ -1791,7 +1791,7 @@ QueryStmt
           |     +-field_descriptor=int64_val
           |     +-default_value=0
           +-$agg17#20 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_and(UINT32) -> UINT32)
+          | +-AggregateFunctionCall(ZetaSQL:bit_and_bq(UINT32) -> UINT32)
           |   +-GetProtoField
           |     +-type=UINT32
           |     +-expr=
@@ -1799,7 +1799,7 @@ QueryStmt
           |     +-field_descriptor=uint32_val
           |     +-default_value=777
           +-$agg18#21 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_and(UINT64) -> UINT64)
+          | +-AggregateFunctionCall(ZetaSQL:bit_and_bq(UINT64) -> UINT64)
           |   +-GetProtoField
           |     +-type=UINT64
           |     +-expr=
@@ -1807,7 +1807,7 @@ QueryStmt
           |     +-field_descriptor=uint64_val
           |     +-default_value=0
           +-$agg19#22 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_or(INT32) -> INT32)
+          | +-AggregateFunctionCall(ZetaSQL:bit_or_bq(INT32) -> INT32)
           |   +-GetProtoField
           |     +-type=INT32
           |     +-expr=
@@ -1815,7 +1815,7 @@ QueryStmt
           |     +-field_descriptor=int32_val
           |     +-default_value=77
           +-$agg20#23 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_or(INT64) -> INT64)
+          | +-AggregateFunctionCall(ZetaSQL:bit_or_bq(INT64) -> INT64)
           |   +-GetProtoField
           |     +-type=INT64
           |     +-expr=
@@ -1823,7 +1823,7 @@ QueryStmt
           |     +-field_descriptor=int64_val
           |     +-default_value=0
           +-$agg21#24 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_or(UINT32) -> UINT32)
+          | +-AggregateFunctionCall(ZetaSQL:bit_or_bq(UINT32) -> UINT32)
           |   +-GetProtoField
           |     +-type=UINT32
           |     +-expr=
@@ -1831,7 +1831,7 @@ QueryStmt
           |     +-field_descriptor=uint32_val
           |     +-default_value=777
           +-$agg22#25 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_or(UINT64) -> UINT64)
+          | +-AggregateFunctionCall(ZetaSQL:bit_or_bq(UINT64) -> UINT64)
           |   +-GetProtoField
           |     +-type=UINT64
           |     +-expr=
@@ -1839,7 +1839,7 @@ QueryStmt
           |     +-field_descriptor=uint64_val
           |     +-default_value=0
           +-$agg23#26 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_xor(INT32) -> INT32)
+          | +-AggregateFunctionCall(ZetaSQL:bit_xor_bq(INT32) -> INT32)
           |   +-GetProtoField
           |     +-type=INT32
           |     +-expr=
@@ -1847,7 +1847,7 @@ QueryStmt
           |     +-field_descriptor=int32_val
           |     +-default_value=77
           +-$agg24#27 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_xor(INT64) -> INT64)
+          | +-AggregateFunctionCall(ZetaSQL:bit_xor_bq(INT64) -> INT64)
           |   +-GetProtoField
           |     +-type=INT64
           |     +-expr=
@@ -1855,7 +1855,7 @@ QueryStmt
           |     +-field_descriptor=int64_val
           |     +-default_value=0
           +-$agg25#28 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_xor(UINT32) -> UINT32)
+          | +-AggregateFunctionCall(ZetaSQL:bit_xor_bq(UINT32) -> UINT32)
           |   +-GetProtoField
           |     +-type=UINT32
           |     +-expr=
@@ -1863,7 +1863,7 @@ QueryStmt
           |     +-field_descriptor=uint32_val
           |     +-default_value=777
           +-$agg26#29 :=
-          | +-AggregateFunctionCall(ZetaSQL:bit_xor(UINT64) -> UINT64)
+          | +-AggregateFunctionCall(ZetaSQL:bit_xor_bq(UINT64) -> UINT64)
           |   +-GetProtoField
           |     +-type=UINT64
           |     +-expr=
