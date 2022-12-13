@@ -1622,8 +1622,6 @@ void GetApproxFunctions(TypeFactory* type_factory,
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
   FunctionSignatureOptions has_bignumeric_type_argument;
   has_bignumeric_type_argument.set_constraints(&HasBigNumericTypeArgument);
-  FunctionSignatureOptions has_all_average_calculable_arguments;
-  has_all_average_calculable_arguments.set_constraints(&HasAllAverageCalculableArguments);
 
   InsertFunction(functions, options, "approx_count_distinct", AGGREGATE,
                  {{int64_type,
@@ -1701,90 +1699,6 @@ void GetApproxFunctions(TypeFactory* type_factory,
             .set_rejects_collation()}},
       DefaultAggregateFunctionOptions().set_compute_result_type_callback(
           absl::bind_front(&ComputeResultTypeForTopStruct, "sum")));
-
-  /* -------------------------------- */
-  /* Snowflake Approx functions begin */
-  /* -------------------------------- */
-
-  // APPROX_TOP_K
-  InsertFunction(
-      functions, options, "approx_top_k", AGGREGATE,
-      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
-        {{ARG_TYPE_ANY_1, supports_grouping},
-         {int64_type,
-          FunctionArgumentTypeOptions()
-              .set_cardinality(FunctionArgumentType::OPTIONAL)
-              .set_is_not_aggregate()
-              .set_min_value(1)
-              .set_max_value(100000)
-              .set_default(Value::Int64(1))},
-         {int64_type,
-          FunctionArgumentTypeOptions()
-              .set_cardinality(FunctionArgumentType::OPTIONAL)
-              .set_is_not_aggregate()
-              .set_max_value(100000)
-              .set_default(Value::Int64(10000))}},
-        FN_APPROX_TOP_K,
-        FunctionSignatureOptions()
-            .set_uses_operation_collation()
-            .set_rejects_collation()}},
-      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopStruct, "count")));
-
-  // APPROX_TOP_K_ACCUMULATE
-  InsertFunction(
-      functions, options, "approx_top_k_accumulate", AGGREGATE,
-      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
-        {{ARG_TYPE_ANY_1, supports_grouping},
-         {int64_type,
-          FunctionArgumentTypeOptions()
-              .set_is_not_aggregate()
-              .set_must_be_non_null()
-              .set_min_value(1)
-              .set_max_value(100000)}},
-        FN_APPROX_TOP_K_ACCUMULATE,
-        FunctionSignatureOptions()
-            .set_uses_operation_collation()
-            .set_rejects_collation()}},
-      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
-
-  // REGR_AVGX
-  InsertFunction(
-      functions, options, "regr_avgx", AGGREGATE,
-      {{ARG_TYPE_ANY_1,
-        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
-        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
-       {ARG_TYPE_ANY_1,
-        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
-        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
-      DefaultAggregateFunctionOptions());
-
-  // REGR_AVGY
-  InsertFunction(
-      functions, options, "regr_avgy", AGGREGATE,
-      {{ARG_TYPE_ANY_1,
-        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
-        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
-       {ARG_TYPE_ANY_1,
-        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
-        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
-      DefaultAggregateFunctionOptions());
-
-  // REGR_COUNT
-  InsertFunction(
-      functions, options, "regr_count", AGGREGATE,
-      {{int64_type,
-        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
-        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
-       {int64_type,
-        {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
-        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
-      DefaultAggregateFunctionOptions());
-
-  /* ------------------------------ */
-  /* Snowflake Approx functions end */
-  /* ------------------------------ */
 }
 
 void GetStatisticalFunctions(TypeFactory* type_factory,
