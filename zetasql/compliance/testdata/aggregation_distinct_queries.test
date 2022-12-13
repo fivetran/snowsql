@@ -1410,33 +1410,33 @@ ARRAY<STRUCT<UINT64, bool_val BOOL>>[{78, false}, {47, true}]
 # BIT_AND_BQ
 # ----------------------------------------------------------------------------
 [name=aggregation_distinct_bit_and_1]
-SELECT bit_and_bq(DISTINCT CAST(x as uint64)), bit_and_bq(DISTINCT CAST(x as int64)),
-       bit_and_bq(DISTINCT CAST(x as uint32)), bit_and_bq(DISTINCT CAST(x as int32))
+SELECT BIT_AND_BQ(DISTINCT CAST(x as uint64)), BIT_AND_BQ(DISTINCT CAST(x as int64)),
+       BIT_AND_BQ(DISTINCT CAST(x as uint32)), BIT_AND_BQ(DISTINCT CAST(x as int32))
 FROM ((SELECT 5 x) UNION ALL (SELECT 5) UNION ALL (SELECT 21))
 --
 ARRAY<STRUCT<UINT64, INT64, UINT32, INT32>>[{5, 5, 5, 5}]
 ==
 [name=aggregation_distinct_bit_and_2]
-SELECT bit_and_bq(DISTINCT int32_val), bit_and_bq(DISTINCT int64_val),
-       bit_and_bq(DISTINCT uint32_val), bit_and_bq(DISTINCT uint64_val)
+SELECT BIT_AND_BQ(DISTINCT int32_val), BIT_AND_BQ(DISTINCT int64_val),
+       BIT_AND_BQ(DISTINCT uint32_val), BIT_AND_BQ(DISTINCT uint64_val)
 FROM TableAllTypes
 --
 ARRAY<STRUCT<INT32, INT64, UINT32, UINT64>>[{0, 0, 0, 0}]
 ==
 [name=aggregation_distinct_bit_and_3]
-SELECT bit_and_bq(DISTINCT int32_val), bit_and_bq(DISTINCT uint32_val),
-       bit_and_bq(DISTINCT int64_val), bit_and_bq(DISTINCT uint64_val)
+SELECT BIT_AND_BQ(DISTINCT int32_val), BIT_AND_BQ(DISTINCT uint32_val),
+       BIT_AND_BQ(DISTINCT int64_val), BIT_AND_BQ(DISTINCT uint64_val)
 FROM TableAllNull
 --
 ARRAY<STRUCT<INT32, UINT32, INT64, UINT64>>[{NULL, NULL, NULL, NULL}]
 ==
 [name=aggregation_distinct_bit_and_4]
-SELECT bit_and_bq(DISTINCT val) FROM TableEmpty
+SELECT BIT_AND_BQ(DISTINCT val) FROM TableEmpty
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
 [name=aggregation_distinct_bit_and_group_by]
-SELECT bit_and_bq(DISTINCT int32_val), row_id
+SELECT BIT_AND_BQ(DISTINCT int32_val), row_id
 FROM TableAllTypes GROUP BY row_id ORDER BY row_id
 --
 ARRAY<STRUCT<INT32, row_id INT64>>[
@@ -1463,8 +1463,8 @@ ARRAY<STRUCT<INT32, row_id INT64>>[
 ]
 ==
 [name=aggregation_distinct_bit_and_group_by_and_having]
-SELECT bit_and_bq(DISTINCT int32_val), bool_val FROM TableAllTypes
-  GROUP BY bool_val HAVING bool_val AND bit_and_bq(DISTINCT int32_val) > 0
+SELECT BIT_AND_BQ(DISTINCT int32_val), bool_val FROM TableAllTypes
+  GROUP BY bool_val HAVING bool_val AND BIT_AND_BQ(DISTINCT int32_val) > 0
     ORDER BY bool_val
 --
 ARRAY<STRUCT<INT32, bool_val BOOL>>[{1, true}]
