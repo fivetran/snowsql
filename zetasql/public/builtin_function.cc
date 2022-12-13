@@ -191,6 +191,18 @@ absl::Status GetBuiltinFunctionsAndTypes(
     ZETASQL_RETURN_IF_ERROR(
         GetArrayFindFunctions(&type_factory, options, &functions, &types));
   }
+
+  /* Snowflake functions START */
+  GetSnowflakeAggregateFunctions(&type_factory, options, &functions);
+  GetSnowflakeBitwiseFunctions(&type_factory, options, &functions);
+  GetSnowflakeConditionalExpressionFunctions(&type_factory, options, &functions);
+  GetSnowflakeConversionFunctions(&type_factory, options, &functions);
+  GetSnowflakeDataGenerationFunctions(&type_factory, options, &functions);
+  GetSnowflakeStringAndBinaryFunctions(&type_factory, options, &functions);
+  GetSnowflakeStringFunctions(&type_factory, options, &functions);
+  GetSnowflakeDateAndTimeFunctions(&type_factory, options, &functions);
+  /* Snowflake functions END */
+
   return absl::OkStatus();
 }
 

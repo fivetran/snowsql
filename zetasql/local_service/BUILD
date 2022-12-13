@@ -107,6 +107,43 @@ cc_test(
 )
 
 cc_test(
+    name = "local_service_snowflake_features_test",
+    srcs = ["local_service_snowflake_features_test.cc"],
+    data = [
+        "//zetasql/testdata:test_schema_proto",
+    ],
+    tags = ["requires-net:loopback"],
+    deps = [
+        ":local_service",
+        "//zetasql/base",
+        "//zetasql/base:path",
+        "//zetasql/base:status",
+        "//zetasql/base/testing:status_matchers",
+        "//zetasql/base/testing:zetasql_gtest_main",
+        "//zetasql/common:status_payload_utils",
+        "//zetasql/common/testing:proto_matchers",
+        "//zetasql/common/testing:testing_proto_util",
+        "//zetasql/proto:function_cc_proto",
+        "//zetasql/proto:simple_catalog_cc_proto",
+        "//zetasql/public:formatter_options_cc_proto",
+        "//zetasql/public:parse_resume_location_cc_proto",
+        "//zetasql/public:simple_catalog",
+        "//zetasql/public:simple_table_cc_proto",
+        "//zetasql/public:type",
+        "//zetasql/public:type_cc_proto",
+        "//zetasql/public:value",
+        "//zetasql/public:value_cc_proto",
+        "//zetasql/public/functions:date_time_util",
+        "//zetasql/resolved_ast:resolved_ast_cc_proto",
+        "//zetasql/testdata:test_proto3_cc_proto",
+        "//zetasql/testdata:test_schema_cc_proto",
+        "@com_google_absl//absl/strings",
+        "@com_google_protobuf//:cc_wkt_protos",
+        "@com_google_protobuf//:protobuf",
+    ],
+)
+
+cc_test(
     name = "local_service_benchmark",
     srcs = ["local_service_benchmark.cc"],
     deps = [

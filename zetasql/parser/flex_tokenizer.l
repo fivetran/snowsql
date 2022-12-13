@@ -442,7 +442,6 @@ connection { return BisonParserImpl::token::KW_CONNECTION; }
 constant { return BisonParserImpl::token::KW_CONSTANT; }
 constraint { return BisonParserImpl::token::KW_CONSTRAINT; }
 continue { return BisonParserImpl::token::KW_CONTINUE; }
-contains { return BisonParserImpl::token::KW_CONTAINS; }
 corresponding { return BisonParserImpl::token::KW_CORRESPONDING; }
 create { return BisonParserImpl::token::KW_CREATE; }
 cross { return BisonParserImpl::token::KW_CROSS; }

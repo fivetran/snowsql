@@ -117,7 +117,6 @@ constexpr KeywordInfoPOD kAllKeywords[] = {
     {"connection", KW_CONNECTION},
     {"constant", KW_CONSTANT},
     {"constraint", KW_CONSTRAINT},
-    {"contains", KW_CONTAINS, kReserved},
     {"continue", KW_CONTINUE},
     {"copy", KW_COPY},
     {"corresponding", KW_CORRESPONDING},
