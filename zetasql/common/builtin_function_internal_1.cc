@@ -1698,6 +1698,8 @@ bool HasAllIntegerCastingArguments(
             && argument.type()->kind() != TYPE_INT64
             && argument.type()->kind() != TYPE_UINT64
             && argument.type()->kind() != TYPE_NUMERIC
+            && argument.type()->kind() != TYPE_DOUBLE
+            && argument.type()->kind() != TYPE_FLOAT
             && argument.type()->kind() != TYPE_BIGNUMERIC
             && argument.type()->kind() != TYPE_STRING) {
       return false;
@@ -1706,17 +1708,20 @@ bool HasAllIntegerCastingArguments(
   return true;
 }
 
-// Returns true if it is possible to calculate an average for all arguments.
-bool HasAllAverageCalculableArguments(
+// Returns true if it is possible to evaluate all input arguments to numeric type.
+bool HasAllEvaluatedToNumericArguments(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments) {
   for (const InputArgumentType& argument : arguments) {
-    if (argument.type()->kind() != TYPE_INT64
-          && argument.type()->kind() != TYPE_UINT64
-          && argument.type()->kind() != TYPE_DOUBLE
-          && argument.type()->kind() != TYPE_NUMERIC
-          && argument.type()->kind() != TYPE_BIGNUMERIC
-          && argument.type()->kind() != TYPE_INTERVAL) {
+    if (argument.type()->kind() != TYPE_INT32
+            && argument.type()->kind() != TYPE_UINT32
+            && argument.type()->kind() != TYPE_INT64
+            && argument.type()->kind() != TYPE_UINT64
+            && argument.type()->kind() != TYPE_NUMERIC
+            && argument.type()->kind() != TYPE_DOUBLE
+            && argument.type()->kind() != TYPE_FLOAT
+            && argument.type()->kind() != TYPE_BIGNUMERIC
+            && argument.type()->kind() != TYPE_STRING) {
       return false;
     }
   }

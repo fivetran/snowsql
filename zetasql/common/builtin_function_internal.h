@@ -482,7 +482,7 @@ bool HasAllIntegerCastingArguments(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments);
 
-bool HasAllAverageCalculableArguments(
+bool HasAllEvaluatedToNumericArguments(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments);
 

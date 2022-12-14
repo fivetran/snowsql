@@ -3684,8 +3684,8 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   FunctionArgumentTypeOptions supports_grouping;
   supports_grouping.set_must_support_grouping();
 
-  FunctionSignatureOptions has_all_average_calculable_arguments;
-  has_all_average_calculable_arguments.set_constraints(&HasAllAverageCalculableArguments);
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
 
   // APPROX_TOP_K
   InsertFunction(
@@ -3735,10 +3735,10 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       functions, options, "regr_avgx", AGGREGATE,
       {{ARG_TYPE_ANY_1,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
-        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
+        FN_REGR_AVGX_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
        {ARG_TYPE_ANY_1,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
-        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       DefaultAggregateFunctionOptions());
 
   // REGR_AVGY
@@ -3746,10 +3746,10 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       functions, options, "regr_avgy", AGGREGATE,
       {{ARG_TYPE_ANY_1,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
-        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
+        FN_REGR_AVGX_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
        {ARG_TYPE_ANY_1,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
-        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       DefaultAggregateFunctionOptions());
 
   // REGR_COUNT
@@ -3757,10 +3757,10 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       functions, options, "regr_count", AGGREGATE,
       {{int64_type,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
-        FN_REGR_AVGX_SAME_ARGS, has_all_average_calculable_arguments},
+        FN_REGR_AVGX_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
        {int64_type,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
-        FN_REGR_AVGX_DIFF_ARGS, has_all_average_calculable_arguments}},
+        FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       DefaultAggregateFunctionOptions());
 }
 

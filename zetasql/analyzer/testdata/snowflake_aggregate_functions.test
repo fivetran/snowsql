@@ -63,6 +63,68 @@ QueryStmt
 ==
 
 # REGR_AVGX
+select regr_avgx(KitchenSink.int32_val, KitchenSink.string_val)
+from TestTable
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [INT32]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-$agg1#4 :=
+            +-AggregateFunctionCall(ZetaSQL:regr_avgx(INT32, STRING) -> INT32)
+              +-GetProtoField
+              | +-type=INT32
+              | +-expr=
+              | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+              | +-field_descriptor=int32_val
+              | +-default_value=77
+              +-GetProtoField
+                +-type=STRING
+                +-expr=
+                | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                +-field_descriptor=string_val
+                +-default_value="default_name"
+==
+
+select regr_avgx(KitchenSink.string_val, KitchenSink.string_val)
+from TestTable
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-$agg1#4 :=
+            +-AggregateFunctionCall(ZetaSQL:regr_avgx(STRING, STRING) -> STRING)
+              +-GetProtoField
+              | +-type=STRING
+              | +-expr=
+              | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+              | +-field_descriptor=string_val
+              | +-default_value="default_name"
+              +-GetProtoField
+                +-type=STRING
+                +-expr=
+                | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                +-field_descriptor=string_val
+                +-default_value="default_name"
+==
+
 select regr_avgx(KitchenSink.int64_val, KitchenSink.uint64_val)
 from TestTable
 --
