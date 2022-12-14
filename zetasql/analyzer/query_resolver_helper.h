@@ -127,8 +127,8 @@ struct QueryGroupByAndAggregateInfo {
   // not use ROLLUP. Stores unowned pointers from <group_by_columns_to_compute>.
   std::vector<const ResolvedComputedColumn*> rollup_column_list;
 
-  // Columns in the ROLLUP list, or an empty vector if the query does
-  // not use ROLLUP. Stores unowned pointers from <group_by_columns_to_compute>.
+  // Columns in the GROUPING SETS list, or an empty vector if the query does
+  // not use GROUPING SETS. Stores unowned pointers from <group_by_columns_to_compute>.
   std::vector<const ResolvedComputedColumn*> grouping_sets_column_list;
 
   // Aggregate function calls that must be computed.
