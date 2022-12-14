@@ -482,6 +482,10 @@ bool HasAllIntegerCastingArguments(
     const FunctionSignature& matched_signature,
     const std::vector<InputArgumentType>& arguments);
 
+bool HasAllEvaluatedToNumericArguments(
+    const FunctionSignature& matched_signature,
+    const std::vector<InputArgumentType>& arguments);
+
 // Returns true if FN_CONCAT_STRING function can coerce argument of given type
 // to STRING.
 bool CanStringConcatCoerceFrom(const zetasql::Type* arg_type);
@@ -505,6 +509,25 @@ absl::StatusOr<const Type*> ComputeResultTypeForTopStruct(
 //            `distance` Double> >
 absl::StatusOr<const Type*> ComputeResultTypeForNearestNeighborsStruct(
     Catalog* catalog, TypeFactory* type_factory, CycleDetector* cycle_detector,
+    const FunctionSignature& /*signature*/,
+    const std::vector<InputArgumentType>& arguments,
+    const AnalyzerOptions& analyzer_options);
+
+// Compute the result type for TOP_K_ACCUMULATE.
+// The output type is
+//   STRUCT<`counters` <INT_64>,
+//          `datatype` <STRING>,
+//          `precision` <INT_64>,
+//          `scale` <INT_64>,
+//          `state` <ARRAY<
+//              STRUCT<
+//                  `value` <arguments[0].type()>,
+//                  `<field2_name>` <arguments[1].type()>
+//              > > >
+//          `type` <STRING> >
+absl::StatusOr<const Type*> ComputeResultTypeForTopAccumulateStruct(
+    const std::string& field2_name, Catalog* catalog, TypeFactory* type_factory,
+    CycleDetector* cycle_detector,
     const FunctionSignature& /*signature*/,
     const std::vector<InputArgumentType>& arguments,
     const AnalyzerOptions& analyzer_options);
@@ -751,10 +774,13 @@ void GetRangeFunctions(TypeFactory* type_factory,
                        NameToFunctionMap* functions);
 
 /* Snowflake specific functions START */
+void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
+                                    const ZetaSQLBuiltinFunctionOptions& options,
+                                    NameToFunctionMap* functions);
+
 void GetSnowflakeBitwiseFunctions(TypeFactory* type_factory,
                                   const ZetaSQLBuiltinFunctionOptions& options,
                                   NameToFunctionMap* functions);
-
 /* Snowflake specific functions END */
 
 }  // namespace zetasql

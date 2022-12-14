@@ -36,3 +36,19 @@ bazel build //zetasql/analyzer:resolver_test --features=-supports_dynamic_linker
 ```
 `analyzer_aggregation_test` = `<package_name>` + `'_'` + `<test_name>`<br>
 `<test_name>` = file name from `'zetasql/<package_name>/testdata'` without `'.test'` extension (see `'gen_analyzer_test'` in `'zetasql/analyzer/BUILD'`).
+
+## Data types
+
+### ARRAY in Snowflake and BigQuery
+`Snowflake`: An `ARRAY` contains 0 or more pieces of data. Each value in an `ARRAY` is of type `VARIANT`. A `VARIANT` can store a value of any other type, including `OBJECT` and `ARRAY`.
+
+`BigQuery`: An `ARRAY` is an ordered list consisting of zero or more values of the same data type. `ARRAY`s of `ARRAY`s are not allowed.
+
+## Functions
+
+### Show Snowflake functions signatures
+Show all Snowflake functions: `SHOW FUNCTIONS`
+
+Example: `APPROX_TOP_K_ACCUMULATE(ANY, NUMBER) RETURN OBJECT`
+
+**Note:** Some Snowflake aggregate functions return OBJECT data type. To simplify a description of new functions BigQuery types were used.<br> ****Should be fixed after implementation of VARIANT and OBJECT data types.**
