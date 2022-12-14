@@ -1598,7 +1598,6 @@ void GetApproxFunctions(TypeFactory* type_factory,
   const Type* double_type = type_factory->get_double();
   const Type* numeric_type = type_factory->get_numeric();
   const Type* bignumeric_type = type_factory->get_bignumeric();
-  const Type* interval_type = type_factory->get_interval();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
 
