@@ -351,7 +351,8 @@ absl::Status PivotRewriterVisitor::VisitResolvedPivotScan(
           aggregate_scan_column_list, std::move(input_with_pivot_column),
           std::move(group_by_list), std::move(aggregate_list),
           /*grouping_set_list=*/{},
-          /*rollup_column_list=*/{});
+          /*rollup_column_list=*/{},
+          /*grouping_sets_column_list=*/{});
 
   std::unique_ptr<ResolvedScan> result;
   if (!output_computed_columns_to_aggregate_column.empty()) {

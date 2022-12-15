@@ -60,6 +60,7 @@ void QueryGroupByAndAggregateInfo::Reset() {
   group_by_columns_to_compute.clear();
   group_by_expr_map.clear();
   rollup_column_list.clear();
+  grouping_sets_column_list.clear();
   aggregate_columns_to_compute.clear();
   group_by_valid_field_info_map.Clear();
   is_post_distinct = false;
@@ -293,6 +294,11 @@ void QueryResolutionInfo::AddRollupColumn(
   group_by_info_.rollup_column_list.push_back(column);
 }
 
+void QueryResolutionInfo::AddGroupingSetsColumn(
+    const ResolvedComputedColumn* column) {
+  group_by_info_.grouping_sets_column_list.push_back(column);
+}
+
 void QueryResolutionInfo::ReleaseGroupingSetsAndRollupList(
     std::vector<std::unique_ptr<const ResolvedGroupingSet>>* grouping_set_list,
     std::vector<std::unique_ptr<const ResolvedColumnRef>>* rollup_column_list) {
@@ -344,6 +350,23 @@ void QueryResolutionInfo::ReleaseGroupingSetsAndRollupList(
   // will generally want to compute aggregates from more to less granular
   // levels of subtotals, e.g. (a, b, c), (a, b), (a), and then ().
   std::reverse(grouping_set_list->begin(), grouping_set_list->end());
+}
+
+void QueryResolutionInfo::ReleaseGroupingSetsAndGroupByGroupingSetsList(
+    std::vector<std::unique_ptr<const ResolvedGroupingSet>>* grouping_set_list,
+    std::vector<std::unique_ptr<const ResolvedColumnRef>>* grouping_sets_column_list) {
+  if (group_by_info_.grouping_sets_column_list.empty()) {
+    return;
+  }
+
+  for (const ResolvedComputedColumn* grouping_sets_column :
+       group_by_info_.grouping_sets_column_list) {
+    auto grouping_sets_column_ref =
+        MakeResolvedColumnRef(grouping_sets_column->column().type(),
+                              grouping_sets_column->column(), /*is_correlated=*/false);
+    grouping_sets_column_list->push_back(std::move(grouping_sets_column_ref));
+  }
+  group_by_info_.grouping_sets_column_list.clear();
 }
 
 void QueryResolutionInfo::AddAggregateComputedColumn(
@@ -416,6 +439,7 @@ absl::Status QueryResolutionInfo::CheckComputedColumnListsAreEmpty() const {
   ZETASQL_RET_CHECK(group_by_info_.group_by_columns_to_compute.empty());
   ZETASQL_RET_CHECK(group_by_info_.aggregate_columns_to_compute.empty());
   ZETASQL_RET_CHECK(group_by_info_.rollup_column_list.empty());
+  ZETASQL_RET_CHECK(group_by_info_.grouping_sets_column_list.empty());
   ZETASQL_RET_CHECK(order_by_columns_to_compute_.empty());
   ZETASQL_RET_CHECK(!analytic_resolver_->HasWindowColumnsToCompute());
   return absl::OkStatus();

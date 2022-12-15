@@ -289,6 +289,7 @@ constexpr KeywordInfoPOD kAllKeywords[] = {
     {"security", KW_SECURITY},
     {"select", KW_SELECT, kReserved},
     {"set", KW_SET, kReserved},
+    {"sets", KW_SETS, kReserved},
     {"show", KW_SHOW},
     {"simple", KW_SIMPLE},
     {"snapshot", KW_SNAPSHOT},
