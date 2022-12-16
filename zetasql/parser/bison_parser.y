@@ -476,7 +476,7 @@ class SeparatedIdentifierTmpNode final : public zetasql::ASTNode {
 //   1: ANALYZE
 //   6: QUALIFY
 //   2: ALTER COLUMN
-%expect 40
+%expect 27
 
 %union {
   bool boolean;
@@ -1192,7 +1192,6 @@ using zetasql::ASTDropStatement;
 %type <identifier> identifier
 %type <identifier> label
 %type <identifier> identifier_in_hints
-%type <identifier> identifier_no_offset
 %type <node> if_statement
 %type <node> elseif_clauses
 %type <node> when_then_clauses
@@ -1283,7 +1282,6 @@ using zetasql::ASTDropStatement;
 %type <node> opt_and_expression
 %type <node> opt_as_alias
 %type <node> opt_as_alias_with_required_as
-%type <node> opt_as_alias_no_offset
 %type <node> opt_as_or_into_alias
 %type <node> opt_as_string_or_integer
 %type <node> opt_as_query
@@ -4778,14 +4776,6 @@ opt_as_alias_with_required_as:
     | /* Nothing */ { $$ = nullptr; }
     ;
 
-opt_as_alias_no_offset:
-    opt_as identifier_no_offset
-      {
-        $$ = MAKE_NODE(ASTAlias, FirstNonEmptyLocation({@1, @2}), @2, {$2});
-      }
-    | /* Nothing */ { $$ = nullptr; }
-    ;
-
 opt_as_or_into_alias:
     "AS" identifier
       {
@@ -5046,14 +5036,14 @@ opt_pivot_or_unpivot_clause_and_alias:
     $$.pivot_clause = nullptr;
     $$.unpivot_clause = nullptr;
   }
-  | "AS" identifier pivot_clause opt_as_alias_no_offset {
+  | "AS" identifier pivot_clause opt_as_alias {
     $$.alias = MAKE_NODE(ASTAlias, @1, {$2});
     $$.alias = parser->WithEndLocation($$.alias, @2);
     $$.pivot_clause = WithExtraChildren($3,
         {static_cast<zetasql::ASTAlias*>($4)});
     $$.unpivot_clause = nullptr;
   }
-  | "AS" identifier unpivot_clause opt_as_alias_no_offset {
+  | "AS" identifier unpivot_clause opt_as_alias {
     $$.alias = MAKE_NODE(ASTAlias, @1, {$2});
     $$.alias = parser->WithEndLocation($$.alias, @2);
     $$.unpivot_clause = WithExtraChildren($3,
@@ -5066,13 +5056,13 @@ opt_pivot_or_unpivot_clause_and_alias:
         "QUALIFY clause must be used in conjunction with WHERE or GROUP BY "
         "or HAVING clause");
   }
-  | identifier pivot_clause opt_as_alias_no_offset {
+  | identifier pivot_clause opt_as_alias {
     $$.alias = MAKE_NODE(ASTAlias, @1, {$1});
     $$.pivot_clause = WithExtraChildren($2,
         {static_cast<zetasql::ASTAlias*>($3)});
     $$.unpivot_clause = nullptr;
   }
-  | identifier unpivot_clause opt_as_alias_no_offset {
+  | identifier unpivot_clause opt_as_alias {
     $$.alias = MAKE_NODE(ASTAlias, @1, {$1});
     $$.unpivot_clause = WithExtraChildren($2,
         {static_cast<zetasql::ASTAlias*>($3)});
@@ -5084,13 +5074,13 @@ opt_pivot_or_unpivot_clause_and_alias:
         "QUALIFY clause must be used in conjunction with WHERE or GROUP BY "
         "or HAVING clause");
   }
-  | pivot_clause opt_as_alias_no_offset {
+  | pivot_clause opt_as_alias {
     $$.alias = nullptr;
     $$.pivot_clause = WithExtraChildren($1,
         {static_cast<zetasql::ASTAlias*>($2)});
     $$.unpivot_clause = nullptr;
   }
-  | unpivot_clause opt_as_alias_no_offset {
+  | unpivot_clause opt_as_alias {
     $$.alias = nullptr;
     $$.unpivot_clause = WithExtraChildren($1,
         {static_cast<zetasql::ASTAlias*>($2)});
@@ -8260,7 +8250,7 @@ floating_point_literal:
       }
     ;
 
-identifier_no_offset:
+identifier:
     IDENTIFIER
       {
         const absl::string_view identifier_text = parser->GetInputText(@1);
@@ -8292,14 +8282,6 @@ identifier_no_offset:
         }
       }
     | keyword_as_identifier
-      {
-        $$ = parser->MakeIdentifier(@1, parser->GetInputText(@1));
-      }
-    ;
-
-identifier:
-    identifier_no_offset
-    | "OFFSET"
       {
         $$ = parser->MakeIdentifier(@1, parser->GetInputText(@1));
       }
@@ -8557,6 +8539,7 @@ keyword_as_identifier:
     | "MODULE"
     | "NUMBER"
     | "NUMERIC"
+//    | "OFFSET"
     | "ONLY"
     | "OPTIONS"
     | "OUT"
@@ -9108,7 +9091,7 @@ delete_statement:
     ;
 
 opt_with_offset_and_alias:
-    "WITH" "OFFSET" opt_as_alias_no_offset
+    "WITH" "OFFSET" opt_as_alias
       {
         $$ = MAKE_NODE(ASTWithOffset, @$, {$3});
       }
