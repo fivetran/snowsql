@@ -92,7 +92,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |       |           |   +-is_ordered=TRUE
 |       |           |   +-input_scan=
 |       |           |   | +-ProjectScan
-|       |           |   |   +-column_list=[$array.elem#3, $array_offset.offset#4, $expr_subquery.value#5]
+|       |           |   |   +-column_list=[$array.elem#3, $array_offset.offset_idx#4, $expr_subquery.value#5]
 |       |           |   |   +-expr_list=
 |       |           |   |   | +-value#5 :=
 |       |           |   |   |   +-GetProtoField
@@ -103,15 +103,15 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |       |           |   |   |     +-default_value=0
 |       |           |   |   +-input_scan=
 |       |           |   |     +-FilterScan
-|       |           |   |       +-column_list=[$array.elem#3, $array_offset.offset#4]
+|       |           |   |       +-column_list=[$array.elem#3, $array_offset.offset_idx#4]
 |       |           |   |       +-input_scan=
 |       |           |   |       | +-ArrayScan
-|       |           |   |       |   +-column_list=[$array.elem#3, $array_offset.offset#4]
+|       |           |   |       |   +-column_list=[$array.elem#3, $array_offset.offset_idx#4]
 |       |           |   |       |   +-array_expr=
 |       |           |   |       |   | +-ColumnRef(type=ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>, column=$subquery1.m#2, is_correlated=TRUE)
 |       |           |   |       |   +-element_column=$array.elem#3
 |       |           |   |       |   +-array_offset_column=
-|       |           |   |       |     +-ColumnHolder(column=$array_offset.offset#4)
+|       |           |   |       |     +-ColumnHolder(column=$array_offset.offset_idx#4)
 |       |           |   |       +-filter_expr=
 |       |           |   |         +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |       |           |   |           +-GetProtoField
@@ -124,7 +124,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |       |           |   +-order_by_item_list=
 |       |           |     +-OrderByItem
 |       |           |       +-column_ref=
-|       |           |       | +-ColumnRef(type=INT64, column=$array_offset.offset#4)
+|       |           |       | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#4)
 |       |           |       +-is_descending=TRUE
 |       |           +-limit=
 |       |             +-Literal(type=INT64, value=1)
