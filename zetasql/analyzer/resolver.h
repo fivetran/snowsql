@@ -2347,9 +2347,9 @@ class Resolver {
       bool allow_argument_coercion, const NameScope* name_scope,
       std::unique_ptr<const ResolvedInlineLambda>* resolved_expr_out);
 
-  // Resolves the given LIMIT or OFFSET clause <ast_expr> and stores the
+  // Resolves the given LIMIT or OFFSET or TOP or FETCH clause <ast_expr> and stores the
   // resolved expression in <resolved_expr>.
-  absl::Status ResolveLimitOrOffsetExpr(
+  absl::Status ResolveLimitOrOffsetOrTopOrFetchExpr(
       const ASTExpression* ast_expr,
       const char* clause_name,
       ExprResolutionInfo* expr_resolution_info,
@@ -2360,24 +2360,10 @@ class Resolver {
       std::unique_ptr<const ResolvedScan> input_scan_in,
       std::unique_ptr<const ResolvedScan>* output);
 
-  // Resolves the given LIMIT or OFFSET clause <ast_expr> and stores the
-  // resolved expression in <resolved_expr>.
-  absl::Status ResolveTopExpr(
-    const ASTExpression* ast_expr, const char* clause_name,
-    ExprResolutionInfo* expr_resolution_info,
-    std::unique_ptr<const ResolvedExpr>* resolved_expr);
-
   absl::Status ResolveTopScan(
     const ASTTop* top,
     std::unique_ptr<const ResolvedScan> input_scan,
     std::unique_ptr<const ResolvedScan>* output);
-
-  // Resolves the given OFFSET or FETCH clause <ast_expr> and stores the
-  // resolved expression in <resolved_expr>.
-  absl::Status ResolveOffsetOrFetchExpr(
-    const ASTExpression* ast_expr, const char* clause_name,
-    ExprResolutionInfo* expr_resolution_info,
-    std::unique_ptr<const ResolvedExpr>* resolved_expr);
 
   absl::Status ResolveOffsetFetchScan(
     const ASTOffsetFetch* offset_fetch,

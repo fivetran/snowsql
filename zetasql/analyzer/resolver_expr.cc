@@ -6728,7 +6728,7 @@ absl::Status Resolver::FinishResolvingAggregateFunction(
     ZETASQL_RET_CHECK(limit_offset->limit() != nullptr);
     ExprResolutionInfo expr_resolution_info(empty_name_scope_.get(), "LIMIT");
     ZETASQL_RETURN_IF_ERROR(
-        ResolveLimitOrOffsetExpr(limit_offset->limit(), /*clause_name=*/"LIMIT",
+        ResolveLimitOrOffsetOrTopOrFetchExpr(limit_offset->limit(), /*clause_name=*/"LIMIT",
                                  &expr_resolution_info, &limit_expr));
   }
 

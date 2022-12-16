@@ -4370,32 +4370,7 @@ absl::Status Resolver::ValidateParameterOrLiteralAndCoerceToInt64IfNeeded(
   return absl::OkStatus();
 }
 
-// TODO: Get rid of duplication
-absl::Status Resolver::ResolveLimitOrOffsetExpr(
-    const ASTExpression* ast_expr, const char* clause_name,
-    ExprResolutionInfo* expr_resolution_info,
-    std::unique_ptr<const ResolvedExpr>* resolved_expr) {
-  ZETASQL_RETURN_IF_ERROR(ResolveExpr(ast_expr, expr_resolution_info, resolved_expr));
-  ZETASQL_DCHECK(resolved_expr != nullptr);
-  ZETASQL_RETURN_IF_ERROR(ValidateParameterOrLiteralAndCoerceToInt64IfNeeded(
-      clause_name, ast_expr, resolved_expr));
-  return absl::OkStatus();
-}
-
-// TODO: Get rid of duplication
-absl::Status Resolver::ResolveTopExpr(
-    const ASTExpression* ast_expr, const char* clause_name,
-    ExprResolutionInfo* expr_resolution_info,
-    std::unique_ptr<const ResolvedExpr>* resolved_expr) {
-  ZETASQL_RETURN_IF_ERROR(ResolveExpr(ast_expr, expr_resolution_info, resolved_expr));
-  ZETASQL_DCHECK(resolved_expr != nullptr);
-  ZETASQL_RETURN_IF_ERROR(ValidateParameterOrLiteralAndCoerceToInt64IfNeeded(
-      clause_name, ast_expr, resolved_expr));
-  return absl::OkStatus();
-}
-
-// TODO: Get rid of duplication
-absl::Status Resolver::ResolveOffsetOrFetchExpr(
+absl::Status Resolver::ResolveLimitOrOffsetOrTopOrFetchExpr(
     const ASTExpression* ast_expr, const char* clause_name,
     ExprResolutionInfo* expr_resolution_info,
     std::unique_ptr<const ResolvedExpr>* resolved_expr) {
@@ -4456,14 +4431,14 @@ absl::Status Resolver::ResolveLimitOffsetScan(
   // Resolve and validate the LIMIT.
   ZETASQL_RET_CHECK(limit_offset->limit() != nullptr);
   std::unique_ptr<const ResolvedExpr> limit_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetExpr(limit_offset->limit(),
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(limit_offset->limit(),
                                            /*clause_name=*/"LIMIT",
                                            &expr_resolution_info, &limit_expr));
 
   // Resolve and validate the OFFSET.
   std::unique_ptr<const ResolvedExpr> offset_expr;
   if (limit_offset->offset() != nullptr) {
-    ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetExpr(
+    ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(
         limit_offset->offset(), /*clause_name=*/"OFFSET", &expr_resolution_info,
         &offset_expr));
   }
@@ -4486,7 +4461,7 @@ absl::Status Resolver::ResolveTopScan(
   // Resolve and validate the TOP.
   ZETASQL_RET_CHECK(top->top() != nullptr);
   std::unique_ptr<const ResolvedExpr> top_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveTopExpr(top->top(),
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(top->top(),
                                           /*clause_name=*/"TOP",
                                           &expr_resolution_info, &top_expr));
 
@@ -4507,14 +4482,14 @@ absl::Status Resolver::ResolveOffsetFetchScan(
   // Resolve and validate the OFFSET.
   ZETASQL_RET_CHECK(offset_fetch->offset() != nullptr);
   std::unique_ptr<const ResolvedExpr> offset_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveOffsetOrFetchExpr(offset_fetch->offset(),
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(offset_fetch->offset(),
                                            /*clause_name=*/"OFFSET",
                                            &expr_resolution_info, &offset_expr));
 
   // Resolve and validate the FETCH.
   ZETASQL_RET_CHECK(offset_fetch->fetch() != nullptr);
   std::unique_ptr<const ResolvedExpr> fetch_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveOffsetOrFetchExpr(offset_fetch->fetch(),
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(offset_fetch->fetch(),
                                            /*clause_name=*/"FETCH",
                                            &expr_resolution_info, &fetch_expr));
   
