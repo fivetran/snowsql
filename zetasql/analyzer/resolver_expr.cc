@@ -4392,6 +4392,7 @@ static bool IsSpecialArrayContextFunction(absl::string_view function_name) {
   // We try to avoid doing the zetasql_base::StringCaseEqual calls as much as possible.
   if (!function_name.empty() && (IsLetterO(function_name[0]) || IsLetterO(function_name[8])) &&
       (zetasql_base::CaseCompare(function_name, "DEFAULT_OFFSET") == 0 ||
+       zetasql_base::CaseCompare(function_name, "OFFSET") == 0 ||
        zetasql_base::CaseCompare(function_name, "ORDINAL") == 0)) {
     return true;
   }
