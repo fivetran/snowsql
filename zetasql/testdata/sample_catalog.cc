@@ -5843,7 +5843,7 @@ void SampleCatalog::LoadSqlFunctions(const LanguageOptions& language_options) {
            AS (IF (input_arr IS NULL,
                    NULL,
                    ARRAY(SELECT e
-                         FROM UNNEST(input_arr) AS e WITH OFFSET offset_idx
+                         FROM UNNEST(input_arr) AS e WITH OFFSET
                          ORDER BY offset_idx desc))); )",
       language_options);
 
