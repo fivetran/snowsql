@@ -370,19 +370,19 @@ bool QueryExpression::CanSetGroupByClause() const {
 }
 bool QueryExpression::CanSetOrderByClause() const {
   return !HasOrderByClause() && !HasLimitClause() && !HasOffsetClause() &&
-      HasFromClause();
+      !HasFetchClause() && HasFromClause();
 }
 bool QueryExpression::CanSetLimitClause() const {
-  return !HasLimitClause() && !HasOffsetClause() && !HasTopClause();
+  return !HasLimitClause() && !HasOffsetClause() && !HasFetchClause() && !HasTopClause();
 }
 bool QueryExpression::CanSetOffsetClause() const {
-  return !HasOffsetClause() && !HasTopClause();
+  return !HasOffsetClause() && !HasFetchClause() && !HasTopClause();
 }
 bool QueryExpression::CanSetTopClause() const {
-  return !HasTopClause() && !HasLimitClause() && !HasOffsetClause();
+  return !HasTopClause() && !HasLimitClause() && !HasOffsetClause() && !HasFetchClause();
 }
 bool QueryExpression::CanSetFetchClause() const {
-  return !HasFetchClause() && !HasLimitClause() && HasOffsetClause();
+  return !HasFetchClause() && !HasLimitClause() && !HasTopClause();
 }
 
 bool QueryExpression::CanSetPivotClause() const { return !HasPivotClause(); }
