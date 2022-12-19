@@ -8176,10 +8176,7 @@ ResolvedArgumentRef(y)
       E.g., OFFSET 1 means to skip one row, so the first row emitted will be the
       second ROW, provided the FETCH is greater than zero.
 
-      The arguments to OFFSET <int64> OFFSET <int64> must be non-negative
-      integer literals or (possibly casted) query parameters.  Query
-      parameter values must be checked at run-time by ZetaSQL compliant
-      backend systems.
+      OFFSET is optional and the absence of OFFSET implies OFFSET 0.
 
       The arguments to FETCH <int64> OFFSET <int64> must be non-negative
       integer literals or (possibly casted) query parameters.  Query
