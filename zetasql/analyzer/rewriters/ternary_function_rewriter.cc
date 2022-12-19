@@ -122,16 +122,16 @@ class RewriteTernaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       NULL,
       CASE third_input
         WHEN 'FIRST' THEN (
-          SELECT offset
-          FROM UNNEST(first_input) AS e WITH OFFSET
+          SELECT offset_idx
+          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
           WHERE e = second_input
-          ORDER BY offset LIMIT 1
+          ORDER BY offset_idx LIMIT 1
         )
         WHEN 'LAST' THEN (
-          SELECT offset
-          FROM UNNEST(first_input) AS e WITH OFFSET
+          SELECT offset_idx
+          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
           WHERE e = second_input
-          ORDER BY offset DESC LIMIT 1
+          ORDER BY offset_idx DESC LIMIT 1
         )
         ELSE ERROR(CONCAT('ARRAY_FIND_MODE ', third_input, ' in ARRAY_OFFSET is unsupported.'))
       END
@@ -147,15 +147,15 @@ class RewriteTernaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       CASE third_input
         WHEN 'FIRST' THEN (
           SELECT e
-          FROM UNNEST(first_input) AS e WITH OFFSET
+          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
           WHERE e = second_input
-          ORDER BY offset LIMIT 1
+          ORDER BY offset_idx LIMIT 1
         )
         WHEN 'LAST' THEN (
           SELECT e
-          FROM UNNEST(first_input) AS e WITH OFFSET
+          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
           WHERE e = second_input
-          ORDER BY offset DESC LIMIT 1
+          ORDER BY offset_idx DESC LIMIT 1
         )
         ELSE ERROR(CONCAT('ARRAY_FIND_MODE ', third_input, ' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.'))
       END

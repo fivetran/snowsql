@@ -4,7 +4,7 @@ from TestTable
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
 select KitchenSink.repeated_double_val[123]
                                        ^
 --
@@ -64,26 +64,26 @@ select at_ordinal(KitchenSink.repeated_double_val, 1)
 ==
 
 # Distinct is not allowed.
-select KitchenSink.repeated_double_val[offset(distinct 0)]
+select KitchenSink.repeated_double_val[default_offset(distinct 0)]
 from TestTable
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
-select KitchenSink.repeated_double_val[offset(distinct 0)]
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
+select KitchenSink.repeated_double_val[default_offset(distinct 0)]
                                        ^
 ==
 
 # Modifiers are not allowed.
-select KitchenSink.repeated_double_val[offset(
+select KitchenSink.repeated_double_val[default_offset(
     0 {{having max 1|ignore nulls|limit 1|order by 1}})]
 from TestTable
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
-select KitchenSink.repeated_double_val[offset(
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
+select KitchenSink.repeated_double_val[default_offset(
                                        ^
 ==
 
 # offset is 0-based.  ordinal is 1-based.
-select KitchenSink.repeated_double_val[offset(0)],
+select KitchenSink.repeated_double_val[default_offset(0)],
        KitchenSink.repeated_double_val[ordinal(1)]
 from TestTable
 --
@@ -153,7 +153,7 @@ QueryStmt
 ==
 
 select 2 + 5,
-       KitchenSink.repeated_double_val[OFFSET(1 + 2 * cast(4 / 3 as int64))]
+       KitchenSink.repeated_double_val[default_offset(1 + 2 * cast(4 / 3 as int64))]
 from TestTable;
 --
 QueryStmt
@@ -189,8 +189,8 @@ QueryStmt
 ==
 
 # Accessing array element -1 should give an error at runtime.
-select KitchenSink.repeated_double_val[OFFSET(0)],
-       KitchenSink.repeated_double_val[OFFSET(-1)]
+select KitchenSink.repeated_double_val[default_offset(0)],
+       KitchenSink.repeated_double_val[default_offset(-1)]
 from TestTable;
 --
 QueryStmt
@@ -223,7 +223,7 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select KitchenSink.repeated_double_val[OFFSET(NULL)] from TestTable;
+select KitchenSink.repeated_double_val[default_offset(NULL)] from TestTable;
 --
 QueryStmt
 +-output_column_list=
@@ -245,7 +245,7 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select keys[OFFSET(2)] from (select array_agg(key) as keys from KeyValue);
+select keys[default_offset(2)] from (select array_agg(key) as keys from KeyValue);
 --
 QueryStmt
 +-output_column_list=
@@ -272,7 +272,7 @@ QueryStmt
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
 
-select keys[OFFSET(2)] + keys[OFFSET(3)]
+select keys[default_offset(2)] + keys[default_offset(3)]
 from (select array_agg(key) as keys from KeyValue);
 --
 QueryStmt
@@ -306,13 +306,13 @@ QueryStmt
 
 select KitchenSink.repeated_double_val[1][2] from TestTable;
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:40]
 select KitchenSink.repeated_double_val[1][2] from TestTable;
                                        ^
 ==
 
 select 1 from TestTable
-where KitchenSink.nested_repeated_group[OFFSET(2)].nestedrepeatedgroupnested[OFFSET(1)].id = 1;
+where KitchenSink.nested_repeated_group[default_offset(2)].nestedrepeatedgroupnested[default_offset(1)].id = 1;
 --
 QueryStmt
 +-output_column_list=
@@ -351,10 +351,10 @@ QueryStmt
             +-Literal(type=INT64, value=1)
 ==
 
-select 5[OFFSET(6)];
+select 5[default_offset(6)];
 --
-ERROR: Subscript access using [OFFSET(INT64)] is not supported on values of type INT64 [at 1:10]
-select 5[OFFSET(6)];
+ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type INT64 [at 1:10]
+select 5[default_offset(6)];
          ^
 ==
 
@@ -366,8 +366,8 @@ select NULL[ORDINAL(2)];
 ==
 
 select 1 from TestTable
-where KitchenSink.nested_repeated_group[OFFSET(
-   KitchenSink.nested_repeated_group[OFFSET(KitchenSink.int64_val)].id)].id = 1;
+where KitchenSink.nested_repeated_group[default_offset(
+   KitchenSink.nested_repeated_group[default_offset(KitchenSink.int64_val)].id)].id = 1;
 --
 QueryStmt
 +-output_column_list=
@@ -415,7 +415,7 @@ QueryStmt
             +-Literal(type=INT64, value=1)
 ==
 
-select 1 + 2 * KitchenSink.repeated_int64_val[OFFSET(2)] + 3 * 4 from TestTable;
+select 1 + 2 * KitchenSink.repeated_int64_val[default_offset(2)] + 3 * 4 from TestTable;
 --
 QueryStmt
 +-output_column_list=
@@ -445,14 +445,14 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select KitchenSink[OFFSET(1)] from TestTable;
+select KitchenSink[default_offset(1)] from TestTable;
 --
-ERROR: Subscript access using [OFFSET(INT64)] is not supported on values of type zetasql_test__.KitchenSinkPB [at 1:20]
-select KitchenSink[OFFSET(1)] from TestTable;
+ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type zetasql_test__.KitchenSinkPB [at 1:20]
+select KitchenSink[default_offset(1)] from TestTable;
                    ^
 ==
 
-select KitchenSink.repeated_int64_val[OFFSET(3)],
+select KitchenSink.repeated_int64_val[default_offset(3)],
        KitchenSink.repeated_int64_val[ORDINAL(3)]
 from TestTable
 --
@@ -487,7 +487,7 @@ QueryStmt
 ==
 
 # Coercion of array offset to int64.
-select [1,2,3][OFFSET(cast(1+2 as uint32))]
+select [1,2,3][default_offset(cast(1+2 as uint32))]
 --
 QueryStmt
 +-output_column_list=
@@ -508,22 +508,22 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select [1,2,3][OFFSET("abc")]
+select [1,2,3][default_offset("abc")]
 --
-ERROR: Array position in [] must be coercible to INT64 type, but has type STRING [at 1:23]
-select [1,2,3][OFFSET("abc")]
-                      ^
+ERROR: Array position in [] must be coercible to INT64 type, but has type STRING [at 1:31]
+select [1,2,3][default_offset("abc")]
+                              ^
 ==
 
-select 1.5[OFFSET(5)]
+select 1.5[default_offset(5)]
 --
-ERROR: Subscript access using [OFFSET(INT64)] is not supported on values of type DOUBLE [at 1:12]
-select 1.5[OFFSET(5)]
+ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type DOUBLE [at 1:12]
+select 1.5[default_offset(5)]
            ^
 ==
 
 # No analysis-time errors for out of range values.
-select ["a","b"][OFFSET(-1)],
+select ["a","b"][default_offset(-1)],
        array<bool>[][ORDINAL(0)],
        cast(null as array<double>)[ORDINAL(NULL)]
 --
@@ -552,7 +552,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select [1,2,3][offset(count(*))]
+select [1,2,3][default_offset(count(*))]
 from TestTable
 --
 QueryStmt
@@ -576,10 +576,10 @@ QueryStmt
 ==
 
 # Using OFFSET or ORDINAL functions elsewhere gives an error.
-select offset(5) from TestTable
+select default_offset(5) from TestTable
 --
-ERROR: OFFSET is not a function. It can only be used for array element access using array[OFFSET(position)] [at 1:8]
-select offset(5) from TestTable
+ERROR: DEFAULT_OFFSET is not a function. It can only be used for array element access using array[DEFAULT_OFFSET(position)] [at 1:8]
+select default_offset(5) from TestTable
        ^
 ==
 
@@ -598,43 +598,43 @@ select 1+ordINAL(5,6,7) from TestTable
          ^
 ==
 
-select [1,2,3][offset(ordinal(1))]
+select [1,2,3][default_offset(ordinal(1))]
 --
-ERROR: ORDINAL is not a function. It can only be used for array element access using array[ORDINAL(position)] [at 1:23]
-select [1,2,3][offset(ordinal(1))]
-                      ^
+ERROR: ORDINAL is not a function. It can only be used for array element access using array[ORDINAL(position)] [at 1:31]
+select [1,2,3][default_offset(ordinal(1))]
+                              ^
 ==
 
 # Invalid offset wrapper - 0 args.
-select [1,2,3][offset()]
+select [1,2,3][default_offset()]
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:16]
-select [1,2,3][offset()]
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:16]
+select [1,2,3][default_offset()]
                ^
 ==
 
 # Invalid offset wrapper - 2 args.
-select [1,2,3][offset(5, 6)]
+select [1,2,3][default_offset(5, 6)]
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:16]
-select [1,2,3][offset(5, 6)]
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:16]
+select [1,2,3][default_offset(5, 6)]
                ^
 ==
 
 # Invalid offset wrapper - distinct.
-select [1,2,3][offset(distinct 5)]
+select [1,2,3][default_offset(distinct 5)]
 --
-ERROR: Array element access with array[position] is not supported. Use array[OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:16]
-select [1,2,3][offset(distinct 5)]
+ERROR: Array element access with array[position] is not supported. Use array[DEFAULT_OFFSET(zero_based_offset)] or array[ORDINAL(one_based_ordinal)] [at 1:16]
+select [1,2,3][default_offset(distinct 5)]
                ^
 ==
 
 # Error occurs inside the offset wrapper.
-select [1,2,3][offset(1+x+2)]
+select [1,2,3][default_offset(1+x+2)]
 --
-ERROR: Unrecognized name: x [at 1:25]
-select [1,2,3][offset(1+x+2)]
-                        ^
+ERROR: Unrecognized name: x [at 1:33]
+select [1,2,3][default_offset(1+x+2)]
+                                ^
 ==
 
 # The following would be equivalent to an ELT() function, though
@@ -661,7 +661,7 @@ QueryStmt
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
 
-select [][OFFSET(0)]
+select [][default_offset(0)]
 --
 QueryStmt
 +-output_column_list=

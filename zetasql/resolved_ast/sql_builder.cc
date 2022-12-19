@@ -467,7 +467,7 @@ absl::StatusOr<std::string> SQLBuilder::GetFunctionCallSQL(
       ResolvedNonScalarFunctionCallBase::SAFE_ERROR_MODE) {
     absl::string_view function_name = function_call->function()->Name();
     if (function_name == "$subscript_with_offset") {
-      sql = absl::StrReplaceAll(sql, {{"OFFSET", "SAFE_OFFSET"}});
+      sql = absl::StrReplaceAll(sql, {{"DEFAULT_OFFSET", "SAFE_OFFSET"}});
     } else if (function_name == "$subscript_with_key") {
       sql = absl::StrReplaceAll(sql, {{"KEY", "SAFE_KEY"}});
     } else if (function_name == "$subscript_with_ordinal") {
@@ -5037,7 +5037,7 @@ absl::Status SQLBuilder::VisitResolvedUpdateItem(
       }
 
       if (!offset.empty()) {
-        absl::StrAppend(&target_sql, "[OFFSET(", offset, ")]");
+        absl::StrAppend(&target_sql, "[DEFAULT_OFFSET(", offset, ")]");
       }
     }
 

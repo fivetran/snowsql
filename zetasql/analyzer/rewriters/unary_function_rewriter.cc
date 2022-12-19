@@ -89,7 +89,7 @@ class RewriteUnaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
     CASE
       WHEN input IS NULL THEN NULL
       WHEN ARRAY_LENGTH(input) = 0 THEN ERROR('ARRAY_FIRST cannot get the first element of an empty array')
-      ELSE input[OFFSET(0)]
+      ELSE input[DEFAULT_OFFSET(0)]
     END
     )";
     constexpr absl::string_view kArrayLastTemplate = R"(

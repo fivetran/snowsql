@@ -215,12 +215,12 @@ UpdateStmt
 [language_features={{|V_1_2_ARRAY_ELEMENTS_WITH_SET}}]
 UPDATE TestTable SET
   (DELETE
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
    WHERE nested_repeated_int64 < 10)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 3:38]
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
                                      ^
 ==
 
@@ -303,13 +303,13 @@ UpdateStmt
 # Nested DELETE with default offset conflicting with the target alias.
 [language_features=V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET]
 UPDATE TestTable SET
-  (DELETE KitchenSink.repeated_int64_val offset WITH OFFSET
-   WHERE offset = 5)
+  (DELETE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+   WHERE offset_idx = 5)
 WHERE true
 --
-ERROR: Duplicate OFFSET alias offset in nested DELETE [at 2:49]
-  (DELETE KitchenSink.repeated_int64_val offset WITH OFFSET
-                                                ^
+ERROR: Duplicate OFFSET alias offset_idx in nested DELETE [at 2:53]
+  (DELETE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+                                                    ^
 ==
 
 # Nested DELETE with non-default offset conflicting with the target alias.
@@ -737,13 +737,13 @@ UpdateStmt
 [language_features={{|V_1_2_ARRAY_ELEMENTS_WITH_SET}}]
 UPDATE TestTable SET
   (UPDATE
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
    SET nested_repeated_int64 = 5
    WHERE nested_repeated_int64 > 10)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 3:38]
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
                                      ^
 ==
 
@@ -906,14 +906,14 @@ ERROR: Unrecognized name: offset_idx [at 3:8]
 # Nested UPDATE with default offset conflicting with the target alias.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val offset WITH OFFSET
-   SET offset = offset + 1
-   WHERE offset = 0)
+  (UPDATE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+   SET offset_idx = offset_idx + 1
+   WHERE offset_idx = 0)
 WHERE true
 --
-ERROR: Duplicate OFFSET alias offset in nested UPDATE [at 2:49]
-  (UPDATE KitchenSink.repeated_int64_val offset WITH OFFSET
-                                                ^
+ERROR: Duplicate OFFSET alias offset_idx in nested UPDATE [at 2:53]
+  (UPDATE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+                                                    ^
 ==
 
 # Nested UPDATE with non-default offset conflicting with the target alias.
@@ -1361,12 +1361,12 @@ UpdateStmt
 [language_features={{|V_1_2_ARRAY_ELEMENTS_WITH_SET}}]
 UPDATE TestTable SET
   (INSERT
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
    VALUES (5))
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 3:38]
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
                                      ^
 ==
 
@@ -2003,7 +2003,7 @@ ERROR: Update item KitchenSink.repeated_int64_val overlaps with KitchenSink [at 
 # Cannot run a nested statement on an array that has already been modified.
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE TestTable SET
-  KitchenSink.nested_repeated_value[OFFSET(0)].nested_int64 = 1,
+  KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_int64 = 1,
   (DELETE KitchenSink.nested_repeated_value WHERE true)
 WHERE true
 --
@@ -2017,11 +2017,11 @@ ERROR: Cannot modify KitchenSink.nested_repeated_value with a nested statement a
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE TestTable SET
   (DELETE KitchenSink.nested_repeated_value WHERE true),
-  KitchenSink.nested_repeated_value[OFFSET(0)].nested_int64 = 1
+  KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_int64 = 1
 WHERE true
 --
 ERROR: Cannot modify an element of KitchenSink.nested_repeated_value and also modify it with a nested statement [at 3:3]
-  KitchenSink.nested_repeated_value[OFFSET(0)].nested_int64 = 1
+  KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_int64 = 1
   ^
 ==
 
@@ -2029,7 +2029,7 @@ ERROR: Cannot modify an element of KitchenSink.nested_repeated_value and also mo
 # if it uses WITH OFFSET.
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET,V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET]
 UPDATE TestTable SET
-  KitchenSink.repeated_int64_val[OFFSET(0)] = 5,
+  KitchenSink.repeated_int64_val[DEFAULT_OFFSET(0)] = 5,
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
    SET repeated_int64_val = 10
    WHERE offset_idx = 1)
@@ -2047,11 +2047,11 @@ UPDATE TestTable SET
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
    SET repeated_int64_val = 10
    WHERE offset_idx = 1),
-  KitchenSink.repeated_int64_val[OFFSET(0)] = 5
+  KitchenSink.repeated_int64_val[DEFAULT_OFFSET(0)] = 5
 WHERE true
 --
 ERROR: Cannot modify an element of KitchenSink.repeated_int64_val and also modify it with a nested statement [at 5:3]
-  KitchenSink.repeated_int64_val[OFFSET(0)] = 5
+  KitchenSink.repeated_int64_val[DEFAULT_OFFSET(0)] = 5
   ^
 ==
 

@@ -51,19 +51,19 @@ QueryStmt
     |         |       | +-ColumnRef(type=STRING, column=$subquery1.second_input#3)
     |         |       +-subquery=
     |         |         +-OrderByScan
-    |         |           +-column_list=[$array_offset.offset#5]
+    |         |           +-column_list=[$array_offset.offset_idx#5]
     |         |           +-is_ordered=TRUE
     |         |           +-input_scan=
     |         |           | +-FilterScan
-    |         |           |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |           |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |           |   +-input_scan=
     |         |           |   | +-ArrayScan
-    |         |           |   |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |           |   |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |           |   |   +-array_expr=
     |         |           |   |   | +-ColumnRef(type=ARRAY<STRING>, column=$subquery1.first_input#2, is_correlated=TRUE)
     |         |           |   |   +-element_column=$array.e#4
     |         |           |   |   +-array_offset_column=
-    |         |           |   |     +-ColumnHolder(column=$array_offset.offset#5)
+    |         |           |   |     +-ColumnHolder(column=$array_offset.offset_idx#5)
     |         |           |   +-filter_expr=
     |         |           |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |         |           |       +-ColumnRef(type=STRING, column=$array.e#4)
@@ -71,7 +71,7 @@ QueryStmt
     |         |           +-order_by_item_list=
     |         |             +-OrderByItem
     |         |               +-column_ref=
-    |         |                 +-ColumnRef(type=INT64, column=$array_offset.offset#5)
+    |         |                 +-ColumnRef(type=INT64, column=$array_offset.offset_idx#5)
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[first_input#2, second_input#3]
@@ -132,19 +132,19 @@ QueryStmt
     |         |     |   | +-ColumnRef(type=STRING, column=$subquery1.second_input#3)
     |         |     |   +-subquery=
     |         |     |     +-OrderByScan
-    |         |     |       +-column_list=[$array_offset.offset#5]
+    |         |     |       +-column_list=[$array_offset.offset_idx#5]
     |         |     |       +-is_ordered=TRUE
     |         |     |       +-input_scan=
     |         |     |       | +-FilterScan
-    |         |     |       |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |     |       |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |     |       |   +-input_scan=
     |         |     |       |   | +-ArrayScan
-    |         |     |       |   |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |     |       |   |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |     |       |   |   +-array_expr=
     |         |     |       |   |   | +-ColumnRef(type=ARRAY<STRING>, column=$subquery1.first_input#2, is_correlated=TRUE)
     |         |     |       |   |   +-element_column=$array.e#4
     |         |     |       |   |   +-array_offset_column=
-    |         |     |       |   |     +-ColumnHolder(column=$array_offset.offset#5)
+    |         |     |       |   |     +-ColumnHolder(column=$array_offset.offset_idx#5)
     |         |     |       |   +-filter_expr=
     |         |     |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |         |     |       |       +-ColumnRef(type=STRING, column=$array.e#4)
@@ -152,7 +152,7 @@ QueryStmt
     |         |     |       +-order_by_item_list=
     |         |     |         +-OrderByItem
     |         |     |           +-column_ref=
-    |         |     |             +-ColumnRef(type=INT64, column=$array_offset.offset#5)
+    |         |     |             +-ColumnRef(type=INT64, column=$array_offset.offset_idx#5)
     |         |     +-Literal(type=ARRAY<INT64>, value=NULL, has_explicit_type=TRUE)
     |         +-input_scan=
     |           +-ProjectScan
@@ -221,15 +221,15 @@ QueryStmt
     |         |           +-is_ordered=TRUE
     |         |           +-input_scan=
     |         |           | +-FilterScan
-    |         |           |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |           |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |           |   +-input_scan=
     |         |           |   | +-ArrayScan
-    |         |           |   |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |           |   |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |           |   |   +-array_expr=
     |         |           |   |   | +-ColumnRef(type=ARRAY<STRING>, column=$subquery1.first_input#2, is_correlated=TRUE)
     |         |           |   |   +-element_column=$array.e#4
     |         |           |   |   +-array_offset_column=
-    |         |           |   |     +-ColumnHolder(column=$array_offset.offset#5)
+    |         |           |   |     +-ColumnHolder(column=$array_offset.offset_idx#5)
     |         |           |   +-filter_expr=
     |         |           |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |         |           |       +-ColumnRef(type=STRING, column=$array.e#4)
@@ -237,7 +237,7 @@ QueryStmt
     |         |           +-order_by_item_list=
     |         |             +-OrderByItem
     |         |               +-column_ref=
-    |         |                 +-ColumnRef(type=INT64, column=$array_offset.offset#5)
+    |         |                 +-ColumnRef(type=INT64, column=$array_offset.offset_idx#5)
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[first_input#2, second_input#3]
@@ -302,15 +302,15 @@ QueryStmt
     |         |     |       +-is_ordered=TRUE
     |         |     |       +-input_scan=
     |         |     |       | +-FilterScan
-    |         |     |       |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |     |       |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |     |       |   +-input_scan=
     |         |     |       |   | +-ArrayScan
-    |         |     |       |   |   +-column_list=[$array.e#4, $array_offset.offset#5]
+    |         |     |       |   |   +-column_list=[$array.e#4, $array_offset.offset_idx#5]
     |         |     |       |   |   +-array_expr=
     |         |     |       |   |   | +-ColumnRef(type=ARRAY<STRING>, column=$subquery1.first_input#2, is_correlated=TRUE)
     |         |     |       |   |   +-element_column=$array.e#4
     |         |     |       |   |   +-array_offset_column=
-    |         |     |       |   |     +-ColumnHolder(column=$array_offset.offset#5)
+    |         |     |       |   |     +-ColumnHolder(column=$array_offset.offset_idx#5)
     |         |     |       |   +-filter_expr=
     |         |     |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |         |     |       |       +-ColumnRef(type=STRING, column=$array.e#4)
@@ -318,7 +318,7 @@ QueryStmt
     |         |     |       +-order_by_item_list=
     |         |     |         +-OrderByItem
     |         |     |           +-column_ref=
-    |         |     |             +-ColumnRef(type=INT64, column=$array_offset.offset#5)
+    |         |     |             +-ColumnRef(type=INT64, column=$array_offset.offset_idx#5)
     |         |     +-Literal(type=ARRAY<STRING>, value=NULL, has_explicit_type=TRUE)
     |         +-input_scan=
     |           +-ProjectScan

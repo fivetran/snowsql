@@ -860,21 +860,21 @@ from TestTable t
 [SAME AS PREVIOUS]
 ==
 
-select (select AS STRUCT d1, offset
+select (select AS STRUCT d1, offset_idx
         from t.KitchenSink.repeated_date d1 with offset cross join
              UNNEST([1]))
 from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<d1 DATE, offset INT64>]
+| +-$query.$col1#8 AS `$col1` [STRUCT<d1 DATE, offset_idx INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
     +-expr_list=
     | +-$col1#8 :=
     |   +-SubqueryExpr
-    |     +-type=STRUCT<d1 DATE, offset INT64>
+    |     +-type=STRUCT<d1 DATE, offset_idx INT64>
     |     +-subquery_type=SCALAR
     |     +-parameter_list=
     |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
@@ -884,19 +884,19 @@ QueryStmt
     |         +-expr_list=
     |         | +-$struct#7 :=
     |         |   +-MakeStruct
-    |         |     +-type=STRUCT<d1 DATE, offset INT64>
+    |         |     +-type=STRUCT<d1 DATE, offset_idx INT64>
     |         |     +-field_list=
     |         |       +-ColumnRef(type=DATE, column=$array.d1#4)
-    |         |       +-ColumnRef(type=INT64, column=$array_offset.offset#5)
+    |         |       +-ColumnRef(type=INT64, column=$array_offset.offset_idx#5)
     |         +-input_scan=
     |           +-ProjectScan
-    |             +-column_list=[$array.d1#4, $array_offset.offset#5]
+    |             +-column_list=[$array.d1#4, $array_offset.offset_idx#5]
     |             +-input_scan=
     |               +-ArrayScan
-    |                 +-column_list=[$array.d1#4, $array_offset.offset#5]
+    |                 +-column_list=[$array.d1#4, $array_offset.offset_idx#5]
     |                 +-input_scan=
     |                 | +-ArrayScan
-    |                 |   +-column_list=[$array.d1#4, $array_offset.offset#5]
+    |                 |   +-column_list=[$array.d1#4, $array_offset.offset_idx#5]
     |                 |   +-array_expr=
     |                 |   | +-GetProtoField
     |                 |   |   +-type=ARRAY<DATE>
@@ -907,7 +907,7 @@ QueryStmt
     |                 |   |   +-format=DATE
     |                 |   +-element_column=$array.d1#4
     |                 |   +-array_offset_column=
-    |                 |     +-ColumnHolder(column=$array_offset.offset#5)
+    |                 |     +-ColumnHolder(column=$array_offset.offset_idx#5)
     |                 +-array_expr=
     |                 | +-Literal(type=ARRAY<INT64>, value=[1])
     |                 +-element_column=$array.$unnest1#6

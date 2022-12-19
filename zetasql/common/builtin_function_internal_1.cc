@@ -374,7 +374,7 @@ std::string ArrayAtFunctionSQL(absl::string_view inner_function_name,
                       inner_function_name, "(", inputs[1], ")]");
 }
 std::string ArrayAtOffsetFunctionSQL(const std::vector<std::string>& inputs) {
-  return ArrayAtFunctionSQL("OFFSET", inputs);
+  return ArrayAtFunctionSQL("DEFAULT_OFFSET", inputs);
 }
 std::string ArrayAtOrdinalFunctionSQL(const std::vector<std::string>& inputs) {
   return ArrayAtFunctionSQL("ORDINAL", inputs);
@@ -395,7 +395,7 @@ std::string SubscriptWithKeyFunctionSQL(
 std::string SubscriptWithOffsetFunctionSQL(
     const std::vector<std::string>& inputs) {
   ZETASQL_DCHECK_EQ(inputs.size(), 2);
-  return absl::StrCat(inputs[0], "[OFFSET(", inputs[1], ")]");
+  return absl::StrCat(inputs[0], "[DEFAULT_OFFSET(", inputs[1], ")]");
 }
 std::string SubscriptWithOrdinalFunctionSQL(
     const std::vector<std::string>& inputs) {

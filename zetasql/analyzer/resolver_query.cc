@@ -118,7 +118,7 @@ namespace zetasql {
 const IdString& Resolver::kArrayId =
     *new IdString(IdString::MakeGlobal("$array"));
 const IdString& Resolver::kOffsetAlias =
-    *new IdString(IdString::MakeGlobal("offset"));
+    *new IdString(IdString::MakeGlobal("offset_idx"));
 const IdString& Resolver::kWeightAlias =
     *new IdString(IdString::MakeGlobal("weight"));
 const IdString& Resolver::kArrayOffsetId =

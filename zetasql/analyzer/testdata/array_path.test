@@ -699,7 +699,7 @@ QueryStmt
 ==
 
 select value
-from RecursivePBTable t, unnest(t.RecursivePB.repeated_recursive_pb.repeated_recursive_pb.repeated_recursive_pb[OFFSET(0)].repeated_recursive_pb.int64_val) value
+from RecursivePBTable t, unnest(t.RecursivePB.repeated_recursive_pb.repeated_recursive_pb.repeated_recursive_pb[DEFAULT_OFFSET(0)].repeated_recursive_pb.int64_val) value
 --
 QueryStmt
 +-output_column_list=
@@ -2750,7 +2750,7 @@ QueryStmt
 SELECT FLATTEN([
     STRUCT([1, 2, 3] AS a),
     STRUCT([4, 5] AS a)
-  ].a[OFFSET(1)]
+  ].a[DEFAULT_OFFSET(1)]
 )
 --
 QueryStmt
@@ -2846,7 +2846,7 @@ SELECT FLATTEN([
     STRUCT([1, 2, 3] AS a),
     STRUCT([4, 5] AS a)
   ].a
-)[OFFSET(1)]
+)[DEFAULT_OFFSET(1)]
 --
 QueryStmt
 +-output_column_list=
@@ -2944,8 +2944,8 @@ QueryStmt
 SELECT FLATTEN([
     STRUCT([1, 2, 3] AS a),
     STRUCT([4, 5] AS a)
-  ].a[OFFSET(1)]
-)[OFFSET(0)]
+  ].a[DEFAULT_OFFSET(1)]
+)[DEFAULT_OFFSET(0)]
 --
 QueryStmt
 +-output_column_list=
@@ -3042,33 +3042,33 @@ QueryStmt
 SELECT FLATTEN([
     STRUCT([1, 2, 3] AS a),
     STRUCT([4, 5] AS a)
-  ].a[OFFSET(1)][OFFSET(0)]
+  ].a[DEFAULT_OFFSET(1)][DEFAULT_OFFSET(0)]
 )
 --
-ERROR: No matching signature for operator ARRAY[OFFSET()] for argument types: INT64, INT64. Supported signature: ARRAY[OFFSET(INT64)] [at 4:18]
-  ].a[OFFSET(1)][OFFSET(0)]
-                 ^
+ERROR: No matching signature for operator ARRAY[DEFAULT_OFFSET()] for argument types: INT64, INT64. Supported signature: ARRAY[DEFAULT_OFFSET(INT64)] [at 4:26]
+  ].a[DEFAULT_OFFSET(1)][DEFAULT_OFFSET(0)]
+                         ^
 ==
 
 SELECT FLATTEN([
     STRUCT([1, 2, 3] AS a),
     STRUCT([4, 5] AS a)
   ].a
-)[OFFSET(1)][OFFSET(0)]
+)[DEFAULT_OFFSET(1)][DEFAULT_OFFSET(0)]
 --
-ERROR: Subscript access using [OFFSET(INT64)] is not supported on values of type INT64 [at 5:14]
-)[OFFSET(1)][OFFSET(0)]
-             ^
+ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type INT64 [at 5:22]
+)[DEFAULT_OFFSET(1)][DEFAULT_OFFSET(0)]
+                     ^
 ==
 
 SELECT FLATTEN([
     STRUCT([STRUCT(STRUCT([1, 2] AS c) AS b)] AS a),
     STRUCT([STRUCT(STRUCT([3] AS c) AS b)] AS a)
-  ].a.b[OFFSET(0)].c
+  ].a.b[DEFAULT_OFFSET(0)].c
 )
 --
-ERROR: No matching signature for operator ARRAY[OFFSET()] for argument types: STRUCT<c ARRAY<INT64>>, INT64. Supported signature: ARRAY[OFFSET(INT64)] [at 4:9]
-  ].a.b[OFFSET(0)].c
+ERROR: No matching signature for operator ARRAY[DEFAULT_OFFSET()] for argument types: STRUCT<c ARRAY<INT64>>, INT64. Supported signature: ARRAY[DEFAULT_OFFSET(INT64)] [at 4:9]
+  ].a.b[DEFAULT_OFFSET(0)].c
         ^
 ==
 
@@ -3076,8 +3076,8 @@ SELECT FLATTEN(
   FLATTEN([
       STRUCT([STRUCT([STRUCT([1, 2] AS c)] AS b)] AS a),
       STRUCT([STRUCT([STRUCT([3] AS c)] AS b)] AS a)
-    ].a[OFFSET(0)]
-  )[OFFSET(0)].b.c
+    ].a[DEFAULT_OFFSET(0)]
+  )[DEFAULT_OFFSET(0)].b.c
 )
 --
 QueryStmt
@@ -3249,7 +3249,7 @@ SELECT FLATTEN(
       STRUCT([STRUCT([STRUCT([1, 2] AS c)] AS b)] AS a),
       STRUCT([STRUCT([STRUCT([3] AS c)] AS b)] AS a)
     ].a
-  )[OFFSET(0)].b.c
+  )[DEFAULT_OFFSET(0)].b.c
 )
 --
 QueryStmt
@@ -3422,8 +3422,8 @@ SELECT FLATTEN(
       STRUCT([STRUCT([STRUCT([1, 2] AS c)] AS b)] AS a),
       STRUCT([STRUCT([STRUCT([3] AS c)] AS b)] AS a)
     ].a
-  ).b[OFFSET(0)].c
-)[OFFSET(0)]
+  ).b[DEFAULT_OFFSET(0)].c
+)[DEFAULT_OFFSET(0)]
 --
 QueryStmt
 +-output_column_list=
@@ -3598,7 +3598,7 @@ QueryStmt
 SELECT FLATTEN(FLATTEN([
     STRUCT([STRUCT([1,2] AS b)] AS a),
     STRUCT([STRUCT([3] AS b)] AS a)
-  ].a).b[OFFSET(0)])
+  ].a).b[DEFAULT_OFFSET(0)])
 --
 QueryStmt
 +-output_column_list=
@@ -4197,7 +4197,7 @@ QueryStmt
 
 [enabled_ast_rewrites=DEFAULTS|DEFAULTS,-ARRAY_FILTER_TRANSFORM]
 SELECT FLATTEN([
-  STRUCT([STRUCT(ARRAY_FILTER([1,2,3], e->e>Key)[OFFSET(0)] AS y), STRUCT(6)] AS x ),
+  STRUCT([STRUCT(ARRAY_FILTER([1,2,3], e->e>Key)[DEFAULT_OFFSET(0)] AS y), STRUCT(6)] AS x ),
   STRUCT([STRUCT(7 AS y), STRUCT(8)] AS x )
 ].x.y) AS my_array FROM KeyValue;
 --
@@ -5111,7 +5111,7 @@ QueryStmt
           +-$agg1#18 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==
 
-select FLATTEN(t.ProtoArray.str_value[OFFSET((SELECT COUNT(*) FROM TestTable))])
+select FLATTEN(t.ProtoArray.str_value[DEFAULT_OFFSET((SELECT COUNT(*) FROM TestTable))])
 from ArrayTypes t;
 --
 QueryStmt
@@ -5232,7 +5232,7 @@ QueryStmt
 ==
 
 select v
-from ArrayTypes t, unnest(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(t.ProtoArray))]) v
+from ArrayTypes t, unnest(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(t.ProtoArray))]) v
 --
 QueryStmt
 +-output_column_list=
@@ -5299,7 +5299,7 @@ QueryStmt
 ==
 
 select v, o
-from ArrayTypes t, unnest(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(t.ProtoArray))]) v WITH OFFSET o
+from ArrayTypes t, unnest(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(t.ProtoArray))]) v WITH OFFSET o
 --
 QueryStmt
 +-output_column_list=
@@ -5388,7 +5388,7 @@ QueryStmt
           +-ColumnHolder(column=$array_offset.o#19)
 ==
 
-select FLATTEN(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(t.ProtoArray))])
+select FLATTEN(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(t.ProtoArray))])
 from ArrayTypes t;
 --
 QueryStmt
@@ -5487,7 +5487,7 @@ QueryStmt
 
 ==
 
-select FLATTEN(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(t.Int32Array))])
+select FLATTEN(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(t.Int32Array))])
 from ArrayTypes t;
 --
 QueryStmt
@@ -5588,7 +5588,7 @@ QueryStmt
 ==
 
 select v
-from ArrayTypes t, UNNEST(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(t.Int32Array))]) v;
+from ArrayTypes t, UNNEST(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(t.Int32Array))]) v;
 --
 QueryStmt
 +-output_column_list=
@@ -5655,7 +5655,7 @@ QueryStmt
 ==
 
 select v, o
-from ArrayTypes t, UNNEST(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(t.Int32Array))]) v WITH OFFSET o;
+from ArrayTypes t, UNNEST(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(t.Int32Array))]) v WITH OFFSET o;
 --
 QueryStmt
 +-output_column_list=
@@ -5745,7 +5745,7 @@ QueryStmt
           +-ColumnHolder(column=$array_offset.o#19)
 ==
 
-select FLATTEN(t.ProtoArray.str_value[OFFSET(ARRAY_LENGTH(test.KitchenSink.nested_repeated_value))])
+select FLATTEN(t.ProtoArray.str_value[DEFAULT_OFFSET(ARRAY_LENGTH(test.KitchenSink.nested_repeated_value))])
 from ArrayTypes t, TestTable test;
 --
 QueryStmt
@@ -5885,7 +5885,7 @@ SELECT FLATTEN(t.KitchenSink.nested_repeated_value.value, t.KitchenSink.neste...
 SELECT
   FLATTEN((SELECT [STRUCT(['A'] AS f11)])
     .f11[ORDINAL(FLATTEN([STRUCT([0] AS f21)].f21)
-      [OFFSET(0)])]) AS col
+      [DEFAULT_OFFSET(0)])]) AS col
 --
 QueryStmt
 +-output_column_list=
@@ -6062,7 +6062,7 @@ QueryStmt
 ==
 
 # Repros b/237592896
-SELECT FLATTEN(ARRAY<STRUCT<f ARRAY<INT64>>>[].f[OFFSET(c+c)])
+SELECT FLATTEN(ARRAY<STRUCT<f ARRAY<INT64>>>[].f[DEFAULT_OFFSET(c+c)])
 FROM ( SELECT 1 AS c ) AS s;
 --
 QueryStmt
