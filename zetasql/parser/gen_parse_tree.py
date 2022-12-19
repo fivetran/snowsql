@@ -8527,20 +8527,20 @@ def main(argv):
       parent='ASTNode',
       fields=[
           Field(
-              'offset',
+              'fetch',
               'ASTExpression',
               tag_id=2,
               field_loader=FieldLoaderMethod.REQUIRED,
               comment="""
-          The OFFSET value. Never NULL.
+          The FETCH value. Never NULL.
               """),
           Field(
-              'fetch',
+              'offset',
               'ASTExpression',
               tag_id=3,
-              field_loader=FieldLoaderMethod.REQUIRED,
+              field_loader=FieldLoaderMethod.OPTIONAL_EXPRESSION,
               comment="""
-          The FETCH value. Never NULL.
+          The OFFSET value. NULL if no OFFSET specified.
               """),
       ])
 

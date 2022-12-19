@@ -1943,8 +1943,10 @@ absl::Status Validator::ValidateResolvedOffsetFetchScan(
     const std::set<ResolvedColumn>& visible_parameters) {
   PushErrorContext push(this, scan);
 
-  VALIDATOR_RET_CHECK(scan->offset() != nullptr);
-  ZETASQL_RETURN_IF_ERROR(ValidateArgumentIsInt64Constant(scan->offset()));
+  if (scan->offset() != nullptr) {
+    // OFFSET is optional.
+    ZETASQL_RETURN_IF_ERROR(ValidateArgumentIsInt64Constant(scan->offset()));
+  }
 
   VALIDATOR_RET_CHECK(scan->fetch() != nullptr);
   ZETASQL_RETURN_IF_ERROR(ValidateArgumentIsInt64Constant(scan->fetch()));

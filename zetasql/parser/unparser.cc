@@ -1637,8 +1637,13 @@ void Unparser::visitASTLimitOffset(const ASTLimitOffset* node, void* data) {
 
 void Unparser::visitASTOffsetFetch(const ASTOffsetFetch* node, void* data) {
   println();
-  print("OFFSET");
-  UnparseChildrenWithSeparator(node, data, "FETCH");
+  if (node->offset() != nullptr) {
+    print("OFFSET");
+    UnparseChildrenWithSeparator(node, data, "FETCH");
+  } else {
+    print("FETCH");
+    node->fetch()->Accept(this, data);
+  }
 }
 
 void Unparser::visitASTHavingModifier(const ASTHavingModifier* node,

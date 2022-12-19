@@ -5783,7 +5783,11 @@ opt_limit_offset_clause:
     "OFFSET" possibly_cast_int_literal_or_parameter opt_row_rows_clause
     "FETCH" opt_first_next_clause possibly_cast_int_literal_or_parameter opt_row_rows_clause opt_only_clause
       {
-        $$ = MAKE_NODE(ASTOffsetFetch, @$, {$2, $6});
+        $$ = MAKE_NODE(ASTOffsetFetch, @$, {$6, $2});
+      }
+    | "FETCH" opt_first_next_clause possibly_cast_int_literal_or_parameter opt_row_rows_clause opt_only_clause
+      {
+        $$ = MAKE_NODE(ASTOffsetFetch, @$, {$3});
       }
     | "LIMIT" possibly_cast_int_literal_or_parameter
       "OFFSET" possibly_cast_int_literal_or_parameter
