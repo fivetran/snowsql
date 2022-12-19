@@ -2392,13 +2392,16 @@ Algebrizer::AlgebrizeTopScan(const ResolvedTopScan* scan) {
 
 absl::StatusOr<std::unique_ptr<RelationalOp>>
 Algebrizer::AlgebrizeOffsetFetchScan(const ResolvedOffsetFetchScan* scan) {
-  ZETASQL_RET_CHECK(scan->offset() != nullptr);
   ZETASQL_RET_CHECK(scan->fetch() != nullptr);
 
-  ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<ValueExpr> offset,
-                   AlgebrizeExpression(scan->offset()));
   ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<ValueExpr> fetch,
                    AlgebrizeExpression(scan->fetch()));
+  std::unique_ptr<ValueExpr> offset;
+  if (scan->offset() != nullptr) {
+    ZETASQL_ASSIGN_OR_RETURN(offset, AlgebrizeExpression(scan->offset()));
+  } else {
+    ZETASQL_ASSIGN_OR_RETURN(offset, ConstExpr::Create(Value::Int64(0)));
+  }
 
   if (algebrizer_options_.allow_order_by_limit_operator &&
       scan->input_scan()->node_kind() == RESOLVED_ORDER_BY_SCAN) {
