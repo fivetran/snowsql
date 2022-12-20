@@ -2402,37 +2402,37 @@ QueryStmt
         +-output_column_list=[$union_all2.$col1#2]
 ==
 
-# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-# union all
-# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-# --
-# QueryStmt
-# +-output_column_list=
-# | +-$union_all.$col1#3 AS `$col1` [PROTO<zetasql_test__.TestInvalidTypeAnnotations>]
-# +-query=
-#   +-SetOperationScan
-#     +-column_list=[$union_all.$col1#3]
-#     +-op_type=UNION_ALL
-#     +-input_item_list=
-#       +-SetOperationItem
-#       | +-scan=
-#       | | +-ProjectScan
-#       | |   +-column_list=[$union_all1.$col1#1]
-#       | |   +-expr_list=
-#       | |   | +-$col1#1 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
-#       | |   +-input_scan=
-#       | |     +-SingleRowScan
-#       | +-output_column_list=[$union_all1.$col1#1]
-#       +-SetOperationItem
-#         +-scan=
-#         | +-ProjectScan
-#         |   +-column_list=[$union_all2.$col1#2]
-#         |   +-expr_list=
-#         |   | +-$col1#2 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
-#         |   +-input_scan=
-#         |     +-SingleRowScan
-#         +-output_column_list=[$union_all2.$col1#2]
-# ==
+select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+union all
+select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+--
+QueryStmt
++-output_column_list=
+| +-$union_all.$col1#3 AS `$col1` [PROTO<zetasql_test__.TestInvalidTypeAnnotations>]
++-query=
+  +-SetOperationScan
+    +-column_list=[$union_all.$col1#3]
+    +-op_type=UNION_ALL
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all1.$col1#1]
+      | |   +-expr_list=
+      | |   | +-$col1#1 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
+      | |   +-input_scan=
+      | |     +-SingleRowScan
+      | +-output_column_list=[$union_all1.$col1#1]
+      +-SetOperationItem
+        +-scan=
+        | +-ProjectScan
+        |   +-column_list=[$union_all2.$col1#2]
+        |   +-expr_list=
+        |   | +-$col1#2 := Literal(type=PROTO<zetasql_test__.TestInvalidTypeAnnotations>, value=NULL, has_explicit_type=TRUE)
+        |   +-input_scan=
+        |     +-SingleRowScan
+        +-output_column_list=[$union_all2.$col1#2]
+==
 
 [language_features={{V_1_2_GROUP_BY_STRUCT|}}]
 select (1, 1)

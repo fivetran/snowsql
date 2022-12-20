@@ -909,7 +909,7 @@ UpdateStmt
 # Nested UPDATE that attempts to write to the offset.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset}}
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset_idx}}
    SET offset_idx = 0
    WHERE true)
 WHERE true
