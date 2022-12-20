@@ -552,7 +552,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select [1,2,3][DEFAULT_OFFSET(count(*))]
+select [1,2,3][default_offset(count(*))]
 from TestTable
 --
 QueryStmt
@@ -576,10 +576,10 @@ QueryStmt
 ==
 
 # Using OFFSET or ORDINAL functions elsewhere gives an error.
-select DEFAULT_OFFSET(5) from TestTable
+select default_offset(5) from TestTable
 --
 ERROR: DEFAULT_OFFSET is not a function. It can only be used for array element access using array[DEFAULT_OFFSET(position)] [at 1:8]
-select DEFAULT_OFFSET(5) from TestTable
+select default_offset(5) from TestTable
        ^
 ==
 
