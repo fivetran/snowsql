@@ -114,7 +114,7 @@ class RewriteBinaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       NULL,
       ARRAY(
         SELECT e
-        FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
+        FROM UNNEST(first_input) AS e WITH OFFSET
         WHERE e = second_input
         ORDER BY offset_idx
       ))
