@@ -2934,15 +2934,15 @@ select [1, 1] intersect all select [2, 3, 4];
                             ^
 ==
 
-# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-# except all
-# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-# --
-# 
-# ERROR: Column 1 in EXCEPT ALL has type that does not support set operation comparisons: PROTO [at 3:1]
-# select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
-# ^
-# ==
+select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+except all
+select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+--
+
+ERROR: Column 1 in EXCEPT ALL has type that does not support set operation comparisons: PROTO [at 3:1]
+select cast(null as zetasql_test__.TestInvalidTypeAnnotations)
+^
+==
 
 # Set ops other than UNION ALL aren't allowed on floating point types if
 # DISALLOW_GROUP_BY_FLOAT is set.
