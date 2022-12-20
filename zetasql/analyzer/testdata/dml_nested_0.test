@@ -227,17 +227,25 @@ ERROR: The target of a nested DML statement cannot reference an array element [a
 # Nested DELETE with an offset_idx.
 [language_features={{|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET}}]
 UPDATE TestTable SET
-  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
+  (DELETE KitchenSink.repeated_int64_val WITH OFFSET{{| offset_idx}}
    WHERE offset_idx = 5)
 WHERE true
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: DELETE does not support WITH OFFSET [at 2:42]
-  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
+  (DELETE KitchenSink.repeated_int64_val WITH OFFSET
                                          ^
 --
-ALTERNATION GROUP: V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET
+ALTERNATION GROUP:  offset_idx
+--	
+ERROR: DELETE does not support WITH OFFSET [at 2:42]	
+  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset_idx	
+                                         ^	
+--	
+ALTERNATION GROUPS:	
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,	
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset_idx
 --
 UpdateStmt
 +-table_scan=
@@ -328,8 +336,8 @@ ERROR: Duplicate OFFSET alias foo in nested DELETE [at 2:58]
 # UPDATE.
 [language_features=V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET]
 UPDATE TestTable target SET
-  (UPDATE KitchenSink.nested_repeated_value target WITH OFFSET offset_idx SET
-     (DELETE target.nested_repeated_int64 target WITH OFFSET offset_idx
+  (UPDATE KitchenSink.nested_repeated_value target WITH OFFSET SET
+     (DELETE target.nested_repeated_int64 target WITH OFFSET
       WHERE offset_idx = target + offset_idx)
    WHERE offset_idx = target.nested_int64 + offset_idx)
 WHERE target.KitchenSink.bool_val
@@ -750,7 +758,7 @@ ERROR: The target of a nested DML statement cannot reference an array element [a
 # Nested UPDATE with an offset.
 [language_features={{|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset_idx}}
    SET repeated_int64_val = 0
    WHERE offset_idx = 5)
   WHERE true
@@ -758,12 +766,20 @@ UPDATE TestTable SET
 ALTERNATION GROUP: <empty>
 --
 ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET
+                                         ^
+--	
+ALTERNATION GROUP:  offset_idx
+--	
+ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]	
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
                                          ^
 --
 ALTERNATION GROUPS:
-    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET
-    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML,
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML, offset
 --
 UpdateStmt
 +-table_scan=
@@ -846,7 +862,7 @@ UpdateStmt
 # Nested UPDATE with an offset with a complex right hand side in the SET.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET
    SET repeated_int64_val = repeated_int64_val + offset_idx + 1
    WHERE offset_idx = 5)
   WHERE true
@@ -893,7 +909,7 @@ UpdateStmt
 # Nested UPDATE that attempts to write to the offset.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset}}
    SET offset_idx = 0
    WHERE true)
 WHERE true
@@ -933,8 +949,8 @@ ERROR: Duplicate OFFSET alias foo in nested UPDATE [at 2:58]
 # UPDATE.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable target SET
-  (UPDATE KitchenSink.nested_repeated_value target WITH OFFSET offset_idx SET
-     (UPDATE target.nested_repeated_int64 target WITH OFFSET offset_idx
+  (UPDATE KitchenSink.nested_repeated_value target WITH OFFSET SET
+     (UPDATE target.nested_repeated_int64 target WITH OFFSET
       SET target = target + offset_idx
       WHERE offset_idx = target + offset_idx)
    WHERE offset_idx = target.nested_int64 + offset_idx)
