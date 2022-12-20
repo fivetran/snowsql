@@ -123,13 +123,13 @@ class RewriteTernaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       CASE third_input
         WHEN 'FIRST' THEN (
           SELECT offset_idx
-          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
+          FROM UNNEST(first_input) AS e WITH OFFSET
           WHERE e = second_input
           ORDER BY offset_idx LIMIT 1
         )
         WHEN 'LAST' THEN (
           SELECT offset_idx
-          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
+          FROM UNNEST(first_input) AS e WITH OFFSET
           WHERE e = second_input
           ORDER BY offset_idx DESC LIMIT 1
         )
@@ -147,13 +147,13 @@ class RewriteTernaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       CASE third_input
         WHEN 'FIRST' THEN (
           SELECT e
-          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
+          FROM UNNEST(first_input) AS e WITH OFFSET
           WHERE e = second_input
           ORDER BY offset_idx LIMIT 1
         )
         WHEN 'LAST' THEN (
           SELECT e
-          FROM UNNEST(first_input) AS e WITH OFFSET offset_idx
+          FROM UNNEST(first_input) AS e WITH OFFSET
           WHERE e = second_input
           ORDER BY offset_idx DESC LIMIT 1
         )
