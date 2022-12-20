@@ -238,13 +238,13 @@ ERROR: DELETE does not support WITH OFFSET [at 2:42]
                                          ^
 --
 ALTERNATION GROUP:  offset_idx
---	
-ERROR: DELETE does not support WITH OFFSET [at 2:42]	
-  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset_idx	
-                                         ^	
---	
-ALTERNATION GROUPS:	
-    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,	
+--
+ERROR: DELETE does not support WITH OFFSET [at 2:42]
+  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
+                                         ^
+--
+ALTERNATION GROUPS:
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,
     V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset_idx
 --
 UpdateStmt
@@ -768,10 +768,10 @@ ALTERNATION GROUP: <empty>
 ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET
                                          ^
---	
+--
 ALTERNATION GROUP:  offset_idx
---	
-ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]	
+--
+ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
                                          ^
 --
