@@ -8395,6 +8395,7 @@ reserved_keyword_rule:
     | "MERGE"
     | "NATURAL"
     | "NEW"
+    | "NEXT"
     | "NOT"
     | "NULL"
     | "NULLS"
