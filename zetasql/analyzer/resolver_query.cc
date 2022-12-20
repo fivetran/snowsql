@@ -4480,11 +4480,12 @@ absl::Status Resolver::ResolveOffsetFetchScan(
                                           "OFFSET FETCH");
 
   // Resolve and validate the OFFSET.
-  ZETASQL_RET_CHECK(offset_fetch->offset() != nullptr);
   std::unique_ptr<const ResolvedExpr> offset_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(offset_fetch->offset(),
-                                           /*clause_name=*/"OFFSET",
-                                           &expr_resolution_info, &offset_expr));
+  if (offset_fetch->offset() != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(
+        offset_fetch->offset(), /*clause_name=*/"OFFSET", &expr_resolution_info,
+        &offset_expr));
+  }
 
   // Resolve and validate the FETCH.
   ZETASQL_RET_CHECK(offset_fetch->fetch() != nullptr);
@@ -4492,7 +4493,6 @@ absl::Status Resolver::ResolveOffsetFetchScan(
   ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(offset_fetch->fetch(),
                                            /*clause_name=*/"FETCH",
                                            &expr_resolution_info, &fetch_expr));
-  
 
   const std::vector<ResolvedColumn>& column_list = input_scan->column_list();
   *output = MakeResolvedOffsetFetchScan(column_list, std::move(input_scan),
