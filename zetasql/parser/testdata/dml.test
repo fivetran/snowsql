@@ -22,17 +22,17 @@ WHERE
 
 # The resolver will fail on this because WITH OFFSET is not allowed in
 # top-level DELETE statements, but it does parse.
-delete T with offset AS offset where true
+delete T with offset AS offset_idx where true
 --
-DeleteStatement [0-41] [delete T with...where true]
+DeleteStatement [0-45] [delete T with...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  WithOffset [9-30] [with offset AS offset]
-    Alias [21-30] [AS offset]
-      Identifier(offset) [24-30] [offset]
-  BooleanLiteral(true) [37-41] [true]
+  WithOffset [9-34] [with offset AS offset_idx]
+    Alias [21-34] [AS offset_idx]
+      Identifier(offset_idx) [24-34] [offset_idx]
+  BooleanLiteral(true) [41-45] [true]
 --
-DELETE T WITH OFFSET AS offset
+DELETE T WITH OFFSET AS offset_idx
 WHERE
   true
 ==
@@ -2108,23 +2108,23 @@ SET
 
 # The resolver will fail on this because WITH OFFSET is not allowed in
 # top-level UPDATE statements, but it does parse.
-update T with offset AS offset set x = y
+update T with offset AS offset_idx set x = y
 --
-UpdateStatement [0-40] [update T with...set x = y]
+UpdateStatement [0-44] [update T with...set x = y]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  WithOffset [9-30] [with offset AS offset]
-    Alias [21-30] [AS offset]
-      Identifier(offset) [24-30] [offset]
-  UpdateItemList [35-40] [x = y]
-    UpdateItem [35-40] [x = y]
-      UpdateSetValue [35-40] [x = y]
-        PathExpression [35-36] [x]
-          Identifier(x) [35-36] [x]
-        PathExpression [39-40] [y]
-          Identifier(y) [39-40] [y]
+  WithOffset [9-34] [with offset AS offset_idx]
+    Alias [21-34] [AS offset_idx]
+      Identifier(offset_idx) [24-34] [offset_idx]
+  UpdateItemList [39-44] [x = y]
+    UpdateItem [39-44] [x = y]
+      UpdateSetValue [39-44] [x = y]
+        PathExpression [39-40] [x]
+          Identifier(x) [39-40] [x]
+        PathExpression [43-44] [y]
+          Identifier(y) [43-44] [y]
 --
-UPDATE T WITH OFFSET AS offset
+UPDATE T WITH OFFSET AS offset_idx
 SET
   x = y
 ==
@@ -3622,19 +3622,19 @@ set (insert a.x  na values (5))
 
 # Nested update with offset.
 update T set
-  (update a with offset {{|as}} {{|offset|foo}}
+  (update a with offset {{|as}} {{|offset_idx|foo}}
    set x = y
-   where offset = 0)
+   where offset_idx = 0)
 where true
 --
 ALTERNATION GROUP: <empty>
 --
-UpdateStatement [0-83] [update T set...where true]
+UpdateStatement [0-87] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-72] [(update a...offset = 0)]
-    UpdateItem [15-72] [(update a...offset = 0)]
-      UpdateStatement [16-71] [update a with...offset = 0]
+  UpdateItemList [15-76] [(update a...offset_idx = 0)]
+    UpdateItem [15-76] [(update a...offset_idx = 0)]
+      UpdateStatement [16-75] [update a with...offset_idx = 0]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
         WithOffset [25-36] [with offset]
@@ -3645,11 +3645,11 @@ UpdateStatement [0-83] [update T set...where true]
                 Identifier(x) [46-47] [x]
               PathExpression [50-51] [y]
                 Identifier(y) [50-51] [y]
-        BinaryExpression(=) [61-71] [offset = 0]
-          PathExpression [61-67] [offset]
-            Identifier(offset) [61-67] [offset]
-          IntLiteral(0) [70-71] [0]
-  BooleanLiteral(true) [79-83] [true]
+        BinaryExpression(=) [61-75] [offset_idx = 0]
+          PathExpression [61-71] [offset_idx]
+            Identifier(offset_idx) [61-71] [offset_idx]
+          IntLiteral(0) [74-75] [0]
+  BooleanLiteral(true) [83-87] [true]
 --
 UPDATE T
 SET
@@ -3658,57 +3658,57 @@ SET
     SET
       x = y
     WHERE
-      offset = 0
+      offset_idx = 0
   )
 WHERE
   true
 --
-ALTERNATION GROUP: offset
+ALTERNATION GROUP: offset_idx
 --
-UpdateStatement [0-89] [update T set...where true]
+UpdateStatement [0-97] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-78] [(update a...offset = 0)]
-    UpdateItem [15-78] [(update a...offset = 0)]
-      UpdateStatement [16-77] [update a with...offset = 0]
+  UpdateItemList [15-86] [(update a...offset_idx = 0)]
+    UpdateItem [15-86] [(update a...offset_idx = 0)]
+      UpdateStatement [16-85] [update a with...offset_idx = 0]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
-        WithOffset [25-44] [with offset  offset]
-          Alias [38-44] [offset]
-            Identifier(offset) [38-44] [offset]
-        UpdateItemList [52-57] [x = y]
-          UpdateItem [52-57] [x = y]
-            UpdateSetValue [52-57] [x = y]
-              PathExpression [52-53] [x]
-                Identifier(x) [52-53] [x]
-              PathExpression [56-57] [y]
-                Identifier(y) [56-57] [y]
-        BinaryExpression(=) [67-77] [offset = 0]
-          PathExpression [67-73] [offset]
-            Identifier(offset) [67-73] [offset]
-          IntLiteral(0) [76-77] [0]
-  BooleanLiteral(true) [85-89] [true]
+        WithOffset [25-48] [with offset  offset_idx]
+          Alias [38-48] [offset_idx]
+            Identifier(offset_idx) [38-48] [offset_idx]
+        UpdateItemList [56-61] [x = y]
+          UpdateItem [56-61] [x = y]
+            UpdateSetValue [56-61] [x = y]
+              PathExpression [56-57] [x]
+                Identifier(x) [56-57] [x]
+              PathExpression [60-61] [y]
+                Identifier(y) [60-61] [y]
+        BinaryExpression(=) [71-85] [offset_idx = 0]
+          PathExpression [71-81] [offset_idx]
+            Identifier(offset_idx) [71-81] [offset_idx]
+          IntLiteral(0) [84-85] [0]
+  BooleanLiteral(true) [93-97] [true]
 --
 UPDATE T
 SET
   (
-    UPDATE a WITH OFFSET AS offset
+    UPDATE a WITH OFFSET AS offset_idx
     SET
       x = y
     WHERE
-      offset = 0
+      offset_idx = 0
   )
 WHERE
   true
 --
 ALTERNATION GROUP: foo
 --
-UpdateStatement [0-86] [update T set...where true]
+UpdateStatement [0-90] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-75] [(update a...offset = 0)]
-    UpdateItem [15-75] [(update a...offset = 0)]
-      UpdateStatement [16-74] [update a with...offset = 0]
+  UpdateItemList [15-79] [(update a...offset_idx = 0)]
+    UpdateItem [15-79] [(update a...offset_idx = 0)]
+      UpdateStatement [16-78] [update a with...offset_idx = 0]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
         WithOffset [25-41] [with offset  foo]
@@ -3721,11 +3721,11 @@ UpdateStatement [0-86] [update T set...where true]
                 Identifier(x) [49-50] [x]
               PathExpression [53-54] [y]
                 Identifier(y) [53-54] [y]
-        BinaryExpression(=) [64-74] [offset = 0]
-          PathExpression [64-70] [offset]
-            Identifier(offset) [64-70] [offset]
-          IntLiteral(0) [73-74] [0]
-  BooleanLiteral(true) [82-86] [true]
+        BinaryExpression(=) [64-78] [offset_idx = 0]
+          PathExpression [64-74] [offset_idx]
+            Identifier(offset_idx) [64-74] [offset_idx]
+          IntLiteral(0) [77-78] [0]
+  BooleanLiteral(true) [86-90] [true]
 --
 UPDATE T
 SET
@@ -3734,7 +3734,7 @@ SET
     SET
       x = y
     WHERE
-      offset = 0
+      offset_idx = 0
   )
 WHERE
   true
@@ -3745,52 +3745,52 @@ ERROR: Syntax error: Unexpected keyword SET [at 3:4]
    set x = y
    ^
 --
-ALTERNATION GROUP: as,offset
+ALTERNATION GROUP: as,offset_idx
 --
-UpdateStatement [0-91] [update T set...where true]
+UpdateStatement [0-99] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-80] [(update a...offset = 0)]
-    UpdateItem [15-80] [(update a...offset = 0)]
-      UpdateStatement [16-79] [update a with...offset = 0]
+  UpdateItemList [15-88] [(update a...offset_idx = 0)]
+    UpdateItem [15-88] [(update a...offset_idx = 0)]
+      UpdateStatement [16-87] [update a with...offset_idx = 0]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
-        WithOffset [25-46] [with offset as offset]
-          Alias [37-46] [as offset]
-            Identifier(offset) [40-46] [offset]
-        UpdateItemList [54-59] [x = y]
-          UpdateItem [54-59] [x = y]
-            UpdateSetValue [54-59] [x = y]
-              PathExpression [54-55] [x]
-                Identifier(x) [54-55] [x]
-              PathExpression [58-59] [y]
-                Identifier(y) [58-59] [y]
-        BinaryExpression(=) [69-79] [offset = 0]
-          PathExpression [69-75] [offset]
-            Identifier(offset) [69-75] [offset]
-          IntLiteral(0) [78-79] [0]
-  BooleanLiteral(true) [87-91] [true]
+        WithOffset [25-50] [with offset as offset_idx]
+          Alias [37-50] [as offset_idx]
+            Identifier(offset_idx) [40-50] [offset_idx]
+        UpdateItemList [58-63] [x = y]
+          UpdateItem [58-63] [x = y]
+            UpdateSetValue [58-63] [x = y]
+              PathExpression [58-59] [x]
+                Identifier(x) [58-59] [x]
+              PathExpression [62-63] [y]
+                Identifier(y) [62-63] [y]
+        BinaryExpression(=) [73-87] [offset_idx = 0]
+          PathExpression [73-83] [offset_idx]
+            Identifier(offset_idx) [73-83] [offset_idx]
+          IntLiteral(0) [86-87] [0]
+  BooleanLiteral(true) [95-99] [true]
 --
 UPDATE T
 SET
   (
-    UPDATE a WITH OFFSET AS offset
+    UPDATE a WITH OFFSET AS offset_idx
     SET
       x = y
     WHERE
-      offset = 0
+      offset_idx = 0
   )
 WHERE
   true
 --
 ALTERNATION GROUP: as,foo
 --
-UpdateStatement [0-88] [update T set...where true]
+UpdateStatement [0-92] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-77] [(update a...offset = 0)]
-    UpdateItem [15-77] [(update a...offset = 0)]
-      UpdateStatement [16-76] [update a with...offset = 0]
+  UpdateItemList [15-81] [(update a...offset_idx = 0)]
+    UpdateItem [15-81] [(update a...offset_idx = 0)]
+      UpdateStatement [16-80] [update a with...offset_idx = 0]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
         WithOffset [25-43] [with offset as foo]
@@ -3803,11 +3803,11 @@ UpdateStatement [0-88] [update T set...where true]
                 Identifier(x) [51-52] [x]
               PathExpression [55-56] [y]
                 Identifier(y) [55-56] [y]
-        BinaryExpression(=) [66-76] [offset = 0]
-          PathExpression [66-72] [offset]
-            Identifier(offset) [66-72] [offset]
-          IntLiteral(0) [75-76] [0]
-  BooleanLiteral(true) [84-88] [true]
+        BinaryExpression(=) [66-80] [offset_idx = 0]
+          PathExpression [66-76] [offset_idx]
+            Identifier(offset_idx) [66-76] [offset_idx]
+          IntLiteral(0) [79-80] [0]
+  BooleanLiteral(true) [88-92] [true]
 --
 UPDATE T
 SET
@@ -3816,7 +3816,7 @@ SET
     SET
       x = y
     WHERE
-      offset = 0
+      offset_idx = 0
   )
 WHERE
   true
@@ -3824,7 +3824,7 @@ WHERE
 
 # Nested delete with offset.
 update T set
-  (delete a with offset {{|as}} {{|offset|foo}} where true)
+  (delete a with offset {{|as}} {{|offset_idx|foo}} where true)
 where true
 --
 ALTERNATION GROUP: <empty>
@@ -3851,26 +3851,26 @@ SET
 WHERE
   true
 --
-ALTERNATION GROUP: offset
+ALTERNATION GROUP: offset_idx
 --
-UpdateStatement [0-67] [update T set...where true]
+UpdateStatement [0-71] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-56] [(delete a...where true)]
-    UpdateItem [15-56] [(delete a...where true)]
-      DeleteStatement [16-55] [delete a with...where true]
+  UpdateItemList [15-60] [(delete a...where true)]
+    UpdateItem [15-60] [(delete a...where true)]
+      DeleteStatement [16-59] [delete a with...where true]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
-        WithOffset [25-44] [with offset  offset]
-          Alias [38-44] [offset]
-            Identifier(offset) [38-44] [offset]
-        BooleanLiteral(true) [51-55] [true]
-  BooleanLiteral(true) [63-67] [true]
+        WithOffset [25-48] [with offset  offset_idx]
+          Alias [38-48] [offset_idx]
+            Identifier(offset_idx) [38-48] [offset_idx]
+        BooleanLiteral(true) [55-59] [true]
+  BooleanLiteral(true) [67-71] [true]
 --
 UPDATE T
 SET
   (
-    DELETE a WITH OFFSET AS offset
+    DELETE a WITH OFFSET AS offset_idx
     WHERE
       true
   )
@@ -3909,26 +3909,26 @@ ERROR: Syntax error: Unexpected keyword WHERE [at 2:29]
   (delete a with offset as  where true)
                             ^
 --
-ALTERNATION GROUP: as,offset
+ALTERNATION GROUP: as,offset_idx
 --
-UpdateStatement [0-69] [update T set...where true]
+UpdateStatement [0-73] [update T set...where true]
   PathExpression [7-8] [T]
     Identifier(T) [7-8] [T]
-  UpdateItemList [15-58] [(delete a...where true)]
-    UpdateItem [15-58] [(delete a...where true)]
-      DeleteStatement [16-57] [delete a with...where true]
+  UpdateItemList [15-62] [(delete a...where true)]
+    UpdateItem [15-62] [(delete a...where true)]
+      DeleteStatement [16-61] [delete a with...where true]
         PathExpression [23-24] [a]
           Identifier(a) [23-24] [a]
-        WithOffset [25-46] [with offset as offset]
-          Alias [37-46] [as offset]
-            Identifier(offset) [40-46] [offset]
-        BooleanLiteral(true) [53-57] [true]
-  BooleanLiteral(true) [65-69] [true]
+        WithOffset [25-50] [with offset as offset_idx]
+          Alias [37-50] [as offset_idx]
+            Identifier(offset_idx) [40-50] [offset_idx]
+        BooleanLiteral(true) [57-61] [true]
+  BooleanLiteral(true) [69-73] [true]
 --
 UPDATE T
 SET
   (
-    DELETE a WITH OFFSET AS offset
+    DELETE a WITH OFFSET AS offset_idx
     WHERE
       true
   )
