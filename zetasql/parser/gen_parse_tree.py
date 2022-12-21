@@ -1565,7 +1565,7 @@ def main(argv):
           Field(
               'lateral',
               SCALAR_BOOL,
-              tag_id=14),
+              tag_id=15),
       ],
       extra_public_defs="""
   // Represents a parse error when parsing join expressions.
