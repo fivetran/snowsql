@@ -99,6 +99,7 @@ void QueryExpression::ClearAllClauses() {
   limit_.clear();
   offset_.clear();
   top_.clear();
+  fetch_.clear();
   anonymization_options_.clear();
   with_recursive_ = false;
   pivot_.clear();
@@ -283,6 +284,10 @@ std::string QueryExpression::GetSQLQuery() const {
     absl::StrAppend(&sql, " OFFSET ", offset_);
   }
 
+  if (!fetch_.empty()) {
+    absl::StrAppend(&sql, " FETCH ", fetch_);
+  }
+
   return sql;
 }
 
@@ -413,6 +418,14 @@ bool QueryExpression::TrySetTopClause(const std::string& top) {
   return true;
 }
 
+bool QueryExpression::TrySetFetchClause(const std::string& fetch) {
+  if (!CanSetFetchClause()) {
+    return false;
+  }
+  fetch_ = fetch;
+  return true;
+}
+
 bool QueryExpression::TrySetWithAnonymizationClause(
     const std::string& anonymization_options) {
   if (!CanSetWithAnonymizationClause()) {
@@ -459,15 +472,19 @@ bool QueryExpression::CanSetGroupByClause() const {
 }
 bool QueryExpression::CanSetOrderByClause() const {
   return !HasOrderByClause() && !HasLimitClause() && !HasOffsetClause() &&
-      HasFromClause();
+      !HasFetchClause() && HasFromClause();
 }
 bool QueryExpression::CanSetLimitClause() const {
-  return !HasLimitClause() && !HasOffsetClause();
+  return !HasLimitClause() && !HasOffsetClause() && !HasFetchClause() && !HasTopClause();
 }
-bool QueryExpression::CanSetOffsetClause() const { return !HasOffsetClause(); }
-
+bool QueryExpression::CanSetOffsetClause() const {
+  return !HasOffsetClause() && !HasFetchClause() && !HasTopClause();
+}
 bool QueryExpression::CanSetTopClause() const {
-  return !HasTopClause() && !HasLimitClause() && !HasOffsetClause();
+  return !HasTopClause() && !HasLimitClause() && !HasOffsetClause() && !HasFetchClause();
+}
+bool QueryExpression::CanSetFetchClause() const {
+  return !HasFetchClause() && !HasLimitClause() && !HasTopClause();
 }
 
 bool QueryExpression::CanSetPivotClause() const { return !HasPivotClause(); }

@@ -4580,8 +4580,8 @@ TEST_F(PreparedQueryProtoTest, Complex) {
 
 TEST_F(PreparedQueryProtoTest, WithRepeatedFieldOffsets) {
   PreparedQuery query(
-      "select col.nested_repeated_value[offset(0)] as v1, "
-      "       col.nested_repeated_value[offset(0)] as v2 "
+      "select col.nested_repeated_value[default_offset(0)] as v1, "
+      "       col.nested_repeated_value[default_offset(0)] as v2 "
       "from TestTable",
       EvaluatorOptions());
   SetupContextCallback(&query);
@@ -4617,8 +4617,8 @@ TEST_F(PreparedQueryProtoTest, WithRepeatedFieldOffsets) {
 
 TEST_F(PreparedQueryProtoTest, WithRepeatedFieldOffsetsAndFieldAccesses) {
   PreparedQuery query(
-      "select col.nested_repeated_value[offset(0)].nested_int64, "
-      "       col.nested_repeated_value[offset(0)].nested_int64 "
+      "select col.nested_repeated_value[default_offset(0)].nested_int64, "
+      "       col.nested_repeated_value[default_offset(0)].nested_int64 "
       "from TestTable",
       EvaluatorOptions());
   SetupContextCallback(&query);
@@ -4638,7 +4638,7 @@ TEST_F(PreparedQueryProtoTest, WithRepeatedFieldOffsetsAndFieldAccesses) {
   ASSERT_FALSE(iter->NextRow());
   ZETASQL_EXPECT_OK(iter->Status());
 
-  // The column is only deserialized once, but nested_repeated_value[offset(0)]
+  // The column is only deserialized once, but nested_repeated_value[default_offset(0)]
   // is deserialized twice.
   EXPECT_EQ(GetNumProtoDeserializations(), 3);
 }
@@ -4646,8 +4646,8 @@ TEST_F(PreparedQueryProtoTest, WithRepeatedFieldOffsetsAndFieldAccesses) {
 TEST_F(PreparedQueryProtoTest,
        MessageFieldWithRepeatedFieldOffsetsAndFieldAccesses) {
   PreparedQuery query(
-      "select col.OptionalGroup.OptionalGroupNested[offset(0)].int64_val, "
-      "       col.OptionalGroup.OptionalGroupNested[offset(0)].int64_val "
+      "select col.OptionalGroup.OptionalGroupNested[default_offset(0)].int64_val, "
+      "       col.OptionalGroup.OptionalGroupNested[default_offset(0)].int64_val "
       "from TestTable",
       EvaluatorOptions());
   SetupContextCallback(&query);

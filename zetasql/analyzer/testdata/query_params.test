@@ -89,7 +89,7 @@ select * from TestTable where @test_param_string = @test_param_bytes;
                               ^
 ==
 
-select 1 from TestTable where @test_param_array[OFFSET(@test_param_int32)] = 1;
+select 1 from TestTable where @test_param_array[DEFAULT_OFFSET(@test_param_int32)] = 1;
 --
 QueryStmt
 +-output_column_list=

@@ -64,16 +64,16 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
       +-is_ordered=TRUE
       +-input_scan=
       | +-ArrayScan
-      |   +-column_list=[$array.e#1, $array_offset.offset#2]
+      |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
       |   | +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
-      |     +-ColumnHolder(column=$array_offset.offset#2)
+      |     +-ColumnHolder(column=$array_offset.offset_idx#2)
       +-order_by_item_list=
         +-OrderByItem
           +-column_ref=
-          | +-ColumnRef(type=INT64, column=$array_offset.offset#2)
+          | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#2)
           +-is_descending=TRUE
 
 [REWRITTEN AST]
@@ -105,16 +105,16 @@ QueryStmt
     |               +-is_ordered=TRUE
     |               +-input_scan=
     |               | +-ArrayScan
-    |               |   +-column_list=[$array.e#2, $array_offset.offset#3]
+    |               |   +-column_list=[$array.e#2, $array_offset.offset_idx#3]
     |               |   +-array_expr=
     |               |   | +-ColumnRef(type=ARRAY<INT64>, column=$inlined_REVERSE_ARRAY.input_arr#4, is_correlated=TRUE)
     |               |   +-element_column=$array.e#2
     |               |   +-array_offset_column=
-    |               |     +-ColumnHolder(column=$array_offset.offset#3)
+    |               |     +-ColumnHolder(column=$array_offset.offset_idx#3)
     |               +-order_by_item_list=
     |                 +-OrderByItem
     |                   +-column_ref=
-    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset#3)
+    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#3)
     |                   +-is_descending=TRUE
     +-input_scan=
       +-SingleRowScan
@@ -150,16 +150,16 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
       +-is_ordered=TRUE
       +-input_scan=
       | +-ArrayScan
-      |   +-column_list=[$array.e#1, $array_offset.offset#2]
+      |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
       |   | +-ArgumentRef(type=ARRAY<STRING>, name="input_arr")
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
-      |     +-ColumnHolder(column=$array_offset.offset#2)
+      |     +-ColumnHolder(column=$array_offset.offset_idx#2)
       +-order_by_item_list=
         +-OrderByItem
           +-column_ref=
-          | +-ColumnRef(type=INT64, column=$array_offset.offset#2)
+          | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#2)
           +-is_descending=TRUE
 
 [REWRITTEN AST]
@@ -191,16 +191,16 @@ QueryStmt
     |               +-is_ordered=TRUE
     |               +-input_scan=
     |               | +-ArrayScan
-    |               |   +-column_list=[$array.e#2, $array_offset.offset#3]
+    |               |   +-column_list=[$array.e#2, $array_offset.offset_idx#3]
     |               |   +-array_expr=
     |               |   | +-ColumnRef(type=ARRAY<STRING>, column=$inlined_REVERSE_ARRAY.input_arr#4, is_correlated=TRUE)
     |               |   +-element_column=$array.e#2
     |               |   +-array_offset_column=
-    |               |     +-ColumnHolder(column=$array_offset.offset#3)
+    |               |     +-ColumnHolder(column=$array_offset.offset_idx#3)
     |               +-order_by_item_list=
     |                 +-OrderByItem
     |                   +-column_ref=
-    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset#3)
+    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#3)
     |                   +-is_descending=TRUE
     +-input_scan=
       +-SingleRowScan
@@ -236,16 +236,16 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
       +-is_ordered=TRUE
       +-input_scan=
       | +-ArrayScan
-      |   +-column_list=[$array.e#1, $array_offset.offset#2]
+      |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
       |   | +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
-      |     +-ColumnHolder(column=$array_offset.offset#2)
+      |     +-ColumnHolder(column=$array_offset.offset_idx#2)
       +-order_by_item_list=
         +-OrderByItem
           +-column_ref=
-          | +-ColumnRef(type=INT64, column=$array_offset.offset#2)
+          | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#2)
           +-is_descending=TRUE
 
 [REWRITTEN AST]
@@ -277,16 +277,16 @@ QueryStmt
     |               +-is_ordered=TRUE
     |               +-input_scan=
     |               | +-ArrayScan
-    |               |   +-column_list=[$array.e#2, $array_offset.offset#3]
+    |               |   +-column_list=[$array.e#2, $array_offset.offset_idx#3]
     |               |   +-array_expr=
     |               |   | +-ColumnRef(type=ARRAY<INT64>, column=$inlined_REVERSE_ARRAY.input_arr#4, is_correlated=TRUE)
     |               |   +-element_column=$array.e#2
     |               |   +-array_offset_column=
-    |               |     +-ColumnHolder(column=$array_offset.offset#3)
+    |               |     +-ColumnHolder(column=$array_offset.offset_idx#3)
     |               +-order_by_item_list=
     |                 +-OrderByItem
     |                   +-column_ref=
-    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset#3)
+    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#3)
     |                   +-is_descending=TRUE
     +-input_scan=
       +-SingleRowScan
@@ -322,16 +322,16 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
       +-is_ordered=TRUE
       +-input_scan=
       | +-ArrayScan
-      |   +-column_list=[$array.e#1, $array_offset.offset#2]
+      |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
       |   | +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
-      |     +-ColumnHolder(column=$array_offset.offset#2)
+      |     +-ColumnHolder(column=$array_offset.offset_idx#2)
       +-order_by_item_list=
         +-OrderByItem
           +-column_ref=
-          | +-ColumnRef(type=INT64, column=$array_offset.offset#2)
+          | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#2)
           +-is_descending=TRUE
 
 [REWRITTEN AST]
@@ -363,16 +363,16 @@ QueryStmt
     |               +-is_ordered=TRUE
     |               +-input_scan=
     |               | +-ArrayScan
-    |               |   +-column_list=[$array.e#2, $array_offset.offset#3]
+    |               |   +-column_list=[$array.e#2, $array_offset.offset_idx#3]
     |               |   +-array_expr=
     |               |   | +-ColumnRef(type=ARRAY<INT64>, column=$inlined_REVERSE_ARRAY.input_arr#4, is_correlated=TRUE)
     |               |   +-element_column=$array.e#2
     |               |   +-array_offset_column=
-    |               |     +-ColumnHolder(column=$array_offset.offset#3)
+    |               |     +-ColumnHolder(column=$array_offset.offset_idx#3)
     |               +-order_by_item_list=
     |                 +-OrderByItem
     |                   +-column_ref=
-    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset#3)
+    |                   | +-ColumnRef(type=INT64, column=$array_offset.offset_idx#3)
     |                   +-is_descending=TRUE
     +-input_scan=
       +-SingleRowScan

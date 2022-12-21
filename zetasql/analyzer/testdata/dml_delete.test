@@ -540,10 +540,10 @@ DELETE TestTable.(a.b).c[3] WHERE True
 ==
 
 # Non-nested DELETE does not allow WITH OFFSET.
-DELETE TestTable WITH OFFSET AS offset WHERE true
+DELETE TestTable WITH OFFSET AS offset_idx WHERE true
 --
 ERROR: Non-nested DELETE statement does not support WITH OFFSET [at 1:18]
-DELETE TestTable WITH OFFSET AS offset WHERE true
+DELETE TestTable WITH OFFSET AS offset_idx WHERE true
                  ^
 ==
 

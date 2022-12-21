@@ -384,9 +384,9 @@ select 1 from t limit 5 offset offset;
 # Expected Errors Below
 select 1 offset 10;
 --
-ERROR: Syntax error: Expected end of input but got integer literal "10" [at 1:17]
+ERROR: Syntax error: Expected keyword FETCH but got ";" [at 1:19]
 select 1 offset 10;
-                ^
+                  ^
 ==
 
 select 1 limit 5 offset;
@@ -419,9 +419,9 @@ select 1 limit 1 offset 2 order by 1;
 
 select 1 order by 1 offset 5
 --
-ERROR: Syntax error: Expected end of input but got keyword OFFSET [at 1:21]
+ERROR: Syntax error: Expected keyword FETCH but got end of statement [at 1:29]
 select 1 order by 1 offset 5
-                    ^
+                            ^
 ==
 
 SELECT 1 LIMIT 1 LIMIT 1;

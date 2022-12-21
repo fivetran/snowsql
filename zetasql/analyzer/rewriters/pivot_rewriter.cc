@@ -391,7 +391,7 @@ PivotRewriterVisitor::AddPostAggregationLogicForAnyValue(
         std::unique_ptr<const ResolvedExpr> offset_zero_expr,
         AnalyzeSubstitute(
             analyzer_options_, *catalog_, *type_factory_,
-            "agg_result[OFFSET(0)]",
+            "agg_result[DEFAULT_OFFSET(0)]",
             {{"agg_result",
               MakeResolvedColumnRef(aggregate_column.type(), aggregate_column,
                                     /*is_correlated=*/false)

@@ -192,10 +192,10 @@ SELECT json_col[1.0] FROM JsonTable;
                 ^
 ==
 
-SELECT json_col[OFFSET(0)] FROM JsonTable;
+SELECT json_col[DEFAULT_OFFSET(0)] FROM JsonTable;
 --
-ERROR: Subscript access using [OFFSET(INT64)] is not supported on values of type JSON [at 1:17]
-SELECT json_col[OFFSET(0)] FROM JsonTable;
+ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type JSON [at 1:17]
+SELECT json_col[DEFAULT_OFFSET(0)] FROM JsonTable;
                 ^
 ==
 
@@ -206,10 +206,10 @@ SELECT 0[0];
          ^
 ==
 
-SELECT 0[OFFSET(0)];
+SELECT 0[DEFAULT_OFFSET(0)];
 --
-ERROR: Subscript access using [OFFSET(INT64)] is not supported on values of type INT64 [at 1:10]
-SELECT 0[OFFSET(0)];
+ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type INT64 [at 1:10]
+SELECT 0[DEFAULT_OFFSET(0)];
          ^
 ==
 

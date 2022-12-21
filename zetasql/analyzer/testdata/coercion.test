@@ -372,7 +372,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select (cast(NULL as array<bool>))[offset(0)]
+select (cast(NULL as array<bool>))[default_offset(0)]
 --
 QueryStmt
 +-output_column_list=
@@ -393,7 +393,7 @@ QueryStmt
 # `javatests/com/google/zetasql/AnalyzerTest.java`
 # See more context at b/186869835.
 [no_java]
-select NULL[offset(0)]
+select NULL[default_offset(0)]
 --
 QueryStmt
 +-output_column_list=

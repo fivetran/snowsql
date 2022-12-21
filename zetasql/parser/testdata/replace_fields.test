@@ -250,29 +250,29 @@ SELECT
 
 # REPLACE_FIELDS() cannot be used with path expressions that index array fields.
 # This will be enforced in the resolver.
-select replace_fields(some_proto, 0 as repeated_field[offset(0)])
+select replace_fields(some_proto, 0 as repeated_field[default_offset(0)])
 --
-QueryStatement [0-65] [select replace_fi...ffset(0)])]
-  Query [0-65] [select replace_fi...ffset(0)])]
-    Select [0-65] [select replace_fi...ffset(0)])]
-      SelectList [7-65] [replace_fields...offset(0)])]
-        SelectColumn [7-65] [replace_fields...offset(0)])]
-          ReplaceFieldsExpression [7-65] [replace_fields...offset(0)])]
+QueryStatement [0-73] [select replace_fi...ffset(0)])]
+  Query [0-73] [select replace_fi...ffset(0)])]
+    Select [0-73] [select replace_fi...ffset(0)])]
+      SelectList [7-73] [replace_fields...t_offset(0)])]
+        SelectColumn [7-73] [replace_fields...t_offset(0)])]
+          ReplaceFieldsExpression [7-73] [replace_fields...t_offset(0)])]
             PathExpression [22-32] [some_proto]
               Identifier(some_proto) [22-32] [some_proto]
-            ReplaceFieldsArg [34-64] [0 as repeated_field[offset(0)]]
+            ReplaceFieldsArg [34-72] [0 as repeated_fie...offset(0)]]
               IntLiteral(0) [34-35] [0]
-              ArrayElement [39-64] [repeated_field[offset(0)]]
+              ArrayElement [39-72] [repeated_field...lt_offset(0)]]
                 PathExpression [39-53] [repeated_field]
                   Identifier(repeated_field) [39-53] [repeated_field]
                 Location [53-54] [[]
-                FunctionCall [54-63] [offset(0)]
-                  PathExpression [54-60] [offset]
-                    Identifier(offset) [54-60] [offset]
-                  IntLiteral(0) [61-62] [0]
+                FunctionCall [54-71] [default_offset(0)]
+                  PathExpression [54-68] [default_offset]
+                    Identifier(default_offset) [54-68] [default_offset]
+                  IntLiteral(0) [69-70] [0]
 --
 SELECT
-  REPLACE_FIELDS(some_proto, 0 AS repeated_field[offset(0)])
+  REPLACE_FIELDS(some_proto, 0 AS repeated_field[default_offset(0)])
 ==
 
 select replace_fields(some_proto, NULL as field_to_clear)
