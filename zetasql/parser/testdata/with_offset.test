@@ -197,35 +197,35 @@ FROM
   structs AS s WITH OFFSET AS pos
 ==
 
-select * from t1 WITH OFFSET offset, t2 WITH OFFSET as offset
+select * from t1 WITH OFFSET offset_idx, t2 WITH OFFSET as offset_idx
 --
-QueryStatement [0-61] [select * from...as offset]
-  Query [0-61] [select * from...as offset]
-    Select [0-61] [select * from...as offset]
+QueryStatement [0-69] [select * from...offset_idx]
+  Query [0-69] [select * from...offset_idx]
+    Select [0-69] [select * from...offset_idx]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-61] [from t1 WITH...as offset]
-        Join(COMMA) [14-61] [t1 WITH OFFSET...as offset]
-          TablePathExpression [14-35] [t1 WITH OFFSET offset]
+      FromClause [9-69] [from t1 WITH...offset_idx]
+        Join(COMMA) [14-69] [t1 WITH OFFSET...offset_idx]
+          TablePathExpression [14-39] [t1 WITH OFFSET offset_idx]
             PathExpression [14-16] [t1]
               Identifier(t1) [14-16] [t1]
-            WithOffset [17-35] [WITH OFFSET offset]
-              Alias [29-35] [offset]
-                Identifier(offset) [29-35] [offset]
-          Location [35-36] [,]
-          TablePathExpression [37-61] [t2 WITH OFFSET as offset]
-            PathExpression [37-39] [t2]
-              Identifier(t2) [37-39] [t2]
-            WithOffset [40-61] [WITH OFFSET as offset]
-              Alias [52-61] [as offset]
-                Identifier(offset) [55-61] [offset]
+            WithOffset [17-39] [WITH OFFSET offset_idx]
+              Alias [29-39] [offset_idx]
+                Identifier(offset_idx) [29-39] [offset_idx]
+          Location [39-40] [,]
+          TablePathExpression [41-69] [t2 WITH OFFSET as offset_idx]
+            PathExpression [41-43] [t2]
+              Identifier(t2) [41-43] [t2]
+            WithOffset [44-69] [WITH OFFSET as offset_idx]
+              Alias [56-69] [as offset_idx]
+                Identifier(offset_idx) [59-69] [offset_idx]
 --
 SELECT
   *
 FROM
-  t1 WITH OFFSET AS offset,
-  t2 WITH OFFSET AS offset
+  t1 WITH OFFSET AS offset_idx,
+  t2 WITH OFFSET AS offset_idx
 ==
 
 select * from f1 WITH abc

@@ -1022,7 +1022,7 @@ void GetSubscriptFunctions(TypeFactory* type_factory,
         FN_ARRAY_AT_OFFSET}},
       FunctionOptions()
           .set_supports_safe_error_mode(false)
-          .set_sql_name("array[offset()]")
+          .set_sql_name("array[default_offset()]")
           .set_get_sql_callback(&ArrayAtOffsetFunctionSQL));
   InsertFunction(
       functions, options, "$array_at_ordinal", SCALAR,
@@ -1133,7 +1133,7 @@ void GetSubscriptFunctions(TypeFactory* type_factory,
           .set_supported_signatures_callback(&EmptySupportedSignatures)
           .set_no_matching_signature_callback(
               absl::bind_front(&NoMatchingSignatureForSubscript,
-                               /*offset_or_ordinal=*/"OFFSET")));
+                               /*offset_or_ordinal=*/"DEFAULT_OFFSET")));
   InsertFunction(
       functions, options, "$subscript_with_ordinal", Function::SCALAR,
       empty_signatures,

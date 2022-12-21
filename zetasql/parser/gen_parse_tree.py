@@ -39,7 +39,7 @@ from zetasql.parser.generator_utils import ScalarType
 from zetasql.parser.generator_utils import Trim
 from zetasql.parser.generator_utils import UpperCamelCase
 
-NEXT_NODE_TAG_ID = 409
+NEXT_NODE_TAG_ID = 410
 
 ROOT_NODE_NAME = 'ASTNode'
 
@@ -826,11 +826,19 @@ def main(argv):
       If present, this applies after the result of <query_expr_> and
       <order_by_>.
             """),
-          Field('is_nested', SCALAR_BOOL, tag_id=6),
+          Field(
+              'offset_fetch',
+              'ASTOffsetFetch',
+              tag_id=6,
+              comment="""
+      If present, this applies after the result of <query_expr_> and
+      <order_by_>.
+            """),
+          Field('is_nested', SCALAR_BOOL, tag_id=7),
           Field(
               'is_pivot_input',
               SCALAR_BOOL,
-              tag_id=7,
+              tag_id=8,
               comment="""
                 True if this query represents the input to a pivot clause.
                 """),
@@ -9095,6 +9103,29 @@ def main(argv):
               'ASTColumnWithOptions',
               tag_id=2,
               field_loader=FieldLoaderMethod.REST_AS_REPEATED),
+      ])
+
+  gen.AddNode(
+      name='ASTOffsetFetch',
+      tag_id=409,
+      parent='ASTNode',
+      fields=[
+          Field(
+              'fetch',
+              'ASTExpression',
+              tag_id=2,
+              field_loader=FieldLoaderMethod.REQUIRED,
+              comment="""
+          The FETCH value. Never NULL.
+              """),
+          Field(
+              'offset',
+              'ASTExpression',
+              tag_id=3,
+              field_loader=FieldLoaderMethod.OPTIONAL_EXPRESSION,
+              comment="""
+          The OFFSET value. NULL if no OFFSET specified.
+              """),
       ])
 
   gen.AddNode(

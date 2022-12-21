@@ -281,7 +281,7 @@ absl::Status CreateUnsupportedGroupingSetsError(
 const IdString& Resolver::kArrayId =
     *new IdString(IdString::MakeGlobal("$array"));
 const IdString& Resolver::kOffsetAlias =
-    *new IdString(IdString::MakeGlobal("offset"));
+    *new IdString(IdString::MakeGlobal("offset_idx"));
 const IdString& Resolver::kWeightAlias =
     *new IdString(IdString::MakeGlobal("weight"));
 const IdString& Resolver::kArrayOffsetId =
@@ -332,8 +332,8 @@ absl::Status Resolver::ResolveQueryAfterWith(
     // If we just have a single SELECT, then we treat that specially so
     // we can resolve the ORDER BY and LIMIT directly inside that SELECT.
     return ResolveSelect(query->query_expr()->GetAsOrDie<ASTSelect>(),
-                         query->order_by(), query->limit_offset(), scope,
-                         query_alias, force_new_columns_for_projected_outputs,
+                         query->order_by(), query->limit_offset(), query->offset_fetch(),
+                         scope, query_alias, force_new_columns_for_projected_outputs,
                          inferred_type_for_query, output, output_name_list);
   }
 
@@ -850,6 +850,7 @@ absl::Status Resolver::AddRemainingScansForSelect(
     const ASTSelect* select, const ASTOrderBy* order_by,
     const ASTLimitOffset* limit_offset,
     const ASTTop* top,
+    const ASTOffsetFetch* offset_fetch,
     const NameScope* having_and_order_by_scope,
     std::unique_ptr<const ResolvedExpr>* resolved_having_expr,
     std::unique_ptr<const ResolvedExpr>* resolved_qualify_expr,
@@ -1065,9 +1066,14 @@ absl::Status Resolver::AddRemainingScansForSelect(
         std::move(*current_scan));
   }
 
-  if (top != nullptr && limit_offset != nullptr) {
+  if (limit_offset != nullptr && top != nullptr) {
     return MakeSqlErrorAt(limit_offset)
-           << "TOP and LIMIT are not allowed in one query";
+           << "Duplicate LIMIT: LIMIT";
+  }
+
+  if (offset_fetch != nullptr && (limit_offset != nullptr || top != nullptr)) {
+    return MakeSqlErrorAt(offset_fetch)
+           << "Duplicate LIMIT: FETCH";
   }
 
   if (top != nullptr) {
@@ -1078,6 +1084,11 @@ absl::Status Resolver::AddRemainingScansForSelect(
   if (limit_offset != nullptr) {
     ZETASQL_RETURN_IF_ERROR(ResolveLimitOffsetScan(
         limit_offset, std::move(*current_scan), current_scan));
+  }
+
+  if (offset_fetch != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(ResolveOffsetFetchScan(
+        offset_fetch, std::move(*current_scan), current_scan));
   }
 
   // Check here, because if there is SELECT AS STRUCT or SELECT AS PROTO
@@ -1315,7 +1326,8 @@ absl::Status Resolver::ResolveQueryExpression(
     case AST_SELECT:
       return ResolveSelect(query_expr->GetAsOrDie<ASTSelect>(),
                            /*order_by=*/nullptr,
-                           /*limit_offset=*/nullptr, scope, query_alias,
+                           /*limit_offset=*/nullptr,
+                           /*offset_fetch=*/nullptr, scope, query_alias,
                            force_new_columns_for_projected_outputs,
                            inferred_type_for_query, output, output_name_list);
 
@@ -1514,8 +1526,9 @@ static constexpr bool IsAlwaysAggregateSelectWithMode(SelectWithMode mode) {
 // For a more detailed discussion, see (broken link).
 absl::Status Resolver::ResolveSelect(
     const ASTSelect* select, const ASTOrderBy* order_by,
-    const ASTLimitOffset* limit_offset, const NameScope* external_scope,
-    IdString query_alias, bool force_new_columns_for_projected_outputs,
+    const ASTLimitOffset* limit_offset, const ASTOffsetFetch* offset_fetch,
+    const NameScope* external_scope, IdString query_alias,
+    bool force_new_columns_for_projected_outputs,
     const Type* inferred_type_for_query,
     std::unique_ptr<const ResolvedScan>* output,
     std::shared_ptr<const NameList>* output_name_list) {
@@ -1787,7 +1800,8 @@ absl::Status Resolver::ResolveSelect(
   // The current <scan> covers the FROM and WHERE clauses.  The remaining
   // scans are built on top of the current <scan>.
   ZETASQL_RETURN_IF_ERROR(AddRemainingScansForSelect(
-      select, order_by, limit_offset, select->top(), having_and_order_by_scope.get(),
+      select, order_by, limit_offset, select->top(),
+      offset_fetch, having_and_order_by_scope.get(),
       &resolved_having_expr, &resolved_qualify_expr,
       query_resolution_info.get(), output_name_list, &scan));
 
@@ -5765,18 +5779,7 @@ absl::Status Resolver::ValidateParameterOrLiteralAndCoerceToInt64IfNeeded(
   return absl::OkStatus();
 }
 
-absl::Status Resolver::ResolveLimitOrOffsetExpr(
-    const ASTExpression* ast_expr, const char* clause_name,
-    ExprResolutionInfo* expr_resolution_info,
-    std::unique_ptr<const ResolvedExpr>* resolved_expr) {
-  ZETASQL_RETURN_IF_ERROR(ResolveExpr(ast_expr, expr_resolution_info, resolved_expr));
-  ABSL_DCHECK(resolved_expr != nullptr);
-  ZETASQL_RETURN_IF_ERROR(ValidateParameterOrLiteralAndCoerceToInt64IfNeeded(
-      clause_name, ast_expr, resolved_expr));
-  return absl::OkStatus();
-}
-
-absl::Status Resolver::ResolveTopExpr(
+absl::Status Resolver::ResolveLimitOrOffsetOrTopOrFetchExpr(
     const ASTExpression* ast_expr, const char* clause_name,
     ExprResolutionInfo* expr_resolution_info,
     std::unique_ptr<const ResolvedExpr>* resolved_expr) {
@@ -5837,14 +5840,14 @@ absl::Status Resolver::ResolveLimitOffsetScan(
   // Resolve and validate the LIMIT.
   ZETASQL_RET_CHECK(limit_offset->limit() != nullptr);
   std::unique_ptr<const ResolvedExpr> limit_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetExpr(limit_offset->limit(),
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(limit_offset->limit(),
                                            /*clause_name=*/"LIMIT",
                                            &expr_resolution_info, &limit_expr));
 
   // Resolve and validate the OFFSET.
   std::unique_ptr<const ResolvedExpr> offset_expr;
   if (limit_offset->offset() != nullptr) {
-    ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetExpr(
+    ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(
         limit_offset->offset(), /*clause_name=*/"OFFSET", &expr_resolution_info,
         &offset_expr));
   }
@@ -5867,13 +5870,43 @@ absl::Status Resolver::ResolveTopScan(
   // Resolve and validate the TOP.
   ZETASQL_RET_CHECK(top->top() != nullptr);
   std::unique_ptr<const ResolvedExpr> top_expr;
-  ZETASQL_RETURN_IF_ERROR(ResolveTopExpr(top->top(),
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(top->top(),
                                           /*clause_name=*/"TOP",
                                           &expr_resolution_info, &top_expr));
 
   const std::vector<ResolvedColumn>& column_list = input_scan->column_list();
   *output = MakeResolvedTopScan(column_list, std::move(input_scan),
                                 std::move(top_expr));
+  return absl::OkStatus();
+}
+
+// Resolves an OffsetFetchScan.
+absl::Status Resolver::ResolveOffsetFetchScan(
+    const ASTOffsetFetch* offset_fetch,
+    std::unique_ptr<const ResolvedScan> input_scan,
+    std::unique_ptr<const ResolvedScan>* output) {
+  ExprResolutionInfo expr_resolution_info(empty_name_scope_.get(),
+                                          "OFFSET FETCH");
+
+  // Resolve and validate the OFFSET.
+  std::unique_ptr<const ResolvedExpr> offset_expr;
+  if (offset_fetch->offset() != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(
+        offset_fetch->offset(), /*clause_name=*/"OFFSET", &expr_resolution_info,
+        &offset_expr));
+  }
+
+  // Resolve and validate the FETCH.
+  ZETASQL_RET_CHECK(offset_fetch->fetch() != nullptr);
+  std::unique_ptr<const ResolvedExpr> fetch_expr;
+  ZETASQL_RETURN_IF_ERROR(ResolveLimitOrOffsetOrTopOrFetchExpr(offset_fetch->fetch(),
+                                           /*clause_name=*/"FETCH",
+                                           &expr_resolution_info, &fetch_expr));
+
+  const std::vector<ResolvedColumn>& column_list = input_scan->column_list();
+  *output = MakeResolvedOffsetFetchScan(column_list, std::move(input_scan),
+                                        std::move(offset_expr),
+                                        std::move(fetch_expr));
   return absl::OkStatus();
 }
 

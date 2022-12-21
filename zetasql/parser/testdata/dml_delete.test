@@ -20,23 +20,6 @@ WHERE
   true
 ==
 
-# The resolver will fail on this because WITH OFFSET is not allowed in
-# top-level DELETE statements, but it does parse.
-delete T with offset AS offset where true
---
-DeleteStatement [0-41] [delete T with...where true]
-  PathExpression [7-8] [T]
-    Identifier(T) [7-8] [T]
-  WithOffset [9-30] [with offset AS offset]
-    Alias [21-30] [AS offset]
-      Identifier(offset) [24-30] [offset]
-  BooleanLiteral(true) [37-41] [true]
---
-DELETE T WITH OFFSET AS offset
-WHERE
-  true
-==
-
 delete a.b.c
 where c=y
 assert_rows_modified 10

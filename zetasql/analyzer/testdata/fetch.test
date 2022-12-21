@@ -1,0 +1,98 @@
+# OFFSET and FETCH tests.
+
+SELECT Key, Value
+FROM KeyValue
+FETCH 0;
+--
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS Key [INT64]
+| +-KeyValue.Value#2 AS Value [STRING]
++-query=
+  +-OffsetFetchScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=KeyValue.[Key#1, Value#2]
+    |   +-input_scan=
+    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+    +-fetch=
+      +-Literal(type=INT64, value=0)
+==
+
+SELECT Key, Value
+FROM KeyValue
+OFFSET 2 FETCH 1;
+--
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS Key [INT64]
+| +-KeyValue.Value#2 AS Value [STRING]
++-query=
+  +-OffsetFetchScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=KeyValue.[Key#1, Value#2]
+    |   +-input_scan=
+    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+    +-offset=
+    | +-Literal(type=INT64, value=2)
+    +-fetch=
+      +-Literal(type=INT64, value=1)
+==
+
+select 1
+offset cast(@test_param_int32 as int32)
+fetch cast(@test_param_int32 as int32)
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-OffsetFetchScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-offset=
+    | +-Cast(INT32 -> INT64)
+    |   +-Parameter(type=INT32, name="test_param_int32")
+    +-fetch=
+      +-Cast(INT32 -> INT64)
+        +-Parameter(type=INT32, name="test_param_int32")
+==
+
+SELECT Key, Value FROM KeyValue order by Key, Value
+OFFSET 2{{| ROWS}} FETCH{{| NEXT}} 3{{| ROWS| ROWS ONLY| ONLY}};
+--
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS Key [INT64]
+| +-KeyValue.Value#2 AS Value [STRING]
++-query=
+  +-OffsetFetchScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-is_ordered=TRUE
+    +-input_scan=
+    | +-OrderByScan
+    |   +-column_list=KeyValue.[Key#1, Value#2]
+    |   +-is_ordered=TRUE
+    |   +-input_scan=
+    |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+    |   +-order_by_item_list=
+    |     +-OrderByItem
+    |     | +-column_ref=
+    |     |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+    |     +-OrderByItem
+    |       +-column_ref=
+    |         +-ColumnRef(type=STRING, column=KeyValue.Value#2)
+    +-offset=
+    | +-Literal(type=INT64, value=2)
+    +-fetch=
+      +-Literal(type=INT64, value=3)
+==
