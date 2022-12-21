@@ -652,7 +652,7 @@ absl::StatusOr<std::string> SQLBuilder::GetFunctionCallSQL(
       ResolvedNonScalarFunctionCallBase::SAFE_ERROR_MODE) {
     absl::string_view function_name = function_call->function()->Name();
     if (function_name == "$subscript_with_offset") {
-      RE2::Replace(&sql, R"re(\[\s*OFFSET\s*\()re", "[SAFE_OFFSET(");
+      RE2::Replace(&sql, R"re(\[\s*DEFAULT_OFFSET\s*\()re", "[SAFE_OFFSET(");
     } else if (function_name == "$subscript_with_key") {
       RE2::Replace(&sql, R"re(\[\s*KEY\s*\()re", "[SAFE_KEY(");
     } else if (function_name == "$subscript_with_ordinal") {
@@ -3013,6 +3013,47 @@ absl::Status SQLBuilder::VisitResolvedTopScan(const ResolvedTopScan* node) {
                         ? node->top()
                         : node->top()->GetAs<ResolvedCast>()->expr()));
     ZETASQL_RET_CHECK(query_expression->TrySetTopClause(result->GetSQL()));
+  }
+  ZETASQL_RETURN_IF_ERROR(
+      AddSelectListIfNeeded(node->column_list(), query_expression.get()));
+  PushSQLForQueryExpression(node, query_expression.release());
+  return absl::OkStatus();
+}
+
+absl::Status SQLBuilder::VisitResolvedOffsetFetchScan(
+    const ResolvedOffsetFetchScan* node) {
+  ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<QueryFragment> input_result,
+                   ProcessNode(node->input_scan()));
+  std::unique_ptr<QueryExpression> query_expression(
+      input_result->query_expression.release());
+
+  if (node->offset() != nullptr) {
+    if (!query_expression->CanSetOffsetClause()) {
+      ZETASQL_RETURN_IF_ERROR(
+          WrapQueryExpression(node->input_scan(), query_expression.get()));
+    }
+    ZETASQL_ASSIGN_OR_RETURN(
+        std::unique_ptr<QueryFragment> result,
+        // If offset is a ResolvedCast, it means that the original offset in the
+        // query is a literal or parameter with a type other than int64_t and
+        // hence, analyzer has added a cast on top of it. We should skip this
+        // cast here to avoid returning CAST(CAST ...)).
+        ProcessNode(node->offset()->node_kind() != RESOLVED_CAST
+                        ? node->offset()
+                        : node->offset()->GetAs<ResolvedCast>()->expr()));
+    ZETASQL_RET_CHECK(query_expression->TrySetOffsetClause(result->GetSQL()));
+  }
+  if (node->fetch() != nullptr) {
+    if (!query_expression->CanSetFetchClause()) {
+      ZETASQL_RETURN_IF_ERROR(
+          WrapQueryExpression(node->input_scan(), query_expression.get()));
+    }
+    ZETASQL_ASSIGN_OR_RETURN(
+        std::unique_ptr<QueryFragment> result,
+        ProcessNode(node->fetch()->node_kind() != RESOLVED_CAST
+                        ? node->fetch()
+                        : node->fetch()->GetAs<ResolvedCast>()->expr()));
+    ZETASQL_RET_CHECK(query_expression->TrySetFetchClause(result->GetSQL()));
   }
   ZETASQL_RETURN_IF_ERROR(
       AddSelectListIfNeeded(node->column_list(), query_expression.get()));
@@ -5786,7 +5827,7 @@ absl::Status SQLBuilder::VisitResolvedUpdateItem(
       }
 
       if (!offset.empty()) {
-        absl::StrAppend(&target_sql, "[OFFSET(", offset, ")]");
+        absl::StrAppend(&target_sql, "[DEFAULT_OFFSET(", offset, ")]");
       }
     }
 

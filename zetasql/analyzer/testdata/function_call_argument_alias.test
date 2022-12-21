@@ -15,20 +15,12 @@ SELECT ARRAY_FIND(x AS arr1)
                     ^
 ==
 
-SELECT s1[OFFSET(1 AS offset)]
+SELECT s1[DEFAULT_OFFSET(1 AS offset_idx)]
 FROM (SELECT AS STRUCT 1 AS a, 2 AS b) s1
 --
-ERROR: Unexpected function call argument alias found at OFFSET [at 1:20]
-SELECT s1[OFFSET(1 AS offset)]
-                   ^
-==
-
-SELECT s1[OFFSET(1) AS offset]
-FROM (SELECT AS STRUCT 1 AS a, 2 AS b) s1
---
-ERROR: Syntax error: Unexpected keyword AS [at 1:21]
-SELECT s1[OFFSET(1) AS offset]
-                    ^
+ERROR: Unexpected function call argument alias found at DEFAULT_OFFSET [at 1:28]
+SELECT s1[DEFAULT_OFFSET(1 AS offset_idx)]
+                           ^
 ==
 
 # Function call argument alias is disallowed for aggregate function

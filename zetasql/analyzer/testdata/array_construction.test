@@ -389,7 +389,7 @@ select ARRAY[ARRAY[1]]
              ^
 ==
 
-select ARRAY[1, 2, 3][OFFSET(0)], [1][OFFSET(0)]
+select ARRAY[1, 2, 3][DEFAULT_OFFSET(0)], [1][DEFAULT_OFFSET(0)]
 from TestTable where [1, 1][ORDINAL(2)] = 1
 --
 QueryStmt

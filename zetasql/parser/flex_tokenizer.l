@@ -562,6 +562,7 @@ model { return BisonParserImpl::token::KW_MODEL; }
 module { return BisonParserImpl::token::KW_MODULE; }
 natural { return BisonParserImpl::token::KW_NATURAL; }
 new { return BisonParserImpl::token::KW_NEW; }
+next { return BisonParserImpl::token::KW_NEXT; }
 no { return BisonParserImpl::token::KW_NO; }
 not { return BisonParserImpl::token::KW_NOT; }
 null { return BisonParserImpl::token::KW_NULL; }

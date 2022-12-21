@@ -1885,7 +1885,7 @@ SHARDED_TEST_F(ComplianceCodebasedTests, TestBitCount, 1) {
 
 SHARDED_TEST_F(ComplianceCodebasedTests, TestArrayAtOffset, 1) {
   SetNamePrefix("ArrayAtOffset");
-  RunStatementTests(Shard(GetFunctionTestsAtOffset()), "@p0[OFFSET(@p1)]");
+  RunStatementTests(Shard(GetFunctionTestsAtOffset()), "@p0[DEFAULT_OFFSET(@p1)]");
 }
 
 SHARDED_TEST_F(ComplianceCodebasedTests, TestArrayAtOrdinal, 1) {

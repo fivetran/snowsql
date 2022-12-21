@@ -1228,7 +1228,7 @@ WITH my_table AS (
   SELECT 1 AS primary_key, "foo" AS value, DATE('2016-11-09') AS modified_date
 )
 SELECT
-  ARRAY_AGG(t ORDER BY modified_date DESC LIMIT 1)[OFFSET(0)].*
+  ARRAY_AGG(t ORDER BY modified_date DESC LIMIT 1)[DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 GROUP BY t.primary_key;
 --
@@ -1315,7 +1315,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key) as k)][OFFSET(0)].*
+  [struct(sum(key) as k)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 --
 QueryStmt
@@ -1374,7 +1374,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key) as k)][OFFSET(0)].*
+  [struct(sum(key) as k)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY value
 --
@@ -1441,7 +1441,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key) as k, value)][OFFSET(0)].*
+  [struct(sum(key) as k, value)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY value
 --
@@ -1457,7 +1457,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key) as k, value)][OFFSET(0)].*
+  [struct(sum(key) as k, value)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY t.value
 --
@@ -1528,7 +1528,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key)+1 as k, value)][OFFSET(0)].*
+  [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY t.value
 --
@@ -1600,7 +1600,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT DISTINCT
-  [struct(sum(key)+1 as k, value)][OFFSET(0)].*
+  [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY t.value
 --
@@ -1678,7 +1678,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key)+1 as k, value)][OFFSET(0)].*
+  [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY t.value
 ORDER BY 1, 2
@@ -1763,7 +1763,7 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT DISTINCT
-  [struct(sum(key)+1 as k, value)][OFFSET(0)].*
+  [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY t.value
 ORDER BY 1, 2
@@ -1855,20 +1855,20 @@ WITH my_table AS (
   SELECT 1 AS key, "foo" AS value, true as bool_value
 )
 SELECT
-  [struct(sum(key) as k, {{|t.}}key)][OFFSET(0)].*
+  [struct(sum(key) as k, {{|t.}}key)][DEFAULT_OFFSET(0)].*
 FROM my_table as t
 GROUP BY t.value
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: SELECT list expression references column key which is neither grouped nor aggregated [at 5:26]
-  [struct(sum(key) as k, key)][OFFSET(0)].*
+  [struct(sum(key) as k, key)][DEFAULT_OFFSET(0)].*
                          ^
 --
 ALTERNATION GROUP: t.
 --
 ERROR: SELECT list expression references t.key which is neither grouped nor aggregated [at 5:26]
-  [struct(sum(key) as k, t.key)][OFFSET(0)].*
+  [struct(sum(key) as k, t.key)][DEFAULT_OFFSET(0)].*
                          ^
 ==
 
@@ -1879,7 +1879,7 @@ WITH my_table AS (
   SELECT 1 AS key, "a" AS value
 )
 SELECT
-  ANY_VALUE([t]) OVER () [OFFSET(0)].*
+  ANY_VALUE([t]) OVER () [DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 --
 QueryStmt
@@ -1957,7 +1957,7 @@ WITH my_table AS (
 SELECT
   t,
   SUM(t.key) OVER (),
-  ANY_VALUE([t]) OVER () [OFFSET(0)].*
+  ANY_VALUE([t]) OVER () [DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 --
 QueryStmt
@@ -2053,7 +2053,7 @@ WITH my_table AS (
   SELECT 1 AS primary_key, "foo" AS value
 )
 SELECT
-  ANY_VALUE([struct(t.primary_key)]) OVER () [OFFSET(0)].*
+  ANY_VALUE([struct(t.primary_key)]) OVER () [DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 GROUP BY t.primary_key;
 --
@@ -2126,9 +2126,9 @@ WITH my_table AS (
   SELECT 1 AS primary_key, "foo" AS value, true as bool_val
 )
 SELECT
-  ARRAY_AGG(t)[OFFSET(0)].*,
+  ARRAY_AGG(t)[DEFAULT_OFFSET(0)].*,
   ANY_VALUE([struct(t.primary_key as pk1, t.primary_key+1 as pk2)])
-      OVER () [OFFSET(0)].*
+      OVER () [DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 GROUP BY t.primary_key;
 --
@@ -2256,7 +2256,7 @@ WITH my_table AS (
          DATE('2016-11-09') AS modified_date
 )
 SELECT
-  ANY_VALUE(ARRAY_AGG(t)) OVER () [OFFSET(0)].*
+  ANY_VALUE(ARRAY_AGG(t)) OVER () [DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 GROUP BY t.primary_key;
 --
@@ -2357,7 +2357,7 @@ WITH my_table AS (
 SELECT
   [STRUCT(ANY_VALUE(STRUCT(t.primary_key, ARRAY_AGG(t))) OVER () as any_val,
           t.primary_key)]
-  [OFFSET(0)].*
+  [DEFAULT_OFFSET(0)].*
 FROM my_table AS t
 GROUP BY t.primary_key;
 --
@@ -2573,7 +2573,7 @@ QueryStmt
 # reference a column resulting from dot-star expansion after aggregation.
 # an analytic function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
-SELECT [struct(t.value, sum(t.key) as k)][OFFSET(0)].*
+SELECT [struct(t.value, sum(t.key) as k)][DEFAULT_OFFSET(0)].*
 FROM (SELECT 1 AS key, "a" AS value) AS t
 GROUP BY t.value
 ORDER BY sum(k) over ();

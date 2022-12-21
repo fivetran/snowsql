@@ -766,10 +766,10 @@ GetProtoField
 
 [in_scope_expression_column_name=value]
 nested_value.nested_int64 +
-value.nested_repeated_group[OFFSET(0)].nestedrepeatedgroupnested[ORDINAL(2)].id
+value.nested_repeated_group[DEFAULT_OFFSET(0)].nestedrepeatedgroupnested[ORDINAL(2)].id
 --
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-+-parse_location=0-107
++-parse_location=0-115
 +-GetProtoField
 | +-parse_location=0-25
 | +-type=INT64
@@ -784,17 +784,17 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | +-field_descriptor=nested_int64
 | +-default_value=88
 +-GetProtoField
-  +-parse_location=28-107
+  +-parse_location=28-115
   +-type=INT64
   +-expr=
   | +-FunctionCall(ZetaSQL:$array_at_ordinal(ARRAY<PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup.NestedRepeatedGroupNested>>, INT64) -> PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup.NestedRepeatedGroupNested>)
-  |   +-parse_location=28-104
+  |   +-parse_location=28-112
   |   +-GetProtoField
-  |   | +-parse_location=28-92
+  |   | +-parse_location=28-100
   |   | +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup.NestedRepeatedGroupNested>>
   |   | +-expr=
   |   | | +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>>, INT64) -> PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>)
-  |   | |   +-parse_location=28-66
+  |   | |   +-parse_location=28-74
   |   | |   +-GetProtoField
   |   | |   | +-parse_location=28-55
   |   | |   | +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>>
@@ -802,10 +802,10 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
   |   | |   | | +-ExpressionColumn(parse_location=28-55, type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
   |   | |   | +-field_descriptor=nested_repeated_group
   |   | |   | +-default_value=[]
-  |   | |   +-Literal(parse_location=63-64, type=INT64, value=0)
+  |   | |   +-Literal(parse_location=71-72, type=INT64, value=0)
   |   | +-field_descriptor=nestedrepeatedgroupnested
   |   | +-default_value=[]
-  |   +-Literal(parse_location=101-102, type=INT64, value=2)
+  |   +-Literal(parse_location=109-110, type=INT64, value=2)
   +-field_descriptor=id
 ==
 
