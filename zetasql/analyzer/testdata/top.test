@@ -283,7 +283,7 @@ select TOP 18446744073709551615 key FROM KeyValue ORDER BY 1;
 # Should generate error.
 select top 1 1 limit 1;
 --
-ERROR: TOP and LIMIT are not allowed in one query [at 1:16]
+ERROR: Duplicate LIMIT: LIMIT [at 1:16]
 select top 1 1 limit 1;
                ^
 ==

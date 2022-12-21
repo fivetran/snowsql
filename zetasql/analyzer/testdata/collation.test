@@ -1924,7 +1924,7 @@ QueryStmt
 select
   # ARRAY<T> -> T cases
   # $array_at_offset
-  array_with_string_ci[offset(0)]           fn_array_at_offset,
+  array_with_string_ci[default_offset(0)]           fn_array_at_offset,
   # $safe_array_at_offset
   array_with_string_ci[safe_offset(0)]      fn_safe_array_at_offset,
   # $array_at_ordinal

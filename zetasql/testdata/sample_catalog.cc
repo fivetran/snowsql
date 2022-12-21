@@ -6405,7 +6405,7 @@ void SampleCatalog::LoadSqlFunctions(const LanguageOptions& language_options) {
                    NULL,
                    ARRAY(SELECT e
                          FROM UNNEST(input_arr) AS e WITH OFFSET
-                         ORDER BY OFFSET desc))); )",
+                         ORDER BY offset_idx desc))); )",
       language_options);
 
   AddSqlDefinedFunctionFromCreate(
