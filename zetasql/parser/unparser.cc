@@ -1639,11 +1639,10 @@ void Unparser::visitASTOffsetFetch(const ASTOffsetFetch* node, void* data) {
   println();
   if (node->offset() != nullptr) {
     print("OFFSET");
-    UnparseChildrenWithSeparator(node, data, "FETCH");
-  } else {
-    print("FETCH");
-    node->fetch()->Accept(this, data);
+    node->offset()->Accept(this, data);
   }
+  print("FETCH");
+  node->fetch()->Accept(this, data);
 }
 
 void Unparser::visitASTHavingModifier(const ASTHavingModifier* node,
