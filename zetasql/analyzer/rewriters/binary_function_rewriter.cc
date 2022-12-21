@@ -98,10 +98,10 @@ class RewriteBinaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
     IF(first_input IS NULL OR second_input IS NULL,
       NULL,
       ARRAY(
-        SELECT offset
+        SELECT offset_idx
         FROM UNNEST(first_input) AS e WITH OFFSET
         WHERE e = second_input
-        ORDER BY offset
+        ORDER BY offset_idx
       ))
     )sql";
 
@@ -116,7 +116,7 @@ class RewriteBinaryFunctionVisitor : public ResolvedASTDeepCopyVisitor {
         SELECT e
         FROM UNNEST(first_input) AS e WITH OFFSET
         WHERE e = second_input
-        ORDER BY offset
+        ORDER BY offset_idx
       ))
     )sql";
     if (IsBuiltInFunctionIdEq(node, FN_ARRAY_OFFSETS)) {

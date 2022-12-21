@@ -42,24 +42,24 @@ select foo.@@bar.baz;
            ^
 ==
 
-select @@foo[OFFSET(0)]
+select @@foo[DEFAULT_OFFSET(0)]
 --
-QueryStatement [0-23] [select @@foo[OFFSET(0)]]
-  Query [0-23] [select @@foo[OFFSET(0)]]
-    Select [0-23] [select @@foo[OFFSET(0)]]
-      SelectList [7-23] [@@foo[OFFSET(0)]]
-        SelectColumn [7-23] [@@foo[OFFSET(0)]]
-          ArrayElement [7-23] [@@foo[OFFSET(0)]]
+QueryStatement [0-31] [select @@foo...AULT_OFFSET(0)]]
+  Query [0-31] [select @@foo...AULT_OFFSET(0)]]
+    Select [0-31] [select @@foo...AULT_OFFSET(0)]]
+      SelectList [7-31] [@@foo[DEFAULT_OFFSET(0)]]
+        SelectColumn [7-31] [@@foo[DEFAULT_OFFSET(0)]]
+          ArrayElement [7-31] [@@foo[DEFAULT_OFFSET(0)]]
             SystemVariableExpr [7-12] [@@foo]
               PathExpression [9-12] [foo]
                 Identifier(foo) [9-12] [foo]
             Location [12-13] [[]
-            FunctionCall [13-22] [OFFSET(0)]
-              PathExpression [13-19] [OFFSET]
-                Identifier(OFFSET) [13-19] [OFFSET]
-              IntLiteral(0) [20-21] [0]
+            FunctionCall [13-30] [DEFAULT_OFFSET(0)]
+              PathExpression [13-27] [DEFAULT_OFFSET]
+                Identifier(DEFAULT_OFFSET) [13-27] [DEFAULT_OFFSET]
+              IntLiteral(0) [28-29] [0]
 --
 
 SELECT
-  @@foo[OFFSET(0)]
+  @@foo[DEFAULT_OFFSET(0)]
 

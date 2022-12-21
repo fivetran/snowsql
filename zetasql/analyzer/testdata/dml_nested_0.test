@@ -215,20 +215,20 @@ UpdateStmt
 [language_features={{|V_1_2_ARRAY_ELEMENTS_WITH_SET}}]
 UPDATE TestTable SET
   (DELETE
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
    WHERE nested_repeated_int64 < 10)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 3:38]
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
                                      ^
 ==
 
-# Nested DELETE with an offset.
+# Nested DELETE with an offset_idx.
 [language_features={{|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET}}]
 UPDATE TestTable SET
-  (DELETE KitchenSink.repeated_int64_val WITH OFFSET{{| offset}}
-   WHERE offset = 5)
+  (DELETE KitchenSink.repeated_int64_val WITH OFFSET{{| offset_idx}}
+   WHERE offset_idx = 5)
 WHERE true
 --
 ALTERNATION GROUP: <empty>
@@ -237,15 +237,15 @@ ERROR: DELETE does not support WITH OFFSET [at 2:42]
   (DELETE KitchenSink.repeated_int64_val WITH OFFSET
                                          ^
 --
-ALTERNATION GROUP:  offset
+ALTERNATION GROUP:  offset_idx
 --
 ERROR: DELETE does not support WITH OFFSET [at 2:42]
-  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset
+  (DELETE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
                                          ^
 --
 ALTERNATION GROUPS:
     V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,
-    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset_idx
 --
 UpdateStmt
 +-table_scan=
@@ -267,10 +267,10 @@ UpdateStmt
     +-delete_list=
       +-DeleteStmt
         +-array_offset_column=
-        | +-ColumnHolder(column=$array.offset#5)
+        | +-ColumnHolder(column=$array.offset_idx#5)
         +-where_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-            +-ColumnRef(type=INT64, column=$array.offset#5)
+            +-ColumnRef(type=INT64, column=$array.offset_idx#5)
             +-Literal(type=INT64, value=5)
 ==
 
@@ -311,13 +311,13 @@ UpdateStmt
 # Nested DELETE with default offset conflicting with the target alias.
 [language_features=V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET]
 UPDATE TestTable SET
-  (DELETE KitchenSink.repeated_int64_val offset WITH OFFSET
-   WHERE offset = 5)
+  (DELETE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+   WHERE offset_idx = 5)
 WHERE true
 --
-ERROR: Duplicate OFFSET alias offset in nested DELETE [at 2:49]
-  (DELETE KitchenSink.repeated_int64_val offset WITH OFFSET
-                                                ^
+ERROR: Duplicate OFFSET alias offset_idx in nested DELETE [at 2:53]
+  (DELETE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+                                                    ^
 ==
 
 # Nested DELETE with non-default offset conflicting with the target alias.
@@ -338,8 +338,8 @@ ERROR: Duplicate OFFSET alias foo in nested DELETE [at 2:58]
 UPDATE TestTable target SET
   (UPDATE KitchenSink.nested_repeated_value target WITH OFFSET SET
      (DELETE target.nested_repeated_int64 target WITH OFFSET
-      WHERE offset = target + offset)
-   WHERE offset = target.nested_int64 + offset)
+      WHERE offset_idx = target + offset_idx)
+   WHERE offset_idx = target.nested_int64 + offset_idx)
 WHERE target.KitchenSink.bool_val
 --
 UpdateStmt
@@ -367,10 +367,10 @@ UpdateStmt
     +-update_list=
       +-UpdateStmt
         +-array_offset_column=
-        | +-ColumnHolder(column=$array.offset#5)
+        | +-ColumnHolder(column=$array.offset_idx#5)
         +-where_expr=
         | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-        |   +-ColumnRef(type=INT64, column=$array.offset#5)
+        |   +-ColumnRef(type=INT64, column=$array.offset_idx#5)
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |     +-GetProtoField
         |     | +-type=INT64
@@ -378,7 +378,7 @@ UpdateStmt
         |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB.Nested>, column=$array.target#4)
         |     | +-field_descriptor=nested_int64
         |     | +-default_value=88
-        |     +-ColumnRef(type=INT64, column=$array.offset#5)
+        |     +-ColumnRef(type=INT64, column=$array.offset_idx#5)
         +-update_item_list=
           +-UpdateItem
             +-target=
@@ -393,13 +393,13 @@ UpdateStmt
             +-delete_list=
               +-DeleteStmt
                 +-array_offset_column=
-                | +-ColumnHolder(column=$array.offset#7)
+                | +-ColumnHolder(column=$array.offset_idx#7)
                 +-where_expr=
                   +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-                    +-ColumnRef(type=INT64, column=$array.offset#7)
+                    +-ColumnRef(type=INT64, column=$array.offset_idx#7)
                     +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
                       +-ColumnRef(type=INT64, column=$array.target#6)
-                      +-ColumnRef(type=INT64, column=$array.offset#7)
+                      +-ColumnRef(type=INT64, column=$array.offset_idx#7)
 ==
 
 # Nested DELETE that reuses the target/offset aliases of an enclosing nested
@@ -745,22 +745,22 @@ UpdateStmt
 [language_features={{|V_1_2_ARRAY_ELEMENTS_WITH_SET}}]
 UPDATE TestTable SET
   (UPDATE
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
    SET nested_repeated_int64 = 5
    WHERE nested_repeated_int64 > 10)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 3:38]
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
                                      ^
 ==
 
 # Nested UPDATE with an offset.
 [language_features={{|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset}}
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset_idx}}
    SET repeated_int64_val = 0
-   WHERE offset = 5)
+   WHERE offset_idx = 5)
   WHERE true
 --
 ALTERNATION GROUP: <empty>
@@ -769,17 +769,17 @@ ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET
                                          ^
 --
-ALTERNATION GROUP:  offset
+ALTERNATION GROUP:  offset_idx
 --
 ERROR: UPDATE ... SET does not support WITH OFFSET [at 2:42]
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
                                          ^
 --
 ALTERNATION GROUPS:
     V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,
-    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET, offset_idx
     V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML,
-    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML, offset
+    V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML, offset_idx
 --
 UpdateStmt
 +-table_scan=
@@ -801,10 +801,10 @@ UpdateStmt
     +-update_list=
       +-UpdateStmt
         +-array_offset_column=
-        | +-ColumnHolder(column=$array.offset#5)
+        | +-ColumnHolder(column=$array.offset_idx#5)
         +-where_expr=
         | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-        |   +-ColumnRef(type=INT64, column=$array.offset#5)
+        |   +-ColumnRef(type=INT64, column=$array.offset_idx#5)
         |   +-Literal(type=INT64, value=5)
         +-update_item_list=
           +-UpdateItem
@@ -863,8 +863,8 @@ UpdateStmt
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
   (UPDATE KitchenSink.repeated_int64_val WITH OFFSET
-   SET repeated_int64_val = repeated_int64_val + offset + 1
-   WHERE offset = 5)
+   SET repeated_int64_val = repeated_int64_val + offset_idx + 1
+   WHERE offset_idx = 5)
   WHERE true
 --
 UpdateStmt
@@ -887,10 +887,10 @@ UpdateStmt
     +-update_list=
       +-UpdateStmt
         +-array_offset_column=
-        | +-ColumnHolder(column=$array.offset#5)
+        | +-ColumnHolder(column=$array.offset_idx#5)
         +-where_expr=
         | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-        |   +-ColumnRef(type=INT64, column=$array.offset#5)
+        |   +-ColumnRef(type=INT64, column=$array.offset_idx#5)
         |   +-Literal(type=INT64, value=5)
         +-update_item_list=
           +-UpdateItem
@@ -902,34 +902,34 @@ UpdateStmt
                   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
                     +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
                     | +-ColumnRef(type=INT64, column=$array.repeated_int64_val#4)
-                    | +-ColumnRef(type=INT64, column=$array.offset#5)
+                    | +-ColumnRef(type=INT64, column=$array.offset_idx#5)
                     +-Literal(type=INT64, value=1)
 ==
 
 # Nested UPDATE that attempts to write to the offset.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset}}
-   SET offset = 0
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET{{| offset_idx}}
+   SET offset_idx = 0
    WHERE true)
 WHERE true
 --
-ERROR: Unrecognized name: offset [at 3:8]
-   SET offset = 0
+ERROR: Unrecognized name: offset_idx [at 3:8]
+   SET offset_idx = 0
        ^
 ==
 
 # Nested UPDATE with default offset conflicting with the target alias.
 [language_features={{V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET|V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET,V_1_2_CORRELATED_REFS_IN_NESTED_DML}}]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val offset WITH OFFSET
-   SET offset = offset + 1
-   WHERE offset = 0)
+  (UPDATE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+   SET offset_idx = offset_idx + 1
+   WHERE offset_idx = 0)
 WHERE true
 --
-ERROR: Duplicate OFFSET alias offset in nested UPDATE [at 2:49]
-  (UPDATE KitchenSink.repeated_int64_val offset WITH OFFSET
-                                                ^
+ERROR: Duplicate OFFSET alias offset_idx in nested UPDATE [at 2:53]
+  (UPDATE KitchenSink.repeated_int64_val offset_idx WITH OFFSET
+                                                    ^
 ==
 
 # Nested UPDATE with non-default offset conflicting with the target alias.
@@ -951,9 +951,9 @@ ERROR: Duplicate OFFSET alias foo in nested UPDATE [at 2:58]
 UPDATE TestTable target SET
   (UPDATE KitchenSink.nested_repeated_value target WITH OFFSET SET
      (UPDATE target.nested_repeated_int64 target WITH OFFSET
-      SET target = target + offset
-      WHERE offset = target + offset)
-   WHERE offset = target.nested_int64 + offset)
+      SET target = target + offset_idx
+      WHERE offset_idx = target + offset_idx)
+   WHERE offset_idx = target.nested_int64 + offset_idx)
 WHERE target.KitchenSink.bool_val
 --
 UpdateStmt
@@ -981,10 +981,10 @@ UpdateStmt
     +-update_list=
       +-UpdateStmt
         +-array_offset_column=
-        | +-ColumnHolder(column=$array.offset#5)
+        | +-ColumnHolder(column=$array.offset_idx#5)
         +-where_expr=
         | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-        |   +-ColumnRef(type=INT64, column=$array.offset#5)
+        |   +-ColumnRef(type=INT64, column=$array.offset_idx#5)
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |     +-GetProtoField
         |     | +-type=INT64
@@ -992,7 +992,7 @@ UpdateStmt
         |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB.Nested>, column=$array.target#4)
         |     | +-field_descriptor=nested_int64
         |     | +-default_value=88
-        |     +-ColumnRef(type=INT64, column=$array.offset#5)
+        |     +-ColumnRef(type=INT64, column=$array.offset_idx#5)
         +-update_item_list=
           +-UpdateItem
             +-target=
@@ -1007,13 +1007,13 @@ UpdateStmt
             +-update_list=
               +-UpdateStmt
                 +-array_offset_column=
-                | +-ColumnHolder(column=$array.offset#7)
+                | +-ColumnHolder(column=$array.offset_idx#7)
                 +-where_expr=
                 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
-                |   +-ColumnRef(type=INT64, column=$array.offset#7)
+                |   +-ColumnRef(type=INT64, column=$array.offset_idx#7)
                 |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
                 |     +-ColumnRef(type=INT64, column=$array.target#6)
-                |     +-ColumnRef(type=INT64, column=$array.offset#7)
+                |     +-ColumnRef(type=INT64, column=$array.offset_idx#7)
                 +-update_item_list=
                   +-UpdateItem
                     +-target=
@@ -1023,7 +1023,7 @@ UpdateStmt
                         +-value=
                           +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
                             +-ColumnRef(type=INT64, column=$array.target#6)
-                            +-ColumnRef(type=INT64, column=$array.offset#7)
+                            +-ColumnRef(type=INT64, column=$array.offset_idx#7)
 ==
 
 UPDATE TestTable SET
@@ -1377,12 +1377,12 @@ UpdateStmt
 [language_features={{|V_1_2_ARRAY_ELEMENTS_WITH_SET}}]
 UPDATE TestTable SET
   (INSERT
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
    VALUES (5))
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 3:38]
-   KitchenSink.nested_repeated_value[OFFSET(0)].nested_repeated_int64
+   KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_repeated_int64
                                      ^
 ==
 
@@ -2019,7 +2019,7 @@ ERROR: Update item KitchenSink.repeated_int64_val overlaps with KitchenSink [at 
 # Cannot run a nested statement on an array that has already been modified.
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE TestTable SET
-  KitchenSink.nested_repeated_value[OFFSET(0)].nested_int64 = 1,
+  KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_int64 = 1,
   (DELETE KitchenSink.nested_repeated_value WHERE true)
 WHERE true
 --
@@ -2033,11 +2033,11 @@ ERROR: Cannot modify KitchenSink.nested_repeated_value with a nested statement a
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE TestTable SET
   (DELETE KitchenSink.nested_repeated_value WHERE true),
-  KitchenSink.nested_repeated_value[OFFSET(0)].nested_int64 = 1
+  KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_int64 = 1
 WHERE true
 --
 ERROR: Cannot modify an element of KitchenSink.nested_repeated_value and also modify it with a nested statement [at 3:3]
-  KitchenSink.nested_repeated_value[OFFSET(0)].nested_int64 = 1
+  KitchenSink.nested_repeated_value[DEFAULT_OFFSET(0)].nested_int64 = 1
   ^
 ==
 
@@ -2045,14 +2045,14 @@ ERROR: Cannot modify an element of KitchenSink.nested_repeated_value and also mo
 # if it uses WITH OFFSET.
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET,V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET]
 UPDATE TestTable SET
-  KitchenSink.repeated_int64_val[OFFSET(0)] = 5,
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset
+  KitchenSink.repeated_int64_val[DEFAULT_OFFSET(0)] = 5,
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
    SET repeated_int64_val = 10
-   WHERE offset = 1)
+   WHERE offset_idx = 1)
 WHERE true
 --
 ERROR: Cannot modify KitchenSink.repeated_int64_val with a nested statement and also modify one of its elements [at 3:11]
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
           ^
 ==
 
@@ -2060,14 +2060,14 @@ ERROR: Cannot modify KitchenSink.repeated_int64_val with a nested statement and 
 # statement, even if the nested statement used WITH OFFSET.
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET,V_1_2_NESTED_UPDATE_DELETE_WITH_OFFSET]
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset
+  (UPDATE KitchenSink.repeated_int64_val WITH OFFSET offset_idx
    SET repeated_int64_val = 10
-   WHERE offset = 1),
-  KitchenSink.repeated_int64_val[OFFSET(0)] = 5
+   WHERE offset_idx = 1),
+  KitchenSink.repeated_int64_val[DEFAULT_OFFSET(0)] = 5
 WHERE true
 --
 ERROR: Cannot modify an element of KitchenSink.repeated_int64_val and also modify it with a nested statement [at 5:3]
-  KitchenSink.repeated_int64_val[OFFSET(0)] = 5
+  KitchenSink.repeated_int64_val[DEFAULT_OFFSET(0)] = 5
   ^
 ==
 

@@ -1548,6 +1548,7 @@ class Resolver {
   absl::Status ResolveSelect(const ASTSelect* select,
                              const ASTOrderBy* order_by,
                              const ASTLimitOffset* limit_offset,
+                             const ASTOffsetFetch* offset_fetch,
                              const NameScope* external_scope,
                              IdString query_alias,
                              bool force_new_columns_for_projected_outputs,
@@ -1835,6 +1836,7 @@ class Resolver {
       const ASTSelect* select, const ASTOrderBy* order_by,
       const ASTLimitOffset* limit_offset,
       const ASTTop* top,
+      const ASTOffsetFetch* offset_fetch,
       const NameScope* having_and_order_by_scope,
       std::unique_ptr<const ResolvedExpr>* resolved_having_expr,
       std::unique_ptr<const ResolvedExpr>* resolved_qualify_expr,
@@ -2345,9 +2347,9 @@ class Resolver {
       bool allow_argument_coercion, const NameScope* name_scope,
       std::unique_ptr<const ResolvedInlineLambda>* resolved_expr_out);
 
-  // Resolves the given LIMIT or OFFSET clause <ast_expr> and stores the
+  // Resolves the given LIMIT or OFFSET or TOP or FETCH clause <ast_expr> and stores the
   // resolved expression in <resolved_expr>.
-  absl::Status ResolveLimitOrOffsetExpr(
+  absl::Status ResolveLimitOrOffsetOrTopOrFetchExpr(
       const ASTExpression* ast_expr,
       const char* clause_name,
       ExprResolutionInfo* expr_resolution_info,
@@ -2358,15 +2360,13 @@ class Resolver {
       std::unique_ptr<const ResolvedScan> input_scan_in,
       std::unique_ptr<const ResolvedScan>* output);
 
-  // Resolves the given LIMIT or OFFSET clause <ast_expr> and stores the
-  // resolved expression in <resolved_expr>.
-  absl::Status ResolveTopExpr(
-    const ASTExpression* ast_expr, const char* clause_name,
-    ExprResolutionInfo* expr_resolution_info,
-    std::unique_ptr<const ResolvedExpr>* resolved_expr);
-
   absl::Status ResolveTopScan(
     const ASTTop* top,
+    std::unique_ptr<const ResolvedScan> input_scan,
+    std::unique_ptr<const ResolvedScan>* output);
+
+  absl::Status ResolveOffsetFetchScan(
+    const ASTOffsetFetch* offset_fetch,
     std::unique_ptr<const ResolvedScan> input_scan,
     std::unique_ptr<const ResolvedScan>* output);
 

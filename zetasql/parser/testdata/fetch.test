@@ -1,0 +1,104 @@
+[default no_show_parse_location_text]
+SELECT 1 FETCH 1
+UNION ALL
+SELECT 1 FETCH 1
+--
+ERROR: Syntax error: Expected end of input but got keyword UNION [at 2:1]
+UNION ALL
+^
+==
+
+select a from t order by a, b OFFSET 2 FETCH 3;
+--
+QueryStatement [0-46]
+  Query [0-46]
+    Select [0-15]
+      SelectList [7-8]
+        SelectColumn [7-8]
+          PathExpression [7-8]
+            Identifier(a) [7-8]
+      FromClause [9-15]
+        TablePathExpression [14-15]
+          PathExpression [14-15]
+            Identifier(t) [14-15]
+    OrderBy [16-29]
+      OrderingExpression(ASC) [25-26]
+        PathExpression [25-26]
+          Identifier(a) [25-26]
+      OrderingExpression(ASC) [28-29]
+        PathExpression [28-29]
+          Identifier(b) [28-29]
+    OffsetFetch [30-46]
+      IntLiteral(3) [45-46]
+      IntLiteral(2) [37-38]
+--
+SELECT
+  a
+FROM
+  t
+ORDER BY a, b
+OFFSET 2 FETCH 3
+==
+
+select a from t order by a, b FETCH 3;
+--
+QueryStatement [0-37]
+  Query [0-37]
+    Select [0-15]
+      SelectList [7-8]
+        SelectColumn [7-8]
+          PathExpression [7-8]
+            Identifier(a) [7-8]
+      FromClause [9-15]
+        TablePathExpression [14-15]
+          PathExpression [14-15]
+            Identifier(t) [14-15]
+    OrderBy [16-29]
+      OrderingExpression(ASC) [25-26]
+        PathExpression [25-26]
+          Identifier(a) [25-26]
+      OrderingExpression(ASC) [28-29]
+        PathExpression [28-29]
+          Identifier(b) [28-29]
+    OffsetFetch [30-37]
+      IntLiteral(3) [36-37]
+--
+SELECT
+  a
+FROM
+  t
+ORDER BY a, b
+FETCH 3
+==
+
+select a from t order by a, b OFFSET 2 ROWS FETCH NEXT 3 ROWS ONLY;
+--
+QueryStatement [0-66]
+  Query [0-66]
+    Select [0-15]
+      SelectList [7-8]
+        SelectColumn [7-8]
+          PathExpression [7-8]
+            Identifier(a) [7-8]
+      FromClause [9-15]
+        TablePathExpression [14-15]
+          PathExpression [14-15]
+            Identifier(t) [14-15]
+    OrderBy [16-29]
+      OrderingExpression(ASC) [25-26]
+        PathExpression [25-26]
+          Identifier(a) [25-26]
+      OrderingExpression(ASC) [28-29]
+        PathExpression [28-29]
+          Identifier(b) [28-29]
+    OffsetFetch [30-66]
+      IntLiteral(3) [55-56]
+      IntLiteral(2) [37-38]
+--
+SELECT
+  a
+FROM
+  t
+ORDER BY a, b
+OFFSET 2 FETCH 3
+==

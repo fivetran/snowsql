@@ -82,8 +82,8 @@ class MapFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       WHEN k IS NULL THEN NULL
       -- 'value' fields are present by proto2+3 definition, so nulls are only
       -- possible when the key is absent.
-      ELSE IFNULL( ( SELECT elem.value FROM UNNEST(m) elem WITH OFFSET offset
-                     WHERE elem.key = k ORDER BY offset DESC LIMIT 1 ),
+      ELSE IFNULL( ( SELECT elem.value FROM UNNEST(m) elem WITH OFFSET offset_idx
+                     WHERE elem.key = k ORDER BY offset_idx DESC LIMIT 1 ),
                    -- If the key isn't found, then it's an error.
                    ERROR(FORMAT("Key not found in map: %T", k)) )
     END
@@ -92,8 +92,8 @@ class MapFunctionVisitor : public ResolvedASTDeepCopyVisitor {
     CASE
       WHEN m IS NULL THEN NULL
       WHEN k IS NULL THEN NULL
-      ELSE ( SELECT elem.value FROM UNNEST(m) elem WITH OFFSET offset
-             WHERE elem.key = k ORDER BY offset DESC LIMIT 1 )
+      ELSE ( SELECT elem.value FROM UNNEST(m) elem WITH OFFSET offset_idx
+             WHERE elem.key = k ORDER BY offset_idx DESC LIMIT 1 )
     END
     )sql";
 
@@ -149,9 +149,9 @@ class MapFunctionVisitor : public ResolvedASTDeepCopyVisitor {
                 FORMAT("MODIFY_MAP: All key arguments must be non-NULL, but found NULL at argument %d",
                        -- Note that the MODIFY_MAP arg index is not the same
                        -- as the offset in the modifications array.
-                       offset * 2 + 1))
-            FROM (SELECT offset
-                  FROM UNNEST(modifications) mod WITH OFFSET offset
+                       offset_idx * 2 + 1))
+            FROM (SELECT offset_idx
+                  FROM UNNEST(modifications) mod WITH OFFSET offset_idx
                   WHERE mod.key IS NULL)) THEN NULL
         WHEN original_map IS NULL THEN NULL
         ELSE ARRAY(
@@ -159,8 +159,8 @@ class MapFunctionVisitor : public ResolvedASTDeepCopyVisitor {
           -- We retain the offset in the subquery to allow us to keep everything
           -- in the same order we originally saw it.
           SELECT AS `$1` key, value FROM (
-            (SELECT orig.key, orig.value value, offset
-             FROM UNNEST(original_map) orig WITH OFFSET offset
+            (SELECT orig.key, orig.value value, offset_idx
+             FROM UNNEST(original_map) orig WITH OFFSET offset_idx
              LEFT JOIN UNNEST(modifications) mod
              ON orig.key = mod.key
              WHERE mod.key IS NULL)
@@ -168,10 +168,10 @@ class MapFunctionVisitor : public ResolvedASTDeepCopyVisitor {
              -- Union those with each entry from the modifications where the
              -- value isn't NULL. We use an offset that starts past the end of
              -- the original map to ensure a deterministic output order.
-            (SELECT mod.key, mod.value, ARRAY_LENGTH(original_map) + offset
-             FROM UNNEST(modifications) mod WITH OFFSET offset
+            (SELECT mod.key, mod.value, ARRAY_LENGTH(original_map) + offset_idx
+             FROM UNNEST(modifications) mod WITH OFFSET offset_idx
              WHERE mod.value IS NOT NULL))
-          ORDER BY offset ASC)
+          ORDER BY offset_idx ASC)
         END
      FROM (SELECT AS VALUE $0) modifications)
     )sql";

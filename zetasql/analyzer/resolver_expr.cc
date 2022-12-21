@@ -136,7 +136,7 @@ STATIC_IDSTRING(kExprSubqueryId, "$expr_subquery");
 STATIC_IDSTRING(kOrderById, "$orderby");
 STATIC_IDSTRING(kInSubqueryCastId, "$in_subquery_cast");
 STATIC_IDSTRING(kKey, "KEY");
-STATIC_IDSTRING(kOffset, "OFFSET");
+STATIC_IDSTRING(kOffset, "DEFAULT_OFFSET");
 STATIC_IDSTRING(kOrdinal, "ORDINAL");
 STATIC_IDSTRING(kSafeKey, "SAFE_KEY");
 STATIC_IDSTRING(kSafeOffset, "SAFE_OFFSET");
@@ -4390,8 +4390,9 @@ absl::string_view StripSafeCaseInsensitive(absl::string_view function_name) {
 
 static bool IsSpecialArrayContextFunction(absl::string_view function_name) {
   // We try to avoid doing the zetasql_base::StringCaseEqual calls as much as possible.
-  if (!function_name.empty() && IsLetterO(function_name[0]) &&
-      (zetasql_base::CaseCompare(function_name, "OFFSET") == 0 ||
+  if (!function_name.empty() && (IsLetterO(function_name[0]) || IsLetterO(function_name[8])) &&
+      (zetasql_base::CaseCompare(function_name, "DEFAULT_OFFSET") == 0 ||
+       zetasql_base::CaseCompare(function_name, "OFFSET") == 0 ||
        zetasql_base::CaseCompare(function_name, "ORDINAL") == 0)) {
     return true;
   }
@@ -5556,7 +5557,7 @@ absl::Status Resolver::ResolveArrayElementAccess(
     if (!language().LanguageFeatureEnabled(FEATURE_V_1_4_BARE_ARRAY_ACCESS)) {
       return MakeSqlErrorAt(ast_position)
              << "Array element access with array[position] is not supported. "
-                "Use array[OFFSET(zero_based_offset)] or "
+                "Use array[DEFAULT_OFFSET(zero_based_offset)] or "
                 "array[ORDINAL(one_based_ordinal)]";
     }
     *function_name = kArrayAtOffset;
@@ -6728,7 +6729,7 @@ absl::Status Resolver::FinishResolvingAggregateFunction(
     ZETASQL_RET_CHECK(limit_offset->limit() != nullptr);
     ExprResolutionInfo expr_resolution_info(empty_name_scope_.get(), "LIMIT");
     ZETASQL_RETURN_IF_ERROR(
-        ResolveLimitOrOffsetExpr(limit_offset->limit(), /*clause_name=*/"LIMIT",
+        ResolveLimitOrOffsetOrTopOrFetchExpr(limit_offset->limit(), /*clause_name=*/"LIMIT",
                                  &expr_resolution_info, &limit_expr));
   }
 

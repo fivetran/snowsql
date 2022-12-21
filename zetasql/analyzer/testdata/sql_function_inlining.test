@@ -634,8 +634,8 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT FloorDiv(values[OFFSET(FloorDiv(CAST(Ceil(RAND() * 11) AS INT64), 2))],
-                values[OFFSET(FloorDiv(CAST(Ceil(RAND() * 11) AS INT64), 2))])
+SELECT FloorDiv(values[DEFAULT_OFFSET(FloorDiv(CAST(Ceil(RAND() * 11) AS INT64), 2))],
+                values[DEFAULT_OFFSET(FloorDiv(CAST(Ceil(RAND() * 11) AS INT64), 2))])
 FROM (SELECT [1, 1, 2, 3, 0] AS values);
 --
 QueryStmt

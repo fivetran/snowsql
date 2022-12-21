@@ -120,7 +120,7 @@ QueryStmt
 # Constant expressions are allowed in hints.
 select @{ key=1+2,
           key2=concat('a',@test_param_string),
-          key3=[STRUCT(1 as x, 2 as y)][offset(0)].y } 5
+          key3=[STRUCT(1 as x, 2 as y)][default_offset(0)].y } 5
 --
 QueryStmt
 +-output_column_list=

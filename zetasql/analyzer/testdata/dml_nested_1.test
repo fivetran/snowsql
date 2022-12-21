@@ -1600,7 +1600,7 @@ UpdateStmt
 ==
 
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
-UPDATE ComplexTypes SET Int32Array[OFFSET(1)] = 0
+UPDATE ComplexTypes SET Int32Array[DEFAULT_OFFSET(1)] = 0
 WHERE true
 --
 UpdateStmt
@@ -1630,8 +1630,8 @@ UpdateStmt
 ==
 
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
-UPDATE ComplexTypes SET Int32Array[OFFSET(1)] = 0
-WHERE Int32Array[OFFSET(1)] = 1
+UPDATE ComplexTypes SET Int32Array[DEFAULT_OFFSET(1)] = 0
+WHERE Int32Array[DEFAULT_OFFSET(1)] = 1
 --
 UpdateStmt
 +-table_scan=
@@ -1665,8 +1665,8 @@ UpdateStmt
 
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE RecursivePBTable SET
-  RecursivePB.repeated_recursive_pb[OFFSET(1)]
-             .repeated_recursive_pb[OFFSET(2)]
+  RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
+             .repeated_recursive_pb[DEFAULT_OFFSET(2)]
              .int64_val = 5
 WHERE true
 --
@@ -1723,11 +1723,11 @@ UpdateStmt
 
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE RecursivePBTable SET
-  RecursivePB.repeated_recursive_pb[OFFSET(1)]
-             .repeated_recursive_pb[OFFSET(2)]
+  RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
+             .repeated_recursive_pb[DEFAULT_OFFSET(2)]
              .int64_val = 5
-WHERE RecursivePB.repeated_recursive_pb[OFFSET(1)]
-             .repeated_recursive_pb[OFFSET(2)].int64_val = 0
+WHERE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
+             .repeated_recursive_pb[DEFAULT_OFFSET(2)].int64_val = 0
 --
 UpdateStmt
 +-table_scan=
@@ -1803,8 +1803,8 @@ UpdateStmt
 
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE RecursivePBTable SET
-  RecursivePB.repeated_recursive_pb[OFFSET(1)]
-             .repeated_recursive_pb[OFFSET(2)] = NULL
+  RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
+             .repeated_recursive_pb[DEFAULT_OFFSET(2)] = NULL
 WHERE true
 --
 UpdateStmt
@@ -1855,9 +1855,9 @@ UpdateStmt
 
 [language_features=V_1_2_ARRAY_ELEMENTS_WITH_SET]
 UPDATE RecursivePBTable SET
-  RecursivePB.repeated_recursive_pb[OFFSET(1)]
-             .repeated_recursive_pb[OFFSET(2)] = NULL
-WHERE ARRAY_LENGTH(RecursivePB.repeated_recursive_pb[OFFSET(1)]
+  RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
+             .repeated_recursive_pb[DEFAULT_OFFSET(2)] = NULL
+WHERE ARRAY_LENGTH(RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
              .repeated_recursive_pb) = 0
 --
 UpdateStmt
@@ -1922,48 +1922,48 @@ UpdateStmt
 ==
 
 UPDATE RecursivePBTable SET
-(DELETE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(DELETE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
              .repeated_recursive_pb
    WHERE true)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 2:43]
-(DELETE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(DELETE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
                                           ^
 ==
 
 UPDATE RecursivePBTable SET
-(DELETE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(DELETE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
              .repeated_recursive_pb
    WHERE int64_val = 0)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 2:43]
-(DELETE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(DELETE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
                                           ^
 ==
 
 UPDATE RecursivePBTable SET
-(UPDATE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(UPDATE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
              .repeated_recursive_pb
              SET int64_val = 1
    WHERE true)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 2:43]
-(UPDATE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(UPDATE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
                                           ^
 ==
 
 UPDATE RecursivePBTable SET
-(UPDATE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(UPDATE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
              .repeated_recursive_pb
              SET int64_val = 1
    WHERE int64_val = 0)
 WHERE true
 --
 ERROR: The target of a nested DML statement cannot reference an array element [at 2:43]
-(UPDATE RecursivePB.repeated_recursive_pb[OFFSET(1)]
+(UPDATE RecursivePB.repeated_recursive_pb[DEFAULT_OFFSET(1)]
                                           ^
 ==
 

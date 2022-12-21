@@ -675,9 +675,9 @@ OPTIONS(x = 1, y = 2)
 ==
 
 # Specifying a single UNNEST expression with alias and offset.
-create index a.b.i1 on c.d.t1 foo UNNEST(a) bar WITH OFFSET AS offset (a, b, c) options(x=1,y=2);
+create index a.b.i1 on c.d.t1 foo UNNEST(a) bar WITH OFFSET AS offset_idx (a, b, c) options(x=1,y=2);
 --
-CreateIndexStatement [0-96] [create index...ptions(x=1,y=2)]
+CreateIndexStatement [0-100] [create index...ptions(x=1,y=2)]
   PathExpression [13-19] [a.b.i1]
     Identifier(a) [13-14] [a]
     Identifier(b) [15-16] [b]
@@ -688,36 +688,36 @@ CreateIndexStatement [0-96] [create index...ptions(x=1,y=2)]
     Identifier(t1) [27-29] [t1]
   Alias [30-33] [foo]
     Identifier(foo) [30-33] [foo]
-  IndexUnnestExpressionList [34-69] [UNNEST(a)...AS offset]
-    UnnestExpressionWithOptAliasAndOffset [34-69] [UNNEST(a)...AS offset]
+  IndexUnnestExpressionList [34-73] [UNNEST(a)...offset_idx]
+    UnnestExpressionWithOptAliasAndOffset [34-73] [UNNEST(a)...offset_idx]
       UnnestExpression [34-43] [UNNEST(a)]
         PathExpression [41-42] [a]
           Identifier(a) [41-42] [a]
       Alias [44-47] [bar]
         Identifier(bar) [44-47] [bar]
-      WithOffset [48-69] [WITH OFFSET AS offset]
-        Alias [60-69] [AS offset]
-          Identifier(offset) [63-69] [offset]
-  IndexItemList [70-79] [(a, b, c)]
-    OrderingExpression(ASC) [71-72] [a]
-      PathExpression [71-72] [a]
-        Identifier(a) [71-72] [a]
-    OrderingExpression(ASC) [74-75] [b]
-      PathExpression [74-75] [b]
-        Identifier(b) [74-75] [b]
-    OrderingExpression(ASC) [77-78] [c]
-      PathExpression [77-78] [c]
-        Identifier(c) [77-78] [c]
-  OptionsList [87-96] [(x=1,y=2)]
-    OptionsEntry [88-91] [x=1]
-      Identifier(x) [88-89] [x]
-      IntLiteral(1) [90-91] [1]
-    OptionsEntry [92-95] [y=2]
-      Identifier(y) [92-93] [y]
-      IntLiteral(2) [94-95] [2]
+      WithOffset [48-73] [WITH OFFSET AS offset_idx]
+        Alias [60-73] [AS offset_idx]
+          Identifier(offset_idx) [63-73] [offset_idx]
+  IndexItemList [74-83] [(a, b, c)]
+    OrderingExpression(ASC) [75-76] [a]
+      PathExpression [75-76] [a]
+        Identifier(a) [75-76] [a]
+    OrderingExpression(ASC) [78-79] [b]
+      PathExpression [78-79] [b]
+        Identifier(b) [78-79] [b]
+    OrderingExpression(ASC) [81-82] [c]
+      PathExpression [81-82] [c]
+        Identifier(c) [81-82] [c]
+  OptionsList [91-100] [(x=1,y=2)]
+    OptionsEntry [92-95] [x=1]
+      Identifier(x) [92-93] [x]
+      IntLiteral(1) [94-95] [1]
+    OptionsEntry [96-99] [y=2]
+      Identifier(y) [96-97] [y]
+      IntLiteral(2) [98-99] [2]
 --
 CREATE INDEX a.b.i1 ON c.d.t1 AS foo
-UNNEST(a) AS bar WITH OFFSET AS offset
+UNNEST(a) AS bar WITH OFFSET AS offset_idx
 (a, b, c)
 OPTIONS(x = 1, y = 2)
 ==

@@ -8165,6 +8165,31 @@ ResolvedArgumentRef(y)
           Field('top', 'ResolvedExpr', tag_id=3)
       ])
 
+  gen.AddNode(
+      name='ResolvedOffsetFetchScan',
+      tag_id=100001,
+      parent='ResolvedScan',
+      comment="""
+      Apply a OFFSET and FETCH to the rows from input_scan. Emit all
+      rows after OFFSET rows have been scanned and up to FETCH total rows
+      emitted. The offset is the number of rows to skip.
+      E.g., OFFSET 1 means to skip one row, so the first row emitted will be the
+      second ROW, provided the FETCH is greater than zero.
+
+      OFFSET is optional and the absence of OFFSET implies OFFSET 0.
+
+      The arguments to FETCH <int64> OFFSET <int64> must be non-negative
+      integer literals or (possibly casted) query parameters.  Query
+      parameter values must be checked at run-time by ZetaSQL compliant
+      backend systems.
+              """,
+      fields=[
+          Field(
+              'input_scan', 'ResolvedScan', tag_id=2, propagate_order=True),
+          Field('offset', 'ResolvedExpr', tag_id=3),
+          Field('fetch', 'ResolvedExpr', tag_id=4)
+      ])
+
   gen.Generate(
       input_file_paths=input_templates,
       output_file_paths=output_files,

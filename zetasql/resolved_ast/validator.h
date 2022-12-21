@@ -284,6 +284,9 @@ class Validator {
   absl::Status ValidateResolvedTopScan(
       const ResolvedTopScan* scan,
       const std::set<ResolvedColumn>& visible_parameters);
+  absl::Status ValidateResolvedOffsetFetchScan(
+      const ResolvedOffsetFetchScan* scan,
+      const std::set<ResolvedColumn>& visible_parameters);
 
   // For a scan with is_ordered=true, validate that this scan can legally
   // produce ordered output.

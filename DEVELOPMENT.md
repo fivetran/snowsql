@@ -20,6 +20,13 @@ bazel build //zetasql/parser/... --features=-supports_dynamic_linker
 bazel test //zetasql/parser/... --features=-supports_dynamic_linker
 ```
 
+## Debug grammar
+Conflicts could appear in finite-state machine created by Bison.
+Running bison with the option `--report=THINGS` will provide you with detailed info about generated finite-state machine.
+   - Use `--report=THINGS` and `--report-file=FILE` keys in `bazel/bison.bzl` file
+   - Update Bison to receive more detailed info. Change version in file `bazel/zetasql_deps_step_2.bzl` (e.g. `bison-3.8.2`)
+   - Use `bazel-out/host/bin/bazel/bison/bin/bison --help` command to see detailed list of `THINGS` options
+
 ## Build and debug tests
 
 ### Build needed package

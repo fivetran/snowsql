@@ -275,6 +275,7 @@ static absl::flat_hash_map<ASTNodeKind, std::string> CreateNodeNamesMap() {
   map[AST_NULL_LITERAL] = "NullLiteral";
   map[AST_NULL_ORDER] = "NullOrder";
   map[AST_NUMERIC_LITERAL] = "NumericLiteral";
+  map[AST_OFFSET_FETCH] = "OffsetFetch";
   map[AST_ON_CLAUSE] = "OnClause";
   map[AST_ON_OR_USING_CLAUSE_LIST] = "OnOrUsingClauseList";
   map[AST_OPTIONS_ENTRY] = "OptionsEntry";
