@@ -1,0 +1,25 @@
+select * from TestTable as A, lateral (select * from TestTable as B);
+--
+QueryStmt
++-output_column_list=
+| +-TestTable.key#1 AS key [INT32]
+| +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
+| +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-TestTable.key#4 AS key [INT32]
+| +-TestTable.TestEnum#5 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
+| +-TestTable.KitchenSink#6 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
++-query=
+  +-ProjectScan
+    +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3, key#4, TestEnum#5, KitchenSink#6]
+    +-input_scan=
+      +-JoinScan
+        +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3, key#4, TestEnum#5, KitchenSink#6]
+        +-left_scan=
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="A")
+        +-right_scan=
+        | +-ProjectScan
+        |   +-column_list=TestTable.[key#4, TestEnum#5, KitchenSink#6]
+        |   +-input_scan=
+        |     +-TableScan(column_list=TestTable.[key#4, TestEnum#5, KitchenSink#6], table=TestTable, column_index_list=[0, 1, 2], alias="B")
+        +-lateral=TRUE
+==

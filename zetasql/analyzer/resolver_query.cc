@@ -6477,7 +6477,7 @@ absl::Status Resolver::ResolveJoin(
   *output_name_list = name_list;
 
   return AddScansForJoin(join, std::move(resolved_lhs), std::move(resolved_rhs),
-                         resolved_join_type, std::move(join_condition),
+                         resolved_join_type, join->lateral(), std::move(join_condition),
                          std::move(computed_columns), output);
 }
 
@@ -6485,6 +6485,7 @@ absl::Status Resolver::AddScansForJoin(
     const ASTJoin* join, std::unique_ptr<const ResolvedScan> resolved_lhs,
     std::unique_ptr<const ResolvedScan> resolved_rhs,
     ResolvedJoinScan::JoinType resolved_join_type,
+    bool lateral,
     std::unique_ptr<const ResolvedExpr> join_condition,
     std::vector<std::unique_ptr<const ResolvedComputedColumn>> computed_columns,
     std::unique_ptr<const ResolvedScan>* output_scan) {
@@ -6492,7 +6493,7 @@ absl::Status Resolver::AddScansForJoin(
       resolved_lhs->column_list(), resolved_rhs->column_list());
   std::unique_ptr<ResolvedJoinScan> resolved_join = MakeResolvedJoinScan(
       concat_columns, resolved_join_type, std::move(resolved_lhs),
-      std::move(resolved_rhs), std::move(join_condition));
+      std::move(resolved_rhs), std::move(join_condition), lateral);
 
   // If we have a join_type keyword hint (e.g. HASH JOIN or LOOKUP JOIN),
   // add it on the front of hint_list, before any long-form hints.

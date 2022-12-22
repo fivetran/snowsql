@@ -2434,6 +2434,10 @@ static std::string GetJoinTypeString(ResolvedJoinScan::JoinType join_type,
   }
 }
 
+static std::string GetLateralString(bool lateral) {
+  return lateral ? " LATERAL " : "";
+}
+
 absl::StatusOr<std::string> SQLBuilder::GetJoinOperand(
     const ResolvedScan* scan) {
   ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<QueryFragment> scan_f, ProcessNode(scan));
@@ -2578,7 +2582,7 @@ absl::Status SQLBuilder::VisitResolvedJoinScan(const ResolvedJoinScan* node) {
   absl::StrAppend(
       &from, left_join_operand, " ",
       GetJoinTypeString(node->join_type(), node->join_expr() != nullptr), hints,
-      " ", right_join_operand);
+      GetLateralString(node->lateral()), " ", right_join_operand);
   if (node->join_expr() != nullptr) {
     ZETASQL_ASSIGN_OR_RETURN(std::unique_ptr<QueryFragment> result,
                      ProcessNode(node->join_expr()));
