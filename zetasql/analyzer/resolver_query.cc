@@ -6419,7 +6419,19 @@ absl::Status Resolver::ResolveJoin(
   std::shared_ptr<NameList> name_list(new NameList);
   std::unique_ptr<const ResolvedExpr> join_condition;
 
-  if (join->using_clause() != nullptr) {
+  if (join->lateral()) {
+    if (join->using_clause() != nullptr || join->on_clause() != nullptr) {
+      // ON or USING clause is not allowed with LATERAL join.
+      return MakeSqlErrorAtLocalNode(join->join_location())
+             << join_type_name << " LATERAL"
+             << " cannot have an immediately following ON or USING clause";
+    } else {
+      ZETASQL_RETURN_IF_ERROR(
+          name_list->MergeFrom(*name_list_lhs, join->lhs()->alias_location()));
+      ZETASQL_RETURN_IF_ERROR(
+          name_list->MergeFrom(*name_list_rhs, join->rhs()->alias_location()));
+    }
+  } else if (join->using_clause() != nullptr) {
     ZETASQL_RET_CHECK(join->on_clause() == nullptr);  // Can't have both.
     if (!expect_join_condition) {
       return MakeSqlErrorAt(join->using_clause())

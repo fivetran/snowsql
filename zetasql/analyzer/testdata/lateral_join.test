@@ -1,4 +1,4 @@
-select * from TestTable as A, lateral (select * from TestTable as B);
+select * from TestTable as A{{,| inner join}} lateral (select * from TestTable as B);
 --
 QueryStmt
 +-output_column_list=
