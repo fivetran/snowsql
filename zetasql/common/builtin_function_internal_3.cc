@@ -3846,6 +3846,57 @@ void GetSnowflakeBitwiseFunctions(TypeFactory* type_factory,
                   FunctionOptions().set_alias_name("bit_xor"));
 }
 
+void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
+                                                const ZetaSQLBuiltinFunctionOptions& options,
+                                                NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  // BOOLAND
+  InsertFunction(
+      functions, options, "booland", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_BOOLAND_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_BOOLAND_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // BOOLNOT
+  InsertFunction(
+      functions, options, "boolnot", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1},
+        FN_BOOLNOT, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // BOOLOR
+  InsertFunction(
+      functions, options, "boolor", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_BOOLOR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_BOOLOR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // BOOLXOR
+  InsertFunction(
+      functions, options, "boolxor", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_BOOLXOR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_BOOLXOR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // ZEROIFNULL(expr1): Returns 0 if its argument is null; otherwise, returns its argument.
+  InsertSimpleFunction(
+      functions, options, "zeroifnull", SCALAR,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_ZEROIFNULL}});
+}
+
 /* Snowflake specific functions END */
 
 }  // namespace zetasql

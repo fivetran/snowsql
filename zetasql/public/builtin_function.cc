@@ -150,6 +150,7 @@ absl::Status GetZetaSQLFunctionsAndTypes(
   /* Snowflake functions START */
   GetSnowflakeAggregateFunctions(type_factory, options, functions);
   GetSnowflakeBitwiseFunctions(type_factory, options, functions);
+  GetSnowflakeConditionalExpressionFunctions(type_factory, options, functions);
   /* Snowflake functions END */
 
   return absl::OkStatus();
