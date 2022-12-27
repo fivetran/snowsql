@@ -3929,6 +3929,12 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {bool_type, {bignumeric_type}, FN_TO_BOOLEAN_BIGNUMERIC, has_bignumeric_type_argument},
        {bool_type, {string_type}, FN_TO_BOOLEAN_STRING},
        {bool_type, {bool_type}, FN_TO_BOOLEAN_BOOL}});
+
+  // TRY_TO_BOOLEAN
+  InsertFunction(
+      functions, options, "try_to_boolean", SCALAR,
+      {{bool_type, {string_type}, FN_TRY_TO_BOOLEAN_STRING},
+       {bool_type, {bool_type}, FN_TRY_TO_BOOLEAN_BOOL}});
 }
 
 /* Snowflake specific functions END */

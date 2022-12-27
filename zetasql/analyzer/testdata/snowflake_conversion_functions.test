@@ -117,3 +117,45 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+#
+# TRY_TO_BOOLEAN( <string_expr> )
+#
+select try_to_boolean(cast({{ 1 AS INT64 | 'true' as string | true as BOOL }}));
+--
+ALTERNATION GROUP:  1 AS INT64 
+--
+ERROR: No matching signature for function TRY_TO_BOOLEAN for argument types: INT64. Supported signatures: TRY_TO_BOOLEAN(STRING); TRY_TO_BOOLEAN(BOOL) [at 1:8]
+select try_to_boolean(cast( 1 AS INT64 ));
+       ^
+--
+ALTERNATION GROUP:  'true' as string 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_boolean(STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="true", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  true as BOOL 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_boolean(BOOL) -> BOOL)
+    |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==
