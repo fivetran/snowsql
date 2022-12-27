@@ -164,7 +164,7 @@ QueryStmt
 # TO_DOUBLE( <expr> [, '<format>' ] )
 #
 [language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
-select to_double(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | 'true' as string | true as BOOL }}));
+select to_double(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | '1.23' as string | true as BOOL }}));
 --
 ALTERNATION GROUPS:
      1 AS INT32 
@@ -249,7 +249,7 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 --
-ALTERNATION GROUP:  'true' as string 
+ALTERNATION GROUP:  '1.23' as string 
 --
 QueryStmt
 +-output_column_list=
@@ -260,7 +260,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:to_double(STRING, optional(0) STRING) -> DOUBLE)
-    |     +-Literal(type=STRING, value="true", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -291,6 +291,57 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:to_double(STRING, optional(1) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="123.45-")
+    |     +-Literal(type=STRING, value="999.99MI")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TRY_TO_DOUBLE( <expr> [, '<format>' ] )
+#
+select try_to_double(cast({{ 1 AS INT64 | 1 as Double }}));
+--
+ALTERNATION GROUP:  1 AS INT64 
+--
+ERROR: No matching signature for function TRY_TO_DOUBLE for argument types: INT64. Supported signature: TRY_TO_DOUBLE(STRING, [STRING]) [at 1:8]
+select try_to_double(cast( 1 AS INT64 ));
+       ^
+--
+ALTERNATION GROUP:  1 as Double 
+--
+ERROR: No matching signature for function TRY_TO_DOUBLE for argument types: DOUBLE. Supported signature: TRY_TO_DOUBLE(STRING, [STRING]) [at 1:8]
+select try_to_double(cast( 1 as Double ));
+       ^
+==
+
+select try_to_double('123.45');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_double(STRING, optional(0) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="123.45")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+select try_to_double('123.45-', '999.99MI');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_double(STRING, optional(1) STRING) -> DOUBLE)
     |     +-Literal(type=STRING, value="123.45-")
     |     +-Literal(type=STRING, value="999.99MI")
     +-input_scan=

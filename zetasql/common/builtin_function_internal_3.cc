@@ -3948,6 +3948,11 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {double_type, {bignumeric_type}, FN_TO_DOUBLE_BIGNUMERIC, has_bignumeric_type_argument},
        {double_type, {string_type, {string_type, OPTIONAL}}, FN_TO_DOUBLE_STRING},
        {double_type, {bool_type}, FN_TO_DOUBLE_BOOL}});
+
+  // TRY_TO_DOUBLE
+  InsertFunction(
+      functions, options, "try_to_double", SCALAR,
+      {{double_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_DOUBLE}});
 }
 
 /* Snowflake specific functions END */
