@@ -1,0 +1,406 @@
+#
+# TO_BOOLEAN( <text_or_numeric_expr> )
+#
+[language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
+select to_boolean(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | 'true' as string | true as BOOL }}));
+--
+ALTERNATION GROUPS:
+     1 AS INT32 
+     1 AS INT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 AS UINT32 
+     1 AS UINT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(UINT64) -> BOOL)
+    |     +-Literal(type=UINT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 as float32 
+     1 AS FLOAT64 
+     1 as float 
+     1 as Double 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(DOUBLE) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as numeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(NUMERIC) -> BOOL)
+    |     +-Literal(type=NUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as bignumeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(BIGNUMERIC) -> BOOL)
+    |     +-Literal(type=BIGNUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  'true' as string 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="true", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  true as BOOL 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(BOOL) -> BOOL)
+    |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TRY_TO_BOOLEAN( <string_expr> )
+#
+select try_to_boolean(cast({{ 1 AS INT64 | 'true' as string | true as BOOL }}));
+--
+ALTERNATION GROUP:  1 AS INT64 
+--
+ERROR: No matching signature for function TRY_TO_BOOLEAN for argument types: INT64. Supported signatures: TRY_TO_BOOLEAN(STRING); TRY_TO_BOOLEAN(BOOL) [at 1:8]
+select try_to_boolean(cast( 1 AS INT64 ));
+       ^
+--
+ALTERNATION GROUP:  'true' as string 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_boolean(STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="true", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  true as BOOL 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_boolean(BOOL) -> BOOL)
+    |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TO_DOUBLE( <expr> [, '<format>' ] )
+#
+[language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
+select to_double(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | '1.23' as string | true as BOOL }}));
+--
+ALTERNATION GROUPS:
+     1 AS INT32 
+     1 AS INT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(INT64) -> DOUBLE)
+    |     +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 AS UINT32 
+     1 AS UINT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(UINT64) -> DOUBLE)
+    |     +-Literal(type=UINT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 as float32 
+     1 AS FLOAT64 
+     1 as float 
+     1 as Double 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(DOUBLE) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as numeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(NUMERIC) -> DOUBLE)
+    |     +-Literal(type=NUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as bignumeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(BIGNUMERIC) -> DOUBLE)
+    |     +-Literal(type=BIGNUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  '1.23' as string 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(STRING, optional(0) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  true as BOOL 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(BOOL) -> DOUBLE)
+    |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+select to_double('123.45-', '999.99MI');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(STRING, optional(1) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="123.45-")
+    |     +-Literal(type=STRING, value="999.99MI")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TRY_TO_DOUBLE( <expr> [, '<format>' ] )
+#
+select try_to_double(cast({{ 1 AS INT64 | 1 as Double }}));
+--
+ALTERNATION GROUP:  1 AS INT64 
+--
+ERROR: No matching signature for function TRY_TO_DOUBLE for argument types: INT64. Supported signature: TRY_TO_DOUBLE(STRING, [STRING]) [at 1:8]
+select try_to_double(cast( 1 AS INT64 ));
+       ^
+--
+ALTERNATION GROUP:  1 as Double 
+--
+ERROR: No matching signature for function TRY_TO_DOUBLE for argument types: DOUBLE. Supported signature: TRY_TO_DOUBLE(STRING, [STRING]) [at 1:8]
+select try_to_double(cast( 1 as Double ));
+       ^
+==
+
+select try_to_double('123.45');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_double(STRING, optional(0) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="123.45")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+select try_to_double('123.45-', '999.99MI');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:try_to_double(STRING, optional(1) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="123.45-")
+    |     +-Literal(type=STRING, value="999.99MI")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TRY_TO_DATE( <string_expr> [, <format> ] )
+#
+select try_to_date('31-01-2019', 'DD-MM-YYYY'), try_to_date('2018-09-15'), try_to_date('Invalid');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DATE]
+| +-$query.$col2#2 AS `$col2` [DATE]
+| +-$query.$col3#3 AS `$col3` [DATE]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[$col1#1, $col2#2, $col3#3]
+    +-expr_list=
+    | +-$col1#1 :=
+    | | +-FunctionCall(ZetaSQL:try_to_date(STRING, optional(1) STRING) -> DATE)
+    | |   +-Literal(type=STRING, value="31-01-2019")
+    | |   +-Literal(type=STRING, value="DD-MM-YYYY")
+    | +-$col2#2 :=
+    | | +-FunctionCall(ZetaSQL:try_to_date(STRING, optional(0) STRING) -> DATE)
+    | |   +-Literal(type=STRING, value="2018-09-15")
+    | +-$col3#3 :=
+    |   +-FunctionCall(ZetaSQL:try_to_date(STRING, optional(0) STRING) -> DATE)
+    |     +-Literal(type=STRING, value="Invalid")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TRY_TO_TIME( <string_expr> [, <format> ] )
+#
+[language_features=V_1_2_CIVIL_TIME]
+select try_to_time('12:30:00', 'HH:MI:SS'), try_to_time('12:30:00'), try_to_time('Invalid');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col2#2 AS `$col2` [TIME]
+| +-$query.$col3#3 AS `$col3` [TIME]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[$col1#1, $col2#2, $col3#3]
+    +-expr_list=
+    | +-$col1#1 :=
+    | | +-FunctionCall(ZetaSQL:try_to_time(STRING, optional(1) STRING) -> TIME)
+    | |   +-Literal(type=STRING, value="12:30:00")
+    | |   +-Literal(type=STRING, value="HH:MI:SS")
+    | +-$col2#2 :=
+    | | +-FunctionCall(ZetaSQL:try_to_time(STRING, optional(0) STRING) -> TIME)
+    | |   +-Literal(type=STRING, value="12:30:00")
+    | +-$col3#3 :=
+    |   +-FunctionCall(ZetaSQL:try_to_time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="Invalid")
+    +-input_scan=
+      +-SingleRowScan
+==
