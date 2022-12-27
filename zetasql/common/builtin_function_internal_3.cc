@@ -3916,6 +3916,7 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   has_bignumeric_type_argument.set_constraints(&HasBigNumericTypeArgument);
 
   const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
   const FunctionOptions fn_options;
 
   // TO_BOOLEAN
@@ -3935,6 +3936,18 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
       functions, options, "try_to_boolean", SCALAR,
       {{bool_type, {string_type}, FN_TRY_TO_BOOLEAN_STRING},
        {bool_type, {bool_type}, FN_TRY_TO_BOOLEAN_BOOL}});
+
+  // TO_DOUBLE
+  // Let INT32 -> INT64, UINT32 -> UINT64, and FLOAT -> DOUBLE.
+  InsertFunction(
+      functions, options, "to_double", SCALAR,
+      {{double_type, {int64_type}, FN_TO_DOUBLE_INT64},
+       {double_type, {uint64_type}, FN_TO_DOUBLE_UINT64},
+       {double_type, {double_type}, FN_TO_DOUBLE_DOUBLE},
+       {double_type, {numeric_type}, FN_TO_DOUBLE_NUMERIC, has_numeric_type_argument},
+       {double_type, {bignumeric_type}, FN_TO_DOUBLE_BIGNUMERIC, has_bignumeric_type_argument},
+       {double_type, {string_type, {string_type, OPTIONAL}}, FN_TO_DOUBLE_STRING},
+       {double_type, {bool_type}, FN_TO_DOUBLE_BOOL}});
 }
 
 /* Snowflake specific functions END */

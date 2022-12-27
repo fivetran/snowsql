@@ -1,7 +1,7 @@
-[language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
 #
 # TO_BOOLEAN( <text_or_numeric_expr> )
 #
+[language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
 select to_boolean(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | 'true' as string | true as BOOL }}));
 --
 ALTERNATION GROUPS:
@@ -156,6 +156,143 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:try_to_boolean(BOOL) -> BOOL)
     |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TO_DOUBLE( <expr> [, '<format>' ] )
+#
+[language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
+select to_double(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | 'true' as string | true as BOOL }}));
+--
+ALTERNATION GROUPS:
+     1 AS INT32 
+     1 AS INT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(INT64) -> DOUBLE)
+    |     +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 AS UINT32 
+     1 AS UINT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(UINT64) -> DOUBLE)
+    |     +-Literal(type=UINT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 as float32 
+     1 AS FLOAT64 
+     1 as float 
+     1 as Double 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(DOUBLE) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as numeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(NUMERIC) -> DOUBLE)
+    |     +-Literal(type=NUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as bignumeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(BIGNUMERIC) -> DOUBLE)
+    |     +-Literal(type=BIGNUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  'true' as string 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(STRING, optional(0) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="true", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  true as BOOL 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(BOOL) -> DOUBLE)
+    |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+select to_double('123.45-', '999.99MI');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_double(STRING, optional(1) STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="123.45-")
+    |     +-Literal(type=STRING, value="999.99MI")
     +-input_scan=
       +-SingleRowScan
 ==

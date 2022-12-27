@@ -62,7 +62,7 @@ enum FunctionSignatureId {
   // 100000-100099 Snowflake Aggregate functions                (NextId: 100008)
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
-  // 100300-100399 Snowflake Conversion functions               (NextId: 100309)
+  // 100300-100399 Snowflake Conversion functions               (NextId: 100316)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1203,4 +1203,11 @@ enum FunctionSignatureId {
   FN_TO_BOOLEAN_BOOL = 100306;            // to_boolean(BOOL) -> bool
   FN_TRY_TO_BOOLEAN_STRING = 100307;      // to_boolean(STRING) -> bool
   FN_TRY_TO_BOOLEAN_BOOL = 100308;        // to_boolean(BOOL) -> bool
+  FN_TO_DOUBLE_INT64 = 100309;            // to_double(INT64) -> DOUBLE
+  FN_TO_DOUBLE_UINT64 = 100310;           // to_double(UINT64) -> DOUBLE
+  FN_TO_DOUBLE_DOUBLE = 100311;           // to_double(DOUBLE) -> DOUBLE
+  FN_TO_DOUBLE_NUMERIC = 100312;          // to_double(NUMERIC) -> DOUBLE
+  FN_TO_DOUBLE_BIGNUMERIC = 100313;       // to_double(BIGNUMERIC) -> DOUBLE
+  FN_TO_DOUBLE_STRING = 100314;           // to_double(STRING, STRING) -> DOUBLE
+  FN_TO_DOUBLE_BOOL = 100315;             // to_double(BOOL) -> DOUBLE
 }
