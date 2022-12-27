@@ -1,0 +1,119 @@
+[language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
+#
+# TO_BOOLEAN( <text_or_numeric_expr> )
+#
+select to_boolean(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | 'true' as string | true as BOOL }}));
+--
+ALTERNATION GROUPS:
+     1 AS INT32 
+     1 AS INT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 AS UINT32 
+     1 AS UINT64 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(UINT64) -> BOOL)
+    |     +-Literal(type=UINT64, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 as float32 
+     1 AS FLOAT64 
+     1 as float 
+     1 as Double 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(DOUBLE) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as numeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(NUMERIC) -> BOOL)
+    |     +-Literal(type=NUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1.23 as bignumeric 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(BIGNUMERIC) -> BOOL)
+    |     +-Literal(type=BIGNUMERIC, value=1.23, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  'true' as string 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="true", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  true as BOOL 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:to_boolean(BOOL) -> BOOL)
+    |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+==

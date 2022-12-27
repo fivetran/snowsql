@@ -3899,6 +3899,38 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
         FN_ZEROIFNULL, has_all_evaluated_to_numeric_arguments}});
 }
 
+void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
+                                     const ZetaSQLBuiltinFunctionOptions& options,
+                                     NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+  const Type* int64_type = type_factory->get_int64();
+  const Type* uint64_type = type_factory->get_uint64();
+  const Type* double_type = type_factory->get_double();
+  const Type* numeric_type = type_factory->get_numeric();
+  const Type* bignumeric_type = type_factory->get_bignumeric();
+  const Type* string_type = type_factory->get_string();
+
+  FunctionSignatureOptions has_numeric_type_argument;
+  has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
+  FunctionSignatureOptions has_bignumeric_type_argument;
+  has_bignumeric_type_argument.set_constraints(&HasBigNumericTypeArgument);
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  // TO_BOOLEAN
+  // Let INT32 -> INT64, UINT32 -> UINT64, and FLOAT -> DOUBLE.
+  InsertFunction(
+      functions, options, "to_boolean", SCALAR,
+      {{bool_type, {int64_type}, FN_TO_BOOLEAN_INT64},
+       {bool_type, {uint64_type}, FN_TO_BOOLEAN_UINT64},
+       {bool_type, {double_type}, FN_TO_BOOLEAN_DOUBLE},
+       {bool_type, {numeric_type}, FN_TO_BOOLEAN_NUMERIC, has_numeric_type_argument},
+       {bool_type, {bignumeric_type}, FN_TO_BOOLEAN_BIGNUMERIC, has_bignumeric_type_argument},
+       {bool_type, {string_type}, FN_TO_BOOLEAN_STRING},
+       {bool_type, {bool_type}, FN_TO_BOOLEAN_BOOL}});
+}
+
 /* Snowflake specific functions END */
 
 }  // namespace zetasql
