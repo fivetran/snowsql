@@ -1,0 +1,437 @@
+#
+# BOOLAND( <expr1> , <expr2> )
+#
+SELECT BOOLAND({{1234, '1234'|1234, 1234|12.34, 1234|12.34, 12.34|NULL, 1234|NULL, NULL}}) AS booland
+--
+ALTERNATION GROUP: 1234, '1234'
+--
+QueryStmt
++-output_column_list=
+| +-$query.booland#1 AS booland [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.booland#1]
+    +-expr_list=
+    | +-booland#1 :=
+    |   +-FunctionCall(ZetaSQL:booland(INT64, STRING) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 1234, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.booland#1 AS booland [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.booland#1]
+    +-expr_list=
+    | +-booland#1 :=
+    |   +-FunctionCall(ZetaSQL:booland(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.booland#1 AS booland [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.booland#1]
+    +-expr_list=
+    | +-booland#1 :=
+    |   +-FunctionCall(ZetaSQL:booland(DOUBLE, INT64) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34, 12.34
+--
+QueryStmt
++-output_column_list=
+| +-$query.booland#1 AS booland [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.booland#1]
+    +-expr_list=
+    | +-booland#1 :=
+    |   +-FunctionCall(ZetaSQL:booland(DOUBLE, DOUBLE) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.booland#1 AS booland [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.booland#1]
+    +-expr_list=
+    | +-booland#1 :=
+    |   +-FunctionCall(ZetaSQL:booland(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL, NULL
+--
+QueryStmt
++-output_column_list=
+| +-$query.booland#1 AS booland [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.booland#1]
+    +-expr_list=
+    | +-booland#1 :=
+    |   +-FunctionCall(ZetaSQL:booland(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# BOOLNOT( <expr1> )
+#
+SELECT BOOLNOT({{1234|'1234'|12.34|NULL}}) AS boolnot
+--
+ALTERNATION GROUP: 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolnot#1 AS boolnot [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolnot#1]
+    +-expr_list=
+    | +-boolnot#1 :=
+    |   +-FunctionCall(ZetaSQL:boolnot(INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: '1234'
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolnot#1 AS boolnot [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolnot#1]
+    +-expr_list=
+    | +-boolnot#1 :=
+    |   +-FunctionCall(ZetaSQL:boolnot(STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolnot#1 AS boolnot [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolnot#1]
+    +-expr_list=
+    | +-boolnot#1 :=
+    |   +-FunctionCall(ZetaSQL:boolnot(DOUBLE) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolnot#1 AS boolnot [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolnot#1]
+    +-expr_list=
+    | +-boolnot#1 :=
+    |   +-FunctionCall(ZetaSQL:boolnot(INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# BOOLOR( <expr1> , <expr2> )
+#
+SELECT BOOLOR({{1234, '1234'|1234, 1234|12.34, 1234|12.34, 12.34|NULL, 1234|NULL, NULL}}) AS boolor
+--
+ALTERNATION GROUP: 1234, '1234'
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolor#1 AS boolor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolor#1]
+    +-expr_list=
+    | +-boolor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolor(INT64, STRING) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 1234, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolor#1 AS boolor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolor#1]
+    +-expr_list=
+    | +-boolor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolor(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolor#1 AS boolor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolor#1]
+    +-expr_list=
+    | +-boolor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolor(DOUBLE, INT64) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34, 12.34
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolor#1 AS boolor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolor#1]
+    +-expr_list=
+    | +-boolor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolor(DOUBLE, DOUBLE) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolor#1 AS boolor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolor#1]
+    +-expr_list=
+    | +-boolor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolor(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL, NULL
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolor#1 AS boolor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolor#1]
+    +-expr_list=
+    | +-boolor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolor(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# BOOLXOR( <expr1> , <expr2> )
+#
+SELECT BOOLXOR({{1234, '1234'|1234, 1234|12.34, 1234|12.34, 12.34|NULL, 1234|NULL, NULL}}) AS boolxor
+--
+ALTERNATION GROUP: 1234, '1234'
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolxor#1 AS boolxor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolxor#1]
+    +-expr_list=
+    | +-boolxor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolxor(INT64, STRING) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 1234, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolxor#1 AS boolxor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolxor#1]
+    +-expr_list=
+    | +-boolxor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolxor(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=1234)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolxor#1 AS boolxor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolxor#1]
+    +-expr_list=
+    | +-boolxor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolxor(DOUBLE, INT64) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34, 12.34
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolxor#1 AS boolxor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolxor#1]
+    +-expr_list=
+    | +-boolxor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolxor(DOUBLE, DOUBLE) -> BOOL)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL, 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolxor#1 AS boolxor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolxor#1]
+    +-expr_list=
+    | +-boolxor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolxor(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL, NULL
+--
+QueryStmt
++-output_column_list=
+| +-$query.boolxor#1 AS boolxor [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.boolxor#1]
+    +-expr_list=
+    | +-boolxor#1 :=
+    |   +-FunctionCall(ZetaSQL:boolxor(INT64, INT64) -> BOOL)
+    |     +-Literal(type=INT64, value=NULL)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# ZEROIFNULL( <expr1> )
+#
+SELECT ZEROIFNULL({{1234|'1234'|12.34|NULL}}) AS zeroifnull
+--
+ALTERNATION GROUP: 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(INT64) -> DOUBLE)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: '1234'
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(STRING) -> DOUBLE)
+    |     +-Literal(type=STRING, value="1234")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(DOUBLE) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(INT64) -> DOUBLE)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
+==

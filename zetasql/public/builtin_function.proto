@@ -59,8 +59,9 @@ enum FunctionSignatureId {
 
   // Snowflake FunctionSignatureIds are assigned in ranges:
   //
-  // 100000-100099 Snowflake Aggregate functions     (NextId: 100008)
-  // 100100-100199 Snowflake Bitwise functions       (NextId: 100109)
+  // 100000-100099 Snowflake Aggregate functions                (NextId: 100008)
+  // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
+  // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1180,4 +1181,14 @@ enum FunctionSignatureId {
   FN_BIT_BIT_SHIFT_RIGHT = 100106;      // bitshiftright(ARG_TYPE_ANY_1, INT64) -> INT64
   FN_BIT_XOR_SAME_ARGS = 100107;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
   FN_BIT_XOR_DIFF_ARGS = 100108;        // bitxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> INT64
+
+  // Snowflake Conditional expression functions
+  FN_BOOLAND_SAME_ARGS = 100200;        // booland(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
+  FN_BOOLAND_DIFF_ARGS = 100201;        // booland(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
+  FN_BOOLNOT = 100202;                  // boolnot(ARG_TYPE_ANY_1) -> bool
+  FN_BOOLOR_SAME_ARGS = 100203;         // boolor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
+  FN_BOOLOR_DIFF_ARGS = 100204;         // boolor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
+  FN_BOOLXOR_SAME_ARGS = 100205;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
+  FN_BOOLXOR_DIFF_ARGS = 100206;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
+  FN_ZEROIFNULL = 100207;               // zeroifnull(ARG_TYPE_ANY_1) -> double
 }
