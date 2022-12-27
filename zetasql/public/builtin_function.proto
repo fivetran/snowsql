@@ -62,7 +62,7 @@ enum FunctionSignatureId {
   // 100000-100099 Snowflake Aggregate functions                (NextId: 100008)
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
-  // 100300-100399 Snowflake Conversion functions               (NextId: 100317)
+  // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1211,4 +1211,6 @@ enum FunctionSignatureId {
   FN_TO_DOUBLE_STRING = 100314;           // to_double(STRING, <STRING>) -> DOUBLE
   FN_TO_DOUBLE_BOOL = 100315;             // to_double(BOOL) -> DOUBLE
   FN_TRY_TO_DOUBLE = 100316;              // try_to_double(STRING, <STRING>) -> DOUBLE
+  FN_TRY_TO_DATE = 100317;                // try_to_date(STRING, <STRING>) -> DATE
+  FN_TRY_TO_TIME = 100318;                // try_to_time(STRING, <STRING>) -> TIME
 }

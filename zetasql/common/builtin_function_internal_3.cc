@@ -3909,6 +3909,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* numeric_type = type_factory->get_numeric();
   const Type* bignumeric_type = type_factory->get_bignumeric();
   const Type* string_type = type_factory->get_string();
+  const Type* date_type = type_factory->get_date();
+  const Type* time_type = type_factory->get_time();
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -3953,6 +3955,16 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "try_to_double", SCALAR,
       {{double_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_DOUBLE}});
+
+  // TRY_TO_DATE
+  InsertFunction(
+      functions, options, "try_to_date", SCALAR,
+      {{date_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_DATE}});
+
+  // TRY_TO_TIME
+  InsertFunction(
+      functions, options, "try_to_time", SCALAR,
+      {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
 }
 
 /* Snowflake specific functions END */

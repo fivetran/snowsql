@@ -347,3 +347,60 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+#
+# TRY_TO_DATE( <string_expr> [, <format> ] )
+#
+select try_to_date('31-01-2019', 'DD-MM-YYYY'), try_to_date('2018-09-15'), try_to_date('Invalid');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DATE]
+| +-$query.$col2#2 AS `$col2` [DATE]
+| +-$query.$col3#3 AS `$col3` [DATE]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[$col1#1, $col2#2, $col3#3]
+    +-expr_list=
+    | +-$col1#1 :=
+    | | +-FunctionCall(ZetaSQL:try_to_date(STRING, optional(1) STRING) -> DATE)
+    | |   +-Literal(type=STRING, value="31-01-2019")
+    | |   +-Literal(type=STRING, value="DD-MM-YYYY")
+    | +-$col2#2 :=
+    | | +-FunctionCall(ZetaSQL:try_to_date(STRING, optional(0) STRING) -> DATE)
+    | |   +-Literal(type=STRING, value="2018-09-15")
+    | +-$col3#3 :=
+    |   +-FunctionCall(ZetaSQL:try_to_date(STRING, optional(0) STRING) -> DATE)
+    |     +-Literal(type=STRING, value="Invalid")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# TRY_TO_TIME( <string_expr> [, <format> ] )
+#
+[language_features=V_1_2_CIVIL_TIME]
+select try_to_time('12:30:00', 'HH:MI:SS'), try_to_time('12:30:00'), try_to_time('Invalid');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col2#2 AS `$col2` [TIME]
+| +-$query.$col3#3 AS `$col3` [TIME]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[$col1#1, $col2#2, $col3#3]
+    +-expr_list=
+    | +-$col1#1 :=
+    | | +-FunctionCall(ZetaSQL:try_to_time(STRING, optional(1) STRING) -> TIME)
+    | |   +-Literal(type=STRING, value="12:30:00")
+    | |   +-Literal(type=STRING, value="HH:MI:SS")
+    | +-$col2#2 :=
+    | | +-FunctionCall(ZetaSQL:try_to_time(STRING, optional(0) STRING) -> TIME)
+    | |   +-Literal(type=STRING, value="12:30:00")
+    | +-$col3#3 :=
+    |   +-FunctionCall(ZetaSQL:try_to_time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="Invalid")
+    +-input_scan=
+      +-SingleRowScan
+==
