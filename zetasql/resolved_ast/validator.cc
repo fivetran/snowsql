@@ -1188,8 +1188,28 @@ absl::Status Validator::ValidateResolvedJoinScan(
 
   VALIDATOR_RET_CHECK(nullptr != scan->left_scan());
   ZETASQL_RETURN_IF_ERROR(ValidateResolvedScan(scan->left_scan(), visible_parameters));
+
   VALIDATOR_RET_CHECK(nullptr != scan->right_scan());
-  ZETASQL_RETURN_IF_ERROR(ValidateResolvedScan(scan->right_scan(), visible_parameters));
+  std::set<ResolvedColumn> right_scan_visible_parameters(
+      visible_parameters.begin(), visible_parameters.end());
+  if (scan->lateral()) {
+    // std::set<ResolvedColumn> left_scan_columns(scan->left_scan()->column_list().begin(), scan->left_scan()->column_list().end());
+    // ZETASQL_RETURN_IF_ERROR(
+    //     AddColumnList(scan->left_scan()->column_list(), scan->right_scan()->column_list()));
+
+    // scan->right_scan()->column_list();
+
+    ZETASQL_RETURN_IF_ERROR(
+        AddColumnList(scan->left_scan()->column_list(), &right_scan_visible_parameters));
+
+    // for (int i = 0; i < scan->left_scan()->column_list().size(); i++) {
+    //   scan->right_scan()->add_column_list(scan->left_scan()->column_list(i));
+    // }
+
+    // std::set<ResolvedColumn> left_scan_columns(
+    //     scan->left_scan()->column_list().begin(), scan->left_scan()->column_list().end());
+  }
+  ZETASQL_RETURN_IF_ERROR(ValidateResolvedScan(scan->right_scan(), right_scan_visible_parameters));
 
   scan->join_type();  // Mark field as visited.
   scan->lateral();  // Mark field as visited.

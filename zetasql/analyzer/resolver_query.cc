@@ -4667,6 +4667,9 @@ absl::Status Resolver::ResolveTableExpression(
           output_name_list);
 
     case AST_TABLE_SUBQUERY:
+      if (table_expr->GetAsOrDie<ASTTableSubquery>()->alias() != nullptr) {
+        int a = 1;
+      }
       return ResolveTableSubquery(table_expr->GetAsOrDie<ASTTableSubquery>(),
                                   external_scope, output, output_name_list);
 
@@ -6290,9 +6293,28 @@ absl::Status Resolver::ResolveJoin(
     // scope object available for parenthesized joins.
     scope_for_rhs = external_scope;
   } else {
-    scope_for_rhs_storage =
-        std::make_unique<NameScope>(external_scope, name_list_lhs);
-    scope_for_rhs = scope_for_rhs_storage.get();
+    if (join->lateral()) {
+      std::shared_ptr<NameList> name_list_for_rhs_storage(new NameList);
+      ZETASQL_RETURN_IF_ERROR(
+          name_list_for_rhs_storage->MergeFrom(*name_list_lhs, join->lhs()->alias_location()));
+
+      // todo: to make ColumnRef's [is_correlated == true] => add to correleted columns set in NameScope
+      // note: see validator.cc -> "case RESOLVED_COLUMN_REF: {"
+      CorrelatedColumnsSet* correlated_columns_set = new CorrelatedColumnsSet();
+      for (int i = 0; i < resolved_lhs->column_list().size(); i++) {
+        correlated_columns_set->insert({resolved_lhs->column_list().at(i), true});
+      }
+
+      scope_for_rhs_storage =
+          std::make_unique<NameScope>(external_scope, name_list_for_rhs_storage, correlated_columns_set);
+    } else {
+      scope_for_rhs_storage =
+          std::make_unique<NameScope>(external_scope, name_list_lhs);
+    }
+    // scope_for_rhs = scope_for_rhs_storage.get();
+
+    // todo: any names from 'name_list_lhs' should be marked as is_correlated in ColumnRef's:
+    scope_for_rhs = new NameScope(scope_for_rhs_storage.get(), nullptr);
   }
 
   // Peek at rhs_node to see if we should try to resolve it as an array scan.
@@ -6352,7 +6374,7 @@ absl::Status Resolver::ResolveJoin(
   // Now we're in the normal table-scan case.
   std::unique_ptr<const ResolvedScan> resolved_rhs;
   std::shared_ptr<const NameList> name_list_rhs;
-  ZETASQL_RETURN_IF_ERROR(ResolveTableExpression(join->rhs(), external_scope,
+  ZETASQL_RETURN_IF_ERROR(ResolveTableExpression(join->rhs(), join->lateral() ? scope_for_rhs : external_scope,
                                          scope_for_rhs, &resolved_rhs,
                                          &name_list_rhs));
 
