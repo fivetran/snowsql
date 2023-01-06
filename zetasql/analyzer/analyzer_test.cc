@@ -1720,7 +1720,7 @@ TEST(SQLBuilderTest, WithScanWithJoinScan) {
   auto join_scan =
       MakeResolvedJoinScan({scan_column}, ResolvedJoinScan::INNER,
                            std::move(table_scan1), std::move(table_scan2),
-                           /*join_expr=*/nullptr);
+                           /*join_expr=*/nullptr, /*lateral=*/false);
   std::vector<std::unique_ptr<const ResolvedWithEntry>> with_entry_list;
   with_entry_list.emplace_back(
       MakeResolvedWithEntry(with_query_name, std::move(join_scan)));
