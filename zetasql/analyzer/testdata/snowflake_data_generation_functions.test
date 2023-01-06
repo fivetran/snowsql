@@ -10,7 +10,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := FunctionCall(ZetaSQL:random(optional(0) INT64) -> INT64)
+    | +-$col1#1 := FunctionCall(ZetaSQL:random(optional <T1>) -> INT64)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -18,9 +18,22 @@ QueryStmt
 [language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE]
 select random(cast({{ 1 AS INT32 | 1 AS INT64 | 1 AS UINT32 | 1 AS UINT64 | 1 as float32 | 1 AS FLOAT64 | 1 as float | 1 as Double | 1.23 as numeric | 1.23 as bignumeric | '1.23' as string | true as BOOL }}));
 --
-ALTERNATION GROUPS:
-     1 AS INT32 
-     1 AS INT64 
+ALTERNATION GROUP:  1 AS INT32 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:random(optional(1) INT32) -> INT64)
+    |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1 AS INT64 
 --
 QueryStmt
 +-output_column_list=
@@ -35,9 +48,22 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 --
-ALTERNATION GROUPS:
-     1 AS UINT32 
-     1 AS UINT64 
+ALTERNATION GROUP:  1 AS UINT32 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:random(optional(1) UINT32) -> INT64)
+    |     +-Literal(type=UINT32, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP:  1 AS UINT64 
 --
 QueryStmt
 +-output_column_list=
@@ -54,8 +80,23 @@ QueryStmt
 --
 ALTERNATION GROUPS:
      1 as float32 
-     1 AS FLOAT64 
      1 as float 
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:random(optional(1) FLOAT) -> INT64)
+    |     +-Literal(type=FLOAT, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUPS:
+     1 AS FLOAT64 
      1 as Double 
 --
 QueryStmt
@@ -118,7 +159,45 @@ QueryStmt
 --
 ALTERNATION GROUP:  true as BOOL 
 --
-ERROR: No matching signature for function RANDOM for argument types: BOOL. Supported signatures: RANDOM([INT64]); RANDOM([UINT64]); RANDOM([DOUBLE]); RANDOM([NUMERIC]); RANDOM([BIGNUMERIC]); RANDOM([STRING]) [at 1:8]
+ERROR: No matching signature for function RANDOM for argument types: BOOL. Supported signature: RANDOM([ANY]) [at 1:8]
 select random(cast( true as BOOL ));
        ^
+==
+
+#
+# RANDSTR( <length> , <gen> )
+#
+select randstr(cast({{1 AS INT32|'1.23' as string}}), cast(1 AS INT32));
+--
+ALTERNATION GROUP: 1 AS INT32
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:randstr(INT32, INT32) -> STRING)
+    |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
+    |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: '1.23' as string
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:randstr(STRING, INT32) -> STRING)
+    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
+    |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==

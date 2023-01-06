@@ -1215,10 +1215,7 @@ enum FunctionSignatureId {
   FN_TRY_TO_TIME = 100318;                // try_to_time(STRING, <STRING>) -> TIME
 
   // Snowflake Data generation functions
-  FN_RANDOM_INT64 = 100400;               // RANDOM(INT64) -> INT64
-  FN_RANDOM_UINT64 = 100401;              // RANDOM(UINT64) -> INT64
-  FN_RANDOM_DOUBLE = 100402;              // RANDOM(DOUBLE) -> INT64
-  FN_RANDOM_NUMERIC = 100403;             // RANDOM(NUMERIC) -> INT64
-  FN_RANDOM_BIGNUMERIC = 100404;          // RANDOM(BIGNUMERIC) -> INT64
-  FN_RANDOM_STRING = 100405;              // RANDOM(STRING) -> INT64
+  FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
+  FN_RANDSTR_SAME_ARGS = 100401;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> STRING
+  FN_RANDSTR_DIFF_ARGS = 100402;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> STRING
 }

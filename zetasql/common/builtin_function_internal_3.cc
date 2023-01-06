@@ -3988,12 +3988,17 @@ void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
   // RANDOM
   InsertFunction(
       functions, options, "random", SCALAR,
-      {{int64_type, {{int64_type, OPTIONAL}}, FN_RANDOM_INT64},
-       {int64_type, {{uint64_type, OPTIONAL}}, FN_RANDOM_UINT64},
-       {int64_type, {{double_type, OPTIONAL}}, FN_RANDOM_DOUBLE},
-       {int64_type, {{numeric_type, OPTIONAL}}, FN_RANDOM_NUMERIC},
-       {int64_type, {{bignumeric_type, OPTIONAL}}, FN_RANDOM_BIGNUMERIC},
-       {int64_type, {{string_type, OPTIONAL}}, FN_RANDOM_STRING}},
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_RANDOM, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // RANDSTR
+  InsertFunction(
+      functions, options, "randstr", SCALAR,
+      {{string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_RANDSTR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_RANDSTR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       fn_options);
 }
 
