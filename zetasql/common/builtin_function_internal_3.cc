@@ -4000,6 +4000,34 @@ void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
        {string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
         FN_RANDSTR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       fn_options);
+
+  // SEQ1
+  InsertFunction(
+      functions, options, "seq1", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ1, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ2
+  InsertFunction(
+      functions, options, "seq2", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ2, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ4
+  InsertFunction(
+      functions, options, "seq4", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ4, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ8
+  InsertFunction(
+      functions, options, "seq8", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ8, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */

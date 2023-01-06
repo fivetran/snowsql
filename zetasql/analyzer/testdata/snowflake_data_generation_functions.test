@@ -201,3 +201,241 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+#
+# SEQ1 / SEQ2 / SEQ4 / SEQ8
+#
+select seq{{1|2|4|8}}({{|0|1|'1.2'}});
+--
+ALTERNATION GROUP: 1,
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := FunctionCall(ZetaSQL:seq1(optional <T1>) -> INT64)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 1,0
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq1(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=0)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 1,1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq1(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 1,'1.2'
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq1(optional(1) STRING) -> INT64)
+    |     +-Literal(type=STRING, value="1.2")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 2,
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := FunctionCall(ZetaSQL:seq2(optional <T1>) -> INT64)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 2,0
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq2(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=0)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 2,1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq2(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 2,'1.2'
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq2(optional(1) STRING) -> INT64)
+    |     +-Literal(type=STRING, value="1.2")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 4,
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := FunctionCall(ZetaSQL:seq4(optional <T1>) -> INT64)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 4,0
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq4(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=0)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 4,1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq4(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 4,'1.2'
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq4(optional(1) STRING) -> INT64)
+    |     +-Literal(type=STRING, value="1.2")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 8,
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := FunctionCall(ZetaSQL:seq8(optional <T1>) -> INT64)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 8,0
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq8(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=0)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 8,1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq8(optional(1) INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 8,'1.2'
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:seq8(optional(1) STRING) -> INT64)
+    |     +-Literal(type=STRING, value="1.2")
+    +-input_scan=
+      +-SingleRowScan
+==

@@ -63,6 +63,7 @@ enum FunctionSignatureId {
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
   // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
+  // 100400-100499 Snowflake Data generation functions          (NextId: 100407)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1218,4 +1219,8 @@ enum FunctionSignatureId {
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
   FN_RANDSTR_SAME_ARGS = 100401;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> STRING
   FN_RANDSTR_DIFF_ARGS = 100402;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> STRING
+  FN_SEQ1 = 100403;                     // SEQ1( [0|1] ) -> INT64
+  FN_SEQ2 = 100404;                     // SEQ2( [0|1] ) -> INT64
+  FN_SEQ4 = 100405;                     // SEQ4( [0|1] ) -> INT64
+  FN_SEQ8 = 100406;                     // SEQ8( [0|1] ) -> INT64
 }
