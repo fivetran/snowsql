@@ -23,3 +23,11 @@ QueryStmt
         |     +-TableScan(column_list=TestTable.[key#4, TestEnum#5, KitchenSink#6], table=TestTable, column_index_list=[0, 1, 2], alias="B")
         +-lateral=TRUE
 ==
+
+# Should be fixed
+select * from TestTable as A, lateral (select * from TestTable as B where B.key = A.key);
+--
+ERROR: Unrecognized name: A [at 1:83]
+...lateral (select * from TestTable as B where B.key = A.key);
+                                                       ^
+==
