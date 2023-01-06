@@ -3967,6 +3967,36 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
       {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
 }
 
+void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
+                                         const ZetaSQLBuiltinFunctionOptions& options,
+                                         NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+  const Type* uint64_type = type_factory->get_uint64();
+  const Type* double_type = type_factory->get_double();
+  const Type* numeric_type = type_factory->get_numeric();
+  const Type* bignumeric_type = type_factory->get_bignumeric();
+  const Type* string_type = type_factory->get_string();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
+
+  // RANDOM
+  InsertFunction(
+      functions, options, "random", SCALAR,
+      {{int64_type, {{int64_type, OPTIONAL}}, FN_RANDOM_INT64},
+       {int64_type, {{uint64_type, OPTIONAL}}, FN_RANDOM_UINT64},
+       {int64_type, {{double_type, OPTIONAL}}, FN_RANDOM_DOUBLE},
+       {int64_type, {{numeric_type, OPTIONAL}}, FN_RANDOM_NUMERIC},
+       {int64_type, {{bignumeric_type, OPTIONAL}}, FN_RANDOM_BIGNUMERIC},
+       {int64_type, {{string_type, OPTIONAL}}, FN_RANDOM_STRING}},
+      fn_options);
+}
+
 /* Snowflake specific functions END */
 
 }  // namespace zetasql
