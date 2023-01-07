@@ -3981,6 +3981,12 @@ void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
       functions, options, "base64_decode_string", SCALAR,
       {{string_type, {string_type, {string_type, OPTIONAL}}, FN_BASE64_DECODE_STRING}},
       fn_options);
+
+  // TRY_BASE64_DECODE_STRING
+  InsertFunction(
+      functions, options, "try_base64_decode_string", SCALAR,
+      {{string_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_BASE64_DECODE_STRING}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
