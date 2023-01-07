@@ -1,0 +1,36 @@
+#
+# BASE64_DECODE_STRING( <input> [ , <alphabet> ] )
+#
+select base64_decode_string('U25vd2ZsYWtl'{{|, '+/='}});
+--
+ALTERNATION GROUP: <empty>
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:base64_decode_string(STRING, optional(0) STRING) -> STRING)
+    |     +-Literal(type=STRING, value="U25vd2ZsYWtl")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: , '+/='
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:base64_decode_string(STRING, optional(1) STRING) -> STRING)
+    |     +-Literal(type=STRING, value="U25vd2ZsYWtl")
+    |     +-Literal(type=STRING, value="+/=")
+    +-input_scan=
+      +-SingleRowScan
+==
