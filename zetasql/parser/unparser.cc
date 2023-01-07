@@ -1470,6 +1470,10 @@ void Unparser::visitASTJoin(const ASTJoin* node, void* data) {
 
   if (node->join_type() == ASTJoin::COMMA) {
     print(",");
+
+    if (node->lateral()) {
+      print("LATERAL");
+    }
   } else {
     println();
     if (node->natural()) {
@@ -1479,6 +1483,10 @@ void Unparser::visitASTJoin(const ASTJoin* node, void* data) {
     print(node->GetSQLForJoinHint());
 
     print("JOIN");
+
+    if (node->lateral()) {
+      print("LATERAL");
+    }
   }
   println();
 

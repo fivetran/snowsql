@@ -1,0 +1,117 @@
+[default no_show_parse_location_text]
+select * from departments as d, lateral (select * from employees as e where e.department_id = d.department_id) as iv2 order by employee_id;
+--
+QueryStatement [0-138]
+  Query [0-138]
+    Select [0-117]
+      SelectList [7-8]
+        SelectColumn [7-8]
+          Star(*) [7-8]
+      FromClause [9-117]
+        Join(COMMA, LATERAL) [14-117]
+          TablePathExpression [14-30]
+            PathExpression [14-25]
+              Identifier(departments) [14-25]
+            Alias [26-30]
+              Identifier(d) [29-30]
+          Location [30-31]
+          TableSubquery [40-117]
+            Query [41-109]
+              Select [41-109]
+                SelectList [48-49]
+                  SelectColumn [48-49]
+                    Star(*) [48-49]
+                FromClause [50-69]
+                  TablePathExpression [55-69]
+                    PathExpression [55-64]
+                      Identifier(employees) [55-64]
+                    Alias [65-69]
+                      Identifier(e) [68-69]
+                WhereClause [70-109]
+                  BinaryExpression(=) [76-109]
+                    PathExpression [76-91]
+                      Identifier(e) [76-77]
+                      Identifier(department_id) [78-91]
+                    PathExpression [94-109]
+                      Identifier(d) [94-95]
+                      Identifier(department_id) [96-109]
+            Alias [111-117]
+              Identifier(iv2) [114-117]
+    OrderBy [118-138]
+      OrderingExpression(ASC) [127-138]
+        PathExpression [127-138]
+          Identifier(employee_id) [127-138]
+--
+SELECT
+  *
+FROM
+  departments AS d, LATERAL
+  (
+    SELECT
+      *
+    FROM
+      employees AS e
+    WHERE
+      e.department_id = d.department_id
+  ) AS iv2
+ORDER BY employee_id
+==
+
+select * from departments as d inner join lateral (select * from employees as e where e.department_id = d.department_id) as iv2 order by employee_id;
+--
+QueryStatement [0-148]
+  Query [0-148]
+    Select [0-127]
+      SelectList [7-8]
+        SelectColumn [7-8]
+          Star(*) [7-8]
+      FromClause [9-127]
+        Join(INNER, LATERAL) [14-127]
+          TablePathExpression [14-30]
+            PathExpression [14-25]
+              Identifier(departments) [14-25]
+            Alias [26-30]
+              Identifier(d) [29-30]
+          Location [31-41]
+          TableSubquery [50-127]
+            Query [51-119]
+              Select [51-119]
+                SelectList [58-59]
+                  SelectColumn [58-59]
+                    Star(*) [58-59]
+                FromClause [60-79]
+                  TablePathExpression [65-79]
+                    PathExpression [65-74]
+                      Identifier(employees) [65-74]
+                    Alias [75-79]
+                      Identifier(e) [78-79]
+                WhereClause [80-119]
+                  BinaryExpression(=) [86-119]
+                    PathExpression [86-101]
+                      Identifier(e) [86-87]
+                      Identifier(department_id) [88-101]
+                    PathExpression [104-119]
+                      Identifier(d) [104-105]
+                      Identifier(department_id) [106-119]
+            Alias [121-127]
+              Identifier(iv2) [124-127]
+    OrderBy [128-148]
+      OrderingExpression(ASC) [137-148]
+        PathExpression [137-148]
+          Identifier(employee_id) [137-148]
+--
+SELECT
+  *
+FROM
+  departments AS d
+  INNER JOIN LATERAL
+  (
+    SELECT
+      *
+    FROM
+      employees AS e
+    WHERE
+      e.department_id = d.department_id
+  ) AS iv2
+ORDER BY employee_id
+==

@@ -1192,6 +1192,7 @@ absl::Status Validator::ValidateResolvedJoinScan(
   ZETASQL_RETURN_IF_ERROR(ValidateResolvedScan(scan->right_scan(), visible_parameters));
 
   scan->join_type();  // Mark field as visited.
+  scan->lateral();  // Mark field as visited.
 
   std::set<ResolvedColumn> left_visible_columns, right_visible_columns;
   ZETASQL_RETURN_IF_ERROR(
