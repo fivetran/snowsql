@@ -3969,6 +3969,7 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
 void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
                                           const ZetaSQLBuiltinFunctionOptions& options,
                                           NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
   const Type* string_type = type_factory->get_string();
 
   const Function::Mode SCALAR = Function::SCALAR;
@@ -3986,6 +3987,18 @@ void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "try_base64_decode_string", SCALAR,
       {{string_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_BASE64_DECODE_STRING}},
+      fn_options);
+
+  // CONTAINS
+  InsertFunction(
+      functions, options, "contains", SCALAR,
+      {{bool_type, {string_type, string_type}, FN_CONTAINS}},
+      fn_options);
+
+  // ENDSWITH
+  InsertFunction(
+      functions, options, "endswith", SCALAR,
+      {{bool_type, {string_type, string_type}, FN_ENDSWITH}},
       fn_options);
 }
 

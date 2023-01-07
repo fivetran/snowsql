@@ -8430,7 +8430,7 @@ reserved_keyword_rule:
     | "WINDOW"
     | "WITH"
     | "UNNEST"
-    | "CONTAINS"
+    //| "CONTAINS"
     | "CUBE"
     | "ESCAPE"
     | "EXCLUDE"
@@ -8620,6 +8620,7 @@ keyword_as_identifier:
     | "WRITE"
     | "ZONE"
     | "DESCRIPTOR"
+    | "CONTAINS"
 
     // Spanner-specific keywords
     | "INTERLEAVE"

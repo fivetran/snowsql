@@ -71,3 +71,43 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+#
+# CONTAINS( <expr1> , <expr2> )
+#
+select contains('1234', '23');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:contains(STRING, STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value="23")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+#
+# ENDSWITH( <expr1> , <expr2> )
+#
+select endswith('1234', '34');
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:endswith(STRING, STRING) -> BOOL)
+    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value="34")
+    +-input_scan=
+      +-SingleRowScan
+==

@@ -63,7 +63,7 @@ enum FunctionSignatureId {
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
   // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
-  // 100500-100599 Snowflake String and binary functions        (NextId: 100502)
+  // 100500-100599 Snowflake String and binary functions        (NextId: 100504)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1218,4 +1218,6 @@ enum FunctionSignatureId {
   // Snowflake String and binary functions
   FN_BASE64_DECODE_STRING = 100500;           // BASE64_DECODE_STRING(STRING, <STRING>) -> STRING
   FN_TRY_BASE64_DECODE_STRING = 100501;       // TRY_BASE64_DECODE_STRING(STRING, <STRING>) -> STRING
+  FN_CONTAINS = 100502;                       // CONTAINS(STRING, STRING) -> BOOL
+  FN_ENDSWITH = 100503;                       // ENDSWITH(STRING, STRING) -> BOOL
 }
