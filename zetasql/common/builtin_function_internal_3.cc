@@ -3971,6 +3971,7 @@ void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
                                           NameToFunctionMap* functions) {
   const Type* bool_type = type_factory->get_bool();
   const Type* string_type = type_factory->get_string();
+  const Type* int64_type = type_factory->get_int64();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
@@ -3999,6 +4000,12 @@ void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "endswith", SCALAR,
       {{bool_type, {string_type, string_type}, FN_ENDSWITH}},
+      fn_options);
+
+  // INSERT
+  InsertFunction(
+      functions, options, "insert", SCALAR,
+      {{string_type, {string_type, int64_type, int64_type, string_type}, FN_INSERT}},
       fn_options);
 }
 
