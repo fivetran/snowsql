@@ -2355,7 +2355,12 @@ value.
               'join_expr',
               'ResolvedExpr',
               tag_id=5,
-              ignorable=IGNORABLE_DEFAULT)
+              ignorable=IGNORABLE_DEFAULT),
+          Field(
+              'lateral',
+              SCALAR_BOOL,
+              tag_id=6,
+              ignorable=IGNORABLE_DEFAULT),
       ])
 
   gen.AddNode(

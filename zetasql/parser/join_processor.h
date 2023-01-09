@@ -395,7 +395,7 @@ ASTNode* JoinRuleAction(const zetasql_bison_parser::location& start_location,
                         const zetasql_bison_parser::location& end_location,
                         ASTNode* lhs, bool opt_natural,
                         ASTJoin::JoinType join_type,
-                        ASTJoin::JoinHint join_hint, ASTNode* opt_hint,
+                        ASTJoin::JoinHint join_hint, ASTNode* opt_hint, bool lateral,
                         ASTNode* table_primary,
                         ASTNode* opt_on_or_using_clause_list,
                         ASTLocation* join_location, BisonParser* parser,
@@ -409,7 +409,7 @@ ASTNode* JoinRuleAction(const zetasql_bison_parser::location& start_location,
 ASTNode* CommaJoinRuleAction(
     const zetasql_bison_parser::location& start_location,
     const zetasql_bison_parser::location& end_location, ASTNode* lhs,
-    ASTNode* table_primary, ASTLocation* comma_location, BisonParser* parser,
+    bool lateral, ASTNode* table_primary, ASTLocation* comma_location, BisonParser* parser,
     ErrorInfo* error_info);
 
 // Performs the transformation algorithm on the expression 'node'.

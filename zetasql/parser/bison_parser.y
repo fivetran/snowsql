@@ -871,7 +871,6 @@ using zetasql::ASTDropStatement;
 
 // These keywords may not be used in the grammar currently but are reserved
 // for future use.
-%token KW_CONTAINS "CONTAINS"
 %token KW_CUBE "CUBE"
 %token KW_ESCAPE "ESCAPE"
 %token KW_EXCLUDE "EXCLUDE"
@@ -1330,6 +1329,7 @@ using zetasql::ASTDropStatement;
 %type <node> opt_input_output_clause
 %type <identifier> opt_language
 %type <language_or_remote_with_connection> opt_language_or_remote_with_connection
+%type <boolean> opt_lateral
 %type <node> opt_like_string_literal
 %type <node> opt_like_path_expression
 %type <node> opt_limit_offset_clause
@@ -5463,6 +5463,12 @@ join_hint:
     | /* Nothing */ { $$ = zetasql::ASTJoin::NO_JOIN_HINT; }
     ;
 
+// Returns true for "LATERAL", false for not-lateral.
+opt_lateral:
+    "LATERAL" { $$ = true; }
+    | /* Nothing */ { $$ = false; }
+    ;
+
 join_input: join | table_primary ;
 
 // This is only used for parenthesized joins. Unparenthesized joins in the FROM
@@ -5473,15 +5479,15 @@ join_input: join | table_primary ;
 // must be processed by TransformJoinExpression in the rule table_primary before
 // the final AST is returned.
 join:
-    join_input opt_natural join_type join_hint "JOIN" opt_hint table_primary
-    opt_on_or_using_clause_list
+    join_input opt_natural join_type join_hint "JOIN" opt_hint opt_lateral
+    table_primary opt_on_or_using_clause_list
       {
         zetasql::parser::ErrorInfo error_info;
         auto *join_location =
             parser->MakeLocation(NonEmptyRangeLocation({@2, @3, @4, @5}));
         auto node = zetasql::parser::JoinRuleAction(
             @1, @$,
-            $1, $2, $3, $4, $6, $7, $8, join_location, parser, &error_info);
+            $1, $2, $3, $4, $6, $7, $8, $9, join_location, parser, &error_info);
         if (node == nullptr) {
           YYERROR_AND_ABORT_AT(error_info.location, error_info.message);
         }
@@ -5492,12 +5498,12 @@ join:
 
 from_clause_contents:
     table_primary
-    | from_clause_contents "," table_primary
+    | from_clause_contents "," opt_lateral table_primary
       {
         zetasql::parser::ErrorInfo error_info;
         auto* comma_location = parser->MakeLocation(@2);
         auto node = zetasql::parser::CommaJoinRuleAction(
-            @1, @3, $1, $3, comma_location, parser, &error_info);
+            @1, @3, $1, $3, $4, comma_location, parser, &error_info);
         if (node == nullptr) {
           YYERROR_AND_ABORT_AT(error_info.location, error_info.message);
         }
@@ -5505,7 +5511,7 @@ from_clause_contents:
         $$ = node;
       }
     | from_clause_contents opt_natural join_type join_hint "JOIN" opt_hint
-      table_primary opt_on_or_using_clause_list
+      opt_lateral table_primary opt_on_or_using_clause_list
       {
         // Give an error if we have a RIGHT or FULL JOIN following a comma
         // join since our left-to-right binding would violate the standard.
@@ -5542,7 +5548,7 @@ from_clause_contents:
             NonEmptyRangeLocation({@2, @3, @4, @5}));
         auto node = zetasql::parser::JoinRuleAction(
             @1, @$,
-            $1, $2, $3, $4, $6, $7, $8,
+            $1, $2, $3, $4, $6, $7, $8, $9,
             join_location,
             parser, &error_info);
         if (node == nullptr) {
@@ -8430,7 +8436,6 @@ reserved_keyword_rule:
     | "WINDOW"
     | "WITH"
     | "UNNEST"
-    | "CONTAINS"
     | "CUBE"
     | "ESCAPE"
     | "EXCLUDE"
