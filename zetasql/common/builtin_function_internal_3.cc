@@ -3971,10 +3971,6 @@ void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
                                          const ZetaSQLBuiltinFunctionOptions& options,
                                          NameToFunctionMap* functions) {
   const Type* int64_type = type_factory->get_int64();
-  const Type* uint64_type = type_factory->get_uint64();
-  const Type* double_type = type_factory->get_double();
-  const Type* numeric_type = type_factory->get_numeric();
-  const Type* bignumeric_type = type_factory->get_bignumeric();
   const Type* string_type = type_factory->get_string();
 
   const Function::Mode SCALAR = Function::SCALAR;
