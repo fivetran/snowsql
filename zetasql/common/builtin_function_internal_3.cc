@@ -3974,6 +3974,8 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
   const Type* int64_type = type_factory->get_int64();
   const Type* string_type = type_factory->get_string();
 
+  const ArrayType* string_array_type = types::StringArrayType();
+
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
   const FunctionOptions fn_options;
@@ -3994,13 +3996,13 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
         FN_REGEXP_LIKE}},
       FunctionOptions().set_alias_name("rlike"));
 
-  // REGEXP_SUBSTR
+  // REGEXP_SUBSTR_ALL
   InsertFunction(
-      functions, options, "regexp_substr", SCALAR,
-      {{string_type,
+      functions, options, "regexp_substr_all", SCALAR,
+      {{string_array_type,
         {string_type, string_type, {int64_type, OPTIONAL},
          {int64_type, OPTIONAL}, {string_type, OPTIONAL}, {int64_type, OPTIONAL}},
-        FN_REGEXP_SUBSTR}},
+        FN_REGEXP_SUBSTR_ALL}},
       fn_options);
 }
 
