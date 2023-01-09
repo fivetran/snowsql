@@ -63,7 +63,7 @@ enum FunctionSignatureId {
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
   // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
-  // 100700-100799 Snowflake Date and time functions            (NextId: 100709)
+  // 100700-100799 Snowflake Date and time functions            (NextId: 100712)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1225,4 +1225,7 @@ enum FunctionSignatureId {
   FN_MONTHNAME_DATE = 100706;                  // MONTHNAME(DATE) -> STRING
   FN_MONTHNAME_DATETIME = 100707;              // MONTHNAME(DATETIME) -> STRING
   FN_MONTHNAME_TIMESTAMP = 100708;             // MONTHNAME(TIMESTAMP) -> STRING
+  FN_NEXT_DAY_DATE = 100709;                   // NEXT_DAY(DATE, VARCHAR) -> DATE
+  FN_NEXT_DAY_DATETIME = 100710;               // NEXT_DAY(DATETIME, VARCHAR) -> DATE
+  FN_NEXT_DAY_TIMESTAMP = 100711;              // NEXT_DAY(TIMESTAMP, VARCHAR) -> DATE
 }

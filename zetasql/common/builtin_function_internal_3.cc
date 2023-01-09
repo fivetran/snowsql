@@ -4003,6 +4003,14 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {string_type, {datetime_type}, FN_MONTHNAME_DATETIME},
        {string_type, {timestamp_type}, FN_MONTHNAME_TIMESTAMP}},
       fn_options);
+
+  // NEXT_DAY
+  InsertFunction(
+      functions, options, "next_day", SCALAR,
+      {{date_type, {date_type, string_type}, FN_NEXT_DAY_DATE},
+       {date_type, {datetime_type, string_type}, FN_NEXT_DAY_DATETIME},
+       {date_type, {timestamp_type, string_type}, FN_NEXT_DAY_TIMESTAMP}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
