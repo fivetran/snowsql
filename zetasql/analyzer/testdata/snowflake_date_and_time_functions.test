@@ -58,3 +58,61 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+#
+# DAYNAME( <date_or_timestamp_expr> )
+#
+[language_features=V_1_2_CIVIL_TIME]
+select dayname({{PARSE_DATE('%m/%d/%Y', '1/1/2023')|PARSE_DATETIME('%D %T,000000', '01/01/23 00:00:00,000000')|PARSE_TIMESTAMP('%d/%m/%y %H:%M:%S,000000', '01/01/23 00:00:00,000000')}});
+--
+ALTERNATION GROUP: PARSE_DATE('%m/%d/%Y', '1/1/2023')
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:dayname(DATE) -> STRING)
+    |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
+    |       +-Literal(type=STRING, value="%m/%d/%Y")
+    |       +-Literal(type=STRING, value="1/1/2023")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: PARSE_DATETIME('%D %T,000000', '01/01/23 00:00:00,000000')
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:dayname(DATETIME) -> STRING)
+    |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
+    |       +-Literal(type=STRING, value="%D %T,000000")
+    |       +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: PARSE_TIMESTAMP('%d/%m/%y %H:%M:%S,000000', '01/01/23 00:00:00,000000')
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:dayname(TIMESTAMP) -> STRING)
+    |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
+    |       +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
+    |       +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    +-input_scan=
+      +-SingleRowScan
+==
