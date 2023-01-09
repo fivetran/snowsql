@@ -1,0 +1,60 @@
+#
+# ADD_MONTHS( <date_or_timestamp_expr> , <num_months_expr> )
+#
+[language_features=V_1_2_CIVIL_TIME]
+select add_months({{PARSE_DATE('%m/%d/%Y', '1/1/2023')|PARSE_DATETIME('%D %T,000000', '01/01/23 00:00:00,000000')|PARSE_TIMESTAMP('%d/%m/%y %H:%M:%S,000000', '01/01/23 00:00:00,000000')}}, 1) as result;
+--
+ALTERNATION GROUP: PARSE_DATE('%m/%d/%Y', '1/1/2023')
+--
+QueryStmt
++-output_column_list=
+| +-$query.result#1 AS result [DATE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.result#1]
+    +-expr_list=
+    | +-result#1 :=
+    |   +-FunctionCall(ZetaSQL:add_months(DATE, INT64) -> DATE)
+    |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
+    |     | +-Literal(type=STRING, value="%m/%d/%Y")
+    |     | +-Literal(type=STRING, value="1/1/2023")
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: PARSE_DATETIME('%D %T,000000', '01/01/23 00:00:00,000000')
+--
+QueryStmt
++-output_column_list=
+| +-$query.result#1 AS result [DATETIME]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.result#1]
+    +-expr_list=
+    | +-result#1 :=
+    |   +-FunctionCall(ZetaSQL:add_months(DATETIME, INT64) -> DATETIME)
+    |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
+    |     | +-Literal(type=STRING, value="%D %T,000000")
+    |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: PARSE_TIMESTAMP('%d/%m/%y %H:%M:%S,000000', '01/01/23 00:00:00,000000')
+--
+QueryStmt
++-output_column_list=
+| +-$query.result#1 AS result [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.result#1]
+    +-expr_list=
+    | +-result#1 :=
+    |   +-FunctionCall(ZetaSQL:add_months(TIMESTAMP, INT64) -> TIMESTAMP)
+    |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
+    |     | +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
+    |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+==

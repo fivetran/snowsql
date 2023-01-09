@@ -3967,6 +3967,27 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
       {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
 }
 
+void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
+                                      const ZetaSQLBuiltinFunctionOptions& options,
+                                      NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+  const Type* date_type = type_factory->get_date();
+  const Type* datetime_type = type_factory->get_datetime();
+  const Type* timestamp_type = type_factory->get_timestamp();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+  const FunctionOptions fn_options;
+
+  // ADD_MONTHS
+  InsertFunction(
+      functions, options, "add_months", SCALAR,
+      {{date_type, {date_type, int64_type}, FN_ADD_MONTHS_DATE},
+       {datetime_type, {datetime_type, int64_type}, FN_ADD_MONTHS_DATETIME},
+       {timestamp_type, {timestamp_type, int64_type}, FN_ADD_MONTHS_TIMESTAMP}},
+      fn_options);
+}
+
 /* Snowflake specific functions END */
 
 }  // namespace zetasql
