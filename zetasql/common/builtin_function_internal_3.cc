@@ -3919,7 +3919,6 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
-  const FunctionOptions fn_options;
 
   // TO_BOOLEAN
   // Let INT32 -> INT64, UINT32 -> UINT64, and FLOAT -> DOUBLE.
@@ -3965,6 +3964,49 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "try_to_time", SCALAR,
       {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
+}
+
+void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
+                                          const ZetaSQLBuiltinFunctionOptions& options,
+                                          NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
+  const Type* string_type = type_factory->get_string();
+  const Type* int64_type = type_factory->get_int64();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  // BASE64_DECODE_STRING
+  InsertFunction(
+      functions, options, "base64_decode_string", SCALAR,
+      {{string_type, {string_type, {string_type, OPTIONAL}}, FN_BASE64_DECODE_STRING}},
+      fn_options);
+
+  // TRY_BASE64_DECODE_STRING
+  InsertFunction(
+      functions, options, "try_base64_decode_string", SCALAR,
+      {{string_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_BASE64_DECODE_STRING}},
+      fn_options);
+
+  // CONTAINS
+  InsertFunction(
+      functions, options, "contains", SCALAR,
+      {{bool_type, {string_type, string_type}, FN_CONTAINS}},
+      fn_options);
+
+  // ENDSWITH
+  InsertFunction(
+      functions, options, "endswith", SCALAR,
+      {{bool_type, {string_type, string_type}, FN_ENDSWITH}},
+      fn_options);
+
+  // INSERT
+  InsertFunction(
+      functions, options, "insert", SCALAR,
+      {{string_type, {string_type, int64_type, int64_type, string_type}, FN_INSERT}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
