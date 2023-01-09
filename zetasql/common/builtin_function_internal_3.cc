@@ -3993,6 +3993,15 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
         {string_type, string_type, {string_type, OPTIONAL}},
         FN_REGEXP_LIKE}},
       fn_options);
+
+  // REGEXP_SUBSTR
+  InsertFunction(
+      functions, options, "regexp_substr", SCALAR,
+      {{string_type,
+        {string_type, string_type, {int64_type, OPTIONAL},
+         {int64_type, OPTIONAL}, {string_type, OPTIONAL}, {int64_type, OPTIONAL}},
+        FN_REGEXP_SUBSTR}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */

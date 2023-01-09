@@ -126,3 +126,55 @@ QueryStmt
             +-Literal(type=STRING, value="san.*")
             +-Literal(type=STRING, value="i")
 ==
+
+#
+# REGEXP_SUBSTR( <subject> , <pattern> [ , <position> [ , <occurrence> [ , <regex_parameters> [ , <group_num> ] ] ] ] )
+#
+select regexp_substr(KitchenSink.string_val, 'the\\W+(\\w+)'{{|, 1, 2, 'e', 1}}) from TestTable;
+--
+ALTERNATION GROUP: <empty>
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#4 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#4]
+    +-expr_list=
+    | +-$col1#4 :=
+    |   +-FunctionCall(ZetaSQL:regexp_substr(STRING, STRING, optional(0) INT64, optional(0) INT64, optional(0) STRING, optional(0) INT64) -> STRING)
+    |     +-GetProtoField
+    |     | +-type=STRING
+    |     | +-expr=
+    |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+    |     | +-field_descriptor=string_val
+    |     | +-default_value="default_name"
+    |     +-Literal(type=STRING, value="the\\W+(\\w+)")
+    +-input_scan=
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+--
+ALTERNATION GROUP: , 1, 2, 'e', 1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#4 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#4]
+    +-expr_list=
+    | +-$col1#4 :=
+    |   +-FunctionCall(ZetaSQL:regexp_substr(STRING, STRING, optional(1) INT64, optional(1) INT64, optional(1) STRING, optional(1) INT64) -> STRING)
+    |     +-GetProtoField
+    |     | +-type=STRING
+    |     | +-expr=
+    |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+    |     | +-field_descriptor=string_val
+    |     | +-default_value="default_name"
+    |     +-Literal(type=STRING, value="the\\W+(\\w+)")
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=2)
+    |     +-Literal(type=STRING, value="e")
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+==
