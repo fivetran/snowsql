@@ -789,6 +789,10 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
 void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
                                      const ZetaSQLBuiltinFunctionOptions& options,
                                      NameToFunctionMap* functions);
+
+void GetSnowflakeStringFunctions(TypeFactory* type_factory,
+                                 const ZetaSQLBuiltinFunctionOptions& options,
+                                 NameToFunctionMap* functions);
 /* Snowflake specific functions END */
 
 }  // namespace zetasql
