@@ -3977,7 +3977,6 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
   const Type* timestamp_type = type_factory->get_timestamp();
 
   const Function::Mode SCALAR = Function::SCALAR;
-  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
   const FunctionOptions fn_options;
 
   // ADD_MONTHS
