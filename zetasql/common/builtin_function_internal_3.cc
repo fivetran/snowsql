@@ -3992,7 +3992,7 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
       {{bool_type,
         {string_type, string_type, {string_type, OPTIONAL}},
         FN_REGEXP_LIKE}},
-      fn_options);
+      FunctionOptions().set_alias_name("rlike"));
 
   // REGEXP_SUBSTR
   InsertFunction(

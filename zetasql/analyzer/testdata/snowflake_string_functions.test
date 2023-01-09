@@ -73,9 +73,11 @@ QueryStmt
 #
 # REGEXP_LIKE( <subject> , <pattern> [ , <parameters> ] )
 #
-select * from TestTable where regexp_like(KitchenSink.string_val, 'san.*'{{|, 'i'}});
+select * from TestTable where {{regexp_like|rlike}}(KitchenSink.string_val, 'san.*'{{|, 'i'}});
 --
-ALTERNATION GROUP: <empty>
+ALTERNATION GROUPS:
+    regexp_like,
+    rlike,
 --
 QueryStmt
 +-output_column_list=
@@ -100,7 +102,9 @@ QueryStmt
             | +-default_value="default_name"
             +-Literal(type=STRING, value="san.*")
 --
-ALTERNATION GROUP: , 'i'
+ALTERNATION GROUPS:
+    regexp_like,, 'i'
+    rlike,, 'i'
 --
 QueryStmt
 +-output_column_list=
