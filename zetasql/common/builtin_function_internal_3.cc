@@ -3995,6 +3995,14 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {string_type, {datetime_type}, FN_DAYNAME_DATETIME},
        {string_type, {timestamp_type}, FN_DAYNAME_TIMESTAMP}},
       fn_options);
+
+  // MONTHNAME
+  InsertFunction(
+      functions, options, "monthname", SCALAR,
+      {{string_type, {date_type}, FN_MONTHNAME_DATE},
+       {string_type, {datetime_type}, FN_MONTHNAME_DATETIME},
+       {string_type, {timestamp_type}, FN_MONTHNAME_TIMESTAMP}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
