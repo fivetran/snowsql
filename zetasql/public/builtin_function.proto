@@ -63,7 +63,7 @@ enum FunctionSignatureId {
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
   // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
-  // 100600-100699 Snowflake String functions                   (NextId: 100601)
+  // 100600-100699 Snowflake String functions                   (NextId: 100602)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1217,4 +1217,5 @@ enum FunctionSignatureId {
 
   // Snowflake String functions
   FN_REGEXP_COUNT = 100600;               // REGEXP_COUNT(STRING, STRING, <INT64>, <STRING>) -> INT64
+  FN_REGEXP_LIKE = 100601;                // REGEXP_LIKE(STRING, STRING, <STRING>) -> BOOLEAN
 }

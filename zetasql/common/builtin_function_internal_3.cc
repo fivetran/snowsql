@@ -3970,6 +3970,7 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
 void GetSnowflakeStringFunctions(TypeFactory* type_factory,
                                  const ZetaSQLBuiltinFunctionOptions& options,
                                  NameToFunctionMap* functions) {
+  const Type* bool_type = type_factory->get_bool();
   const Type* int64_type = type_factory->get_int64();
   const Type* string_type = type_factory->get_string();
 
@@ -3977,7 +3978,7 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
   const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
   const FunctionOptions fn_options;
 
-  // FN_REGEXP_COUNT
+  // REGEXP_COUNT
   InsertFunction(
       functions, options, "regexp_count", SCALAR,
       {{int64_type,
@@ -3985,6 +3986,13 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
         FN_REGEXP_COUNT}},
       fn_options);
 
+  // REGEXP_LIKE
+  InsertFunction(
+      functions, options, "regexp_like", SCALAR,
+      {{bool_type,
+        {string_type, string_type, {string_type, OPTIONAL}},
+        FN_REGEXP_LIKE}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */

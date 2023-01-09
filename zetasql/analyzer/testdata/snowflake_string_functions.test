@@ -1,7 +1,7 @@
 #
 # REGEXP_COUNT( <subject> , <pattern> [ , <position> , <parameters> ] )
 #
-select regexp_count("a", '[[:punct:]][[:alnum:]]+[[:punct:]]'{{|, 1|, 1, 'i'}}) from TestTable;
+select regexp_count(KitchenSink.string_val, '[[:punct:]][[:alnum:]]+[[:punct:]]'{{|, 1|, 1, 'i'}}) from TestTable;
 --
 ALTERNATION GROUP: <empty>
 --
@@ -14,10 +14,15 @@ QueryStmt
     +-expr_list=
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:regexp_count(STRING, STRING, optional(0) INT64, optional(0) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="a")
+    |     +-GetProtoField
+    |     | +-type=STRING
+    |     | +-expr=
+    |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+    |     | +-field_descriptor=string_val
+    |     | +-default_value="default_name"
     |     +-Literal(type=STRING, value="[[:punct:]][[:alnum:]]+[[:punct:]]")
     +-input_scan=
-      +-TableScan(table=TestTable)
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 --
 ALTERNATION GROUP: , 1
 --
@@ -30,11 +35,16 @@ QueryStmt
     +-expr_list=
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:regexp_count(STRING, STRING, optional(1) INT64, optional(0) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="a")
+    |     +-GetProtoField
+    |     | +-type=STRING
+    |     | +-expr=
+    |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+    |     | +-field_descriptor=string_val
+    |     | +-default_value="default_name"
     |     +-Literal(type=STRING, value="[[:punct:]][[:alnum:]]+[[:punct:]]")
     |     +-Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=TestTable)
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 --
 ALTERNATION GROUP: , 1, 'i'
 --
@@ -47,10 +57,72 @@ QueryStmt
     +-expr_list=
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:regexp_count(STRING, STRING, optional(1) INT64, optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="a")
+    |     +-GetProtoField
+    |     | +-type=STRING
+    |     | +-expr=
+    |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+    |     | +-field_descriptor=string_val
+    |     | +-default_value="default_name"
     |     +-Literal(type=STRING, value="[[:punct:]][[:alnum:]]+[[:punct:]]")
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=STRING, value="i")
     +-input_scan=
-      +-TableScan(table=TestTable)
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+==
+
+#
+# REGEXP_LIKE( <subject> , <pattern> [ , <parameters> ] )
+#
+select * from TestTable where regexp_like(KitchenSink.string_val, 'san.*'{{|, 'i'}});
+--
+ALTERNATION GROUP: <empty>
+--
+QueryStmt
++-output_column_list=
+| +-TestTable.key#1 AS key [INT32]
+| +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
+| +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
++-query=
+  +-ProjectScan
+    +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
+    +-input_scan=
+      +-FilterScan
+        +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
+        +-input_scan=
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2])
+        +-filter_expr=
+          +-FunctionCall(ZetaSQL:regexp_like(STRING, STRING, optional(0) STRING) -> BOOL)
+            +-GetProtoField
+            | +-type=STRING
+            | +-expr=
+            | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+            | +-field_descriptor=string_val
+            | +-default_value="default_name"
+            +-Literal(type=STRING, value="san.*")
+--
+ALTERNATION GROUP: , 'i'
+--
+QueryStmt
++-output_column_list=
+| +-TestTable.key#1 AS key [INT32]
+| +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
+| +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
++-query=
+  +-ProjectScan
+    +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
+    +-input_scan=
+      +-FilterScan
+        +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
+        +-input_scan=
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2])
+        +-filter_expr=
+          +-FunctionCall(ZetaSQL:regexp_like(STRING, STRING, optional(1) STRING) -> BOOL)
+            +-GetProtoField
+            | +-type=STRING
+            | +-expr=
+            | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+            | +-field_descriptor=string_val
+            | +-default_value="default_name"
+            +-Literal(type=STRING, value="san.*")
+            +-Literal(type=STRING, value="i")
 ==
