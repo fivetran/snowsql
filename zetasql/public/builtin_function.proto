@@ -63,6 +63,8 @@ enum FunctionSignatureId {
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
   // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
+  // 100400-100499 Snowflake Data generation functions          (NextId: 100407)
+  // 100500-100599 Snowflake String and binary functions        (NextId: 100505)
   // 100600-100699 Snowflake String functions                   (NextId: 100603)
 
   // enum value                       // Related function name
@@ -1214,6 +1216,22 @@ enum FunctionSignatureId {
   FN_TRY_TO_DOUBLE = 100316;              // try_to_double(STRING, <STRING>) -> DOUBLE
   FN_TRY_TO_DATE = 100317;                // try_to_date(STRING, <STRING>) -> DATE
   FN_TRY_TO_TIME = 100318;                // try_to_time(STRING, <STRING>) -> TIME
+
+  // Snowflake Data generation functions
+  FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
+  FN_RANDSTR_SAME_ARGS = 100401;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> STRING
+  FN_RANDSTR_DIFF_ARGS = 100402;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> STRING
+  FN_SEQ1 = 100403;                     // SEQ1( [0|1] ) -> INT64
+  FN_SEQ2 = 100404;                     // SEQ2( [0|1] ) -> INT64
+  FN_SEQ4 = 100405;                     // SEQ4( [0|1] ) -> INT64
+  FN_SEQ8 = 100406;                     // SEQ8( [0|1] ) -> INT64
+
+  // Snowflake String and binary functions
+  FN_BASE64_DECODE_STRING = 100500;           // BASE64_DECODE_STRING(STRING, <STRING>) -> STRING
+  FN_TRY_BASE64_DECODE_STRING = 100501;       // TRY_BASE64_DECODE_STRING(STRING, <STRING>) -> STRING
+  FN_CONTAINS = 100502;                       // CONTAINS(STRING, STRING) -> BOOL
+  FN_ENDSWITH = 100503;                       // ENDSWITH(STRING, STRING) -> BOOL
+  FN_INSERT = 100504;                         // INSERT(STRING, INT64, INT64, STRING) -> STRING
 
   // Snowflake String functions
   FN_REGEXP_COUNT = 100600;               // REGEXP_COUNT(STRING, STRING, <INT64>, <STRING>) -> INT64

@@ -427,7 +427,6 @@ connection { return BisonParserImpl::token::KW_CONNECTION; }
 constant { return BisonParserImpl::token::KW_CONSTANT; }
 constraint { return BisonParserImpl::token::KW_CONSTRAINT; }
 continue { return BisonParserImpl::token::KW_CONTINUE; }
-contains { return BisonParserImpl::token::KW_CONTAINS; }
 create { return BisonParserImpl::token::KW_CREATE; }
 cross { return BisonParserImpl::token::KW_CROSS; }
 cube { return BisonParserImpl::token::KW_CUBE; }
