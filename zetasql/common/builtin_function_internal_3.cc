@@ -3966,6 +3966,65 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
       {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
 }
 
+void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
+                                         const ZetaSQLBuiltinFunctionOptions& options,
+                                         NameToFunctionMap* functions) {
+  const Type* int64_type = type_factory->get_int64();
+  const Type* string_type = type_factory->get_string();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+
+  FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
+  has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
+
+  // RANDOM
+  InsertFunction(
+      functions, options, "random", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_RANDOM, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // RANDSTR
+  InsertFunction(
+      functions, options, "randstr", SCALAR,
+      {{string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1},
+        FN_RANDSTR_SAME_ARGS, has_all_evaluated_to_numeric_arguments},
+       {string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
+        FN_RANDSTR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ1
+  InsertFunction(
+      functions, options, "seq1", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ1, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ2
+  InsertFunction(
+      functions, options, "seq2", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ2, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ4
+  InsertFunction(
+      functions, options, "seq4", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ4, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+
+  // SEQ8
+  InsertFunction(
+      functions, options, "seq8", SCALAR,
+      {{int64_type, {{ARG_TYPE_ANY_1, OPTIONAL}},
+        FN_SEQ8, has_all_evaluated_to_numeric_arguments}},
+      fn_options);
+}
+
 void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
                                           const ZetaSQLBuiltinFunctionOptions& options,
                                           NameToFunctionMap* functions) {
