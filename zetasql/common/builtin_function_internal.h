@@ -797,6 +797,10 @@ void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
 void GetSnowflakeStringAndBinaryFunctions(TypeFactory* type_factory,
                                           const ZetaSQLBuiltinFunctionOptions& options,
                                           NameToFunctionMap* functions);
+
+void GetSnowflakeStringFunctions(TypeFactory* type_factory,
+                                 const ZetaSQLBuiltinFunctionOptions& options,
+                                 NameToFunctionMap* functions);
 /* Snowflake specific functions END */
 
 }  // namespace zetasql

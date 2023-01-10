@@ -154,6 +154,7 @@ absl::Status GetZetaSQLFunctionsAndTypes(
   GetSnowflakeConversionFunctions(type_factory, options, functions);
   GetSnowflakeDataGenerationFunctions(type_factory, options, functions);
   GetSnowflakeStringAndBinaryFunctions(type_factory, options, functions);
+  GetSnowflakeStringFunctions(type_factory, options, functions);
   /* Snowflake functions END */
 
   return absl::OkStatus();

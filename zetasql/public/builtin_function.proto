@@ -65,6 +65,7 @@ enum FunctionSignatureId {
   // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
   // 100400-100499 Snowflake Data generation functions          (NextId: 100407)
   // 100500-100599 Snowflake String and binary functions        (NextId: 100505)
+  // 100600-100699 Snowflake String functions                   (NextId: 100603)
 
   // enum value                       // Related function name
   // ----------                       // ---------------------
@@ -1231,4 +1232,9 @@ enum FunctionSignatureId {
   FN_CONTAINS = 100502;                       // CONTAINS(STRING, STRING) -> BOOL
   FN_ENDSWITH = 100503;                       // ENDSWITH(STRING, STRING) -> BOOL
   FN_INSERT = 100504;                         // INSERT(STRING, INT64, INT64, STRING) -> STRING
+
+  // Snowflake String functions
+  FN_REGEXP_COUNT = 100600;               // REGEXP_COUNT(STRING, STRING, <INT64>, <STRING>) -> INT64
+  FN_REGEXP_LIKE = 100601;                // REGEXP_LIKE(STRING, STRING, <STRING>) -> BOOLEAN
+  FN_REGEXP_SUBSTR_ALL = 100602;          // REGEXP_SUBSTR_ALL(STRING, STRING, <INT64>, <INT64>, <STRING>, <INT64>) -> ARRAY<STRING>
 }
