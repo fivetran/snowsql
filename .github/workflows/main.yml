@@ -11,24 +11,24 @@ jobs:
     env:
       excluded-build-targets: -zetasql/jdk/... -java/... -javatests/...
       macos-build-args: --features=-supports_dynamic_linker --config=clang --copt "-O3"
-      remote-cache-linux: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
-      remote-cache-macos: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+      bazel-linux-cache: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+      bazel-macos-cache: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
 
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build $remote-cache-linux -- //... $excluded-build-targets
+            build-command: bazel build $bazel-linux-cache -- //... $excluded-build-targets
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            test-command: bazel test $remote-cache-linux -- //... $excluded-build-targets
+            test-command: bazel test $bazel-linux-cache -- //... $excluded-build-targets
 
           - os: macos-latest
             build-command: |
-              bazel build -- //... $macos-build-args $remote-cache-macos $excluded-build-targets
+              bazel build -- //... $macos-build-args $bazel-macos-cache $excluded-build-targets
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: bazel test $macos-build-args $remote-cache-macos -- //... $excluded-build-targets
+            test-command: bazel test $macos-build-args $bazel-macos-cache -- //... $excluded-build-targets
 
     runs-on: ${{ matrix.os }}
 
