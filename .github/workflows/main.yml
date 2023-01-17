@@ -8,37 +8,27 @@ on:
 
 jobs:
   build-test:
+    env:
+      excluded-build-targets: -zetasql/jdk/... -java/... -javatests/...
+      macos-build-args: --features=-supports_dynamic_linker --config=clang --copt "-O3"
+      remote-cache-linux: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+      remote-cache-macos: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build //zetasql/local_service:libremote_server.so --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+            build-command: bazel build -- //... "$excluded-build-targets" "$remote-cache-linux"
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            test-command: |
-              bazel test //zetasql/analyzer/...
-              bazel test //zetasql/base/...
-              bazel test //zetasql/common/...
-              bazel test //zetasql/compliance/...
-              bazel test //zetasql/local_service/...
-              bazel test //zetasql/parser/...
+            test-command: bazel test -- //... "$excluded-build-targets" "$remote-cache-linux"
 
           - os: macos-latest
             build-command: |
-              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker --config=clang --copt "-O3" --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+              bazel build -- //... "$excluded-build-targets" "$macos-build-args" "$remote-cache-macos"
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: | # Temporary skip 2 tests for MacOS
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/base/...
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/common/...
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/compliance/...
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" -- //zetasql/local_service/... \
-                -//zetasql/local_service:libremote_server.so \
-                -//zetasql/local_service:liblocal_service_jni.so \
-                -//zetasql/local_service:liblocal_service_jni.dylib \
-                -//zetasql/local_service:local_service_jni
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/parser/...
+            test-command: bazel test -- //... "$excluded-build-targets" "$macos-build-args" "$remote-cache-macos"
 
     runs-on: ${{ matrix.os }}
 
