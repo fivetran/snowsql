@@ -25,7 +25,7 @@ jobs:
 
           - os: macos-latest
             build-command: |
-              bazel build -- //... ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} ${EXCLUDED_BUILD_TARGETS}
+              bazel build ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
             test-command: bazel test ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
