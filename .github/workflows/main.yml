@@ -19,16 +19,16 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build "$remote-cache-linux" -- //... "$excluded-build-targets"
+            build-command: bazel build $remote-cache-linux -- //... $excluded-build-targets
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            test-command: bazel test "$remote-cache-linux" -- //... "$excluded-build-targets"
+            test-command: bazel test $remote-cache-linux -- //... $excluded-build-targets
 
           - os: macos-latest
             build-command: |
-              bazel build -- //... "$macos-build-args" "$remote-cache-macos" "$excluded-build-targets"
+              bazel build -- //... $macos-build-args $remote-cache-macos $excluded-build-targets
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: bazel test "$macos-build-args" "$remote-cache-macos" -- //... "$excluded-build-targets"
+            test-command: bazel test $macos-build-args $remote-cache-macos -- //... $excluded-build-targets
 
     runs-on: ${{ matrix.os }}
 
