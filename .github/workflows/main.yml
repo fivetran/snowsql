@@ -9,26 +9,28 @@ on:
 jobs:
   build-test:
     env:
-      EXCLUDED_BUILD_TARGETS: -zetasql/jdk/... -java/... -javatests/...
-      MACOS_BUILD_ARGS: --features=-supports_dynamic_linker --config=clang --copt "-O3"
-      BAZEL_LINUX_CACHE: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
-      BAZEL_MACOS_CACHE: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+      BAZEL_LINUX_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+      BAZEL_MACOS_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
 
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build ${BAZEL_LINUX_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
+            build-command: bazel build ${BAZEL_LINUX_CACHE_ARGS} \
+              -- //zetasql/local_service:libremote_server.so -zetasql/jdk/... -java/... -javatests/...
+            test-command: bazel test ${BAZEL_LINUX_CACHE_ARGS} \
+              -- //... -zetasql/jdk/... -java/... -javatests/...
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            test-command: bazel test ${BAZEL_LINUX_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
 
           - os: macos-latest
             build-command: |
-              bazel build ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
+              bazel build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} \
+                -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
+            test-command: bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} \
+              -- //... -zetasql/jdk/... -java/... -javatests/...
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: bazel test ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
 
     runs-on: ${{ matrix.os }}
 
