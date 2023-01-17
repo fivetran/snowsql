@@ -9,26 +9,26 @@ on:
 jobs:
   build-test:
     env:
-      excluded-build-targets: -zetasql/jdk/... -java/... -javatests/...
-      macos-build-args: --features=-supports_dynamic_linker --config=clang --copt "-O3"
-      bazel-linux-cache: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
-      bazel-macos-cache: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+      EXCLUDED_BUILD_TARGETS: -zetasql/jdk/... -java/... -javatests/...
+      MACOS_BUILD_ARGS: --features=-supports_dynamic_linker --config=clang --copt "-O3"
+      BAZEL_LINUX_CACHE: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+      BAZEL_MACOS_CACHE: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
 
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build $bazel-linux-cache -- //... $excluded-build-targets
+            build-command: bazel build ${BAZEL_LINUX_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
             lib-path: bazel-bin/zetasql/local_service/libremote_server.so
-            test-command: bazel test $bazel-linux-cache -- //... $excluded-build-targets
+            test-command: bazel test ${BAZEL_LINUX_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
 
           - os: macos-latest
             build-command: |
-              bazel build -- //... $macos-build-args $bazel-macos-cache $excluded-build-targets
+              bazel build -- //... ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} ${EXCLUDED_BUILD_TARGETS}
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: bazel test $macos-build-args $bazel-macos-cache -- //... $excluded-build-targets
+            test-command: bazel test ${MACOS_BUILD_ARGS} ${BAZEL_MACOS_CACHE} -- //... ${EXCLUDED_BUILD_TARGETS}
 
     runs-on: ${{ matrix.os }}
 
