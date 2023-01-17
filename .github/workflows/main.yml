@@ -23,11 +23,9 @@ jobs:
 
           - os: macos-latest
             build-command: |
-              bazel build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} \
-                -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
+              bazel build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} \
-              -- //... -zetasql/jdk/... -java/... -javatests/...
+            test-command: bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/...
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
 
     runs-on: ${{ matrix.os }}
