@@ -61,6 +61,7 @@ void QueryGroupByAndAggregateInfo::Reset() {
   group_by_expr_map.clear();
   rollup_column_list.clear();
   grouping_sets_column_list.clear();
+  cube_column_list.clear();
   aggregate_columns_to_compute.clear();
   group_by_valid_field_info_map.Clear();
   is_post_distinct = false;
@@ -299,6 +300,11 @@ void QueryResolutionInfo::AddGroupingSetsColumn(
   group_by_info_.grouping_sets_column_list.push_back(column);
 }
 
+void QueryResolutionInfo::AddCubeColumn(
+    const ResolvedComputedColumn* column) {
+  group_by_info_.cube_column_list.push_back(column);
+}
+
 void QueryResolutionInfo::ReleaseGroupingSetsAndRollupList(
     std::vector<std::unique_ptr<const ResolvedGroupingSet>>* grouping_set_list,
     std::vector<std::unique_ptr<const ResolvedColumnRef>>* rollup_column_list) {
@@ -367,6 +373,23 @@ void QueryResolutionInfo::ReleaseGroupingSetsAndGroupByGroupingSetsList(
     grouping_sets_column_list->push_back(std::move(grouping_sets_column_ref));
   }
   group_by_info_.grouping_sets_column_list.clear();
+}
+
+void QueryResolutionInfo::ReleaseGroupingSetsAndCubeList(
+    std::vector<std::unique_ptr<const ResolvedGroupingSet>>* grouping_set_list,
+    std::vector<std::unique_ptr<const ResolvedColumnRef>>* cube_column_list) {
+  if (group_by_info_.cube_column_list.empty()) {
+    return;
+  }
+
+  for (const ResolvedComputedColumn* cube_column :
+       group_by_info_.cube_column_list) {
+    auto cube_column_ref =
+        MakeResolvedColumnRef(cube_column->column().type(),
+                              cube_column->column(), /*is_correlated=*/false);
+    cube_column_list->push_back(std::move(cube_column_ref));
+  }
+  group_by_info_.cube_column_list.clear();
 }
 
 void QueryResolutionInfo::AddAggregateComputedColumn(
@@ -440,6 +463,7 @@ absl::Status QueryResolutionInfo::CheckComputedColumnListsAreEmpty() const {
   ZETASQL_RET_CHECK(group_by_info_.aggregate_columns_to_compute.empty());
   ZETASQL_RET_CHECK(group_by_info_.rollup_column_list.empty());
   ZETASQL_RET_CHECK(group_by_info_.grouping_sets_column_list.empty());
+  ZETASQL_RET_CHECK(group_by_info_.cube_column_list.empty());
   ZETASQL_RET_CHECK(order_by_columns_to_compute_.empty());
   ZETASQL_RET_CHECK(!analytic_resolver_->HasWindowColumnsToCompute());
   return absl::OkStatus();

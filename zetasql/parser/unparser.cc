@@ -1560,18 +1560,27 @@ void Unparser::visitASTGroupingSets(const ASTGroupingSets* node, void* data) {
   print(")");
 }
 
+void Unparser::visitASTCube(const ASTCube* node, void* data) {
+  print("CUBE(");
+  UnparseVectorWithSeparator(node->expressions(), data, ",");
+  print(")");
+}
+
 void Unparser::visitASTGroupingItem(const ASTGroupingItem* node, void* data) {
   if (node->expression() != nullptr) {
     ZETASQL_DCHECK(node->rollup() == nullptr);
     node->expression()->Accept(this, data);
   } else {
     ZETASQL_DCHECK(
-        node->rollup() != nullptr && node->grouping_sets() == nullptr
-            || node->rollup() == nullptr && node->grouping_sets() != nullptr);
+        node->rollup() != nullptr && node->grouping_sets() == nullptr && node->cube() == nullptr
+            || node->rollup() == nullptr && node->grouping_sets() != nullptr && node->cube() == nullptr
+            || node->rollup() == nullptr && node->grouping_sets() == nullptr && node->cube() != nullptr);
     if (node->rollup() != nullptr) {
       node->rollup()->Accept(this, data);
-    } else {
+    } else if (node->grouping_sets() != nullptr) {
       node->grouping_sets()->Accept(this, data);
+    } else if (node->cube() != nullptr) {
+      node->cube()->Accept(this, data);
     }
   }
 }

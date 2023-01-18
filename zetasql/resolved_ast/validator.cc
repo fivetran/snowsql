@@ -1388,6 +1388,12 @@ absl::Status Validator::ValidateResolvedAggregateScan(
       column_ref->column();
     }
   }
+  if (!scan->cube_column_list().empty()) {
+    for (const auto& column_ref : scan->cube_column_list()) {
+      // Mark as accessed.
+      column_ref->column();
+    }
+  }
 
   std::set<ResolvedColumn> visible_columns;
   ZETASQL_RETURN_IF_ERROR(AddColumnsFromComputedColumnList(

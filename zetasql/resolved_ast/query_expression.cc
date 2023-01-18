@@ -155,6 +155,15 @@ std::string QueryExpression::GetSQLQuery() const {
                               out, zetasql_base::FindOrDie(group_by_list_, column_id));
                         }),
           ")");
+    } else if (!cube_column_id_list_.empty()) {
+      absl::StrAppend(
+          &sql, "CUBE(",
+          absl::StrJoin(cube_column_id_list_, ", ",
+                        [this](std::string* out, int column_id) {
+                          absl::StrAppend(
+                              out, zetasql_base::FindOrDie(group_by_list_, column_id));
+                        }),
+          ")");
     } else {
       // We assume while iterating the group_by_list_, the entries will be
       // sorted by the column id.
@@ -268,7 +277,8 @@ bool QueryExpression::TrySetGroupByClause(
     const std::map<int, std::string>& group_by_list,
     const std::string& group_by_hints,
     const std::vector<int>& rollup_column_id_list,
-    const std::vector<int>& grouping_sets_column_id_list) {
+    const std::vector<int>& grouping_sets_column_id_list,
+    const std::vector<int>& cube_column_id_list) {
   if (!CanSetGroupByClause()) {
     return false;
   }
@@ -277,6 +287,7 @@ bool QueryExpression::TrySetGroupByClause(
   group_by_hints_ = group_by_hints;
   rollup_column_id_list_ = rollup_column_id_list;
   grouping_sets_column_id_list_ = grouping_sets_column_id_list;
+  cube_column_id_list_ = cube_column_id_list;
   return true;
 }
 

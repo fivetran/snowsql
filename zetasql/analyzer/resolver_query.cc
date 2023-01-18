@@ -432,6 +432,7 @@ absl::Status Resolver::AddAggregateScan(
 
   std::vector<std::unique_ptr<const ResolvedColumnRef>> rollup_column_list;
   std::vector<std::unique_ptr<const ResolvedColumnRef>> grouping_sets_column_list;
+  std::vector<std::unique_ptr<const ResolvedColumnRef>> cube_column_list;
   std::vector<std::unique_ptr<const ResolvedGroupingSet>> grouping_set_list;
 
   // Retrieve the grouping sets and rollup list for the aggregate scan, if any.
@@ -439,6 +440,8 @@ absl::Status Resolver::AddAggregateScan(
                                                           &rollup_column_list);
   query_resolution_info->ReleaseGroupingSetsAndGroupByGroupingSetsList(&grouping_set_list,
                                                                        &grouping_sets_column_list);
+  query_resolution_info->ReleaseGroupingSetsAndCubeList(&grouping_set_list,
+                                                                       &cube_column_list);                               
 
   ZETASQL_RET_CHECK(!column_list.empty());
   std::unique_ptr<ResolvedAggregateScan> aggregate_scan =
@@ -447,7 +450,8 @@ absl::Status Resolver::AddAggregateScan(
           query_resolution_info->release_group_by_columns_to_compute(),
           query_resolution_info->release_aggregate_columns_to_compute(),
           std::move(grouping_set_list), std::move(rollup_column_list),
-          std::move(grouping_sets_column_list));
+          std::move(grouping_sets_column_list),
+          std::move(cube_column_list));
   // If the feature is not enabled, any collation annotation that might exist on
   // the grouping expressions is ignored.
   if (language().LanguageFeatureEnabled(FEATURE_V_1_3_COLLATION_SUPPORT)) {
@@ -614,6 +618,11 @@ absl::Status Resolver::AddRemainingScansForSelect(
         ZETASQL_RET_CHECK_EQ(select->group_by()->grouping_items().size(), 1);
         return MakeSqlErrorAt(select->group_by()->grouping_items(0)->grouping_sets())
                << "GROUP BY GROUPING SETS is not supported in anonymization queries";
+      }
+      if (query_resolution_info->HasGroupByCube()) {
+        ZETASQL_RET_CHECK_EQ(select->group_by()->grouping_items().size(), 1);
+        return MakeSqlErrorAt(select->group_by()->grouping_items(0)->cube())
+               << "GROUP BY CUBE is not supported in anonymization queries";
       }
       ZETASQL_RETURN_IF_ERROR(AddAnonymizedAggregateScan(select, query_resolution_info,
                                                  current_scan));
@@ -3064,6 +3073,7 @@ absl::Status Resolver::ResolveGroupByExprs(
   std::vector<const ASTExpression*> grouping_expressions;
   bool is_rollup = false;
   bool is_grouping_sets = false;
+  bool is_cube = false;
   if (group_by->grouping_items().size() == 1 &&
       group_by->grouping_items()[0]->rollup() != nullptr) {
     const ASTRollup* rollup = group_by->grouping_items()[0]->rollup();
@@ -3081,6 +3091,13 @@ absl::Status Resolver::ResolveGroupByExprs(
         grouping_sets->expressions();
     grouping_expressions.assign(expressions.begin(), expressions.end());
     is_grouping_sets = true;
+  } else if (group_by->grouping_items().size() == 1 &&
+             group_by->grouping_items()[0]->cube() != nullptr) {
+    const ASTCube* cube = group_by->grouping_items()[0]->cube();
+    const absl::Span<const ASTExpression* const>& expressions =
+        cube->expressions();
+    grouping_expressions.assign(expressions.begin(), expressions.end());
+    is_cube = true;
   } else {
     // Ensure that there is no ROLLUP in the list, and build the list of
     // expressions.
@@ -3100,6 +3117,11 @@ absl::Status Resolver::ResolveGroupByExprs(
       if (ast_grouping_item->grouping_sets() != nullptr) {
         return MakeSqlErrorAt(ast_grouping_item->grouping_sets())
                  << "The GROUP BY clause only supports GROUPING SETS when there are "
+                    "no other grouping elements";
+      }
+      if (ast_grouping_item->cube() != nullptr) {
+        return MakeSqlErrorAt(ast_grouping_item->cube())
+                 << "The GROUP BY clause only supports CUBE when there are "
                     "no other grouping elements";
       }
       ZETASQL_RET_CHECK(ast_grouping_item->expression() != nullptr);
@@ -3179,7 +3201,7 @@ absl::Status Resolver::ResolveGroupByExprs(
         // We are already grouping by this SELECT list column, so we do not need
         // to do more unless the query uses GROUP BY ROLLUP, in which case we
         // need to add another entry in the rollup list for it.
-        if (!is_rollup && !is_grouping_sets) {
+        if (!is_rollup && !is_grouping_sets && !is_cube) {
           continue;
         }
 
@@ -3204,6 +3226,9 @@ absl::Status Resolver::ResolveGroupByExprs(
         }
         if (is_grouping_sets) {
           query_resolution_info->AddGroupingSetsColumn(existing_computed_column);
+        }
+        if (is_cube) {
+          query_resolution_info->AddCubeColumn(existing_computed_column);
         }
         continue;
       }
@@ -3233,6 +3258,9 @@ absl::Status Resolver::ResolveGroupByExprs(
     }
     if (is_grouping_sets) {
       query_resolution_info->AddGroupingSetsColumn(computed_column);
+    }
+    if (is_cube) {
+      query_resolution_info->AddCubeColumn(computed_column);
     }
   }
 

@@ -2876,6 +2876,7 @@ absl::Status SQLBuilder::ProcessAggregateScanBase(
     const ResolvedAggregateScanBase* node,
     const std::vector<int>& rollup_column_id_list,
     const std::vector<int>& grouping_sets_column_id_list,
+    const std::vector<int>& cube_column_id_list,
     QueryExpression* query_expression) {
   if (!query_expression->CanSetGroupByClause()) {
     ZETASQL_RETURN_IF_ERROR(WrapQueryExpression(node->input_scan(), query_expression));
@@ -2906,7 +2907,7 @@ absl::Status SQLBuilder::ProcessAggregateScanBase(
   ZETASQL_RETURN_IF_ERROR(AppendHintsIfPresent(node->hint_list(), &group_by_hints));
 
   ZETASQL_RET_CHECK(query_expression->TrySetGroupByClause(group_by_list, group_by_hints,
-                                                  rollup_column_id_list, grouping_sets_column_id_list));
+                                                  rollup_column_id_list, grouping_sets_column_id_list, cube_column_id_list));
   ZETASQL_RETURN_IF_ERROR(AddSelectListIfNeeded(node->column_list(), query_expression));
   return absl::OkStatus();
 }
@@ -2947,8 +2948,18 @@ absl::Status SQLBuilder::VisitResolvedAggregateScan(
     }
   }
 
+  std::vector<int> cube_column_id_list;
+  if (!node->cube_column_list().empty()) {
+    for (const auto& column_ref : node->cube_column_list()) {
+      cube_column_id_list.push_back(column_ref->column().column_id());
+      // Mark as accessed.
+      column_ref->column();
+    }
+  }
+
   ZETASQL_RETURN_IF_ERROR(ProcessAggregateScanBase(node, rollup_column_id_list,
                                            grouping_sets_column_id_list,
+                                           cube_column_id_list,
                                            query_expression.get()));
   PushSQLForQueryExpression(node, query_expression.release());
   return absl::OkStatus();
@@ -2963,6 +2974,7 @@ absl::Status SQLBuilder::VisitResolvedAnonymizedAggregateScan(
 
   ZETASQL_RETURN_IF_ERROR(ProcessAggregateScanBase(node, /*rollup_column_id_list=*/{},
                                            /*grouping_sets_column_id_list=*/{},
+                                           /*cube_column_id_list=*/{},
                                            query_expression.get()));
 
   // We handle the WITH ANONYMIZATION clause *after* processing the
