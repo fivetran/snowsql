@@ -42,6 +42,7 @@ jobs:
                 -zetasql/tools/execute_query:execute_query_tool_test \
                 -zetasql/reference_impl:reference_compliance_test \
                 -zetasql/reference_impl:reference_compliance_test_minimal_rewrites
+                -zetasql/reference_impl:reference_compliance_test_all_rewrites
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
 
     runs-on: ${{ matrix.os }}
