@@ -625,6 +625,7 @@ class SQLBuilder : public ResolvedASTVisitor {
       const ResolvedAggregateScanBase* node,
       const std::vector<int>& rollup_column_id_list,
       const std::vector<int>& grouping_sets_column_id_list,
+      const std::vector<int>& cube_column_id_list,
       QueryExpression* query_expression);
 
   // Helper function to return corresponding SQL for a list of

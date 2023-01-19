@@ -1822,7 +1822,7 @@ RewriterVisitor::RewriteInnerAggregateScan(
   }
   return MakeResolvedAggregateScan(new_column_list, std::move(input_scan),
                                    std::move(inner_group_by_list),
-                                   std::move(inner_aggregate_list), {}, {}, {});
+                                   std::move(inner_aggregate_list), {}, {}, {}, {});
 }
 
 absl::Status RewriterVisitor::MakeKThresholdFunctionColumn(

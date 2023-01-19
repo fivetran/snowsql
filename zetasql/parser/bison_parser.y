@@ -1319,6 +1319,7 @@ using zetasql::ASTDropStatement;
 %type <node> generic_entity_body
 %type <node> opt_generic_entity_body
 %type <node> grouping_sets_list
+%type <node> cube_list
 %type <node> having_clause
 %type <node> opt_having_clause
 %type <node> opt_having_modifier
@@ -5662,6 +5663,17 @@ grouping_sets_list:
       }
     ;
 
+cube_list:
+    "CUBE" "(" expression
+      {
+        $$ = MAKE_NODE(ASTCube, @$, {$3});
+      }
+    | cube_list "," expression
+      {
+        $$ = WithExtraChildren($1, {$3});
+      }
+    ;
+
 grouping_item:
     expression
       {
@@ -5672,6 +5684,10 @@ grouping_item:
         $$ = MAKE_NODE(ASTGroupingItem, @$, {parser->WithEndLocation($1, @$)});
       }
     | grouping_sets_list ")"
+      {
+        $$ = MAKE_NODE(ASTGroupingItem, @$, {parser->WithEndLocation($1, @$)});
+      }
+    | cube_list ")"
       {
         $$ = MAKE_NODE(ASTGroupingItem, @$, {parser->WithEndLocation($1, @$)});
       }

@@ -2556,6 +2556,12 @@ value.
               'ResolvedColumnRef',
               tag_id=7,
               vector=True,
+              ignorable=IGNORABLE_DEFAULT),
+          Field(
+              'cube_column_list',
+              'ResolvedColumnRef',
+              tag_id=8,
+              vector=True,
               ignorable=IGNORABLE_DEFAULT)
       ])
   gen.AddNode(

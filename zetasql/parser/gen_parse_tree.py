@@ -39,7 +39,7 @@ from zetasql.parser.generator_utils import ScalarType
 from zetasql.parser.generator_utils import Trim
 from zetasql.parser.generator_utils import UpperCamelCase
 
-NEXT_NODE_TAG_ID = 367
+NEXT_NODE_TAG_ID = 368
 
 ROOT_NODE_NAME = 'ASTNode'
 
@@ -1342,6 +1342,10 @@ def main(argv):
               'grouping_sets',
               'ASTGroupingSets',
               tag_id=4),
+          Field(
+              'cube',
+              'ASTCube',
+              tag_id=5),
       ])
 
   gen.AddNode(
@@ -8546,6 +8550,18 @@ def main(argv):
               comment="""
           The OFFSET value. NULL if no OFFSET specified.
               """),
+      ])
+
+  gen.AddNode(
+      name='ASTCube',
+      tag_id=367,
+      parent='ASTNode',
+      fields=[
+          Field(
+              'expressions',
+              'ASTExpression',
+              tag_id=2,
+              field_loader=FieldLoaderMethod.REST_AS_REPEATED),
       ])
 
   gen.Generate(output_path, template_path=template_path)

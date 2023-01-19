@@ -324,6 +324,7 @@ static absl::flat_hash_map<ASTNodeKind, std::string> CreateNodeNamesMap() {
   map[AST_ROLLBACK_STATEMENT] = "RollbackStatement";
   map[AST_ROLLUP] = "Rollup";
   map[AST_GROUPING_SETS] = "GroupingSets";
+  map[AST_CUBE] = "Cube";
   map[AST_RUN_BATCH_STATEMENT] = "RunBatchStatement";
   map[AST_SAMPLE_CLAUSE] = "SampleClause";
   map[AST_SAMPLE_SIZE] = "SampleSize";
