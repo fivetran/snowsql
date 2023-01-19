@@ -1652,6 +1652,32 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
         path_expr, &resolved_expr, &num_names_consumed));
   }
 
+  if (num_names_consumed == 0) {
+    // (4) We still haven't found a matching name. Try to resolve the longest
+    // possible prefix of <path_expr> to a named constant.
+    const Constant* constant = nullptr;
+    absl::Status find_constant_with_path_prefix_status =
+        catalog_->FindConstantWithPathPrefix(path_expr->ToIdentifierVector(),
+                                             &num_names_consumed, &constant,
+                                             analyzer_options_.find_options());
+
+    // Handle the case where a constant was found or some internal error
+    // occurred. If no constant was found, <num_names_consumed> is set to 0.
+    if (find_constant_with_path_prefix_status.code() !=
+        absl::StatusCode::kNotFound) {
+      // If an error occurred, return immediately.
+      ZETASQL_RETURN_IF_ERROR(find_constant_with_path_prefix_status);
+
+      // A constant was found. Wrap it in an AST node and skip ahead to
+      // resolving any field access in a path suffix if present.
+      ZETASQL_RET_CHECK(constant != nullptr);
+      ZETASQL_RET_CHECK_GT(num_names_consumed, 0);
+      auto resolved_constant = MakeResolvedConstant(constant->type(), constant);
+      MaybeRecordParseLocation(path_expr, resolved_constant.get());
+      resolved_expr = std::move(resolved_constant);
+    }
+  }
+
   if (num_names_consumed == 0 && expr_resolution_info->select_name_scope != nullptr) {
     ZETASQL_RETURN_IF_ERROR(expr_resolution_info->select_name_scope->LookupNamePath(
         path_expr, expr_resolution_info->clause_name,
@@ -1679,31 +1705,6 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
     }
   }
 
-  if (num_names_consumed == 0) {
-    // (4) We still haven't found a matching name. Try to resolve the longest
-    // possible prefix of <path_expr> to a named constant.
-    const Constant* constant = nullptr;
-    absl::Status find_constant_with_path_prefix_status =
-        catalog_->FindConstantWithPathPrefix(path_expr->ToIdentifierVector(),
-                                             &num_names_consumed, &constant,
-                                             analyzer_options_.find_options());
-
-    // Handle the case where a constant was found or some internal error
-    // occurred. If no constant was found, <num_names_consumed> is set to 0.
-    if (find_constant_with_path_prefix_status.code() !=
-        absl::StatusCode::kNotFound) {
-      // If an error occurred, return immediately.
-      ZETASQL_RETURN_IF_ERROR(find_constant_with_path_prefix_status);
-
-      // A constant was found. Wrap it in an AST node and skip ahead to
-      // resolving any field access in a path suffix if present.
-      ZETASQL_RET_CHECK(constant != nullptr);
-      ZETASQL_RET_CHECK_GT(num_names_consumed, 0);
-      auto resolved_constant = MakeResolvedConstant(constant->type(), constant);
-      MaybeRecordParseLocation(path_expr, resolved_constant.get());
-      resolved_expr = std::move(resolved_constant);
-    }
-  }
   if (generated_column_cycle_detector_ != nullptr) {
     // If we are analyzing generated columns, we need to record the dependency
     // here so that we are not introducing cycles.
