@@ -168,7 +168,7 @@ GROUP BY CUBE(key, b);
                    ^
 ==
 
-# GROUPING SETS of an expression over an aggregate function.
+# CUBE of an expression over an aggregate function.
 SELECT
   key AS a,
   1 + SUM(KitchenSink.double_val) AS b
