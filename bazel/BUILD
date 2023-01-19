@@ -33,7 +33,7 @@ exports_files([
     "zetasql_deps_step_2.bzl",
     "zetasql_deps_step_3.bzl",
     "zetasql_deps_step_4.bzl",
-    "zetasql_java_deps.bzl",
+    # "zetasql_java_deps.bzl",
 ])
 
 flex_header(

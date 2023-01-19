@@ -8,37 +8,42 @@ on:
 
 jobs:
   build-test:
+    env:
+      BAZEL_LINUX_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+      BAZEL_MACOS_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
-            build-command: bazel build //zetasql/local_service:libremote_server.so --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
-            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
+            build-command: bazel build ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so -zetasql/jdk/... -java/... -javatests/...
             test-command: |
-              bazel test //zetasql/analyzer/...
-              bazel test //zetasql/base/...
-              bazel test //zetasql/common/...
-              bazel test //zetasql/compliance/...
-              bazel test //zetasql/local_service/...
-              bazel test //zetasql/parser/...
+              bazel test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
+                -zetasql/reference_impl:algebrizer_test \
+                -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
+                -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
+                -zetasql/reference_impl:reference_compliance_test \
+                -zetasql/reference_impl:reference_compliance_test_all_rewrites
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
 
           - os: macos-latest
             build-command: |
-              bazel build //zetasql/local_service:libremote_server.dylib --features=-supports_dynamic_linker --config=clang --copt "-O3" --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+              bazel build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
+            test-command: |
+              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.so \
+                -zetasql/analyzer:analyzer_set_operation_test \
+                -zetasql/common:multiprecision_int_test \
+                -zetasql/public:proto_value_conversion_test \
+                -zetasql/public/functions:math_test \
+                -zetasql/reference_impl:algebrizer_test \
+                -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
+                -zetasql/tools/execute_query:execute_query_tool_test \
+                -zetasql/reference_impl:reference_compliance_test \
+                -zetasql/reference_impl:reference_compliance_test_minimal_rewrites\
+                -zetasql/reference_impl:reference_compliance_test_all_rewrites
             lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: | # Temporary skip 2 tests for MacOS
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" -- //zetasql/analyzer/... -//zetasql/analyzer:analyzer_set_operation_test -//zetasql/analyzer:analyzer_test
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/base/...
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/common/...
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/compliance/...
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" -- //zetasql/local_service/... \
-                -//zetasql/local_service:libremote_server.so \
-                -//zetasql/local_service:liblocal_service_jni.so \
-                -//zetasql/local_service:liblocal_service_jni.dylib \
-                -//zetasql/local_service:local_service_jni
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" //zetasql/parser/...
 
     runs-on: ${{ matrix.os }}
 

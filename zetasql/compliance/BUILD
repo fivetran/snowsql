@@ -240,10 +240,10 @@ cc_proto_library(
     deps = [":test_driver_proto"],
 )
 
-java_proto_library(
-    name = "test_driver_java_proto",
-    deps = [":test_driver_proto"],
-)
+# java_proto_library(
+#     name = "test_driver_java_proto",
+#     deps = [":test_driver_proto"],
+# )
 
 cc_library(
     name = "test_util",
