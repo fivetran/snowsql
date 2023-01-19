@@ -1,0 +1,180 @@
+SELECT SUM(key), value
+FROM KeyValue
+GROUP BY CUBE(value);
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$groupby.value#4 AS value [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#3, $groupby.value#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$groupby.value#4, $aggregate.$agg1#3]
+        +-input_scan=
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+        +-group_by_list=
+        | +-value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)
+        +-aggregate_list=
+        | +-$agg1#3 :=
+        |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
+        |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+        +-cube_column_list=
+          +-ColumnRef(type=STRING, column=$groupby.value#4)
+==
+
+SELECT SUM(key), value, GROUPING(value) AS x
+FROM KeyValue
+GROUP BY CUBE(value, x);
+--
+ERROR: Function not found: `GROUPING` [at 1:25]
+SELECT SUM(key), value, GROUPING(value) AS x
+                        ^
+==
+
+SELECT key, value
+FROM KeyValue
+GROUP BY key, CUBE(value);
+--
+ERROR: The GROUP BY clause only supports CUBE when there are no other grouping elements [at 3:15]
+GROUP BY key, CUBE(value);
+              ^
+==
+
+SELECT key, value
+FROM KeyValue
+GROUP BY CUBE(value), key;
+--
+ERROR: The GROUP BY clause only supports CUBE when there are no other grouping elements [at 3:10]
+GROUP BY CUBE(value), key;
+         ^
+==
+
+SELECT key, value
+FROM KeyValue
+GROUP BY CUBE(value), CUBE(key);
+--
+ERROR: The GROUP BY clause only supports CUBE when there are no other grouping elements [at 3:10]
+GROUP BY CUBE(value), CUBE(key);
+         ^
+==
+
+SELECT
+  sum(KitchenSink.int64_val),
+  sum(KitchenSink.double_val)
+FROM TestTable
+GROUP BY CUBE(key, KitchenSink.date);
+--
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg2#5 AS `$col2` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=$aggregate.[$agg1#4, $agg2#5]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=$aggregate.[$agg1#4, $agg2#5]
+        +-input_scan=
+        | +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
+        +-group_by_list=
+        | +-key#6 := ColumnRef(type=INT32, column=TestTable.key#1)
+        | +-date#7 :=
+        |   +-GetProtoField
+        |     +-type=DATE
+        |     +-expr=
+        |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+        |     +-field_descriptor=date
+        |     +-default_value=1970-01-01
+        |     +-format=DATE
+        +-aggregate_list=
+        | +-$agg1#4 :=
+        | | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
+        | |   +-GetProtoField
+        | |     +-type=INT64
+        | |     +-expr=
+        | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+        | |     +-field_descriptor=int64_val
+        | |     +-default_value=0
+        | +-$agg2#5 :=
+        |   +-AggregateFunctionCall(ZetaSQL:sum(DOUBLE) -> DOUBLE)
+        |     +-GetProtoField
+        |       +-type=DOUBLE
+        |       +-expr=
+        |       | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+        |       +-field_descriptor=double_val
+        |       +-default_value=0
+        +-cube_column_list=
+          +-ColumnRef(type=INT32, column=$groupby.key#6)
+          +-ColumnRef(type=DATE, column=$groupby.date#7)
+==
+
+# References to the same column using different aliases.
+SELECT
+  key AS a,
+  key AS b,
+  kEy AS c
+FROM TestTable
+GROUP BY CUBE(a, b, c, b, key);
+--
+QueryStmt
++-output_column_list=
+| +-$groupby.a#4 AS a [INT32]
+| +-$groupby.a#4 AS b [INT32]
+| +-$groupby.a#4 AS c [INT32]
++-query=
+  +-ProjectScan
+    +-column_list=$groupby.[a#4, a#4, a#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$groupby.a#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.key#1], table=TestTable, column_index_list=[0])
+        +-group_by_list=
+        | +-a#4 := ColumnRef(type=INT32, column=TestTable.key#1)
+        +-cube_column_list=
+          +-ColumnRef(type=INT32, column=$groupby.a#4)
+          +-ColumnRef(type=INT32, column=$groupby.a#4)
+          +-ColumnRef(type=INT32, column=$groupby.a#4)
+          +-ColumnRef(type=INT32, column=$groupby.a#4)
+          +-ColumnRef(type=INT32, column=$groupby.a#4)
+==
+
+# CUBE of an aggregate function.
+SELECT
+  key AS a,
+  sum(KitchenSink.int64_val) AS b,
+  KitchenSink.date AS key,
+  sum(KitchenSink.double_val) AS d
+FROM TestTable
+GROUP BY CUBE(key, a, b, d);
+--
+ERROR: Column b contains an aggregation function, which is not allowed in GROUP BY [at 7:23]
+GROUP BY CUBE(key, a, b, d);
+                      ^
+==
+
+# CUBE of an analytic function.
+[language_features=ANALYTIC_FUNCTIONS]
+SELECT
+  key AS a,
+  SUM(KitchenSink.double_val) OVER (PARTITION BY KitchenSink.date) AS b
+FROM TestTable
+GROUP BY CUBE(key, b);
+--
+ERROR: Column b contains an analytic function, which is not allowed in GROUP BY [at 5:20]
+GROUP BY CUBE(key, b);
+                   ^
+==
+
+# GROUPING SETS of an expression over an aggregate function.
+SELECT
+  key AS a,
+  1 + SUM(KitchenSink.double_val) AS b
+FROM TestTable
+GROUP BY CUBE(key, b);
+--
+ERROR: Column b contains an aggregation function, which is not allowed in GROUP BY [at 5:20]
+GROUP BY CUBE(key, b);
+                   ^
