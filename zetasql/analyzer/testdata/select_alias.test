@@ -18,3 +18,27 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+SELECT 0.23 AS a, 100 * a as b, a * b
+--
+QueryStmt
++-output_column_list=
+| +-$query.a#1 AS a [DOUBLE]
+| +-$query.b#2 AS b [DOUBLE]
+| +-$query.$col3#3 AS `$col3` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=$query.[a#1, b#2, $col3#3]
+    +-expr_list=
+    | +-a#1 := Literal(type=DOUBLE, value=0.23)
+    | +-b#2 :=
+    | | +-FunctionCall(ZetaSQL:$multiply(DOUBLE, DOUBLE) -> DOUBLE)
+    | |   +-Literal(type=DOUBLE, value=100)
+    | |   +-ColumnRef(type=DOUBLE, column=$query.a#1)
+    | +-$col3#3 :=
+    |   +-FunctionCall(ZetaSQL:$multiply(DOUBLE, DOUBLE) -> DOUBLE)
+    |     +-ColumnRef(type=DOUBLE, column=$query.a#1)
+    |     +-ColumnRef(type=DOUBLE, column=$query.b#2)
+    +-input_scan=
+      +-SingleRowScan
+==
