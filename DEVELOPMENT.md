@@ -44,6 +44,8 @@ bazel build //zetasql/analyzer:resolver_test --features=-supports_dynamic_linker
 `analyzer_aggregation_test` = `<package_name>` + `'_'` + `<test_name>`<br>
 `<test_name>` = file name from `'zetasql/<package_name>/testdata'` without `'.test'` extension (see `'gen_analyzer_test'` in `'zetasql/analyzer/BUILD'`).
 
+# Support Snowflake syntax
+
 ## Data types
 
 ### ARRAY in Snowflake and BigQuery
@@ -60,16 +62,8 @@ Example: `APPROX_TOP_K_ACCUMULATE(ANY, NUMBER) RETURN OBJECT`
 
 **Note:** Some Snowflake aggregate functions return OBJECT data type. To simplify a description of new functions BigQuery types were used.<br> ****Should be fixed after implementation of VARIANT and OBJECT data types.**
 
-# Support Snowflake syntax
-
 ## Referencing an alias in the same SELECT statement
-1. For now range variables take precedence over columns with the same name.
-<br>Here 1st `value` is resolved as KeyValue. Snowflake implementation assumes that `value` is `STRING` here.
-```sql
-select value, value.value, kv.value from KeyValue value, KeyValue kv
-```
-
-2. If a clause contains `GROUP BY` or some aggregation function (e.g. `COUNT(*)`) then referencing aliases in the same `SELECT` will be incorrect.
+1. If a clause contains `GROUP BY` or some aggregation function (e.g. `COUNT(*)`) then referencing aliases in the same `SELECT` will be incorrect.
 <br>It should be implemented later.
 The next query is valid in Snowflake but fails in SnowSQL:
 ```sql
@@ -79,12 +73,12 @@ from (
 );
 ```
 
-3. Name resolution is performed in the next order:
-   - Function argument
+2. Name resolution is performed in the next order:
+   - Function argument (Only if FEATURE_FUNCTION_ARGUMENT_NAMES_HIDE_LOCAL_NAMES is on)
    - Name target
    - Expression column
    - Function argument
    - Named constant
+   - **Select list aliases**
 
    **Note:** It should be considered during further implementation.
-   <br>**Note:** No information in comparison guide found.
