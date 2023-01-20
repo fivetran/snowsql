@@ -2821,7 +2821,9 @@ absl::Status Resolver::ResolveSelectColumnFirstPass(
   IdString select_column_alias =
       ComputeSelectColumnAlias(ast_select_column, ast_select_column_idx);
 
-  const NameScope* select_scope = new NameScope(nullptr, select_name_list);
+  const NameScope* select_scope = select_name_list != nullptr
+      ? new NameScope(nullptr, select_name_list)
+      : nullptr;
 
   // Save stack space for nested SELECT list subqueries.
   std::unique_ptr<ExprResolutionInfo> expr_resolution_info(
