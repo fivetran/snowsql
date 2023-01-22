@@ -1988,7 +1988,6 @@ void Resolver::FinalizeSelectColumnState(
     const ResolvedColumn& select_column =
         select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
             ->column();
-    // todo: update deps
     for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
       select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
     }
@@ -2008,7 +2007,6 @@ void Resolver::FinalizeSelectColumnState(
     // get PROJECTed.
     query_resolution_info->select_list_columns_to_compute()->push_back(
         std::move(resolved_computed_column));
-    // todo: update deps
     for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
       select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
     }
