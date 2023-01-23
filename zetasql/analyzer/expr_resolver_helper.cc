@@ -209,13 +209,14 @@ absl::StatusOr<bool> IsConstantExpression(const ResolvedExpr* expr) {
 
 ExprResolutionInfo::ExprResolutionInfo(
     const NameScope* name_scope_in, const NameScope* aggregate_name_scope_in,
-    const NameScope* analytic_name_scope_in, bool allows_aggregation_in,
-    bool allows_analytic_in, bool use_post_grouping_columns_in,
+    const NameScope* analytic_name_scope_in, const NameScope* select_name_scope_in,
+    bool allows_aggregation_in, bool allows_analytic_in, bool use_post_grouping_columns_in,
     const char* clause_name_in, QueryResolutionInfo* query_resolution_info_in,
     const ASTExpression* top_level_ast_expr_in, IdString column_alias_in)
     : name_scope(name_scope_in),
       aggregate_name_scope(aggregate_name_scope_in),
       analytic_name_scope(analytic_name_scope_in),
+      select_name_scope(select_name_scope_in),
       allows_aggregation(allows_aggregation_in),
       allows_analytic(allows_analytic_in),
       clause_name(clause_name_in),
@@ -225,18 +226,41 @@ ExprResolutionInfo::ExprResolutionInfo(
       column_alias(column_alias_in) {}
 
 ExprResolutionInfo::ExprResolutionInfo(
+    const NameScope* name_scope_in, const NameScope* aggregate_name_scope_in,
+    const NameScope* analytic_name_scope_in,
+    bool allows_aggregation_in, bool allows_analytic_in, bool use_post_grouping_columns_in,
+    const char* clause_name_in, QueryResolutionInfo* query_resolution_info_in,
+    const ASTExpression* top_level_ast_expr_in, IdString column_alias_in)
+    : ExprResolutionInfo(
+          name_scope_in, aggregate_name_scope_in, analytic_name_scope_in, nullptr,
+          allows_aggregation_in, allows_analytic_in, use_post_grouping_columns_in,
+          clause_name_in, query_resolution_info_in,
+          top_level_ast_expr_in, column_alias_in) {}
+
+ExprResolutionInfo::ExprResolutionInfo(
+    const NameScope* name_scope_in,
+    const NameScope* select_name_scope_in,
+    QueryResolutionInfo* query_resolution_info_in,
+    const ASTExpression* top_level_ast_expr_in, IdString column_alias_in)
+    : ExprResolutionInfo(
+          name_scope_in, name_scope_in, name_scope_in, select_name_scope_in,
+          true /* allows_aggregation */, true /* allows_analytic */,
+          false /* use_post_grouping_columns */, "" /* clause_name */,
+          query_resolution_info_in, top_level_ast_expr_in, column_alias_in) {}
+
+ExprResolutionInfo::ExprResolutionInfo(
     const NameScope* name_scope_in,
     QueryResolutionInfo* query_resolution_info_in,
     const ASTExpression* top_level_ast_expr_in, IdString column_alias_in)
     : ExprResolutionInfo(
-          name_scope_in, name_scope_in, name_scope_in,
+          name_scope_in, name_scope_in, name_scope_in, nullptr,
           true /* allows_aggregation */, true /* allows_analytic */,
           false /* use_post_grouping_columns */, "" /* clause_name */,
           query_resolution_info_in, top_level_ast_expr_in, column_alias_in) {}
 
 ExprResolutionInfo::ExprResolutionInfo(const NameScope* name_scope_in,
                                        const char* clause_name_in)
-    : ExprResolutionInfo(name_scope_in, name_scope_in, name_scope_in,
+    : ExprResolutionInfo(name_scope_in, name_scope_in, name_scope_in, nullptr,
                          false /* allows_aggregation */,
                          false /* allows_analytic */,
                          false /* use_post_grouping_columns */, clause_name_in,
@@ -244,7 +268,7 @@ ExprResolutionInfo::ExprResolutionInfo(const NameScope* name_scope_in,
 
 ExprResolutionInfo::ExprResolutionInfo(ExprResolutionInfo* parent)
     : ExprResolutionInfo(parent->name_scope, parent->aggregate_name_scope,
-                         parent->analytic_name_scope,
+                         parent->analytic_name_scope, parent->select_name_scope,
                          parent->allows_aggregation, parent->allows_analytic,
                          parent->use_post_grouping_columns, parent->clause_name,
                          parent->query_resolution_info,
@@ -259,6 +283,7 @@ ExprResolutionInfo::ExprResolutionInfo(ExprResolutionInfo* parent,
                                        bool allows_analytic_in)
     : ExprResolutionInfo(name_scope_in, parent->aggregate_name_scope,
                          parent->analytic_name_scope,
+                         parent->select_name_scope,
                          parent->allows_aggregation, allows_analytic_in,
                          parent->use_post_grouping_columns, clause_name_in,
                          parent->query_resolution_info,
