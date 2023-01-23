@@ -1552,6 +1552,7 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
         ResolvedColumn resolved_column = target.column();
         auto resolved_column_ref = MakeColumnRefWithCorrelation(
             resolved_column, correlated_columns_sets, access_flags);
+        resolved_column.resolved_column_refs->push_back(resolved_column_ref.get());
         MaybeRecordParseLocation(path_expr.GetParseLocationRange(),
                                  resolved_column_ref.get());
         resolved_expr = std::move(resolved_column_ref);
@@ -1699,6 +1700,36 @@ absl::Status Resolver::ResolvePathExpressionAsExpression(
       resolved_expr = std::move(resolved_constant);
     }
   }
+
+  if (expr_resolution_info->select_name_scope != nullptr) {
+    if (num_names_consumed == 0) {
+      ZETASQL_RETURN_IF_ERROR(expr_resolution_info->select_name_scope->LookupNamePath(
+          path_expr, expr_resolution_info->clause_name,
+          expr_resolution_info->is_post_distinct(), in_strict_mode(),
+          &correlated_columns_sets, &num_names_consumed, &target));
+      resolved_to_target = num_names_consumed > 0;
+    }
+    if (resolved_to_target) {
+      switch (target.kind()) {
+        case NameTarget::EXPLICIT_COLUMN:
+        case NameTarget::IMPLICIT_COLUMN: {
+          ResolvedColumn resolved_column = target.column();
+          auto resolved_column_ref = MakeColumnRefWithCorrelation(
+              resolved_column, correlated_columns_sets, access_flags);
+          resolved_column.resolved_column_refs->push_back(resolved_column_ref.get());
+          MaybeRecordParseLocation(path_expr.GetParseLocationRange(), resolved_column_ref.get());
+          resolved_expr = std::move(resolved_column_ref);
+          if (expr_resolution_info->query_resolution_info != nullptr &&
+              !expr_resolution_info->is_post_distinct()) {
+            ZETASQL_RETURN_IF_ERROR(ValidateColumnForAggregateOrAnalyticSupport(
+                resolved_column, first_name, path_expr.first_name(), expr_resolution_info));
+          }
+          break;
+        }
+      }
+    }
+  }
+
   if (generated_column_cycle_detector_ != nullptr) {
     // If we are analyzing generated columns, we need to record the dependency
     // here so that we are not introducing cycles.

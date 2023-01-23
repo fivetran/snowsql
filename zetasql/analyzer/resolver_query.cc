@@ -1559,10 +1559,13 @@ absl::Status Resolver::ResolveSelect(
   if (select->select_as() == nullptr) {
     inferred_type_for_select_list = inferred_type_for_query;
   }
+
   ZETASQL_RETURN_IF_ERROR(ResolveSelectListExprsFirstPass(
       select->select_list(), from_scan_scope.get(),
       select->from_clause() != nullptr, from_clause_name_list,
-      query_resolution_info.get(), inferred_type_for_select_list));
+      query_resolution_info.get(),
+      query_alias,
+      inferred_type_for_select_list));
 
   query_resolution_info->set_has_group_by(select->group_by() != nullptr);
   query_resolution_info->set_has_having(select->having() != nullptr);
@@ -1816,7 +1819,7 @@ absl::Status Resolver::ResolveModelTransformSelectList(
   for (int i = 0; i < select_list->columns().size(); ++i) {
     ZETASQL_RETURN_IF_ERROR(ResolveSelectColumnFirstPass(
         select_list->columns(i), input_scope, input_cols_name_list, i,
-        /*has_from_clause=*/true, &query_info));
+        /*has_from_clause=*/true, &query_info, nullptr, nullptr));
   }
   FinalizeSelectColumnStateList(
       select_list, kDummyTableId,
@@ -2322,6 +2325,9 @@ void Resolver::FinalizeSelectColumnStateList(
       const ResolvedColumn& select_column =
           select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
               ->column();
+      for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
+        select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+      }
       select_column_state->resolved_select_column = select_column;
     } else {
       ResolvedColumn select_column(
@@ -2338,6 +2344,9 @@ void Resolver::FinalizeSelectColumnStateList(
       // get PROJECTed.
       query_resolution_info->select_list_columns_to_compute()->push_back(
           std::move(resolved_computed_column));
+      for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
+        select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+      }
       select_column_state->resolved_select_column = select_column;
     }
   }
@@ -3128,7 +3137,9 @@ absl::Status Resolver::ResolveSelectColumnFirstPass(
     const ASTSelectColumn* ast_select_column, const NameScope* from_scan_scope,
     const std::shared_ptr<const NameList>& from_clause_name_list,
     int ast_select_column_idx, bool has_from_clause,
-    QueryResolutionInfo* query_resolution_info, const Type* inferred_type) {
+    QueryResolutionInfo* query_resolution_info,
+    std::shared_ptr<NameList> select_name_list,
+    const Type* inferred_type) {
   RETURN_ERROR_IF_OUT_OF_STACK_SPACE();
 
   const ASTExpression* ast_select_expr = ast_select_column->expression();
@@ -3148,9 +3159,14 @@ absl::Status Resolver::ResolveSelectColumnFirstPass(
 
   IdString select_column_alias =
       ComputeSelectColumnAlias(ast_select_column, ast_select_column_idx);
+
+  const NameScope* select_scope = select_name_list != nullptr
+      ? new NameScope(nullptr, select_name_list)
+      : nullptr;
+
   // Save stack space for nested SELECT list subqueries.
   std::unique_ptr<ExprResolutionInfo> expr_resolution_info(
-      new ExprResolutionInfo(from_scan_scope, query_resolution_info,
+      new ExprResolutionInfo(from_scan_scope, select_scope, query_resolution_info,
                              ast_select_expr, select_column_alias));
   std::unique_ptr<const ResolvedExpr> resolved_expr;
   ZETASQL_RETURN_IF_ERROR(ResolveExpr(ast_select_expr, expr_resolution_info.get(),
@@ -3170,11 +3186,25 @@ absl::Status Resolver::ResolveSelectListExprsFirstPass(
     bool has_from_clause,
     const std::shared_ptr<const NameList>& from_clause_name_list,
     QueryResolutionInfo* query_resolution_info,
+    IdString query_alias,
     const Type* inferred_type_for_query) {
+
+  std::shared_ptr<NameList> select_name_list(new NameList);
+
   for (int i = 0; i < select_list->columns().size(); ++i) {
     ZETASQL_RETURN_IF_ERROR(ResolveSelectColumnFirstPass(
         select_list->columns(i), from_scan_scope, from_clause_name_list, i,
-        has_from_clause, query_resolution_info, inferred_type_for_query));
+        has_from_clause, query_resolution_info, select_name_list,
+        inferred_type_for_query));
+
+    const std::unique_ptr<SelectColumnState>& select_column_state =
+        query_resolution_info->select_column_state_list()->select_column_state_list().back();
+    ResolvedColumn select_column(
+        -1, query_alias, select_column_state->alias,
+        select_column_state->resolved_expr->annotated_type());
+
+    select_column_state->resolved_select_column = select_column;
+    select_name_list->AddColumn(select_column_state->alias, select_column, true);
   }
   return absl::OkStatus();
 }
