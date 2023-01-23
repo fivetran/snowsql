@@ -44,6 +44,8 @@ bazel build //zetasql/analyzer:resolver_test --features=-supports_dynamic_linker
 `analyzer_aggregation_test` = `<package_name>` + `'_'` + `<test_name>`<br>
 `<test_name>` = file name from `'zetasql/<package_name>/testdata'` without `'.test'` extension (see `'gen_analyzer_test'` in `'zetasql/analyzer/BUILD'`).
 
+# Support Snowflake syntax
+
 ## Data types
 
 ### ARRAY in Snowflake and BigQuery
@@ -59,3 +61,24 @@ Show all Snowflake functions: `SHOW FUNCTIONS`
 Example: `APPROX_TOP_K_ACCUMULATE(ANY, NUMBER) RETURN OBJECT`
 
 **Note:** Some Snowflake aggregate functions return OBJECT data type. To simplify a description of new functions BigQuery types were used.<br> ****Should be fixed after implementation of VARIANT and OBJECT data types.**
+
+## Referencing an alias in the same SELECT statement
+1. If a clause contains `GROUP BY` or some aggregation function (e.g. `COUNT(*)`) then referencing aliases in the same `SELECT` will be incorrect.
+<br>It should be implemented later.
+The next query is valid in Snowflake but fails in SnowSQL:
+```sql
+select 12.5 as key, key * count(*)
+from (
+   select * from UNNEST(GENERATE_ARRAY(1, 5))
+);
+```
+
+2. Name resolution is performed in the next order:
+   - Function argument (Only if FEATURE_FUNCTION_ARGUMENT_NAMES_HIDE_LOCAL_NAMES is on)
+   - Name target
+   - Expression column
+   - Function argument
+   - Named constant
+   - **Select list aliases**
+
+   **Note:** It should be considered during further implementation.
