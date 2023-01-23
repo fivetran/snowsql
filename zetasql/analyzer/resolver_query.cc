@@ -1349,7 +1349,6 @@ absl::Status Resolver::ResolveSelect(
     // reset the analytic resolver state before re-resolving the SELECT and
     // resolving the ORDER BY (which can contain analytic functions).
     // Fix this.
-
     FinalizeSelectColumnStateList(select->select_list(), query_alias,
                                   force_new_columns_for_projected_outputs,
                                   query_resolution_info.get(),
