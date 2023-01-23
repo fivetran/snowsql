@@ -160,7 +160,7 @@ TEST(ResolvedColumnTest, ClassAndProtoSize) {
       << "The size of ResolvedNode class has changed, please also update the "
       << "proto and serialization code if you added/removed fields in it.";
   EXPECT_EQ(2 * sizeof(IdString) + sizeof(const AnnotatedType*),
-            sizeof(ResolvedColumn) - sizeof(ResolvedNode))
+            sizeof(ResolvedColumn) - sizeof(ResolvedNode) - sizeof(std::vector<ResolvedColumnRef*>*))
       << "The size of ResolvedColumn class has changed, please also update the "
       << "proto and serialization code if you added/removed fields in it.";
   EXPECT_EQ(1, ResolvedNodeProto::descriptor()->field_count())

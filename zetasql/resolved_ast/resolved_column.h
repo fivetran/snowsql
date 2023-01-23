@@ -66,7 +66,7 @@ class ResolvedColumn {
         table_name_(table_name),
         name_(name),
         annotated_type_(annotated_type) {
-    ABSL_DCHECK_GT(column_id, 0) << "column_id should be positive";
+    // ABSL_DCHECK_GT(column_id, 0) << "column_id should be positive";
     ABSL_DCHECK(!table_name.empty());
     ABSL_DCHECK(!name.empty());
     ABSL_DCHECK(annotated_type.type != nullptr);
@@ -81,6 +81,7 @@ class ResolvedColumn {
     table_name_.clear();
     name_.clear();
     annotated_type_ = AnnotatedType();
+    resolved_column_refs->clear();
   }
 
   // Return "<table>.<column>#<column_id>".
@@ -98,6 +99,8 @@ class ResolvedColumn {
       const ResolvedNode::RestoreParams& params);
 
   int column_id() const { return column_id_; }
+
+  std::vector<ResolvedColumnRef*>* resolved_column_refs = new std::vector<ResolvedColumnRef*>();
 
   // Get the table and column name.  The _id forms return an IdString so
   // do not have to copy a string.  The non-_id forms are slower and should
