@@ -1987,7 +1987,7 @@ absl::Status Resolver::ResolveReturningClause(
                                                   /*has_from_clause=*/true,
                                                   from_clause_name_list,
                                                   query_resolution_info.get(),
-                                                  target_alias, /*force_new_columns_for_projected_outputs=*/false));
+                                                  target_alias));
 
   if (query_resolution_info->HasGroupByOrAggregation()) {
     return MakeSqlErrorAt(ast_node)

@@ -1265,7 +1265,7 @@ absl::Status Resolver::ResolveSelect(
       select->select_list(), from_scan_scope.get(),
       select->from_clause() != nullptr, from_clause_name_list,
       query_resolution_info.get(),
-      query_alias, force_new_columns_for_projected_outputs,
+      query_alias,
       inferred_type_for_select_list));
 
   query_resolution_info->set_has_group_by(select->group_by() != nullptr);
@@ -1967,50 +1967,41 @@ void Resolver::FinalizeSelectColumnStateList(
   // that returns a vector<SelectColumnsState*>.
   for (const std::unique_ptr<SelectColumnState>& select_column_state :
        select_column_state_list->select_column_state_list()) {
-    FinalizeSelectColumnState(query_alias, force_new_columns_for_projected_outputs,
-        query_resolution_info, select_column_state);
-  }
-}
-
-void Resolver::FinalizeSelectColumnState(
-    IdString query_alias,
-    bool force_new_columns_for_projected_outputs,
-    QueryResolutionInfo* query_resolution_info,
-    const std::unique_ptr<SelectColumnState>& select_column_state) {
-  if (!force_new_columns_for_projected_outputs &&
+    if (!force_new_columns_for_projected_outputs &&
       select_column_state->resolved_expr->node_kind() ==
           RESOLVED_COLUMN_REF &&
       !select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
             ->is_correlated() &&
       !analyzer_options_.create_new_column_for_each_projected_output()) {
-    // The expression was already resolved to a column.  If it was not
-    // correlated, just use the column.
-    const ResolvedColumn& select_column =
-        select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
-            ->column();
-    for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
-      select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+      // The expression was already resolved to a column.  If it was not
+      // correlated, just use the column.
+      const ResolvedColumn& select_column =
+          select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
+              ->column();
+      for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
+        select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+      }
+      select_column_state->resolved_select_column = select_column;
+    } else {
+      ResolvedColumn select_column(
+          AllocateColumnId(), query_alias, select_column_state->alias,
+          select_column_state->resolved_expr->annotated_type());
+      std::unique_ptr<ResolvedComputedColumn> resolved_computed_column =
+          MakeResolvedComputedColumn(
+              select_column, std::move(select_column_state->resolved_expr));
+      select_column_state->resolved_computed_column =
+          resolved_computed_column.get();
+      // TODO: Also do not include internal aliases, i.e.,
+      // !IsInternalAlias(select_column_state->alias).  Do this in a
+      // subsequent changelist, as it will impact where/when such columns
+      // get PROJECTed.
+      query_resolution_info->select_list_columns_to_compute()->push_back(
+          std::move(resolved_computed_column));
+      for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
+        select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
+      }
+      select_column_state->resolved_select_column = select_column;
     }
-    select_column_state->resolved_select_column = select_column;
-  } else {
-    ResolvedColumn select_column(
-        AllocateColumnId(), query_alias, select_column_state->alias,
-        select_column_state->resolved_expr->annotated_type());
-    std::unique_ptr<ResolvedComputedColumn> resolved_computed_column =
-        MakeResolvedComputedColumn(
-            select_column, std::move(select_column_state->resolved_expr));
-    select_column_state->resolved_computed_column =
-        resolved_computed_column.get();
-    // TODO: Also do not include internal aliases, i.e.,
-    // !IsInternalAlias(select_column_state->alias).  Do this in a
-    // subsequent changelist, as it will impact where/when such columns
-    // get PROJECTed.
-    query_resolution_info->select_list_columns_to_compute()->push_back(
-        std::move(resolved_computed_column));
-    for (int i = 0; i < select_column_state->resolved_select_column.resolved_column_refs->size(); i++) {
-      select_column_state->resolved_select_column.resolved_column_refs->at(i)->set_column(select_column);
-    }
-    select_column_state->resolved_select_column = select_column;
   }
 }
 
@@ -2845,7 +2836,7 @@ absl::Status Resolver::ResolveSelectListExprsFirstPass(
     bool has_from_clause,
     const std::shared_ptr<const NameList>& from_clause_name_list,
     QueryResolutionInfo* query_resolution_info,
-    IdString query_alias, bool force_new_columns_for_projected_outputs,
+    IdString query_alias,
     const Type* inferred_type_for_query) {
 
   std::shared_ptr<NameList> select_name_list(new NameList);
