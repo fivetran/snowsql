@@ -2337,10 +2337,10 @@ absl::Status Validator::ValidateResolvedProjectScan(
   ZETASQL_RETURN_IF_ERROR(
       AddColumnList(scan->input_scan()->column_list(), &visible_columns));
   ZETASQL_RETURN_IF_ERROR(
+      AddColumnsFromComputedColumnList(scan->expr_list(), &visible_columns));
+  ZETASQL_RETURN_IF_ERROR(
       ValidateResolvedComputedColumnList(visible_columns, visible_parameters,
                                          scan->expr_list()));
-  ZETASQL_RETURN_IF_ERROR(
-      AddColumnsFromComputedColumnList(scan->expr_list(), &visible_columns));
   ZETASQL_RETURN_IF_ERROR(CheckColumnList(scan, visible_columns));
 
   return absl::OkStatus();
