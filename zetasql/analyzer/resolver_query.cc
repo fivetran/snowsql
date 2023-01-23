@@ -1968,11 +1968,11 @@ void Resolver::FinalizeSelectColumnStateList(
   for (const std::unique_ptr<SelectColumnState>& select_column_state :
        select_column_state_list->select_column_state_list()) {
     if (!force_new_columns_for_projected_outputs &&
-      select_column_state->resolved_expr->node_kind() ==
-          RESOLVED_COLUMN_REF &&
-      !select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
-            ->is_correlated() &&
-      !analyzer_options_.create_new_column_for_each_projected_output()) {
+        select_column_state->resolved_expr->node_kind() ==
+            RESOLVED_COLUMN_REF &&
+        !select_column_state->resolved_expr->GetAs<ResolvedColumnRef>()
+             ->is_correlated() &&
+        !analyzer_options_.create_new_column_for_each_projected_output()) {
       // The expression was already resolved to a column.  If it was not
       // correlated, just use the column.
       const ResolvedColumn& select_column =
