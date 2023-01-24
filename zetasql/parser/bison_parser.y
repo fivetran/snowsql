@@ -1062,6 +1062,14 @@ using zetasql::ASTDropStatement;
 %token KW_EXCEPTION "EXCEPTION"
 %token KW_ERROR "ERROR"
 
+// Snowflake data types keywords
+%token KW_INT "INT"
+%token KW_INTEGER "INTEGER"
+%token KW_BIGINT "BIGINT"
+%token KW_SMALLINT "SMALLINT"
+%token KW_TINYINT "TINYINT"
+%token KW_BYTEINT "BYTEINT"
+
 // Spanner-specific keywords
 %token KW_INTERLEAVE "INTERLEAVE"
 %token KW_NULL_FILTERED "NULL_FILTERED"
@@ -8641,6 +8649,14 @@ keyword_as_identifier:
     | "WRITE"
     | "ZONE"
     | "DESCRIPTOR"
+
+    // Snowflake data types
+    | "INT"
+    | "INTEGER"
+    | "BIGINT"
+    | "SMALLINT"
+    | "TINYINT"
+    | "BYTEINT"
 
     // Spanner-specific keywords
     | "INTERLEAVE"

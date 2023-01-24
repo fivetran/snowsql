@@ -515,6 +515,12 @@ inout { return BisonParserImpl::token::KW_INOUT; }
 index { return BisonParserImpl::token::KW_INDEX; }
 inner { return BisonParserImpl::token::KW_INNER; }
 insert { return BisonParserImpl::token::KW_INSERT; }
+int { return BisonParserImpl::token::KW_INT; }
+integer { return BisonParserImpl::token::KW_INTEGER; }
+bigint { return BisonParserImpl::token::KW_BIGINT; }
+smallint { return BisonParserImpl::token::KW_SMALLINT; }
+tinyint { return BisonParserImpl::token::KW_TINYINT; }
+byteint { return BisonParserImpl::token::KW_BYTEINT; }
 intersect { return BisonParserImpl::token::KW_INTERSECT; }
 interval { return BisonParserImpl::token::KW_INTERVAL; }
 iterate { return BisonParserImpl::token::KW_ITERATE; }
