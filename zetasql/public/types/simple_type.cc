@@ -107,8 +107,7 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"uint64", {TYPE_UINT64, true}},
       {"bool", {TYPE_BOOL}},
       {"boolean", {TYPE_BOOL}},
-      // Removed due to conflict with Snowflake data type
-      // {"float", {TYPE_FLOAT, true}},
+      {"float", {TYPE_FLOAT, true}},
       {"float32", {TYPE_FLOAT, true}},
       {"float64", {TYPE_DOUBLE}},
       {"double", {TYPE_DOUBLE, true}},
@@ -135,7 +134,6 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"tinyint", {TYPE_INT64, false}},
       {"byteint", {TYPE_INT64, false}},
 
-      {"float", {TYPE_DOUBLE, false}},
       {"float4", {TYPE_DOUBLE, false}},
       {"float8", {TYPE_DOUBLE, false}},
 
