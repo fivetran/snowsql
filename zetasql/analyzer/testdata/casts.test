@@ -4542,30 +4542,58 @@ select cast("99999999999999999999999999999.999999999" as DECIMAL),
 
 select cast("123" as SMALLINT)
 --
-ERROR: Type not found: SMALLINT [at 1:22]
-select cast("123" as SMALLINT)
-                     ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=123, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select cast("123" as BIGINT)
 --
-ERROR: Type not found: BIGINT [at 1:22]
-select cast("123" as BIGINT)
-                     ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=123, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select cast("123" as INT)
 --
-ERROR: Type not found: INT [at 1:22]
-select cast("123" as INT)
-                     ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=123, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select cast("123" as INTEGER)
 --
-ERROR: Type not found: INTEGER [at 1:22]
-select cast("123" as INTEGER)
-                     ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=123, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select cast("123" as INT64AliasType)

@@ -464,6 +464,7 @@ describe { return BisonParserImpl::token::KW_DESCRIBE; }
 deterministic { return BisonParserImpl::token::KW_DETERMINISTIC; }
 distinct { return BisonParserImpl::token::KW_DISTINCT; }
 do { return BisonParserImpl::token::KW_DO; }
+double { return BisonParserImpl::token::KW_DOUBLE; }
 drop { return BisonParserImpl::token::KW_DROP; }
 else { return BisonParserImpl::token::KW_ELSE; }
 elseif { return BisonParserImpl::token::KW_ELSEIF; }
@@ -622,6 +623,7 @@ percent { return BisonParserImpl::token::KW_PERCENT; }
 policies { return BisonParserImpl::token::KW_POLICIES; }
 policy { return BisonParserImpl::token::KW_POLICY; }
 preceding { return BisonParserImpl::token::KW_PRECEDING; }
+precision { return BisonParserImpl::token::KW_PRECISION; }
 primary { return BisonParserImpl::token::KW_PRIMARY; }
 private { return BisonParserImpl::token::KW_PRIVATE; }
 privilege { return BisonParserImpl::token::KW_PRIVILEGE; }
