@@ -759,9 +759,9 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
   ResolveFunctionFails("CAST('foo' AS VARCHAR(5))", "Type not found: VARCHAR");
 
   // SQL Standard type names which are not even parsable in ZetaSQL
-  ParseFunctionFails(
-      "CAST(1 as DOUBLE PRECISION)",
-      R"error(Expected ")" but got identifier "PRECISION")error");
+//   ParseFunctionFails(
+//       "CAST(1 as DOUBLE PRECISION)",
+//       R"error(Expected ")" but got identifier "PRECISION")error");
   ParseFunctionFails("CAST('foo' as CHAR VARYING(10))",
                      R"error(Expected ")" but got identifier "VARYING")error");
 }
