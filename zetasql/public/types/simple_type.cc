@@ -125,6 +125,20 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"bignumeric", {TYPE_BIGNUMERIC}},
       {"bigdecimal", {TYPE_BIGNUMERIC, false, FEATURE_V_1_3_DECIMAL_ALIAS}},
       {"json", {TYPE_JSON}},
+
+      // Snowflake data types
+      {"int", {TYPE_INT64, false}},
+      {"integer", {TYPE_INT64, false}},
+      {"bigint", {TYPE_INT64, false}},
+      {"smallint", {TYPE_INT64, false}},
+      {"tinyint", {TYPE_INT64, false}},
+      {"byteint", {TYPE_INT64, false}},
+
+      {"float4", {TYPE_DOUBLE, false}},
+      {"float8", {TYPE_DOUBLE, false}},
+
+      {"double precision", {TYPE_DOUBLE, false}},
+      {"real", {TYPE_DOUBLE, false}},
   };
   return *result;
 }
