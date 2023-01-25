@@ -53,6 +53,17 @@ bazel build //zetasql/analyzer:resolver_test --features=-supports_dynamic_linker
 
 `BigQuery`: An `ARRAY` is an ordered list consisting of zero or more values of the same data type. `ARRAY`s of `ARRAY`s are not allowed.
 
+### INT, INTEGER, BIGINT, SMALLINT, TINYINT, BYTEINT
+In Snowflake these types are synonymous with NUMBER, except that precision and scale cannot be specified (i.e. always defaults to NUMBER(38, 0)).<br>
+Currently INTEGER types added as synonyms for INT64.
+
+### FLOAT, FLOAT4, FLOAT8
+The names FLOAT, FLOAT4, and FLOAT8 are for compatibility with other systems; Snowflake treats all three as 64-bit floating-point numbers.<br>
+Analog of these types in BigQuery is DOUBLE.
+
+### DOUBLE, DOUBLE PRECISION, REAL
+Synonymous with FLOAT.
+
 ## Functions
 
 ### Show Snowflake functions signatures

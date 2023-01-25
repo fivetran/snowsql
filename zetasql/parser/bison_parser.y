@@ -476,7 +476,7 @@ class SeparatedIdentifierTmpNode final : public zetasql::ASTNode {
 //   1: ANALYZE
 //   6: QUALIFY
 //   2: ALTER COLUMN
-%expect 27
+%expect 28
 
 %union {
   bool boolean;
@@ -936,6 +936,7 @@ using zetasql::ASTDropStatement;
 %token KW_DESCRIPTOR "DESCRIPTOR"
 %token KW_DETERMINISTIC "DETERMINISTIC"
 %token KW_DO "DO"
+%token KW_DOUBLE "DOUBLE"
 %token KW_DROP "DROP"
 %token KW_ENFORCED "ENFORCED"
 %token KW_ELSEIF "ELSEIF"
@@ -994,6 +995,7 @@ using zetasql::ASTDropStatement;
 %token KW_PIVOT "PIVOT"
 %token KW_POLICIES "POLICIES"
 %token KW_POLICY "POLICY"
+%token KW_PRECISION "PRECISION"
 %token KW_PRIMARY "PRIMARY"
 %token KW_PRIVATE "PRIVATE"
 %token KW_PRIVILEGE "PRIVILEGE"
@@ -8311,6 +8313,10 @@ identifier:
       {
         $$ = parser->MakeIdentifier(@1, parser->GetInputText(@1));
       }
+    | "DOUBLE" "PRECISION"
+      {
+        $$ = parser->MakeIdentifier(@$, "DOUBLE PRECISION");
+      }
     ;
 
 label:
@@ -8515,6 +8521,7 @@ keyword_as_identifier:
     | "DESCRIBE"
     | "DETERMINISTIC"
     | "DO"
+    | "DOUBLE"
     | "DROP"
     | "ELSEIF"
     | "ENFORCED"
@@ -8575,6 +8582,7 @@ keyword_as_identifier:
     | "PIVOT"
     | "POLICIES"
     | "POLICY"
+    | "PRECISION"
     | "PRIMARY"
     | "PRIVATE"
     | "PRIVILEGE"
