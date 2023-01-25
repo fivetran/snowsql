@@ -476,7 +476,7 @@ class SeparatedIdentifierTmpNode final : public zetasql::ASTNode {
 //   1: ANALYZE
 //   6: QUALIFY
 //   2: ALTER COLUMN
-%expect 27
+%expect 28
 
 %union {
   bool boolean;
@@ -793,6 +793,7 @@ using zetasql::ASTDropStatement;
 %token KW_DEFINE "DEFINE"
 %token KW_DESC "DESC"
 %token KW_DISTINCT "DISTINCT"
+%token KW_DOUBLE "DOUBLE"
 %token KW_ELSE "ELSE"
 %token KW_END "END"
 %token KW_ENUM "ENUM"
@@ -843,6 +844,7 @@ using zetasql::ASTDropStatement;
 %token KW_OVER "OVER"
 %token KW_PARTITION "PARTITION"
 %token KW_PRECEDING "PRECEDING"
+%token KW_PRECISION "PRECISION"
 %token KW_PROTO "PROTO"
 %token KW_RANGE "RANGE"
 %token KW_RECURSIVE "RECURSIVE"
@@ -8311,6 +8313,10 @@ identifier:
       {
         $$ = parser->MakeIdentifier(@1, parser->GetInputText(@1));
       }
+    | "DOUBLE" "PRECISION"
+      {
+        $$ = parser->MakeIdentifier(@$, "DOUBLE PRECISION");
+      }
     ;
 
 label:
@@ -8515,6 +8521,7 @@ keyword_as_identifier:
     | "DESCRIBE"
     | "DETERMINISTIC"
     | "DO"
+    | "DOUBLE"
     | "DROP"
     | "ELSEIF"
     | "ENFORCED"
@@ -8575,6 +8582,7 @@ keyword_as_identifier:
     | "PIVOT"
     | "POLICIES"
     | "POLICY"
+    | "PRECISION"
     | "PRIMARY"
     | "PRIVATE"
     | "PRIVILEGE"
@@ -8641,14 +8649,6 @@ keyword_as_identifier:
     | "WRITE"
     | "ZONE"
     | "DESCRIPTOR"
-
-    // Snowflake data types
-    | "INT"
-    | "INTEGER"
-    | "BIGINT"
-    | "SMALLINT"
-    | "TINYINT"
-    | "BYTEINT"
 
     // Spanner-specific keywords
     | "INTERLEAVE"

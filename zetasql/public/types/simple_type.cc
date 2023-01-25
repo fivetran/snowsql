@@ -135,9 +135,12 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"tinyint", {TYPE_INT64, false}},
       {"byteint", {TYPE_INT64, false}},
 
-      {"float", {TYPE_DOUBLE, true}},
-      {"float4", {TYPE_DOUBLE, true}},
-      {"float8", {TYPE_DOUBLE, true}},
+      {"float", {TYPE_DOUBLE, false}},
+      {"float4", {TYPE_DOUBLE, false}},
+      {"float8", {TYPE_DOUBLE, false}},
+
+      {"double precision", {TYPE_DOUBLE, false}},
+      {"real", {TYPE_DOUBLE, false}},
   };
   return *result;
 }
