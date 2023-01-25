@@ -257,7 +257,7 @@
 //   6: QUALIFY
 //   2: ALTER COLUMN
 //   1: SUM(SEQUENCE CLAMPED BETWEEN x and y)
-%expect 26
+%expect 27
 
 %union {
   bool boolean;
@@ -668,6 +668,7 @@ using namespace zetasql::parser_internal;
 %token KW_DESCRIPTOR "DESCRIPTOR"
 %token KW_DETERMINISTIC "DETERMINISTIC"
 %token KW_DO "DO"
+%token KW_DOUBLE "DOUBLE"
 %token KW_DROP "DROP"
 %token KW_ENFORCED "ENFORCED"
 %token KW_ELSEIF "ELSEIF"
@@ -729,6 +730,7 @@ using namespace zetasql::parser_internal;
 %token KW_PIVOT "PIVOT"
 %token KW_POLICIES "POLICIES"
 %token KW_POLICY "POLICY"
+%token KW_PRECISION "PRECISION"
 %token KW_PRIMARY "PRIMARY"
 %token KW_PRIVATE "PRIVATE"
 %token KW_PRIVILEGE "PRIVILEGE"
@@ -8432,6 +8434,10 @@ identifier:
       {
         $$ = parser->MakeIdentifier(@1, parser->GetInputText(@1));
       }
+    | "DOUBLE" "PRECISION"
+      {
+        $$ = parser->MakeIdentifier(@$, "DOUBLE PRECISION");
+      }
     ;
 
 label:
@@ -8526,6 +8532,7 @@ keyword_as_identifier:
     | "DESCRIBE"
     | "DETERMINISTIC"
     | "DO"
+    | "DOUBLE"
     | "DROP"
     | "ELSEIF"
     | "ENFORCED"
@@ -8589,6 +8596,7 @@ keyword_as_identifier:
     | "PIVOT"
     | "POLICIES"
     | "POLICY"
+    | "PRECISION"
     | "PRIMARY"
     | "PRIVATE"
     | "PRIVILEGE"
