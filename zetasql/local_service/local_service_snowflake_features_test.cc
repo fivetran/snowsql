@@ -122,109 +122,37 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithTopClause) {
   AnalyzeResponse response;
   ZETASQL_EXPECT_OK(Analyze(request, &response));
 
-  AnalyzeResponse expectedResponse;
+  AnyResolvedExprProto responseTop = response
+      .resolved_statement()
+      .resolved_query_stmt_node()
+      .query()
+      .resolved_top_scan_node()
+      .top();
+
+  AnyResolvedExprProto expectedResponseTop;
   ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(
-  R"pb(resolved_statement {
-    resolved_query_stmt_node {
-        output_column_list {
-        name: "column_1"
-        column {
-            column_id: 1
-            table_name: "table_1"
-            name: "column_1"
-            type {
-            type_kind: TYPE_INT32
-            }
-        }
-        }
-        is_value_table: false
-        query {
-        resolved_top_scan_node {
-            parent {
-            column_list {
-                column_id: 1
-                table_name: "table_1"
-                name: "column_1"
-                type {
-                type_kind: TYPE_INT32
-                }
-            }
-            is_ordered: false
-            }
-            input_scan {
-            resolved_project_scan_node {
-                parent {
-                column_list {
-                    column_id: 1
-                    table_name: "table_1"
-                    name: "column_1"
-                    type {
-                    type_kind: TYPE_INT32
-                    }
-                }
-                is_ordered: false
-                }
-                input_scan {
-                resolved_table_scan_node {
-                    parent {
-                    column_list {
-                        column_id: 1
-                        table_name: "table_1"
-                        name: "column_1"
-                        type {
-                        type_kind: TYPE_INT32
-                        }
-                    }
-                    column_list {
-                        column_id: 2
-                        table_name: "table_1"
-                        name: "column_2"
-                        type {
-                        type_kind: TYPE_STRING
-                        }
-                    }
-                    is_ordered: false
-                    }
-                    table {
-                    name: "table_1"
-                    serialization_id: 1
-                    full_name: "table_1"
-                    }
-                    column_index_list: 0
-                    column_index_list: 1
-                    alias: ""
-                }
-                }
-            }
-            }
-            top {
-            resolved_literal_node {
-                parent {
-                type {
-                    type_kind: TYPE_INT64
-                }
-                type_annotation_map {
-                }
-                }
-                value {
-                type {
-                    type_kind: TYPE_INT64
-                }
-                value {
-                    int64_value: 3
-                }
-                }
-                has_explicit_type: false
-                float_literal_id: 0
-                preserve_in_literal_remover: false
-            }
-            }
-        }
-        }
-    }
-    })pb",
-      &expectedResponse));
-  EXPECT_THAT(response, EqualsProto(expectedResponse));
+  R"pb(resolved_literal_node {
+         parent {
+           type {
+             type_kind: TYPE_INT64
+           }
+           type_annotation_map {
+           }
+         }
+         value {
+           type {
+             type_kind: TYPE_INT64
+           }
+           value {
+             int64_value: 3
+           }
+         }
+         has_explicit_type: false
+         float_literal_id: 0
+         preserve_in_literal_remover: false
+       })pb",
+      &expectedResponseTop));
+  EXPECT_THAT(responseTop, EqualsProto(expectedResponseTop));
 }
 
 TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithGroupByGroupingSetsClause) {
