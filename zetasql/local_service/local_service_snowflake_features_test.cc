@@ -660,5 +660,587 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithLateralClause) {
   EXPECT_THAT(resolvedJoinScanProto, EqualsProto(expectedJoinScanProto));
 }
 
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithGroupByCubeClause) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  AnalyzeRequest request;
+  *request.mutable_simple_catalog() = catalog;
+  request.set_sql_statement("select count(*) from table_1 group by cube (column_1, column_2)");
+
+  AnalyzeResponse response;
+  ZETASQL_EXPECT_OK(Analyze(request, &response));
+
+  AnyResolvedAggregateScanBaseProto responseAggregateScanBaseNode = response
+      .resolved_statement()
+      .resolved_query_stmt_node()
+      .query()
+      .resolved_project_scan_node()
+      .input_scan()
+      .resolved_aggregate_scan_base_node();
+
+  AnyResolvedAggregateScanBaseProto expectedAggregateScanBaseNode;
+  ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(
+      R"pb(resolved_aggregate_scan_node {
+    parent {
+        parent {
+        column_list {
+            column_id: 4
+            table_name: "$groupby"
+            name: "column_1"
+            type {
+            type_kind: TYPE_INT32
+            }
+        }
+        column_list {
+            column_id: 5
+            table_name: "$groupby"
+            name: "column_2"
+            type {
+            type_kind: TYPE_STRING
+            }
+        }
+        column_list {
+            column_id: 3
+            table_name: "$aggregate"
+            name: "$agg1"
+            type {
+            type_kind: TYPE_INT64
+            }
+        }
+        is_ordered: false
+        }
+        input_scan {
+        resolved_table_scan_node {
+            parent {
+            column_list {
+                column_id: 1
+                table_name: "table_1"
+                name: "column_1"
+                type {
+                type_kind: TYPE_INT32
+                }
+            }
+            column_list {
+                column_id: 2
+                table_name: "table_1"
+                name: "column_2"
+                type {
+                type_kind: TYPE_STRING
+                }
+            }
+            is_ordered: false
+            }
+            table {
+            name: "table_1"
+            serialization_id: 1
+            full_name: "table_1"
+            }
+            column_index_list: 0
+            column_index_list: 1
+            alias: ""
+        }
+        }
+        group_by_list {
+        column {
+            column_id: 4
+            table_name: "$groupby"
+            name: "column_1"
+            type {
+            type_kind: TYPE_INT32
+            }
+        }
+        expr {
+            resolved_column_ref_node {
+            parent {
+                type {
+                type_kind: TYPE_INT32
+                }
+                type_annotation_map {
+                }
+            }
+            column {
+                column_id: 1
+                table_name: "table_1"
+                name: "column_1"
+                type {
+                type_kind: TYPE_INT32
+                }
+            }
+            is_correlated: false
+            }
+        }
+        }
+        group_by_list {
+        column {
+            column_id: 5
+            table_name: "$groupby"
+            name: "column_2"
+            type {
+            type_kind: TYPE_STRING
+            }
+        }
+        expr {
+            resolved_column_ref_node {
+            parent {
+                type {
+                type_kind: TYPE_STRING
+                }
+                type_annotation_map {
+                }
+            }
+            column {
+                column_id: 2
+                table_name: "table_1"
+                name: "column_2"
+                type {
+                type_kind: TYPE_STRING
+                }
+            }
+            is_correlated: false
+            }
+        }
+        }
+        aggregate_list {
+        column {
+            column_id: 3
+            table_name: "$aggregate"
+            name: "$agg1"
+            type {
+            type_kind: TYPE_INT64
+            }
+        }
+        expr {
+            resolved_function_call_base_node {
+            resolved_non_scalar_function_call_base_node {
+                resolved_aggregate_function_call_node {
+                parent {
+                    parent {
+                    parent {
+                        type {
+                        type_kind: TYPE_INT64
+                        }
+                        type_annotation_map {
+                        }
+                    }
+                    function {
+                        name: "ZetaSQL:$count_star"
+                    }
+                    signature {
+                        return_type {
+                        kind: ARG_TYPE_FIXED
+                        type {
+                            type_kind: TYPE_INT64
+                        }
+                        options {
+                            cardinality: REQUIRED
+                            extra_relation_input_columns_allowed: true
+                        }
+                        num_occurrences: 1
+                        }
+                        context_id: 57
+                        options {
+                        is_deprecated: false
+                        }
+                    }
+                    error_mode: DEFAULT_ERROR_MODE
+                    }
+                    distinct: false
+                    null_handling_modifier: DEFAULT_NULL_HANDLING
+                }
+                function_call_info {
+                }
+                }
+            }
+            }
+        }
+        }
+    }
+    cube_column_list {
+        parent {
+        type {
+            type_kind: TYPE_INT32
+        }
+        type_annotation_map {
+        }
+        }
+        column {
+        column_id: 4
+        table_name: "$groupby"
+        name: "column_1"
+        type {
+            type_kind: TYPE_INT32
+        }
+        }
+        is_correlated: false
+    }
+    cube_column_list {
+        parent {
+        type {
+            type_kind: TYPE_STRING
+        }
+        type_annotation_map {
+        }
+        }
+        column {
+        column_id: 5
+        table_name: "$groupby"
+        name: "column_2"
+        type {
+            type_kind: TYPE_STRING
+        }
+        }
+        is_correlated: false
+    }
+    })pb",
+      &expectedAggregateScanBaseNode));
+  EXPECT_THAT(responseAggregateScanBaseNode, EqualsProto(expectedAggregateScanBaseNode));
+}
+
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSelectListAlias) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  AnalyzeRequest request;
+  *request.mutable_simple_catalog() = catalog;
+  request.set_sql_statement("SELECT 0.23 AS a, 100 * a as b, a * b");
+
+  AnalyzeResponse response;
+  ZETASQL_EXPECT_OK(Analyze(request, &response));
+
+  AnalyzeResponse expectedResponse;
+  ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(
+      R"pb(resolved_statement {
+  resolved_query_stmt_node {
+    output_column_list {
+      name: "a"
+      column {
+        column_id: 1
+        table_name: "$query"
+        name: "a"
+        type {
+          type_kind: TYPE_DOUBLE
+        }
+      }
+    }
+    output_column_list {
+      name: "b"
+      column {
+        column_id: 2
+        table_name: "$query"
+        name: "b"
+        type {
+          type_kind: TYPE_DOUBLE
+        }
+      }
+    }
+    output_column_list {
+      name: "$col3"
+      column {
+        column_id: 3
+        table_name: "$query"
+        name: "$col3"
+        type {
+          type_kind: TYPE_DOUBLE
+        }
+      }
+    }
+    is_value_table: false
+    query {
+      resolved_project_scan_node {
+        parent {
+          column_list {
+            column_id: 1
+            table_name: "$query"
+            name: "a"
+            type {
+              type_kind: TYPE_DOUBLE
+            }
+          }
+          column_list {
+            column_id: 2
+            table_name: "$query"
+            name: "b"
+            type {
+              type_kind: TYPE_DOUBLE
+            }
+          }
+          column_list {
+            column_id: 3
+            table_name: "$query"
+            name: "$col3"
+            type {
+              type_kind: TYPE_DOUBLE
+            }
+          }
+          is_ordered: false
+        }
+        expr_list {
+          column {
+            column_id: 1
+            table_name: "$query"
+            name: "a"
+            type {
+              type_kind: TYPE_DOUBLE
+            }
+          }
+          expr {
+            resolved_literal_node {
+              parent {
+                type {
+                  type_kind: TYPE_DOUBLE
+                }
+                type_annotation_map {
+                }
+              }
+              value {
+                type {
+                  type_kind: TYPE_DOUBLE
+                }
+                value {
+                  double_value: 0.23
+                }
+              }
+              has_explicit_type: false
+              float_literal_id: 0
+              preserve_in_literal_remover: false
+            }
+          }
+        }
+        expr_list {
+          column {
+            column_id: 2
+            table_name: "$query"
+            name: "b"
+            type {
+              type_kind: TYPE_DOUBLE
+            }
+          }
+          expr {
+            resolved_function_call_base_node {
+              resolved_function_call_node {
+                parent {
+                  parent {
+                    type {
+                      type_kind: TYPE_DOUBLE
+                    }
+                    type_annotation_map {
+                    }
+                  }
+                  function {
+                    name: "ZetaSQL:$multiply"
+                  }
+                  signature {
+                    argument {
+                      kind: ARG_TYPE_FIXED
+                      type {
+                        type_kind: TYPE_DOUBLE
+                      }
+                      options {
+                        cardinality: REQUIRED
+                        extra_relation_input_columns_allowed: true
+                      }
+                      num_occurrences: 1
+                    }
+                    argument {
+                      kind: ARG_TYPE_FIXED
+                      type {
+                        type_kind: TYPE_DOUBLE
+                      }
+                      options {
+                        cardinality: REQUIRED
+                        extra_relation_input_columns_allowed: true
+                      }
+                      num_occurrences: 1
+                    }
+                    return_type {
+                      kind: ARG_TYPE_FIXED
+                      type {
+                        type_kind: TYPE_DOUBLE
+                      }
+                      options {
+                        cardinality: REQUIRED
+                        extra_relation_input_columns_allowed: true
+                      }
+                      num_occurrences: 1
+                    }
+                    context_id: 41
+                    options {
+                      is_deprecated: false
+                    }
+                  }
+                  argument_list {
+                    resolved_literal_node {
+                      parent {
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                        type_annotation_map {
+                        }
+                      }
+                      value {
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                        value {
+                          double_value: 100
+                        }
+                      }
+                      has_explicit_type: false
+                      float_literal_id: 0
+                      preserve_in_literal_remover: false
+                    }
+                  }
+                  argument_list {
+                    resolved_column_ref_node {
+                      parent {
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                        type_annotation_map {
+                        }
+                      }
+                      column {
+                        column_id: 1
+                        table_name: "$query"
+                        name: "a"
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                      }
+                      is_correlated: false
+                    }
+                  }
+                  error_mode: DEFAULT_ERROR_MODE
+                }
+                function_call_info {
+                }
+              }
+            }
+          }
+        }
+        expr_list {
+          column {
+            column_id: 3
+            table_name: "$query"
+            name: "$col3"
+            type {
+              type_kind: TYPE_DOUBLE
+            }
+          }
+          expr {
+            resolved_function_call_base_node {
+              resolved_function_call_node {
+                parent {
+                  parent {
+                    type {
+                      type_kind: TYPE_DOUBLE
+                    }
+                    type_annotation_map {
+                    }
+                  }
+                  function {
+                    name: "ZetaSQL:$multiply"
+                  }
+                  signature {
+                    argument {
+                      kind: ARG_TYPE_FIXED
+                      type {
+                        type_kind: TYPE_DOUBLE
+                      }
+                      options {
+                        cardinality: REQUIRED
+                        extra_relation_input_columns_allowed: true
+                      }
+                      num_occurrences: 1
+                    }
+                    argument {
+                      kind: ARG_TYPE_FIXED
+                      type {
+                        type_kind: TYPE_DOUBLE
+                      }
+                      options {
+                        cardinality: REQUIRED
+                        extra_relation_input_columns_allowed: true
+                      }
+                      num_occurrences: 1
+                    }
+                    return_type {
+                      kind: ARG_TYPE_FIXED
+                      type {
+                        type_kind: TYPE_DOUBLE
+                      }
+                      options {
+                        cardinality: REQUIRED
+                        extra_relation_input_columns_allowed: true
+                      }
+                      num_occurrences: 1
+                    }
+                    context_id: 41
+                    options {
+                      is_deprecated: false
+                    }
+                  }
+                  argument_list {
+                    resolved_column_ref_node {
+                      parent {
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                        type_annotation_map {
+                        }
+                      }
+                      column {
+                        column_id: 1
+                        table_name: "$query"
+                        name: "a"
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                      }
+                      is_correlated: false
+                    }
+                  }
+                  argument_list {
+                    resolved_column_ref_node {
+                      parent {
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                        type_annotation_map {
+                        }
+                      }
+                      column {
+                        column_id: 2
+                        table_name: "$query"
+                        name: "b"
+                        type {
+                          type_kind: TYPE_DOUBLE
+                        }
+                      }
+                      is_correlated: false
+                    }
+                  }
+                  error_mode: DEFAULT_ERROR_MODE
+                }
+                function_call_info {
+                }
+              }
+            }
+          }
+        }
+        input_scan {
+          resolved_single_row_scan_node {
+            parent {
+              is_ordered: false
+            }
+          }
+        }
+      }
+    }
+  }
+})pb",
+      &expectedResponse));
+  EXPECT_THAT(response, EqualsProto(expectedResponse));
+}
+
 }  // namespace local_service
 }  // namespace zetasql
