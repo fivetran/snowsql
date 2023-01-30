@@ -530,5 +530,135 @@ fetch {
   EXPECT_THAT(resolvedOffsetFetch, EqualsProto(expectedOffsetFetch));
 }
 
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithLateralClause) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  AnalyzeRequest request;
+  *request.mutable_simple_catalog() = catalog;
+  request.set_sql_statement("select column_1 from table_1, lateral (select column_2 from table_1)");
+
+  AnalyzeResponse response;
+  ZETASQL_EXPECT_OK(Analyze(request, &response));
+
+  ResolvedJoinScanProto resolvedJoinScanProto = response
+      .resolved_statement()
+      .resolved_query_stmt_node()
+      .query()
+      .resolved_project_scan_node()
+      .input_scan()
+      .resolved_join_scan_node();
+
+  ResolvedJoinScanProto expectedJoinScanProto;
+  ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(
+  R"pb(parent {
+        column_list {
+        column_id: 1
+        table_name: "table_1"
+        name: "column_1"
+        type {
+            type_kind: TYPE_INT32
+        }
+        }
+        column_list {
+        column_id: 2
+        table_name: "table_1"
+        name: "column_2"
+        type {
+            type_kind: TYPE_STRING
+        }
+        }
+        column_list {
+        column_id: 4
+        table_name: "table_1"
+        name: "column_2"
+        type {
+            type_kind: TYPE_STRING
+        }
+        }
+        is_ordered: false
+    }
+    join_type: INNER
+    left_scan {
+        resolved_table_scan_node {
+        parent {
+            column_list {
+            column_id: 1
+            table_name: "table_1"
+            name: "column_1"
+            type {
+                type_kind: TYPE_INT32
+            }
+            }
+            column_list {
+            column_id: 2
+            table_name: "table_1"
+            name: "column_2"
+            type {
+                type_kind: TYPE_STRING
+            }
+            }
+            is_ordered: false
+        }
+        table {
+            name: "table_1"
+            serialization_id: 1
+            full_name: "table_1"
+        }
+        column_index_list: 0
+        column_index_list: 1
+        alias: ""
+        }
+    }
+    right_scan {
+        resolved_project_scan_node {
+        parent {
+            column_list {
+            column_id: 4
+            table_name: "table_1"
+            name: "column_2"
+            type {
+                type_kind: TYPE_STRING
+            }
+            }
+            is_ordered: false
+        }
+        input_scan {
+            resolved_table_scan_node {
+            parent {
+                column_list {
+                column_id: 3
+                table_name: "table_1"
+                name: "column_1"
+                type {
+                    type_kind: TYPE_INT32
+                }
+                }
+                column_list {
+                column_id: 4
+                table_name: "table_1"
+                name: "column_2"
+                type {
+                    type_kind: TYPE_STRING
+                }
+                }
+                is_ordered: false
+            }
+            table {
+                name: "table_1"
+                serialization_id: 1
+                full_name: "table_1"
+            }
+            column_index_list: 0
+            column_index_list: 1
+            alias: ""
+            }
+        }
+        }
+    }
+    lateral: true)pb",
+      &expectedJoinScanProto));
+  EXPECT_THAT(resolvedJoinScanProto, EqualsProto(expectedJoinScanProto));
+}
+
 }  // namespace local_service
 }  // namespace zetasql
