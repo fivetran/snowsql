@@ -391,5 +391,144 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithGroupByGroupingSetsClau
   EXPECT_THAT(responseAggregateScanBaseNode, EqualsProto(expectedAggregateScanBaseNode));
 }
 
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithFetchClause) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  AnalyzeRequest request;
+  *request.mutable_simple_catalog() = catalog;
+  request.set_sql_statement("select * from table_1 offset 2 rows fetch next 3 rows only");
+
+  AnalyzeResponse response;
+  ZETASQL_EXPECT_OK(Analyze(request, &response));
+
+  ResolvedOffsetFetchScanProto resolvedOffsetFetch = response
+      .resolved_statement()
+      .resolved_query_stmt_node()
+      .query()
+      .resolved_offset_fetch_scan_node();
+
+  ResolvedOffsetFetchScanProto expectedOffsetFetch;
+  ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(
+  R"pb(parent {
+  column_list {
+    column_id: 1
+    table_name: "table_1"
+    name: "column_1"
+    type {
+      type_kind: TYPE_INT32
+    }
+  }
+  column_list {
+    column_id: 2
+    table_name: "table_1"
+    name: "column_2"
+    type {
+      type_kind: TYPE_STRING
+    }
+  }
+  is_ordered: false
+}
+input_scan {
+  resolved_project_scan_node {
+    parent {
+      column_list {
+        column_id: 1
+        table_name: "table_1"
+        name: "column_1"
+        type {
+          type_kind: TYPE_INT32
+        }
+      }
+      column_list {
+        column_id: 2
+        table_name: "table_1"
+        name: "column_2"
+        type {
+          type_kind: TYPE_STRING
+        }
+      }
+      is_ordered: false
+    }
+    input_scan {
+      resolved_table_scan_node {
+        parent {
+          column_list {
+            column_id: 1
+            table_name: "table_1"
+            name: "column_1"
+            type {
+              type_kind: TYPE_INT32
+            }
+          }
+          column_list {
+            column_id: 2
+            table_name: "table_1"
+            name: "column_2"
+            type {
+              type_kind: TYPE_STRING
+            }
+          }
+          is_ordered: false
+        }
+        table {
+          name: "table_1"
+          serialization_id: 1
+          full_name: "table_1"
+        }
+        column_index_list: 0
+        column_index_list: 1
+        alias: ""
+      }
+    }
+  }
+}
+offset {
+  resolved_literal_node {
+    parent {
+      type {
+        type_kind: TYPE_INT64
+      }
+      type_annotation_map {
+      }
+    }
+    value {
+      type {
+        type_kind: TYPE_INT64
+      }
+      value {
+        int64_value: 2
+      }
+    }
+    has_explicit_type: false
+    float_literal_id: 0
+    preserve_in_literal_remover: false
+  }
+}
+fetch {
+  resolved_literal_node {
+    parent {
+      type {
+        type_kind: TYPE_INT64
+      }
+      type_annotation_map {
+      }
+    }
+    value {
+      type {
+        type_kind: TYPE_INT64
+      }
+      value {
+        int64_value: 3
+      }
+    }
+    has_explicit_type: false
+    float_literal_id: 0
+    preserve_in_literal_remover: false
+  }
+})pb",
+      &expectedOffsetFetch));
+  EXPECT_THAT(resolvedOffsetFetch, EqualsProto(expectedOffsetFetch));
+}
+
 }  // namespace local_service
 }  // namespace zetasql
