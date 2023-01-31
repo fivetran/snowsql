@@ -1242,5 +1242,16 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSelectListAlias) {
   EXPECT_THAT(response, EqualsProto(expectedResponse));
 }
 
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  // INT, INTEGER, BIGINT, SMALLINT, TINYINT, BYTEINT
+  AnalyzeRequest analyzeIntegerRequest;
+  *analyzeIntegerRequest.mutable_simple_catalog() = catalog;
+  analyzeIntegerRequest.set_sql_statement("SELECT CAST(1 AS INT), CAST(1 AS INTEGER), CAST(1 AS BIGINT), CAST(1 AS SMALLINT), CAST(1 AS TINYINT), CAST(1 AS BYTEINT)");
+  AnalyzeResponse response;
+  ZETASQL_EXPECT_OK(Analyze(analyzeIntegerRequest, &response));
+}
+
 }  // namespace local_service
 }  // namespace zetasql
