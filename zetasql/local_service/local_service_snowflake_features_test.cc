@@ -1245,12 +1245,35 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSelectListAlias) {
 TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
   SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
 
+  // NUMBER
+  AnalyzeRequest analyzeNumberRequest;
+  *analyzeNumberRequest.mutable_simple_catalog() = catalog;
+  analyzeNumberRequest.mutable_options()->mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_DECIMAL_ALIAS);
+  analyzeNumberRequest.mutable_options()->mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_NUMERIC_TYPE);
+  analyzeNumberRequest.set_sql_statement("SELECT CAST(1.0 AS NUMBER)");
+  AnalyzeResponse analyzeNumberResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
+
   // INT, INTEGER, BIGINT, SMALLINT, TINYINT, BYTEINT
   AnalyzeRequest analyzeIntegerRequest;
   *analyzeIntegerRequest.mutable_simple_catalog() = catalog;
   analyzeIntegerRequest.set_sql_statement("SELECT CAST(1 AS INT), CAST(1 AS INTEGER), CAST(1 AS BIGINT), CAST(1 AS SMALLINT), CAST(1 AS TINYINT), CAST(1 AS BYTEINT)");
-  AnalyzeResponse response;
-  ZETASQL_EXPECT_OK(Analyze(analyzeIntegerRequest, &response));
+  AnalyzeResponse analyzeIntegerResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeIntegerRequest, &analyzeIntegerResponse));
+
+  // FLOAT, FLOAT4, FLOAT8
+  AnalyzeRequest analyzeFloatRequest;
+  *analyzeFloatRequest.mutable_simple_catalog() = catalog;
+  analyzeFloatRequest.set_sql_statement("SELECT CAST(1.0 AS FLOAT), CAST(1.0 AS FLOAT4), CAST(1.0 AS FLOAT8)");
+  AnalyzeResponse analyzeFloatResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeFloatRequest, &analyzeFloatResponse));
+
+  // DOUBLE PRECISION, REAL
+  AnalyzeRequest analyzeRealRequest;
+  *analyzeRealRequest.mutable_simple_catalog() = catalog;
+  analyzeRealRequest.set_sql_statement("SELECT CAST(1.0 AS DOUBLE PRECISION), CAST(1.0 AS REAL)");
+  AnalyzeResponse analyzeRealResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeRealRequest, &analyzeRealResponse));
 }
 
 }  // namespace local_service
