@@ -1276,5 +1276,106 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
   ZETASQL_EXPECT_OK(Analyze(analyzeRealRequest, &analyzeRealResponse));
 }
 
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  // Snowflake Aggregate functions
+  AnalyzeRequest analyzeAggregateFunctionsRequest;
+  *analyzeAggregateFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *aggregate_functions_request_text =
+    "select "
+    "approx_top_k(column_1), approx_top_k_accumulate(column_1, 10), "
+    "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2), "
+    "regr_count(column_1, column_2) from table_1";
+  analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
+  AnalyzeResponse analyzeAggregateFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeAggregateFunctionsRequest, &analyzeAggregateFunctionsResponse));
+
+  // Snowflake Bitwise functions
+  AnalyzeRequest analyzeBitwiseFunctionsRequest;
+  *analyzeBitwiseFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *bitwise_functions_request_text =
+    "select "
+    "bitand(11, 22), bitnot(11), bitor(11, 22), "
+    "bitshiftleft(11, 1), bitshiftright(11, 1), "
+    "bitxor(11, 22)";
+  analyzeBitwiseFunctionsRequest.set_sql_statement(bitwise_functions_request_text);
+  AnalyzeResponse analyzeBitwiseFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeBitwiseFunctionsRequest, &analyzeBitwiseFunctionsResponse));
+
+  // Snowflake Conditional expression functions
+  AnalyzeRequest analyzeConditionalExpressionFunctionsRequest;
+  *analyzeConditionalExpressionFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *conditional_expression_functions_request_text =
+    "select "
+    "booland(1, 0), boolnot(1), "
+    "boolor(1, 0), boolxor(1, 0), "
+    "zeroifnull(null)";
+  analyzeConditionalExpressionFunctionsRequest.set_sql_statement(conditional_expression_functions_request_text);
+  AnalyzeResponse analyzeConditionalExpressionFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeConditionalExpressionFunctionsRequest, &analyzeConditionalExpressionFunctionsResponse));
+
+  // Snowflake Conversion functions
+  AnalyzeRequest analyzeConversionFunctionsRequest;
+  *analyzeConversionFunctionsRequest.mutable_simple_catalog() = catalog;
+  analyzeConversionFunctionsRequest.mutable_options()->mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_2_CIVIL_TIME);
+  const char *conversion_functions_request_text =
+    "select "
+    "to_boolean('yes'), try_to_boolean('yes'), "
+    "to_double('1.1'), try_to_double('1.1'), "
+    "try_to_date('2018-09-15')"; /* todo: check find_options in AnalyzerTest for try_to_time('12:30:00') */
+  analyzeConversionFunctionsRequest.set_sql_statement(conversion_functions_request_text);
+  AnalyzeResponse analyzeConversionFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeConversionFunctionsRequest, &analyzeConversionFunctionsResponse));
+
+  // Snowflake Data generation functions
+  AnalyzeRequest analyzeDataGenerationFunctionsRequest;
+  *analyzeDataGenerationFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *data_generation_functions_request_text =
+    "select "
+    "random(), randstr(5, random()), "
+    "seq1(), seq2(), "
+    "seq4(), seq8()";
+  analyzeDataGenerationFunctionsRequest.set_sql_statement(data_generation_functions_request_text);
+  AnalyzeResponse analyzeDataGenerationFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeDataGenerationFunctionsRequest, &analyzeDataGenerationFunctionsResponse));
+
+  // Snowflake String and binary functions
+  AnalyzeRequest analyzeStringAndBinaryFunctionsRequest;
+  *analyzeStringAndBinaryFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *string_and_binary_functions_request_text =
+    "select "
+    "base64_decode_string('U25vd2ZsYWtl'), try_base64_decode_string('U25vd2ZsYWtl'), "
+    "contains('ice tea', 'te'), endswith('ice tea', 'a'), "
+    "insert('abcdef', 3, 2, 'zzz')";
+  analyzeStringAndBinaryFunctionsRequest.set_sql_statement(string_and_binary_functions_request_text);
+  AnalyzeResponse analyzeStringAndBinaryFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeStringAndBinaryFunctionsRequest, &analyzeStringAndBinaryFunctionsResponse));
+
+  // Snowflake String functions
+  AnalyzeRequest analyzeStringFunctionsRequest;
+  *analyzeStringFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *string_functions_request_text =
+    "select "
+    "regexp_count('It was the best of times', '\\bwas\\b', 1), "
+    "regexp_like(column_2, 'san.*', 'i'), "
+    "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]')"
+    "from table_1";
+  analyzeStringFunctionsRequest.set_sql_statement(string_functions_request_text);
+  AnalyzeResponse analyzeStringFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeStringFunctionsRequest, &analyzeStringFunctionsResponse));
+
+  // Snowflake Date and time functions
+  AnalyzeRequest analyzeDateAndTimeFunctionsRequest;
+  *analyzeDateAndTimeFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *date_and_time_functions_request_text =
+    "select "
+    "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')), "
+    "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday')";
+  analyzeDateAndTimeFunctionsRequest.set_sql_statement(date_and_time_functions_request_text);
+  AnalyzeResponse analyzeDateAndTimeFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeDateAndTimeFunctionsRequest, &analyzeDateAndTimeFunctionsResponse));
+}
+
 }  // namespace local_service
 }  // namespace zetasql
