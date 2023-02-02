@@ -1323,7 +1323,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "select "
     "to_boolean('yes'), try_to_boolean('yes'), "
     "to_double('1.1'), try_to_double('1.1'), "
-    "try_to_date('2018-09-15')"; /* todo: check find_options in AnalyzerTest for try_to_time('12:30:00') */
+    "try_to_date('2018-09-15'), try_to_time('12:30:00')";
   analyzeConversionFunctionsRequest.set_sql_statement(conversion_functions_request_text);
   AnalyzeResponse analyzeConversionFunctionsResponse;
   ZETASQL_EXPECT_OK(Analyze(analyzeConversionFunctionsRequest, &analyzeConversionFunctionsResponse));
