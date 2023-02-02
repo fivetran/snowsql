@@ -1320,7 +1320,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   // Snowflake Conversion functions
   AnalyzeRequest analyzeConversionFunctionsRequest;
   *analyzeConversionFunctionsRequest.mutable_simple_catalog() = catalog;
-  analyzeConversionFunctionsRequest.mutable_options()->mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_2_CIVIL_TIME);
+  *analyzeConversionFunctionsRequest.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
   const char *conversion_functions_request_text =
     "select "
     "to_boolean('yes'), try_to_boolean('yes'), "
