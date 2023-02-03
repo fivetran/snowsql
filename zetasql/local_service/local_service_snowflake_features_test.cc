@@ -1252,6 +1252,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
   // NUMBER
   AnalyzeRequest analyzeNumberRequest;
   *analyzeNumberRequest.mutable_simple_catalog() = catalog;
+  *analyzeNumberRequest.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
   analyzeNumberRequest.set_sql_statement("SELECT CAST(1.0 AS NUMBER)");
   AnalyzeResponse analyzeNumberResponse;
   ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
