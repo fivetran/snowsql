@@ -99,6 +99,8 @@ class ZetaSqlLocalServiceImplTest : public ::testing::Test {
 
     zetasql::ZetaSQLBuiltinFunctionOptionsProto options;
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_2_CIVIL_TIME);
+    options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_DECIMAL_ALIAS);
+    options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_NUMERIC_TYPE);
 
     zetasql::ZetaSQLBuiltinFunctionOptionsProto* builtin_function_options =
         catalog.mutable_builtin_function_options();
@@ -1250,8 +1252,6 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
   // NUMBER
   AnalyzeRequest analyzeNumberRequest;
   *analyzeNumberRequest.mutable_simple_catalog() = catalog;
-  analyzeNumberRequest.mutable_options()->mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_DECIMAL_ALIAS);
-  analyzeNumberRequest.mutable_options()->mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_NUMERIC_TYPE);
   analyzeNumberRequest.set_sql_statement("SELECT CAST(1.0 AS NUMBER)");
   AnalyzeResponse analyzeNumberResponse;
   ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
