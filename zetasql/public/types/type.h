@@ -63,6 +63,7 @@ class TypeParameters;
 class Value;
 class ValueContent;
 class ValueProto;
+class VariantType;
 
 namespace internal {
 class TypeStore;
@@ -105,6 +106,7 @@ class Type {
   bool IsBigNumericType() const { return kind_ == TYPE_BIGNUMERIC; }
   bool IsJsonType() const { return kind_ == TYPE_JSON; }
   bool IsRangeType() const { return kind_ == TYPE_RANGE; }
+  bool IsVariantType() const { return kind_ == TYPE_VARIANT; }
 
   // DEPRECATED, use UsingFeatureV12CivilTimeType() instead.
   //
@@ -142,6 +144,7 @@ class Type {
   bool IsProto() const { return kind_ == TYPE_PROTO; }
   bool IsStructOrProto() const { return IsStruct() || IsProto(); }
   bool IsRange() const { return kind_ == TYPE_RANGE; }
+  bool IsVariant() const { return kind_ == TYPE_VARIANT; }
 
   bool IsFloatingPoint() const { return IsFloat() || IsDouble(); }
   bool IsNumerical() const {
@@ -209,6 +212,7 @@ class Type {
   virtual const EnumType* AsEnum() const { return nullptr; }
   virtual const ExtendedType* AsExtendedType() const { return nullptr; }
   virtual const RangeType* AsRange() const { return nullptr; }
+  virtual const VariantType* AsVariant() const { return nullptr; }
 
   // Returns true if the type supports grouping with respect to the
   // 'language_options'. E.g. struct type supports grouping if the
@@ -785,6 +789,7 @@ class Type {
   friend class ArrayType;
   friend class StructType;
   friend class RangeType;
+  friend class VariantType;
 
   const internal::TypeStore* type_store_;  // Used for lifetime checking only.
   const TypeKind kind_;

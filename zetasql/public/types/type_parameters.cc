@@ -28,6 +28,7 @@
 #include "zetasql/public/type_parameters.pb.h"
 #include "zetasql/public/types/array_type.h"
 #include "zetasql/public/types/range_type.h"
+#include "zetasql/public/types/variant_type.h"
 #include "zetasql/public/types/simple_value.h"
 #include "zetasql/public/types/struct_type.h"
 #include "zetasql/public/types/type.h"
@@ -297,6 +298,12 @@ bool TypeParameters::MatchType(const Type* type) const {
         return false;
       }
       return child(0).MatchType(type->AsRange()->element_type());
+    }
+    if (type->IsVariant()) {
+      if (num_children() != 1) {
+        return false;
+      }
+      return child(0).MatchType(type->AsVariant()->element_type());
     }
   }
   return false;

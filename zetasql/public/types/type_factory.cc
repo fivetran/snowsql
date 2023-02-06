@@ -46,6 +46,7 @@
 #include "zetasql/public/types/internal_utils.h"
 #include "zetasql/public/types/proto_type.h"
 #include "zetasql/public/types/range_type.h"
+#include "zetasql/public/types/variant_type.h"
 #include "zetasql/public/types/simple_type.h"
 #include "zetasql/public/types/struct_type.h"
 #include "zetasql/public/types/type.h"
@@ -548,6 +549,48 @@ absl::Status TypeFactory::MakeRangeType(const Type* element_type,
                                         const Type** result) {
   return MakeRangeType(element_type,
                        reinterpret_cast<const RangeType**>(result));
+}
+
+absl::Status TypeFactory::MakeVariantType(const Type* element_type,
+                                          const VariantType** result) {
+  if (!RangeType::IsValidElementType(element_type)) {
+    // TODO: Add a product mode to TypeFactoryOptions and use that
+    // here.
+    return ::zetasql_base::InvalidArgumentErrorBuilder()
+           << "Unsupported type: VARIANT<"
+           << element_type->ShortTypeName(PRODUCT_EXTERNAL)
+           << "> is not supported";
+  }
+
+  //
+  // TODO: Check available data types
+  //
+  // static const auto* kStaticTypeSet = new absl::flat_hash_set<const Type*>{
+  //     types::TimestampType(),
+  //     types::DateType(),
+  //     types::DatetimeType(),
+  // };
+  // ZETASQL_DCHECK(kStaticTypeSet->contains(element_type));
+  if (this != s_type_factory()) {
+    return s_type_factory()->MakeVariantType(element_type, result);
+  }
+
+  *result = nullptr;
+  AddDependency(element_type);
+
+  const int depth_limit = nesting_depth_limit();
+  if (element_type->nesting_depth() + 1 > depth_limit) {
+    return ::zetasql_base::InvalidArgumentErrorBuilder()
+           << "Variant type would exceed nesting depth limit of " << depth_limit;
+  }
+  absl::MutexLock lock(&store_->mutex_);
+  *result = MakeTypeWithChildElementType(element_type, cached_variant_types_);
+  return absl::OkStatus();
+}
+
+absl::Status TypeFactory::MakeVariantType(const Type* element_type, const Type** result) {
+  return MakeVariantType(element_type,
+                         reinterpret_cast<const VariantType**>(result));
 }
 
 absl::StatusOr<const ExtendedType*> TypeFactory::InternalizeExtendedType(

@@ -35,6 +35,7 @@
 #include "zetasql/public/types/extended_type.h"
 #include "zetasql/public/types/proto_type.h"
 #include "zetasql/public/types/range_type.h"
+#include "zetasql/public/types/variant_type.h"
 #include "zetasql/public/types/simple_type.h"
 #include "zetasql/public/types/struct_type.h"
 #include "zetasql/public/types/type.h"
@@ -267,6 +268,13 @@ class TypeFactory {
   absl::Status MakeRangeType(const Type* element_type,
                              const RangeType** result);
   absl::Status MakeRangeType(const Type* element_type, const Type** result);
+
+  // Make a variant type.
+  // If <element_type> is not created by this TypeFactory, the TypeFactory that
+  // created the <type> must outlive this TypeFactory.
+  absl::Status MakeVariantType(const Type* element_type,
+                               const VariantType** result);
+  absl::Status MakeVariantType(const Type* element_type, const Type** result);
 
   // Stores the unique copy of an ExtendedType in the TypeFactory. If such
   // extended type already exists in the cache, frees `extended_type` and
@@ -547,6 +555,9 @@ class TypeFactory {
       cached_enum_types_ ABSL_GUARDED_BY(store_->mutex_);
 
   absl::flat_hash_map<const Type*, const RangeType*> cached_range_types_
+      ABSL_GUARDED_BY(store_->mutex_);
+
+  absl::flat_hash_map<const Type*, const VariantType*> cached_variant_types_
       ABSL_GUARDED_BY(store_->mutex_);
 
   // The key is a descriptor and a catalog name path.

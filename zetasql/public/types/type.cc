@@ -38,6 +38,7 @@
 #include "zetasql/public/type.pb.h"
 #include "zetasql/public/types/array_type.h"
 #include "zetasql/public/types/range_type.h"
+#include "zetasql/public/types/variant_type.h"
 #include "zetasql/public/types/simple_type.h"
 #include "zetasql/public/types/struct_type.h"
 #include "zetasql/public/types/type_factory.h"
@@ -436,6 +437,9 @@ std::string Type::CapitalizedName() const {
       // TODO: move this logic into an appropriate function of
       // Type's interface.
       return ShortTypeName(ProductMode::PRODUCT_EXTERNAL);
+    case TYPE_VARIANT:
+      return absl::StrCat("Variant<",
+                          this->AsVariant()->element_type()->DebugString(), ">");
     case TYPE_UNKNOWN:
     case __TypeKind__switch_must_have_a_default__:
       ZETASQL_LOG(FATAL) << "Unexpected type kind expected internally only: " << kind();

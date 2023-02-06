@@ -1,19 +1,3 @@
-//
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
 #ifndef ZETASQL_PUBLIC_TYPES_VARIANT_TYPE_H_
 #define ZETASQL_PUBLIC_TYPES_VARIANT_TYPE_H_
 
@@ -45,6 +29,7 @@ class TypeParameterValue;
 class TypeParameters;
 class ValueContent;
 class ValueProto;
+class TypeModifiers;
 
 // A variant type.
 // Variants are allowed to have no internal type.
@@ -55,14 +40,14 @@ class VariantType : public ContainerType {
   VariantType& operator=(const VariantType&) = delete;
 #endif  // SWIG
 
-  // The element type of the range.
+  // The element type of the variant.
   const Type* element_type() const { return element_type_; }
 
   bool UsingFeatureV12CivilTimeType() const override {
     return element_type_->UsingFeatureV12CivilTimeType();
   }
 
-  const RangeType* AsRange() const override { return this; }
+  const VariantType* AsVariant() const override { return this; }
 
   std::string ShortTypeName(ProductMode mode) const override;
   std::string TypeName(ProductMode mode) const override;
@@ -78,7 +63,7 @@ class VariantType : public ContainerType {
     return element_type_->nesting_depth() + 1;
   }
 
-  // Helper function for determining if a type is a valid range element type.
+  // Helper function for determining if a type is a valid variant element type.
   static bool IsValidElementType(const Type* element_type);
 
  protected:
@@ -86,7 +71,7 @@ class VariantType : public ContainerType {
       const ValueContent& value_content,
       const Type::FormatValueContentOptions& options) const override {
     if (options.mode == Type::FormatValueContentOptions::Mode::kDebug) {
-      return "Range(";
+      return "Variant(";
     }
     return absl::StrCat(TypeName(options.product_mode), "[");
   }
@@ -134,10 +119,40 @@ class VariantType : public ContainerType {
   void DebugStringImpl(bool details, TypeOrStringVector* stack,
                        std::string* debug_string) const override;
 
+  // Return estimated size of memory owned by this type. Variant's owned memory
+  // does not include its element type memory (which is owned by some
+  // TypeFactory).
+  int64_t GetEstimatedOwnedMemoryBytesSize() const override {
+    return sizeof(*this);
+  }
+
+  void CopyValueContent(const ValueContent& from,
+                        ValueContent* to) const override;
+  void ClearValueContent(const ValueContent& value) const override;
+
+  absl::HashState HashTypeParameter(absl::HashState state) const override;
+  absl::HashState HashValueContent(const ValueContent& value,
+                                   absl::HashState state) const override;
+  std::string FormatValueContentContainerElement(
+      const internal::ValueContentContainerElement& element,
+      const Type::FormatValueContentOptions& options) const;
+  std::string FormatValueContent(
+      const ValueContent& value,
+      const FormatValueContentOptions& options) const override;
+  bool ValueContentEquals(
+      const ValueContent& x, const ValueContent& y,
+      const ValueEqualityCheckOptions& options) const override;
+  bool ValueContentLess(const ValueContent& x, const ValueContent& y,
+                        const Type* other_type) const override;
+  absl::Status SerializeValueContent(const ValueContent& value,
+                                     ValueProto* value_proto) const override;
+  absl::Status DeserializeValueContent(const ValueProto& value_proto,
+                                       ValueContent* value) const override;
+
   const Type* const element_type_;
 
   friend class TypeFactory;
-  friend class RangeTypeTestPeer;
+  // friend class VariantTypeTestPeer;
 };
 
 }  // namespace zetasql
