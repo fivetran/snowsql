@@ -652,6 +652,11 @@ absl::Status Coercer::GetCommonSuperType(
                          argument_set, /*treat_parameters_as_literals=*/true));
   }
 
+  if (*common_supertype == nullptr) {
+    // ZETASQL_ASSIGN_OR_RETURN(*common_supertype, type_factory_->get_variant());
+    *common_supertype = type_factory_->get_variant();
+  }
+
   return absl::OkStatus();
 }
 

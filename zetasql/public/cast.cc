@@ -270,6 +270,19 @@ const CastHashMap* InitializeZetaSQLCasts() {
   ADD_TO_MAP(RANGE,      RANGE,      IMPLICIT);
   // clang-format on
 
+  // All types could be casted to VARIANT
+  ADD_TO_MAP(BOOL,        VARIANT,     IMPLICIT);
+  ADD_TO_MAP(INT32,       VARIANT,     IMPLICIT);
+  ADD_TO_MAP(INT64,       VARIANT,     IMPLICIT);
+  ADD_TO_MAP(UINT32,      VARIANT,     IMPLICIT);
+  ADD_TO_MAP(UINT64,      VARIANT,     IMPLICIT);
+  ADD_TO_MAP(FLOAT,       VARIANT,     IMPLICIT);
+  ADD_TO_MAP(DOUBLE,      VARIANT,     IMPLICIT);
+  ADD_TO_MAP(STRING,      VARIANT,     IMPLICIT);
+  ADD_TO_MAP(ENUM,        VARIANT,     IMPLICIT);
+  ADD_TO_MAP(NUMERIC,     VARIANT,     IMPLICIT);
+  ADD_TO_MAP(BIGNUMERIC,  VARIANT,     IMPLICIT);
+
   return map;
 }
 

@@ -139,6 +139,8 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
 
       {"double precision", {TYPE_DOUBLE, false}},
       {"real", {TYPE_DOUBLE, false}},
+
+      {"variant", {TYPE_VARIANT, false}},
   };
   return *result;
 }
@@ -174,6 +176,7 @@ const std::map<TypeKind, TypeKindInfo>& SimpleTypeKindInfoMap() {
       {TYPE_NUMERIC, {false, FEATURE_NUMERIC_TYPE}},
       {TYPE_BIGNUMERIC, {false, FEATURE_BIGNUMERIC_TYPE}},
       {TYPE_JSON, {false, FEATURE_JSON_TYPE}},
+      {TYPE_VARIANT, {}},
   };
   return *result;
 }

@@ -638,7 +638,6 @@ const RangeType* TimestampRangeType();
 
 // SnowflakeTypes
 const Type* VariantType();
-const Type* ObjectType();
 
 // Accessor for the ZetaSQL enum Type (functions::DateTimestampPart)
 // that represents date parts in function signatures.  Intended

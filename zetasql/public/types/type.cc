@@ -146,9 +146,7 @@ static const auto& GetTypeKindInfoMap() {
 
           // Snowflake types
           {TYPE_VARIANT,
-           {"VARIANT",          1000,          30,   false }},
-          {TYPE_OBJECT,
-           {"OBJECT",           1001,          31,   false }},
+           {"VARIANT",          1000,          30,   true }},
 
           // clang-format on
           // When a new entry is added here, update
