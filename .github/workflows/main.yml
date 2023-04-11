@@ -17,9 +17,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-20.04
-            build-command: npx @bazel/bazelisk build ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
+            build-command: npx @bazel/bazelisk build --copt "-O3" ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
             test-command: |
-              npx @bazel/bazelisk bazel test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
+              npx @bazel/bazelisk test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
                 -zetasql/reference_impl:algebrizer_test \
                 -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
                 -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
