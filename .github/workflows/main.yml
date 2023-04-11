@@ -16,8 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            build-command: bazel build ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so -zetasql/jdk/... -java/... -javatests/...
+          - os: ubuntu-20.04
+            build-command: bazel build ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
             test-command: |
               bazel test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
                 -zetasql/reference_impl:algebrizer_test \
@@ -25,7 +25,7 @@ jobs:
                 -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
                 -zetasql/reference_impl:reference_compliance_test \
                 -zetasql/reference_impl:reference_compliance_test_all_rewrites
-            lib-path: bazel-bin/zetasql/local_service/libremote_server.so
+            lib-path: bazel-bin/zetasql/local_service/libremote_server.so bazel-bin/zetasql/local_service/remote_server_executable
 
           - os: macos-latest
             build-command: |
@@ -68,10 +68,10 @@ jobs:
         run: ${{ matrix.test-command }}
 
       - name: Archive build artifacts
-        run: tar -cvzf ${{ matrix.lib-path }}.tar.gz ${{ matrix.lib-path }}
+        run: tar -cvzf ${{ matrix.os }}.tar.gz ${{ matrix.lib-path }}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ runner.os }}
-          path: ${{ matrix.lib-path }}.tar.gz
+          name: ${{ matrix.os }}
+          path: ${{ matrix.os }}.tar.gz
