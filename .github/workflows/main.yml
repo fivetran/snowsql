@@ -17,9 +17,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-20.04
-            build-command: bazel build ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
+            build-command: npx @bazel/bazelisk build ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
             test-command: |
-              bazel test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
+              npx @bazel/bazelisk bazel test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
                 -zetasql/reference_impl:algebrizer_test \
                 -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
                 -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
@@ -29,10 +29,10 @@ jobs:
 
           - os: macos-latest
             build-command: |
-              bazel build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
+              npx @bazel/bazelisk build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
               install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
             test-command: |
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.so \
+              npx @bazel/bazelisk test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.so \
                 -zetasql/analyzer:analyzer_set_operation_test \
                 -zetasql/common:multiprecision_int_test \
                 -zetasql/public:proto_value_conversion_test \
@@ -50,11 +50,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Install Bazel
-        uses: abhinavsingh/setup-bazel@v3
-        with:
-          version: 4.1.0
 
       - name: Prepare Google service account credentials
         run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
