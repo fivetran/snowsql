@@ -7,71 +7,85 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-test:
+  build-test-macos:
+    runs-on: macos-latest
+
     env:
-      BAZEL_LINUX_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
       BAZEL_MACOS_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
 
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-20.04
-            build-command: bazel build --copt "-O3" ${BAZEL_LINUX_CACHE_ARGS} -- //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
-            test-command: |
-              bazel test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
-                -zetasql/reference_impl:algebrizer_test \
-                -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
-                -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
-                -zetasql/reference_impl:reference_compliance_test \
-                -zetasql/reference_impl:reference_compliance_test_all_rewrites
-            lib-path: bazel-bin/zetasql/local_service/libremote_server.so bazel-bin/zetasql/local_service/remote_server_executable
-
-          - os: macos-latest
-            build-command: |
-              bazel build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
-              install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
-            test-command: |
-              bazel test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.so \
-                -zetasql/analyzer:analyzer_set_operation_test \
-                -zetasql/common:multiprecision_int_test \
-                -zetasql/public:proto_value_conversion_test \
-                -zetasql/public/functions:math_test \
-                -zetasql/reference_impl:algebrizer_test \
-                -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
-                -zetasql/tools/execute_query:execute_query_tool_test \
-                -zetasql/reference_impl:reference_compliance_test \
-                -zetasql/reference_impl:reference_compliance_test_minimal_rewrites\
-                -zetasql/reference_impl:reference_compliance_test_all_rewrites
-            lib-path: bazel-bin/zetasql/local_service/libremote_server.dylib
-
-    runs-on: ${{ matrix.os }}
-
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
 
-      - name: Install Bazel
-        uses: abhinavsingh/setup-bazel@v3
-        with:
-          version: 4.1.0
-
-      - name: Prepare Google service account credentials
+      - name: prepare google service account credentials
         run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
         env:
           GCS_SERVICE_ACCOUNT: ${{ secrets.GCS_SERVICE_ACCOUNT }}
 
-      - name: Bazel build
-        run: ${{ matrix.build-command }}
+      - name: bazel build
+        run: |
+          npx @bazel/bazelisk build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:libremote_server.dylib -zetasql/jdk/... -java/... -javatests/...
+          install_name_tool -id "@loader_path/libremote_server.dylib" bazel-bin/zetasql/local_service/libremote_server.dylib
 
-      - name: Bazel test
-        run: ${{ matrix.test-command }}
+      - name: bazel test
+        run: |
+          npx @bazel/bazelisk test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.so \
+            -zetasql/analyzer:analyzer_set_operation_test \
+            -zetasql/common:multiprecision_int_test \
+            -zetasql/public:proto_value_conversion_test \
+            -zetasql/public/functions:math_test \
+            -zetasql/reference_impl:algebrizer_test \
+            -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
+            -zetasql/tools/execute_query:execute_query_tool_test \
+            -zetasql/reference_impl:reference_compliance_test \
+            -zetasql/reference_impl:reference_compliance_test_minimal_rewrites\
+            -zetasql/reference_impl:reference_compliance_test_all_rewrites
 
-      - name: Archive build artifacts
-        run: tar -cvzf ${{ matrix.os }}.tar.gz ${{ matrix.lib-path }}
+      - name: move file to out folder
+        run: |
+          mkdir -p out/darwin/x86_64
+          mv bazel-bin/zetasql/local_service/libremote_server.dylib out/darwin/x86_64
 
-      - name: Upload Artifacts
+      - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}
-          path: ${{ matrix.os }}.tar.gz
+          name: artifacts
+          path: |
+            out/darwin/x86_64
+            **/*.proto
+
+  build-test-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - name: prepare google service account credentials
+        run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
+        env:
+          GCS_SERVICE_ACCOUNT: ${{ secrets.GCS_SERVICE_ACCOUNT }}
+
+      - name: build
+        run: |
+          docker run -v service_account_credentials.json:/build/service_account_credentials.json --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker buildx build --output out --platform linux/amd64 .
+          # for linux/arm64 it is very slow and we can't use it now
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: |
+            out/linux/amd64
+            # out/linux/arm64
