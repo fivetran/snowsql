@@ -43,15 +43,15 @@ jobs:
 
       - name: move file to out folder
         run: |
-          mkdir -p out/darwin/x86_64
-          mv bazel-bin/zetasql/local_service/libremote_server.dylib out/darwin/x86_64
+          mkdir -p darwin_x86_64
+          mv bazel-bin/zetasql/local_service/libremote_server.dylib darwin_x86_64
 
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
           path: |
-            out/darwin/x86_64
+            darwin_x86_64
             **/*.proto
 
   build-test-linux:
