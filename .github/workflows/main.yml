@@ -71,17 +71,6 @@ jobs:
       - name: available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
-      - name: build
-        run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker buildx build --file Dockerfile.bigquery --output out --platform linux/amd64 .
-          # for linux/arm64 it is very slow and we can't use it now
-
-      - name: upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          version: 4.1.0
-
       - name: prepare google service account credentials
         run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
         env:
@@ -89,7 +78,7 @@ jobs:
 
       - name: build
         run: |
-          docker run -v service_account_credentials.json:/build/service_account_credentials.json --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker run -v service_account_credentials.json:/zetasql/service_account_credentials.json --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx build --file Dockerfile.snowflake --output out --platform linux/amd64 .
           # for linux/arm64 it is very slow and we can't use it now
 

@@ -1,33 +1,59 @@
-FROM openjdk:8u332-jdk-bullseye AS linux-builder
-ENV DEBIAN_FRONTEND=noninteractive
-ARG BAZEL_LINUX_CACHE_ARGS=--remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+################################################################################
+#                                     BUILD                                    #
+################################################################################
 
-ADD . /build
-WORKDIR /build
+FROM ubuntu:18.04 as linux-builder
 
-RUN apt-get update \
-  && apt-get install -y curl gnupg \
-  && apt-get update \
-  && apt-get install -y \
-    g++ \
-    make \
-    nodejs \
-    npm \
-    python \
-    python3-distutils \
-    tzdata \
-  && apt-get autoremove -y \
-  && apt-get clean -y \
-  && rm -rf /var/lib/apt/lists/*
-RUN npx @bazel/bazelisk build --copt "-O3" --config=g++ ${BAZEL_LINUX_CACHE_ARGS} //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -- -zetasql/jdk/... -java/... -javatests/...
-RUN npx @bazel/bazelisk test ${BAZEL_LINUX_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
-  -zetasql/reference_impl:algebrizer_test \
-  -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
-  -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
-  -zetasql/reference_impl:reference_compliance_test \
-  -zetasql/reference_impl:reference_compliance_test_all_rewrites
+# Setup java
+RUN apt-get update && apt-get -qq install -y default-jre default-jdk
+
+# Install prerequisites for bazel
+RUN apt-get update && apt-get -qq install curl tar build-essential wget        \
+    python python3 zip unzip
+
+ENV BAZEL_VERSION=4.2.4
+
+# Install bazel from source
+RUN mkdir -p bazel                                                          && \
+    cd bazel                                                                && \
+    wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-dist.zip &&\
+    unzip bazel-${BAZEL_VERSION}-dist.zip                                              && \
+    rm -rf bazel-${BAZEL_VERSION}-dist.zip
+ENV PATH=$PATH:/usr/bin:/usr/local/bin
+ENV EXTRA_BAZEL_ARGS="--tool_java_runtime_version=local_jdk"
+RUN cd bazel && bash ./compile.sh
+RUN cp /bazel/output/bazel  /usr/local/bin
+
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive"                         \
+    TZ="America/Los_Angeles" apt-get install -y tzdata
+
+# Unfortunately ZetaSQL has issues with clang (default bazel compiler), so
+# we install GCC. Also install make for rules_foreign_cc bazel rules.
+RUN apt-get -qq install -y software-properties-common
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test                          && \
+    apt-get -qq update                                                      && \
+    apt-get -qq install -y gcc-11 g++-11 make rename  git                   && \
+    apt-get -qq install -y ca-certificates libgnutls30                      && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 90          \
+                        --slave   /usr/bin/g++ g++ /usr/bin/g++-11          && \
+    update-alternatives --set gcc /usr/bin/gcc-11
+
+COPY . /zetasql
+
+ENV BAZEL_ARGS=--config=g++ --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+
+RUN cd zetasql                                                              && \
+    CC=/usr/bin/gcc CXX=/usr/bin/g++                                           \
+    bazel build ${BAZEL_ARGS} //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -- -zetasql/jdk/... -java/... -javatests/... \
+    
+    && bazel test ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
+      -zetasql/reference_impl:algebrizer_test \
+      -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
+      -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
+      -zetasql/reference_impl:reference_compliance_test \
+      -zetasql/reference_impl:reference_compliance_test_all_rewrites
 
 FROM alpine
 ARG TARGETPLATFORM
-COPY --from=linux-builder /build/bazel-bin/zetasql/local_service/libremote_server.so ${TARGETPLATFORM}/libremote_server.so
-COPY --from=linux-builder /build/bazel-bin/zetasql/local_service/remote_server_executable ${TARGETPLATFORM}/remote_server_executable
+COPY --from=linux-builder /zetasql/bazel-bin/zetasql/local_service/libremote_server.so ${TARGETPLATFORM}/libremote_server.so
+COPY --from=linux-builder /zetasql/bazel-bin/zetasql/local_service/remote_server_executable ${TARGETPLATFORM}/remote_server_executable
