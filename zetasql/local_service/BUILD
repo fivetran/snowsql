@@ -256,17 +256,6 @@ cc_test(
 #     alwayslink = 1,
 # )
 
-cc_library(
-    name = "remote_server",
-    srcs = ["remote_server.cc"],
-    linkstatic = 1,
-    deps = [
-        ":local_service_grpc",
-        "@com_github_grpc_grpc//:grpc++",
-    ],
-    alwayslink = 1,
-)
-
 cc_binary(
     name = "remote_server_executable",
     srcs = [
@@ -291,15 +280,3 @@ cc_binary(
 #     linkshared = 1,
 #     deps = [":local_service_jni"],
 # )
-
-cc_binary(
-    name = "libremote_server.so",
-    linkshared = 1,
-    deps = [":remote_server"],
-)
-
-cc_binary(
-    name = "libremote_server.dylib",
-    linkshared = 1,
-    deps = [":remote_server"],
-)

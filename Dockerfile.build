@@ -44,9 +44,9 @@ ENV BAZEL_ARGS=--config=g++ --remote_cache=https://storage.googleapis.com/snowsq
 
 RUN cd zetasql                                                              && \
     CC=/usr/bin/gcc CXX=/usr/bin/g++                                           \
-    bazel build ${BAZEL_ARGS} //zetasql/local_service:libremote_server.so //zetasql/local_service:remote_server_executable -- -zetasql/jdk/... -java/... -javatests/... \
+    bazel build ${BAZEL_ARGS} //zetasql/local_service:remote_server_executable -- -zetasql/jdk/... -java/... -javatests/... \
     
-    && bazel test ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:libremote_server.dylib \
+    && bazel test ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:remote_server_executable \
       -zetasql/reference_impl:algebrizer_test \
       -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
       -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
@@ -55,5 +55,4 @@ RUN cd zetasql                                                              && \
 
 FROM alpine
 ARG TARGETPLATFORM
-COPY --from=linux-builder /zetasql/bazel-bin/zetasql/local_service/libremote_server.so ${TARGETPLATFORM}/libremote_server.so
 COPY --from=linux-builder /zetasql/bazel-bin/zetasql/local_service/remote_server_executable ${TARGETPLATFORM}/remote_server_executable
