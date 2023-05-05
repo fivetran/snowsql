@@ -49,6 +49,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
+          if-no-files-found: error
           path: |
             darwin_x86_64/
             **/*.proto
@@ -85,11 +86,15 @@ jobs:
         run: |
           mkdir -p linux_x86_64
           mv out/linux/amd64/remote_server_executable linux_x86_64
+          echo '' > nothing.txt
 
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
+          if-no-files-found: error
           path: |
+            nothing.txt  
             linux_x86_64/
           # linux_arm_64/
+          # nothing.txt needs to preserve directory structure
