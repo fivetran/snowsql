@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-test-macos:
-    runs-on: macos-latest
+    runs-on: macos-11
 
     env:
       BAZEL_MACOS_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
