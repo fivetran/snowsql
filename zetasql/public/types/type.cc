@@ -142,6 +142,8 @@ static const auto& GetTypeKindInfoMap() {
            {"INTERVAL",           27,          27,    true }},
           {TYPE_RANGE,
            {"RANGE",              29,          29,   false }},
+          {TYPE_VARIANT,
+           {"VARIANT",            1000,        1000,   true }},
           // clang-format on
           // When a new entry is added here, update
           // TypeTest::VerifyCostAndSpecificity.
@@ -400,6 +402,8 @@ std::string Type::CapitalizedName() const {
       return "BigNumeric";
     case TYPE_JSON:
       return "Json";
+    case TYPE_VARIANT:
+      return "Variant";
     case TYPE_RANGE:
       // TODO: Consider moving to the types library and audit use of
       // DebugString.

@@ -76,7 +76,7 @@ Example: `APPROX_TOP_K_ACCUMULATE(ANY, NUMBER) RETURN OBJECT`
 ## Referencing an alias in the same SELECT statement
 1. If a clause contains `GROUP BY` or some aggregation function (e.g. `COUNT(*)`) then referencing aliases in the same `SELECT` will be incorrect.
 <br>It should be implemented later.
-The next query is valid in Snowflake but fails in SnowSQL:
+The next query is valid in Snowflake but fails in zetasql-snowflake:
 ```sql
 select 12.5 as key, key * count(*)
 from (
