@@ -4038,11 +4038,15 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* int64_type = type_factory->get_int64();
   const Type* uint64_type = type_factory->get_uint64();
   const Type* double_type = type_factory->get_double();
+  const Type* float_type = type_factory->get_float();
   const Type* numeric_type = type_factory->get_numeric();
   const Type* bignumeric_type = type_factory->get_bignumeric();
   const Type* string_type = type_factory->get_string();
   const Type* date_type = type_factory->get_date();
+  const Type* datetime_type = type_factory->get_datetime();
+  const Type* timestamp_type = type_factory->get_timestamp();
   const Type* time_type = type_factory->get_time();
+  const Type* variant_type = type_factory->get_variant();
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -4096,6 +4100,21 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "try_to_time", SCALAR,
       {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIME}});
+
+  // TO_VARIANT
+  InsertFunction(
+      functions, options, "to_variant", SCALAR,
+      {{variant_type, {int64_type}, FN_TO_VARIANT_INT64},
+       {variant_type, {uint64_type}, FN_TO_VARIANT_UINT64},
+       {variant_type, {double_type}, FN_TO_VARIANT_DOUBLE},
+       {variant_type, {float_type}, FN_TO_VARIANT_FLOAT},
+       {variant_type, {numeric_type}, FN_TO_VARIANT_NUMERIC},
+       {variant_type, {bignumeric_type}, FN_TO_VARIANT_BIGNUMERIC},
+       {variant_type, {string_type}, FN_TO_VARIANT_STRING},
+       {variant_type, {bool_type}, FN_TO_VARIANT_BOOL},
+       {variant_type, {date_type}, FN_TO_VARIANT_DATE},
+       {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
+       {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
