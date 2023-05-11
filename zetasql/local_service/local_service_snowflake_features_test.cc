@@ -1285,7 +1285,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeVariantType) {
   AnalyzeRequest analyzeNumberRequest;
   *analyzeNumberRequest.mutable_simple_catalog() = catalog;
   *analyzeNumberRequest.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
-  analyzeNumberRequest.set_sql_statement("SELECT CAST(1 AS VARIANT), CAST(1.0 AS VARIANT),  CAST('str' AS VARIANT), CAST(true AS VARIANT)");
+  analyzeNumberRequest.set_sql_statement("SELECT CAST(CAST(1 AS VARIANT) AS INT), CAST(CAST(1.0 AS VARIANT) AS DOUBLE), CAST(CAST('str' AS VARIANT) AS STRING), CAST(CAST(true AS VARIANT) AS BOOLEAN)");
   AnalyzeResponse analyzeNumberResponse;
   ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
 }
