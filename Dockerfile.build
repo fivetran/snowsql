@@ -21,9 +21,9 @@ RUN apt-get update \
 
 ENV BAZEL_ARGS=--config=clang --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
 
-RUN npx @bazel/bazelisk build ${BAZEL_ARGS} --copt "-O3" //zetasql/local_service:remote_server_executable  -- -zetasql/jdk/... -java/... -javatests/... \
+RUN npx @bazel/bazelisk build ${BAZEL_ARGS} --copt "-O3" //zetasql/local_service:remote_server_executable  -- -zetasql/jdk/... -java/... -javatests/...
 
-    && npx @bazel/bazelisk test ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:remote_server_executable \
+RUN npx @bazel/bazelisk test ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:remote_server_executable \
       -zetasql/reference_impl:algebrizer_test \
       -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
       -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
