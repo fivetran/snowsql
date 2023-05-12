@@ -16,7 +16,7 @@ namespace local_service {
 namespace {
 
 extern "C" void RunServer(int port) {
-  std::string server_address_with_port = "0.0.0.0:" + std::to_string(port);
+  std::string server_address_with_port = "localhost:" + std::to_string(port);
   std::cout << "Running server on " << server_address_with_port << "..." << std::endl;
 
   ZetaSqlLocalServiceGrpcImpl* service =
