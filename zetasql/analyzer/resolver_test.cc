@@ -728,6 +728,17 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
                      types::Uint32Type());
   TestCastExpression("CAST(CAST(1 as `zetasql_test__.TestEnum`) as UINT64)",
                      types::Uint64Type());
+  
+  // Snowflake VARIANT type
+  TestCastExpression("CAST(1 as VARIANT)", types::VariantType());
+  TestCastExpression("CAST('1' as VARIANT)", types::VariantType());
+  TestCastExpression("CAST(true as VARIANT)", types::VariantType());
+  TestCastExpression("CAST(false as VARIANT)", types::VariantType());
+
+  TestCastExpression("CAST(CAST(1 as VARIANT) AS INT32)", types::Int32Type());
+  TestCastExpression("CAST(CAST('1' as VARIANT) AS STRING)", types::StringType());
+  TestCastExpression("CAST(CAST(true as VARIANT) AS bool)", types::BoolType());
+  TestCastExpression("CAST(CAST(false as VARIANT) AS BOoL)", types::BoolType());
 
   // TODO: Add basic CAST resolution tests for ENUM, PROTO, STRUCT,
   // ARRAY (some will be errors - to be added in TestResolverErrors).

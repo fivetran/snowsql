@@ -371,7 +371,8 @@ TEST_F(ProtoValueConversionTest, RoundTrip) {
       "[CAST(NULL AS BIGNUMERIC)]", "[CAST(NULL AS GEOGRAPHY)]",
       "[CAST(NULL AS RANGE<DATE>)]", "[CAST(NULL AS RANGE<DATETIME>)]",
       "[CAST(NULL AS RANGE<TIMESTAMP>)]",
-      "[CAST(NULL AS JSON)]"};
+      "[CAST(NULL AS JSON)]",
+      "[CAST(NULL AS VARIANT)]"};
 
   for (bool array_wrappers : {true, false}) {
     for (bool element_wrappers : {true, false}) {
