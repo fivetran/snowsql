@@ -302,6 +302,7 @@ const Type* TypeFactory::get_geography() { return types::GeographyType(); }
 const Type* TypeFactory::get_numeric() { return types::NumericType(); }
 const Type* TypeFactory::get_bignumeric() { return types::BigNumericType(); }
 const Type* TypeFactory::get_json() { return types::JsonType(); }
+const Type* TypeFactory::get_variant() { return types::VariantType(); }
 
 const Type* TypeFactory::MakeSimpleType(TypeKind kind) {
   ABSL_CHECK(Type::IsSimpleType(kind)) << kind;
@@ -331,6 +332,7 @@ absl::Status TypeFactory::MakeArrayType(const Type* element_type,
       types::NumericType(),
       types::BigNumericType(),
       types::JsonType(),
+      types::VariantType(),
   };
   if (this != s_type_factory() && kStaticTypeSet->contains(element_type)) {
     return s_type_factory()->MakeArrayType(element_type, result);
@@ -967,6 +969,11 @@ static const Type* s_json_type() {
   return s_json_type;
 }
 
+static const Type* s_variant_type() {
+  static const Type* s_variant_type = new SimpleType(s_type_factory(), TYPE_VARIANT);
+  return s_variant_type;
+}
+
 static const EnumType* s_date_part_enum_type() {
   static const EnumType* s_date_part_enum_type = [] {
     const EnumType* enum_type;
@@ -1156,6 +1163,12 @@ static const ArrayType* s_json_array_type() {
   return s_json_array_type;
 }
 
+static const ArrayType* s_variant_array_type() {
+  static const ArrayType* s_variant_array_type =
+      MakeArrayType(s_type_factory()->get_variant());
+  return s_variant_array_type;
+}
+
 static const EnumType* GetArrayZipModeEnumType() {
   static const EnumType* s_array_zip_mode_enum_type = [] {
     const EnumType* enum_type;
@@ -1189,6 +1202,7 @@ const Type* GeographyType() { return s_geography_type(); }
 const Type* NumericType() { return s_numeric_type(); }
 const Type* BigNumericType() { return s_bignumeric_type(); }
 const Type* JsonType() { return s_json_type(); }
+const Type* VariantType() { return s_variant_type(); }
 const StructType* EmptyStructType() { return s_empty_struct_type(); }
 const EnumType* DatePartEnumType() { return s_date_part_enum_type(); }
 const EnumType* NormalizeModeEnumType() { return s_normalize_mode_enum_type(); }
@@ -1228,6 +1242,8 @@ const ArrayType* BigNumericArrayType() { return s_bignumeric_array_type(); }
 
 const ArrayType* JsonArrayType() { return s_json_array_type(); }
 
+const ArrayType* VariantArrayType() { return s_variant_array_type(); }
+
 const Type* TypeFromSimpleTypeKind(TypeKind type_kind) {
   switch (type_kind) {
     case TYPE_INT32:
@@ -1266,6 +1282,8 @@ const Type* TypeFromSimpleTypeKind(TypeKind type_kind) {
       return BigNumericType();
     case TYPE_JSON:
       return JsonType();
+    case TYPE_VARIANT:
+      return VariantType();
     default:
       ZETASQL_VLOG(1) << "Could not build static Type from type: "
               << Type::TypeKindToString(type_kind, PRODUCT_INTERNAL);
@@ -1311,6 +1329,8 @@ const ArrayType* ArrayTypeFromSimpleTypeKind(TypeKind type_kind) {
       return BigNumericArrayType();
     case TYPE_JSON:
       return JsonArrayType();
+    case TYPE_VARIANT:
+      return VariantArrayType();
     default:
       ZETASQL_VLOG(1) << "Could not build static ArrayType from type: "
               << Type::TypeKindToString(type_kind, PRODUCT_INTERNAL);

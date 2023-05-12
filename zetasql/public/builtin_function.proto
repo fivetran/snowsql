@@ -64,7 +64,7 @@ enum FunctionSignatureId {
   // 100000-100099 Snowflake Aggregate functions                (NextId: 100008)
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
   // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
-  // 100300-100399 Snowflake Conversion functions               (NextId: 100319)
+  // 100300-100399 Snowflake Conversion functions               (NextId: 100330)
   // 100400-100499 Snowflake Data generation functions          (NextId: 100407)
   // 100500-100599 Snowflake String and binary functions        (NextId: 100505)
   // 100600-100699 Snowflake String functions                   (NextId: 100603)
@@ -1381,6 +1381,17 @@ enum FunctionSignatureId {
   FN_TRY_TO_DOUBLE = 100316;              // try_to_double(STRING, <STRING>) -> DOUBLE
   FN_TRY_TO_DATE = 100317;                // try_to_date(STRING, <STRING>) -> DATE
   FN_TRY_TO_TIME = 100318;                // try_to_time(STRING, <STRING>) -> TIME
+  FN_TO_VARIANT_INT64 = 100319;           // to_variant(INT64) -> VARIANT
+  FN_TO_VARIANT_UINT64 = 100320;          // to_variant(UINT64) -> VARIANT
+  FN_TO_VARIANT_DOUBLE = 100321;          // to_variant(DOUBLE) -> VARIANT
+  FN_TO_VARIANT_FLOAT = 100322;           // to_variant(FLOAT) -> VARIANT
+  FN_TO_VARIANT_NUMERIC = 100323;         // to_variant(NUMERIC) -> VARIANT
+  FN_TO_VARIANT_BIGNUMERIC = 100324;      // to_variant(BIGNUMERIC) -> VARIANT
+  FN_TO_VARIANT_STRING = 100325;          // to_variant(STRING) -> VARIANT
+  FN_TO_VARIANT_BOOL = 100326;            // to_variant(BOOL) -> VARIANT
+  FN_TO_VARIANT_DATE = 100327;            // to_variant(DATE) -> VARIANT
+  FN_TO_VARIANT_DATETIME = 100328;        // to_variant(DATETIME) -> VARIANT
+  FN_TO_VARIANT_TIMESTAMP = 100329;       // to_variant(TIMESTAMP) -> VARIANT
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
