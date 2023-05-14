@@ -15,8 +15,8 @@ namespace zetasql {
 namespace local_service {
 namespace {
 
-extern "C" void RunServer(int port) {
-  std::string server_address_with_port = "localhost:" + std::to_string(port);
+extern "C" void RunServer(std::string &address, int port) {
+  std::string server_address_with_port = address + ":" + std::to_string(port);
   std::cout << "Running server on " << server_address_with_port << "..." << std::endl;
 
   ZetaSqlLocalServiceGrpcImpl* service =
@@ -41,7 +41,8 @@ extern "C" void RunServer(int port) {
 }
 
 int main(int argc, char* argv[]) {
-  std::string port = argv[1];
-  zetasql::local_service::RunServer(std::stoi(port));
+  std::string address = argv[1];
+  std::string port = argv[2];
+  zetasql::local_service::RunServer(address, std::stoi(port));
   return 0;
 }
