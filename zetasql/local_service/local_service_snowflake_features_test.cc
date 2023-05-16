@@ -1299,8 +1299,12 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeAggregateFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *aggregate_functions_request_text =
     "select "
-    "approx_top_k(column_1), approx_top_k_accumulate(column_1, 10), "
-    "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2), "
+    "approx_percentile(column_1, 0.5),"
+    "approx_percentile_accumulate(column_1),"
+    "approx_percentile_combine(column_1),"
+    "approx_percentile_estimate(column_1, 0.01),"
+    "approx_top_k(column_1), approx_top_k_accumulate(column_1, 10),"
+    "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
   AnalyzeResponse analyzeAggregateFunctionsResponse;
@@ -1311,8 +1315,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeBitwiseFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *bitwise_functions_request_text =
     "select "
-    "bitand(11, 22), bitnot(11), bitor(11, 22), "
-    "bitshiftleft(11, 1), bitshiftright(11, 1), "
+    "bitand(11, 22), bitnot(11), bitor(11, 22),"
+    "bitshiftleft(11, 1), bitshiftright(11, 1),"
     "bitxor(11, 22)";
   analyzeBitwiseFunctionsRequest.set_sql_statement(bitwise_functions_request_text);
   AnalyzeResponse analyzeBitwiseFunctionsResponse;
@@ -1323,8 +1327,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeConditionalExpressionFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *conditional_expression_functions_request_text =
     "select "
-    "booland(1, 0), boolnot(1), "
-    "boolor(1, 0), boolxor(1, 0), "
+    "booland(1, 0), boolnot(1),"
+    "boolor(1, 0), boolxor(1, 0),"
     "zeroifnull(null)";
   analyzeConditionalExpressionFunctionsRequest.set_sql_statement(conditional_expression_functions_request_text);
   AnalyzeResponse analyzeConditionalExpressionFunctionsResponse;
@@ -1349,8 +1353,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeDataGenerationFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *data_generation_functions_request_text =
     "select "
-    "random(), randstr(5, random()), "
-    "seq1(), seq2(), "
+    "random(), randstr(5, random()),"
+    "seq1(), seq2(),"
     "seq4(), seq8()";
   analyzeDataGenerationFunctionsRequest.set_sql_statement(data_generation_functions_request_text);
   AnalyzeResponse analyzeDataGenerationFunctionsResponse;
@@ -1361,8 +1365,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeStringAndBinaryFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *string_and_binary_functions_request_text =
     "select "
-    "base64_decode_string('U25vd2ZsYWtl'), try_base64_decode_string('U25vd2ZsYWtl'), "
-    "contains('ice tea', 'te'), endswith('ice tea', 'a'), "
+    "base64_decode_string('U25vd2ZsYWtl'), try_base64_decode_string('U25vd2ZsYWtl'),"
+    "contains('ice tea', 'te'), endswith('ice tea', 'a'),"
     "insert('abcdef', 3, 2, 'zzz')";
   analyzeStringAndBinaryFunctionsRequest.set_sql_statement(string_and_binary_functions_request_text);
   AnalyzeResponse analyzeStringAndBinaryFunctionsResponse;
@@ -1373,8 +1377,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeStringFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *string_functions_request_text =
     "select "
-    "regexp_count('It was the best of times', '\\bwas\\b', 1), "
-    "regexp_like(column_2, 'san.*', 'i'), "
+    "regexp_count('It was the best of times', '\\bwas\\b', 1),"
+    "regexp_like(column_2, 'san.*', 'i'),"
     "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]')"
     "from table_1";
   analyzeStringFunctionsRequest.set_sql_statement(string_functions_request_text);
@@ -1386,7 +1390,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   *analyzeDateAndTimeFunctionsRequest.mutable_simple_catalog() = catalog;
   const char *date_and_time_functions_request_text =
     "select "
-    "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')), "
+    "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
     "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday')";
   analyzeDateAndTimeFunctionsRequest.set_sql_statement(date_and_time_functions_request_text);
   AnalyzeResponse analyzeDateAndTimeFunctionsResponse;

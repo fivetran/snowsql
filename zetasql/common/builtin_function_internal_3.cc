@@ -3894,6 +3894,30 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
         {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
         FN_REGR_AVGX_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE
+  InsertFunction(
+      functions, options, "approx_percentile", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2}, FN_APPROX_PERCENTILE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE_ACCUMULATE
+  InsertFunction(
+      functions, options, "approx_percentile_accumulate", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROX_PERCENTILE_ACCUMULATE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE_COMBINE
+  InsertFunction(
+      functions, options, "approx_percentile_combine", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROX_PERCENTILE_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_PERCENTILE_ESTIMATE
+  InsertFunction(
+      functions, options, "approx_percentile_estimate", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_APPROX_PERCENTILE_ESTIMATE}},
+      DefaultAggregateFunctionOptions());
 }
 
 void GetSnowflakeBitwiseFunctions(TypeFactory* type_factory,

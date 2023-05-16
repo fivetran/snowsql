@@ -1262,6 +1262,10 @@ enum FunctionSignatureId {
   FN_REGR_AVGY_DIFF_ARGS = 100005;          // regr_avgy (ARG_TYPE_ANY_1, ARG_TYPE_ANY_2)
   FN_REGR_COUNT_SAME_ARGS = 100006;         // regr_count (ARG_TYPE_ANY_1, ARG_TYPE_ANY_1)
   FN_REGR_COUNT_DIFF_ARGS = 100007;         // regr_count (ARG_TYPE_ANY_1, ARG_TYPE_ANY_2)
+  FN_APPROX_PERCENTILE = 100008;            // approx_percentile(FLOAT, FLOAT) -> FLOAT
+  FN_APPROX_PERCENTILE_ACCUMULATE = 100009; // approx_percentile_accumulate(FLOAT) -> OBJECT
+  FN_APPROX_PERCENTILE_COMBINE = 100010;    // approx_percentile_combine(OBJECT) -> OBJECT
+  FN_APPROX_PERCENTILE_ESTIMATE = 100011;   // approx_percentile_estimate(OBJECT, FLOAT) -> FLOAT
 
   // Snowflake Bitwise functions
   FN_BIT_AND_SAME_ARGS = 100100;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
