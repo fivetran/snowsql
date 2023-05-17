@@ -3811,6 +3811,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
                                     NameToFunctionMap* functions) {
   const Type* int64_type = type_factory->get_int64();
   const Type* numeric_type = type_factory->get_numeric();
+  const Type* bool_type = type_factory->get_bool();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
 
@@ -3903,6 +3904,24 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "bitxor_agg", AGGREGATE,
       {{numeric_type, {numeric_type}, FN_BITXOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BOOLAND_AGG
+  InsertFunction(
+      functions, options, "booland_agg", AGGREGATE,
+      {{bool_type, {numeric_type}, FN_BOOLAND_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BOOLOR_AGG
+  InsertFunction(
+      functions, options, "boolor_agg", AGGREGATE,
+      {{bool_type, {numeric_type}, FN_BOOLOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BOOLXOR_AGG
+  InsertFunction(
+      functions, options, "boolxor_agg", AGGREGATE,
+      {{bool_type, {numeric_type}, FN_BOOLXOR_AGG}},
       DefaultAggregateFunctionOptions());
 
   // REGR_AVGX
