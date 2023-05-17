@@ -3924,6 +3924,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{bool_type, {numeric_type}, FN_BOOLXOR_AGG}},
       DefaultAggregateFunctionOptions());
 
+  // GROUPING_ID
+  InsertFunction(
+      functions, options, "grouping_id", AGGREGATE,
+      {{numeric_type, {{ARG_TYPE_ANY_1, FunctionArgumentType::REPEATED}}, FN_GROUPING_ID}},
+      DefaultAggregateFunctionOptions());
+
   // REGR_AVGX
   InsertFunction(
       functions, options, "regr_avgx", AGGREGATE,

@@ -1314,6 +1314,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "booland_agg(column_1),"
     "boolor_agg(column_1),"
     "boolxor_agg(column_1),"
+    "grouping_id(column_1, column_2),"
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
