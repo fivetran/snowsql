@@ -3814,6 +3814,8 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   const Type* bool_type = type_factory->get_bool();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
+  const FunctionArgumentType::ArgumentCardinality REPEATED =
+        FunctionArgumentType::REPEATED;
 
   FunctionArgumentTypeOptions supports_grouping;
   supports_grouping.set_must_support_grouping();
@@ -3909,25 +3911,25 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // BOOLAND_AGG
   InsertFunction(
       functions, options, "booland_agg", AGGREGATE,
-      {{bool_type, {numeric_type}, FN_BOOLAND_AGG}},
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLAND_AGG}},
       DefaultAggregateFunctionOptions());
 
   // BOOLOR_AGG
   InsertFunction(
       functions, options, "boolor_agg", AGGREGATE,
-      {{bool_type, {numeric_type}, FN_BOOLOR_AGG}},
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLOR_AGG}},
       DefaultAggregateFunctionOptions());
 
   // BOOLXOR_AGG
   InsertFunction(
       functions, options, "boolxor_agg", AGGREGATE,
-      {{bool_type, {numeric_type}, FN_BOOLXOR_AGG}},
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLXOR_AGG}},
       DefaultAggregateFunctionOptions());
 
   // GROUPING_ID
   InsertFunction(
       functions, options, "grouping_id", AGGREGATE,
-      {{numeric_type, {{ARG_TYPE_ANY_1, FunctionArgumentType::REPEATED}}, FN_GROUPING_ID}},
+      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_GROUPING_ID}},
       DefaultAggregateFunctionOptions());
 
   // REGR_AVGX
