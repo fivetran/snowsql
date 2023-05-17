@@ -1304,6 +1304,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "approx_percentile_combine(column_1),"
     "approx_percentile_estimate(column_1, 0.01),"
     "approx_top_k(column_1), approx_top_k_accumulate(column_1, 10),"
+    "approx_top_k_combine(column_1), approx_top_k_combine(column_1, 0.1),"
+    "approx_top_k_estimate(column_1), approx_top_k_estimate(column_1, 0.5),"
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);

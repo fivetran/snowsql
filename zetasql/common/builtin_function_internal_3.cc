@@ -3810,6 +3810,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
                                     const ZetaSQLBuiltinFunctionOptions& options,
                                     NameToFunctionMap* functions) {
   const Type* int64_type = type_factory->get_int64();
+  const Type* numeric_type = type_factory->get_numeric();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
 
@@ -3861,6 +3862,18 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
             .set_rejects_collation()}},
       DefaultAggregateFunctionOptions().set_compute_result_type_callback(
           absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
+
+  // APPROX_TOP_K_COMBINE
+  InsertFunction(
+      functions, options, "approx_top_k_combine", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, FunctionArgumentType::OPTIONAL}}, FN_APPROX_TOP_K_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROX_TOP_K_ESTIMATE
+  InsertFunction(
+      functions, options, "approx_top_k_estimate", AGGREGATE,
+      {{ARG_ARRAY_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, FunctionArgumentType::OPTIONAL}}, FN_APPROX_TOP_K_ESTIMATE}},
+      DefaultAggregateFunctionOptions());
 
   // REGR_AVGX
   InsertFunction(
