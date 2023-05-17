@@ -3875,6 +3875,36 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{ARG_ARRAY_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, FunctionArgumentType::OPTIONAL}}, FN_APPROX_TOP_K_ESTIMATE}},
       DefaultAggregateFunctionOptions());
 
+  // APPROXIMATE_JACCARD_INDEX
+  InsertFunction(
+      functions, options, "approximate_jaccard_index", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROXIMATE_JACCARD_INDEX}},
+      DefaultAggregateFunctionOptions());
+
+  // APPROXIMATE_SIMILARITY
+  InsertFunction(
+      functions, options, "approximate_similarity", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_APPROXIMATE_SIMILARITY}},
+      DefaultAggregateFunctionOptions());
+
+  // BITAND_AGG
+  InsertFunction(
+      functions, options, "bitand_agg", AGGREGATE,
+      {{numeric_type, {numeric_type}, FN_BITAND_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BITOR_AGG
+  InsertFunction(
+      functions, options, "bitor_agg", AGGREGATE,
+      {{numeric_type, {numeric_type}, FN_BITOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
+  // BITXOR_AGG
+  InsertFunction(
+      functions, options, "bitxor_agg", AGGREGATE,
+      {{numeric_type, {numeric_type}, FN_BITXOR_AGG}},
+      DefaultAggregateFunctionOptions());
+
   // REGR_AVGX
   InsertFunction(
       functions, options, "regr_avgx", AGGREGATE,

@@ -1268,6 +1268,11 @@ enum FunctionSignatureId {
   FN_APPROX_PERCENTILE_ESTIMATE = 100011;   // approx_percentile_estimate(OBJECT, FLOAT) -> FLOAT
   FN_APPROX_TOP_K_COMBINE = 100012;         // approx_top_k_combine(OBJECT [, NUMBER]) -> OBJECT
   FN_APPROX_TOP_K_ESTIMATE = 100013;        // approx_top_k_estimate(OBJECT [, NUMBER]) -> ARRAY
+  FN_APPROXIMATE_JACCARD_INDEX = 100014;    // approximate_jaccard_index(VARIANT) -> FLOAT
+  FN_APPROXIMATE_SIMILARITY = 100015;       // approximate_similarity(VARIANT) -> FLOAT
+  FN_BITAND_AGG = 100016;                   // bitand_agg(NUMBER) -> NUMBER
+  FN_BITOR_AGG = 100017;                    // bitor_agg(NUMBER) -> NUMBER
+  FN_BITXOR_AGG = 100018;                   // bitxor_agg(NUMBER) -> NUMBER
 
   // Snowflake Bitwise functions
   FN_BIT_AND_SAME_ARGS = 100100;        // bitand(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> INT64
