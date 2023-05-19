@@ -3812,6 +3812,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   const Type* int64_type = type_factory->get_int64();
   const Type* numeric_type = type_factory->get_numeric();
   const Type* bool_type = type_factory->get_bool();
+  const Type* bytes_type = type_factory->get_bytes();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
@@ -3942,6 +3943,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "hll", AGGREGATE,
       {{int64_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, FunctionArgumentType::OPTIONAL}}, FN_HLL}},
+      DefaultAggregateFunctionOptions());
+
+  // HLL_ACCUMULATE
+  InsertFunction(
+      functions, options, "hll_accumulate", AGGREGATE,
+      {{bytes_type, {ARG_TYPE_ANY_1}, FN_HLL_ACCUMULATE}},
       DefaultAggregateFunctionOptions());
 
   // REGR_AVGX
