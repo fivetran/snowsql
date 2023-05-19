@@ -1320,6 +1320,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "boolor_agg(column_1), boolor_agg(bool_column),"
     "boolxor_agg(column_1), boolxor_agg(bool_column),"
     "grouping_id(column_1), grouping_id(column_1, column_2)," // TODO: grouping_id(column_1, column_2, bool_column)
+    "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2)," // TODO: hash_agg(*), hash_agg(column_1, column_2, bool_column)
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
