@@ -3957,6 +3957,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{bytes_type, {ARG_TYPE_ANY_1}, FN_HLL_COMBINE}},
       DefaultAggregateFunctionOptions());
 
+  // HLL_ESTIMATE
+  InsertFunction(
+      functions, options, "hll_estimate", AGGREGATE,
+      {{numeric_type, {ARG_TYPE_ANY_1}, FN_HLL_ESTIMATE}},
+      DefaultAggregateFunctionOptions());
+
   // REGR_AVGX
   InsertFunction(
       functions, options, "regr_avgx", AGGREGATE,
