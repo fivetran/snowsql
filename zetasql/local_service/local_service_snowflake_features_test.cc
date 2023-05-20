@@ -1325,6 +1325,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "hll_accumulate(column_1)," // TODO:  hll_accumulate(*)
     "hll_combine(column_1), hll_combine(column_2),"
     "hll_estimate(column_1), hll_estimate(column_2),"
+    "hll_export(column_1), hll_export(column_2),"
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
