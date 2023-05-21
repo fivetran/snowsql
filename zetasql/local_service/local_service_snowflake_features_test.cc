@@ -1330,6 +1330,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "kurtosis(column_1)," // TODO: kurtosis(column_2) should return error
     "listagg(column_1), listagg(column_1, ','), listagg(column_2), listagg(column_2, ','), listagg('asd', ','),"
     "median(column_1),"
+    "minhash(1, column_1), minhash(1024, column_2), minhash(1024, bool_column),"
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);

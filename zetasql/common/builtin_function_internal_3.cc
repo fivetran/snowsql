@@ -3996,6 +3996,15 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{float_type, {ARG_TYPE_ANY_1}, FN_MEDIAN}},
       DefaultAggregateFunctionOptions());
 
+  // MINHASH  
+  InsertFunction(
+      functions, options, "minhash", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {{int64_type,
+          FunctionArgumentTypeOptions()
+              .set_min_value(1)
+              .set_max_value(1024)}, ARG_TYPE_ANY_1}, FN_MINHASH}},
+      DefaultAggregateFunctionOptions());
+
   // REGR_AVGX
   InsertFunction(
       functions, options, "regr_avgx", AGGREGATE,
