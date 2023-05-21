@@ -4005,6 +4005,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
               .set_max_value(1024)}, ARG_TYPE_ANY_1}, FN_MINHASH}},
       DefaultAggregateFunctionOptions());
 
+  // MINHASH_COMBINE  
+  InsertFunction(
+      functions, options, "minhash_combine", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_MINHASH_COMBINE}},
+      DefaultAggregateFunctionOptions());
+
   // REGR_AVGX
   InsertFunction(
       functions, options, "regr_avgx", AGGREGATE,
