@@ -1322,11 +1322,12 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "grouping_id(column_1), grouping_id(column_1, column_2)," // TODO: grouping_id(column_1, column_2, bool_column)
     "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2)," // TODO: hash_agg(*), hash_agg(column_1, column_2, bool_column)
     "hll(column_1), hll(column_1, column_2),"
-    "hll_accumulate(column_1)," // TODO:  hll_accumulate(*)
+    "hll_accumulate(column_1)," // TODO: hll_accumulate(*)
     "hll_combine(column_1), hll_combine(column_2),"
     "hll_estimate(column_1), hll_estimate(column_2),"
     "hll_export(column_1), hll_export(column_2),"
     "hll_import(column_1), hll_import(column_2),"
+    "kurtosis(column_1)," // TODO: kurtosis(column_2) should return error
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2) from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
