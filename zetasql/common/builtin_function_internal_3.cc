@@ -3990,6 +3990,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{string_type, {ARG_TYPE_ANY_1, {string_type, OPTIONAL}}, FN_LISTAGG}},
       DefaultAggregateFunctionOptions());
 
+  // MEDIAN  
+  InsertFunction(
+      functions, options, "median", AGGREGATE,
+      {{float_type, {ARG_TYPE_ANY_1}, FN_MEDIAN}},
+      DefaultAggregateFunctionOptions());
+
   // REGR_AVGX
   InsertFunction(
       functions, options, "regr_avgx", AGGREGATE,
