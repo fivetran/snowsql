@@ -3814,10 +3814,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   const Type* bool_type = type_factory->get_bool();
   const Type* bytes_type = type_factory->get_bytes();
   const Type* float_type = type_factory->get_float();
+  const Type* string_type = type_factory->get_string();
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
         FunctionArgumentType::REPEATED;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
   FunctionArgumentTypeOptions supports_grouping;
   supports_grouping.set_must_support_grouping();
@@ -3832,14 +3834,14 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
         {{ARG_TYPE_ANY_1, supports_grouping},
          {int64_type,
           FunctionArgumentTypeOptions()
-              .set_cardinality(FunctionArgumentType::OPTIONAL)
+              .set_cardinality(OPTIONAL)
               .set_is_not_aggregate()
               .set_min_value(1)
               .set_max_value(100000)
               .set_default(Value::Int64(1))},
          {int64_type,
           FunctionArgumentTypeOptions()
-              .set_cardinality(FunctionArgumentType::OPTIONAL)
+              .set_cardinality(OPTIONAL)
               .set_is_not_aggregate()
               .set_max_value(100000)
               .set_default(Value::Int64(10000))}},
@@ -3871,13 +3873,13 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // APPROX_TOP_K_COMBINE
   InsertFunction(
       functions, options, "approx_top_k_combine", AGGREGATE,
-      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, FunctionArgumentType::OPTIONAL}}, FN_APPROX_TOP_K_COMBINE}},
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, OPTIONAL}}, FN_APPROX_TOP_K_COMBINE}},
       DefaultAggregateFunctionOptions());
 
   // APPROX_TOP_K_ESTIMATE
   InsertFunction(
       functions, options, "approx_top_k_estimate", AGGREGATE,
-      {{ARG_ARRAY_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, FunctionArgumentType::OPTIONAL}}, FN_APPROX_TOP_K_ESTIMATE}},
+      {{ARG_ARRAY_TYPE_ANY_1, {ARG_TYPE_ANY_1, {numeric_type, OPTIONAL}}, FN_APPROX_TOP_K_ESTIMATE}},
       DefaultAggregateFunctionOptions());
 
   // APPROXIMATE_JACCARD_INDEX
@@ -3943,7 +3945,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // HLL
   InsertFunction(
       functions, options, "hll", AGGREGATE,
-      {{int64_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, FunctionArgumentType::OPTIONAL}}, FN_HLL}},
+      {{int64_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, OPTIONAL}}, FN_HLL}},
       DefaultAggregateFunctionOptions());
 
   // HLL_ACCUMULATE
@@ -3980,6 +3982,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "kurtosis", AGGREGATE,
       {{float_type, {ARG_TYPE_ANY_1}, FN_KURTOSIS}},
+      DefaultAggregateFunctionOptions());
+
+  // LISTAGG  
+  InsertFunction(
+      functions, options, "listagg", AGGREGATE,
+      {{string_type, {ARG_TYPE_ANY_1, {string_type, OPTIONAL}}, FN_LISTAGG}},
       DefaultAggregateFunctionOptions());
 
   // REGR_AVGX
