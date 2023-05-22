@@ -1336,7 +1336,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "object_agg(column_2, column_1),"
     "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
     "regr_count(column_1, column_2),"
-    "regr_intercept(column_1, 3), REGR_INTERCEPT(1, 4), REGR_INTERCEPT(1.3, 4.33),"
+    "regr_intercept(column_1, 3), regr_intercept(1, 4), regr_intercept(1.3, 4.33),"
+    "regr_r2(column_1, 3), regr_r2(1, 2), regr_r2(1.1, 2.2),"
     " from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
   AnalyzeResponse analyzeAggregateFunctionsResponse;
