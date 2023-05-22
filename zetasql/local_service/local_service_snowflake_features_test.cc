@@ -1342,6 +1342,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "regr_sxx(column_1, 2), regr_sxx(1, 2), regr_sxx(1.1, 2.2),"
     "regr_syy(column_1, 2), regr_syy(1, 2), regr_syy(1.1, 2.2),"
     "skew(column_1), skew(null),"
+    "variance_pop(column_1), variance_pop(null),"
     " from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
   AnalyzeResponse analyzeAggregateFunctionsResponse;
