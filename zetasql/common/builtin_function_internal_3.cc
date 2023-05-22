@@ -4086,6 +4086,18 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2}, FN_APPROX_PERCENTILE}},
       DefaultAggregateFunctionOptions());
 
+  // REGR_SYY
+  InsertFunction(
+      functions, options, "regr_syy", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_REGR_SYY}},
+      DefaultAggregateFunctionOptions());
+
+  // SKEW
+  InsertFunction(
+      functions, options, "skew", AGGREGATE,
+      {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1}, FN_SKEW}},
+      DefaultAggregateFunctionOptions());
+
   // APPROX_PERCENTILE_ACCUMULATE
   InsertFunction(
       functions, options, "approx_percentile_accumulate", AGGREGATE,
