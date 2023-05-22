@@ -1338,6 +1338,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     "regr_count(column_1, column_2),"
     "regr_intercept(column_1, 3), regr_intercept(1, 4), regr_intercept(1.3, 4.33),"
     "regr_r2(column_1, 3), regr_r2(1, 2), regr_r2(1.1, 2.2),"
+    "regr_slope(column_1, 2), regr_slope(1, 2), regr_slope(1.1, 2.2)"
     " from table_1";
   analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
   AnalyzeResponse analyzeAggregateFunctionsResponse;
