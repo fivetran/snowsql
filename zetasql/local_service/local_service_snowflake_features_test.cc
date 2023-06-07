@@ -1435,7 +1435,16 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   analyzeDateAndTimeFunctionsRequest.set_sql_statement(date_and_time_functions_request_text);
   AnalyzeResponse analyzeDateAndTimeFunctionsResponse;
   ZETASQL_EXPECT_OK(Analyze(analyzeDateAndTimeFunctionsRequest, &analyzeDateAndTimeFunctionsResponse));
-}
 
+  // Snowflake semi-structured data functions
+  AnalyzeRequest analyzeSemiStructuredFunctionsRequest;
+  *analyzeSemiStructuredFunctionsRequest.mutable_simple_catalog() = catalog;
+  const char *semi_structured_functions_request_text =
+    "select "
+    "parse_json('{\"name\":\"John\"}')";
+  analyzeSemiStructuredFunctionsRequest.set_sql_statement(semi_structured_functions_request_text);
+  AnalyzeResponse analyzeSemiStructuredFunctionsResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeSemiStructuredFunctionsRequest, &analyzeSemiStructuredFunctionsResponse));
+}
 }  // namespace local_service
 }  // namespace zetasql

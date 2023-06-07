@@ -170,6 +170,7 @@ absl::Status GetZetaSQLFunctionsAndTypes(
   GetSnowflakeStringAndBinaryFunctions(type_factory, options, functions);
   GetSnowflakeStringFunctions(type_factory, options, functions);
   GetSnowflakeDateAndTimeFunctions(type_factory, options, functions);
+  GetSnowflakeSemiStructuredFunctions(type_factory, options, functions);
   /* Snowflake functions END */
 
   return absl::OkStatus();
