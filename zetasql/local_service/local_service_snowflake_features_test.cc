@@ -1390,6 +1390,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "parse_json('{\"name\":\"John\"}'),"
       "object_construct('a', 1), object_construct('a', 1, 'b', 2), object_construct('a', 'str', 'b', 2), object_construct('a', 1, 'b', 'str'),"
       "object_delete(object_construct('a', 1), 'a'), object_delete(object_construct('a', 'str', 'b', 2), 'a', 'b'),"
+      "object_insert(object_construct('a', 1), 'b', 2), object_insert(object_construct('a', 1), 'b', 2, false), object_insert(object_construct('a', 1), 'b', 2, true), object_insert(object_construct('a', 1), 'b', 'str', true),"
     }
   };
 

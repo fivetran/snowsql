@@ -4554,11 +4554,13 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   const Type* variant_type = type_factory->get_variant();
   const Type* string_type = type_factory->get_string();
   const Type* object_type = type_factory->get_object();
+  const Type* bool_type = type_factory->get_bool();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
       FunctionArgumentType::REPEATED;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
   // PARSE_JSON
   InsertFunction(
@@ -4576,6 +4578,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "object_delete", SCALAR,
       {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
+      fn_options);
+  
+  // OBJECT_INSERT
+  InsertFunction(
+      functions, options, "object_insert", SCALAR,
+      {{object_type, {object_type, string_type, ARG_TYPE_ANY_1, {bool_type, OPTIONAL}}, FN_OBJECT_INSERT}},
       fn_options);
 }
 
