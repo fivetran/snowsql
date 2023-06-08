@@ -1392,6 +1392,19 @@ enum FunctionSignatureId {
   FN_TO_VARIANT_DATE = 100327;            // to_variant(DATE) -> VARIANT
   FN_TO_VARIANT_DATETIME = 100328;        // to_variant(DATETIME) -> VARIANT
   FN_TO_VARIANT_TIMESTAMP = 100329;       // to_variant(TIMESTAMP) -> VARIANT
+  FN_TO_VARCHAR_INT64 = 100330;           // to_varchar(INT64) -> STRING
+  FN_TO_VARCHAR_UINT64 = 100331;          // to_varchar(UINT64) -> STRING
+  FN_TO_VARCHAR_DOUBLE = 100332;          // to_varchar(DOUBLE) -> STRING
+  FN_TO_VARCHAR_FLOAT = 100333;           // to_varchar(FLOAT) -> STRING
+  FN_TO_VARCHAR_NUMERIC = 100334;         // to_varchar(NUMERIC) -> STRING
+  FN_TO_VARCHAR_BIGNUMERIC = 100335;      // to_varchar(BIGNUMERIC) -> STRING
+  FN_TO_VARCHAR_STRING = 100336;          // to_varchar(STRING) -> STRING
+  FN_TO_VARCHAR_BOOL = 100337;            // to_varchar(BOOL) -> STRING
+  FN_TO_VARCHAR_DATE = 100338;            // to_varchar(DATE) -> STRING
+  FN_TO_VARCHAR_DATETIME = 100339;        // to_varchar(DATETIME) -> STRING
+  FN_TO_VARCHAR_TIMESTAMP = 100340;       // to_varchar(TIMESTAMP) -> STRING
+  FN_TO_VARCHAR_TIME = 100341;            // to_varchar(TIME) -> STRING
+  FN_TO_VARCHAR_VARIANT = 100342;         // to_varchar(VARIANT) -> STRING
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
@@ -1427,4 +1440,6 @@ enum FunctionSignatureId {
   FN_NEXT_DAY_DATE = 100709;                   // NEXT_DAY(DATE, VARCHAR) -> DATE
   FN_NEXT_DAY_DATETIME = 100710;               // NEXT_DAY(DATETIME, VARCHAR) -> DATE
   FN_NEXT_DAY_TIMESTAMP = 100711;              // NEXT_DAY(TIMESTAMP, VARCHAR) -> DATE
+
+  FN_PARSE_JSON_SNOWFLAKE = 100712;            // PARSE_JSON(STRING) -> VARIANT
 }

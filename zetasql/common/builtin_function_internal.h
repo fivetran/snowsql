@@ -839,6 +839,10 @@ void GetSnowflakeStringFunctions(TypeFactory* type_factory,
 void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
                                       const ZetaSQLBuiltinFunctionOptions& options,
                                       NameToFunctionMap* functions);
+
+void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
+                                         const ZetaSQLBuiltinFunctionOptions& options,
+                                         NameToFunctionMap* functions);
 /* Snowflake specific functions END */
 
 }  // namespace zetasql
