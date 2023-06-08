@@ -1247,16 +1247,16 @@ void GetJSONFunctions(TypeFactory* type_factory,
                                           "stringify_wide_numbers", kNamedOnly)
                                       .set_default(values::Bool(false))}},
                      FN_TO_JSON}});
-    InsertFunction(
-        functions, options, "parse_json", SCALAR,
-        {{json_type,
-          {string_type,
-           FunctionArgumentType(
-               string_type,
-               FunctionArgumentTypeOptions(FunctionArgumentType::OPTIONAL)
-                   .set_argument_name("wide_number_mode", kNamedOnly)
-                   .set_default(Value::String("exact")))},
-          FN_PARSE_JSON}});
+    // InsertFunction(
+    //     functions, options, "parse_json", SCALAR,
+    //     {{json_type,
+    //       {string_type,
+    //        FunctionArgumentType(
+    //            string_type,
+    //            FunctionArgumentTypeOptions(FunctionArgumentType::OPTIONAL)
+    //                .set_argument_name("wide_number_mode", kNamedOnly)
+    //                .set_default(Value::String("exact")))},
+    //       FN_PARSE_JSON}});
 
     if (options.language_options.LanguageFeatureEnabled(
             FEATURE_JSON_VALUE_EXTRACTION_FUNCTIONS)) {
@@ -4562,6 +4562,24 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {variant_type, {date_type}, FN_TO_VARIANT_DATE},
        {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
        {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP}});
+
+  // TO_VARCHAR
+  InsertFunction(
+      functions, options, "to_varchar", SCALAR,
+      {{string_type, {int64_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_INT64},
+       {string_type, {uint64_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_UINT64},
+       {string_type, {double_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_DOUBLE},
+       {string_type, {float_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_FLOAT},
+       {string_type, {numeric_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_NUMERIC},
+       {string_type, {bignumeric_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_BIGNUMERIC},
+       {string_type, {string_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_STRING},
+       {string_type, {bool_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_BOOL},
+       {string_type, {date_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_DATE},
+       {string_type, {datetime_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_DATETIME},
+       {string_type, {timestamp_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_TIMESTAMP},
+       {string_type, {time_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_TIME},
+       {string_type, {variant_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_VARIANT}},
+       FunctionOptions().set_alias_name("to_char"));
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
@@ -4747,6 +4765,22 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{date_type, {date_type, string_type}, FN_NEXT_DAY_DATE},
        {date_type, {datetime_type, string_type}, FN_NEXT_DAY_DATETIME},
        {date_type, {timestamp_type, string_type}, FN_NEXT_DAY_TIMESTAMP}},
+      fn_options);
+}
+
+void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
+                                      const ZetaSQLBuiltinFunctionOptions& options,
+                                      NameToFunctionMap* functions) {
+  const Type* variant_type = type_factory->get_variant();
+  const Type* string_type = type_factory->get_string();
+
+  const Function::Mode SCALAR = Function::SCALAR;
+  const FunctionOptions fn_options;
+
+  // PARSE_JSON
+  InsertFunction(
+      functions, options, "parse_json", SCALAR,
+      {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
       fn_options);
 }
 
