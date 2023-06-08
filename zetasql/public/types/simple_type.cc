@@ -140,6 +140,11 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
 
       {"double precision", {TYPE_DOUBLE, false}},
       {"real", {TYPE_DOUBLE, false}},
+
+      {"varchar", {TYPE_STRING, false}},
+      {"char", {TYPE_STRING, false}},
+      {"character", {TYPE_STRING, false}},
+      {"text", {TYPE_STRING, false}},
   };
   return *result;
 }
