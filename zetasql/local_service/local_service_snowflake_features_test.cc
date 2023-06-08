@@ -1266,7 +1266,11 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
     {"FLOAT4", "1.0"},
     {"FLOAT8", "1.0"},
     {"DOUBLE PRECISION", "1.0"},
-    {"REAL", "1.0"}
+    {"REAL", "1.0"},
+    {"VARCHAR", "1.0"},
+    {"TEXT", "1.0"},
+    {"CHARACTER", "1"},
+    {"CHAR", "1"},
   };
 
   for (auto const& pair: dataTypesAndValues) {
