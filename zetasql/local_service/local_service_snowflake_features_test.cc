@@ -1253,35 +1253,30 @@ class ZetaSqlLocalServiceImplTest : public ::testing::Test {
 
 TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
   SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+  
+  std::vector<std::pair<std::string, std::string>> dataTypesAndValues = {
+    {"NUMBER", "1.0"},
+    {"INT", "1"},
+    {"INTEGER", "1"},
+    {"BIGINT", "1"},
+    {"SMALLINT", "1"},
+    {"TINYINT", "1"},
+    {"BYTEINT", "1"},
+    {"FLOAT", "1.0"},
+    {"FLOAT4", "1.0"},
+    {"FLOAT8", "1.0"},
+    {"DOUBLE PRECISION", "1.0"},
+    {"REAL", "1.0"}
+  };
 
-  // NUMBER
-  AnalyzeRequest analyzeNumberRequest;
-  *analyzeNumberRequest.mutable_simple_catalog() = catalog;
-  *analyzeNumberRequest.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
-  analyzeNumberRequest.set_sql_statement("SELECT CAST(1.0 AS NUMBER)");
-  AnalyzeResponse analyzeNumberResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
-
-  // INT, INTEGER, BIGINT, SMALLINT, TINYINT, BYTEINT
-  AnalyzeRequest analyzeIntegerRequest;
-  *analyzeIntegerRequest.mutable_simple_catalog() = catalog;
-  analyzeIntegerRequest.set_sql_statement("SELECT CAST(1 AS INT), CAST(1 AS INTEGER), CAST(1 AS BIGINT), CAST(1 AS SMALLINT), CAST(1 AS TINYINT), CAST(1 AS BYTEINT)");
-  AnalyzeResponse analyzeIntegerResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeIntegerRequest, &analyzeIntegerResponse));
-
-  // FLOAT, FLOAT4, FLOAT8
-  AnalyzeRequest analyzeFloatRequest;
-  *analyzeFloatRequest.mutable_simple_catalog() = catalog;
-  analyzeFloatRequest.set_sql_statement("SELECT CAST(1.0 AS FLOAT), CAST(1.0 AS FLOAT4), CAST(1.0 AS FLOAT8)");
-  AnalyzeResponse analyzeFloatResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeFloatRequest, &analyzeFloatResponse));
-
-  // DOUBLE PRECISION, REAL
-  AnalyzeRequest analyzeRealRequest;
-  *analyzeRealRequest.mutable_simple_catalog() = catalog;
-  analyzeRealRequest.set_sql_statement("SELECT CAST(1.0 AS DOUBLE PRECISION), CAST(1.0 AS REAL)");
-  AnalyzeResponse analyzeRealResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeRealRequest, &analyzeRealResponse));
+  for (auto const& pair: dataTypesAndValues) {
+    AnalyzeRequest request;
+    *request.mutable_simple_catalog() = catalog;
+    *request.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
+    request.set_sql_statement("SELECT CAST(" + pair.second + " AS " + pair.first + ")");
+    AnalyzeResponse response;
+    ZETASQL_EXPECT_OK(Analyze(request, &response));
+  }
 }
 
 TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeVariantType) {
@@ -1289,7 +1284,6 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeVariantType) {
 
   AnalyzeRequest analyzeNumberRequest;
   *analyzeNumberRequest.mutable_simple_catalog() = catalog;
-  *analyzeNumberRequest.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
   analyzeNumberRequest.set_sql_statement("SELECT CAST(CAST(1 AS VARIANT) AS INT), CAST(CAST(1.0 AS VARIANT) AS DOUBLE), CAST(CAST('str' AS VARIANT) AS STRING), CAST(CAST(true AS VARIANT) AS BOOLEAN)");
   AnalyzeResponse analyzeNumberResponse;
   ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
