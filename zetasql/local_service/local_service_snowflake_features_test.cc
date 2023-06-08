@@ -1295,156 +1295,117 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeVariantType) {
   ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
 }
 
-
 TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
 
-  // Snowflake Aggregate functions
-  AnalyzeRequest analyzeAggregateFunctionsRequest;
-  *analyzeAggregateFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *aggregate_functions_request_text =
-    "select "
-    "approx_percentile(column_1, 0.5),"
-    "approx_percentile_accumulate(column_1),"
-    "approx_percentile_combine(column_1),"
-    "approx_percentile_estimate(column_1, 0.01),"
-    "approx_top_k(column_1), approx_top_k_accumulate(column_1, 10),"
-    "approx_top_k_combine(column_1), approx_top_k_combine(column_1, 0.1),"
-    "approx_top_k_estimate(column_1), approx_top_k_estimate(column_1, 0.5),"
-    "approximate_jaccard_index(column_1),"
-    "approximate_similarity(column_1),"
-    "bitand_agg(column_1),"
-    "bitor_agg(column_1),"
-    "bitxor_agg(column_1),"
-    "booland_agg(column_1), booland_agg(bool_column),"
-    "boolor_agg(column_1), boolor_agg(bool_column),"
-    "boolxor_agg(column_1), boolxor_agg(bool_column),"
-    "grouping_id(column_1), grouping_id(column_1, column_2)," // TODO: grouping_id(column_1, column_2, bool_column)
-    "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2)," // TODO: hash_agg(*), hash_agg(column_1, column_2, bool_column)
-    "hll(column_1), hll(column_1, column_2),"
-    "hll_accumulate(column_1)," // TODO: hll_accumulate(*)
-    "hll_combine(column_1), hll_combine(column_2),"
-    "hll_estimate(column_1), hll_estimate(column_2),"
-    "hll_export(column_1), hll_export(column_2),"
-    "hll_import(column_1), hll_import(column_2),"
-    "kurtosis(column_1)," // TODO: kurtosis(column_2) should return error
-    "listagg(column_1), listagg(column_1, ','), listagg(column_2), listagg(column_2, ','), listagg('asd', ','),"
-    "median(column_1),"
-    "minhash(1, column_1), minhash(1024, column_2), minhash(1024, bool_column),"
-    "minhash_combine(column_1), minhash_combine(column_2), minhash_combine(bool_column),"
-    "mode(column_1), mode(column_2), mode(bool_column),"
-    "object_agg(column_2, column_1),"
-    "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
-    "regr_count(column_1, column_2),"
-    "regr_intercept(column_1, 3), regr_intercept(1, 4), regr_intercept(1.3, 4.33),"
-    "regr_r2(column_1, 3), regr_r2(1, 2), regr_r2(1.1, 2.2),"
-    "regr_slope(column_1, 2), regr_slope(1, 2), regr_slope(1.1, 2.2),"
-    "regr_sxx(column_1, 2), regr_sxx(1, 2), regr_sxx(1.1, 2.2),"
-    "regr_syy(column_1, 2), regr_syy(1, 2), regr_syy(1.1, 2.2),"
-    "skew(column_1), skew(null),"
-    "variance_pop(column_1), variance_pop(null),"
-    " from table_1";
-  analyzeAggregateFunctionsRequest.set_sql_statement(aggregate_functions_request_text);
-  AnalyzeResponse analyzeAggregateFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeAggregateFunctionsRequest, &analyzeAggregateFunctionsResponse));
+  std::vector<std::pair<std::string, const char*>> functionTests = {
+    {"Aggregate", 
+      "select "
+      "approx_percentile(column_1, 0.5),"
+      "approx_percentile_accumulate(column_1),"
+      "approx_percentile_combine(column_1),"
+      "approx_percentile_estimate(column_1, 0.01),"
+      "approx_top_k(column_1), approx_top_k_accumulate(column_1, 10),"
+      "approx_top_k_combine(column_1), approx_top_k_combine(column_1, 0.1),"
+      "approx_top_k_estimate(column_1), approx_top_k_estimate(column_1, 0.5),"
+      "approximate_jaccard_index(column_1),"
+      "approximate_similarity(column_1),"
+      "bitand_agg(column_1),"
+      "bitor_agg(column_1),"
+      "bitxor_agg(column_1),"
+      "booland_agg(column_1), booland_agg(bool_column),"
+      "boolor_agg(column_1), boolor_agg(bool_column),"
+      "boolxor_agg(column_1), boolxor_agg(bool_column),"
+      "grouping_id(column_1), grouping_id(column_1, column_2)," // TODO: grouping_id(column_1, column_2, bool_column)
+      "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2)," // TODO: hash_agg(*), hash_agg(column_1, column_2, bool_column)
+      "hll(column_1), hll(column_1, column_2),"
+      "hll_accumulate(column_1)," // TODO: hll_accumulate(*)
+      "hll_combine(column_1), hll_combine(column_2),"
+      "hll_estimate(column_1), hll_estimate(column_2),"
+      "hll_export(column_1), hll_export(column_2),"
+      "hll_import(column_1), hll_import(column_2),"
+      "kurtosis(column_1)," // TODO: kurtosis(column_2) should return error
+      "listagg(column_1), listagg(column_1, ','), listagg(column_2), listagg(column_2, ','), listagg('asd', ','),"
+      "median(column_1),"
+      "minhash(1, column_1), minhash(1024, column_2), minhash(1024, bool_column),"
+      "minhash_combine(column_1), minhash_combine(column_2), minhash_combine(bool_column),"
+      "mode(column_1), mode(column_2), mode(bool_column),"
+      "object_agg(column_2, column_1),"
+      "regr_avgx(column_1, column_2), regr_avgy(column_1, column_2),"
+      "regr_count(column_1, column_2),"
+      "regr_intercept(column_1, 3), regr_intercept(1, 4), regr_intercept(1.3, 4.33),"
+      "regr_r2(column_1, 3), regr_r2(1, 2), regr_r2(1.1, 2.2),"
+      "regr_slope(column_1, 2), regr_slope(1, 2), regr_slope(1.1, 2.2),"
+      "regr_sxx(column_1, 2), regr_sxx(1, 2), regr_sxx(1.1, 2.2),"
+      "regr_syy(column_1, 2), regr_syy(1, 2), regr_syy(1.1, 2.2),"
+      "skew(column_1), skew(null),"
+      "variance_pop(column_1), variance_pop(null),"
+      "from table_1"
+    },
+    {"Bitwise",
+      "select "
+      "bitand(11, 22), bitnot(11), bitor(11, 22),"
+      "bitshiftleft(11, 1), bitshiftright(11, 1),"
+      "bitxor(11, 22),"
+    },
+    {"ConditionalExpression",
+      "select "
+      "booland(1, 0), boolnot(1),"
+      "boolor(1, 0), boolxor(1, 0),"
+      "zeroifnull(null),"
+    },
+    {"Conversion", 
+      "select "
+      "to_boolean('yes'), try_to_boolean('yes'),"
+      "to_double('1.1'), try_to_double('1.1'),"
+      "try_to_date('2018-09-15'), try_to_time('12:30:00'),"
+      "to_variant('2018-09-15'), to_variant(true), to_variant(1), to_variant(1.1), to_variant(current_date), to_variant(current_timestamp), to_variant(cast(1.1 as float)),"
+      "to_varchar(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_varchar(true), to_varchar(1), to_varchar(1.1), to_varchar(current_date), to_varchar(current_timestamp), to_varchar(current_time), to_varchar(cast(1.1 as float)),"
+      "to_char(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_char(true), to_char(1), to_char(1.1), to_char(current_date), to_char(current_timestamp), to_char(current_time), to_char(cast(1.1 as float)),"
+    },
+    {"DataGeneration",
+      "select "
+      "random(), randstr(5, random()),"
+      "seq1(), seq2(),"
+      "seq4(), seq8(),"
+    },
+    {"StringAndBinary",
+      "select "
+      "base64_decode_string('U25vd2ZsYWtl'), try_base64_decode_string('U25vd2ZsYWtl'),"
+      "contains('ice tea', 'te'), endswith('ice tea', 'a'),"
+      "insert('abcdef', 3, 2, 'zzz'),"
+    },
+    {"String",
+      "select "
+      "regexp_count('It was the best of times', '\\bwas\\b', 1),"
+      "regexp_like(column_2, 'san.*', 'i'),"
+      "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]'),"
+      "from table_1"
+    },
+    {"DateAndTime",
+      "select "
+      "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
+      "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
+    },
+    {"SemiStructured",
+      "select "
+      "parse_json('{\"name\":\"John\"}'),"
+    }
+  };
 
-  // Snowflake Bitwise functions
-  AnalyzeRequest analyzeBitwiseFunctionsRequest;
-  *analyzeBitwiseFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *bitwise_functions_request_text =
-    "select "
-    "bitand(11, 22), bitnot(11), bitor(11, 22),"
-    "bitshiftleft(11, 1), bitshiftright(11, 1),"
-    "bitxor(11, 22)";
-  analyzeBitwiseFunctionsRequest.set_sql_statement(bitwise_functions_request_text);
-  AnalyzeResponse analyzeBitwiseFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeBitwiseFunctionsRequest, &analyzeBitwiseFunctionsResponse));
-
-  // Snowflake Conditional expression functions
-  AnalyzeRequest analyzeConditionalExpressionFunctionsRequest;
-  *analyzeConditionalExpressionFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *conditional_expression_functions_request_text =
-    "select "
-    "booland(1, 0), boolnot(1),"
-    "boolor(1, 0), boolxor(1, 0),"
-    "zeroifnull(null)";
-  analyzeConditionalExpressionFunctionsRequest.set_sql_statement(conditional_expression_functions_request_text);
-  AnalyzeResponse analyzeConditionalExpressionFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeConditionalExpressionFunctionsRequest, &analyzeConditionalExpressionFunctionsResponse));
-
-  // Snowflake Conversion functions
-  AnalyzeRequest analyzeConversionFunctionsRequest;
-  *analyzeConversionFunctionsRequest.mutable_simple_catalog() = catalog;
-  *analyzeConversionFunctionsRequest.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
-  const char *conversion_functions_request_text =
-    "select "
-    "to_boolean('yes'), try_to_boolean('yes'),"
-    "to_double('1.1'), try_to_double('1.1'),"
-    "try_to_date('2018-09-15'), try_to_time('12:30:00'),"
-    "to_variant('2018-09-15'), to_variant(true), to_variant(1), to_variant(1.1), to_variant(current_date), to_variant(current_timestamp), to_variant(cast(1.1 as float)),"
-    "to_varchar(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_varchar(true), to_varchar(1), to_varchar(1.1), to_varchar(current_date), to_varchar(current_timestamp), to_varchar(current_time), to_varchar(cast(1.1 as float)),"
-    "to_char(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_char(true), to_char(1), to_char(1.1), to_char(current_date), to_char(current_timestamp), to_char(current_time), to_char(cast(1.1 as float))";
-  analyzeConversionFunctionsRequest.set_sql_statement(conversion_functions_request_text);
-  AnalyzeResponse analyzeConversionFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeConversionFunctionsRequest, &analyzeConversionFunctionsResponse));
-
-  // Snowflake Data generation functions
-  AnalyzeRequest analyzeDataGenerationFunctionsRequest;
-  *analyzeDataGenerationFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *data_generation_functions_request_text =
-    "select "
-    "random(), randstr(5, random()),"
-    "seq1(), seq2(),"
-    "seq4(), seq8()";
-  analyzeDataGenerationFunctionsRequest.set_sql_statement(data_generation_functions_request_text);
-  AnalyzeResponse analyzeDataGenerationFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeDataGenerationFunctionsRequest, &analyzeDataGenerationFunctionsResponse));
-
-  // Snowflake String and binary functions
-  AnalyzeRequest analyzeStringAndBinaryFunctionsRequest;
-  *analyzeStringAndBinaryFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *string_and_binary_functions_request_text =
-    "select "
-    "base64_decode_string('U25vd2ZsYWtl'), try_base64_decode_string('U25vd2ZsYWtl'),"
-    "contains('ice tea', 'te'), endswith('ice tea', 'a'),"
-    "insert('abcdef', 3, 2, 'zzz')";
-  analyzeStringAndBinaryFunctionsRequest.set_sql_statement(string_and_binary_functions_request_text);
-  AnalyzeResponse analyzeStringAndBinaryFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeStringAndBinaryFunctionsRequest, &analyzeStringAndBinaryFunctionsResponse));
-
-  // Snowflake String functions
-  AnalyzeRequest analyzeStringFunctionsRequest;
-  *analyzeStringFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *string_functions_request_text =
-    "select "
-    "regexp_count('It was the best of times', '\\bwas\\b', 1),"
-    "regexp_like(column_2, 'san.*', 'i'),"
-    "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]')"
-    "from table_1";
-  analyzeStringFunctionsRequest.set_sql_statement(string_functions_request_text);
-  AnalyzeResponse analyzeStringFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeStringFunctionsRequest, &analyzeStringFunctionsResponse));
-
-  // Snowflake Date and time functions
-  AnalyzeRequest analyzeDateAndTimeFunctionsRequest;
-  *analyzeDateAndTimeFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *date_and_time_functions_request_text =
-    "select "
-    "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
-    "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday')";
-  analyzeDateAndTimeFunctionsRequest.set_sql_statement(date_and_time_functions_request_text);
-  AnalyzeResponse analyzeDateAndTimeFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeDateAndTimeFunctionsRequest, &analyzeDateAndTimeFunctionsResponse));
-
-  // Snowflake semi-structured data functions
-  AnalyzeRequest analyzeSemiStructuredFunctionsRequest;
-  *analyzeSemiStructuredFunctionsRequest.mutable_simple_catalog() = catalog;
-  const char *semi_structured_functions_request_text =
-    "select "
-    "parse_json('{\"name\":\"John\"}')";
-  analyzeSemiStructuredFunctionsRequest.set_sql_statement(semi_structured_functions_request_text);
-  AnalyzeResponse analyzeSemiStructuredFunctionsResponse;
-  ZETASQL_EXPECT_OK(Analyze(analyzeSemiStructuredFunctionsRequest, &analyzeSemiStructuredFunctionsResponse));
+  for (const auto& [functionType, sqlStatement] : functionTests) {
+    AnalyzeRequest request;
+    *request.mutable_simple_catalog() = catalog;
+    
+    if (functionType == "Conversion")
+      *request.mutable_options()->mutable_language_options() = catalog.builtin_function_options().language_options();
+    
+    request.set_sql_statement(sqlStatement);
+    
+    AnalyzeResponse response;
+    ZETASQL_EXPECT_OK(Analyze(request, &response));
+  }
 }
+
 }  // namespace local_service
 }  // namespace zetasql
