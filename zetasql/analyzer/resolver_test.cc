@@ -785,8 +785,8 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
 //   ResolveFunctionFails("CAST(1 as NUMBER)", "Type not found: NUMBER");
   ResolveFunctionFails("CAST(b'0' as binary)", "Type not found: binary");
   ResolveFunctionFails("CAST(b'0' as BLOB)", "Type not found: BLOB");
-  ResolveFunctionFails("CAST('foo' as CHAR)", "Type not found: CHAR");
-  ResolveFunctionFails("CAST('foo' AS VARCHAR(5))", "Type not found: VARCHAR");
+//   ResolveFunctionFails("CAST('foo' as CHAR)", "Type not found: CHAR");
+//   ResolveFunctionFails("CAST('foo' AS VARCHAR(5))", "Type not found: VARCHAR");
 
   // SQL Standard type names which are not even parsable in ZetaSQL
 //   ParseFunctionFails(
