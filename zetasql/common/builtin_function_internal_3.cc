@@ -4571,6 +4571,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
       functions, options, "object_construct", SCALAR,
       {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
       fn_options);
+    
+  // OBJECT_DELETE
+  InsertFunction(
+      functions, options, "object_delete", SCALAR,
+      {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
