@@ -1388,6 +1388,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     {"SemiStructured",
       "select "
       "parse_json('{\"name\":\"John\"}'),"
+      "object_construct('a', 1), object_construct('a', 1, 'b', 2), object_construct('a', 'str', 'b', 2), object_construct('a', 1, 'b', 'str'),"
     }
   };
 

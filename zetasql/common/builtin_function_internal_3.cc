@@ -4553,14 +4553,23 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
                                       NameToFunctionMap* functions) {
   const Type* variant_type = type_factory->get_variant();
   const Type* string_type = type_factory->get_string();
+  const Type* object_type = type_factory->get_object();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
+  const FunctionArgumentType::ArgumentCardinality REPEATED =
+      FunctionArgumentType::REPEATED;
 
   // PARSE_JSON
   InsertFunction(
       functions, options, "parse_json", SCALAR,
       {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
+      fn_options);
+
+  // OBJECT_CONSTRUCT
+  InsertFunction(
+      functions, options, "object_construct", SCALAR,
+      {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
       fn_options);
 }
 
