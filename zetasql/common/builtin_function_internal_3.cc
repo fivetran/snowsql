@@ -4274,6 +4274,7 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* timestamp_type = type_factory->get_timestamp();
   const Type* time_type = type_factory->get_time();
   const Type* variant_type = type_factory->get_variant();
+  const Type* object_type = type_factory->get_object();
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -4360,6 +4361,12 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {string_type, {time_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_TIME},
        {string_type, {variant_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_VARIANT}},
        FunctionOptions().set_alias_name("to_char"));
+
+    // TO_OBJECT
+    InsertFunction(
+        functions, options, "to_object", SCALAR,
+        {{object_type, {variant_type}, FN_TO_OBJECT_VARIANT},
+         {object_type, {object_type}, FN_TO_OBJECT_OBJECT}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
