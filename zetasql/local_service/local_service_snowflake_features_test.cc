@@ -1392,6 +1392,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "object_delete(object_construct('a', 1), 'a'), object_delete(object_construct('a', 'str', 'b', 2), 'a', 'b'),"
       "object_insert(object_construct('a', 1), 'b', 2), object_insert(object_construct('a', 1), 'b', 2, false), object_insert(object_construct('a', 1), 'b', 2, true), object_insert(object_construct('a', 1), 'b', 'str', true),"
       "is_object(object_construct('a', 1)), is_object(to_variant(1)), is_object(1), is_object(false),"
+      "as_object(1), as_object(to_variant(1)), as_object(parse_json('{}')),"
     }
   };
 

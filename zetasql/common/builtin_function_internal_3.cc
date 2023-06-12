@@ -4591,6 +4591,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
       functions, options, "is_object", SCALAR,
       {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_OBJECT}},
       fn_options);
+
+  // AS_OBJECT
+  InsertFunction(
+      functions, options, "as_object", SCALAR,
+      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
