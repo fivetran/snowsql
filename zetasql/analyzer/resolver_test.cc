@@ -740,6 +740,11 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
   TestCastExpression("CAST(CAST(true as VARIANT) AS bool)", types::BoolType());
   TestCastExpression("CAST(CAST(false as VARIANT) AS BOoL)", types::BoolType());
 
+  // Snowflake OBJECT type
+  TestCastExpression("CAST(CAST('{}' as VARIANT) as OBJECT)", types::ObjectType());
+  
+  TestCastExpression("CAST(CAST(CAST('{}' as VARIANT) as OBJECT) as VARIANT)", types::VariantType());
+  TestCastExpression("CAST(CAST(CAST('{}' as VARIANT) as OBJECT) as STRING)", types::StringType());
   // TODO: Add basic CAST resolution tests for ENUM, PROTO, STRUCT,
   // ARRAY (some will be errors - to be added in TestResolverErrors).
 
