@@ -215,6 +215,7 @@ class TypeFactory {
   const Type* get_bignumeric();
   const Type* get_json();
   const Type* get_variant();
+  const Type* get_object();
 
   // Return a Type object for a simple type.  This works for all
   // non-parameterized scalar types.  Enums, arrays, structs and protos must
@@ -601,6 +602,7 @@ const StructType* EmptyStructType();
 
 // Snowflake types
 const Type* VariantType();
+const Type* ObjectType();
 
 // ArrayTypes
 const ArrayType* Int32ArrayType();
