@@ -1360,6 +1360,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_variant('2018-09-15'), to_variant(true), to_variant(1), to_variant(1.1), to_variant(current_date), to_variant(current_timestamp), to_variant(cast(1.1 as float)),"
       "to_varchar(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_varchar(true), to_varchar(1), to_varchar(1.1), to_varchar(current_date), to_varchar(current_timestamp), to_varchar(current_time), to_varchar(cast(1.1 as float)),"
       "to_char(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_char(true), to_char(1), to_char(1.1), to_char(current_date), to_char(current_timestamp), to_char(current_time), to_char(cast(1.1 as float)),"
+      "to_object(to_variant(column_1)),"
+      "from table_1"
     },
     {"DataGeneration",
       "select "
@@ -1388,6 +1390,11 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     {"SemiStructured",
       "select "
       "parse_json('{\"name\":\"John\"}'),"
+      "object_construct('a', 1), object_construct('a', 1, 'b', 2), object_construct('a', 'str', 'b', 2), object_construct('a', 1, 'b', 'str'),"
+      "object_delete(object_construct('a', 1), 'a'), object_delete(object_construct('a', 'str', 'b', 2), 'a', 'b'),"
+      "object_insert(object_construct('a', 1), 'b', 2), object_insert(object_construct('a', 1), 'b', 2, false), object_insert(object_construct('a', 1), 'b', 2, true), object_insert(object_construct('a', 1), 'b', 'str', true),"
+      "is_object(object_construct('a', 1)), is_object(to_variant(1)), is_object(1), is_object(false),"
+      "as_object(1), as_object(to_variant(1)), as_object(parse_json('{}')),"
     }
   };
 
