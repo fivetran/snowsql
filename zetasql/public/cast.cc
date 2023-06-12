@@ -312,7 +312,7 @@ const CastHashMap* InitializeZetaSQLCasts() {
   ADD_TO_MAP(VARIANT,    OBJECT,     EXPLICIT);
   ADD_TO_MAP(VARIANT,    VARIANT,    EXPLICIT);
 
-  ADD_TO_MAP(OBJECT,     VARIANT,    EXPLICIT);
+  ADD_TO_MAP(OBJECT,     VARIANT,    IMPLICIT);
   ADD_TO_MAP(OBJECT,     STRING,     EXPLICIT);
   // clang-format on
 
