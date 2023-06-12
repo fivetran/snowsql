@@ -4494,6 +4494,7 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* timestamp_type = type_factory->get_timestamp();
   const Type* time_type = type_factory->get_time();
   const Type* variant_type = type_factory->get_variant();
+  const Type* object_type = type_factory->get_object();
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -4580,6 +4581,12 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {string_type, {time_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_TIME},
        {string_type, {variant_type, {string_type, OPTIONAL}}, FN_TO_VARCHAR_VARIANT}},
        FunctionOptions().set_alias_name("to_char"));
+
+    // TO_OBJECT
+    InsertFunction(
+        functions, options, "to_object", SCALAR,
+        {{object_type, {variant_type}, FN_TO_OBJECT_VARIANT},
+         {object_type, {object_type}, FN_TO_OBJECT_OBJECT}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
@@ -4773,14 +4780,49 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
                                       NameToFunctionMap* functions) {
   const Type* variant_type = type_factory->get_variant();
   const Type* string_type = type_factory->get_string();
+  const Type* object_type = type_factory->get_object();
+  const Type* bool_type = type_factory->get_bool();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
+  const FunctionArgumentType::ArgumentCardinality REPEATED =
+      FunctionArgumentType::REPEATED;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
   // PARSE_JSON
   InsertFunction(
       functions, options, "parse_json", SCALAR,
       {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
+      fn_options);
+
+  // OBJECT_CONSTRUCT
+  InsertFunction(
+      functions, options, "object_construct", SCALAR,
+      {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
+      fn_options);
+    
+  // OBJECT_DELETE
+  InsertFunction(
+      functions, options, "object_delete", SCALAR,
+      {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
+      fn_options);
+  
+  // OBJECT_INSERT
+  InsertFunction(
+      functions, options, "object_insert", SCALAR,
+      {{object_type, {object_type, string_type, ARG_TYPE_ANY_1, {bool_type, OPTIONAL}}, FN_OBJECT_INSERT}},
+      fn_options);
+
+  // IS_OBJECT
+  InsertFunction(
+      functions, options, "is_object", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_OBJECT}},
+      fn_options);
+
+  // AS_OBJECT
+  InsertFunction(
+      functions, options, "as_object", SCALAR,
+      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
       fn_options);
 }
 

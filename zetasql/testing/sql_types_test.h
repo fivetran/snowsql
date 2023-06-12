@@ -84,6 +84,7 @@ class ZetaSQLTypesTest : public ::testing::Test {
 #define STRUCT (*struct_arg)
 #define UNTYPED_NULL (*untyped_null_arg_)
 #define VARIANT (*variant_arg)
+#define OBJECT (*object_arg)
 
   // These are parameter non-literals.
 #define BOOL_PARAMETER (*bool_parameter_arg)

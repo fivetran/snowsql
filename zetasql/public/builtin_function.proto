@@ -1405,6 +1405,8 @@ enum FunctionSignatureId {
   FN_TO_VARCHAR_TIMESTAMP = 100340;       // to_varchar(TIMESTAMP) -> STRING
   FN_TO_VARCHAR_TIME = 100341;            // to_varchar(TIME) -> STRING
   FN_TO_VARCHAR_VARIANT = 100342;         // to_varchar(VARIANT) -> STRING
+  FN_TO_OBJECT_VARIANT = 100343;          // to_object(VARIANT) -> OBJECT
+  FN_TO_OBJECT_OBJECT = 100344;           // to_object(OBJECT) -> OBJECT
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
@@ -1442,4 +1444,9 @@ enum FunctionSignatureId {
   FN_NEXT_DAY_TIMESTAMP = 100711;              // NEXT_DAY(TIMESTAMP, VARCHAR) -> DATE
 
   FN_PARSE_JSON_SNOWFLAKE = 100712;            // PARSE_JSON(STRING) -> VARIANT
+  FN_OBJECT_CONSTRUCT = 100713;                // OBJECT_CONSTRUCT(STRING, <ARG_TYPE_ANY_1>, ...) -> OBJECT
+  FN_OBJECT_DELETE = 100714;                   // OBJECT_DELETE(OBJECT, STRING [, STRING...]) -> OBJECT
+  FN_OBJECT_INSERT = 100715;                   // OBJECT_INSERT(OBJECT, STRING, ARG_TYPE_ANY_1 [, BOOLEAN]) -> OBJECT
+  FN_IS_OBJECT = 100716;                       // IS_OBJECT(ANY) -> BOOLEAN
+  FN_AS_OBJECT = 100717;                       // AS_OBJECT(ANY) -> OBJECT
 }
