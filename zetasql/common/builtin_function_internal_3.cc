@@ -4575,6 +4575,8 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   const Type* string_type = type_factory->get_string();
   const Type* object_type = type_factory->get_object();
   const Type* bool_type = type_factory->get_bool();
+  const ArrayType* array_variant_type;
+  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
@@ -4622,6 +4624,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "as_binary", SCALAR,
       {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+      fn_options);
+
+  // ARRAY_CONSTRUCT
+  InsertFunction(
+      functions, options, "array_construct", SCALAR,
+      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT}},
       fn_options);
 }
 
