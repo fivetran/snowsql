@@ -4575,6 +4575,7 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   const Type* string_type = type_factory->get_string();
   const Type* object_type = type_factory->get_object();
   const Type* bool_type = type_factory->get_bool();
+  const Type* int64_type = type_factory->get_int64();
   const ArrayType* array_variant_type;
   ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
@@ -4660,6 +4661,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "array_contains", SCALAR,
       {{bool_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_CONTAINS}},
+      fn_options);
+
+  // ARRAY_INSERT
+  InsertFunction(
+      functions, options, "array_insert", SCALAR,
+      {{array_variant_type, {array_variant_type, int64_type, ARG_TYPE_ANY_1}, FN_ARRAY_INSERT}},
       fn_options);
 }
 
