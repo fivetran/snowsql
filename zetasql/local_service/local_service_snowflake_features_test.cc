@@ -1361,6 +1361,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_varchar(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_varchar(true), to_varchar(1), to_varchar(1.1), to_varchar(current_date), to_varchar(current_timestamp), to_varchar(current_time), to_varchar(cast(1.1 as float)),"
       "to_char(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_char(true), to_char(1), to_char(1.1), to_char(current_date), to_char(current_timestamp), to_char(current_time), to_char(cast(1.1 as float)),"
       "to_object(to_variant(column_1)),"
+      "to_binary('U25vd2ZsYWtl'), to_binary('U25vd2ZsYWtl', 'BASE64'), to_binary(to_variant('U25vd2ZsYWtl')),"
       "from table_1"
     },
     {"DataGeneration",

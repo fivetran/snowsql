@@ -1366,7 +1366,9 @@ enum FunctionSignatureId {
   FN_TO_VARCHAR_VARIANT = 100342;         // to_varchar(VARIANT) -> STRING
   FN_TO_OBJECT_VARIANT = 100343;          // to_object(VARIANT) -> OBJECT
   FN_TO_OBJECT_OBJECT = 100344;           // to_object(OBJECT) -> OBJECT
-
+  FN_TO_BINARY_STRING = 100345;           // to_binary(STRING [, STRING]) -> BINARY
+  FN_TO_BINARY_VARIANT = 100346;          // to_binary(VARIANT) -> BINARY
+  
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
   FN_RANDSTR_SAME_ARGS = 100401;        // RANDSTR(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> STRING
