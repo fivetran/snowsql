@@ -1396,6 +1396,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "object_insert(object_construct('a', 1), 'b', 2), object_insert(object_construct('a', 1), 'b', 2, false), object_insert(object_construct('a', 1), 'b', 2, true), object_insert(object_construct('a', 1), 'b', 'str', true),"
       "is_object(object_construct('a', 1)), is_object(to_variant(1)), is_object(1), is_object(false),"
       "as_object(1), as_object(to_variant(1)), as_object(parse_json('{}')),"
+      "as_binary(to_variant('s')), as_binary(to_variant(to_binary('F0A5'))),"
     }
   };
 
