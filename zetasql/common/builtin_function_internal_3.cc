@@ -4343,7 +4343,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {variant_type, {bool_type}, FN_TO_VARIANT_BOOL},
        {variant_type, {date_type}, FN_TO_VARIANT_DATE},
        {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
-       {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP}});
+       {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP},
+       {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES}});
 
   // TO_VARCHAR
   InsertFunction(
