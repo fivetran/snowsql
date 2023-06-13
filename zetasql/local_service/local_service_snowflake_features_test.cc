@@ -1399,6 +1399,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "as_object(1), as_object(to_variant(1)), as_object(parse_json('{}')),"
       "as_binary(to_variant('s')), as_binary(to_variant(to_binary('F0A5'))),"
       "array_construct(1, 'John Doe', true, DATE('2023-06-13'), 1500.50),"
+      "array_construct_compact(1, null, 'John Doe', true, DATE('2023-06-13'), 1500.50),"
     }
   };
 
