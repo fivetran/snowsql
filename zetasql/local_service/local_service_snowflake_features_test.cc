@@ -1401,6 +1401,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "array_construct(1, 'John Doe', true, DATE('2023-06-13'), 1500.50),"
       "array_construct_compact(1, null, 'John Doe', true, DATE('2023-06-13'), 1500.50),"
       "array_append(array_construct(1), 2), array_append(array_construct(), 's'),"
+      "array_cat(array_construct(1, 's'), array_construct(2, 'a')),"
     }
   };
 

@@ -4643,6 +4643,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
       functions, options, "array_append", SCALAR,
       {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
       fn_options);
+
+  // ARRAY_CAT
+    InsertFunction(
+        functions, options, "array_cat", SCALAR,
+        {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_CAT}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
