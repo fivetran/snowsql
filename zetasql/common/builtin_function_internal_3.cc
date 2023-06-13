@@ -4637,6 +4637,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
       functions, options, "array_construct_compact", SCALAR,
       {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT_COMPACT}},
       fn_options);
+  
+  // ARRAY_APPEND
+  InsertFunction(
+      functions, options, "array_append", SCALAR,
+      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
