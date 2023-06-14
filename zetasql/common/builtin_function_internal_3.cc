@@ -4674,6 +4674,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
       functions, options, "array_intersection", SCALAR,
       {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_INTERSECTION}},
       fn_options);
+
+  // ARRAY_POSITION
+  InsertFunction(
+      functions, options, "array_position", SCALAR,
+      {{int64_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_POSITION}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
