@@ -4276,6 +4276,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* variant_type = type_factory->get_variant();
   const Type* object_type = type_factory->get_object();
   const Type* bytes_type = type_factory->get_bytes();
+  const ArrayType* array_variant_type;
+  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -4344,7 +4346,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {variant_type, {date_type}, FN_TO_VARIANT_DATE},
        {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
        {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP},
-       {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES}});
+       {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES},
+       {variant_type, {array_variant_type}, FN_TO_VARIANT_ARRAY}});
 
   // TO_VARCHAR
   InsertFunction(
@@ -4685,6 +4688,13 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "array_prepend", SCALAR,
       {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_PREPEND}},
+      fn_options);
+
+  // ARRAY_SIZE
+  InsertFunction(
+      functions, options, "array_size", SCALAR,
+      {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
+      {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
       fn_options);
 }
 
