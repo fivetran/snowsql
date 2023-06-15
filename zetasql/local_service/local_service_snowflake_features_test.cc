@@ -1411,6 +1411,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "array_size(array_construct()), array_size(to_variant(array_construct())),"
       "arrays_overlap(array_construct(), array_construct()),"
       "as_array(1), as_array(array_construct()),"
+      "is_array(1), is_array(false), is_array(array_construct()),"
     }
   };
 
