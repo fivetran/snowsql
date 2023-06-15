@@ -4383,6 +4383,11 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
     InsertFunction(
         functions, options, "try_to_binary", SCALAR,
         {{bytes_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_BINARY_STRING}});
+
+    // TO_ARRAY
+    InsertFunction(
+        functions, options, "to_array", SCALAR,
+        {{array_variant_type, {ARG_TYPE_ANY_1}, FN_TO_ARRAY}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,

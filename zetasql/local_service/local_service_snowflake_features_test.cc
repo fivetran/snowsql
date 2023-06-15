@@ -1363,6 +1363,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_object(to_variant(column_1)),"
       "to_binary('U25vd2ZsYWtl'), to_binary('U25vd2ZsYWtl', 'BASE64'), to_binary(to_variant('U25vd2ZsYWtl')),"
       "try_to_binary('U25vd2ZsYWtl'), try_to_binary('U25vd2ZsYWtl', 'BASE64'),"
+      "to_array(1), to_array(true), to_array(to_variant(1)), to_array(array_construct()),"
       "from table_1"
     },
     {"DataGeneration",
