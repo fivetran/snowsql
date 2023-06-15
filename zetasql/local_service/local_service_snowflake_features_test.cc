@@ -1409,6 +1409,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "array_position(1, array_construct(1)), array_position('s', array_construct('s')),"
       "array_prepend(array_construct(1), 2), array_prepend(array_construct(), 's'),"
       "array_size(array_construct()), array_size(to_variant(array_construct())),"
+      "arrays_overlap(array_construct(), array_construct()),"
     }
   };
 

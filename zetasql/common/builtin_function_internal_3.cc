@@ -4696,6 +4696,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
       {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
       {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
       fn_options);
+
+  // ARRAYS_OVERLAP
+  InsertFunction(
+      functions, options, "arrays_overlap", SCALAR,
+      {{bool_type, {array_variant_type, array_variant_type}, FN_ARRAYS_OVERLAP}},
+      fn_options);
 }
 
 /* Snowflake specific functions END */
