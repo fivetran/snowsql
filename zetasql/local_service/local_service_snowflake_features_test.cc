@@ -1363,6 +1363,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_object(to_variant(column_1)),"
       "to_binary('U25vd2ZsYWtl'), to_binary('U25vd2ZsYWtl', 'BASE64'), to_binary(to_variant('U25vd2ZsYWtl')),"
       "try_to_binary('U25vd2ZsYWtl'), try_to_binary('U25vd2ZsYWtl', 'BASE64'),"
+      "to_array(1), to_array(true), to_array(to_variant(1)), to_array(array_construct()),"
       "from table_1"
     },
     {"DataGeneration",
@@ -1398,6 +1399,20 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "is_object(object_construct('a', 1)), is_object(to_variant(1)), is_object(1), is_object(false),"
       "as_object(1), as_object(to_variant(1)), as_object(parse_json('{}')),"
       "as_binary(to_variant('s')), as_binary(to_variant(to_binary('F0A5'))),"
+      "array_construct(1, 'John Doe', true, DATE('2023-06-13'), 1500.50),"
+      "array_construct_compact(1, null, 'John Doe', true, DATE('2023-06-13'), 1500.50),"
+      "array_append(array_construct(1), 2), array_append(array_construct(), 's'),"
+      "array_cat(array_construct(1, 's'), array_construct(2, 'a')),"
+      "array_compact(array_construct(1, 'a', null)), array_compact(array_construct()),"
+      "array_contains(1, array_construct(1, 's')), array_contains(1, array_construct()),"
+      "array_insert(array_construct(), 0, 1),"
+      "array_intersection(array_construct(), array_construct()), array_intersection(array_construct(), null), array_intersection(null, array_construct()),"
+      "array_position(1, array_construct(1)), array_position('s', array_construct('s')),"
+      "array_prepend(array_construct(1), 2), array_prepend(array_construct(), 's'),"
+      "array_size(array_construct()), array_size(to_variant(array_construct())),"
+      "arrays_overlap(array_construct(), array_construct()),"
+      "as_array(1), as_array(array_construct()),"
+      "is_array(1), is_array(false), is_array(array_construct()),"
     }
   };
 

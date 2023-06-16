@@ -4496,6 +4496,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* variant_type = type_factory->get_variant();
   const Type* object_type = type_factory->get_object();
   const Type* bytes_type = type_factory->get_bytes();
+  const ArrayType* array_variant_type;
+  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -4564,7 +4566,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {variant_type, {date_type}, FN_TO_VARIANT_DATE},
        {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
        {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP},
-       {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES}});
+       {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES},
+       {variant_type, {array_variant_type}, FN_TO_VARIANT_ARRAY}});
 
   // TO_VARCHAR
   InsertFunction(
@@ -4600,6 +4603,11 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
     InsertFunction(
         functions, options, "try_to_binary", SCALAR,
         {{bytes_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_BINARY_STRING}});
+
+    // TO_ARRAY
+    InsertFunction(
+        functions, options, "to_array", SCALAR,
+        {{array_variant_type, {ARG_TYPE_ANY_1}, FN_TO_ARRAY}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
@@ -4795,6 +4803,9 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   const Type* string_type = type_factory->get_string();
   const Type* object_type = type_factory->get_object();
   const Type* bool_type = type_factory->get_bool();
+  const Type* int64_type = type_factory->get_int64();
+  const ArrayType* array_variant_type;
+  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
@@ -4842,6 +4853,91 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   InsertFunction(
       functions, options, "as_binary", SCALAR,
       {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+      fn_options);
+
+  // ARRAY_CONSTRUCT
+  InsertFunction(
+      functions, options, "array_construct", SCALAR,
+      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT}},
+      fn_options);
+
+  // ARRAY_CONSTRUCT_COMPACT
+  InsertFunction(
+      functions, options, "array_construct_compact", SCALAR,
+      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT_COMPACT}},
+      fn_options);
+  
+  // ARRAY_APPEND
+  InsertFunction(
+      functions, options, "array_append", SCALAR,
+      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
+      fn_options);
+
+  // ARRAY_CAT
+  InsertFunction(
+      functions, options, "array_cat", SCALAR,
+      {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_CAT}},
+      fn_options);
+
+  // ARRAY_COMPACT
+  InsertFunction(
+      functions, options, "array_compact", SCALAR,
+      {{array_variant_type, {array_variant_type}, FN_ARRAY_COMPACT}},
+      fn_options);
+
+  // ARRAY_CONTAINS
+  InsertFunction(
+      functions, options, "array_contains", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_CONTAINS}},
+      fn_options);
+
+  // ARRAY_INSERT
+  InsertFunction(
+      functions, options, "array_insert", SCALAR,
+      {{array_variant_type, {array_variant_type, int64_type, ARG_TYPE_ANY_1}, FN_ARRAY_INSERT}},
+      fn_options);
+
+  // ARRAY_INTERSECTION
+  InsertFunction(
+      functions, options, "array_intersection", SCALAR,
+      {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_INTERSECTION}},
+      fn_options);
+
+  // ARRAY_POSITION
+  InsertFunction(
+      functions, options, "array_position", SCALAR,
+      {{int64_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_POSITION}},
+      fn_options);
+
+  // ARRAY_PREPEND
+  InsertFunction(
+      functions, options, "array_prepend", SCALAR,
+      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_PREPEND}},
+      fn_options);
+
+  // ARRAY_SIZE
+  InsertFunction(
+      functions, options, "array_size", SCALAR,
+      {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
+      {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
+      fn_options);
+
+  // ARRAYS_OVERLAP
+  InsertFunction(
+      functions, options, "arrays_overlap", SCALAR,
+      {{bool_type, {array_variant_type, array_variant_type}, FN_ARRAYS_OVERLAP}},
+      fn_options);
+
+  // AS_ARRAY
+  InsertFunction(
+      functions, options, "as_array", SCALAR,
+      {{array_variant_type, {ARG_TYPE_ANY_1}, FN_AS_ARRAY}},
+      fn_options);
+
+  // IS_ARRAY
+  InsertFunction(
+      functions, options, "is_array", SCALAR,
+      {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_ARRAY}},
       fn_options);
 }
 
