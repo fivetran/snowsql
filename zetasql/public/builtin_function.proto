@@ -1411,6 +1411,8 @@ enum FunctionSignatureId {
   FN_TO_BINARY_VARIANT = 100346;          // to_binary(VARIANT) -> BINARY
   FN_TO_VARIANT_BYTES = 100347;           // to_variant(BYTES) -> VARIANT
   FN_TRY_TO_BINARY_STRING = 100348;       // try_to_binary(STRING [, STRING]) -> BINARY
+  FN_TO_VARIANT_ARRAY = 100349;           // to_variant(ARRAY) -> VARIANT
+  FN_TO_ARRAY = 100350;                   // to_array(ANY) -> ARRAY
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
@@ -1453,4 +1455,19 @@ enum FunctionSignatureId {
   FN_OBJECT_INSERT = 100715;                   // OBJECT_INSERT(OBJECT, STRING, ARG_TYPE_ANY_1 [, BOOLEAN]) -> OBJECT
   FN_IS_OBJECT = 100716;                       // IS_OBJECT(ANY) -> BOOLEAN
   FN_AS_OBJECT = 100717;                       // AS_OBJECT(ANY) -> OBJECT
+  FN_ARRAY_CONSTRUCT = 100718;                 // ARRAY_CONSTRUCT(<ARG_TYPE_ANY_1>, ...) -> ARRAY
+  FN_ARRAY_CONSTRUCT_COMPACT = 100719;         // ARRAY_CONSTRUCT_COMPACT(<ARG_TYPE_ANY_1>, ...) -> ARRAY
+  FN_ARRAY_APPEND = 100720;                    // ARRAY_APPEND(ARRAY, ARG_TYPE_ANY_1) -> ARRAY
+  FN_ARRAY_CAT = 100721;                       // ARRAY_CAT(ARRAY, ARRAY) -> ARRAY
+  FN_ARRAY_COMPACT = 100722;                   // ARRAY_COMPACT(ARRAY) -> ARRAY
+  FN_ARRAY_CONTAINS = 100723;                  // ARRAY_CONTAINS(ARG_TYPE_ANY_1, ARRAY) -> BOOLEAN
+  FN_ARRAY_INSERT = 100724;                    // ARRAY_INSERT(ARRAY, INT64, ARG_TYPE_ANY_1) -> ARRAY
+  FN_ARRAY_INTERSECTION = 100725;              // ARRAY_INTERSECTION(ARRAY, ARRAY) -> ARRAY
+  FN_ARRAY_POSITION = 100726;                  // ARRAY_POSITION(VARIANT, ARRAY) -> INT64
+  FN_ARRAY_PREPEND = 100727;                   // ARRAY_PREPEND(ARRAY, VARIANT) -> ARRAY
+  FN_ARRAY_SIZE_ARRAY = 100728;                // ARRAY_SIZE(ARRAY) -> INT64
+  FN_ARRAY_SIZE_VARIANT = 100729;              // ARRAY_SIZE(VARIANT) -> INT64
+  FN_ARRAYS_OVERLAP = 100730;                  // ARRAYS_OVERLAP(ARRAY, ARRAY) -> BOOLEAN
+  FN_AS_ARRAY = 100731;                        // AS_ARRAY(ANY) -> ARRAY
+  FN_IS_ARRAY = 100732;                        // IS_ARRAY(ANY) -> BOOLEAN
 }
