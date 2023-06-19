@@ -1381,6 +1381,11 @@ enum FunctionSignatureId {
   FN_TO_DECIMAL_VARIANT_2 = 100357;       // to_decimal(VARIANT, <INT64>, <INT64>) -> DECIMAL
   FN_TO_TIME_STRING = 100358;             // to_time(STRING, <STRING>) -> TIME
   FN_TO_TIME_VARIANT = 100359;            // to_time(VARIANT) -> TIME
+  FN_TO_TIMESTAMP_NUMERIC = 100360;       // to_timestamp(NUMERIC, <INT64>) -> TIMESTAMP
+  FN_TO_TIMESTAMP_DATE = 100361;          // to_timestamp(DATE) -> TIMESTAMP
+  FN_TO_TIMESTAMP_TIMESTAMP = 100362;     // to_timestamp(TIMESTAMP) -> TIMESTAMP
+  FN_TO_TIMESTAMP_STRING = 100363;        // to_timestamp(STRING, <STRING>) -> TIMESTAMP
+  FN_TO_TIMESTAMP_VARIANT = 100364;       // to_timestamp(VARIANT) -> TIMESTAMP
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64

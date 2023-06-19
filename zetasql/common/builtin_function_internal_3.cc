@@ -4429,6 +4429,15 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
         {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIME_STRING},
          {time_type, {variant_type}, FN_TO_TIME_VARIANT}});
          //TODO: FunctionOptions().set_alias_name("time"));
+
+    // TO_TIMESTAMP
+    InsertFunction(
+        functions, options, "to_timestamp", SCALAR,
+        {{timestamp_type, {numeric_type, {int64_type, OPTIONAL}}, FN_TO_TIMESTAMP_NUMERIC},
+         {timestamp_type, {date_type}, FN_TO_TIMESTAMP_DATE},
+         {timestamp_type, {timestamp_type}, FN_TO_TIMESTAMP_TIMESTAMP},
+         {timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIMESTAMP_STRING},
+         {timestamp_type, {variant_type}, FN_TO_TIMESTAMP_VARIANT}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
