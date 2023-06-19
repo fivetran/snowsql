@@ -256,8 +256,7 @@
 //   1: ANALYZE
 //   6: QUALIFY
 //   2: ALTER COLUMN
-//   1: SUM(SEQUENCE CLAMPED BETWEEN x and y)
-%expect 27
+%expect 31
 
 %union {
   bool boolean;
@@ -417,6 +416,7 @@
 %token '@' "@"
 %token KW_DOUBLE_AT "@@"
 %token KW_CONCAT_OP "||"
+%token KW_CAST_OP "::"
 %token '+' "+"
 %token '-' "-"
 %token '/' "/"
@@ -461,6 +461,7 @@
 %left "<<" ">>"
 %left "+" "-"
 %left "||"
+%left "::"
 %left "*" "/"
 %precedence UNARY_PRECEDENCE  // For all unary operators
 %precedence DOUBLE_AT_PRECEDENCE // Needs to appear before "."
@@ -6805,6 +6806,19 @@ expression_not_parenthesized:
             MAKE_NODE(ASTUnaryExpression, @$, {$2});
         expression->set_op($1);
         $$ = expression;
+      }
+      | expression "::" type
+      {
+        // NOT has lower precedence but can be parsed unparenthesized in the
+        // rhs because it is not ambiguous. However, this is not allowed. Other
+        // expressions with lower precedence wouldn't be parsed as children, so
+        // we don't have to check for those.
+        if (IsUnparenthesizedNotExpression($3)) {
+          YYERROR_UNEXPECTED_AND_ABORT_AT(@3);
+        }
+        auto* cast = MAKE_NODE(ASTCastExpression, @$, {$1, $3});
+        cast->set_is_safe_cast(false);
+        $$ = cast;
       }
     ;
 
