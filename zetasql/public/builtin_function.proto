@@ -1372,6 +1372,15 @@ enum FunctionSignatureId {
   FN_TRY_TO_BINARY_STRING = 100348;       // try_to_binary(STRING [, STRING]) -> BINARY
   FN_TO_VARIANT_ARRAY = 100349;           // to_variant(ARRAY) -> VARIANT
   FN_TO_ARRAY = 100350;                   // to_array(ANY) -> ARRAY
+  FN_TO_DATE = 100351;                    // to_date(STRING, <STRING>) -> DATE
+  FN_TO_DECIMAL_NUMERIC_1 = 100352;       // to_decimal(NUMERIC, <STRING>, <INT64>, <INT64>) -> DECIMAL
+  FN_TO_DECIMAL_NUMERIC_2 = 100353;       // to_decimal(NUMERIC, <INT64>, <INT64>) -> DECIMAL
+  FN_TO_DECIMAL_STRING_1 = 100354;        // to_decimal(STRING, <STRING>, <INT64>, <INT64>) -> DECIMAL
+  FN_TO_DECIMAL_STRING_2 = 100355;        // to_decimal(STRING, <INT64>, <INT64>) -> DECIMAL
+  FN_TO_DECIMAL_VARIANT_1 = 100356;       // to_decimal(VARIANT, <STRING>, <INT64>, <INT64>) -> DECIMAL
+  FN_TO_DECIMAL_VARIANT_2 = 100357;       // to_decimal(VARIANT, <INT64>, <INT64>) -> DECIMAL
+  FN_TO_TIME_STRING = 100358;             // to_time(STRING, <STRING>) -> TIME
+  FN_TO_TIME_VARIANT = 100359;            // to_time(VARIANT) -> TIME
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64

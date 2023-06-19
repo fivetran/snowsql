@@ -4388,6 +4388,47 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
     InsertFunction(
         functions, options, "to_array", SCALAR,
         {{array_variant_type, {ARG_TYPE_ANY_1}, FN_TO_ARRAY}});
+
+    // TO_DATE
+    InsertFunction(
+        functions, options, "to_date", SCALAR,
+        {{date_type, {string_type, {string_type, OPTIONAL}}, FN_TO_DATE}});
+
+    FunctionArgumentTypeOptions precision_arg;
+    precision_arg.set_is_not_aggregate();
+    precision_arg.set_must_be_non_null();
+    precision_arg.set_cardinality(OPTIONAL);
+    precision_arg.set_min_value(1);
+    precision_arg.set_max_value(38);
+
+    // TO_DECIMAL
+    InsertFunction(
+        functions, options, "to_decimal", SCALAR,
+        {{numeric_type, {numeric_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_1},
+         {numeric_type, {numeric_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_2},
+         {numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_2},
+         {numeric_type, {variant_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_1},
+         {numeric_type, {variant_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_2}},
+         FunctionOptions().set_alias_name("to_number"));
+
+    // TO_NUMERIC
+    // TODO: try to combine with TO_DECIMAL/TO_NUMBER
+    InsertFunction(
+        functions, options, "to_numeric", SCALAR,
+        {{numeric_type, {numeric_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_1},
+         {numeric_type, {numeric_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_2},
+         {numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_2},
+         {numeric_type, {variant_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_1},
+         {numeric_type, {variant_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_2}});
+
+    // TO_TIME
+    InsertFunction(
+        functions, options, "to_time", SCALAR,
+        {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIME_STRING},
+         {time_type, {variant_type}, FN_TO_TIME_VARIANT}});
+         //TODO: FunctionOptions().set_alias_name("time"));
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,

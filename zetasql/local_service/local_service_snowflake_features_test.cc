@@ -1364,6 +1364,11 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_binary('U25vd2ZsYWtl'), to_binary('U25vd2ZsYWtl', 'BASE64'), to_binary(to_variant('U25vd2ZsYWtl')),"
       "try_to_binary('U25vd2ZsYWtl'), try_to_binary('U25vd2ZsYWtl', 'BASE64'),"
       "to_array(1), to_array(true), to_array(to_variant(1)), to_array(array_construct()),"
+      "to_date('2018-09-15'), to_date('2023-04-20', 'YYYY-MM-DD'), to_date('15000'),"
+      "to_decimal('12.3456', 10, 1), to_decimal(12.3456, 10, 1), to_decimal(to_variant(12.3456), 10, 1), to_decimal('12.3', '99.9', 9, 5),"
+      "to_number('12.3456', 10, 1), to_number(12.3456, 10, 1), to_number(to_variant(12.3456), 10, 1), to_number('12.3', '99.9', 9, 5),"
+      "to_numeric('12.3456', 10, 1), to_numeric(12.3456, 10, 1), to_numeric(to_variant(12.3456), 10, 1), to_numeric('12.3', '99.9', 9, 5),"
+      // TODO: "to_time('12:30:00'), to_time('12:30:00', 'HH24:MI:SS'), to_time('123000'), to_time(to_variant('12:30:00')),"
       "from table_1"
     },
     {"DataGeneration",
