@@ -1155,15 +1155,15 @@ void GetJSONFunctions(TypeFactory* type_factory,
          {json_type, default_json_path_argument},
          FN_JSON_VALUE_ARRAY_JSON});
 
-    InsertFunction(functions, options, "to_json", SCALAR,
-                   {{json_type,
-                     {ARG_TYPE_ANY_1,
-                      {bool_type, FunctionArgumentTypeOptions()
-                                      .set_cardinality(FunctionEnums::OPTIONAL)
-                                      .set_argument_name(
-                                          "stringify_wide_numbers", kNamedOnly)
-                                      .set_default(values::Bool(false))}},
-                     FN_TO_JSON}});
+    // InsertFunction(functions, options, "to_json", SCALAR,
+    //                {{json_type,
+    //                  {ARG_TYPE_ANY_1,
+    //                   {bool_type, FunctionArgumentTypeOptions()
+    //                                   .set_cardinality(FunctionEnums::OPTIONAL)
+    //                                   .set_argument_name(
+    //                                       "stringify_wide_numbers", kNamedOnly)
+    //                                   .set_default(values::Bool(false))}},
+    //                  FN_TO_JSON}});
     // InsertFunction(
     //     functions, options, "parse_json", SCALAR,
     //     {{json_type,
@@ -4480,10 +4480,15 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
         FunctionOptions().set_alias_name("try_to_timestamp_ltz"));
 
     // TRY_TO_TIMESTAMP_NTZ, TRY_TO_TIMESTAMP_TZ
-        InsertFunction(
+    InsertFunction(
         functions, options, "try_to_timestamp_ntz", SCALAR,
         {{timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIMESTAMP}},
         FunctionOptions().set_alias_name("try_to_timestamp_tz"));
+
+    // TO_JSON
+    InsertFunction(
+        functions, options, "to_json", SCALAR,
+        {{string_type, {variant_type}, FN_TO_JSON_SNOWFLAKE}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,

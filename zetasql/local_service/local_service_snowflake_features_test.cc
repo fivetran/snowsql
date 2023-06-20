@@ -1382,6 +1382,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "try_to_timestamp_ltz('2023-06-19 14:30:00'), try_to_timestamp_ltz('a'), try_to_timestamp_ltz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
       "try_to_timestamp_ntz('2023-06-19 14:30:00'), try_to_timestamp_ntz('a'), try_to_timestamp_ntz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
       "try_to_timestamp_tz('2023-06-19 14:30:00'), try_to_timestamp_tz('a'), try_to_timestamp_tz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
+      "to_json(object_construct('a', 1)), to_json(parse_json('{}')),"
       "from table_1"
     },
     {"DataGeneration",
