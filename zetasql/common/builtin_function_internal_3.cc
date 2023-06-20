@@ -4461,6 +4461,18 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
         functions, options, "try_to_numeric", SCALAR,
         {{numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_1},
          {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_2}});
+
+    // TRY_TO_TIMESTAMP, TRY_TO_TIMESTAMP_LTZ
+    InsertFunction(
+        functions, options, "try_to_timestamp", SCALAR,
+        {{timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIMESTAMP}},
+        FunctionOptions().set_alias_name("try_to_timestamp_ltz"));
+
+    // TRY_TO_TIMESTAMP_NTZ, TRY_TO_TIMESTAMP_TZ
+        InsertFunction(
+        functions, options, "try_to_timestamp_ntz", SCALAR,
+        {{timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIMESTAMP}},
+        FunctionOptions().set_alias_name("try_to_timestamp_tz"));
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,

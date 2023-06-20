@@ -1355,8 +1355,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     {"Conversion", 
       "select "
       "to_boolean('yes'), try_to_boolean('yes'),"
-      "to_double('1.1'), try_to_double('1.1'),"
-      "try_to_date('2018-09-15'), try_to_time('12:30:00'),"
+      "to_double('1.1'), try_to_double('1.1'), try_to_double('a'),"
+      "try_to_date('2018-09-15'),"
+      "try_to_time('12:30:00'), try_to_time('14:30:00', 'HH24:MI:SS'),"
       "to_variant('2018-09-15'), to_variant(true), to_variant(1), to_variant(1.1), to_variant(current_date), to_variant(current_timestamp), to_variant(cast(1.1 as float)),"
       "to_varchar(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_varchar(true), to_varchar(1), to_varchar(1.1), to_varchar(current_date), to_varchar(current_timestamp), to_varchar(current_time), to_varchar(cast(1.1 as float)),"
       "to_char(current_timestamp, 'mm/dd/yyyy, hh24:mi hours'), to_char(true), to_char(1), to_char(1.1), to_char(current_date), to_char(current_timestamp), to_char(current_time), to_char(cast(1.1 as float)),"
@@ -1374,6 +1375,11 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "try_to_decimal('12.3456', 10, 1), try_to_decimal('a'), try_to_decimal('12.3', '99.9'), try_to_decimal('12.3', '99.9', 9, 5),"
       "try_to_number('12.3456', 10, 1), try_to_number('a'), try_to_number('12.3', '99.9'), try_to_number('12.3', '99.9', 9, 5),"
       "try_to_numeric('12.3456', 10, 1), try_to_numeric('a'), try_to_numeric('12.3', '99.9'), try_to_numeric('12.3', '99.9', 9, 5),"
+      "try_to_timestamp('2023-06-19 14:30:00'), try_to_timestamp('a'), try_to_timestamp('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
+      "try_to_timestamp_ltz('2023-06-19 14:30:00'), try_to_timestamp_ltz('a'), try_to_timestamp_ltz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
+      "try_to_timestamp_ntz('2023-06-19 14:30:00'), try_to_timestamp_ntz('a'), try_to_timestamp_ntz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
+      "try_to_timestamp_tz('2023-06-19 14:30:00'), try_to_timestamp_tz('a'), try_to_timestamp_tz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
+
       "from table_1"
     },
     {"DataGeneration",
