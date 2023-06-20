@@ -1007,7 +1007,7 @@ std::string ASTUnaryExpression::GetSQLForOperator() const {
 
 std::string ASTCastExpression::SingleNodeDebugString() const {
   return absl::StrCat(ASTNode::SingleNodeDebugString(),
-                      is_safe_cast_ ? "(return_null_on_error=true)" : "");
+                      is_try_cast_ ? "(return_null_on_error=true)" : "");
 }
 
 std::string ASTDropStatement::SingleNodeDebugString() const {

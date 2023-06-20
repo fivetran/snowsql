@@ -151,7 +151,7 @@ class FunctionResolver {
   // having been explicitly cast (and it will thereafter be treated as a
   // non-literal with respect to coercion). <return_null_on_error> indicates
   // whether the cast should return a NULL value of the <target_type> in case of
-  // cast failures, which should only be set to true when using SAFE_CAST.
+  // cast failures, which should only be set to true when using TRY_CAST.
   // <format> is the format string used for the conversion. It can be null.
   // <time_zone> is used together with the format string when casting from/to
   // timestamp type. It can be null. <type_params> holds the type parameters for
@@ -408,7 +408,7 @@ class FunctionResolver {
   // having been explicitly cast (and it will thereafter be treated as a
   // non-literal with respect to coercion). <return_null_on_error> indicates
   // whether the cast should return a NULL value of the <target_type> in case of
-  // cast failures, which should only be set to true when using SAFE_CAST.
+  // cast failures, which should only be set to true when using TRY_CAST.
   absl::Status ConvertLiteralToType(
       const ASTNode* ast_location, const ResolvedLiteral* argument_literal,
       const Type* target_type, const ResolvedScan* scan,

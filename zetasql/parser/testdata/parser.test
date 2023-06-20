@@ -853,23 +853,23 @@ SELECT
   "\\U00012346" AS `\\U00012345`
 ==
 
-select {{safe_cast|cast}}("1" as int32);
+select {{try_cast|cast}}("1" as int32);
 --
-ALTERNATION GROUP: safe_cast
+ALTERNATION GROUP: try_cast
 --
-QueryStatement [0-30] [select safe_cast("1" as int32)]
-  Query [0-30] [select safe_cast("1" as int32)]
-    Select [0-30] [select safe_cast("1" as int32)]
-      SelectList [7-30] [safe_cast("1" as int32)]
-        SelectColumn [7-30] [safe_cast("1" as int32)]
-          CastExpression(return_null_on_error=true) [7-30] [safe_cast("1" as int32)]
-            StringLiteral("1") [17-20] ["1"]
-            SimpleType [24-29] [int32]
-              PathExpression [24-29] [int32]
-                Identifier(int32) [24-29] [int32]
+QueryStatement [0-29] [select try_cast("1" as int32)]
+  Query [0-29] [select try_cast("1" as int32)]
+    Select [0-29] [select try_cast("1" as int32)]
+      SelectList [7-29] [try_cast("1" as int32)]
+        SelectColumn [7-29] [try_cast("1" as int32)]
+          CastExpression(return_null_on_error=true) [7-29] [try_cast("1" as int32)]
+            StringLiteral("1") [16-19] ["1"]
+            SimpleType [23-28] [int32]
+              PathExpression [23-28] [int32]
+                Identifier(int32) [23-28] [int32]
 --
 SELECT
-  SAFE_CAST("1" AS int32)
+  TRY_CAST("1" AS int32)
 --
 ALTERNATION GROUP: cast
 --
@@ -1036,7 +1036,7 @@ SELECT
   CAST(x AS ARRAY< string > COLLATE 'und:ci')
 ==
 
-select {{cast|safe_cast}}(`date` as date) from A;
+select {{cast|try_cast}}(`date` as date) from A;
 --
 ALTERNATION GROUP: cast
 --
@@ -1061,31 +1061,31 @@ SELECT
 FROM
   A
 --
-ALTERNATION GROUP: safe_cast
+ALTERNATION GROUP: try_cast
 --
-QueryStatement [0-39] [select safe_cast...ate) from A]
-  Query [0-39] [select safe_cast...ate) from A]
-    Select [0-39] [select safe_cast...ate) from A]
-      SelectList [7-32] [safe_cast(`date` as date)]
-        SelectColumn [7-32] [safe_cast(`date` as date)]
-          CastExpression(return_null_on_error=true) [7-32] [safe_cast(`date` as date)]
-            PathExpression [17-23] [`date`]
-              Identifier(date) [17-23] [`date`]
-            SimpleType [27-31] [date]
-              PathExpression [27-31] [date]
-                Identifier(date) [27-31] [date]
-      FromClause [33-39] [from A]
-        TablePathExpression [38-39] [A]
-          PathExpression [38-39] [A]
-            Identifier(A) [38-39] [A]
+QueryStatement [0-38] [select try_cast...date) from A]
+  Query [0-38] [select try_cast...date) from A]
+    Select [0-38] [select try_cast...date) from A]
+      SelectList [7-31] [try_cast(`date` as date)]
+        SelectColumn [7-31] [try_cast(`date` as date)]
+          CastExpression(return_null_on_error=true) [7-31] [try_cast(`date` as date)]
+            PathExpression [16-22] [`date`]
+              Identifier(date) [16-22] [`date`]
+            SimpleType [26-30] [date]
+              PathExpression [26-30] [date]
+                Identifier(date) [26-30] [date]
+      FromClause [32-38] [from A]
+        TablePathExpression [37-38] [A]
+          PathExpression [37-38] [A]
+            Identifier(A) [37-38] [A]
 --
 SELECT
-  SAFE_CAST(date AS date)
+  TRY_CAST(date AS date)
 FROM
   A
 ==
 
-select {{cast|safe_cast}}([1,2,3] as array<string>)
+select {{cast|try_cast}}([1,2,3] as array<string>)
 --
 
 ALTERNATION GROUP: cast
@@ -1108,25 +1108,25 @@ QueryStatement [0-37] [select cast...array<string>)]
 SELECT
   CAST(ARRAY[1, 2, 3] AS ARRAY< string >)
 --
-ALTERNATION GROUP: safe_cast
+ALTERNATION GROUP: try_cast
 --
-QueryStatement [0-42] [select safe_cast...ay<string>)]
-  Query [0-42] [select safe_cast...ay<string>)]
-    Select [0-42] [select safe_cast...ay<string>)]
-      SelectList [7-42] [safe_cast(...array<string>)]
-        SelectColumn [7-42] [safe_cast(...array<string>)]
-          CastExpression(return_null_on_error=true) [7-42] [safe_cast(...array<string>)]
-            ArrayConstructor [17-24] [[1,2,3]]
-              IntLiteral(1) [18-19] [1]
-              IntLiteral(2) [20-21] [2]
-              IntLiteral(3) [22-23] [3]
-            ArrayType [28-41] [array<string>]
-              SimpleType [34-40] [string]
-                PathExpression [34-40] [string]
-                  Identifier(string) [34-40] [string]
+QueryStatement [0-41] [select try_cast...ray<string>)]
+  Query [0-41] [select try_cast...ray<string>)]
+    Select [0-41] [select try_cast...ray<string>)]
+      SelectList [7-41] [try_cast([...array<string>)]
+        SelectColumn [7-41] [try_cast([...array<string>)]
+          CastExpression(return_null_on_error=true) [7-41] [try_cast([...array<string>)]
+            ArrayConstructor [16-23] [[1,2,3]]
+              IntLiteral(1) [17-18] [1]
+              IntLiteral(2) [19-20] [2]
+              IntLiteral(3) [21-22] [3]
+            ArrayType [27-40] [array<string>]
+              SimpleType [33-39] [string]
+                PathExpression [33-39] [string]
+                  Identifier(string) [33-39] [string]
 --
 SELECT
-  SAFE_CAST(ARRAY[1, 2, 3] AS ARRAY< string >)
+  TRY_CAST(ARRAY[1, 2, 3] AS ARRAY< string >)
 ==
 
 select cast("1" as int32), cast(1 as string),
@@ -1213,88 +1213,88 @@ FROM
   T
 ==
 
-select safe_cast("1" as int32),
-       safe_cast(1 as string),
-       safe_cast(t as TimeStamp_Millis),
-       safe_cast(u as TimeStamp_Micros),
-       safe_cast(v as TimeStamp_seconds),
-       safe_cast(w as TimeStamp_nanos),
-       safe_cast(x as `mypackage.myproto`),
-       safe_cast(y as `mypackage.myenum`) from T;
+select try_cast("1" as int32),
+       try_cast(1 as string),
+       try_cast(t as TimeStamp_Millis),
+       try_cast(u as TimeStamp_Micros),
+       try_cast(v as TimeStamp_seconds),
+       try_cast(w as TimeStamp_nanos),
+       try_cast(x as `mypackage.myproto`),
+       try_cast(y as `mypackage.myenum`) from T;
 --
 
-QueryStatement [0-319] [select safe_cast...um`) from T]
-  Query [0-319] [select safe_cast...um`) from T]
-    Select [0-319] [select safe_cast...um`) from T]
-      SelectList [7-312] [safe_cast(...ypackage.myenum`)]
-        SelectColumn [7-30] [safe_cast("1" as int32)]
-          CastExpression(return_null_on_error=true) [7-30] [safe_cast("1" as int32)]
-            StringLiteral("1") [17-20] ["1"]
-            SimpleType [24-29] [int32]
-              PathExpression [24-29] [int32]
-                Identifier(int32) [24-29] [int32]
-        SelectColumn [39-61] [safe_cast(1 as string)]
-          CastExpression(return_null_on_error=true) [39-61] [safe_cast(1 as string)]
-            IntLiteral(1) [49-50] [1]
-            SimpleType [54-60] [string]
-              PathExpression [54-60] [string]
-                Identifier(string) [54-60] [string]
-        SelectColumn [70-102] [safe_cast(...TimeStamp_Millis)]
-          CastExpression(return_null_on_error=true) [70-102] [safe_cast(...TimeStamp_Millis)]
-            PathExpression [80-81] [t]
-              Identifier(t) [80-81] [t]
-            SimpleType [85-101] [TimeStamp_Millis]
-              PathExpression [85-101] [TimeStamp_Millis]
-                Identifier(TimeStamp_Millis) [85-101] [TimeStamp_Millis]
-        SelectColumn [111-143] [safe_cast(...TimeStamp_Micros)]
-          CastExpression(return_null_on_error=true) [111-143] [safe_cast(...TimeStamp_Micros)]
-            PathExpression [121-122] [u]
-              Identifier(u) [121-122] [u]
-            SimpleType [126-142] [TimeStamp_Micros]
-              PathExpression [126-142] [TimeStamp_Micros]
-                Identifier(TimeStamp_Micros) [126-142] [TimeStamp_Micros]
-        SelectColumn [152-185] [safe_cast(...imeStamp_seconds)]
-          CastExpression(return_null_on_error=true) [152-185] [safe_cast(...imeStamp_seconds)]
-            PathExpression [162-163] [v]
-              Identifier(v) [162-163] [v]
-            SimpleType [167-184] [TimeStamp_seconds]
-              PathExpression [167-184] [TimeStamp_seconds]
-                Identifier(TimeStamp_seconds) [167-184] [TimeStamp_seconds]
-        SelectColumn [194-225] [safe_cast(...TimeStamp_nanos)]
-          CastExpression(return_null_on_error=true) [194-225] [safe_cast(...TimeStamp_nanos)]
-            PathExpression [204-205] [w]
-              Identifier(w) [204-205] [w]
-            SimpleType [209-224] [TimeStamp_nanos]
-              PathExpression [209-224] [TimeStamp_nanos]
-                Identifier(TimeStamp_nanos) [209-224] [TimeStamp_nanos]
-        SelectColumn [234-269] [safe_cast(....myproto`)]
-          CastExpression(return_null_on_error=true) [234-269] [safe_cast(....myproto`)]
-            PathExpression [244-245] [x]
-              Identifier(x) [244-245] [x]
-            SimpleType [249-268] [`mypackage.myproto`]
-              PathExpression [249-268] [`mypackage.myproto`]
-                Identifier(`mypackage.myproto`) [249-268] [`mypackage.myproto`]
-        SelectColumn [278-312] [safe_cast(...ypackage.myenum`)]
-          CastExpression(return_null_on_error=true) [278-312] [safe_cast(...ypackage.myenum`)]
-            PathExpression [288-289] [y]
-              Identifier(y) [288-289] [y]
-            SimpleType [293-311] [`mypackage.myenum`]
-              PathExpression [293-311] [`mypackage.myenum`]
-                Identifier(`mypackage.myenum`) [293-311] [`mypackage.myenum`]
-      FromClause [313-319] [from T]
-        TablePathExpression [318-319] [T]
-          PathExpression [318-319] [T]
-            Identifier(T) [318-319] [T]
+QueryStatement [0-311] [select try_cast...num`) from T]
+  Query [0-311] [select try_cast...num`) from T]
+    Select [0-311] [select try_cast...num`) from T]
+      SelectList [7-304] [try_cast("...ypackage.myenum`)]
+        SelectColumn [7-29] [try_cast("1" as int32)]
+          CastExpression(return_null_on_error=true) [7-29] [try_cast("1" as int32)]
+            StringLiteral("1") [16-19] ["1"]
+            SimpleType [23-28] [int32]
+              PathExpression [23-28] [int32]
+                Identifier(int32) [23-28] [int32]
+        SelectColumn [38-59] [try_cast(1 as string)]
+          CastExpression(return_null_on_error=true) [38-59] [try_cast(1 as string)]
+            IntLiteral(1) [47-48] [1]
+            SimpleType [52-58] [string]
+              PathExpression [52-58] [string]
+                Identifier(string) [52-58] [string]
+        SelectColumn [68-99] [try_cast(t...TimeStamp_Millis)]
+          CastExpression(return_null_on_error=true) [68-99] [try_cast(t...TimeStamp_Millis)]
+            PathExpression [77-78] [t]
+              Identifier(t) [77-78] [t]
+            SimpleType [82-98] [TimeStamp_Millis]
+              PathExpression [82-98] [TimeStamp_Millis]
+                Identifier(TimeStamp_Millis) [82-98] [TimeStamp_Millis]
+        SelectColumn [108-139] [try_cast(u...TimeStamp_Micros)]
+          CastExpression(return_null_on_error=true) [108-139] [try_cast(u...TimeStamp_Micros)]
+            PathExpression [117-118] [u]
+              Identifier(u) [117-118] [u]
+            SimpleType [122-138] [TimeStamp_Micros]
+              PathExpression [122-138] [TimeStamp_Micros]
+                Identifier(TimeStamp_Micros) [122-138] [TimeStamp_Micros]
+        SelectColumn [148-180] [try_cast(v...imeStamp_seconds)]
+          CastExpression(return_null_on_error=true) [148-180] [try_cast(v...imeStamp_seconds)]
+            PathExpression [157-158] [v]
+              Identifier(v) [157-158] [v]
+            SimpleType [162-179] [TimeStamp_seconds]
+              PathExpression [162-179] [TimeStamp_seconds]
+                Identifier(TimeStamp_seconds) [162-179] [TimeStamp_seconds]
+        SelectColumn [189-219] [try_cast(w as TimeStamp_nanos)]
+          CastExpression(return_null_on_error=true) [189-219] [try_cast(w as TimeStamp_nanos)]
+            PathExpression [198-199] [w]
+              Identifier(w) [198-199] [w]
+            SimpleType [203-218] [TimeStamp_nanos]
+              PathExpression [203-218] [TimeStamp_nanos]
+                Identifier(TimeStamp_nanos) [203-218] [TimeStamp_nanos]
+        SelectColumn [228-262] [try_cast(x....myproto`)]
+          CastExpression(return_null_on_error=true) [228-262] [try_cast(x....myproto`)]
+            PathExpression [237-238] [x]
+              Identifier(x) [237-238] [x]
+            SimpleType [242-261] [`mypackage.myproto`]
+              PathExpression [242-261] [`mypackage.myproto`]
+                Identifier(`mypackage.myproto`) [242-261] [`mypackage.myproto`]
+        SelectColumn [271-304] [try_cast(y...ypackage.myenum`)]
+          CastExpression(return_null_on_error=true) [271-304] [try_cast(y...ypackage.myenum`)]
+            PathExpression [280-281] [y]
+              Identifier(y) [280-281] [y]
+            SimpleType [285-303] [`mypackage.myenum`]
+              PathExpression [285-303] [`mypackage.myenum`]
+                Identifier(`mypackage.myenum`) [285-303] [`mypackage.myenum`]
+      FromClause [305-311] [from T]
+        TablePathExpression [310-311] [T]
+          PathExpression [310-311] [T]
+            Identifier(T) [310-311] [T]
 --
 SELECT
-  SAFE_CAST("1" AS int32),
-  SAFE_CAST(1 AS string),
-  SAFE_CAST(t AS TimeStamp_Millis),
-  SAFE_CAST(u AS TimeStamp_Micros),
-  SAFE_CAST(v AS TimeStamp_seconds),
-  SAFE_CAST(w AS TimeStamp_nanos),
-  SAFE_CAST(x AS `mypackage.myproto`),
-  SAFE_CAST(y AS `mypackage.myenum`)
+  TRY_CAST("1" AS int32),
+  TRY_CAST(1 AS string),
+  TRY_CAST(t AS TimeStamp_Millis),
+  TRY_CAST(u AS TimeStamp_Micros),
+  TRY_CAST(v AS TimeStamp_seconds),
+  TRY_CAST(w AS TimeStamp_nanos),
+  TRY_CAST(x AS `mypackage.myproto`),
+  TRY_CAST(y AS `mypackage.myenum`)
 FROM
   T
 ==
@@ -1423,131 +1423,131 @@ FROM
   T
 ==
 
-select safe_cast(x as foo),
-       safe_cast(x as a.b),
-       safe_cast(x > 5 as timestamp_seconds),
-       safe_cast("1" as `int64`) as safe_cast_1_as_int64,
-       safe_cast(x < 10 as b),
-       safe_cast(x as struct<x int, y double>),
-       safe_cast(x as struct<int, double>),
-       safe_cast(x as struct<x int, y double, string, bytes>)
+select try_cast(x as foo),
+       try_cast(x as a.b),
+       try_cast(x > 5 as timestamp_seconds),
+       try_cast("1" as `int64`) as try_cast_1_as_int64,
+       try_cast(x < 10 as b),
+       try_cast(x as struct<x int, y double>),
+       try_cast(x as struct<int, double>),
+       try_cast(x as struct<x int, y double, string, bytes>)
 from T;
 --
-QueryStatement [0-351] [select safe_cast...es>) from T]
-  Query [0-351] [select safe_cast...es>) from T]
-    Select [0-351] [select safe_cast...es>) from T]
-      SelectList [7-344] [safe_cast(...string, bytes>)]
-        SelectColumn [7-26] [safe_cast(x as foo)]
-          CastExpression(return_null_on_error=true) [7-26] [safe_cast(x as foo)]
-            PathExpression [17-18] [x]
-              Identifier(x) [17-18] [x]
-            SimpleType [22-25] [foo]
-              PathExpression [22-25] [foo]
-                Identifier(foo) [22-25] [foo]
-        SelectColumn [35-54] [safe_cast(x as a.b)]
-          CastExpression(return_null_on_error=true) [35-54] [safe_cast(x as a.b)]
-            PathExpression [45-46] [x]
-              Identifier(x) [45-46] [x]
-            SimpleType [50-53] [a.b]
-              PathExpression [50-53] [a.b]
-                Identifier(a) [50-51] [a]
-                Identifier(b) [52-53] [b]
-        SelectColumn [63-100] [safe_cast(...imestamp_seconds)]
-          CastExpression(return_null_on_error=true) [63-100] [safe_cast(...imestamp_seconds)]
-            BinaryExpression(>) [73-78] [x > 5]
-              PathExpression [73-74] [x]
-                Identifier(x) [73-74] [x]
-              IntLiteral(5) [77-78] [5]
-            SimpleType [82-99] [timestamp_seconds]
-              PathExpression [82-99] [timestamp_seconds]
-                Identifier(timestamp_seconds) [82-99] [timestamp_seconds]
-        SelectColumn [109-158] [safe_cast(...e_cast_1_as_int64]
-          CastExpression(return_null_on_error=true) [109-134] [safe_cast("1" as `int64`)]
-            StringLiteral("1") [119-122] ["1"]
-            SimpleType [126-133] [`int64`]
-              PathExpression [126-133] [`int64`]
-                Identifier(int64) [126-133] [`int64`]
-          Alias [135-158] [as safe_cast_1_as_int64]
-            Identifier(safe_cast_1_as_int64) [138-158] [safe_cast_1_as_int64]
-        SelectColumn [167-189] [safe_cast(x < 10 as b)]
-          CastExpression(return_null_on_error=true) [167-189] [safe_cast(x < 10 as b)]
-            BinaryExpression(<) [177-183] [x < 10]
-              PathExpression [177-178] [x]
-                Identifier(x) [177-178] [x]
-              IntLiteral(10) [181-183] [10]
-            SimpleType [187-188] [b]
-              PathExpression [187-188] [b]
-                Identifier(b) [187-188] [b]
-        SelectColumn [198-237] [safe_cast(...y double>)]
-          CastExpression(return_null_on_error=true) [198-237] [safe_cast(...y double>)]
-            PathExpression [208-209] [x]
-              Identifier(x) [208-209] [x]
-            StructType [213-236] [struct<x int, y double>]
-              StructField [220-225] [x int]
-                Identifier(x) [220-221] [x]
-                SimpleType [222-225] [int]
-                  PathExpression [222-225] [int]
-                    Identifier(int) [222-225] [int]
-              StructField [227-235] [y double]
-                Identifier(y) [227-228] [y]
-                SimpleType [229-235] [double]
-                  PathExpression [229-235] [double]
-                    Identifier(double) [229-235] [double]
-        SelectColumn [246-281] [safe_cast(..., double>)]
-          CastExpression(return_null_on_error=true) [246-281] [safe_cast(..., double>)]
-            PathExpression [256-257] [x]
-              Identifier(x) [256-257] [x]
-            StructType [261-280] [struct<int, double>]
-              StructField [268-271] [int]
-                SimpleType [268-271] [int]
-                  PathExpression [268-271] [int]
-                    Identifier(int) [268-271] [int]
-              StructField [273-279] [double]
-                SimpleType [273-279] [double]
-                  PathExpression [273-279] [double]
-                    Identifier(double) [273-279] [double]
-        SelectColumn [290-344] [safe_cast(...string, bytes>)]
-          CastExpression(return_null_on_error=true) [290-344] [safe_cast(...string, bytes>)]
-            PathExpression [300-301] [x]
-              Identifier(x) [300-301] [x]
-            StructType [305-343] [struct<x int...string, bytes>]
-              StructField [312-317] [x int]
-                Identifier(x) [312-313] [x]
-                SimpleType [314-317] [int]
-                  PathExpression [314-317] [int]
-                    Identifier(int) [314-317] [int]
-              StructField [319-327] [y double]
-                Identifier(y) [319-320] [y]
-                SimpleType [321-327] [double]
-                  PathExpression [321-327] [double]
-                    Identifier(double) [321-327] [double]
-              StructField [329-335] [string]
-                SimpleType [329-335] [string]
-                  PathExpression [329-335] [string]
-                    Identifier(string) [329-335] [string]
-              StructField [337-342] [bytes]
-                SimpleType [337-342] [bytes]
-                  PathExpression [337-342] [bytes]
-                    Identifier(bytes) [337-342] [bytes]
-      FromClause [345-351] [from T]
-        TablePathExpression [350-351] [T]
-          PathExpression [350-351] [T]
-            Identifier(T) [350-351] [T]
+QueryStatement [0-342] [select try_cast...tes>) from T]
+  Query [0-342] [select try_cast...tes>) from T]
+    Select [0-342] [select try_cast...tes>) from T]
+      SelectList [7-335] [try_cast(x...string, bytes>)]
+        SelectColumn [7-25] [try_cast(x as foo)]
+          CastExpression(return_null_on_error=true) [7-25] [try_cast(x as foo)]
+            PathExpression [16-17] [x]
+              Identifier(x) [16-17] [x]
+            SimpleType [21-24] [foo]
+              PathExpression [21-24] [foo]
+                Identifier(foo) [21-24] [foo]
+        SelectColumn [34-52] [try_cast(x as a.b)]
+          CastExpression(return_null_on_error=true) [34-52] [try_cast(x as a.b)]
+            PathExpression [43-44] [x]
+              Identifier(x) [43-44] [x]
+            SimpleType [48-51] [a.b]
+              PathExpression [48-51] [a.b]
+                Identifier(a) [48-49] [a]
+                Identifier(b) [50-51] [b]
+        SelectColumn [61-97] [try_cast(x...imestamp_seconds)]
+          CastExpression(return_null_on_error=true) [61-97] [try_cast(x...imestamp_seconds)]
+            BinaryExpression(>) [70-75] [x > 5]
+              PathExpression [70-71] [x]
+                Identifier(x) [70-71] [x]
+              IntLiteral(5) [74-75] [5]
+            SimpleType [79-96] [timestamp_seconds]
+              PathExpression [79-96] [timestamp_seconds]
+                Identifier(timestamp_seconds) [79-96] [timestamp_seconds]
+        SelectColumn [106-153] [try_cast("...y_cast_1_as_int64]
+          CastExpression(return_null_on_error=true) [106-130] [try_cast("1" as `int64`)]
+            StringLiteral("1") [115-118] ["1"]
+            SimpleType [122-129] [`int64`]
+              PathExpression [122-129] [`int64`]
+                Identifier(int64) [122-129] [`int64`]
+          Alias [131-153] [as try_cast_1_as_int64]
+            Identifier(try_cast_1_as_int64) [134-153] [try_cast_1_as_int64]
+        SelectColumn [162-183] [try_cast(x < 10 as b)]
+          CastExpression(return_null_on_error=true) [162-183] [try_cast(x < 10 as b)]
+            BinaryExpression(<) [171-177] [x < 10]
+              PathExpression [171-172] [x]
+                Identifier(x) [171-172] [x]
+              IntLiteral(10) [175-177] [10]
+            SimpleType [181-182] [b]
+              PathExpression [181-182] [b]
+                Identifier(b) [181-182] [b]
+        SelectColumn [192-230] [try_cast(x...y double>)]
+          CastExpression(return_null_on_error=true) [192-230] [try_cast(x...y double>)]
+            PathExpression [201-202] [x]
+              Identifier(x) [201-202] [x]
+            StructType [206-229] [struct<x int, y double>]
+              StructField [213-218] [x int]
+                Identifier(x) [213-214] [x]
+                SimpleType [215-218] [int]
+                  PathExpression [215-218] [int]
+                    Identifier(int) [215-218] [int]
+              StructField [220-228] [y double]
+                Identifier(y) [220-221] [y]
+                SimpleType [222-228] [double]
+                  PathExpression [222-228] [double]
+                    Identifier(double) [222-228] [double]
+        SelectColumn [239-273] [try_cast(x..., double>)]
+          CastExpression(return_null_on_error=true) [239-273] [try_cast(x..., double>)]
+            PathExpression [248-249] [x]
+              Identifier(x) [248-249] [x]
+            StructType [253-272] [struct<int, double>]
+              StructField [260-263] [int]
+                SimpleType [260-263] [int]
+                  PathExpression [260-263] [int]
+                    Identifier(int) [260-263] [int]
+              StructField [265-271] [double]
+                SimpleType [265-271] [double]
+                  PathExpression [265-271] [double]
+                    Identifier(double) [265-271] [double]
+        SelectColumn [282-335] [try_cast(x...string, bytes>)]
+          CastExpression(return_null_on_error=true) [282-335] [try_cast(x...string, bytes>)]
+            PathExpression [291-292] [x]
+              Identifier(x) [291-292] [x]
+            StructType [296-334] [struct<x int...string, bytes>]
+              StructField [303-308] [x int]
+                Identifier(x) [303-304] [x]
+                SimpleType [305-308] [int]
+                  PathExpression [305-308] [int]
+                    Identifier(int) [305-308] [int]
+              StructField [310-318] [y double]
+                Identifier(y) [310-311] [y]
+                SimpleType [312-318] [double]
+                  PathExpression [312-318] [double]
+                    Identifier(double) [312-318] [double]
+              StructField [320-326] [string]
+                SimpleType [320-326] [string]
+                  PathExpression [320-326] [string]
+                    Identifier(string) [320-326] [string]
+              StructField [328-333] [bytes]
+                SimpleType [328-333] [bytes]
+                  PathExpression [328-333] [bytes]
+                    Identifier(bytes) [328-333] [bytes]
+      FromClause [336-342] [from T]
+        TablePathExpression [341-342] [T]
+          PathExpression [341-342] [T]
+            Identifier(T) [341-342] [T]
 --
 SELECT
-  SAFE_CAST(x AS foo),
-  SAFE_CAST(x AS a.b),
-  SAFE_CAST(x > 5 AS timestamp_seconds),
-  SAFE_CAST("1" AS int64) AS safe_cast_1_as_int64,
-  SAFE_CAST(x < 10 AS b),
-  SAFE_CAST(x AS STRUCT< x int, y double >),
-  SAFE_CAST(x AS STRUCT< int, double >),
-  SAFE_CAST(x AS STRUCT< x int, y double, string, bytes >)
+  TRY_CAST(x AS foo),
+  TRY_CAST(x AS a.b),
+  TRY_CAST(x > 5 AS timestamp_seconds),
+  TRY_CAST("1" AS int64) AS try_cast_1_as_int64,
+  TRY_CAST(x < 10 AS b),
+  TRY_CAST(x AS STRUCT< x int, y double >),
+  TRY_CAST(x AS STRUCT< int, double >),
+  TRY_CAST(x AS STRUCT< x int, y double, string, bytes >)
 FROM
   T
 ==
 
-select {{cast|safe_cast}}(expr as string format format_string) from t;
+select {{cast|try_cast}}(expr as string format format_string) from t;
 
 --
 ALTERNATION GROUP: cast
@@ -1576,34 +1576,34 @@ SELECT
 FROM
   t
 --
-ALTERNATION GROUP: safe_cast
+ALTERNATION GROUP: try_cast
 --
-QueryStatement [0-60] [select safe_cast...ing) from t]
-  Query [0-60] [select safe_cast...ing) from t]
-    Select [0-60] [select safe_cast...ing) from t]
-      SelectList [7-53] [safe_cast(...format_string)]
-        SelectColumn [7-53] [safe_cast(...format_string)]
-          CastExpression(return_null_on_error=true) [7-53] [safe_cast(...format_string)]
-            PathExpression [17-21] [expr]
-              Identifier(expr) [17-21] [expr]
-            SimpleType [25-31] [string]
-              PathExpression [25-31] [string]
-                Identifier(string) [25-31] [string]
-            FormatClause [32-52] [format format_string]
-              PathExpression [39-52] [format_string]
-                Identifier(format_string) [39-52] [format_string]
-      FromClause [54-60] [from t]
-        TablePathExpression [59-60] [t]
-          PathExpression [59-60] [t]
-            Identifier(t) [59-60] [t]
+QueryStatement [0-59] [select try_cast...ring) from t]
+  Query [0-59] [select try_cast...ring) from t]
+    Select [0-59] [select try_cast...ring) from t]
+      SelectList [7-52] [try_cast(expr...format_string)]
+        SelectColumn [7-52] [try_cast(expr...format_string)]
+          CastExpression(return_null_on_error=true) [7-52] [try_cast(expr...format_string)]
+            PathExpression [16-20] [expr]
+              Identifier(expr) [16-20] [expr]
+            SimpleType [24-30] [string]
+              PathExpression [24-30] [string]
+                Identifier(string) [24-30] [string]
+            FormatClause [31-51] [format format_string]
+              PathExpression [38-51] [format_string]
+                Identifier(format_string) [38-51] [format_string]
+      FromClause [53-59] [from t]
+        TablePathExpression [58-59] [t]
+          PathExpression [58-59] [t]
+            Identifier(t) [58-59] [t]
 --
 SELECT
-  SAFE_CAST(expr AS string FORMAT format_string)
+  TRY_CAST(expr AS string FORMAT format_string)
 FROM
   t
 ==
 
-select {{cast|safe_cast}}('literal' as int64 format format_string) from t;
+select {{cast|try_cast}}('literal' as int64 format format_string) from t;
 --
 
 ALTERNATION GROUP: cast
@@ -1631,33 +1631,33 @@ SELECT
 FROM
   t
 --
-ALTERNATION GROUP: safe_cast
+ALTERNATION GROUP: try_cast
 --
-QueryStatement [0-64] [select safe_cast...ing) from t]
-  Query [0-64] [select safe_cast...ing) from t]
-    Select [0-64] [select safe_cast...ing) from t]
-      SelectList [7-57] [safe_cast(...format_string)]
-        SelectColumn [7-57] [safe_cast(...format_string)]
-          CastExpression(return_null_on_error=true) [7-57] [safe_cast(...format_string)]
-            StringLiteral('literal') [17-26] ['literal']
-            SimpleType [30-35] [int64]
-              PathExpression [30-35] [int64]
-                Identifier(int64) [30-35] [int64]
-            FormatClause [36-56] [format format_string]
-              PathExpression [43-56] [format_string]
-                Identifier(format_string) [43-56] [format_string]
-      FromClause [58-64] [from t]
-        TablePathExpression [63-64] [t]
-          PathExpression [63-64] [t]
-            Identifier(t) [63-64] [t]
+QueryStatement [0-63] [select try_cast...ring) from t]
+  Query [0-63] [select try_cast...ring) from t]
+    Select [0-63] [select try_cast...ring) from t]
+      SelectList [7-56] [try_cast('...format_string)]
+        SelectColumn [7-56] [try_cast('...format_string)]
+          CastExpression(return_null_on_error=true) [7-56] [try_cast('...format_string)]
+            StringLiteral('literal') [16-25] ['literal']
+            SimpleType [29-34] [int64]
+              PathExpression [29-34] [int64]
+                Identifier(int64) [29-34] [int64]
+            FormatClause [35-55] [format format_string]
+              PathExpression [42-55] [format_string]
+                Identifier(format_string) [42-55] [format_string]
+      FromClause [57-63] [from t]
+        TablePathExpression [62-63] [t]
+          PathExpression [62-63] [t]
+            Identifier(t) [62-63] [t]
 --
 SELECT
-  SAFE_CAST('literal' AS int64 FORMAT format_string)
+  TRY_CAST('literal' AS int64 FORMAT format_string)
 FROM
   t
 ==
 
-select {{cast|safe_cast}}(expr AS date FORMAT format_string At tImE ZoNe hour || ':' || minute) from t;
+select {{cast|try_cast}}(expr AS date FORMAT format_string At tImE ZoNe hour || ':' || minute) from t;
 
 --
 ALTERNATION GROUP: cast
@@ -1693,36 +1693,36 @@ SELECT
 FROM
   t
 --
-ALTERNATION GROUP: safe_cast
+ALTERNATION GROUP: try_cast
 --
-QueryStatement [0-93] [select safe_cast...ute) from t]
-  Query [0-93] [select safe_cast...ute) from t]
-    Select [0-93] [select safe_cast...ute) from t]
-      SelectList [7-86] [safe_cast(...|| minute)]
-        SelectColumn [7-86] [safe_cast(...|| minute)]
-          CastExpression(return_null_on_error=true) [7-86] [safe_cast(...|| minute)]
-            PathExpression [17-21] [expr]
-              Identifier(expr) [17-21] [expr]
-            SimpleType [25-29] [date]
-              PathExpression [25-29] [date]
-                Identifier(date) [25-29] [date]
-            FormatClause [30-85] [FORMAT format_str...|| minute]
-              PathExpression [37-50] [format_string]
-                Identifier(format_string) [37-50] [format_string]
-              BinaryExpression(||) [64-85] [hour || ':' || minute]
-                BinaryExpression(||) [64-75] [hour || ':']
-                  PathExpression [64-68] [hour]
-                    Identifier(hour) [64-68] [hour]
-                  StringLiteral(':') [72-75] [':']
-                PathExpression [79-85] [minute]
-                  Identifier(minute) [79-85] [minute]
-      FromClause [87-93] [from t]
-        TablePathExpression [92-93] [t]
-          PathExpression [92-93] [t]
-            Identifier(t) [92-93] [t]
+QueryStatement [0-92] [select try_cast...nute) from t]
+  Query [0-92] [select try_cast...nute) from t]
+    Select [0-92] [select try_cast...nute) from t]
+      SelectList [7-85] [try_cast(expr...|| minute)]
+        SelectColumn [7-85] [try_cast(expr...|| minute)]
+          CastExpression(return_null_on_error=true) [7-85] [try_cast(expr...|| minute)]
+            PathExpression [16-20] [expr]
+              Identifier(expr) [16-20] [expr]
+            SimpleType [24-28] [date]
+              PathExpression [24-28] [date]
+                Identifier(date) [24-28] [date]
+            FormatClause [29-84] [FORMAT format_str...|| minute]
+              PathExpression [36-49] [format_string]
+                Identifier(format_string) [36-49] [format_string]
+              BinaryExpression(||) [63-84] [hour || ':' || minute]
+                BinaryExpression(||) [63-74] [hour || ':']
+                  PathExpression [63-67] [hour]
+                    Identifier(hour) [63-67] [hour]
+                  StringLiteral(':') [71-74] [':']
+                PathExpression [78-84] [minute]
+                  Identifier(minute) [78-84] [minute]
+      FromClause [86-92] [from t]
+        TablePathExpression [91-92] [t]
+          PathExpression [91-92] [t]
+            Identifier(t) [91-92] [t]
 --
 SELECT
-  SAFE_CAST(expr AS date FORMAT format_string AT TIME ZONE hour || ':' || minute)
+  TRY_CAST(expr AS date FORMAT format_string AT TIME ZONE hour || ':' || minute)
 FROM
   t
 ==

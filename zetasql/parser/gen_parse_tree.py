@@ -1777,7 +1777,7 @@ def main(argv):
               'ASTFormatClause',
               tag_id=4),
           Field(
-              'is_safe_cast',
+              'is_try_cast',
               SCALAR_BOOL,
               tag_id=5),
       ])

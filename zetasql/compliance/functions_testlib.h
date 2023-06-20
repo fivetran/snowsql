@@ -87,7 +87,7 @@ GetFunctionTestsCastString();  // string/bytes
 // Casts between strings and numeric types
 std::vector<QueryParamsWithResult> GetFunctionTestsCastNumericString();
 
-// All SAFE_CAST tests.
+// All TRY_CAST tests.
 std::vector<QueryParamsWithResult> GetFunctionTestsSafeCast();
 
 // Casts between different array types, where arrays include/exclude NULL

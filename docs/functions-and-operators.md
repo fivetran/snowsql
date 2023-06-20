@@ -8226,7 +8226,7 @@ expression should be converted to some other type.
 
 When using `CAST`, a query can fail if ZetaSQL is unable to perform
 the cast. If you want to protect your queries from these types of errors, you
-can use [SAFE_CAST][con-func-safecast].
+can use [TRY_CAST][con-func-safecast].
 
 Casts between supported types that do not successfully map from the original
 value to the target domain produce runtime errors. For example, casting
@@ -9445,13 +9445,13 @@ SELECT CAST('06/02/2020 17:00:53.110 +00' AS TIMESTAMP FORMAT 'YYYY-MM-DD HH:MI:
 
 [con-func-cast]: #cast
 
-[con-func-safecast]: #safe_casting
+[con-func-safecast]: #try_casting
 
-### `SAFE_CAST` 
-<a id="safe_casting"></a>
+### `TRY_CAST` 
+<a id="try_casting"></a>
 
 <pre class="lang-sql prettyprint">
-<code>SAFE_CAST(expression AS typename [format_clause])</code>
+<code>TRY_CAST(expression AS typename [format_clause])</code>
 </pre>
 
 **Description**
@@ -9464,11 +9464,11 @@ SELECT CAST("apple" AS INT64) AS not_a_number;
 ```
 
 If you want to protect your queries from these types of errors, you can use
-`SAFE_CAST`. `SAFE_CAST` is identical to `CAST`, except it returns `NULL`
+`TRY_CAST`. `TRY_CAST` is identical to `CAST`, except it returns `NULL`
 instead of raising an error.
 
 ```sql
-SELECT SAFE_CAST("apple" AS INT64) AS not_a_number;
+SELECT TRY_CAST("apple" AS INT64) AS not_a_number;
 
 +--------------+
 | not_a_number |

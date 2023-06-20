@@ -370,8 +370,8 @@ AllDepthLimitDetectorTestCases() {
                                        R({" AS DOUBLE)"}), " AS c"},
           },
           {
-              .depth_limit_test_case_name = "nested_safe_cast",
-              .depth_limit_template = {"SELECT ", R({"SAFE_CAST("}), "1",
+              .depth_limit_test_case_name = "nested_try_cast",
+              .depth_limit_template = {"SELECT ", R({"TRY_CAST("}), "1",
                                        R({" AS DOUBLE)"}), " AS c"},
           },
           {.depth_limit_test_case_name = "nested_least",

@@ -734,7 +734,7 @@ class ResolvedCast : public <a href="#ResolvedExpr">ResolvedExpr</a> {
   const <a href="#ResolvedExpr">ResolvedExpr</a>* expr() const;
 
 <font color="brown">  // Whether to return NULL if the cast fails. This is set to true for
-  // SAFE_CAST.</font>
+  // TRY_CAST.</font>
   bool return_null_on_error() const;
 
 <font color="brown">  // If at least one of types involved in this cast is or contains an

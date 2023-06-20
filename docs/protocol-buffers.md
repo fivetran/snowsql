@@ -875,7 +875,7 @@ could result in loss of data.
 `STRING` literals used where a `PROTO` value is expected will be implicitly cast
 to `PROTO`. If the literal value cannot be parsed using the expected `PROTO`
 type, an error will be raised. To return `NULL`
-instead, use [`SAFE_CAST`][link_to_safe_cast].
+instead, use [`TRY_CAST`][link_to_try_cast].
 
 ## Constructing protocol buffers
 
@@ -908,7 +908,7 @@ type][proto-data-type-construct].
 
 [cast-as-proto]: https://github.com/google/zetasql/blob/master/docs/conversion_functions.md#cast-as-proto
 
-[link_to_safe_cast]: https://github.com/google/zetasql/blob/master/docs/conversion_functions.md#safe_casting
+[link_to_try_cast]: https://github.com/google/zetasql/blob/master/docs/conversion_functions.md#try_casting
 
 [link_to_expression_subquery]: https://github.com/google/zetasql/blob/master/docs/subqueries.md#expression_subquery_concepts
 

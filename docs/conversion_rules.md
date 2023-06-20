@@ -167,7 +167,7 @@ PROTO
 Most data types can be cast from one type to another with the `CAST` function.
 When using `CAST`, a query can fail if ZetaSQL is unable to perform
 the cast. If you want to protect your queries from these types of errors, you
-can use `SAFE_CAST`. To learn more about the rules for `CAST`, `SAFE_CAST` and
+can use `TRY_CAST`. To learn more about the rules for `CAST`, `TRY_CAST` and
 other casting functions, see
 [Conversion functions][con-rules-link-to-conversion-functions].
 

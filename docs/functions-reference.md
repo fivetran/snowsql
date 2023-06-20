@@ -69,7 +69,7 @@ doesn't return an error, `SAFE.` has no effect on the output.
   don't support the `SAFE.` prefix.
 + The `CAST` and `EXTRACT` functions don't support the `SAFE.`
   prefix. To prevent errors from casting, use
-  [SAFE_CAST][link-to-SAFE_CAST].
+  [TRY_CAST][link-to-TRY_CAST].
 
 **Example**
 
@@ -99,7 +99,7 @@ SELECT SAFE.SUBSTR('bar', 0, 2) AS safe_output;
 
 [link-to-SAFE_DIVIDE]: https://github.com/google/zetasql/blob/master/docs/mathematical_functions.md#safe_divide
 
-[link-to-SAFE_CAST]: https://github.com/google/zetasql/blob/master/docs/conversion_functions.md#safe_casting
+[link-to-TRY_CAST]: https://github.com/google/zetasql/blob/master/docs/conversion_functions.md#try_casting
 
 <!-- mdlint on -->
 
