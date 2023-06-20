@@ -1371,15 +1371,17 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_numeric('12.3456', 10, 1), to_numeric(12.3456, 10, 1), to_numeric(to_variant(12.3456), 10, 1), to_numeric('12.3', '99.9', 9, 5),"
       // TODO: "to_time('12:30:00'), to_time('12:30:00', 'HH24:MI:SS'), to_time('123000'), to_time(to_variant('12:30:00')),"
       "to_timestamp(1592581800000), to_timestamp(to_date('2023-06-19 14:30:00')), to_timestamp('2023-06-19 14:30:00'), to_timestamp(to_timestamp('2023-06-19 14:30:00')), to_timestamp(to_variant('2023-06-19 14:30:00')),"
+      "to_timestamp_tz(1592581800000), to_timestamp_tz(to_date('2023-06-19 14:30:00')), to_timestamp_tz('2023-06-19 14:30:00'), to_timestamp_tz(to_timestamp_tz('2023-06-19 14:30:00')), to_timestamp_tz(to_variant('2023-06-19 14:30:00')),"
+      "to_timestamp_ltz(1592581800000), to_timestamp_ltz(to_date('2023-06-19 14:30:00')), to_timestamp_ltz('2023-06-19 14:30:00'), to_timestamp_ltz(to_timestamp_ltz('2023-06-19 14:30:00')), to_timestamp_ltz(to_variant('2023-06-19 14:30:00')),"
+      "to_timestamp_ntz(1592581800000), to_timestamp_ntz(to_date('2023-06-19 14:30:00')), to_timestamp_ntz('2023-06-19 14:30:00'), to_timestamp_ntz(to_timestamp_ntz('2023-06-19 14:30:00')), to_timestamp_ntz(to_variant('2023-06-19 14:30:00')),"
       "to_xml(object_construct('a', 1)), to_xml(array_construct('a', 1)), to_xml(1), to_xml(1.1), to_xml(false),"
       "try_to_decimal('12.3456', 10, 1), try_to_decimal('a'), try_to_decimal('12.3', '99.9'), try_to_decimal('12.3', '99.9', 9, 5),"
       "try_to_number('12.3456', 10, 1), try_to_number('a'), try_to_number('12.3', '99.9'), try_to_number('12.3', '99.9', 9, 5),"
       "try_to_numeric('12.3456', 10, 1), try_to_numeric('a'), try_to_numeric('12.3', '99.9'), try_to_numeric('12.3', '99.9', 9, 5),"
-      "try_to_timestamp('2023-06-19 14:30:00'), try_to_timestamp('a'), try_to_timestamp('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
-      "try_to_timestamp_ltz('2023-06-19 14:30:00'), try_to_timestamp_ltz('a'), try_to_timestamp_ltz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
-      "try_to_timestamp_ntz('2023-06-19 14:30:00'), try_to_timestamp_ntz('a'), try_to_timestamp_ntz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
-      "try_to_timestamp_tz('2023-06-19 14:30:00'), try_to_timestamp_tz('a'), try_to_timestamp_tz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS')"
-
+      "try_to_timestamp('2023-06-19 14:30:00'), try_to_timestamp('a'), try_to_timestamp('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
+      "try_to_timestamp_ltz('2023-06-19 14:30:00'), try_to_timestamp_ltz('a'), try_to_timestamp_ltz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
+      "try_to_timestamp_ntz('2023-06-19 14:30:00'), try_to_timestamp_ntz('a'), try_to_timestamp_ntz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
+      "try_to_timestamp_tz('2023-06-19 14:30:00'), try_to_timestamp_tz('a'), try_to_timestamp_tz('2023-06-19 14:30:00', 'YYYY-MM-DD HH24:MI:SS'),"
       "from table_1"
     },
     {"DataGeneration",
