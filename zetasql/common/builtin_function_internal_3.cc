@@ -4448,6 +4448,19 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
          {string_type, {object_type}, FN_TO_XML_OBJECT},
          {string_type, {float_type}, FN_TO_XML_FLOAT},
          {string_type, {bool_type}, FN_TO_XML_BOOL}});
+
+    // TRY_TO_DECIMAL
+    InsertFunction(
+        functions, options, "try_to_decimal", SCALAR,
+        {{numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_2}},
+         FunctionOptions().set_alias_name("try_to_number"));
+
+    // TRY_TO_NUMERIC
+    InsertFunction(
+        functions, options, "try_to_numeric", SCALAR,
+        {{numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_2}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
