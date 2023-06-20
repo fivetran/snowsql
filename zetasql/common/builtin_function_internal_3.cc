@@ -4438,6 +4438,16 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
          {timestamp_type, {timestamp_type}, FN_TO_TIMESTAMP_TIMESTAMP},
          {timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIMESTAMP_STRING},
          {timestamp_type, {variant_type}, FN_TO_TIMESTAMP_VARIANT}});
+
+    // TO_XML
+    InsertFunction(
+        functions, options, "to_xml", SCALAR,
+        {{string_type, {variant_type}, FN_TO_XML_VARIANT},
+         {string_type, {array_variant_type}, FN_TO_XML_ARRAY},
+         {string_type, {int64_type}, FN_TO_XML_INT64},
+         {string_type, {object_type}, FN_TO_XML_OBJECT},
+         {string_type, {float_type}, FN_TO_XML_FLOAT},
+         {string_type, {bool_type}, FN_TO_XML_BOOL}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,

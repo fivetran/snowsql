@@ -1386,6 +1386,12 @@ enum FunctionSignatureId {
   FN_TO_TIMESTAMP_TIMESTAMP = 100362;     // to_timestamp(TIMESTAMP) -> TIMESTAMP
   FN_TO_TIMESTAMP_STRING = 100363;        // to_timestamp(STRING, <STRING>) -> TIMESTAMP
   FN_TO_TIMESTAMP_VARIANT = 100364;       // to_timestamp(VARIANT) -> TIMESTAMP
+  FN_TO_XML_VARIANT = 100365;             // to_xml(STRING) -> STRING
+  FN_TO_XML_ARRAY = 100366;               // to_xml(ARRAY) -> STRING
+  FN_TO_XML_INT64 = 100367;               // to_xml(INT64) -> STRING
+  FN_TO_XML_OBJECT = 100368;              // to_xml(OBJECT) -> STRING
+  FN_TO_XML_FLOAT = 100369;               // to_xml(FLOAT) -> STRING
+  FN_TO_XML_BOOL = 100370;                // to_xml(BOOL) -> STRING
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
