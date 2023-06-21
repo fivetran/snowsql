@@ -4881,6 +4881,13 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "as_timestamp_ntz", SCALAR,
         {{timestamp_type, {ARG_TYPE_ANY_1}, FN_AS_TIMESTAMP}},
         fn_options);
+
+    // CHECK_JSON
+    InsertFunction(
+        functions, options, "check_json", SCALAR,
+        {{string_type, {string_type}, FN_CHECK_JSON_STRING},
+         {string_type, {variant_type}, FN_CHECK_JSON_VARIANT}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
