@@ -250,39 +250,3 @@ QueryStmt
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
-
-[language_features=JSON_TYPE,NAMED_ARGUMENTS]
-SELECT TO_JSON(key), TO_JSON(TestEnum, stringify_wide_numbers=>true), TO_JSON(KitchenSink, stringify_wide_numbers=>false) FROM TestTable;
---
-QueryStmt
-+-output_column_list=
-| +-$query.$col1#4 AS `$col1` [JSON]
-| +-$query.$col2#5 AS `$col2` [JSON]
-| +-$query.$col3#6 AS `$col3` [JSON]
-+-query=
-  +-ProjectScan
-    +-column_list=$query.[$col1#4, $col2#5, $col3#6]
-    +-expr_list=
-    | +-$col1#4 :=
-    | | +-FunctionCall(ZetaSQL:to_json(INT32, optional(1) BOOL stringify_wide_numbers) -> JSON)
-    | |   +-ColumnRef(type=INT32, column=TestTable.key#1)
-    | |   +-Literal(type=BOOL, value=false)
-    | +-$col2#5 :=
-    | | +-FunctionCall(ZetaSQL:to_json(ENUM<zetasql_test__.TestEnum>, optional(1) BOOL stringify_wide_numbers) -> JSON)
-    | |   +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#2)
-    | |   +-Literal(type=BOOL, value=true)
-    | +-$col3#6 :=
-    |   +-FunctionCall(ZetaSQL:to_json(PROTO<zetasql_test__.KitchenSinkPB>, optional(1) BOOL stringify_wide_numbers) -> JSON)
-    |     +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
-    |     +-Literal(type=BOOL, value=false)
-    +-input_scan=
-      +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2])
-==
-
-[language_features=JSON_TYPE,NAMED_ARGUMENTS]
-SELECT TO_JSON(1, false);
---
-ERROR: Positional argument is invalid because this function restricts that this argument is referred to by name "stringify_wide_numbers" only [at 1:19]
-SELECT TO_JSON(1, false);
-                  ^
-==

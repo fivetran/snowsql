@@ -662,7 +662,7 @@ rollup { return BisonParserImpl::token::KW_ROLLUP; }
 row { return BisonParserImpl::token::KW_ROW; }
 rows { return BisonParserImpl::token::KW_ROWS; }
 run { return BisonParserImpl::token::KW_RUN; }
-safe_cast { return BisonParserImpl::token::KW_SAFE_CAST; }
+try_cast { return BisonParserImpl::token::KW_TRY_CAST; }
 schema { return BisonParserImpl::token::KW_SCHEMA; }
 search { return BisonParserImpl::token::KW_SEARCH; }
 security { return BisonParserImpl::token::KW_SECURITY; }

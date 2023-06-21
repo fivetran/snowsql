@@ -101,11 +101,11 @@
 // easily solved in any other way.
 //
 //
-// AMBIGUOUS CASE 2: SAFE_CAST(...)
+// AMBIGUOUS CASE 2: TRY_CAST(...)
 // --------------------------------
-// The SAFE_CAST keyword is non-reserved and can be used as an identifier. This
+// The TRY_CAST keyword is non-reserved and can be used as an identifier. This
 // causes one shift/reduce conflict between keyword_as_identifier and the rule
-// that starts with "SAFE_CAST" "(". It is resolved in favor of the SAFE_CAST(
+// that starts with "TRY_CAST" "(". It is resolved in favor of the TRY_CAST(
 // rule, which is the desired behavior.
 //
 //
@@ -759,7 +759,7 @@ using namespace zetasql::parser_internal;
 %token KW_ROLLBACK "ROLLBACK"
 %token KW_ROW "ROW"
 %token KW_RUN "RUN"
-%token KW_SAFE_CAST "SAFE_CAST"
+%token KW_TRY_CAST "TRY_CAST"
 %token KW_SCHEMA "SCHEMA"
 %token KW_SEARCH "SEARCH"
 %token KW_SECURITY "SECURITY"
@@ -6809,7 +6809,7 @@ expression_not_parenthesized:
           YYERROR_UNEXPECTED_AND_ABORT_AT(@3);
         }
         auto* cast = MAKE_NODE(ASTCastExpression, @$, {$1, $3});
-        cast->set_is_safe_cast(false);
+        cast->set_is_try_cast(false);
         $$ = cast;
       }
     ;
@@ -7670,7 +7670,7 @@ cast_expression:
       "CAST" "(" expression "AS" type opt_format ")"
       {
         auto* cast = MAKE_NODE(ASTCastExpression, @$, {$3, $5, $6});
-        cast->set_is_safe_cast(false);
+        cast->set_is_try_cast(false);
         $$ = cast;
       }
     | "CAST" "(" "SELECT"
@@ -7683,17 +7683,17 @@ cast_expression:
       }
     // This rule causes a shift/reduce conflict with keyword_as_identifier. It
     // is resolved in favor of this rule, which is the desired behavior.
-    | "SAFE_CAST" "(" expression "AS" type opt_format ")"
+    | "TRY_CAST" "(" expression "AS" type opt_format ")"
       {
         auto* cast = MAKE_NODE(ASTCastExpression, @$, {$3, $5, $6});
-        cast->set_is_safe_cast(true);
+        cast->set_is_try_cast(true);
         $$ = cast;
       }
-    | "SAFE_CAST" "(" "SELECT"
+    | "TRY_CAST" "(" "SELECT"
       {
         YYERROR_AND_ABORT_AT(
         @3,
-        "The argument to SAFE_CAST is an expression, not a query; to use a "
+        "The argument to TRY_CAST is an expression, not a query; to use a "
         "query as an expression, the query must be wrapped with additional "
         "parentheses to make it a scalar subquery expression");
       }
@@ -8637,7 +8637,7 @@ keyword_as_identifier:
     | "ROLLBACK"
     | "ROW"
     | "RUN"
-    | "SAFE_CAST"
+    | "TRY_CAST"
     | "SCHEMA"
     | "SEARCH"
     | "SECURITY"

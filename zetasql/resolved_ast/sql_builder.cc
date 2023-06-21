@@ -1365,7 +1365,7 @@ absl::Status SQLBuilder::VisitResolvedCast(const ResolvedCast* node) {
 
   PushQueryFragment(
       node,
-      absl::StrCat(node->return_null_on_error() ? "SAFE_CAST(" : "CAST(",
+      absl::StrCat(node->return_null_on_error() ? "TRY_CAST(" : "CAST(",
                    result->GetSQL(), " AS ", type_name, format_clause, ")"));
   return absl::OkStatus();
 }

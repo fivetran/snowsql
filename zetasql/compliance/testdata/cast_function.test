@@ -661,19 +661,19 @@ SELECT CAST(b'\xe2\x28\xa1' AS STRING FORMAT 'utf8')
 ERROR: generic::out_of_range: A string is not valid UTF-8.
 ==
 
-# Test that null is returned by SAFE_CAST when the input cannot be converted
+# Test that null is returned by TRY_CAST when the input cannot be converted
 # to string using the given format
 [required_features=V_1_3_FORMAT_IN_CAST]
-[name=cast_bytes_to_string_safe_cast_with_invalid_input]
-SELECT SAFE_CAST(b'\xe2\x28\xa1' AS STRING FORMAT 'utf8')
+[name=cast_bytes_to_string_try_cast_with_invalid_input]
+SELECT TRY_CAST(b'\xe2\x28\xa1' AS STRING FORMAT 'utf8')
 --
 ARRAY<STRUCT<STRING>>[{NULL}]
 ==
 
-# Test that null is returned by SAFE_CAST when the format string is invalid.
+# Test that null is returned by TRY_CAST when the format string is invalid.
 [required_features=V_1_3_FORMAT_IN_CAST]
-[name=cast_bytes_to_string_safe_cast_with_invalid_format]
-SELECT SAFE_CAST(b'abc' AS STRING FORMAT 'x' || 'y' || 'z')
+[name=cast_bytes_to_string_try_cast_with_invalid_format]
+SELECT TRY_CAST(b'abc' AS STRING FORMAT 'x' || 'y' || 'z')
 --
 ARRAY<STRUCT<STRING>>[{NULL}]
 ==
@@ -798,20 +798,20 @@ SELECT CAST('123' as bytes FORMAT 'base2')
 ERROR: generic::out_of_range: Failed to decode invalid base2 string due to character '2' at offset 1
 ==
 
-# Test that null is returned by SAFE_CAST when the input cannot be converted
+# Test that null is returned by TRY_CAST when the input cannot be converted
 # to bytes using the given format
 [required_features=V_1_3_FORMAT_IN_CAST]
-[name=cast_string_to_bytes_safe_cast_invalid_input]
-SELECT SAFE_CAST('123' as bytes FORMAT 'base2')
+[name=cast_string_to_bytes_try_cast_invalid_input]
+SELECT TRY_CAST('123' as bytes FORMAT 'base2')
 --
 ARRAY<STRUCT<BYTES>>[{NULL}]
 ==
 
-# Test that null is returned by SAFE_CAST when the format string is invalid.
+# Test that null is returned by TRY_CAST when the format string is invalid.
 # to bytes using the given format
 [required_features=V_1_3_FORMAT_IN_CAST]
-[name=cast_string_to_bytes_safe_cast_invalid_format]
-SELECT SAFE_CAST('123' as bytes FORMAT 'x' || 'y' || 'z')
+[name=cast_string_to_bytes_try_cast_invalid_format]
+SELECT TRY_CAST('123' as bytes FORMAT 'x' || 'y' || 'z')
 --
 ARRAY<STRUCT<BYTES>>[{NULL}]
 
@@ -1331,8 +1331,8 @@ select cast(1000 AS `zetasql_test__.TestEnum`);
 ERROR: generic::out_of_range: Out of range cast of integer 1000 to enum type zetasql_test__.TestEnum
 ==
 
-[name=safe_cast_invalid_int_to_enum]
-select safe_cast(1000 AS `zetasql_test__.TestEnum`);
+[name=try_cast_invalid_int_to_enum]
+select try_cast(1000 AS `zetasql_test__.TestEnum`);
 --
 ARRAY<STRUCT<ENUM<zetasql_test__.TestEnum>>>[{NULL}]
 ==
@@ -1349,8 +1349,8 @@ select cast('TESTENUM1000' AS `zetasql_test__.TestEnum`)
 ERROR: generic::out_of_range: Out of range cast of string 'TESTENUM1000' to enum type zetasql_test__.TestEnum; Did you mean 'TESTENUM0'?
 ==
 
-[name=safe_cast_invalid_string_literal_to_enum]
-select safe_cast('TESTENUM1000' AS `zetasql_test__.TestEnum`)
+[name=try_cast_invalid_string_literal_to_enum]
+select try_cast('TESTENUM1000' AS `zetasql_test__.TestEnum`)
 --
 ARRAY<STRUCT<ENUM<zetasql_test__.TestEnum>>>[{NULL}]
 ==
@@ -1367,8 +1367,8 @@ select SQRT(cast(9999999999 as int32))
 ERROR: generic::out_of_range: int32 out of range: 9999999999
 ==
 
-[name=invalid_safe_cast_nested_inside_a_function]
-select SQRT(safe_cast(9999999999 as int32))
+[name=invalid_try_cast_nested_inside_a_function]
+select SQRT(try_cast(9999999999 as int32))
 --
 ARRAY<STRUCT<DOUBLE>>[{NULL}]
 ==
@@ -1380,9 +1380,9 @@ select cast(9223372036854775808 as int64), 9223372036854775808
 ERROR: generic::out_of_range: int64 out of range: 9223372036854775808
 ==
 
-[name=safe_cast_overflowing_literal_into_int64]
+[name=try_cast_overflowing_literal_into_int64]
 # INT64_MAX + 1 => 9223372036854775808
-select safe_cast(9223372036854775808 as int64), 9223372036854775808
+select try_cast(9223372036854775808 as int64), 9223372036854775808
 --
 ARRAY<STRUCT<INT64, UINT64>>[{NULL, 9223372036854775808}]
 ==
@@ -1434,8 +1434,8 @@ select cast("abc" as INT64)
 ERROR: generic::out_of_range: Bad int64 value: abc
 ==
 
-[name=safe_cast_invalid_string_to_int64]
-select safe_cast("abc" as INT64)
+[name=try_cast_invalid_string_to_int64]
+select try_cast("abc" as INT64)
 --
 ARRAY<STRUCT<INT64>>[{NULL}]
 ==
@@ -1447,9 +1447,9 @@ select cast(["100", "abc"] as ARRAY<INT64>);
 ERROR: generic::out_of_range: Bad int64 value: abc
 ==
 
-[name=safe_cast_array_with_invalid_string_literals]
+[name=try_cast_array_with_invalid_string_literals]
 [required_features=V_1_1_CAST_DIFFERENT_ARRAY_TYPES]
-select safe_cast(["100", "abc"] as ARRAY<INT64>);
+select try_cast(["100", "abc"] as ARRAY<INT64>);
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<INT64>(NULL)}]
 ==
@@ -1501,7 +1501,7 @@ ERROR: generic::out_of_range: uint32 out of range: -1769384439
 ==
 # Test case from b/79755993 (now fixed).
 [name=safe_nested_casts_of_invalid_literals]
-select SAFE_CAST(CAST(- 1769384439 AS INT32) AS UINT32)
+select TRY_CAST(CAST(- 1769384439 AS INT32) AS UINT32)
        & CAST(1834360097 AS UINT32);
 --
 ARRAY<STRUCT<UINT32>>[{NULL}]

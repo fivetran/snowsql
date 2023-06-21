@@ -2245,7 +2245,7 @@ void Unparser::visitASTFormatClause(const ASTFormatClause *node, void *data) {
 
 void Unparser::visitASTCastExpression(const ASTCastExpression* node,
                                       void* data) {
-  print(node->is_safe_cast() ? "SAFE_CAST(" : "CAST(");
+  print(node->is_try_cast() ? "TRY_CAST(" : "CAST(");
   node->expr()->Accept(this, data);
   print("AS");
   node->type()->Accept(this, data);
