@@ -4975,6 +4975,13 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "is_timestamp_ntz", SCALAR,
         {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIMESTAMP}},
         fn_options);
+
+    // PARSE_XML
+    InsertFunction(
+        functions, options, "parse_xml", SCALAR,
+        {{object_type, {string_type, {bool_type, OPTIONAL}}, FN_PARSE_XML_STRING},
+         {object_type, {string_type, {bool_type, OPTIONAL}}, FN_PARSE_XML_VARIANT}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
