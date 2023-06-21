@@ -103,6 +103,7 @@ class ZetaSqlLocalServiceImplTest : public ::testing::Test {
     ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(catalog_proto_text, &catalog));
 
     zetasql::ZetaSQLBuiltinFunctionOptionsProto options;
+    options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_TYPEOF_FUNCTION);
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_2_CIVIL_TIME);
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_DECIMAL_ALIAS);
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_NUMERIC_TYPE);
