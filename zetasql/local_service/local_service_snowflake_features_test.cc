@@ -1454,6 +1454,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "is_boolean(true), is_boolean(to_variant('a')), is_boolean(1), is_boolean(array_construct()),"
       "is_char(true), is_char(to_variant('a')), is_char(1), is_char(array_construct()),"
       "is_varchar(true), is_varchar(to_variant('a')), is_varchar(1), is_varchar(array_construct()),"
+      "is_date(true), is_date(to_variant('a')), is_date(1), is_date(array_construct()),"
+      "is_date_value(true), is_date_value(to_variant('a')), is_date_value(1), is_date_value(array_construct()),"
     }
   };
 
