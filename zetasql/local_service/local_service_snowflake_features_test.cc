@@ -1441,6 +1441,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "as_double(to_variant('123.45')), as_double(1), as_double(1.1),"
       "as_real(to_variant('123.45')), as_real(1), as_double(1.1),"
       "as_integer(to_variant(1)), as_integer(to_variant('1')),"
+      "as_time(to_variant(to_time('12:34:56'))),"
     }
   };
 
