@@ -1466,6 +1466,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "is_timestamp_ntz(true), is_timestamp_ntz(to_variant('a')), is_timestamp_ntz(1), is_timestamp_ntz(array_construct()),"
       "is_timestamp_ltz(true), is_timestamp_ltz(to_variant('a')), is_timestamp_ltz(1), is_timestamp_ltz(array_construct()),"
       "parse_xml('<'), parse_xml('<', false), parse_xml(to_variant('<')), parse_xml(to_variant('<'), false),"
+      "strip_null_value(get_path(parse_json('{\"a\": null}'), 'a')), strip_null_value(true), strip_null_value(to_variant('a')), strip_null_value(1), strip_null_value(array_construct()),"
     }
   };
 

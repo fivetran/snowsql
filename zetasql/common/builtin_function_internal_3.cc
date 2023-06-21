@@ -4982,6 +4982,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         {{object_type, {string_type, {bool_type, OPTIONAL}}, FN_PARSE_XML_STRING},
          {object_type, {string_type, {bool_type, OPTIONAL}}, FN_PARSE_XML_VARIANT}},
         fn_options);
+
+    // STRIP_NULL_VALUE
+    InsertFunction(
+        functions, options, "strip_null_value", SCALAR,
+        {{variant_type, {ARG_TYPE_ANY_1}, FN_STRIP_NULL_VALUE}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
