@@ -1468,6 +1468,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "parse_xml('<'), parse_xml('<', false), parse_xml(to_variant('<')), parse_xml(to_variant('<'), false),"
       "strip_null_value(get_path(parse_json('{\"a\": null}'), 'a')), strip_null_value(true), strip_null_value(to_variant('a')), strip_null_value(1), strip_null_value(array_construct()),"
       "strtok_to_array('1 2'), strtok_to_array('1;2', ';'), strtok_to_array(to_variant('1 2')), strtok_to_array(to_variant('1;2'), to_variant(';')),"
+      "try_parse_json('{}'), try_parse_json(to_variant('notjson')),"
     }
   };
 

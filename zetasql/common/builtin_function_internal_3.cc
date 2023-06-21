@@ -4994,6 +4994,13 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "strtok_to_array", SCALAR,
         {{array_variant_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, OPTIONAL}}, FN_STRTOK_TO_ARRAY}},
         fn_options);
+
+    // TRY_PARSE_JSON
+    InsertFunction(
+        functions, options, "try_parse_json", SCALAR,
+        {{variant_type, {string_type}, FN_TRY_PARSE_JSON_STRING},
+         {variant_type, {variant_type}, FN_TRY_PARSE_JSON_VARIANT}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
