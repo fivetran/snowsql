@@ -4957,6 +4957,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "is_null_value", SCALAR,
         {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_NULL_VALUE}},
         fn_options);
+
+    // IS_TIME
+    InsertFunction(
+        functions, options, "is_time", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIME}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
