@@ -5001,6 +5001,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         {{variant_type, {string_type}, FN_TRY_PARSE_JSON_STRING},
          {variant_type, {variant_type}, FN_TRY_PARSE_JSON_VARIANT}},
         fn_options);
+
+    // XMLGET
+    InsertFunction(
+        functions, options, "xmlget", SCALAR,
+        {{object_type, {ARG_TYPE_ANY_1, string_type, {int64_type, OPTIONAL}}, FN_XMLGET}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
