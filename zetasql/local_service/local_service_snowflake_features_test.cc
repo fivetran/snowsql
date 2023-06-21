@@ -1460,6 +1460,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "is_integer(true), is_integer(to_variant('a')), is_integer(1), is_integer(array_construct()),"
       "is_double(true), is_double(to_variant('a')), is_double(1), is_double(array_construct()),"
       "is_real(true), is_real(to_variant('a')), is_real(1), is_real(array_construct()),"
+      "is_null_value(get_path(parse_json('{\"a\": null}'), 'a')), is_null_value(true), is_null_value(to_variant('a')), is_null_value(1), is_null_value(array_construct()),"
     }
   };
 

@@ -4951,6 +4951,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "is_double", SCALAR,
         {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_DOUBLE}},
         FunctionOptions().set_alias_name("is_real"));
+
+    // IS_NULL_VALUE
+    InsertFunction(
+        functions, options, "is_null_value", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_NULL_VALUE}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
