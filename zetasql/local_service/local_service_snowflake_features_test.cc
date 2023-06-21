@@ -1446,6 +1446,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "as_timestamp_ltz(to_variant(to_timestamp_ltz('2018-10-10 12:34:56'))),"
       "as_timestamp_ntz(to_variant(to_timestamp_ntz('2018-10-10 12:34:56'))),"
       "check_json('{}'), check_json('notjson'), check_json(to_variant('1')),"
+      "check_xml('<'), check_xml('<', false),"
     }
   };
 

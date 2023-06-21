@@ -4888,6 +4888,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         {{string_type, {string_type}, FN_CHECK_JSON_STRING},
          {string_type, {variant_type}, FN_CHECK_JSON_VARIANT}},
         fn_options);
+
+    // CHECK_XML
+    InsertFunction(
+        functions, options, "check_xml", SCALAR,
+        {{string_type, {string_type, {bool_type, OPTIONAL}}, FN_CHECK_XML}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
