@@ -1452,6 +1452,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "get_path(parse_json('{}'), 'a'),"
       "is_binary(to_variant(to_binary('snow', 'utf-8'))), is_binary(1), is_binary(array_construct()),"
       "is_boolean(true), is_boolean(to_variant('a')), is_boolean(1), is_boolean(array_construct()),"
+      "is_char(true), is_char(to_variant('a')), is_char(1), is_char(array_construct()),"
+      "is_varchar(true), is_varchar(to_variant('a')), is_varchar(1), is_varchar(array_construct()),"
     }
   };
 

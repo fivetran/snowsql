@@ -4921,6 +4921,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "is_boolean", SCALAR,
         {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_BOOLEAN}},
         fn_options);
+
+    // IS_CHAR, IS_VARCHAR
+    InsertFunction(
+        functions, options, "is_char", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_CHAR}},
+        FunctionOptions().set_alias_name("is_varchar"));
 }
 
 /* Snowflake specific functions END */
