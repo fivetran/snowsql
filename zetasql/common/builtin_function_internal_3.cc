@@ -4988,6 +4988,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "strip_null_value", SCALAR,
         {{variant_type, {ARG_TYPE_ANY_1}, FN_STRIP_NULL_VALUE}},
         fn_options);
+
+    // STRTOK_TO_ARRAY
+    InsertFunction(
+        functions, options, "strtok_to_array", SCALAR,
+        {{array_variant_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, OPTIONAL}}, FN_STRTOK_TO_ARRAY}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
