@@ -227,32 +227,32 @@ GROUP BY returns
 ORDER BY returns
 ==
 
-# safe_cast should still be used as column or path name.
-select safe_cast from (select 1 as safe_cast)
+# try_cast should still be used as column or path name.
+select try_cast from (select 1 as try_cast)
 --
-QueryStatement [0-45] [select safe_cast...safe_cast)]
-  Query [0-45] [select safe_cast...safe_cast)]
-    Select [0-45] [select safe_cast...safe_cast)]
-      SelectList [7-16] [safe_cast]
-        SelectColumn [7-16] [safe_cast]
-          PathExpression [7-16] [safe_cast]
-            Identifier(`safe_cast`) [7-16] [safe_cast]
-      FromClause [17-45] [from (select 1 as safe_cast)]
-        TableSubquery [22-45] [(select 1 as safe_cast)]
-          Query [23-44] [select 1 as safe_cast]
-            Select [23-44] [select 1 as safe_cast]
-              SelectList [30-44] [1 as safe_cast]
-                SelectColumn [30-44] [1 as safe_cast]
-                  IntLiteral(1) [30-31] [1]
-                  Alias [32-44] [as safe_cast]
-                    Identifier(`safe_cast`) [35-44] [safe_cast]
+QueryStatement [0-43] [select try_cast...try_cast)]
+  Query [0-43] [select try_cast...try_cast)]
+    Select [0-43] [select try_cast...try_cast)]
+      SelectList [7-15] [try_cast]
+        SelectColumn [7-15] [try_cast]
+          PathExpression [7-15] [try_cast]
+            Identifier(`try_cast`) [7-15] [try_cast]
+      FromClause [16-43] [from (select 1 as try_cast)]
+        TableSubquery [21-43] [(select 1 as try_cast)]
+          Query [22-42] [select 1 as try_cast]
+            Select [22-42] [select 1 as try_cast]
+              SelectList [29-42] [1 as try_cast]
+                SelectColumn [29-42] [1 as try_cast]
+                  IntLiteral(1) [29-30] [1]
+                  Alias [31-42] [as try_cast]
+                    Identifier(`try_cast`) [34-42] [try_cast]
 --
 SELECT
-  `safe_cast`
+  `try_cast`
 FROM
   (
     SELECT
-      1 AS `safe_cast`
+      1 AS `try_cast`
   )
 ==
 
