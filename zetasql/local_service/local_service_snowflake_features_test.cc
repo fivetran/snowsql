@@ -1442,6 +1442,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "as_real(to_variant('123.45')), as_real(1), as_double(1.1),"
       "as_integer(to_variant(1)), as_integer(to_variant('1')),"
       "as_time(to_variant(to_time('12:34:56'))),"
+      "as_timestamp_tz(to_variant(to_timestamp_tz('2018-10-10 12:34:56'))),"
+      "as_timestamp_ltz(to_variant(to_timestamp_ltz('2018-10-10 12:34:56'))),"
+      "as_timestamp_ntz(to_variant(to_timestamp_ntz('2018-10-10 12:34:56'))),"
     }
   };
 

@@ -4689,6 +4689,7 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
     const Type* numeric_type = type_factory->get_numeric();
     const Type* double_type = type_factory->get_double();
     const Type* time_type = type_factory->get_time();
+    const Type* timestamp_type = type_factory->get_timestamp();
     const ArrayType* array_variant_type;
     ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
@@ -4865,6 +4866,19 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
     InsertFunction(
         functions, options, "as_time", SCALAR,
         {{time_type, {ARG_TYPE_ANY_1}, FN_AS_TIME}},
+        fn_options);
+
+    // TODO: change return type for AS_TIMESTAMP_* functions
+    // AS_TIMESTAMP_TZ, AS_TIMESTAMP_LTZ
+    InsertFunction(
+        functions, options, "as_timestamp_tz", SCALAR,
+        {{timestamp_type, {ARG_TYPE_ANY_1}, FN_AS_TIMESTAMP}},
+        FunctionOptions().set_alias_name("as_timestamp_ltz"));
+
+    // AS_TIMESTAMP_NTZ
+    InsertFunction(
+        functions, options, "as_timestamp_ntz", SCALAR,
+        {{timestamp_type, {ARG_TYPE_ANY_1}, FN_AS_TIMESTAMP}},
         fn_options);
 }
 
