@@ -1449,6 +1449,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "check_xml('<'), check_xml('<', false),"
       "get(parse_json('{}'), 'a'), get(array_construct(1, 2), 1), get(to_variant(parse_json('{}')), 'a'), get(to_variant(array_construct(1, 2)), 1),"
       "get_ignore_case(parse_json('{}'), 'a'), get_ignore_case(array_construct(1, 2), 1), get_ignore_case(to_variant(parse_json('{}')), 'a'), get_ignore_case(to_variant(array_construct(1, 2)), 1),"
+      "get_path(parse_json('{}'), 'a'),"
+      "is_binary(to_variant(to_binary('snow', 'utf-8'))), is_binary(1), is_binary(array_construct()),"
     }
   };
 

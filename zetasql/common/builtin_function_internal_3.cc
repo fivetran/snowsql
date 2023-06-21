@@ -4903,6 +4903,18 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
          {variant_type, {variant_type, int64_type}, FN_GET_VARIANT_INT64},
          {variant_type, {variant_type, string_type}, FN_GET_OBJECT_STRING}},
         FunctionOptions().set_alias_name("get_ignore_case"));
+
+    // GET_PATH
+    InsertFunction(
+        functions, options, "get_path", SCALAR,
+        {{variant_type, {variant_type, string_type}, FN_GET_PATH}},
+        fn_options);
+
+    // IS_BINARY
+    InsertFunction(
+        functions, options, "is_binary", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_BINARY}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
