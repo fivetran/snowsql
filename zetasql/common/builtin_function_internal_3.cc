@@ -4685,6 +4685,7 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
     const Type* object_type = type_factory->get_object();
     const Type* bool_type = type_factory->get_bool();
     const Type* int64_type = type_factory->get_int64();
+    const Type* date_type = type_factory->get_date();
     const ArrayType* array_variant_type;
     ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
@@ -4832,6 +4833,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "as_char", SCALAR,
         {{string_type, {ARG_TYPE_ANY_1}, FN_AS_CHAR}},
         FunctionOptions().set_alias_name("as_varchar"));
+
+    // AS_DATE
+    InsertFunction(
+        functions, options, "as_date", SCALAR,
+        {{date_type, {ARG_TYPE_ANY_1}, FN_AS_DATE}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
