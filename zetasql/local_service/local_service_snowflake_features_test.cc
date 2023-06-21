@@ -1432,6 +1432,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "arrays_overlap(array_construct(), array_construct()),"
       "as_array(1), as_array(array_construct()),"
       "is_array(1), is_array(false), is_array(array_construct()),"
+      "as_boolean(true), as_boolean(to_variant(true)), as_boolean(array_construct()), as_boolean(1),"
+      "as_char(false), as_char(1), as_char(to_variant('a')),"
+      "as_varchar(false), as_varchar(1), as_varchar(to_variant('a')),"
     }
   };
 

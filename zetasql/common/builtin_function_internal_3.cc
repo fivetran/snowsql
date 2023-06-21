@@ -4680,146 +4680,158 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
                                       const ZetaSQLBuiltinFunctionOptions& options,
                                       NameToFunctionMap* functions) {
-  const Type* variant_type = type_factory->get_variant();
-  const Type* string_type = type_factory->get_string();
-  const Type* object_type = type_factory->get_object();
-  const Type* bool_type = type_factory->get_bool();
-  const Type* int64_type = type_factory->get_int64();
-  const ArrayType* array_variant_type;
-  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
+    const Type* variant_type = type_factory->get_variant();
+    const Type* string_type = type_factory->get_string();
+    const Type* object_type = type_factory->get_object();
+    const Type* bool_type = type_factory->get_bool();
+    const Type* int64_type = type_factory->get_int64();
+    const ArrayType* array_variant_type;
+    ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
-  const Function::Mode SCALAR = Function::SCALAR;
-  const FunctionOptions fn_options;
-  const FunctionArgumentType::ArgumentCardinality REPEATED =
-      FunctionArgumentType::REPEATED;
-  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+    const Function::Mode SCALAR = Function::SCALAR;
+    const FunctionOptions fn_options;
+    const FunctionArgumentType::ArgumentCardinality REPEATED =
+        FunctionArgumentType::REPEATED;
+    const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
-  // PARSE_JSON
-  InsertFunction(
-      functions, options, "parse_json", SCALAR,
-      {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
-      fn_options);
+    // PARSE_JSON
+    InsertFunction(
+        functions, options, "parse_json", SCALAR,
+        {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
+        fn_options);
 
-  // OBJECT_CONSTRUCT
-  InsertFunction(
-      functions, options, "object_construct", SCALAR,
-      {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
-      fn_options);
+    // OBJECT_CONSTRUCT
+    InsertFunction(
+        functions, options, "object_construct", SCALAR,
+        {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
+        fn_options);
+        
+    // OBJECT_DELETE
+    InsertFunction(
+        functions, options, "object_delete", SCALAR,
+        {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
+        fn_options);
     
-  // OBJECT_DELETE
-  InsertFunction(
-      functions, options, "object_delete", SCALAR,
-      {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
-      fn_options);
-  
-  // OBJECT_INSERT
-  InsertFunction(
-      functions, options, "object_insert", SCALAR,
-      {{object_type, {object_type, string_type, ARG_TYPE_ANY_1, {bool_type, OPTIONAL}}, FN_OBJECT_INSERT}},
-      fn_options);
+    // OBJECT_INSERT
+    InsertFunction(
+        functions, options, "object_insert", SCALAR,
+        {{object_type, {object_type, string_type, ARG_TYPE_ANY_1, {bool_type, OPTIONAL}}, FN_OBJECT_INSERT}},
+        fn_options);
 
-  // IS_OBJECT
-  InsertFunction(
-      functions, options, "is_object", SCALAR,
-      {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_OBJECT}},
-      fn_options);
+    // IS_OBJECT
+    InsertFunction(
+        functions, options, "is_object", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_OBJECT}},
+        fn_options);
 
-  // AS_OBJECT
-  InsertFunction(
-      functions, options, "as_object", SCALAR,
-      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
-      fn_options);
+    // AS_OBJECT
+    InsertFunction(
+        functions, options, "as_object", SCALAR,
+        {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+        fn_options);
 
-  // AS_BINARY
-  InsertFunction(
-      functions, options, "as_binary", SCALAR,
-      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
-      fn_options);
+    // AS_BINARY
+    InsertFunction(
+        functions, options, "as_binary", SCALAR,
+        {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+        fn_options);
 
-  // ARRAY_CONSTRUCT
-  InsertFunction(
-      functions, options, "array_construct", SCALAR,
-      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT}},
-      fn_options);
+    // ARRAY_CONSTRUCT
+    InsertFunction(
+        functions, options, "array_construct", SCALAR,
+        {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT}},
+        fn_options);
 
-  // ARRAY_CONSTRUCT_COMPACT
-  InsertFunction(
-      functions, options, "array_construct_compact", SCALAR,
-      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT_COMPACT}},
-      fn_options);
-  
-  // ARRAY_APPEND
-  InsertFunction(
-      functions, options, "array_append", SCALAR,
-      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
-      fn_options);
+    // ARRAY_CONSTRUCT_COMPACT
+    InsertFunction(
+        functions, options, "array_construct_compact", SCALAR,
+        {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT_COMPACT}},
+        fn_options);
+    
+    // ARRAY_APPEND
+    InsertFunction(
+        functions, options, "array_append", SCALAR,
+        {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
+        fn_options);
 
-  // ARRAY_CAT
-  InsertFunction(
-      functions, options, "array_cat", SCALAR,
-      {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_CAT}},
-      fn_options);
+    // ARRAY_CAT
+    InsertFunction(
+        functions, options, "array_cat", SCALAR,
+        {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_CAT}},
+        fn_options);
 
-  // ARRAY_COMPACT
-  InsertFunction(
-      functions, options, "array_compact", SCALAR,
-      {{array_variant_type, {array_variant_type}, FN_ARRAY_COMPACT}},
-      fn_options);
+    // ARRAY_COMPACT
+    InsertFunction(
+        functions, options, "array_compact", SCALAR,
+        {{array_variant_type, {array_variant_type}, FN_ARRAY_COMPACT}},
+        fn_options);
 
-  // ARRAY_CONTAINS
-  InsertFunction(
-      functions, options, "array_contains", SCALAR,
-      {{bool_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_CONTAINS}},
-      fn_options);
+    // ARRAY_CONTAINS
+    InsertFunction(
+        functions, options, "array_contains", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_CONTAINS}},
+        fn_options);
 
-  // ARRAY_INSERT
-  InsertFunction(
-      functions, options, "array_insert", SCALAR,
-      {{array_variant_type, {array_variant_type, int64_type, ARG_TYPE_ANY_1}, FN_ARRAY_INSERT}},
-      fn_options);
+    // ARRAY_INSERT
+    InsertFunction(
+        functions, options, "array_insert", SCALAR,
+        {{array_variant_type, {array_variant_type, int64_type, ARG_TYPE_ANY_1}, FN_ARRAY_INSERT}},
+        fn_options);
 
-  // ARRAY_INTERSECTION
-  InsertFunction(
-      functions, options, "array_intersection", SCALAR,
-      {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_INTERSECTION}},
-      fn_options);
+    // ARRAY_INTERSECTION
+    InsertFunction(
+        functions, options, "array_intersection", SCALAR,
+        {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_INTERSECTION}},
+        fn_options);
 
-  // ARRAY_POSITION
-  InsertFunction(
-      functions, options, "array_position", SCALAR,
-      {{int64_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_POSITION}},
-      fn_options);
+    // ARRAY_POSITION
+    InsertFunction(
+        functions, options, "array_position", SCALAR,
+        {{int64_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_POSITION}},
+        fn_options);
 
-  // ARRAY_PREPEND
-  InsertFunction(
-      functions, options, "array_prepend", SCALAR,
-      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_PREPEND}},
-      fn_options);
+    // ARRAY_PREPEND
+    InsertFunction(
+        functions, options, "array_prepend", SCALAR,
+        {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_PREPEND}},
+        fn_options);
 
-  // ARRAY_SIZE
-  InsertFunction(
-      functions, options, "array_size", SCALAR,
-      {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
-      {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
-      fn_options);
+    // ARRAY_SIZE
+    InsertFunction(
+        functions, options, "array_size", SCALAR,
+        {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
+        {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
+        fn_options);
 
-  // ARRAYS_OVERLAP
-  InsertFunction(
-      functions, options, "arrays_overlap", SCALAR,
-      {{bool_type, {array_variant_type, array_variant_type}, FN_ARRAYS_OVERLAP}},
-      fn_options);
+    // ARRAYS_OVERLAP
+    InsertFunction(
+        functions, options, "arrays_overlap", SCALAR,
+        {{bool_type, {array_variant_type, array_variant_type}, FN_ARRAYS_OVERLAP}},
+        fn_options);
 
-  // AS_ARRAY
-  InsertFunction(
-      functions, options, "as_array", SCALAR,
-      {{array_variant_type, {ARG_TYPE_ANY_1}, FN_AS_ARRAY}},
-      fn_options);
+    // AS_ARRAY
+    InsertFunction(
+        functions, options, "as_array", SCALAR,
+        {{array_variant_type, {ARG_TYPE_ANY_1}, FN_AS_ARRAY}},
+        fn_options);
 
-  // IS_ARRAY
-  InsertFunction(
-      functions, options, "is_array", SCALAR,
-      {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_ARRAY}},
-      fn_options);
+    // IS_ARRAY
+    InsertFunction(
+        functions, options, "is_array", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_ARRAY}},
+        fn_options);
+
+    // AS_BOOLEAN
+    InsertFunction(
+        functions, options, "as_boolean", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_AS_BOOLEAN}},
+        fn_options);
+
+    // AS_CHAR
+    InsertFunction(
+        functions, options, "as_char", SCALAR,
+        {{string_type, {ARG_TYPE_ANY_1}, FN_AS_CHAR}},
+        FunctionOptions().set_alias_name("as_varchar"));
 }
 
 /* Snowflake specific functions END */
