@@ -1438,6 +1438,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "as_date(to_variant(to_date('2018-10-10'))),"
       "as_decimal(to_variant(12345)), as_decimal(to_variant(123.45), 10, 2), as_decimal(to_variant(123.45), 10),"
       "as_number(to_variant(12345)), as_number(to_variant(123.45), 10, 2), as_number(to_variant(123.45), 10),"
+      "as_double(to_variant('123.45')), as_double(1), as_double(1.1),"
+      "as_real(to_variant('123.45')), as_real(1), as_double(1.1),"
+      "as_integer(to_variant(1)), as_integer(to_variant('1')),"
     }
   };
 

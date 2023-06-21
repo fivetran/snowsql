@@ -4687,6 +4687,7 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
     const Type* int64_type = type_factory->get_int64();
     const Type* date_type = type_factory->get_date();
     const Type* numeric_type = type_factory->get_numeric();
+    const Type* double_type = type_factory->get_double();
     const ArrayType* array_variant_type;
     ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
@@ -4846,6 +4847,18 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "as_decimal", SCALAR,
         {{numeric_type, {variant_type, {int64_type, OPTIONAL}, {int64_type, OPTIONAL}}, FN_AS_DECIMAL}},
         FunctionOptions().set_alias_name("as_number"));
+
+    // AS_DOUBLE , AS_REAL
+    InsertFunction(
+        functions, options, "as_double", SCALAR,
+        {{double_type, {ARG_TYPE_ANY_1}, FN_AS_DOUBLE}},
+        FunctionOptions().set_alias_name("as_real"));
+
+    // AS_INTEGER
+    InsertFunction(
+        functions, options, "as_integer", SCALAR,
+        {{int64_type, {ARG_TYPE_ANY_1}, FN_AS_INTEGER}},
+        fn_options);
 
 }
 
