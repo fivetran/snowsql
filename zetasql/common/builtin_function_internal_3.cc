@@ -4915,6 +4915,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "is_binary", SCALAR,
         {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_BINARY}},
         fn_options);
+
+    // IS_BOOLEAN
+    InsertFunction(
+        functions, options, "is_boolean", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_BOOLEAN}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
