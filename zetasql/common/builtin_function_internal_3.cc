@@ -4894,6 +4894,15 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "check_xml", SCALAR,
         {{string_type, {string_type, {bool_type, OPTIONAL}}, FN_CHECK_XML}},
         fn_options);
+
+    // GET, GET_IGNORE_CASE
+    InsertFunction(
+        functions, options, "get", SCALAR,
+        {{variant_type, {array_variant_type, int64_type}, FN_GET_ARRAY},
+         {variant_type, {object_type, string_type}, FN_GET_OBJECT},
+         {variant_type, {variant_type, int64_type}, FN_GET_VARIANT_INT64},
+         {variant_type, {variant_type, string_type}, FN_GET_OBJECT_STRING}},
+        FunctionOptions().set_alias_name("get_ignore_case"));
 }
 
 /* Snowflake specific functions END */

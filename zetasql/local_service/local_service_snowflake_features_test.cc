@@ -1447,6 +1447,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "as_timestamp_ntz(to_variant(to_timestamp_ntz('2018-10-10 12:34:56'))),"
       "check_json('{}'), check_json('notjson'), check_json(to_variant('1')),"
       "check_xml('<'), check_xml('<', false),"
+      "get(parse_json('{}'), 'a'), get(array_construct(1, 2), 1), get(to_variant(parse_json('{}')), 'a'), get(to_variant(array_construct(1, 2)), 1),"
+      "get_ignore_case(parse_json('{}'), 'a'), get_ignore_case(array_construct(1, 2), 1), get_ignore_case(to_variant(parse_json('{}')), 'a'), get_ignore_case(to_variant(array_construct(1, 2)), 1),"
     }
   };
 
