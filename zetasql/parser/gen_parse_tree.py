@@ -1850,7 +1850,7 @@ def main(argv):
               field_loader=FieldLoaderMethod.REQUIRED,
           ),
           Field('format', 'ASTFormatClause', tag_id=4),
-          Field('is_safe_cast', SCALAR_BOOL, tag_id=5),
+          Field('is_try_cast', SCALAR_BOOL, tag_id=5),
       ],
   )
 

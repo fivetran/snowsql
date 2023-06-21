@@ -522,10 +522,10 @@ select cast(select key from keyvalue)
 ==
 
 # A query mistakenly attempts to use a table subquery as an argument to the
-# SAFE_CAST function. The parser helps detect this case and return a reasonable
+# TRY_CAST function. The parser helps detect this case and return a reasonable
 # error.
-select safe_cast(select key from keyvalue)
+select  try_cast(select key from keyvalue)
 --
-ERROR: The argument to SAFE_CAST is an expression, not a query; to use a query as an expression, the query must be wrapped with additional parentheses to make it a scalar subquery expression [at 1:18]
-select safe_cast(select key from keyvalue)
+ERROR: The argument to TRY_CAST is an expression, not a query; to use a query as an expression, the query must be wrapped with additional parentheses to make it a scalar subquery expression [at 1:18]
+select  try_cast(select key from keyvalue)
                  ^

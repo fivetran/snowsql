@@ -235,7 +235,7 @@ void AddBlockForAsKeyword(ChunkBlock* const chunk_block, Chunk* as_chunk) {
           !chunk->HasMatchingClosingChunk()) {
         // Formatting for "CAST(foo AS STRING)": AS on the same level with foo.
         if (chunk->LastKeywordsAre("CAST", "(") ||
-            chunk->LastKeywordsAre("SAFE_CAST", "(")) {
+            chunk->LastKeywordsAre("TRY_CAST", "(")) {
           // Broken query, e.g. "CAST( AS STRING".
           if (i == t->children().rbegin()) {
             (*i)->AddIndentedChunk(as_chunk);

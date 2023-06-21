@@ -1934,8 +1934,8 @@ QueryStmt
 
 [no_enable_literal_replacement]
 select Key, array_agg(
-    distinct SAFE_CAST(KitchenSink.string_val AS INT64) + KEY + 5 + SAFE_CAST(KEY AS INT32)
-    order by SAFE_CAST(KitchenSink.string_val AS INT64) + KEY + 5 + SAFE_CAST(KEY AS INT32))
+    distinct TRY_CAST(KitchenSink.string_val AS INT64) + KEY + 5 + TRY_CAST(KEY AS INT32)
+    order by TRY_CAST(KitchenSink.string_val AS INT64) + KEY + 5 + TRY_CAST(KEY AS INT32))
 from TestTable
 group by Key
 --

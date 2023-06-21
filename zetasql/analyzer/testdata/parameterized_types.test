@@ -410,9 +410,9 @@ create table t (a unknown_type(123));
 ==
 
 [language_features={{PARAMETERIZED_TYPES,NUMERIC_TYPE|NUMERIC_TYPE}}]
-select {{safe_cast|cast}}(1.2 as NUMERIC(8,2));
+select {{ try_cast|cast}}(1.2 as NUMERIC(8,2));
 --
-ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE,safe_cast
+ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE, try_cast
 --
 QueryStmt
 +-output_column_list=
@@ -445,10 +445,10 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 --
-ALTERNATION GROUP: NUMERIC_TYPE,safe_cast
+ALTERNATION GROUP: NUMERIC_TYPE, try_cast
 --
 ERROR: Parameterized types are not supported [at 1:32]
-select safe_cast(1.2 as NUMERIC(8,2));
+select  try_cast(1.2 as NUMERIC(8,2));
                                ^
 --
 ALTERNATION GROUP: NUMERIC_TYPE,cast

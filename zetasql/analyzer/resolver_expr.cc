@@ -5417,7 +5417,7 @@ absl::Status Resolver::ResolveExplicitCast(
 
   ZETASQL_RETURN_IF_ERROR(ResolveExpr(cast->expr(), expr_resolution_info,
                               &resolved_argument, resolved_cast_type));
-  const bool return_null_on_error = cast->is_safe_cast();
+  const bool return_null_on_error = cast->is_try_cast();
 
   std::unique_ptr<const ResolvedExpr> resolved_format;
   std::unique_ptr<const ResolvedExpr> resolved_time_zone;

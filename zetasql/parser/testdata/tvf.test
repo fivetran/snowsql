@@ -1460,41 +1460,41 @@ FROM
 ==
 
 # The TVF name is the same as a reserved keyword with special function syntax.
-# This is allowed, because TVF calls are not expressions, so SAFE_CAST does not
+# This is allowed, because TVF calls are not expressions, so TRY_CAST does not
 # have special syntax here.
-select * from safe_cast(true, (select 1), (select 2))
+select * from try_cast(true, (select 1), (select 2))
 --
-QueryStatement [0-53] [select * from...select 2))]
-  Query [0-53] [select * from...select 2))]
-    Select [0-53] [select * from...select 2))]
+QueryStatement [0-52] [select * from...select 2))]
+  Query [0-52] [select * from...select 2))]
+    Select [0-52] [select * from...select 2))]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-53] [from safe_cast...select 2))]
-        TVF [14-53] [safe_cast(...select 2))]
-          PathExpression [14-23] [safe_cast]
-            Identifier(`safe_cast`) [14-23] [safe_cast]
-          TVFArgument [24-28] [true]
-            BooleanLiteral(true) [24-28] [true]
-          TVFArgument [30-40] [(select 1)]
-            ExpressionSubquery [30-40] [(select 1)]
-              Query [31-39] [select 1]
-                Select [31-39] [select 1]
-                  SelectList [38-39] [1]
-                    SelectColumn [38-39] [1]
-                      IntLiteral(1) [38-39] [1]
-          TVFArgument [42-52] [(select 2)]
-            ExpressionSubquery [42-52] [(select 2)]
-              Query [43-51] [select 2]
-                Select [43-51] [select 2]
-                  SelectList [50-51] [2]
-                    SelectColumn [50-51] [2]
-                      IntLiteral(2) [50-51] [2]
+      FromClause [9-52] [from try_cast...select 2))]
+        TVF [14-52] [try_cast(true...select 2))]
+          PathExpression [14-22] [try_cast]
+            Identifier(`try_cast`) [14-22] [try_cast]
+          TVFArgument [23-27] [true]
+            BooleanLiteral(true) [23-27] [true]
+          TVFArgument [29-39] [(select 1)]
+            ExpressionSubquery [29-39] [(select 1)]
+              Query [30-38] [select 1]
+                Select [30-38] [select 1]
+                  SelectList [37-38] [1]
+                    SelectColumn [37-38] [1]
+                      IntLiteral(1) [37-38] [1]
+          TVFArgument [41-51] [(select 2)]
+            ExpressionSubquery [41-51] [(select 2)]
+              Query [42-50] [select 2]
+                Select [42-50] [select 2]
+                  SelectList [49-50] [2]
+                    SelectColumn [49-50] [2]
+                      IntLiteral(2) [49-50] [2]
 --
 SELECT
   *
 FROM
-  `safe_cast`(true, (
+  `try_cast`(true, (
     SELECT
       1
   ), (
@@ -2090,47 +2090,47 @@ FROM
 
 # Valid TABLESAMPLE clause for table-valued function call using subqueries to
 # represent table arguments.
-select * from safe_cast(true, (select 1), (select 2))
+select * from try_cast(true, (select 1), (select 2))
 tablesample reservoir (100 rows) repeatable(10)
 --
-QueryStatement [0-101] [select * from...repeatable(10)]
-  Query [0-101] [select * from...repeatable(10)]
-    Select [0-101] [select * from...repeatable(10)]
+QueryStatement [0-100] [select * from...repeatable(10)]
+  Query [0-100] [select * from...repeatable(10)]
+    Select [0-100] [select * from...repeatable(10)]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-101] [from safe_cast...epeatable(10)]
-        TVF [14-101] [safe_cast(...repeatable(10)]
-          PathExpression [14-23] [safe_cast]
-            Identifier(`safe_cast`) [14-23] [safe_cast]
-          TVFArgument [24-28] [true]
-            BooleanLiteral(true) [24-28] [true]
-          TVFArgument [30-40] [(select 1)]
-            ExpressionSubquery [30-40] [(select 1)]
-              Query [31-39] [select 1]
-                Select [31-39] [select 1]
-                  SelectList [38-39] [1]
-                    SelectColumn [38-39] [1]
-                      IntLiteral(1) [38-39] [1]
-          TVFArgument [42-52] [(select 2)]
-            ExpressionSubquery [42-52] [(select 2)]
-              Query [43-51] [select 2]
-                Select [43-51] [select 2]
-                  SelectList [50-51] [2]
-                    SelectColumn [50-51] [2]
-                      IntLiteral(2) [50-51] [2]
-          SampleClause [54-101] [tablesample...repeatable(10)]
-            Identifier(reservoir) [66-75] [reservoir]
-            SampleSize [77-85] [100 rows]
-              IntLiteral(100) [77-80] [100]
-            SampleSuffix [87-101] [repeatable(10)]
-              RepeatableClause [87-101] [repeatable(10)]
-                IntLiteral(10) [98-100] [10]
+      FromClause [9-100] [from try_cast...repeatable(10)]
+        TVF [14-100] [try_cast(true...repeatable(10)]
+          PathExpression [14-22] [try_cast]
+            Identifier(`try_cast`) [14-22] [try_cast]
+          TVFArgument [23-27] [true]
+            BooleanLiteral(true) [23-27] [true]
+          TVFArgument [29-39] [(select 1)]
+            ExpressionSubquery [29-39] [(select 1)]
+              Query [30-38] [select 1]
+                Select [30-38] [select 1]
+                  SelectList [37-38] [1]
+                    SelectColumn [37-38] [1]
+                      IntLiteral(1) [37-38] [1]
+          TVFArgument [41-51] [(select 2)]
+            ExpressionSubquery [41-51] [(select 2)]
+              Query [42-50] [select 2]
+                Select [42-50] [select 2]
+                  SelectList [49-50] [2]
+                    SelectColumn [49-50] [2]
+                      IntLiteral(2) [49-50] [2]
+          SampleClause [53-100] [tablesample...repeatable(10)]
+            Identifier(reservoir) [65-74] [reservoir]
+            SampleSize [76-84] [100 rows]
+              IntLiteral(100) [76-79] [100]
+            SampleSuffix [86-100] [repeatable(10)]
+              RepeatableClause [86-100] [repeatable(10)]
+                IntLiteral(10) [97-99] [10]
 --
 SELECT
   *
 FROM
-  `safe_cast`(true, (
+  `try_cast`(true, (
     SELECT
       1
   ), (
@@ -2141,178 +2141,178 @@ FROM
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 tablesample reservoir (100 rows) repeatable(10)
 --
-QueryStatement [0-109] [select * from...repeatable(10)]
-  Query [0-109] [select * from...repeatable(10)]
-    Select [0-109] [select * from...repeatable(10)]
+QueryStatement [0-108] [select * from...repeatable(10)]
+  Query [0-108] [select * from...repeatable(10)]
+    Select [0-108] [select * from...repeatable(10)]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-109] [from safe_cast...epeatable(10)]
-        TVF [14-109] [safe_cast(...repeatable(10)]
-          PathExpression [14-23] [safe_cast]
-            Identifier(`safe_cast`) [14-23] [safe_cast]
-          TVFArgument [24-28] [true]
-            BooleanLiteral(true) [24-28] [true]
-          TVFArgument [30-44] [table keyvalue]
-            TableClause [30-44] [table keyvalue]
-              PathExpression [36-44] [keyvalue]
-                Identifier(keyvalue) [36-44] [keyvalue]
-          TVFArgument [46-60] [table keyvalue]
-            TableClause [46-60] [table keyvalue]
-              PathExpression [52-60] [keyvalue]
-                Identifier(keyvalue) [52-60] [keyvalue]
-          SampleClause [62-109] [tablesample...repeatable(10)]
-            Identifier(reservoir) [74-83] [reservoir]
-            SampleSize [85-93] [100 rows]
-              IntLiteral(100) [85-88] [100]
-            SampleSuffix [95-109] [repeatable(10)]
-              RepeatableClause [95-109] [repeatable(10)]
-                IntLiteral(10) [106-108] [10]
+      FromClause [9-108] [from try_cast...repeatable(10)]
+        TVF [14-108] [try_cast(true...repeatable(10)]
+          PathExpression [14-22] [try_cast]
+            Identifier(`try_cast`) [14-22] [try_cast]
+          TVFArgument [23-27] [true]
+            BooleanLiteral(true) [23-27] [true]
+          TVFArgument [29-43] [table keyvalue]
+            TableClause [29-43] [table keyvalue]
+              PathExpression [35-43] [keyvalue]
+                Identifier(keyvalue) [35-43] [keyvalue]
+          TVFArgument [45-59] [table keyvalue]
+            TableClause [45-59] [table keyvalue]
+              PathExpression [51-59] [keyvalue]
+                Identifier(keyvalue) [51-59] [keyvalue]
+          SampleClause [61-108] [tablesample...repeatable(10)]
+            Identifier(reservoir) [73-82] [reservoir]
+            SampleSize [84-92] [100 rows]
+              IntLiteral(100) [84-87] [100]
+            SampleSuffix [94-108] [repeatable(10)]
+              RepeatableClause [94-108] [repeatable(10)]
+                IntLiteral(10) [105-107] [10]
 --
 SELECT
   *
 FROM
-  `safe_cast`(true, TABLE keyvalue, TABLE keyvalue) TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: with query hint.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 @{num_workers=42}
 tablesample reservoir (100 rows) repeatable(10)
 --
-QueryStatement [0-127] [select * from...repeatable(10)]
-  Query [0-127] [select * from...repeatable(10)]
-    Select [0-127] [select * from...repeatable(10)]
+QueryStatement [0-126] [select * from...repeatable(10)]
+  Query [0-126] [select * from...repeatable(10)]
+    Select [0-126] [select * from...repeatable(10)]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-127] [from safe_cast...epeatable(10)]
-        TVF [14-127] [safe_cast(...repeatable(10)]
-          PathExpression [14-23] [safe_cast]
-            Identifier(`safe_cast`) [14-23] [safe_cast]
-          TVFArgument [24-28] [true]
-            BooleanLiteral(true) [24-28] [true]
-          TVFArgument [30-44] [table keyvalue]
-            TableClause [30-44] [table keyvalue]
-              PathExpression [36-44] [keyvalue]
-                Identifier(keyvalue) [36-44] [keyvalue]
-          TVFArgument [46-60] [table keyvalue]
-            TableClause [46-60] [table keyvalue]
-              PathExpression [52-60] [keyvalue]
-                Identifier(keyvalue) [52-60] [keyvalue]
-          Hint [62-79] [@{num_workers=42}]
-            HintEntry [64-78] [num_workers=42]
-              Identifier(num_workers) [64-75] [num_workers]
-              IntLiteral(42) [76-78] [42]
-          SampleClause [80-127] [tablesample...repeatable(10)]
-            Identifier(reservoir) [92-101] [reservoir]
-            SampleSize [103-111] [100 rows]
-              IntLiteral(100) [103-106] [100]
-            SampleSuffix [113-127] [repeatable(10)]
-              RepeatableClause [113-127] [repeatable(10)]
-                IntLiteral(10) [124-126] [10]
+      FromClause [9-126] [from try_cast...repeatable(10)]
+        TVF [14-126] [try_cast(true...repeatable(10)]
+          PathExpression [14-22] [try_cast]
+            Identifier(`try_cast`) [14-22] [try_cast]
+          TVFArgument [23-27] [true]
+            BooleanLiteral(true) [23-27] [true]
+          TVFArgument [29-43] [table keyvalue]
+            TableClause [29-43] [table keyvalue]
+              PathExpression [35-43] [keyvalue]
+                Identifier(keyvalue) [35-43] [keyvalue]
+          TVFArgument [45-59] [table keyvalue]
+            TableClause [45-59] [table keyvalue]
+              PathExpression [51-59] [keyvalue]
+                Identifier(keyvalue) [51-59] [keyvalue]
+          Hint [61-78] [@{num_workers=42}]
+            HintEntry [63-77] [num_workers=42]
+              Identifier(num_workers) [63-74] [num_workers]
+              IntLiteral(42) [75-77] [42]
+          SampleClause [79-126] [tablesample...repeatable(10)]
+            Identifier(reservoir) [91-100] [reservoir]
+            SampleSize [102-110] [100 rows]
+              IntLiteral(100) [102-105] [100]
+            SampleSuffix [112-126] [repeatable(10)]
+              RepeatableClause [112-126] [repeatable(10)]
+                IntLiteral(10) [123-125] [10]
 --
 SELECT
   *
 FROM
-  `safe_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: with alias.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 as myalias
 tablesample reservoir (100 rows) repeatable(10)
 --
-QueryStatement [0-120] [select * from...repeatable(10)]
-  Query [0-120] [select * from...repeatable(10)]
-    Select [0-120] [select * from...repeatable(10)]
+QueryStatement [0-119] [select * from...repeatable(10)]
+  Query [0-119] [select * from...repeatable(10)]
+    Select [0-119] [select * from...repeatable(10)]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-120] [from safe_cast...epeatable(10)]
-        TVF [14-120] [safe_cast(...repeatable(10)]
-          PathExpression [14-23] [safe_cast]
-            Identifier(`safe_cast`) [14-23] [safe_cast]
-          TVFArgument [24-28] [true]
-            BooleanLiteral(true) [24-28] [true]
-          TVFArgument [30-44] [table keyvalue]
-            TableClause [30-44] [table keyvalue]
-              PathExpression [36-44] [keyvalue]
-                Identifier(keyvalue) [36-44] [keyvalue]
-          TVFArgument [46-60] [table keyvalue]
-            TableClause [46-60] [table keyvalue]
-              PathExpression [52-60] [keyvalue]
-                Identifier(keyvalue) [52-60] [keyvalue]
-          Alias [62-72] [as myalias]
-            Identifier(myalias) [65-72] [myalias]
-          SampleClause [73-120] [tablesample...repeatable(10)]
-            Identifier(reservoir) [85-94] [reservoir]
-            SampleSize [96-104] [100 rows]
-              IntLiteral(100) [96-99] [100]
-            SampleSuffix [106-120] [repeatable(10)]
-              RepeatableClause [106-120] [repeatable(10)]
-                IntLiteral(10) [117-119] [10]
+      FromClause [9-119] [from try_cast...repeatable(10)]
+        TVF [14-119] [try_cast(true...repeatable(10)]
+          PathExpression [14-22] [try_cast]
+            Identifier(`try_cast`) [14-22] [try_cast]
+          TVFArgument [23-27] [true]
+            BooleanLiteral(true) [23-27] [true]
+          TVFArgument [29-43] [table keyvalue]
+            TableClause [29-43] [table keyvalue]
+              PathExpression [35-43] [keyvalue]
+                Identifier(keyvalue) [35-43] [keyvalue]
+          TVFArgument [45-59] [table keyvalue]
+            TableClause [45-59] [table keyvalue]
+              PathExpression [51-59] [keyvalue]
+                Identifier(keyvalue) [51-59] [keyvalue]
+          Alias [61-71] [as myalias]
+            Identifier(myalias) [64-71] [myalias]
+          SampleClause [72-119] [tablesample...repeatable(10)]
+            Identifier(reservoir) [84-93] [reservoir]
+            SampleSize [95-103] [100 rows]
+              IntLiteral(100) [95-98] [100]
+            SampleSuffix [105-119] [repeatable(10)]
+              RepeatableClause [105-119] [repeatable(10)]
+                IntLiteral(10) [116-118] [10]
 --
 SELECT
   *
 FROM
-  `safe_cast`(true, TABLE keyvalue, TABLE keyvalue) AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: with query hint and alias.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 @{num_workers=42} as myalias
 tablesample reservoir (100 rows) repeatable(10)
 --
-QueryStatement [0-138] [select * from...repeatable(10)]
-  Query [0-138] [select * from...repeatable(10)]
-    Select [0-138] [select * from...repeatable(10)]
+QueryStatement [0-137] [select * from...repeatable(10)]
+  Query [0-137] [select * from...repeatable(10)]
+    Select [0-137] [select * from...repeatable(10)]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-138] [from safe_cast...epeatable(10)]
-        TVF [14-138] [safe_cast(...repeatable(10)]
-          PathExpression [14-23] [safe_cast]
-            Identifier(`safe_cast`) [14-23] [safe_cast]
-          TVFArgument [24-28] [true]
-            BooleanLiteral(true) [24-28] [true]
-          TVFArgument [30-44] [table keyvalue]
-            TableClause [30-44] [table keyvalue]
-              PathExpression [36-44] [keyvalue]
-                Identifier(keyvalue) [36-44] [keyvalue]
-          TVFArgument [46-60] [table keyvalue]
-            TableClause [46-60] [table keyvalue]
-              PathExpression [52-60] [keyvalue]
-                Identifier(keyvalue) [52-60] [keyvalue]
-          Hint [62-79] [@{num_workers=42}]
-            HintEntry [64-78] [num_workers=42]
-              Identifier(num_workers) [64-75] [num_workers]
-              IntLiteral(42) [76-78] [42]
-          Alias [80-90] [as myalias]
-            Identifier(myalias) [83-90] [myalias]
-          SampleClause [91-138] [tablesample...repeatable(10)]
-            Identifier(reservoir) [103-112] [reservoir]
-            SampleSize [114-122] [100 rows]
-              IntLiteral(100) [114-117] [100]
-            SampleSuffix [124-138] [repeatable(10)]
-              RepeatableClause [124-138] [repeatable(10)]
-                IntLiteral(10) [135-137] [10]
+      FromClause [9-137] [from try_cast...repeatable(10)]
+        TVF [14-137] [try_cast(true...repeatable(10)]
+          PathExpression [14-22] [try_cast]
+            Identifier(`try_cast`) [14-22] [try_cast]
+          TVFArgument [23-27] [true]
+            BooleanLiteral(true) [23-27] [true]
+          TVFArgument [29-43] [table keyvalue]
+            TableClause [29-43] [table keyvalue]
+              PathExpression [35-43] [keyvalue]
+                Identifier(keyvalue) [35-43] [keyvalue]
+          TVFArgument [45-59] [table keyvalue]
+            TableClause [45-59] [table keyvalue]
+              PathExpression [51-59] [keyvalue]
+                Identifier(keyvalue) [51-59] [keyvalue]
+          Hint [61-78] [@{num_workers=42}]
+            HintEntry [63-77] [num_workers=42]
+              Identifier(num_workers) [63-74] [num_workers]
+              IntLiteral(42) [75-77] [42]
+          Alias [79-89] [as myalias]
+            Identifier(myalias) [82-89] [myalias]
+          SampleClause [90-137] [tablesample...repeatable(10)]
+            Identifier(reservoir) [102-111] [reservoir]
+            SampleSize [113-121] [100 rows]
+              IntLiteral(100) [113-116] [100]
+            SampleSuffix [123-137] [repeatable(10)]
+              RepeatableClause [123-137] [repeatable(10)]
+                IntLiteral(10) [134-136] [10]
 --
 SELECT
   *
 FROM
-  `safe_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Invalid TABLESAMPLE clause for table-valued function call using subqueries to
 # represent table arguments: no table sample type specified.
-select * from safe_cast(true, (select 1), (select 2))
+select * from try_cast(true, (select 1), (select 2))
 tablesample
 --
 ERROR: Syntax error: Unexpected end of statement [at 2:12]
@@ -2322,7 +2322,7 @@ tablesample
 
 # Invalid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: no table sample type specified.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 tablesample
 --
 ERROR: Syntax error: Unexpected end of statement [at 2:12]
@@ -2333,7 +2333,7 @@ tablesample
 # Invalid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: hint and TABLESAMPLE clause in wrong
 # order.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 tablesample reservoir (100 rows) repeatable(10)
 @{num_workers=42}
 --
@@ -2345,7 +2345,7 @@ ERROR: Syntax error: Expected end of input but got "@" [at 3:1]
 # Invalid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: alias and TABLESAMPLE clause in wrong
 # order.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 tablesample reservoir (100 rows) repeatable(10)
 as myalias
 --
@@ -2357,7 +2357,7 @@ as myalias
 # Invalid TABLESAMPLE clause for table-valued function call using the TABLE
 # keyword to represent table arguments: hint/alias and TABLESAMPLE clause in
 # wrong order.
-select * from safe_cast(true, table keyvalue, table keyvalue)
+select * from try_cast(true, table keyvalue, table keyvalue)
 tablesample reservoir (100 rows) repeatable(10)
 @{num_workers=42} as myalias
 --
