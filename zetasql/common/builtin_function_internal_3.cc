@@ -4963,6 +4963,18 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
         functions, options, "is_time", SCALAR,
         {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIME}},
         fn_options);
+
+    // IS_TIMESTAMP_TZ, IS_TIMESTAMP_LTZ
+    InsertFunction(
+        functions, options, "is_timestamp_tz", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIMESTAMP}},
+        FunctionOptions().set_alias_name("is_timestamp_ltz"));
+
+    // IS_TIMESTAMP_NTZ
+    InsertFunction(
+        functions, options, "is_timestamp_ntz", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIMESTAMP}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */

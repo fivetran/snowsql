@@ -1462,6 +1462,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "is_real(true), is_real(to_variant('a')), is_real(1), is_real(array_construct()),"
       "is_null_value(get_path(parse_json('{\"a\": null}'), 'a')), is_null_value(true), is_null_value(to_variant('a')), is_null_value(1), is_null_value(array_construct()),"
       "is_time(true), is_time(to_variant('a')), is_time(1), is_time(array_construct()),"
+      "is_timestamp_tz(true), is_timestamp_tz(to_variant('a')), is_timestamp_tz(1), is_timestamp_tz(array_construct()),"
+      "is_timestamp_ntz(true), is_timestamp_ntz(to_variant('a')), is_timestamp_ntz(1), is_timestamp_ntz(array_construct()),"
+      "is_timestamp_ltz(true), is_timestamp_ltz(to_variant('a')), is_timestamp_ltz(1), is_timestamp_ltz(array_construct()),"
     }
   };
 
