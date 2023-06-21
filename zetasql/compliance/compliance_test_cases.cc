@@ -1140,7 +1140,7 @@ SHARDED_TEST_F(ComplianceCodebasedTests, TestSafeCastFunction, 4) {
                 : absl::StrCat("\'", p.param(2).string_value(), "\'"));
       }
     }
-    return absl::StrCat("SAFE_CAST(@p0 AS ",
+    return absl::StrCat("TRY_CAST(@p0 AS ",
                         p.result().type()->TypeName(PRODUCT_INTERNAL),
                         optional_format_param, ")");
   };

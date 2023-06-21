@@ -1651,7 +1651,7 @@ def main(unused_argv):
               ignorable=IGNORABLE_DEFAULT,
               comment="""
               Whether to return NULL if the cast fails. This is set to true for
-              SAFE_CAST.
+              TRY_CAST.
                       """),
           Field(
               'extended_cast',

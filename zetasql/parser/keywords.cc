@@ -290,7 +290,7 @@ constexpr KeywordInfoPOD kAllKeywords[] = {
     {"row", KW_ROW},
     {"rows", KW_ROWS, kReserved},
     {"run", KW_RUN},
-    {"safe_cast", KW_SAFE_CAST},
+    {"try_cast", KW_TRY_CAST},
     {"schema", KW_SCHEMA},
     {"search", KW_SEARCH},
     {"security", KW_SECURITY},
@@ -554,7 +554,7 @@ CreateNonReservedIdentifiersThatMustBeBackquotedTrie() {
            "replace",    // INSERT REPLACE versus INSERT `replace`
            "row",        // DROP `row` `access` `policy` versus DROP ROW ACCESS
                          // POLICY
-           "safe_cast",  // SAFE_CAST(...) versus `safe_cast`(3)
+           "try_cast",  // TRY_CAST(...) versus `try_cast`(3)
            "update",     // INSERT UPDATE versus INSERT `update`
            "clamped",    // See AMBIGUOUS CASE 14 in bison_parser.y
            // "value" is not included because it causes too much escaping for

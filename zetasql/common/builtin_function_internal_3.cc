@@ -1238,15 +1238,15 @@ void GetJSONFunctions(TypeFactory* type_factory,
          {json_type, default_json_path_argument},
          FN_JSON_VALUE_ARRAY_JSON});
 
-    InsertFunction(functions, options, "to_json", SCALAR,
-                   {{json_type,
-                     {ARG_TYPE_ANY_1,
-                      {bool_type, FunctionArgumentTypeOptions()
-                                      .set_cardinality(FunctionEnums::OPTIONAL)
-                                      .set_argument_name(
-                                          "stringify_wide_numbers", kNamedOnly)
-                                      .set_default(values::Bool(false))}},
-                     FN_TO_JSON}});
+    // InsertFunction(functions, options, "to_json", SCALAR,
+    //                {{json_type,
+    //                  {ARG_TYPE_ANY_1,
+    //                   {bool_type, FunctionArgumentTypeOptions()
+    //                                   .set_cardinality(FunctionEnums::OPTIONAL)
+    //                                   .set_argument_name(
+    //                                       "stringify_wide_numbers", kNamedOnly)
+    //                                   .set_default(values::Bool(false))}},
+    //                  FN_TO_JSON}});
     // InsertFunction(
     //     functions, options, "parse_json", SCALAR,
     //     {{json_type,
@@ -4608,6 +4608,107 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
     InsertFunction(
         functions, options, "to_array", SCALAR,
         {{array_variant_type, {ARG_TYPE_ANY_1}, FN_TO_ARRAY}});
+
+    // TO_DATE
+    InsertFunction(
+        functions, options, "to_date", SCALAR,
+        {{date_type, {string_type, {string_type, OPTIONAL}}, FN_TO_DATE}});
+
+    FunctionArgumentTypeOptions precision_arg;
+    precision_arg.set_is_not_aggregate();
+    precision_arg.set_must_be_non_null();
+    precision_arg.set_cardinality(OPTIONAL);
+    precision_arg.set_min_value(1);
+    precision_arg.set_max_value(38);
+
+    // TO_DECIMAL
+    InsertFunction(
+        functions, options, "to_decimal", SCALAR,
+        {{numeric_type, {numeric_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_1},
+         {numeric_type, {numeric_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_2},
+         {numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_2},
+         {numeric_type, {variant_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_1},
+         {numeric_type, {variant_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_2}},
+         FunctionOptions().set_alias_name("to_number"));
+
+    // TO_NUMERIC
+    // TODO: try to combine with TO_DECIMAL/TO_NUMBER
+    InsertFunction(
+        functions, options, "to_numeric", SCALAR,
+        {{numeric_type, {numeric_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_1},
+         {numeric_type, {numeric_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_NUMERIC_2},
+         {numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_STRING_2},
+         {numeric_type, {variant_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_1},
+         {numeric_type, {variant_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_2}});
+
+    // TO_TIME
+    InsertFunction(
+        functions, options, "to_time", SCALAR,
+        {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIME_STRING},
+         {time_type, {variant_type}, FN_TO_TIME_VARIANT}});
+         //TODO: FunctionOptions().set_alias_name("time"));
+
+    // TO_TIMESTAMP, TO_TIMESTAMP_TZ
+    InsertFunction(
+        functions, options, "to_timestamp", SCALAR,
+        {{timestamp_type, {numeric_type, {int64_type, OPTIONAL}}, FN_TO_TIMESTAMP_NUMERIC},
+         {timestamp_type, {date_type}, FN_TO_TIMESTAMP_DATE},
+         {timestamp_type, {timestamp_type}, FN_TO_TIMESTAMP_TIMESTAMP},
+         {timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIMESTAMP_STRING},
+         {timestamp_type, {variant_type}, FN_TO_TIMESTAMP_VARIANT}},
+         FunctionOptions().set_alias_name("to_timestamp_tz"));
+
+    // TO_TIMESTAMP_LTZ, TO_TIMESTAMP_NTZ
+    InsertFunction(
+        functions, options, "to_timestamp_ltz", SCALAR,
+        {{timestamp_type, {numeric_type, {int64_type, OPTIONAL}}, FN_TO_TIMESTAMP_NUMERIC},
+         {timestamp_type, {date_type}, FN_TO_TIMESTAMP_DATE},
+         {timestamp_type, {timestamp_type}, FN_TO_TIMESTAMP_TIMESTAMP},
+         {timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIMESTAMP_STRING},
+         {timestamp_type, {variant_type}, FN_TO_TIMESTAMP_VARIANT}},
+         FunctionOptions().set_alias_name("to_timestamp_ntz"));
+
+    // TO_XML
+    InsertFunction(
+        functions, options, "to_xml", SCALAR,
+        {{string_type, {variant_type}, FN_TO_XML_VARIANT},
+         {string_type, {array_variant_type}, FN_TO_XML_ARRAY},
+         {string_type, {int64_type}, FN_TO_XML_INT64},
+         {string_type, {object_type}, FN_TO_XML_OBJECT},
+         {string_type, {float_type}, FN_TO_XML_FLOAT},
+         {string_type, {bool_type}, FN_TO_XML_BOOL}});
+
+    // TRY_TO_DECIMAL
+    InsertFunction(
+        functions, options, "try_to_decimal", SCALAR,
+        {{numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_2}},
+         FunctionOptions().set_alias_name("try_to_number"));
+
+    // TRY_TO_NUMERIC
+    InsertFunction(
+        functions, options, "try_to_numeric", SCALAR,
+        {{numeric_type, {string_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_1},
+         {numeric_type, {string_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TRY_TO_DECIMAL_STRING_2}});
+
+    // TRY_TO_TIMESTAMP, TRY_TO_TIMESTAMP_LTZ
+    InsertFunction(
+        functions, options, "try_to_timestamp", SCALAR,
+        {{timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIMESTAMP}},
+        FunctionOptions().set_alias_name("try_to_timestamp_ltz"));
+
+    // TRY_TO_TIMESTAMP_NTZ, TRY_TO_TIMESTAMP_TZ
+    InsertFunction(
+        functions, options, "try_to_timestamp_ntz", SCALAR,
+        {{timestamp_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_TIMESTAMP}},
+        FunctionOptions().set_alias_name("try_to_timestamp_tz"));
+
+    // TO_JSON
+    InsertFunction(
+        functions, options, "to_json", SCALAR,
+        {{string_type, {variant_type}, FN_TO_JSON_SNOWFLAKE}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,

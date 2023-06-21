@@ -810,7 +810,7 @@ TEST(StringsTest, QuotedForms) {
   EXPECT_EQ("optIONS", ToIdentifierLiteral(IdString::MakeGlobal("optIONS")));
   // Non-reserved SQL keywords do get quoted if they can be used in an
   // identifier context and take on special meaning there.
-  EXPECT_EQ("`safe_cAst`", ToIdentifierLiteral("safe_cAst"));
+  EXPECT_EQ("`try_cAst`", ToIdentifierLiteral("try_cAst"));
 
   // ToAlwaysQuotedIdentifierLiteral always back quote.
   EXPECT_EQ("``", ToAlwaysQuotedIdentifierLiteral(
