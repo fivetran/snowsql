@@ -4567,7 +4567,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
        {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP},
        {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES},
-       {variant_type, {array_variant_type}, FN_TO_VARIANT_ARRAY}});
+       {variant_type, {array_variant_type}, FN_TO_VARIANT_ARRAY},
+       {variant_type, {time_type}, FN_TO_VARIANT_TIME}});
 
   // TO_VARCHAR
   InsertFunction(
@@ -4900,146 +4901,332 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
                                       const ZetaSQLBuiltinFunctionOptions& options,
                                       NameToFunctionMap* functions) {
-  const Type* variant_type = type_factory->get_variant();
-  const Type* string_type = type_factory->get_string();
-  const Type* object_type = type_factory->get_object();
-  const Type* bool_type = type_factory->get_bool();
-  const Type* int64_type = type_factory->get_int64();
-  const ArrayType* array_variant_type;
-  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
+    const Type* variant_type = type_factory->get_variant();
+    const Type* string_type = type_factory->get_string();
+    const Type* object_type = type_factory->get_object();
+    const Type* bool_type = type_factory->get_bool();
+    const Type* int64_type = type_factory->get_int64();
+    const Type* date_type = type_factory->get_date();
+    const Type* numeric_type = type_factory->get_numeric();
+    const Type* double_type = type_factory->get_double();
+    const Type* time_type = type_factory->get_time();
+    const Type* timestamp_type = type_factory->get_timestamp();
+    const ArrayType* array_variant_type;
+    ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_variant_type));
 
-  const Function::Mode SCALAR = Function::SCALAR;
-  const FunctionOptions fn_options;
-  const FunctionArgumentType::ArgumentCardinality REPEATED =
-      FunctionArgumentType::REPEATED;
-  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
+    const Function::Mode SCALAR = Function::SCALAR;
+    const FunctionOptions fn_options;
+    const FunctionArgumentType::ArgumentCardinality REPEATED =
+        FunctionArgumentType::REPEATED;
+    const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
-  // PARSE_JSON
-  InsertFunction(
-      functions, options, "parse_json", SCALAR,
-      {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
-      fn_options);
+    // PARSE_JSON
+    InsertFunction(
+        functions, options, "parse_json", SCALAR,
+        {{variant_type, {string_type}, FN_PARSE_JSON_SNOWFLAKE}},
+        fn_options);
 
-  // OBJECT_CONSTRUCT
-  InsertFunction(
-      functions, options, "object_construct", SCALAR,
-      {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
-      fn_options);
+    // OBJECT_CONSTRUCT
+    InsertFunction(
+        functions, options, "object_construct", SCALAR,
+        {{object_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_OBJECT_CONSTRUCT}},
+        fn_options);
+        
+    // OBJECT_DELETE
+    InsertFunction(
+        functions, options, "object_delete", SCALAR,
+        {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
+        fn_options);
     
-  // OBJECT_DELETE
-  InsertFunction(
-      functions, options, "object_delete", SCALAR,
-      {{object_type, {object_type, string_type, {string_type, REPEATED}}, FN_OBJECT_DELETE}},
-      fn_options);
-  
-  // OBJECT_INSERT
-  InsertFunction(
-      functions, options, "object_insert", SCALAR,
-      {{object_type, {object_type, string_type, ARG_TYPE_ANY_1, {bool_type, OPTIONAL}}, FN_OBJECT_INSERT}},
-      fn_options);
+    // OBJECT_INSERT
+    InsertFunction(
+        functions, options, "object_insert", SCALAR,
+        {{object_type, {object_type, string_type, ARG_TYPE_ANY_1, {bool_type, OPTIONAL}}, FN_OBJECT_INSERT}},
+        fn_options);
 
-  // IS_OBJECT
-  InsertFunction(
-      functions, options, "is_object", SCALAR,
-      {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_OBJECT}},
-      fn_options);
+    // IS_OBJECT
+    InsertFunction(
+        functions, options, "is_object", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_OBJECT}},
+        fn_options);
 
-  // AS_OBJECT
-  InsertFunction(
-      functions, options, "as_object", SCALAR,
-      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
-      fn_options);
+    // AS_OBJECT
+    InsertFunction(
+        functions, options, "as_object", SCALAR,
+        {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+        fn_options);
 
-  // AS_BINARY
-  InsertFunction(
-      functions, options, "as_binary", SCALAR,
-      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
-      fn_options);
+    // AS_BINARY
+    InsertFunction(
+        functions, options, "as_binary", SCALAR,
+        {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+        fn_options);
 
-  // ARRAY_CONSTRUCT
-  InsertFunction(
-      functions, options, "array_construct", SCALAR,
-      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT}},
-      fn_options);
+    // ARRAY_CONSTRUCT
+    InsertFunction(
+        functions, options, "array_construct", SCALAR,
+        {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT}},
+        fn_options);
 
-  // ARRAY_CONSTRUCT_COMPACT
-  InsertFunction(
-      functions, options, "array_construct_compact", SCALAR,
-      {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT_COMPACT}},
-      fn_options);
-  
-  // ARRAY_APPEND
-  InsertFunction(
-      functions, options, "array_append", SCALAR,
-      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
-      fn_options);
+    // ARRAY_CONSTRUCT_COMPACT
+    InsertFunction(
+        functions, options, "array_construct_compact", SCALAR,
+        {{array_variant_type, {{ARG_TYPE_ARBITRARY, REPEATED}}, FN_ARRAY_CONSTRUCT_COMPACT}},
+        fn_options);
+    
+    // ARRAY_APPEND
+    InsertFunction(
+        functions, options, "array_append", SCALAR,
+        {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_APPEND}},
+        fn_options);
 
-  // ARRAY_CAT
-  InsertFunction(
-      functions, options, "array_cat", SCALAR,
-      {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_CAT}},
-      fn_options);
+    // ARRAY_CAT
+    InsertFunction(
+        functions, options, "array_cat", SCALAR,
+        {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_CAT}},
+        fn_options);
 
-  // ARRAY_COMPACT
-  InsertFunction(
-      functions, options, "array_compact", SCALAR,
-      {{array_variant_type, {array_variant_type}, FN_ARRAY_COMPACT}},
-      fn_options);
+    // ARRAY_COMPACT
+    InsertFunction(
+        functions, options, "array_compact", SCALAR,
+        {{array_variant_type, {array_variant_type}, FN_ARRAY_COMPACT}},
+        fn_options);
 
-  // ARRAY_CONTAINS
-  InsertFunction(
-      functions, options, "array_contains", SCALAR,
-      {{bool_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_CONTAINS}},
-      fn_options);
+    // ARRAY_CONTAINS
+    InsertFunction(
+        functions, options, "array_contains", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_CONTAINS}},
+        fn_options);
 
-  // ARRAY_INSERT
-  InsertFunction(
-      functions, options, "array_insert", SCALAR,
-      {{array_variant_type, {array_variant_type, int64_type, ARG_TYPE_ANY_1}, FN_ARRAY_INSERT}},
-      fn_options);
+    // ARRAY_INSERT
+    InsertFunction(
+        functions, options, "array_insert", SCALAR,
+        {{array_variant_type, {array_variant_type, int64_type, ARG_TYPE_ANY_1}, FN_ARRAY_INSERT}},
+        fn_options);
 
-  // ARRAY_INTERSECTION
-  InsertFunction(
-      functions, options, "array_intersection", SCALAR,
-      {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_INTERSECTION}},
-      fn_options);
+    // ARRAY_INTERSECTION
+    InsertFunction(
+        functions, options, "array_intersection", SCALAR,
+        {{array_variant_type, {array_variant_type, array_variant_type}, FN_ARRAY_INTERSECTION}},
+        fn_options);
 
-  // ARRAY_POSITION
-  InsertFunction(
-      functions, options, "array_position", SCALAR,
-      {{int64_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_POSITION}},
-      fn_options);
+    // ARRAY_POSITION
+    InsertFunction(
+        functions, options, "array_position", SCALAR,
+        {{int64_type, {ARG_TYPE_ANY_1, array_variant_type}, FN_ARRAY_POSITION}},
+        fn_options);
 
-  // ARRAY_PREPEND
-  InsertFunction(
-      functions, options, "array_prepend", SCALAR,
-      {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_PREPEND}},
-      fn_options);
+    // ARRAY_PREPEND
+    InsertFunction(
+        functions, options, "array_prepend", SCALAR,
+        {{array_variant_type, {array_variant_type, ARG_TYPE_ANY_1}, FN_ARRAY_PREPEND}},
+        fn_options);
 
-  // ARRAY_SIZE
-  InsertFunction(
-      functions, options, "array_size", SCALAR,
-      {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
-      {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
-      fn_options);
+    // ARRAY_SIZE
+    InsertFunction(
+        functions, options, "array_size", SCALAR,
+        {{int64_type, {array_variant_type}, FN_ARRAY_SIZE_ARRAY},
+        {int64_type, {variant_type}, FN_ARRAY_SIZE_VARIANT}},
+        fn_options);
 
-  // ARRAYS_OVERLAP
-  InsertFunction(
-      functions, options, "arrays_overlap", SCALAR,
-      {{bool_type, {array_variant_type, array_variant_type}, FN_ARRAYS_OVERLAP}},
-      fn_options);
+    // ARRAYS_OVERLAP
+    InsertFunction(
+        functions, options, "arrays_overlap", SCALAR,
+        {{bool_type, {array_variant_type, array_variant_type}, FN_ARRAYS_OVERLAP}},
+        fn_options);
 
-  // AS_ARRAY
-  InsertFunction(
-      functions, options, "as_array", SCALAR,
-      {{array_variant_type, {ARG_TYPE_ANY_1}, FN_AS_ARRAY}},
-      fn_options);
+    // AS_ARRAY
+    InsertFunction(
+        functions, options, "as_array", SCALAR,
+        {{array_variant_type, {ARG_TYPE_ANY_1}, FN_AS_ARRAY}},
+        fn_options);
 
-  // IS_ARRAY
-  InsertFunction(
-      functions, options, "is_array", SCALAR,
-      {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_ARRAY}},
-      fn_options);
+    // IS_ARRAY
+    InsertFunction(
+        functions, options, "is_array", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_ARRAY}},
+        fn_options);
+
+    // AS_BOOLEAN
+    InsertFunction(
+        functions, options, "as_boolean", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_AS_BOOLEAN}},
+        fn_options);
+
+    // AS_CHAR
+    InsertFunction(
+        functions, options, "as_char", SCALAR,
+        {{string_type, {ARG_TYPE_ANY_1}, FN_AS_CHAR}},
+        FunctionOptions().set_alias_name("as_varchar"));
+
+    // AS_DATE
+    InsertFunction(
+        functions, options, "as_date", SCALAR,
+        {{date_type, {ARG_TYPE_ANY_1}, FN_AS_DATE}},
+        fn_options);
+
+    // AS_DECIMAL, AS_NUMBER
+    InsertFunction(
+        functions, options, "as_decimal", SCALAR,
+        {{numeric_type, {variant_type, {int64_type, OPTIONAL}, {int64_type, OPTIONAL}}, FN_AS_DECIMAL}},
+        FunctionOptions().set_alias_name("as_number"));
+
+    // AS_DOUBLE , AS_REAL
+    InsertFunction(
+        functions, options, "as_double", SCALAR,
+        {{double_type, {ARG_TYPE_ANY_1}, FN_AS_DOUBLE}},
+        FunctionOptions().set_alias_name("as_real"));
+
+    // AS_INTEGER
+    InsertFunction(
+        functions, options, "as_integer", SCALAR,
+        {{int64_type, {ARG_TYPE_ANY_1}, FN_AS_INTEGER}},
+        fn_options);
+
+    // AS_TIME
+    InsertFunction(
+        functions, options, "as_time", SCALAR,
+        {{time_type, {ARG_TYPE_ANY_1}, FN_AS_TIME}},
+        fn_options);
+
+    // TODO: change return type for AS_TIMESTAMP_* functions
+    // AS_TIMESTAMP_TZ, AS_TIMESTAMP_LTZ
+    InsertFunction(
+        functions, options, "as_timestamp_tz", SCALAR,
+        {{timestamp_type, {ARG_TYPE_ANY_1}, FN_AS_TIMESTAMP}},
+        FunctionOptions().set_alias_name("as_timestamp_ltz"));
+
+    // AS_TIMESTAMP_NTZ
+    InsertFunction(
+        functions, options, "as_timestamp_ntz", SCALAR,
+        {{timestamp_type, {ARG_TYPE_ANY_1}, FN_AS_TIMESTAMP}},
+        fn_options);
+
+    // CHECK_JSON
+    InsertFunction(
+        functions, options, "check_json", SCALAR,
+        {{string_type, {string_type}, FN_CHECK_JSON_STRING},
+         {string_type, {variant_type}, FN_CHECK_JSON_VARIANT}},
+        fn_options);
+
+    // CHECK_XML
+    InsertFunction(
+        functions, options, "check_xml", SCALAR,
+        {{string_type, {string_type, {bool_type, OPTIONAL}}, FN_CHECK_XML}},
+        fn_options);
+
+    // GET, GET_IGNORE_CASE
+    InsertFunction(
+        functions, options, "get", SCALAR,
+        {{variant_type, {array_variant_type, int64_type}, FN_GET_ARRAY},
+         {variant_type, {object_type, string_type}, FN_GET_OBJECT},
+         {variant_type, {variant_type, int64_type}, FN_GET_VARIANT_INT64},
+         {variant_type, {variant_type, string_type}, FN_GET_OBJECT_STRING}},
+        FunctionOptions().set_alias_name("get_ignore_case"));
+
+    // GET_PATH
+    InsertFunction(
+        functions, options, "get_path", SCALAR,
+        {{variant_type, {variant_type, string_type}, FN_GET_PATH}},
+        fn_options);
+
+    // IS_BINARY
+    InsertFunction(
+        functions, options, "is_binary", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_BINARY}},
+        fn_options);
+
+    // IS_BOOLEAN
+    InsertFunction(
+        functions, options, "is_boolean", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_BOOLEAN}},
+        fn_options);
+
+    // IS_CHAR, IS_VARCHAR
+    InsertFunction(
+        functions, options, "is_char", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_CHAR}},
+        FunctionOptions().set_alias_name("is_varchar"));
+
+    // IS_DATE, IS_DATE_VALUE
+    InsertFunction(
+        functions, options, "is_date", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_DATE}},
+        FunctionOptions().set_alias_name("is_date_value"));
+    
+    // IS_DECIMAL
+    InsertFunction(
+        functions, options, "is_decimal", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_DECIMAL}},
+        fn_options);
+
+    // IS_INTEGER
+    InsertFunction(
+        functions, options, "is_integer", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_INTEGER}},
+        fn_options);
+
+    // IS_DOUBLE, IS_REAL
+    InsertFunction(
+        functions, options, "is_double", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_DOUBLE}},
+        FunctionOptions().set_alias_name("is_real"));
+
+    // IS_NULL_VALUE
+    InsertFunction(
+        functions, options, "is_null_value", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_NULL_VALUE}},
+        fn_options);
+
+    // IS_TIME
+    InsertFunction(
+        functions, options, "is_time", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIME}},
+        fn_options);
+
+    // IS_TIMESTAMP_TZ, IS_TIMESTAMP_LTZ
+    InsertFunction(
+        functions, options, "is_timestamp_tz", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIMESTAMP}},
+        FunctionOptions().set_alias_name("is_timestamp_ltz"));
+
+    // IS_TIMESTAMP_NTZ
+    InsertFunction(
+        functions, options, "is_timestamp_ntz", SCALAR,
+        {{bool_type, {ARG_TYPE_ANY_1}, FN_IS_TIMESTAMP}},
+        fn_options);
+
+    // PARSE_XML
+    InsertFunction(
+        functions, options, "parse_xml", SCALAR,
+        {{object_type, {string_type, {bool_type, OPTIONAL}}, FN_PARSE_XML_STRING},
+         {object_type, {string_type, {bool_type, OPTIONAL}}, FN_PARSE_XML_VARIANT}},
+        fn_options);
+
+    // STRIP_NULL_VALUE
+    InsertFunction(
+        functions, options, "strip_null_value", SCALAR,
+        {{variant_type, {ARG_TYPE_ANY_1}, FN_STRIP_NULL_VALUE}},
+        fn_options);
+
+    // STRTOK_TO_ARRAY
+    InsertFunction(
+        functions, options, "strtok_to_array", SCALAR,
+        {{array_variant_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, OPTIONAL}}, FN_STRTOK_TO_ARRAY}},
+        fn_options);
+
+    // TRY_PARSE_JSON
+    InsertFunction(
+        functions, options, "try_parse_json", SCALAR,
+        {{variant_type, {string_type}, FN_TRY_PARSE_JSON_STRING},
+         {variant_type, {variant_type}, FN_TRY_PARSE_JSON_VARIANT}},
+        fn_options);
+
+    // XMLGET
+    InsertFunction(
+        functions, options, "xmlget", SCALAR,
+        {{object_type, {ARG_TYPE_ANY_1, string_type, {int64_type, OPTIONAL}}, FN_XMLGET}},
+        fn_options);
 }
 
 /* Snowflake specific functions END */
