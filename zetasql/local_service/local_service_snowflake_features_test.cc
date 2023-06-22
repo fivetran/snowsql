@@ -103,6 +103,7 @@ class ZetaSqlLocalServiceImplTest : public ::testing::Test {
     ABSL_CHECK(google::protobuf::TextFormat::ParseFromString(catalog_proto_text, &catalog));
 
     zetasql::ZetaSQLBuiltinFunctionOptionsProto options;
+    options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_TYPEOF_FUNCTION);
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_2_CIVIL_TIME);
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_V_1_3_DECIMAL_ALIAS);
     options.mutable_language_options()->add_enabled_language_features(LanguageFeature::FEATURE_NUMERIC_TYPE);
@@ -1432,6 +1433,45 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "arrays_overlap(array_construct(), array_construct()),"
       "as_array(1), as_array(array_construct()),"
       "is_array(1), is_array(false), is_array(array_construct()),"
+      "as_boolean(true), as_boolean(to_variant(true)), as_boolean(array_construct()), as_boolean(1),"
+      "as_char(false), as_char(1), as_char(to_variant('a')),"
+      "as_varchar(false), as_varchar(1), as_varchar(to_variant('a')),"
+      "as_date(to_variant(to_date('2018-10-10'))),"
+      "as_decimal(to_variant(12345)), as_decimal(to_variant(123.45), 10, 2), as_decimal(to_variant(123.45), 10),"
+      "as_number(to_variant(12345)), as_number(to_variant(123.45), 10, 2), as_number(to_variant(123.45), 10),"
+      "as_double(to_variant('123.45')), as_double(1), as_double(1.1),"
+      "as_real(to_variant('123.45')), as_real(1), as_double(1.1),"
+      "as_integer(to_variant(1)), as_integer(to_variant('1')),"
+      "as_time(to_variant(to_time('12:34:56'))),"
+      "as_timestamp_tz(to_variant(to_timestamp_tz('2018-10-10 12:34:56'))),"
+      "as_timestamp_ltz(to_variant(to_timestamp_ltz('2018-10-10 12:34:56'))),"
+      "as_timestamp_ntz(to_variant(to_timestamp_ntz('2018-10-10 12:34:56'))),"
+      "check_json('{}'), check_json('notjson'), check_json(to_variant('1')),"
+      "check_xml('<'), check_xml('<', false),"
+      "get(parse_json('{}'), 'a'), get(array_construct(1, 2), 1), get(to_variant(parse_json('{}')), 'a'), get(to_variant(array_construct(1, 2)), 1),"
+      "get_ignore_case(parse_json('{}'), 'a'), get_ignore_case(array_construct(1, 2), 1), get_ignore_case(to_variant(parse_json('{}')), 'a'), get_ignore_case(to_variant(array_construct(1, 2)), 1),"
+      "get_path(parse_json('{}'), 'a'),"
+      "is_binary(to_variant(to_binary('snow', 'utf-8'))), is_binary(1), is_binary(array_construct()),"
+      "is_boolean(true), is_boolean(to_variant('a')), is_boolean(1), is_boolean(array_construct()),"
+      "is_char(true), is_char(to_variant('a')), is_char(1), is_char(array_construct()),"
+      "is_varchar(true), is_varchar(to_variant('a')), is_varchar(1), is_varchar(array_construct()),"
+      "is_date(true), is_date(to_variant('a')), is_date(1), is_date(array_construct()),"
+      "is_date_value(true), is_date_value(to_variant('a')), is_date_value(1), is_date_value(array_construct()),"
+      "is_decimal(true), is_decimal(to_variant('a')), is_decimal(1), is_decimal(array_construct()),"
+      "is_integer(true), is_integer(to_variant('a')), is_integer(1), is_integer(array_construct()),"
+      "is_double(true), is_double(to_variant('a')), is_double(1), is_double(array_construct()),"
+      "is_real(true), is_real(to_variant('a')), is_real(1), is_real(array_construct()),"
+      "is_null_value(get_path(parse_json('{\"a\": null}'), 'a')), is_null_value(true), is_null_value(to_variant('a')), is_null_value(1), is_null_value(array_construct()),"
+      "is_time(true), is_time(to_variant('a')), is_time(1), is_time(array_construct()),"
+      "is_timestamp_tz(true), is_timestamp_tz(to_variant('a')), is_timestamp_tz(1), is_timestamp_tz(array_construct()),"
+      "is_timestamp_ntz(true), is_timestamp_ntz(to_variant('a')), is_timestamp_ntz(1), is_timestamp_ntz(array_construct()),"
+      "is_timestamp_ltz(true), is_timestamp_ltz(to_variant('a')), is_timestamp_ltz(1), is_timestamp_ltz(array_construct()),"
+      "parse_xml('<'), parse_xml('<', false), parse_xml(to_variant('<')), parse_xml(to_variant('<'), false),"
+      "strip_null_value(get_path(parse_json('{\"a\": null}'), 'a')), strip_null_value(true), strip_null_value(to_variant('a')), strip_null_value(1), strip_null_value(array_construct()),"
+      "strtok_to_array('1 2'), strtok_to_array('1;2', ';'), strtok_to_array(to_variant('1 2')), strtok_to_array(to_variant('1;2'), to_variant(';')),"
+      "try_parse_json('{}'), try_parse_json(to_variant('notjson')),"
+      "typeof(123), typeof(to_variant('text')), typeof(to_object(to_variant('{}'))),"
+      "xmlget(to_variant(''), 't'), xmlget(to_variant(''), 't', 5),"
     }
   };
 
