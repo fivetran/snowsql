@@ -1437,6 +1437,7 @@ enum FunctionSignatureId {
   FN_TRY_TO_DECIMAL_STRING_2 = 100372;    // try_to_decimal(STRING, <INT64>, <INT64>) -> DECIMAL
   FN_TRY_TO_TIMESTAMP = 100373;           // try_to_timestamp(STRING, <STRING>) -> TIMESTAMP
   FN_TO_JSON_SNOWFLAKE = 100374;          // to_json(VARIANT) -> STRING
+  FN_TO_VARIANT_TIME = 100375;            // to_variant(TIME) -> VARIANT
 
   // Snowflake Data generation functions
   FN_RANDOM = 100400;                   // RANDOM(ARG_TYPE_ANY_1) -> INT64
@@ -1494,4 +1495,37 @@ enum FunctionSignatureId {
   FN_ARRAYS_OVERLAP = 100730;                  // ARRAYS_OVERLAP(ARRAY, ARRAY) -> BOOLEAN
   FN_AS_ARRAY = 100731;                        // AS_ARRAY(ANY) -> ARRAY
   FN_IS_ARRAY = 100732;                        // IS_ARRAY(ANY) -> BOOLEAN
+  FN_AS_BOOLEAN = 100733;                      // AS_BOOLEAN(ANY) -> BOOLEAN
+  FN_AS_CHAR = 100734;                         // AS_CHAR(ANY) -> STRING
+  FN_AS_DATE = 100735;                         // AS_DATE(VARIANT) -> DATE
+  FN_AS_DECIMAL = 100736;                      // AS_DECIMAL(VARIANT, <INT64>, <INT64>) -> DECIMAL
+  FN_AS_DOUBLE = 100737;                       // AS_DOUBLE(VARIANT) -> DOUBLE
+  FN_AS_INTEGER = 100738;                      // AS_INTEGER(VARIANT) -> INTEGER
+  FN_AS_TIME = 100739;                         // AS_TIME(VARIANT) -> TIME
+  FN_AS_TIMESTAMP = 100740;                    // AS_TIMESTAMP(VARIANT) -> TIMESTAMP
+  FN_CHECK_JSON_STRING = 100741;               // CHECK_JSON(STRING) -> STRING
+  FN_CHECK_JSON_VARIANT = 100742;              // CHECK_JSON(VARIANT) -> STRING
+  FN_CHECK_XML = 100743;                       // CHECK_XML(STRING) -> STRING
+  FN_GET_ARRAY = 100744;                       // GET(ARRAY, INT64) -> VARIANT
+  FN_GET_OBJECT = 100745;                      // GET(OBJECT, STRING) -> VARIANT
+  FN_GET_VARIANT_INT64 = 100746;               // GET(VARIANT, INT64) -> VARIANT
+  FN_GET_OBJECT_STRING = 100747;               // GET(OBJECT, STRING) -> VARIANT
+  FN_GET_PATH = 100748;                        // GET_PATH(VARIANT, STRING) -> VARIANT
+  FN_IS_BINARY = 100749;                       // IS_BINARY(VARIANT) -> BOOLEAN
+  FN_IS_BOOLEAN = 100750;                      // IS_BOOLEAN(VARIANT) -> BOOLEAN
+  FN_IS_CHAR = 100751;                         // IS_CHAR(VARIANT) -> BOOLEAN
+  FN_IS_DATE = 100752;                         // IS_DATE(VARIANT) -> BOOLEAN
+  FN_IS_DECIMAL = 100753;                      // IS_DECIMAL(VARIANT) -> BOOLEAN
+  FN_IS_INTEGER = 100754;                      // IS_INTEGER(VARIANT) -> BOOLEAN
+  FN_IS_DOUBLE = 100755;                       // IS_DOUBLE(VARIANT) -> BOOLEAN
+  FN_IS_NULL_VALUE = 100756;                   // IS_NULL_VALUE(VARIANT) -> BOOLEAN
+  FN_IS_TIME = 100757;                         // IS_TIME(VARIANT) -> BOOLEAN
+  FN_IS_TIMESTAMP = 100758;                    // IS_TIMESTAMP(VARIANT) -> BOOLEAN
+  FN_PARSE_XML_STRING = 100759;                // PARSE_XML(STRING, <BOOL>) -> OBJECT
+  FN_PARSE_XML_VARIANT = 100760;               // PARSE_XML(VARIANT, <BOOL>) -> OBJECT
+  FN_STRIP_NULL_VALUE = 100761;                // STRIP_NULL_VALUE(VARIANT) -> VARIANT
+  FN_STRTOK_TO_ARRAY = 100762;                 // STRTOK_TO_ARRAY(STRING, <STRING>) -> ARRAY
+  FN_TRY_PARSE_JSON_STRING = 100763;           // TRY_PARSE_JSON(STRING) -> VARIANT
+  FN_TRY_PARSE_JSON_VARIANT = 100764;          // TRY_PARSE_JSON(VARIANT) -> VARIANT
+  FN_XMLGET = 100765;                          // XMLGET(ANY, STRING, <INT64>) -> VARIANT
 }
