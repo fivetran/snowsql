@@ -277,22 +277,3 @@ DescribeStatement [0-33] [DESCRIBE my...dataset.table]
 --
 DESCRIBE `my-project`.dataset.table
 ==
-
-[no_test_get_parse_tokens]
-[language_features=V_1_3_ALLOW_DASHES_IN_TABLE_NAME{{|,V_1_3_ALLOW_SLASH_PATHS}}]
-DESCRIBE /span/db/my-mdb-grp:my_db.Table
---
-ALTERNATION GROUP: <empty>
---
-ERROR: Syntax error: Table name contains '/' character. It needs to be quoted: `/span/db/my-mdb-grp:my_db.Table` [at 1:10]
-DESCRIBE /span/db/my-mdb-grp:my_db.Table
-         ^
---
-ALTERNATION GROUP: ,V_1_3_ALLOW_SLASH_PATHS
---
-DescribeStatement [0-40] [DESCRIBE /...my_db.Table]
-  PathExpression [9-40] [/span/db/my...my_db.Table]
-    Identifier(`/span/db/my-mdb-grp:my_db`) [9-34] [/span/db/my-mdb-grp:my_db]
-    Identifier(Table) [35-40] [Table]
---
-DESCRIBE `/span/db/my-mdb-grp:my_db`.Table

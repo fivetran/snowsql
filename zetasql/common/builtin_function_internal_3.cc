@@ -814,6 +814,14 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
   }
 
   InsertFunction(
+      functions, options, "$get_path_op", SCALAR,
+      {{string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2}, FN_GET_PATH_OP}},
+      FunctionOptions()
+          .set_supports_safe_error_mode(false)
+          .set_sql_name(":")
+          .set_get_sql_callback(absl::bind_front(&InfixFunctionSQL, ":")));
+
+  InsertFunction(
       functions, options, "$concat_op", SCALAR,
       {{string_type,
         {{string_type, concat_option}, {string_type, concat_option}},

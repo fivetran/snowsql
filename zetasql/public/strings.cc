@@ -947,6 +947,7 @@ static absl::Status AddIdentifierPathSegment(
   return absl::OkStatus();
 }
 
+// TODO: disable FEATURE_V_1_3_ALLOW_SLASH_PATHS
 static absl::StatusOr<bool> IsSlashPath(
     absl::string_view str, const LanguageOptions& language_options) {
   if (str.empty() || str[0] != '/') return false;

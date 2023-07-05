@@ -1,0 +1,37 @@
+[no_enable_literal_replacement]
+select parse_json(''):a
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [VARIANT]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
+    |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
+    |     | +-Literal(type=STRING, value="")
+    |     +-Literal(type=STRING, value="")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+[no_enable_literal_replacement]
+select parse_json('{"a":"b"}'):"a"
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [VARIANT]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
+    |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
+    |     | +-Literal(type=STRING, value='{"a":"b"}')
+    |     +-Literal(type=STRING, value="a")
+    +-input_scan=
+      +-SingleRowScan
+==

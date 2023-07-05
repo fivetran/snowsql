@@ -7,7 +7,7 @@
 
 ## Build exec query tool
 ```
-bazel build //zetasql/tools/execute_query:execute_query -c dbg --spawn_strategy=local
+bazel build //zetasql/tools/execute_query:execute_query -c dbg --spawn_strategy=local --config=clang
 ```
 
 ## Build one package

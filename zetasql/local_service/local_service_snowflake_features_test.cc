@@ -1451,6 +1451,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "get(parse_json('{}'), 'a'), get(array_construct(1, 2), 1), get(to_variant(parse_json('{}')), 'a'), get(to_variant(array_construct(1, 2)), 1),"
       "get_ignore_case(parse_json('{}'), 'a'), get_ignore_case(array_construct(1, 2), 1), get_ignore_case(to_variant(parse_json('{}')), 'a'), get_ignore_case(to_variant(array_construct(1, 2)), 1),"
       "get_path(parse_json('{}'), 'a'),"
+      "parse_json('{\"a\":\"b\"}'):a, parse_json('{\"a\":\"b\"}'):\"a\","
       "is_binary(to_variant(to_binary('snow', 'utf-8'))), is_binary(1), is_binary(array_construct()),"
       "is_boolean(true), is_boolean(to_variant('a')), is_boolean(1), is_boolean(array_construct()),"
       "is_char(true), is_char(to_variant('a')), is_char(1), is_char(array_construct()),"
