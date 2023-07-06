@@ -6862,7 +6862,7 @@ expression_not_parenthesized:
             zetasql::ASTBinaryExpression::GET_PATH_OP);
         $$ = binary_expression;
       }
-    | expression ":" path_expression
+    | expression ":" generalized_path_expression
       {
         auto* literal = MAKE_NODE(ASTStringLiteral, @3);
         auto* binary_expression =
