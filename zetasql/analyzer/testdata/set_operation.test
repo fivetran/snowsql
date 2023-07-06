@@ -260,7 +260,7 @@ QueryStmt
 
 select 1 union all select 1,2
 --
-ERROR: Queries in UNION ALL have mismatched column count; query 1 has 1 column, query 2 has 2 columns [at 1:20]
+ERROR: Queries in UNION have mismatched column count; query 1 has 1 column, query 2 has 2 columns [at 1:20]
 select 1 union all select 1,2
                    ^
 ==
@@ -273,7 +273,7 @@ select 5
 union all
 select 6,7
 --
-ERROR: Queries in UNION ALL have mismatched column count; query 1 has 2 columns, query 3 has 1 column [at 5:1]
+ERROR: Queries in UNION have mismatched column count; query 1 has 2 columns, query 3 has 1 column [at 5:1]
 select 5
 ^
 ==
