@@ -415,6 +415,7 @@
 %token KW_DOUBLE_AT "@@"
 %token KW_CONCAT_OP "||"
 %token KW_CAST_OP "::"
+%token KW_GET_PATH_OP ":"
 %token '+' "+"
 %token '-' "-"
 %token '/' "/"
@@ -460,6 +461,7 @@
 %left "+" "-"
 %left "||"
 %left "::"
+%left ":"
 %left "*" "/"
 %precedence UNARY_PRECEDENCE  // For all unary operators
 %precedence DOUBLE_AT_PRECEDENCE // Needs to appear before "."
@@ -6799,7 +6801,7 @@ expression_not_parenthesized:
         expression->set_op($1);
         $$ = expression;
       }
-      | expression "::" type
+    | expression "::" type
       {
         // NOT has lower precedence but can be parsed unparenthesized in the
         // rhs because it is not ambiguous. However, this is not allowed. Other
@@ -6811,6 +6813,23 @@ expression_not_parenthesized:
         auto* cast = MAKE_NODE(ASTCastExpression, @$, {$1, $3});
         cast->set_is_try_cast(false);
         $$ = cast;
+      }
+    | expression ":" string_literal
+      {
+        auto* binary_expression =
+            MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $3});
+        binary_expression->set_op(
+            zetasql::ASTBinaryExpression::GET_PATH_OP);
+        $$ = binary_expression;
+      }
+    | expression ":" generalized_path_expression
+      {
+        auto* literal = MAKE_NODE(ASTStringLiteral, @3);
+        auto* binary_expression =
+            MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, literal});
+        binary_expression->set_op(
+            zetasql::ASTBinaryExpression::GET_PATH_OP);
+        $$ = binary_expression;
       }
     ;
 
