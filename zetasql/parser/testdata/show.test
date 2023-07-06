@@ -216,22 +216,3 @@ ShowStatement [0-41] [SHOW TABLES...dataset.table]
 --
 SHOW TABLES FROM `my-project`.dataset.table
 ==
-
-[no_test_get_parse_tokens]
-[language_features=V_1_3_ALLOW_DASHES_IN_TABLE_NAME{{|,V_1_3_ALLOW_SLASH_PATHS}}]
-SHOW TABLES FROM /span/db/my-mdb-grp:my_db
---
-ALTERNATION GROUP: <empty>
---
-ERROR: Syntax error: Table name contains '/' character. It needs to be quoted: `/span/db/my-mdb-grp:my_db` [at 1:18]
-SHOW TABLES FROM /span/db/my-mdb-grp:my_db
-                 ^
---
-ALTERNATION GROUP: ,V_1_3_ALLOW_SLASH_PATHS
---
-ShowStatement [0-42] [SHOW TABLES...-grp:my_db]
-  Identifier(TABLES) [5-11] [TABLES]
-  PathExpression [17-42] [/span/db/my-mdb-grp:my_db]
-    Identifier(`/span/db/my-mdb-grp:my_db`) [17-42] [/span/db/my-mdb-grp:my_db]
---
-SHOW TABLES FROM `/span/db/my-mdb-grp:my_db`

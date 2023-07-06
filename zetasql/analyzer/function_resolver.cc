@@ -147,6 +147,7 @@ static const std::string* const kBitwiseOrFnName =
 static const std::string* const kBitwiseXorFnName =
     new std::string("$bitwise_xor");
 static const std::string* const kConcatOpFnName = new std::string("$concat_op");
+static const std::string* const kGetPathOpFnName = new std::string("$get_path_op");
 static const std::string* const kDivideFnName = new std::string("$divide");
 static const std::string* const kEqualFnName = new std::string("$equal");
 static const std::string* const kGreaterFnName = new std::string("$greater");
@@ -207,6 +208,8 @@ const std::string& FunctionResolver::BinaryOperatorToFunctionName(
       return *kInvalidBinaryOperatorStr;
     case ASTBinaryExpression::CONCAT_OP:
       return *kConcatOpFnName;
+    case ASTBinaryExpression::GET_PATH_OP:
+      return *kGetPathOpFnName;
     case ASTBinaryExpression::DISTINCT:
       if (is_not) {
         ABSL_CHECK(not_handled != nullptr);
@@ -1990,6 +1993,34 @@ absl::Status FunctionResolver::ResolveGeneralFunctionCall(
   }
 
   ZETASQL_RET_CHECK(!result_signature->result_type().IsVoid());
+
+  if (function->Name() == "$get_path_op") {
+    const Function* get_path_op_function;
+    ResolvedFunctionCallBase::ErrorMode get_path_op_error_mode;
+    std::vector<std::string> function_name_path;
+    std::unique_ptr<const FunctionSignature> get_path_result_signature;
+    arg_reorder_index_mapping.clear();
+
+    function_name_path.push_back("get_path");
+    ZETASQL_RETURN_IF_ERROR(resolver_->LookupFunctionFromCatalog(
+        ast_location, function_name_path,
+        Resolver::FunctionNotFoundHandleMode::kReturnError,
+        &get_path_op_function, &get_path_op_error_mode));
+    ZETASQL_ASSIGN_OR_RETURN(
+        const FunctionSignature* matched_signature,
+        FindMatchingSignature(get_path_op_function, ast_location,
+                              arg_locations_in, named_arguments,
+                              /*name_scope=*/nullptr, &input_argument_types,
+                              /*arg_overrides=*/nullptr,
+                              &arg_reorder_index_mapping,
+                              /*mismatch_errors=*/nullptr));
+    get_path_result_signature.reset(matched_signature);
+
+    *resolved_expr_out = MakeResolvedFunctionCall(
+        get_path_result_signature->result_type().type(), get_path_op_function,
+        *get_path_result_signature, std::move(arguments),
+        /*generic_argument_list=*/{}, get_path_op_error_mode, function_call_info);
+  } else
 
   // We transform the concatenation operator (||) function into the
   // corresponding CONCAT or ARRAY_CONCAT function call here. Engines never

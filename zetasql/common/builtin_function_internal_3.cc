@@ -827,6 +827,8 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
   const Type* double_type = type_factory->get_double();
   const Type* string_type = type_factory->get_string();
   const Type* bytes_type = type_factory->get_bytes();
+  const Type* numeric_type = type_factory->get_numeric();
+  const Type* variant_type = type_factory->get_variant();
 
   const Function::Mode SCALAR = Function::SCALAR;
 
@@ -893,6 +895,14 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
           zetasql::FEATURE_V_1_3_CONCAT_MIXED_TYPES)) {
     concat_option.set_allow_coercion_from(&CanStringConcatCoerceFrom);
   }
+
+  InsertFunction(
+      functions, options, "$get_path_op", SCALAR,
+      {{string_type, {variant_type, string_type}, FN_GET_PATH_OP_VARIANT}},
+      FunctionOptions()
+          .set_supports_safe_error_mode(false)
+          .set_sql_name(":")
+          .set_get_sql_callback(absl::bind_front(&InfixFunctionSQL, ":")));
 
   InsertFunction(
       functions, options, "$concat_op", SCALAR,
