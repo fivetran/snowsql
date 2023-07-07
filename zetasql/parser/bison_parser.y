@@ -4318,6 +4318,10 @@ all_or_distinct:
       $$ = MAKE_NODE(ASTSetOperationAllOrDistinct, @$, {});
       $$->set_value(zetasql::ASTSetOperation::ALL);
     }
+    | %empty {
+      $$ = MAKE_NODE(ASTSetOperationAllOrDistinct, @$, {});
+      $$->set_value(zetasql::ASTSetOperation::ALL);
+    }
     | "DISTINCT" {
       $$ = MAKE_NODE(ASTSetOperationAllOrDistinct, @$, {});
       $$->set_value(zetasql::ASTSetOperation::DISTINCT);
