@@ -1342,7 +1342,7 @@ constexpr absl::string_view SetOperationTypeToString(
     const ResolvedSetOperationScanEnums::SetOperationType type) {
   switch (type) {
     case ResolvedSetOperationScanEnums::UNION_ALL:
-      return "UNION ALL";
+      return "UNION";
     case ResolvedSetOperationScanEnums::UNION_DISTINCT:
       return "UNION DISTINCT";
     case ResolvedSetOperationScanEnums::INTERSECT_ALL:

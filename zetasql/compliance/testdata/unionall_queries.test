@@ -523,7 +523,7 @@ SELECT int64_val, int32_val, date_val FROM TableDataTypes
 UNION ALL
 SELECT int64_val, int32_val FROM TableDataTypes
 --
-ERROR: generic::invalid_argument: Queries in UNION ALL have mismatched column count; query 1 has 3 columns, query 2 has 2 columns [at 3:1]
+ERROR: generic::invalid_argument: Queries in UNION have mismatched column count; query 1 has 3 columns, query 2 has 2 columns [at 3:1]
 SELECT int64_val, int32_val FROM TableDataTypes
 ^
 ==

@@ -1,0 +1,42 @@
+select 1
+union
+select 2
+union
+select 3
+--
+QueryStmt
++-output_column_list=
+| +-$union_all.$col1#4 AS `$col1` [INT64]
++-query=
+  +-SetOperationScan
+    +-column_list=[$union_all.$col1#4]
+    +-op_type=UNION_ALL
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all1.$col1#1]
+      | |   +-expr_list=
+      | |   | +-$col1#1 := Literal(type=INT64, value=1)
+      | |   +-input_scan=
+      | |     +-SingleRowScan
+      | +-output_column_list=[$union_all1.$col1#1]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all2.$col1#2]
+      | |   +-expr_list=
+      | |   | +-$col1#2 := Literal(type=INT64, value=2)
+      | |   +-input_scan=
+      | |     +-SingleRowScan
+      | +-output_column_list=[$union_all2.$col1#2]
+      +-SetOperationItem
+        +-scan=
+        | +-ProjectScan
+        |   +-column_list=[$union_all3.$col1#3]
+        |   +-expr_list=
+        |   | +-$col1#3 := Literal(type=INT64, value=3)
+        |   +-input_scan=
+        |     +-SingleRowScan
+        +-output_column_list=[$union_all3.$col1#3]
+==
