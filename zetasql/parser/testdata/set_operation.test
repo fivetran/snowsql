@@ -116,16 +116,6 @@ SELECT
   2
 ==
 
-# UNION without ALL or DISTINCT not supported. TODO: Better error.
-select 1
-UNION
-select 2
---
-ERROR: Syntax error: Expected keyword ALL or keyword DISTINCT but got keyword SELECT [at 3:1]
-select 2
-^
-==
-
 select 1
 EXCEPT ALL
 select 2
@@ -252,16 +242,6 @@ SELECT
 INTERSECT DISTINCT
 SELECT
   2
-==
-
-# INTERSECT without ALL or DISTINCT not supported.
-select 1
-INTERSECT
-select 2
---
-ERROR: Syntax error: Expected keyword ALL or keyword DISTINCT but got keyword SELECT [at 3:1]
-select 2
-^
 ==
 
 select 1
@@ -458,18 +438,6 @@ INTERSECT DISTINCT
 SELECT
   3
 ==
-
-select 1
-UNION ALL
-select 2
-UNION
-select 3
---
-ERROR: Syntax error: Expected keyword ALL or keyword DISTINCT but got keyword SELECT [at 5:1]
-select 3
-^
-==
-
 
 # Use paranthesis to make multiple set operations work in a single query.
 select 1

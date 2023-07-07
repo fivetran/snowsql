@@ -714,7 +714,7 @@ from (select * from SimpleTypesWithAnonymizationUid
       union all
       select @_p2_INT32, @_p3_INT64, @_p4_UINT32, @_p5_UINT64, @_p6_STRING, @_p7_BYTES, @_p8_BOOL, @_p9_FLOAT, @_p10_DOUBLE, @_p11_DATE, @_p12_INT64, @_p13_NUMERIC);
 
-Rewrite ERROR: Not all queries in UNION ALL are anonymization-enabled table expressions; query 1 is an anonymization-enabled table expression, but query 2 is not [at 2:7]
+Rewrite ERROR: Not all queries in UNION are anonymization-enabled table expressions; query 1 is an anonymization-enabled table expression, but query 2 is not [at 2:7]
 from (select * from SimpleTypesWithAnonymizationUid
       ^
 --
@@ -1170,7 +1170,7 @@ from (select * from T1StringAnonymizationUid
       union all
       select @_p2_STRING, @_p5_STRING);
 
-Rewrite ERROR: Not all queries in UNION ALL are anonymization-enabled table expressions; query 1 is an anonymization-enabled table expression, but query 3 is not [at 2:7]
+Rewrite ERROR: Not all queries in UNION are anonymization-enabled table expressions; query 1 is an anonymization-enabled table expression, but query 3 is not [at 2:7]
 from (select * from T1StringAnonymizationUid
       ^
 ==
@@ -1228,7 +1228,7 @@ from (select * from T1StringAnonymizationUid
       union all
       select * from T2StringAnonymizationUid);
 
-Rewrite ERROR: Queries in UNION ALL have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 2 has userid column 'uid' in position 2 [at 2:7]
+Rewrite ERROR: Queries in UNION have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 2 has userid column 'uid' in position 2 [at 2:7]
 from (select * from T1StringAnonymizationUid
       ^
 --
@@ -1540,7 +1540,7 @@ from (select * from T1StringAnonymizationUid
       union all
       select * from T2StringAnonymizationUid);
 
-Rewrite ERROR: Queries in UNION ALL have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 3 has userid column 'uid' in position 2 [at 2:7]
+Rewrite ERROR: Queries in UNION have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 3 has userid column 'uid' in position 2 [at 2:7]
 from (select * from T1StringAnonymizationUid
       ^
 ==

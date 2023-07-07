@@ -694,7 +694,7 @@ from (select * from SimpleTypesWithAnonymizationUid
       union all
       select @_p1_INT32, @_p2_INT64, @_p3_UINT32, @_p4_UINT64, @_p5_STRING, @_p6_BYTES, @_p7_BOOL, @_p8_FLOAT, @_p9_DOUBLE, @_p10_DATE, @_p11_INT64, @_p12_NUMERIC);
 
-Rewrite ERROR: Not all queries in UNION ALL are differential_privacy-enabled table expressions; query 1 is a differential_privacy-enabled table expression, but query 2 is not [at 2:7]
+Rewrite ERROR: Not all queries in UNION are differential_privacy-enabled table expressions; query 1 is a differential_privacy-enabled table expression, but query 2 is not [at 2:7]
 from (select * from SimpleTypesWithAnonymizationUid
       ^
 --
@@ -1144,7 +1144,7 @@ from (select * from T1StringAnonymizationUid
       union all
       select @_p1_STRING, @_p2_STRING);
 
-Rewrite ERROR: Not all queries in UNION ALL are differential_privacy-enabled table expressions; query 1 is a differential_privacy-enabled table expression, but query 3 is not [at 2:7]
+Rewrite ERROR: Not all queries in UNION are differential_privacy-enabled table expressions; query 1 is a differential_privacy-enabled table expression, but query 3 is not [at 2:7]
 from (select * from T1StringAnonymizationUid
       ^
 ==
@@ -1201,7 +1201,7 @@ from (select * from T1StringAnonymizationUid
       union all
       select * from T2StringAnonymizationUid);
 
-Rewrite ERROR: Queries in UNION ALL have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 2 has userid column 'uid' in position 2 [at 2:7]
+Rewrite ERROR: Queries in UNION have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 2 has userid column 'uid' in position 2 [at 2:7]
 from (select * from T1StringAnonymizationUid
       ^
 --
@@ -1507,7 +1507,7 @@ from (select * from T1StringAnonymizationUid
       union all
       select * from T2StringAnonymizationUid);
 
-Rewrite ERROR: Queries in UNION ALL have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 3 has userid column 'uid' in position 2 [at 2:7]
+Rewrite ERROR: Queries in UNION have mismatched userid columns; query 1 has userid column 'uid' in position 1, query 3 has userid column 'uid' in position 2 [at 2:7]
 from (select * from T1StringAnonymizationUid
       ^
 ==
