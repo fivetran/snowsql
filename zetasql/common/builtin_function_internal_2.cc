@@ -1931,6 +1931,9 @@ void GetBooleanFunctions(TypeFactory* type_factory,
   const Type* int64_type = type_factory->get_int64();
   const Type* uint64_type = type_factory->get_uint64();
   const Type* string_type = type_factory->get_string();
+  const Type* float_type = type_factory->get_float();
+  const Type* numeric_type = type_factory->get_numeric();
+  const Type* double_type = type_factory->get_double();
   const ArrayType* array_string_type;
   ZETASQL_CHECK_OK(type_factory->MakeArrayType(string_type, &array_string_type));
   const ArrayType* array_byte_type;
@@ -1948,7 +1951,17 @@ void GetBooleanFunctions(TypeFactory* type_factory,
         FN_EQUAL,
         FunctionSignatureOptions().set_uses_operation_collation()},
        {bool_type, {int64_type, uint64_type}, FN_EQUAL_INT64_UINT64},
-       {bool_type, {uint64_type, int64_type}, FN_EQUAL_UINT64_INT64}},
+       {bool_type, {uint64_type, int64_type}, FN_EQUAL_UINT64_INT64},
+       {bool_type, {bool_type, string_type}, FN_EQUAL_BOOL_STRING},
+       {bool_type, {string_type, bool_type}, FN_EQUAL_STRING_BOOL},
+       {bool_type, {int64_type, string_type}, FN_EQUAL_INT64_STRING},
+       {bool_type, {string_type, int64_type}, FN_EQUAL_STRING_INT64},
+       {bool_type, {float_type, string_type}, FN_EQUAL_FLOAT_STRING},
+       {bool_type, {string_type, float_type}, FN_EQUAL_STRING_FLOAT},
+       {bool_type, {numeric_type, string_type}, FN_EQUAL_NUMERIC_STRING},
+       {bool_type, {string_type, numeric_type}, FN_EQUAL_STRING_NUMERIC},
+       {bool_type, {double_type, string_type}, FN_EQUAL_DOUBLE_STRING},
+       {bool_type, {string_type, double_type}, FN_EQUAL_STRING_DOUBLE}},
       FunctionOptions()
           .set_supports_safe_error_mode(false)
           .set_sql_name("=")

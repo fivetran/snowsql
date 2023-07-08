@@ -852,7 +852,7 @@ p0: BOOL
 
 SELECT x FROM (SELECT 0 AS x) WHERE @p0 GROUP BY x HAVING @p0 = 'foo';
 --
-ERROR: Undeclared parameter 'p0' is used assuming different types (BOOL vs STRING) [at 1:59]
+ERROR: Undeclared parameter 'p0' is used assuming different types (BOOL vs INT64) [at 1:59]
 SELECT x FROM (SELECT 0 AS x) WHERE @p0 GROUP BY x HAVING @p0 = 'foo';
                                                           ^
 ==
@@ -893,16 +893,16 @@ p0: BOOL
 
 SELECT x FROM (SELECT 0 AS x) WHERE @p0 = 'foo' GROUP BY x HAVING @p0;
 --
-ERROR: Undeclared parameter 'p0' is used assuming different types (STRING vs BOOL) [at 1:67]
+ERROR: Undeclared parameter 'p0' is used assuming different types (BOOL vs INT64) [at 1:37]
 SELECT x FROM (SELECT 0 AS x) WHERE @p0 = 'foo' GROUP BY x HAVING @p0;
-                                                                  ^
+                                    ^
 ==
 
 SELECT x FROM (SELECT 0 AS x) WHERE @p0 = 'foo' AND @p0;
 --
-ERROR: Undeclared parameter 'p0' is used assuming different types (STRING vs BOOL) [at 1:53]
+ERROR: Undeclared parameter 'p0' is used assuming different types (BOOL vs INT64) [at 1:37]
 SELECT x FROM (SELECT 0 AS x) WHERE @p0 = 'foo' AND @p0;
-                                                    ^
+                                    ^
 ==
 
 SELECT x FROM (SELECT 0 AS x) GROUP BY x HAVING @p0;

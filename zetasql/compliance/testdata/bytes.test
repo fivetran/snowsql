@@ -212,7 +212,7 @@ ARRAY<STRUCT<INT64, INT64, INT64>>[{2, 3, 3}]
 [name=function_lower_upper_bytes]
 SELECT b"" = LOWER(NULL), b"" = UPPER(NULL)
 --
-ERROR: generic::invalid_argument: No matching signature for operator = for argument types: BYTES, STRING. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:8]
+ERROR: generic::invalid_argument: No matching signature for operator = for argument types: BYTES, STRING. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:8]
 SELECT b"" = LOWER(NULL), b"" = UPPER(NULL)
        ^
 ==

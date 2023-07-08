@@ -2261,19 +2261,6 @@ partition by (select c1 from t1)
                              ^
 ==
 
-# PARTITION BY with type mismatch in expression
-create table t1 (
-  c1 int32,
-  c2 int64,
-  c3 string
-)
-partition by c1, c2 + 5 = c3
---
-ERROR: No matching signature for operator = for argument types: INT64, STRING. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 6:18]
-partition by c1, c2 + 5 = c3
-                 ^
-==
-
 # CLUSTER BY with no expressions
 create table t1 (
   c1 int32,

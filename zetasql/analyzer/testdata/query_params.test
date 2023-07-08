@@ -84,7 +84,7 @@ QueryStmt
 
 select * from TestTable where @test_param_string = @test_param_bytes;
 --
-ERROR: No matching signature for operator = for argument types: STRING, BYTES. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:31]
+ERROR: No matching signature for operator = for argument types: STRING, BYTES. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:31]
 select * from TestTable where @test_param_string = @test_param_bytes;
                               ^
 ==

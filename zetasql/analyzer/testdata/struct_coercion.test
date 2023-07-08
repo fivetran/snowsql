@@ -1012,7 +1012,7 @@ select key, value
 from keyvalue kv
 where struct(key, key) = ('1', '1');
 --
-ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<STRING, STRING>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 3:7]
+ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<STRING, STRING>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 3:7]
 where struct(key, key) = ('1', '1');
       ^
 ==
@@ -1045,7 +1045,7 @@ select key, value
 from keyvalue kv
 where struct(key, key) = struct<key uint64, key int64>(cast(1 as uint64), 1);
 --
-ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<key UINT64, key INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 3:7]
+ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<key UINT64, key INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 3:7]
 where struct(key, key) = struct<key uint64, key int64>(cast(1 as uint64), 1);
       ^
 ==
