@@ -272,9 +272,9 @@ select 1
 union all
 select 'abc'
 --
-ERROR: Column 1 in UNION ALL has incompatible types: INT64, STRING [at 3:1]
+ERROR: Could not cast literal "abc" to type INT64 [at 3:8]
 select 'abc'
-^
+       ^
 ==
 
 # Different (non-literal) types coerce to a common supertype.
@@ -506,9 +506,106 @@ select 5 union all
 select value from KeyValue union all
 select key from KeyValue
 --
-ERROR: Column 1 in UNION ALL has incompatible types: INT64, INT64, INT64, INT64, INT64, INT32, INT64, STRING, INT64 [at 2:1]
+
 select key from KeyValue union all
-^
+select key from KeyValue union all
+select key from KeyValue union all
+select key from KeyValue union all
+select cast(5 as int64) union all
+select cast(5 as int32) union all
+select 5 union all
+select value from KeyValue union all
+select key from KeyValue
+--
+QueryStmt
++-output_column_list=
+| +-$union_all.key#16 AS key [INT64]
++-query=
+  +-SetOperationScan
+    +-column_list=[$union_all.key#16]
+    +-op_type=UNION_ALL
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[KeyValue.Key#1]
+      | |   +-input_scan=
+      | |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
+      | +-output_column_list=[KeyValue.Key#1]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[KeyValue.Key#3]
+      | |   +-input_scan=
+      | |     +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0])
+      | +-output_column_list=[KeyValue.Key#3]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[KeyValue.Key#5]
+      | |   +-input_scan=
+      | |     +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0])
+      | +-output_column_list=[KeyValue.Key#5]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[KeyValue.Key#7]
+      | |   +-input_scan=
+      | |     +-TableScan(column_list=[KeyValue.Key#7], table=KeyValue, column_index_list=[0])
+      | +-output_column_list=[KeyValue.Key#7]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all5.$col1#9]
+      | |   +-expr_list=
+      | |   | +-$col1#9 := Literal(type=INT64, value=5, has_explicit_type=TRUE)
+      | |   +-input_scan=
+      | |     +-SingleRowScan
+      | +-output_column_list=[$union_all5.$col1#9]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all6_cast.$col1#17]
+      | |   +-expr_list=
+      | |   | +-$col1#17 := Literal(type=INT64, value=5, has_explicit_type=TRUE)
+      | |   +-input_scan=
+      | |     +-ProjectScan
+      | |       +-column_list=[$union_all6.$col1#10]
+      | |       +-expr_list=
+      | |       | +-$col1#10 := Literal(type=INT32, value=5, has_explicit_type=TRUE)
+      | |       +-input_scan=
+      | |         +-SingleRowScan
+      | +-output_column_list=[$union_all6_cast.$col1#17]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all7.$col1#11]
+      | |   +-expr_list=
+      | |   | +-$col1#11 := Literal(type=INT64, value=5)
+      | |   +-input_scan=
+      | |     +-SingleRowScan
+      | +-output_column_list=[$union_all7.$col1#11]
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all8_cast.Value#18]
+      | |   +-expr_list=
+      | |   | +-Value#18 :=
+      | |   |   +-Cast(STRING -> INT64)
+      | |   |     +-ColumnRef(type=STRING, column=KeyValue.Value#13)
+      | |   +-input_scan=
+      | |     +-ProjectScan
+      | |       +-column_list=[KeyValue.Value#13]
+      | |       +-input_scan=
+      | |         +-TableScan(column_list=[KeyValue.Value#13], table=KeyValue, column_index_list=[1])
+      | +-output_column_list=[$union_all8_cast.Value#18]
+      +-SetOperationItem
+        +-scan=
+        | +-ProjectScan
+        |   +-column_list=[KeyValue.Key#14]
+        |   +-input_scan=
+        |     +-TableScan(column_list=[KeyValue.Key#14], table=KeyValue, column_index_list=[0])
+        +-output_column_list=[KeyValue.Key#14]
 ==
 
 # Multiple columns, some of which have to get widened in either direction.
@@ -3572,9 +3669,50 @@ SELECT bool_val FROM (SELECT true AS bool_val)
 UNION DISTINCT
 SELECT str_val FROM (SELECT 'abc' AS str_val)
 --
-ERROR: Column 1 in UNION DISTINCT has incompatible types: BOOL, STRING [at 3:1]
+
+SELECT bool_val FROM (SELECT true AS bool_val)
+UNION DISTINCT
 SELECT str_val FROM (SELECT 'abc' AS str_val)
-^
+--
+QueryStmt
++-output_column_list=
+| +-$union_distinct.bool_val#3 AS bool_val [BOOL]
++-query=
+  +-SetOperationScan
+    +-column_list=[$union_distinct.bool_val#3]
+    +-op_type=UNION_DISTINCT
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$subquery1.bool_val#1]
+      | |   +-input_scan=
+      | |     +-ProjectScan
+      | |       +-column_list=[$subquery1.bool_val#1]
+      | |       +-expr_list=
+      | |       | +-bool_val#1 := Literal(type=BOOL, value=true)
+      | |       +-input_scan=
+      | |         +-SingleRowScan
+      | +-output_column_list=[$subquery1.bool_val#1]
+      +-SetOperationItem
+        +-scan=
+        | +-ProjectScan
+        |   +-column_list=[$union_distinct2_cast.str_val#4]
+        |   +-expr_list=
+        |   | +-str_val#4 :=
+        |   |   +-Cast(STRING -> BOOL)
+        |   |     +-ColumnRef(type=STRING, column=$subquery2.str_val#2)
+        |   +-input_scan=
+        |     +-ProjectScan
+        |       +-column_list=[$subquery2.str_val#2]
+        |       +-input_scan=
+        |         +-ProjectScan
+        |           +-column_list=[$subquery2.str_val#2]
+        |           +-expr_list=
+:= Literal(type=STRING, value="abc")
+        |           +-input_scan=
+        |             +-SingleRowScan
+        +-output_column_list=[$union_distinct2_cast.str_val#4]
 ==
 
 
