@@ -870,9 +870,19 @@ QueryStmt
 --
 ALTERNATION GROUP: fn_on_struct_int32_date
 --
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_STRUCT_INT32_DATE for argument types: STRUCT<a INT32, b STRING>. Supported signature: FN_ON_STRUCT_INT32_DATE(STRUCT<a INT32, b DATE>) [at 1:8]
-select fn_on_struct_int32_date(@test_param_struct)
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(sample_functions:fn_on_struct_int32_date(STRUCT<a INT32, b DATE>) -> BOOL)
+    |     +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<a INT32, b DATE>)
+    |       +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 [language_features={{V_1_1_CAST_DIFFERENT_ARRAY_TYPES|}}]

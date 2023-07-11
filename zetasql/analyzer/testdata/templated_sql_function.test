@@ -1010,11 +1010,24 @@ Could not cast literal 999999999999999 to type INT32
 # Call a templated SQL UDF with a string, and an expected return type of DATE.
 select udf_one_templated_arg_return_date('2018-07-01')
 --
-ERROR: Invalid function udf_one_templated_arg_return_date [at 1:8]
-select udf_one_templated_arg_return_date('2018-07-01')
-       ^
-Analysis of function Templated_SQL_Function:udf_one_templated_arg_return_date failed:
-Function declared to return DATE but the function body produces incompatible type STRING
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DATE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(Templated_SQL_Function:udf_one_templated_arg_return_date(STRING) -> DATE)
+    |     +-Literal(type=STRING, value="2018-07-01")
+    +-input_scan=
+      +-SingleRowScan
+
+With Templated SQL function call:
+  Templated_SQL_Function:udf_one_templated_arg_return_date(STRING) -> DATE
+containing resolved templated expression:
+Cast(STRING -> DATE)
++-ArgumentRef(type=STRING, name="x")
 ==
 
 # Call a templated SQL UDF with a 64-bit integer argument type that fits under

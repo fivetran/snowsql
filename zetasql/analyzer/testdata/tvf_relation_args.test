@@ -6836,9 +6836,36 @@ select *
 from tvf_one_relation_arg_one_date_input_column(
     (select '2016-01-01' as mydate))
 --
-ERROR: Invalid type STRING for column "mydate DATE" of argument 1 of TVF_ONE_RELATION_ARG_ONE_DATE_INPUT_COLUMN(TABLE<mydate DATE>) [at 3:5]
-    (select '2016-01-01' as mydate))
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_one_relation_arg_one_date_input_column.column_bool#3 AS column_bool [BOOL]
+| +-tvf_one_relation_arg_one_date_input_column.column_bytes#4 AS column_bytes [BYTES]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+        +-tvf=tvf_one_relation_arg_one_date_input_column((TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-signature=(TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery2.mydate#2]
+        |   |   +-expr_list=
+        |   |   | +-mydate#2 :=
+        |   |   |   +-Cast(STRING -> DATE)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery1.mydate#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery1.mydate#1]
+        |   |       +-expr_list=
+        |   |       | +-mydate#1 := Literal(type=STRING, value="2016-01-01")
+        |   |       +-input_scan=
+        |   |         +-SingleRowScan
+        |   +-argument_column_list=[$subquery2.mydate#2]
+        +-column_index_list=[0, 1]
 ==
 
 # A TVF accepts one relation argument with one date column.
@@ -6847,9 +6874,36 @@ select *
 from tvf_one_relation_arg_one_date_input_column(
     (select '2016-01-01@abcdefg' as mydate))
 --
-ERROR: Invalid type STRING for column "mydate DATE" of argument 1 of TVF_ONE_RELATION_ARG_ONE_DATE_INPUT_COLUMN(TABLE<mydate DATE>) [at 3:5]
-    (select '2016-01-01@abcdefg' as mydate))
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_one_relation_arg_one_date_input_column.column_bool#3 AS column_bool [BOOL]
+| +-tvf_one_relation_arg_one_date_input_column.column_bytes#4 AS column_bytes [BYTES]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+        +-tvf=tvf_one_relation_arg_one_date_input_column((TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-signature=(TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery2.mydate#2]
+        |   |   +-expr_list=
+        |   |   | +-mydate#2 :=
+        |   |   |   +-Cast(STRING -> DATE)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery1.mydate#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery1.mydate#1]
+        |   |       +-expr_list=
+        |   |       | +-mydate#1 := Literal(type=STRING, value="2016-01-01@abcdefg")
+        |   |       +-input_scan=
+        |   |         +-SingleRowScan
+        |   +-argument_column_list=[$subquery2.mydate#2]
+        +-column_index_list=[0, 1]
 ==
 
 # A TVF accepts one relation argument with one date column.
@@ -6858,9 +6912,39 @@ select *
 from tvf_one_relation_arg_one_date_input_column(
     (select * from (select '2016-01-01' as mydate)))
 --
-ERROR: Invalid type STRING for column "mydate DATE" of argument 1 of TVF_ONE_RELATION_ARG_ONE_DATE_INPUT_COLUMN(TABLE<mydate DATE>) [at 3:5]
-    (select * from (select '2016-01-01' as mydate)))
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_one_relation_arg_one_date_input_column.column_bool#3 AS column_bool [BOOL]
+| +-tvf_one_relation_arg_one_date_input_column.column_bytes#4 AS column_bytes [BYTES]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+        +-tvf=tvf_one_relation_arg_one_date_input_column((TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-signature=(TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery3.mydate#2]
+        |   |   +-expr_list=
+        |   |   | +-mydate#2 :=
+        |   |   |   +-Cast(STRING -> DATE)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery2.mydate#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery2.mydate#1]
+        |   |       +-input_scan=
+        |   |         +-ProjectScan
+        |   |           +-column_list=[$subquery2.mydate#1]
+        |   |           +-expr_list=
+        |   |           | +-mydate#1 := Literal(type=STRING, value="2016-01-01")
+        |   |           +-input_scan=
+        |   |             +-SingleRowScan
+        |   +-argument_column_list=[$subquery3.mydate#2]
+        +-column_index_list=[0, 1]
 ==
 
 # The query calls a TVF that has one relation argument with a required schema
