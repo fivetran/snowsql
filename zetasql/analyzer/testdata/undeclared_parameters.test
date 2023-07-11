@@ -118,9 +118,9 @@ p: STRING
 
 SELECT "foo" IN UNNEST([@p, @q]);
 --
-ERROR: No matching signature for operator IN UNNEST for argument types: STRING, ARRAY<INT64> [at 1:14]
+ERROR: Could not cast literal "foo" to type INT64 [at 1:8]
 SELECT "foo" IN UNNEST([@p, @q]);
-             ^
+       ^
 ==
 
 SELECT "foo" IN UNNEST([CAST(@p AS STRING), @q]);

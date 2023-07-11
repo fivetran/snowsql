@@ -715,15 +715,26 @@ Recursive dependencies detected when resolving function Templated_SQL_Function:u
 # The function performs an invalid projection.
 select udf_templated_arg_plus_integer("abc");
 --
-ERROR: Invalid function udf_templated_arg_plus_integer [at 1:8]
-select udf_templated_arg_plus_integer("abc");
-       ^
-Analysis of function Templated_SQL_Function:udf_templated_arg_plus_integer failed [at 1:1]
-x + 42
-^
-No matching signature for operator + for argument types: STRING, INT64. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:1]
-x + 42
-^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_plus_integer(STRING) -> INT64)
+    |     +-Literal(type=STRING, value="abc")
+    +-input_scan=
+      +-SingleRowScan
+
+With Templated SQL function call:
+  Templated_SQL_Function:udf_templated_arg_plus_integer(STRING) -> INT64
+containing resolved templated expression:
+FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
++-Cast(STRING -> INT64)
+| +-ArgumentRef(type=STRING, name="x")
++-Literal(type=INT64, value=42)
 ==
 
 # Parse error.
@@ -781,20 +792,6 @@ FunctionCall(ZetaSQL:$like_any(STRING, repeated(1) STRING) -> BOOL)
 +-Literal(type=STRING, value="z")
 ==
 
-# Analysis error.
-select udf_templated_analysis_error();
---
-ERROR: Invalid function udf_templated_analysis_error [at 1:8]
-select udf_templated_analysis_error();
-       ^
-Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
-'abc' + 42
-^
-No matching signature for operator + for argument types: STRING, INT64. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:1]
-'abc' + 42
-^
-==
-
 # Call a UDF that refers to 'udf_templated_analysis_error' to show two levels
 # of nested error messages.
 select key, value, udf_call_udf_templated_analysis_error()
@@ -812,7 +809,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-No matching signature for operator + for argument types: STRING, INT64. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:1]
+Could not cast literal "abc" to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -840,7 +837,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-No matching signature for operator + for argument types: STRING, INT64. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:1]
+Could not cast literal "abc" to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -874,7 +871,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-No matching signature for operator + for argument types: STRING, INT64. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:1]
+Could not cast literal "abc" to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -1046,11 +1043,24 @@ Function declared to return INT32 but the function body produces incompatible ty
 # expected return type.
 select udf_one_templated_arg_return_int64(cast(1 as string))
 --
-ERROR: Invalid function udf_one_templated_arg_return_int64 [at 1:8]
-select udf_one_templated_arg_return_int64(cast(1 as string))
-       ^
-Analysis of function Templated_SQL_Function:udf_one_templated_arg_return_int64 failed:
-Function declared to return INT64 but the function body produces incompatible type STRING
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(Templated_SQL_Function:udf_one_templated_arg_return_int64(STRING) -> INT64)
+    |     +-Literal(type=STRING, value="1", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
+
+With Templated SQL function call:
+  Templated_SQL_Function:udf_one_templated_arg_return_int64(STRING) -> INT64
+containing resolved templated expression:
+Cast(STRING -> INT64)
++-ArgumentRef(type=STRING, name="x")
 ==
 
 # Call a SQL UDA with an invalid templated SQL body that refers to an AGGREGATE

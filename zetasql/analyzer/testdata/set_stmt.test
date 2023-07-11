@@ -51,7 +51,7 @@ SET @foo = 3;
 # Assignment to system variable (wrong type)
 SET @@int64_system_variable = 'string';
 --
-ERROR: Expected type INT64; found STRING [at 1:31]
+ERROR: Could not cast literal "string" to type INT64 [at 1:31]
 SET @@int64_system_variable = 'string';
                               ^
 ==
@@ -203,7 +203,7 @@ AssignmentStmt
 # Assignment to nested field of struct-type system variable (wrong type)
 SET @@struct_system_variable.d.a = 'this is a string';
 --
-ERROR: Expected type INT32; found STRING [at 1:36]
+ERROR: Could not cast literal "this is a string" to type INT32 [at 1:36]
 SET @@struct_system_variable.d.a = 'this is a string';
                                    ^
 ==
@@ -280,7 +280,7 @@ AssignmentStmt
 # Assignment to scalar field of system variable of proto type (value wrong type)
 SET @@proto_system_variable.int64_key_1 = 'test';
 --
-ERROR: Expected type INT64; found STRING [at 1:43]
+ERROR: Could not cast literal "test" to type INT64 [at 1:43]
 SET @@proto_system_variable.int64_key_1 = 'test';
                                           ^
 ==
@@ -304,9 +304,9 @@ AssignmentStmt
 # Assign to repeated proto field (one element has wrong type)
 SET @@proto_system_variable.repeated_int64_val = [20, 'abcd'];
 --
-ERROR: Array elements of types {INT64, STRING} do not have a common supertype [at 1:50]
+ERROR: Could not cast literal "abcd" to type INT64 [at 1:55]
 SET @@proto_system_variable.repeated_int64_val = [20, 'abcd'];
-                                                 ^
+                                                      ^
 ==
 
 # Assign to repeated proto field (all elements have wrong type)

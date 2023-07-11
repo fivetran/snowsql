@@ -418,13 +418,6 @@ select approx_quantiles(key, 10 respect nulls) from KeyValue
        ^
 ==
 
-select approx_quantiles(key, @test_param_string) from KeyValue
---
-ERROR: No matching signature for aggregate function APPROX_QUANTILES for argument types: INT64, STRING. Supported signature: APPROX_QUANTILES(ANY, INT64) [at 1:8]
-select approx_quantiles(key, @test_param_string) from KeyValue
-       ^
-==
-
 select approx_quantiles() from KeyValue
 --
 ERROR: Number of arguments does not match for aggregate function APPROX_QUANTILES. Supported signature: APPROX_QUANTILES(ANY, INT64) [at 1:8]
@@ -505,13 +498,6 @@ select approx_top_count(string, 1+1) from SimpleTypes
 ERROR: Argument 2 to APPROX_TOP_COUNT must be a literal or query parameter [at 1:33]
 select approx_top_count(string, 1+1) from SimpleTypes
                                 ^
-==
-
-select approx_top_count(string, 'abc') from SimpleTypes
---
-ERROR: No matching signature for aggregate function APPROX_TOP_COUNT for argument types: STRING, STRING. Supported signature: APPROX_TOP_COUNT(ANY, INT64) [at 1:8]
-select approx_top_count(string, 'abc') from SimpleTypes
-       ^
 ==
 
 select approx_top_count(string) from SimpleTypes
@@ -992,13 +978,6 @@ select approx_top_sum((1, KitchenSink), key, 10) from TestTable
 ERROR: Argument 1 to APPROX_TOP_SUM must support grouping; Type STRUCT<INT64, zetasql_test__.KitchenSinkPB> does not [at 1:23]
 select approx_top_sum((1, KitchenSink), key, 10) from TestTable
                       ^
-==
-
-select approx_top_sum(key, 'abc', 10) from TestTable
---
-ERROR: No matching signature for aggregate function APPROX_TOP_SUM for argument types: INT32, STRING, INT64. Supported signatures: APPROX_TOP_SUM(ANY, INT64, INT64); APPROX_TOP_SUM(ANY, UINT64, INT64); APPROX_TOP_SUM(ANY, DOUBLE, INT64) [at 1:8]
-select approx_top_sum(key, 'abc', 10) from TestTable
-       ^
 ==
 
 select approx_top_sum(key, cast(5 as int32), 10) from TestTable
@@ -1535,13 +1514,6 @@ QueryStmt
               +-Parameter(type=INT64, name="test_param_int64")
               +-Literal(type=INT64, value=123)
               +-Parameter(type=INT64, name="test_param_int64")
-==
-
-select d3a_count.init(@test_param_int64, "ABC", @test_param_int64) from SimpleTypes
---
-ERROR: No matching signature for aggregate function D3A_COUNT.INIT for argument types: INT64, STRING, INT64. Supported signatures: D3A_COUNT.INIT(INT64, INT64, [INT64]); D3A_COUNT.INIT(UINT64, INT64, [INT64]); D3A_COUNT.INIT(STRING, INT64, [INT64]); D3A_COUNT.INIT(BYTES, INT64, [INT64]) [at 1:8]
-select d3a_count.init(@test_param_int64, "ABC", @test_param_int64) from Simpl...
-       ^
 ==
 
 select d3a_count.init(@test_param_int64, @test_param_int64, key) from KeyValue

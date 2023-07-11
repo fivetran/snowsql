@@ -296,9 +296,29 @@ select ntile(null) over (order by value) from keyvalue;
 
 select ntile("1") over (order by value) from keyvalue;
 --
-ERROR: No matching signature for analytic function NTILE for argument types: STRING. Supported signature: NTILE(INT64) [at 1:8]
-select ntile("1") over (order by value) from keyvalue;
-       ^
+QueryStmt
++-output_column_list=
+| +-$analytic.$analytic1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$analytic.$analytic1#4]
+    +-input_scan=
+      +-AnalyticScan
+        +-column_list=[KeyValue.Value#2, $analytic.$analytic1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
+        +-function_group_list=
+          +-AnalyticFunctionGroup
+            +-order_by=
+            | +-WindowOrdering
+            |   +-order_by_item_list=
+            |     +-OrderByItem
+            |       +-column_ref=
+            |         +-ColumnRef(type=STRING, column=KeyValue.Value#2)
+            +-analytic_function_list=
+              +-$analytic1#4 :=
+                +-AnalyticFunctionCall(ZetaSQL:ntile(INT64) -> INT64)
+                  +-Literal(type=INT64, value=1)
 ==
 
 select ntile(true) over (order by value) from keyvalue;

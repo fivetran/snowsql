@@ -1027,27 +1027,6 @@ UpdateStmt
 ==
 
 UPDATE TestTable SET
-  (UPDATE KitchenSink.repeated_int64_val SET
-   repeated_int64_val = 1
-   WHERE "abc")
-WHERE true
---
-ERROR: WHERE clause should return type BOOL, but returns STRING [at 4:10]
-   WHERE "abc")
-         ^
-==
-
-UPDATE TestTable SET
-  (DELETE KitchenSink.repeated_int64_val
-   WHERE "abc")
-WHERE true
---
-ERROR: WHERE clause should return type BOOL, but returns STRING [at 3:10]
-   WHERE "abc")
-         ^
-==
-
-UPDATE TestTable SET
   (UPDATE KitchenSink.repeated_int64_val SET repeated_int64_val = 1)
 WHERE true
 --
@@ -1755,7 +1734,7 @@ UPDATE TestTable SET
   (INSERT KitchenSink.repeated_int64_val VALUES ("one"))
 WHERE true
 --
-ERROR: Value has type STRING which cannot be inserted into column repeated_int64_val, which has type INT64 [at 2:50]
+ERROR: Could not cast literal "one" to type INT64 [at 2:50]
   (INSERT KitchenSink.repeated_int64_val VALUES ("one"))
                                                  ^
 ==

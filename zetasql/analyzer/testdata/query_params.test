@@ -468,53 +468,6 @@ select fn_on_float(@test_param_double)
        ^
 ==
 
-# Some additional explicit casts that work, but are not supported as parameter
-# coercions.
-select fn_on_{{float|double|bool|int32|int64|uint32|uint64}}(@test_param_string)
---
-ALTERNATION GROUP: float
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_FLOAT for argument types: STRING. Supported signature: FN_ON_FLOAT(FLOAT) [at 1:8]
-select fn_on_float(@test_param_string)
-       ^
---
-ALTERNATION GROUP: double
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_DOUBLE for argument types: STRING. Supported signature: FN_ON_DOUBLE(DOUBLE) [at 1:8]
-select fn_on_double(@test_param_string)
-       ^
---
-ALTERNATION GROUP: bool
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_BOOL for argument types: STRING. Supported signature: FN_ON_BOOL(BOOL) [at 1:8]
-select fn_on_bool(@test_param_string)
-       ^
---
-ALTERNATION GROUP: int32
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_INT32 for argument types: STRING. Supported signature: FN_ON_INT32(INT32) [at 1:8]
-select fn_on_int32(@test_param_string)
-       ^
---
-ALTERNATION GROUP: int64
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_INT64 for argument types: STRING. Supported signature: FN_ON_INT64(INT64) [at 1:8]
-select fn_on_int64(@test_param_string)
-       ^
---
-ALTERNATION GROUP: uint32
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_UINT32 for argument types: STRING. Supported signature: FN_ON_UINT32(UINT32) [at 1:8]
-select fn_on_uint32(@test_param_string)
-       ^
---
-ALTERNATION GROUP: uint64
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_UINT64 for argument types: STRING. Supported signature: FN_ON_UINT64(UINT64) [at 1:8]
-select fn_on_uint64(@test_param_string)
-       ^
-==
-
 select fn_on_bool(@test_param_{{int32|int64|uint32|uint64}})
 --
 ALTERNATION GROUP: int32

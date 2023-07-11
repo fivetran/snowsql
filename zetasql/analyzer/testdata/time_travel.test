@@ -338,9 +338,9 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF DATE '2000-01-01'
 SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF 1 + "foo"
 --
 
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:56]
+ERROR: Could not cast literal "foo" to type INT64 [at 1:60]
 SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF 1 + "foo"
-                                                       ^
+                                                           ^
 ==
 
 SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF @test_param_string

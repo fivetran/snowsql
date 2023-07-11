@@ -1473,9 +1473,9 @@ WITH RECURSIVE t AS (
     UNION ALL SELECT 'test' FROM t
 ) SELECT * FROM t;
 --
-ERROR: Cannot coerce column 1 of recursive term (STRING) to column type in non-recursive term ( DOUBLE) [at 3:15]
-    UNION ALL SELECT 'test' FROM t
-              ^
+ERROR: Could not cast literal "test" to type DOUBLE [at 2:10]
+  SELECT 2.5
+         ^
 ==
 
 # (ERROR) Mismatched column numbers within non-recursive term

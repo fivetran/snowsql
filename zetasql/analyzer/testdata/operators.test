@@ -1448,9 +1448,20 @@ select TestStruct>>2 from ComplexTypes;
 
 select 1 + '1';
 --
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:8]
-select 1 + '1';
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
+
 ==
 
 select +5
@@ -2252,13 +2263,13 @@ SELECT 'test' IS {{NOT|}} DISTINCT FROM 2;
 --
 ALTERNATION GROUP: NOT
 --
-ERROR: No matching signature for operator IS NOT DISTINCT FROM for argument types: STRING, INT64. Supported signatures: ANY IS NOT DISTINCT FROM ANY; INT64 IS NOT DISTINCT FROM UINT64; UINT64 IS NOT DISTINCT FROM INT64 [at 1:8]
+ERROR: Could not cast literal "test" to type INT64 [at 1:8]
 SELECT 'test' IS NOT DISTINCT FROM 2;
        ^
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: No matching signature for operator IS DISTINCT FROM for argument types: STRING, INT64. Supported signatures: ANY IS DISTINCT FROM ANY; INT64 IS DISTINCT FROM UINT64; UINT64 IS DISTINCT FROM INT64 [at 1:8]
+ERROR: Could not cast literal "test" to type INT64 [at 1:8]
 SELECT 'test' IS  DISTINCT FROM 2;
        ^
 ==

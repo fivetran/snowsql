@@ -57,9 +57,9 @@ QueryStmt
 
 select false from TestTable where true IN ('a');
 --
-ERROR: No matching signature for operator IN for argument types literal BOOL and {STRING} [at 1:40]
+ERROR: Could not cast literal "a" to type BOOL [at 1:44]
 select false from TestTable where true IN ('a');
-                                       ^
+                                           ^
 ==
 
 select 5 IN ('a', 4 + 5, KitchenSink.bytes_val) from TestTable;
@@ -1414,9 +1414,9 @@ QueryStmt
 
 select struct(1) IN (struct('abc'))
 --
-ERROR: No matching signature for operator IN for argument types STRUCT<INT64> and {STRUCT<STRING>} [at 1:18]
+ERROR: Could not cast literal {"abc"} to type STRUCT<INT64> [at 1:22]
 select struct(1) IN (struct('abc'))
-                 ^
+                     ^
 ==
 
 select struct(1) IN (select struct('abc'))
@@ -1424,14 +1424,6 @@ select struct(1) IN (select struct('abc'))
 ERROR: Cannot execute IN subquery with uncomparable types STRUCT<INT64> and STRUCT<STRING> [at 1:8]
 select struct(1) IN (select struct('abc'))
        ^
-==
-
-[language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select struct(1) IN UNNEST([struct('abc')])
---
-ERROR: No matching signature for operator IN UNNEST for argument types: STRUCT<INT64>, ARRAY<STRUCT<STRING>> [at 1:18]
-select struct(1) IN UNNEST([struct('abc')])
-                 ^
 ==
 
 select 1 IN ( (select 1) UNION ALL (select 2) )

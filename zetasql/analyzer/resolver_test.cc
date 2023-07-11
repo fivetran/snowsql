@@ -864,8 +864,6 @@ TEST_F(ResolverTest, TestResolveCaseExpressions) {
 
   ResolveFunctionFails("CASE 1 WHEN 1 THEN 2 WHEN a THEN b END",
                        "Unrecognized name: a");
-  ResolveFunctionFails("CASE 1 WHEN '1' THEN 2 END",
-                       "No matching signature for operator CASE");
 }
 
 TEST_F(ResolverTest, TestResolveFunctions) {

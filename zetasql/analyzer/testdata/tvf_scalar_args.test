@@ -2633,9 +2633,9 @@ select * from tvf_exactly_3_int64_args()
 # Test several TVFs, each of which accepts one argument of some POD type.
 select column_bool from tvf_exactly_1_bool_arg("invalid")
 --
-ERROR: No matching signature for tvf_exactly_1_bool_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_BOOL_ARG(BOOL) [at 1:25]
+ERROR: Could not cast literal "invalid" to type BOOL [at 1:48]
 select column_bool from tvf_exactly_1_bool_arg("invalid")
-                        ^
+                                               ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
@@ -2649,9 +2649,9 @@ select column_bool from tvf_exactly_1_bytes_arg(42)
 # Test several TVFs, each of which accepts one argument of some POD type.
 select column_bool from tvf_exactly_1_double_arg("invalid")
 --
-ERROR: No matching signature for tvf_exactly_1_double_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_DOUBLE_ARG(DOUBLE) [at 1:25]
+ERROR: Could not cast literal "invalid" to type DOUBLE [at 1:50]
 select column_bool from tvf_exactly_1_double_arg("invalid")
-                        ^
+                                                 ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
@@ -2665,17 +2665,17 @@ select column_bool from tvf_exactly_1_float_arg("invalid")
 # Test several TVFs, each of which accepts one argument of some POD type.
 select column_bool from tvf_exactly_1_int32_arg("invalid")
 --
-ERROR: No matching signature for tvf_exactly_1_int32_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_INT32_ARG(INT32) [at 1:25]
+ERROR: Could not cast literal "invalid" to type INT32 [at 1:49]
 select column_bool from tvf_exactly_1_int32_arg("invalid")
-                        ^
+                                                ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
 select column_bool from tvf_exactly_1_int64_arg("invalid")
 --
-ERROR: No matching signature for tvf_exactly_1_int64_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_INT64_ARG(INT64) [at 1:25]
+ERROR: Could not cast literal "invalid" to type INT64 [at 1:49]
 select column_bool from tvf_exactly_1_int64_arg("invalid")
-                        ^
+                                                ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
@@ -2761,17 +2761,17 @@ select column_bool from tvf_exactly_one_arg_enum_any(42)
 # The TVF accepts a repeating final int64 argument.
 select column_bool from tvf_repeating_int64_args("a", "b", "c")
 --
-ERROR: No matching signature for tvf_repeating_int64_args for argument types: STRING, STRING, STRING. Supported signature: TVF_REPEATING_INT64_ARGS([INT64, ...]) [at 1:25]
+ERROR: Could not cast literal "a" to type INT64 [at 1:50]
 select column_bool from tvf_repeating_int64_args("a", "b", "c")
-                        ^
+                                                 ^
 ==
 
 # The TVF accepts a templated repeating final argument.
 select column_bool from tvf_repeating_any_one_type_args(1, "a")
 --
-ERROR: No matching signature for tvf_repeating_any_one_type_args for argument types: INT64, STRING. Supported signature: TVF_REPEATING_ANY_ONE_TYPE_ARGS([ANY, ...]) [at 1:25]
+ERROR: Could not cast literal "a" to type INT64 [at 1:60]
 select column_bool from tvf_repeating_any_one_type_args(1, "a")
-                        ^
+                                                           ^
 ==
 
 # The TVF argument is not enclosed in parentheses and so the parsing fails.
@@ -3070,13 +3070,43 @@ Recursive dependencies detected when resolving table function tvf_calls_self_ind
 select *
 from tvf_templated_select_x_with_required_output_schema("abc");
 --
-ERROR: Invalid table-valued function tvf_templated_select_x_with_required_output_schema [at 2:6]
-from tvf_templated_select_x_with_required_output_schema("abc");
-     ^
-Analysis of table-valued function tvf_templated_select_x_with_required_output_schema failed [at 1:1]
-select x as key
-^
-Column key for the output table of a CREATE TABLE FUNCTION statement has type INT64, but the SQL body provides incompatible type STRING for this column
+QueryStmt
++-output_column_list=
+| +-tvf_templated_select_x_with_required_output_schema.key#1 AS key [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[tvf_templated_select_x_with_required_output_schema.key#1]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=[tvf_templated_select_x_with_required_output_schema.key#1]
+        +-tvf=tvf_templated_select_x_with_required_output_schema((ANY TYPE) -> TABLE<key INT64>)
+        +-signature=(literal STRING) -> TABLE<key INT64>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-expr=
+        |     +-Literal(type=STRING, value="abc")
+        +-column_index_list=[0]
+
+With Templated SQL TVF signature:
+  tvf_templated_select_x_with_required_output_schema(literal STRING) -> TABLE<key INT64>
+containing resolved templated query:
+QueryStmt
++-output_column_list=
+| +-$subquery1.key#2 AS key [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$subquery1.key#2]
+    +-expr_list=
+    | +-key#2 :=
+    |   +-Cast(STRING -> INT64)
+    |     +-ColumnRef(type=STRING, column=$query.key#1)
+    +-input_scan=
+      +-ProjectScan
+        +-column_list=[$query.key#1]
+        +-expr_list=
+        | +-key#1 := ArgumentRef(type=STRING, name="x")
+        +-input_scan=
+          +-SingleRowScan
 ==
 
 # This query calls a TVF with a required output schema, but the SQL body does

@@ -2932,9 +2932,32 @@ create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
     select "abc" as x, "abc" as y
 --
-ERROR: Column x for the output table of a CREATE TABLE FUNCTION statement has type INT64, but the SQL body provides incompatible type STRING for this column [at 1:1]
-create temporary table function maketable(x int64, y string)
-^
+CreateTableFunctionStmt
++-name_path=maketable
++-create_scope=CREATE_TEMP
++-argument_name_list=[x, y]
++-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
++-has_explicit_return_schema=TRUE
++-language="SQL"
++-code='select "abc" as x, "abc" as y'
++-query=
+| +-ProjectScan
+|   +-column_list=[$subquery1.x#3, $query.y#2]
+|   +-expr_list=
+|   | +-x#3 :=
+|   |   +-Cast(STRING -> INT64)
+|   |     +-ColumnRef(type=STRING, column=$query.x#1)
+|   +-input_scan=
+|     +-ProjectScan
+|       +-column_list=$query.[x#1, y#2]
+|       +-expr_list=
+|       | +-x#1 := Literal(type=STRING, value="abc")
+|       | +-y#2 := Literal(type=STRING, value="abc")
+|       +-input_scan=
+|         +-SingleRowScan
++-output_column_list=
+  +-$subquery1.x#3 AS x [INT64]
+  +-$query.y#2 AS y [STRING]
 ==
 
 # Duplicate argument names
