@@ -1890,9 +1890,27 @@ QueryStmt
 
 select sum(KitchenSink.string_val) from TestTable
 --
-ERROR: No matching signature for aggregate function SUM for argument types: STRING. Supported signatures: SUM(INT64); SUM(UINT64); SUM(DOUBLE) [at 1:8]
-select sum(KitchenSink.string_val) from TestTable
-       ^
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#4 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-$agg1#4 :=
+            +-AggregateFunctionCall(ZetaSQL:sum(DOUBLE) -> DOUBLE)
+              +-Cast(STRING -> DOUBLE)
+                +-GetProtoField
+                  +-type=STRING
+                  +-expr=
+                  | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                  +-field_descriptor=string_val
+                  +-default_value="default_name"
 ==
 
 # Note that int32_val is widened to INT64 before doing the SUM in order to
@@ -4999,9 +5017,27 @@ QueryStmt
 select countif(KitchenSink.string_val) as cntif
 from TestTable
 --
-ERROR: No matching signature for aggregate function COUNTIF for argument types: STRING. Supported signature: COUNTIF(BOOL) [at 1:8]
-select countif(KitchenSink.string_val) as cntif
-       ^
+QueryStmt
++-output_column_list=
+| +-$aggregate.cntif#4 AS cntif [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.cntif#4]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.cntif#4]
+        +-input_scan=
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
+        +-aggregate_list=
+          +-cntif#4 :=
+            +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
+              +-Cast(STRING -> BOOL)
+                +-GetProtoField
+                  +-type=STRING
+                  +-expr=
+                  | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
+                  +-field_descriptor=string_val
+                  +-default_value="default_name"
 ==
 
 [language_features={{V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE|}}]

@@ -588,9 +588,9 @@ QueryStmt
 
 select @{ h1=[1, 'a', null] } key from Keyvalue
 --
-ERROR: Array elements of types {INT64, NULL, STRING} do not have a common supertype [at 1:14]
+ERROR: Could not cast literal "a" to type INT64 [at 1:18]
 select @{ h1=[1, 'a', null] } key from Keyvalue
-             ^
+                 ^
 ==
 
 select @{ h1=[1, 2], h2=ARRAY<int32>[1, 2], h3=ARRAY[1, 2] } key

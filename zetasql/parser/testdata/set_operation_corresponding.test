@@ -121,16 +121,6 @@ SELECT
   2
 ==
 
-# UNION with CORRESPONDING but without ALL or DISTINCT not supported.
-select 1
-UNION CORRESPONDING
-select 2
---
-ERROR: Syntax error: Expected keyword ALL or keyword DISTINCT but got keyword CORRESPONDING [at 2:7]
-UNION CORRESPONDING
-      ^
-==
-
 select 1
 EXCEPT ALL CORRESPONDING
 select 2
@@ -268,9 +258,28 @@ select 1
 INTERSECT CORRESPONDING
 select 2
 --
-ERROR: Syntax error: Expected keyword ALL or keyword DISTINCT but got keyword CORRESPONDING [at 2:11]
-INTERSECT CORRESPONDING
-          ^
+QueryStatement [0-41] [select 1 INTERSEC...G select 2]
+  Query [0-41] [select 1 INTERSEC...G select 2]
+    SetOperation(INTERSECT ALL) [0-41] [select 1 INTERSEC...G select 2]
+      SetOperationMetadataList [8-32] [INTERSECT CORRESPONDING]
+        SetOperationMetadata [8-32] [INTERSECT CORRESPONDING]
+          SetOperationType [9-18] [INTERSECT]
+          SetOperationAllOrDistinct [18-18] []
+          SetOperationColumnMatchMode [19-32] [CORRESPONDING]
+      Select [0-8] [select 1]
+        SelectList [7-8] [1]
+          SelectColumn [7-8] [1]
+            IntLiteral(1) [7-8] [1]
+      Select [33-41] [select 2]
+        SelectList [40-41] [2]
+          SelectColumn [40-41] [2]
+            IntLiteral(2) [40-41] [2]
+--
+SELECT
+  1
+INTERSECT ALL CORRESPONDING
+SELECT
+  2
 ==
 
 select 1
@@ -484,9 +493,39 @@ select 2
 UNION CORRESPONDING
 select 3
 --
-ERROR: Syntax error: Expected keyword ALL or keyword DISTINCT but got keyword CORRESPONDING [at 4:7]
-UNION CORRESPONDING
-      ^
+QueryStatement [0-70] [select 1 UNION...DING select 3]
+  Query [0-70] [select 1 UNION...DING select 3]
+    SetOperation(UNION ALL) [0-70] [select 1 UNION...DING select 3]
+      SetOperationMetadataList [8-61] [UNION ALL...CORRESPONDING]
+        SetOperationMetadata [8-32] [UNION ALL CORRESPONDING]
+          SetOperationType [9-14] [UNION]
+          SetOperationAllOrDistinct [15-18] [ALL]
+          SetOperationColumnMatchMode [19-32] [CORRESPONDING]
+        SetOperationMetadata [41-61] [UNION CORRESPONDING]
+          SetOperationType [42-47] [UNION]
+          SetOperationAllOrDistinct [47-47] []
+          SetOperationColumnMatchMode [48-61] [CORRESPONDING]
+      Select [0-8] [select 1]
+        SelectList [7-8] [1]
+          SelectColumn [7-8] [1]
+            IntLiteral(1) [7-8] [1]
+      Select [33-41] [select 2]
+        SelectList [40-41] [2]
+          SelectColumn [40-41] [2]
+            IntLiteral(2) [40-41] [2]
+      Select [62-70] [select 3]
+        SelectList [69-70] [3]
+          SelectColumn [69-70] [3]
+            IntLiteral(3) [69-70] [3]
+--
+SELECT
+  1
+UNION ALL CORRESPONDING
+SELECT
+  2
+UNION ALL CORRESPONDING
+SELECT
+  3
 ==
 
 

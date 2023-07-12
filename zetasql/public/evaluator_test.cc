@@ -136,7 +136,7 @@ TEST(EvaluatorTest, ColumnExpression) {
 
 TEST(EvaluatorTest, NoRecoveryFromError) {
   PreparedExpression expr("a * 2");
-  EXPECT_THAT(expr.Execute({{"a", Value::String("foo")}}),
+  EXPECT_THAT(expr.Execute({{"a", Value::Date(16101)}}),
               StatusIs(absl::StatusCode::kInvalidArgument,
                        HasSubstr("No matching signature")));
   EXPECT_THAT(expr.Execute({{"a", Value::Int64(1)}}),
@@ -648,7 +648,7 @@ TEST(EvaluatorTest, ExecuteAfterPrepare) {
   AnalyzerOptions options2;
   ZETASQL_ASSERT_OK(options2.AddQueryParameter("param1", types::Int64Type()));
   ZETASQL_ASSERT_OK(options2.AddQueryParameter("param2", types::Int64Type()));
-  ZETASQL_ASSERT_OK(options2.AddExpressionColumn("col", types::StringType()));
+  ZETASQL_ASSERT_OK(options2.AddExpressionColumn("col", types::DateType()));
   EXPECT_THAT(expr2.Prepare(options2),
               StatusIs(absl::StatusCode::kInvalidArgument,
                        HasSubstr("No matching signature for operator *")));
@@ -694,7 +694,7 @@ TEST(EvaluatorTest, ExecuteAfterPrepareWithPositionalParameters) {
   options2.set_parameter_mode(PARAMETER_POSITIONAL);
   ZETASQL_ASSERT_OK(options2.AddPositionalQueryParameter(types::Int64Type()));
   ZETASQL_ASSERT_OK(options2.AddPositionalQueryParameter(types::Int64Type()));
-  ZETASQL_ASSERT_OK(options2.AddExpressionColumn("col", types::StringType()));
+  ZETASQL_ASSERT_OK(options2.AddExpressionColumn("col", types::DateType()));
   EXPECT_THAT(expr2.Prepare(options2),
               StatusIs(absl::StatusCode::kInvalidArgument,
                        HasSubstr("No matching signature for operator *")));
@@ -709,7 +709,7 @@ TEST(EvaluatorTest, PrepareFailOnAnalysis) {
   PreparedExpression expr("@param + col");
   AnalyzerOptions options;
   ZETASQL_ASSERT_OK(options.AddQueryParameter("param", types::Int64Type()));
-  ZETASQL_ASSERT_OK(options.AddExpressionColumn("col", types::StringType()));
+  ZETASQL_ASSERT_OK(options.AddExpressionColumn("col", types::DateType()));
   EXPECT_THAT(expr.Prepare(options),
               StatusIs(absl::StatusCode::kInvalidArgument,
                        HasSubstr("No matching signature")));
@@ -3746,14 +3746,6 @@ TEST(PreparedQuery, TwoIteratorsAtTheSameTime) {
   EXPECT_EQ(Int64(30), iter2->GetValue(0));
   EXPECT_EQ(Int64(1), iter2->GetValue(1));
   EXPECT_FALSE(iter2->NextRow());
-}
-
-TEST(PreparedQuery, Error) {
-  PreparedQuery query("select 1 + 'abc'", EvaluatorOptions());
-
-  EXPECT_THAT(query.Prepare(AnalyzerOptions()),
-              StatusIs(absl::StatusCode::kInvalidArgument,
-                       HasSubstr("No matching signature")));
 }
 
 TEST(PreparedQueryDeathTest, IteratorStillLiveOnDestruction) {

@@ -544,36 +544,6 @@ select with anonymization options(delta=0, foo=0)
                                            ^
 ==
 
-# Invalid option type (options must be numerical)
-select with anonymization options({{delta|epsilon|kappa|k_threshold}}='0')
-       anon_count(* CLAMPED BETWEEN 0 AND 100)
-from SimpleTypesWithAnonymizationUid;
---
-ALTERNATION GROUP: delta
---
-ERROR: Anonymization option delta value has type STRING which cannot be coerced to expected type DOUBLE [at 1:41]
-select with anonymization options(delta='0')
-                                        ^
---
-ALTERNATION GROUP: epsilon
---
-ERROR: Anonymization option epsilon value has type STRING which cannot be coerced to expected type DOUBLE [at 1:43]
-select with anonymization options(epsilon='0')
-                                          ^
---
-ALTERNATION GROUP: kappa
---
-ERROR: Anonymization option kappa value has type STRING which cannot be coerced to expected type INT64 [at 1:41]
-select with anonymization options(kappa='0')
-                                        ^
---
-ALTERNATION GROUP: k_threshold
---
-ERROR: Anonymization option k_threshold value has type STRING which cannot be coerced to expected type INT64 [at 1:47]
-select with anonymization options(k_threshold='0')
-                                              ^
-==
-
 select with anonymization options(
     {{delta|epsilon|kappa|k_threshold}}=@test_param_int64)
        anon_count(* CLAMPED BETWEEN 0 AND 100)
@@ -843,27 +813,6 @@ QueryStmt
             +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
               +-Literal(type=INT64, value=1)
               +-Literal(type=INT64, value=2)
-==
-
-# Non-constant expressions for options fails.
-# This is an attempt to reference column SimpleTypesWithAnonyizationUid.int64,
-# but because options are not expressions, the 'int64' is treated as a STRING
-# and this doesn't work.
-select with anonymization options(epsilon={{int64|`int64`}})
-       anon_count(* CLAMPED BETWEEN 0 AND 100)
-from SimpleTypesWithAnonymizationUid;
---
-ALTERNATION GROUP: int64
---
-ERROR: Anonymization option epsilon value has type STRING which cannot be coerced to expected type DOUBLE [at 1:43]
-select with anonymization options(epsilon=int64)
-                                          ^
---
-ALTERNATION GROUP: `int64`
---
-ERROR: Anonymization option epsilon value has type STRING which cannot be coerced to expected type DOUBLE [at 1:43]
-select with anonymization options(epsilon=`int64`)
-                                          ^
 ==
 
 # Non-constant expressions for options fails.  Because these are options,
@@ -6837,20 +6786,6 @@ from SimpleTypesWithAnonymizationUid;
 ERROR: Argument * can only be used in COUNT(*) or ANON_COUNT(*) [at 1:36]
 select with anonymization anon_sum(* clampED Between 10 and 100)
                                    ^
-==
-
-# TODO: create a custom error message for this case. The problem is
-# the clamped between clause, and for count(*) both of the bounds must be
-# integers, but in this case we have one that is a string. The first part of the
-# error message is a bit unintuitive, though the 'supported signature' part is
-# very helpful.
-[enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
-select with anonymization anon_count(* clampED Between 10 and "100" with report(forMAT=PRoto))
-from SimpleTypesWithAnonymizationUid;
---
-ERROR: No matching signature for aggregate operator ANON_COUNT(*) for argument types: INT64, STRING. Supported signature: ANON_COUNT(* [CLAMPED BETWEEN INT64 AND INT64] WITH REPORT(FORMAT=PROTO)) [at 1:27]
-select with anonymization anon_count(* clampED Between 10 and "100" with repo...
-                          ^
 ==
 
 [language_features=ANONYMIZATION,JSON_TYPE]

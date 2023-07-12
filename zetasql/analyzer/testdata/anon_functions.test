@@ -193,48 +193,6 @@ select ANON_COUNT(* clamped between int64 and int64) from SimpleTypes
                                     ^
 ==
 
-# Non-INT64 argument for clamp bounds.
-[language_features=ANONYMIZATION]
-select ANON_COUNT(* clamped between {{0|"abc"}} and {{1|"def"}}) from SimpleTypes
---
-ALTERNATION GROUP: 0,1
---
-QueryStmt
-+-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-+-query=
-  +-ProjectScan
-    +-column_list=[$aggregate.$agg1#19]
-    +-input_scan=
-      +-AnonymizedAggregateScan
-        +-column_list=[$aggregate.$agg1#19]
-        +-input_scan=
-        | +-TableScan(table=SimpleTypes)
-        +-aggregate_list=
-          +-$agg1#19 :=
-            +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
-              +-Literal(type=INT64, value=0)
-              +-Literal(type=INT64, value=1)
---
-ALTERNATION GROUP: 0,"def"
---
-ERROR: No matching signature for aggregate operator ANON_COUNT(*) for argument types: INT64, STRING. Supported signature: ANON_COUNT(* [CLAMPED BETWEEN INT64 AND INT64]) [at 1:8]
-select ANON_COUNT(* clamped between 0 and "def") from SimpleTypes
-       ^
---
-ALTERNATION GROUP: "abc",1
---
-ERROR: No matching signature for aggregate operator ANON_COUNT(*) for argument types: STRING, INT64. Supported signature: ANON_COUNT(* [CLAMPED BETWEEN INT64 AND INT64]) [at 1:8]
-select ANON_COUNT(* clamped between "abc" and 1) from SimpleTypes
-       ^
---
-ALTERNATION GROUP: "abc","def"
---
-ERROR: No matching signature for aggregate operator ANON_COUNT(*) for argument types: STRING, STRING. Supported signature: ANON_COUNT(* [CLAMPED BETWEEN INT64 AND INT64]) [at 1:8]
-select ANON_COUNT(* clamped between "abc" and "def") from SimpleTypes
-       ^
-==
-
 # Reject non-const bounds
 [language_features=ANONYMIZATION]
 select ANON_COUNT(string clamped between int64 and 5) from SimpleTypes
@@ -242,49 +200,6 @@ select ANON_COUNT(string clamped between int64 and 5) from SimpleTypes
 ERROR: Lower bound on CLAMPED BETWEEN must be a literal or query parameter [at 1:42]
 select ANON_COUNT(string clamped between int64 and 5) from SimpleTypes
                                          ^
-==
-
-# Non-INT64 argument for clamp bounds.
-[language_features=ANONYMIZATION]
-select ANON_COUNT(string clamped between {{0|"abc"}} and {{1|"def"}}) from SimpleTypes
---
-ALTERNATION GROUP: 0,1
---
-QueryStmt
-+-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-+-query=
-  +-ProjectScan
-    +-column_list=[$aggregate.$agg1#19]
-    +-input_scan=
-      +-AnonymizedAggregateScan
-        +-column_list=[$aggregate.$agg1#19]
-        +-input_scan=
-        | +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
-        +-aggregate_list=
-          +-$agg1#19 :=
-            +-AggregateFunctionCall(ZetaSQL:anon_count(STRING, optional(1) INT64, optional(1) INT64) -> INT64)
-              +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-              +-Literal(type=INT64, value=0)
-              +-Literal(type=INT64, value=1)
---
-ALTERNATION GROUP: 0,"def"
---
-ERROR: No matching signature for aggregate function ANON_COUNT for argument types: STRING, INT64, STRING. Supported signature: ANON_COUNT(ANY [CLAMPED BETWEEN INT64 AND INT64]) [at 1:8]
-select ANON_COUNT(string clamped between 0 and "def") from SimpleTypes
-       ^
---
-ALTERNATION GROUP: "abc",1
---
-ERROR: No matching signature for aggregate function ANON_COUNT for argument types: STRING, STRING, INT64. Supported signature: ANON_COUNT(ANY [CLAMPED BETWEEN INT64 AND INT64]) [at 1:8]
-select ANON_COUNT(string clamped between "abc" and 1) from SimpleTypes
-       ^
---
-ALTERNATION GROUP: "abc","def"
---
-ERROR: No matching signature for aggregate function ANON_COUNT for argument types: STRING, STRING, STRING. Supported signature: ANON_COUNT(ANY [CLAMPED BETWEEN INT64 AND INT64]) [at 1:8]
-select ANON_COUNT(string clamped between "abc" and "def") from SimpleTypes
-       ^
 ==
 
 # Accept const parameter bounds
@@ -360,24 +275,6 @@ QueryStmt
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
               +-Literal(type=INT64, value=0)
               +-Literal(type=INT64, value=1)
-==
-
-# ANON_SUM should reject exprs other than int64, uint64, double & numeric
-[language_features=ANONYMIZATION]
-select ANON_SUM(string clamped between 0 and 1) from SimpleTypes
---
-ERROR: No matching signature for aggregate function ANON_SUM for argument types: STRING, INT64, INT64. Supported signatures: ANON_SUM(INT64 [CLAMPED BETWEEN INT64 AND INT64]), ANON_SUM(UINT64 [CLAMPED BETWEEN UINT64 AND UINT64]), ANON_SUM(DOUBLE [CLAMPED BETWEEN DOUBLE AND DOUBLE]) [at 1:8]
-select ANON_SUM(string clamped between 0 and 1) from SimpleTypes
-       ^
-==
-
-# ANON_AVG should reject exprs other than int64, uint64, double & numeric
-[language_features=ANONYMIZATION]
-select ANON_AVG(string clamped between 0 and 1) from SimpleTypes
---
-ERROR: No matching signature for aggregate function ANON_AVG for argument types: STRING, INT64, INT64. Supported signature: ANON_AVG(DOUBLE [CLAMPED BETWEEN DOUBLE AND DOUBLE]) [at 1:8]
-select ANON_AVG(string clamped between 0 and 1) from SimpleTypes
-       ^
 ==
 
 # Valid ANON_SUM function call

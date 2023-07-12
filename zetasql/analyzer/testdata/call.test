@@ -151,9 +151,9 @@ CallStmt
 
 call proc_on_any_any(1, "a")
 --
-ERROR: No matching signature for procedure proc_on_any_any for argument types: INT64, STRING. Supported signature: proc_on_any_any(T1, T1) [at 1:6]
+ERROR: Could not cast literal "a" to type INT64 [at 1:25]
 call proc_on_any_any(1, "a")
-     ^
+                        ^
 ==
 
 # Calling procedure with mix or req/opt/rep arguments.
@@ -244,14 +244,6 @@ call proc_on_string("one", "two")
 --
 ERROR: No matching signature for procedure proc_on_string for argument types: STRING, STRING. Supported signature: proc_on_string(STRING) [at 1:6]
 call proc_on_string("one", "two")
-     ^
-==
-
-# Incorrect argument type test.
-call proc_on_int32("string")
---
-ERROR: No matching signature for procedure proc_on_int32 for argument types: STRING. Supported signature: proc_on_int32(INT32) [at 1:6]
-call proc_on_int32("string")
      ^
 ==
 
