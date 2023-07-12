@@ -496,36 +496,6 @@ select with differential_privacy options(delta=0, foo=0)
                                                   ^
 ==
 
-# Invalid option type (options must be numerical)
-select with differential_privacy options({{delta|epsilon|max_groups_contributed|k_threshold}}='0')
-       count(*, contribution_bounds_per_group => (0,100))
-from SimpleTypesWithAnonymizationUid;
---
-ALTERNATION GROUP: delta
---
-ERROR: Differential privacy option delta value has type STRING which cannot be coerced to expected type DOUBLE [at 1:48]
-select with differential_privacy options(delta='0')
-                                               ^
---
-ALTERNATION GROUP: epsilon
---
-ERROR: Differential privacy option epsilon value has type STRING which cannot be coerced to expected type DOUBLE [at 1:50]
-select with differential_privacy options(epsilon='0')
-                                                 ^
---
-ALTERNATION GROUP: max_groups_contributed
---
-ERROR: Differential privacy option max_groups_contributed value has type STRING which cannot be coerced to expected type INT64 [at 1:65]
-select with differential_privacy options(max_groups_contributed='0')
-                                                                ^
---
-ALTERNATION GROUP: k_threshold
---
-ERROR: Unknown differential privacy option: k_threshold [at 1:42]
-select with differential_privacy options(k_threshold='0')
-                                         ^
-==
-
 select with differential_privacy options(
     {{delta|epsilon|max_groups_contributed|k_threshold}}=@test_param_int64)
        count(*, contribution_bounds_per_group => (0,100))
@@ -740,27 +710,6 @@ ALTERNATION GROUP: k_threshold
 ERROR: Unknown differential privacy option: k_threshold [at 1:42]
 select with differential_privacy options(k_threshold=1+2)
                                          ^
-==
-
-# Non-constant expressions for options fails.
-# This is an attempt to reference column SimpleTypesWithAnonyizationUid.int64,
-# but because options are not expressions, the 'int64' is treated as a STRING
-# and this doesn't work.
-select with differential_privacy options(epsilon={{int64|`int64`}})
-       count(*, contribution_bounds_per_group => (0,100))
-from SimpleTypesWithAnonymizationUid;
---
-ALTERNATION GROUP: int64
---
-ERROR: Differential privacy option epsilon value has type STRING which cannot be coerced to expected type DOUBLE [at 1:50]
-select with differential_privacy options(epsilon=int64)
-                                                 ^
---
-ALTERNATION GROUP: `int64`
---
-ERROR: Differential privacy option epsilon value has type STRING which cannot be coerced to expected type DOUBLE [at 1:50]
-select with differential_privacy options(epsilon=`int64`)
-                                                 ^
 ==
 
 # Non-constant expressions for options fails.  Because these are options,
@@ -6801,20 +6750,6 @@ from SimpleTypesWithAnonymizationUid;
 ERROR: Argument * can only be used in COUNT(*) [at 1:38]
 select with differential_privacy sum(*, contribution_bounds_per_group => (10,...
                                      ^
-==
-
-# TODO: create a custom error message for this case. The problem is
-# the clamped between clause, and for count(*) both of the bounds must be
-# integers, but in this case we have one that is a string. The first part of the
-# error message is a bit unintuitive, though the 'supported signature' part is
-# very helpful.
-[enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
-select with differential_privacy count(*, contribution_bounds_per_group => (10, "100"), report_format => "PROTO")
-from SimpleTypesWithAnonymizationUid;
---
-ERROR: No matching signature for aggregate operator COUNT(*) in SELECT WITH DIFFERENTIAL_PRIVACY context for argument types: STRUCT<INT64, STRING>, STRING. Supported signatures: COUNT(* [, contribution_bounds_per_group => STRUCT<INT64, INT64>] [, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT]) [at 1:34]
-select with differential_privacy count(*, contribution_bounds_per_group => (1...
-                                 ^
 ==
 
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]

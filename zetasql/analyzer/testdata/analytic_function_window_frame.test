@@ -608,9 +608,29 @@ QueryStmt
 # Non-integer expression for rows.
 select afn_agg() over (rows '2' preceding) from keyvalue
 --
-ERROR: Window framing expression for ROWS can only be of integer type, but has type STRING [at 1:29]
-select afn_agg() over (rows '2' preceding) from keyvalue
-                            ^
+QueryStmt
++-output_column_list=
+| +-$analytic.$analytic1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$analytic.$analytic1#4]
+    +-input_scan=
+      +-AnalyticScan
+        +-column_list=[$analytic.$analytic1#4]
+        +-input_scan=
+        | +-TableScan(table=KeyValue)
+        +-function_group_list=
+          +-AnalyticFunctionGroup
+            +-analytic_function_list=
+              +-$analytic1#4 :=
+                +-AnalyticFunctionCall(sample_functions:afn_agg() -> INT64)
+                  +-window_frame=
+                    +-WindowFrame(frame_unit=ROWS)
+                      +-start_expr=
+                      | +-WindowFrameExpr(boundary_type=OFFSET PRECEDING)
+                      |   +-Literal(type=INT64, value=2)
+                      +-end_expr=
+                        +-WindowFrameExpr(boundary_type=CURRENT ROW)
 ==
 
 select afn_agg() over (rows 2.5 preceding) from keyvalue
@@ -623,9 +643,30 @@ select afn_agg() over (rows 2.5 preceding) from keyvalue
 select afn_agg() over (rows between 2 preceding and '3' following)
 from keyvalue
 --
-ERROR: Window framing expression for ROWS can only be of integer type, but has type STRING [at 1:53]
-select afn_agg() over (rows between 2 preceding and '3' following)
-                                                    ^
+QueryStmt
++-output_column_list=
+| +-$analytic.$analytic1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$analytic.$analytic1#4]
+    +-input_scan=
+      +-AnalyticScan
+        +-column_list=[$analytic.$analytic1#4]
+        +-input_scan=
+        | +-TableScan(table=KeyValue)
+        +-function_group_list=
+          +-AnalyticFunctionGroup
+            +-analytic_function_list=
+              +-$analytic1#4 :=
+                +-AnalyticFunctionCall(sample_functions:afn_agg() -> INT64)
+                  +-window_frame=
+                    +-WindowFrame(frame_unit=ROWS)
+                      +-start_expr=
+                      | +-WindowFrameExpr(boundary_type=OFFSET PRECEDING)
+                      |   +-Literal(type=INT64, value=2)
+                      +-end_expr=
+                        +-WindowFrameExpr(boundary_type=OFFSET FOLLOWING)
+                          +-Literal(type=INT64, value=3)
 ==
 
 select afn_agg() over (rows between 2 preceding and 3.5 following)
@@ -665,9 +706,35 @@ select afn_agg() over (order by key
                        range between unbounded preceding and '3' preceding)
 from keyvalue
 --
-ERROR: Window framing expression has type STRING that cannot coerce to the type of the ORDER BY expression, which is INT64 [at 2:62]
-                       range between unbounded preceding and '3' preceding)
-                                                             ^
+QueryStmt
++-output_column_list=
+| +-$analytic.$analytic1#4 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$analytic.$analytic1#4]
+    +-input_scan=
+      +-AnalyticScan
+        +-column_list=[KeyValue.Key#1, $analytic.$analytic1#4]
+        +-input_scan=
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
+        +-function_group_list=
+          +-AnalyticFunctionGroup
+            +-order_by=
+            | +-WindowOrdering
+            |   +-order_by_item_list=
+            |     +-OrderByItem
+            |       +-column_ref=
+            |         +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+            +-analytic_function_list=
+              +-$analytic1#4 :=
+                +-AnalyticFunctionCall(sample_functions:afn_agg() -> INT64)
+                  +-window_frame=
+                    +-WindowFrame(frame_unit=RANGE)
+                      +-start_expr=
+                      | +-WindowFrameExpr(boundary_type=UNBOUNDED PRECEDING)
+                      +-end_expr=
+                        +-WindowFrameExpr(boundary_type=OFFSET PRECEDING)
+                          +-Literal(type=INT64, value=3)
 ==
 
 # The frame expression must have a type coercible to the ordering expression

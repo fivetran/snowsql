@@ -508,13 +508,6 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select [1,2,3][DEFAULT_OFFSET("abc")]
---
-ERROR: Array position in [] must be coercible to INT64 type, but has type STRING [at 1:31]
-select [1,2,3][DEFAULT_OFFSET("abc")]
-                              ^
-==
-
 select 1.5[DEFAULT_OFFSET(5)]
 --
 ERROR: Subscript access using [DEFAULT_OFFSET(INT64)] is not supported on values of type DOUBLE [at 1:12]

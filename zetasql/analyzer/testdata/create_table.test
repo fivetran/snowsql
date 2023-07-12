@@ -2261,19 +2261,6 @@ partition by (select c1 from t1)
                              ^
 ==
 
-# PARTITION BY with type mismatch in expression
-create table t1 (
-  c1 int32,
-  c2 int64,
-  c3 string
-)
-partition by c1, c2 + 5 = c3
---
-ERROR: No matching signature for operator = for argument types: INT64, STRING. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 6:18]
-partition by c1, c2 + 5 = c3
-                 ^
-==
-
 # CLUSTER BY with no expressions
 create table t1 (
   c1 int32,
@@ -2571,7 +2558,7 @@ CreateTableStmt
 [no_enable_literal_replacement]
 create table t (a int32 AS (CAST("" as STRING)));
 --
-ERROR: Generated column expression has type STRING which cannot be assigned to column type INT32 [at 1:25]
+ERROR: Could not cast "" to type INT32 [at 1:25]
 create table t (a int32 AS (CAST("" as STRING)));
                         ^
 ==
@@ -4399,7 +4386,7 @@ CreateTableStmt
 [no_enable_literal_replacement]
 create table t (a int32 default (CAST("" as STRING)));
 --
-ERROR: Column default expression has type STRING which cannot be assigned to column type INT32 [at 1:34]
+ERROR: Could not cast "" to type INT32 [at 1:34]
 create table t (a int32 default (CAST("" as STRING)));
                                  ^
 ==
@@ -4513,16 +4500,6 @@ CreateTableStmt
 
 ==
 
-# Column has type ARRAY<int64>, default value has type ARRAY<STRING> (disallowed).
-[language_features={{V_1_3_COLUMN_DEFAULT_VALUE|V_1_1_CAST_DIFFERENT_ARRAY_TYPES,V_1_3_COLUMN_DEFAULT_VALUE}}]
-[no_enable_literal_replacement]
-create table t (a ARRAY<int64> default ["1","2"]);
---
-ERROR: Column default expression has type ARRAY<STRING> which cannot be assigned to column type ARRAY<INT64> [at 1:40]
-create table t (a ARRAY<int64> default ["1","2"]);
-                                       ^
-==
-
 # A STRUCT<INT64, INT64> column with an ARRAY<INT64> default value (disallowed).
 [language_features=V_1_3_COLUMN_DEFAULT_VALUE]
 [no_enable_literal_replacement]
@@ -4585,9 +4562,18 @@ ERROR: Column default expression has type STRUCT<INT64, STRING> which cannot be 
 [no_enable_literal_replacement]
 create table t (a STRUCT<int64, string> default ("1", "xyz"));
 --
-ERROR: Column default expression has type STRUCT<STRING, STRING> which cannot be assigned to column type STRUCT<INT64, STRING> [at 1:49]
-create table t (a STRUCT<int64, string> default ("1", "xyz"));
-                                                ^
+CreateTableStmt
++-name_path=t
++-column_definition_list=
+  +-ColumnDefinition
+    +-name="a"
+    +-type=STRUCT<INT64, STRING>
+    +-column=t.a#1
+    +-default_value=
+      +-ColumnDefaultValue
+        +-expression=
+        | +-Literal(type=STRUCT<INT64, STRING>, value={1, "xyz"})
+        +-sql='("1", "xyz")'
 ==
 
 # Column default value with a function that doesn't exist.

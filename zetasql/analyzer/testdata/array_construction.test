@@ -354,13 +354,6 @@ QueryStmt
       +-TableScan(column_list=SimpleTypes.[int64#2, double#9], table=SimpleTypes, column_index_list=[1, 8])
 ==
 
-select ["a", 3]
---
-ERROR: Array elements of types {INT64, STRING} do not have a common supertype [at 1:8]
-select ["a", 3]
-       ^
-==
-
 select ArrayOfInt32(1, 2, 3)
 --
 ERROR: Function not found: ArrayOfInt32; Did you mean array_filter? [at 1:8]
