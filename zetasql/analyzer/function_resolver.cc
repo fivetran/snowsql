@@ -151,6 +151,7 @@ static const std::string* const kBitwiseXorFnName =
     new std::string("$bitwise_xor");
 static const std::string* const kConcatOpFnName = new std::string("$concat_op");
 static const std::string* const kGetPathOpFnName = new std::string("$get_path_op");
+static const std::string* const kModOpFnName = new std::string("$mod_op");
 static const std::string* const kDivideFnName = new std::string("$divide");
 static const std::string* const kEqualFnName = new std::string("$equal");
 static const std::string* const kGreaterFnName = new std::string("$greater");
@@ -213,6 +214,8 @@ const std::string& FunctionResolver::BinaryOperatorToFunctionName(
       return *kConcatOpFnName;
     case ASTBinaryExpression::GET_PATH_OP:
       return *kGetPathOpFnName;
+    case ASTBinaryExpression::MOD_OP:
+      return *kModOpFnName;
     case ASTBinaryExpression::DISTINCT:
       if (is_not) {
         ZETASQL_CHECK(not_handled != nullptr);
@@ -1814,6 +1817,31 @@ absl::Status FunctionResolver::ResolveGeneralFunctionCall(
         get_path_result_signature->result_type().type(), get_path_op_function,
         *get_path_result_signature, std::move(arguments),
         /*generic_argument_list=*/{}, get_path_op_error_mode, function_call_info);
+  } else if (function->Name() == "$mod_op") {
+    const Function* mod_op_function;
+    ResolvedFunctionCallBase::ErrorMode mod_op_error_mode;
+    std::vector<std::string> function_name_path;
+    std::unique_ptr<const FunctionSignature> mod_result_signature;
+    arg_reorder_index_mapping.clear();
+
+    function_name_path.push_back("mod");
+    ZETASQL_RETURN_IF_ERROR(resolver_->LookupFunctionFromCatalog(
+        ast_location, function_name_path,
+        Resolver::FunctionNotFoundHandleMode::kReturnError,
+        &mod_op_function, &mod_op_error_mode));
+    ZETASQL_ASSIGN_OR_RETURN(
+        const FunctionSignature* matched_signature,
+        FindMatchingSignature(mod_op_function, ast_location,
+                              arg_locations_in, named_arguments,
+                              /*name_scope=*/nullptr, &input_argument_types,
+                              /*arg_overrides=*/nullptr,
+                              &arg_reorder_index_mapping));
+    mod_result_signature.reset(matched_signature);
+
+    *resolved_expr_out = MakeResolvedFunctionCall(
+        mod_result_signature->result_type().type(), mod_op_function,
+        *mod_result_signature, std::move(arguments),
+        /*generic_argument_list=*/{}, mod_op_error_mode, function_call_info);
   } else
 
   // We transform the concatenation operator (||) function into the

@@ -746,6 +746,7 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
   const Type* double_type = type_factory->get_double();
   const Type* string_type = type_factory->get_string();
   const Type* bytes_type = type_factory->get_bytes();
+  const Type* numeric_type = type_factory->get_numeric();
 
   const Function::Mode SCALAR = Function::SCALAR;
 
@@ -820,6 +821,14 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
           .set_supports_safe_error_mode(false)
           .set_sql_name(":")
           .set_get_sql_callback(absl::bind_front(&InfixFunctionSQL, ":")));
+
+  InsertFunction(
+      functions, options, "$mod_op", SCALAR,
+      {{numeric_type, {numeric_type, numeric_type}, FN_MOD_OP}},
+      FunctionOptions()
+          .set_supports_safe_error_mode(false)
+          .set_sql_name("%")
+          .set_get_sql_callback(absl::bind_front(&InfixFunctionSQL, "%")));
 
   InsertFunction(
       functions, options, "$concat_op", SCALAR,
