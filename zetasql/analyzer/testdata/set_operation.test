@@ -3695,7 +3695,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[$subquery2.str_val#2]
         |           +-expr_list=
-:= Literal(type=STRING, value="abc")
+        |           | +-str_val#2 := Literal(type=STRING, value="abc")
         |           +-input_scan=
         |             +-SingleRowScan
         +-output_column_list=[$union_distinct2_cast.str_val#4]
