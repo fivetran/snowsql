@@ -507,16 +507,6 @@ select value from KeyValue union all
 select key from KeyValue
 --
 
-select key from KeyValue union all
-select key from KeyValue union all
-select key from KeyValue union all
-select key from KeyValue union all
-select cast(5 as int64) union all
-select cast(5 as int32) union all
-select 5 union all
-select value from KeyValue union all
-select key from KeyValue
---
 QueryStmt
 +-output_column_list=
 | +-$union_all.key#16 AS key [INT64]
@@ -3670,10 +3660,6 @@ UNION DISTINCT
 SELECT str_val FROM (SELECT 'abc' AS str_val)
 --
 
-SELECT bool_val FROM (SELECT true AS bool_val)
-UNION DISTINCT
-SELECT str_val FROM (SELECT 'abc' AS str_val)
---
 QueryStmt
 +-output_column_list=
 | +-$union_distinct.bool_val#3 AS bool_val [BOOL]
