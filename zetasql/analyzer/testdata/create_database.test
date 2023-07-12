@@ -28,14 +28,6 @@ create database a.b.db;
 CreateDatabaseStmt(name_path=a.b.db)
 ==
 
-# Invalid option.
-create database db options(db_option=1+'2');
---
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:38]
-create database db options(db_option=1+'2');
-                                     ^
-==
-
 [disallow_duplicate_options]
 create database db options(option_1=1,option_1='2');
 --

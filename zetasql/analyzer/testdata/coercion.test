@@ -183,9 +183,19 @@ QueryStmt
 
 select 1 + '1';
 --
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:8]
-select 1 + '1';
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 # NULL tests for simple types.
@@ -587,14 +597,14 @@ select 1 FROM TestTable WHERE KitchenSink.test_enum = NULL;
 
 select 1 FROM TestTable WHERE KitchenSink.test_enum = KitchenSink.string_val;
 --
-ERROR: No matching signature for operator = for argument types: zetasql_test__.TestEnum, STRING. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:31]
+ERROR: No matching signature for operator = for argument types: zetasql_test__.TestEnum, STRING. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:31]
 select 1 FROM TestTable WHERE KitchenSink.test_enum = KitchenSink.string_val;
                               ^
 ==
 
 select 1 FROM TestTable WHERE KitchenSink.test_enum = KitchenSink.int64_val;
 --
-ERROR: No matching signature for operator = for argument types: zetasql_test__.TestEnum, INT64. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:31]
+ERROR: No matching signature for operator = for argument types: zetasql_test__.TestEnum, INT64. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:31]
 select 1 FROM TestTable WHERE KitchenSink.test_enum = KitchenSink.int64_val;
                               ^
 ==
@@ -1628,7 +1638,7 @@ QueryStmt
 select KitchenSink.repeated_int32_val = KitchenSink.repeated_string_val
 from TestTable
 --
-ERROR: No matching signature for operator = for argument types: ARRAY<INT32>, ARRAY<STRING>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:8]
+ERROR: No matching signature for operator = for argument types: ARRAY<INT32>, ARRAY<STRING>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:8]
 select KitchenSink.repeated_int32_val = KitchenSink.repeated_string_val
        ^
 ==
@@ -1637,7 +1647,7 @@ select KitchenSink.repeated_int32_val = KitchenSink.repeated_string_val
 select KitchenSink.repeated_int32_val = KitchenSink.repeated_int64_val
 from TestTable
 --
-ERROR: No matching signature for operator = for argument types: ARRAY<INT32>, ARRAY<INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:8]
+ERROR: No matching signature for operator = for argument types: ARRAY<INT32>, ARRAY<INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:8]
 select KitchenSink.repeated_int32_val = KitchenSink.repeated_int64_val
        ^
 ==
@@ -1647,7 +1657,7 @@ select KitchenSink.repeated_int32_val = KitchenSink.repeated_int64_val
 select KitchenSink.repeated_int32_val = [1,2,3]
 from TestTable
 --
-ERROR: No matching signature for operator = for argument types: ARRAY<INT32>, ARRAY<INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:8]
+ERROR: No matching signature for operator = for argument types: ARRAY<INT32>, ARRAY<INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:8]
 select KitchenSink.repeated_int32_val = [1,2,3]
        ^
 
@@ -1692,7 +1702,7 @@ QueryStmt
 select KitchenSink.repeated_string_val = [null]
 from TestTable
 --
-ERROR: No matching signature for operator = for argument types: ARRAY<STRING>, ARRAY<INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:8]
+ERROR: No matching signature for operator = for argument types: ARRAY<STRING>, ARRAY<INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:8]
 select KitchenSink.repeated_string_val = [null]
        ^
 ==
@@ -2777,7 +2787,7 @@ QueryStmt
 --
 ALTERNATION GROUP: external
 --
-ERROR: No matching signature for operator = for argument types: STRUCT<constant_rounding_mode ROUNDING_MODE>, STRUCT<INT64>. Supported signature: ANY = ANY [at 2:8]
+ERROR: No matching signature for operator = for argument types: STRUCT<constant_rounding_mode ROUNDING_MODE>, STRUCT<INT64>. Supported signatures: ANY = ANY; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; NUMERIC = STRING; STRING = NUMERIC; FLOAT64 = STRING; STRING = FLOAT64 [at 2:8]
 select STRUCT( nested_catalog.constant_rounding_mode) = struct(1)
        ^
 
@@ -2818,7 +2828,7 @@ select nested_catalog.constant_rounding_mode in (1, 2)
 # Types are not coercible with each other
 select CAST(1 as `zetasql.functions.RoundingMode`) = CAST(1 as ROUNDING_MODE),
 --
-ERROR: No matching signature for operator = for argument types: zetasql.functions.RoundingMode, ROUNDING_MODE. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 2:8]
+ERROR: No matching signature for operator = for argument types: zetasql.functions.RoundingMode, ROUNDING_MODE. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; NUMERIC = STRING; STRING = NUMERIC; DOUBLE = STRING; STRING = DOUBLE [at 2:8]
 select CAST(1 as `zetasql.functions.RoundingMode`) = CAST(1 as ROUNDING_MODE),
        ^
 ==
@@ -2826,7 +2836,7 @@ select CAST(1 as `zetasql.functions.RoundingMode`) = CAST(1 as ROUNDING_MODE),
 [language_features=NUMERIC_TYPE,ROUND_WITH_ROUNDING_MODE]
 select CAST(1 as `zetasql.functions.RoundingMode`) = CAST(1 as ROUNDING_MODE)
 --
-ERROR: No matching signature for operator = for argument types: zetasql.functions.RoundingMode, ROUNDING_MODE. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:8]
+ERROR: No matching signature for operator = for argument types: zetasql.functions.RoundingMode, ROUNDING_MODE. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; NUMERIC = STRING; STRING = NUMERIC; DOUBLE = STRING; STRING = DOUBLE [at 1:8]
 select CAST(1 as `zetasql.functions.RoundingMode`) = CAST(1 as ROUNDING_MODE)
        ^
 ==

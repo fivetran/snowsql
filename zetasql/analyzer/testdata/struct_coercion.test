@@ -1012,9 +1012,26 @@ select key, value
 from keyvalue kv
 where struct(key, key) = ('1', '1');
 --
-ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<STRING, STRING>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 3:7]
-where struct(key, key) = ('1', '1');
-      ^
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS key [INT64]
+| +-KeyValue.Value#2 AS value [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-input_scan=
+      +-FilterScan
+        +-column_list=KeyValue.[Key#1, Value#2]
+        +-input_scan=
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        +-filter_expr=
+          +-FunctionCall(ZetaSQL:$equal(STRUCT<key INT64, key INT64>, STRUCT<key INT64, key INT64>) -> BOOL)
+            +-MakeStruct
+            | +-type=STRUCT<key INT64, key INT64>
+            | +-field_list=
+            |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+            |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+            +-Literal(type=STRUCT<key INT64, key INT64>, value={key:1, key:1})
 ==
 
 # STRUCT in-list with incompatible types.
@@ -1022,9 +1039,27 @@ select key, value
 from keyvalue kv
 where struct(key, key) in (('1', '1'), ('2', '2'));
 --
-ERROR: No matching signature for operator IN for argument types STRUCT<key INT64, key INT64> and {STRUCT<STRING, STRING>} [at 3:24]
-where struct(key, key) in (('1', '1'), ('2', '2'));
-                       ^
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS key [INT64]
+| +-KeyValue.Value#2 AS value [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-input_scan=
+      +-FilterScan
+        +-column_list=KeyValue.[Key#1, Value#2]
+        +-input_scan=
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        +-filter_expr=
+          +-FunctionCall(ZetaSQL:$in(STRUCT<key INT64, key INT64>, repeated(2) STRUCT<key INT64, key INT64>) -> BOOL)
+            +-MakeStruct
+            | +-type=STRUCT<key INT64, key INT64>
+            | +-field_list=
+            |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+            |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+            +-Literal(type=STRUCT<key INT64, key INT64>, value={key:1, key:1})
+            +-Literal(type=STRUCT<key INT64, key INT64>, value={key:2, key:2})
 ==
 
 # STRUCT in-subquery with incompatible types.
@@ -1045,7 +1080,7 @@ select key, value
 from keyvalue kv
 where struct(key, key) = struct<key uint64, key int64>(cast(1 as uint64), 1);
 --
-ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<key UINT64, key INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 3:7]
+ERROR: No matching signature for operator = for argument types: STRUCT<key INT64, key INT64>, STRUCT<key UINT64, key INT64>. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 3:7]
 where struct(key, key) = struct<key uint64, key int64>(cast(1 as uint64), 1);
       ^
 ==
@@ -1142,9 +1177,19 @@ QueryStmt
 
 select STRUCT<INT32, STRING>(NULL, NULL) IN (STRUCT<INT64, INT64>(NULL, NULL))
 --
-ERROR: No matching signature for operator IN for argument types STRUCT<INT32, STRING> and {STRUCT<INT64, INT64>} [at 1:42]
-select STRUCT<INT32, STRING>(NULL, NULL) IN (STRUCT<INT64, INT64>(NULL, NULL))
-                                         ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$in(STRUCT<INT64, INT64>, repeated(1) STRUCT<INT64, INT64>) -> BOOL)
+    |     +-Literal(type=STRUCT<INT64, INT64>, value={NULL, NULL}, has_explicit_type=TRUE)
+    |     +-Literal(type=STRUCT<INT64, INT64>, value={NULL, NULL}, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select STRUCT<UINT64>(1) IN (STRUCT<INT64>(1))
@@ -1156,9 +1201,19 @@ select STRUCT<UINT64>(1) IN (STRUCT<INT64>(1))
 
 select (cast(NULL as INT32), cast(NULL as STRING)) IN ((cast(NULL as INT64), cast(NULL as INT64)))
 --
-ERROR: No matching signature for operator IN for argument types STRUCT<INT32, STRING> and {STRUCT<INT64, INT64>} [at 1:52]
-select (cast(NULL as INT32), cast(NULL as STRING)) IN ((cast(NULL as INT64), ...
-                                                   ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$in(STRUCT<INT64, INT64>, repeated(1) STRUCT<INT64, INT64>) -> BOOL)
+    |     +-Literal(type=STRUCT<INT64, INT64>, value={NULL, NULL}, has_explicit_type=TRUE)
+    |     +-Literal(type=STRUCT<INT64, INT64>, value={NULL, NULL}, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select (1, NULL) IN (NULL, (NULL, cast(NULL as STRING)))

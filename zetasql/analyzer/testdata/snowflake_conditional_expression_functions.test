@@ -369,3 +369,69 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 ==
+
+#
+# ZEROIFNULL( <expr1> )
+#
+SELECT ZEROIFNULL({{1234|'1234'|12.34|NULL}}) AS zeroifnull
+--
+ALTERNATION GROUP: 1234
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(INT64 input) -> INT64)
+    |     +-Literal(type=INT64, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: '1234'
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(DOUBLE input) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=1234)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: 12.34
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(DOUBLE input) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=12.34)
+    +-input_scan=
+      +-SingleRowScan
+--
+ALTERNATION GROUP: NULL
+--
+QueryStmt
++-output_column_list=
+| +-$query.zeroifnull#1 AS zeroifnull [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.zeroifnull#1]
+    +-expr_list=
+    | +-zeroifnull#1 :=
+    |   +-FunctionCall(ZetaSQL:zeroifnull(INT64 input) -> INT64)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
+==

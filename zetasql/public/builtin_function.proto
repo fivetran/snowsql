@@ -39,7 +39,7 @@ enum FunctionSignatureId {
   // other special functions (CASE).  FunctionSignatureIds are assigned
   // in ranges:
   //
-  // 0002-0999 Non-standard function calls    (NextId: 302)
+  // 0002-0999 Non-standard function calls    (NextId: 312)
   // 1000-1099 String functions               (NextId: 1083)
   // 1100-1199 Control flow functions         (NextId: 1107)
   // 1200-1299 Time functions                 (Fully used)
@@ -108,6 +108,16 @@ enum FunctionSignatureId {
   FN_EQUAL = 42;                           // $equal
   FN_EQUAL_INT64_UINT64 = 230;             // $equal
   FN_EQUAL_UINT64_INT64 = 231;             // $equal
+  FN_EQUAL_BOOL_STRING = 302;              // $equal
+  FN_EQUAL_STRING_BOOL = 303;              // $equal
+  FN_EQUAL_INT64_STRING = 304;             // $equal
+  FN_EQUAL_STRING_INT64 = 305;             // $equal
+  FN_EQUAL_FLOAT_STRING = 306;             // $equal
+  FN_EQUAL_STRING_FLOAT = 307;             // $equal
+  FN_EQUAL_NUMERIC_STRING = 308;           // $equal
+  FN_EQUAL_STRING_NUMERIC = 309;           // $equal
+  FN_EQUAL_DOUBLE_STRING = 310;            // $equal
+  FN_EQUAL_STRING_DOUBLE = 311;            // $equal
   FN_STRING_ARRAY_LIKE_ANY = 291;          // $like_any_array
   FN_STRING_ARRAY_LIKE_ALL = 292;          // $like_all_array
   FN_STRING_LIKE = 97;                     // $like

@@ -65,7 +65,7 @@ QueryStmt
 
 select @{ other_qual.int32_hint="abc" } 1
 --
-ERROR: Hint other_qual.int32_hint value has type STRING which cannot be coerced to expected type INT32 [at 1:33]
+ERROR: Could not cast literal "abc" to type INT32 [at 1:33]
 select @{ other_qual.int32_hint="abc" } 1
                                 ^
 ==
@@ -175,14 +175,26 @@ QueryStmt
 
 select @{ qual.int32_hint='123' } 1
 --
-ERROR: Hint qual.int32_hint value has type STRING which cannot be coerced to expected type INT32 [at 1:27]
-select @{ qual.int32_hint='123' } 1
-                          ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-hint_list=
+    | +-qual.int32_hint := Literal(type=INT32, value=123)
+    +-input_scan=
+      +-ProjectScan
+        +-column_list=[$query.$col1#1]
+        +-expr_list=
+        | +-$col1#1 := Literal(type=INT64, value=1)
+        +-input_scan=
+          +-SingleRowScan
 ==
 
 select @{ qual.int32_hint=abc } 1
 --
-ERROR: Hint qual.int32_hint value has type STRING which cannot be coerced to expected type INT32 [at 1:27]
+ERROR: Could not cast literal "abc" to type INT32 [at 1:27]
 select @{ qual.int32_hint=abc } 1
                           ^
 ==
@@ -612,9 +624,23 @@ QueryStmt
 
 select @{ int64_hint = @test_param_string } 1
 --
-ERROR: Hint int64_hint value has type STRING which cannot be coerced to expected type INT64 [at 1:24]
-select @{ int64_hint = @test_param_string } 1
-                       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-hint_list=
+    | +-int64_hint :=
+    |   +-Cast(STRING -> INT64)
+    |     +-Parameter(type=STRING, name="test_param_string")
+    +-input_scan=
+      +-ProjectScan
+        +-column_list=[$query.$col1#1]
+        +-expr_list=
+        | +-$col1#1 := Literal(type=INT64, value=1)
+        +-input_scan=
+          +-SingleRowScan
 ==
 
 # Literal coercions on parameterized hints.
@@ -690,9 +716,18 @@ ExportDataStmt
 export data OPTIONS(INT32_option="123")
 as select 1 x
 --
-ERROR: Option INT32_option value has type STRING which cannot be coerced to expected type INT32 [at 1:34]
-export data OPTIONS(INT32_option="123")
-                                 ^
+ExportDataStmt
++-option_list=
+| +-INT32_option := Literal(type=INT32, value=123)
++-output_column_list=
+| +-$create_as.x#1 AS x [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$create_as.x#1]
+    +-expr_list=
+    | +-x#1 := Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 export data OPTIONS(INT32_option=1234567890123)
@@ -783,9 +818,20 @@ ExportDataStmt
 export data OPTIONS(int64_option = @test_param_string)
 as select 1 x
 --
-ERROR: Option int64_option value has type STRING which cannot be coerced to expected type INT64 [at 1:36]
-export data OPTIONS(int64_option = @test_param_string)
-                                   ^
+ExportDataStmt
++-option_list=
+| +-int64_option :=
+|   +-Cast(STRING -> INT64)
+|     +-Parameter(type=STRING, name="test_param_string")
++-output_column_list=
+| +-$create_as.x#1 AS x [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$create_as.x#1]
+    +-expr_list=
+    | +-x#1 := Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 # Test case from b/152892304

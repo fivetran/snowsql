@@ -1567,9 +1567,9 @@ SELECT datetime('2015-12-28 15:42:56-08:00');
 --
 ALTERNATION GROUP: CAST('2015-12-28 15:42:56-08:00' AS STRING)
 --
-ERROR: No matching signature for function DATETIME for argument types: STRING. Supported signatures: DATETIME(INT64, INT64, INT64, INT64, INT64, INT64); DATETIME(DATE, TIME); DATETIME(TIMESTAMP, [STRING]); DATETIME(DATE) [at 1:8]
+ERROR: Could not cast "2015-12-28 15:42:56-08:00" to type DATE [at 1:17]
 SELECT datetime(CAST('2015-12-28 15:42:56-08:00' AS STRING));
-       ^
+                ^
 ==
 
 [language_features={{V_1_2_CIVIL_TIME|}}]
