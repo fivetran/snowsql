@@ -800,7 +800,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_FP_T_LAMBDA_RET_T
   Argument types: INT64, LAMBDA
   Signature: FN_FP_T_LAMBDA_RET_T(T1, FUNCTION<T1->T1>)
-    Argument 2: failed to resolve lambda body, error: Lambda should return type INT64, but returns STRING [at 1:8]
+    Argument 2: failed to resolve lambda body, error: Could not cast literal "abc" to type INT64 [at 1:8]
 SELECT fn_fp_T_LAMBDA_RET_T(1, e->"abc");
        ^
 ==
@@ -1603,13 +1603,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ARRAY_FILTER
     Argument 2: failed to resolve lambda body, error: No matching signature for function SAMPLE_FUNCTIONS:FN_ARRAY_FILTER
       Argument types: ARRAY<INT64>, LAMBDA
       Signature: FN_ARRAY_FILTER(ARRAY<T1>, FUNCTION<T1->BOOL>)
-        Argument 2: failed to resolve lambda body, error: No matching signature for operator > for argument types: INT64, STRING
-          Signature: T1 > T1
-            Unable to find common supertype for templated argument <T1>
-          Signature: INT64 > UINT64
-            Argument 2: Unable to coerce type STRING to expected type UINT64
-          Signature: UINT64 > INT64
-            Argument 1: Unable to coerce type INT64 to expected type UINT64
+        Argument 2: failed to resolve lambda body, error: Could not cast literal "" to type INT64
       Signature: FN_ARRAY_FILTER(ARRAY<T1>, FUNCTION<(T1, INT64)->BOOL>)
         Argument 2: lambda requires 2 arguments but 1 is provided
   Signature: FN_ARRAY_FILTER(ARRAY<T1>, FUNCTION<(T1, INT64)->BOOL>)

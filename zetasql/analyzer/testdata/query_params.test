@@ -84,7 +84,7 @@ QueryStmt
 
 select * from TestTable where @test_param_string = @test_param_bytes;
 --
-ERROR: No matching signature for operator = for argument types: STRING, BYTES. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 1:31]
+ERROR: No matching signature for operator = for argument types: STRING, BYTES. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64; BOOL = STRING; STRING = BOOL; INT64 = STRING; STRING = INT64; FLOAT = STRING; STRING = FLOAT; DOUBLE = STRING; STRING = DOUBLE [at 1:31]
 select * from TestTable where @test_param_string = @test_param_bytes;
                               ^
 ==
@@ -465,53 +465,6 @@ select fn_on_float(@test_param_double)
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_FLOAT for argument types: DOUBLE. Supported signature: FN_ON_FLOAT(FLOAT) [at 1:8]
 select fn_on_float(@test_param_double)
-       ^
-==
-
-# Some additional explicit casts that work, but are not supported as parameter
-# coercions.
-select fn_on_{{float|double|bool|int32|int64|uint32|uint64}}(@test_param_string)
---
-ALTERNATION GROUP: float
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_FLOAT for argument types: STRING. Supported signature: FN_ON_FLOAT(FLOAT) [at 1:8]
-select fn_on_float(@test_param_string)
-       ^
---
-ALTERNATION GROUP: double
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_DOUBLE for argument types: STRING. Supported signature: FN_ON_DOUBLE(DOUBLE) [at 1:8]
-select fn_on_double(@test_param_string)
-       ^
---
-ALTERNATION GROUP: bool
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_BOOL for argument types: STRING. Supported signature: FN_ON_BOOL(BOOL) [at 1:8]
-select fn_on_bool(@test_param_string)
-       ^
---
-ALTERNATION GROUP: int32
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_INT32 for argument types: STRING. Supported signature: FN_ON_INT32(INT32) [at 1:8]
-select fn_on_int32(@test_param_string)
-       ^
---
-ALTERNATION GROUP: int64
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_INT64 for argument types: STRING. Supported signature: FN_ON_INT64(INT64) [at 1:8]
-select fn_on_int64(@test_param_string)
-       ^
---
-ALTERNATION GROUP: uint32
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_UINT32 for argument types: STRING. Supported signature: FN_ON_UINT32(UINT32) [at 1:8]
-select fn_on_uint32(@test_param_string)
-       ^
---
-ALTERNATION GROUP: uint64
---
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_UINT64 for argument types: STRING. Supported signature: FN_ON_UINT64(UINT64) [at 1:8]
-select fn_on_uint64(@test_param_string)
        ^
 ==
 
@@ -917,9 +870,19 @@ QueryStmt
 --
 ALTERNATION GROUP: fn_on_struct_int32_date
 --
-ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ON_STRUCT_INT32_DATE for argument types: STRUCT<a INT32, b STRING>. Supported signature: FN_ON_STRUCT_INT32_DATE(STRUCT<a INT32, b DATE>) [at 1:8]
-select fn_on_struct_int32_date(@test_param_struct)
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(sample_functions:fn_on_struct_int32_date(STRUCT<a INT32, b DATE>) -> BOOL)
+    |     +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<a INT32, b DATE>)
+    |       +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 [language_features={{V_1_1_CAST_DIFFERENT_ARRAY_TYPES|}}]

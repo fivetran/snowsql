@@ -893,22 +893,6 @@ QueryStmt
                         +-WindowFrameExpr(boundary_type=UNBOUNDED FOLLOWING)
 ==
 
-select d3a_count.init(key) over ()
-from keyvalue;
---
-ERROR: No matching signature for aggregate function D3A_COUNT.INIT for argument types: INT64. Supported signatures: D3A_COUNT.INIT(INT64, INT64, [INT64]); D3A_COUNT.INIT(UINT64, INT64, [INT64]); D3A_COUNT.INIT(STRING, INT64, [INT64]); D3A_COUNT.INIT(BYTES, INT64, [INT64]) [at 1:8]
-select d3a_count.init(key) over ()
-       ^
-==
-
-select d3a_count.init(key, key / 10) over ()
-from keyvalue;
---
-ERROR: No matching signature for aggregate function D3A_COUNT.INIT for argument types: INT64, DOUBLE. Supported signatures: D3A_COUNT.INIT(INT64, INT64, [INT64]); D3A_COUNT.INIT(UINT64, INT64, [INT64]); D3A_COUNT.INIT(STRING, INT64, [INT64]); D3A_COUNT.INIT(BYTES, INT64, [INT64]) [at 1:8]
-select d3a_count.init(key, key / 10) over ()
-       ^
-==
-
 select d3a_count.init(key, CAST(key / 10 AS INT64)) over ()
 from keyvalue;
 --

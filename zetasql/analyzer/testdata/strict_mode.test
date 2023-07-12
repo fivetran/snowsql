@@ -72,10 +72,6 @@ where KeyValue.key = 5 and value = 7
 STRICT MODE ERROR: Alias value cannot be used without a qualifier in strict name resolution mode [at 3:28]
 where KeyValue.key = 5 and value = 7
                            ^
---
-ERROR: No matching signature for operator = for argument types: STRING, INT64. Supported signatures: ANY = ANY; INT64 = UINT64; UINT64 = INT64 [at 3:28]
-where KeyValue.key = 5 and value = 7
-                           ^
 ==
 
 # key is an implicit name on both sides of the JOIN USING.

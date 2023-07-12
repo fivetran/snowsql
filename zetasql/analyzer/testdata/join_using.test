@@ -413,14 +413,6 @@ QueryStmt
               +-ColumnRef(type=INT32, column=TestTable.key#3)
 ==
 
-select 1
-from KeyValue join (select 123 value) using (value)
---
-ERROR: Column 'value' in USING has incompatible types that cannot be directly compared using equality on either side of the join: STRING and INT64 [at 2:46]
-from KeyValue join (select 123 value) using (value)
-                                             ^
-==
-
 # Select list aliases are in a different order from each other.
 # Using clause references are in a different order from either select list.
 # None of the USING columns have the same type in both input subqueries.

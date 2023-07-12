@@ -297,17 +297,19 @@ select fingerprint("S")
 [product_mode={{internal|external}}]
 select 1 + '2'
 --
-ALTERNATION GROUP: internal
---
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:8]
-select 1 + '2'
-       ^
---
-ALTERNATION GROUP: external
---
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; FLOAT64 + FLOAT64 [at 1:8]
-select 1 + '2'
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=2)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 # This is a valid INT64 value (kint64min), but because the ZetaSQL parser

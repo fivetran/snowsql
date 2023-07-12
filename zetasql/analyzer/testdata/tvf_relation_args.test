@@ -6451,17 +6451,9 @@ select column_bytes from tvf_one_relation_arg_repeating_int64_args(1, 2, 3)
 select column_bytes from tvf_one_relation_arg_repeating_int64_args(
     (select 1, 2), "abc")
 --
-ERROR: No matching signature for tvf_one_relation_arg_repeating_int64_args for argument types: TABLE<$col1 INT64, $col2 INT64>, STRING. Supported signature: TVF_ONE_RELATION_ARG_REPEATING_INT64_ARGS(TABLE, [INT64, ...]) [at 1:26]
-select column_bytes from tvf_one_relation_arg_repeating_int64_args(
-                         ^
---
-Signature Mismatch Details:
-ERROR: No matching signature for tvf_one_relation_arg_repeating_int64_args
-  Argument types: TABLE<$col1 INT64, $col2 INT64>, STRING
-  Signature: TVF_ONE_RELATION_ARG_REPEATING_INT64_ARGS(TABLE, [INT64, ...])
-    Argument 2: Unable to coerce type STRING to expected type INT64 [at 1:26]
-select column_bytes from tvf_one_relation_arg_repeating_int64_args(
-                         ^
+ERROR: Could not cast literal "abc" to type INT64 [at 2:20]
+    (select 1, 2), "abc")
+                   ^
 ==
 
 # A TVF accepts one scalar argument and one relation argument, but the query
@@ -6490,17 +6482,9 @@ ERROR: Scalar subquery cannot have more than one column unless using SELECT AS S
 select column_bytes from tvf_one_relation_arg_repeating_any_one_type_args(
     (select 1, 2), 3, "abc")
 --
-ERROR: No matching signature for tvf_one_relation_arg_repeating_any_one_type_args for argument types: TABLE<$col1 INT64, $col2 INT64>, INT64, STRING. Supported signature: TVF_ONE_RELATION_ARG_REPEATING_ANY_ONE_TYPE_ARGS(TABLE, [ANY, ...]) [at 1:26]
-select column_bytes from tvf_one_relation_arg_repeating_any_one_type_args(
-                         ^
---
-Signature Mismatch Details:
-ERROR: No matching signature for tvf_one_relation_arg_repeating_any_one_type_args
-  Argument types: TABLE<$col1 INT64, $col2 INT64>, INT64, STRING
-  Signature: TVF_ONE_RELATION_ARG_REPEATING_ANY_ONE_TYPE_ARGS(TABLE, [T1, ...])
-    Unable to find common supertype for templated argument <T1> [at 1:26]
-select column_bytes from tvf_one_relation_arg_repeating_any_one_type_args(
-                         ^
+ERROR: Could not cast literal "abc" to type INT64 [at 2:23]
+    (select 1, 2), 3, "abc")
+                      ^
 ==
 
 # It should not be possible to refer to value tables by any other name than
@@ -6755,9 +6739,36 @@ select *
 from tvf_one_relation_arg_one_date_input_column(
     (select '2016-01-01' as mydate))
 --
-ERROR: Invalid type STRING for column "mydate DATE" of argument 1 of TVF_ONE_RELATION_ARG_ONE_DATE_INPUT_COLUMN(TABLE<mydate DATE>) [at 3:5]
-    (select '2016-01-01' as mydate))
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_one_relation_arg_one_date_input_column.column_bool#3 AS column_bool [BOOL]
+| +-tvf_one_relation_arg_one_date_input_column.column_bytes#4 AS column_bytes [BYTES]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+        +-tvf=tvf_one_relation_arg_one_date_input_column((TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-signature=(TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery2.mydate#2]
+        |   |   +-expr_list=
+        |   |   | +-mydate#2 :=
+        |   |   |   +-Cast(STRING -> DATE)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery1.mydate#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery1.mydate#1]
+        |   |       +-expr_list=
+        |   |       | +-mydate#1 := Literal(type=STRING, value="2016-01-01")
+        |   |       +-input_scan=
+        |   |         +-SingleRowScan
+        |   +-argument_column_list=[$subquery2.mydate#2]
+        +-column_index_list=[0, 1]
 ==
 
 # A TVF accepts one relation argument with one date column.
@@ -6766,9 +6777,36 @@ select *
 from tvf_one_relation_arg_one_date_input_column(
     (select '2016-01-01@abcdefg' as mydate))
 --
-ERROR: Invalid type STRING for column "mydate DATE" of argument 1 of TVF_ONE_RELATION_ARG_ONE_DATE_INPUT_COLUMN(TABLE<mydate DATE>) [at 3:5]
-    (select '2016-01-01@abcdefg' as mydate))
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_one_relation_arg_one_date_input_column.column_bool#3 AS column_bool [BOOL]
+| +-tvf_one_relation_arg_one_date_input_column.column_bytes#4 AS column_bytes [BYTES]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+        +-tvf=tvf_one_relation_arg_one_date_input_column((TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-signature=(TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery2.mydate#2]
+        |   |   +-expr_list=
+        |   |   | +-mydate#2 :=
+        |   |   |   +-Cast(STRING -> DATE)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery1.mydate#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery1.mydate#1]
+        |   |       +-expr_list=
+        |   |       | +-mydate#1 := Literal(type=STRING, value="2016-01-01@abcdefg")
+        |   |       +-input_scan=
+        |   |         +-SingleRowScan
+        |   +-argument_column_list=[$subquery2.mydate#2]
+        +-column_index_list=[0, 1]
 ==
 
 # A TVF accepts one relation argument with one date column.
@@ -6777,9 +6815,39 @@ select *
 from tvf_one_relation_arg_one_date_input_column(
     (select * from (select '2016-01-01' as mydate)))
 --
-ERROR: Invalid type STRING for column "mydate DATE" of argument 1 of TVF_ONE_RELATION_ARG_ONE_DATE_INPUT_COLUMN(TABLE<mydate DATE>) [at 3:5]
-    (select * from (select '2016-01-01' as mydate)))
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_one_relation_arg_one_date_input_column.column_bool#3 AS column_bool [BOOL]
+| +-tvf_one_relation_arg_one_date_input_column.column_bytes#4 AS column_bytes [BYTES]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_one_relation_arg_one_date_input_column.[column_bool#3, column_bytes#4]
+        +-tvf=tvf_one_relation_arg_one_date_input_column((TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-signature=(TABLE<mydate DATE>) -> TABLE<column_bool BOOL, column_bytes BYTES>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery3.mydate#2]
+        |   |   +-expr_list=
+        |   |   | +-mydate#2 :=
+        |   |   |   +-Cast(STRING -> DATE)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery2.mydate#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery2.mydate#1]
+        |   |       +-input_scan=
+        |   |         +-ProjectScan
+        |   |           +-column_list=[$subquery2.mydate#1]
+        |   |           +-expr_list=
+        |   |           | +-mydate#1 := Literal(type=STRING, value="2016-01-01")
+        |   |           +-input_scan=
+        |   |             +-SingleRowScan
+        |   +-argument_column_list=[$subquery3.mydate#2]
+        +-column_index_list=[0, 1]
 ==
 
 # The query calls a TVF that has one relation argument with a required schema
@@ -6984,15 +7052,68 @@ select key, value from t
 select * from tvf_templated_select_relation_arg_and_catalog_table(
     (select value, key from keyvalue));
 --
-ERROR: Invalid table-valued function tvf_templated_select_relation_arg_and_catalog_table [at 1:15]
-select * from tvf_templated_select_relation_arg_and_catalog_table(
-              ^
-Analysis of table-valued function tvf_templated_select_relation_arg_and_catalog_table failed [at 1:30]
-(select * from t) union all (select * from keyvalue)
-                             ^
-Column 1 in UNION ALL has incompatible types: STRING, INT64 [at 1:30]
-(select * from t) union all (select * from keyvalue)
-                             ^
+QueryStmt
++-output_column_list=
+| +-tvf_templated_select_relation_arg_and_catalog_table.value#3 AS value [INT64]
+| +-tvf_templated_select_relation_arg_and_catalog_table.key#4 AS key [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=tvf_templated_select_relation_arg_and_catalog_table.[value#3, key#4]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=tvf_templated_select_relation_arg_and_catalog_table.[value#3, key#4]
+        +-tvf=tvf_templated_select_relation_arg_and_catalog_table((ANY TABLE) -> ANY TABLE)
+        +-signature=(TABLE<value STRING, key INT64>) -> TABLE<value INT64, key INT64>
+        +-argument_list=
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=KeyValue.[Value#2, Key#1]
+        |   |   +-input_scan=
+        |   |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+        |   +-argument_column_list=KeyValue.[Value#2, Key#1]
+        +-column_index_list=[0, 1]
+
+With Templated SQL TVF signature:
+  tvf_templated_select_relation_arg_and_catalog_table(TABLE<value STRING, key INT64>) -> TABLE<value INT64, key INT64>
+containing resolved templated query:
+QueryStmt
++-output_column_list=
+| +-$union_all.value#5 AS value [INT64]
+| +-$union_all.key#6 AS key [INT64]
++-query=
+  +-SetOperationScan
+    +-column_list=$union_all.[value#5, key#6]
+    +-op_type=UNION_ALL
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[$union_all1_cast.value#7, t.key#2]
+      | |   +-expr_list=
+      | |   | +-value#7 :=
+      | |   |   +-Cast(STRING -> INT64)
+      | |   |     +-ColumnRef(type=STRING, column=t.value#1)
+      | |   +-input_scan=
+      | |     +-ProjectScan
+      | |       +-column_list=t.[value#1, key#2]
+      | |       +-input_scan=
+      | |         +-RelationArgumentScan(column_list=t.[value#1, key#2], name="t")
+      | +-output_column_list=[$union_all1_cast.value#7, t.key#2]
+      +-SetOperationItem
+        +-scan=
+        | +-ProjectScan
+        |   +-column_list=[KeyValue.Key#3, $union_all2_cast.Value#8]
+        |   +-expr_list=
+        |   | +-Value#8 :=
+        |   |   +-Cast(STRING -> INT64)
+        |   |     +-ColumnRef(type=STRING, column=KeyValue.Value#4)
+        |   +-input_scan=
+        |     +-ProjectScan
+        |       +-column_list=KeyValue.[Key#3, Value#4]
+        |       +-input_scan=
+        |         +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1])
+        +-output_column_list=[KeyValue.Key#3, $union_all2_cast.Value#8]
 ==
 
 # Call a templated TVF that refers to a column named "key" from both input
@@ -7030,9 +7151,57 @@ select * from tvf_templated_select_scalar_and_relation_args(
     1,
     (select 'a' as key));
 --
-ERROR: Invalid type STRING for column "key INT64" of argument 2 of TVF_TEMPLATED_SELECT_SCALAR_AND_RELATION_ARGS(INT64, TABLE<key INT64>) [at 3:5]
-    (select 'a' as key));
-    ^
+QueryStmt
++-output_column_list=
+| +-tvf_templated_select_scalar_and_relation_args.key#3 AS key [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[tvf_templated_select_scalar_and_relation_args.key#3]
+    +-input_scan=
+      +-TVFScan
+        +-column_list=[tvf_templated_select_scalar_and_relation_args.key#3]
+        +-tvf=tvf_templated_select_scalar_and_relation_args((INT64, TABLE<key INT64>) -> ANY TABLE)
+        +-signature=(literal INT64, TABLE<key INT64>) -> TABLE<key INT64>
+        +-argument_list=
+        | +-FunctionArgument
+        | | +-expr=
+        | |   +-Literal(type=INT64, value=1)
+        | +-FunctionArgument
+        |   +-scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=[$subquery2.key#2]
+        |   |   +-expr_list=
+        |   |   | +-key#2 :=
+        |   |   |   +-Cast(STRING -> INT64)
+        |   |   |     +-ColumnRef(type=STRING, column=$subquery1.key#1)
+        |   |   +-input_scan=
+        |   |     +-ProjectScan
+        |   |       +-column_list=[$subquery1.key#1]
+        |   |       +-expr_list=
+        |   |       | +-key#1 := Literal(type=STRING, value="a")
+        |   |       +-input_scan=
+        |   |         +-SingleRowScan
+        |   +-argument_column_list=[$subquery2.key#2]
+        +-column_index_list=[0]
+
+With Templated SQL TVF signature:
+  tvf_templated_select_scalar_and_relation_args(literal INT64, TABLE<key INT64>) -> TABLE<key INT64>
+containing resolved templated query:
+QueryStmt
++-output_column_list=
+| +-t.key#1 AS key [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[t.key#1]
+    +-input_scan=
+      +-FilterScan
+        +-column_list=[t.key#1]
+        +-input_scan=
+        | +-RelationArgumentScan(column_list=[t.key#1], name="t")
+        +-filter_expr=
+          +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
+            +-ColumnRef(type=INT64, column=t.key#1)
+            +-ArgumentRef(type=INT64, name="x")
 ==
 
 # Call a simple templated SQL TVF with a missing output column name.
@@ -7043,40 +7212,6 @@ select * from tvf_templated_select_one_missing_col_name();
               ^
 Analysis of table-valued function tvf_templated_select_one_missing_col_name failed:
 Function body is missing one or more explicit output column names
-==
-
-# Call a templated SQL TVF that performs addition on a scalar argument and an
-# integer literal. We pass a string here, resulting in an analysis error when
-# processing the SQL body because it is invalid to add an integer and a string.
-select * from tvf_templated_scalar_arg_plus_integer('abc');
---
-ERROR: Invalid table-valued function tvf_templated_scalar_arg_plus_integer [at 1:15]
-select * from tvf_templated_scalar_arg_plus_integer('abc');
-              ^
-Analysis of table-valued function tvf_templated_scalar_arg_plus_integer failed [at 1:8]
-select x + 42
-       ^
-No matching signature for operator + for argument types: STRING, INT64. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:8]
-select x + 42
-       ^
---
-Signature Mismatch Details:
-ERROR: Invalid table-valued function tvf_templated_scalar_arg_plus_integer [at 1:15]
-select * from tvf_templated_scalar_arg_plus_integer('abc');
-              ^
-Analysis of table-valued function tvf_templated_scalar_arg_plus_integer failed [at 1:8]
-select x + 42
-       ^
-No matching signature for operator +
-  Argument types: STRING, INT64
-  Signature: INT64 + INT64
-    Argument 1: Unable to coerce type STRING to expected type INT64
-  Signature: UINT64 + UINT64
-    Argument 1: Unable to coerce type STRING to expected type UINT64
-  Signature: DOUBLE + DOUBLE
-    Argument 1: Unable to coerce type STRING to expected type DOUBLE [at 1:8]
-select x + 42
-       ^
 ==
 
 # Call a TVF with a valid templated SQL body that performs concatenation on a
@@ -7153,17 +7288,9 @@ Syntax error: Unexpected end of statement [at 1:1]
 # passing a string value instead.
 select * from tvf_templated_select_int64_arg('aaa');
 --
-ERROR: No matching signature for tvf_templated_select_int64_arg for argument types: STRING. Supported signature: TVF_TEMPLATED_SELECT_INT64_ARG(INT64) [at 1:15]
+ERROR: Could not cast literal "aaa" to type INT64 [at 1:46]
 select * from tvf_templated_select_int64_arg('aaa');
-              ^
---
-Signature Mismatch Details:
-ERROR: No matching signature for tvf_templated_select_int64_arg
-  Argument types: STRING
-  Signature: TVF_TEMPLATED_SELECT_INT64_ARG(INT64)
-    Argument 1: Unable to coerce type STRING to expected type INT64 [at 1:15]
-select * from tvf_templated_select_int64_arg('aaa');
-              ^
+                                             ^
 ==
 
 # Call a TVF that returns a table where a column name contains '$'.

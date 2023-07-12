@@ -418,15 +418,6 @@ QueryStmt
 
 select as value 5
 union all
-select as value 'abc'
---
-ERROR: Column 1 in UNION ALL has incompatible types: INT64, STRING [at 3:1]
-select as value 'abc'
-^
-==
-
-select as value 5
-union all
 select as value 1.0
 --
 QueryStmt

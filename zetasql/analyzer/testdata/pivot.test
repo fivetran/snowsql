@@ -710,7 +710,7 @@ PIVOT(SUM(Key) FOR Key IN (1, volatile_function(1)));
 SELECT * FROM KeyValue
 PIVOT(SUM(Key) FOR Key IN (1, 'test'));
 --
-ERROR: PIVOT IN list item must be type INT64 to match the PIVOT FOR expression; found STRING [at 2:31]
+ERROR: Could not cast literal "test" to type INT64 [at 2:31]
 PIVOT(SUM(Key) FOR Key IN (1, 'test'));
                               ^
 ==

@@ -91,9 +91,9 @@ QueryStmt
 
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
 --
-ERROR: No matching signature for operator BETWEEN for argument types: INT64, INT64, STRING. Supported signature: (ANY) BETWEEN (ANY) AND (ANY) [at 1:53]
+ERROR: Could not cast literal "Z" to type INT64 [at 1:67]
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
-                                                    ^
+                                                                  ^
 ==
 
 select * from TestTable where KitchenSink BETWEEN NULL AND NULL;

@@ -849,14 +849,6 @@ create index KeyValueByValueDuplicate on KeyValue(Value) STORING (Value);
                                                                   ^
 ==
 
-# Error resolving options.
-create index i1 on KeyValue(Key) options(o=1+'2');
---
-ERROR: No matching signature for operator + for argument types: INT64, STRING. Supported signatures: INT64 + INT64; UINT64 + UINT64; DOUBLE + DOUBLE [at 1:44]
-create index i1 on KeyValue(Key) options(o=1+'2');
-                                           ^
-==
-
 create {{|or replace}} {{|unique}} {{|search}} index {{|if not exists}} i1 on KeyValue(Key)
 options()
 --
