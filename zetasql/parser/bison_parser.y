@@ -418,6 +418,7 @@
 %token KW_CONCAT_OP "||"
 %token KW_CAST_OP "::"
 %token KW_GET_PATH_OP ":"
+%token KW_MOD_OP "%"
 %token '+' "+"
 %token '-' "-"
 %token '/' "/"
@@ -464,6 +465,7 @@
 %left "||"
 %left "::"
 %left ":"
+%left "%"
 %left "*" "/"
 %precedence UNARY_PRECEDENCE  // For all unary operators
 %precedence DOUBLE_AT_PRECEDENCE // Needs to appear before "."
@@ -6841,6 +6843,14 @@ expression_not_parenthesized:
             MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, literal});
         binary_expression->set_op(
             zetasql::ASTBinaryExpression::GET_PATH_OP);
+        $$ = binary_expression;
+      }
+    | expression "%" expression
+      {
+        auto* binary_expression =
+            MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $3});
+        binary_expression->set_op(
+            zetasql::ASTBinaryExpression::MOD_OP);
         $$ = binary_expression;
       }
     ;
