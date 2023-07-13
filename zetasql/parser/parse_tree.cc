@@ -519,6 +519,8 @@ std::string ASTBinaryExpression::GetSQLForOperator() const {
       return "||";
     case GET_PATH_OP:
       return ":";
+    case MOD_OP:
+      return "%";
     case DISTINCT:
       return is_not_ ? "IS NOT DISTINCT FROM" : "IS DISTINCT FROM";
   }
