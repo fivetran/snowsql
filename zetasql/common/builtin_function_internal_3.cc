@@ -905,6 +905,14 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
           .set_get_sql_callback(absl::bind_front(&InfixFunctionSQL, ":")));
 
   InsertFunction(
+      functions, options, "$mod_op", SCALAR,
+      {{numeric_type, {numeric_type, numeric_type}, FN_MOD_OP}},
+      FunctionOptions()
+          .set_supports_safe_error_mode(false)
+          .set_sql_name("%")
+          .set_get_sql_callback(absl::bind_front(&InfixFunctionSQL, "%")));
+
+  InsertFunction(
       functions, options, "$concat_op", SCALAR,
       {{string_type,
         {{string_type, concat_option}, {string_type, concat_option}},
