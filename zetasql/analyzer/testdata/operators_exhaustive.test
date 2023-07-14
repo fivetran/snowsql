@@ -3581,15 +3581,35 @@ QueryStmt
 --
 ALTERNATION GROUP: *
 --
-ERROR: Operands of * cannot be literal NULL [at 1:12]
-select 1 * NULL
-           ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: /
 --
-ERROR: Operands of / cannot be literal NULL [at 1:12]
-select 1 / NULL
-           ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$divide(DOUBLE, DOUBLE) -> DOUBLE)
+    |     +-Literal(type=DOUBLE, value=1)
+    |     +-Literal(type=DOUBLE, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: =
 --

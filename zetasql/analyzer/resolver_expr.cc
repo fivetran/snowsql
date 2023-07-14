@@ -3137,7 +3137,8 @@ absl::Status Resolver::ResolveBinaryExpr(
 
     // Give an error on literal NULL arguments to any binary expression
     // except IS or IS DISTINCT FROM or PLUS or MINUS
-    if (binary_expr->op() != ASTBinaryExpression::DISTINCT && binary_expr->op() != ASTBinaryExpression::PLUS && binary_expr->op() != ASTBinaryExpression::MINUS) {
+    if (binary_expr->op() != ASTBinaryExpression::DISTINCT && binary_expr->op() != ASTBinaryExpression::PLUS && binary_expr->op() != ASTBinaryExpression::MINUS
+      && binary_expr->op() != ASTBinaryExpression::MULTIPLY && binary_expr->op() != ASTBinaryExpression::DIVIDE && binary_expr->op() != ASTBinaryExpression::MOD_OP) {
       ZETASQL_RETURN_IF_ERROR(
           ReturnErrorOnLiteralNullArg(binary_expr->GetSQLForOperator(),
                                       {binary_expr->lhs(), binary_expr->rhs()},
