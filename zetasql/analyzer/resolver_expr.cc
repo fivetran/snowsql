@@ -3035,18 +3035,11 @@ absl::Status Resolver::ResolveUnaryExpr(
       }
     }
   } else if (unary_expr->op() == ASTUnaryExpression::PLUS) {
-    // Unary plus on NULL is an error.
-    if (unary_expr->operand()->node_kind() == AST_NULL_LITERAL) {
-      return MakeSqlErrorAt(unary_expr->operand())
-             << "Operands of " << unary_expr->GetSQLForOperator()
-             << " cannot be literal NULL";
-    }
-
     ZETASQL_RETURN_IF_ERROR(ResolveExpr(unary_expr->operand(), expr_resolution_info,
                                 resolved_expr_out));
 
-    // Unary plus on non-numeric type is an error.
-    if (!(*resolved_expr_out)->type()->IsNumerical()) {
+    // Unary plus on non-numeric and non-string type is an error.
+    if (!(*resolved_expr_out)->type()->IsNumerical() && !(*resolved_expr_out)->type()->IsString()) {
       return MakeSqlErrorAt(unary_expr->operand())
              << "Operands of " << unary_expr->GetSQLForOperator()
              << " must be numeric type but was "
@@ -3095,9 +3088,11 @@ absl::Status Resolver::ResolveUnaryExpr(
       unary_expr, function_name, {unary_expr->operand()},
       *kEmptyArgumentOptionMap, expr_resolution_info, resolved_expr_out));
 
-  ZETASQL_RETURN_IF_ERROR(ReturnErrorOnLiteralNullArg(unary_expr->GetSQLForOperator(),
-                                              {unary_expr->operand()},
-                                              resolved_expr_out->get()));
+  if (unary_expr->op() == ASTUnaryExpression::MINUS && unary_expr->op() == ASTUnaryExpression::PLUS) {
+    ZETASQL_RETURN_IF_ERROR(ReturnErrorOnLiteralNullArg(unary_expr->GetSQLForOperator(),
+                                                {unary_expr->operand()},
+                                                resolved_expr_out->get()));
+  }
   return absl::OkStatus();
 }
 
@@ -3155,8 +3150,9 @@ absl::Status Resolver::ResolveBinaryExpr(
         *kEmptyArgumentOptionMap, expr_resolution_info, &resolved_binary_expr));
 
     // Give an error on literal NULL arguments to any binary expression
-    // except IS or IS DISTINCT FROM
-    if (binary_expr->op() != ASTBinaryExpression::DISTINCT) {
+    // except IS or IS DISTINCT FROM or PLUS or MINUS
+    if (binary_expr->op() != ASTBinaryExpression::DISTINCT && binary_expr->op() != ASTBinaryExpression::PLUS && binary_expr->op() != ASTBinaryExpression::MINUS
+      && binary_expr->op() != ASTBinaryExpression::MULTIPLY && binary_expr->op() != ASTBinaryExpression::DIVIDE && binary_expr->op() != ASTBinaryExpression::MOD_OP) {
       ZETASQL_RETURN_IF_ERROR(
           ReturnErrorOnLiteralNullArg(binary_expr->GetSQLForOperator(),
                                       {binary_expr->lhs(), binary_expr->rhs()},
