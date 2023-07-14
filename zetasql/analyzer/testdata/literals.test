@@ -389,13 +389,6 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select -(0x8000000000000000)
---
-ERROR: No matching signature for operator - for argument types: UINT64. Supported signatures: -(INT32); -(INT64); -(FLOAT); -(DOUBLE) [at 1:8]
-select -(0x8000000000000000)
-       ^
-==
-
 select b'aaa'
 --
 QueryStmt
@@ -470,23 +463,44 @@ QueryStmt
 
 select +null
 --
-ERROR: Operands of + cannot be literal NULL [at 1:9]
-select +null
-        ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select +(null)
 --
-ERROR: Operands of + cannot be literal NULL [at 1:10]
-select +(null)
-         ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select + null
 --
-ERROR: Operands of + cannot be literal NULL [at 1:10]
-select + null
-         ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select `bytes`
