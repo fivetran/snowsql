@@ -1297,7 +1297,6 @@ void GetArithmeticFunctions(TypeFactory* type_factory,
       FunctionOptions()
           .set_supports_safe_error_mode(false)
           .set_sql_name("-")
-          .set_arguments_are_coercible(false)
           .set_get_sql_callback(absl::bind_front(&PreUnaryFunctionSQL, "-")));
 }
 

@@ -1473,8 +1473,14 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "try_parse_json('{}'), try_parse_json(to_variant('notjson')),"
       "typeof(123), typeof(to_variant('text')), typeof(to_object(to_variant('{}'))),"
       "xmlget(to_variant(''), 't'), xmlget(to_variant(''), 't', 5),"
+
+    },
+    {"Operations",
+      "select "
       "mod(3, 2),"
       "3%2, 3 % 2,"
+      "'1' + '5', 1 + '5', 1 + null, +'5', + '5', +null,"
+      "'1' - '5', 1 - '5', 1 - pnull, -'5', - '5', -null,"
     }
   };
 
