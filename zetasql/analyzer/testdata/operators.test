@@ -1494,9 +1494,18 @@ select null = 6
 
 select -null
 --
-ERROR: Operands of - cannot be literal NULL [at 1:9]
-select -null
-        ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$unary_minus(INT64) -> INT64)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select +++1
@@ -1605,17 +1614,37 @@ QueryStmt
 select -uint32
 from SimpleTypes
 --
-ERROR: No matching signature for operator - for argument types: UINT32. Supported signatures: -(INT32); -(INT64); -(FLOAT); -(DOUBLE) [at 1:8]
-select -uint32
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$unary_minus(INT64) -> INT64)
+    |     +-Cast(UINT32 -> INT64)
+    |       +-ColumnRef(type=UINT32, column=SimpleTypes.uint32#3)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2])
 ==
 
 select -uint64
 from SimpleTypes
 --
-ERROR: No matching signature for operator - for argument types: UINT64. Supported signatures: -(INT32); -(INT64); -(FLOAT); -(DOUBLE) [at 1:8]
-select -uint64
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$unary_minus(DOUBLE) -> DOUBLE)
+    |     +-Cast(UINT64 -> DOUBLE)
+    |       +-ColumnRef(type=UINT64, column=SimpleTypes.uint64#4)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.uint64#4], table=SimpleTypes, column_index_list=[3])
 ==
 
 select 5++2, 5 +-2, 5- +2, 5- -2
@@ -1659,9 +1688,16 @@ select -bool from SimpleTypes
 
 select +"555"
 --
-ERROR: Operands of + must be numeric type but was STRING [at 1:9]
-select +"555"
-        ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=STRING, value="555")
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 # b/17461053
