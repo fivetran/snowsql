@@ -4918,16 +4918,6 @@ CreateTableStmt
         +-sql="NULL"
 ==
 
-# Column default value is NOT NULL and NOT NULL attribute (disallowed).
-[language_features=CREATE_TABLE_NOT_NULL,V_1_3_COLUMN_DEFAULT_VALUE]
-[no_enable_literal_replacement]
-create table t (a int32 default NOT NULL NOT NULL);
---
-ERROR: Operands of NOT cannot be literal NULL [at 1:37]
-create table t (a int32 default NOT NULL NOT NULL);
-                                    ^
-==
-
 # Column default value is 1 and NOT NULL attribute.
 [language_features=CREATE_TABLE_NOT_NULL,V_1_3_COLUMN_DEFAULT_VALUE]
 [no_enable_literal_replacement]

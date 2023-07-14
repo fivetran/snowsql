@@ -309,22 +309,6 @@ select interval 2-1 year to month
                             ^
 ==
 
-[language_features={{|INTERVAL_TYPE}}]
-SELECT INTERVAL -'2' HOUR
---
-ALTERNATION GROUP: <empty>
---
-ERROR: Unexpected INTERVAL expression [at 1:8]
-SELECT INTERVAL -'2' HOUR
-       ^
---
-ALTERNATION GROUP: INTERVAL_TYPE
---
-ERROR: No matching signature for operator - for argument types: STRING. Supported signatures: -(INT32); -(INT64); -(FLOAT); -(DOUBLE); -(INTERVAL) [at 1:17]
-SELECT INTERVAL -'2' HOUR
-                ^
-==
-
 [language_features=INTERVAL_TYPE]
 SELECT INTERVAL 'Long' DAY
 --

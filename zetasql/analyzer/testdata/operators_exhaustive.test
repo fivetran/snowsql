@@ -3355,55 +3355,138 @@ select {{int32|int64|uint32|uint64|float|double}} + NULL from SimpleTypes;
 --
 ALTERNATION GROUP: int32
 --
-ERROR: Operands of + cannot be literal NULL [at 1:16]
-select int32 + NULL from SimpleTypes;
-               ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
+    |     +-Cast(INT32 -> INT64)
+    |     | +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0])
 --
 ALTERNATION GROUP: int64
 --
-ERROR: Operands of + cannot be literal NULL [at 1:16]
-select int64 + NULL from SimpleTypes;
-               ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
+    |     +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1])
 --
 ALTERNATION GROUP: uint32
 --
-ERROR: Operands of + cannot be literal NULL [at 1:17]
-select uint32 + NULL from SimpleTypes;
-                ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [UINT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(UINT64, UINT64) -> UINT64)
+    |     +-Cast(UINT32 -> UINT64)
+    |     | +-ColumnRef(type=UINT32, column=SimpleTypes.uint32#3)
+    |     +-Literal(type=UINT64, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2])
 --
 ALTERNATION GROUP: uint64
 --
-ERROR: Operands of + cannot be literal NULL [at 1:17]
-select uint64 + NULL from SimpleTypes;
-                ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [UINT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(UINT64, UINT64) -> UINT64)
+    |     +-ColumnRef(type=UINT64, column=SimpleTypes.uint64#4)
+    |     +-Literal(type=UINT64, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.uint64#4], table=SimpleTypes, column_index_list=[3])
 --
 ALTERNATION GROUP: float
 --
-ERROR: Operands of + cannot be literal NULL [at 1:16]
-select float + NULL from SimpleTypes;
-               ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
+    |     +-Cast(FLOAT -> DOUBLE)
+    |     | +-ColumnRef(type=FLOAT, column=SimpleTypes.float#8)
+    |     +-Literal(type=DOUBLE, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.float#8], table=SimpleTypes, column_index_list=[7])
 --
 ALTERNATION GROUP: double
 --
-ERROR: Operands of + cannot be literal NULL [at 1:17]
-select double + NULL from SimpleTypes;
-                ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [DOUBLE]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
+    |     +-ColumnRef(type=DOUBLE, column=SimpleTypes.double#9)
+    |     +-Literal(type=DOUBLE, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.double#9], table=SimpleTypes, column_index_list=[8])
 ==
 
 [language_features=NUMERIC_TYPE]
 select numeric + NULL from SimpleTypes;
 --
-ERROR: Operands of + cannot be literal NULL [at 1:18]
-select numeric + NULL from SimpleTypes;
-                 ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [NUMERIC]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(NUMERIC, NUMERIC) -> NUMERIC)
+    |     +-ColumnRef(type=NUMERIC, column=SimpleTypes.numeric#16)
+    |     +-Literal(type=NUMERIC, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.numeric#16], table=SimpleTypes, column_index_list=[15])
 ==
 
 [language_features=BIGNUMERIC_TYPE]
 select bignumeric + NULL from SimpleTypes;
 --
-ERROR: Operands of + cannot be literal NULL [at 1:21]
-select bignumeric + NULL from SimpleTypes;
-                    ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [BIGNUMERIC]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-FunctionCall(ZetaSQL:$add(BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
+    |     +-ColumnRef(type=BIGNUMERIC, column=SimpleTypes.bignumeric#17)
+    |     +-Literal(type=BIGNUMERIC, value=NULL)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.bignumeric#17], table=SimpleTypes, column_index_list=[16])
 ==
 
 select NULL = {{int32|int64|uint32|uint64|float|double}} from SimpleTypes;
@@ -3466,15 +3549,35 @@ select 1 {{+|-|*|/|=|<|<=|>|>=|<>|!=|^|&}} NULL
 --
 ALTERNATION GROUP: +
 --
-ERROR: Operands of + cannot be literal NULL [at 1:12]
-select 1 + NULL
-           ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: -
 --
-ERROR: Operands of - cannot be literal NULL [at 1:12]
-select 1 - NULL
-           ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$subtract(INT64, INT64) -> INT64)
+    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: *
 --
@@ -3562,21 +3665,46 @@ select {{-|+|~}} NULL
 --
 ALTERNATION GROUP: -
 --
-ERROR: Operands of - cannot be literal NULL [at 1:10]
-select - NULL
-         ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$unary_minus(INT64) -> INT64)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: +
 --
-ERROR: Operands of + cannot be literal NULL [at 1:10]
-select + NULL
-         ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: ~
 --
-ERROR: Operands of ~ cannot be literal NULL [at 1:10]
-select ~ NULL
-         ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$bitwise_not(INT64) -> INT64)
+    |     +-Literal(type=INT64, value=NULL)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 # Additional tests for arithmetic between signed/unsigned non-literal/literal

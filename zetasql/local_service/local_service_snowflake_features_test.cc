@@ -1480,7 +1480,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "mod(3, 2),"
       "3%2, 3 % 2,"
       "'1' + '5', 1 + '5', 1 + null, +'5', + '5', +null,"
-      "'1' - '5', 1 - '5', 1 - pnull, -'5', - '5', -null,"
+      "'1' - '5', 1 - '5', 1 - null, -'5', - '5', -null,"
     }
   };
 
