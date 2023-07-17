@@ -781,6 +781,7 @@ using zetasql::ASTDropStatement;
 %token KW_LIMIT "LIMIT"
 %token KW_LOOKUP "LOOKUP"
 %token KW_MERGE "MERGE"
+%token KW_MINUS "MINUS"
 %token KW_NATURAL "NATURAL"
 %token KW_NEW "NEW"
 %token KW_NEXT "NEXT"

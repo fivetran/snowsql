@@ -223,6 +223,7 @@ constexpr KeywordInfoPOD kAllKeywords[] = {
     {"merge", KW_MERGE, kReserved},
     {"message", KW_MESSAGE},
     {"min", KW_MIN},
+    {"minus", KW_MINUS, kReserved},
     {"model", KW_MODEL},
     {"module", KW_MODULE},
     {"natural", KW_NATURAL, kReserved},

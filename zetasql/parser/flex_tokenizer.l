@@ -570,6 +570,15 @@ max { return BisonParserImpl::token::KW_MAX; }
 merge { return BisonParserImpl::token::KW_MERGE; }
 message { return BisonParserImpl::token::KW_MESSAGE; }
 min { return BisonParserImpl::token::KW_MIN; }
+minus/{opt_whitespace}"(" { return BisonParserImpl::token::KW_EXCEPT; }
+minus {
+  if (mode_ == BisonParserMode::kTokenizer ||
+      mode_ == BisonParserMode::kTokenizerPreserveComments ||
+      mode_ == BisonParserMode::kMacroBody) {
+    return BisonParserImpl::token::KW_EXCEPT;
+  }
+  return BisonParserImpl::token::KW_EXCEPT_IN_SET_OP;
+}
 model { return BisonParserImpl::token::KW_MODEL; }
 module { return BisonParserImpl::token::KW_MODULE; }
 natural { return BisonParserImpl::token::KW_NATURAL; }
