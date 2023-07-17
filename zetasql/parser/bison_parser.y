@@ -6894,6 +6894,14 @@ expression_not_parenthesized:
         binary_expression->set_op($2);
         $$ = binary_expression;
       }
+    | expression comparative_operator "ANY" parenthesized_query[query]
+      {
+        // TODO: make new node type for this
+        auto* binary_expression =
+              MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $1});
+        binary_expression->set_op($2);
+        $$ = binary_expression;
+      }
     ;
 
 // Note that the tokenizer will be in "DOT_IDENTIFIER" mode for all identifiers
