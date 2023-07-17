@@ -170,14 +170,32 @@ SELECT
   2
 ==
 
-# EXCEPT without ALL or DISTINCT not supported.
+# EXCEPT without ALL or DISTINCT.
 select 1
 EXCEPT
 select 2
 --
-ERROR: EXCEPT must be followed by ALL, DISTINCT, or "(" [at 2:1]
-EXCEPT
-^
+QueryStatement [0-24] [select 1 EXCEPT select 2]
+  Query [0-24] [select 1 EXCEPT select 2]
+    SetOperation(EXCEPT ALL) [0-24] [select 1 EXCEPT select 2]
+      SetOperationMetadataList [8-15] [EXCEPT]
+        SetOperationMetadata [8-15] [EXCEPT]
+          SetOperationType [9-15] [EXCEPT]
+          ASTSetOperationAllOrDistinct [15-15] []
+      Select [0-8] [select 1]
+        SelectList [7-8] [1]
+          SelectColumn [7-8] [1]
+            IntLiteral(1) [7-8] [1]
+      Select [16-24] [select 2]
+        SelectList [23-24] [2]
+          SelectColumn [23-24] [2]
+            IntLiteral(2) [23-24] [2]
+--
+SELECT
+  1
+EXCEPT ALL
+SELECT
+  2
 ==
 
 # EXCEPT with other garbage after gives the same error.
@@ -185,8 +203,40 @@ SELECT * FROM Table
 EXCEPT
 {{Garbage|5|'abc'|FROM|;|+}}
 --
-ERROR: EXCEPT must be followed by ALL, DISTINCT, or "(" [at 2:1]
-EXCEPT
+ALTERNATION GROUP: Garbage
+--
+ERROR: Syntax error: Expected "(" or keyword SELECT but got identifier "Garbage" [at 3:1]
+Garbage
+^
+--
+ALTERNATION GROUP: 5
+--
+ERROR: Syntax error: Expected "(" or keyword SELECT but got integer literal "5" [at 3:1]
+5
+^
+--
+ALTERNATION GROUP: 'abc'
+--
+ERROR: Syntax error: Expected "(" or keyword SELECT but got string literal 'abc' [at 3:1]
+'abc'
+^
+--
+ALTERNATION GROUP: FROM
+--
+ERROR: Syntax error: Expected "(" or keyword SELECT but got keyword FROM [at 3:1]
+FROM
+^
+--
+ALTERNATION GROUP: ;
+--
+ERROR: Syntax error: Expected "(" or keyword SELECT but got ";" [at 3:1]
+;
+^
+--
+ALTERNATION GROUP: +
+--
+ERROR: Syntax error: Expected "(" or keyword SELECT but got "+" [at 3:1]
++
 ^
 ==
 

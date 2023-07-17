@@ -482,12 +482,9 @@ except {
   if (mode_ == BisonParserMode::kTokenizer ||
       mode_ == BisonParserMode::kTokenizerPreserveComments ||
       mode_ == BisonParserMode::kMacroBody) {
-    // In raw tokenization mode, this may be legal.
     return BisonParserImpl::token::KW_EXCEPT;
   }
-  SetOverrideError(*yylloc,
-                   "EXCEPT must be followed by ALL, DISTINCT, or \"(\"");
-  yyterminate();
+  return BisonParserImpl::token::KW_EXCEPT_IN_SET_OP;
 }
 exception { return BisonParserImpl::token::KW_EXCEPTION; }
 exclude { return BisonParserImpl::token::KW_EXCLUDE; }
