@@ -553,6 +553,7 @@ using namespace zetasql::parser_internal;
 %token KW_LIMIT "LIMIT"
 %token KW_LOOKUP "LOOKUP"
 %token KW_MERGE "MERGE"
+%token KW_MINUS "MINUS"
 %token KW_NATURAL "NATURAL"
 %token KW_NEW "NEW"
 %token KW_NO "NO"
@@ -6851,6 +6852,22 @@ expression_not_parenthesized:
             MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $3});
         binary_expression->set_op(
             zetasql::ASTBinaryExpression::MOD_OP);
+        $$ = binary_expression;
+      }
+    | expression comparative_operator "ALL" parenthesized_query[query]
+      {
+        // TODO: make new node type for this
+        auto* binary_expression =
+              MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $1});
+        binary_expression->set_op($2);
+        $$ = binary_expression;
+      }
+    | expression comparative_operator "ANY" parenthesized_query[query]
+      {
+        // TODO: make new node type for this
+        auto* binary_expression =
+              MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $1});
+        binary_expression->set_op($2);
         $$ = binary_expression;
       }
     ;
