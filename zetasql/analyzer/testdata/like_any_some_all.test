@@ -1661,13 +1661,6 @@ select ('a', 'b') LIKE ANY ('a');
                   ^
 ==
 
-SELECT 'b' LIKE ANY ('a', NULL, CURRENT_TIMESTAMP());
---
-ERROR: No matching signature for operator LIKE ANY|SOME for argument types literal STRING and {NULL, STRING, TIMESTAMP} [at 1:12]
-SELECT 'b' LIKE ANY ('a', NULL, CURRENT_TIMESTAMP());
-           ^
-==
-
 select 'a' LIKE {{ANY|SOME|ALL}} (select 'a')
 --
 ALTERNATION GROUP: ANY

@@ -183,16 +183,8 @@ TokenKind ZetaSqlFlexTokenizer::ApplyTokenDisambiguation(
         case '(':
           // This is the SELECT * EXCEPT (column...) case.
           return Token::KW_EXCEPT;
-        case Token::KW_ALL:
-        case Token::KW_DISTINCT:
-        case Token::KW_OPEN_HINT:
-        case Token::KW_OPEN_INTEGER_HINT:
-          // This is the {query} EXCEPT {opt_hint} ALL|DISTINCT {query} case.
-          return Token::KW_EXCEPT_IN_SET_OP;
         default:
-          SetOverrideError(
-              location, "EXCEPT must be followed by ALL, DISTINCT, or \"(\"");
-          break;
+          return Token::KW_EXCEPT_IN_SET_OP;
       }
       break;
     default:
