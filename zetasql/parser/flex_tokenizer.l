@@ -486,12 +486,9 @@ except {
   if (mode_ == BisonParserMode::kTokenizer ||
       mode_ == BisonParserMode::kTokenizerPreserveComments ||
       mode_ == BisonParserMode::kMacroBody) {
-    // In raw tokenization mode, this may be legal.
     return BisonParserImpl::token::KW_EXCEPT;
   }
-  SetOverrideError(*yylloc,
-                   "EXCEPT must be followed by ALL, DISTINCT, or \"(\"");
-  yyterminate();
+  return BisonParserImpl::token::KW_EXCEPT_IN_SET_OP;
 }
 exception { return BisonParserImpl::token::KW_EXCEPTION; }
 exclude { return BisonParserImpl::token::KW_EXCLUDE; }
@@ -577,6 +574,15 @@ merge { return BisonParserImpl::token::KW_MERGE; }
 message { return BisonParserImpl::token::KW_MESSAGE; }
 metadata { return BisonParserImpl::token::KW_METADATA; }
 min { return BisonParserImpl::token::KW_MIN; }
+minus/{opt_whitespace}"(" { return BisonParserImpl::token::KW_EXCEPT; }
+minus {
+  if (mode_ == BisonParserMode::kTokenizer ||
+      mode_ == BisonParserMode::kTokenizerPreserveComments ||
+      mode_ == BisonParserMode::kMacroBody) {
+    return BisonParserImpl::token::KW_EXCEPT;
+  }
+  return BisonParserImpl::token::KW_EXCEPT_IN_SET_OP;
+}
 model { return BisonParserImpl::token::KW_MODEL; }
 module { return BisonParserImpl::token::KW_MODULE; }
 natural { return BisonParserImpl::token::KW_NATURAL; }

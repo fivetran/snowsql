@@ -92,7 +92,7 @@ SELECT $1 + $2
 # The macro name cannot be a reserved keyword
 DEFINE macro EXCEPT $subquery;
 --
-ERROR: EXCEPT must be followed by ALL, DISTINCT, or "(" [at 1:14]
+ERROR: Syntax error: Unexpected keyword EXCEPT [at 1:14]
 DEFINE macro EXCEPT $subquery;
              ^
 ==
