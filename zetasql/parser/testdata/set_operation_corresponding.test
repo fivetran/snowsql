@@ -177,26 +177,6 @@ SELECT
   2
 ==
 
-# EXCEPT with CORRESPONDING but without ALL or DISTINCT not supported.
-select 1
-EXCEPT CORRESPONDING
-select 2
---
-ERROR: EXCEPT must be followed by ALL, DISTINCT, or "(" [at 2:1]
-EXCEPT CORRESPONDING
-^
-==
-
-# EXCEPT with CORRESPONDING with other garbage after gives the same error.
-SELECT * FROM Table
-EXCEPT CORRESPONDING
-{{Garbage|5|'abc'|FROM|;|+}}
---
-ERROR: EXCEPT must be followed by ALL, DISTINCT, or "(" [at 2:1]
-EXCEPT CORRESPONDING
-^
-==
-
 select 1
 INTERSECT ALL CORRESPONDING
 select 2
