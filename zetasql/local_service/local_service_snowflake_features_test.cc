@@ -1413,6 +1413,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
     {"Numeric",
       "select "
       "pi(),"
+      "degrees(1::float), degrees(1::double),"
     },
     {"SemiStructured",
       "select "

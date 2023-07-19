@@ -1710,6 +1710,8 @@ void GetTrigonometricFunctions(TypeFactory* type_factory,
                        {{double_type, {double_type}, FN_COTH_DOUBLE}});
   InsertSimpleFunction(functions, options, "pi", SCALAR,
                        {{double_type, {}, FN_PI}});
+  InsertSimpleFunction(functions, options, "degrees", SCALAR,
+                       {{double_type, {double_type}, FN_DEGREES}});
 }
 
 absl::Status GetMathFunctions(TypeFactory* type_factory,
