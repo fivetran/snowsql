@@ -1417,6 +1417,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "factorial(1::float), factorial(1::double),"
       "haversine(1::float, 1::float, 1::float, 1::float), haversine(1::double, 1::double, 1::double, 1::double),"
       "radians(60), radians(60:float), radians(60:double),"
+      "square(60), square(60:float), square(60:double),"
     },
     {"SemiStructured",
       "select "
