@@ -1714,6 +1714,8 @@ void GetTrigonometricFunctions(TypeFactory* type_factory,
                        {{double_type, {double_type}, FN_DEGREES}});
   InsertSimpleFunction(functions, options, "factorial", SCALAR,
                        {{double_type, {double_type}, FN_FACTORIAL}});
+  InsertSimpleFunction(functions, options, "haversine", SCALAR,
+                       {{double_type, {double_type, double_type, double_type, double_type}, FN_HAVERSINE}});
 }
 
 absl::Status GetMathFunctions(TypeFactory* type_factory,
