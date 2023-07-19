@@ -1414,6 +1414,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "select "
       "pi(),"
       "degrees(1::float), degrees(1::double),"
+      "factorial(1::float), factorial(1::double),"
     },
     {"SemiStructured",
       "select "
