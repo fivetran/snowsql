@@ -1410,6 +1410,10 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
       "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
     },
+    {"Numeric",
+      "select "
+      "pi(),"
+    },
     {"SemiStructured",
       "select "
       "parse_json('{\"name\":\"John\"}'),"
