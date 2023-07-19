@@ -1423,7 +1423,8 @@ absl::Status GetNumericFunctions(TypeFactory* type_factory,
        {bignumeric_type,
         {bignumeric_type, int64_type},
         FN_TRUNC_WITH_DIGITS_BIGNUMERIC,
-        has_bignumeric_type_argument}});
+        has_bignumeric_type_argument}},
+        FunctionOptions().set_alias_name("truncate"));
   InsertFunction(functions, options, "ceil", SCALAR,
                  {{float_type, {float_type}, FN_CEIL_FLOAT},
                   {double_type, {double_type}, FN_CEIL_DOUBLE},
