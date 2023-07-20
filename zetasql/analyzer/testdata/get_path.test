@@ -1,4 +1,52 @@
 [no_enable_literal_replacement]
+select parse_json('{"a":"b"}'):"a"
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [VARIANT]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
+    |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
+    |     | +-Literal(type=STRING, value='{"a":"b"}')
+    |     +-Literal(type=STRING, value="a")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+with test_table as (select parse_json('') as j)
+select 1:"q" from test_table
+--
+ERROR: No matching signature for operator : for argument types: INT64, STRING. Supported signature: VARIANT : STRING [at 2:8]
+select 1:"q" from test_table
+       ^
+==
+
+[no_enable_literal_replacement]
+select cast(parse_json('{"a":"b"}') as object):"a"
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [VARIANT]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
+    |     +-Cast(OBJECT -> VARIANT)
+    |     | +-Cast(VARIANT -> OBJECT)
+    |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
+    |     |     +-Literal(type=STRING, value='{"a":"b"}')
+    |     +-Literal(type=STRING, value="a")
+    +-input_scan=
+      +-SingleRowScan
+==
+
+[no_enable_literal_replacement]
 select parse_json(''):a
 --
 QueryStmt
@@ -17,8 +65,16 @@ QueryStmt
       +-SingleRowScan
 ==
 
+with test_table as (select parse_json('') as j)
+select 1:q from test_table
+--
+ERROR: No matching signature for operator : for argument types: INT64, STRING. Supported signature: VARIANT : STRING [at 2:8]
+select 1:q from test_table
+       ^
+==
+
 [no_enable_literal_replacement]
-select parse_json('{"a":"b"}'):"a"
+select cast(parse_json('{"a":"b"}') as object):a
 --
 QueryStmt
 +-output_column_list=
@@ -29,9 +85,12 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
-    |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
-    |     | +-Literal(type=STRING, value='{"a":"b"}')
-    |     +-Literal(type=STRING, value="a")
+    |     +-Cast(OBJECT -> VARIANT)
+    |     | +-Cast(VARIANT -> OBJECT)
+    |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
+    |     |     +-Literal(type=STRING, value='{"a":"b"}')
+    |     +-Literal(type=STRING, value="")
     +-input_scan=
       +-SingleRowScan
 ==
+

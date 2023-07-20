@@ -747,6 +747,7 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
   const Type* string_type = type_factory->get_string();
   const Type* bytes_type = type_factory->get_bytes();
   const Type* numeric_type = type_factory->get_numeric();
+  const Type* variant_type = type_factory->get_variant();
 
   const Function::Mode SCALAR = Function::SCALAR;
 
@@ -816,7 +817,7 @@ void GetMiscellaneousFunctions(TypeFactory* type_factory,
 
   InsertFunction(
       functions, options, "$get_path_op", SCALAR,
-      {{string_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2}, FN_GET_PATH_OP}},
+      {{string_type, {variant_type, string_type}, FN_GET_PATH_OP_VARIANT}},
       FunctionOptions()
           .set_supports_safe_error_mode(false)
           .set_sql_name(":")
