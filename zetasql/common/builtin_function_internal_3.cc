@@ -4670,6 +4670,7 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
   const Type* int64_type = type_factory->get_int64();
   const Type* string_type = type_factory->get_string();
   const Type* date_type = type_factory->get_date();
+  const Type* time_type = type_factory->get_time();
   const Type* datetime_type = type_factory->get_datetime();
   const Type* timestamp_type = type_factory->get_timestamp();
 
@@ -4713,6 +4714,14 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       functions, options, "datediff", SCALAR,
       {{int64_type, {string_type, date_type, date_type}, FN_DATEDIFF_DATE},
        {int64_type, {string_type, timestamp_type, timestamp_type}, FN_DATEDIFF_TIMESTAMP}},
+      fn_options);
+
+  // DATEADD
+  InsertFunction(
+      functions, options, "dateadd", SCALAR,
+      {{date_type, {string_type, int64_type, date_type}, FN_DATEADD_DATE},
+       {time_type, {string_type, int64_type, time_type}, FN_DATEADD_TIME},
+       {timestamp_type, {string_type, int64_type, timestamp_type}, FN_DATEADD_TIMESTAMP}},
       fn_options);
 }
 

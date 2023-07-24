@@ -1396,6 +1396,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "select "
       "datediff(month, '2021-01-01', '2021-02-28'), datediff(day, '2021-01-01', '2021-02-28'), datediff(year, '2021-01-01', '2021-02-28'),"
       "datediff(hour, '2021-01-01 00:00:00'::timestamp, '2023-07-24 14:30:00'::timestamp), datediff(yrs, '2021-01-01 00:00:00'::date, '2021-01-01'),"
+      "dateadd(month, 1, '2021-01-01'), dateadd(day, 1, '2021-02-28'), dateadd(year, 1, '2021-02-28'),"
+      "dateadd(month, 1, '2021-01-01 00:00:00'::timestamp), dateadd(day, 1, '2021-01-01 00:00:00'::timestamp), dateadd(year, 1, '2021-01-01 00:00:00'::timestamp),"
     },
     {"StringAndBinary",
       "select "
