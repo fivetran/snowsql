@@ -4388,20 +4388,9 @@ ERROR: TIMESTAMP_DIFF does not support the WEEK date part when the argument is T
 [language_features={{|V_1_3_ADDITIONAL_STRING_FUNCTIONS|V_1_2_CIVIL_TIME|V_1_3_ADDITIONAL_STRING_FUNCTIONS,V_1_2_CIVIL_TIME}}]
 select last_day(date '2020-07-10', SECOND)
 --
-ALTERNATION GROUPS:
-    <empty>
-    V_1_3_ADDITIONAL_STRING_FUNCTIONS
-    V_1_2_CIVIL_TIME
---
-ERROR: Function not found: last_day; Did you mean next_day? [at 1:8]
+ERROR: Unrecognized name: SECOND [at 1:36]
 select last_day(date '2020-07-10', SECOND)
-       ^
---
-ALTERNATION GROUP: V_1_3_ADDITIONAL_STRING_FUNCTIONS,V_1_2_CIVIL_TIME
---
-ERROR: LAST_DAY does not support the SECOND date part [at 1:8]
-select last_day(date '2020-07-10', SECOND)
-       ^
+                                   ^
 ==
 
 [language_features={{|TIME_BUCKET_FUNCTIONS|INTERVAL_TYPE|TIME_BUCKET_FUNCTIONS,INTERVAL_TYPE}}]

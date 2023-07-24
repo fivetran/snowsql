@@ -4193,7 +4193,6 @@ InitSpecialFunctionFamilyMap() {
   zetasql_base::InsertOrDie(out, IdString::MakeGlobal("time_trunc"), FAMILY_DATE_TRUNC);
   zetasql_base::InsertOrDie(out, IdString::MakeGlobal("timestamp_trunc"),
                    FAMILY_DATE_TRUNC);
-  zetasql_base::InsertOrDie(out, IdString::MakeGlobal("last_day"), FAMILY_DATE_TRUNC);
 
   // These expect argument 1 to be a NORMALIZE_MODE.
   zetasql_base::InsertOrDie(out, IdString::MakeGlobal("normalize"),

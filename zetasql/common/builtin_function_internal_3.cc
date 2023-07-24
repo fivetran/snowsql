@@ -4676,6 +4676,7 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
   // ADD_MONTHS
   InsertFunction(
@@ -4738,6 +4739,13 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{date_type, {string_type, date_type}, FN_DATE_TRUNC_DATE},
        {time_type, {string_type, time_type}, FN_DATE_TRUNC_TIME},
        {timestamp_type, {string_type, timestamp_type}, FN_DATE_TRUNC_TIMESTAMP}},
+      fn_options);
+
+  // LAST_DAY
+  InsertFunction(
+      functions, options, "last_day", SCALAR,
+      {{date_type, {date_type, {string_type, OPTIONAL}}, FN_LAST_DAY_DATE},
+       {date_type, {timestamp_type, {string_type, OPTIONAL}}, FN_LAST_DAY_TIMESTAMP}},
       fn_options);
 }
 

@@ -849,19 +849,19 @@ void GetDatetimeDiffTruncLastFunctions(
       FunctionOptions().set_pre_resolution_argument_constraint(absl::bind_front(
           &CheckDateDatetimeTimeTimestampTruncArguments, "TIMESTAMP_TRUNC")));
 
-  if (options.language_options.LanguageFeatureEnabled(
-          FEATURE_V_1_3_ADDITIONAL_STRING_FUNCTIONS) &&
-      options.language_options.LanguageFeatureEnabled(
-          FEATURE_V_1_2_CIVIL_TIME)) {
-    InsertSimpleFunction(
-        functions, options, "last_day", SCALAR,
-        {{date_type, {date_type, {datepart_type, OPTIONAL}}, FN_LAST_DAY_DATE},
-         {date_type,
-          {datetime_type, {datepart_type, OPTIONAL}},
-          FN_LAST_DAY_DATETIME}},
-        FunctionOptions().set_pre_resolution_argument_constraint(
-            absl::bind_front(&CheckLastDayArguments, "LAST_DAY")));
-  }
+//   if (options.language_options.LanguageFeatureEnabled(
+//           FEATURE_V_1_3_ADDITIONAL_STRING_FUNCTIONS) &&
+//       options.language_options.LanguageFeatureEnabled(
+//           FEATURE_V_1_2_CIVIL_TIME)) {
+//     InsertSimpleFunction(
+//         functions, options, "last_day", SCALAR,
+//         {{date_type, {date_type, {datepart_type, OPTIONAL}}, FN_LAST_DAY_DATE},
+//          {date_type,
+//           {datetime_type, {datepart_type, OPTIONAL}},
+//           FN_LAST_DAY_DATETIME}},
+//         FunctionOptions().set_pre_resolution_argument_constraint(
+//             absl::bind_front(&CheckLastDayArguments, "LAST_DAY")));
+//   }
 }
 
 void GetDatetimeBucketFunctions(TypeFactory* type_factory,

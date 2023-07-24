@@ -7998,8 +7998,7 @@ function_call_expression_with_args_prefix:
       {
         absl::string_view func_name = parser->GetInputText(@1);
         if(zetasql_base::CaseEqual(func_name, "datediff(") || zetasql_base::CaseEqual(func_name, "dateadd(") ||
-           zetasql_base::CaseEqual(func_name, "date_part(") || zetasql_base::CaseEqual(func_name, "date_trunc(") ||
-           zetasql_base::CaseEqual(func_name, "last_day(")) {
+           zetasql_base::CaseEqual(func_name, "date_part(") || zetasql_base::CaseEqual(func_name, "date_trunc(")) {
           absl::string_view raw_argument = parser->GetInputText(@2);
           std::unordered_set<std::string> time_parts {
             "year", "y", "yy", "yyy", "yyyy", "yr", "years", "yrs",
@@ -8047,7 +8046,24 @@ function_call_expression_with_args_prefix:
       }
     | function_call_expression_with_args_prefix "," function_call_argument
       {
-        $$ = WithExtraChildren($1, {$3});
+        absl::string_view func_name = parser->GetInputText(@1);
+        if(absl::StartsWithIgnoreCase(func_name, "last_day(")) {
+          absl::string_view raw_argument = parser->GetInputText(@3);
+          std::unordered_set<std::string> time_parts {
+            "year", "y", "yy", "yyy", "yyyy", "yr", "years", "yrs",
+            "month", "mm", "mon", "mons", "months",
+            "week", "w", "wk", "weekofyear", "woy", "wy",
+            "quarter", "q", "qtr", "qtrs", "quarters",
+          };
+          if(time_parts.find(std::string(raw_argument)) != time_parts.end()){
+            auto* literal = MAKE_NODE(ASTStringLiteral, @1);
+            $$ = WithExtraChildren($1, {literal});
+          } else {
+            $$ = WithExtraChildren($1, {$3});
+          }
+        } else {
+          $$ = WithExtraChildren($1, {$3});
+        }
       }
     ;
 

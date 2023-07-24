@@ -438,8 +438,8 @@ enum FunctionSignatureId {
   FN_PARSE_TIME = 1823;        // parse_time
   FN_PARSE_TIMESTAMP = 1296;   // parse_timestamp
 
-  FN_LAST_DAY_DATE = 1843;      // last_day date
-  FN_LAST_DAY_DATETIME = 1844;  // last_day datetime
+//   FN_LAST_DAY_DATE = 1843;      // last_day date
+//   FN_LAST_DAY_DATETIME = 1844;  // last_day datetime
 
   FN_INTERVAL_CONSTRUCTOR = 1855;  // $interval
   FN_MAKE_INTERVAL = 1856;         // make_interval
@@ -1459,6 +1459,8 @@ enum FunctionSignatureId {
   FN_DATE_TRUNC_DATE = 100776;                 // DATE_TRUNC(STRING, DATE) -> DATE
   FN_DATE_TRUNC_TIME = 100777;                 // DATE_TRUNC(STRING, TIME) -> TIME
   FN_DATE_TRUNC_TIMESTAMP = 100778;            // DATE_TRUNC(STRING, TIMESTAMP) -> TIMESTAMP
+  FN_LAST_DAY_DATE = 100779;                   // LAST_DAY(DATE, <STRING>) -> DATE
+  FN_LAST_DAY_TIMESTAMP = 100780;              // LAST_DAY(TIMESTAMP, <STRING>) -> TIMESTAMP
 
   FN_PARSE_JSON_SNOWFLAKE = 100712;            // PARSE_JSON(STRING) -> VARIANT
   FN_OBJECT_CONSTRUCT = 100713;                // OBJECT_CONSTRUCT(STRING, <ARG_TYPE_ANY_1>, ...) -> OBJECT
