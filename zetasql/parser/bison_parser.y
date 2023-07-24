@@ -7996,7 +7996,42 @@ lambda_argument_list:
 function_call_expression_with_args_prefix:
     function_call_expression_base function_call_argument
       {
-        $$ = WithExtraChildren($1, {$2});
+        absl::string_view func_name = parser->GetInputText(@1);
+        if(zetasql_base::CaseEqual(func_name, "datediff(")) {
+          absl::string_view raw_argument = parser->GetInputText(@2);
+          std::unordered_set<std::string> time_parts {
+            "year", "y", "yy", "yyy", "yyyy", "yr", "years", "yrs",
+            "month", "mm", "mon", "mons", "months",
+            "day", "d", "dd", "days", "dayofmonth",
+            "dayofweek", "weekday", "dow", "dw",
+            "dayofweekiso", "weekday_iso", "dow_iso", "dw_iso",
+            "dayofyear", "yearday", "doy", "dy",
+            "week", "w", "wk", "weekofyear", "woy", "wy",
+            "weekiso", "week_iso", "weekofyeariso", "weekofyear_iso",
+            "quarter", "q", "qtr", "qtrs", "quarters",
+            "yearofweek", "yearofweekiso",
+            "hour", "h", "hh", "hr", "hours", "hrs",
+            "minute", "m", "mi", "min", "minutes", "mins",
+            "second", "s", "sec", "seconds", "secs",
+            "millisecond", "ms", "msec", "milliseconds",
+            "microsecond", "us", "usec", "microseconds",
+            "nanosecond", "ns", "nsec", "nanosec", "nsecond", "nanoseconds", "nanosecs", "nseconds",
+            "epoch_second", "epoch", "epoch_seconds",
+            "epoch_millisecond", "epoch_milliseconds",
+            "epoch_microsecond", "epoch_microseconds",
+            "epoch_nanosecond", "epoch_nanoseconds",
+            "timezone_hour", "tzh",
+            "timezone_minute", "tzm"
+          };
+          if(time_parts.find(std::string(raw_argument)) != time_parts.end()){
+            auto* literal = MAKE_NODE(ASTStringLiteral, @1);
+            $$ = WithExtraChildren($1, {literal});
+          } else {
+            $$ = WithExtraChildren($1, {$2});
+          }
+        } else {
+          $$ = WithExtraChildren($1, {$2});
+        }
       }
     // The first argument may be a "*" instead of an expression. This is valid
     // for COUNT(*), which has no other arguments

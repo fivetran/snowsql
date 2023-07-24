@@ -810,9 +810,27 @@ where KitchenSink.bool_val = @test_param_bool;
 
 SELECT CURRENT_DATE() BETWEEN TIMESTAMP(?) AND TIMESTAMP(?)
 --
-ERROR: No matching signature for operator BETWEEN for argument types: DATE, TIMESTAMP, TIMESTAMP. Supported signature: (ANY) BETWEEN (ANY) AND (ANY) [at 1:23]
-SELECT CURRENT_DATE() BETWEEN TIMESTAMP(?) AND TIMESTAMP(?)
-                      ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [BOOL]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:$between(DATE, DATE, DATE) -> BOOL)
+    |     +-FunctionCall(ZetaSQL:current_date(optional(0) STRING) -> DATE)
+    |     +-Cast(TIMESTAMP -> DATE)
+    |     | +-FunctionCall(ZetaSQL:timestamp(STRING, optional(0) STRING) -> TIMESTAMP)
+    |     |   +-Parameter(parse_location=40-41, type=STRING, position=1)
+    |     +-Cast(TIMESTAMP -> DATE)
+    |       +-FunctionCall(ZetaSQL:timestamp(STRING, optional(0) STRING) -> TIMESTAMP)
+    |         +-Parameter(parse_location=57-58, type=STRING, position=2)
+    +-input_scan=
+      +-SingleRowScan
+[UNDECLARED_PARAMETERS]
+STRING
+STRING
 ==
 
 # The following are regression tests against resolving query parameters that

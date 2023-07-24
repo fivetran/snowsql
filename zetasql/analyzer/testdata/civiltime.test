@@ -1526,9 +1526,18 @@ QueryStmt
 --
 ALTERNATION GROUP: CAST('2015-12-28 15:42:56-08:00' AS STRING)
 --
-ERROR: No matching signature for function TIME for argument types: STRING. Supported signatures: TIME(INT64, INT64, INT64); TIME(TIMESTAMP, [STRING]); TIME(DATETIME) [at 1:8]
-SELECT time(CAST('2015-12-28 15:42:56-08:00' AS STRING));
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIME]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:time(TIMESTAMP, optional(0) STRING) -> TIME)
+    |     +-Literal(type=TIMESTAMP, value=2015-12-28 23:42:56+00, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 [language_features={{V_1_2_CIVIL_TIME|}}]
@@ -1551,7 +1560,7 @@ QueryStmt
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Function not found: datetime [at 1:8]
+ERROR: Function not found: datetime; Did you mean datediff? [at 1:8]
 SELECT datetime(TIMESTAMP '2015-12-28 15:42:56-08:00');
        ^
 ==

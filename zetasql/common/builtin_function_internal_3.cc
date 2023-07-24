@@ -4707,6 +4707,13 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {date_type, {datetime_type, string_type}, FN_NEXT_DAY_DATETIME},
        {date_type, {timestamp_type, string_type}, FN_NEXT_DAY_TIMESTAMP}},
       fn_options);
+
+  // DATEDIFF
+  InsertFunction(
+      functions, options, "datediff", SCALAR,
+      {{int64_type, {string_type, date_type, date_type}, FN_DATEDIFF_DATE},
+       {int64_type, {string_type, timestamp_type, timestamp_type}, FN_DATEDIFF_TIMESTAMP}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
