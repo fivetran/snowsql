@@ -4723,6 +4723,14 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {time_type, {string_type, int64_type, time_type}, FN_DATEADD_TIME},
        {timestamp_type, {string_type, int64_type, timestamp_type}, FN_DATEADD_TIMESTAMP}},
       fn_options);
+
+  // DATE_PART
+  InsertFunction(
+      functions, options, "date_part", SCALAR,
+      {{int64_type, {string_type, date_type}, FN_DATE_PART_DATE},
+       {int64_type, {string_type, time_type}, FN_DATE_PART_TIME},
+       {int64_type, {string_type, timestamp_type}, FN_DATE_PART_TIMESTAMP}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
