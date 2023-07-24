@@ -362,7 +362,7 @@ enum FunctionSignatureId {
   FN_DATETIME_SUB = 1814;   // datetime_sub
   FN_TIME_SUB = 1815;       // time_sub
   FN_TIMESTAMP_SUB = 1263;  // timestamp_sub
-  FN_DATE_TRUNC_DATE = 1220;  // date_trunc
+  //FN_DATE_TRUNC_DATE = 1220;  // date_trunc
   FN_DATETIME_TRUNC = 1818;   // datetime_trunc
   FN_TIME_TRUNC = 1819;       // time_trunc
   FN_TIMESTAMP_TRUNC = 1264;  // timestamp_trunc
@@ -1456,6 +1456,9 @@ enum FunctionSignatureId {
   FN_DATE_PART_DATE = 100773;                  // DATE_PART(STRING, DATE) -> INT64
   FN_DATE_PART_TIME = 100774;                  // DATE_PART(STRING, TIME) -> INT64
   FN_DATE_PART_TIMESTAMP = 100775;             // DATE_PART(STRING, TIMESTAMP) -> INT64
+  FN_DATE_TRUNC_DATE = 100776;                 // DATE_TRUNC(STRING, DATE) -> DATE
+  FN_DATE_TRUNC_TIME = 100777;                 // DATE_TRUNC(STRING, TIME) -> TIME
+  FN_DATE_TRUNC_TIMESTAMP = 100778;            // DATE_TRUNC(STRING, TIMESTAMP) -> TIMESTAMP
 
   FN_PARSE_JSON_SNOWFLAKE = 100712;            // PARSE_JSON(STRING) -> VARIANT
   FN_OBJECT_CONSTRUCT = 100713;                // OBJECT_CONSTRUCT(STRING, <ARG_TYPE_ANY_1>, ...) -> OBJECT
@@ -1514,5 +1517,5 @@ enum FunctionSignatureId {
   FN_GET_PATH_OP_VARIANT = 100766;             // GET_PATH_OP(VARIANT, STRING) -> VARIANT
   FN_MOD_OP = 100767;                          // MOD_OP(NUMERIC, NUMERIC) -> NUMERIC
 
-  // next 100776
+  // next 100779
 }

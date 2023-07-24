@@ -799,21 +799,21 @@ void GetDatetimeDiffTruncLastFunctions(
                            "TIMESTAMP_DIFF", arguments, language_options);
                      }));
 
-  InsertFunction(
-      functions, options, "date_trunc", SCALAR,
-      {
-          {date_type, {date_type, datepart_type}, FN_DATE_TRUNC_DATE},
-          {datetime_type,
-           {datetime_type, datepart_type},
-           FN_DATETIME_TRUNC,
-           extended_datetime_signatures},
-          {timestamp_type,
-           {timestamp_type, datepart_type, {string_type, OPTIONAL}},
-           FN_TIMESTAMP_TRUNC,
-           extended_datetime_signatures},
-      },
-      FunctionOptions().set_pre_resolution_argument_constraint(absl::bind_front(
-          &CheckDateDatetimeTimeTimestampTruncArguments, "DATE_TRUNC")));
+//   InsertFunction(
+//       functions, options, "date_trunc", SCALAR,
+//       {
+//           {date_type, {date_type, datepart_type}, FN_DATE_TRUNC_DATE},
+//           {datetime_type,
+//            {datetime_type, datepart_type},
+//            FN_DATETIME_TRUNC,
+//            extended_datetime_signatures},
+//           {timestamp_type,
+//            {timestamp_type, datepart_type, {string_type, OPTIONAL}},
+//            FN_TIMESTAMP_TRUNC,
+//            extended_datetime_signatures},
+//       },
+//       FunctionOptions().set_pre_resolution_argument_constraint(absl::bind_front(
+//           &CheckDateDatetimeTimeTimestampTruncArguments, "DATE_TRUNC")));
 
   InsertFunction(
       functions, options, "datetime_trunc", SCALAR,

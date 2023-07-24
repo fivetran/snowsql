@@ -1050,45 +1050,6 @@ void AddDateTruncToCatalog(SimpleCatalogProto* catalog) {
       FN_DATE_TRUNC_DATE);
 }
 
-// builtin-only use for datetimepart
-TEST_F(ZetaSqlLocalServiceImplTest,
-       AnalyzeWithDescriptorPoolListProtoBuiltinOnlyForFunction) {
-  AnalyzeRequest request;
-  request.set_sql_statement(R"(select DATE_TRUNC(DATE "2020-10-20", MONTH))");
-  // We add a useless descriptor set, this ensures that 'zero' is not somehow
-  // magic.
-  AddEmptyFileDescriptorSet(request.mutable_descriptor_pool_list());
-  AddBuiltin(request.mutable_descriptor_pool_list());
-  AddDateTruncToCatalog(request.mutable_simple_catalog());
-
-  AnalyzeResponse response;
-  ZETASQL_EXPECT_OK(Analyze(request, &response));
-
-  auto date_trunc_call = response.resolved_statement()
-                             .resolved_query_stmt_node()
-                             .query()
-                             .resolved_project_scan_node()
-                             .expr_list(0)
-                             .expr()
-                             .resolved_function_call_base_node()
-                             .resolved_function_call_node()
-                             .parent();
-  auto signature = date_trunc_call.signature();
-  EXPECT_EQ(date_trunc_call.function().name(), "ZetaSQL:date_trunc");
-
-  TypeProto datetimepart_type;
-  ZETASQL_CHECK(google::protobuf::TextFormat::ParseFromString(
-      R"pb(type_kind: TYPE_ENUM
-           enum_type {
-             enum_name: "zetasql.functions.DateTimestampPart"
-             enum_file_name: "zetasql/public/functions/datetime.proto"
-             file_descriptor_set_index: 1
-           })pb",
-      &datetimepart_type));
-
-  EXPECT_THAT(signature.argument(1).type(), EqualsProto(datetimepart_type));
-}
-
 // The presence of the built in DescrpitorPool doesn't magically make that
 // available in the catalog
 TEST_F(ZetaSqlLocalServiceImplTest,

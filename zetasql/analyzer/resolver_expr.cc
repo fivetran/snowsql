@@ -4188,7 +4188,6 @@ InitSpecialFunctionFamilyMap() {
                    FAMILY_DATE_DIFF);
 
   // These expect argument 1 to be a DATEPART.
-  zetasql_base::InsertOrDie(out, IdString::MakeGlobal("date_trunc"), FAMILY_DATE_TRUNC);
   zetasql_base::InsertOrDie(out, IdString::MakeGlobal("datetime_trunc"),
                    FAMILY_DATE_TRUNC);
   zetasql_base::InsertOrDie(out, IdString::MakeGlobal("time_trunc"), FAMILY_DATE_TRUNC);

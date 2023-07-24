@@ -1400,6 +1400,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "dateadd(month, 1, '2021-01-01 00:00:00'::timestamp), dateadd(day, 1, '2021-01-01 00:00:00'::timestamp), dateadd(year, 1, '2021-01-01 00:00:00'::timestamp),"
       "date_part(month, '2021-01-01'), date_part(day, '2021-02-28'), date_part(year, '2021-02-28'),"
       "date_part(epoch_second, '2021-01-01 00:00:00'::timestamp), date_part(epoch_millisecond, '2021-01-01 00:00:00'::timestamp), date_part(epoch_second, '2021-01-01 00:00:00'::timestamp),"
+      "date_trunc(month, '2021-01-01'), date_trunc(day, '2021-02-28'), date_trunc(year, '2021-02-28'),"
+      "date_trunc(nanoseconds, '2021-01-01 00:00:00'::timestamp), date_trunc(millisecond, '2021-01-01 00:00:00'::timestamp), date_trunc(microsecond, '2021-01-01 00:00:00'::timestamp),"
     },
     {"StringAndBinary",
       "select "
