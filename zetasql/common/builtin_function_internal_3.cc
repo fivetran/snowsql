@@ -4668,6 +4668,7 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
                                       const ZetaSQLBuiltinFunctionOptions& options,
                                       NameToFunctionMap* functions) {
   const Type* int64_type = type_factory->get_int64();
+  const Type* double_type = type_factory->get_double();
   const Type* string_type = type_factory->get_string();
   const Type* date_type = type_factory->get_date();
   const Type* time_type = type_factory->get_time();
@@ -4681,9 +4682,9 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
   // ADD_MONTHS
   InsertFunction(
       functions, options, "add_months", SCALAR,
-      {{date_type, {date_type, int64_type}, FN_ADD_MONTHS_DATE},
-       {datetime_type, {datetime_type, int64_type}, FN_ADD_MONTHS_DATETIME},
-       {timestamp_type, {timestamp_type, int64_type}, FN_ADD_MONTHS_TIMESTAMP}},
+      {{date_type, {date_type, double_type}, FN_ADD_MONTHS_DATE},
+       {datetime_type, {datetime_type, double_type}, FN_ADD_MONTHS_DATETIME},
+       {timestamp_type, {timestamp_type, double_type}, FN_ADD_MONTHS_TIMESTAMP}},
       fn_options);
 
   // DAYNAME

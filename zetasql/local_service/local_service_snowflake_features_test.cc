@@ -1404,6 +1404,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "date_trunc(nanoseconds, '2021-01-01 00:00:00'::timestamp), date_trunc(millisecond, '2021-01-01 00:00:00'::timestamp), date_trunc(microsecond, '2021-01-01 00:00:00'::timestamp),"
       "last_day('2021-01-01'::date, year), last_day('2021-01-01'::date, month), last_day('2021-01-01'::date, quarter),"
       "last_day('2023-01-01 15:30:00'::timestamp, year), last_day('2023-01-01 15:30:00'::timestamp, month), last_day('2023-01-01 15:30:00'::timestamp, quarter),"
+      "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), add_months('2016-02-29', 1.1),"
+      "dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
+      "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
     },
     {"StringAndBinary",
       "select "
@@ -1417,11 +1420,6 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "regexp_like(column_2, 'san.*', 'i'),"
       "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]'),"
       "from table_1"
-    },
-    {"DateAndTime",
-      "select "
-      "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
-      "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
     },
     {"Numeric",
       "select "
