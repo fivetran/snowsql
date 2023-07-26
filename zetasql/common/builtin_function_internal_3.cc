@@ -4711,6 +4711,14 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {date_type, {timestamp_type, string_type}, FN_NEXT_DAY_TIMESTAMP}},
       fn_options);
 
+  // PREVIOUS_DAY
+  InsertFunction(
+      functions, options, "previous_day", SCALAR,
+      {{date_type, {date_type, string_type}, FN_PREVIOUS_DAY_DATE},
+       {date_type, {datetime_type, string_type}, FN_PREVIOUS_DAY_DATETIME},
+       {date_type, {timestamp_type, string_type}, FN_PREVIOUS_DAY_TIMESTAMP}},
+      fn_options);
+
   // DATEDIFF
   InsertFunction(
       functions, options, "datediff", SCALAR,

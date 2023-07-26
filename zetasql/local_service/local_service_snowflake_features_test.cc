@@ -1406,6 +1406,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "last_day('2023-01-01 15:30:00'::timestamp, year), last_day('2023-01-01 15:30:00'::timestamp, month), last_day('2023-01-01 15:30:00'::timestamp, quarter),"
       "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), add_months('2016-02-29', 1.1),"
       "dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
+      "previous_day('2022-12-01', 'su'), previous_day('2022-12-01'::date, 'su'), previous_day('2022-12-01'::timestamp, 'su'),"
       "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
     },
     {"StringAndBinary",
