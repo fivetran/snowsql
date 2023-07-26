@@ -1408,6 +1408,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
       "previous_day('2022-12-01', 'su'), previous_day('2022-12-01'::date, 'su'), previous_day('2022-12-01'::timestamp, 'su'),"
       "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
+      "time_from_parts(1, 2, 3), time_from_parts(1, 2, 3, 4),"
     },
     {"StringAndBinary",
       "select "

@@ -4756,6 +4756,15 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{date_type, {date_type, {string_type, OPTIONAL}}, FN_LAST_DAY_DATE},
        {date_type, {timestamp_type, {string_type, OPTIONAL}}, FN_LAST_DAY_TIMESTAMP}},
       fn_options);
+
+  // TIME_FROM_PARTS
+  InsertFunction(
+      functions, options, "time_from_parts", SCALAR,
+      {{time_type, {{double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(23)},
+          {double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(59)},
+          {double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(59)},
+          {double_type, OPTIONAL}}, FN_TIME_FROM_PARTS}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
