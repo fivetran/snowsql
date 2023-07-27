@@ -1272,6 +1272,10 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
     {"TEXT", "1.0"},
     {"CHARACTER", "1"},
     {"CHAR", "1"},
+    {"TIMESTAMP", "1234567890"},
+    {"TIMESTAMP_LTZ", "'2023-01-01 12:00:00'"},
+    {"TIMESTAMP_NTZ", "'2023-01-01 12:00:00'"},
+    {"TIMESTAMP_TZ", "'2023-01-01 12:00:00'"},
   };
 
   for (auto const& pair: dataTypesAndValues) {

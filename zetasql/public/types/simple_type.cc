@@ -149,6 +149,10 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
 
       {"binary", {TYPE_BYTES, false}},
       {"varbinary", {TYPE_BYTES, false}},
+
+      {"timestamp_ltz", {TYPE_TIMESTAMP}},
+      {"timestamp_ntz", {TYPE_TIMESTAMP}},
+      {"timestamp_tz", {TYPE_TIMESTAMP}},
   };
   return *result;
 }
