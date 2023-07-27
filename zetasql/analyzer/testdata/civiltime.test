@@ -1968,7 +1968,7 @@ ALTERNATION GROUPS:
     add,millisecond
     add,microsecond
 --
-ERROR: Function not found: time_add; Did you mean date_add? [at 1:8]
+ERROR: Function not found: time_add; Did you mean timeadd? [at 1:8]
 select time_add(
        ^
 --
@@ -2048,7 +2048,7 @@ ALTERNATION GROUPS:
     TIMESTAMP_NANOS,add
     add
 --
-ERROR: Function not found: time_add; Did you mean date_add? [at 1:8]
+ERROR: Function not found: time_add; Did you mean timeadd? [at 1:8]
 select time_add(current_time, interval 1 nanosecond);
        ^
 --

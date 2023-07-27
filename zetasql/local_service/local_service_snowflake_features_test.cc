@@ -1409,7 +1409,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "previous_day('2022-12-01', 'su'), previous_day('2022-12-01'::date, 'su'), previous_day('2022-12-01'::timestamp, 'su'),"
       "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
       "time_from_parts(1, 2, 3), time_from_parts(1, 2, 3, 4),"
-      "time_slice('2023-01-31'::date, 4, 'month'), time_slice('2023-01-31 15:15:45'::timestamp, 4, 'month')"
+      "time_slice('2023-01-31'::date, 4, 'month'), time_slice('2023-01-31 15:15:45'::timestamp, 4, 'month'),"
+      "timeadd(hour, 2.2, '2013-05-08'), timeadd(hour, 2, to_timestamp_ltz('2013-05-08 11:22:33.444')), timeadd(HoUr, 2.2, '2013-05-08'),"
     },
     {"StringAndBinary",
       "select "
