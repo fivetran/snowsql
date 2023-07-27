@@ -4793,6 +4793,13 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{timestamp_type, {string_type, string_type, timestamp_type}, FN_CONVERT_TIMESTAMP_NTZ},
        {timestamp_type, {string_type, timestamp_type}, FN_CONVERT_TIMESTAMP}},
       fn_options);
+
+  // TIMEDIFF
+  InsertFunction(
+      functions, options, "timediff", SCALAR,
+      {{int64_type, {string_type, date_type, date_type}, FN_TIMEDIFF_DATE},
+       {int64_type, {string_type, timestamp_type, timestamp_type}, FN_TIMEDIFF_TIMESTAMP}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,

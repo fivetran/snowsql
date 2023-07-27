@@ -1417,6 +1417,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "timeadd(hour, 2.2, '2013-05-08'), timeadd(hour, 2, to_timestamp_ltz('2013-05-08 11:22:33.444')), timeadd(HoUr, 2.2, '2013-05-08'),"
       "date_from_parts(1, 2, 3), date_from_parts(1.1, 2.2, 3.3),"
       "convert_timezone('America/Los_Angeles', 'America/New_York', '2019-01-01 14:00:00'::timestamp_ntz), convert_timezone('America/Los_Angeles', '2018-04-05 12:00:00'),"
+      "timediff(hour, '2021-01-01 00:00:00'::timestamp, '2023-07-24 14:30:00'::timestamp), timediff(yrs, '2021-01-01 00:00:00'::date, '2021-01-01'),"
     },
     {"StringAndBinary",
       "select "
