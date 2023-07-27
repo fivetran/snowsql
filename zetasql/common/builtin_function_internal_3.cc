@@ -4786,6 +4786,13 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       functions, options, "date_from_parts", SCALAR,
       {{date_type, {double_type, double_type, double_type}, FN_DATE_FROM_PARTS}},
       fn_options);
+
+  // CONVERT_TIMEZONE
+  InsertFunction(
+      functions, options, "convert_timezone", SCALAR,
+      {{timestamp_type, {string_type, string_type, timestamp_type}, FN_CONVERT_TIMESTAMP_NTZ},
+       {timestamp_type, {string_type, timestamp_type}, FN_CONVERT_TIMESTAMP}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
