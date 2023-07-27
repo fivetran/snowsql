@@ -4774,12 +4774,18 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        fn_options);
 
     // TIMEADD
-    InsertFunction(
-        functions, options, "timeadd", SCALAR,
-        {{time_type, {string_type, double_type, time_type}, FN_TIMEADD_TIME},
-         {timestamp_type, {string_type, double_type, timestamp_type}, FN_TIMEADD_TIMESTAMP},
-         {date_type, {string_type, double_type, date_type}, FN_TIMEADD_DATE}},
-        fn_options);
+  InsertFunction(
+      functions, options, "timeadd", SCALAR,
+      {{time_type, {string_type, double_type, time_type}, FN_TIMEADD_TIME},
+       {timestamp_type, {string_type, double_type, timestamp_type}, FN_TIMEADD_TIMESTAMP},
+       {date_type, {string_type, double_type, date_type}, FN_TIMEADD_DATE}},
+      fn_options);
+
+  // DATE_FROM_PARTS
+  InsertFunction(
+      functions, options, "date_from_parts", SCALAR,
+      {{date_type, {double_type, double_type, double_type}, FN_DATE_FROM_PARTS}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
