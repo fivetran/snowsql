@@ -1434,7 +1434,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "timestamp_ntz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_ntz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_ntz_from_parts('1', '2', '3', '4', '5', '6'),"
       "timestamp_ntz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_ntz_from_parts('2023-07-27', '10:00:00'), timestamp_ntz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
       "timestamp_tz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_tz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_tz_from_parts('1', '2', '3', '4', '5', '6'),"
-      "timestamp_tz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_tz_from_parts('2023-07-27', '10:00:00'), timestamp_tz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp), TIMESTAMP_TZ_FROM_PARTS(2013, 4, 5, 12, 00, 00, 0, 'America/Los_Angeles')"
+      "timestamp_tz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_tz_from_parts('2023-07-27', '10:00:00'), timestamp_tz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp), TIMESTAMP_TZ_FROM_PARTS(2013, 4, 5, 12, 00, 00, 0, 'America/Los_Angeles'),"
+      "trunc('2021-01-01'::date, 'month'), trunc('2021-02-28'::date, 'day'), trunc('2021-02-28'::timestamp, 'year'),"
     },
     {"StringAndBinary",
       "select "

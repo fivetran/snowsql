@@ -1304,6 +1304,8 @@ absl::Status GetNumericFunctions(TypeFactory* type_factory,
   const Type* bignumeric_type = type_factory->get_bignumeric();
   const Type* string_type = type_factory->get_string();
   const Type* rounding_mode_type = types::RoundingModeEnumType();
+  const Type* date_type = type_factory->get_date();
+  const Type* timestamp_type = type_factory->get_timestamp();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
@@ -1424,7 +1426,8 @@ absl::Status GetNumericFunctions(TypeFactory* type_factory,
        {bignumeric_type,
         {bignumeric_type, int64_type},
         FN_TRUNC_WITH_DIGITS_BIGNUMERIC,
-        has_bignumeric_type_argument}},
+        has_bignumeric_type_argument},
+        {date_type, {timestamp_type, string_type}, FN_TRUNC_DATE}},
         FunctionOptions().set_alias_name("truncate"));
   InsertFunction(functions, options, "ceil", SCALAR,
                  {{float_type, {float_type}, FN_CEIL_FLOAT},
