@@ -421,31 +421,6 @@ void GetTimeAndDatetimeConstructionAndConversionFunctions(
       FunctionSignatureOptions().add_required_language_feature(
           FEATURE_V_1_3_DATE_TIME_CONSTRUCTORS);
 
-  InsertFunction(functions, options, "time", SCALAR,
-                 {{time_type,
-                   {
-                       int64_type,  // hour
-                       int64_type,  // minute
-                       int64_type,  // second
-                   },
-                   FN_TIME_FROM_HOUR_MINUTE_SECOND},
-                  {time_type,
-                   {
-                       timestamp_type,           // timestamp
-                       {string_type, OPTIONAL},  // timezone
-                   },
-                   FN_TIME_FROM_TIMESTAMP},
-                  {time_type,
-                   {
-                       datetime_type,  // datetime
-                   },
-                   FN_TIME_FROM_DATETIME},
-                  {time_type,
-                   {time_type},
-                   FN_TIME_FROM_TIME,
-                   date_time_constructor_options}},
-                 time_and_datetime_function_options);
-
   InsertFunction(functions, options, "datetime", SCALAR,
                  {{datetime_type,
                    {
@@ -799,21 +774,21 @@ void GetDatetimeDiffTruncLastFunctions(
                            "TIMESTAMP_DIFF", arguments, language_options);
                      }));
 
-  InsertFunction(
-      functions, options, "date_trunc", SCALAR,
-      {
-          {date_type, {date_type, datepart_type}, FN_DATE_TRUNC_DATE},
-          {datetime_type,
-           {datetime_type, datepart_type},
-           FN_DATETIME_TRUNC,
-           extended_datetime_signatures},
-          {timestamp_type,
-           {timestamp_type, datepart_type, {string_type, OPTIONAL}},
-           FN_TIMESTAMP_TRUNC,
-           extended_datetime_signatures},
-      },
-      FunctionOptions().set_pre_resolution_argument_constraint(absl::bind_front(
-          &CheckDateDatetimeTimeTimestampTruncArguments, "DATE_TRUNC")));
+//   InsertFunction(
+//       functions, options, "date_trunc", SCALAR,
+//       {
+//           {date_type, {date_type, datepart_type}, FN_DATE_TRUNC_DATE},
+//           {datetime_type,
+//            {datetime_type, datepart_type},
+//            FN_DATETIME_TRUNC,
+//            extended_datetime_signatures},
+//           {timestamp_type,
+//            {timestamp_type, datepart_type, {string_type, OPTIONAL}},
+//            FN_TIMESTAMP_TRUNC,
+//            extended_datetime_signatures},
+//       },
+//       FunctionOptions().set_pre_resolution_argument_constraint(absl::bind_front(
+//           &CheckDateDatetimeTimeTimestampTruncArguments, "DATE_TRUNC")));
 
   InsertFunction(
       functions, options, "datetime_trunc", SCALAR,
@@ -849,19 +824,19 @@ void GetDatetimeDiffTruncLastFunctions(
       FunctionOptions().set_pre_resolution_argument_constraint(absl::bind_front(
           &CheckDateDatetimeTimeTimestampTruncArguments, "TIMESTAMP_TRUNC")));
 
-  if (options.language_options.LanguageFeatureEnabled(
-          FEATURE_V_1_3_ADDITIONAL_STRING_FUNCTIONS) &&
-      options.language_options.LanguageFeatureEnabled(
-          FEATURE_V_1_2_CIVIL_TIME)) {
-    InsertSimpleFunction(
-        functions, options, "last_day", SCALAR,
-        {{date_type, {date_type, {datepart_type, OPTIONAL}}, FN_LAST_DAY_DATE},
-         {date_type,
-          {datetime_type, {datepart_type, OPTIONAL}},
-          FN_LAST_DAY_DATETIME}},
-        FunctionOptions().set_pre_resolution_argument_constraint(
-            absl::bind_front(&CheckLastDayArguments, "LAST_DAY")));
-  }
+//   if (options.language_options.LanguageFeatureEnabled(
+//           FEATURE_V_1_3_ADDITIONAL_STRING_FUNCTIONS) &&
+//       options.language_options.LanguageFeatureEnabled(
+//           FEATURE_V_1_2_CIVIL_TIME)) {
+//     InsertSimpleFunction(
+//         functions, options, "last_day", SCALAR,
+//         {{date_type, {date_type, {datepart_type, OPTIONAL}}, FN_LAST_DAY_DATE},
+//          {date_type,
+//           {datetime_type, {datepart_type, OPTIONAL}},
+//           FN_LAST_DAY_DATETIME}},
+//         FunctionOptions().set_pre_resolution_argument_constraint(
+//             absl::bind_front(&CheckLastDayArguments, "LAST_DAY")));
+//   }
 }
 
 void GetDatetimeBucketFunctions(TypeFactory* type_factory,
