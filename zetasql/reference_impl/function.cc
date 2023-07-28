@@ -881,7 +881,6 @@ FunctionMap::FunctionMap() {
                      "Enum_value_descriptor_proto");
     RegisterFunction(FunctionKind::kDate, "date", "Date");
     RegisterFunction(FunctionKind::kTimestamp, "timestamp", "Timestamp");
-    RegisterFunction(FunctionKind::kTime, "time", "Time");
     RegisterFunction(FunctionKind::kDatetime, "datetime", "Datetime");
     RegisterFunction(FunctionKind::kDateBucket, "date_bucket", "Date_bucket");
     RegisterFunction(FunctionKind::kDateTimeBucket, "datetime_bucket",

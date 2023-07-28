@@ -1272,6 +1272,10 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeTypes) {
     {"TEXT", "1.0"},
     {"CHARACTER", "1"},
     {"CHAR", "1"},
+    {"TIMESTAMP", "1234567890"},
+    {"TIMESTAMP_LTZ", "'2023-01-01 12:00:00'"},
+    {"TIMESTAMP_NTZ", "'2023-01-01 12:00:00'"},
+    {"TIMESTAMP_TZ", "'2023-01-01 12:00:00'"},
   };
 
   for (auto const& pair: dataTypesAndValues) {
@@ -1370,7 +1374,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "to_decimal('12.3456', 10, 1), to_decimal(12.3456, 10, 1), to_decimal(to_variant(12.3456), 10, 1), to_decimal('12.3', '99.9', 9, 5),"
       "to_number('12.3456', 10, 1), to_number(12.3456, 10, 1), to_number(to_variant(12.3456), 10, 1), to_number('12.3', '99.9', 9, 5),"
       "to_numeric('12.3456', 10, 1), to_numeric(12.3456, 10, 1), to_numeric(to_variant(12.3456), 10, 1), to_numeric('12.3', '99.9', 9, 5),"
-      // TODO: "to_time('12:30:00'), to_time('12:30:00', 'HH24:MI:SS'), to_time('123000'), to_time(to_variant('12:30:00')),"
+      "time('12:30:00'), time('12:30:00', 'HH24:MI:SS'), time('123000'), time(to_variant('12:30:00')),"
+      "to_time('12:30:00'), to_time('12:30:00', 'HH24:MI:SS'), to_time('123000'), to_time(to_variant('12:30:00')),"
       "to_timestamp(1592581800000), to_timestamp(to_date('2023-06-19 14:30:00')), to_timestamp('2023-06-19 14:30:00'), to_timestamp(to_timestamp('2023-06-19 14:30:00')), to_timestamp(to_variant('2023-06-19 14:30:00')),"
       "to_timestamp_tz(1592581800000), to_timestamp_tz(to_date('2023-06-19 14:30:00')), to_timestamp_tz('2023-06-19 14:30:00'), to_timestamp_tz(to_timestamp_tz('2023-06-19 14:30:00')), to_timestamp_tz(to_variant('2023-06-19 14:30:00')),"
       "to_timestamp_ltz(1592581800000), to_timestamp_ltz(to_date('2023-06-19 14:30:00')), to_timestamp_ltz('2023-06-19 14:30:00'), to_timestamp_ltz(to_timestamp_ltz('2023-06-19 14:30:00')), to_timestamp_ltz(to_variant('2023-06-19 14:30:00')),"
@@ -1392,6 +1397,49 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "seq1(), seq2(),"
       "seq4(), seq8(),"
     },
+    {"DateAndTime",
+      "select "
+      "datediff(month, '2021-01-01', '2021-02-28'), datediff(day, '2021-01-01', '2021-02-28'), datediff(year, '2021-01-01', '2021-02-28'),"
+      "datediff(hour, '2021-01-01 00:00:00'::timestamp, '2023-07-24 14:30:00'::timestamp), datediff(yrs, '2021-01-01 00:00:00'::date, '2021-01-01'),"
+      "timestampdiff(month, '2021-01-01', '2021-02-28'), timestampdiff(day, '2021-01-01', '2021-02-28'), timestampdiff(year, '2021-01-01', '2021-02-28'),"
+      "timestampdiff(hour, '2021-01-01 00:00:00'::timestamp, '2023-07-24 14:30:00'::timestamp), timestampdiff(yrs, '2021-01-01 00:00:00'::date, '2021-01-01'),"
+      "dateadd(month, 1, '2021-01-01'), dateadd(day, 1, '2021-02-28'), dateadd(year, 1, '2021-02-28'), dateadd(year, 1.8, '2021-02-28'),"
+      "dateadd(month, 1, '2021-01-01 00:00:00'::timestamp), dateadd(day, 1, '2021-01-01 00:00:00'::timestamp), dateadd(year, 1, '2021-01-01 00:00:00'::timestamp),"
+      "timestampadd(month, 1, '2021-01-01'), timestampadd(day, 1, '2021-02-28'), timestampadd(year, 1, '2021-02-28'), timestampadd(year, 1.8, '2021-02-28'),"
+      "timestampadd(month, 1, '2021-01-01 00:00:00'::timestamp), timestampadd(day, 1, '2021-01-01 00:00:00'::timestamp), timestampadd(year, 1, '2021-01-01 00:00:00'::timestamp),"
+      "date_part(month, '2021-01-01'), date_part(day, '2021-02-28'), date_part(year, '2021-02-28'),"
+      "date_part(epoch_second, '2021-01-01 00:00:00'::timestamp), date_part(epoch_millisecond, '2021-01-01 00:00:00'::timestamp), date_part(epoch_second, '2021-01-01 00:00:00'::timestamp),"
+      "date_trunc(month, '2021-01-01'), date_trunc(day, '2021-02-28'), date_trunc(year, '2021-02-28'),"
+      "date_trunc(nanoseconds, '2021-01-01 00:00:00'::timestamp), date_trunc(millisecond, '2021-01-01 00:00:00'::timestamp), date_trunc(microsecond, '2021-01-01 00:00:00'::timestamp),"
+      "last_day('2021-01-01'::date, year), last_day('2021-01-01'::date, month), last_day('2021-01-01'::date, quarter),"
+      "last_day('2023-01-01 15:30:00'::timestamp, year), last_day('2023-01-01 15:30:00'::timestamp, month), last_day('2023-01-01 15:30:00'::timestamp, quarter),"
+      "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), add_months('2016-02-29', 1.1),"
+      "dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
+      "previous_day('2022-12-01', 'su'), previous_day('2022-12-01'::date, 'su'), previous_day('2022-12-01'::timestamp, 'su'),"
+      "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
+      "time_from_parts(1, 2, 3), time_from_parts(1, 2, 3, 4),"
+      "timefromparts(1, 2, 3), timefromparts(1, 2, 3, 4),"
+      "time_slice('2023-01-31'::date, 4, 'month'), time_slice('2023-01-31 15:15:45'::timestamp, 4, 'month'),"
+      "timeadd(hour, 2.2, '2013-05-08'), timeadd(hour, 2, to_timestamp_ltz('2013-05-08 11:22:33.444')), timeadd(HoUr, 2.2, '2013-05-08'),"
+      "date_from_parts(1, 2, 3), date_from_parts(1.1, 2.2, 3.3),"
+      "datefromparts(1, 2, 3), datefromparts(1.1, 2.2, 3.3),"
+      "convert_timezone('America/Los_Angeles', 'America/New_York', '2019-01-01 14:00:00'::timestamp_ntz), convert_timezone('America/Los_Angeles', '2018-04-05 12:00:00'),"
+      "timediff(hour, '2021-01-01 00:00:00'::timestamp, '2023-07-24 14:30:00'::timestamp), timediff(yrs, '2021-01-01 00:00:00'::date, '2021-01-01'),"
+      "timestamp_from_parts(2023, 07, 27, 10, 00, 00), timestamp_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_from_parts('2023-07-27', '10:00:00'), timestamp_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestampfromparts(2023, 07, 27, 10, 00, 00), timestampfromparts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestampfromparts('1', '2', '3', '4', '5', '6'),"
+      "timestampfromparts(date('2023-07-27'), to_time('10:00:00')), timestampfromparts('2023-07-27', '10:00:00'), timestampfromparts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestamp_ltz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_ltz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_ltz_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_ltz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_ltz_from_parts('2023-07-27', '10:00:00'), timestamp_ltz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestamp_ntz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_ntz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_ntz_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_ntz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_ntz_from_parts('2023-07-27', '10:00:00'), timestamp_ntz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestamp_tz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_tz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_tz_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_tz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_tz_from_parts('2023-07-27', '10:00:00'), timestamp_tz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp), TIMESTAMP_TZ_FROM_PARTS(2013, 4, 5, 12, 00, 00, 0, 'America/Los_Angeles'),"
+      "trunc('2021-01-01'::date, 'month'), trunc('2021-02-28'::date, 'day'), trunc('2021-02-28'::timestamp, 'year'),"
+      "year('2021-01-01'), quarter('2021-01-01'), month('2021-01-01'), day('2021-01-01'), dayofmonth('2021-01-01'), dayofyear('2021-01-01'), weekiso('2021-01-01'),"
+      "yearofweek('2021-01-01'), yearofweekiso('2021-01-01'), dayofweek('2021-01-01'), dayofweekiso('2021-01-01'), week('2021-01-01'), weekofyear('2021-01-01'),"
+      "hour(to_time('10:33:00')), minute(to_time('10:33:00')), second(to_time('10:33:00')),"
+    },
     {"StringAndBinary",
       "select "
       "base64_decode_string('U25vd2ZsYWtl'), try_base64_decode_string('U25vd2ZsYWtl'),"
@@ -1404,11 +1452,6 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "regexp_like(column_2, 'san.*', 'i'),"
       "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]'),"
       "from table_1"
-    },
-    {"DateAndTime",
-      "select "
-      "add_months(parse_date('%m/%d/%Y', '1/1/2023'), 1), dayname(parse_date('%m/%d/%Y', '1/1/2023')),"
-      "monthname(PARSE_DATE('%m/%d/%Y', '1/1/2023')), next_day(parse_date('%m/%d/%Y', '1/1/2023'), 'Friday'),"
     },
     {"SemiStructured",
       "select "

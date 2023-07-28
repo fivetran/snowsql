@@ -14,11 +14,11 @@ QueryStmt
     +-column_list=[$query.result#1]
     +-expr_list=
     | +-result#1 :=
-    |   +-FunctionCall(ZetaSQL:add_months(DATE, INT64) -> DATE)
+    |   +-FunctionCall(ZetaSQL:add_months(DATE, DOUBLE) -> DATE)
     |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
     |     | +-Literal(type=STRING, value="%m/%d/%Y")
     |     | +-Literal(type=STRING, value="1/1/2023")
-    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=DOUBLE, value=1)
     +-input_scan=
       +-SingleRowScan
 --
@@ -32,11 +32,11 @@ QueryStmt
     +-column_list=[$query.result#1]
     +-expr_list=
     | +-result#1 :=
-    |   +-FunctionCall(ZetaSQL:add_months(DATETIME, INT64) -> DATETIME)
+    |   +-FunctionCall(ZetaSQL:add_months(DATETIME, DOUBLE) -> DATETIME)
     |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
     |     | +-Literal(type=STRING, value="%D %T,000000")
     |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
-    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=DOUBLE, value=1)
     +-input_scan=
       +-SingleRowScan
 --
@@ -50,11 +50,11 @@ QueryStmt
     +-column_list=[$query.result#1]
     +-expr_list=
     | +-result#1 :=
-    |   +-FunctionCall(ZetaSQL:add_months(TIMESTAMP, INT64) -> TIMESTAMP)
+    |   +-FunctionCall(ZetaSQL:add_months(TIMESTAMP, DOUBLE) -> TIMESTAMP)
     |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
     |     | +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
     |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
-    |     +-Literal(type=INT64, value=1)
+    |     +-Literal(type=DOUBLE, value=1)
     +-input_scan=
       +-SingleRowScan
 ==

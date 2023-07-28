@@ -1494,8 +1494,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
-    |   +-FunctionCall(ZetaSQL:time(TIMESTAMP, optional(0) STRING) -> TIME)
-    |     +-Literal(type=TIMESTAMP, value=2015-12-28 23:42:56+00, has_explicit_type=TRUE)
+    |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08", has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -1519,16 +1519,25 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
-    |   +-FunctionCall(ZetaSQL:time(TIMESTAMP, optional(0) STRING) -> TIME)
-    |     +-Literal(type=TIMESTAMP, value=2015-12-28 23:42:56+00)
+    |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08:00")
     +-input_scan=
       +-SingleRowScan
 --
 ALTERNATION GROUP: CAST('2015-12-28 15:42:56-08:00' AS STRING)
 --
-ERROR: No matching signature for function TIME for argument types: STRING. Supported signatures: TIME(INT64, INT64, INT64); TIME(TIMESTAMP, [STRING]); TIME(DATETIME) [at 1:8]
-SELECT time(CAST('2015-12-28 15:42:56-08:00' AS STRING));
-       ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIME]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08:00", has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 [language_features={{V_1_2_CIVIL_TIME|}}]
@@ -1551,7 +1560,7 @@ QueryStmt
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Function not found: datetime [at 1:8]
+ERROR: Function not found: datetime; Did you mean datediff? [at 1:8]
 SELECT datetime(TIMESTAMP '2015-12-28 15:42:56-08:00');
        ^
 ==
@@ -1959,7 +1968,7 @@ ALTERNATION GROUPS:
     add,millisecond
     add,microsecond
 --
-ERROR: Function not found: time_add; Did you mean date_add? [at 1:8]
+ERROR: Function not found: time_add; Did you mean timeadd? [at 1:8]
 select time_add(
        ^
 --
@@ -2039,7 +2048,7 @@ ALTERNATION GROUPS:
     TIMESTAMP_NANOS,add
     add
 --
-ERROR: Function not found: time_add; Did you mean date_add? [at 1:8]
+ERROR: Function not found: time_add; Did you mean timeadd? [at 1:8]
 select time_add(current_time, interval 1 nanosecond);
        ^
 --
@@ -2242,7 +2251,7 @@ ALTERNATION GROUPS:
     isoyear
     isoweek
 --
-ERROR: Function not found: time_diff; Did you mean date_diff? [at 2:3]
+ERROR: Function not found: time_diff; Did you mean timediff? [at 2:3]
   time_diff(
   ^
 ==
@@ -2277,7 +2286,7 @@ ALTERNATION GROUPS:
     TIMESTAMP_NANOS
     <empty>
 --
-ERROR: Function not found: time_diff; Did you mean date_diff? [at 1:8]
+ERROR: Function not found: time_diff; Did you mean timediff? [at 1:8]
 select time_diff(current_time, time '12:34:56.123456', nanosecond);
        ^
 ==
@@ -3711,8 +3720,9 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:datetime(DATETIME) -> DATETIME)
     | |   +-FunctionCall(ZetaSQL:current_datetime(optional(0) STRING) -> DATETIME)
     | +-$col2#2 :=
-    | | +-FunctionCall(ZetaSQL:time(TIME) -> TIME)
-    | |   +-FunctionCall(ZetaSQL:current_time(optional(0) STRING) -> TIME)
+    | | +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    | |   +-Cast(TIME -> STRING)
+    | |     +-FunctionCall(ZetaSQL:current_time(optional(0) STRING) -> TIME)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:datetime(STRING) -> DATETIME)
     | |   +-Literal(type=STRING, value="2000-01-02 03:04:05")
@@ -3736,7 +3746,7 @@ select time_diff(current_time, time '01:02:03', day)
 
 [language_features=V_1_2_CIVIL_TIME,V_1_3_EXTENDED_DATE_TIME_SIGNATURES]
 select
-  date_trunc('1999-12-31', year), date_trunc(@test_param_string, year),
+  date_trunc('year', '1999-12-31'), date_trunc('year', @test_param_string),
   datetime_trunc('1999-12-31', year), datetime_trunc(@test_param_string, year),
   timestamp_trunc('1999-12-31', year), timestamp_trunc(@test_param_string, year),
 --
@@ -3753,14 +3763,14 @@ QueryStmt
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
     +-expr_list=
     | +-$col1#1 :=
-    | | +-FunctionCall(ZetaSQL:date_trunc(DATE, ENUM<zetasql.functions.DateTimestampPart>) -> DATE)
+    | | +-FunctionCall(ZetaSQL:date_trunc(STRING, DATE) -> DATE)
+    | |   +-Literal(type=STRING, value="year")
     | |   +-Literal(type=DATE, value=1999-12-31)
-    | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=YEAR)
     | +-$col2#2 :=
-    | | +-FunctionCall(ZetaSQL:date_trunc(DATE, ENUM<zetasql.functions.DateTimestampPart>) -> DATE)
+    | | +-FunctionCall(ZetaSQL:date_trunc(STRING, DATE) -> DATE)
+    | |   +-Literal(type=STRING, value="year")
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
-    | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=YEAR)
+    | |     +-Parameter(type=STRING, name="test_param_string")
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:datetime_trunc(DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> DATETIME)
     | |   +-Literal(type=DATETIME, value=1999-12-31 00:00:00)
@@ -4379,20 +4389,9 @@ ERROR: TIMESTAMP_DIFF does not support the WEEK date part when the argument is T
 [language_features={{|V_1_3_ADDITIONAL_STRING_FUNCTIONS|V_1_2_CIVIL_TIME|V_1_3_ADDITIONAL_STRING_FUNCTIONS,V_1_2_CIVIL_TIME}}]
 select last_day(date '2020-07-10', SECOND)
 --
-ALTERNATION GROUPS:
-    <empty>
-    V_1_3_ADDITIONAL_STRING_FUNCTIONS
-    V_1_2_CIVIL_TIME
---
-ERROR: Function not found: last_day; Did you mean next_day? [at 1:8]
+ERROR: Unrecognized name: SECOND [at 1:36]
 select last_day(date '2020-07-10', SECOND)
-       ^
---
-ALTERNATION GROUP: V_1_3_ADDITIONAL_STRING_FUNCTIONS,V_1_2_CIVIL_TIME
---
-ERROR: LAST_DAY does not support the SECOND date part [at 1:8]
-select last_day(date '2020-07-10', SECOND)
-       ^
+                                   ^
 ==
 
 [language_features={{|TIME_BUCKET_FUNCTIONS|INTERVAL_TYPE|TIME_BUCKET_FUNCTIONS,INTERVAL_TYPE}}]
