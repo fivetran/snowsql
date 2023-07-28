@@ -7997,10 +7997,11 @@ function_call_expression_with_args_prefix:
     function_call_expression_base function_call_argument
       {
         absl::string_view func_name = parser->GetInputText(@1);
-        if(zetasql_base::CaseEqual(func_name, "datediff(") || zetasql_base::CaseEqual(func_name, "dateadd(") ||
-           zetasql_base::CaseEqual(func_name, "date_part(") || zetasql_base::CaseEqual(func_name, "date_trunc(") ||
-           zetasql_base::CaseEqual(func_name, "timeadd(") || zetasql_base::CaseEqual(func_name, "timediff(") ||
-           zetasql_base::CaseEqual(func_name, "timediff(")) {
+        std::unordered_set<std::string> functions {
+          "datediff(", "dateadd(", "date_part(", "date_trunc(", "timeadd(",
+          "timediff(", "timestampadd(",
+        };
+        if(functions.find(absl::AsciiStrToLower(std::string(func_name))) != functions.end()) {
           absl::string_view raw_argument = parser->GetInputText(@2);
           std::unordered_set<std::string> time_parts {
             "year", "y", "yy", "yyy", "yyyy", "yr", "years", "yrs",
@@ -8026,7 +8027,7 @@ function_call_expression_with_args_prefix:
             "timezone_hour", "tzh",
             "timezone_minute", "tzm"
           };
-          if(time_parts.find(absl::AsciiStrToLower(std::string(raw_argument))) != time_parts.end()){
+          if(time_parts.find(absl::AsciiStrToLower(std::string(raw_argument))) != time_parts.end()) {
             auto* literal = MAKE_NODE(ASTStringLiteral, @1);
             $$ = WithExtraChildren($1, {literal});
           } else {
