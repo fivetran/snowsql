@@ -1420,6 +1420,12 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "timediff(hour, '2021-01-01 00:00:00'::timestamp, '2023-07-24 14:30:00'::timestamp), timediff(yrs, '2021-01-01 00:00:00'::date, '2021-01-01'),"
       "timestamp_from_parts(2023, 07, 27, 10, 00, 00), timestamp_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_from_parts('1', '2', '3', '4', '5', '6'),"
       "timestamp_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_from_parts('2023-07-27', '10:00:00'), timestamp_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestamp_ltz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_ltz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_ltz_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_ltz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_ltz_from_parts('2023-07-27', '10:00:00'), timestamp_ltz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestamp_ntz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_ntz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_ntz_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_ntz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_ntz_from_parts('2023-07-27', '10:00:00'), timestamp_ntz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp),"
+      "timestamp_tz_from_parts(2023, 07, 27, 10, 00, 00), timestamp_tz_from_parts(1.1, 2.2, 3.3, 4.4, 5.5, 6.6), timestamp_tz_from_parts('1', '2', '3', '4', '5', '6'),"
+      "timestamp_tz_from_parts(date('2023-07-27'), to_time('10:00:00')), timestamp_tz_from_parts('2023-07-27', '10:00:00'), timestamp_tz_from_parts('2222-02-02t12:34:56-07:00'::timestamp, '2023-06-19t11:11:11-11:11'::timestamp), TIMESTAMP_TZ_FROM_PARTS(2013, 4, 5, 12, 00, 00, 0, 'America/Los_Angeles')"
     },
     {"StringAndBinary",
       "select "
