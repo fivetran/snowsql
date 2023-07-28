@@ -4800,6 +4800,13 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{int64_type, {string_type, date_type, date_type}, FN_TIMEDIFF_DATE},
        {int64_type, {string_type, timestamp_type, timestamp_type}, FN_TIMEDIFF_TIMESTAMP}},
       fn_options);
+
+    // TIMESTAMP_FROM_PARTS
+    InsertFunction(
+        functions, options, "timestamp_from_parts", SCALAR,
+        {{timestamp_type, {double_type, double_type, double_type, double_type, double_type, double_type, {double_type, OPTIONAL}}, FN_TIMESTAMP_FROM_PART_DOUBLE},
+         {timestamp_type, {date_type, time_type}, FN_TIMESTAMP_FROM_PART_DATE}},
+        fn_options);  
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
