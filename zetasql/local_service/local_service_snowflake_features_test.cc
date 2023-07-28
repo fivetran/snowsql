@@ -1438,6 +1438,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "trunc('2021-01-01'::date, 'month'), trunc('2021-02-28'::date, 'day'), trunc('2021-02-28'::timestamp, 'year'),"
       "year('2021-01-01'), quarter('2021-01-01'), month('2021-01-01'), day('2021-01-01'), dayofmonth('2021-01-01'), dayofyear('2021-01-01'), weekiso('2021-01-01'),"
       "yearofweek('2021-01-01'), yearofweekiso('2021-01-01'), dayofweek('2021-01-01'), dayofweekiso('2021-01-01'), week('2021-01-01'), weekofyear('2021-01-01'),"
+      "hour(to_time('10:33:00')), minute(to_time('10:33:00')), second(to_time('10:33:00')),"
     },
     {"StringAndBinary",
       "select "

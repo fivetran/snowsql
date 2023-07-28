@@ -4853,6 +4853,27 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       functions, options, "quarter", SCALAR,
       {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
       fn_options);
+
+  // HOUR
+  InsertFunction(
+      functions, options, "hour", SCALAR,
+      {{int64_type, {timestamp_type}, FN_HOUR_TIMESTAMP},
+      {int64_type, {time_type}, FN_HOUR_TIME}},
+      fn_options);
+
+  // MINUTE
+  InsertFunction(
+      functions, options, "minute", SCALAR,
+      {{int64_type, {timestamp_type}, FN_MINUTE_TIMESTAMP},
+      {int64_type, {time_type}, FN_MINUTE_TIME}},
+      fn_options);
+
+  // SECOND
+  InsertFunction(
+      functions, options, "second", SCALAR,
+      {{int64_type, {timestamp_type}, FN_SECOND_TIMESTAMP},
+      {int64_type, {time_type}, FN_SECOND_TIME}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
