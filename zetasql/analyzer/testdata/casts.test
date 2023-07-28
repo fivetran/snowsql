@@ -1333,15 +1333,31 @@ select {{ try_cast|cast}}(1 as TIMESTAMP)
 --
 ALTERNATION GROUP:  try_cast
 --
-ERROR: Invalid cast from INT64 to TIMESTAMP [at 1:18]
-select  try_cast(1 as TIMESTAMP)
-                 ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=TIMESTAMP, value=NULL, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: cast
 --
-ERROR: Invalid cast from INT64 to TIMESTAMP [at 1:13]
-select cast(1 as TIMESTAMP)
-            ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-Cast(INT64 -> TIMESTAMP)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select {{ try_cast|cast}}(`int64` as timestamp)
@@ -1349,15 +1365,34 @@ from SimpleTypes;
 --
 ALTERNATION GROUP:  try_cast
 --
-ERROR: Invalid cast from INT64 to TIMESTAMP [at 1:18]
-select  try_cast(`int64` as timestamp)
-                 ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-Cast(INT64 -> TIMESTAMP)
+    |     +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
+    |     +-return_null_on_error=TRUE
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1])
 --
 ALTERNATION GROUP: cast
 --
-ERROR: Invalid cast from INT64 to TIMESTAMP [at 1:13]
-select cast(`int64` as timestamp)
-            ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-Cast(INT64 -> TIMESTAMP)
+    |     +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1])
 ==
 
 select {{ try_cast|cast}}(timestamp as int64)
@@ -1381,15 +1416,34 @@ from SimpleTypes;
 --
 ALTERNATION GROUP:  try_cast
 --
-ERROR: Invalid cast from INT32 to TIMESTAMP [at 1:18]
-select  try_cast(`int32` as timestamp)
-                 ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-Cast(INT32 -> TIMESTAMP)
+    |     +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
+    |     +-return_null_on_error=TRUE
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0])
 --
 ALTERNATION GROUP: cast
 --
-ERROR: Invalid cast from INT32 to TIMESTAMP [at 1:13]
-select cast(`int32` as timestamp)
-            ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#19]
+    +-expr_list=
+    | +-$col1#19 :=
+    |   +-Cast(INT32 -> TIMESTAMP)
+    |     +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
+    +-input_scan=
+      +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0])
 ==
 
 select {{ try_cast|cast}}(timestamp as int32)
@@ -1412,15 +1466,31 @@ select {{ try_cast|cast}}(1 as TIMESTAMP)
 --
 ALTERNATION GROUP:  try_cast
 --
-ERROR: Invalid cast from INT64 to TIMESTAMP [at 1:18]
-select  try_cast(1 as TIMESTAMP)
-                 ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=TIMESTAMP, value=NULL, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 --
 ALTERNATION GROUP: cast
 --
-ERROR: Invalid cast from INT64 to TIMESTAMP [at 1:13]
-select cast(1 as TIMESTAMP)
-            ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 :=
+    |   +-Cast(INT64 -> TIMESTAMP)
+    |     +-Literal(type=INT64, value=1)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select {{ try_cast|cast}}(1.5 as TIMESTAMP);

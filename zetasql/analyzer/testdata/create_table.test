@@ -4418,9 +4418,18 @@ CreateTableStmt
 [no_enable_literal_replacement]
 create table t (a TIMESTAMP default (CAST("0001-01-01 00:00:00" as STRING)));
 --
-ERROR: Column default expression has type STRING which cannot be assigned to column type TIMESTAMP [at 1:38]
-create table t (a TIMESTAMP default (CAST("0001-01-01 00:00:00" as STRING)));
-                                     ^
+CreateTableStmt
++-name_path=t
++-column_definition_list=
+  +-ColumnDefinition
+    +-name="a"
+    +-type=TIMESTAMP
+    +-column=t.a#1
+    +-default_value=
+      +-ColumnDefaultValue
+        +-expression=
+        | +-Literal(type=TIMESTAMP, value=0001-01-01 07:52:58+00, has_explicit_type=TRUE)
+        +-sql='CAST("0001-01-01 00:00:00" as STRING)'
 ==
 
 # Column default value, column type is TIMESTAMP, default value is a quoted
@@ -4551,9 +4560,23 @@ create table t (a STRUCT<int64, TIMESTAMP> default
                    CAST("0001-01-01 00:00:00" as STRING))
 );
 --
-ERROR: Column default expression has type STRUCT<INT64, STRING> which cannot be assigned to column type STRUCT<INT64, TIMESTAMP> [at 2:19]
-                  (FARM_FINGERPRINT("foo"),
-                  ^
+CreateTableStmt
++-name_path=t
++-column_definition_list=
+  +-ColumnDefinition
+    +-name="a"
+    +-type=STRUCT<INT64, TIMESTAMP>
+    +-column=t.a#1
+    +-default_value=
+      +-ColumnDefaultValue
+        +-expression=
+        | +-MakeStruct
+        |   +-type=STRUCT<INT64, TIMESTAMP>
+        |   +-field_list=
+        |     +-FunctionCall(ZetaSQL:farm_fingerprint(STRING) -> INT64)
+        |     | +-Literal(type=STRING, value="foo")
+        |     +-Literal(type=TIMESTAMP, value=0001-01-01 07:52:58+00, has_explicit_type=TRUE)
+        +-sql='(FARM_FINGERPRINT("foo"),\n                   CAST("0001-01-01 00:00:00" as STRING))'
 ==
 
 # A STRUCT<int64, STRING> column with a STRUCT<STRING, STRING> default value

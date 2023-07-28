@@ -2427,9 +2427,56 @@ UNION ALL
  INTERSECT ALL
  select timestamp from SimpleTypes s1)
 --
-ERROR: Column 1 in INTERSECT ALL has incompatible types: DATE, TIMESTAMP [at 5:2]
- select timestamp from SimpleTypes s1)
- ^
+QueryStmt
++-output_column_list=
+| +-$union_all.timestamp#57 AS timestamp [TIMESTAMP]
++-query=
+  +-SetOperationScan
+    +-column_list=[$union_all.timestamp#57]
+    +-op_type=UNION_ALL
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-ProjectScan
+      | |   +-column_list=[SimpleTypes.timestamp#15]
+      | |   +-input_scan=
+      | |     +-TableScan(column_list=[SimpleTypes.timestamp#15], table=SimpleTypes, column_index_list=[14], alias="s1")
+      | +-output_column_list=[SimpleTypes.timestamp#15]
+      +-SetOperationItem
+        +-scan=
+        | +-ProjectScan
+        |   +-column_list=[$union_all2_cast.date#58]
+        |   +-expr_list=
+        |   | +-date#58 :=
+        |   |   +-Cast(DATE -> TIMESTAMP)
+        |   |     +-ColumnRef(type=DATE, column=$intersect_all.date#55)
+        |   +-input_scan=
+        |     +-SetOperationScan
+        |       +-column_list=[$intersect_all.date#55]
+        |       +-op_type=INTERSECT_ALL
+        |       +-input_item_list=
+        |         +-SetOperationItem
+        |         | +-scan=
+        |         | | +-ProjectScan
+        |         | |   +-column_list=[SimpleTypes.date#28]
+        |         | |   +-input_scan=
+        |         | |     +-TableScan(column_list=[SimpleTypes.date#28], table=SimpleTypes, column_index_list=[9], alias="s1")
+        |         | +-output_column_list=[SimpleTypes.date#28]
+        |         +-SetOperationItem
+        |           +-scan=
+        |           | +-ProjectScan
+        |           |   +-column_list=[$intersect_all2_cast.timestamp#56]
+        |           |   +-expr_list=
+        |           |   | +-timestamp#56 :=
+        |           |   |   +-Cast(TIMESTAMP -> DATE)
+        |           |   |     +-ColumnRef(type=TIMESTAMP, column=SimpleTypes.timestamp#51)
+        |           |   +-input_scan=
+        |           |     +-ProjectScan
+        |           |       +-column_list=[SimpleTypes.timestamp#51]
+        |           |       +-input_scan=
+        |           |         +-TableScan(column_list=[SimpleTypes.timestamp#51], table=SimpleTypes, column_index_list=[14], alias="s1")
+        |           +-output_column_list=[$intersect_all2_cast.timestamp#56]
+        +-output_column_list=[$union_all2_cast.date#58]
 ==
 
 # b/16799835

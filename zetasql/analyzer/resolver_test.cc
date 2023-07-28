@@ -669,6 +669,12 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
   TestCastExpression("cast(timestamp('2013-11-26 12:23:34') as timestamp)",
                      types::TimestampType());
 
+  TestCastExpression("CAST(10000000000 as timestamp)",
+                    types::TimestampType());
+
+  TestCastExpression("CAST(CAST(1 as INT64) as timestamp)",
+                    types::TimestampType());
+
   TestCastExpression("CAST(true as STRING)", types::StringType());
   TestCastExpression("CAST(false as STRING)", types::StringType());
 
@@ -744,11 +750,6 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
                        "Invalid cast from DATE to INT32");
   ResolveFunctionFails("cast(cast('2013-11-26' as date) as INT64)",
                        "Invalid cast from DATE to INT64");
-
-  ResolveFunctionFails("CAST(10000000000 as timestamp)",
-                       "Invalid cast from INT64 to TIMESTAMP");
-  ResolveFunctionFails("CAST(CAST(1 as INT64) as timestamp)",
-                       "Invalid cast from INT64 to TIMESTAMP");
 
   ResolveFunctionFails(
       "cast(cast('2013-11-26 12:23:34' as timestamp) as INT64)",
