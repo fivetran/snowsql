@@ -4771,7 +4771,7 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
           {double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(59)},
           {double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(59)},
           {double_type, OPTIONAL}}, FN_TIME_FROM_PARTS}},
-      fn_options);
+      FunctionOptions().set_alias_name("timefromparts"));
 
   // TIME_SLICE
   InsertFunction(
