@@ -477,9 +477,16 @@ QueryStmt
 
 select STRUCT<INT32, STRING>(1, timestamp '1678-01-01')
 --
-ERROR: Struct field 2 has type TIMESTAMP which does not coerce to STRING [at 1:33]
-select STRUCT<INT32, STRING>(1, timestamp '1678-01-01')
-                                ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRING>]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=STRUCT<INT32, STRING>, value={1, "1678-01-01 00:00:58-07:52"}, has_explicit_type=TRUE)
+    +-input_scan=
+      +-SingleRowScan
 ==
 
 select STRUCT<INT32, FLOAT>(1, cast(1 AS DOUBLE))

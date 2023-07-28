@@ -1501,6 +1501,8 @@ absl::Status GetNumericFunctions(TypeFactory* type_factory,
   const Type* bignumeric_type = type_factory->get_bignumeric();
   const Type* string_type = type_factory->get_string();
   const Type* rounding_mode_type = types::RoundingModeEnumType();
+  const Type* date_type = type_factory->get_date();
+  const Type* timestamp_type = type_factory->get_timestamp();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
@@ -1621,7 +1623,9 @@ absl::Status GetNumericFunctions(TypeFactory* type_factory,
        {bignumeric_type,
         {bignumeric_type, int64_type},
         FN_TRUNC_WITH_DIGITS_BIGNUMERIC,
-        has_bignumeric_type_argument}});
+        has_bignumeric_type_argument},
+        {date_type, {timestamp_type, string_type}, FN_TRUNC_DATE}},
+        FunctionOptions().set_alias_name("truncate"));
   InsertFunction(functions, options, "ceil", SCALAR,
                  {{float_type, {float_type}, FN_CEIL_FLOAT},
                   {double_type, {double_type}, FN_CEIL_DOUBLE},
@@ -4662,12 +4666,12 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
          {numeric_type, {variant_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_1},
          {numeric_type, {variant_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_2}});
 
-    // TO_TIME
+    // TIME, TO_TIME
     InsertFunction(
-        functions, options, "to_time", SCALAR,
+        functions, options, "time", SCALAR,
         {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIME_STRING},
-         {time_type, {variant_type}, FN_TO_TIME_VARIANT}});
-         //TODO: FunctionOptions().set_alias_name("time"));
+         {time_type, {variant_type}, FN_TO_TIME_VARIANT}},
+         FunctionOptions().set_alias_name("to_time"));
 
     // TO_TIMESTAMP, TO_TIMESTAMP_TZ
     InsertFunction(
@@ -4875,20 +4879,23 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
                                       const ZetaSQLBuiltinFunctionOptions& options,
                                       NameToFunctionMap* functions) {
   const Type* int64_type = type_factory->get_int64();
+  const Type* double_type = type_factory->get_double();
   const Type* string_type = type_factory->get_string();
   const Type* date_type = type_factory->get_date();
+  const Type* time_type = type_factory->get_time();
   const Type* datetime_type = type_factory->get_datetime();
   const Type* timestamp_type = type_factory->get_timestamp();
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
+  const FunctionArgumentType::ArgumentCardinality OPTIONAL = FunctionArgumentType::OPTIONAL;
 
   // ADD_MONTHS
   InsertFunction(
       functions, options, "add_months", SCALAR,
-      {{date_type, {date_type, int64_type}, FN_ADD_MONTHS_DATE},
-       {datetime_type, {datetime_type, int64_type}, FN_ADD_MONTHS_DATETIME},
-       {timestamp_type, {timestamp_type, int64_type}, FN_ADD_MONTHS_TIMESTAMP}},
+      {{date_type, {date_type, double_type}, FN_ADD_MONTHS_DATE},
+       {datetime_type, {datetime_type, double_type}, FN_ADD_MONTHS_DATETIME},
+       {timestamp_type, {timestamp_type, double_type}, FN_ADD_MONTHS_TIMESTAMP}},
       fn_options);
 
   // DAYNAME
@@ -4913,6 +4920,167 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{date_type, {date_type, string_type}, FN_NEXT_DAY_DATE},
        {date_type, {datetime_type, string_type}, FN_NEXT_DAY_DATETIME},
        {date_type, {timestamp_type, string_type}, FN_NEXT_DAY_TIMESTAMP}},
+      fn_options);
+
+  // PREVIOUS_DAY
+  InsertFunction(
+      functions, options, "previous_day", SCALAR,
+      {{date_type, {date_type, string_type}, FN_PREVIOUS_DAY_DATE},
+       {date_type, {datetime_type, string_type}, FN_PREVIOUS_DAY_DATETIME},
+       {date_type, {timestamp_type, string_type}, FN_PREVIOUS_DAY_TIMESTAMP}},
+      fn_options);
+
+  // DATEDIFF, TIMESTAMPDIFF
+  InsertFunction(
+      functions, options, "datediff", SCALAR,
+      {{int64_type, {string_type, date_type, date_type}, FN_DATEDIFF_DATE},
+       {int64_type, {string_type, timestamp_type, timestamp_type}, FN_DATEDIFF_TIMESTAMP}},
+      FunctionOptions().set_alias_name("timestampdiff"));
+
+  // DATEADD, TIMEADD, TIMESTAMPADD
+  InsertFunction(
+      functions, options, "dateadd", SCALAR,
+      {{date_type, {string_type, double_type, date_type}, FN_DATEADD_DATE},
+       {time_type, {string_type, double_type, time_type}, FN_DATEADD_TIME},
+       {timestamp_type, {string_type, int64_type, timestamp_type}, FN_DATEADD_TIMESTAMP}},
+      FunctionOptions().set_alias_name("timestampadd"));
+  // TIMEADD
+  InsertFunction(
+      functions, options, "timeadd", SCALAR,
+      {{date_type, {string_type, double_type, date_type}, FN_DATEADD_DATE},
+       {time_type, {string_type, double_type, time_type}, FN_DATEADD_TIME},
+       {timestamp_type, {string_type, int64_type, timestamp_type}, FN_DATEADD_TIMESTAMP}},
+      fn_options);
+
+  // DATE_PART
+  InsertFunction(
+      functions, options, "date_part", SCALAR,
+      {{int64_type, {string_type, date_type}, FN_DATE_PART_DATE},
+       {int64_type, {string_type, time_type}, FN_DATE_PART_TIME},
+       {int64_type, {string_type, timestamp_type}, FN_DATE_PART_TIMESTAMP}},
+      fn_options);
+
+  // DATE_TRUNC
+  InsertFunction(
+      functions, options, "date_trunc", SCALAR,
+      {{date_type, {string_type, date_type}, FN_DATE_TRUNC_DATE},
+       {time_type, {string_type, time_type}, FN_DATE_TRUNC_TIME},
+       {timestamp_type, {string_type, timestamp_type}, FN_DATE_TRUNC_TIMESTAMP}},
+      fn_options);
+
+  // LAST_DAY
+  InsertFunction(
+      functions, options, "last_day", SCALAR,
+      {{date_type, {date_type, {string_type, OPTIONAL}}, FN_LAST_DAY_DATE},
+       {date_type, {timestamp_type, {string_type, OPTIONAL}}, FN_LAST_DAY_TIMESTAMP}},
+      fn_options);
+
+  // TIME_FROM_PARTS
+  InsertFunction(
+      functions, options, "time_from_parts", SCALAR,
+      {{time_type, {{double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(23)},
+          {double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(59)},
+          {double_type, FunctionArgumentTypeOptions().set_min_value(0).set_max_value(59)},
+          {double_type, OPTIONAL}}, FN_TIME_FROM_PARTS}},
+      FunctionOptions().set_alias_name("timefromparts"));
+
+  // TIME_SLICE
+  InsertFunction(
+      functions, options, "time_slice", SCALAR,
+      {{timestamp_type, {timestamp_type, int64_type, string_type, {string_type, OPTIONAL}}, FN_TIME_SLICE_TIMESTAMP},
+       {date_type, {date_type, int64_type, string_type, {string_type, OPTIONAL}}, FN_TIME_SLICE_DATE}},
+       fn_options);
+
+  // DATE_FROM_PARTS
+  InsertFunction(
+      functions, options, "date_from_parts", SCALAR,
+      {{date_type, {double_type, double_type, double_type}, FN_DATE_FROM_PARTS}},
+      FunctionOptions().set_alias_name("datefromparts"));
+
+  // CONVERT_TIMEZONE
+  InsertFunction(
+      functions, options, "convert_timezone", SCALAR,
+      {{timestamp_type, {string_type, string_type, timestamp_type}, FN_CONVERT_TIMESTAMP_NTZ},
+       {timestamp_type, {string_type, timestamp_type}, FN_CONVERT_TIMESTAMP}},
+      fn_options);
+
+  // TIMEDIFF
+  InsertFunction(
+      functions, options, "timediff", SCALAR,
+      {{int64_type, {string_type, date_type, date_type}, FN_TIMEDIFF_DATE},
+       {int64_type, {string_type, timestamp_type, timestamp_type}, FN_TIMEDIFF_TIMESTAMP}},
+      fn_options);
+
+  // TIMESTAMP_FROM_PARTS, 
+  InsertFunction(
+      functions, options, "timestamp_from_parts", SCALAR,
+      {{timestamp_type, {double_type, double_type, double_type, double_type, double_type, double_type, {double_type, OPTIONAL}}, FN_TIMESTAMP_FROM_PART_DOUBLE},
+       {timestamp_type, {date_type, time_type}, FN_TIMESTAMP_FROM_PART_DATE}},
+      FunctionOptions().set_alias_name("timestampfromparts"));
+
+  // TIMESTAMP_LTZ_FROM_PARTS, TIMESTAMP_NTZ_FROM_PARTS
+  InsertFunction(
+    functions, options, "timestamp_ltz_from_parts", SCALAR,
+    {{timestamp_type, {double_type, double_type, double_type, double_type, double_type, double_type, {double_type, OPTIONAL}}, FN_TIMESTAMP_FROM_PART_DOUBLE},
+     {timestamp_type, {date_type, time_type}, FN_TIMESTAMP_FROM_PART_DATE}},
+    FunctionOptions().set_alias_name("timestamp_ntz_from_parts"));
+
+  // TIMESTAMP_TZ_FROM_PARTS
+  InsertFunction(
+      functions, options, "timestamp_tz_from_parts", SCALAR,
+      {{timestamp_type, {double_type, double_type, double_type, double_type, double_type, double_type, {double_type, OPTIONAL}, {string_type, OPTIONAL}}, FN_TIMESTAMP_TZ_FROM_PART_DOUBLE},
+       {timestamp_type, {date_type, time_type}, FN_TIMESTAMP_TZ_FROM_PART_DATE}},
+      fn_options);
+
+  // YEAR, YEAROFWEEK, YEAROFWEEKISO, DAY , DAYOFMONTH, DAYOFWEEK, DAYOFWEEKISO, DAYOFYEAR, WEEK , WEEKOFYEAR, WEEKISO, MONTH, QUARTER
+  InsertFunction(
+      functions, options, "year", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("yearofweek"));
+  InsertFunction(
+      functions, options, "yearofweekiso", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("day"));
+  InsertFunction(
+      functions, options, "dayofmonth", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("dayofweek"));
+  InsertFunction(
+      functions, options, "dayofweekiso", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("dayofyear"));
+  InsertFunction(
+      functions, options, "week", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("weekofyear"));
+  InsertFunction(
+      functions, options, "weekiso", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("month"));
+  InsertFunction(
+      functions, options, "quarter", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      fn_options);
+
+  // HOUR
+  InsertFunction(
+      functions, options, "hour", SCALAR,
+      {{int64_type, {timestamp_type}, FN_HOUR_TIMESTAMP},
+      {int64_type, {time_type}, FN_HOUR_TIME}},
+      fn_options);
+
+  // MINUTE
+  InsertFunction(
+      functions, options, "minute", SCALAR,
+      {{int64_type, {timestamp_type}, FN_MINUTE_TIMESTAMP},
+      {int64_type, {time_type}, FN_MINUTE_TIME}},
+      fn_options);
+
+  // SECOND
+  InsertFunction(
+      functions, options, "second", SCALAR,
+      {{int64_type, {timestamp_type}, FN_SECOND_TIMESTAMP},
+      {int64_type, {time_type}, FN_SECOND_TIME}},
       fn_options);
 }
 
