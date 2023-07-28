@@ -4455,12 +4455,12 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
          {numeric_type, {variant_type, {string_type, OPTIONAL}, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_1},
          {numeric_type, {variant_type, {int64_type, precision_arg}, {int64_type, OPTIONAL}}, FN_TO_DECIMAL_VARIANT_2}});
 
-    // TO_TIME
+    // TIME, TO_TIME
     InsertFunction(
-        functions, options, "to_time", SCALAR,
+        functions, options, "time", SCALAR,
         {{time_type, {string_type, {string_type, OPTIONAL}}, FN_TO_TIME_STRING},
-         {time_type, {variant_type}, FN_TO_TIME_VARIANT}});
-         //TODO: FunctionOptions().set_alias_name("time"));
+         {time_type, {variant_type}, FN_TO_TIME_VARIANT}},
+         FunctionOptions().set_alias_name("to_time"));
 
     // TO_TIMESTAMP, TO_TIMESTAMP_TZ
     InsertFunction(

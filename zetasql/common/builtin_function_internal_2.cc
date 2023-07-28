@@ -421,31 +421,6 @@ void GetTimeAndDatetimeConstructionAndConversionFunctions(
       FunctionSignatureOptions().add_required_language_feature(
           FEATURE_V_1_3_DATE_TIME_CONSTRUCTORS);
 
-  InsertFunction(functions, options, "time", SCALAR,
-                 {{time_type,
-                   {
-                       int64_type,  // hour
-                       int64_type,  // minute
-                       int64_type,  // second
-                   },
-                   FN_TIME_FROM_HOUR_MINUTE_SECOND},
-                  {time_type,
-                   {
-                       timestamp_type,           // timestamp
-                       {string_type, OPTIONAL},  // timezone
-                   },
-                   FN_TIME_FROM_TIMESTAMP},
-                  {time_type,
-                   {
-                       datetime_type,  // datetime
-                   },
-                   FN_TIME_FROM_DATETIME},
-                  {time_type,
-                   {time_type},
-                   FN_TIME_FROM_TIME,
-                   date_time_constructor_options}},
-                 time_and_datetime_function_options);
-
   InsertFunction(functions, options, "datetime", SCALAR,
                  {{datetime_type,
                    {

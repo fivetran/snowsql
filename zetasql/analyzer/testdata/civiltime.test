@@ -1494,8 +1494,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
-    |   +-FunctionCall(ZetaSQL:time(TIMESTAMP, optional(0) STRING) -> TIME)
-    |     +-Literal(type=TIMESTAMP, value=2015-12-28 23:42:56+00, has_explicit_type=TRUE)
+    |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08", has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -1519,8 +1519,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
-    |   +-FunctionCall(ZetaSQL:time(TIMESTAMP, optional(0) STRING) -> TIME)
-    |     +-Literal(type=TIMESTAMP, value=2015-12-28 23:42:56+00)
+    |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08:00")
     +-input_scan=
       +-SingleRowScan
 --
@@ -1534,8 +1534,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
-    |   +-FunctionCall(ZetaSQL:time(TIMESTAMP, optional(0) STRING) -> TIME)
-    |     +-Literal(type=TIMESTAMP, value=2015-12-28 23:42:56+00, has_explicit_type=TRUE)
+    |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08:00", has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -3720,8 +3720,9 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:datetime(DATETIME) -> DATETIME)
     | |   +-FunctionCall(ZetaSQL:current_datetime(optional(0) STRING) -> DATETIME)
     | +-$col2#2 :=
-    | | +-FunctionCall(ZetaSQL:time(TIME) -> TIME)
-    | |   +-FunctionCall(ZetaSQL:current_time(optional(0) STRING) -> TIME)
+    | | +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
+    | |   +-Cast(TIME -> STRING)
+    | |     +-FunctionCall(ZetaSQL:current_time(optional(0) STRING) -> TIME)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:datetime(STRING) -> DATETIME)
     | |   +-Literal(type=STRING, value="2000-01-02 03:04:05")
