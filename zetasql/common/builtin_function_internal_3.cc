@@ -4726,13 +4726,20 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {int64_type, {string_type, timestamp_type, timestamp_type}, FN_DATEDIFF_TIMESTAMP}},
       fn_options);
 
-  // DATEADD
+  // DATEADD, TIMEADD, TIMESTAMPADD
   InsertFunction(
       functions, options, "dateadd", SCALAR,
       {{date_type, {string_type, double_type, date_type}, FN_DATEADD_DATE},
        {time_type, {string_type, double_type, time_type}, FN_DATEADD_TIME},
        {timestamp_type, {string_type, int64_type, timestamp_type}, FN_DATEADD_TIMESTAMP}},
       FunctionOptions().set_alias_name("timestampadd"));
+  // TIMEADD
+  InsertFunction(
+      functions, options, "timeadd", SCALAR,
+      {{date_type, {string_type, double_type, date_type}, FN_DATEADD_DATE},
+       {time_type, {string_type, double_type, time_type}, FN_DATEADD_TIME},
+       {timestamp_type, {string_type, int64_type, timestamp_type}, FN_DATEADD_TIMESTAMP}},
+      fn_options);
 
   // DATE_PART
   InsertFunction(
@@ -4772,14 +4779,6 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{timestamp_type, {timestamp_type, int64_type, string_type, {string_type, OPTIONAL}}, FN_TIME_SLICE_TIMESTAMP},
        {date_type, {date_type, int64_type, string_type, {string_type, OPTIONAL}}, FN_TIME_SLICE_DATE}},
        fn_options);
-
-    // TIMEADD
-  InsertFunction(
-      functions, options, "timeadd", SCALAR,
-      {{time_type, {string_type, double_type, time_type}, FN_TIMEADD_TIME},
-       {timestamp_type, {string_type, double_type, timestamp_type}, FN_TIMEADD_TIMESTAMP},
-       {date_type, {string_type, double_type, date_type}, FN_TIMEADD_DATE}},
-      fn_options);
 
   // DATE_FROM_PARTS
   InsertFunction(
