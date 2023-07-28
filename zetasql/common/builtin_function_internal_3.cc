@@ -4823,6 +4823,36 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
       {{timestamp_type, {double_type, double_type, double_type, double_type, double_type, double_type, {double_type, OPTIONAL}, {string_type, OPTIONAL}}, FN_TIMESTAMP_TZ_FROM_PART_DOUBLE},
        {timestamp_type, {date_type, time_type}, FN_TIMESTAMP_TZ_FROM_PART_DATE}},
       fn_options);
+
+  // YEAR, YEAROFWEEK, YEAROFWEEKISO, DAY , DAYOFMONTH, DAYOFWEEK, DAYOFWEEKISO, DAYOFYEAR, WEEK , WEEKOFYEAR, WEEKISO, MONTH, QUARTER
+  InsertFunction(
+      functions, options, "year", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("yearofweek"));
+  InsertFunction(
+      functions, options, "yearofweekiso", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("day"));
+  InsertFunction(
+      functions, options, "dayofmonth", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("dayofweek"));
+  InsertFunction(
+      functions, options, "dayofweekiso", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("dayofyear"));
+  InsertFunction(
+      functions, options, "week", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("weekofyear"));
+  InsertFunction(
+      functions, options, "weekiso", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      FunctionOptions().set_alias_name("month"));
+  InsertFunction(
+      functions, options, "quarter", SCALAR,
+      {{int64_type, {timestamp_type}, FN_EXTRACT_PART}},
+      fn_options);
 }
 
 void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
