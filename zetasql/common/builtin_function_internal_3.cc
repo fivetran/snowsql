@@ -4719,12 +4719,12 @@ void GetSnowflakeDateAndTimeFunctions(TypeFactory* type_factory,
        {date_type, {timestamp_type, string_type}, FN_PREVIOUS_DAY_TIMESTAMP}},
       fn_options);
 
-  // DATEDIFF
+  // DATEDIFF, TIMESTAMPDIFF
   InsertFunction(
       functions, options, "datediff", SCALAR,
       {{int64_type, {string_type, date_type, date_type}, FN_DATEDIFF_DATE},
        {int64_type, {string_type, timestamp_type, timestamp_type}, FN_DATEDIFF_TIMESTAMP}},
-      fn_options);
+      FunctionOptions().set_alias_name("timestampdiff"));
 
   // DATEADD, TIMEADD, TIMESTAMPADD
   InsertFunction(

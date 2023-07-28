@@ -7999,7 +7999,7 @@ function_call_expression_with_args_prefix:
         absl::string_view func_name = parser->GetInputText(@1);
         std::unordered_set<std::string> functions {
           "datediff(", "dateadd(", "date_part(", "date_trunc(", "timeadd(",
-          "timediff(", "timestampadd(",
+          "timediff(", "timestampadd(", "timestampdiff(",
         };
         if(functions.find(absl::AsciiStrToLower(std::string(func_name))) != functions.end()) {
           absl::string_view raw_argument = parser->GetInputText(@2);
