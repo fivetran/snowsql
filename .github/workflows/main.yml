@@ -7,7 +7,54 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-linux:
+  build-test-macos:
+    runs-on: macos-11
+
+    env:
+      BAZEL_MACOS_CACHE_ARGS: --remote_cache=https://storage.googleapis.com/snowsql-bazel-macos-cache --google_credentials=service_account_credentials.json
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: prepare google service account credentials
+        run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
+        env:
+          GCS_SERVICE_ACCOUNT: ${{ secrets.GCS_SERVICE_ACCOUNT }}
+
+      - name: bazel build
+        run: |
+          npx @bazel/bazelisk build --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //zetasql/local_service:remote_server_executable -zetasql/jdk/... -java/... -javatests/...
+
+      - name: bazel test
+        run: |
+          npx @bazel/bazelisk test --features=-supports_dynamic_linker --config=clang --copt "-O3" ${BAZEL_MACOS_CACHE_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:remote_server_executable \
+            -zetasql/analyzer:analyzer_set_operation_test \
+            -zetasql/common:multiprecision_int_test \
+            -zetasql/public:proto_value_conversion_test \
+            -zetasql/public/functions:math_test \
+            -zetasql/reference_impl:algebrizer_test \
+            -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
+            -zetasql/tools/execute_query:execute_query_tool_test \
+            -zetasql/reference_impl:reference_compliance_test \
+            -zetasql/reference_impl:reference_compliance_test_minimal_rewrites\
+            -zetasql/reference_impl:reference_compliance_test_all_rewrites
+
+      - name: move file
+        run: |
+          mkdir -p darwin_x86_64
+          mv bazel-bin/zetasql/local_service/remote_server_executable darwin_x86_64
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          if-no-files-found: error
+          path: |
+            darwin_x86_64/
+            **/*.proto
+
+  build-test-linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +71,14 @@ jobs:
       - name: available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
+      - name: prepare google service account credentials
+        run: echo "$GCS_SERVICE_ACCOUNT" > service_account_credentials.json
+        env:
+          GCS_SERVICE_ACCOUNT: ${{ secrets.GCS_SERVICE_ACCOUNT }}
+
       - name: build
         run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker run -v service_account_credentials.json:/zetasql/service_account_credentials.json --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx build --file Dockerfile.build --output out --platform linux/amd64 .
           # for linux/arm64 it is very slow and we can't use it now
 
@@ -42,31 +94,7 @@ jobs:
           name: artifacts
           if-no-files-found: error
           path: |
-            nothing.txt
+            nothing.txt  
             linux_x86_64/
           # linux_arm_64/
           # nothing.txt needs to preserve directory structure
-
-  build-macos:
-    runs-on: macos-11
-  
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-          
-      - name: build
-        run: npx @bazel/bazelisk build --copt "-O3" --config=clang //zetasql/local_service:remote_server_executable
-
-      - name: move file
-        run: |
-          mkdir -p darwin_x86_64
-          mv bazel-bin/zetasql/local_service/remote_server_executable darwin_x86_64
-
-      - name: upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifacts
-          if-no-files-found: error
-          path: |
-            darwin_x86_64/
-            **/*.proto

@@ -21,8 +21,8 @@ package(default_visibility = [":zetasql_implementation"])
 package_group(
     name = "zetasql_implementation",
     packages = [
-        "//java/...",
-        "//javatests/...",
+        # "//java/...",
+        # "//javatests/...",
         "//zetasql/...",
     ],
 )
