@@ -1,0 +1,44 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Execute query",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/bazel-bin/zetasql/tools/execute_query/execute_query",
+      "args": ["select 1 + 1;"],
+      // "args": ["select * from UNNEST(GENERATE_ARRAY(0, 11)) as u, LATERAL (select * from UNNEST(GENERATE_ARRAY(0, 11)) as t where u = t);"],
+      // "args": ["select * from UNNEST(GENERATE_ARRAY(1, 10)) OFFSET 1 ROW FETCH FIRST 2 ROWS;"],
+      // "args": ["select * from (select a as a_1, a * 2 as a_2 from UNNEST(GENERATE_ARRAY(1, 10)) a) GROUP BY GROUPING SETS (a_1, a_2);"],
+      // "args": ["SELECT cast('12345' as NUMBER) int"],
+      // "args": ["SELECT TOP 5 * FROM UNNEST(GENERATE_ARRAY(0, 11));"],
+      "sourceMap": {
+        ".": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Execute analyzer test",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/bazel-bin/zetasql/analyzer/analyzer_aggregation_test",
+      "args": [
+        "--test_file=./zetasql/analyzer/testdata/aggregation.test"
+      ],
+      "sourceMap": {
+        ".": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Execute resolver test",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/bazel-bin/zetasql/analyzer/resolver_test",
+      "sourceMap": {
+        ".": "${workspaceFolder}"
+      }
+    },
+  ]
+}
