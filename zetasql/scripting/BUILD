@@ -265,7 +265,7 @@ cc_proto_library(
     deps = [":variable_proto"],
 )
 
-java_proto_library(
-    name = "variable_java_proto",
-    deps = [":variable_proto"],
-)
+# java_proto_library(
+#     name = "variable_java_proto",
+#     deps = [":variable_proto"],
+# )

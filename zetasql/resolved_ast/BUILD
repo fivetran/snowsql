@@ -96,11 +96,11 @@ cc_proto_library(
     deps = [":resolved_node_kind_proto"],
 )
 
-java_proto_library(
-    name = "resolved_node_kind_java_proto",
-    visibility = ["//visibility:public"],
-    deps = [":resolved_node_kind_proto"],
-)
+# java_proto_library(
+#     name = "resolved_node_kind_java_proto",
+#     visibility = ["//visibility:public"],
+#     deps = [":resolved_node_kind_proto"],
+# )
 
 # TODO How do I make the library with generated headers live in public/?
 cc_library(
@@ -526,11 +526,11 @@ cc_proto_library(
     deps = [":resolved_ast_enums_proto"],
 )
 
-java_proto_library(
-    name = "resolved_ast_enums_java_proto",
-    visibility = ["//visibility:public"],
-    deps = [":resolved_ast_enums_proto"],
-)
+# java_proto_library(
+#     name = "resolved_ast_enums_java_proto",
+#     visibility = ["//visibility:public"],
+#     deps = [":resolved_ast_enums_proto"],
+# )
 
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 
@@ -561,10 +561,10 @@ cc_proto_library(
     deps = [":resolved_ast_proto"],
 )
 
-java_proto_library(
-    name = "resolved_ast_java_proto",
-    deps = [":resolved_ast_proto"],
-)
+# java_proto_library(
+#     name = "resolved_ast_java_proto",
+#     deps = [":resolved_ast_proto"],
+# )
 
 proto_library(
     name = "serialization_proto",
@@ -582,10 +582,10 @@ cc_proto_library(
     deps = [":serialization_proto"],
 )
 
-java_proto_library(
-    name = "serialization_java_proto",
-    deps = [":serialization_proto"],
-)
+# java_proto_library(
+#     name = "serialization_java_proto",
+#     deps = [":serialization_proto"],
+# )
 
 cc_library(
     name = "rewrite_utils",

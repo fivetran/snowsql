@@ -158,15 +158,15 @@ cc_proto_library(
     deps = [":ast_enums_proto"],
 )
 
-java_proto_library(
-    name = "ast_enums_java_proto",
-    deps = [":ast_enums_proto"],
-)
+# java_proto_library(
+#     name = "ast_enums_java_proto",
+#     deps = [":ast_enums_proto"],
+# )
 
-java_proto_library(
-    name = "ast_java_proto",
-    deps = [":parse_tree_proto"],
-)
+# java_proto_library(
+#     name = "ast_java_proto",
+#     deps = [":parse_tree_proto"],
+# )
 
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 

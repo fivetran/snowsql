@@ -815,10 +815,10 @@ cc_proto_library(
     deps = ["datetime_proto"],
 )
 
-java_proto_library(
-    name = "datetime_java_proto",
-    deps = [":datetime_proto"],
-)
+# java_proto_library(
+#     name = "datetime_java_proto",
+#     deps = [":datetime_proto"],
+# )
 
 proto_library(
     name = "normalize_mode_proto",
@@ -830,10 +830,10 @@ cc_proto_library(
     deps = ["normalize_mode_proto"],
 )
 
-java_proto_library(
-    name = "normalize_mode_java_proto",
-    deps = [":normalize_mode_proto"],
-)
+# java_proto_library(
+#     name = "normalize_mode_java_proto",
+#     deps = [":normalize_mode_proto"],
+# )
 
 proto_library(
     name = "rounding_mode_proto",
@@ -848,10 +848,10 @@ cc_proto_library(
     deps = ["rounding_mode_proto"],
 )
 
-java_proto_library(
-    name = "rounding_mode_java_proto",
-    deps = [":rounding_mode_proto"],
-)
+# java_proto_library(
+#     name = "rounding_mode_java_proto",
+#     deps = [":rounding_mode_proto"],
+# )
 
 proto_library(
     name = "array_find_mode_proto",
