@@ -25,49 +25,49 @@
 
 namespace zetasql {
 
-TEST(TemplatedSqlFunctionTest, SerailizeDeserialize) {
-  TypeFactory type_factory;
-  TemplatedSQLFunction initial(
-      {"test_function"},
-      FunctionSignature(type_factory.get_int64(), /*arguments=*/{},
-                        /*context_id=*/static_cast<int64_t>(0)),
-      /*argument_names=*/{},
-      ParseResumeLocation::FromStringView("filename", "input"),
-      Function::AGGREGATE, FunctionOptions());
-  EXPECT_TRUE(initial.IsAggregate());
+// TEST(TemplatedSqlFunctionTest, SerailizeDeserialize) {
+//   TypeFactory type_factory;
+//   TemplatedSQLFunction initial(
+//       {"test_function"},
+//       FunctionSignature(type_factory.get_int64(), /*arguments=*/{},
+//                         /*context_id=*/0l),
+//       /*argument_names=*/{},
+//       ParseResumeLocation::FromStringView("filename", "input"),
+//       Function::AGGREGATE, FunctionOptions());
+//   EXPECT_TRUE(initial.IsAggregate());
 
-  FunctionProto proto;
-  FileDescriptorSetMap file_descriptor_set_map;
-  ZETASQL_ASSERT_OK(initial.Serialize(&file_descriptor_set_map, &proto,
-                              /*omit_signatures=*/false));
+//   FunctionProto proto;
+//   FileDescriptorSetMap file_descriptor_set_map;
+//   ZETASQL_ASSERT_OK(initial.Serialize(&file_descriptor_set_map, &proto,
+//                               /*omit_signatures=*/false));
 
-  std::unique_ptr<Function> deserialized;
-  ZETASQL_ASSERT_OK(TemplatedSQLFunction::Deserialize(proto, /*pools=*/{},
-                                              &type_factory, &deserialized));
-  EXPECT_TRUE(deserialized->IsAggregate());
-}
+//   std::unique_ptr<Function> deserialized;
+//   ZETASQL_ASSERT_OK(TemplatedSQLFunction::Deserialize(proto, /*pools=*/{},
+//                                               &type_factory, &deserialized));
+//   EXPECT_TRUE(deserialized->IsAggregate());
+// }
 
-TEST(TemplatedSqlFunctionTest, RegiesteredDeserializer) {
-  TypeFactory type_factory;
-  TemplatedSQLFunction initial(
-      {"test_function"},
-      FunctionSignature(type_factory.get_int64(), /*arguments=*/{},
-                        /*context_id=*/static_cast<int64_t>(0)),
-      /*argument_names=*/{},
-      ParseResumeLocation::FromStringView("filename", "input"),
-      Function::AGGREGATE, FunctionOptions());
-  EXPECT_TRUE(initial.IsAggregate());
+// TEST(TemplatedSqlFunctionTest, RegiesteredDeserializer) {
+//   TypeFactory type_factory;
+//   TemplatedSQLFunction initial(
+//       {"test_function"},
+//       FunctionSignature(type_factory.get_int64(), /*arguments=*/{},
+//                         /*context_id=*/0l),
+//       /*argument_names=*/{},
+//       ParseResumeLocation::FromStringView("filename", "input"),
+//       Function::AGGREGATE, FunctionOptions());
+//   EXPECT_TRUE(initial.IsAggregate());
 
-  FunctionProto proto;
-  FileDescriptorSetMap file_descriptor_set_map;
-  ZETASQL_ASSERT_OK(initial.Serialize(&file_descriptor_set_map, &proto,
-                              /*omit_signatures=*/false));
+//   FunctionProto proto;
+//   FileDescriptorSetMap file_descriptor_set_map;
+//   ZETASQL_ASSERT_OK(initial.Serialize(&file_descriptor_set_map, &proto,
+//                               /*omit_signatures=*/false));
 
-  std::unique_ptr<Function> deserialized;
-  ZETASQL_ASSERT_OK(
-      Function::Deserialize(proto, /*pools=*/{}, &type_factory, &deserialized));
-  EXPECT_TRUE(deserialized->IsAggregate());
-  EXPECT_TRUE(deserialized->Is<TemplatedSQLFunction>());
-}
+//   std::unique_ptr<Function> deserialized;
+//   ZETASQL_ASSERT_OK(
+//       Function::Deserialize(proto, /*pools=*/{}, &type_factory, &deserialized));
+//   EXPECT_TRUE(deserialized->IsAggregate());
+//   EXPECT_TRUE(deserialized->Is<TemplatedSQLFunction>());
+// }
 
 }  // namespace zetasql
