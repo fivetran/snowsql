@@ -76,7 +76,7 @@ static std::unique_ptr<const ResolvedJoinScan> MakeJoin(
       {} /* column_list */, type,
       MakeResolvedTableScan({} /* column_list */, t1, nullptr /* systime */),
       MakeResolvedTableScan({} /* column_list */, t2, nullptr /* systime */),
-      nullptr /* join_condition */);
+      nullptr /* join_condition */, false);
   ABSL_LOG(INFO) << "Made " << node->DebugString();
   return node;
 }
@@ -749,7 +749,7 @@ TEST_F(ResolvedASTTest, GetChildNodes) {
 
     auto join_scan = MakeResolvedJoinScan(
         {} /* column_list */, ResolvedJoinScan::INNER, std::move(table1_scan),
-        std::move(table2_scan), nullptr /* join_condition */);
+        std::move(table2_scan), nullptr /* join_condition */, false);
     std::vector<const ResolvedNode*> child_nodes;
     join_scan->GetChildNodes(&child_nodes);
     EXPECT_THAT(child_nodes, UnorderedElementsAreArray(expected_child_nodes));
@@ -758,7 +758,7 @@ TEST_F(ResolvedASTTest, GetChildNodes) {
     expected_child_nodes = {join_scan.get(), table2_scan2.get()};
     auto join_scan2 = MakeResolvedJoinScan(
         {} /* column_list */, ResolvedJoinScan::INNER, std::move(join_scan),
-        std::move(table2_scan2), nullptr /* join_condition */);
+        std::move(table2_scan2), nullptr /* join_condition */, false);
 
     // Check that grandchildren aren't returned. Also, check that the vector is
     // cleared before the children are added.
@@ -807,7 +807,7 @@ TEST_F(ResolvedASTTest, GetTreeDepth) {
                                               nullptr /* filter_expr */);
     auto join_scan = MakeResolvedJoinScan(
         {} /* column_list */, ResolvedJoinScan::INNER, std::move(filter_scan),
-        std::move(table1_scan), nullptr /* join_condition */);
+        std::move(table1_scan), nullptr /* join_condition */, false);
     EXPECT_EQ(join_scan->GetTreeDepth(), 3);
   }
 
@@ -819,7 +819,7 @@ TEST_F(ResolvedASTTest, GetTreeDepth) {
                                               nullptr /* filter_expr */);
     auto join_scan = MakeResolvedJoinScan(
         {} /* column_list */, ResolvedJoinScan::INNER, std::move(table1_scan),
-        std::move(filter_scan), nullptr /* join_condition */);
+        std::move(filter_scan), nullptr /* join_condition */, false);
     EXPECT_EQ(join_scan->GetTreeDepth(), 3);
   }
 
@@ -858,7 +858,7 @@ TEST_F(ResolvedASTTest, GetTreeDepth) {
         ResolvedFunctionCallBase::DEFAULT_ERROR_MODE);
     auto join_scan = MakeResolvedJoinScan(
         {} /* column_list */, ResolvedJoinScan::INNER, std::move(filter_scan),
-        std::move(table1_scan), std::move(func_and));
+        std::move(table1_scan), std::move(func_and), false);
     EXPECT_EQ(join_scan->GetTreeDepth(), 4);
   }
 }
@@ -882,10 +882,10 @@ TEST_F(ResolvedASTTest, GetDescendantsWithKinds) {
   const ResolvedTableScan* s4 = s4_uptr.get();
   auto join2 = MakeResolvedJoinScan(
       {} /* column_list */, ResolvedJoinScan::INNER, std::move(s2_uptr),
-      std::move(s3_uptr), nullptr /* join_condition */);
+      std::move(s3_uptr), nullptr /* join_condition */, false);
   auto join1 = MakeResolvedJoinScan(
       {} /* column_list */, ResolvedJoinScan::INNER, std::move(s1_uptr),
-      std::move(join2), nullptr /* join_condition */);
+      std::move(join2), nullptr /* join_condition */, false);
   const ResolvedJoinScan* j1 = join1.get();
   auto u1 = MakeResolvedSetOperationScan(
       {} /* column_list */, ResolvedSetOperationScan::UNION_ALL,

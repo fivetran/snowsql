@@ -385,6 +385,9 @@ std::string ASTJoin::SingleNodeDebugString() const {
   if (join_hint() != NO_JOIN_HINT) {
     join_attrs.push_back(GetSQLForJoinHint());
   }
+  if (lateral()) {
+    join_attrs.push_back("LATERAL");
+  }
 
   if (join_attrs.empty()) {
     return ASTNode::SingleNodeDebugString();

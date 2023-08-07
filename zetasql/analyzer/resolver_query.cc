@@ -7680,7 +7680,19 @@ absl::Status Resolver::ResolveJoin(
   std::shared_ptr<NameList> name_list(new NameList);
   std::unique_ptr<const ResolvedExpr> join_condition;
 
-  if (join->using_clause() != nullptr) {
+  if (join->lateral()) {
+    if (join->using_clause() != nullptr || join->on_clause() != nullptr) {
+      // ON or USING clause is not allowed with LATERAL join.
+      return MakeSqlErrorAtLocalNode(join->join_location())
+             << join_type_name << " LATERAL"
+             << " cannot have an immediately following ON or USING clause";
+    } else {
+      ZETASQL_RETURN_IF_ERROR(
+          name_list->MergeFrom(*name_list_lhs, join->lhs()->alias_location()));
+      ZETASQL_RETURN_IF_ERROR(
+          name_list->MergeFrom(*name_list_rhs, join->rhs()->alias_location()));
+    }
+  } else if (join->using_clause() != nullptr) {
     ZETASQL_RET_CHECK(join->on_clause() == nullptr);  // Can't have both.
     if (!expect_join_condition) {
       return MakeSqlErrorAt(join->using_clause())
@@ -7738,7 +7750,7 @@ absl::Status Resolver::ResolveJoin(
   *output_name_list = name_list;
 
   return AddScansForJoin(join, std::move(resolved_lhs), std::move(resolved_rhs),
-                         resolved_join_type, std::move(join_condition),
+                         resolved_join_type, join->lateral(), std::move(join_condition),
                          std::move(computed_columns), output);
 }
 
@@ -7746,6 +7758,7 @@ absl::Status Resolver::AddScansForJoin(
     const ASTJoin* join, std::unique_ptr<const ResolvedScan> resolved_lhs,
     std::unique_ptr<const ResolvedScan> resolved_rhs,
     ResolvedJoinScan::JoinType resolved_join_type,
+    bool lateral,
     std::unique_ptr<const ResolvedExpr> join_condition,
     std::vector<std::unique_ptr<const ResolvedComputedColumn>> computed_columns,
     std::unique_ptr<const ResolvedScan>* output_scan) {
@@ -7753,7 +7766,7 @@ absl::Status Resolver::AddScansForJoin(
       resolved_lhs->column_list(), resolved_rhs->column_list());
   std::unique_ptr<ResolvedJoinScan> resolved_join = MakeResolvedJoinScan(
       concat_columns, resolved_join_type, std::move(resolved_lhs),
-      std::move(resolved_rhs), std::move(join_condition));
+      std::move(resolved_rhs), std::move(join_condition), lateral);
 
   // If we have a join_type keyword hint (e.g. HASH JOIN or LOOKUP JOIN),
   // add it on the front of hint_list, before any long-form hints.
