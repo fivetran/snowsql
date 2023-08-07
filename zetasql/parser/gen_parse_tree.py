@@ -1613,6 +1613,10 @@ def main(argv):
       Indicates whether this join contains a COMMA JOIN on the lhs side of the
       tree path.
               """),
+          Field(
+              'lateral',
+              SCALAR_BOOL,
+              tag_id=15),
       ],
       extra_public_defs="""
   // Represents a parse error when parsing join expressions.

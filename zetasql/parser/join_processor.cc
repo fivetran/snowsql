@@ -417,7 +417,7 @@ static const ASTJoin::ParseError* GetParseError(const ASTNode* node) {
 ASTNode* JoinRuleAction(const zetasql_bison_parser::location& start_location,
                         const zetasql_bison_parser::location& end_location,
                         ASTNode* lhs, bool natural, ASTJoin::JoinType join_type,
-                        ASTJoin::JoinHint join_hint, ASTNode* hint,
+                        ASTJoin::JoinHint join_hint, ASTNode* hint, bool lateral,
                         ASTNode* table_primary,
                         ASTNode* on_or_using_clause_list,
                         ASTLocation* join_location, BisonParser* parser,
@@ -471,6 +471,7 @@ ASTNode* JoinRuleAction(const zetasql_bison_parser::location& start_location,
   join->set_natural(natural);
   join->set_join_type(join_type);
   join->set_join_hint(join_hint);
+  join->set_lateral(lateral);
   join->set_unmatched_join_count(unmatched_join_count - clause_count);
   join->set_contains_comma_join(ContainsCommaJoin(lhs));
 
@@ -511,7 +512,7 @@ ASTNode* JoinRuleAction(const zetasql_bison_parser::location& start_location,
 ASTNode* CommaJoinRuleAction(
     const zetasql_bison_parser::location& start_location,
     const zetasql_bison_parser::location& end_location, ASTNode* lhs,
-    ASTNode* table_primary, ASTLocation* comma_location, BisonParser* parser,
+    bool lateral, ASTNode* table_primary, ASTLocation* comma_location, BisonParser* parser,
     ErrorInfo* error_info) {
   if (IsTransformationNeeded(lhs)) {
     return MakeSyntaxError(
@@ -523,6 +524,7 @@ ASTNode* CommaJoinRuleAction(
       start_location, end_location, {lhs, comma_location, table_primary});
   comma_join->set_join_type(ASTJoin::COMMA);
   comma_join->set_contains_comma_join(true);
+  comma_join->set_lateral(lateral);
   return comma_join;
 }
 
