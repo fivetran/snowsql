@@ -4207,6 +4207,12 @@ void Unparser::visitASTInputOutputClause(const ASTInputOutputClause* node,
   node->output()->Accept(this, data);
 }
 
+void Unparser::visitASTTop(const ASTTop* node, void* data) {
+  println();
+  print("TOP");
+  UnparseChildrenWithSeparator(node, data, "");
+}
+
 void Unparser::visitASTSpannerTableOptions(const ASTSpannerTableOptions* node,
                                            void* data) {
   node->primary_key()->Accept(this, data);

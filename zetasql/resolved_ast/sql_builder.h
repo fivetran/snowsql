@@ -347,6 +347,7 @@ class SQLBuilder : public ResolvedASTVisitor {
   absl::Status VisitResolvedArrayScan(const ResolvedArrayScan* node) override;
   absl::Status VisitResolvedLimitOffsetScan(
       const ResolvedLimitOffsetScan* node) override;
+  absl::Status VisitResolvedTopScan(const ResolvedTopScan* node) override;
   absl::Status VisitResolvedSetOperationScan(
       const ResolvedSetOperationScan* node) override;
   absl::Status VisitResolvedOrderByScan(
