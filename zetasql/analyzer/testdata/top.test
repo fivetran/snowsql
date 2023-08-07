@@ -1,0 +1,289 @@
+# TOP tests.
+SELECT TOP 1 1;
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Literal(type=INT64, value=1)
+==
+
+SELECT TOP 0
+Key, Value
+FROM KeyValue;
+--
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS Key [INT64]
+| +-KeyValue.Value#2 AS Value [STRING]
++-query=
+  +-TopScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=KeyValue.[Key#1, Value#2]
+    |   +-input_scan=
+    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+    +-top=
+      +-Literal(type=INT64, value=0)
+==
+
+SELECT TOP -1
+Key, Value
+FROM KeyValue;
+--
+ERROR: Syntax error: Unexpected "-" [at 1:12]
+SELECT TOP -1
+           ^
+==
+
+SELECT TOP @test_param_int32 1;
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Cast(INT32 -> INT64)
+        +-Parameter(type=INT32, name="test_param_int32")
+==
+
+SELECT TOP @test_param_int64 1;
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Parameter(type=INT64, name="test_param_int64")
+==
+
+SELECT TOP @test_param_uint32 1;
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Cast(UINT32 -> INT64)
+        +-Parameter(type=UINT32, name="test_param_uint32")
+==
+
+SELECT TOP @test_param_uint64 1;
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Cast(UINT64 -> INT64)
+        +-Parameter(type=UINT64, name="test_param_uint64")
+==
+
+# Casting of literals to integer and parameters to int64 works.
+select top cast(1 as int32) 1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
+==
+
+select top cast(@test_param_int32 as int32) 1
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS `$col1` [INT64]
++-query=
+  +-TopScan
+    +-column_list=[$query.$col1#1]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=[$query.$col1#1]
+    |   +-expr_list=
+    |   | +-$col1#1 := Literal(type=INT64, value=1)
+    |   +-input_scan=
+    |     +-SingleRowScan
+    +-top=
+      +-Cast(INT32 -> INT64)
+        +-Parameter(type=INT32, name="test_param_int32")
+==
+
+select top cast(@test_param_int64 as int32) 1
+--
+ERROR: TOP expects an integer literal or parameter [at 1:12]
+select top cast(@test_param_int64 as int32) 1
+           ^
+==
+
+# Casting of other expressions does not work.
+select top cast(`key` as int64) 1
+from KeyValue
+--
+ERROR: Syntax error: Expected "@" or "@@" or integer literal but got identifier `key` [at 1:17]
+select top cast(`key` as int64) 1
+                ^
+==
+
+SELECT TOP 5 *
+FROM (SELECT TOP 10
+      Key, Value
+      FROM KeyValue)
+--
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS Key [INT64]
+| +-KeyValue.Value#2 AS Value [STRING]
++-query=
+  +-TopScan
+    +-column_list=KeyValue.[Key#1, Value#2]
+    +-input_scan=
+    | +-ProjectScan
+    |   +-column_list=KeyValue.[Key#1, Value#2]
+    |   +-input_scan=
+    |     +-TopScan
+    |       +-column_list=KeyValue.[Key#1, Value#2]
+    |       +-input_scan=
+    |       | +-ProjectScan
+    |       |   +-column_list=KeyValue.[Key#1, Value#2]
+    |       |   +-input_scan=
+    |       |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
+    |       +-top=
+    |         +-Literal(type=INT64, value=10)
+    +-top=
+      +-Literal(type=INT64, value=5)
+==
+
+select TOP 5 * from KeyValue kv1
+UNION ALL
+SELECT TOP 5 * from KeyValue kv2;
+--
+QueryStmt
++-output_column_list=
+| +-$union_all.Key#5 AS Key [INT64]
+| +-$union_all.Value#6 AS Value [STRING]
++-query=
+  +-SetOperationScan
+    +-column_list=$union_all.[Key#5, Value#6]
+    +-op_type=UNION_ALL
+    +-input_item_list=
+      +-SetOperationItem
+      | +-scan=
+      | | +-TopScan
+      | |   +-column_list=KeyValue.[Key#1, Value#2]
+      | |   +-input_scan=
+      | |   | +-ProjectScan
+      | |   |   +-column_list=KeyValue.[Key#1, Value#2]
+      | |   |   +-input_scan=
+      | |   |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+      | |   +-top=
+      | |     +-Literal(type=INT64, value=5)
+      | +-output_column_list=KeyValue.[Key#1, Value#2]
+      +-SetOperationItem
+        +-scan=
+        | +-TopScan
+        |   +-column_list=KeyValue.[Key#3, Value#4]
+        |   +-input_scan=
+        |   | +-ProjectScan
+        |   |   +-column_list=KeyValue.[Key#3, Value#4]
+        |   |   +-input_scan=
+        |   |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |   +-top=
+        |     +-Literal(type=INT64, value=5)
+        +-output_column_list=KeyValue.[Key#3, Value#4]
+==
+
+select top 3 key from KeyValue order by 1;
+--
+QueryStmt
++-output_column_list=
+| +-KeyValue.Key#1 AS key [INT64]
++-query=
+  +-TopScan
+    +-column_list=[KeyValue.Key#1]
+    +-is_ordered=TRUE
+    +-input_scan=
+    | +-OrderByScan
+    |   +-column_list=[KeyValue.Key#1]
+    |   +-is_ordered=TRUE
+    |   +-input_scan=
+    |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
+    |   +-order_by_item_list=
+    |     +-OrderByItem
+    |       +-column_ref=
+    |         +-ColumnRef(type=INT64, column=KeyValue.Key#1)
+    +-top=
+      +-Literal(type=INT64, value=3)
+==
+
+select TOP 18446744073709551615 key FROM KeyValue ORDER BY 1;
+--
+ERROR: Could not cast literal 18446744073709551615 to type INT64 [at 1:12]
+select TOP 18446744073709551615 key FROM KeyValue ORDER BY 1;
+           ^
+==
+
+# Should generate error.
+select top 1 1 limit 1;
+--
+ERROR: TOP and LIMIT are not allowed in one query [at 1:16]
+select top 1 1 limit 1;
+               ^
+==
