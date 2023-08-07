@@ -849,6 +849,7 @@ static absl::Status CreatePostGroupByNameScope(
 absl::Status Resolver::AddRemainingScansForSelect(
     const ASTSelect* select, const ASTOrderBy* order_by,
     const ASTLimitOffset* limit_offset,
+    const ASTTop* top,
     const NameScope* having_and_order_by_scope,
     std::unique_ptr<const ResolvedExpr>* resolved_having_expr,
     std::unique_ptr<const ResolvedExpr>* resolved_qualify_expr,
@@ -1062,6 +1063,16 @@ absl::Status Resolver::AddRemainingScansForSelect(
         select_column_state_list->resolved_column_list(),
         query_resolution_info->release_select_list_columns_to_compute(),
         std::move(*current_scan));
+  }
+
+  if (top != nullptr && limit_offset != nullptr) {
+    return MakeSqlErrorAt(limit_offset)
+           << "TOP and LIMIT are not allowed in one query";
+  }
+
+  if (top != nullptr) {
+    ZETASQL_RETURN_IF_ERROR(ResolveTopScan(
+        top, std::move(*current_scan), current_scan));
   }
 
   if (limit_offset != nullptr) {
@@ -1776,7 +1787,7 @@ absl::Status Resolver::ResolveSelect(
   // The current <scan> covers the FROM and WHERE clauses.  The remaining
   // scans are built on top of the current <scan>.
   ZETASQL_RETURN_IF_ERROR(AddRemainingScansForSelect(
-      select, order_by, limit_offset, having_and_order_by_scope.get(),
+      select, order_by, limit_offset, select->top(), having_and_order_by_scope.get(),
       &resolved_having_expr, &resolved_qualify_expr,
       query_resolution_info.get(), output_name_list, &scan));
 
@@ -5765,6 +5776,17 @@ absl::Status Resolver::ResolveLimitOrOffsetExpr(
   return absl::OkStatus();
 }
 
+absl::Status Resolver::ResolveTopExpr(
+    const ASTExpression* ast_expr, const char* clause_name,
+    ExprResolutionInfo* expr_resolution_info,
+    std::unique_ptr<const ResolvedExpr>* resolved_expr) {
+  ZETASQL_RETURN_IF_ERROR(ResolveExpr(ast_expr, expr_resolution_info, resolved_expr));
+  ABSL_DCHECK(resolved_expr != nullptr);
+  ZETASQL_RETURN_IF_ERROR(ValidateParameterOrLiteralAndCoerceToInt64IfNeeded(
+      clause_name, ast_expr, resolved_expr));
+  return absl::OkStatus();
+}
+
 absl::Status Resolver::ResolveHavingModifier(
     const ASTHavingModifier* ast_having_modifier,
     ExprResolutionInfo* expr_resolution_info,
@@ -5831,6 +5853,27 @@ absl::Status Resolver::ResolveLimitOffsetScan(
   *output = MakeResolvedLimitOffsetScan(column_list, std::move(input_scan),
                                         std::move(limit_expr),
                                         std::move(offset_expr));
+  return absl::OkStatus();
+}
+
+// Resolves a TopScan.
+absl::Status Resolver::ResolveTopScan(
+    const ASTTop* top,
+    std::unique_ptr<const ResolvedScan> input_scan,
+    std::unique_ptr<const ResolvedScan>* output) {
+  ExprResolutionInfo expr_resolution_info(empty_name_scope_.get(),
+                                          "TOP");
+
+  // Resolve and validate the TOP.
+  ZETASQL_RET_CHECK(top->top() != nullptr);
+  std::unique_ptr<const ResolvedExpr> top_expr;
+  ZETASQL_RETURN_IF_ERROR(ResolveTopExpr(top->top(),
+                                          /*clause_name=*/"TOP",
+                                          &expr_resolution_info, &top_expr));
+
+  const std::vector<ResolvedColumn>& column_list = input_scan->column_list();
+  *output = MakeResolvedTopScan(column_list, std::move(input_scan),
+                                std::move(top_expr));
   return absl::OkStatus();
 }
 
@@ -5993,7 +6036,7 @@ absl::Status Resolver::ResolveFromClauseAndCreateScan(
     for (int i = 0; i < select->num_children(); ++i) {
       const ASTNode* child = select->child(i);
       if (child != select->select_list() && child != select->select_as() &&
-          child != select->hint()) {
+          child != select->hint() && child != select->top()) {
         ZETASQL_RET_CHECK_FAIL() << "Select without FROM clause has child of type "
                          << child->GetNodeKindString()
                          << " that wasn't caught with an error";

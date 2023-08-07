@@ -320,6 +320,7 @@ constexpr KeywordInfoPOD kAllKeywords[] = {
     {"time", KW_TIME},
     {"timestamp", KW_TIMESTAMP},
     {"to", KW_TO, kReserved},
+    {"top", KW_TOP, kReserved},
     {"transaction", KW_TRANSACTION},
     {"transform", KW_TRANSFORM},
     {"treat", KW_TREAT, kReserved},
