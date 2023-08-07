@@ -2879,7 +2879,7 @@ class Resolver {
   absl::Status AddScansForJoin(
       const ASTJoin* join, std::unique_ptr<const ResolvedScan> resolved_lhs,
       std::unique_ptr<const ResolvedScan> resolved_rhs,
-      ResolvedJoinScan::JoinType resolved_join_type,
+      ResolvedJoinScan::JoinType resolved_join_type, bool lateral,
       std::unique_ptr<const ResolvedExpr> join_condition,
       std::vector<std::unique_ptr<const ResolvedComputedColumn>>
           computed_columns,
