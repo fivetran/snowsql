@@ -1453,6 +1453,17 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "regexp_substr_all('a1_a2a3_a4A5a6', 'a[[:digit:]]'),"
       "from table_1"
     },
+    {"Numeric",
+      "select "
+      "pi(),"
+      "degrees(1::float), degrees(1::double),"
+      "factorial(1::float), factorial(1::double),"
+      "haversine(1::float, 1::float, 1::float, 1::float), haversine(1::double, 1::double, 1::double, 1::double),"
+      "radians(60), radians(60::float), radians(60::double),"
+      "square(60), square(60::float), square(60::double),"
+      "truncate(12.2), truncate(12.2, 2),"
+      "trunc(12.2), trunc(12.2, 2),"
+    },
     {"SemiStructured",
       "select "
       "parse_json('{\"name\":\"John\"}'),"
