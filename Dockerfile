@@ -9,23 +9,20 @@ RUN apt-get update && apt-get -qq install -y default-jre default-jdk
 
 # Install prerequisites for bazel
 RUN apt-get update && apt-get -qq install curl tar build-essential wget        \
-    python python3 zip unzip nodejs npm \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    python python3 zip unzip
 
 ENV BAZEL_VERSION=6.2.0
 
 # Install bazel from source
-# RUN mkdir -p bazel                                                          && \
-#     cd bazel                                                                && \
-#     wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-dist.zip &&\
-#     unzip bazel-${BAZEL_VERSION}-dist.zip                                              && \
-#     rm -rf bazel-${BAZEL_VERSION}-dist.zip
+RUN mkdir -p bazel                                                          && \
+    cd bazel                                                                && \
+    wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-dist.zip &&\
+    unzip bazel-${BAZEL_VERSION}-dist.zip                                              && \
+    rm -rf bazel-${BAZEL_VERSION}-dist.zip
 ENV PATH=$PATH:/usr/bin:/usr/local/bin
 ENV EXTRA_BAZEL_ARGS="--tool_java_runtime_version=local_jdk"
-# RUN cd bazel && bash ./compile.sh
-# RUN cp /bazel/output/bazel  /usr/local/bin
+RUN cd bazel && bash ./compile.sh
+RUN cp /bazel/output/bazel  /usr/local/bin
 
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive"                         \
     TZ="America/Los_Angeles" apt-get install -y tzdata
@@ -39,10 +36,7 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test                          && \
     apt-get -qq install -y ca-certificates libgnutls30                      && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 90          \
                         --slave   /usr/bin/g++ g++ /usr/bin/g++-11          && \
-    update-alternatives --set gcc /usr/bin/gcc-11 \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    update-alternatives --set gcc /usr/bin/gcc-11
 
 COPY . /zetasql
 
@@ -50,4 +44,4 @@ ENV BAZEL_ARGS="--config=g++"
 
 RUN cd zetasql                                                              && \
     CC=/usr/bin/gcc CXX=/usr/bin/g++                                           \
-    npx @bazel/bazelisk build ${BAZEL_ARGS} ...
+    bazel build ${BAZEL_ARGS} ...
