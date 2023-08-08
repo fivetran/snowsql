@@ -4495,6 +4495,7 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
   const Type* time_type = type_factory->get_time();
   const Type* variant_type = type_factory->get_variant();
   const Type* object_type = type_factory->get_object();
+  const Type* bytes_type = type_factory->get_bytes();
 
   FunctionSignatureOptions has_numeric_type_argument;
   has_numeric_type_argument.set_constraints(&HasNumericTypeArgument);
@@ -4562,7 +4563,8 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
        {variant_type, {bool_type}, FN_TO_VARIANT_BOOL},
        {variant_type, {date_type}, FN_TO_VARIANT_DATE},
        {variant_type, {datetime_type}, FN_TO_VARIANT_DATETIME},
-       {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP}});
+       {variant_type, {timestamp_type}, FN_TO_VARIANT_TIMESTAMP},
+       {variant_type, {bytes_type}, FN_TO_VARIANT_BYTES}});
 
   // TO_VARCHAR
   InsertFunction(
@@ -4587,6 +4589,17 @@ void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
         functions, options, "to_object", SCALAR,
         {{object_type, {variant_type}, FN_TO_OBJECT_VARIANT},
          {object_type, {object_type}, FN_TO_OBJECT_OBJECT}});
+
+    // TO_BINARY
+    InsertFunction(
+        functions, options, "to_binary", SCALAR,
+        {{bytes_type, {string_type, {string_type, OPTIONAL}}, FN_TO_BINARY_STRING},
+         {bytes_type, {variant_type}, FN_TO_BINARY_VARIANT}});
+
+    // TRY_TO_BINARY
+    InsertFunction(
+        functions, options, "try_to_binary", SCALAR,
+        {{bytes_type, {string_type, {string_type, OPTIONAL}}, FN_TRY_TO_BINARY_STRING}});
 }
 
 void GetSnowflakeDataGenerationFunctions(TypeFactory* type_factory,
@@ -4822,6 +4835,12 @@ void GetSnowflakeSemiStructuredFunctions(TypeFactory* type_factory,
   // AS_OBJECT
   InsertFunction(
       functions, options, "as_object", SCALAR,
+      {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
+      fn_options);
+
+  // AS_BINARY
+  InsertFunction(
+      functions, options, "as_binary", SCALAR,
       {{object_type, {ARG_TYPE_ANY_1}, FN_AS_OBJECT}},
       fn_options);
 }

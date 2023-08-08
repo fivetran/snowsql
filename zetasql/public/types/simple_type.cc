@@ -146,6 +146,9 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"char", {TYPE_STRING, false}},
       {"character", {TYPE_STRING, false}},
       {"text", {TYPE_STRING, false}},
+
+      {"binary", {TYPE_BYTES, false}},
+      {"varbinary", {TYPE_BYTES, false}},
   };
   return *result;
 }
