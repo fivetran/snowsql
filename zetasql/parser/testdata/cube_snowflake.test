@@ -1,0 +1,269 @@
+[language_features=V_1_4_GROUPING_SETS]
+SELECT x, SUM(y) FROM T GROUP BY CUBE(x);
+--
+QueryStatement [0-40] [SELECT x,...BY CUBE(x)]
+  Query [0-40] [SELECT x,...BY CUBE(x)]
+    Select [0-40] [SELECT x,...BY CUBE(x)]
+      SelectList [7-16] [x, SUM(y)]
+        SelectColumn [7-8] [x]
+          PathExpression [7-8] [x]
+            Identifier(x) [7-8] [x]
+        SelectColumn [10-16] [SUM(y)]
+          FunctionCall [10-16] [SUM(y)]
+            PathExpression [10-13] [SUM]
+              Identifier(SUM) [10-13] [SUM]
+            PathExpression [14-15] [y]
+              Identifier(y) [14-15] [y]
+      FromClause [17-23] [FROM T]
+        TablePathExpression [22-23] [T]
+          PathExpression [22-23] [T]
+            Identifier(T) [22-23] [T]
+      GroupBy [24-40] [GROUP BY CUBE(x)]
+        GroupingItem [33-40] [CUBE(x)]
+          Cube [33-40] [CUBE(x)]
+            PathExpression [38-39] [x]
+              Identifier(x) [38-39] [x]
+--
+SELECT
+  x,
+  SUM(y)
+FROM
+  T
+GROUP BY CUBE(x)
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, "foo", "bar")
+FROM T GROUP BY CUBE(x, y);
+--
+QueryStatement [0-90] [SELECT x,...CUBE(x, y)]
+  Query [0-90] [SELECT x,...CUBE(x, y)]
+    Select [0-90] [SELECT x,...CUBE(x, y)]
+      SelectList [7-63] [x, y, GROUPING...foo", "bar")]
+        SelectColumn [7-8] [x]
+          PathExpression [7-8] [x]
+            Identifier(x) [7-8] [x]
+        SelectColumn [10-11] [y]
+          PathExpression [10-11] [y]
+            Identifier(y) [10-11] [y]
+        SelectColumn [13-28] [GROUPING(x) = 1]
+          BinaryExpression(=) [13-28] [GROUPING(x) = 1]
+            FunctionCall [13-24] [GROUPING(x)]
+              PathExpression [13-21] [GROUPING]
+                Identifier(`GROUPING`) [13-21] [GROUPING]
+              PathExpression [22-23] [x]
+                Identifier(x) [22-23] [x]
+            IntLiteral(1) [27-28] [1]
+        SelectColumn [30-63] [IF(GROUPING...foo", "bar")]
+          FunctionCall [30-63] [IF(GROUPING...foo", "bar")]
+            PathExpression [30-32] [IF]
+              Identifier(`IF`) [30-32] [IF]
+            BinaryExpression(=) [33-48] [GROUPING(y) = 0]
+              FunctionCall [33-44] [GROUPING(y)]
+                PathExpression [33-41] [GROUPING]
+                  Identifier(`GROUPING`) [33-41] [GROUPING]
+                PathExpression [42-43] [y]
+                  Identifier(y) [42-43] [y]
+              IntLiteral(0) [47-48] [0]
+            StringLiteral("foo") [50-55] ["foo"]
+            StringLiteral("bar") [57-62] ["bar"]
+      FromClause [64-70] [FROM T]
+        TablePathExpression [69-70] [T]
+          PathExpression [69-70] [T]
+            Identifier(T) [69-70] [T]
+      GroupBy [71-90] [GROUP BY CUBE(x, y)]
+        GroupingItem [80-90] [CUBE(x, y)]
+          Cube [80-90] [CUBE(x, y)]
+            PathExpression [85-86] [x]
+              Identifier(x) [85-86] [x]
+            PathExpression [88-89] [y]
+              Identifier(y) [88-89] [y]
+--
+SELECT
+  x,
+  y,
+  `GROUPING`(x) = 1,
+  `IF`(`GROUPING`(y) = 0, "foo", "bar")
+FROM
+  T
+GROUP BY CUBE(x, y)
+
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x, SUM(y) FROM T GROUP @{hint_name=5} BY CUBE(x);
+--
+QueryStatement [0-55] [SELect x,...BY CUBE(x)]
+  Query [0-55] [SELect x,...BY CUBE(x)]
+    Select [0-55] [SELect x,...BY CUBE(x)]
+      SelectList [7-16] [x, SUM(y)]
+        SelectColumn [7-8] [x]
+          PathExpression [7-8] [x]
+            Identifier(x) [7-8] [x]
+        SelectColumn [10-16] [SUM(y)]
+          FunctionCall [10-16] [SUM(y)]
+            PathExpression [10-13] [SUM]
+              Identifier(SUM) [10-13] [SUM]
+            PathExpression [14-15] [y]
+              Identifier(y) [14-15] [y]
+      FromClause [17-23] [FROM T]
+        TablePathExpression [22-23] [T]
+          PathExpression [22-23] [T]
+            Identifier(T) [22-23] [T]
+      GroupBy [24-55] [GROUP @{hint_name...BY CUBE(x)]
+        Hint [30-44] [@{hint_name=5}]
+          HintEntry [32-43] [hint_name=5]
+            Identifier(hint_name) [32-41] [hint_name]
+            IntLiteral(5) [42-43] [5]
+        GroupingItem [48-55] [CUBE(x)]
+          Cube [48-55] [CUBE(x)]
+            PathExpression [53-54] [x]
+              Identifier(x) [53-54] [x]
+--
+SELECT
+  x,
+  SUM(y)
+FROM
+  T
+GROUP @{ hint_name = 5 } BY CUBE(x)
+
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x, y, z, GROUPING (
+x)
+FROM T
+GROUP BY 1, 2, CUBE (
+x + 2, y = 'foo', z), z, x, CUBE(y, x
+);
+--
+QueryStatement [0-98] [SELect x,...CUBE(y, x )]
+  Query [0-98] [SELect x,...CUBE(y, x )]
+    Select [0-98] [SELect x,...CUBE(y, x )]
+      SelectList [7-29] [x, y, z, GROUPING ( x)]
+        SelectColumn [7-8] [x]
+          PathExpression [7-8] [x]
+            Identifier(x) [7-8] [x]
+        SelectColumn [10-11] [y]
+          PathExpression [10-11] [y]
+            Identifier(y) [10-11] [y]
+        SelectColumn [13-14] [z]
+          PathExpression [13-14] [z]
+            Identifier(z) [13-14] [z]
+        SelectColumn [16-29] [GROUPING ( x)]
+          FunctionCall [16-29] [GROUPING ( x)]
+            PathExpression [16-24] [GROUPING]
+              Identifier(`GROUPING`) [16-24] [GROUPING]
+            PathExpression [27-28] [x]
+              Identifier(x) [27-28] [x]
+      FromClause [30-36] [FROM T]
+        TablePathExpression [35-36] [T]
+          PathExpression [35-36] [T]
+            Identifier(T) [35-36] [T]
+      GroupBy [37-98] [GROUP BY 1...CUBE(y, x )]
+        GroupingItem [46-47] [1]
+          IntLiteral(1) [46-47] [1]
+        GroupingItem [49-50] [2]
+          IntLiteral(2) [49-50] [2]
+        GroupingItem [52-79] [CUBE ( x + 2, y = 'foo', z)]
+          Cube [52-79] [CUBE ( x + 2, y = 'foo', z)]
+            BinaryExpression(+) [59-64] [x + 2]
+              PathExpression [59-60] [x]
+                Identifier(x) [59-60] [x]
+              IntLiteral(2) [63-64] [2]
+            BinaryExpression(=) [66-75] [y = 'foo']
+              PathExpression [66-67] [y]
+                Identifier(y) [66-67] [y]
+              StringLiteral('foo') [70-75] ['foo']
+            PathExpression [77-78] [z]
+              Identifier(z) [77-78] [z]
+        GroupingItem [81-82] [z]
+          PathExpression [81-82] [z]
+            Identifier(z) [81-82] [z]
+        GroupingItem [84-85] [x]
+          PathExpression [84-85] [x]
+            Identifier(x) [84-85] [x]
+        GroupingItem [87-98] [CUBE(y, x )]
+          Cube [87-98] [CUBE(y, x )]
+            PathExpression [92-93] [y]
+              Identifier(y) [92-93] [y]
+            PathExpression [95-96] [x]
+              Identifier(x) [95-96] [x]
+--
+SELECT
+  x,
+  y,
+  z,
+  `GROUPING`(x)
+FROM
+  T
+GROUP BY 1, 2, CUBE(x + 2, y = 'foo', z), z, x, CUBE(y, x)
+
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x FROM T GROUP BY CUBE();
+--
+ERROR: Syntax error: Unexpected ")" [at 1:31]
+SELect x FROM T GROUP BY CUBE();
+                              ^
+
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x FROM T GROUP BY CUBE(x;
+--
+ERROR: Syntax error: Expected ")" or "," but got ";" [at 1:32]
+SELect x FROM T GROUP BY CUBE(x;
+                               ^
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x FROM T GROUP BY CUBE x;
+--
+ERROR: Syntax error: Expected "(" but got identifier "x" [at 1:31]
+SELect x FROM T GROUP BY CUBE x;
+                              ^
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x FROM T GROUP BY CUBE;
+--
+ERROR: Syntax error: Expected "(" but got ";" [at 1:30]
+SELect x FROM T GROUP BY CUBE;
+                             ^
+
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect x FROM T GROUP BY x, y WITH CUBE;
+--
+ERROR: Syntax error: Expected end of input but got keyword WITH [at 1:31]
+SELect x FROM T GROUP BY x, y WITH CUBE;
+                              ^
+==
+
+[language_features=V_1_4_GROUPING_SETS]
+SELect `cube` FROM T GROUP BY `cube`;
+--
+QueryStatement [0-36] [SELect `cube...BY `cube`]
+  Query [0-36] [SELect `cube...BY `cube`]
+    Select [0-36] [SELect `cube...BY `cube`]
+      SelectList [7-13] [`cube`]
+        SelectColumn [7-13] [`cube`]
+          PathExpression [7-13] [`cube`]
+            Identifier(`cube`) [7-13] [`cube`]
+      FromClause [14-20] [FROM T]
+        TablePathExpression [19-20] [T]
+          PathExpression [19-20] [T]
+            Identifier(T) [19-20] [T]
+      GroupBy [21-36] [GROUP BY `cube`]
+        GroupingItem [30-36] [`cube`]
+          PathExpression [30-36] [`cube`]
+            Identifier(`cube`) [30-36] [`cube`]
+--
+SELECT
+  `cube`
+FROM
+  T
+GROUP BY `cube`
