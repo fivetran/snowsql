@@ -23,13 +23,13 @@ ENV BAZEL_ARGS=--config=clang --remote_cache=https://storage.googleapis.com/snow
 
 RUN npx @bazel/bazelisk build ${BAZEL_ARGS} --copt "-O3" //zetasql/local_service:remote_server_executable -- -zetasql/jdk/... -java/... -javatests/...
 
-# RUN npx @bazel/bazelisk test --test_output=errors ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:remote_server_executable \
-#       -zetasql/public:proto_value_conversion_test \
-#       -zetasql/reference_impl:algebrizer_test \
-#       -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
-#       -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
-#       -zetasql/reference_impl:reference_compliance_test \
-#       -zetasql/reference_impl:reference_compliance_test_all_rewrites
+RUN npx @bazel/bazelisk test --test_output=errors ${BAZEL_ARGS} -- //... -zetasql/jdk/... -java/... -javatests/... -zetasql/local_service:remote_server_executable \
+      -zetasql/public:proto_value_conversion_test \
+      -zetasql/reference_impl:algebrizer_test \
+      -zetasql/resolved_ast:resolved_ast_deep_copy_visitor_test \
+      -zetasql/reference_impl:reference_compliance_test_minimal_rewrites \
+      -zetasql/reference_impl:reference_compliance_test \
+      -zetasql/reference_impl:reference_compliance_test_all_rewrites
 
 FROM alpine
 ARG TARGETPLATFORM
