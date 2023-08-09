@@ -78,7 +78,7 @@ jobs:
 
       - name: build
         run: |
-          docker run -v service_account_credentials.json:/zetasql/service_account_credentials.json --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx build --file Dockerfile.build --output out --platform linux/amd64 .
           # for linux/arm64 it is very slow and we can't use it now
 
