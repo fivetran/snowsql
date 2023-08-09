@@ -19,7 +19,7 @@ RUN apt-get update \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/*
 
-ENV BAZEL_ARGS=--config=clang --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json
+ENV BAZEL_ARGS="--config=clang --remote_cache=https://storage.googleapis.com/snowsql-bazel-linux-cache --google_credentials=service_account_credentials.json"
 
 RUN npx @bazel/bazelisk build ${BAZEL_ARGS} --copt "-O3" //zetasql/local_service:remote_server_executable -- -zetasql/jdk/... -java/... -javatests/...
 
