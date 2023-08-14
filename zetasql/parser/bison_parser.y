@@ -4732,6 +4732,24 @@ select_column:
         auto* alias = MAKE_NODE(ASTAlias, @2, @3, {$3});
         $$ = MAKE_NODE(ASTSelectColumn, @$, {$1, alias});
       }
+    | expression "AS" string_literal
+      {
+        absl::string_view raw_input = parser->GetInputText(@3);
+        if(raw_input.size() < 2) {
+          YYERROR_AND_ABORT_AT(@3,
+                               "Syntax error: string literal is too short");
+        }
+        if(raw_input[0] != '"') {
+          YYERROR_AND_ABORT_AT(@3,
+                               "Syntax error: supported only double quoted string literal");
+        }
+
+        absl::string_view id_view = raw_input.substr(1, raw_input.size() - 2);
+        zetasql::ASTIdentifier* id =
+            parser->MakeIdentifier(@3, id_view);
+        auto* alias = MAKE_NODE(ASTAlias, @2, @3, {id});
+        $$ = MAKE_NODE(ASTSelectColumn, @$, {$1, alias});
+      }
     | expression identifier
       {
         auto* alias = MAKE_NODE(ASTAlias, @2, {$2});
