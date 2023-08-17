@@ -1298,6 +1298,17 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeVariantType) {
   ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
 }
 
+TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithUsingStringLiterals) {
+  SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
+
+  AnalyzeRequest analyzeNumberRequest;
+  *analyzeNumberRequest.mutable_simple_catalog() = catalog;
+  analyzeNumberRequest.set_sql_statement("select 1 as \"a\", 2 as \"select\", 3 as \"from\"");
+  AnalyzeResponse analyzeNumberResponse;
+  ZETASQL_EXPECT_OK(Analyze(analyzeNumberRequest, &analyzeNumberResponse));
+}
+
+
 TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
   SimpleCatalogProto catalog = GetPreparedSimpleCatalogProto();
 
