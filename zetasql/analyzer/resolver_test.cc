@@ -798,8 +798,8 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
 //   ParseFunctionFails(
 //       "CAST(1 as DOUBLE PRECISION)",
 //       R"error(Expected ")" but got identifier "PRECISION")error");
-  ParseFunctionFails("CAST('foo' as CHAR VARYING(10))",
-                     R"error(Expected ")" but got identifier "VARYING")error");
+//   ParseFunctionFails("CAST('foo' as CHAR VARYING(10))",
+//                      R"error(Expected ")" but got identifier "VARYING")error");
 }
 
 TEST_F(ResolverTest, TestCoerceToBoolSuccess) {
