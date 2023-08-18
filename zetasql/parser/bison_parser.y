@@ -256,7 +256,7 @@
 //   1: ANALYZE
 //   6: QUALIFY
 //   2: ALTER COLUMN
-%expect 31
+%expect 34
 
 %union {
   bool boolean;
@@ -649,6 +649,8 @@ using namespace zetasql::parser_internal;
 %token KW_BREAK "BREAK"
 %token KW_CALL "CALL"
 %token KW_CASCADE "CASCADE"
+%token KW_CHAR "CHAR"
+%token KW_CHARACTER "CHARACTER"
 %token KW_CHECK "CHECK"
 %token KW_CLAMPED "CLAMPED"
 %token KW_CLONE "CLONE"
@@ -722,6 +724,7 @@ using namespace zetasql::parser_internal;
 %token KW_MIN "MIN"
 %token KW_MODEL "MODEL"
 %token KW_MODULE "MODULE"
+%token KW_NCHAR "NCHAR"
 %token KW_NEXT "NEXT"
 %token KW_NUMBER "NUMBER"
 %token KW_NUMERIC "NUMERIC"
@@ -799,6 +802,7 @@ using namespace zetasql::parser_internal;
 %token KW_UNTIL "UNTIL"
 %token KW_UPDATE "UPDATE"
 %token KW_VALUE "VALUE"
+%token KW_VARYING "VARYING"
 %token KW_VALUES "VALUES"
 %token KW_VECTOR "VECTOR"
 %token KW_VOLATILE "VOLATILE"
@@ -8550,6 +8554,18 @@ identifier:
       {
         $$ = parser->MakeIdentifier(@$, "DOUBLE PRECISION");
       }
+    | "CHARACTER" "VARYING"
+      {
+        $$ = parser->MakeIdentifier(@$, "CHARACTER VARYING");
+      }
+    | "CHAR" "VARYING"
+      {
+        $$ = parser->MakeIdentifier(@$, "CHAR VARYING");
+      }
+    | "NCHAR" "VARYING"
+      {
+        $$ = parser->MakeIdentifier(@$, "NCHAR VARYING");
+      }
     ;
 
 label:
@@ -8619,6 +8635,8 @@ keyword_as_identifier:
     | "BREAK"
     | "CALL"
     | "CASCADE"
+    | "CHAR"
+    | "CHARACTER"
     | "CHECK"
     | "CLAMPED"
     | "CLONE"
@@ -8694,6 +8712,7 @@ keyword_as_identifier:
     | "MIN"
     | "MODEL"
     | "MODULE"
+    | "NCHAR"
     | "NEXT"
     | "NUMBER"
     | "NUMERIC"
@@ -8778,6 +8797,7 @@ keyword_as_identifier:
     | "UNPIVOT"
     | "UNTIL"
     | "UPDATE"
+    | "VARYING"
     | "VALUE"
     | "VALUES"
     | "VECTOR"
