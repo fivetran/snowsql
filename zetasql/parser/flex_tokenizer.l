@@ -429,6 +429,8 @@ call { return BisonParserImpl::token::KW_CALL; }
 cascade { return BisonParserImpl::token::KW_CASCADE; }
 case { return BisonParserImpl::token::KW_CASE; }
 cast { return BisonParserImpl::token::KW_CAST; }
+char { return BisonParserImpl::token::KW_CHAR; }
+character { return BisonParserImpl::token::KW_CHARACTER; }
 check { return BisonParserImpl::token::KW_CHECK; }
 clamped { return BisonParserImpl::token::KW_CLAMPED; }
 clone { return BisonParserImpl::token::KW_CLONE; }
@@ -570,6 +572,7 @@ minus {
 model { return BisonParserImpl::token::KW_MODEL; }
 module { return BisonParserImpl::token::KW_MODULE; }
 natural { return BisonParserImpl::token::KW_NATURAL; }
+nchar { return BisonParserImpl::token::KW_NCHAR; }
 new { return BisonParserImpl::token::KW_NEW; }
 next { return BisonParserImpl::token::KW_NEXT; }
 no { return BisonParserImpl::token::KW_NO; }
@@ -695,6 +698,7 @@ update { return BisonParserImpl::token::KW_UPDATE; }
 using { return BisonParserImpl::token::KW_USING; }
 value { return BisonParserImpl::token::KW_VALUE; }
 values { return BisonParserImpl::token::KW_VALUES; }
+varying { return BisonParserImpl::token::KW_VARYING; }
 vector { return BisonParserImpl::token::KW_VECTOR; }
 view { return BisonParserImpl::token::KW_VIEW; }
 views { return BisonParserImpl::token::KW_VIEWS; }

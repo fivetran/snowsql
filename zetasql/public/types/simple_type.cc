@@ -146,13 +146,19 @@ const std::map<absl::string_view, TypeNameInfo>& SimpleTypeNameInfoMap() {
       {"char", {TYPE_STRING, false}},
       {"character", {TYPE_STRING, false}},
       {"text", {TYPE_STRING, false}},
+      {"nchar", {TYPE_STRING, false}},
+      {"nvarchar", {TYPE_STRING, false}},
+      {"nvarchar2", {TYPE_STRING, false}},
+      {"character varying", {TYPE_STRING, false}},
+      {"char varying", {TYPE_STRING, false}},
+      {"nchar varying", {TYPE_STRING, false}},
 
       {"binary", {TYPE_BYTES, false}},
       {"varbinary", {TYPE_BYTES, false}},
 
-      {"timestamp_ltz", {TYPE_TIMESTAMP}},
-      {"timestamp_ntz", {TYPE_TIMESTAMP}},
-      {"timestamp_tz", {TYPE_TIMESTAMP}},
+      {"timestamp_ltz", {TYPE_TIMESTAMP, false}},
+      {"timestamp_ntz", {TYPE_TIMESTAMP, false}},
+      {"timestamp_tz", {TYPE_TIMESTAMP, false}},
   };
   return *result;
 }
