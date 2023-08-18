@@ -239,7 +239,7 @@ sq3text_0          {sq3}(({sq}|{sq}{sq})?({no_backslash_sq}|{any_escape}))*
 sq3text            {sq3text_0}{sq3}
 dq3text_0          {dq3}(({dq}|{dq}{dq})?({no_backslash_dq}|{any_escape}))*
 dq3text            {dq3text_0}{dq3}
-string_literal                  r?({sqtext}|{dqtext}|{sq3text}|{dq3text})
+string_literal                  r?({sqtext}|{sq3text})
 bytes_literal                   (b|rb|br)({sqtext}|{dqtext}|{sq3text}|{dq3text})
 unterminated_string_literal     ({sqtext_0}|{dqtext_0})
 unterminated_triple_quoted_string_literal ({sq3text_0}|{dq3text_0})
@@ -255,8 +255,8 @@ unterminated_triple_quoted_raw_bytes_literal  (rb|br)({sq3text_0}|{dq3text_0})
 not_generalized_identifier      [^A-Z_0-9]
 unquoted_identifier             [A-Z_][A-Z_0-9]*
 unquoted_generalized_identifier [A-Z_0-9]+
-bqtext_0                        {bq}([^\\\`\r\n]|({any_escape}))*
-bqtext                          {bqtext_0}{bq}
+bqtext_0                        {dq}([^"\\\r\n]|({any_escape}))*
+bqtext                          {bqtext_0}{dq}
 identifier                      {unquoted_identifier}|{bqtext}
 generalized_identifier          {unquoted_generalized_identifier}|{bqtext}
 unterminated_escaped_identifier {bqtext_0}

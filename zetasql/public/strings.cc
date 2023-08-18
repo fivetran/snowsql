@@ -618,7 +618,7 @@ static bool MayBeTripleQuotedString(const absl::string_view str) {
 
 static bool MayBeStringLiteral(const absl::string_view str) {
   return (str.size() >= 2 && str[0] == str[str.size() - 1] &&
-          (str[0] == '\'' || str[0] == '"'));
+          (str[0] == '\''));
 }
 
 static bool MayBeBytesLiteral(const absl::string_view str) {
@@ -782,10 +782,10 @@ static absl::Status ParseIdentifierImpl(absl::string_view str,
                                         bool allow_reserved_keywords) {
   if (error_offset) *error_offset = 0;
   // The closing quote is validated by CUnescapeInternal() below.
-  const bool is_quoted = !str.empty() && str[0] == '`';
+  const bool is_quoted = !str.empty() && str[0] == '"';
 
   if (is_quoted) {
-    const int quotes_length = 1;  // Starts after the opening quote '`'.
+    const int quotes_length = 1;  // Starts after the opening quote '"'.
     const absl::string_view quotes = str.substr(0, quotes_length);
     // Includes the closing quotes.
     absl::string_view copy_str = absl::ClippedSubstr(str, quotes_length);
