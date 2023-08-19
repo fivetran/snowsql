@@ -2167,9 +2167,9 @@ TEST_F(ValueTest, NaN) {
   EXPECT_EQ("nan", double_nan.DebugString());
   EXPECT_EQ("Float(nan)", float_nan.FullDebugString());
   EXPECT_EQ("Double(nan)", double_nan.FullDebugString());
-  EXPECT_EQ("CAST(\"nan\" AS FLOAT)", float_nan.GetSQL());
-  EXPECT_EQ("CAST(\"nan\" AS FLOAT64)", double_nan.GetSQL(PRODUCT_EXTERNAL));
-  EXPECT_EQ("CAST(\"nan\" AS DOUBLE)", double_nan.GetSQL(PRODUCT_INTERNAL));
+  EXPECT_EQ("CAST('nan' AS FLOAT)", float_nan.GetSQL());
+  EXPECT_EQ("CAST('nan' AS FLOAT64)", double_nan.GetSQL(PRODUCT_EXTERNAL));
+  EXPECT_EQ("CAST('nan' AS DOUBLE)", double_nan.GetSQL(PRODUCT_INTERNAL));
 }
 
 TEST_F(ValueTest, Enum) {

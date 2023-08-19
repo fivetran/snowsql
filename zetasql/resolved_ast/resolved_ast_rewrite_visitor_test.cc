@@ -325,7 +325,7 @@ TEST_F(ResolvedASTRewriteVisitorTest, TestCopyASTTestComplex) {
         company_id,
         COUNT(*) AS imps
       FROM adwords_impressions
-      WHERE customer_id = "999999"
+      WHERE customer_id = '999999'
       GROUP BY 1, 2, 3, 4
     ),
     campaign_totals AS (

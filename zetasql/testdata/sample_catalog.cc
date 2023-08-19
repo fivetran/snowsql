@@ -5133,7 +5133,7 @@ void SampleCatalog::LoadNonTemplatedSqlTableValuedFunctions(
           CREATE TABLE FUNCTION CallsUnaryAbTableArgWithScalarArgsTempl(
             ignored_param ANY TYPE)
           AS SELECT * FROM UnaryAbTableArgWithScalarArgsTempl(
-              1, (SELECT 1 a, "2" b, DATE '2020-08-22' AS c), "b");
+              1, (SELECT 1 a, '2' b, DATE '2020-08-22' AS c), 'b');
       )sql",
       language_options);
   AddSqlDefinedTableFunctionFromCreate(

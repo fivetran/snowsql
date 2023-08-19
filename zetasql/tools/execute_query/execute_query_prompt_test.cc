@@ -226,16 +226,16 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
 TEST(ExecuteQueryStatementPrompt, TripleQuoted) {
   TestStmtPrompt(
       {
-          {.ret = "SELECT 99, \"\"\"hello\n"},
+          {.ret = "SELECT 99, '''hello\n"},
           {.ret = "\n", .want_continuation = true},
           {.ret = "line\n", .want_continuation = true},
           {.ret = "", .want_continuation = true},
           {.ret = "\n", .want_continuation = true},
-          {.ret = "world\"\"\", 101;", .want_continuation = true},
+          {.ret = "world''', 101;", .want_continuation = true},
           {.ret = std::nullopt},
       },
       {
-          IsOkAndHolds("SELECT 99, \"\"\"hello\n\nline\n\nworld\"\"\", 101;"),
+          IsOkAndHolds("SELECT 99, '''hello\n\nline\n\nworld''', 101;"),
           IsOkAndHolds(std::nullopt),
       });
 }
