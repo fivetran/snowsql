@@ -1007,7 +1007,7 @@ TEST(CreateIteratorTest, AggregateOrderBy) {
       "| +-$e := ArrayAgg($c) ORDER BY $c := $c DESC "
       "[ignores_null = false],\n"
       "| +-$f := StringAgg($c) ORDER BY $c := $c DESC,\n"
-      "| +-$g := StringAgg($c, ConstExpr(\"|\")) "
+      "| +-$g := StringAgg($c, ConstExpr('|')) "
       "ORDER BY $c := $c DESC,\n"
       "| +-$h := StringAgg($c) ORDER BY $b := $b ASC,\n"
       "| +-$i := StringAgg($c) ORDER BY $b := $b ASC,"
@@ -1039,23 +1039,23 @@ TEST(CreateIteratorTest, AggregateOrderBy) {
   EXPECT_EQ(Tuple(&iter->Schema(), &data[0]).DebugString(),
             "<k:0,"
             "d:[1, 1, 2],"
-            "e:[\"z\", \"y\", \"x\"],"
-            "f:\"z,y,x\","
-            "g:\"z|y|x\","
-            "h:\"x,y,z\","
-            "i:\"y,x,z\","
+            "e:['z', 'y', 'x'],"
+            "f:'z,y,x',"
+            "g:'z|y|x',"
+            "h:'x,y,z',"
+            "i:'y,x,z',"
             "j:[1, 2],"
-            "l:[\"z\", \"x\", \"y\"]>");
+            "l:['z', 'x', 'y']>");
   EXPECT_EQ(Tuple(&iter->Schema(), &data[1]).DebugString(),
             "<k:1,"
             "d:[NULL, NULL, 10, 10],"
-            "e:[\"c\", \"b\", \"a\", NULL],"
-            "f:\"c,b,a\","
-            "g:\"c|b|a\","
-            "h:\"a,c,b\","
-            "i:\"a,c,b\","
+            "e:['c', 'b', 'a', NULL],"
+            "f:'c,b,a',"
+            "g:'c|b|a',"
+            "h:'a,c,b',"
+            "i:'a,c,b',"
             "j:[NULL, 10],"
-            "l:[\"c\", \"b\", \"a\", NULL]>");
+            "l:['c', 'b', 'a', NULL]>");
   // Check for the extra slot.
   EXPECT_EQ(data[0].num_slots(), 10);
   EXPECT_EQ(data[1].num_slots(), 10);
@@ -1329,16 +1329,16 @@ TEST(CreateIteratorTest, AggregateLimit) {
             "e:[1, 1],"
             "f:[1, 1, 2],"
             "g:NULL,"
-            "h:[\"z\", \"y\"],"
-            "i:[\"z\", \"y\", \"x\"]>");
+            "h:['z', 'y'],"
+            "i:['z', 'y', 'x']>");
   EXPECT_EQ(Tuple(&iter->Schema(), &data[1]).DebugString(),
             "<k:1,"
             "d:NULL,"
             "e:[NULL, NULL],"
             "f:[NULL, NULL, 10, 10],"
             "g:NULL,"
-            "h:[\"c\", \"b\"],"
-            "i:[\"c\", \"b\", \"a\", NULL]>");
+            "h:['c', 'b'],"
+            "i:['c', 'b', 'a', NULL]>");
   // Check for the extra slot.
   EXPECT_EQ(data[0].num_slots(), 8);
   EXPECT_EQ(data[1].num_slots(), 8);
@@ -1464,9 +1464,9 @@ TEST(CreateIteratorTest, AggregateHaving) {
                        ReadFromTupleIterator(iter.get()));
   ASSERT_EQ(data.size(), 2);
   EXPECT_EQ(Tuple(&iter->Schema(), &data[0]).DebugString(),
-            "<k:0,d:[\"z\"],e:[\"x\", \"y\"]>");
+            "<k:0,d:['z'],e:['x', 'y']>");
   EXPECT_EQ(Tuple(&iter->Schema(), &data[1]).DebugString(),
-            "<k:1,d:[\"c\", \"b\"],e:[\"n\"]>");
+            "<k:1,d:['c', 'b'],e:['n']>");
   // Check for the extra slot.
   EXPECT_EQ(data[0].num_slots(), 4);
   EXPECT_EQ(data[1].num_slots(), 4);
