@@ -485,12 +485,12 @@ TEST_F(ValueTest, CopyAssignMove) {
 
 TEST_F(ValueTest, StringDebugString) {
   // Strings and bytes get escaped as printable zetasql literals.
-  EXPECT_EQ("\"abc\"", Value::String("abc").DebugString());
+  EXPECT_EQ("'abc'", Value::String("abc").DebugString());
   EXPECT_EQ("'ab\"c'", Value::String("ab\"c").DebugString());
-  EXPECT_EQ("\"ab'c\"", Value::String("ab'c").DebugString());
-  EXPECT_EQ("\"ab\\x01 c\"",
+  EXPECT_EQ("'ab\\'c'", Value::String("ab'c").DebugString());
+  EXPECT_EQ("'ab\\x01 c'",
             TestGetSQL(Value::String("ab\x01 c")).DebugString());
-  EXPECT_EQ("\"ab\\x01 c\"",
+  EXPECT_EQ("'ab\\x01 c'",
             TestGetSQL(Value::String(std::string("ab\x01 c")))
                 .DebugString());  // NOLINT
 
@@ -503,13 +503,13 @@ TEST_F(ValueTest, StringDebugString) {
 
 TEST_F(ValueTest, StringFormatting) {
   EXPECT_EQ(Value::String("hello").DebugString(/*verbose=*/true),
-            "String(\"hello\")");
-  EXPECT_EQ(Value::String("hello").DebugString(), "\"hello\"");
-  EXPECT_EQ(Value::String("hello").Format(), "String(\"hello\")");
+            "String('hello')");
+  EXPECT_EQ(Value::String("hello").DebugString(), "'hello'");
+  EXPECT_EQ(Value::String("hello").Format(), "String('hello')");
   EXPECT_EQ(Value::String("hello").Format(/*print_top_level_type=*/false),
-            "\"hello\"");
-  EXPECT_EQ(Value::String("hello").GetSQLLiteral(), "\"hello\"");
-  EXPECT_EQ(Value::String("hello").GetSQL(), "\"hello\"");
+            "'hello'");
+  EXPECT_EQ(Value::String("hello").GetSQLLiteral(), "'hello'");
+  EXPECT_EQ(Value::String("hello").GetSQL(), "'hello'");
 }
 
 TEST_F(ValueTest, SimpleRoundTrip) {
@@ -538,8 +538,8 @@ TEST_F(ValueTest, DateFormatting) {
   EXPECT_EQ(date.DebugString(), "2022-09-16");
   EXPECT_EQ(date.Format(), "Date(2022-09-16)");
   EXPECT_EQ(date.Format(/*print_top_level_type=*/false), "2022-09-16");
-  EXPECT_EQ(date.GetSQLLiteral(), R"sql(DATE "2022-09-16")sql");
-  EXPECT_EQ(date.GetSQL(), R"sql(DATE "2022-09-16")sql");
+  EXPECT_EQ(date.GetSQLLiteral(), R"sql(DATE '2022-09-16')sql");
+  EXPECT_EQ(date.GetSQL(), R"sql(DATE '2022-09-16')sql");
 }
 
 TEST_F(ValueTest, DatetimeFormatting) {
@@ -552,9 +552,9 @@ TEST_F(ValueTest, DatetimeFormatting) {
   EXPECT_EQ(datetime.Format(/*print_top_level_type=*/false),
             "2022-09-16 13:14:11.000000001");
   EXPECT_EQ(datetime.GetSQLLiteral(),
-            R"sql(DATETIME "2022-09-16 13:14:11.000000001")sql");
+            R"sql(DATETIME '2022-09-16 13:14:11.000000001')sql");
   EXPECT_EQ(datetime.GetSQL(),
-            R"sql(DATETIME "2022-09-16 13:14:11.000000001")sql");
+            R"sql(DATETIME '2022-09-16 13:14:11.000000001')sql");
 }
 
 TEST_F(ValueTest, Timestamp) {
@@ -641,8 +641,8 @@ TEST_F(ValueTest, TimestampFormatting) {
   EXPECT_EQ(ts.Format(), "Timestamp(2022-09-16 19:43:00+00)");
   EXPECT_EQ(ts.Format(/*print_top_level_type=*/false),
             "2022-09-16 19:43:00+00");
-  EXPECT_EQ(ts.GetSQLLiteral(), R"sql(TIMESTAMP "2022-09-16 19:43:00+00")sql");
-  EXPECT_EQ(ts.GetSQL(), R"sql(TIMESTAMP "2022-09-16 19:43:00+00")sql");
+  EXPECT_EQ(ts.GetSQLLiteral(), R"sql(TIMESTAMP '2022-09-16 19:43:00+00')sql");
+  EXPECT_EQ(ts.GetSQL(), R"sql(TIMESTAMP '2022-09-16 19:43:00+00')sql");
 }
 
 TEST_F(ValueTest, Interval) {
@@ -720,9 +720,9 @@ TEST_F(ValueTest, IntervalFormatting) {
   EXPECT_EQ(interval.Format(), "Interval(0-0 45 0:0:0)");
   EXPECT_EQ(interval.Format(/*print_top_level_type=*/false), "0-0 45 0:0:0");
   EXPECT_EQ(interval.GetSQLLiteral(),
-            R"sql(INTERVAL "0-0 45 0:0:0" YEAR TO SECOND)sql");
+            R"sql(INTERVAL '0-0 45 0:0:0' YEAR TO SECOND)sql");
   EXPECT_EQ(interval.GetSQL(),
-            R"sql(INTERVAL "0-0 45 0:0:0" YEAR TO SECOND)sql");
+            R"sql(INTERVAL '0-0 45 0:0:0' YEAR TO SECOND)sql");
 }
 
 TEST_F(ValueTest, Geography) {
@@ -773,8 +773,8 @@ TEST_F(ValueTest, NumericFormatting) {
   EXPECT_EQ(numeric.DebugString(), "650");
   EXPECT_EQ(numeric.Format(), "Numeric(650)");
   EXPECT_EQ(numeric.Format(/*print_top_level_type=*/false), "650");
-  EXPECT_EQ(numeric.GetSQLLiteral(), R"sql(NUMERIC "650")sql");
-  EXPECT_EQ(numeric.GetSQL(), R"sql(NUMERIC "650")sql");
+  EXPECT_EQ(numeric.GetSQLLiteral(), R"sql(NUMERIC '650')sql");
+  EXPECT_EQ(numeric.GetSQL(), R"sql(NUMERIC '650')sql");
 }
 
 TEST_F(ValueTest, BigNumeric) {
@@ -823,8 +823,8 @@ TEST_F(ValueTest, BigNumericFormatting) {
   EXPECT_EQ(numeric.DebugString(), "5973600000000");
   EXPECT_EQ(numeric.Format(), "BigNumeric(5973600000000)");
   EXPECT_EQ(numeric.Format(/*print_top_level_type=*/false), "5973600000000");
-  EXPECT_EQ(numeric.GetSQLLiteral(), R"sql(BIGNUMERIC "5973600000000")sql");
-  EXPECT_EQ(numeric.GetSQL(), R"sql(BIGNUMERIC "5973600000000")sql");
+  EXPECT_EQ(numeric.GetSQLLiteral(), R"sql(BIGNUMERIC '5973600000000')sql");
+  EXPECT_EQ(numeric.GetSQL(), R"sql(BIGNUMERIC '5973600000000')sql");
 }
 
 TEST_F(ValueTest, JSON) {
@@ -1658,21 +1658,21 @@ TEST_F(ValueTest, StructOfStringsFormatting) {
                                          {Value::String("12345678901234567890"),
                                           Value::String("abc")}));
   EXPECT_EQ(struct_of_strings.DebugString(/*verbose=*/true),
-            R"(Struct{a:String("12345678901234567890"), b:String("abc")})");
+            R"(Struct{a:String('12345678901234567890'), b:String('abc')})");
   EXPECT_EQ(struct_of_strings.DebugString(),
-            R"({a:"12345678901234567890", b:"abc"})");
+            R"({a:'12345678901234567890', b:'abc'})");
   EXPECT_EQ(struct_of_strings.Format(), R"(STRUCT<a STRING, b STRING>{
-  "12345678901234567890",
-  "abc"
+  '12345678901234567890',
+  'abc'
 })");
   EXPECT_EQ(struct_of_strings.Format(/*print_top_level_type=*/false), R"({
-  "12345678901234567890",
-  "abc"
+  '12345678901234567890',
+  'abc'
 })");
   EXPECT_EQ(struct_of_strings.GetSQLLiteral(),
-            R"(("12345678901234567890", "abc"))");
+            R"(('12345678901234567890', 'abc'))");
   EXPECT_EQ(struct_of_strings.GetSQL(),
-            R"(STRUCT<a STRING, b STRING>("12345678901234567890", "abc"))");
+            R"(STRUCT<a STRING, b STRING>('12345678901234567890', 'abc'))");
 }
 
 TEST_F(ValueTest, StructOfArraysOfStringsFormatting) {
@@ -1689,37 +1689,37 @@ TEST_F(ValueTest, StructOfArraysOfStringsFormatting) {
           {array_of_strings, array_of_strings}));
   EXPECT_EQ(
       struct_of_arrays_of_strings.DebugString(/*verbose=*/true),
-      R"(Struct{a:Array[String("789010992827372"), String("quiteLongVeryBerryString")], )"
-      R"(b:Array[String("789010992827372"), String("quiteLongVeryBerryString")]})");
+      R"(Struct{a:Array[String('789010992827372'), String('quiteLongVeryBerryString')], )"
+      R"(b:Array[String('789010992827372'), String('quiteLongVeryBerryString')]})");
   EXPECT_EQ(
       struct_of_arrays_of_strings.DebugString(),
-      R"({a:["789010992827372", "quiteLongVeryBerryString"], b:["789010992827372", "quiteLongVeryBerryString"]})");
+      R"({a:['789010992827372', 'quiteLongVeryBerryString'], b:['789010992827372', 'quiteLongVeryBerryString']})");
   EXPECT_EQ(struct_of_arrays_of_strings.Format(),
             R"(STRUCT<a ARRAY<>, b ARRAY<>>{
   ARRAY<STRING>[
-    "789010992827372",
-    "quiteLongVeryBerryString"
+    '789010992827372',
+    'quiteLongVeryBerryString'
   ],
   ARRAY<STRING>[
-    "789010992827372",
-    "quiteLongVeryBerryString"
+    '789010992827372',
+    'quiteLongVeryBerryString'
   ]
 })");
   EXPECT_EQ(struct_of_arrays_of_strings.Format(/*print_top_level_type=*/false),
             R"({ARRAY<STRING>[
-   "789010992827372",
-   "quiteLongVeryBerryString"
+   '789010992827372',
+   'quiteLongVeryBerryString'
  ],
  ARRAY<STRING>[
-   "789010992827372",
-   "quiteLongVeryBerryString"
+   '789010992827372',
+   'quiteLongVeryBerryString'
  ]})");
   EXPECT_EQ(
       struct_of_arrays_of_strings.GetSQLLiteral(),
-      R"((["789010992827372", "quiteLongVeryBerryString"], ["789010992827372", "quiteLongVeryBerryString"]))");
+      R"((['789010992827372', 'quiteLongVeryBerryString'], ['789010992827372', 'quiteLongVeryBerryString']))");
   EXPECT_EQ(
       struct_of_arrays_of_strings.GetSQL(),
-      R"(STRUCT<a ARRAY<STRING>, b ARRAY<STRING>>(ARRAY<STRING>["789010992827372", "quiteLongVeryBerryString"], ARRAY<STRING>["789010992827372", "quiteLongVeryBerryString"]))");
+      R"(STRUCT<a ARRAY<STRING>, b ARRAY<STRING>>(ARRAY<STRING>['789010992827372', 'quiteLongVeryBerryString'], ARRAY<STRING>['789010992827372', 'quiteLongVeryBerryString']))");
 }
 
 TEST_F(ValueTest, StructWithNoFields) {
@@ -1851,8 +1851,8 @@ TEST_F(ValueTest, NumericArray) {
 
 TEST_F(ValueTest, StringArray) {
   Value v1 = TestGetSQL(StringArray({"foo", "bar"}));
-  EXPECT_EQ("Array[String(\"foo\"), String(\"bar\")]", v1.FullDebugString());
-  EXPECT_EQ("[\"foo\", \"bar\"]", v1.ShortDebugString());
+  EXPECT_EQ("Array[String('foo'), String('bar')]", v1.FullDebugString());
+  EXPECT_EQ("['foo', 'bar']", v1.ShortDebugString());
   absl::Cord c1("foo"), c2("bar");
   Value v2 = StringArray({&c1, &c2});
   EXPECT_EQ(v1, v2);
@@ -1873,9 +1873,9 @@ TEST_F(ValueTest, FloatArray) {
   EXPECT_EQ("[1.5, 2.5, nan]", v1.DebugString());
   EXPECT_EQ(
       "ARRAY<FLOAT>[CAST(1.5 AS FLOAT), CAST(2.5 AS FLOAT), "
-      "CAST(\"nan\" AS FLOAT)]",
+      "CAST('nan' AS FLOAT)]",
       v1.GetSQL());
-  EXPECT_EQ("[1.5, 2.5, CAST(\"nan\" AS FLOAT)]", v1.GetSQLLiteral());
+  EXPECT_EQ("[1.5, 2.5, CAST('nan' AS FLOAT)]", v1.GetSQLLiteral());
 }
 
 TEST_F(ValueTest, DoubleArray) {
@@ -1886,13 +1886,13 @@ TEST_F(ValueTest, DoubleArray) {
   EXPECT_EQ("[1.5, 2.5]", v1.GetSQLLiteral());
   Value v2 = DoubleArray({1.5, std::numeric_limits<double>::infinity()});
   EXPECT_EQ("[1.5, inf]", v2.DebugString());
-  EXPECT_EQ("ARRAY<FLOAT64>[1.5, CAST(\"inf\" AS FLOAT64)]",
+  EXPECT_EQ("ARRAY<FLOAT64>[1.5, CAST('inf' AS FLOAT64)]",
             v2.GetSQL(PRODUCT_EXTERNAL));
-  EXPECT_EQ("ARRAY<DOUBLE>[1.5, CAST(\"inf\" AS DOUBLE)]",
+  EXPECT_EQ("ARRAY<DOUBLE>[1.5, CAST('inf' AS DOUBLE)]",
             v2.GetSQL(PRODUCT_INTERNAL));
-  EXPECT_EQ("[1.5, CAST(\"inf\" AS FLOAT64)]",
+  EXPECT_EQ("[1.5, CAST('inf' AS FLOAT64)]",
             v2.GetSQLLiteral(PRODUCT_EXTERNAL));
-  EXPECT_EQ("[1.5, CAST(\"inf\" AS DOUBLE)]",
+  EXPECT_EQ("[1.5, CAST('inf' AS DOUBLE)]",
             v2.GetSQLLiteral(PRODUCT_INTERNAL));
 }
 
@@ -2067,22 +2067,22 @@ TEST_F(ValueTest, ArrayOfStringFormatting) {
                                         {Value::String("12345678901234567890"),
                                          Value::String("abc")}));
   EXPECT_EQ(array_of_strings.DebugString(/*verbose=*/true),
-            R"(Array[String("12345678901234567890"), String("abc")])");
+            R"(Array[String('12345678901234567890'), String('abc')])");
   EXPECT_EQ(array_of_strings.DebugString(),
-            R"(["12345678901234567890", "abc"])");
+            R"(['12345678901234567890', 'abc'])");
   EXPECT_EQ(array_of_strings.Format(), R"(ARRAY<STRING>[
-  "12345678901234567890",
-  "abc"
+  '12345678901234567890',
+  'abc'
 ])");
   EXPECT_EQ(array_of_strings.Format(/*print_top_level_type=*/false),
             R"(ARRAY<STRING>[
-  "12345678901234567890",
-  "abc"
+  '12345678901234567890',
+  'abc'
 ])");
   EXPECT_EQ(array_of_strings.GetSQLLiteral(),
-            R"(["12345678901234567890", "abc"])");
+            R"(['12345678901234567890', 'abc'])");
   EXPECT_EQ(array_of_strings.GetSQL(),
-            R"(ARRAY<STRING>["12345678901234567890", "abc"])");
+            R"(ARRAY<STRING>['12345678901234567890', 'abc'])");
 }
 
 TEST_F(ValueTest, ArrayOfStructsOfStringsFormatting) {
@@ -2099,41 +2099,41 @@ TEST_F(ValueTest, ArrayOfStructsOfStringsFormatting) {
                                          Value::Null(string_struct_type)}));
   EXPECT_EQ(
       array_of_structs_of_strings.DebugString(/*verbose=*/true),
-      R"(Array[Struct{a:String("5938"), b:String("longFunctionInvocation, 2")}, )"
-      R"(Struct{a:String("5938"), b:String("longFunctionInvocation, 2")}, Struct(NULL)])");
+      R"(Array[Struct{a:String('5938'), b:String('longFunctionInvocation, 2')}, )"
+      R"(Struct{a:String('5938'), b:String('longFunctionInvocation, 2')}, Struct(NULL)])");
   EXPECT_EQ(
       array_of_structs_of_strings.DebugString(),
-      R"([{a:"5938", b:"longFunctionInvocation, 2"}, {a:"5938", b:"longFunctionInvocation, 2"}, NULL])");
+      R"([{a:'5938', b:'longFunctionInvocation, 2'}, {a:'5938', b:'longFunctionInvocation, 2'}, NULL])");
   EXPECT_EQ(array_of_structs_of_strings.Format(),
             R"(ARRAY<STRUCT<a STRING, b STRING>>[
   {
-    "5938",
-    "longFunctionInvocation, 2"
+    '5938',
+    'longFunctionInvocation, 2'
   },
   {
-    "5938",
-    "longFunctionInvocation, 2"
+    '5938',
+    'longFunctionInvocation, 2'
   },
   NULL
 ])");
   EXPECT_EQ(array_of_structs_of_strings.Format(/*print_top_level_type=*/false),
             R"(ARRAY<STRUCT<a STRING, b STRING>>[
   {
-    "5938",
-    "longFunctionInvocation, 2"
+    '5938',
+    'longFunctionInvocation, 2'
   },
   {
-    "5938",
-    "longFunctionInvocation, 2"
+    '5938',
+    'longFunctionInvocation, 2'
   },
   NULL
 ])");
   EXPECT_EQ(
       array_of_structs_of_strings.GetSQLLiteral(),
-      R"([("5938", "longFunctionInvocation, 2"), ("5938", "longFunctionInvocation, 2"), NULL])");
+      R"([('5938', 'longFunctionInvocation, 2'), ('5938', 'longFunctionInvocation, 2'), NULL])");
   EXPECT_EQ(
       array_of_structs_of_strings.GetSQL(),
-      R"(ARRAY<STRUCT<a STRING, b STRING>>[STRUCT<a STRING, b STRING>("5938", "longFunctionInvocation, 2"), STRUCT<a STRING, b STRING>("5938", "longFunctionInvocation, 2"), CAST(NULL AS STRUCT<a STRING, b STRING>)])");
+      R"(ARRAY<STRUCT<a STRING, b STRING>>[STRUCT<a STRING, b STRING>('5938', 'longFunctionInvocation, 2'), STRUCT<a STRING, b STRING>('5938', 'longFunctionInvocation, 2'), CAST(NULL AS STRUCT<a STRING, b STRING>)])");
 }
 
 // A sanity test to make sure EqualsInternal does not blow up in the case
@@ -2254,9 +2254,9 @@ TEST_F(ValueTest, EnumFormatting) {
   EXPECT_EQ(enum_value.DebugString(), "TESTENUM0");
   EXPECT_EQ(enum_value.Format(), "Enum<zetasql_test__.TestEnum>(TESTENUM0:0)");
   EXPECT_EQ(enum_value.Format(/*print_top_level_type=*/false), "TESTENUM0");
-  EXPECT_EQ(enum_value.GetSQLLiteral(), R"sql("TESTENUM0")sql");
+  EXPECT_EQ(enum_value.GetSQLLiteral(), R"sql('TESTENUM0')sql");
   EXPECT_EQ(enum_value.GetSQL(),
-            R"sql(CAST("TESTENUM0" AS `zetasql_test__.TestEnum`))sql");
+            R"sql(CAST('TESTENUM0' AS "zetasql_test__.TestEnum"))sql");
 }
 
 TEST_F(ValueTest, EnumFormattingUnknownEnum) {
@@ -2269,7 +2269,7 @@ TEST_F(ValueTest, EnumFormattingUnknownEnum) {
   EXPECT_EQ(enum_value.Format(/*print_top_level_type=*/false), "2586");
   EXPECT_EQ(enum_value.GetSQLLiteral(), R"sql(2586)sql");
   EXPECT_EQ(enum_value.GetSQL(),
-            R"sql(CAST(2586 AS `zetasql_test__.TestProto3Enum`))sql");
+            R"sql(CAST(2586 AS "zetasql_test__.TestProto3Enum"))sql");
 }
 
 TEST_F(ValueTest, StructWithNanAndInf) {
@@ -2694,10 +2694,10 @@ double_val: 12
   double_val: 12
 })");
   EXPECT_EQ(proto_value.GetSQLLiteral(),
-            R"sql("int64_key_1: 1 int64_key_2: 2 double_val: 12")sql");
+            R"sql('int64_key_1: 1 int64_key_2: 2 double_val: 12')sql");
   EXPECT_EQ(
       proto_value.GetSQL(),
-      R"sql(CAST(b"\x08\x01\x10\x02I\x00\x00\x00\x00\x00\x00(@" AS `zetasql_test__.KitchenSinkPB`))sql");
+      R"sql(CAST(b"\x08\x01\x10\x02I\x00\x00\x00\x00\x00\x00(@" AS "zetasql_test__.KitchenSinkPB"))sql");
 }
 
 TEST_F(ValueTest, ClassAndProtoSize) {
@@ -3125,9 +3125,9 @@ TEST_F(ValueTest, RangeOfDatesFormatting) {
   EXPECT_EQ(range_d_regular.Format(/*print_top_level_type=*/false),
             R"([1970-10-28, 1970-10-29))");
   EXPECT_EQ(range_d_regular.GetSQLLiteral(),
-            R"sql(RANGE<DATE> "[1970-10-28, 1970-10-29)")sql");
+            R"sql(RANGE<DATE> '[1970-10-28, 1970-10-29)')sql");
   EXPECT_EQ(range_d_regular.GetSQL(),
-            R"sql(RANGE<DATE> "[1970-10-28, 1970-10-29)")sql");
+            R"sql(RANGE<DATE> '[1970-10-28, 1970-10-29)')sql");
 
   // Range with unbounded start
   const Value range_d_unbounded_start =
@@ -3140,9 +3140,9 @@ TEST_F(ValueTest, RangeOfDatesFormatting) {
   EXPECT_EQ(range_d_unbounded_start.Format(/*print_top_level_type=*/false),
             R"([NULL, 1970-10-29))");
   EXPECT_EQ(range_d_unbounded_start.GetSQLLiteral(),
-            R"sql(RANGE<DATE> "[UNBOUNDED, 1970-10-29)")sql");
+            R"sql(RANGE<DATE> '[UNBOUNDED, 1970-10-29)')sql");
   EXPECT_EQ(range_d_unbounded_start.GetSQL(),
-            R"sql(RANGE<DATE> "[UNBOUNDED, 1970-10-29)")sql");
+            R"sql(RANGE<DATE> '[UNBOUNDED, 1970-10-29)')sql");
 
   // Range with unbounded end
   const Value range_d_unbounded_end =
@@ -3154,9 +3154,9 @@ TEST_F(ValueTest, RangeOfDatesFormatting) {
   EXPECT_EQ(range_d_unbounded_end.Format(/*print_top_level_type=*/false),
             R"([1970-10-28, NULL))");
   EXPECT_EQ(range_d_unbounded_end.GetSQLLiteral(),
-            R"sql(RANGE<DATE> "[1970-10-28, UNBOUNDED)")sql");
+            R"sql(RANGE<DATE> '[1970-10-28, UNBOUNDED)')sql");
   EXPECT_EQ(range_d_unbounded_end.GetSQL(),
-            R"sql(RANGE<DATE> "[1970-10-28, UNBOUNDED)")sql");
+            R"sql(RANGE<DATE> '[1970-10-28, UNBOUNDED)')sql");
 
   // Range with unbounded start and end
   const Value range_d_unbounded_all =
@@ -3168,9 +3168,9 @@ TEST_F(ValueTest, RangeOfDatesFormatting) {
   EXPECT_EQ(range_d_unbounded_all.Format(/*print_top_level_type=*/false),
             R"([NULL, NULL))");
   EXPECT_EQ(range_d_unbounded_all.GetSQLLiteral(),
-            R"sql(RANGE<DATE> "[UNBOUNDED, UNBOUNDED)")sql");
+            R"sql(RANGE<DATE> '[UNBOUNDED, UNBOUNDED)')sql");
   EXPECT_EQ(range_d_unbounded_all.GetSQL(),
-            R"sql(RANGE<DATE> "[UNBOUNDED, UNBOUNDED)")sql");
+            R"sql(RANGE<DATE> '[UNBOUNDED, UNBOUNDED)')sql");
 }
 
 TEST_F(ValueTest, RangeOfDatetimesFormatting) {
@@ -3199,10 +3199,10 @@ TEST_F(ValueTest, RangeOfDatetimesFormatting) {
 ))");
   EXPECT_EQ(
       range_dt_regular.GetSQLLiteral(),
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)')sql");
   EXPECT_EQ(
       range_dt_regular.GetSQL(),
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)')sql");
 
   // Range with unbounded start
   const Value range_dt_unbounded_start =
@@ -3225,10 +3225,10 @@ TEST_F(ValueTest, RangeOfDatetimesFormatting) {
 ))");
   EXPECT_EQ(
       range_dt_unbounded_start.GetSQLLiteral(),
-      R"sql(RANGE<DATETIME> "[UNBOUNDED, 2022-09-13 16:37:11.000000001)")sql");
+      R"sql(RANGE<DATETIME> '[UNBOUNDED, 2022-09-13 16:37:11.000000001)')sql");
   EXPECT_EQ(
       range_dt_unbounded_start.GetSQL(),
-      R"sql(RANGE<DATETIME> "[UNBOUNDED, 2022-09-13 16:37:11.000000001)")sql");
+      R"sql(RANGE<DATETIME> '[UNBOUNDED, 2022-09-13 16:37:11.000000001)')sql");
 
   // Range with unbounded end
   const Value range_dt_unbounded_end =
@@ -3251,10 +3251,10 @@ TEST_F(ValueTest, RangeOfDatetimesFormatting) {
 ))");
   EXPECT_EQ(
       range_dt_unbounded_end.GetSQLLiteral(),
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, UNBOUNDED)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, UNBOUNDED)')sql");
   EXPECT_EQ(
       range_dt_unbounded_end.GetSQL(),
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, UNBOUNDED)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, UNBOUNDED)')sql");
 
   // Range with unbounded start and end
   const Value range_dt_unbounded_all =
@@ -3266,9 +3266,9 @@ TEST_F(ValueTest, RangeOfDatetimesFormatting) {
   EXPECT_EQ(range_dt_unbounded_all.Format(/*print_top_level_type=*/false),
             R"([NULL, NULL))");
   EXPECT_EQ(range_dt_unbounded_all.GetSQLLiteral(),
-            R"sql(RANGE<DATETIME> "[UNBOUNDED, UNBOUNDED)")sql");
+            R"sql(RANGE<DATETIME> '[UNBOUNDED, UNBOUNDED)')sql");
   EXPECT_EQ(range_dt_unbounded_all.GetSQL(),
-            R"sql(RANGE<DATETIME> "[UNBOUNDED, UNBOUNDED)")sql");
+            R"sql(RANGE<DATETIME> '[UNBOUNDED, UNBOUNDED)')sql");
 }
 
 TEST_F(ValueTest, FormatRangeOfTimestamps) {
@@ -3299,10 +3299,10 @@ TEST_F(ValueTest, FormatRangeOfTimestamps) {
 ))");
   EXPECT_EQ(
       range_ts_regular.GetSQLLiteral(),
-      R"sql(RANGE<TIMESTAMP> "[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)")sql");
+      R"sql(RANGE<TIMESTAMP> '[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)')sql");
   EXPECT_EQ(
       range_ts_regular.GetSQL(),
-      R"sql(RANGE<TIMESTAMP> "[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)")sql");
+      R"sql(RANGE<TIMESTAMP> '[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)')sql");
 
   // Range with unbounded start
   const Value range_ts_unbounded_start =
@@ -3324,10 +3324,10 @@ TEST_F(ValueTest, FormatRangeOfTimestamps) {
 ))");
   EXPECT_EQ(
       range_ts_unbounded_start.GetSQLLiteral(),
-      R"sql(RANGE<TIMESTAMP> "[UNBOUNDED, 9999-12-31 23:59:59.999999999+00)")sql");
+      R"sql(RANGE<TIMESTAMP> '[UNBOUNDED, 9999-12-31 23:59:59.999999999+00)')sql");
   EXPECT_EQ(
       range_ts_unbounded_start.GetSQL(),
-      R"sql(RANGE<TIMESTAMP> "[UNBOUNDED, 9999-12-31 23:59:59.999999999+00)")sql");
+      R"sql(RANGE<TIMESTAMP> '[UNBOUNDED, 9999-12-31 23:59:59.999999999+00)')sql");
 
   // Range with unbounded end
   const Value range_ts_unbounded_end =
@@ -3347,9 +3347,9 @@ TEST_F(ValueTest, FormatRangeOfTimestamps) {
   NULL
 ))");
   EXPECT_EQ(range_ts_unbounded_end.GetSQLLiteral(),
-            R"sql(RANGE<TIMESTAMP> "[0001-01-01 00:00:00+00, UNBOUNDED)")sql");
+            R"sql(RANGE<TIMESTAMP> '[0001-01-01 00:00:00+00, UNBOUNDED)')sql");
   EXPECT_EQ(range_ts_unbounded_end.GetSQL(),
-            R"sql(RANGE<TIMESTAMP> "[0001-01-01 00:00:00+00, UNBOUNDED)")sql");
+            R"sql(RANGE<TIMESTAMP> '[0001-01-01 00:00:00+00, UNBOUNDED)')sql");
 
   // Range with unbounded start and end
   const Value range_ts_unbounded_all =
@@ -3361,9 +3361,9 @@ TEST_F(ValueTest, FormatRangeOfTimestamps) {
   EXPECT_EQ(range_ts_unbounded_all.Format(/*print_top_level_type=*/false),
             R"([NULL, NULL))");
   EXPECT_EQ(range_ts_unbounded_all.GetSQLLiteral(),
-            R"sql(RANGE<TIMESTAMP> "[UNBOUNDED, UNBOUNDED)")sql");
+            R"sql(RANGE<TIMESTAMP> '[UNBOUNDED, UNBOUNDED)')sql");
   EXPECT_EQ(range_ts_unbounded_all.GetSQL(),
-            R"sql(RANGE<TIMESTAMP> "[UNBOUNDED, UNBOUNDED)")sql");
+            R"sql(RANGE<TIMESTAMP> '[UNBOUNDED, UNBOUNDED)')sql");
 }
 
 TEST_F(ValueTest, FormatArrayOfRanges) {
@@ -3394,10 +3394,10 @@ TEST_F(ValueTest, FormatArrayOfRanges) {
 ])");
   EXPECT_EQ(
       array_of_ranges.GetSQLLiteral(),
-      R"sql([RANGE<DATE> "[1970-10-28, 1970-10-29)", RANGE<DATE> "[UNBOUNDED, 1970-01-23)", NULL])sql");
+      R"sql([RANGE<DATE> '[1970-10-28, 1970-10-29)', RANGE<DATE> '[UNBOUNDED, 1970-01-23)', NULL])sql");
   EXPECT_EQ(
       array_of_ranges.GetSQL(),
-      R"sql(ARRAY<RANGE<DATE>>[RANGE<DATE> "[1970-10-28, 1970-10-29)", RANGE<DATE> "[UNBOUNDED, 1970-01-23)", CAST(NULL AS RANGE<DATE>)])sql");
+      R"sql(ARRAY<RANGE<DATE>>[RANGE<DATE> '[1970-10-28, 1970-10-29)', RANGE<DATE> '[UNBOUNDED, 1970-01-23)', CAST(NULL AS RANGE<DATE>)])sql");
 }
 
 TEST_F(ValueTest, FormatStructOfRanges) {
@@ -3439,10 +3439,10 @@ TEST_F(ValueTest, FormatStructOfRanges) {
  NULL})");
   EXPECT_EQ(
       struct_of_ranges.GetSQLLiteral(),
-      R"sql((RANGE<DATE> "[1970-10-28, 1970-10-29)", RANGE<DATETIME> "[UNBOUNDED, 2022-09-13 16:37:11.000000001)", NULL))sql");
+      R"sql((RANGE<DATE> '[1970-10-28, 1970-10-29)', RANGE<DATETIME> '[UNBOUNDED, 2022-09-13 16:37:11.000000001)', NULL))sql");
   EXPECT_EQ(
       struct_of_ranges.GetSQL(),
-      R"sql(STRUCT<d RANGE<DATE>, dt RANGE<DATETIME>, t RANGE<TIMESTAMP>>(RANGE<DATE> "[1970-10-28, 1970-10-29)", RANGE<DATETIME> "[UNBOUNDED, 2022-09-13 16:37:11.000000001)", CAST(NULL AS RANGE<TIMESTAMP>)))sql");
+      R"sql(STRUCT<d RANGE<DATE>, dt RANGE<DATETIME>, t RANGE<TIMESTAMP>>(RANGE<DATE> '[1970-10-28, 1970-10-29)', RANGE<DATETIME> '[UNBOUNDED, 2022-09-13 16:37:11.000000001)', CAST(NULL AS RANGE<TIMESTAMP>)))sql");
 }
 
 TEST_F(ValueTest, ValueConstructor) {
@@ -3488,34 +3488,34 @@ TEST_F(ValueTest, FormatTestArrayWrapping) {
   // Array that triggers wrap due to long element
   EXPECT_EQ(Array({"abcdefghijklmnopqrstuvw", "x", "y", "z"}).Format(),
             R"(ARRAY<STRING>[
-  "abcdefghijklmnopqrstuvw",
-  "x",
-  "y",
-  "z"
+  'abcdefghijklmnopqrstuvw',
+  'x',
+  'y',
+  'z'
 ])");
   // Array that triggers wrap because its long.
   EXPECT_EQ(Array({"h", "i", "j", "k", "l", "m", "n", "p", "p", "q", "r", "s",
                    "t", "u", "v", "w", "x", "y", "z"})
                 .Format(),
-            R"(ARRAY<STRING>["h",
-              "i",
-              "j",
-              "k",
-              "l",
-              "m",
-              "n",
-              "p",
-              "p",
-              "q",
-              "r",
-              "s",
-              "t",
-              "u",
-              "v",
-              "w",
-              "x",
-              "y",
-              "z"])");
+            R"(ARRAY<STRING>['h',
+              'i',
+              'j',
+              'k',
+              'l',
+              'm',
+              'n',
+              'p',
+              'p',
+              'q',
+              'r',
+              's',
+              't',
+              'u',
+              'v',
+              'w',
+              'x',
+              'y',
+              'z'])");
 }
 
 TEST_F(ValueTest, FormatTestStructWrapping) {
@@ -3553,15 +3553,15 @@ TEST_F(ValueTest, FormatTestSanitization) {
        $$0 STRING,
        $$$0 STRING,
        $$$$0 STRING>{
-  "$val1",
-  "val2$",
-  "$",
-  "$$",
-  "$$$",
-  "$0$1$2",
-  "$$0",
-  "$$$0",
-  "$$$$0"
+  '$val1',
+  'val2$',
+  '$',
+  '$$',
+  '$$$',
+  '$0$1$2',
+  '$$0',
+  '$$$0',
+  '$$$$0'
 })");
   // Array type containing dollar signs
   EXPECT_EQ(StructArray({"$col1", "col2$", "$", "$$", "$$$", "$0$1$2", "$$0",
@@ -3578,7 +3578,7 @@ TEST_F(ValueTest, FormatTestSanitization) {
              $$0 STRING,
              $$$0 STRING,
              $$$$0 STRING>>[
-  {"$val1", "val2$", "$", "$$", "$$$", "$0$1$2", "$$0", "$$$0", "$$$$0"}
+  {'$val1', 'val2$', '$', '$$', '$$$', '$0$1$2', '$$0', '$$$0', '$$$$0'}
 ])");
   // Array type containing dollar signs and long enough to trigger wrapping
   // after the multi-line array type.
@@ -3599,16 +3599,16 @@ TEST_F(ValueTest, FormatTestSanitization) {
         $$$$0 STRING,
         extralong$typename STRING
       >>
-[{"$val1",
-  "val2$",
-  "$",
-  "$$",
-  "$$$",
-  "$0$1$2",
-  "$$0",
-  "$$$0",
-  "$$$$0",
-  "extralong$value"}])");
+[{'$val1',
+  'val2$',
+  '$',
+  '$$',
+  '$$$',
+  '$0$1$2',
+  '$$0',
+  '$$$0',
+  '$$$$0',
+  'extralong$value'}])");
 }
 
 TEST_F(ValueTest, FormatTestTypeTruncation) {
@@ -3617,7 +3617,7 @@ TEST_F(ValueTest, FormatTestTypeTruncation) {
   EXPECT_EQ(v.Format(), R"(ARRAY<STRUCT<ARRAY<>, ARRAY<>>>[
   {
     ARRAY<INT32>[2, 1],
-    ARRAY<STRING>["bar", "foo"]
+    ARRAY<STRING>['bar', 'foo']
   }
 ])");
 
@@ -3646,8 +3646,8 @@ TEST_F(ValueTest, FormatWrapAfterMultiLineArrayType) {
              struct_field3 STRING,
              struct_field4 STRING>>
 [
-  {"11", "12", "13", "14"},
-  {"21", "22", "23", "24"}
+  {'11', '12', '13', '14'},
+  {'21', '22', '23', '24'}
 ])");
 }
 
