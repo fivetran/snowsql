@@ -276,7 +276,7 @@ ParameterAssignment [0-20] [SET @AND="something"]
     Identifier("AND") [5-8] [AND]
   StringLiteral("something") [9-20] ["something"]
 --
-SET @`AND` = "something"
+SET @"AND" = "something"
 --
 ALTERNATION GROUP: @@
 --
@@ -286,7 +286,7 @@ SystemVariableAssignment [0-21] [SET @@AND="something"]
       Identifier("AND") [6-9] [AND]
   StringLiteral("something") [10-21] ["something"]
 --
-SET @@`AND` = "something"
+SET @@"AND" = "something"
 ==
 
 # Use a parameter name that is an non-reserved keyword.
@@ -353,7 +353,7 @@ ParameterAssignment [0-36] [SET @VAL =...TIMESTAMP() + 100]
         Identifier("CURRENT_TIMESTAMP") [11-28] [CURRENT_TIMESTAMP]
     IntLiteral(100) [33-36] [100]
 --
-SET @VAL = `CURRENT_TIMESTAMP`() + 100
+SET @VAL = "CURRENT_TIMESTAMP"() + 100
 --
 ALTERNATION GROUP: @@
 --
@@ -367,7 +367,7 @@ SystemVariableAssignment [0-37] [SET @@VAL..._TIMESTAMP() + 100]
         Identifier("CURRENT_TIMESTAMP") [12-29] [CURRENT_TIMESTAMP]
     IntLiteral(100) [34-37] [100]
 --
-SET @@VAL = `CURRENT_TIMESTAMP`() + 100
+SET @@VAL = "CURRENT_TIMESTAMP"() + 100
 ==
 
 # Set a parameter to an expression with a SELECT statment

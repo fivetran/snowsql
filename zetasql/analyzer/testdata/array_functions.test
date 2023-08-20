@@ -35,7 +35,7 @@ ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -55,7 +55,7 @@ SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), "LAS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -75,7 +75,7 @@ SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), CAST
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -110,7 +110,7 @@ ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -145,7 +145,7 @@ ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -180,7 +180,7 @@ ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -238,7 +238,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -270,7 +270,7 @@ SELECT ARRAY_OFFSET([1, 4, 4, 6], e -> e = 4, 'FIRST')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -297,7 +297,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -414,7 +414,7 @@ SELECT ARRAY_OFFSET([1, 4, 4, 6], e -> e > 2 AND e < 5, 'LAST')
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -445,7 +445,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -582,7 +582,7 @@ SELECT ARRAY_FIND([1, 4, 4, 6], e -> e > 7, 'FIRST')
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -609,7 +609,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -726,7 +726,7 @@ SELECT ARRAY_FIND_ALL([STRUCT(1 AS a, 2 AS b), STRUCT(3 AS a, 4 AS b)], e -> e.a
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<STRUCT<a INT64, b INT64>>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<STRUCT<a INT64, b INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -754,7 +754,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<STRUCT<a INT64, b INT64>>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<STRUCT<a INT64, b INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -846,7 +846,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -861,7 +861,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -944,7 +944,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -959,7 +959,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1064,7 +1064,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1079,7 +1079,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1162,7 +1162,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1177,7 +1177,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1280,7 +1280,7 @@ SELECT ARRAY_FIND(["A"], e -> exists (select 1))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1314,7 +1314,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1446,7 +1446,7 @@ SELECT (ARRAY_FIND(["A"], e -> exists (select Key))) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1484,7 +1484,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]

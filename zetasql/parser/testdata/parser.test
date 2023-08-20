@@ -341,18 +341,18 @@ SELECT * FROM (EXPLAIN SELECT 1);
                        ^
 ==
 
-select f1, `f 2` from T where b;
+select f1, "f 2" from T where b;
 --
 QueryStatement [0-31] [select f1,...T where b]
   Query [0-31] [select f1,...T where b]
     Select [0-31] [select f1,...T where b]
-      SelectList [7-16] [f1, `f 2`]
+      SelectList [7-16] [f1, "f 2"]
         SelectColumn [7-9] [f1]
           PathExpression [7-9] [f1]
             Identifier(f1) [7-9] [f1]
-        SelectColumn [11-16] [`f 2`]
-          PathExpression [11-16] [`f 2`]
-            Identifier("f 2") [11-16] [`f 2`]
+        SelectColumn [11-16] ["f 2"]
+          PathExpression [11-16] ["f 2"]
+            Identifier("f 2") [11-16] ["f 2"]
       FromClause [17-23] [from T]
         TablePathExpression [22-23] [T]
           PathExpression [22-23] [T]
@@ -363,7 +363,7 @@ QueryStatement [0-31] [select f1,...T where b]
 --
 SELECT
   f1,
-  `f 2`
+  "f 2"
 FROM
   T
 WHERE
@@ -476,7 +476,7 @@ QueryStatement [0-55] [select hll_count...) from bar]
             Identifier(bar) [52-55] [bar]
 --
 SELECT
-  hll_count.`extract`(hll_count.`merge`(foo))
+  hll_count."extract"(hll_count."merge"(foo))
 FROM
   bar
 ==
@@ -504,7 +504,7 @@ QueryStatement [0-55] [select d3a_count...) from bar]
             Identifier(bar) [52-55] [bar]
 --
 SELECT
-  d3a_count.`extract`(d3a_count.`merge`(foo))
+  d3a_count."extract"(d3a_count."merge"(foo))
 FROM
   bar
 ==
@@ -771,86 +771,86 @@ FROM
   T
 ==
 
-select 1 as `This is an\\n\\talias on a new line.`
+select 1 as "This is an\\n\\talias on a new line."
 --
-QueryStatement [0-50] [select 1 as...new line.`]
-  Query [0-50] [select 1 as...new line.`]
-    Select [0-50] [select 1 as...new line.`]
-      SelectList [7-50] [1 as `This...new line.`]
-        SelectColumn [7-50] [1 as `This...new line.`]
+QueryStatement [0-50] [select 1 as...new line."]
+  Query [0-50] [select 1 as...new line."]
+    Select [0-50] [select 1 as...new line."]
+      SelectList [7-50] [1 as "This...new line."]
+        SelectColumn [7-50] [1 as "This...new line."]
           IntLiteral(1) [7-8] [1]
-          Alias [9-50] [as `This is...new line.`]
-            Identifier("This is an\\n\\talias on a new line.") [12-50] [`This is an...new line.`]
+          Alias [9-50] [as "This is...new line."]
+            Identifier("This is an\\n\\talias on a new line.") [12-50] ["This is an...new line."]
 --
 SELECT
-  1 AS `This is an\\n\\talias on a new line.`
+  1 AS "This is an\\n\\talias on a new line."
 ==
 
 # NOTE: Backslashes are being unescaped by the test framework.
-select 1 as `\\t`, 2 as `\\n`, 3 as `\\010`, 4 as `\\xafh`, 5 as `\\u00045678`,
-       6 as `\\U00045678`, '\\x53' as `\\x54`;
+select 1 as "\\t", 2 as "\\n", 3 as "\\010", 4 as "\\xafh", 5 as "\\u00045678",
+       6 as "\\U00045678", '\\x53' as "\\x54";
 --
-QueryStatement [0-125] [select 1 as...as `\\x54`]
-  Query [0-125] [select 1 as...as `\\x54`]
-    Select [0-125] [select 1 as...as `\\x54`]
-      SelectList [7-125] [1 as `\\t`...as `\\x54`]
-        SelectColumn [7-17] [1 as `\\t`]
+QueryStatement [0-125] [select 1 as...as "\\x54"]
+  Query [0-125] [select 1 as...as "\\x54"]
+    Select [0-125] [select 1 as...as "\\x54"]
+      SelectList [7-125] [1 as "\\t"...as "\\x54"]
+        SelectColumn [7-17] [1 as "\\t"]
           IntLiteral(1) [7-8] [1]
-          Alias [9-17] [as `\\t`]
-            Identifier("\\t") [12-17] [`\\t`]
-        SelectColumn [19-29] [2 as `\\n`]
+          Alias [9-17] [as "\\t"]
+            Identifier("\\t") [12-17] ["\\t"]
+        SelectColumn [19-29] [2 as "\\n"]
           IntLiteral(2) [19-20] [2]
-          Alias [21-29] [as `\\n`]
-            Identifier("\\n") [24-29] [`\\n`]
-        SelectColumn [31-43] [3 as `\\010`]
+          Alias [21-29] [as "\\n"]
+            Identifier("\\n") [24-29] ["\\n"]
+        SelectColumn [31-43] [3 as "\\010"]
           IntLiteral(3) [31-32] [3]
-          Alias [33-43] [as `\\010`]
-            Identifier("\\010") [36-43] [`\\010`]
-        SelectColumn [45-58] [4 as `\\xafh`]
+          Alias [33-43] [as "\\010"]
+            Identifier("\\010") [36-43] ["\\010"]
+        SelectColumn [45-58] [4 as "\\xafh"]
           IntLiteral(4) [45-46] [4]
-          Alias [47-58] [as `\\xafh`]
-            Identifier("\\xafh") [50-58] [`\\xafh`]
-        SelectColumn [60-78] [5 as `\\u00045678`]
+          Alias [47-58] [as "\\xafh"]
+            Identifier("\\xafh") [50-58] ["\\xafh"]
+        SelectColumn [60-78] [5 as "\\u00045678"]
           IntLiteral(5) [60-61] [5]
-          Alias [62-78] [as `\\u00045678`]
-            Identifier("\\u00045678") [65-78] [`\\u00045678`]
-        SelectColumn [87-105] [6 as `\\U00045678`]
+          Alias [62-78] [as "\\u00045678"]
+            Identifier("\\u00045678") [65-78] ["\\u00045678"]
+        SelectColumn [87-105] [6 as "\\U00045678"]
           IntLiteral(6) [87-88] [6]
-          Alias [89-105] [as `\\U00045678`]
-            Identifier("\\U00045678") [92-105] [`\\U00045678`]
-        SelectColumn [107-125] ['\\x53' as `\\x54`]
+          Alias [89-105] [as "\\U00045678"]
+            Identifier("\\U00045678") [92-105] ["\\U00045678"]
+        SelectColumn [107-125] ['\\x53' as "\\x54"]
           StringLiteral('\\x53') [107-114] ['\\x53']
-          Alias [115-125] [as `\\x54`]
-            Identifier("\\x54") [118-125] [`\\x54`]
+          Alias [115-125] [as "\\x54"]
+            Identifier("\\x54") [118-125] ["\\x54"]
 --
 SELECT
-  1 AS `\\t`,
-  2 AS `\\n`,
-  3 AS `\\010`,
-  4 AS `\\xafh`,
-  5 AS `\\u00045678`,
-  6 AS `\\U00045678`,
-  '\\x53' AS `\\x54`
+  1 AS "\\t",
+  2 AS "\\n",
+  3 AS "\\010",
+  4 AS "\\xafh",
+  5 AS "\\u00045678",
+  6 AS "\\U00045678",
+  '\\x53' AS "\\x54"
 ==
 
-select '\\u1235' as `\\u1234`, "\\U00012346" as `\\U00012345`;
+select '\\u1235' as "\\u1234", "\\U00012346" as "\\U00012345";
 --
-QueryStatement [0-61] [select '\\...U00012345`]
-  Query [0-61] [select '\\...U00012345`]
-    Select [0-61] [select '\\...U00012345`]
-      SelectList [7-61] ['\\u1235'...U00012345`]
-        SelectColumn [7-29] ['\\u1235' as `\\u1234`]
+QueryStatement [0-61] [select '\\...U00012345"]
+  Query [0-61] [select '\\...U00012345"]
+    Select [0-61] [select '\\...U00012345"]
+      SelectList [7-61] ['\\u1235'...U00012345"]
+        SelectColumn [7-29] ['\\u1235' as "\\u1234"]
           StringLiteral('\\u1235') [7-16] ['\\u1235']
-          Alias [17-29] [as `\\u1234`]
-            Identifier("\\u1234") [20-29] [`\\u1234`]
-        SelectColumn [31-61] ["\\U00012346" as `\\U00012345`]
+          Alias [17-29] [as "\\u1234"]
+            Identifier("\\u1234") [20-29] ["\\u1234"]
+        SelectColumn [31-61] ["\\U00012346" as "\\U00012345"]
           StringLiteral("\\U00012346") [31-44] ["\\U00012346"]
-          Alias [45-61] [as `\\U00012345`]
-            Identifier("\\U00012345") [48-61] [`\\U00012345`]
+          Alias [45-61] [as "\\U00012345"]
+            Identifier("\\U00012345") [48-61] ["\\U00012345"]
 --
 SELECT
-  '\\u1235' AS `\\u1234`,
-  "\\U00012346" AS `\\U00012345`
+  '\\u1235' AS "\\u1234",
+  "\\U00012346" AS "\\U00012345"
 ==
 
 SELECT fake_alias_function(1 as example_alias)
@@ -896,7 +896,7 @@ QueryStatement [0-28] [SELECT safe.cast(1 as int32)]
                 Identifier(int32) [22-27] [int32]
 --
 SELECT
-  safe.`cast`(1 AS int32)
+  safe."cast"(1 AS int32)
 ==
 
 select {{safe_cast|cast}}("1" as int32);
@@ -1084,18 +1084,18 @@ SELECT
   CAST(x AS ARRAY< string > COLLATE 'und:ci')
 ==
 
-select {{cast|try_cast}}(`date` as date) from A;
+select {{cast|try_cast}}("date" as date) from A;
 --
 ALTERNATION GROUP: cast
 --
 QueryStatement [0-34] [select cast...date) from A]
   Query [0-34] [select cast...date) from A]
     Select [0-34] [select cast...date) from A]
-      SelectList [7-27] [cast(`date` as date)]
-        SelectColumn [7-27] [cast(`date` as date)]
-          CastExpression [7-27] [cast(`date` as date)]
-            PathExpression [12-18] [`date`]
-              Identifier(date) [12-18] [`date`]
+      SelectList [7-27] [cast("date" as date)]
+        SelectColumn [7-27] [cast("date" as date)]
+          CastExpression [7-27] [cast("date" as date)]
+            PathExpression [12-18] ["date"]
+              Identifier(date) [12-18] ["date"]
             SimpleType [22-26] [date]
               PathExpression [22-26] [date]
                 Identifier(date) [22-26] [date]
@@ -1114,11 +1114,11 @@ ALTERNATION GROUP: try_cast
 QueryStatement [0-38] [select try_cast...date) from A]
   Query [0-38] [select try_cast...date) from A]
     Select [0-38] [select try_cast...date) from A]
-      SelectList [7-31] [try_cast(`date` as date)]
-        SelectColumn [7-31] [try_cast(`date` as date)]
-          CastExpression(return_null_on_error=true) [7-31] [try_cast(`date` as date)]
-            PathExpression [16-22] [`date`]
-              Identifier(date) [16-22] [`date`]
+      SelectList [7-31] [try_cast("date" as date)]
+        SelectColumn [7-31] [try_cast("date" as date)]
+          CastExpression(return_null_on_error=true) [7-31] [try_cast("date" as date)]
+            PathExpression [16-22] ["date"]
+              Identifier(date) [16-22] ["date"]
             SimpleType [26-30] [date]
               PathExpression [26-30] [date]
                 Identifier(date) [26-30] [date]
@@ -1182,13 +1182,13 @@ select cast("1" as int32), cast(1 as string),
        cast(u as TimeStamp_Micros),
        cast(v as TimeStamp_seconds),
        cast(w as TimeStamp_nanos),
-       cast(x as `mypackage.myproto`),
-       cast(y as `mypackage.myenum`) from T;
+       cast(x as "mypackage.myproto"),
+       cast(y as "mypackage.myenum") from T;
 --
-QueryStatement [0-272] [select cast...myenum`) from T]
-  Query [0-272] [select cast...myenum`) from T]
-    Select [0-272] [select cast...myenum`) from T]
-      SelectList [7-265] [cast("1" as...package.myenum`)]
+QueryStatement [0-272] [select cast...myenum") from T]
+  Query [0-272] [select cast...myenum") from T]
+    Select [0-272] [select cast...myenum") from T]
+      SelectList [7-265] [cast("1" as...package.myenum")]
         SelectColumn [7-25] [cast("1" as int32)]
           CastExpression [7-25] [cast("1" as int32)]
             StringLiteral("1") [12-15] ["1"]
@@ -1229,20 +1229,20 @@ QueryStatement [0-272] [select cast...myenum`) from T]
             SimpleType [172-187] [TimeStamp_nanos]
               PathExpression [172-187] [TimeStamp_nanos]
                 Identifier(TimeStamp_nanos) [172-187] [TimeStamp_nanos]
-        SelectColumn [197-227] [cast(x as `mypackage.myproto`)]
-          CastExpression [197-227] [cast(x as `mypackage.myproto`)]
+        SelectColumn [197-227] [cast(x as "mypackage.myproto")]
+          CastExpression [197-227] [cast(x as "mypackage.myproto")]
             PathExpression [202-203] [x]
               Identifier(x) [202-203] [x]
-            SimpleType [207-226] [`mypackage.myproto`]
-              PathExpression [207-226] [`mypackage.myproto`]
-                Identifier("mypackage.myproto") [207-226] [`mypackage.myproto`]
-        SelectColumn [236-265] [cast(y as `mypackage.myenum`)]
-          CastExpression [236-265] [cast(y as `mypackage.myenum`)]
+            SimpleType [207-226] ["mypackage.myproto"]
+              PathExpression [207-226] ["mypackage.myproto"]
+                Identifier("mypackage.myproto") [207-226] ["mypackage.myproto"]
+        SelectColumn [236-265] [cast(y as "mypackage.myenum")]
+          CastExpression [236-265] [cast(y as "mypackage.myenum")]
             PathExpression [241-242] [y]
               Identifier(y) [241-242] [y]
-            SimpleType [246-264] [`mypackage.myenum`]
-              PathExpression [246-264] [`mypackage.myenum`]
-                Identifier("mypackage.myenum") [246-264] [`mypackage.myenum`]
+            SimpleType [246-264] ["mypackage.myenum"]
+              PathExpression [246-264] ["mypackage.myenum"]
+                Identifier("mypackage.myenum") [246-264] ["mypackage.myenum"]
       FromClause [266-272] [from T]
         TablePathExpression [271-272] [T]
           PathExpression [271-272] [T]
@@ -1255,8 +1255,8 @@ SELECT
   CAST(u AS TimeStamp_Micros),
   CAST(v AS TimeStamp_seconds),
   CAST(w AS TimeStamp_nanos),
-  CAST(x AS `mypackage.myproto`),
-  CAST(y AS `mypackage.myenum`)
+  CAST(x AS "mypackage.myproto"),
+  CAST(y AS "mypackage.myenum")
 FROM
   T
 ==
@@ -1267,14 +1267,14 @@ select try_cast("1" as int32),
        try_cast(u as TimeStamp_Micros),
        try_cast(v as TimeStamp_seconds),
        try_cast(w as TimeStamp_nanos),
-       try_cast(x as `mypackage.myproto`),
-       try_cast(y as `mypackage.myenum`) from T;
+       try_cast(x as "mypackage.myproto"),
+       try_cast(y as "mypackage.myenum") from T;
 --
 
-QueryStatement [0-311] [select try_cast...num`) from T]
-  Query [0-311] [select try_cast...num`) from T]
-    Select [0-311] [select try_cast...num`) from T]
-      SelectList [7-304] [try_cast("...ypackage.myenum`)]
+QueryStatement [0-311] [select try_cast...num") from T]
+  Query [0-311] [select try_cast...num") from T]
+    Select [0-311] [select try_cast...num") from T]
+      SelectList [7-304] [try_cast("...ypackage.myenum")]
         SelectColumn [7-29] [try_cast("1" as int32)]
           CastExpression(return_null_on_error=true) [7-29] [try_cast("1" as int32)]
             StringLiteral("1") [16-19] ["1"]
@@ -1315,20 +1315,20 @@ QueryStatement [0-311] [select try_cast...num`) from T]
             SimpleType [203-218] [TimeStamp_nanos]
               PathExpression [203-218] [TimeStamp_nanos]
                 Identifier(TimeStamp_nanos) [203-218] [TimeStamp_nanos]
-        SelectColumn [228-262] [try_cast(x....myproto`)]
-          CastExpression(return_null_on_error=true) [228-262] [try_cast(x....myproto`)]
+        SelectColumn [228-262] [try_cast(x....myproto")]
+          CastExpression(return_null_on_error=true) [228-262] [try_cast(x....myproto")]
             PathExpression [237-238] [x]
               Identifier(x) [237-238] [x]
-            SimpleType [242-261] [`mypackage.myproto`]
-              PathExpression [242-261] [`mypackage.myproto`]
-                Identifier("mypackage.myproto") [242-261] [`mypackage.myproto`]
-        SelectColumn [271-304] [try_cast(y...ypackage.myenum`)]
-          CastExpression(return_null_on_error=true) [271-304] [try_cast(y...ypackage.myenum`)]
+            SimpleType [242-261] ["mypackage.myproto"]
+              PathExpression [242-261] ["mypackage.myproto"]
+                Identifier("mypackage.myproto") [242-261] ["mypackage.myproto"]
+        SelectColumn [271-304] [try_cast(y...ypackage.myenum")]
+          CastExpression(return_null_on_error=true) [271-304] [try_cast(y...ypackage.myenum")]
             PathExpression [280-281] [y]
               Identifier(y) [280-281] [y]
-            SimpleType [285-303] [`mypackage.myenum`]
-              PathExpression [285-303] [`mypackage.myenum`]
-                Identifier("mypackage.myenum") [285-303] [`mypackage.myenum`]
+            SimpleType [285-303] ["mypackage.myenum"]
+              PathExpression [285-303] ["mypackage.myenum"]
+                Identifier("mypackage.myenum") [285-303] ["mypackage.myenum"]
       FromClause [305-311] [from T]
         TablePathExpression [310-311] [T]
           PathExpression [310-311] [T]
@@ -1341,8 +1341,8 @@ SELECT
   TRY_CAST(u AS TimeStamp_Micros),
   TRY_CAST(v AS TimeStamp_seconds),
   TRY_CAST(w AS TimeStamp_nanos),
-  TRY_CAST(x AS `mypackage.myproto`),
-  TRY_CAST(y AS `mypackage.myenum`)
+  TRY_CAST(x AS "mypackage.myproto"),
+  TRY_CAST(y AS "mypackage.myenum")
 FROM
   T
 ==
@@ -1350,7 +1350,7 @@ FROM
 select cast(x as foo),
        cast(x as a.b),
        cast(x > 5 as timestamp_seconds),
-       cast("1" as `int64`) as cast_1_as_int64,
+       cast("1" as "int64") as cast_1_as_int64,
        cast(x < 10 as b),
        cast(x as struct<x int, y double>),
        cast(x as struct<int, double>),
@@ -1386,11 +1386,11 @@ QueryStatement [0-306] [select cast...bytes>) from T]
               PathExpression [67-84] [timestamp_seconds]
                 Identifier(timestamp_seconds) [67-84] [timestamp_seconds]
         SelectColumn [94-133] [cast("1" as...cast_1_as_int64]
-          CastExpression [94-114] [cast("1" as `int64`)]
+          CastExpression [94-114] [cast("1" as "int64")]
             StringLiteral("1") [99-102] ["1"]
-            SimpleType [106-113] [`int64`]
-              PathExpression [106-113] [`int64`]
-                Identifier(int64) [106-113] [`int64`]
+            SimpleType [106-113] ["int64"]
+              PathExpression [106-113] ["int64"]
+                Identifier(int64) [106-113] ["int64"]
           Alias [115-133] [as cast_1_as_int64]
             Identifier(cast_1_as_int64) [118-133] [cast_1_as_int64]
         SelectColumn [142-159] [cast(x < 10 as b)]
@@ -1474,7 +1474,7 @@ FROM
 select try_cast(x as foo),
        try_cast(x as a.b),
        try_cast(x > 5 as timestamp_seconds),
-       try_cast("1" as `int64`) as try_cast_1_as_int64,
+       try_cast("1" as "int64") as try_cast_1_as_int64,
        try_cast(x < 10 as b),
        try_cast(x as struct<x int, y double>),
        try_cast(x as struct<int, double>),
@@ -1510,11 +1510,11 @@ QueryStatement [0-342] [select try_cast...tes>) from T]
               PathExpression [79-96] [timestamp_seconds]
                 Identifier(timestamp_seconds) [79-96] [timestamp_seconds]
         SelectColumn [106-153] [try_cast("...y_cast_1_as_int64]
-          CastExpression(return_null_on_error=true) [106-130] [try_cast("1" as `int64`)]
+          CastExpression(return_null_on_error=true) [106-130] [try_cast("1" as "int64")]
             StringLiteral("1") [115-118] ["1"]
-            SimpleType [122-129] [`int64`]
-              PathExpression [122-129] [`int64`]
-                Identifier(int64) [122-129] [`int64`]
+            SimpleType [122-129] ["int64"]
+              PathExpression [122-129] ["int64"]
+                Identifier(int64) [122-129] ["int64"]
           Alias [131-153] [as try_cast_1_as_int64]
             Identifier(try_cast_1_as_int64) [134-153] [try_cast_1_as_int64]
         SelectColumn [162-183] [try_cast(x < 10 as b)]
@@ -1876,7 +1876,7 @@ SELECT
   nested1.field1,
   field2
 FROM
-  table1.`with`.dots
+  table1."with".dots
 ==
 
 # PROTO reserved word works in a path expression.
@@ -1892,15 +1892,15 @@ QueryStatement [0-20] [select nested1.proto]
             Identifier("proto") [15-20] [proto]
 --
 SELECT
-  nested1.`proto`
+  nested1."proto"
 ==
 
 # Table name with backticks
-select nested1.field1, field2 from `table.with.dots`
+select nested1.field1, field2 from "table.with.dots"
 --
-QueryStatement [0-52] [select nested1...with.dots`]
-  Query [0-52] [select nested1...with.dots`]
-    Select [0-52] [select nested1...with.dots`]
+QueryStatement [0-52] [select nested1...with.dots"]
+  Query [0-52] [select nested1...with.dots"]
+    Select [0-52] [select nested1...with.dots"]
       SelectList [7-29] [nested1.field1, field2]
         SelectColumn [7-21] [nested1.field1]
           PathExpression [7-21] [nested1.field1]
@@ -1909,16 +1909,16 @@ QueryStatement [0-52] [select nested1...with.dots`]
         SelectColumn [23-29] [field2]
           PathExpression [23-29] [field2]
             Identifier(field2) [23-29] [field2]
-      FromClause [30-52] [from `table.with.dots`]
-        TablePathExpression [35-52] [`table.with.dots`]
-          PathExpression [35-52] [`table.with.dots`]
-            Identifier("table.with.dots") [35-52] [`table.with.dots`]
+      FromClause [30-52] [from "table.with.dots"]
+        TablePathExpression [35-52] ["table.with.dots"]
+          PathExpression [35-52] ["table.with.dots"]
+            Identifier("table.with.dots") [35-52] ["table.with.dots"]
 --
 SELECT
   nested1.field1,
   field2
 FROM
-  `table.with.dots`
+  "table.with.dots"
 ==
 
 select f(column.field_name) like 'pattern%';

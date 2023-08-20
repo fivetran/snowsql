@@ -51,7 +51,7 @@ SELECT
   f1,
   f2
 FROM
-  T AS `QUALIFY`
+  T AS "QUALIFY"
 ==
 
 select f1, f2 from T AS QUALIFY
@@ -77,7 +77,7 @@ SELECT
   f1,
   f2
 FROM
-  T AS `QUALIFY`
+  T AS "QUALIFY"
 ==
 
 select f1, f2 from T QUALIFY WHERE true
@@ -105,7 +105,7 @@ SELECT
   f1,
   f2
 FROM
-  T AS `QUALIFY`
+  T AS "QUALIFY"
 WHERE
   true
 ==
@@ -135,7 +135,7 @@ SELECT
   f1,
   f2
 FROM
-  T AS `QUALIFY`
+  T AS "QUALIFY"
 WHERE
   false
 ==
@@ -165,7 +165,7 @@ SELECT
   f1,
   f2
 FROM
-  T AS `QUALIFY`
+  T AS "QUALIFY"
 ==
 
 # QUALIFY language option disabled when QUALIFY is used as a clause

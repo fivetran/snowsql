@@ -416,7 +416,7 @@ ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE, try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -433,7 +433,7 @@ ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE,cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -463,7 +463,7 @@ select cast(["hi", "hello", "hola"] as ARRAY<STRING(12)>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -490,7 +490,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,PARAMETERIZED_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -518,7 +518,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,PARAMETERIZED_TYPES,NUMERIC_
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -539,7 +539,7 @@ select cast(coalesce(struct(false, 1.23,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<BOOL, STRING, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<BOOL, STRING, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -564,7 +564,7 @@ STRUCT<a NUMERIC(5), b ARRAY<STRUCT<STRING(5), INT64, STRUCT<NUMERIC(5), NUMERIC
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a NUMERIC, b ARRAY<STRUCT<STRING, INT64, STRUCT<NUMERIC, NUMERIC>>>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a NUMERIC, b ARRAY<STRUCT<STRING, INT64, STRUCT<NUMERIC, NUMERIC>>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -593,7 +593,7 @@ select cast((2, cast("hello" as STRING(5))) as STRUCT<a INT32, b STRING(2)>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT32, b STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT32, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -658,7 +658,7 @@ select CAST(9999999999999999999999999999.999999999 as numeric(29, 1));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -679,7 +679,7 @@ select cast((99999999999999999999999999.999999999, 99999999999999999999999999.99
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<NUMERIC, BIGNUMERIC>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<NUMERIC, BIGNUMERIC>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -696,7 +696,7 @@ select cast([numeric '99999999999999999999999999.999999999'] as array<numeric(29
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<NUMERIC>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<NUMERIC>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

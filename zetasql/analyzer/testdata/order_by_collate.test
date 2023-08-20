@@ -1,6 +1,6 @@
 [default language_features=V_1_1_ORDER_BY_COLLATE,ANALYTIC_FUNCTIONS]
 
-select `string` col from SimpleTypes
+select "string" col from SimpleTypes
 order by col COLLATE {{"en_US"|@test_param_string|r"en_US"}}
 --
 ALTERNATION GROUPS:
@@ -43,13 +43,13 @@ QueryStmt
 ==
 
 # COLLATE must be followed by a string literal or a string parameter.
-select `string` col from SimpleTypes
-order by col COLLATE {{`string`|@test_param_int32|@test_param_bytes|@test_param_enum}}
+select "string" col from SimpleTypes
+order by col COLLATE {{"string"|@test_param_int32|@test_param_bytes|@test_param_enum}}
 --
-ALTERNATION GROUP: `string`
+ALTERNATION GROUP: "string"
 --
-ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier `string` [at 2:22]
-order by col COLLATE `string`
+ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier "string" [at 2:22]
+order by col COLLATE "string"
                      ^
 --
 ALTERNATION GROUP: @test_param_int32
@@ -71,24 +71,24 @@ order by col COLLATE @test_param_enum
                      ^
 ==
 
-select {{`int32`|`bytes`|`date`}} col from SimpleTypes order by col COLLATE "en_US"
+select {{"int32"|"bytes"|"date"}} col from SimpleTypes order by col COLLATE "en_US"
 --
-ALTERNATION GROUP: `int32`
+ALTERNATION GROUP: "int32"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT32 [at 1:46]
-select `int32` col from SimpleTypes order by col COLLATE "en_US"
+select "int32" col from SimpleTypes order by col COLLATE "en_US"
                                              ^
 --
-ALTERNATION GROUP: `bytes`
+ALTERNATION GROUP: "bytes"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BYTES [at 1:46]
-select `bytes` col from SimpleTypes order by col COLLATE "en_US"
+select "bytes" col from SimpleTypes order by col COLLATE "en_US"
                                              ^
 --
-ALTERNATION GROUP: `date`
+ALTERNATION GROUP: "date"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to DATE [at 1:45]
-select `date` col from SimpleTypes order by col COLLATE "en_US"
+select "date" col from SimpleTypes order by col COLLATE "en_US"
                                             ^
 ==
 
@@ -135,7 +135,7 @@ order by length(value) COLLATE "en_US"
          ^
 ==
 
-select `string` a, `string` b, `string` c, int32 from SimpleTypes
+select "string" a, "string" b, "string" c, int32 from SimpleTypes
 order by a COLLATE "s1" ASC,
          b COLLATE "s2" DESC,
          3 COLLATE @test_param_string ASC,
@@ -177,7 +177,7 @@ QueryStmt
 ==
 
 # It is up to the engine to fail if the collation name is invalid or NULL.
-select `string` a
+select "string" a
 from SimpleTypes
 order by a COLLATE "",
          a COLLATE "NULL",
@@ -217,7 +217,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -275,25 +275,25 @@ ERROR: COLLATE must be followed by a string literal or a string parameter [at 2:
                                 ^
 ==
 
-select afn_agg() over (order by {{`int32`|`bytes`|`date`}} COLLATE "en_US")
+select afn_agg() over (order by {{"int32"|"bytes"|"date"}} COLLATE "en_US")
 from SimpleTypes
 --
-ALTERNATION GROUP: `int32`
+ALTERNATION GROUP: "int32"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT32 [at 1:33]
-select afn_agg() over (order by `int32` COLLATE "en_US")
+select afn_agg() over (order by "int32" COLLATE "en_US")
                                 ^
 --
-ALTERNATION GROUP: `bytes`
+ALTERNATION GROUP: "bytes"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BYTES [at 1:33]
-select afn_agg() over (order by `bytes` COLLATE "en_US")
+select afn_agg() over (order by "bytes" COLLATE "en_US")
                                 ^
 --
-ALTERNATION GROUP: `date`
+ALTERNATION GROUP: "date"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to DATE [at 1:33]
-select afn_agg() over (order by `date` COLLATE "en_US")
+select afn_agg() over (order by "date" COLLATE "en_US")
                                 ^
 ==
 
@@ -303,7 +303,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -370,7 +370,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -419,7 +419,7 @@ QueryStmt
 ==
 
 [language_features={{V_1_1_ORDER_BY_COLLATE|}}]
-select `string` from SimpleTypes order by 1 COLLATE "en_US"
+select "string" from SimpleTypes order by 1 COLLATE "en_US"
 --
 ALTERNATION GROUP: V_1_1_ORDER_BY_COLLATE
 --
@@ -442,7 +442,7 @@ QueryStmt
 ALTERNATION GROUP: <empty>
 --
 ERROR: COLLATE is not supported [at 1:45]
-select `string` from SimpleTypes order by 1 COLLATE "en_US"
+select "string" from SimpleTypes order by 1 COLLATE "en_US"
                                             ^
 ==
 
@@ -453,7 +453,7 @@ ALTERNATION GROUP: V_1_1_ORDER_BY_COLLATE,ANALYTIC_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]

@@ -122,7 +122,7 @@ select * from tvf_one_relation_arg_output_schema_is_input_schema(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_one_relation_arg_output_schema_is_input_schema.$col1#4 AS `$col1` [INT64]
+| +-tvf_one_relation_arg_output_schema_is_input_schema.$col1#4 AS "$col1" [INT64]
 | +-tvf_one_relation_arg_output_schema_is_input_schema.y#5 AS y [INT64]
 | +-tvf_one_relation_arg_output_schema_is_input_schema.z#6 AS z [INT64]
 +-query=
@@ -185,7 +185,7 @@ select * from tvf_one_optional_relation_arg_return_int64_value_table(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_one_optional_relation_arg_return_int64_value_table.$col0#4 AS `$col0` [INT64]
+| +-tvf_one_optional_relation_arg_return_int64_value_table.$col0#4 AS "$col0" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_one_optional_relation_arg_return_int64_value_table.$col0#4]
@@ -213,7 +213,7 @@ select * from tvf_one_optional_relation_arg_return_int64_value_table()
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_one_optional_relation_arg_return_int64_value_table.$col0#1 AS `$col0` [INT64]
+| +-tvf_one_optional_relation_arg_return_int64_value_table.$col0#1 AS "$col0" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_one_optional_relation_arg_return_int64_value_table.$col0#1]
@@ -297,9 +297,9 @@ select * from tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.$col1#6 AS `$col1` [INT64]
-| +-tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.$col2#7 AS `$col2` [INT64]
-| +-tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.$col3#8 AS `$col3` [INT64]
+| +-tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.$col1#6 AS "$col1" [INT64]
+| +-tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.$col2#7 AS "$col2" [INT64]
+| +-tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.$col3#8 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=tvf_one_relation_arg_output_schema_is_input_schema_plus_int64_arg.[$col1#6, $col2#7, $col3#8]
@@ -405,7 +405,7 @@ from tvf_one_relation_arg_output_schema_is_input_schema(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_one_relation_arg_output_schema_is_input_schema.$col0#3 AS `$col0` [INT64]
+| +-tvf_one_relation_arg_output_schema_is_input_schema.$col0#3 AS "$col0" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.$col0#3]
@@ -431,7 +431,7 @@ select * from tvf_one_relation_arg_output_schema_is_input_schema(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_one_relation_arg_output_schema_is_input_schema.$col0#2 AS `$col0` [PROTO<zetasql_test__.EmptyMessage>]
+| +-tvf_one_relation_arg_output_schema_is_input_schema.$col0#2 AS "$col0" [PROTO<zetasql_test__.EmptyMessage>]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.$col0#2]
@@ -529,15 +529,15 @@ from tvf_two_relation_args_return_proto_value_table(
 QueryStmt
 +-output_column_list=
 | +-tvf_two_relation_args_return_proto_value_table.$col0#5 AS mytvf [PROTO<zetasql_test__.TestExtraPB>]
-| +-$query.$col2#6 AS `$col2` [STRING]
+| +-$query.$col2#6 AS "$col2" [STRING]
 | +-$query.int32_val1#7 AS int32_val1 [INT32]
-| +-$query.$col4#8 AS `$col4` [STRING]
+| +-$query.$col4#8 AS "$col4" [STRING]
 | +-$query.int32_val1#9 AS int32_val1 [INT32]
-| +-$query.$col6#10 AS `$col6` [STRING]
+| +-$query.$col6#10 AS "$col6" [STRING]
 | +-$query.int32_val1#11 AS int32_val1 [INT32]
 | +-$query.int32_val2#12 AS int32_val2 [INT32]
 | +-$query.str_value#13 AS str_value [ARRAY<STRING>]
-| +-$query.$col8#14 AS `$col8` [STRING]
+| +-$query.$col8#14 AS "$col8" [STRING]
 | +-$query.int32_val1#15 AS int32_val1 [INT32]
 | +-$query.int32_val2#16 AS int32_val2 [INT32]
 | +-$query.str_value#17 AS str_value [ARRAY<STRING>]
@@ -721,7 +721,7 @@ select * from tvf_two_relation_args_return_int64_value_table(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_two_relation_args_return_int64_value_table.$col0#5 AS `$col0` [INT64]
+| +-tvf_two_relation_args_return_int64_value_table.$col0#5 AS "$col0" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_two_relation_args_return_int64_value_table.$col0#5]
@@ -849,8 +849,8 @@ select * from tvf_two_relation_args_output_schema_is_input_schema(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_two_relation_args_output_schema_is_input_schema.$col1#5 AS `$col1` [INT64]
-| +-tvf_two_relation_args_output_schema_is_input_schema.$col2#6 AS `$col2` [INT64]
+| +-tvf_two_relation_args_output_schema_is_input_schema.$col1#5 AS "$col1" [INT64]
+| +-tvf_two_relation_args_output_schema_is_input_schema.$col2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=tvf_two_relation_args_output_schema_is_input_schema.[$col1#5, $col2#6]
@@ -892,8 +892,8 @@ from tvf_two_relation_args_second_optional_output_schema_is_input_schema((
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col1#3 AS `$col1` [INT64]
-| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col2#4 AS `$col2` [INT64]
+| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col1#3 AS "$col1" [INT64]
+| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=tvf_two_relation_args_second_optional_output_schema_is_input_schema.[$col1#3, $col2#4]
@@ -925,8 +925,8 @@ from tvf_two_relation_args_second_optional_output_schema_is_input_schema((
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col1#5 AS `$col1` [INT64]
-| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col2#6 AS `$col2` [INT64]
+| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col1#5 AS "$col1" [INT64]
+| +-tvf_two_relation_args_second_optional_output_schema_is_input_schema.$col2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=tvf_two_relation_args_second_optional_output_schema_is_input_schema.[$col1#5, $col2#6]
@@ -1110,7 +1110,7 @@ from tvf_one_relation_arg_output_schema_is_input_schema(
 QueryStmt
 +-output_column_list=
 | +-tvf_one_relation_arg_output_schema_is_input_schema.int32_val1#9 AS int32_val1 [INT32]
-| +-$query.$col2#12 AS `$col2` [STRING]
+| +-$query.$col2#12 AS "$col2" [STRING]
 | +-tvf_one_relation_arg_output_schema_is_input_schema.int32_val1#9 AS int32_val1 [INT32]
 +-query=
   +-ProjectScan
@@ -1884,7 +1884,7 @@ QueryStmt
 # column types.
 select column_bool, column_bytes
 from tvf_one_relation_arg_required_input_schema_many_types(
-    (select true as bool, bytes, `date`, double, float, int32, int64,
+    (select true as bool, bytes, "date", double, float, int32, int64,
             'abc' as string, timestamp as time, uint32,
             uint64 from simpletypes))
 --
@@ -1994,7 +1994,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select uint32 as uint64, string from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2038,7 +2038,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select string, uint64 from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2079,7 +2079,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select string, uint32 as uint64 from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2123,7 +2123,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select uint64, string, 42 as extra_col from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2166,7 +2166,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select uint32 as uint64, string, 42 as extra_col from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2213,7 +2213,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select string, uint32 as uint64, 42 as extra_col from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2260,7 +2260,7 @@ QueryStmt
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select string, uint32 as uint64, 42 as extra_col from simpletypes),
-    (select string, `date`, 42 as extra_col from simpletypes))
+    (select string, "date", 42 as extra_col from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2484,7 +2484,7 @@ QueryStmt
 # The query passes a relation with the correct literal enum value.
 select *
 from tvf_one_relation_arg_one_enum_input_column(
-    (select cast(1 AS `zetasql_test__.TestEnum`) as myenum))
+    (select cast(1 AS "zetasql_test__.TestEnum") as myenum))
 --
 QueryStmt
 +-output_column_list=
@@ -2515,7 +2515,7 @@ QueryStmt
 # The query passes a relation with a correct enum-valued column reference.
 select *
 from tvf_one_relation_arg_one_enum_input_column(
-    (select * from (select cast(1 AS `zetasql_test__.TestEnum`) as myenum)))
+    (select * from (select cast(1 AS "zetasql_test__.TestEnum") as myenum)))
 --
 QueryStmt
 +-output_column_list=
@@ -2592,7 +2592,7 @@ QueryStmt
 # A TVF accepts one relation argument with one date column.
 select *
 from tvf_one_relation_arg_one_date_input_column(
-    (select `date` as mydate from simpletypes))
+    (select "date" as mydate from simpletypes))
 --
 QueryStmt
 +-output_column_list=
@@ -2628,7 +2628,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<STRING>>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2852,7 +2852,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<column_bool BOOL, column_bytes BYTES>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<column_bool BOOL, column_bytes BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -3998,7 +3998,7 @@ QueryStmt
 
 # Call a TVF that expects an argument where the name contains '$'.
 select * from tvf_templated_scalar_arg_plus_integer_accept_dollars_col_name(
-    (select @test_param_bool as `$col1`))
+    (select @test_param_bool as "$col1"))
 --
 QueryStmt
 +-output_column_list=
@@ -4465,15 +4465,15 @@ from tvf_two_relation_args_return_proto_value_table(
 QueryStmt
 +-output_column_list=
 | +-tvf_two_relation_args_return_proto_value_table.$col0#7 AS mytvf [PROTO<zetasql_test__.TestExtraPB>]
-| +-$query.$col2#8 AS `$col2` [STRING]
+| +-$query.$col2#8 AS "$col2" [STRING]
 | +-$query.int32_val1#9 AS int32_val1 [INT32]
-| +-$query.$col4#10 AS `$col4` [STRING]
+| +-$query.$col4#10 AS "$col4" [STRING]
 | +-$query.int32_val1#11 AS int32_val1 [INT32]
-| +-$query.$col6#12 AS `$col6` [STRING]
+| +-$query.$col6#12 AS "$col6" [STRING]
 | +-$query.int32_val1#13 AS int32_val1 [INT32]
 | +-$query.int32_val2#14 AS int32_val2 [INT32]
 | +-$query.str_value#15 AS str_value [ARRAY<STRING>]
-| +-$query.$col8#16 AS `$col8` [STRING]
+| +-$query.$col8#16 AS "$col8" [STRING]
 | +-$query.int32_val1#17 AS int32_val1 [INT32]
 | +-$query.int32_val2#18 AS int32_val2 [INT32]
 | +-$query.str_value#19 AS str_value [ARRAY<STRING>]
@@ -4786,7 +4786,7 @@ QueryStmt
 # statement starting with a WITH clause for the relation argument.
 select *
 from tvf_one_relation_arg_one_date_input_column(
-    (with w1 as (select `date` as mydate from simpletypes)
+    (with w1 as (select "date" as mydate from simpletypes)
      select mydate from w1))
 --
 QueryStmt
@@ -5224,7 +5224,7 @@ select (select column_bytes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [BYTES]
+| +-$query.$col1#6 AS "$col1" [BYTES]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#6]
@@ -5560,7 +5560,7 @@ QueryStmt
 # without the "no_schema" in its name has a schema specified for the table
 # argument that does not include column 'x'. In all cases for that TVF, the 'x'
 # path expression resolves to the scalar argument. The TVF with "no_schema" uses
-# `ANY TABLE` instead of specifying a schema for the table argument. In that
+# "ANY TABLE" instead of specifying a schema for the table argument. In that
 # case, when the supplied subquery includes a column 'x', the 'x' path
 # expression is resolved to the column implied by scanning the table argument in
 # the FROM clause.
@@ -6305,10 +6305,10 @@ QueryStmt
 # in the relation argument.
 select *
 from tvf_one_relation_arg_one_date_input_column(
-    select `date` as mydate from simpletypes)
+    select "date" as mydate from simpletypes)
 --
 ERROR: Syntax error: Each subquery argument for table-valued function calls must be enclosed in parentheses. To fix this, replace SELECT... with (SELECT...) [at 3:5]
-    select `date` as mydate from simpletypes)
+    select "date" as mydate from simpletypes)
     ^
 ==
 
@@ -6578,7 +6578,7 @@ ERROR: Required column "string" not found in table passed as argument 1 of TVF_O
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select uint64 from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 ERROR: Required column "string" not found in table passed as argument 1 of TVF_TWO_RELATION_ARGS_UINT64_STRING_AND_DATE_STRING_INPUT_COLUMNS(TABLE<uint64 UINT64, string STRING>, TABLE<date DATE, string STRING>) [at 3:5]
     (select uint64 from simpletypes),
@@ -6590,10 +6590,10 @@ ERROR: Required column "string" not found in table passed as argument 1 of TVF_T
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select uint64, string from simpletypes),
-    (select `date` from simpletypes))
+    (select "date" from simpletypes))
 --
 ERROR: Required column "string" not found in table passed as argument 2 of TVF_TWO_RELATION_ARGS_UINT64_STRING_AND_DATE_STRING_INPUT_COLUMNS(TABLE<uint64 UINT64, string STRING>, TABLE<date DATE, string STRING>) [at 4:5]
-    (select `date` from simpletypes))
+    (select "date" from simpletypes))
     ^
 ==
 
@@ -6638,7 +6638,7 @@ ERROR: Required column "string" not found in table passed as argument 1 of TVF_T
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select 'abc' as uint64, string from simpletypes),
-    (select `date` from simpletypes))
+    (select "date" from simpletypes))
 --
 ERROR: Invalid type STRING for column "uint64 UINT64" of argument 1 of TVF_TWO_RELATION_ARGS_UINT64_STRING_AND_DATE_STRING_INPUT_COLUMNS(TABLE<uint64 UINT64, string STRING>, TABLE<date DATE, string STRING>) [at 3:5]
     (select 'abc' as uint64, string from simpletypes),
@@ -6670,10 +6670,10 @@ ERROR: Invalid type INT64 for value table column with expected type "zetasql_tes
 # The query passes a relation with the wrong enum value.
 select *
 from tvf_one_relation_arg_one_enum_input_column(
-    (select cast(1 AS `zetasql_test__.AnotherTestEnum`) as myenum))
+    (select cast(1 AS "zetasql_test__.AnotherTestEnum") as myenum))
 --
 ERROR: Invalid type zetasql_test__.AnotherTestEnum for column "myenum zetasql_test__.TestEnum" of argument 1 of TVF_ONE_RELATION_ARG_ONE_ENUM_INPUT_COLUMN(TABLE<myenum zetasql_test__.TestEnum>) [at 3:5]
-    (select cast(1 AS `zetasql_test__.AnotherTestEnum`) as myenum))
+    (select cast(1 AS "zetasql_test__.AnotherTestEnum") as myenum))
     ^
 ==
 
@@ -6684,7 +6684,7 @@ ERROR: Invalid type zetasql_test__.AnotherTestEnum for column "myenum zetasql_te
 select column_bool, column_bytes
 from tvf_two_relation_args_uint64_string_and_date_string_input_columns(
     (select 'abc' as uint64, string from simpletypes),
-    (select `date`, string from simpletypes))
+    (select "date", string from simpletypes))
 --
 ERROR: Invalid type STRING for column "uint64 UINT64" of argument 1 of TVF_TWO_RELATION_ARGS_UINT64_STRING_AND_DATE_STRING_INPUT_COLUMNS(TABLE<uint64 UINT64, string STRING>, TABLE<date DATE, string STRING>) [at 3:5]
     (select 'abc' as uint64, string from simpletypes),
@@ -6882,11 +6882,11 @@ ERROR: Function does not allow extra input column named "extra_col" for argument
 [language_features=TABLE_VALUED_FUNCTIONS]
 select *
 from tvf_one_relation_arg_one_date_input_column(
-    (with w1 as (select `date` as mydate from simpletypes)
+    (with w1 as (select "date" as mydate from simpletypes)
      select mydate from w1))
 --
 ERROR: WITH is not supported on subqueries in this language version [at 3:6]
-    (with w1 as (select `date` as mydate from simpletypes)
+    (with w1 as (select "date" as mydate from simpletypes)
      ^
 ==
 
@@ -6896,11 +6896,11 @@ ERROR: WITH is not supported on subqueries in this language version [at 3:6]
 # different error message in this case.
 select *
 from tvf_one_relation_arg_one_date_input_column(
-    with w1 as (select `date` as mydate from simpletypes)
+    with w1 as (select "date" as mydate from simpletypes)
     select mydate from w1)
 --
 ERROR: Syntax error: Each subquery argument for table-valued function calls must be enclosed in parentheses. To fix this, replace WITH... with (WITH...) [at 3:5]
-    with w1 as (select `date` as mydate from simpletypes)
+    with w1 as (select "date" as mydate from simpletypes)
     ^
 ==
 

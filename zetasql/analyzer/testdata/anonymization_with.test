@@ -83,7 +83,7 @@ from with_scan;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-parse_location=0-109
@@ -131,7 +131,7 @@ from (select * from t1);
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-parse_location=0-148
@@ -183,7 +183,7 @@ from (select * from t1);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$aggregate.$agg1#14]
@@ -215,7 +215,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$aggregate.$agg1#14]
@@ -270,7 +270,7 @@ from (select * from t1);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#55 AS `$col1` [INT64]
+| +-$aggregate.$agg1#55 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$aggregate.$agg1#55]
@@ -316,7 +316,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#55 AS `$col1` [INT64]
+| +-$aggregate.$agg1#55 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$aggregate.$agg1#55]
@@ -388,7 +388,7 @@ select with anonymization anon_count(*) from t1;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#20 AS `$col1` [INT64]
+| +-$aggregate.$agg1#20 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-parse_location=0-185
@@ -666,7 +666,7 @@ from t;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#17 AS `$col1` [INT64]
+| +-$aggregate.$agg1#17 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-parse_location=0-189
@@ -717,7 +717,7 @@ select 1 from t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#49 AS `$col1` [INT64]
+| +-$query.$col1#49 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#49]
@@ -753,7 +753,7 @@ select 1 from t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#50 AS `$col1` [INT64]
+| +-$query.$col1#50 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#50]
@@ -788,7 +788,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#50 AS `$col1` [INT64]
+| +-$query.$col1#50 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#50]
@@ -849,7 +849,7 @@ select count(*) from t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#63 AS `$col1` [INT64]
+| +-$union_all.$col1#63 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$union_all.$col1#63]
@@ -907,7 +907,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#63 AS `$col1` [INT64]
+| +-$union_all.$col1#63 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$union_all.$col1#63]
@@ -1908,7 +1908,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -1940,7 +1940,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -1995,7 +1995,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$aggregate.$agg1#37]
@@ -2038,7 +2038,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$aggregate.$agg1#37]
@@ -2103,7 +2103,7 @@ select * from t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1.$col1#14 AS `$col1` [INT64]
+| +-t1.$col1#14 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1.$col1#14]
@@ -2129,7 +2129,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-t1.$col1#14 AS `$col1` [INT64]
+| +-t1.$col1#14 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1.$col1#14]
@@ -2180,7 +2180,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#55 AS `$col1` [INT64]
+| +-$aggregate.$agg1#55 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#55]
@@ -2226,7 +2226,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#55 AS `$col1` [INT64]
+| +-$aggregate.$agg1#55 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#55]
@@ -2297,7 +2297,7 @@ from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#38 AS `$col1` [INT64]
+| +-$aggregate.$agg1#38 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-215

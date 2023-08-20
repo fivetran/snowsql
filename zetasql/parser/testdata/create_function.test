@@ -1106,9 +1106,9 @@ RETURNS string REMOTE WITH CONNECTION myconn
 ==
 
 # Remote function with connection name with -.
-create function myfunc ( ) returns string remote with connection `myconn-abc`;
+create function myfunc ( ) returns string remote with connection "myconn-abc";
 --
-CreateFunctionStatement [0-77] [create function...myconn-abc`]
+CreateFunctionStatement [0-77] [create function...myconn-abc"]
   FunctionDeclaration [16-26] [myfunc ( )]
     PathExpression [16-22] [myfunc]
       Identifier(myfunc) [16-22] [myfunc]
@@ -1116,13 +1116,13 @@ CreateFunctionStatement [0-77] [create function...myconn-abc`]
   SimpleType [35-41] [string]
     PathExpression [35-41] [string]
       Identifier(string) [35-41] [string]
-  WithConnectionClause [49-77] [with connection `myconn-abc`]
-    ConnectionClause [54-77] [connection `myconn-abc`]
-      PathExpression [65-77] [`myconn-abc`]
-        Identifier("myconn-abc") [65-77] [`myconn-abc`]
+  WithConnectionClause [49-77] [with connection "myconn-abc"]
+    ConnectionClause [54-77] [connection "myconn-abc"]
+      PathExpression [65-77] ["myconn-abc"]
+        Identifier("myconn-abc") [65-77] ["myconn-abc"]
 --
 CREATE FUNCTION myfunc()
-RETURNS string REMOTE WITH CONNECTION `myconn-abc`
+RETURNS string REMOTE WITH CONNECTION "myconn-abc"
 ==
 
 # Remote function with missing connection.
@@ -1582,7 +1582,7 @@ CREATE PUBLIC FUNCTION MatchesBucket(value DOUBLE, bucket project_namespace.Buck
 RETURNS BOOL AS (
   CASE bucket.type
     WHEN "point" THEN value = bucket.point
-    WHEN "range" THEN bucket.`range`.low <= value AND value < bucket.`range`.high
+    WHEN "range" THEN bucket."range".low <= value AND value < bucket."range".high
     ELSE ERROR("Unsupported bucket type")
   END
 )
@@ -1932,9 +1932,9 @@ CreateFunctionStatement [0-73] [create function...function())]
       PathExpression [62-70] [function]
         Identifier("function") [62-70] [function]
 --
-CREATE FUNCTION `function`(`function` FUNCTION<() -> INT64 >)
+CREATE FUNCTION "function"("function" FUNCTION<() -> INT64 >)
 AS (
-  `function`()
+  "function"()
 )
 
 ==

@@ -21,22 +21,22 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
-| +-$query.$col8#8 AS `$col8` [INT64]
-| +-$query.$col9#9 AS `$col9` [INT64]
-| +-$query.$col10#10 AS `$col10` [INT64]
-| +-$query.$col11#11 AS `$col11` [INT64]
-| +-$query.$col12#12 AS `$col12` [DATE]
-| +-$query.$col13#13 AS `$col13` [INT64]
-| +-$query.$col14#14 AS `$col14` [INT64]
-| +-$query.$col15#15 AS `$col15` [INT64]
-| +-$query.$col16#16 AS `$col16` [TIME]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
+| +-$query.$col8#8 AS "$col8" [INT64]
+| +-$query.$col9#9 AS "$col9" [INT64]
+| +-$query.$col10#10 AS "$col10" [INT64]
+| +-$query.$col11#11 AS "$col11" [INT64]
+| +-$query.$col12#12 AS "$col12" [DATE]
+| +-$query.$col13#13 AS "$col13" [INT64]
+| +-$query.$col14#14 AS "$col14" [INT64]
+| +-$query.$col15#15 AS "$col15" [INT64]
+| +-$query.$col16#16 AS "$col16" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14, $col15#15, $col16#16]
@@ -201,13 +201,13 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,V_1_2_WEEK_WITH_WEEKDAY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7]
@@ -256,11 +256,11 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -584,7 +584,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,year
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -601,7 +601,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,quarter
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -618,7 +618,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -635,7 +635,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,week
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -652,7 +652,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -669,7 +669,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -686,7 +686,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -703,7 +703,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -720,7 +720,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -737,7 +737,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -754,7 +754,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,year
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -771,7 +771,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,quarter
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -788,7 +788,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -805,7 +805,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,week
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -822,7 +822,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -839,7 +839,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -856,7 +856,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -873,7 +873,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -890,7 +890,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -907,7 +907,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -998,7 +998,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,year
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1015,7 +1015,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,quarter
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1032,7 +1032,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1049,7 +1049,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,week
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1066,7 +1066,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1083,7 +1083,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1100,7 +1100,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1117,7 +1117,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1134,7 +1134,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1151,7 +1151,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1204,7 +1204,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,year
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1221,7 +1221,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,quarter
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1238,7 +1238,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1255,7 +1255,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,week
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1272,7 +1272,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1289,7 +1289,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1306,7 +1306,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1323,7 +1323,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1340,7 +1340,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1357,7 +1357,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1422,7 +1422,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS,add
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1439,7 +1439,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS,sub
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1488,7 +1488,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1513,7 +1513,7 @@ ALTERNATION GROUP: '2015-12-28 15:42:56-08:00'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1528,7 +1528,7 @@ ALTERNATION GROUP: CAST('2015-12-28 15:42:56-08:00' AS STRING)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1547,7 +1547,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1590,7 +1590,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1601,13 +1601,13 @@ QueryStmt
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Function not found: `current_time`; Did you mean current_date? [at 1:8]
+ERROR: Function not found: "current_time"; Did you mean current_date? [at 1:8]
 SELECT current_time;
        ^
 --
 ALTERNATION GROUP: ()
 --
-ERROR: Function not found: `current_time`; Did you mean current_date? [at 1:8]
+ERROR: Function not found: "current_time"; Did you mean current_date? [at 1:8]
 SELECT current_time();
        ^
 ==
@@ -1621,7 +1621,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1632,13 +1632,13 @@ QueryStmt
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Function not found: `current_datetime`; Did you mean current_date? [at 1:8]
+ERROR: Function not found: "current_datetime"; Did you mean current_date? [at 1:8]
 SELECT current_datetime;
        ^
 --
 ALTERNATION GROUP: ()
 --
-ERROR: Function not found: `current_datetime`; Did you mean current_date? [at 1:8]
+ERROR: Function not found: "current_datetime"; Did you mean current_date? [at 1:8]
 SELECT current_datetime();
        ^
 ==
@@ -1718,7 +1718,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1735,7 +1735,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1752,7 +1752,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1769,7 +1769,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1786,7 +1786,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,add,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1869,7 +1869,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1886,7 +1886,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1903,7 +1903,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1920,7 +1920,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1937,7 +1937,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,sub,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2002,7 +2002,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS,add
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2019,7 +2019,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS,sub
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2108,7 +2108,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2125,7 +2125,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2142,7 +2142,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2159,7 +2159,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2176,7 +2176,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2263,7 +2263,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2302,7 +2302,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,year
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2319,7 +2319,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2336,7 +2336,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2365,7 +2365,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,quarter
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2382,7 +2382,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2399,7 +2399,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2416,7 +2416,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2433,7 +2433,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2450,7 +2450,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2479,7 +2479,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,week
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2508,7 +2508,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,isoyear
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2525,7 +2525,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,isoweek
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2591,13 +2591,13 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7]
@@ -2648,7 +2648,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2688,7 +2688,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,year
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2704,7 +2704,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,quarter
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2720,7 +2720,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2736,7 +2736,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,week
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2752,7 +2752,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2768,7 +2768,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2784,7 +2784,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2800,7 +2800,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2816,7 +2816,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2832,7 +2832,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2870,7 +2870,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2944,7 +2944,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,isoyear
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2960,7 +2960,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,isoweek
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3012,7 +3012,7 @@ ALTERNATION GROUP: sunday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3028,7 +3028,7 @@ ALTERNATION GROUP: monday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3044,7 +3044,7 @@ ALTERNATION GROUP: tuesday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3060,7 +3060,7 @@ ALTERNATION GROUP: wednesday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3076,7 +3076,7 @@ ALTERNATION GROUP: thursday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3092,7 +3092,7 @@ ALTERNATION GROUP: friday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3108,7 +3108,7 @@ ALTERNATION GROUP: saturday
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3130,7 +3130,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,hour
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3146,7 +3146,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,minute
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3162,7 +3162,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,second
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3178,7 +3178,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,millisecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3194,7 +3194,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,microsecond
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3246,7 +3246,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,TIMESTAMP_NANOS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3468,7 +3468,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3484,7 +3484,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,time
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3516,7 +3516,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3532,7 +3532,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME,datetime
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3564,7 +3564,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3591,7 +3591,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3634,7 +3634,7 @@ select if(current_time > "12:00:00", current_date, current_datetime)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3657,7 +3657,7 @@ select datetime_diff(current_datetime, current_date, second)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3707,11 +3707,11 @@ select datetime(current_datetime()), time(current_time()), datetime('2000-01-02 
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
-| +-$query.$col2#2 AS `$col2` [TIME]
-| +-$query.$col3#3 AS `$col3` [DATETIME]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
+| +-$query.$col2#2 AS "$col2" [TIME]
+| +-$query.$col3#3 AS "$col3" [DATETIME]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -3752,12 +3752,12 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
-| +-$query.$col2#2 AS `$col2` [DATE]
-| +-$query.$col3#3 AS `$col3` [DATETIME]
-| +-$query.$col4#4 AS `$col4` [DATETIME]
-| +-$query.$col5#5 AS `$col5` [TIMESTAMP]
-| +-$query.$col6#6 AS `$col6` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [DATE]
+| +-$query.$col2#2 AS "$col2" [DATE]
+| +-$query.$col3#3 AS "$col3" [DATETIME]
+| +-$query.$col4#4 AS "$col4" [DATETIME]
+| +-$query.$col5#5 AS "$col5" [TIMESTAMP]
+| +-$query.$col6#6 AS "$col6" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -3804,18 +3804,18 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
-| +-$query.$col2#2 AS `$col2` [DATE]
-| +-$query.$col3#3 AS `$col3` [DATE]
-| +-$query.$col4#4 AS `$col4` [DATE]
-| +-$query.$col5#5 AS `$col5` [DATETIME]
-| +-$query.$col6#6 AS `$col6` [DATETIME]
-| +-$query.$col7#7 AS `$col7` [DATETIME]
-| +-$query.$col8#8 AS `$col8` [DATETIME]
-| +-$query.$col9#9 AS `$col9` [TIMESTAMP]
-| +-$query.$col10#10 AS `$col10` [TIMESTAMP]
-| +-$query.$col11#11 AS `$col11` [TIMESTAMP]
-| +-$query.$col12#12 AS `$col12` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [DATE]
+| +-$query.$col2#2 AS "$col2" [DATE]
+| +-$query.$col3#3 AS "$col3" [DATE]
+| +-$query.$col4#4 AS "$col4" [DATE]
+| +-$query.$col5#5 AS "$col5" [DATETIME]
+| +-$query.$col6#6 AS "$col6" [DATETIME]
+| +-$query.$col7#7 AS "$col7" [DATETIME]
+| +-$query.$col8#8 AS "$col8" [DATETIME]
+| +-$query.$col9#9 AS "$col9" [TIMESTAMP]
+| +-$query.$col10#10 AS "$col10" [TIMESTAMP]
+| +-$query.$col11#11 AS "$col11" [TIMESTAMP]
+| +-$query.$col12#12 AS "$col12" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
@@ -3904,24 +3904,24 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
-| +-$query.$col8#8 AS `$col8` [INT64]
-| +-$query.$col9#9 AS `$col9` [INT64]
-| +-$query.$col10#10 AS `$col10` [INT64]
-| +-$query.$col11#11 AS `$col11` [INT64]
-| +-$query.$col12#12 AS `$col12` [INT64]
-| +-$query.$col13#13 AS `$col13` [INT64]
-| +-$query.$col14#14 AS `$col14` [INT64]
-| +-$query.$col15#15 AS `$col15` [INT64]
-| +-$query.$col16#16 AS `$col16` [INT64]
-| +-$query.$col17#17 AS `$col17` [INT64]
-| +-$query.$col18#18 AS `$col18` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
+| +-$query.$col8#8 AS "$col8" [INT64]
+| +-$query.$col9#9 AS "$col9" [INT64]
+| +-$query.$col10#10 AS "$col10" [INT64]
+| +-$query.$col11#11 AS "$col11" [INT64]
+| +-$query.$col12#12 AS "$col12" [INT64]
+| +-$query.$col13#13 AS "$col13" [INT64]
+| +-$query.$col14#14 AS "$col14" [INT64]
+| +-$query.$col15#15 AS "$col15" [INT64]
+| +-$query.$col16#16 AS "$col16" [INT64]
+| +-$query.$col17#17 AS "$col17" [INT64]
+| +-$query.$col18#18 AS "$col18" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14, $col15#15, $col16#16, $col17#17, $col18#18]
@@ -4040,12 +4040,12 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -4100,18 +4100,18 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
-| +-$query.$col2#2 AS `$col2` [TIMESTAMP]
-| +-$query.$col3#3 AS `$col3` [TIMESTAMP]
-| +-$query.$col4#4 AS `$col4` [TIMESTAMP]
-| +-$query.$col5#5 AS `$col5` [DATETIME]
-| +-$query.$col6#6 AS `$col6` [DATETIME]
-| +-$query.$col7#7 AS `$col7` [DATETIME]
-| +-$query.$col8#8 AS `$col8` [DATETIME]
-| +-$query.$col9#9 AS `$col9` [DATE]
-| +-$query.$col10#10 AS `$col10` [DATE]
-| +-$query.$col11#11 AS `$col11` [DATE]
-| +-$query.$col12#12 AS `$col12` [DATE]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
+| +-$query.$col2#2 AS "$col2" [TIMESTAMP]
+| +-$query.$col3#3 AS "$col3" [TIMESTAMP]
+| +-$query.$col4#4 AS "$col4" [TIMESTAMP]
+| +-$query.$col5#5 AS "$col5" [DATETIME]
+| +-$query.$col6#6 AS "$col6" [DATETIME]
+| +-$query.$col7#7 AS "$col7" [DATETIME]
+| +-$query.$col8#8 AS "$col8" [DATETIME]
+| +-$query.$col9#9 AS "$col9" [DATE]
+| +-$query.$col10#10 AS "$col10" [DATE]
+| +-$query.$col11#11 AS "$col11" [DATE]
+| +-$query.$col12#12 AS "$col12" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
@@ -4224,7 +4224,7 @@ ALTERNATION GROUP: TIME_BUCKET_FUNCTIONS,INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
+| +-$query.$col1#1 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4264,7 +4264,7 @@ ALTERNATION GROUP: ,V_1_2_CIVIL_TIME,INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4334,8 +4334,8 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
-| +-$query.$col2#2 AS `$col2` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
+| +-$query.$col2#2 AS "$col2" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -4410,7 +4410,7 @@ ALTERNATION GROUP: TIME_BUCKET_FUNCTIONS,INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

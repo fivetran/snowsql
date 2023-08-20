@@ -1329,11 +1329,11 @@ create index i1 on ComplexTypes (ALL COLUMNS);
                                 ^
 ==
 
-# Index an non-exist `ALL COLUMNS` column should fail.
-create search index i1 on ComplexTypes (`ALL COLUMNS`);
+# Index an non-exist "ALL COLUMNS" column should fail.
+create search index i1 on ComplexTypes ("ALL COLUMNS");
 --
-ERROR: Unrecognized name: `ALL COLUMNS` [at 1:41]
-create search index i1 on ComplexTypes (`ALL COLUMNS`);
+ERROR: Unrecognized name: "ALL COLUMNS" [at 1:41]
+create search index i1 on ComplexTypes ("ALL COLUMNS");
                                         ^
 ==
 

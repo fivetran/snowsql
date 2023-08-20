@@ -3605,7 +3605,7 @@ FROM
 ==
 
 # CORRESPONDING: CORRESPONDING as a non-first input query to CORRESPONDING,
-# the alias `int32` should be preserved.
+# the alias "int32" should be preserved.
 SELECT int32, float FROM SimpleTypes
 {{UNION ALL|UNION DISTINCT|EXCEPT ALL|EXCEPT DISTINCT|INTERSECT ALL|INTERSECT DISTINCT}} CORRESPONDING
 (
@@ -13642,7 +13642,7 @@ GROUP BY 1, 2
 
 # CORRESPONDING: Test the edge case where column names conflict with the
 # column aliases assigned by sqlbuilder. Sqlbuilder assigns aliases in the form
-# of `a_<num>`.
+# of "a_<num>".
 SELECT 1 AS a_2, 2 AS a_1
 {{UNION ALL|UNION DISTINCT|EXCEPT ALL|EXCEPT DISTINCT|INTERSECT ALL|INTERSECT DISTINCT}} CORRESPONDING
 SELECT 2 AS a_1, 1 AS a_2

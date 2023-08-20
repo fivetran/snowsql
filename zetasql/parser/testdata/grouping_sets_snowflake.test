@@ -85,8 +85,8 @@ QueryStatement [0-99] [SELECT x,...SETS(x, y)]
 SELECT
   x,
   y,
-  `GROUPING`(x) = 1,
-  `IF`(`GROUPING`(y) = 0, "foo", "bar")
+  "GROUPING"(x) = 1,
+  "IF"("GROUPING"(y) = 0, "foo", "bar")
 FROM
   T
 GROUP BY GROUPING SETS(x, y)
@@ -203,7 +203,7 @@ SELECT
   x,
   y,
   z,
-  `GROUPING`(x)
+  "GROUPING"(x)
 FROM
   T
 GROUP BY 1, 2, GROUPING SETS(x + 2, y = 'foo', z), z, x, GROUPING SETS(y, x)
@@ -253,26 +253,26 @@ select x FROM T GROUP BY x, y WITH GROUPING SETS;
 ==
 
 [language_features=V_1_4_GROUPING_SETS]
-select `grouping sets` FROM T GROUP BY `grouping sets`;
+select "grouping sets" FROM T GROUP BY "grouping sets";
 --
-QueryStatement [0-54] [select `grouping...uping sets`]
-  Query [0-54] [select `grouping...uping sets`]
-    Select [0-54] [select `grouping...uping sets`]
-      SelectList [7-22] [`grouping sets`]
-        SelectColumn [7-22] [`grouping sets`]
-          PathExpression [7-22] [`grouping sets`]
-            Identifier("grouping sets") [7-22] [`grouping sets`]
+QueryStatement [0-54] [select "grouping...uping sets"]
+  Query [0-54] [select "grouping...uping sets"]
+    Select [0-54] [select "grouping...uping sets"]
+      SelectList [7-22] ["grouping sets"]
+        SelectColumn [7-22] ["grouping sets"]
+          PathExpression [7-22] ["grouping sets"]
+            Identifier("grouping sets") [7-22] ["grouping sets"]
       FromClause [23-29] [FROM T]
         TablePathExpression [28-29] [T]
           PathExpression [28-29] [T]
             Identifier(T) [28-29] [T]
-      GroupBy [30-54] [GROUP BY `grouping sets`]
-        GroupingItem [39-54] [`grouping sets`]
-          PathExpression [39-54] [`grouping sets`]
-            Identifier("grouping sets") [39-54] [`grouping sets`]
+      GroupBy [30-54] [GROUP BY "grouping sets"]
+        GroupingItem [39-54] ["grouping sets"]
+          PathExpression [39-54] ["grouping sets"]
+            Identifier("grouping sets") [39-54] ["grouping sets"]
 --
 SELECT
-  `grouping sets`
+  "grouping sets"
 FROM
   T
-GROUP BY `grouping sets`
+GROUP BY "grouping sets"

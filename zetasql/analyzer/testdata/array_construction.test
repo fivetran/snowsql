@@ -3,13 +3,13 @@ select 1, [1], ARRAY[1], ARRAY<int64>[1], ARRAY<int32>[1], ARRAY<uint32>[1],
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#3 AS `$col3` [ARRAY<INT64>]
-| +-$query.$col4#4 AS `$col4` [ARRAY<INT64>]
-| +-$query.$col5#5 AS `$col5` [ARRAY<INT32>]
-| +-$query.$col6#6 AS `$col6` [ARRAY<UINT32>]
-| +-$query.$col7#7 AS `$col7` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#3 AS "$col3" [ARRAY<INT64>]
+| +-$query.$col4#4 AS "$col4" [ARRAY<INT64>]
+| +-$query.$col5#5 AS "$col5" [ARRAY<INT32>]
+| +-$query.$col6#6 AS "$col6" [ARRAY<UINT32>]
+| +-$query.$col7#7 AS "$col7" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7]
@@ -30,12 +30,12 @@ select [1, 2, 3], ARRAY[1, 2, 3], ARRAY<int64>[1, 2, 3], ARRAY<int32>[1, 2, 3],
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#3 AS `$col3` [ARRAY<INT64>]
-| +-$query.$col4#4 AS `$col4` [ARRAY<INT32>]
-| +-$query.$col5#5 AS `$col5` [ARRAY<UINT32>]
-| +-$query.$col6#6 AS `$col6` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#3 AS "$col3" [ARRAY<INT64>]
+| +-$query.$col4#4 AS "$col4" [ARRAY<INT32>]
+| +-$query.$col5#5 AS "$col5" [ARRAY<UINT32>]
+| +-$query.$col6#6 AS "$col6" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -55,13 +55,13 @@ select ARRAY<int32>[], ARRAY<int64>[], ARRAY<uint32>[],
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#3 AS `$col3` [ARRAY<UINT32>]
-| +-$query.$col4#4 AS `$col4` [ARRAY<UINT64>]
-| +-$query.$col5#5 AS `$col5` [ARRAY<STRING>]
-| +-$query.$col6#6 AS `$col6` [ARRAY<FLOAT>]
-| +-$query.$col7#7 AS `$col7` [ARRAY<BYTES>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#3 AS "$col3" [ARRAY<UINT32>]
+| +-$query.$col4#4 AS "$col4" [ARRAY<UINT64>]
+| +-$query.$col5#5 AS "$col5" [ARRAY<STRING>]
+| +-$query.$col6#6 AS "$col6" [ARRAY<FLOAT>]
+| +-$query.$col7#7 AS "$col7" [ARRAY<BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7]
@@ -81,7 +81,7 @@ select []
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -95,7 +95,7 @@ select ARRAY[]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -111,15 +111,15 @@ select [NULL], ARRAY[NULL], ARRAY<int64>[NULL], ARRAY<int32>[NULL],
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#3 AS `$col3` [ARRAY<INT64>]
-| +-$query.$col4#4 AS `$col4` [ARRAY<INT32>]
-| +-$query.$col5#5 AS `$col5` [ARRAY<UINT32>]
-| +-$query.$col6#6 AS `$col6` [ARRAY<UINT64>]
-| +-$query.$col7#7 AS `$col7` [ARRAY<STRING>]
-| +-$query.$col8#8 AS `$col8` [ARRAY<FLOAT>]
-| +-$query.$col9#9 AS `$col9` [ARRAY<BYTES>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#3 AS "$col3" [ARRAY<INT64>]
+| +-$query.$col4#4 AS "$col4" [ARRAY<INT32>]
+| +-$query.$col5#5 AS "$col5" [ARRAY<UINT32>]
+| +-$query.$col6#6 AS "$col6" [ARRAY<UINT64>]
+| +-$query.$col7#7 AS "$col7" [ARRAY<STRING>]
+| +-$query.$col8#8 AS "$col8" [ARRAY<FLOAT>]
+| +-$query.$col9#9 AS "$col9" [ARRAY<BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -141,8 +141,8 @@ select [cast(NULL as STRING)], [cast(NULL as bytes)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<BYTES>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -170,10 +170,10 @@ select ARRAY<int32>[cast(cast(coalesce(1) as int64) as int32)],
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<UINT32>]
-| +-$query.$col3#3 AS `$col3` [ARRAY<UINT64>]
-| +-$query.$col4#4 AS `$col4` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<UINT32>]
+| +-$query.$col3#3 AS "$col3" [ARRAY<UINT64>]
+| +-$query.$col4#4 AS "$col4" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -251,7 +251,7 @@ select [1, sqrt(1.5), 1 + 1.5]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -268,11 +268,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select [1, `int64`] from SimpleTypes
+select [1, "int64"] from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#19 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -285,11 +285,11 @@ QueryStmt
       +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1])
 ==
 
-select [1.5, `double`] from SimpleTypes
+select [1.5, "double"] from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#19 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -306,8 +306,8 @@ select [1.5, 1], [1, 1.5]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<DOUBLE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -318,11 +318,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select [1.5, `int64`] from SimpleTypes
+select [1.5, "int64"] from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#19 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -336,11 +336,11 @@ QueryStmt
       +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1])
 ==
 
-select [`double`, `int64`] from SimpleTypes
+select ["double", "int64"] from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#19 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -387,8 +387,8 @@ from TestTable where [1, 1][ORDINAL(2)] = 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
-| +-$query.$col2#5 AS `$col2` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
+| +-$query.$col2#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -424,7 +424,7 @@ select ARRAY<date>["1970-01-01"]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DATE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -465,11 +465,11 @@ select ARRAY<date>[" 1970-01-01"]
                    ^
 ==
 
-select ["1970-01-01", `date`] from SimpleTypes
+select ["1970-01-01", "date"] from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [ARRAY<DATE>]
+| +-$query.$col1#19 AS "$col1" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -482,10 +482,10 @@ QueryStmt
       +-TableScan(column_list=[SimpleTypes.date#10], table=SimpleTypes, column_index_list=[9])
 ==
 
-select [19700101, `date`] from SimpleTypes
+select [19700101, "date"] from SimpleTypes
 --
 ERROR: Array elements of types {INT64, DATE} do not have a common supertype [at 1:8]
-select [19700101, `date`] from SimpleTypes
+select [19700101, "date"] from SimpleTypes
        ^
 ==
 
@@ -497,9 +497,9 @@ select ARRAY<double>[1, cast(1 as int32), cast(1 as int64), cast(1 as uint32),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#3 AS `$col3` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#3 AS "$col3" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -549,7 +549,7 @@ select [9223372036854775808,1, 0, null]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -572,7 +572,7 @@ select [cast(1 as uint32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -587,7 +587,7 @@ select ARRAY[cast(1 as uint32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -601,7 +601,7 @@ select ARRAY<uint64>[cast(1 as uint32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -615,7 +615,7 @@ select [1, cast(2 as int32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -629,7 +629,7 @@ select ARRAY<int64>[1, cast(2 as int32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -643,7 +643,7 @@ select [cast(1 as int64), cast(2 as int32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -657,7 +657,7 @@ select ARRAY<int64>[cast(1 as int64), cast(2 as int32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -671,7 +671,7 @@ select [cast(1 as int32), cast(2 as uint32)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -685,7 +685,7 @@ select [b'123', b'456']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<BYTES>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -699,7 +699,7 @@ select [date '2011-01-01', date '2011-01-02']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DATE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -714,7 +714,7 @@ select [datetime '2011-01-01 00:00:00', datetime '2011-01-02 00:00:00']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DATETIME>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DATETIME>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -729,7 +729,7 @@ select [time '12:01:59', time '1:00:00']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<TIME>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<TIME>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -743,7 +743,7 @@ select [timestamp '2011-01-01 00:00:00', timestamp '2011-01-02 00:00:00']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<TIMESTAMP>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<TIMESTAMP>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -758,7 +758,7 @@ select [numeric '0', numeric '1']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<NUMERIC>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<NUMERIC>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

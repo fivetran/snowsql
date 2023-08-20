@@ -82,8 +82,8 @@ QueryStatement [0-90] [SELECT x,...CUBE(x, y)]
 SELECT
   x,
   y,
-  `GROUPING`(x) = 1,
-  `IF`(`GROUPING`(y) = 0, "foo", "bar")
+  "GROUPING"(x) = 1,
+  "IF"("GROUPING"(y) = 0, "foo", "bar")
 FROM
   T
 GROUP BY CUBE(x, y)
@@ -194,7 +194,7 @@ SELECT
   x,
   y,
   z,
-  `GROUPING`(x)
+  "GROUPING"(x)
 FROM
   T
 GROUP BY 1, 2, CUBE(x + 2, y = 'foo', z), z, x, CUBE(y, x)
@@ -244,26 +244,26 @@ SELect x FROM T GROUP BY x, y WITH CUBE;
 ==
 
 [language_features=V_1_4_GROUPING_SETS]
-SELect `cube` FROM T GROUP BY `cube`;
+SELect "cube" FROM T GROUP BY "cube";
 --
-QueryStatement [0-36] [SELect `cube...BY `cube`]
-  Query [0-36] [SELect `cube...BY `cube`]
-    Select [0-36] [SELect `cube...BY `cube`]
-      SelectList [7-13] [`cube`]
-        SelectColumn [7-13] [`cube`]
-          PathExpression [7-13] [`cube`]
-            Identifier("cube") [7-13] [`cube`]
+QueryStatement [0-36] [SELect "cube...BY "cube"]
+  Query [0-36] [SELect "cube...BY "cube"]
+    Select [0-36] [SELect "cube...BY "cube"]
+      SelectList [7-13] ["cube"]
+        SelectColumn [7-13] ["cube"]
+          PathExpression [7-13] ["cube"]
+            Identifier("cube") [7-13] ["cube"]
       FromClause [14-20] [FROM T]
         TablePathExpression [19-20] [T]
           PathExpression [19-20] [T]
             Identifier(T) [19-20] [T]
-      GroupBy [21-36] [GROUP BY `cube`]
-        GroupingItem [30-36] [`cube`]
-          PathExpression [30-36] [`cube`]
-            Identifier("cube") [30-36] [`cube`]
+      GroupBy [21-36] [GROUP BY "cube"]
+        GroupingItem [30-36] ["cube"]
+          PathExpression [30-36] ["cube"]
+            Identifier("cube") [30-36] ["cube"]
 --
 SELECT
-  `cube`
+  "cube"
 FROM
   T
-GROUP BY `cube`
+GROUP BY "cube"

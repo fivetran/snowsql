@@ -5,7 +5,7 @@ CREATE TABLE Extensions AS
 SELECT 1 key, cast('''
   int64_key_1: 1
   int64_key_2: 1
-''' as `zetasql_test__.KitchenSinkPB`) as value
+''' as "zetasql_test__.KitchenSinkPB") as value
 union all
 select 2, null
 union all
@@ -17,7 +17,7 @@ select 4, cast('''
   [zetasql_test__.KitchenSinkExtension.int_extension]: 506
   [zetasql_test__.KitchenSinkExtension.repeated_extension] { value: "507" }
   [zetasql_test__.KitchenSinkExtension.repeated_extension] { value: "508" }
-''' as `zetasql_test__.KitchenSinkPB`) as value
+''' as "zetasql_test__.KitchenSinkPB") as value
 --
 ARRAY<STRUCT<
         key INT64,

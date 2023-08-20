@@ -455,11 +455,11 @@ SELECT ARRAY[STRUCT(1 as i)] || ARRAY[STRUCT(2 as i)]
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRUCT<i INT64>>[known order:{1}, {2}]}]
 ==
 [name=array_concat_proto]
-SELECT ARRAY_CONCAT(ARRAY<`zetasql_test__.KitchenSinkPB`>[
+SELECT ARRAY_CONCAT(ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
-  '''], ARRAY<`zetasql_test__.KitchenSinkPB`>[
+  '''], ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 21
     int64_key_2: 22
@@ -481,11 +481,11 @@ ARRAY<STRUCT<ARRAY<>>>[
 
 ==
 [name=array_concat_operator_proto]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
-  '''] || ARRAY<`zetasql_test__.KitchenSinkPB`>[
+  '''] || ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 21
     int64_key_2: 22

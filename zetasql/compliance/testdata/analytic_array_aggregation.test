@@ -349,7 +349,7 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 SELECT ARRAY_AGG(elem)
   OVER(PARTITION BY elem.int64_key_1 ORDER BY elem.int_with_no_default_nullable
      ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING)
-FROM UNNEST(ARRAY<`zetasql_test__.KitchenSinkPB`>[
+FROM UNNEST(ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 0
     int64_key_2: 100
@@ -855,7 +855,7 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 SELECT ARRAY_AGG(elem)
   OVER(PARTITION BY elem.int64_key_1 ORDER BY elem.int_with_no_default_nullable
      ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING)
-FROM UNNEST(ARRAY<`zetasql_test__.KitchenSinkPB`>[
+FROM UNNEST(ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 0
     int64_key_2: 100

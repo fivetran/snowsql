@@ -14,7 +14,7 @@ select fn_named_args(format_string => "%x", date_string => "12/25/08")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -41,7 +41,7 @@ select fn_named_args(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -71,7 +71,7 @@ select fn_named_args("%x", date_string => "12/25/08")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -91,7 +91,7 @@ select fn_named_args_two_signatures(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -110,7 +110,7 @@ select fn_three_named_args_two_signatures(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -130,7 +130,7 @@ select fn_three_named_args_two_signatures(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -157,9 +157,9 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_THREE_NAMED_ARGS_TWO_SIGNATURES
   Argument types: STRING, STRING, invalid_arg_name => STRING
   Signature: FN_THREE_NAMED_ARGS_TWO_SIGNATURES(STRING, STRING, [format_string=>]STRING)
-    Named argument `invalid_arg_name` does not exist in signature
+    Named argument "invalid_arg_name" does not exist in signature
   Signature: FN_THREE_NAMED_ARGS_TWO_SIGNATURES(STRING, STRING, [date_string=>]STRING)
-    Named argument `invalid_arg_name` does not exist in signature [at 1:8]
+    Named argument "invalid_arg_name" does not exist in signature [at 1:8]
 select fn_three_named_args_two_signatures(
        ^
 ==
@@ -191,7 +191,7 @@ select fn_named_args_optional(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -210,7 +210,7 @@ select fn_named_args_optional(format_string => "%X")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -229,7 +229,7 @@ select fn_named_args_optional(date_string => "12/25/08")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -441,7 +441,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for tvf_named_optional_any_relation_arg_optional_scalar_arg
   Argument types: NULL, STRING
   Signature: TVF_NAMED_OPTIONAL_ANY_RELATION_ARG_OPTIONAL_SCALAR_ARG([any_relation_arg => TABLE], [format_string => STRING])
-    Named argument `any_relation_arg`: expected TABLE, found NULL [at 1:15]
+    Named argument "any_relation_arg": expected TABLE, found NULL [at 1:15]
 select * from tvf_named_optional_any_relation_arg_optional_scalar_arg(
               ^
 ==
@@ -655,7 +655,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS_ERROR_IF_POSITIONAL
   Argument types: STRING, date_string => STRING
   Signature: FN_NAMED_ARGS_ERROR_IF_POSITIONAL(format_string => STRING, date_string => STRING)
-    Positional argument at 1 is invalid because argument `format_string` can only be referred to by name [at 1:8]
+    Positional argument at 1 is invalid because argument "format_string" can only be referred to by name [at 1:8]
 select fn_named_args_error_if_positional(
        ^
 ==
@@ -687,7 +687,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS_ERROR_IF_POSITIONAL
   Argument types: STRING, STRING
   Signature: FN_NAMED_ARGS_ERROR_IF_POSITIONAL(format_string => STRING, date_string => STRING)
-    Positional argument at 1 is invalid because argument `format_string` can only be referred to by name [at 1:8]
+    Positional argument at 1 is invalid because argument "format_string" can only be referred to by name [at 1:8]
 select fn_named_args_error_if_positional(
        ^
 ==
@@ -698,7 +698,7 @@ select fn_named_args_error_if_positional(
    "12/25/08",
    format_string=> "%X");
 --
-ERROR: Named argument `format_string` duplicates positional argument 1, which also provides `format_string` [at 3:4]
+ERROR: Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 3:4]
    format_string=> "%X");
    ^
 --
@@ -706,7 +706,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS_ERROR_IF_POSITIONAL
   Argument types: STRING, format_string => STRING
   Signature: FN_NAMED_ARGS_ERROR_IF_POSITIONAL(format_string => STRING, date_string => STRING)
-    Named argument `format_string` duplicates positional argument 1, which also provides `format_string` [at 1:8]
+    Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:8]
 select fn_named_args_error_if_positional(
        ^
 ==
@@ -725,7 +725,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS_ERROR_IF_POSITIONAL_FIRST_ARG
   Argument types: STRING, date_string => STRING
   Signature: FN_NAMED_ARGS_ERROR_IF_POSITIONAL_FIRST_ARG(format_string => STRING, [date_string=>]STRING)
-    Positional argument at 1 is invalid because argument `format_string` can only be referred to by name [at 1:8]
+    Positional argument at 1 is invalid because argument "format_string" can only be referred to by name [at 1:8]
 select fn_named_args_error_if_positional_first_arg(
        ^
 ==
@@ -744,7 +744,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS_ERROR_IF_POSITIONAL_SECOND_ARG
   Argument types: STRING, STRING
   Signature: FN_NAMED_ARGS_ERROR_IF_POSITIONAL_SECOND_ARG(STRING, date_string => STRING)
-    Positional argument at 2 is invalid because argument `date_string` can only be referred to by name [at 1:8]
+    Positional argument at 2 is invalid because argument "date_string" can only be referred to by name [at 1:8]
 select fn_named_args_error_if_positional_second_arg(
        ^
 ==
@@ -763,7 +763,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS_ERROR_IF_POSITIONAL
   Argument types: format_string => INT64, date_string => STRING
   Signature: FN_NAMED_ARGS_ERROR_IF_POSITIONAL(format_string => STRING, date_string => STRING)
-    Named argument `format_string`: Unable to coerce type INT64 to expected type STRING [at 1:8]
+    Named argument "format_string": Unable to coerce type INT64 to expected type STRING [at 1:8]
 select fn_named_args_error_if_positional(
        ^
 ==
@@ -782,7 +782,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPTIONAL_ARGS_ERROR_IF_POSITIONAL
   Argument types: format_string => INT64, date_string => STRING
   Signature: FN_NAMED_OPTIONAL_ARGS_ERROR_IF_POSITIONAL(format_string => STRING, [date_string => STRING])
-    Named argument `format_string`: Unable to coerce type INT64 to expected type STRING [at 1:8]
+    Named argument "format_string": Unable to coerce type INT64 to expected type STRING [at 1:8]
 select fn_named_optional_args_error_if_positional(
        ^
 ==
@@ -794,7 +794,7 @@ select fn_named_args_error_if_positional(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -815,7 +815,7 @@ select fn_named_optional_args_error_if_positional(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -836,7 +836,7 @@ select fn_named_args_error_if_positional_second_arg(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -856,7 +856,7 @@ select fn_optional_named_optional_args("foo")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -879,7 +879,7 @@ select fn_optional_named_optional_not_null_args(arg => "foo")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -935,7 +935,7 @@ ERROR: Argument 'arg' to SAMPLE_FUNCTIONS:FN_OPTIONAL_NAMED_OPTIONAL_NOT_NULL_AR
 # function signature with the same name as one of the provided named arguments.
 select fn_named_args("%x", format_string => "%x")
 --
-ERROR: Named argument `format_string` duplicates positional argument 1, which also provides `format_string` [at 1:28]
+ERROR: Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:28]
 select fn_named_args("%x", format_string => "%x")
                            ^
 --
@@ -943,7 +943,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS
   Argument types: STRING, format_string => STRING
   Signature: FN_NAMED_ARGS([format_string=>]STRING, [date_string=>]STRING)
-    Named argument `format_string` duplicates positional argument 1, which also provides `format_string` [at 1:8]
+    Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:8]
 select fn_named_args("%x", format_string => "%x")
        ^
 ==
@@ -1156,7 +1156,7 @@ select fn_named_args(
 select fn_named_args(
     format_string => "%X", bad_name => "12/25/08")
 --
-ERROR: Named argument `bad_name` not found in signature for call to function sample_functions:fn_named_args [at 2:28]
+ERROR: Named argument "bad_name" not found in signature for call to function sample_functions:fn_named_args [at 2:28]
     format_string => "%X", bad_name => "12/25/08")
                            ^
 --
@@ -1164,7 +1164,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_ARGS
   Argument types: format_string => STRING, bad_name => STRING
   Signature: FN_NAMED_ARGS([format_string=>]STRING, [date_string=>]STRING)
-    Named argument `bad_name` does not exist in signature [at 1:8]
+    Named argument "bad_name" does not exist in signature [at 1:8]
 select fn_named_args(
        ^
 ==
@@ -1249,7 +1249,7 @@ select fn_regular_and_named_signatures("foo")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1268,7 +1268,7 @@ select fn_regular_and_named_signatures("foo", "bar")
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1287,7 +1287,7 @@ select fn_regular_and_named_signatures("foo", date_string => "bar")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1331,9 +1331,9 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REGULAR_AND_NAMED_SIGNATURES
   Argument types: STRING, unknown_arg => STRING
   Signature: FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [STRING])
-    Named argument `unknown_arg` does not exist in signature
+    Named argument "unknown_arg" does not exist in signature
   Signature: FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [date_string => STRING])
-    Named argument `unknown_arg` does not exist in signature [at 1:8]
+    Named argument "unknown_arg" does not exist in signature [at 1:8]
 select fn_regular_and_named_signatures("foo", unknown_arg => "baz")
        ^
 ==
@@ -1349,11 +1349,11 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -1414,12 +1414,12 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -1478,12 +1478,12 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -1575,7 +1575,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REP_OPT
   Argument types: STRING, STRING, STRING, STRING, o0 => STRING, o1 => STRING
   Signature: FN_REP_OPT([a0=>]STRING, [[r0=>]STRING, ...], [[r1=>]STRING, ...], [[r2=>]STRING, ...], [a1=>]STRING, [[o0=>]STRING], [[o1=>]STRING])
-    Required named argument `a1` is not provided [at 1:8]
+    Required named argument "a1" is not provided [at 1:8]
 SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => "o0", o1 => "o1");
        ^
 ==
@@ -1606,12 +1606,12 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -1690,12 +1690,12 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -1757,16 +1757,16 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
-| +-$query.$col9#9 AS `$col9` [STRING]
-| +-$query.$col10#10 AS `$col10` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
+| +-$query.$col9#9 AS "$col9" [STRING]
+| +-$query.$col10#10 AS "$col10" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10]
@@ -1846,12 +1846,12 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
@@ -1911,15 +1911,15 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
-| +-$query.$col9#9 AS `$col9` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
+| +-$query.$col9#9 AS "$col9" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -2001,21 +2001,21 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
-| +-$query.$col9#9 AS `$col9` [STRING]
-| +-$query.$col10#10 AS `$col10` [STRING]
-| +-$query.$col11#11 AS `$col11` [STRING]
-| +-$query.$col12#12 AS `$col12` [STRING]
-| +-$query.$col13#13 AS `$col13` [STRING]
-| +-$query.$col14#14 AS `$col14` [STRING]
-| +-$query.$col15#15 AS `$col15` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
+| +-$query.$col9#9 AS "$col9" [STRING]
+| +-$query.$col10#10 AS "$col10" [STRING]
+| +-$query.$col11#11 AS "$col11" [STRING]
+| +-$query.$col12#12 AS "$col12" [STRING]
+| +-$query.$col13#13 AS "$col13" [STRING]
+| +-$query.$col14#14 AS "$col14" [STRING]
+| +-$query.$col15#15 AS "$col15" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14, $col15#15]
@@ -2116,9 +2116,9 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -2154,9 +2154,9 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -2194,11 +2194,11 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -2248,11 +2248,11 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -2299,10 +2299,10 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -2345,10 +2345,10 @@ select fn_optional_any(),
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -2396,7 +2396,7 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2417,7 +2417,7 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2909,7 +2909,7 @@ SELECT fn_named_struct_args(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]

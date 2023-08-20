@@ -400,19 +400,19 @@ ERROR: table 'a.b' may not be recursively referenced from inside an inner WITH e
 
 # Recursive view with recursive WITH inside of it. Also, choose names for both
 # tables which require backticks.
-CREATE MATERIALIZED RECURSIVE VIEW `a-b.c`.d AS (
+CREATE MATERIALIZED RECURSIVE VIEW "a-b.c".d AS (
   SELECT 1 AS n
   UNION ALL (
-    WITH RECURSIVE `x-y.z` AS (
+    WITH RECURSIVE "x-y.z" AS (
        SELECT 1 AS n
        UNION ALL
-       SELECT n + 1 FROM `x-y.z`
-    ) SELECT * FROM `x-y.z` INNER JOIN `a-b.c`.d USING (n)
+       SELECT n + 1 FROM "x-y.z"
+    ) SELECT * FROM "x-y.z" INNER JOIN "a-b.c".d USING (n)
   )
 );
 --
 CreateMaterializedViewStmt
-+-name_path=`a-b.c`.d
++-name_path="a-b.c".d
 +-output_column_list=
 | +-$union_all.n#2 AS n [INT64]
 +-query=
@@ -480,7 +480,7 @@ CreateMaterializedViewStmt
 |       |   |           +-ColumnRef(type=INT64, column=$view.n#8)
 |       |   +-recursive=TRUE
 |       +-output_column_list=[x-y.z.n#7]
-+-sql="SELECT 1 AS n\n  UNION ALL (\n    WITH RECURSIVE `x-y.z` AS (\n       SELECT 1 AS n\n       UNION ALL\n       SELECT n + 1 FROM `x-y.z`\n    ) SELECT * FROM `x-y.z` INNER JOIN `a-b.c`.d USING (n)\n  )"
++-sql="SELECT 1 AS n\n  UNION ALL (\n    WITH RECURSIVE "x-y.z" AS (\n       SELECT 1 AS n\n       UNION ALL\n       SELECT n + 1 FROM "x-y.z"\n    ) SELECT * FROM "x-y.z" INNER JOIN "a-b.c".d USING (n)\n  )"
 +-recursive=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="n", type=INT64, column=`a-b.c`.d.n#9)
+  +-ColumnDefinition(name="n", type=INT64, column="a-b.c".d.n#9)

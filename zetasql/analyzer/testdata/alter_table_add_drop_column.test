@@ -49,10 +49,10 @@ AlterTableStmt
 ==
 
 # Add columns with empty name
-ALTER TABLE KeyValue ADD COLUMN `` STRING;
+ALTER TABLE KeyValue ADD COLUMN "" STRING;
 --
 ERROR: Syntax error: Invalid empty identifier [at 1:33]
-ALTER TABLE KeyValue ADD COLUMN `` STRING;
+ALTER TABLE KeyValue ADD COLUMN "" STRING;
                                 ^
 ==
 

@@ -3,7 +3,7 @@ SELECT JSON '1'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [JSON]
+| +-$query.$col1#1 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -67,11 +67,11 @@ QueryStmt
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
 
-SELECT json_col.`"foo\'bar[ \?@#\\123_baz` FROM JsonTable
+SELECT json_col.""foo\'bar[ \?@#\\123_baz" FROM JsonTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query."foo'bar[ ?@#\123_baz#2 AS `"foo'bar[ ?@#\\123_baz` [JSON]
+| +-$query."foo'bar[ ?@#\123_baz#2 AS ""foo'bar[ ?@#\\123_baz" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query."foo'bar[ ?@#\123_baz#2]
@@ -115,7 +115,7 @@ SELECT json_col['field'] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -132,7 +132,7 @@ SELECT json_col[SUBSTR("bar", 0, 2)] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -152,7 +152,7 @@ select json_col[CAST(0 AS INT32)] from JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -169,7 +169,7 @@ SELECT json_col[1+2] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -218,7 +218,7 @@ SELECT json_col[SAFE.SUBSTR("bar", 0, 2)] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -238,7 +238,7 @@ SELECT json_col[CAST(NULL AS STRING)] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]

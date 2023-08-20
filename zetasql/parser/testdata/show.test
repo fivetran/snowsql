@@ -140,15 +140,15 @@ SHOW MATERIALIZED VIEWS;
 ShowStatement [0-23] [SHOW MATERIALIZED VIEWS]
   Identifier("MATERIALIZED VIEWS") [5-23] [MATERIALIZED VIEWS]
 --
-SHOW `MATERIALIZED VIEWS`
+SHOW "MATERIALIZED VIEWS"
 ==
 
-SHOW `MATERIALIZED VIEWS`;
+SHOW "MATERIALIZED VIEWS";
 --
-ShowStatement [0-25] [SHOW `MATERIALIZED VIEWS`]
-  Identifier("MATERIALIZED VIEWS") [5-25] [`MATERIALIZED VIEWS`]
+ShowStatement [0-25] [SHOW "MATERIALIZED VIEWS"]
+  Identifier("MATERIALIZED VIEWS") [5-25] ["MATERIALIZED VIEWS"]
 --
-SHOW `MATERIALIZED VIEWS`
+SHOW "MATERIALIZED VIEWS"
 ==
 
 SHOW MATERIALIZED VIEWS like 'KitchenSync%';
@@ -157,7 +157,7 @@ ShowStatement [0-43] [SHOW MATERIALIZED...chenSync%']
   Identifier("MATERIALIZED VIEWS") [5-23] [MATERIALIZED VIEWS]
   StringLiteral('KitchenSync%') [29-43] ['KitchenSync%']
 --
-SHOW `MATERIALIZED VIEWS` LIKE 'KitchenSync%'
+SHOW "MATERIALIZED VIEWS" LIKE 'KitchenSync%'
 ==
 
 SHOW MATERIALIZED VIEWS from KitchenSync;
@@ -167,7 +167,7 @@ ShowStatement [0-40] [SHOW MATERIALIZED...itchenSync]
   PathExpression [29-40] [KitchenSync]
     Identifier(KitchenSync) [29-40] [KitchenSync]
 --
-SHOW `MATERIALIZED VIEWS` FROM KitchenSync
+SHOW "MATERIALIZED VIEWS" FROM KitchenSync
 ==
 
 SHOW MATERIALIZED VIEWS from KitchenSync like '%foo%';
@@ -178,7 +178,7 @@ ShowStatement [0-53] [SHOW MATERIALIZED...ke '%foo%']
     Identifier(KitchenSync) [29-40] [KitchenSync]
   StringLiteral('%foo%') [46-53] ['%foo%']
 --
-SHOW `MATERIALIZED VIEWS` FROM KitchenSync LIKE '%foo%'
+SHOW "MATERIALIZED VIEWS" FROM KitchenSync LIKE '%foo%'
 ==
 
 SHOW MATERIALIZED TABLES
@@ -201,7 +201,7 @@ SHOW TABLES FROM my-project.dataset.table;
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `my-project.dataset.table` [at 1:18]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "my-project.dataset.table" [at 1:18]
 SHOW TABLES FROM my-project.dataset.table;
                  ^
 --
@@ -214,5 +214,5 @@ ShowStatement [0-41] [SHOW TABLES...dataset.table]
     Identifier(dataset) [28-35] [dataset]
     Identifier(table) [36-41] [table]
 --
-SHOW TABLES FROM `my-project`.dataset.table
+SHOW TABLES FROM "my-project".dataset.table
 ==

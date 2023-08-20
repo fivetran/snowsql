@@ -13,7 +13,7 @@ SELECT 1 FROM TestTable.fake.array
 --
 ALTERNATION GROUP: catalog.
 --
-ERROR: Table not found: catalog.TestTable.fake.`array` [at 4:15]
+ERROR: Table not found: catalog.TestTable.fake."array" [at 4:15]
 SELECT 1 FROM catalog.TestTable.fake.array
               ^
 ==
@@ -76,7 +76,7 @@ ALTERNATION GROUP: 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -899,7 +899,7 @@ from (select KitchenSink from TestTable) subq
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]

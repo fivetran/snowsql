@@ -150,7 +150,7 @@ SELECT fn_array_filter(1, (e, i) -> e > i);
 
 SELECT fn_array_filter(ARRAY<INT64>[1, 2], (e, e)->e+1) AS a_1;
 --
-ERROR: Lambda argument name `e` is already defined [at 1:48]
+ERROR: Lambda argument name "e" is already defined [at 1:48]
 SELECT fn_array_filter(ARRAY<INT64>[1, 2], (e, e)->e+1) AS a_1;
                                                ^
 ==
@@ -247,7 +247,7 @@ SELECT fn_array_filter([1,2], e -> true);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -271,7 +271,7 @@ SELECT fn_array_filter([1,2], e -> e > 0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -298,7 +298,7 @@ SELECT fn_array_filter([1,2], e -> e > Key) from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -328,7 +328,7 @@ SELECT fn_array_filter([kv.key, 3,4], e -> e > kv.Key) from KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -360,7 +360,7 @@ SELECT fn_array_filter([1,2,3], e1 -> ARRAY_IS_DISTINCT(fn_array_filter([e1,3,4]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -402,7 +402,7 @@ SELECT fn_array_filter([1,2,3], e1 -> e1 in UNNEST(fn_array_filter([2,3,4], e2->
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -443,7 +443,7 @@ SELECT fn_array_filter([1,2,3], e1 -> ARRAY_IS_DISTINCT(fn_array_filter([e1,3,4]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -483,7 +483,7 @@ SELECT fn_array_filter([1,2,Key], Key -> (Key > 0)) From KeyValue as e;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -513,7 +513,7 @@ SELECT fn_array_filter([1,2,e.Key], e -> (e > 0)) From KeyValue as e;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -543,7 +543,7 @@ SELECT fn_array_filter([1,2], (e, i) -> e > i);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -570,7 +570,7 @@ SELECT fn_array_transform([1,2], (e) -> e + 1 );
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -615,7 +615,7 @@ SELECT fn_array_transform([1,2], (e, i) -> e + i);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -641,7 +641,7 @@ SELECT fn_fp_T_T_LAMBDA(1, 1, e->e>0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -673,7 +673,7 @@ SELECT fn_fp_T_T_LAMBDA(Key, 1.0, e->e>0) FROM KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -723,7 +723,7 @@ SELECT fn_fp_ArrayT_T_LAMBDA([1, 2], 1, e->e>0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -768,7 +768,7 @@ SELECT fn_fp_T_LAMBDA_RET_T(1, e->e+1);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -810,7 +810,7 @@ SELECT fn_fp_array_sort([1,2,3], (e1, e2) -> e1 - e2);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -837,7 +837,7 @@ SELECT fn_fp_array_reduce([1,2,3], 0, (s, e) -> s + e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -866,7 +866,7 @@ SELECT fn_fp_named_then_lambda("123", (e) -> e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -895,7 +895,7 @@ SELECT fn_fp_named_then_lambda(format_string => "123", (e) -> e);
 
 SELECT fn_fp_named_then_lambda((e) -> e, format_string => "123");
 --
-ERROR: Named argument `format_string` duplicates positional argument 1, which also provides `format_string` [at 1:42]
+ERROR: Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:42]
 SELECT fn_fp_named_then_lambda((e) -> e, format_string => "123");
                                          ^
 --
@@ -903,7 +903,7 @@ Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_FP_NAMED_THEN_LAMBDA
   Argument types: LAMBDA, format_string => STRING
   Signature: FN_FP_NAMED_THEN_LAMBDA([format_string=>]STRING, FUNCTION<INT64->T1>)
-    Named argument `format_string` duplicates positional argument 1, which also provides `format_string` [at 1:8]
+    Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:8]
 SELECT fn_fp_named_then_lambda((e) -> e, format_string => "123");
        ^
 ==
@@ -912,7 +912,7 @@ SELECT fn_fp_lambda_then_named((e) -> e, "123");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -936,7 +936,7 @@ SELECT fn_fp_lambda_then_named((e) -> e, format_string => "123");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -960,7 +960,7 @@ SELECT fn_fp_lambda_then_repeated((e) -> e, 1, 2, 3);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -991,7 +991,7 @@ SELECT fn_fp_repeated_arg_then_lambda(1, 2, 3, (e) -> e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1021,7 +1021,7 @@ SELECT fn_fp_repeated_arg_then_lambda((e) -> e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1043,7 +1043,7 @@ SELECT fn_fp_repeated_arg_then_lambda_string("1", "2", (e) -> e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [STRING]
+| +-$query.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1070,7 +1070,7 @@ SELECT fn_fp_repeated_arg_then_lambda_string((e) -> e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [STRING]
+| +-$query.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1092,7 +1092,7 @@ SELECT ARRAY_FILTER([1,2,3], e -> e>0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1118,7 +1118,7 @@ SELECT ARRAY_FILTER([1,2,3], (e, i) -> e>i*i);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1146,7 +1146,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e) -> e+1);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1172,7 +1172,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> i*100 + e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1200,7 +1200,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> i*100 + e);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1228,7 +1228,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> CAST(i*100 + e AS STRING));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1261,7 +1261,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> CAST(i*@factor + e AS STRING));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1290,7 +1290,7 @@ factor: INT64
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1359,7 +1359,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> CAST(i*@array_input + e AS STRING));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1388,7 +1388,7 @@ array_input: INT64
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1458,7 +1458,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> CAST(i*? + e AS STRING));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1487,7 +1487,7 @@ INT64
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]

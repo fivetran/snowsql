@@ -6,7 +6,7 @@
 
 [prepare_database]
 CREATE TABLE input AS
-\-- Summing `value` will overflow if we add three of them together.
+\-- Summing "value" will overflow if we add three of them together.
 select offset, key, cast(pow(2,63)/2.5 as int64) as value
 from unnest([1,1,2,2,2,3,3,3,3,4]) key with offset
 --

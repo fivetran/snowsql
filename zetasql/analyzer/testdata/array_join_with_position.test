@@ -161,8 +161,8 @@ select *
 QueryStmt
 +-output_column_list=
 | +-$array_offset.pos#2 AS pos [INT64]
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
-| +-$array.$unnest2#3 AS `$unnest2` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
+| +-$array.$unnest2#3 AS "$unnest2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array_offset.pos#2, $array.$unnest1#1, $array.$unnest2#3]
@@ -196,8 +196,8 @@ select *
 QueryStmt
 +-output_column_list=
 | +-$array_offset.pos#4 AS pos [INT64]
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
-| +-$array.$unnest2#3 AS `$unnest2` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
+| +-$array.$unnest2#3 AS "$unnest2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array_offset.pos#4, $array.$unnest1#1, $array.$unnest2#3]
@@ -306,7 +306,7 @@ from UNNEST([1]) t1
 QueryStmt
 +-output_column_list=
 | +-$array.t1#1 AS t1 [INT64]
-| +-$query.$col2#7 AS `$col2` [INT64]
+| +-$query.$col2#7 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.t1#1, $query.$col2#7]
@@ -365,7 +365,7 @@ from UNNEST([1.0]) t1
 QueryStmt
 +-output_column_list=
 | +-$array.t1#1 AS t1 [DOUBLE]
-| +-$query.$col2#7 AS `$col2` [INT64]
+| +-$query.$col2#7 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.t1#1, $query.$col2#7]
@@ -421,9 +421,9 @@ select *
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
 | +-$array_offset.pos1#2 AS pos1 [INT64]
-| +-$array.$unnest2#3 AS `$unnest2` [INT64]
+| +-$array.$unnest2#3 AS "$unnest2" [INT64]
 | +-$array_offset.pos2#4 AS pos2 [INT64]
 +-query=
   +-ProjectScan
@@ -457,9 +457,9 @@ select *
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
 | +-$array_offset.pos1#2 AS pos1 [INT64]
-| +-$array.$unnest2#3 AS `$unnest2` [INT64]
+| +-$array.$unnest2#3 AS "$unnest2" [INT64]
 | +-$array_offset.pos2#4 AS pos2 [INT64]
 +-query=
   +-ProjectScan
@@ -664,8 +664,8 @@ QueryStmt
 +-output_column_list=
 | +-$array_offset.offset_idx#2 AS offset_idx [INT64]
 | +-$array_offset.offset_idx#2 AS offset_idx [INT64]
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
-| +-$array.$unnest2#3 AS `$unnest2` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
+| +-$array.$unnest2#3 AS "$unnest2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array_offset.offset_idx#2, $array_offset.offset_idx#2, $array.$unnest1#1, $array.$unnest2#3]
@@ -728,7 +728,7 @@ ERROR: Duplicate alias offset_idx found [at 4:39]
                                       ^
 ==
 
-# `key` is both an implicit column from TestTable and an explicit position.
+# "key" is both an implicit column from TestTable and an explicit position.
 # The explicit column currently resolves over top of the implicit column.
 select key, T.key, '--', *
 from TestTable T, T.KitchenSink.repeated_date d with offset key
@@ -737,7 +737,7 @@ QueryStmt
 +-output_column_list=
 | +-$array_offset.key#5 AS key [INT64]
 | +-TestTable.key#1 AS key [INT32]
-| +-$query.$col3#6 AS `$col3` [STRING]
+| +-$query.$col3#6 AS "$col3" [STRING]
 | +-TestTable.key#1 AS key [INT32]
 | +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 | +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
@@ -784,7 +784,7 @@ QueryStmt
 | +-$array.nrv#4 AS nrv [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
 | +-$array_offset.offset_idx#5 AS offset_idx [INT64]
 | +-$query.nested_int64#6 AS nested_int64 [INT64]
-| +-$query.$col4#7 AS `$col4` [INT64]
+| +-$query.$col4#7 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.nrv#4, $array_offset.offset_idx#5, $query.nested_int64#6, $query.$col4#7]
@@ -847,7 +847,7 @@ QueryStmt
 | +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 | +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
 | +-$array.repeated_int64_val#4 AS repeated_int64_val [INT64]
-| +-$array.$unnest1#6 AS `$unnest1` [INT64]
+| +-$array.$unnest1#6 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array_offset.pos#5, TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.repeated_int64_val#4, $array.$unnest1#6]

@@ -79,7 +79,7 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_proto_array_basic]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
@@ -216,7 +216,7 @@ ARRAY<STRUCT<ARRAY<>>>[
          int64_key_2: 22
        ''' as zetasql_test__.KitchenSinkPB) b,
   cast(NULL as zetasql_test__.KitchenSinkPB) c]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[@a, @b, @c];
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[@a, @b, @c];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[known order:
@@ -423,7 +423,7 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_proto_array_with_null]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
@@ -518,7 +518,7 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=select_proto_array_all_null]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[NULL, NULL];
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[NULL, NULL];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[known order:NULL, NULL]}
@@ -590,7 +590,7 @@ SELECT ARRAY<zetasql_test__.TestEnum>[];
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<ENUM<zetasql_test__.TestEnum>>[]}]
 ==
 [name=select_proto_array_empty]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[];
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[];
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[]}]
 ==
@@ -660,7 +660,7 @@ SELECT CAST(NULL AS ARRAY<zetasql_test__.TestEnum>)
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<ENUM<zetasql_test__.TestEnum>>(NULL)}]
 ==
 [name=select_cast_null_to_proto_array]
-SELECT CAST(NULL AS ARRAY<`zetasql_test__.KitchenSinkPB`>);
+SELECT CAST(NULL AS ARRAY<"zetasql_test__.KitchenSinkPB">);
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>(NULL)}]
 ==

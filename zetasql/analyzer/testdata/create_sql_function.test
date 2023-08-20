@@ -597,16 +597,16 @@ create function fn ( a int32, string ) as ( "s" );
 ==
 
 # Function with quoted argument names.
-create function fn(`a b` int32, `c d` int32)
-as (`a b` + `c d`)
+create function fn("a b" int32, "c d" int32)
+as ("a b" + "c d")
 --
 CreateFunctionStmt
 +-name_path=fn
 +-return_type=INT64
-+-argument_name_list=[`a b`, `c d`]
++-argument_name_list=["a b", "c d"]
 +-signature=(INT32 a b, INT32 c d) -> INT64
 +-language="SQL"
-+-code="`a b` + `c d`"
++-code=""a b" + "c d""
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     +-Cast(INT32 -> INT64)

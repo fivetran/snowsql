@@ -8,7 +8,7 @@ from (select 1 union all select 2);
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-119
@@ -66,7 +66,7 @@ ALTERNATION GROUP: union,all
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-205
@@ -108,7 +108,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-205
@@ -158,7 +158,7 @@ ALTERNATION GROUP: union,distinct
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-210
@@ -200,7 +200,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-210
@@ -250,7 +250,7 @@ ALTERNATION GROUP: intersect,all
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-209
@@ -292,7 +292,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-209
@@ -342,7 +342,7 @@ ALTERNATION GROUP: intersect,distinct
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-214
@@ -384,7 +384,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-214
@@ -434,7 +434,7 @@ ALTERNATION GROUP: except,all
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-206
@@ -476,7 +476,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-206
@@ -526,7 +526,7 @@ ALTERNATION GROUP: except,distinct
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-211
@@ -568,7 +568,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-211
@@ -628,7 +628,7 @@ ALTERNATION GROUP: union,all
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#47 AS `$col1` [INT64]
+| +-$aggregate.$agg1#47 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-237
@@ -703,7 +703,7 @@ ALTERNATION GROUP: union,distinct
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#47 AS `$col1` [INT64]
+| +-$aggregate.$agg1#47 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-242
@@ -778,7 +778,7 @@ ALTERNATION GROUP: intersect,all
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#47 AS `$col1` [INT64]
+| +-$aggregate.$agg1#47 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-241
@@ -853,7 +853,7 @@ ALTERNATION GROUP: intersect,distinct
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#47 AS `$col1` [INT64]
+| +-$aggregate.$agg1#47 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-246
@@ -928,7 +928,7 @@ ALTERNATION GROUP: except,all
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#47 AS `$col1` [INT64]
+| +-$aggregate.$agg1#47 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-238
@@ -1003,7 +1003,7 @@ ALTERNATION GROUP: except,distinct
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#47 AS `$col1` [INT64]
+| +-$aggregate.$agg1#47 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-243
@@ -1087,7 +1087,7 @@ from (select * from T1StringAnonymizationUid
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#11 AS `$col1` [INT64]
+| +-$aggregate.$agg1#11 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-231
@@ -1162,7 +1162,7 @@ ALTERNATION GROUP: union,all
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-191
@@ -1210,7 +1210,7 @@ ALTERNATION GROUP: union,distinct
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-196
@@ -1258,7 +1258,7 @@ ALTERNATION GROUP: intersect,all
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-195
@@ -1306,7 +1306,7 @@ ALTERNATION GROUP: intersect,distinct
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-200
@@ -1354,7 +1354,7 @@ ALTERNATION GROUP: except,all
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-192
@@ -1402,7 +1402,7 @@ ALTERNATION GROUP: except,distinct
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-197
@@ -1459,7 +1459,7 @@ from (select * from T1StringAnonymizationUid
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#9 AS `$col1` [INT64]
+| +-$aggregate.$agg1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-252
@@ -1525,7 +1525,7 @@ from (select * from T1StringAnonymizationUid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#11 AS `$col1` [INT64]
+| +-$aggregate.$agg1#11 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-281
@@ -1588,7 +1588,7 @@ from (select * from T1StringAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#11 AS `$col1` [INT64]
+| +-$aggregate.$agg1#11 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-281
@@ -1665,7 +1665,7 @@ cross join (select "a", "b"
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-270
@@ -1740,7 +1740,7 @@ cross join (select @_p1_STRING, @_p2_STRING
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-270
@@ -1829,7 +1829,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-202
@@ -1871,7 +1871,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-202

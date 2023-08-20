@@ -14,7 +14,7 @@ select @{ key = 5 } 123
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -58,7 +58,7 @@ select @{ h=v, h='v', k=(TestConstantString)} 123
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -77,11 +77,11 @@ QueryStmt
 
 # Hints have an optional qualifier that indicates which database engine
 # should interpret them.
-select @{ key=1, db1.key='x', `db2`.key=y } 123
+select @{ key=1, db1.key='x', "db2".key=y } 123
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -98,16 +98,16 @@ QueryStmt
           +-SingleRowScan
 ==
 
-select @{ `a b`.`c d`=`e f` } 123
+select @{ "a b"."c d"="e f" } 123
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-hint_list=
-    | +-`a b`.`c d` := Literal(type=STRING, value="e f")
+    | +-"a b"."c d" := Literal(type=STRING, value="e f")
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -124,7 +124,7 @@ select @{ key=1+2,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -159,7 +159,7 @@ select @123 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -179,7 +179,7 @@ select @1234567890123456 @{a=b} 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -200,7 +200,7 @@ select @0 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -236,7 +236,7 @@ select @10 @{ num_shards=20, engine.num_shards=30 } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -330,11 +330,11 @@ QueryStmt
 # The value in () is interpreted as an expression, not a string.
 # Make sure we can read non-standard constant names via backticks.
 select @{ key1=KitchenSink,
-          key2=(`Test Constant-String`),
+          key2=("Test Constant-String"),
           key3=(nested_catalog.TestConstantBool),
           key4=nested_catalog.TestConstantBool,
-          key5=(nested_catalog.`Test Constant-String`),
-          key6=nested_catalog.`Test Constant-String` }
+          key5=(nested_catalog."Test Constant-String"),
+          key6=nested_catalog."Test Constant-String" }
        KitchenSink from TestTable
 --
 QueryStmt
@@ -379,7 +379,7 @@ select @{ key1=(select 1) } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -413,7 +413,7 @@ select @{ key1=(select count(*) from TestTable) } 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -445,7 +445,7 @@ select @{ key1=(1), key2=((1)) } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -465,7 +465,7 @@ select @{ key1=(1, 2) } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -484,7 +484,7 @@ select @{ key1=((1, 2)) } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -503,7 +503,7 @@ select @{ key1=(1, [2], [(2,3), (4,5)]) } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -522,7 +522,7 @@ select @{ key=@test_param_bool } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -549,7 +549,7 @@ select @{ key=null } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -569,14 +569,14 @@ select @{ proto=1, proto.hash=2, hash.proto=3 } 123
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-hint_list=
-    | +-`proto` := Literal(type=INT64, value=1)
-    | +-`proto`.`hash` := Literal(type=INT64, value=2)
-    | +-`hash`.`proto` := Literal(type=INT64, value=3)
+    | +-"proto" := Literal(type=INT64, value=1)
+    | +-"proto"."hash" := Literal(type=INT64, value=2)
+    | +-"hash"."proto" := Literal(type=INT64, value=3)
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -703,7 +703,7 @@ select @{ h=struct(array[struct(5)]) } 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -731,7 +731,7 @@ cross join @155 @{e=f} KeyValue kv5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [INT64]
+| +-$query.$col1#11 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -794,7 +794,7 @@ LOOKUP JOIN KeyValue kv3 on true
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -828,7 +828,7 @@ CROSS LOOKUP JOIN @123 KeyValue kv3
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -867,7 +867,7 @@ left join @123 nested_repeated_value.nested_repeated_int64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -910,7 +910,7 @@ left hash join @555 @{j1=1} TestTable.KitchenSink.nested_repeated_value
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1181,7 +1181,7 @@ from KeyValue @{hint=kv1},
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1255,7 +1255,7 @@ left hash join TestTable.KitchenSink.nested_repeated_value @12 @{abc=123}
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1288,8 +1288,8 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
-| +-$query.$col2#8 AS `$col2` [ARRAY<DATE>]
+| +-$query.$col1#7 AS "$col1" [INT64]
+| +-$query.$col2#8 AS "$col2" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#7, $col2#8]
@@ -1371,7 +1371,7 @@ select 1 from TestTable @555
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1455,7 +1455,7 @@ QueryStmt
 +-hint_list=
 | +-h1 := Literal(type=INT64, value=4)
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1497,7 +1497,7 @@ ExplainStmt
     +-hint_list=
     | +-h2 := Literal(type=INT64, value=2)
     +-output_column_list=
-    | +-$query.$col1#1 AS `$col1` [INT64]
+    | +-$query.$col1#1 AS "$col1" [INT64]
     +-query=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -1525,7 +1525,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1593,7 +1593,7 @@ where T.KitchenSink.int32_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1641,7 +1641,7 @@ select 1 IN @{a = 1,b = c} (select 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1675,7 +1675,7 @@ where T.KitchenSink.int32_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1755,7 +1755,7 @@ where T.KitchenSink.int32_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1804,7 +1804,7 @@ select 1 NOT IN @{ a = 1 ,b = c} (select 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1839,7 +1839,7 @@ where T.KitchenSink.int32_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1957,7 +1957,7 @@ where EXISTS @{ a = 1, b = c}
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1998,7 +1998,7 @@ select EXISTS @{ a = 1 , b = c}(select 1, 2)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -2050,7 +2050,7 @@ select fn_on_int64(kv1.Key) @{ a = 1 , b = c } from KeyValue as kv1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]

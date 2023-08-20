@@ -252,14 +252,14 @@ create external table function options() as select 1;
        ^
 ==
 
-create external table `function` options();
+create external table "function" options();
 --
 CreateExternalTableStatement [0-42] [create external...options()]
-  PathExpression [22-32] [`function`]
-    Identifier("function") [22-32] [`function`]
+  PathExpression [22-32] ["function"]
+    Identifier("function") [22-32] ["function"]
   OptionsList [40-42] [()]
 --
-CREATE EXTERNAL TABLE `function` OPTIONS()
+CREATE EXTERNAL TABLE "function" OPTIONS()
 ==
 
 create external table function options();
@@ -291,14 +291,14 @@ create external table function option as select 1;
        ^
 ==
 
-create external table `function` options();
+create external table "function" options();
 --
 CreateExternalTableStatement [0-42] [create external...options()]
-  PathExpression [22-32] [`function`]
-    Identifier("function") [22-32] [`function`]
+  PathExpression [22-32] ["function"]
+    Identifier("function") [22-32] ["function"]
   OptionsList [40-42] [()]
 --
-CREATE EXTERNAL TABLE `function` OPTIONS()
+CREATE EXTERNAL TABLE "function" OPTIONS()
 ==
 
 create {{|temp|temporary|public|private}} external table t(x int64)
@@ -719,7 +719,7 @@ options (a=b, c="def")
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `t1-2` [at 1:23]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "t1-2" [at 1:23]
 create external table t1-2
                       ^
 --
@@ -737,7 +737,7 @@ CreateExternalTableStatement [0-49] [create external..., c="def")]
       Identifier(c) [41-42] [c]
       StringLiteral("def") [43-48] ["def"]
 --
-CREATE EXTERNAL TABLE `t1-2` OPTIONS(a = b, c = "def")
+CREATE EXTERNAL TABLE "t1-2" OPTIONS(a = b, c = "def")
 ==
 
 create external table projectid.datasetid.tablename
@@ -982,19 +982,19 @@ CREATE EXTERNAL TABLE projectid.datasetid.tablename
 # Invalid WITH CLAUSE order: CONNECTION, PARTITION COLUMNS.
 # CONNECTION must be after PARTITION COLUMNS.
 create external table projectid.datasetid.tablename(x int64)
-with connection `project.us-west-2.connection_1`
+with connection "project.us-west-2.connection_1"
 with partition columns
 options (x=bar)
 --
 ERROR: Syntax error: Expected keyword OPTIONS [at 2:49]
-with connection `project.us-west-2.connection_1`
+with connection "project.us-west-2.connection_1"
                                                 ^
 ==
 
 # WITH CLAUSE order: PARTITION COLUMNS, CONNECTION
 create external table projectid.datasetid.tablename(x int64)
 with partition columns
-with connection `project.country-region-5.connection_1`
+with connection "project.country-region-5.connection_1"
 options (x=bar)
 --
 CreateExternalTableStatement [0-155] [create external...ions (x=bar)]
@@ -1009,10 +1009,10 @@ CreateExternalTableStatement [0-155] [create external...ions (x=bar)]
         PathExpression [54-59] [int64]
           Identifier(int64) [54-59] [int64]
   WithPartitionColumnsClause [61-83] [with partition columns]
-  WithConnectionClause [84-139] [with connection...onnection_1`]
-    ConnectionClause [89-139] [connection...connection_1`]
-      PathExpression [100-139] [`project.country...nnection_1`]
-        Identifier("project.country-region-5.connection_1") [100-139] [`project.country...nnection_1`]
+  WithConnectionClause [84-139] [with connection...onnection_1"]
+    ConnectionClause [89-139] [connection...connection_1"]
+      PathExpression [100-139] ["project.country...nnection_1"]
+        Identifier("project.country-region-5.connection_1") [100-139] ["project.country...nnection_1"]
   OptionsList [148-155] [(x=bar)]
     OptionsEntry [149-154] [x=bar]
       Identifier(x) [149-150] [x]
@@ -1022,7 +1022,7 @@ CreateExternalTableStatement [0-155] [create external...ions (x=bar)]
 CREATE EXTERNAL TABLE projectid.datasetid.tablename
 (
   x int64
-) WITH PARTITION COLUMNS WITH CONNECTION `project.country-region-5.connection_1` OPTIONS(x = bar)
+) WITH PARTITION COLUMNS WITH CONNECTION "project.country-region-5.connection_1" OPTIONS(x = bar)
 ==
 
 create external table t(x int64)

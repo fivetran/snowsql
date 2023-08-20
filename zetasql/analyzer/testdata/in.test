@@ -2,7 +2,7 @@ select 'a' IN ('a', 'b', 'c');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -80,7 +80,7 @@ select NULL IN (NULL);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -97,7 +97,7 @@ select NOT NULL NOT IN (NULL, NULL);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -122,7 +122,7 @@ select KitchenSink.int64_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -171,7 +171,7 @@ select true from TestTable where cast(1 as int32) IN (cast(1 as int32), 123);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -199,7 +199,7 @@ select cast(1 as int64) IN (cast(1 as int32), 1234567890123);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -217,7 +217,7 @@ select true from TestTable where cast(1 as int32) IN (cast(1 as int64));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -237,7 +237,7 @@ select 5 IN (cast(5 as int32));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -254,7 +254,7 @@ select cast(1 as int32) IN (1, 2, 3);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -273,7 +273,7 @@ select 1 IN (select 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -299,7 +299,7 @@ select 1 NOT IN (select 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -329,13 +329,13 @@ select 1 IN (select 1, 2)
              ^
 ==
 
-select countif(`int32` > 0)
+select countif("int32" > 0)
 from SimpleTypes
-having countif(`int64` > 0) > 5;
+having countif("int64" > 0) > 5;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -382,7 +382,7 @@ select cast(1 as int64) IN (select cast(1 as uint64))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -408,7 +408,7 @@ select cast(1 as int64) IN (select cast(1 as int32))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -439,7 +439,7 @@ select cast(1 as int32) IN (select cast(1 as int64))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -472,13 +472,13 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#149 AS `$col1` [BOOL]
-| +-$query.$col2#150 AS `$col2` [BOOL]
-| +-$query.$col3#151 AS `$col3` [BOOL]
-| +-$query.$col4#152 AS `$col4` [BOOL]
-| +-$query.$col5#153 AS `$col5` [BOOL]
-| +-$query.$col6#154 AS `$col6` [BOOL]
-| +-$query.$col7#155 AS `$col7` [BOOL]
+| +-$query.$col1#149 AS "$col1" [BOOL]
+| +-$query.$col2#150 AS "$col2" [BOOL]
+| +-$query.$col3#151 AS "$col3" [BOOL]
+| +-$query.$col4#152 AS "$col4" [BOOL]
+| +-$query.$col5#153 AS "$col5" [BOOL]
+| +-$query.$col6#154 AS "$col6" [BOOL]
+| +-$query.$col7#155 AS "$col7" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#149, $col2#150, $col3#151, $col4#152, $col5#153, $col6#154, $col7#155]
@@ -588,7 +588,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [BOOL]
+| +-$query.$col1#7 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -617,8 +617,8 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [BOOL]
-| +-$query.$col2#8 AS `$col2` [BOOL]
+| +-$query.$col1#7 AS "$col1" [BOOL]
+| +-$query.$col2#8 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#7, $col2#8]
@@ -759,8 +759,8 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -853,7 +853,7 @@ select 1 IN (select uint64 from SimpleTypes)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BOOL]
+| +-$query.$col1#19 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -919,7 +919,7 @@ ALTERNATION GROUP: V_1_1_ARRAY_EQUALITY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [BOOL]
+| +-$query.$col1#5 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -959,7 +959,7 @@ ALTERNATION GROUP: V_1_1_ARRAY_EQUALITY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -987,7 +987,7 @@ select (select AS STRUCT 1, 2) IN ( (select AS STRUCT 1, 2) )
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [BOOL]
+| +-$query.$col1#7 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1044,7 +1044,7 @@ SELECT (1,1) IN ((1,1), (1,2))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1062,7 +1062,7 @@ SELECT (1,1) IN UNNEST([(1,1), (1,2)])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1079,7 +1079,7 @@ SELECT (1,1) IN (SELECT u FROM UNNEST([(1,1),(1, 2)]) u)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BOOL]
+| +-$query.$col1#2 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1108,8 +1108,8 @@ select struct(cast(1 as int32)) IN (struct(cast(1 as int64))),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -1150,7 +1150,7 @@ select struct(cast(1 as int32)) IN UNNEST([struct(cast(1 as int64))])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1177,7 +1177,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1204,7 +1204,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1223,7 +1223,7 @@ select 123 IN UNNEST(array<int32>[123])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1247,7 +1247,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BOOL]
+| +-$query.$col1#19 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -1280,7 +1280,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1307,7 +1307,7 @@ select "TESTENUM0" IN UNNEST([TestEnum]) from EnumTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [BOOL]
+| +-$query.$col1#6 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1327,7 +1327,7 @@ select null in unnest([1, 2, 3])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1345,7 +1345,7 @@ select null in unnest(["foo", "bar", "baz"])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1399,7 +1399,7 @@ select struct('TESTENUM1')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1430,7 +1430,7 @@ select 1 IN ( (select 1) UNION ALL (select 2) )
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1472,7 +1472,7 @@ select 1 IN ( (select 1), (select 2) )
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1512,7 +1512,7 @@ where T.KitchenSink.int32_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1563,7 +1563,7 @@ select true from TestTable where 1 IN (1&2, 1 + 2)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1588,7 +1588,7 @@ select true from TestTable where true IN ((1) < (2), @test_param_bool IS TRUE)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1634,7 +1634,7 @@ select cast(1 as int32) IN UNNEST(@test_param_array)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1651,7 +1651,7 @@ select 1 IN UNNEST([1])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1668,7 +1668,7 @@ select 1 IN UNNEST([1*1, 1+1, 1*1+1])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1693,27 +1693,27 @@ QueryStmt
 ==
 
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select KitchenSink IN UNNEST(ARRAY<`zetasql_test__.KitchenSinkPB`>[])
+select KitchenSink IN UNNEST(ARRAY<"zetasql_test__.KitchenSinkPB">[])
 from TestTable
 --
 ERROR: First argument to IN UNNEST of type PROTO<zetasql_test__.KitchenSinkPB> does not support equality comparison [at 1:20]
-select KitchenSink IN UNNEST(ARRAY<`zetasql_test__.KitchenSinkPB`>[])
+select KitchenSink IN UNNEST(ARRAY<"zetasql_test__.KitchenSinkPB">[])
                    ^
 ==
 
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select KitchenSink.int32_val IN UNNEST(ARRAY<`zetasql_test__.KitchenSinkPB`>[])
+select KitchenSink.int32_val IN UNNEST(ARRAY<"zetasql_test__.KitchenSinkPB">[])
 from TestTable
 --
 ERROR: Second argument to IN UNNEST of type ARRAY<PROTO<zetasql_test__.KitchenSinkPB>> is not supported because array element type is not equality comparable [at 1:30]
-select KitchenSink.int32_val IN UNNEST(ARRAY<`zetasql_test__.KitchenSinkPB`>[])
+select KitchenSink.int32_val IN UNNEST(ARRAY<"zetasql_test__.KitchenSinkPB">[])
                              ^
 ==
 
-select 1 from SimpleTypes where `int32` IN UNNEST( (select `int32`) )
+select 1 from SimpleTypes where "int32" IN UNNEST( (select "int32") )
 --
 ERROR: Second argument of IN UNNEST must be an array but was INT32 [at 1:41]
-select 1 from SimpleTypes where `int32` IN UNNEST( (select `int32`) )
+select 1 from SimpleTypes where "int32" IN UNNEST( (select "int32") )
                                         ^
 ==
 
@@ -1731,7 +1731,7 @@ where T.KitchenSink.string_val IN UNNEST(T.KitchenSink.repeated_string_val)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1801,7 +1801,7 @@ where T.KitchenSink.date IN UNNEST(ARRAY(select T.KitchenSink.date))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1846,7 +1846,7 @@ select 5 in (select key from KeyValue)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1867,9 +1867,9 @@ QueryStmt
 ==
 
 # IN subquery with a correlated column and another table scan.
-select `double`
+select "double"
 from SimpleTypes T
-where (select `int64`) IN (select `int32` + key from KeyValue)
+where (select "int64") IN (select "int32" + key from KeyValue)
 --
 QueryStmt
 +-output_column_list=

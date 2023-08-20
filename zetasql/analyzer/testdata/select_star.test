@@ -39,11 +39,11 @@ select 1, key, *, 33, * from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col4#4 AS `$col4` [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
 +-query=
@@ -95,8 +95,8 @@ select * from (select 1, 2)
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.$col1#1 AS `$col1` [INT64]
-| +-$subquery1.$col2#2 AS `$col2` [INT64]
+| +-$subquery1.$col1#1 AS "$col1" [INT64]
+| +-$subquery1.$col2#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$subquery1.[$col1#1, $col2#2]
@@ -134,10 +134,10 @@ select 111, kv.*, 222 from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col3#4 AS `$col3` [INT64]
+| +-$query.$col3#4 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3, KeyValue.Key#1, KeyValue.Value#2, $query.$col3#4]
@@ -162,21 +162,21 @@ from KeyValue kv,
 --
 QueryStmt
 +-output_column_list=
-| +-subq.$col1#3 AS `$col1` [INT64]
-| +-subq.$col2#4 AS `$col2` [STRING]
+| +-subq.$col1#3 AS "$col1" [INT64]
+| +-subq.$col2#4 AS "$col2" [STRING]
 | +-subq.c3#5 AS c3 [STRING]
-| +-$query.$col2#9 AS `$col2` [STRING]
+| +-$query.$col2#9 AS "$col2" [STRING]
 | +-TestTable.key#6 AS key [INT32]
 | +-TestTable.TestEnum#7 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 | +-TestTable.KitchenSink#8 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$query.$col4#10 AS `$col4` [STRING]
+| +-$query.$col4#10 AS "$col4" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col6#11 AS `$col6` [STRING]
+| +-$query.$col6#11 AS "$col6" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-subq.$col1#3 AS `$col1` [INT64]
-| +-subq.$col2#4 AS `$col2` [STRING]
+| +-subq.$col1#3 AS "$col1" [INT64]
+| +-subq.$col2#4 AS "$col2" [STRING]
 | +-subq.c3#5 AS c3 [STRING]
 | +-TestTable.key#6 AS key [INT32]
 | +-TestTable.TestEnum#7 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
@@ -249,8 +249,8 @@ from (select 1),
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.$col1#1 AS `$col1` [INT64]
-| +-subq2.$col1#2 AS `$col1` [INT64]
+| +-$subquery1.$col1#1 AS "$col1" [INT64]
+| +-subq2.$col1#2 AS "$col1" [INT64]
 | +-$subquery2.three#3 AS three [INT64]
 +-query=
   +-ProjectScan
@@ -297,7 +297,7 @@ QueryStmt
 | +-KeyValue.Value#4 AS Value [STRING]
 | +-KeyValue.Key#5 AS Key [INT64]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col2#7 AS `$col2` [STRING]
+| +-$query.$col2#7 AS "$col2" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
 +-query=
@@ -333,8 +333,8 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$subquery3.$col2#3 AS `$col2` [INT64]
-| +-$subquery1.$col2#4 AS `$col2` [INT64]
+| +-$subquery3.$col2#3 AS "$col2" [INT64]
+| +-$subquery1.$col2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $subquery3.$col2#3, $subquery1.$col2#4]
@@ -438,7 +438,7 @@ SELECT (SELECT {{t.|}}* FROM (SELECT 1 AS a) AS t GROUP BY {{t.a|a|1}})
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -475,7 +475,7 @@ FROM KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<a INT64, Key INT64>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<a INT64, Key INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -525,7 +525,7 @@ from KeyValue outer_kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [INT64]
+| +-$query.$col1#10 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]

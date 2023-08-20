@@ -3,7 +3,7 @@ select parse_json('{"a":"b"}'):"a"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -30,7 +30,7 @@ select cast(parse_json('{"a":"b"}') as object):"a"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -51,7 +51,7 @@ select parse_json(''):a
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -78,7 +78,7 @@ select cast(parse_json('{"a":"b"}') as object):a
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

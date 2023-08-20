@@ -14,10 +14,10 @@ sdfds
 ==
 
 # Backquoted identifiers are not quoted again in the error message.
-`sdfds`
+"sdfds"
 --
-ERROR: Syntax error: Unexpected identifier `sdfds` [at 1:1]
-`sdfds`
+ERROR: Syntax error: Unexpected identifier "sdfds" [at 1:1]
+"sdfds"
 ^
 ==
 
@@ -278,11 +278,11 @@ select 1 as x from;
                   ^
 ==
 
-select `sadffds
-` as x;
+select "sadffds
+" as x;
 --
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `sadffds
+select "sadffds
        ^
 ==
 
@@ -300,38 +300,38 @@ select abcd\nefg;
            ^
 ==
 
-select ``;
+select "";
 --
 ERROR: Syntax error: Invalid empty identifier [at 1:8]
-select ``;
+select "";
        ^
 ==
 
-select "bad_escape_in_identifier" as `\U12345678`;
+select "bad_escape_in_identifier" as "\U12345678";
 --
 ERROR: Syntax error: Illegal escape sequence: Value of \U12345678 exceeds Unicode limit (0x0010FFFF) [at 1:39]
-select "bad_escape_in_identifier" as `\U12345678`;
+select "bad_escape_in_identifier" as "\U12345678";
                                       ^
 ==
 
-select "bad_escape_in_identifier" as `\U12345`;
+select "bad_escape_in_identifier" as "\U12345";
 --
 ERROR: Syntax error: Illegal escape sequence: \U must be followed by 8 hex digits but saw: \U12345 [at 1:39]
-select "bad_escape_in_identifier" as `\U12345`;
+select "bad_escape_in_identifier" as "\U12345";
                                       ^
 ==
 
-select "bad_escape_in_identifier" as `\U1234`;
+select "bad_escape_in_identifier" as "\U1234";
 --
 ERROR: Syntax error: Illegal escape sequence: \U must be followed by 8 hex digits but saw: \U1234 [at 1:39]
-select "bad_escape_in_identifier" as `\U1234`;
+select "bad_escape_in_identifier" as "\U1234";
                                       ^
 ==
 
-select "bad_escape_in_identifier" as `\u123`
+select "bad_escape_in_identifier" as "\u123"
 --
 ERROR: Syntax error: Illegal escape sequence: \u must be followed by 4 hex digits but saw: \u123 [at 1:39]
-select "bad_escape_in_identifier" as `\u123`
+select "bad_escape_in_identifier" as "\u123"
                                       ^
 ==
 

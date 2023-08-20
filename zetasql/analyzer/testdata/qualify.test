@@ -339,7 +339,7 @@ select 1 from KeyValue WHERE true QUALIFY row_number() over () = 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -575,7 +575,7 @@ QUALIFY SUM(KeyValue.Key) > 1 and ROW_NUMBER() OVER () > 0;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -670,7 +670,7 @@ FROM (SELECT Key from KeyValue)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -732,7 +732,7 @@ FROM (SELECT Key from KeyValue) AS SubQuery
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -793,7 +793,7 @@ QUALIFY key > 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -827,7 +827,7 @@ QUALIFY sum(key) > 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -910,7 +910,7 @@ QUALIFY SUM(SUM(key)) OVER () > 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1066,7 +1066,7 @@ QUALIFY x > 1;
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#5 AS value [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col2" [INT64]
 | +-$analytic.x#6 AS x [INT64]
 +-query=
   +-ProjectScan
@@ -1107,7 +1107,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.value#5 AS value [STRING]
 | +-$aggregate.x#3 AS x [INT64]
-| +-$analytic.$analytic1#6 AS `$col3` [INT64]
+| +-$analytic.$analytic1#6 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#5, $aggregate.x#3, $analytic.$analytic1#6]
@@ -1146,7 +1146,7 @@ QUALIFY key > 1;
 QueryStmt
 +-output_column_list=
 | +-$groupby.key#4 AS key [INT64]
-| +-$analytic.$analytic1#5 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.key#4, $analytic.$analytic1#5]
@@ -1181,7 +1181,7 @@ QUALIFY x > 1;
 QueryStmt
 +-output_column_list=
 | +-$groupby.x#5 AS x [INT64]
-| +-$analytic.$analytic1#6 AS `$col2` [INT64]
+| +-$analytic.$analytic1#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.x#5, $analytic.$analytic1#6]
@@ -1224,7 +1224,7 @@ QUALIFY x > 1;
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#6 AS value [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col2" [INT64]
 | +-$analytic.x#7 AS x [INT64]
 +-query=
   +-ProjectScan
@@ -1362,7 +1362,7 @@ QUALIFY sum(key) > 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#5 AS `$col1` [INT64]
+| +-$analytic.$analytic1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#5]
@@ -1408,8 +1408,8 @@ QUALIFY MAX(key) > 1 AND SUM(SUM(key)) OVER (ORDER BY value ROWS BETWEEN UNBOUND
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#5 AS value [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [INT64]
-| +-$analytic.$analytic1#6 AS `$col3` [INT64]
+| +-$aggregate.$agg1#3 AS "$col2" [INT64]
+| +-$analytic.$analytic1#6 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#5, $aggregate.$agg1#3, $analytic.$analytic1#6]
@@ -1522,8 +1522,8 @@ QueryStmt
 ==
 
 # Aggregate functions in the QUALIFY clause reference pre-grouped column. The
-# `value` in `QUALIFY COUNT(value) > 1` references the `value` column before
-# GROUP BY aggregation, so `COUNT(value)` make sense.
+# "value" in "QUALIFY COUNT(value) > 1" references the "value" column before
+# GROUP BY aggregation, so "COUNT(value)" make sense.
 SELECT value, row_number() over ()
 FROM KeyValue
 GROUP BY value
@@ -1532,7 +1532,7 @@ QUALIFY COUNT(value) > 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#4 AS value [STRING]
-| +-$analytic.$analytic1#5 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#4, $analytic.$analytic1#5]
@@ -1563,8 +1563,8 @@ QueryStmt
             +-Literal(type=INT64, value=1)
 ==
 
-# QUALIFY clause can reference post-grouped column. The `value` in `QUALIFY
-# value > 1` references the `value` column after GROUP BY aggregation.
+# QUALIFY clause can reference post-grouped column. The "value" in "QUALIFY
+# value > 1" references the "value" column after GROUP BY aggregation.
 SELECT value, row_number() over ()
 FROM KeyValue
 GROUP BY value
@@ -1573,7 +1573,7 @@ QUALIFY value > 'abc'
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#4 AS value [STRING]
-| +-$analytic.$analytic1#5 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#4, $analytic.$analytic1#5]
@@ -1609,7 +1609,7 @@ QUALIFY value > 'abc' AND SUM(key) > 10 AND SUM(SUM(key)) OVER () > 0;
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#4 AS value [STRING]
-| +-$analytic.$analytic1#5 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#4, $analytic.$analytic1#5]

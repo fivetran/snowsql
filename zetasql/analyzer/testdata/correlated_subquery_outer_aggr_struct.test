@@ -30,7 +30,7 @@ GROUP BY {{ct.|}}TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#11 AS TestStruct [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
-| +-$query.$col2#16 AS `$col2` [STRUCT<TestStruct STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, c INT32, d STRUCT<a INT32, b STRING>>]
+| +-$query.$col2#16 AS "$col2" [STRUCT<TestStruct STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, c INT32, d STRUCT<a INT32, b STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#11, $query.$col2#16]
@@ -88,7 +88,7 @@ GROUP BY {{ct.|}}TestStruct.d
 QueryStmt
 +-output_column_list=
 | +-$query.a#9 AS a [INT32]
-| +-$query.$col2#11 AS `$col2` [INT32]
+| +-$query.$col2#11 AS "$col2" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#9, $col2#11]
@@ -140,7 +140,7 @@ GROUP BY TestStruct.d
 QueryStmt
 +-output_column_list=
 | +-$groupby.d#8 AS d [STRUCT<a INT32, b STRING>]
-| +-$query.$col2#10 AS `$col2` [INT64]
+| +-$query.$col2#10 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.d#8, $query.$col2#10]
@@ -217,7 +217,7 @@ GROUP BY TestStruct, ct.TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#8 AS TestStruct [STRUCT<a INT32, b STRING>]
-| +-$query.$col2#11 AS `$col2` [INT32]
+| +-$query.$col2#11 AS "$col2" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#8, $query.$col2#11]
@@ -273,8 +273,8 @@ GROUP BY 1
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$col1#9 AS `$col1` [STRUCT<a INT32, b STRING>]
-| +-$aggregate.$agg1#8 AS `$col2` [INT64]
+| +-$groupby.$col1#9 AS "$col1" [STRUCT<a INT32, b STRING>]
+| +-$aggregate.$agg1#8 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$col1#9, $aggregate.$agg1#8]
@@ -439,7 +439,7 @@ GROUP BY (SELECT TestStruct)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRING]
+| +-$query.$col1#9 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -494,7 +494,7 @@ GROUP BY (SELECT {{ct.|}}TestStruct.d)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#7]
@@ -1078,7 +1078,7 @@ GROUP BY TestStruct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<a INT32, STRUCT<a INT32, b STRING>>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<a INT32, STRUCT<a INT32, b STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#16]
@@ -1167,7 +1167,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#24 AS `$col1` [INT64]
+| +-$query.$col1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#24]
@@ -1239,7 +1239,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#24 AS `$col1` [INT64]
+| +-$query.$col1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#24]
@@ -1311,7 +1311,7 @@ GROUP BY TestStruct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#16]
@@ -1792,7 +1792,7 @@ GROUP BY TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#17 AS TestStruct [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
-| +-$query.$col2#28 AS `$col2` [STRUCT<STRUCT<a INT32, b STRING>, INT32>]
+| +-$query.$col2#28 AS "$col2" [STRUCT<STRUCT<a INT32, b STRING>, INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#17, $query.$col2#28]
@@ -1883,7 +1883,7 @@ GROUP BY TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#20 AS TestStruct [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
-| +-$query.$col2#34 AS `$col2` [STRUCT<a INT32, STRUCT<c INT32, TestEnum ENUM<zetasql_test__.TestEnum>>>]
+| +-$query.$col2#34 AS "$col2" [STRUCT<a INT32, STRUCT<c INT32, TestEnum ENUM<zetasql_test__.TestEnum>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#20, $query.$col2#34]
@@ -2416,7 +2416,7 @@ GROUP BY TestStruct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [BOOL]
+| +-$query.$col1#10 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2475,7 +2475,7 @@ GROUP BY TestStruct.c, TestStruct.d
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [BOOL]
+| +-$query.$col1#11 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -2590,7 +2590,7 @@ GROUP BY TestStruct.d IN (SELECT as struct TestStruct.c a, TestStruct.d.b b)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [STRING]
+| +-$query.$col1#11 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -2829,7 +2829,7 @@ GROUP BY TestStruct;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#22 AS `$col1` [INT32]
+| +-$query.$col1#22 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#22]
@@ -2947,7 +2947,7 @@ GROUP BY (SELECT as struct ct.TestStruct, sum(ct.key) FROM ComplexTypes)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#17 AS `$col1` [STRING]
+| +-$query.$col1#17 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#17]
@@ -3185,7 +3185,7 @@ ALTERNATION GROUPS:
 QueryStmt
 +-output_column_list=
 | +-$groupby.d#14 AS d [STRUCT<a INT32, b STRING>]
-| +-$query.$col2#16 AS `$col2` [BOOL]
+| +-$query.$col2#16 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.d#14, $query.$col2#16]
@@ -3251,7 +3251,7 @@ GROUP BY TestStructValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<TestStructValueTable STRUCT<a INT32, b STRING>, a INT32>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<TestStructValueTable STRUCT<a INT32, b STRING>, a INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -3573,7 +3573,7 @@ GROUP BY st
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -3622,7 +3622,7 @@ GROUP BY (SELECT st.TestStruct)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]

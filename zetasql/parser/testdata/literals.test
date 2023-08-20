@@ -433,10 +433,10 @@ select '\x53'        as OneHexByte
       ,'\?...'       as question
       ,'\"...'       as single_double_quote
       ,'\'...'       as single_single_quote
-      ,'\`...'       as single_back_tick
+      ,'\"...'       as single_back_tick
       ,"\"..."       as double_double_quote
       ,"\'..."       as double_single_quote
-      ,"\`..."       as double_back_tick
+      ,"\"..."       as double_back_tick
       ,'\uabcd'      as short_UTF8_char
       ,'\U0010FFFF'  as long_UTF8_char
 --
@@ -500,8 +500,8 @@ QueryStatement [0-695] [select '\x53...long_UTF8_char]
           StringLiteral('\'...') [410-417] ['\'...']
           Alias [424-446] [as single_single_quote]
             Identifier(single_single_quote) [427-446] [single_single_quote]
-        SelectColumn [454-487] ['\`...'...single_back_tick]
-          StringLiteral('\`...') [454-461] ['\`...']
+        SelectColumn [454-487] ['\"...'...single_back_tick]
+          StringLiteral('\"...') [454-461] ['\"...']
           Alias [468-487] [as single_back_tick]
             Identifier(single_back_tick) [471-487] [single_back_tick]
         SelectColumn [495-531] ["\"..."...double_double_quote]
@@ -512,8 +512,8 @@ QueryStatement [0-695] [select '\x53...long_UTF8_char]
           StringLiteral("\'...") [539-546] ["\'..."]
           Alias [553-575] [as double_single_quote]
             Identifier(double_single_quote) [556-575] [double_single_quote]
-        SelectColumn [583-616] ["\`..."...double_back_tick]
-          StringLiteral("\`...") [583-590] ["\`..."]
+        SelectColumn [583-616] ["\"..."...double_back_tick]
+          StringLiteral("\"...") [583-590] ["\"..."]
           Alias [597-616] [as double_back_tick]
             Identifier(double_back_tick) [600-616] [double_back_tick]
         SelectColumn [624-656] ['\uabcd'...short_UTF8_char]
@@ -540,10 +540,10 @@ SELECT
   '\?...' AS question,
   '\"...' AS single_double_quote,
   '\'...' AS single_single_quote,
-  '\`...' AS single_back_tick,
+  '\"...' AS single_back_tick,
   "\"..." AS double_double_quote,
   "\'..." AS double_single_quote,
-  "\`..." AS double_back_tick,
+  "\"..." AS double_back_tick,
   '\uabcd' AS short_UTF8_char,
   '\U0010FFFF' AS long_UTF8_char
 ==
@@ -844,12 +844,12 @@ SELECT
   ''''''
 ==
 
-select b'abc', B"def", B'"', B"'", B'`', B"`"
+select b'abc', B"def", B'"', B"'", B'"', B"""
 --
-QueryStatement [0-45] [select b'abc...B'`', B"`"]
-  Query [0-45] [select b'abc...B'`', B"`"]
-    Select [0-45] [select b'abc...B'`', B"`"]
-      SelectList [7-45] [b'abc', B"...B'`', B"`"]
+QueryStatement [0-45] [select b'abc...B'"', B"""]
+  Query [0-45] [select b'abc...B'"', B"""]
+    Select [0-45] [select b'abc...B'"', B"""]
+      SelectList [7-45] [b'abc', B"...B'"', B"""]
         SelectColumn [7-13] [b'abc']
           BytesLiteral(b'abc') [7-13] [b'abc']
         SelectColumn [15-21] [B"def"]
@@ -858,26 +858,26 @@ QueryStatement [0-45] [select b'abc...B'`', B"`"]
           BytesLiteral(B'"') [23-27] [B'"']
         SelectColumn [29-33] [B"'"]
           BytesLiteral(B"'") [29-33] [B"'"]
-        SelectColumn [35-39] [B'`']
-          BytesLiteral(B'`') [35-39] [B'`']
-        SelectColumn [41-45] [B"`"]
-          BytesLiteral(B"`") [41-45] [B"`"]
+        SelectColumn [35-39] [B'"']
+          BytesLiteral(B'"') [35-39] [B'"']
+        SelectColumn [41-45] [B"""]
+          BytesLiteral(B""") [41-45] [B"""]
 --
 SELECT
   b'abc',
   B"def",
   B'"',
   B"'",
-  B'`',
-  B"`"
+  B'"',
+  B"""
 ==
 
-select b"""abc""", B'''def''', B"""'''a'''""", b'''"a"''', B'''`''', B"""`"""
+select b"""abc""", B'''def''', B"""'''a'''""", b'''"a"''', B'''"''', B"""""""
 --
-QueryStatement [0-77] [select b""..., B"""`"""]
-  Query [0-77] [select b""..., B"""`"""]
-    Select [0-77] [select b""..., B"""`"""]
-      SelectList [7-77] [b"""abc"""..., B"""`"""]
+QueryStatement [0-77] [select b""..., B"""""""]
+  Query [0-77] [select b""..., B"""""""]
+    Select [0-77] [select b""..., B"""""""]
+      SelectList [7-77] [b"""abc"""..., B"""""""]
         SelectColumn [7-17] [b"""abc"""]
           BytesLiteral(b"""abc""") [7-17] [b"""abc"""]
         SelectColumn [19-29] [B'''def''']
@@ -886,18 +886,18 @@ QueryStatement [0-77] [select b""..., B"""`"""]
           BytesLiteral(B"""'''a'''""") [31-45] [B"""'''a'''"""]
         SelectColumn [47-57] [b'''"a"''']
           BytesLiteral(b'''"a"''') [47-57] [b'''"a"''']
-        SelectColumn [59-67] [B'''`''']
-          BytesLiteral(B'''`''') [59-67] [B'''`''']
-        SelectColumn [69-77] [B"""`"""]
-          BytesLiteral(B"""`""") [69-77] [B"""`"""]
+        SelectColumn [59-67] [B'''"''']
+          BytesLiteral(B'''"''') [59-67] [B'''"''']
+        SelectColumn [69-77] [B"""""""]
+          BytesLiteral(B""""""") [69-77] [B"""""""]
 --
 SELECT
   b"""abc""",
   B'''def''',
   B"""'''a'''""",
   b'''"a"''',
-  B'''`''',
-  B"""`"""
+  B'''"''',
+  B"""""""
 ==
 
 select b'\x53'   as OneHexByte
@@ -913,10 +913,10 @@ select b'\x53'   as OneHexByte
      , b'\?...'  as question
      , b'\"...'  as single_double_quote
      , b'\'...'  as single_single_quote
-     , b'\`...'  as single_back_tick
+     , b'\"...'  as single_back_tick
      , b"\"..."  as double_double_quote
      , b"\'..."  as double_single_quote
-     , b"\`..."  as double_back_tick
+     , b"\"..."  as double_back_tick
 --
 QueryStatement [0-509] [select b'\...double_back_tick]
   Query [0-509] [select b'\...double_back_tick]
@@ -974,8 +974,8 @@ QueryStatement [0-509] [select b'\...double_back_tick]
           BytesLiteral(b'\'...') [323-331] [b'\'...']
           Alias [333-355] [as single_single_quote]
             Identifier(single_single_quote) [336-355] [single_single_quote]
-        SelectColumn [363-392] [b'\`...'  as single_back_tick]
-          BytesLiteral(b'\`...') [363-371] [b'\`...']
+        SelectColumn [363-392] [b'\"...'  as single_back_tick]
+          BytesLiteral(b'\"...') [363-371] [b'\"...']
           Alias [373-392] [as single_back_tick]
             Identifier(single_back_tick) [376-392] [single_back_tick]
         SelectColumn [400-432] [b"\"..."...double_double_quote]
@@ -986,8 +986,8 @@ QueryStatement [0-509] [select b'\...double_back_tick]
           BytesLiteral(b"\'...") [440-448] [b"\'..."]
           Alias [450-472] [as double_single_quote]
             Identifier(double_single_quote) [453-472] [double_single_quote]
-        SelectColumn [480-509] [b"\`..."  as double_back_tick]
-          BytesLiteral(b"\`...") [480-488] [b"\`..."]
+        SelectColumn [480-509] [b"\"..."  as double_back_tick]
+          BytesLiteral(b"\"...") [480-488] [b"\"..."]
           Alias [490-509] [as double_back_tick]
             Identifier(double_back_tick) [493-509] [double_back_tick]
 --
@@ -1005,10 +1005,10 @@ SELECT
   b'\?...' AS question,
   b'\"...' AS single_double_quote,
   b'\'...' AS single_single_quote,
-  b'\`...' AS single_back_tick,
+  b'\"...' AS single_back_tick,
   b"\"..." AS double_double_quote,
   b"\'..." AS double_single_quote,
-  b"\`..." AS double_back_tick
+  b"\"..." AS double_back_tick
 ==
 
 select b'''\x53'''   as OneHexByte
@@ -1024,10 +1024,10 @@ select b'''\x53'''   as OneHexByte
      , b'''\?...'''  as question
      , b'''\"...'''  as single_double_quote
      , b'''\'...'''  as single_single_quote
-     , b'''\`...'''  as single_back_tick
+     , b'''\"...'''  as single_back_tick
      , b"""\"..."""  as double_double_quote
      , b"""\'..."""  as double_single_quote
-     , b"""\`..."""  as double_back_tick
+     , b"""\"..."""  as double_back_tick
 --
 QueryStatement [0-577] [select b''...double_back_tick]
   Query [0-577] [select b''...double_back_tick]
@@ -1085,8 +1085,8 @@ QueryStatement [0-577] [select b''...double_back_tick]
           BytesLiteral(b'''\'...''') [371-383] [b'''\'...''']
           Alias [385-407] [as single_single_quote]
             Identifier(single_single_quote) [388-407] [single_single_quote]
-        SelectColumn [415-448] [b'''\`...'...single_back_tick]
-          BytesLiteral(b'''\`...''') [415-427] [b'''\`...''']
+        SelectColumn [415-448] [b'''\"...'...single_back_tick]
+          BytesLiteral(b'''\"...''') [415-427] [b'''\"...''']
           Alias [429-448] [as single_back_tick]
             Identifier(single_back_tick) [432-448] [single_back_tick]
         SelectColumn [456-492] [b"""\"..."...uble_double_quote]
@@ -1097,8 +1097,8 @@ QueryStatement [0-577] [select b''...double_back_tick]
           BytesLiteral(b"""\'...""") [500-512] [b"""\'..."""]
           Alias [514-536] [as double_single_quote]
             Identifier(double_single_quote) [517-536] [double_single_quote]
-        SelectColumn [544-577] [b"""\`..."...double_back_tick]
-          BytesLiteral(b"""\`...""") [544-556] [b"""\`..."""]
+        SelectColumn [544-577] [b"""\"..."...double_back_tick]
+          BytesLiteral(b"""\"...""") [544-556] [b"""\"..."""]
           Alias [558-577] [as double_back_tick]
             Identifier(double_back_tick) [561-577] [double_back_tick]
 --
@@ -1116,10 +1116,10 @@ SELECT
   b'''\?...''' AS question,
   b'''\"...''' AS single_double_quote,
   b'''\'...''' AS single_single_quote,
-  b'''\`...''' AS single_back_tick,
+  b'''\"...''' AS single_back_tick,
   b"""\"...""" AS double_double_quote,
   b"""\'...""" AS double_single_quote,
-  b"""\`...""" AS double_back_tick
+  b"""\"...""" AS double_back_tick
 ==
 
 select b'\x5'   as OneHexByteRequiresTwoDigits
@@ -2035,16 +2035,16 @@ SELECT
   NUMERIC '-'
 ==
 
-select NUMERIC '100' `NUMERIC`
+select NUMERIC '100' "NUMERIC"
 --
-QueryStatement [0-30] [select NUMERIC '100' `NUMERIC`]
-  Query [0-30] [select NUMERIC '100' `NUMERIC`]
-    Select [0-30] [select NUMERIC '100' `NUMERIC`]
-      SelectList [7-30] [NUMERIC '100' `NUMERIC`]
-        SelectColumn [7-30] [NUMERIC '100' `NUMERIC`]
+QueryStatement [0-30] [select NUMERIC '100' "NUMERIC"]
+  Query [0-30] [select NUMERIC '100' "NUMERIC"]
+    Select [0-30] [select NUMERIC '100' "NUMERIC"]
+      SelectList [7-30] [NUMERIC '100' "NUMERIC"]
+        SelectColumn [7-30] [NUMERIC '100' "NUMERIC"]
           NumericLiteral('100') [7-20] [NUMERIC '100']
-          Alias [21-30] [`NUMERIC`]
-            Identifier(NUMERIC) [21-30] [`NUMERIC`]
+          Alias [21-30] ["NUMERIC"]
+            Identifier(NUMERIC) [21-30] ["NUMERIC"]
 --
 SELECT
   NUMERIC '100' AS NUMERIC
@@ -2069,10 +2069,10 @@ SELECT
 # strip the backticks and without the backticks NUMERIC gets parsed
 # as a keyword and the query succeeds.
 [no_test_get_parse_tokens]
-select `NUMERIC` '100'
+select "NUMERIC" '100'
 --
 ERROR: Syntax error: Expected end of input but got string literal '100' [at 1:18]
-select `NUMERIC` '100'
+select "NUMERIC" '100'
                  ^
 ==
 
@@ -2216,16 +2216,16 @@ SELECT
   BIGNUMERIC '-'
 ==
 
-select BIGNUMERIC '100' `BIGNUMERIC`
+select BIGNUMERIC '100' "BIGNUMERIC"
 --
-QueryStatement [0-36] [select BIGNUMERIC...IGNUMERIC`]
-  Query [0-36] [select BIGNUMERIC...IGNUMERIC`]
-    Select [0-36] [select BIGNUMERIC...IGNUMERIC`]
-      SelectList [7-36] [BIGNUMERIC '100' `BIGNUMERIC`]
-        SelectColumn [7-36] [BIGNUMERIC '100' `BIGNUMERIC`]
+QueryStatement [0-36] [select BIGNUMERIC...IGNUMERIC"]
+  Query [0-36] [select BIGNUMERIC...IGNUMERIC"]
+    Select [0-36] [select BIGNUMERIC...IGNUMERIC"]
+      SelectList [7-36] [BIGNUMERIC '100' "BIGNUMERIC"]
+        SelectColumn [7-36] [BIGNUMERIC '100' "BIGNUMERIC"]
           BigNumericLiteral('100') [7-23] [BIGNUMERIC '100']
-          Alias [24-36] [`BIGNUMERIC`]
-            Identifier(BIGNUMERIC) [24-36] [`BIGNUMERIC`]
+          Alias [24-36] ["BIGNUMERIC"]
+            Identifier(BIGNUMERIC) [24-36] ["BIGNUMERIC"]
 --
 SELECT
   BIGNUMERIC '100' AS BIGNUMERIC
@@ -2250,10 +2250,10 @@ SELECT
 # strip the backticks and without the backticks BIGNUMERIC gets parsed
 # as a keyword and the query succeeds.
 [no_test_get_parse_tokens]
-select `BIGNUMERIC` '100'
+select "BIGNUMERIC" '100'
 --
 ERROR: Syntax error: Expected end of input but got string literal '100' [at 1:21]
-select `BIGNUMERIC` '100'
+select "BIGNUMERIC" '100'
                     ^
 ==
 

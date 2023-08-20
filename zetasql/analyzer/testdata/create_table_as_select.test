@@ -281,13 +281,13 @@ options (abc=def, xyz=@bad_param)
                       ^
 ==
 
-create table a.b.`c.d`.`e f g`.kk
+create table a.b."c.d"."e f g".kk
 as select 1 c
 --
 CreateTableAsSelectStmt
-+-name_path=a.b.`c.d`.`e f g`.kk
++-name_path=a.b."c.d"."e f g".kk
 +-column_definition_list=
-| +-ColumnDefinition(name="c", type=INT64, column=a.b.`c.d`.`e f g`.kk.c#2)
+| +-ColumnDefinition(name="c", type=INT64, column=a.b."c.d"."e f g".kk.c#2)
 +-output_column_list=
 | +-$create_as.c#1 AS c [INT64]
 +-query=
@@ -331,7 +331,7 @@ CreateTableAsSelectStmt
 | +-ColumnDefinition(name="$struct", type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
 +-is_value_table=TRUE
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<a INT64, INT64, c INT64, c INT64>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<a INT64, INT64, c INT64, c INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$make_struct.$struct#5]
@@ -358,7 +358,7 @@ CreateTableAsSelectStmt
 
 # Create a value table with SELECT AS ProtoName.
 create table tt
-as select as `zetasql_test__.TestExtraPB` 55 int32_val1
+as select as "zetasql_test__.TestExtraPB" 55 int32_val1
 --
 CreateTableAsSelectStmt
 +-name_path=tt
@@ -366,7 +366,7 @@ CreateTableAsSelectStmt
 | +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
 +-is_value_table=TRUE
 +-output_column_list=
-| +-$make_proto.$proto#2 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#2 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$make_proto.$proto#2]
@@ -1487,7 +1487,7 @@ with connection conn
 [language_features=CREATE_TABLE_WITH_CONNECTION]
 [no_java]
 create table tt
-with connection `connection2`
+with connection "connection2"
 as select 1 a, 2 b;
 --
 CreateTableAsSelectStmt

@@ -237,10 +237,10 @@ from SimpleTypes
 QueryStmt
 +-output_column_list=
 | +-SimpleTypes.int64#2 AS int64 [INT64]
-| +-$query.$col2#19 AS `$col2` [BOOL]
-| +-$query.$col3#20 AS `$col3` [BOOL]
-| +-$query.$col4#21 AS `$col4` [BOOL]
-| +-$query.$col5#22 AS `$col5` [BOOL]
+| +-$query.$col2#19 AS "$col2" [BOOL]
+| +-$query.$col3#20 AS "$col3" [BOOL]
+| +-$query.$col4#21 AS "$col4" [BOOL]
+| +-$query.$col5#22 AS "$col5" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[SimpleTypes.int64#2, $query.$col2#19, $query.$col3#20, $query.$col4#21, $query.$col5#22]
@@ -286,10 +286,10 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BOOL]
-| +-$query.$col2#20 AS `$col2` [BOOL]
-| +-$query.$col3#21 AS `$col3` [BOOL]
-| +-$query.$col4#22 AS `$col4` [BOOL]
+| +-$query.$col1#19 AS "$col1" [BOOL]
+| +-$query.$col2#20 AS "$col2" [BOOL]
+| +-$query.$col3#21 AS "$col3" [BOOL]
+| +-$query.$col4#22 AS "$col4" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, $col3#21, $col4#22]

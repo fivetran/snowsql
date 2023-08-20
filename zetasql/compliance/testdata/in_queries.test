@@ -123,11 +123,11 @@ ARRAY<STRUCT<
 [prepare_database]
 CREATE TABLE Test2 AS
 SELECT 1 id,
-       (SELECT AS `zetasql_test__.TestExtraPB`
+       (SELECT AS "zetasql_test__.TestExtraPB"
          1 int32_val1, ['a', 'b', 'c'] str_value) Info
 UNION ALL
 SELECT 2 id,
-       (SELECT AS `zetasql_test__.TestExtraPB`
+       (SELECT AS "zetasql_test__.TestExtraPB"
          2 int32_val1, ['d'] str_value) Info;
 --
 ARRAY<STRUCT<
@@ -150,13 +150,13 @@ ARRAY<STRUCT<
 [prepare_database]
 CREATE TABLE TestEnum AS
 SELECT cast(1 as int64) x,
-       cast(0 as `zetasql_test__.TestEnum`) as enum_col
+       cast(0 as "zetasql_test__.TestEnum") as enum_col
 UNION ALL
 SELECT cast(2 as int64) x,
-       cast(1 as `zetasql_test__.TestEnum`) as enum_col
+       cast(1 as "zetasql_test__.TestEnum") as enum_col
 UNION ALL
 SELECT cast(3 as int64) x,
-       cast(2 as `zetasql_test__.TestEnum`) as enum_col;
+       cast(2 as "zetasql_test__.TestEnum") as enum_col;
 --
 ARRAY<STRUCT<
         x INT64,
@@ -495,8 +495,8 @@ ARRAY<STRUCT<x INT64>>[{1}]
 ==
 [name=in_clause_enum_type]
 SELECT x FROM TestEnum WHERE enum_col IN (
-  CAST("TESTENUM0" AS `zetasql_test__.TestEnum`),
-  CAST("TESTENUM2" AS `zetasql_test__.TestEnum`)) ORDER BY x;
+  CAST("TESTENUM0" AS "zetasql_test__.TestEnum"),
+  CAST("TESTENUM2" AS "zetasql_test__.TestEnum")) ORDER BY x;
 --
 ARRAY<STRUCT<x INT64>>[known order:{1}, {3}]
 ==

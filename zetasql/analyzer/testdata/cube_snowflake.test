@@ -5,7 +5,7 @@ GROUP BY CUBE(value);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 | +-$groupby.value#4 AS value [STRING]
 +-query=
   +-ProjectScan
@@ -34,7 +34,7 @@ SELECT SUM(key), value, GROUPING(value) AS x
 FROM KeyValue
 GROUP BY CUBE(value, x);
 --
-ERROR: Function not found: `GROUPING` [at 1:25]
+ERROR: Function not found: "GROUPING" [at 1:25]
 SELECT SUM(key), value, GROUPING(value) AS x
                         ^
 ==
@@ -78,8 +78,8 @@ GROUP BY CUBE(key, KitchenSink.date);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
-| +-$aggregate.$agg2#5 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
+| +-$aggregate.$agg2#5 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#4, $agg2#5]

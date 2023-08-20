@@ -6,7 +6,7 @@ select cast(null as STRUCT<INT32, x STRING, BYTES>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, x STRING, BYTES>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, x STRING, BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -21,7 +21,7 @@ select cast((5, '2014-01-01') AS STRUCT<INT64, x STRING>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT64, x STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT64, x STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -36,7 +36,7 @@ select cast((5, '2014-01-01') AS STRUCT<INT32, x STRING>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, x STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, x STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -47,11 +47,11 @@ QueryStmt
 ==
 
 select cast(('2014-01-01 12:34:56.000001', "int64_key_1: 1, int64_key_2: 2")
-            AS STRUCT<TIMESTAMP, `zetasql_test__.KitchenSinkPB`>)
+            AS STRUCT<TIMESTAMP, "zetasql_test__.KitchenSinkPB">)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<TIMESTAMP, PROTO<zetasql_test__.KitchenSinkPB>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<TIMESTAMP, PROTO<zetasql_test__.KitchenSinkPB>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -68,7 +68,7 @@ select cast(("1970-01-01 01:01:06 UTC", "1970-01-01 01:01:06")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<TIMESTAMP, TIMESTAMP>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<TIMESTAMP, TIMESTAMP>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -83,7 +83,7 @@ select cast((5, '2014-01-01') AS STRUCT<STRING, INT32>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<STRING, INT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<STRING, INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -101,7 +101,7 @@ select cast((NULL, NULL) AS STRUCT<INT32, x STRING>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, x STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, x STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -117,7 +117,7 @@ select cast((NULL, (NULL, (NULL, NULL))) AS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRUCT<INT64, STRUCT<UINT32, UINT64>>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRUCT<INT64, STRUCT<UINT32, UINT64>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -131,7 +131,7 @@ select cast((null, null) as STRUCT<INT32, STRUCT<INT64, INT64>>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRUCT<INT64, INT64>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRUCT<INT64, INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -147,7 +147,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRUCT<INT64, x STRING>]
+| +-$query.$col1#19 AS "$col1" [STRUCT<INT64, x STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -167,7 +167,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRUCT<INT64, x DOUBLE>]
+| +-$query.$col1#19 AS "$col1" [STRUCT<INT64, x DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -190,7 +190,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRUCT<INT32, STRING>]
+| +-$query.$col1#19 AS "$col1" [STRUCT<INT32, STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -212,7 +212,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRUCT<INT32, INT64>]
+| +-$query.$col1#19 AS "$col1" [STRUCT<INT32, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -234,7 +234,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRUCT<INT32, DATE, DATE>]
+| +-$query.$col1#19 AS "$col1" [STRUCT<INT32, DATE, DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -265,7 +265,7 @@ select cast((-1, -1) AS STRUCT<INT32, UINT32>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, UINT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -281,7 +281,7 @@ select cast((-1, cast(-1 AS INT32)) AS STRUCT<INT32, UINT32>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, UINT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -301,7 +301,7 @@ select cast(cast((-1, -1) AS STRUCT<INT64, INT64>) AS STRUCT<INT32, UINT32>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, UINT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -318,8 +318,8 @@ select cast((timestamp '1678-01-01', "b") AS STRUCT<STRING, BYTES>),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<STRING, BYTES>]
-| +-$query.$col2#2 AS `$col2` [STRUCT<STRING, BYTES>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<STRING, BYTES>]
+| +-$query.$col2#2 AS "$col2" [STRUCT<STRING, BYTES>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -335,7 +335,7 @@ select cast(@test_param_struct AS STRUCT<INT64, DATE>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT64, DATE>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT64, DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -365,7 +365,7 @@ select ARRAY<STRUCT<INT64, DOUBLE>>[(1, 1.0),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRUCT<INT64, DOUBLE>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRUCT<INT64, DOUBLE>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -401,7 +401,7 @@ select STRUCT<INT64, INT32>(1, 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT64, INT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT64, INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -415,7 +415,7 @@ select STRUCT<a INT64, b INT32>(1, 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT64, b INT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT64, b INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -436,7 +436,7 @@ select STRUCT<INT32, DATE>(1, "2014-01-01")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, DATE>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -460,12 +460,12 @@ select STRUCT<INT32, BYTES>(1, "b")
                                ^
 ==
 
-select STRUCT<`zetasql_test__.TestEnum`, TIMESTAMP>
+select STRUCT<"zetasql_test__.TestEnum", TIMESTAMP>
     (1, "2014-01-01 12:34:56.000001")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<ENUM<zetasql_test__.TestEnum>, TIMESTAMP>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<ENUM<zetasql_test__.TestEnum>, TIMESTAMP>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -479,7 +479,7 @@ select STRUCT<INT32, STRING>(1, timestamp '1678-01-01')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -508,7 +508,7 @@ select STRUCT<INT32, FLOAT>(int32, 1.0) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRUCT<INT32, FLOAT>]
+| +-$query.$col1#19 AS "$col1" [STRUCT<INT32, FLOAT>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -533,7 +533,7 @@ select ARRAY<STRUCT<INT32, STRUCT<INT64, INT64>>>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRUCT<INT32, STRUCT<INT64, INT64>>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRUCT<INT32, STRUCT<INT64, INT64>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -571,7 +571,7 @@ select [(1, 1), (-1, -1)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRUCT<INT64, INT64>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRUCT<INT64, INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -585,7 +585,7 @@ select [(cast(1 as int32), cast(1 as int64)), (-1, -1)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRUCT<INT32, INT64>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRUCT<INT32, INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -606,7 +606,7 @@ select (1, cast(1 as int32)) = (1, 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -627,7 +627,7 @@ select (1, 1) IN ((1, cast(1 as int32)))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -656,7 +656,7 @@ ALTERNATION GROUP: struct
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [STRING]
+| +-$aggregate.$agg1#8 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -709,7 +709,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [STRING]
+| +-$aggregate.$agg1#8 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -961,7 +961,7 @@ group by (key, key) in (select as struct key, key as key1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [STRING]
+| +-$aggregate.$agg1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1113,7 +1113,7 @@ select STRUCT<INT64, INT32>(1, 2) IN (NULL, (NULL, NULL))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1135,7 +1135,7 @@ select STRUCT<>() IN (NULL)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1152,7 +1152,7 @@ select (1, 2) IN (NULL)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1169,7 +1169,7 @@ select STRUCT<INT64, INT32>(NULL, NULL) IN (STRUCT<INT64, INT64>(NULL, NULL))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1186,7 +1186,7 @@ select STRUCT<INT32, STRING>(NULL, NULL) IN (STRUCT<INT64, INT64>(NULL, NULL))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1210,7 +1210,7 @@ select (cast(NULL as INT32), cast(NULL as STRING)) IN ((cast(NULL as INT64), cas
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1227,7 +1227,7 @@ select (1, NULL) IN (NULL, (NULL, cast(NULL as STRING)))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1253,7 +1253,7 @@ select (NULL, NULL) IN ((NULL, (NULL, NULL)))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1284,7 +1284,7 @@ select (NULL, (NULL, NULL)) IN (NULL,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1325,7 +1325,7 @@ select COALESCE(NULL, STRUCT<a INT32>(NULL))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1342,7 +1342,7 @@ select COALESCE(STRUCT<INT32>(NULL), STRUCT<b INT64>(NULL))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1359,7 +1359,7 @@ select COALESCE(STRUCT<a INT32>(NULL), STRUCT<b INT32>(NULL))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT32>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1376,7 +1376,7 @@ select COALESCE(cast(NULL AS STRUCT<a INT32, b INT64>), STRUCT<INT64, a INT32>(3
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT64, b INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT64, b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1393,7 +1393,7 @@ select COALESCE(cast((1, 2) AS STRUCT<a INT32, b INT64>), STRUCT<INT64, a INT32>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT64, b INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT64, b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1410,7 +1410,7 @@ select COALESCE(STRUCT<a INT32, b INT64>(1, 2), STRUCT<INT64, a INT32>(3, 4))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT64, b INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT64, b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1431,7 +1431,7 @@ select COALESCE(STRUCT<a INT32, STRUCT<INT32, b DOUBLE>>(1, NULL),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT32, STRUCT<INT32, b DOUBLE>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT32, STRUCT<INT32, b DOUBLE>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1451,7 +1451,7 @@ select COALESCE(NULL,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT32, STRUCT<INT32, b DOUBLE>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT32, STRUCT<INT32, b DOUBLE>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1478,7 +1478,7 @@ select COALESCE(NULL,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRUCT<INT32, DOUBLE>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRUCT<INT32, DOUBLE>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1502,7 +1502,7 @@ select COALESCE(NULL,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRUCT<INT32, STRUCT<INT32, INT32>>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRUCT<INT32, STRUCT<INT32, INT32>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1525,7 +1525,7 @@ select COALESCE(STRUCT(NULL as x, NULL as y),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<x INT32, y STRUCT<INT32, DOUBLE>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<x INT32, y STRUCT<INT32, DOUBLE>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1555,7 +1555,7 @@ select coalesce(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<x INT64, y INT64>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<x INT64, y INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1615,7 +1615,7 @@ select as struct 3 z, 4 z
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$struct#7 AS `$struct` [STRUCT<x INT64, y INT64>]
+| +-$union_all.$struct#7 AS "$struct" [STRUCT<x INT64, y INT64>]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan
@@ -1680,7 +1680,7 @@ ALTERNATION GROUP: array<int64>,int64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<ARRAY<STRING>, ARRAY<INT64>, STRING, INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<ARRAY<STRING>, ARRAY<INT64>, STRING, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1693,7 +1693,7 @@ ALTERNATION GROUP: array<int64>,string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<ARRAY<STRING>, ARRAY<INT64>, STRING, STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<ARRAY<STRING>, ARRAY<INT64>, STRING, STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1706,7 +1706,7 @@ ALTERNATION GROUP: array<string>,int64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<ARRAY<STRING>, ARRAY<STRING>, STRING, INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<ARRAY<STRING>, ARRAY<STRING>, STRING, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1719,7 +1719,7 @@ ALTERNATION GROUP: array<string>,string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<ARRAY<STRING>, ARRAY<STRING>, STRING, STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<ARRAY<STRING>, ARRAY<STRING>, STRING, STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

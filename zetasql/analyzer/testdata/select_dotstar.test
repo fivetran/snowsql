@@ -200,11 +200,11 @@ QueryStmt
 +-output_column_list=
 | +-t.c1#7 AS c1 [STRUCT<INT64, INT64>]
 | +-t.c2#8 AS c2 [STRUCT<a INT64, b INT64>]
-| +-$query.$col2#9 AS `$col2` [STRING]
+| +-$query.$col2#9 AS "$col2" [STRING]
 | +-t.c1#7 AS c1 [STRUCT<INT64, INT64>]
-| +-$query.$field1#10 AS `$field1` [INT64]
-| +-$query.$field2#11 AS `$field2` [INT64]
-| +-$query.$col5#12 AS `$col5` [STRING]
+| +-$query.$field1#10 AS "$field1" [INT64]
+| +-$query.$field2#11 AS "$field2" [INT64]
+| +-$query.$col5#12 AS "$col5" [STRING]
 | +-t.c2#8 AS c2 [STRUCT<a INT64, b INT64>]
 | +-$query.a#13 AS a [INT64]
 | +-$query.b#14 AS b [INT64]
@@ -299,9 +299,9 @@ QueryStmt
 | +-$query.a#11 AS a [INT64]
 | +-$query.b#12 AS b [INT64]
 | +-$query.c#13 AS c [INT64]
-| +-$query.$field1#14 AS `$field1` [INT64]
-| +-$query.$field2#15 AS `$field2` [INT64]
-| +-$query.$field3#16 AS `$field3` [INT64]
+| +-$query.$field1#14 AS "$field1" [INT64]
+| +-$query.$field2#15 AS "$field2" [INT64]
+| +-$query.$field3#16 AS "$field3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#11, b#12, c#13, $field1#14, $field2#15, $field3#16]
@@ -400,13 +400,13 @@ QueryStmt
 
 select (select AS STRUCT 1 a, 2 b).*,
        '---',
-       (select as `zetasql_test__.TestExtraPB` 55 int32_val1).*;
+       (select as "zetasql_test__.TestExtraPB" 55 int32_val1).*;
 --
 QueryStmt
 +-output_column_list=
 | +-$query.a#8 AS a [INT64]
 | +-$query.b#9 AS b [INT64]
-| +-$query.$col2#10 AS `$col2` [STRING]
+| +-$query.$col2#10 AS "$col2" [STRING]
 | +-$query.int32_val1#11 AS int32_val1 [INT32]
 | +-$query.int32_val2#12 AS int32_val2 [INT32]
 | +-$query.str_value#13 AS str_value [ARRAY<STRING>]
@@ -504,7 +504,7 @@ QueryStmt
 +-output_column_list=
 | +-t.a#1 AS a [INT64]
 | +-t.b#2 AS b [INT64]
-| +-$query.$col2#6 AS `$col2` [STRUCT<a INT64, b INT64>]
+| +-$query.$col2#6 AS "$col2" [STRUCT<a INT64, b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[t.a#1, t.b#2, $query.$col2#6]
@@ -652,7 +652,7 @@ select (select AS STRUCT t.*, 1) from KeyValue t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<Key INT64, Value STRING, INT64>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<Key INT64, Value STRING, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -696,7 +696,7 @@ select (select AS STRUCT t.TestProto.*) from ComplexTypes t;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#12 AS `$col1` [STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<STRING>>]
+| +-$query.$col1#12 AS "$col1" [STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#12]
@@ -756,11 +756,11 @@ QueryStmt
 
 # Creates a proto from proto field members expanded as columns through
 # dot star.
-select (select as `zetasql_test__.TestExtraPB` TestProto.* from ComplexTypes);
+select (select as "zetasql_test__.TestExtraPB" TestProto.* from ComplexTypes);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$query.$col1#11 AS "$col1" [PROTO<zetasql_test__.TestExtraPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -813,12 +813,12 @@ QueryStmt
 
 # Converts proto field members into a struct and then again creates a proto out
 # of struct field members expanded through dot star.
-select as `zetasql_test__.TestExtraPB`
+select as "zetasql_test__.TestExtraPB"
           (select as struct TestProto.* from ComplexTypes).*;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#15 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#15 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -1963,7 +1963,7 @@ FROM my_table AS t
 QueryStmt
 +-output_column_list=
 | +-$query.t#11 AS t [STRUCT<key INT64, value STRING>]
-| +-$analytic.$analytic1#12 AS `$col2` [INT64]
+| +-$analytic.$analytic1#12 AS "$col2" [INT64]
 | +-$query.key#13 AS key [INT64]
 | +-$query.value#14 AS value [STRING]
 +-query=

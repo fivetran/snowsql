@@ -5,7 +5,7 @@ select WITH(a AS 2, b AS 3 * 4, a + b)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -33,7 +33,7 @@ SELECT
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -93,7 +93,7 @@ select WITH(value AS 2, key + value + LENGTH(KeyValue.value)) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -128,7 +128,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -187,7 +187,7 @@ SELECT WITH(a AS 1, b AS a + 2, c AS b + 3, d AS a * 2, a + c + d)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -225,7 +225,7 @@ SELECT
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -316,7 +316,7 @@ SELECT WITH(a AS "abc", b AS WITH(a AS "def", b AS "ghi", CONCAT(a, b)), CONCAT(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -350,7 +350,7 @@ SELECT
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -453,7 +453,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -504,7 +504,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -617,7 +617,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [DOUBLE]
+| +-$query.$col1#10 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -671,7 +671,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [DOUBLE]
+| +-$query.$col1#10 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -769,7 +769,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -819,7 +819,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -914,7 +914,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [DOUBLE]
+| +-$query.$col1#8 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -967,7 +967,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [DOUBLE]
+| +-$query.$col1#8 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]

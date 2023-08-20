@@ -4,7 +4,7 @@ SELECT udf_templated_return_one();
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -21,7 +21,7 @@ Literal(type=INT64, value=1)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -37,7 +37,7 @@ ALTERNATION GROUP: [1, 2, 3]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -79,7 +79,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -123,7 +123,7 @@ ALTERNATION GROUP: ["a", "b", "c"]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -165,7 +165,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -209,7 +209,7 @@ ALTERNATION GROUP: []
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -251,7 +251,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -295,7 +295,7 @@ ALTERNATION GROUP: CAST(NULL AS ARRAY<INT64>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -337,7 +337,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -382,7 +382,7 @@ SELECT TimesTwo(rand());
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -403,7 +403,7 @@ FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -426,7 +426,7 @@ SELECT SUM_DOUBLE_ARRAY(GENERATE_ARRAY(1, 2, 3));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -483,7 +483,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -581,7 +581,7 @@ select templated_scalar_definer_rights(6)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -614,7 +614,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

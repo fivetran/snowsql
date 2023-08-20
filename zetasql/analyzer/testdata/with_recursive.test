@@ -9,8 +9,8 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1.$unnest2#7 AS `$unnest2` [INT64]
-| +-t1.$unnest1#8 AS `$unnest1` [INT64]
+| +-t1.$unnest2#7 AS "$unnest2" [INT64]
+| +-t1.$unnest1#8 AS "$unnest1" [INT64]
 +-query=
   +-WithScan
     +-column_list=t1.[$unnest2#7, $unnest1#8]
@@ -194,7 +194,7 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1.$unnest1#3 AS `$unnest1` [INT64]
+| +-t1.$unnest1#3 AS "$unnest1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1.$unnest1#3]
@@ -234,7 +234,7 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1.$unnest1#3 AS `$unnest1` [INT64]
+| +-t1.$unnest1#3 AS "$unnest1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1.$unnest1#3]
@@ -286,7 +286,7 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1_2.$col1#4 AS `$col1` [INT64]
+| +-t1_2.$col1#4 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1_2.$col1#4]
@@ -359,8 +359,8 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1_3.$col1#7 AS `$col1` [INT64]
-| +-t1_3.$col1#8 AS `$col1` [INT64]
+| +-t1_3.$col1#7 AS "$col1" [INT64]
+| +-t1_3.$col1#8 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=t1_3.[$col1#7, $col1#8]
@@ -421,7 +421,7 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1.$col1#4 AS `$col1` [INT64]
+| +-t1.$col1#4 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1.$col1#4]
@@ -470,7 +470,7 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1_2.$col1#6 AS `$col1` [INT64]
+| +-t1_2.$col1#6 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1_2.$col1#6]
@@ -541,7 +541,7 @@ SELECT * FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1_4.$col1#6 AS `$col1` [INT64]
+| +-t1_4.$col1#6 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t1_4.$col1#6]
@@ -655,8 +655,8 @@ SELECT * FROM T1;
 --
 QueryStmt
 +-output_column_list=
-| +-t1.$unnest2#7 AS `$unnest2` [INT64]
-| +-t1.$unnest1#8 AS `$unnest1` [INT64]
+| +-t1.$unnest2#7 AS "$unnest2" [INT64]
+| +-t1.$unnest1#8 AS "$unnest1" [INT64]
 +-query=
   +-WithScan
     +-column_list=t1.[$unnest2#7, $unnest1#8]
@@ -737,8 +737,8 @@ WITH RECURSIVE
 --
 QueryStmt
 +-output_column_list=
-| +-t1_3.$col1#7 AS `$col1` [INT64]
-| +-t1_3.$col1#8 AS `$col1` [INT64]
+| +-t1_3.$col1#7 AS "$col1" [INT64]
+| +-t1_3.$col1#8 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=t1_3.[$col1#7, $col1#8]
@@ -801,8 +801,8 @@ SELECT * FROM A;
 --
 QueryStmt
 +-output_column_list=
-| +-A.$col1#6 AS `$col1` [INT64]
-| +-A.$col1#7 AS `$col1` [INT64]
+| +-A.$col1#6 AS "$col1" [INT64]
+| +-A.$col1#7 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=A.[$col1#6, $col1#7]
@@ -860,8 +860,8 @@ SELECT * FROM A;
 --
 QueryStmt
 +-output_column_list=
-| +-A.$col1#6 AS `$col1` [INT64]
-| +-A.$col1#7 AS `$col1` [INT64]
+| +-A.$col1#6 AS "$col1" [INT64]
+| +-A.$col1#7 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=A.[$col1#6, $col1#7]
@@ -922,12 +922,12 @@ SELECT * FROM A;
 --
 QueryStmt
 +-output_column_list=
-| +-A.$col1#16 AS `$col1` [INT64]
-| +-A.$col1#17 AS `$col1` [INT64]
-| +-A.$col1#18 AS `$col1` [INT64]
-| +-A.$col1#19 AS `$col1` [INT64]
-| +-A.$col1#20 AS `$col1` [INT64]
-| +-A.$col1#21 AS `$col1` [INT64]
+| +-A.$col1#16 AS "$col1" [INT64]
+| +-A.$col1#17 AS "$col1" [INT64]
+| +-A.$col1#18 AS "$col1" [INT64]
+| +-A.$col1#19 AS "$col1" [INT64]
+| +-A.$col1#20 AS "$col1" [INT64]
+| +-A.$col1#21 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=A.[$col1#16, $col1#17, $col1#18, $col1#19, $col1#20, $col1#21]
@@ -1081,7 +1081,7 @@ ALTERNATION GROUP: ALL
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#4 AS `$col1` [INT64]
+| +-t.$col1#4 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#4]
@@ -1121,7 +1121,7 @@ ALTERNATION GROUP: DISTINCT
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#4 AS `$col1` [INT64]
+| +-t.$col1#4 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#4]
@@ -1166,7 +1166,7 @@ ALTERNATION GROUP: ALL
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#4 AS `$col1` [INT64]
+| +-t.$col1#4 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#4]
@@ -1206,7 +1206,7 @@ ALTERNATION GROUP: DISTINCT
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#4 AS `$col1` [INT64]
+| +-t.$col1#4 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#4]
@@ -1262,7 +1262,7 @@ SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT * FROM t
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#7 AS `$col1` [INT64]
+| +-t.$col1#7 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#7]
@@ -1332,7 +1332,7 @@ SELECT 1 UNION ALL SELECT 2.5 UNION ALL SELECT CAST(3.14 AS NUMERIC)
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#9 AS `$col1` [NUMERIC]
+| +-t.$col1#9 AS "$col1" [NUMERIC]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#9]
@@ -1412,7 +1412,7 @@ SELECT 2.5
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#6 AS `$col1` [DOUBLE]
+| +-t.$col1#6 AS "$col1" [DOUBLE]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#6]
@@ -1510,7 +1510,7 @@ ALTERNATION GROUP: ALL
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#4 AS `$col1` [STRUCT<STRING, STRING>]
+| +-t.$col1#4 AS "$col1" [STRUCT<STRING, STRING>]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#4]
@@ -5254,7 +5254,7 @@ ERROR: A subquery containing a recursive reference may not use INTERSECT, UNION,
                                       ^
 ==
 
-# Simple query with shape `SELECT (WITH RECURSIVE ...) FROM ...`
+# Simple query with shape "SELECT (WITH RECURSIVE ...) FROM ..."
 SELECT
   (
     WITH RECURSIVE
@@ -5338,7 +5338,7 @@ QueryStmt
           +-SingleRowScan
 ==
 
-# Simple query with shape `SELECT ... FROM (WITH RECURSIVE ...)`
+# Simple query with shape "SELECT ... FROM (WITH RECURSIVE ...)"
 SELECT
   n_arr
 FROM
@@ -5409,7 +5409,7 @@ QueryStmt
         +-recursive=TRUE
 ==
 
-# Simple query with shape `WITH t as (WITH RECURSIVE ...) SELECT ... FROM ...`
+# Simple query with shape "WITH t as (WITH RECURSIVE ...) SELECT ... FROM ..."
 WITH
   t AS (
     WITH RECURSIVE

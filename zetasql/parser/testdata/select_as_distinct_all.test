@@ -9,10 +9,10 @@ select
     y.all,
     # 'all' in the middle of path expression
     z.all.good,
-    # quoted identifier `all`
-    `all`,
+    # quoted identifier "all"
+    "all",
     # Only prefix needs to be quoted
-    `all`.all,
+    "all".all,
     # all (no pun) magic suffixes together
     x.123.all.y.2daysago.all
 from x.all;
@@ -33,12 +33,12 @@ QueryStatement [0-366] [select   #...from x.all]
             Identifier(z) [179-180] [z]
             Identifier("all") [181-184] [all]
             Identifier(good) [185-189] [good]
-        SelectColumn [225-230] [`all`]
-          PathExpression [225-230] [`all`]
-            Identifier("all") [225-230] [`all`]
-        SelectColumn [273-282] [`all`.all]
-          PathExpression [273-282] [`all`.all]
-            Identifier("all") [273-278] [`all`]
+        SelectColumn [225-230] ["all"]
+          PathExpression [225-230] ["all"]
+            Identifier("all") [225-230] ["all"]
+        SelectColumn [273-282] ["all".all]
+          PathExpression [273-282] ["all".all]
+            Identifier("all") [273-278] ["all"]
             Identifier("all") [279-282] [all]
         SelectColumn [331-355] [x.123.all.y.2daysago.all]
           PathExpression [331-355] [x.123.all.y.2daysago.all]
@@ -56,13 +56,13 @@ QueryStatement [0-366] [select   #...from x.all]
 --
 SELECT
   x,
-  y.`all`,
-  z.`all`.good,
-  `all`,
-  `all`.`all`,
-  x.`123`.`all`.y.`2daysago`.`all`
+  y."all",
+  z."all".good,
+  "all",
+  "all"."all",
+  x."123"."all".y."2daysago"."all"
 FROM
-  x.`all`
+  x."all"
 ==
 
 select all from t;
@@ -526,14 +526,14 @@ SELECT AS VALUE
 # identifier and not as a keyword and should be unparsed with backquotes so
 # that it does not get treated as a keyword here.
 [no_test_unparse][no_test_get_parse_tokens]
-select as `value` 5
+select as "value" 5
 --
-QueryStatement [0-19] [select as `value` 5]
-  Query [0-19] [select as `value` 5]
-    Select [0-19] [select as `value` 5]
-      SelectAs [7-17] [as `value`]
-        PathExpression [10-17] [`value`]
-          Identifier(value) [10-17] [`value`]
+QueryStatement [0-19] [select as "value" 5]
+  Query [0-19] [select as "value" 5]
+    Select [0-19] [select as "value" 5]
+      SelectAs [7-17] [as "value"]
+        PathExpression [10-17] ["value"]
+          Identifier(value) [10-17] ["value"]
       SelectList [18-19] [5]
         SelectColumn [18-19] [5]
           IntLiteral(5) [18-19] [5]

@@ -89,7 +89,7 @@ ALTER TABLE foo-123.bar DROP CONSTRAINT baz
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-123.bar` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-123.bar" [at 1:13]
 ALTER TABLE foo-123.bar DROP CONSTRAINT baz
             ^
 --
@@ -103,7 +103,7 @@ AlterTableStatement [0-43]
     DropConstraintAction [24-43]
       Identifier(baz) [40-43]
 --
-ALTER TABLE `foo-123`.bar DROP CONSTRAINT baz
+ALTER TABLE "foo-123".bar DROP CONSTRAINT baz
 ==
 
 ALTER TABLE t DROP PRIMARY KEY {{|IF EXISTS}}

@@ -4,10 +4,10 @@ from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
-| +-$query.$col2#10 AS `$col2` [INT64]
-| +-$query.$col3#11 AS `$col3` [INT64]
-| +-$query.$col4#12 AS `$col4` [STRUCT<key INT64, value STRING>]
+| +-$query.$col1#9 AS "$col1" [INT64]
+| +-$query.$col2#10 AS "$col2" [INT64]
+| +-$query.$col3#11 AS "$col3" [INT64]
+| +-$query.$col4#12 AS "$col4" [STRUCT<key INT64, value STRING>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#9, $col2#10, $col3#11, $col4#12]
@@ -88,7 +88,7 @@ from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [STRUCT<Key INT64, Value STRING>]
+| +-$query.$col1#6 AS "$col1" [STRUCT<Key INT64, Value STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -127,7 +127,7 @@ from KeyValue kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRUCT<Key INT64, Value STRING>]
+| +-$query.$col1#5 AS "$col1" [STRUCT<Key INT64, Value STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -163,7 +163,7 @@ from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<key INT64, value STRING>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<key INT64, value STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -219,7 +219,7 @@ from KeyValue kv1
 QueryStmt
 +-output_column_list=
 | +-KeyValue.Value#2 AS value [STRING]
-| +-$query.$col2#11 AS `$col2` [STRUCT<value STRING, STRUCT<value STRING, key INT64, key INT64>>]
+| +-$query.$col2#11 AS "$col2" [STRUCT<value STRING, STRUCT<value STRING, key INT64, key INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Value#2, $query.$col2#11]
@@ -285,8 +285,8 @@ where (select AS STRUCT key,value).key = 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [BOOL]
-| +-$query.$col2#10 AS `$col2` [ARRAY<STRING>]
+| +-$query.$col1#9 AS "$col1" [BOOL]
+| +-$query.$col2#10 AS "$col2" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#9, $col2#10]
@@ -378,7 +378,7 @@ having SUM((select key))>0
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$col1#4 AS `$col1` [INT64]
+| +-$groupby.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$col1#4]
@@ -524,7 +524,7 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col2#6 AS `$col2` [ARRAY<STRUCT<Key INT64, Value2 STRING>>]
+| +-$query.$col2#6 AS "$col2" [ARRAY<STRUCT<Key INT64, Value2 STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $query.$col2#6]
@@ -624,7 +624,7 @@ from (select 1 aaa, 2 bbb)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -713,7 +713,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -751,7 +751,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<TestEnum ENUM<zetasql_test__.TestEnum>, dt DATE>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<TestEnum ENUM<zetasql_test__.TestEnum>, dt DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -799,7 +799,7 @@ from (select key, array_agg(value) values from KeyValue group by 1) subq
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -847,7 +847,7 @@ group by value
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [STRING]
+| +-$query.$col1#6 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -883,7 +883,7 @@ from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -922,7 +922,7 @@ from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -962,7 +962,7 @@ where (select {{as value|}} {{T.|}}x as y from KeyValue GROUP BY {{T.|}}x) = 1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -1012,7 +1012,7 @@ where (select {{T.|}}x as y from TestStructValueTable GROUP BY {{T.|}}x) = 1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#6 AS `$col1` [INT64]
+| +-$aggregate.$agg1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#6]
@@ -1061,7 +1061,7 @@ where (select count(*) + T.a from KeyValue) = 1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -1114,7 +1114,7 @@ from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1154,7 +1154,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<DATE>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1199,7 +1199,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [ARRAY<DATE>]
+| +-$query.$col1#9 AS "$col1" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -1282,7 +1282,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -1428,7 +1428,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [BOOL]
+| +-$query.$col1#6 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1477,7 +1477,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [BOOL]
+| +-$query.$col1#7 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1532,7 +1532,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [BOOL]
+| +-$query.$col1#8 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1589,7 +1589,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [BOOL]
+| +-$query.$col1#9 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -1650,7 +1650,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [BOOL]
+| +-$query.$col1#8 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1724,7 +1724,7 @@ where (select ex from KeyValue GROUP BY ex order by ex) = 'a'
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1772,7 +1772,7 @@ from (select 4 as b)
 QueryStmt
 +-output_column_list=
 | +-$query.a#3 AS a [INT64]
-| +-$query.$col2#4 AS `$col2` [INT64]
+| +-$query.$col2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#3, $col2#4]
@@ -1830,7 +1830,7 @@ group by b
 QueryStmt
 +-output_column_list=
 | +-$query.a#4 AS a [INT64]
-| +-$query.$col2#6 AS `$col2` [INT64]
+| +-$query.$col2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#4, $col2#6]
@@ -1870,7 +1870,7 @@ from (select 4 as b)
 QueryStmt
 +-output_column_list=
 | +-$query.a#8 AS a [INT64]
-| +-$query.$col2#9 AS `$col2` [STRUCT<INT64, INT64>]
+| +-$query.$col2#9 AS "$col2" [STRUCT<INT64, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#8, $col2#9]
@@ -1969,7 +1969,7 @@ GROUP BY m;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#13 AS `$col1` [INT64]
+| +-$query.$col1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#13]
@@ -2024,7 +2024,7 @@ FROM Int32ValueTable m;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<key INT64, INT64>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<key INT64, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -2103,7 +2103,7 @@ from KeyValue t1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2152,7 +2152,7 @@ from KeyValue t1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<value STRING, INT64, key INT64, value STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<value STRING, INT64, key INT64, value STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2216,7 +2216,7 @@ from KeyValue t1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<x STRING, STRING, INT64, key INT64, value STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<x STRING, STRING, INT64, key INT64, value STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2295,7 +2295,7 @@ FROM (
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<x STRUCT<z1 INT32, z2 STRING>, z2 STRING>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<x STRUCT<z1 INT32, z2 STRING>, z2 STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2352,7 +2352,7 @@ FROM ComplexTypes ct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [STRUCT<nested_value PROTO<zetasql_test__.KitchenSinkPB.Nested>, nested_int64 INT64>]
+| +-$query.$col1#11 AS "$col1" [STRUCT<nested_value PROTO<zetasql_test__.KitchenSinkPB.Nested>, nested_int64 INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -2416,7 +2416,7 @@ ALTERNATION GROUP: .nested_int64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -2457,7 +2457,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
+| +-$query.$col1#9 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -2498,7 +2498,7 @@ FROM ComplexTypes ct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -2546,7 +2546,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
+| +-$query.$col1#9 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -2582,7 +2582,7 @@ ALTERNATION GROUP: .nested_int64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]

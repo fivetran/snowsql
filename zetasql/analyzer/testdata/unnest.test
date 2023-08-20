@@ -2,7 +2,7 @@ select 1 from unnest( ARRAY(select 2) )
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -29,7 +29,7 @@ from UNNEST([1, 2]) a, UNNEST(ARRAY[1, 2]) b, UNNEST(ARRAY<int32>[1, 2]) c
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -62,10 +62,10 @@ QueryStmt
 | +-$array.arr#4 AS arr [STRUCT<x INT64, y INT64>]
 | +-$query.x#6 AS x [INT64]
 | +-$array_offset.pos#5 AS pos [INT64]
-| +-$query.$col4#7 AS `$col4` [STRING]
+| +-$query.$col4#7 AS "$col4" [STRING]
 | +-$query.x#8 AS x [INT64]
 | +-$query.y#9 AS y [INT64]
-| +-$query.$col6#10 AS `$col6` [STRING]
+| +-$query.$col6#10 AS "$col6" [STRING]
 | +-$query.x#11 AS x [INT64]
 | +-$query.y#12 AS y [INT64]
 | +-$array_offset.pos#5 AS pos [INT64]
@@ -147,7 +147,7 @@ select * from UNNEST([])
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#1]
@@ -163,7 +163,7 @@ select * from UNNEST([1, 2]) with offset
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
 | +-$array_offset.offset_idx#2 AS offset_idx [INT64]
 +-query=
   +-ProjectScan
@@ -182,7 +182,7 @@ select count(*) from UNNEST(ARRAY<int64>[cast(NULL as uint32)])
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -202,7 +202,7 @@ select * from unnest(@test_param_array)
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT32]
+| +-$array.$unnest1#1 AS "$unnest1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#1]
@@ -357,8 +357,8 @@ from (select ARRAY(select 1) arr)
 QueryStmt
 +-output_column_list=
 | +-$subquery1.arr#2 AS arr [ARRAY<INT64>]
-| +-$query.$col2#6 AS `$col2` [INT64]
-| +-$query.$col3#7 AS `$col3` [ARRAY<INT64>]
+| +-$query.$col2#6 AS "$col2" [INT64]
+| +-$query.$col3#7 AS "$col3" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$subquery1.arr#2, $query.$col2#6, $query.$col3#7]
@@ -478,7 +478,7 @@ QueryStmt
 | +-$query.nested_repeated_int64#7 AS nested_repeated_int64 [ARRAY<INT64>]
 | +-$query.nested_repeated_int32#8 AS nested_repeated_int32 [ARRAY<INT32>]
 | +-$query.value#9 AS value [ARRAY<INT32>]
-| +-$array.$unnest1#5 AS `$unnest1` [INT64]
+| +-$array.$unnest1#5 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $query.nested_int64#6, $query.nested_repeated_int64#7, $query.nested_repeated_int32#8, $query.value#9, $array.$unnest1#5]
@@ -568,7 +568,7 @@ QueryStmt
 | +-TestTable.key#1 AS key [INT32]
 | +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 | +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$array.$unnest1#5 AS `$unnest1` [INT32]
+| +-$array.$unnest1#5 AS "$unnest1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.$unnest1#5]
@@ -613,7 +613,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -730,7 +730,7 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$array.$unnest1#3 AS `$unnest1` [INT64]
+| +-$array.$unnest1#3 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $array.$unnest1#3]
@@ -766,7 +766,7 @@ from TestTable T;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1014,27 +1014,27 @@ FROM UNNEST([1,2], mode => {{"STRICT"|"TRUNCATE"|"PAD"}});
 --
 ALTERNATION GROUP: "STRICT"
 --
-ERROR: The named argument `mode` used in UNNEST is not implemented [at 2:20]
+ERROR: The named argument "mode" used in UNNEST is not implemented [at 2:20]
 FROM UNNEST([1,2], mode => "STRICT");
                    ^
 --
 ALTERNATION GROUP: "TRUNCATE"
 --
-ERROR: The named argument `mode` used in UNNEST is not implemented [at 2:20]
+ERROR: The named argument "mode" used in UNNEST is not implemented [at 2:20]
 FROM UNNEST([1,2], mode => "TRUNCATE");
                    ^
 --
 ALTERNATION GROUP: "PAD"
 --
-ERROR: The named argument `mode` used in UNNEST is not implemented [at 2:20]
+ERROR: The named argument "mode" used in UNNEST is not implemented [at 2:20]
 FROM UNNEST([1,2], mode => "PAD");
                    ^
 ==
 
-# Named arguments other than `mode` are not supported.
+# Named arguments other than "mode" are not supported.
 SELECT *
 FROM UNNEST([1, 2], unsupported_named_argument => "PAD");
 --
-ERROR: Unsupported named argument `unsupported_named_argument` in UNNEST [at 2:21]
+ERROR: Unsupported named argument "unsupported_named_argument" in UNNEST [at 2:21]
 FROM UNNEST([1, 2], unsupported_named_argument => "PAD");
                     ^

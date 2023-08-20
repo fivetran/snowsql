@@ -25,8 +25,8 @@ from SimpleTypesWithAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
-| +-$aggregate.$agg2#14 AS `$col2` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
+| +-$aggregate.$agg2#14 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -53,7 +53,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -70,7 +70,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -105,7 +105,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -123,7 +123,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -160,7 +160,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -178,7 +178,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -215,7 +215,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -234,7 +234,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -272,7 +272,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#13 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -290,7 +290,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#13 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -332,9 +332,9 @@ group by int32;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
-| +-$aggregate.$agg3#15 AS `$col4` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
+| +-$aggregate.$agg3#15 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#16, $aggregate.$agg1#13, $aggregate.$agg2#14, $aggregate.$agg3#15]
@@ -362,9 +362,9 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
-| +-$aggregate.$agg3#15 AS `$col4` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
+| +-$aggregate.$agg3#15 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#16, $aggregate.$agg1#13, $aggregate.$agg2#14, $aggregate.$agg3#15]
@@ -418,7 +418,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -439,7 +439,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -505,7 +505,7 @@ ALTERNATION GROUP: delta
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -527,7 +527,7 @@ ALTERNATION GROUP: epsilon
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -549,7 +549,7 @@ ALTERNATION GROUP: max_groups_contributed
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -581,7 +581,7 @@ ALTERNATION GROUP: delta
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -601,7 +601,7 @@ ALTERNATION GROUP: epsilon
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -638,7 +638,7 @@ ALTERNATION GROUP: delta
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -662,7 +662,7 @@ ALTERNATION GROUP: epsilon
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -686,7 +686,7 @@ ALTERNATION GROUP: max_groups_contributed
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -734,7 +734,7 @@ from SimpleTypes;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-100
@@ -767,7 +767,7 @@ from ProtoAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-110
@@ -798,7 +798,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -816,7 +816,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -914,7 +914,7 @@ group by string;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.string#14 AS string [STRING]
 +-query=
   +-ProjectScan
@@ -935,7 +935,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.string#14 AS string [STRING]
 +-query=
   +-ProjectScan
@@ -1031,7 +1031,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#14 AS `$col1` [INT64]
+| +-$query.$col1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#14]
@@ -1054,7 +1054,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#14 AS `$col1` [INT64]
+| +-$query.$col1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#14]
@@ -1098,7 +1098,7 @@ group by int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -1124,7 +1124,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -1174,7 +1174,7 @@ ALTERNATION GROUP: a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1199,7 +1199,7 @@ ALTERNATION GROUP: <empty>
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1229,7 +1229,7 @@ from (select int64 from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1263,7 +1263,7 @@ from (select b.int64 from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1294,7 +1294,7 @@ from (select int64, uid from SimpleTypesWithAnonymizationUid);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1315,7 +1315,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1368,7 +1368,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#15]
@@ -1395,7 +1395,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#15]
@@ -1443,7 +1443,7 @@ from (SELECT count(*) from SimpleTypesWithAnonymizationUid a);
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-145
@@ -1490,7 +1490,7 @@ ALTERNATION GROUP:  a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-165
@@ -1532,7 +1532,7 @@ ALTERNATION GROUP: <empty>
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-163
@@ -1586,7 +1586,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#16 AS `$col1` [INT64]
+| +-$aggregate.$agg1#16 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#16]
@@ -1624,7 +1624,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#16 AS `$col1` [INT64]
+| +-$aggregate.$agg1#16 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#16]
@@ -1688,7 +1688,7 @@ ALTERNATION GROUP:  a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-177
@@ -1733,7 +1733,7 @@ ALTERNATION GROUP: <empty>
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-175
@@ -1788,7 +1788,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#35 AS `$col1` [INT64]
+| +-$aggregate.$agg1#35 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#35]
@@ -1855,7 +1855,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#35 AS `$col1` [INT64]
+| +-$aggregate.$agg1#35 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#35]
@@ -1943,7 +1943,7 @@ cross join SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#32 AS `$col1` [INT64]
+| +-$aggregate.$agg1#32 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#32]
@@ -1974,7 +1974,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#32 AS `$col1` [INT64]
+| +-$aggregate.$agg1#32 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#32]
@@ -2035,8 +2035,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
-| +-$aggregate.$agg2#14 AS `$col2` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
+| +-$aggregate.$agg2#14 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -2057,8 +2057,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
-| +-$aggregate.$agg2#14 AS `$col2` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
+| +-$aggregate.$agg2#14 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -2110,7 +2110,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#14 AS `$struct` [STRUCT<INT64>]
+| +-$make_struct.$struct#14 AS "$struct" [STRUCT<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2138,7 +2138,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#14 AS `$struct` [STRUCT<INT64>]
+| +-$make_struct.$struct#14 AS "$struct" [STRUCT<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2249,7 +2249,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -2270,7 +2270,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -2312,7 +2312,7 @@ group by int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -2336,7 +2336,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -2381,7 +2381,7 @@ group by a;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2406,7 +2406,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2451,7 +2451,7 @@ from ArrayWithAnonymizationUid t inner join unnest(t.int64_array) a on true;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2476,7 +2476,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2524,7 +2524,7 @@ from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-166
@@ -2576,7 +2576,7 @@ tablesample reservoir (1 rows);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-151
@@ -2605,7 +2605,7 @@ tablesample reservoir (@_p1_INT64 rows);
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-151
@@ -2652,7 +2652,7 @@ tablesample system (cast(@test_param_uint64 as int64) rows) repeatable(10);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-195
@@ -2685,7 +2685,7 @@ tablesample system (cast(@test_param_uint64 as int64) rows) repeatable(@_p1_INT6
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-195
@@ -2736,7 +2736,7 @@ tablesample some_random (1 percent) repeatable(@test_param_int32);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-186
@@ -2768,7 +2768,7 @@ tablesample some_random (@_p1_INT64 percent) repeatable(@test_param_int32);
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-186
@@ -2818,7 +2818,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-224
@@ -2861,7 +2861,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-224
@@ -2922,7 +2922,7 @@ group by weight;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 | +-$groupby.weight#15 AS weight [DOUBLE]
 +-query=
   +-ProjectScan
@@ -2958,7 +2958,7 @@ group by weight;
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 | +-$groupby.weight#15 AS weight [DOUBLE]
 +-query=
   +-ProjectScan
@@ -3011,7 +3011,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -3029,7 +3029,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -3068,8 +3068,8 @@ group by int64;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64#15 AS int64 [INT64]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64#15, $aggregate.$agg1#13, $aggregate.$agg2#14]
@@ -3093,8 +3093,8 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64#15 AS int64 [INT64]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64#15, $aggregate.$agg1#13, $aggregate.$agg2#14]
@@ -3870,7 +3870,7 @@ FROM UNNEST(ARRAY(SELECT WITH DIFFERENTIAL_PRIVACY count(*) as count
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#14 AS `$unnest1` [INT64]
+| +-$array.$unnest1#14 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#14]
@@ -3898,7 +3898,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#14 AS `$unnest1` [INT64]
+| +-$array.$unnest1#14 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#14]
@@ -4122,7 +4122,7 @@ FROM KitchenSinkWithUidValueTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4139,7 +4139,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4189,7 +4189,7 @@ GROUP BY int32_val;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32_val#3 AS int32_val [INT32]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32_val#3, $aggregate.$agg1#2]
@@ -4221,7 +4221,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32_val#3 AS int32_val [INT32]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32_val#3, $aggregate.$agg1#2]
@@ -4287,7 +4287,7 @@ GROUP BY int64_val;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64_val#3 AS int64_val [INT64]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64_val#3, $aggregate.$agg1#2]
@@ -4319,7 +4319,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64_val#3 AS int64_val [INT64]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64_val#3, $aggregate.$agg1#2]
@@ -4384,7 +4384,7 @@ FROM (SELECT string_val
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4412,7 +4412,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4467,7 +4467,7 @@ FROM (SELECT count(*), string_val
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -4500,7 +4500,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -4559,7 +4559,7 @@ FROM (SELECT WITH DIFFERENTIAL_PRIVACY count(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4594,7 +4594,7 @@ FROM TestStructWithUidValueTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4611,7 +4611,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4660,7 +4660,7 @@ GROUP BY b;
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4685,7 +4685,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4742,7 +4742,7 @@ GROUP BY b;
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4773,7 +4773,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4836,7 +4836,7 @@ FROM (SELECT a
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4863,7 +4863,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4917,7 +4917,7 @@ FROM (SELECT count(*), a
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -4949,7 +4949,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -5007,7 +5007,7 @@ FROM (SELECT count(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5045,7 +5045,7 @@ from
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#29 AS `$col1` [INT64]
+| +-$aggregate.$agg1#29 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#29]
@@ -5107,7 +5107,7 @@ from
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#17 AS `$col1` [INT64]
+| +-$aggregate.$agg1#17 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#17]
@@ -5158,9 +5158,9 @@ select * from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.uid#14 AS uid [INT64]
-| +-$aggregate.$agg1#27 AS `$col1` [INT64]
+| +-$aggregate.$agg1#27 AS "$col1" [INT64]
 | +-$groupby.uid#28 AS uid [INT64]
 +-query=
   +-ProjectScan
@@ -5205,9 +5205,9 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.uid#14 AS uid [INT64]
-| +-$aggregate.$agg1#27 AS `$col1` [INT64]
+| +-$aggregate.$agg1#27 AS "$col1" [INT64]
 | +-$groupby.uid#28 AS uid [INT64]
 +-query=
   +-ProjectScan
@@ -5344,7 +5344,7 @@ select with differential_privacy count(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5361,7 +5361,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5415,7 +5415,7 @@ select with differential_privacy count(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5432,7 +5432,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5490,7 +5490,7 @@ select with differential_privacy count(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5514,7 +5514,7 @@ select with differential_privacy count(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5564,7 +5564,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5671,7 +5671,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -5691,7 +5691,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -5744,8 +5744,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5768,8 +5768,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5828,8 +5828,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5853,8 +5853,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5921,7 +5921,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -5941,7 +5941,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -5994,7 +5994,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6014,7 +6014,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6067,8 +6067,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6092,8 +6092,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6160,8 +6160,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6184,8 +6184,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6244,8 +6244,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6268,8 +6268,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6337,8 +6337,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6364,8 +6364,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6436,8 +6436,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6463,8 +6463,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6535,7 +6535,7 @@ from SimpleTypesWithAnonymizationUid;
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6556,7 +6556,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6613,8 +6613,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [ARRAY<DOUBLE>]
-| +-$aggregate.$agg2#14 AS `$col2` [ARRAY<DOUBLE>]
+| +-$aggregate.$agg1#13 AS "$col1" [ARRAY<DOUBLE>]
+| +-$aggregate.$agg2#14 AS "$col2" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6640,8 +6640,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [ARRAY<DOUBLE>]
-| +-$aggregate.$agg2#14 AS `$col2` [ARRAY<DOUBLE>]
+| +-$aggregate.$agg1#13 AS "$col1" [ARRAY<DOUBLE>]
+| +-$aggregate.$agg2#14 AS "$col2" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6777,7 +6777,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6796,7 +6796,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6836,7 +6836,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6859,7 +6859,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6902,7 +6902,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6921,7 +6921,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6960,7 +6960,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6979,7 +6979,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7018,7 +7018,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7037,7 +7037,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7076,7 +7076,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7096,7 +7096,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7136,7 +7136,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7156,7 +7156,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7196,7 +7196,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7215,7 +7215,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7254,7 +7254,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7273,7 +7273,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7312,7 +7312,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7331,7 +7331,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7370,7 +7370,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7389,7 +7389,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7428,7 +7428,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7447,7 +7447,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7486,7 +7486,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7505,7 +7505,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7544,7 +7544,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7562,7 +7562,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7599,7 +7599,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7617,7 +7617,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7654,7 +7654,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7672,7 +7672,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7709,7 +7709,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7727,7 +7727,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7796,8 +7796,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
-| +-$aggregate.$agg2#14 AS `$col2` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg2#14 AS "$col2" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -7825,8 +7825,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
-| +-$aggregate.$agg2#14 AS `$col2` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg2#14 AS "$col2" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -7895,7 +7895,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7914,7 +7914,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7994,29 +7994,29 @@ select with differential_privacy anon_count(*) FROM SimpleTypesWithAnonymizat...
 # Using DP functions inside ANONYMIZATION queries.
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
 [ language_features=ANONYMIZATION,DIFFERENTIAL_PRIVACY,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NAMED_ARGUMENTS,NUMERIC_TYPE,JSON_TYPE]
-select WITH ANONYMIZATION `$differential_privacy_count`(1) from SimpleTypesWithAnonymizationUid;
+select WITH ANONYMIZATION "$differential_privacy_count"(1) from SimpleTypesWithAnonymizationUid;
 --
 
-ERROR: Function not found: `$differential_privacy_count` [at 1:27]
-select WITH ANONYMIZATION `$differential_privacy_count`(1) from SimpleTypesWi...
+ERROR: Function not found: "$differential_privacy_count" [at 1:27]
+select WITH ANONYMIZATION "$differential_privacy_count"(1) from SimpleTypesWi...
                           ^
 ==
 
 # Using DP functions inside regular queries.
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
-select `$differential_privacy_count`(1) from SimpleTypesWithAnonymizationUid;
+select "$differential_privacy_count"(1) from SimpleTypesWithAnonymizationUid;
 --
-ERROR: Function not found: `$differential_privacy_count` [at 1:8]
-select `$differential_privacy_count`(1) from SimpleTypesWithAnonymizationUid;
+ERROR: Function not found: "$differential_privacy_count" [at 1:8]
+select "$differential_privacy_count"(1) from SimpleTypesWithAnonymizationUid;
        ^
 ==
 
 # Using DP functions inside regular queries.
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
-select `$differential_privacy_count1`(1) from SimpleTypesWithAnonymizationUid;
+select "$differential_privacy_count1"(1) from SimpleTypesWithAnonymizationUid;
 --
-ERROR: Function not found: `$differential_privacy_count1` [at 1:8]
-select `$differential_privacy_count1`(1) from SimpleTypesWithAnonymizationUid;
+ERROR: Function not found: "$differential_privacy_count1" [at 1:8]
+select "$differential_privacy_count1"(1) from SimpleTypesWithAnonymizationUid;
        ^
 ==
 
@@ -8028,7 +8028,7 @@ select with differential_privacy
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -8077,7 +8077,7 @@ select with ANONYMIZATION
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#27 AS `$col1` [INT64]
+| +-$union_all.$col1#27 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#27]
@@ -8113,7 +8113,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#27 AS `$col1` [INT64]
+| +-$union_all.$col1#27 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#27]
@@ -8189,7 +8189,7 @@ select with DIFFERENTIAL_PRIVACY
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#26 AS `$col1` [INT64]
+| +-$aggregate.$agg1#26 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#26]
@@ -8231,7 +8231,7 @@ select with ANONYMIZATION
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#26 AS `$col1` [INT64]
+| +-$aggregate.$agg1#26 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#26]
@@ -8269,7 +8269,7 @@ select COUNT(*) from SimpleTypesWithAnonymizationUid
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#27 AS `$col1` [INT64]
+| +-$union_all.$col1#27 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#27]
@@ -8325,8 +8325,8 @@ GROUP BY 1, 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$groupby.$col2#17 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$groupby.$col2#17 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-165
@@ -8379,8 +8379,8 @@ GROUP BY 1, 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$groupby.$col2#17 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$groupby.$col2#17 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-165
@@ -8453,7 +8453,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
 | +-$query.x#22 AS x [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-225
@@ -8531,7 +8531,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
 | +-$query.x#22 AS x [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-225
@@ -8628,8 +8628,8 @@ GROUP BY 1, 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#15 AS int32 [INT32]
-| +-$groupby.$col2#16 AS `$col2` [STRING]
-| +-$aggregate.$agg1#14 AS `$col3` [INT64]
+| +-$groupby.$col2#16 AS "$col2" [STRING]
+| +-$aggregate.$agg1#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#15, $groupby.$col2#16, $aggregate.$agg1#14]
@@ -8665,8 +8665,8 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#15 AS int32 [INT32]
-| +-$groupby.$col2#16 AS `$col2` [STRING]
-| +-$aggregate.$agg1#14 AS `$col3` [INT64]
+| +-$groupby.$col2#16 AS "$col2" [STRING]
+| +-$aggregate.$agg1#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#15, $groupby.$col2#16, $aggregate.$agg1#14]
@@ -8732,8 +8732,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.s#16 AS s [STRING]
-| +-$query.$col2#18 AS `$col2` [ARRAY<STRING>]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#18 AS "$col2" [ARRAY<STRING>]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-174
@@ -8787,8 +8787,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.s#16 AS s [STRING]
-| +-$query.$col2#18 AS `$col2` [ARRAY<STRING>]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#18 AS "$col2" [ARRAY<STRING>]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-174
@@ -8859,8 +8859,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$query.$col2#19 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#19 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-162
@@ -8914,8 +8914,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$query.$col2#19 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#19 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-162

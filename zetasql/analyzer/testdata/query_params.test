@@ -5,7 +5,7 @@ select 1 from TestTable where KitchenSink.bool_val = @test_param_bool;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -29,12 +29,12 @@ QueryStmt
 
 # This test is here to document current behavior and notice regressions in case
 # some customer has started doing this. We suspect the authors never intended
-# the `@` token to be separated from the variable name by whitespace.
+# the "@" token to be separated from the variable name by whitespace.
 SELECT @ test_param_bool;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -47,13 +47,13 @@ QueryStmt
 
 # This test is here to document current behavior and notice regressions in case
 # some customer has started doing this. We suspect the authors never intended
-# the `@` token to be separated from the variable name by whitespace.
+# the "@" token to be separated from the variable name by whitespace.
 SELECT @
   SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -68,7 +68,7 @@ select 1 + @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -93,7 +93,7 @@ select 1 from TestTable where @test_param_array[DEFAULT_OFFSET(@test_param_int32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -195,7 +195,7 @@ select 5 from KeyValue group by @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -286,7 +286,7 @@ limit @test_param_double
 
 select @test_param_proto.int64_val,
        (@test_param_proto.int64_val),
-       @ `test_param_proto`.int64_val;
+       @ "test_param_proto".int64_val;
 --
 QueryStmt
 +-output_column_list=
@@ -330,10 +330,10 @@ select @test_param_mixedcase,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -360,10 +360,10 @@ select fn_on_TestEnum(@test_param_int32),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [BOOL]
-| +-$query.$col4#4 AS `$col4` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
+| +-$query.$col4#4 AS "$col4" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -393,9 +393,9 @@ select fn_on_KitchenSinkPB(@test_param_string),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -420,8 +420,8 @@ select fn_on_DATE(@test_param_string),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -523,7 +523,7 @@ ALTERNATION GROUP: KitchenSinkPB
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -548,7 +548,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -584,7 +584,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -605,7 +605,7 @@ select struct(cast(1 as int32)) IN UNNEST(@test_param_array_struct_int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -634,7 +634,7 @@ select cast(1 as int32) IN UNNEST(@test_param_array_int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -653,7 +653,7 @@ select "TESTENUM0" IN UNNEST(@test_param_array_enum)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -695,7 +695,7 @@ select TestEnum in unnest(@test_param_array_enum) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -713,7 +713,7 @@ select @test_param_int64 in unnest(array_concat([TestEnum], [])) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -736,7 +736,7 @@ select null in unnest(@test_param_array_int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -755,7 +755,7 @@ select null in unnest(@test_param_array_string)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -780,7 +780,7 @@ ALTERNATION GROUP: TestEnum
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -802,7 +802,7 @@ ALTERNATION GROUP: struct<int32,string>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -818,7 +818,7 @@ select cast(@test_param_struct as struct<int64,date>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT64, DATE>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT64, DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -841,7 +841,7 @@ ALTERNATION GROUP: fn_on_struct_int32_string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -856,7 +856,7 @@ ALTERNATION GROUP: fn_on_struct_int64_string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -872,7 +872,7 @@ ALTERNATION GROUP: fn_on_struct_int32_date
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -892,7 +892,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,array<string>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -909,7 +909,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -931,9 +931,9 @@ select cast(@test_param_proto as string),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [INT64]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -960,11 +960,11 @@ select cast(@test_param_proto as date)
 
 # @select is a BOOL parameter.  It behaves the same way back-ticked or not
 # back-ticked.
-select @{{select|`select`}};
+select @{{select|"select"}};
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -979,8 +979,8 @@ select @proto, @test_param_proto;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$query.$col2#2 AS `$col2` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col2#2 AS "$col2" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]

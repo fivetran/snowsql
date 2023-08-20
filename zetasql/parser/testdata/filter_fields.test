@@ -203,14 +203,14 @@ SELECT
   filter_fields(some_proto, +int32_field, RESET_CLEARED_REQUIRED_FIELDS  => False)
 ==
 
-select filter_fields(some_proto, +int32_field, +`where`)
+select filter_fields(some_proto, +int32_field, +"where")
 --
-QueryStatement [0-56] [select filter_fie...+`where`)]
-  Query [0-56] [select filter_fie...+`where`)]
-    Select [0-56] [select filter_fie...+`where`)]
-      SelectList [7-56] [filter_fields...+`where`)]
-        SelectColumn [7-56] [filter_fields...+`where`)]
-          FunctionCall [7-56] [filter_fields...+`where`)]
+QueryStatement [0-56] [select filter_fie...+"where")]
+  Query [0-56] [select filter_fie...+"where")]
+    Select [0-56] [select filter_fie...+"where")]
+      SelectList [7-56] [filter_fields...+"where")]
+        SelectColumn [7-56] [filter_fields...+"where")]
+          FunctionCall [7-56] [filter_fields...+"where")]
             PathExpression [7-20] [filter_fields]
               Identifier(filter_fields) [7-20] [filter_fields]
             PathExpression [21-31] [some_proto]
@@ -218,12 +218,12 @@ QueryStatement [0-56] [select filter_fie...+`where`)]
             UnaryExpression(+) [33-45] [+int32_field]
               PathExpression [34-45] [int32_field]
                 Identifier(int32_field) [34-45] [int32_field]
-            UnaryExpression(+) [47-55] [+`where`]
-              PathExpression [48-55] [`where`]
-                Identifier("where") [48-55] [`where`]
+            UnaryExpression(+) [47-55] [+"where"]
+              PathExpression [48-55] ["where"]
+                Identifier("where") [48-55] ["where"]
 --
 SELECT
-  filter_fields(some_proto, +int32_field, +`where`)
+  filter_fields(some_proto, +int32_field, +"where")
 ==
 
 select filter_fields(some_proto, +int32_field, +where)

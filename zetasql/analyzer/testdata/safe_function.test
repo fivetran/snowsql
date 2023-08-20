@@ -11,7 +11,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -60,7 +60,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -88,7 +88,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -114,7 +114,7 @@ ALTERNATION GROUP: ,V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -159,7 +159,7 @@ ALTERNATION GROUP: ,ANALYTIC_FUNCTIONS,,V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -183,7 +183,7 @@ QueryStmt
 [language_features={{|V_1_2_SAFE_FUNCTION_CALL}}]
 select safe.cast(1 as int64)
 --
-ERROR: Unexpected function call argument alias found at safe.`cast` [at 1:20]
+ERROR: Unexpected function call argument alias found at safe."cast" [at 1:20]
 select safe.cast(1 as int64)
                    ^
 ==
@@ -201,7 +201,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -218,19 +218,19 @@ QueryStmt
 # which won't re-parse.
 [no_run_unparser]
 [language_features={{|V_1_2_SAFE_FUNCTION_CALL}}]
-select safe.`if`(true, 1, 2)
+select safe."if"(true, 1, 2)
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Function calls with SAFE are not supported [at 1:8]
-select safe.`if`(true, 1, 2)
+select safe."if"(true, 1, 2)
        ^
 --
 ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -300,7 +300,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -325,7 +325,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -352,7 +352,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -458,12 +458,12 @@ SELECT
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<DOUBLE>]
-| +-$query.$col2#5 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#6 AS `$col3` [BOOL]
-| +-$query.$col4#7 AS `$col4` [BOOL]
-| +-$query.$col5#8 AS `$col5` [BOOL]
-| +-$query.$col6#9 AS `$col6` [BOOL]
+| +-$query.$col1#4 AS "$col1" [ARRAY<DOUBLE>]
+| +-$query.$col2#5 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#6 AS "$col3" [BOOL]
+| +-$query.$col4#7 AS "$col4" [BOOL]
+| +-$query.$col5#8 AS "$col5" [BOOL]
+| +-$query.$col6#9 AS "$col6" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7, $col5#8, $col6#9]
@@ -543,12 +543,12 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<DOUBLE>]
-| +-$query.$col2#5 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#6 AS `$col3` [BOOL]
-| +-$query.$col4#7 AS `$col4` [BOOL]
-| +-$query.$col5#8 AS `$col5` [BOOL]
-| +-$query.$col6#9 AS `$col6` [BOOL]
+| +-$query.$col1#4 AS "$col1" [ARRAY<DOUBLE>]
+| +-$query.$col2#5 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#6 AS "$col3" [BOOL]
+| +-$query.$col4#7 AS "$col4" [BOOL]
+| +-$query.$col5#8 AS "$col5" [BOOL]
+| +-$query.$col6#9 AS "$col6" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7, $col5#8, $col6#9]
@@ -617,12 +617,12 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<DOUBLE>]
-| +-$query.$col2#5 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#6 AS `$col3` [BOOL]
-| +-$query.$col4#7 AS `$col4` [BOOL]
-| +-$query.$col5#8 AS `$col5` [BOOL]
-| +-$query.$col6#9 AS `$col6` [BOOL]
+| +-$query.$col1#4 AS "$col1" [ARRAY<DOUBLE>]
+| +-$query.$col2#5 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#6 AS "$col3" [BOOL]
+| +-$query.$col4#7 AS "$col4" [BOOL]
+| +-$query.$col5#8 AS "$col5" [BOOL]
+| +-$query.$col6#9 AS "$col6" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7, $col5#8, $col6#9]

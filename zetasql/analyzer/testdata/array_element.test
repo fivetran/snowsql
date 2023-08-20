@@ -12,7 +12,7 @@ ALTERNATION GROUP: V_1_4_BARE_ARRAY_ACCESS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -89,8 +89,8 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
-| +-$query.$col2#5 AS `$col2` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
+| +-$query.$col2#5 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -124,8 +124,8 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
-| +-$query.$col2#5 AS `$col2` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
+| +-$query.$col2#5 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -158,8 +158,8 @@ from TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
-| +-$query.$col2#5 AS `$col2` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [INT64]
+| +-$query.$col2#5 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -195,8 +195,8 @@ from TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
-| +-$query.$col2#5 AS `$col2` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
+| +-$query.$col2#5 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -227,7 +227,7 @@ select KitchenSink.repeated_double_val[DEFAULT_OFFSET(NULL)] from TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -249,7 +249,7 @@ select keys[DEFAULT_OFFSET(2)] from (select array_agg(key) as keys from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -277,7 +277,7 @@ from (select array_agg(key) as keys from KeyValue);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -316,7 +316,7 @@ where KitchenSink.nested_repeated_group[DEFAULT_OFFSET(2)].nestedrepeatedgroupne
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -371,7 +371,7 @@ where KitchenSink.nested_repeated_group[DEFAULT_OFFSET(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -419,7 +419,7 @@ select 1 + 2 * KitchenSink.repeated_int64_val[DEFAULT_OFFSET(2)] + 3 * 4 from Te
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -458,8 +458,8 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
-| +-$query.$col2#5 AS `$col2` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
+| +-$query.$col2#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -491,7 +491,7 @@ select [1,2,3][DEFAULT_OFFSET(cast(1+2 as uint32))]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -522,9 +522,9 @@ select ["a","b"][DEFAULT_OFFSET(-1)],
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -550,7 +550,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -638,7 +638,7 @@ from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -658,7 +658,7 @@ select [][DEFAULT_OFFSET(0)]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -702,7 +702,7 @@ from MapFieldTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT32]
+| +-$query.$col1#3 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -743,7 +743,7 @@ from MapFieldTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT32]
+| +-$query.$col1#3 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -763,7 +763,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT32]
+| +-$query.$col1#3 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -862,7 +862,7 @@ from MapFieldTable table
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [UINT64]
+| +-$query.$col1#3 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -883,7 +883,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [UINT64]
+| +-$query.$col1#3 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1009,7 +1009,7 @@ from MapFieldTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<PROTO<zetasql_test__.MessageWithMapField.Int32Int32MapEntry>>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<PROTO<zetasql_test__.MessageWithMapField.Int32Int32MapEntry>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]

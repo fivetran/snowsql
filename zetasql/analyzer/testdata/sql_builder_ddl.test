@@ -696,7 +696,7 @@ CREATE TABLE t1 CLONE KeyValue FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP()
 [UNPARSED_SQL]
 CREATE TABLE t1 CLONE
 KeyValue
-  FOR SYSTEM_TIME AS OF `CURRENT_TIMESTAMP`();
+  FOR SYSTEM_TIME AS OF "CURRENT_TIMESTAMP"();
 ==
 
 # CREATE TABLE CLONE with WHERE clause
@@ -729,7 +729,7 @@ CREATE TABLE t1 COPY KeyValue FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP()
 [UNPARSED_SQL]
 CREATE TABLE t1 COPY
 KeyValue
-  FOR SYSTEM_TIME AS OF `CURRENT_TIMESTAMP`();
+  FOR SYSTEM_TIME AS OF "CURRENT_TIMESTAMP"();
 ==
 
 # CREATE TABLE COPY with WHERE clause
@@ -760,7 +760,7 @@ create snapshot table s1 clone KeyValue for system_time as of CURRENT_TIMESTAMP(
 --
 [UNPARSED_SQL]
 CREATE SNAPSHOT TABLE s1 CLONE KeyValue
-  FOR SYSTEM_TIME AS OF `CURRENT_TIMESTAMP`();
+  FOR SYSTEM_TIME AS OF "CURRENT_TIMESTAMP"();
 ==
 
 # CREATE SNAPSHOT TABLE with OPTIONS
@@ -781,7 +781,7 @@ OPTIONS(expiration_timestamp = "2019-05-22 00:00:00+00", description = "mydatase
 create privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-CREATE PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns RESTRICT TO ("obsessed@google.com",
+CREATE PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ("obsessed@google.com",
 "mdb/datahub-eng");
 ==
 
@@ -789,42 +789,42 @@ CREATE PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColum
 create privilege restriction on select (doubly_nested_struct.e, doubly_nested_struct.f.c) on table DoublyNestedStructTable;
 --
 [UNPARSED_SQL]
-CREATE PRIVILEGE RESTRICTION ON `select`(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable;
+CREATE PRIVILEGE RESTRICTION ON "select"(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable;
 ==
 
 [privilege_restriction_table_not_scanned]
 create privilege restriction on select (int_a, string_a) on table MultipleColumns;
 --
 [UNPARSED_SQL]
-CREATE PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns;
+CREATE PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns;
 ==
 
 [privilege_restriction_table_not_scanned]
 drop privilege restriction on select (int_a, string_a) on table MultipleColumns;
 --
 [UNPARSED_SQL]
-DROP PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns;
+DROP PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns;
 ==
 
 [privilege_restriction_table_not_scanned]
 drop privilege restriction if exists on select (int_a, string_a) on table MultipleColumns;
 --
 [UNPARSED_SQL]
-DROP PRIVILEGE RESTRICTION IF EXISTS ON `select`(int_a, string_a) ON table MultipleColumns;
+DROP PRIVILEGE RESTRICTION IF EXISTS ON "select"(int_a, string_a) ON table MultipleColumns;
 ==
 
 [privilege_restriction_table_not_scanned]
 drop privilege restriction on select (doubly_nested_struct.e, doubly_nested_struct.f.c) on table DoublyNestedStructTable;
 --
 [UNPARSED_SQL]
-DROP PRIVILEGE RESTRICTION ON `select`(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable;
+DROP PRIVILEGE RESTRICTION ON "select"(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable;
 ==
 
 [privilege_restriction_table_not_scanned]
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns RESTRICT TO ("obsessed@google.com",
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ("obsessed@google.com",
   "mdb/datahub-eng");
 ==
 
@@ -832,14 +832,14 @@ ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumn
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ();
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns RESTRICT TO ();
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ();
 ==
 
 [privilege_restriction_table_not_scanned]
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns add ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns ADD ("obsessed@google.com",
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD ("obsessed@google.com",
   "mdb/datahub-eng");
 ==
 
@@ -847,7 +847,7 @@ ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumn
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns add if not exists ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns ADD IF NOT EXISTS ("obsessed@google.com",
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD IF NOT EXISTS ("obsessed@google.com",
   "mdb/datahub-eng");
 ==
 
@@ -855,14 +855,14 @@ ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumn
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns add ();
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns ADD ();
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD ();
 ==
 
 [privilege_restriction_table_not_scanned]
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns REMOVE ("obsessed@google.com",
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ("obsessed@google.com",
   "mdb/datahub-eng");
 ==
 
@@ -870,7 +870,7 @@ ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumn
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove if exists ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns REMOVE IF EXISTS ("obsessed@google.com",
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE IF EXISTS ("obsessed@google.com",
   "mdb/datahub-eng");
 ==
 
@@ -878,21 +878,21 @@ ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumn
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ();
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns REMOVE ();
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ();
 ==
 
 [privilege_restriction_table_not_scanned]
 alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ();
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(int_a, string_a) ON table MultipleColumns REMOVE ();
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ();
 ==
 
 [privilege_restriction_table_not_scanned]
 alter privilege restriction on select (doubly_nested_struct.e, doubly_nested_struct.f.c) on table DoublyNestedStructTable restrict to ("obsessed@google.com", "mdb/datahub-eng");
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON `select`(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable RESTRICT TO ("obsessed@google.com",
+ALTER PRIVILEGE RESTRICTION ON "select"(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable RESTRICT TO ("obsessed@google.com",
   "mdb/datahub-eng");
 ==
 

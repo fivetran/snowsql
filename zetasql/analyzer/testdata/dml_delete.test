@@ -58,7 +58,7 @@ DeleteStmt
 ==
 
 DELETE SimpleTypes
-WHERE `int64` IN (select key from KeyValue)
+WHERE "int64" IN (select key from KeyValue)
 --
 DeleteStmt
 +-table_scan=
@@ -268,12 +268,12 @@ DeleteStmt
         +-default_value=77
 ==
 
-DELETE `zetasql_test__.KeyValueStruct`
+DELETE "zetasql_test__.KeyValueStruct"
 WHERE key > 1
 ASSERT_ROWS_MODIFIED 0
 --
-ERROR: Table not found: `zetasql_test__.KeyValueStruct` [at 1:8]
-DELETE `zetasql_test__.KeyValueStruct`
+ERROR: Table not found: "zetasql_test__.KeyValueStruct" [at 1:8]
+DELETE "zetasql_test__.KeyValueStruct"
        ^
 ==
 

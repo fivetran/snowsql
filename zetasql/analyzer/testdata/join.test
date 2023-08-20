@@ -113,7 +113,7 @@ select 1 from KeyValue kv1 join KeyValue kv2 ON true;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -133,7 +133,7 @@ select 1 from KeyValue kv1 join KeyValue kv2 ON kv1.key = kv2.key;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -170,7 +170,7 @@ select 1 from KeyValue kv1 join KeyValue kv2 using (key);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -223,7 +223,7 @@ from KeyValue kv1 cross join (KeyValue kv2 cross join KeyValue kv3);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -245,7 +245,7 @@ select 1 from KeyValue kv1 cross join KeyValue kv2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -291,7 +291,7 @@ select 1 from KeyValue kv1 inner join KeyValue kv2 on true
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -311,7 +311,7 @@ select 1 from KeyValue kv1 left join KeyValue kv2 on 1=1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -334,7 +334,7 @@ select 1 from KeyValue kv1 left join KeyValue kv2 on NULL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -356,7 +356,7 @@ select 1 from KeyValue kv1 right join KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -382,7 +382,7 @@ select 1 from KeyValue kv1 full join KeyValue kv2 on kv1.key = kv2.key
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -771,7 +771,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<STRUCT<arr1 INT64, arr2 INT64>>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<STRUCT<arr1 INT64, arr2 INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]

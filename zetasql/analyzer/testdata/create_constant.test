@@ -287,7 +287,7 @@ CreateConstantStmt
 # CREATE CONSTANT statements of type PROTO resolve correctly.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE PRIVATE CONSTANT a = CAST("" AS `zetasql_test__.EmptyMessage`);
+CREATE PRIVATE CONSTANT a = CAST("" AS "zetasql_test__.EmptyMessage");
 --
 CreateConstantStmt
 +-name_path=a
@@ -300,7 +300,7 @@ CreateConstantStmt
 # CREATE CONSTANT statements of type ENUM resolve correctly.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE PRIVATE CONSTANT a = CAST("TESTENUM0" AS `zetasql_test__.TestEnum`);
+CREATE PRIVATE CONSTANT a = CAST("TESTENUM0" AS "zetasql_test__.TestEnum");
 --
 CreateConstantStmt
 +-name_path=a
@@ -312,7 +312,7 @@ CreateConstantStmt
 # CREATE CONSTANT statements of type ARRAY resolve correctly.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE PRIVATE CONSTANT a = ARRAY<`zetasql_test__.KitchenSinkPB`>[]
+CREATE PRIVATE CONSTANT a = ARRAY<"zetasql_test__.KitchenSinkPB">[]
 --
 CreateConstantStmt
 +-name_path=a

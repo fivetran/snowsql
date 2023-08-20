@@ -2,12 +2,12 @@
 [default language_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,NUMERIC_TYPE]
 [no_run_unparser]
 [default enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
-select with differential_privacy options(privacy_unit_column=`int64`) count(*)
+select with differential_privacy options(privacy_unit_column="int64") count(*)
 from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -27,7 +27,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -59,12 +59,12 @@ QueryStmt
 # Setting nested columns.
 [no_run_unparser]
 select with differential_privacy options(privacy_unit_column=str.s) count(*)
-from (SELECT STRUCT(SimpleTypes.`int64` AS i, SimpleTypes.`string` AS s) AS str FROM SimpleTypes) group by str.i;
+from (SELECT STRUCT(SimpleTypes."int64" AS i, SimpleTypes."string" AS s) AS str FROM SimpleTypes) group by str.i;
 --
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#20 AS `$col1` [INT64]
+| +-$aggregate.$agg1#20 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#20]
@@ -106,7 +106,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#20 AS `$col1` [INT64]
+| +-$aggregate.$agg1#20 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#20]
@@ -160,12 +160,12 @@ QueryStmt
 
 # Setting privacy unit column on Join.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=s2.`int32`) count(*)
-from SimpleTypes AS s1 Right OUTER JOIN SimpleTypes AS s2 ON s1.`int64` = s2.`int64`;
+select with differential_privacy options(privacy_unit_column=s2."int32") count(*)
+from SimpleTypes AS s1 Right OUTER JOIN SimpleTypes AS s2 ON s1."int64" = s2."int64";
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#37]
@@ -195,7 +195,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#37]
@@ -236,12 +236,12 @@ QueryStmt
 
 # Setting privacy unit column on Join.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=s2.`int32`) count(*)
+select with differential_privacy options(privacy_unit_column=s2."int32") count(*)
 from SimpleTypes AS s1 CROSS JOIN SimpleTypes AS s2 ;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#37]
@@ -266,7 +266,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#37]
@@ -304,13 +304,13 @@ QueryStmt
 
 # Setting on subquery correctly exporting privacy_unit_column name will work.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=`int32`) count(*)
+select with differential_privacy options(privacy_unit_column="int32") count(*)
 from (SELECT * FROM SimpleTypes);
 --
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -333,7 +333,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -367,23 +367,23 @@ QueryStmt
 
 # Setting privacy_unit_column to name that does not exist in the subquery will return an error.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=`int32`) count(*)
+select with differential_privacy options(privacy_unit_column="int32") count(*)
 from (SELECT int64 FROM SimpleTypes);
 --
 ERROR: Unrecognized name: int32; Did you mean int64? [at 1:62]
-select with differential_privacy options(privacy_unit_column=`int32`) count(*)
+select with differential_privacy options(privacy_unit_column="int32") count(*)
                                                              ^
 ==
 
 # Overriding metadata column returns an error.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=`int32`) count(*)
+select with differential_privacy options(privacy_unit_column="int32") count(*)
 from SimpleTypesWithAnonymizationUid;
 --
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -405,14 +405,14 @@ Rewrite ERROR: privacy_unit_column option cannot override the privacy unit colum
 
 # Overriding aliased metadata column returns an error.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=`int32`) count(*)
-from (SELECT uid AS tmp_uid, `int32` FROM SimpleTypesWithAnonymizationUid);
+select with differential_privacy options(privacy_unit_column="int32") count(*)
+from (SELECT uid AS tmp_uid, "int32" FROM SimpleTypesWithAnonymizationUid);
 --
 
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -437,13 +437,13 @@ Rewrite ERROR: privacy_unit_column option cannot override the privacy unit colum
 
 # Overriding metadata column on unpropagated privacy_unit_column in subquery returns an error.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=`int32`) count(*)
-from (SELECT `int32` FROM SimpleTypesWithAnonymizationUid);
+select with differential_privacy options(privacy_unit_column="int32") count(*)
+from (SELECT "int32" FROM SimpleTypesWithAnonymizationUid);
 --
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -468,13 +468,13 @@ Rewrite ERROR: Subqueries of differential_privacy queries must explicitly SELECT
 
 # Overriding metadata column on join returns an error.
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=SimpleTypes.`int32`) count(*)
+select with differential_privacy options(privacy_unit_column=SimpleTypes."int32") count(*)
 from SimpleTypesWithAnonymizationUid CROSS JOIN SimpleTypes;
 --
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -506,7 +506,7 @@ count(*) FROM KitchenSinkValueTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -531,7 +531,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -579,12 +579,12 @@ ERROR: Unrecognized name: this_column_does_not_exist [at 1:62]
 
 # Non struct
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=`int32`)
+select with differential_privacy options(privacy_unit_column="int32")
 count(*) FROM SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -604,7 +604,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -670,7 +670,7 @@ count(*) FROM SimpleTypesWithStruct;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -699,7 +699,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -749,11 +749,11 @@ select with differential_privacy options(privacy_unit_column=(SELECT 1))
 
 # Struct with 2 fields
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=(`int32`, `int64`))
+select with differential_privacy options(privacy_unit_column=("int32", "int64"))
 count(*) FROM SimpleTypes;
 --
 ERROR: Differential privacy option must be a path expression [at 1:62]
-select with differential_privacy options(privacy_unit_column=(`int32`, `int64`))
+select with differential_privacy options(privacy_unit_column=("int32", "int64"))
                                                              ^
 ==
 
@@ -770,12 +770,12 @@ ERROR: Differential privacy option must be a path expression [at 2:23]
 
 # Parenthesized path expression
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=(`int32`))
+select with differential_privacy options(privacy_unit_column=("int32"))
 count(*) FROM SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -795,7 +795,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -826,9 +826,9 @@ QueryStmt
 
 # Explicit struct constructor
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=STRUCT<INT32>(`int32`))
+select with differential_privacy options(privacy_unit_column=STRUCT<INT32>("int32"))
 count(*) FROM SimpleTypes;
 --
 ERROR: Differential privacy option must be a path expression [at 1:62]
-...differential_privacy options(privacy_unit_column=STRUCT<INT32>(`int32`))
+...differential_privacy options(privacy_unit_column=STRUCT<INT32>("int32"))
                                                     ^

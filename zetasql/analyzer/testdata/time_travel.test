@@ -6,7 +6,7 @@ ALTERNATION GROUP: V_1_1_FOR_SYSTEM_TIME_AS_OF
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -36,7 +36,7 @@ ALTERNATION GROUP: V_1_1_FOR_SYSTEM_TIME_AS_OF
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -63,7 +63,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -84,7 +84,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF '2000-01-01 01:01:01'
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -105,7 +105,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF '2000-01-01'
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -126,7 +126,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF TIMESTAMP_SUB(CURRENT_TIM
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -150,7 +150,7 @@ SELECT COUNT(*) FROM ComplexTypes t FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP, t.I
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -208,7 +208,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF CAST(@test_param_string A
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -230,7 +230,7 @@ SELECT COUNT(*) FROM TestTable FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP TABLESAMP
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]

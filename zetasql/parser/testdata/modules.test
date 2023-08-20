@@ -46,16 +46,16 @@ ImportStatement [0-30] [import module foo.bar as alias]
 IMPORT MODULE foo.bar AS alias
 ==
 
-import module foo.bar as `bar.baz`
+import module foo.bar as "bar.baz"
 --
-ImportStatement [0-34] [import module...`bar.baz`]
+ImportStatement [0-34] [import module..."bar.baz"]
   PathExpression [14-21] [foo.bar]
     Identifier(foo) [14-17] [foo]
     Identifier(bar) [18-21] [bar]
-  Alias [22-34] [as `bar.baz`]
-    Identifier("bar.baz") [25-34] [`bar.baz`]
+  Alias [22-34] [as "bar.baz"]
+    Identifier("bar.baz") [25-34] ["bar.baz"]
 --
-IMPORT MODULE foo.bar AS `bar.baz`
+IMPORT MODULE foo.bar AS "bar.baz"
 ==
 
 # aliases require 'as'
@@ -227,7 +227,7 @@ ImportStatement [0-24] [import module module.all]
     Identifier(module) [14-20] [module]
     Identifier("all") [21-24] [all]
 --
-IMPORT MODULE module.`all`
+IMPORT MODULE module."all"
 ==
 
 # Importing anything except MODULE does not work.
@@ -515,7 +515,7 @@ ModuleStatement [0-41] [module import...options(a=1)]
 MODULE import.module.options OPTIONS(a = 1)
 ==
 
-# Reserved keywords like `all` are ok if they can be used inside identifiers,
+# Reserved keywords like "all" are ok if they can be used inside identifiers,
 # but they have to be back-ticked if they start the path expression.
 module all;
 --
@@ -531,26 +531,26 @@ ModuleStatement [0-17] [module module.all]
     Identifier(module) [7-13] [module]
     Identifier("all") [14-17] [all]
 --
-MODULE module.`all`
+MODULE module."all"
 ==
 
-module `all`;
+module "all";
 --
-ModuleStatement [0-12] [module `all`]
-  PathExpression [7-12] [`all`]
-    Identifier("all") [7-12] [`all`]
+ModuleStatement [0-12] [module "all"]
+  PathExpression [7-12] ["all"]
+    Identifier("all") [7-12] ["all"]
 --
-MODULE `all`
+MODULE "all"
 ==
 
-module module.`all`;
+module module."all";
 --
-ModuleStatement [0-19] [module module.`all`]
-  PathExpression [7-19] [module.`all`]
+ModuleStatement [0-19] [module module."all"]
+  PathExpression [7-19] [module."all"]
     Identifier(module) [7-13] [module]
-    Identifier("all") [14-19] [`all`]
+    Identifier("all") [14-19] ["all"]
 --
-MODULE module.`all`
+MODULE module."all"
 ==
 
 # Other reserved keywords are not ok.

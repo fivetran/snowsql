@@ -5,7 +5,7 @@ SELECT ARRAY_FILTER([1,2,3], e -> e>0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -29,7 +29,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -91,7 +91,7 @@ SELECT ARRAY_REVERSE(ARRAY_FILTER([1,2,3], e -> e>0));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -116,7 +116,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -179,7 +179,7 @@ SELECT ARRAY_FILTER([1,2,3], (e, i) -> e>i);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -203,7 +203,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -265,7 +265,7 @@ SELECT ARRAY_FILTER([1,2,3], e -> e > Key) FROM KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -291,7 +291,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -356,7 +356,7 @@ SELECT ARRAY_FILTER([1,2,3], (e,i) -> (e+i) > Key) FROM KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -384,7 +384,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -451,7 +451,7 @@ SELECT ARRAY_FILTER([1,Key], e-> e>0) FROM KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -477,7 +477,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -544,7 +544,7 @@ SELECT ARRAY_FILTER([1,2, Key], Key-> Key>kv.Key) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -573,7 +573,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -642,7 +642,7 @@ SELECT ARRAY_FILTER(ARRAY_FILTER([1,2,Key], e->e>0), e->e>1) FROM KeyValue as kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -680,7 +680,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -797,7 +797,7 @@ SELECT (SELECT(ARRAY_FILTER(ARRAY_FILTER([1,2,Key], e->e>0), e->e>1))) FROM KeyV
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -847,7 +847,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -976,7 +976,7 @@ SELECT ARRAY_FILTER([1,2,3], e-> e > ARRAY_LENGTH(ARRAY_FILTER([1,2,Key], e->e<0
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1017,7 +1017,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1135,7 +1135,7 @@ SELECT (SELECT ARRAY_FILTER([1,2,3], e-> e > ARRAY_LENGTH(ARRAY_FILTER([1,2,Key]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1188,7 +1188,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1319,7 +1319,7 @@ SELECT (SELECT(ARRAY_FILTER([1,2,Key], Key->Key>1))) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1358,7 +1358,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1439,7 +1439,7 @@ SELECT (SELECT(ARRAY_FILTER([1,2,Key], Key->kv.Key>Key))) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1480,7 +1480,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1561,7 +1561,7 @@ SELECT ARRAY_FILTER(ARRAY_TRANSFORM([1,2,3], e->e+1), e -> e>0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1596,7 +1596,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1706,7 +1706,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], e -> ARRAY_LENGTH(ARRAY_FILTER([e, 4], e->e>1)))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1742,7 +1742,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1856,7 +1856,7 @@ SELECT ARRAY_FILTER([1,2], e->e>1) FROM t1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#7]
@@ -1921,7 +1921,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#7]
@@ -2036,7 +2036,7 @@ ALTERNATION GROUP: ,V_1_4_SAFE_FUNCTION_CALL_WITH_LAMBDA_ARGS,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -2060,7 +2060,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -2125,7 +2125,7 @@ ALTERNATION GROUPS:
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]

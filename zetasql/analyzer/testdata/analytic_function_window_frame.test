@@ -11,7 +11,7 @@ select afn_agg() over (rows unbounded preceding) from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -37,7 +37,7 @@ select afn_agg() over (rows 2 preceding) from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -64,7 +64,7 @@ select afn_agg() over (order by key range current row) from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -135,7 +135,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -192,7 +192,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -232,7 +232,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -263,7 +263,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -289,13 +289,13 @@ QueryStmt
 
 # The window frame clause does not always generate empty windows.
 # The tuples with null, NaN or inf order keys will have a non-empty window.
-select afn_agg() over (order by `double` range between 3.0 following and
+select afn_agg() over (order by "double" range between 3.0 following and
                                                        2.0 following)
 from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#20 AS `$col1` [INT64]
+| +-$analytic.$analytic1#20 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#20]
@@ -327,18 +327,18 @@ QueryStmt
 
 # This is incorrect. Casting from uint64 to double loses precision.
 # TODO: We should capture the error.
-select afn_agg() over (order by `double`
+select afn_agg() over (order by "double"
                        range between 0xFFFFFFFFFFFFFFFE preceding and
                                      0xFFFFFFFFFFFFFFFF preceding),
-       afn_agg() over (order by `double`
+       afn_agg() over (order by "double"
                        range between 0xFFFFFFFFFFFFFFFF following and
                                      0xFFFFFFFFFFFFFFFE following)
 from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#21 AS `$col1` [INT64]
-| +-$analytic.$analytic2#22 AS `$col2` [INT64]
+| +-$analytic.$analytic1#21 AS "$col1" [INT64]
+| +-$analytic.$analytic2#22 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#21, $analytic2#22]
@@ -392,7 +392,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -417,7 +417,7 @@ QueryStmt
                             +-Parameter(type=INT32, name="test_param_int32")
 ==
 
-select afn_agg() over (order by `uint64`
+select afn_agg() over (order by "uint64"
                        range between @test_param_int32 preceding and
                                      current row)
 from SimpleTypes
@@ -453,12 +453,12 @@ select afn_agg() over (order by key RANGE between 2 preceding and -1 following)
                                                                   ^
 ==
 
-select afn_agg() over (order by `double` RANGE between -1.0 preceding and
+select afn_agg() over (order by "double" RANGE between -1.0 preceding and
                                                         1 following)
 from SimpleTypes
 --
 ERROR: Window framing expression cannot evaluate to a negative value [at 1:56]
-select afn_agg() over (order by `double` RANGE between -1.0 preceding and
+select afn_agg() over (order by "double" RANGE between -1.0 preceding and
                                                        ^
 ==
 
@@ -477,7 +477,7 @@ select afn_agg() over (order by key) from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -512,7 +512,7 @@ select afn_agg() over () from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -540,7 +540,7 @@ select afn_order() over (order by key) from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -567,8 +567,8 @@ select afn_agg(key) over(),
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#5 AS `$col1` [INT64]
-| +-$analytic.$analytic2#6 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col1" [INT64]
+| +-$analytic.$analytic2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#5, $analytic2#6]
@@ -610,7 +610,7 @@ select afn_agg() over (rows '2' preceding) from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -645,7 +645,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -708,7 +708,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -747,12 +747,12 @@ select afn_agg() over (order by key range between 2 preceding and 2.2 following)
                                                                   ^
 ==
 
-select afn_agg() over (order by `double` range 3.3 preceding)
+select afn_agg() over (order by "double" range 3.3 preceding)
 from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#20 AS `$col1` [INT64]
+| +-$analytic.$analytic1#20 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#20]
@@ -784,19 +784,19 @@ QueryStmt
 # Coercion is performed if the framing expression type is not equal to the
 # target type (INT64 for ROWS and the ordering expression type for RANGE).
 select afn_agg() over (rows @test_param_uint32 preceding),
-       afn_agg() over (order by `int64` range @test_param_uint32 preceding),
-       afn_agg() over (order by `uint64` range 1 preceding),
-       afn_agg() over (order by `double` range @test_param_uint64 preceding),
-       afn_agg() over (order by `double` range 1 preceding)
+       afn_agg() over (order by "int64" range @test_param_uint32 preceding),
+       afn_agg() over (order by "uint64" range 1 preceding),
+       afn_agg() over (order by "double" range @test_param_uint64 preceding),
+       afn_agg() over (order by "double" range 1 preceding)
 from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#24 AS `$col1` [INT64]
-| +-$analytic.$analytic2#25 AS `$col2` [INT64]
-| +-$analytic.$analytic3#26 AS `$col3` [INT64]
-| +-$analytic.$analytic4#27 AS `$col4` [INT64]
-| +-$analytic.$analytic5#28 AS `$col5` [INT64]
+| +-$analytic.$analytic1#24 AS "$col1" [INT64]
+| +-$analytic.$analytic2#25 AS "$col2" [INT64]
+| +-$analytic.$analytic3#26 AS "$col3" [INT64]
+| +-$analytic.$analytic4#27 AS "$col4" [INT64]
+| +-$analytic.$analytic5#28 AS "$col5" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#24, $analytic2#25, $analytic3#26, $analytic4#27, $analytic5#28]
@@ -915,11 +915,11 @@ select afn_agg() over (order by timestamp range 3 preceding)
 ==
 
 # Date is currently not allowed in the window ORDER BY for range.
-select afn_agg() over (order by `date` range 3 preceding)
+select afn_agg() over (order by "date" range 3 preceding)
 from SimpleTypes
 --
 ERROR: ORDER BY key must be numeric in a RANGE-based window with OFFSET PRECEDING or OFFSET FOLLOWING boundaries, but has type DATE [at 1:24]
-select afn_agg() over (order by `date` range 3 preceding)
+select afn_agg() over (order by "date" range 3 preceding)
                        ^
 ==
 
@@ -952,7 +952,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1058,7 +1058,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1112,7 +1112,7 @@ ALTERNATION GROUP: ,V_1_3_NULLS_FIRST_LAST_IN_ORDER_BY,first
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1150,7 +1150,7 @@ ALTERNATION GROUP: ,V_1_3_NULLS_FIRST_LAST_IN_ORDER_BY,last
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]

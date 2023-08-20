@@ -7621,34 +7621,34 @@ ARRAY<STRUCT<x RANGE<DATETIME>, POS INT64>>[unknown order:
 [name=orderby_single_base_column_enum_asc]
 SELECT enum_val, row_id FROM (
   SELECT CAST(1 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(2 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(3 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(4 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(5 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(6 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(7 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(8 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(9 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(10 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
 ) t
 WHERE row_id IN (1, 3, 5, 7)
 ORDER BY enum_val ASC
@@ -7667,34 +7667,34 @@ ARRAY<STRUCT<
 [name=orderby_single_base_column_enum_desc]
 SELECT enum_val, row_id FROM (
   SELECT CAST(1 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(2 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(3 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(4 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(5 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(6 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(7 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(8 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(9 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(10 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
 ) t
 WHERE row_id IN (1, 3, 5, 7)
 ORDER BY enum_val DESC
@@ -7713,34 +7713,34 @@ ARRAY<STRUCT<
 [name=orderby_multi_base_column_enum_asc]
 SELECT enum_val, row_id FROM (
   SELECT CAST(1 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(2 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(3 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(4 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(5 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(6 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(7 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(8 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(9 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(10 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
 ) t
 ORDER BY enum_val ASC, row_id
 --
@@ -7764,34 +7764,34 @@ ARRAY<STRUCT<
 [name=orderby_multi_base_column_enum_desc]
 SELECT enum_val, row_id FROM (
   SELECT CAST(1 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(2 AS int64) as row_id,
-         CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(0 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(3 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(4 AS int64) as row_id,
-         CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(1 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(5 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(6 AS int64) as row_id,
-         CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(7 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(8 AS int64) as row_id,
-         CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(9 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
   UNION ALL
   SELECT CAST(10 AS int64) as row_id,
-         CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+         CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
 ) t
 ORDER BY enum_val DESC, row_id
 --
@@ -7816,34 +7816,34 @@ ARRAY<STRUCT<
 SELECT * FROM UNNEST(ARRAY(
   SELECT enum_val FROM (
     SELECT CAST(1 AS int64) as row_id,
-           CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(0 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(2 AS int64) as row_id,
-           CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(0 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(3 AS int64) as row_id,
-           CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(1 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(4 AS int64) as row_id,
-           CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(1 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(5 AS int64) as row_id,
-           CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(6 AS int64) as row_id,
-           CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(7 AS int64) as row_id,
-           CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(8 AS int64) as row_id,
-           CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(9 AS int64) as row_id,
-           CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(10 AS int64) as row_id,
-           CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
   ) t
   ORDER BY enum_val ASC
 )) x WITH OFFSET POS
@@ -7869,34 +7869,34 @@ ARRAY<STRUCT<
 SELECT * FROM UNNEST(ARRAY(
   SELECT enum_val FROM (
     SELECT CAST(1 AS int64) as row_id,
-           CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(0 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(2 AS int64) as row_id,
-           CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(0 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(3 AS int64) as row_id,
-           CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(1 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(4 AS int64) as row_id,
-           CAST(1 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(1 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(5 AS int64) as row_id,
-           CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(6 AS int64) as row_id,
-           CAST(2 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(7 AS int64) as row_id,
-           CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(8 AS int64) as row_id,
-           CAST(2147483647 AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(2147483647 AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(9 AS int64) as row_id,
-           CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
     UNION ALL
     SELECT CAST(10 AS int64) as row_id,
-           CAST(NULL AS `zetasql_test__.TestEnum`) as enum_val
+           CAST(NULL AS "zetasql_test__.TestEnum") as enum_val
   ) t
   ORDER BY enum_val DESC
 )) x WITH OFFSET POS

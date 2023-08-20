@@ -106,7 +106,7 @@ WHERE EXISTS(SELECT WITH ANONYMIZATION ANON_COUNT(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#31 AS `$col1` [INT64]
+| +-$query.$col1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-134
@@ -142,7 +142,7 @@ WHERE EXISTS(SELECT WITH ANONYMIZATION ANON_COUNT(*)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#31 AS `$col1` [INT64]
+| +-$query.$col1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-134
@@ -200,7 +200,7 @@ WHERE EXISTS(SELECT * FROM SimpleTypesWithAnonymizationUid)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#31 AS `$col1` [INT64]
+| +-$query.$col1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-85
@@ -241,7 +241,7 @@ WHERE EXISTS(SELECT * FROM tvf_no_args_with_anonymization_uid())
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#30 AS `$col1` [INT64]
+| +-$query.$col1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-90
@@ -1231,7 +1231,7 @@ from SimpleTypesWithAnonymizationUid) > 0;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#26 AS `$col1` [INT64]
+| +-$query.$col1#26 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#26]
@@ -1264,7 +1264,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#26 AS `$col1` [INT64]
+| +-$query.$col1#26 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#26]

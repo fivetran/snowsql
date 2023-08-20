@@ -5,13 +5,13 @@ drop ;
      ^
 ==
 
-drop external table `function`;
+drop external table "function";
 --
-DropStatement EXTERNAL TABLE [0-30] [drop external table `function`]
-  PathExpression [20-30] [`function`]
-    Identifier("function") [20-30] [`function`]
+DropStatement EXTERNAL TABLE [0-30] [drop external table "function"]
+  PathExpression [20-30] ["function"]
+    Identifier("function") [20-30] ["function"]
 --
-DROP EXTERNAL TABLE `function`
+DROP EXTERNAL TABLE "function"
 ==
 
 drop table;
@@ -179,14 +179,14 @@ DROP SNAPSHOT TABLE IF EXISTS a
 ==
 
 # dashed parameters are allowed for snapshots
-drop SNAPSHOT TABLE if exists `snapshot-1`;
+drop SNAPSHOT TABLE if exists "snapshot-1";
 --
 
-DropSnapshotTableStatement(is_if_exists) [0-42] [drop SNAPSHOT...snapshot-1`]
-  PathExpression [30-42] [`snapshot-1`]
-    Identifier("snapshot-1") [30-42] [`snapshot-1`]
+DropSnapshotTableStatement(is_if_exists) [0-42] [drop SNAPSHOT...snapshot-1"]
+  PathExpression [30-42] ["snapshot-1"]
+    Identifier("snapshot-1") [30-42] ["snapshot-1"]
 --
-DROP SNAPSHOT TABLE IF EXISTS `snapshot-1`
+DROP SNAPSHOT TABLE IF EXISTS "snapshot-1"
 ==
 
 drop SNAPSHOT TABLE
@@ -774,50 +774,50 @@ drop SNAPSHOT TABLE foo DROP_MODE_UNSPECIFIED;
                         ^
 ==
 
-DROP SCHEMA IF EXISTS `foo.bar` {{|RESTRICT|ResTRICT|CASCADE|INVALID_DROP_MODE|DROP_MODE_UNSPECIFIED}} ;
+DROP SCHEMA IF EXISTS "foo.bar" {{|RESTRICT|ResTRICT|CASCADE|INVALID_DROP_MODE|DROP_MODE_UNSPECIFIED}} ;
 --
 ALTERNATION GROUP: <empty>
 --
-DropStatement SCHEMA(is_if_exists) [0-31] [DROP SCHEMA...`foo.bar`]
-  PathExpression [22-31] [`foo.bar`]
-    Identifier("foo.bar") [22-31] [`foo.bar`]
+DropStatement SCHEMA(is_if_exists) [0-31] [DROP SCHEMA..."foo.bar"]
+  PathExpression [22-31] ["foo.bar"]
+    Identifier("foo.bar") [22-31] ["foo.bar"]
 --
-DROP SCHEMA IF EXISTS `foo.bar`
+DROP SCHEMA IF EXISTS "foo.bar"
 --
 ALTERNATION GROUP: RESTRICT
 --
-DropStatement SCHEMA(is_if_exists, drop_mode=RESTRICT) [0-40] [DROP SCHEMA...` RESTRICT]
-  PathExpression [22-31] [`foo.bar`]
-    Identifier("foo.bar") [22-31] [`foo.bar`]
+DropStatement SCHEMA(is_if_exists, drop_mode=RESTRICT) [0-40] [DROP SCHEMA..." RESTRICT]
+  PathExpression [22-31] ["foo.bar"]
+    Identifier("foo.bar") [22-31] ["foo.bar"]
 --
-DROP SCHEMA IF EXISTS `foo.bar` RESTRICT
+DROP SCHEMA IF EXISTS "foo.bar" RESTRICT
 --
 ALTERNATION GROUP: ResTRICT
 --
-DropStatement SCHEMA(is_if_exists, drop_mode=RESTRICT) [0-40] [DROP SCHEMA...` ResTRICT]
-  PathExpression [22-31] [`foo.bar`]
-    Identifier("foo.bar") [22-31] [`foo.bar`]
+DropStatement SCHEMA(is_if_exists, drop_mode=RESTRICT) [0-40] [DROP SCHEMA..." ResTRICT]
+  PathExpression [22-31] ["foo.bar"]
+    Identifier("foo.bar") [22-31] ["foo.bar"]
 --
-DROP SCHEMA IF EXISTS `foo.bar` RESTRICT
+DROP SCHEMA IF EXISTS "foo.bar" RESTRICT
 --
 ALTERNATION GROUP: CASCADE
 --
-DropStatement SCHEMA(is_if_exists, drop_mode=CASCADE) [0-39] [DROP SCHEMA...bar` CASCADE]
-  PathExpression [22-31] [`foo.bar`]
-    Identifier("foo.bar") [22-31] [`foo.bar`]
+DropStatement SCHEMA(is_if_exists, drop_mode=CASCADE) [0-39] [DROP SCHEMA...bar" CASCADE]
+  PathExpression [22-31] ["foo.bar"]
+    Identifier("foo.bar") [22-31] ["foo.bar"]
 --
-DROP SCHEMA IF EXISTS `foo.bar` CASCADE
+DROP SCHEMA IF EXISTS "foo.bar" CASCADE
 --
 ALTERNATION GROUP: INVALID_DROP_MODE
 --
 ERROR: Syntax error: Expected end of input but got identifier "INVALID_DROP_MODE" [at 1:33]
-DROP SCHEMA IF EXISTS `foo.bar` INVALID_DROP_MODE ;
+DROP SCHEMA IF EXISTS "foo.bar" INVALID_DROP_MODE ;
                                 ^
 --
 ALTERNATION GROUP: DROP_MODE_UNSPECIFIED
 --
 ERROR: Syntax error: Expected end of input but got identifier "DROP_MODE_UNSPECIFIED" [at 1:33]
-DROP SCHEMA IF EXISTS `foo.bar` DROP_MODE_UNSPECIFIED ;
+DROP SCHEMA IF EXISTS "foo.bar" DROP_MODE_UNSPECIFIED ;
                                 ^
 ==
 
@@ -856,7 +856,7 @@ drop table foo-bar.baz;
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-bar.baz` [at 1:12]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-bar.baz" [at 1:12]
 drop table foo-bar.baz;
            ^
 --
@@ -867,4 +867,4 @@ DropStatement TABLE [0-22] [drop table foo-bar.baz]
     Identifier("foo-bar") [11-18] [foo-bar]
     Identifier(baz) [19-22] [baz]
 --
-DROP TABLE `foo-bar`.baz
+DROP TABLE "foo-bar".baz

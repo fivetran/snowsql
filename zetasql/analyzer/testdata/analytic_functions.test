@@ -39,7 +39,7 @@ from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -90,7 +90,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -330,7 +330,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -362,7 +362,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -414,7 +414,7 @@ ALTERNATION GROUP: ANALYTIC_FUNCTIONS,V_1_2_GROUP_BY_STRUCT
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#8 AS `$col1` [INT64]
+| +-$analytic.$analytic1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#8]
@@ -451,7 +451,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#20 AS `$col1` [INT64]
+| +-$analytic.$analytic1#20 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#20]
@@ -534,8 +534,8 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [INT64]
-| +-$analytic.$analytic1#9 AS `$col2` [INT64]
+| +-$query.$col1#8 AS "$col1" [INT64]
+| +-$analytic.$analytic1#9 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8, $analytic.$analytic1#9]
@@ -601,7 +601,7 @@ order by afn_agg(sum(key)) over (partition by count(value) order by max(key)+1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#4]
@@ -672,7 +672,7 @@ select countif(key > 100) OVER (PARTITION BY key) FROM KeyValue
 
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -709,7 +709,7 @@ order by afn_agg(countif(key > 100))
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#4]
@@ -833,7 +833,7 @@ from (select key as outer_key from keyvalue)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -925,7 +925,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -955,7 +955,7 @@ window w  as ()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1367,7 +1367,7 @@ FROM SimpleTypes
 QueryStmt
 +-output_column_list=
 | +-SimpleTypes.int32#1 AS foo [INT32]
-| +-$analytic.$analytic1#20 AS `$col2` [INT64]
+| +-$analytic.$analytic1#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[SimpleTypes.int32#1, $analytic.$analytic1#20]
@@ -1399,7 +1399,7 @@ FROM (SELECT 1 AS a, 2 AS b)
 QueryStmt
 +-output_column_list=
 | +-$analytic.a#5 AS a [INT64]
-| +-$analytic.$analytic2#6 AS `$col2` [INT64]
+| +-$analytic.$analytic2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[a#5, $analytic2#6]
@@ -1470,7 +1470,7 @@ HAVING a > 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [BOOL]
+| +-$query.$col1#7 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1542,9 +1542,9 @@ HAVING min_c_plus_1 > 1
 QueryStmt
 +-output_column_list=
 | +-$query.min_c_plus_1#11 AS min_c_plus_1 [INT64]
-| +-$query.$col2#12 AS `$col2` [INT64]
-| +-$query.$col3#14 AS `$col3` [BOOL]
-| +-$query.$col4#16 AS `$col4` [INT64]
+| +-$query.$col2#12 AS "$col2" [INT64]
+| +-$query.$col3#14 AS "$col3" [BOOL]
+| +-$query.$col4#16 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[min_c_plus_1#11, $col2#12, $col3#14, $col4#16]
@@ -1656,7 +1656,7 @@ FROM (SELECT 1 AS a, 2 AS b)
 QueryStmt
 +-output_column_list=
 | +-$query.foo#4 AS foo [STRING]
-| +-$analytic.$analytic1#5 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.foo#4, $analytic.$analytic1#5]
@@ -1700,7 +1700,7 @@ FROM (SELECT 1 AS a, 2 AS b)
 QueryStmt
 +-output_column_list=
 | +-$query.foo#4 AS foo [STRING]
-| +-$analytic.$analytic1#5 AS `$col2` [INT64]
+| +-$analytic.$analytic1#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.foo#4, $analytic.$analytic1#5]
@@ -1949,7 +1949,7 @@ ALTERNATION GROUP: ,V_1_1_NULL_HANDLING_MODIFIER_IN_ANALYTIC
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1983,7 +1983,7 @@ ALTERNATION GROUP: ,V_1_1_NULL_HANDLING_MODIFIER_IN_ANALYTIC
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -2014,7 +2014,7 @@ from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -2040,7 +2040,7 @@ from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -2067,7 +2067,7 @@ from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -2098,7 +2098,7 @@ from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -2345,7 +2345,7 @@ ALTERNATION GROUP: ,V_1_1_ORDER_BY_COLLATE,DENSE_RANK()
 QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
-| +-$analytic.$analytic1#4 AS `$col2` [INT64]
+| +-$analytic.$analytic1#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, $analytic.$analytic1#4]
@@ -2372,7 +2372,7 @@ ALTERNATION GROUP: ,V_1_1_ORDER_BY_COLLATE,CUME_DIST()
 QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
-| +-$analytic.$analytic1#4 AS `$col2` [DOUBLE]
+| +-$analytic.$analytic1#4 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, $analytic.$analytic1#4]
@@ -2399,7 +2399,7 @@ ALTERNATION GROUP: ,V_1_1_ORDER_BY_COLLATE,PERCENT_RANK()
 QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
-| +-$analytic.$analytic1#4 AS `$col2` [DOUBLE]
+| +-$analytic.$analytic1#4 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, $analytic.$analytic1#4]
@@ -2426,7 +2426,7 @@ ALTERNATION GROUP: ,V_1_1_ORDER_BY_COLLATE,RANK()
 QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
-| +-$analytic.$analytic1#4 AS `$col2` [INT64]
+| +-$analytic.$analytic1#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, $analytic.$analytic1#4]
@@ -2453,7 +2453,7 @@ ALTERNATION GROUP: ,V_1_1_ORDER_BY_COLLATE,NTILE(3)
 QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
-| +-$analytic.$analytic1#4 AS `$col2` [INT64]
+| +-$analytic.$analytic1#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, $analytic.$analytic1#4]

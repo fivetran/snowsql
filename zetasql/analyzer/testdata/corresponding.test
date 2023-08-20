@@ -653,10 +653,10 @@ SELECT *, 1 AS a
 ==
 
 # CORRESPONDING: same column with different alias within a query is allowed.
-SELECT `int32` AS col1, `int32` AS col2
+SELECT "int32" AS col1, "int32" AS col2
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `float` AS col2, `float` AS col1
+SELECT "float" AS col2, "float" AS col1
 FROM SimpleTypes
 --
 QueryStmt
@@ -755,9 +755,9 @@ QueryStmt
 ==
 
 # CORRESPONDING: same column with and without alias.
-SELECT `int32` AS col, `int32` FROM SimpleTypes
+SELECT "int32" AS col, "int32" FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `float`, `float` AS col FROM SimpleTypes
+SELECT "float", "float" AS col FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
@@ -1031,13 +1031,13 @@ QueryStmt
 ==
 
 # CORRESPONDING: Extra columns are omitted from table scan.
-SELECT `uint32`, `float`
+SELECT "uint32", "float"
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `uint32`, `json`
+SELECT "uint32", "json"
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `json`, `uint32`
+SELECT "json", "uint32"
 FROM SimpleTypes
 --
 QueryStmt
@@ -1853,9 +1853,9 @@ QueryStmt
 ==
 
 # CORRESPONDING: Multiple columns, some of which have to get widened in either direction.
-select `int32` AS col1, `uint32` AS col2, `string` AS col3 from SimpleTypes s1
+select "int32" AS col1, "uint32" AS col2, "string" AS col3 from SimpleTypes s1
 union all CORRESPONDING
-select `string` AS col3, `int32` AS col2, `int64` AS col1, from SimpleTypes s2
+select "string" AS col3, "int32" AS col2, "int64" AS col1, from SimpleTypes s2
 --
 QueryStmt
 +-output_column_list=
@@ -2860,10 +2860,10 @@ QueryStmt
 ==
 
 # CORRESPONDING: with a group by.
-select `uint64` from SimpleTypes
+select "uint64" from SimpleTypes
 union all CORRESPONDING
-select CAST(1 AS UINT64) as `uint64` from SimpleTypes
-group by `uint64`
+select CAST(1 AS UINT64) as "uint64" from SimpleTypes
+group by "uint64"
 --
 QueryStmt
 +-output_column_list=
@@ -2926,13 +2926,13 @@ QueryStmt
 ==
 
 # CORRESPONDING: Type coercing in multiple operations of columns from table scans.
-SELECT `uint32` AS col
+SELECT "uint32" AS col
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `int32` AS col
+SELECT "int32" AS col
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `float` AS col
+SELECT "float" AS col
 FROM SimpleTypes
 --
 QueryStmt
@@ -3042,11 +3042,11 @@ QueryStmt
 ==
 
 # CORRESPONDING: nested set operations with type coercing.
-select `uint32` AS col from SimpleTypes s1
+select "uint32" AS col from SimpleTypes s1
 UNION ALL CORRESPONDING
-(select `int32` AS col from SimpleTypes s2
+(select "int32" AS col from SimpleTypes s2
  INTERSECT ALL CORRESPONDING
- (select `float` AS col from SimpleTypes s3 EXCEPT ALL CORRESPONDING select 1 AS col));
+ (select "float" AS col from SimpleTypes s3 EXCEPT ALL CORRESPONDING select 1 AS col));
 --
 QueryStmt
 +-output_column_list=

@@ -560,7 +560,7 @@ SELECT
   UNIX_MILLIS(ts) ts_unix_millis,
   UNIX_MILLIS(ts_proto.timestamp_millis) ts_unix_millis
 FROM (SELECT TIMESTAMP "1890-08-03 01:33:11.634390+00" as ts,
-             NEW `zetasql_test__.KitchenSinkPB.NestedDates`(
+             NEW "zetasql_test__.KitchenSinkPB.NestedDates"(
                  "1890-08-03 01:33:11.634390+00" AS timestamp_millis
              ) AS ts_proto);
 --

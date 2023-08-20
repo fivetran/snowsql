@@ -180,16 +180,16 @@ END
 ==
 
 # valid parameter with empty mode and backtick-quoted parameter name
-CREATE PROCEDURE procedure_name (`OUT` int32)
+CREATE PROCEDURE procedure_name ("OUT" int32)
 BEGIN
 END;
 --
 CreateProcedureStatement [0-55] [CREATE PROCEDURE...BEGIN END]
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
-  FunctionParameters [32-45] [(`OUT` int32)]
-    FunctionParameter [33-44] [`OUT` int32]
-      Identifier("OUT") [33-38] [`OUT`]
+  FunctionParameters [32-45] [("OUT" int32)]
+    FunctionParameter [33-44] ["OUT" int32]
+      Identifier("OUT") [33-38] ["OUT"]
       SimpleType [39-44] [int32]
         PathExpression [39-44] [int32]
           Identifier(int32) [39-44] [int32]
@@ -198,7 +198,7 @@ CreateProcedureStatement [0-55] [CREATE PROCEDURE...BEGIN END]
       BeginEndBlock [46-55] [BEGIN END]
         StatementList [51-51] []
 --
-CREATE PROCEDURE procedure_name(`OUT` int32)
+CREATE PROCEDURE procedure_name("OUT" int32)
 BEGIN
 END
 ==
@@ -222,7 +222,7 @@ CreateProcedureStatement [0-57] [CREATE PROCEDURE...BEGIN END]
       BeginEndBlock [48-57] [BEGIN END]
         StatementList [53-53] []
 --
-CREATE PROCEDURE procedure_name(OUT `OUT` int32)
+CREATE PROCEDURE procedure_name(OUT "OUT" int32)
 BEGIN
 END
 ==
@@ -332,7 +332,7 @@ CreateProcedureStatement [0-45] [CREATE PROCEDURE...BEGIN END]
       BeginEndBlock [36-45] [BEGIN END]
         StatementList [41-41] []
 --
-CREATE PROCEDURE `OUT`(param_1 INT32)
+CREATE PROCEDURE "OUT"(param_1 INT32)
 BEGIN
 END
 ==

@@ -31,8 +31,8 @@ SELECT CAST(0 AS INT32) AS i32,
        CAST('''
   int64_key_1: 1
   int64_key_2: 1
-''' as `zetasql_test__.KitchenSinkPB`) AS pb,
-       CAST('TESTENUM0' AS `zetasql_test__.TestEnum`) AS pe;
+''' as "zetasql_test__.KitchenSinkPB") AS pb,
+       CAST('TESTENUM0' AS "zetasql_test__.TestEnum") AS pe;
 --
 ARRAY<STRUCT<
         i32 INT32,
@@ -155,8 +155,8 @@ ARRAY<STRUCT<STRING, STRING, STRING, STRING, STRING, STRING>>[
     "UINT32",
     "UINT64",
     "FLOAT",
-    "`zetasql_test__.KitchenSinkPB`",
-    "`zetasql_test__.TestEnum`"
+    ""zetasql_test__.KitchenSinkPB"",
+    ""zetasql_test__.TestEnum""
   }
 ]
 ==

@@ -1212,7 +1212,7 @@ ALTER ALL ROW ACCESS POLICIES ON t1 REVOKE FROM ALL
 ==
 
 # ALTER ALL with table name as path.
-alter all row access policies on namespace.`all`.t1
+alter all row access policies on namespace."all".t1
 revoke from ("foo@google.com");
 --
 AlterAllRowAccessPoliciesStatement [0-82]
@@ -1224,7 +1224,7 @@ AlterAllRowAccessPoliciesStatement [0-82]
     GranteeList [65-81]
       StringLiteral("foo@google.com") [65-81]
 --
-ALTER ALL ROW ACCESS POLICIES ON namespace.`all`.t1 REVOKE FROM ("foo@google.com")
+ALTER ALL ROW ACCESS POLICIES ON namespace."all".t1 REVOKE FROM ("foo@google.com")
 ==
 
 # ALTER ALL with missing table name.

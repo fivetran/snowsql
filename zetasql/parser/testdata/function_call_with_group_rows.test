@@ -230,23 +230,23 @@ GROUP BY f1
 
 # group_rows can be used as identifier.
 SELECT
-  `with` group_rows,
+  "with" group_rows,
   sum(group_rows) with group_rows(
     SELECT group_rows
     FROM group_rows())
 FROM (
   SELECT
-    1 `with`,
+    1 "with",
     2 group_rows)
 GROUP BY group_rows
 --
-QueryStatement [0-175] [SELECT   `...group_rows]
-  Query [0-175] [SELECT   `...group_rows]
-    Select [0-175] [SELECT   `...group_rows]
-      SelectList [9-107] [`with` group_rows...up_rows())]
-        SelectColumn [9-26] [`with` group_rows]
-          PathExpression [9-15] [`with`]
-            Identifier("with") [9-15] [`with`]
+QueryStatement [0-175] [SELECT   "...group_rows]
+  Query [0-175] [SELECT   "...group_rows]
+    Select [0-175] [SELECT   "...group_rows]
+      SelectList [9-107] ["with" group_rows...up_rows())]
+        SelectColumn [9-26] ["with" group_rows]
+          PathExpression [9-15] ["with"]
+            Identifier("with") [9-15] ["with"]
           Alias [16-26] [group_rows]
             Identifier(group_rows) [16-26] [group_rows]
         SelectColumn [30-107] [sum(group_rows...group_rows())]
@@ -270,11 +270,11 @@ QueryStatement [0-175] [SELECT   `...group_rows]
         TableSubquery [113-155] [(   SELECT...group_rows)]
           Query [117-154] [SELECT...group_rows]
             Select [117-154] [SELECT...group_rows]
-              SelectList [128-154] [1 `with`,     2 group_rows]
-                SelectColumn [128-136] [1 `with`]
+              SelectList [128-154] [1 "with",     2 group_rows]
+                SelectColumn [128-136] [1 "with"]
                   IntLiteral(1) [128-129] [1]
-                  Alias [130-136] [`with`]
-                    Identifier("with") [130-136] [`with`]
+                  Alias [130-136] ["with"]
+                    Identifier("with") [130-136] ["with"]
                 SelectColumn [142-154] [2 group_rows]
                   IntLiteral(2) [142-143] [2]
                   Alias [144-154] [group_rows]
@@ -285,7 +285,7 @@ QueryStatement [0-175] [SELECT   `...group_rows]
             Identifier(group_rows) [165-175] [group_rows]
 --
 SELECT
-  `with` AS group_rows,
+  "with" AS group_rows,
   sum(group_rows) WITH GROUP_ROWS (
     SELECT
       group_rows
@@ -295,7 +295,7 @@ SELECT
 FROM
   (
     SELECT
-      1 AS `with`,
+      1 AS "with",
       2 AS group_rows
   )
 GROUP BY group_rows

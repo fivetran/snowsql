@@ -7,7 +7,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -22,7 +22,7 @@ ALTERNATION GROUP: , '+/='
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -44,7 +44,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -59,7 +59,7 @@ ALTERNATION GROUP: , '+/='
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -79,7 +79,7 @@ select contains('1234', '23');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -99,7 +99,7 @@ select endswith('1234', '34');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

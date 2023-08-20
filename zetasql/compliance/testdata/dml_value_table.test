@@ -18,9 +18,9 @@ ARRAY<INT64>[10, 20]
 
 [prepare_database]
 CREATE TABLE KitchenSinkValueTable AS
-SELECT AS `zetasql_test__.KitchenSinkPB` 10 int64_key_1, 11 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 10 int64_key_1, 11 int64_key_2
 UNION ALL
-SELECT AS `zetasql_test__.KitchenSinkPB` 20 int64_key_1, 21 int64_key_2,
+SELECT AS "zetasql_test__.KitchenSinkPB" 20 int64_key_1, 21 int64_key_2,
   true bool_val
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[

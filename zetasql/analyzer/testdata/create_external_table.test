@@ -521,13 +521,13 @@ CreateExternalTableStmt
 [language_features=CREATE_EXTERNAL_TABLE_WITH_CONNECTION,CREATE_EXTERNAL_TABLE_WITH_TABLE_ELEMENT_LIST,CREATE_EXTERNAL_TABLE_WITH_PARTITION_COLUMNS]
 [no_java]
 create external table projectid.datasetid.tablename(x int64)
-with connection `connection2`
+with connection "connection2"
 with partition columns
 options (x=bar)
 --
 
 ERROR: Syntax error: Expected keyword OPTIONS [at 2:30]
-with connection `connection2`
+with connection "connection2"
                              ^
 ==
 
@@ -535,7 +535,7 @@ with connection `connection2`
 [no_java]
 create external table projectid.datasetid.tablename(x int64)
 with partition columns
-with connection `connection2`
+with connection "connection2"
 options (x=bar)
 --
 

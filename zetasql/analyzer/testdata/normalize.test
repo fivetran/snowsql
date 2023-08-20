@@ -6,11 +6,11 @@ SELECT NORMALIZE('abcdefg'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -39,19 +39,19 @@ QueryStmt
 ==
 
 # NORMALIZE is not a keyword.
-SELECT `NORMALIZE`('abcdefg'),
-       `NORMALIZE`('abcdefg', NFC),
-       `NORMALIZE`('abcdefg', NFKC),
-       `NORMALIZE`('abcdefg', NFD),
-       `NORMALIZE`('abcdefg', NFKD)
+SELECT "NORMALIZE"('abcdefg'),
+       "NORMALIZE"('abcdefg', NFC),
+       "NORMALIZE"('abcdefg', NFKC),
+       "NORMALIZE"('abcdefg', NFD),
+       "NORMALIZE"('abcdefg', NFKD)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -94,11 +94,11 @@ SELECT NORMALIZE_AND_CASEFOLD('abcdefg'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -127,19 +127,19 @@ QueryStmt
 ==
 
 # NORMALIZE_AND_CASEFOLD is not a keyword.
-SELECT `NORMALIZE_AND_CASEFOLD`('abcdefg'),
-       `NORMALIZE_AND_CASEFOLD`('abcdefg', NFC),
-       `NORMALIZE_AND_CASEFOLD`('abcdefg', NFKC),
-       `NORMALIZE_AND_CASEFOLD`('abcdefg', NFD),
-       `NORMALIZE_AND_CASEFOLD`('abcdefg', NFKD)
+SELECT "NORMALIZE_AND_CASEFOLD"('abcdefg'),
+       "NORMALIZE_AND_CASEFOLD"('abcdefg', NFC),
+       "NORMALIZE_AND_CASEFOLD"('abcdefg', NFKC),
+       "NORMALIZE_AND_CASEFOLD"('abcdefg', NFD),
+       "NORMALIZE_AND_CASEFOLD"('abcdefg', NFKD)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -176,11 +176,11 @@ FROM KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
-| +-$query.$col2#4 AS `$col2` [STRING]
-| +-$query.$col3#5 AS `$col3` [STRING]
-| +-$query.$col4#6 AS `$col4` [STRING]
-| +-$query.$col5#7 AS `$col5` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
+| +-$query.$col2#4 AS "$col2" [STRING]
+| +-$query.$col3#5 AS "$col3" [STRING]
+| +-$query.$col4#6 AS "$col4" [STRING]
+| +-$query.$col5#7 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#3, $col2#4, $col3#5, $col4#6, $col5#7]
@@ -217,11 +217,11 @@ FROM KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
-| +-$query.$col2#4 AS `$col2` [STRING]
-| +-$query.$col3#5 AS `$col3` [STRING]
-| +-$query.$col4#6 AS `$col4` [STRING]
-| +-$query.$col5#7 AS `$col5` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
+| +-$query.$col2#4 AS "$col2" [STRING]
+| +-$query.$col3#5 AS "$col3" [STRING]
+| +-$query.$col4#6 AS "$col4" [STRING]
+| +-$query.$col5#7 AS "$col5" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#3, $col2#4, $col3#5, $col4#6, $col5#7]
@@ -264,7 +264,7 @@ GROUP BY x;
 QueryStmt
 +-output_column_list=
 | +-$groupby.x#4 AS x [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [STRING]
+| +-$aggregate.$agg1#3 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.x#4, $aggregate.$agg1#3]
@@ -311,7 +311,7 @@ FROM (SELECT "NFC" AS NFC)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [STRING]
+| +-$query.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -351,11 +351,11 @@ SELECT NORMALIZE("abc", "NFC")
 ==
 
 # Backquoted identifiers are accepted.
-SELECT NORMALIZE("abc", `NFC`)
+SELECT NORMALIZE("abc", "NFC")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

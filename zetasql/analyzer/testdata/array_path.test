@@ -1708,7 +1708,7 @@ from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1922,7 +1922,7 @@ select flatten(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1964,7 +1964,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2755,7 +2755,7 @@ SELECT FLATTEN([
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2779,7 +2779,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2850,7 +2850,7 @@ SELECT FLATTEN([
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2874,7 +2874,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2949,7 +2949,7 @@ SELECT FLATTEN([
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2975,7 +2975,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3082,7 +3082,7 @@ SELECT FLATTEN(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3121,7 +3121,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3254,7 +3254,7 @@ SELECT FLATTEN(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3291,7 +3291,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3427,7 +3427,7 @@ SELECT FLATTEN(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3467,7 +3467,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3602,7 +3602,7 @@ SELECT FLATTEN(FLATTEN([
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3635,7 +3635,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3830,7 +3830,7 @@ SELECT FLATTEN(JsonArray.field) FROM ArrayTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [ARRAY<JSON>]
+| +-$query.$col1#18 AS "$col1" [ARRAY<JSON>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#18]
@@ -3852,7 +3852,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [ARRAY<JSON>]
+| +-$query.$col1#18 AS "$col1" [ARRAY<JSON>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#18]
@@ -3918,7 +3918,7 @@ SELECT FLATTEN([STRUCT(JSON '1' AS x, 2 AS y), (JSON '11', 22)].x.field)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<JSON>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<JSON>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3955,7 +3955,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<JSON>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<JSON>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4629,7 +4629,7 @@ FROM SimpleTypes types
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#37 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#37 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#37]
@@ -4664,7 +4664,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#37 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#37 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#37]
@@ -4899,7 +4899,7 @@ select count(*) from ArrayTypes t where 3 in unnest(t.ProtoArray.int32_val1);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#18 AS `$col1` [INT64]
+| +-$aggregate.$agg1#18 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#18]
@@ -4931,7 +4931,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#18 AS `$col1` [INT64]
+| +-$aggregate.$agg1#18 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#18]
@@ -5008,7 +5008,7 @@ from ArrayTypes t;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#22 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#22 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#22]
@@ -5045,7 +5045,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#22 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#22 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#22]
@@ -5285,7 +5285,7 @@ from ArrayTypes t;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#18 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#18]
@@ -5311,7 +5311,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#18 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#18]
@@ -5384,7 +5384,7 @@ from ArrayTypes t;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#18 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#18]
@@ -5410,7 +5410,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#18 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#18]
@@ -5642,7 +5642,7 @@ from ArrayTypes t, TestTable test;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#21 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#21 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#21]
@@ -5678,7 +5678,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#21 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#21 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#21]
@@ -5959,7 +5959,7 @@ FROM ( SELECT 1 AS c ) AS s;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -5990,7 +5990,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]

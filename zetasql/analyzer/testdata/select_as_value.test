@@ -2,7 +2,7 @@ select as value 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [INT64]
+| +-$query.$col1#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -17,7 +17,7 @@ select as value KitchenSink from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-TestTable.KitchenSink#3 AS `$value_column` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-TestTable.KitchenSink#3 AS "$value_column" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -44,7 +44,7 @@ select as value 5 as abc
 --
 QueryStmt
 +-output_column_list=
-| +-$query.abc#1 AS `$value_column` [INT64]
+| +-$query.abc#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -89,8 +89,8 @@ select (select as value 123), array(select as value 123)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
-| +-$query.$col2#4 AS `$col2` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [INT64]
+| +-$query.$col2#4 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#3, $col2#4]
@@ -125,7 +125,7 @@ select as value struct()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [STRUCT<>]
+| +-$query.$col1#1 AS "$value_column" [STRUCT<>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -140,7 +140,7 @@ select as value new zetasql_test__.TestExtraPB()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$query.$col1#1 AS "$value_column" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -183,7 +183,7 @@ ALTERNATION GROUP: as value
 --
 QueryStmt
 +-output_column_list=
-| +-KitchenSinkValueTable.value#1 AS `$value_column` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-KitchenSinkValueTable.value#1 AS "$value_column" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -322,7 +322,7 @@ from (select 123 value)
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.value#1 AS `$value_column` [INT64]
+| +-$subquery1.value#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -340,7 +340,7 @@ select distinct as value key from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$distinct.key#4 AS `$value_column` [INT32]
+| +-$distinct.key#4 AS "$value_column" [INT32]
 +-is_value_table=TRUE
 +-query=
   +-AggregateScan
@@ -357,7 +357,7 @@ select 6
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$value_column#3 AS `$value_column` [INT64]
+| +-$union_all.$value_column#3 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan
@@ -390,7 +390,7 @@ select as value 6
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#3 AS `$col1` [INT64]
+| +-$union_all.$col1#3 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#3]
@@ -422,7 +422,7 @@ select as value 1.0
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$value_column#3 AS `$value_column` [DOUBLE]
+| +-$union_all.$value_column#3 AS "$value_column" [DOUBLE]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan
@@ -459,7 +459,7 @@ select as value [1,2,3]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$value_column" [ARRAY<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan

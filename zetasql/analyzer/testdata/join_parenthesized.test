@@ -9,13 +9,13 @@ QueryStmt
 | +-KeyValue.Value#4 AS Value [STRING]
 | +-KeyValue.Key#5 AS Key [INT64]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col2#7 AS `$col2` [STRING]
+| +-$query.$col2#7 AS "$col2" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col4#8 AS `$col4` [STRING]
+| +-$query.$col4#8 AS "$col4" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
-| +-$query.$col6#9 AS `$col6` [STRING]
+| +-$query.$col6#9 AS "$col6" [STRING]
 | +-KeyValue.Key#5 AS Key [INT64]
 | +-KeyValue.Value#6 AS Value [STRING]
 +-query=
@@ -106,7 +106,7 @@ QueryStmt
 | +-KeyValue.Key#3 AS key [INT64]
 | +-KeyValue.Value#4 AS value [STRING]
 | +-KeyValue.Value#8 AS value [STRING]
-| +-$query.$col4#9 AS `$col4` [STRING]
+| +-$query.$col4#9 AS "$col4" [STRING]
 | +-KeyValue.Key#3 AS key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
 | +-KeyValue.Value#4 AS Value [STRING]
@@ -254,7 +254,7 @@ from (TestTable tt cross join KeyValue kv) join tt.KitchenSink.repeated_int32_va
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -323,7 +323,7 @@ ALTERNATION GROUP: LEFT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [INT64]
+| +-$query.$col1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -354,7 +354,7 @@ from TestTable A, (KeyValue B RIGHT JOIN KeyValue C USING (key))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [INT64]
+| +-$query.$col1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]

@@ -5,7 +5,7 @@ ARRAY<STRUCT<STRING>>[{"abc"}]
 ==
 # Test all the accepted escaped characters.
 [name=strings_accepted_escaped_characters]
-SELECT "a\ab", "a\bb", "a\fb", "a\nb", "a\rb", "a\tb", "a\vb", "a\\b", "a\?b", "a\'b", "a\`b"
+SELECT "a\ab", "a\bb", "a\fb", "a\nb", "a\rb", "a\tb", "a\vb", "a\\b", "a\?b", "a\'b", "a\"b"
 --
 ARRAY<STRUCT<STRING,
              STRING,
@@ -28,7 +28,7 @@ ARRAY<STRUCT<STRING,
   "a\\b",
   "a?b",
   "a'b",
-  "a`b"}]
+  "a"b"}]
 ==
 
 #Test that unaccepted escaped characters error out.
@@ -163,9 +163,9 @@ SELECT '''a''''''b'''
 ==
 
 [name=strings_unescaped_quote_types_10]
-SELECT 'a`b'
+SELECT 'a"b'
 --
-ARRAY<STRUCT<STRING>>[{"a`b"}]
+ARRAY<STRUCT<STRING>>[{"a"b"}]
 ==
 
 # Test octals.
@@ -1305,8 +1305,8 @@ ARRAY<STRUCT<STRING, BYTES>>[{NULL, NULL}]
 [name=to_json_string_with_escaped_field_names]
 SELECT
   TO_JSON_STRING(
-    STRUCT<`a\"in\"between\\slashes\\\\` INT64,
-           `abca\x00\x01\x1A\x1F` STRING>(1, 'foo'))
+    STRUCT<"a\"in\"between\\slashes\\\\" INT64,
+           "abca\x00\x01\x1A\x1F" STRING>(1, 'foo'))
 --
 ARRAY<STRUCT<STRING>>[
   {

@@ -332,11 +332,11 @@ options (abc=def, xyz=@bad_param)
                       ^
 ==
 
-create view a.b.`c.d`.`e f g`.kk
+create view a.b."c.d"."e f g".kk
 as select 1 c
 --
 CreateViewStmt
-+-name_path=a.b.`c.d`.`e f g`.kk
++-name_path=a.b."c.d"."e f g".kk
 +-output_column_list=
 | +-$view.c#1 AS c [INT64]
 +-query=
@@ -348,7 +348,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 c"
 +-column_definition_list=
-  +-ColumnDefinition(name="c", type=INT64, column=a.b.`c.d`.`e f g`.kk.c#2)
+  +-ColumnDefinition(name="c", type=INT64, column=a.b."c.d"."e f g".kk.c#2)
 ==
 
 # Anonymous columns not allowed.
@@ -408,7 +408,7 @@ ALTERNATION GROUP: <empty>
 CreateViewStmt
 +-name_path=tt
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<a INT64, INT64, c INT64, c INT64>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<a INT64, INT64, c INT64, c INT64>]
 +-query=
 | +-ProjectScan
 |   +-column_list=[$make_struct.$struct#5]
@@ -441,7 +441,7 @@ ALTERNATION GROUP: materialized
 CreateMaterializedViewStmt
 +-name_path=tt
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<a INT64, INT64, c INT64, c INT64>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<a INT64, INT64, c INT64, c INT64>]
 +-query=
 | +-ProjectScan
 |   +-column_list=[$make_struct.$struct#5]
@@ -474,7 +474,7 @@ ALTERNATION GROUP: approx
 CreateApproxViewStmt
 +-name_path=tt
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<a INT64, INT64, c INT64, c INT64>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<a INT64, INT64, c INT64, c INT64>]
 +-query=
 | +-ProjectScan
 |   +-column_list=[$make_struct.$struct#5]
@@ -505,14 +505,14 @@ CreateApproxViewStmt
 
 # Create a value view with SELECT AS ProtoName.
 create {{|materialized|approx}} view tt
-as select as `zetasql_test__.TestExtraPB` 55 int32_val1
+as select as "zetasql_test__.TestExtraPB" 55 int32_val1
 --
 ALTERNATION GROUP: <empty>
 --
 CreateViewStmt
 +-name_path=tt
 +-output_column_list=
-| +-$make_proto.$proto#2 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#2 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-query=
 | +-ProjectScan
 |   +-column_list=[$make_proto.$proto#2]
@@ -529,7 +529,7 @@ CreateViewStmt
 |       | +-int32_val1#1 := Literal(type=INT64, value=55)
 |       +-input_scan=
 |         +-SingleRowScan
-+-sql="select as `zetasql_test__.TestExtraPB` 55 int32_val1"
++-sql="select as "zetasql_test__.TestExtraPB" 55 int32_val1"
 +-is_value_table=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
@@ -539,7 +539,7 @@ ALTERNATION GROUP: materialized
 CreateMaterializedViewStmt
 +-name_path=tt
 +-output_column_list=
-| +-$make_proto.$proto#2 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#2 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-query=
 | +-ProjectScan
 |   +-column_list=[$make_proto.$proto#2]
@@ -556,7 +556,7 @@ CreateMaterializedViewStmt
 |       | +-int32_val1#1 := Literal(type=INT64, value=55)
 |       +-input_scan=
 |         +-SingleRowScan
-+-sql="select as `zetasql_test__.TestExtraPB` 55 int32_val1"
++-sql="select as "zetasql_test__.TestExtraPB" 55 int32_val1"
 +-is_value_table=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
@@ -566,7 +566,7 @@ ALTERNATION GROUP: approx
 CreateApproxViewStmt
 +-name_path=tt
 +-output_column_list=
-| +-$make_proto.$proto#2 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#2 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-query=
 | +-ProjectScan
 |   +-column_list=[$make_proto.$proto#2]
@@ -583,7 +583,7 @@ CreateApproxViewStmt
 |       | +-int32_val1#1 := Literal(type=INT64, value=55)
 |       +-input_scan=
 |         +-SingleRowScan
-+-sql="select as `zetasql_test__.TestExtraPB` 55 int32_val1"
++-sql="select as "zetasql_test__.TestExtraPB" 55 int32_val1"
 +-is_value_table=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
@@ -789,7 +789,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -800,7 +800,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -828,7 +828,7 @@ ALTERNATION GROUP: materialized
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -839,7 +839,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -867,7 +867,7 @@ ALTERNATION GROUP: approx
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -878,7 +878,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -910,7 +910,7 @@ create view T as /* comment */ select 1 a
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -921,7 +921,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -957,7 +957,7 @@ select 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -968,7 +968,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -994,7 +994,7 @@ CreateViewStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1005,7 +1005,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1031,7 +1031,7 @@ CreateViewStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1262,7 +1262,7 @@ CreateViewStmt
 ==
 
 # Create view with column name list, view sql columns have no name.
-create {{materialized|approx|}} view tt(a, `b`)
+create {{materialized|approx|}} view tt(a, "b")
 as select 1, 2
 --
 ALTERNATION GROUP: materialized
@@ -1475,27 +1475,27 @@ create  view tt(aB, Ab)
 ==
 
 # Create view with internal column name
-create {{materialized|approx|}} view tt(`$foo`, `$2`)
+create {{materialized|approx|}} view tt("$foo", "$2")
 as select 1, 2
 --
 ALTERNATION GROUP: materialized
 
 --
 ERROR: Illegal column name: $foo [at 1:29]
-create materialized view tt(`$foo`, `$2`)
+create materialized view tt("$foo", "$2")
                             ^
 --
 ALTERNATION GROUP: approx
 --
 ERROR: Illegal column name: $foo [at 1:23]
-create approx view tt(`$foo`, `$2`)
+create approx view tt("$foo", "$2")
                       ^
 --
 ALTERNATION GROUP: <empty>
 --
 
 ERROR: Illegal column name: $foo [at 1:17]
-create  view tt(`$foo`, `$2`)
+create  view tt("$foo", "$2")
                 ^
 ==
 

@@ -234,43 +234,43 @@ WHERE
   true;
 ==
 
-DELETE ` Value`
-WHERE ` Value`.` Value` = "true"
+DELETE " Value"
+WHERE " Value"." Value" = "true"
 --
 [UNPARSED_SQL]
-DELETE ` Value` AS ` value_1`
+DELETE " Value" AS " value_1"
 WHERE
-  (` value_1`.` Value`) = "true";
+  (" value_1"." Value") = "true";
 ==
 
-UPDATE ` Value` SET
-  ` Value`.` Value` = "true"
-WHERE ` Key` > 1
+UPDATE " Value" SET
+  " Value"." Value" = "true"
+WHERE " Key" > 1
 --
 [UNPARSED_SQL]
-UPDATE ` Value` AS ` value_1`
+UPDATE " Value" AS " value_1"
 SET
-  ` value_1`.` Value` = "true"
+  " value_1"." Value" = "true"
 WHERE
-  (` value_1`.` Key`) > 1;
+  (" value_1"." Key") > 1;
 ==
 
-INSERT ` Value` (` Key`, ` Value`)
-select * from ` Value`
+INSERT " Value" (" Key", " Value")
+select * from " Value"
 --
 [UNPARSED_SQL]
-INSERT INTO ` Value`(` Key`, ` Value`)
+INSERT INTO " Value"(" Key", " Value")
 SELECT
-  ` value_4`.a_2 AS a_2,
-  ` value_4`.a_3 AS a_3
+  " value_4".a_2 AS a_2,
+  " value_4".a_3 AS a_3
 FROM
   (
     SELECT
-      ` value_1`.` Key` AS a_2,
-      ` value_1`.` Value` AS a_3
+      " value_1"." Key" AS a_2,
+      " value_1"." Value" AS a_3
     FROM
-      ` Value` AS ` value_1`
-  ) AS ` value_4`;
+      " Value" AS " value_1"
+  ) AS " value_4";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
@@ -318,7 +318,7 @@ INSERT INTO nested_catalog.KeyValueNested(Key, Value)
 VALUES
   (1, "one")
 THEN RETURN
-  (KeyValueNested.Key) + 1 AS `$col1`;
+  (KeyValueNested.Key) + 1 AS "$col1";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
@@ -335,7 +335,7 @@ SET
 WHERE
   (keyvaluenested_1.Key) = 1
 THEN RETURN
-  (keyvaluenested_1.Key) + 1 AS `$col1`;
+  (keyvaluenested_1.Key) + 1 AS "$col1";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
@@ -350,7 +350,7 @@ DELETE nested_catalog.KeyValueNested AS keyvaluenested_1
 WHERE
   (keyvaluenested_1.Key) = 1
 THEN RETURN
-  (keyvaluenested_1.Key) + 1 AS `$col1`;
+  (keyvaluenested_1.Key) + 1 AS "$col1";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when

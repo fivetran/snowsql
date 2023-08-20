@@ -908,7 +908,7 @@ SELECT (SELECT * FROM UnaryScalarArg(a)) FROM (SELECT 1 AS a);
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1142,7 +1142,7 @@ SELECT WITH(a AS 1, (SELECT * FROM ScalarParamUsedAsTVFArgument(a)));
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -2633,7 +2633,7 @@ ALTERNATION GROUP: 1,TABLE abTable,"two"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2687,7 +2687,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2776,7 +2776,7 @@ ALTERNATION GROUP: 1,TABLE abTable,t.b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2837,7 +2837,7 @@ ALTERNATION GROUP: 1,(SELECT 1 AS a, "two" AS b),"two"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2897,7 +2897,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2992,7 +2992,7 @@ ALTERNATION GROUP: 1,(SELECT 1 AS a, "two" AS b),t.b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3060,7 +3060,7 @@ ALTERNATION GROUP: 1,(SELECT t.a, "two" AS b),"two"
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3128,7 +3128,7 @@ ALTERNATION GROUP: 1,(SELECT t.a, "two" AS b),t.b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3197,7 +3197,7 @@ ALTERNATION GROUP: t.a,TABLE abTable,"two"
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3259,7 +3259,7 @@ ALTERNATION GROUP: t.a,TABLE abTable,t.b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3322,7 +3322,7 @@ ALTERNATION GROUP: t.a,(SELECT 1 AS a, "two" AS b),"two"
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3390,7 +3390,7 @@ ALTERNATION GROUP: t.a,(SELECT 1 AS a, "two" AS b),t.b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3459,7 +3459,7 @@ ALTERNATION GROUP: t.a,(SELECT t.a, "two" AS b),"two"
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3527,7 +3527,7 @@ ALTERNATION GROUP: t.a,(SELECT t.a, "two" AS b),t.b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [STRUCT<a INT64, b STRING>]
+| +-$query.$col1#10 AS "$col1" [STRUCT<a INT64, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -3600,7 +3600,7 @@ FROM (SELECT 'b' AS b) AS t;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRING]
+| +-$query.$col1#7 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -3750,7 +3750,7 @@ QueryStmt
 
 SELECT *
 FROM JoinsTableArgToScannedTable(
-  (SELECT `key`, `value` FROM TwoIntegers), "arg");
+  (SELECT "key", "value" FROM TwoIntegers), "arg");
 --
 QueryStmt
 +-output_column_list=

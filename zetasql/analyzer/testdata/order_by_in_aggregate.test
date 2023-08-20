@@ -5,7 +5,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -41,7 +41,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#6 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#6 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#6]
@@ -83,7 +83,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -118,7 +118,7 @@ order by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#5 AS Key [INT32]
-| +-$aggregate.$agg1#4 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#4 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.Key#5, $aggregate.$agg1#4]
@@ -155,7 +155,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [STRING]
+| +-$aggregate.$agg1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -273,8 +273,8 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#8 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
-| +-$aggregate.$agg2#7 AS `$col3` [STRING]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
+| +-$aggregate.$agg2#7 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#8, $aggregate.$agg1#5, $aggregate.$agg2#7]
@@ -377,7 +377,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#9 AS Key [INT32]
-| +-$aggregate.$agg1#8 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#8 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#9, $aggregate.$agg1#8]
@@ -430,7 +430,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#5]
@@ -853,7 +853,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -879,7 +879,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -906,7 +906,7 @@ from KitchenSinkValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -942,7 +942,7 @@ from KitchenSinkValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -979,7 +979,7 @@ from TestStructValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1015,7 +1015,7 @@ from TestStructValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1056,7 +1056,7 @@ from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#7 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#7]
@@ -1410,7 +1410,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1443,7 +1443,7 @@ from (select 1 as w, [1, 2] as x union all select 2 as w, [5, 2] as x
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#9 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#9 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#9]
@@ -1501,7 +1501,7 @@ from (select 1 as w, [1, 2] as x union all select 2 as w, [5, 2] as x
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#9 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#9 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#9]
@@ -1563,8 +1563,8 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#8 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
-| +-$aggregate.$agg2#7 AS `$col3` [STRING]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
+| +-$aggregate.$agg2#7 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#8, $aggregate.$agg1#5, $aggregate.$agg2#7]
@@ -1623,8 +1623,8 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#4 AS `$col2` [ARRAY<INT64>]
-| +-$aggregate.$agg2#5 AS `$col3` [STRING]
+| +-$aggregate.$agg1#4 AS "$col2" [ARRAY<INT64>]
+| +-$aggregate.$agg2#5 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#4, $aggregate.$agg2#5]
@@ -1663,7 +1663,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1752,7 +1752,7 @@ ALTERNATION GROUP: ,V_1_3_ARRAY_ORDERING
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1805,7 +1805,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1859,7 +1859,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1897,7 +1897,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#5]
@@ -1942,7 +1942,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#5]
@@ -1993,7 +1993,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<STRING>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2039,7 +2039,7 @@ ALTERNATION GROUP: has_,has_
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2098,7 +2098,7 @@ ALTERNATION GROUP: ,V_1_3_NULLS_FIRST_LAST_IN_ORDER_BY,first
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -2121,7 +2121,7 @@ ALTERNATION GROUP: ,V_1_3_NULLS_FIRST_LAST_IN_ORDER_BY,last
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]

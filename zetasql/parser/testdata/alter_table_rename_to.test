@@ -30,7 +30,7 @@ ALTER TABLE IF EXISTS foo RENAME TO bar
 ==
 
 # The new name is a path expression
-ALTER TABLE foo RENAME TO {{foo.bar|`foo.bar`}};
+ALTER TABLE foo RENAME TO {{foo.bar|"foo.bar"}};
 --
 ALTERNATION GROUP: foo.bar
 --
@@ -45,7 +45,7 @@ AlterTableStatement [0-33]
 --
 ALTER TABLE foo RENAME TO foo.bar
 --
-ALTERNATION GROUP: `foo.bar`
+ALTERNATION GROUP: "foo.bar"
 --
 AlterTableStatement [0-35]
   PathExpression [12-15]
@@ -55,5 +55,5 @@ AlterTableStatement [0-35]
       PathExpression [26-35]
         Identifier("foo.bar") [26-35]
 --
-ALTER TABLE foo RENAME TO `foo.bar`
+ALTER TABLE foo RENAME TO "foo.bar"
 ==

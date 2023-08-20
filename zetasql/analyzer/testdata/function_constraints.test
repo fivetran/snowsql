@@ -27,7 +27,7 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -49,7 +49,7 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -231,9 +231,9 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -295,10 +295,10 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]

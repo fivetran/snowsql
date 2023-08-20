@@ -4,9 +4,9 @@ select /* comment */ 1, # comment
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -35,7 +35,7 @@ select 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -93,7 +93,7 @@ select "abc";
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -105,7 +105,7 @@ QueryStmt
 
 # Note: Backslashes are unescaped by the test framework.
 # Then the \x escapes are unescaped to S and T by zetasql.
-select T from (select '\x53' as `\x54`)
+select T from (select '\x53' as "\x54")
 --
 QueryStmt
 +-output_column_list=
@@ -129,13 +129,13 @@ select 1 from NoTable
               ^
 ==
 
-# NOTE: If the output of this query changes to not include `$col1`, then
+# NOTE: If the output of this query changes to not include "$col1", then
 # the test below should also be updated.
 select * from (select 1+2);
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.$col1#1 AS `$col1` [INT64]
+| +-$subquery1.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$subquery1.$col1#1]
@@ -153,14 +153,14 @@ QueryStmt
 
 # We should have a virtual column called $col1 (see previous query),
 # but shouldn't be able to select it.
-select `$col1` from (select 1+2);
+select "$col1" from (select 1+2);
 --
-ERROR: Unrecognized name: `$col1` [at 1:8]
-select `$col1` from (select 1+2);
+ERROR: Unrecognized name: "$col1" [at 1:8]
+select "$col1" from (select 1+2);
        ^
 ==
 
-select `Key`, Value from `KeyValue`;
+select "Key", Value from "KeyValue";
 --
 QueryStmt
 +-output_column_list=
@@ -416,7 +416,7 @@ select kv.kv from KeyValue AS kv
           ^
 ==
 
-# `key` as a scan alias takes precedence over `key` as a column.
+# "key" as a scan alias takes precedence over "key" as a column.
 select value, key.value from KeyValue as key
 --
 QueryStmt
@@ -597,7 +597,7 @@ ExplainStmt
 +-statement=
   +-QueryStmt
     +-output_column_list=
-    | +-$query.$col1#1 AS `$col1` [INT64]
+    | +-$query.$col1#1 AS "$col1" [INT64]
     +-query=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -777,13 +777,13 @@ QueryStmt
 
 # Using SQL reserved and non-reserved keywords as identifiers.
 # Where an identifier gets printed with ToIdentifierLiteral, it will be quoted.
-select 1 `select`, 2 `SELect`, 3 options, `from`.key
-from KeyValue `from`
+select 1 "select", 2 "SELect", 3 options, "from".key
+from KeyValue "from"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.select#3 AS `select` [INT64]
-| +-$query.SELect#4 AS `SELect` [INT64]
+| +-$query.select#3 AS "select" [INT64]
+| +-$query.SELect#4 AS "SELect" [INT64]
 | +-$query.options#5 AS options [INT64]
 | +-KeyValue.Key#1 AS key [INT64]
 +-query=
@@ -798,10 +798,10 @@ QueryStmt
 ==
 
 # Reserved keyword in an identifier in an error message.
-select `select`.`from` from KeyValue
+select "select"."from" from KeyValue
 --
-ERROR: Unrecognized name: `select` [at 1:8]
-select `select`.`from` from KeyValue
+ERROR: Unrecognized name: "select" [at 1:8]
+select "select"."from" from KeyValue
        ^
 ==
 
@@ -810,7 +810,7 @@ select 5 from NoColumns
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -848,7 +848,7 @@ where true
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#1 AS `$col1` [INT64]
+| +-$aggregate.$agg1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#1]

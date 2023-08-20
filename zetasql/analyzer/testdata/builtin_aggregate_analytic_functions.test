@@ -24,25 +24,25 @@ window w as (partition by key order by value rows 2 preceding)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#22 AS `$col1` [INT64]
-| +-$analytic.$analytic2#23 AS `$col2` [INT64]
-| +-$analytic.$analytic3#24 AS `$col3` [INT64]
-| +-$analytic.$analytic4#25 AS `$col4` [DOUBLE]
-| +-$analytic.$analytic5#26 AS `$col5` [DOUBLE]
-| +-$analytic.$analytic6#27 AS `$col6` [DOUBLE]
-| +-$analytic.$analytic7#28 AS `$col7` [DOUBLE]
-| +-$analytic.$analytic8#29 AS `$col8` [DOUBLE]
-| +-$analytic.$analytic9#30 AS `$col9` [DOUBLE]
-| +-$analytic.$analytic10#31 AS `$col10` [DOUBLE]
-| +-$analytic.$analytic11#32 AS `$col11` [DOUBLE]
-| +-$analytic.$analytic12#33 AS `$col12` [DOUBLE]
-| +-$analytic.$analytic13#34 AS `$col13` [DOUBLE]
-| +-$analytic.$analytic14#35 AS `$col14` [INT64]
-| +-$analytic.$analytic15#36 AS `$col15` [INT64]
-| +-$analytic.$analytic16#37 AS `$col16` [STRING]
-| +-$analytic.$analytic17#38 AS `$col17` [ARRAY<INT64>]
-| +-$analytic.$analytic18#39 AS `$col18` [ARRAY<INT64>]
-| +-$analytic.$analytic19#40 AS `$col19` [STRING]
+| +-$analytic.$analytic1#22 AS "$col1" [INT64]
+| +-$analytic.$analytic2#23 AS "$col2" [INT64]
+| +-$analytic.$analytic3#24 AS "$col3" [INT64]
+| +-$analytic.$analytic4#25 AS "$col4" [DOUBLE]
+| +-$analytic.$analytic5#26 AS "$col5" [DOUBLE]
+| +-$analytic.$analytic6#27 AS "$col6" [DOUBLE]
+| +-$analytic.$analytic7#28 AS "$col7" [DOUBLE]
+| +-$analytic.$analytic8#29 AS "$col8" [DOUBLE]
+| +-$analytic.$analytic9#30 AS "$col9" [DOUBLE]
+| +-$analytic.$analytic10#31 AS "$col10" [DOUBLE]
+| +-$analytic.$analytic11#32 AS "$col11" [DOUBLE]
+| +-$analytic.$analytic12#33 AS "$col12" [DOUBLE]
+| +-$analytic.$analytic13#34 AS "$col13" [DOUBLE]
+| +-$analytic.$analytic14#35 AS "$col14" [INT64]
+| +-$analytic.$analytic15#36 AS "$col15" [INT64]
+| +-$analytic.$analytic16#37 AS "$col16" [STRING]
+| +-$analytic.$analytic17#38 AS "$col17" [ARRAY<INT64>]
+| +-$analytic.$analytic18#39 AS "$col18" [ARRAY<INT64>]
+| +-$analytic.$analytic19#40 AS "$col19" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#22, $analytic2#23, $analytic3#24, $analytic4#25, $analytic5#26, $analytic6#27, $analytic7#28, $analytic8#29, $analytic9#30, $analytic10#31, $analytic11#32, $analytic12#33, $analytic13#34, $analytic14#35, $analytic15#36, $analytic16#37, $analytic17#38, $analytic18#39, $analytic19#40]
@@ -297,25 +297,25 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#22 AS `$col1` [INT64]
-| +-$analytic.$analytic2#23 AS `$col2` [INT64]
-| +-$analytic.$analytic3#24 AS `$col3` [INT64]
-| +-$analytic.$analytic4#25 AS `$col4` [DOUBLE]
-| +-$analytic.$analytic5#26 AS `$col5` [DOUBLE]
-| +-$analytic.$analytic6#27 AS `$col6` [DOUBLE]
-| +-$analytic.$analytic7#28 AS `$col7` [DOUBLE]
-| +-$analytic.$analytic8#29 AS `$col8` [DOUBLE]
-| +-$analytic.$analytic9#30 AS `$col9` [DOUBLE]
-| +-$analytic.$analytic10#31 AS `$col10` [DOUBLE]
-| +-$analytic.$analytic11#32 AS `$col11` [DOUBLE]
-| +-$analytic.$analytic12#33 AS `$col12` [DOUBLE]
-| +-$analytic.$analytic13#34 AS `$col13` [DOUBLE]
-| +-$analytic.$analytic14#35 AS `$col14` [INT64]
-| +-$analytic.$analytic15#36 AS `$col15` [INT64]
-| +-$analytic.$analytic16#37 AS `$col16` [STRING]
-| +-$analytic.$analytic17#38 AS `$col17` [ARRAY<INT64>]
-| +-$analytic.$analytic18#39 AS `$col18` [ARRAY<INT64>]
-| +-$analytic.$analytic19#40 AS `$col19` [STRING]
+| +-$analytic.$analytic1#22 AS "$col1" [INT64]
+| +-$analytic.$analytic2#23 AS "$col2" [INT64]
+| +-$analytic.$analytic3#24 AS "$col3" [INT64]
+| +-$analytic.$analytic4#25 AS "$col4" [DOUBLE]
+| +-$analytic.$analytic5#26 AS "$col5" [DOUBLE]
+| +-$analytic.$analytic6#27 AS "$col6" [DOUBLE]
+| +-$analytic.$analytic7#28 AS "$col7" [DOUBLE]
+| +-$analytic.$analytic8#29 AS "$col8" [DOUBLE]
+| +-$analytic.$analytic9#30 AS "$col9" [DOUBLE]
+| +-$analytic.$analytic10#31 AS "$col10" [DOUBLE]
+| +-$analytic.$analytic11#32 AS "$col11" [DOUBLE]
+| +-$analytic.$analytic12#33 AS "$col12" [DOUBLE]
+| +-$analytic.$analytic13#34 AS "$col13" [DOUBLE]
+| +-$analytic.$analytic14#35 AS "$col14" [INT64]
+| +-$analytic.$analytic15#36 AS "$col15" [INT64]
+| +-$analytic.$analytic16#37 AS "$col16" [STRING]
+| +-$analytic.$analytic17#38 AS "$col17" [ARRAY<INT64>]
+| +-$analytic.$analytic18#39 AS "$col18" [ARRAY<INT64>]
+| +-$analytic.$analytic19#40 AS "$col19" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#22, $analytic2#23, $analytic3#24, $analytic4#25, $analytic5#26, $analytic6#27, $analytic7#28, $analytic8#29, $analytic9#30, $analytic10#31, $analytic11#32, $analytic12#33, $analytic13#34, $analytic14#35, $analytic15#36, $analytic16#37, $analytic17#38, $analytic18#39, $analytic19#40]
@@ -535,20 +535,20 @@ window w as (partition by key)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#17 AS `$col1` [INT64]
-| +-$analytic.$analytic2#18 AS `$col2` [INT64]
-| +-$analytic.$analytic3#19 AS `$col3` [DOUBLE]
-| +-$analytic.$analytic4#20 AS `$col4` [DOUBLE]
-| +-$analytic.$analytic5#21 AS `$col5` [DOUBLE]
-| +-$analytic.$analytic6#22 AS `$col6` [DOUBLE]
-| +-$analytic.$analytic7#23 AS `$col7` [DOUBLE]
-| +-$analytic.$analytic8#24 AS `$col8` [DOUBLE]
-| +-$analytic.$analytic9#25 AS `$col9` [DOUBLE]
-| +-$analytic.$analytic10#26 AS `$col10` [INT64]
-| +-$analytic.$analytic11#27 AS `$col11` [INT64]
-| +-$analytic.$analytic12#28 AS `$col12` [INT64]
-| +-$analytic.$analytic13#29 AS `$col13` [ARRAY<INT64>]
-| +-$analytic.$analytic14#30 AS `$col14` [STRING]
+| +-$analytic.$analytic1#17 AS "$col1" [INT64]
+| +-$analytic.$analytic2#18 AS "$col2" [INT64]
+| +-$analytic.$analytic3#19 AS "$col3" [DOUBLE]
+| +-$analytic.$analytic4#20 AS "$col4" [DOUBLE]
+| +-$analytic.$analytic5#21 AS "$col5" [DOUBLE]
+| +-$analytic.$analytic6#22 AS "$col6" [DOUBLE]
+| +-$analytic.$analytic7#23 AS "$col7" [DOUBLE]
+| +-$analytic.$analytic8#24 AS "$col8" [DOUBLE]
+| +-$analytic.$analytic9#25 AS "$col9" [DOUBLE]
+| +-$analytic.$analytic10#26 AS "$col10" [INT64]
+| +-$analytic.$analytic11#27 AS "$col11" [INT64]
+| +-$analytic.$analytic12#28 AS "$col12" [INT64]
+| +-$analytic.$analytic13#29 AS "$col13" [ARRAY<INT64>]
+| +-$analytic.$analytic14#30 AS "$col14" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#17, $analytic2#18, $analytic3#19, $analytic4#20, $analytic5#21, $analytic6#22, $analytic7#23, $analytic8#24, $analytic9#25, $analytic10#26, $analytic11#27, $analytic12#28, $analytic13#29, $analytic14#30]
@@ -748,7 +748,7 @@ ALTERNATION GROUP: approx_quantiles(value, 3)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [ARRAY<STRING>]
+| +-$analytic.$analytic1#4 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -775,7 +775,7 @@ ALTERNATION GROUP: approx_top_count(key, 4)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [ARRAY<STRUCT<value INT64, count INT64>>]
+| +-$analytic.$analytic1#4 AS "$col1" [ARRAY<STRUCT<value INT64, count INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -804,7 +804,7 @@ from keyvalue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [BYTES]
+| +-$analytic.$analytic1#4 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -832,7 +832,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [INT64]
+| +-$analytic.$analytic1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -865,7 +865,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [BYTES]
+| +-$analytic.$analytic1#3 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -898,7 +898,7 @@ from keyvalue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [BYTES]
+| +-$analytic.$analytic1#4 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -931,7 +931,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [INT64]
+| +-$analytic.$analytic1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -964,7 +964,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [BYTES]
+| +-$analytic.$analytic1#3 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -997,7 +997,7 @@ from keyvalue;
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [BYTES]
+| +-$analytic.$analytic1#4 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1025,7 +1025,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [ARRAY<INT64>]
+| +-$analytic.$analytic1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -1059,7 +1059,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [BYTES]
+| +-$analytic.$analytic1#3 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -1092,7 +1092,7 @@ from (select cast(NULL as bytes) as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#3 AS `$col1` [INT64]
+| +-$analytic.$analytic1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#3]
@@ -1128,7 +1128,7 @@ ALTERNATION GROUP: bit_and_bq(key)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1154,7 +1154,7 @@ ALTERNATION GROUP: bit_or_bq(key)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1180,7 +1180,7 @@ ALTERNATION GROUP:  bit_xor_bq(key)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [INT64]
+| +-$analytic.$analytic1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1210,7 +1210,7 @@ ALTERNATION GROUP: logical_and(true)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [BOOL]
+| +-$analytic.$analytic1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -1236,7 +1236,7 @@ ALTERNATION GROUP: logical_or(true)
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [BOOL]
+| +-$analytic.$analytic1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]

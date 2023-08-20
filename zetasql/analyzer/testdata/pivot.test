@@ -186,7 +186,7 @@ ALTERNATION GROUP: TABLE_VALUED_FUNCTIONS,V_1_3_PIVOT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1385,7 +1385,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [INT64]
 | +-$pivot._1#4 AS _1 [INT64]
 | +-$pivot.minus_2#5 AS minus_2 [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1462,7 +1462,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [INT64]
 | +-$pivot._1#4 AS _1 [INT64]
 | +-$pivot.minus_2#5 AS minus_2 [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1546,7 +1546,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [NUMERIC]
 | +-$pivot._1#4 AS _1 [NUMERIC]
 | +-$pivot.minus_2#5 AS minus_2 [NUMERIC]
-| +-$pivot.NULL#6 AS `NULL` [NUMERIC]
+| +-$pivot.NULL#6 AS "NULL" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1622,7 +1622,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [BIGNUMERIC]
 | +-$pivot._1#4 AS _1 [BIGNUMERIC]
 | +-$pivot.minus_2#5 AS minus_2 [BIGNUMERIC]
-| +-$pivot.NULL#6 AS `NULL` [BIGNUMERIC]
+| +-$pivot.NULL#6 AS "NULL" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1735,7 +1735,7 @@ QueryStmt
 +-output_column_list=
 | +-$pivot.test#4 AS test [INT64]
 | +-$pivot.empty_string_value#5 AS empty_string_value [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[test#4, empty_string_value#5, NULL#6]
@@ -1816,7 +1816,7 @@ QueryStmt
 +-output_column_list=
 | +-$pivot._2018_01_01#4 AS _2018_01_01 [INT64]
 | +-$pivot._2019_01_01#5 AS _2019_01_01 [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_2018_01_01#4, _2019_01_01#5, NULL#6]
@@ -1859,7 +1859,7 @@ ALTERNATION GROUP:  AS mytime
 QueryStmt
 +-output_column_list=
 | +-$pivot.mytime#4 AS mytime [INT64]
-| +-$pivot.NULL#5 AS `NULL` [INT64]
+| +-$pivot.NULL#5 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[mytime#4, NULL#5]
@@ -1912,7 +1912,7 @@ ALTERNATION GROUP: TIMESTAMP,AS mytime
 QueryStmt
 +-output_column_list=
 | +-$pivot.mytime#4 AS mytime [INT64]
-| +-$pivot.NULL#5 AS `NULL` [INT64]
+| +-$pivot.NULL#5 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[mytime#4, NULL#5]
@@ -1951,7 +1951,7 @@ ALTERNATION GROUP: DATETIME,AS mytime
 QueryStmt
 +-output_column_list=
 | +-$pivot.mytime#4 AS mytime [INT64]
-| +-$pivot.NULL#5 AS `NULL` [INT64]
+| +-$pivot.NULL#5 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[mytime#4, NULL#5]
@@ -2051,7 +2051,7 @@ HAVING _2 > z;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby._2#9 AS _2 [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2125,7 +2125,7 @@ HAVING two > z;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby.two#9 AS two [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2199,7 +2199,7 @@ HAVING two > z;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby.two#9 AS two [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2278,7 +2278,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby._2#9 AS _2 [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2343,7 +2343,7 @@ ALTERNATION GROUP: AS _1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby._2#9 AS _2 [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2444,8 +2444,8 @@ SELECT * FROM (SELECT TRUE AS x) PIVOT(ANY_VALUE(x) FOR x IN (TRUE, FALSE));
 --
 QueryStmt
 +-output_column_list=
-| +-$pivot.true#3 AS `true` [BOOL]
-| +-$pivot.false#4 AS `false` [BOOL]
+| +-$pivot.true#3 AS "true" [BOOL]
+| +-$pivot.false#4 AS "false" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[true#3, false#4]
@@ -2674,7 +2674,7 @@ SELECT
   TESTENUM0,
   TESTENUM1,
   TESTENUMNEGATIVE,
-  `NULL`
+  "NULL"
   FROM (
   SELECT int64_key_1, test_enum FROM KitchenSinkValueTable)
   PIVOT(SUM(int64_key_1)
@@ -2689,7 +2689,7 @@ QueryStmt
 | +-$pivot.TESTENUM0#5 AS TESTENUM0 [INT64]
 | +-$pivot.TESTENUM1#6 AS TESTENUM1 [INT64]
 | +-$pivot.TESTENUMNEGATIVE#7 AS TESTENUMNEGATIVE [INT64]
-| +-$pivot.NULL#8 AS `NULL` [INT64]
+| +-$pivot.NULL#8 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[TESTENUM0#5, TESTENUM1#6, TESTENUMNEGATIVE#7, NULL#8]
@@ -2759,7 +2759,7 @@ WITH t AS (
     xy_x_1_y_2_ab_a_test_a_b_false,
     xy_x_minus_1_y_minus_2_ab_a_NULL_b_false,
     xy_x_minus_1_y_NULL_ab_NULL,
-    `NULL`
+    "NULL"
 FROM t
   PIVOT(ANY_VALUE(s) FOR s IN (
     STRUCT(STRUCT(1, 2), STRUCT('test_a', FALSE)),
@@ -2773,7 +2773,7 @@ QueryStmt
 | +-$pivot.xy_x_1_y_2_ab_a_test_a_b_false#4 AS xy_x_1_y_2_ab_a_test_a_b_false [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
 | +-$pivot.xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5 AS xy_x_minus_1_y_minus_2_ab_a_NULL_b_false [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
 | +-$pivot.xy_x_minus_1_y_NULL_ab_NULL#6 AS xy_x_minus_1_y_NULL_ab_NULL [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
-| +-$pivot.NULL#7 AS `NULL` [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
+| +-$pivot.NULL#7 AS "NULL" [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
 +-query=
   +-WithScan
     +-column_list=$pivot.[xy_x_1_y_2_ab_a_test_a_b_false#4, xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5, xy_x_minus_1_y_NULL_ab_NULL#6, NULL#7]
@@ -2842,7 +2842,7 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#20 AS `$col1` [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
+| +-$query.$col1#20 AS "$col1" [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#20]
@@ -2957,7 +2957,7 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#20 AS `$col1` [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
+| +-$query.$col1#20 AS "$col1" [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#20]
@@ -3073,7 +3073,7 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [STRUCT<count_t INT64, sum_t BOOL, count_f INT64, sum_f BOOL, count_n INT64, sum_n BOOL>]
+| +-$query.$col1#18 AS "$col1" [STRUCT<count_t INT64, sum_t BOOL, count_f INT64, sum_f BOOL, count_n INT64, sum_n BOOL>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#18]
@@ -3200,7 +3200,7 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#20 AS `$col1` [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
+| +-$query.$col1#20 AS "$col1" [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#20]
@@ -3315,7 +3315,7 @@ ALTERNATION GROUP: c
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#16]
@@ -3399,7 +3399,7 @@ ALTERNATION GROUP: t2.c
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#16]
@@ -3698,7 +3698,7 @@ WITH t AS (
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#17 AS `$col1` [INT64]
+| +-$query.$col1#17 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#17]
@@ -3749,8 +3749,8 @@ WITH t AS (
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$col1#10 AS `$col1` [INT64]
-| +-$groupby.$col2#11 AS `$col2` [INT64]
+| +-$groupby.$col1#10 AS "$col1" [INT64]
+| +-$groupby.$col2#11 AS "$col2" [INT64]
 | +-$pivot.s_zero#12 AS s_zero [INT64]
 | +-$pivot.s_one#13 AS s_one [INT64]
 +-query=

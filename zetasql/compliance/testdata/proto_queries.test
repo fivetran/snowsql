@@ -1,7 +1,7 @@
 [load_proto_files=zetasql/testdata/test_schema.proto]
 [load_proto_names=zetasql_test__.KitchenSinkPB, zetasql_test__.TestExtraPB, zetasql_test__.KitchenSinkPB.Nested, zetasql_test__.RepeatedHolderPB]
 [name=proto_1]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
   {
@@ -12,19 +12,19 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
 ==
 [name=proto_2]
 SELECT p.int64_key_1, p.int64_key_2 FROM
-(SELECT (SELECT AS `zetasql_test__.KitchenSinkPB`
+(SELECT (SELECT AS "zetasql_test__.KitchenSinkPB"
          5 int64_key_1, 6 int64_key_2) p)
 --
 ARRAY<STRUCT<int64_key_1 INT64, int64_key_2 INT64>>[{5, 6}]
 ==
 [name=proto_3]
-SELECT AS `zetasql_test__.TestExtraPB` 10 int32_val1
+SELECT AS "zetasql_test__.TestExtraPB" 10 int32_val1
 --
 ARRAY<PROTO<zetasql_test__.TestExtraPB>>[{int32_val1: 10}]
 ==
 [name=proto_4]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2,
-  ARRAY(SELECT AS `zetasql_test__.KitchenSinkPB.Nested` 7 nested_int64)
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2,
+  ARRAY(SELECT AS "zetasql_test__.KitchenSinkPB.Nested" 7 nested_int64)
   nested_repeated_value
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
@@ -40,9 +40,9 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
 NOTE: Reference implementation reports non-determinism.
 ==
 [name=proto_5]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2,
-  ARRAY(SELECT AS `zetasql_test__.RepeatedHolderPB`
-    ARRAY(SELECT AS `zetasql_test__.TestExtraPB` a int32_val1
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2,
+  ARRAY(SELECT AS "zetasql_test__.RepeatedHolderPB"
+    ARRAY(SELECT AS "zetasql_test__.TestExtraPB" a int32_val1
           FROM (SELECT 10 a UNION ALL SELECT 20) ORDER BY a)
     repeated_field)
   repeated_holder
@@ -66,13 +66,13 @@ NOTE: Reference implementation reports non-determinism.
 ==
 # NULL in required field.
 [name=proto_6]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, NULL int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, NULL int64_key_2
 --
 ERROR: generic::out_of_range: Cannot encode a null value Int64(NULL) in required protocol message field zetasql_test__.KitchenSinkPB.int64_key_2
 ==
 # Write date_decimal field, which is annotated to use DATE_DECIMAL format.
 [name=proto_7]
-SELECT AS `zetasql_test__.KitchenSinkPB`
+SELECT AS "zetasql_test__.KitchenSinkPB"
        5 int64_key_1, 6 int64_key_2, date '2011-03-05' date_decimal
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
@@ -85,19 +85,19 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
 ==
 [name=proto_8]
 SELECT p.date_decimal
-FROM (SELECT (SELECT AS `zetasql_test__.KitchenSinkPB`
+FROM (SELECT (SELECT AS "zetasql_test__.KitchenSinkPB"
               5 int64_key_1, 6 int64_key_2) p)
 --
 ARRAY<STRUCT<date_decimal DATE>>[{NULL}]
 ==
 [name=proto_9]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, NULL int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, NULL int64_key_2
 --
 ERROR: generic::out_of_range: Cannot encode a null value Int64(NULL) in required protocol message field zetasql_test__.KitchenSinkPB.int64_key_2
 ==
 [name=proto_10]
 SELECT
-  (SELECT AS `zetasql_test__.KitchenSinkPB.Nested` 18 nested_int64) proto_val
+  (SELECT AS "zetasql_test__.KitchenSinkPB.Nested" 18 nested_int64) proto_val
 --
 ARRAY<STRUCT<proto_val PROTO<zetasql_test__.KitchenSinkPB.Nested>>>[
   {{nested_int64: 18}}
@@ -105,16 +105,16 @@ ARRAY<STRUCT<proto_val PROTO<zetasql_test__.KitchenSinkPB.Nested>>>[
 ==
 [name=proto_11]
 SELECT IF(FALSE, p, NULL) proto_val FROM
-  (SELECT AS `zetasql_test__.KitchenSinkPB.Nested` 18 nested_int64) p
+  (SELECT AS "zetasql_test__.KitchenSinkPB.Nested" 18 nested_int64) p
 --
 ARRAY<STRUCT<proto_val PROTO<zetasql_test__.KitchenSinkPB.Nested>>>[{NULL}]
 ==
 [name=proto_12]
 SELECT ARRAY(SELECT p) proto_val
 FROM
- (SELECT (SELECT AS `zetasql_test__.KitchenSinkPB.Nested` 18 nested_int64) p
+ (SELECT (SELECT AS "zetasql_test__.KitchenSinkPB.Nested" 18 nested_int64) p
     UNION ALL
-  SELECT (SELECT AS `zetasql_test__.KitchenSinkPB.Nested`
+  SELECT (SELECT AS "zetasql_test__.KitchenSinkPB.Nested"
                          19 nested_int64, [1, 2, 3] nested_repeated_int64))
 ORDER BY p.nested_int64
 --
@@ -133,9 +133,9 @@ ARRAY<STRUCT<proto_val ARRAY<>>>[known order:
 [name=proto_12b]
 SELECT ARRAY(SELECT p) proto_val
 FROM
- (SELECT AS `zetasql_test__.KitchenSinkPB.Nested` 18 nested_int64
+ (SELECT AS "zetasql_test__.KitchenSinkPB.Nested" 18 nested_int64
     UNION ALL
-  SELECT AS `zetasql_test__.KitchenSinkPB.Nested`
+  SELECT AS "zetasql_test__.KitchenSinkPB.Nested"
                          19 nested_int64, [1, 2, 3] nested_repeated_int64) p
 --
 ARRAY<STRUCT<proto_val ARRAY<>>>[unknown order:
@@ -152,8 +152,8 @@ ARRAY<STRUCT<proto_val ARRAY<>>>[unknown order:
 ==
 [name=proto_13]
 SELECT
-  (SELECT AS `zetasql_test__.KitchenSinkPB.Nested` 18 nested_int64) x,
-  (SELECT AS `zetasql_test__.KitchenSinkPB.Nested`
+  (SELECT AS "zetasql_test__.KitchenSinkPB.Nested" 18 nested_int64) x,
+  (SELECT AS "zetasql_test__.KitchenSinkPB.Nested"
      19 nested_int64, [1, 2, 3] nested_repeated_int64) y,
   (SELECT NULL) z
 --
@@ -173,7 +173,7 @@ ARRAY<STRUCT<
 
 ==
 [name=proto_null_array_int32]
-SELECT AS `zetasql_test__.KitchenSinkPB`
+SELECT AS "zetasql_test__.KitchenSinkPB"
   5 int64_key_1, 6 int64_key_2,
   CAST(NULL as array<int32>) repeated_int32_val
 --

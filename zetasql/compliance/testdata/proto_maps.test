@@ -74,8 +74,8 @@ ARRAY<STRUCT<INT32>>[{456}]
 # reachable by user statements and we at least need it to not crash, having
 # a reasonable result is nice too.
 [name=map_array_with_a_null_entry]
-SELECT ARRAY<`zetasql_test__.MessageWithMapField.Uint64StringMapEntry`>[
-    NEW `zetasql_test__.MessageWithMapField.Uint64StringMapEntry`(
+SELECT ARRAY<"zetasql_test__.MessageWithMapField.Uint64StringMapEntry">[
+    NEW "zetasql_test__.MessageWithMapField.Uint64StringMapEntry"(
       1 AS key,
       "hello there" AS value
     ),

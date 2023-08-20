@@ -718,6 +718,6 @@ Signature Mismatch Details:
 ERROR: No matching signature for tvf_optional_scalar_named_model_named_table
   Argument types: DOUBLE, NULL, TABLE<$col1 INT64>
   Signature: TVF_OPTIONAL_SCALAR_NAMED_MODEL_NAMED_TABLE([ANY], [foobar => MODEL], [barfoo => TABLE])
-    Named argument `foobar`: expected MODEL, found NULL [at 1:15]
+    Named argument "foobar": expected MODEL, found NULL [at 1:15]
 select * from tvf_optional_scalar_named_model_named_table(1.0,
               ^

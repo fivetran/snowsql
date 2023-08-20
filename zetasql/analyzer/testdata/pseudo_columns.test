@@ -66,7 +66,7 @@ QueryStmt
 | +-EnumTable.key#1 AS key [INT32]
 | +-EnumTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 | +-EnumTable.AnotherTestEnum#3 AS AnotherTestEnum [ENUM<zetasql_test__.AnotherTestEnum>]
-| +-$query.$col2#6 AS `$col2` [STRING]
+| +-$query.$col2#6 AS "$col2" [STRING]
 | +-EnumTable.Filename#4 AS Filename [STRING]
 | +-EnumTable.RowId#5 AS RowID [BYTES]
 +-query=
@@ -154,7 +154,7 @@ QueryStmt
 | +-$query.int32_val1#4 AS int32_val1 [INT32]
 | +-$query.int32_val2#5 AS int32_val2 [INT32]
 | +-$query.str_value#6 AS str_value [ARRAY<STRING>]
-| +-$query.$col2#7 AS `$col2` [STRING]
+| +-$query.$col2#7 AS "$col2" [STRING]
 | +-TestExtraValueTable.Filename#2 AS filename [STRING]
 | +-TestExtraValueTable.RowId#3 AS rowid [BYTES]
 +-query=
@@ -260,7 +260,7 @@ select count(*) from AllPseudoColumns
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -403,7 +403,7 @@ from EnumTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [STRUCT<key INT32, key INT32, rowid BYTES, filename STRING>]
+| +-$query.$col1#11 AS "$col1" [STRUCT<key INT32, key INT32, rowid BYTES, filename STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -449,7 +449,7 @@ from TestExtraValueTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<int32_val1 INT32, int32_val2 INT32, rowid BYTES, filename STRING>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<int32_val1 INT32, int32_val2 INT32, rowid BYTES, filename STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]

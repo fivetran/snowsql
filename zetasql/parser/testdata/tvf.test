@@ -504,7 +504,7 @@ FROM
       1
     FROM
       mytvf()
-  ), `current_date`(), `current_timestamp`())
+  ), "current_date"(), "current_timestamp"())
 ==
 
 # A TVF has a correlated reference to the enclosing query.
@@ -748,7 +748,7 @@ QueryStatement [0-63] [select * from...keyvalue))]
 SELECT
   *
 FROM
-  my.`42`.dot.separated.tvf((
+  my."42".dot.separated.tvf((
     SELECT
       *
     FROM
@@ -787,7 +787,7 @@ QueryStatement [0-62] [select * from...keyvalue))]
 SELECT
   *
 FROM
-  my.`42dot`.separated.tvf((
+  my."42dot".separated.tvf((
     SELECT
       *
     FROM
@@ -865,7 +865,7 @@ QueryStatement [0-59] [select * from...keyvalue))]
 SELECT
   *
 FROM
-  my.dot.separated.`42`((
+  my.dot.separated."42"((
     SELECT
       *
     FROM
@@ -1450,7 +1450,7 @@ QueryStatement [0-46] [select * from...select 2))]
 SELECT
   *
 FROM
-  `if`(true, (
+  "if"(true, (
     SELECT
       1
   ), (
@@ -1494,7 +1494,7 @@ QueryStatement [0-52] [select * from...select 2))]
 SELECT
   *
 FROM
-  `try_cast`(true, (
+  "try_cast"(true, (
     SELECT
       1
   ), (
@@ -2130,7 +2130,7 @@ QueryStatement [0-100] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, (
+  "try_cast"(true, (
     SELECT
       1
   ), (
@@ -2175,7 +2175,7 @@ QueryStatement [0-108] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
@@ -2219,7 +2219,7 @@ QueryStatement [0-126] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
@@ -2261,7 +2261,7 @@ QueryStatement [0-119] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
@@ -2307,7 +2307,7 @@ QueryStatement [0-137] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Invalid TABLESAMPLE clause for table-valued function call using subqueries to

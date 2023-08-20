@@ -33,19 +33,19 @@ ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET DATA TYPE STRING
 ==
 
 # ALTER TABLE to set column type.
-ALTER TABLE foo ALTER COLUMN `CAST` SET DATA TYPE STRING;
+ALTER TABLE foo ALTER COLUMN "CAST" SET DATA TYPE STRING;
 --
 AlterTableStatement [0-56] [ALTER TABLE...TYPE STRING]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
   AlterActionList [16-56] [ALTER COLUMN...TYPE STRING]
     AlterColumnTypeAction [16-56] [ALTER COLUMN...TYPE STRING]
-      Identifier("CAST") [29-35] [`CAST`]
+      Identifier("CAST") [29-35] ["CAST"]
       SimpleColumnSchema [50-56] [STRING]
         PathExpression [50-56] [STRING]
           Identifier(STRING) [50-56] [STRING]
 --
-ALTER TABLE foo ALTER COLUMN `CAST` SET DATA TYPE STRING
+ALTER TABLE foo ALTER COLUMN "CAST" SET DATA TYPE STRING
 
 ==
 

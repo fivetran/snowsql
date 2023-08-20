@@ -7,7 +7,7 @@ select as struct key from KeyValue order by key
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#3 AS `$struct` [STRUCT<key INT64>]
+| +-$make_struct.$struct#3 AS "$struct" [STRUCT<key INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -37,7 +37,7 @@ select as value struct(key) from (select key from KeyValue order by key)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$value_column` [STRUCT<key INT64>]
+| +-$query.$col1#3 AS "$value_column" [STRUCT<key INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -64,7 +64,7 @@ select @{hint=true} 1 from TestTable order by key
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -189,7 +189,7 @@ select as struct key+1 k from TestTable order by key limit 10
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<k INT64>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<k INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -233,7 +233,7 @@ select k+1 from (select key+1 k from TestTable order by key limit 10)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -277,10 +277,10 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#13 AS `$col1` [INT32]
-| +-$query.$col2#14 AS `$col2` [ARRAY<INT32>]
-| +-$query.$col3#15 AS `$col3` [BOOL]
-| +-$query.$col4#16 AS `$col4` [BOOL]
+| +-$query.$col1#13 AS "$col1" [INT32]
+| +-$query.$col2#14 AS "$col2" [ARRAY<INT32>]
+| +-$query.$col3#15 AS "$col3" [BOOL]
+| +-$query.$col4#16 AS "$col4" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#13, $col2#14, $col3#15, $col4#16]
@@ -424,7 +424,7 @@ select * from unnest([1,2,3])
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#1]
@@ -443,7 +443,7 @@ select array_agg(x) from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -477,7 +477,7 @@ select * from unnest(array(select key from TestTable order by key))
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#4 AS `$unnest1` [INT32]
+| +-$array.$unnest1#4 AS "$unnest1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#4]

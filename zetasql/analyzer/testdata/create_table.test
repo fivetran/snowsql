@@ -621,7 +621,7 @@ CreateTableStmt
 # RANGE column with name range in backticks.
 [language_features=RANGE_TYPE]
 [no_java]
-create table t1 (`range` range<date>);
+create table t1 ("range" range<date>);
 --
 CreateTableStmt
 +-name_path=t1
@@ -3976,11 +3976,11 @@ CreateTableStmt
 # is optional.
 create table t1 (
   a int32 options(option_a=literal),
-  b int64 options(option_b=(`TestConstantString`)),
+  b int64 options(option_b=("TestConstantString")),
   c int64 options(option_c=(nested_catalog.TestConstantBool)),
   d int64 options(option_d=nested_catalog.TestConstantBool),
-  e int64 options(option_e=(nested_catalog.`Test Constant-String`)),
-  f int64 options(option_f=nested_catalog.`Test Constant-String`))
+  e int64 options(option_e=(nested_catalog."Test Constant-String")),
+  f int64 options(option_f=nested_catalog."Test Constant-String"))
 --
 CreateTableStmt
 +-name_path=t1
@@ -4047,10 +4047,10 @@ ERROR: Unable to determine if TestConstantString is a string or expression.  If 
 # Option values which conflict with constant names should result in an error,
 # even when the name is in backticks.
 create table t1 (a int32 options(option_a=literal),
-                 c int64 options(option_c=`TestConstantString`))
+                 c int64 options(option_c="TestConstantString"))
 --
 ERROR: Unable to determine if TestConstantString is a string or expression.  If a string is intended, please enclose it with quotation marks.  If an expression is intended, please enclose it with parentheses. [at 2:43]
-                 c int64 options(option_c=`TestConstantString`))
+                 c int64 options(option_c="TestConstantString"))
                                           ^
 
 ==
@@ -5297,7 +5297,7 @@ create table t (a int64) with connection conn;
 
 [language_features=CREATE_TABLE_WITH_CONNECTION]
 [no_java]
-create table t (a int64) with connection `connection2`;
+create table t (a int64) with connection "connection2";
 --
 CreateTableStmt
 +-name_path=t
@@ -5310,7 +5310,7 @@ CreateTableStmt
 
 [language_features=CREATE_TABLE_WITH_CONNECTION]
 [no_java]
-create table t (a int64) with connection `connection2`
+create table t (a int64) with connection "connection2"
 options(x=foo);
 --
 CreateTableStmt

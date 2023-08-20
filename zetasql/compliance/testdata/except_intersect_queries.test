@@ -187,15 +187,15 @@ ARRAY<STRUCT<primary_key INT64, int32_val INT32, int64_val INT64, uint32_val UIN
 # Table with enums, arrays, structs (both values and nulls)
 [prepare_database]
 CREATE TABLE TableComplex1 AS
-SELECT cast(1 as int64) as primary_key, CAST(0 AS `zetasql_test__.TestEnum`) as enum_val,
+SELECT cast(1 as int64) as primary_key, CAST(0 AS "zetasql_test__.TestEnum") as enum_val,
        [0, 0, 0] AS array_val,
        (0, 0) AS struct_val
 UNION ALL
-SELECT 2, CAST(1 AS `zetasql_test__.TestEnum`), [1, 1, 1], (1, 1)
+SELECT 2, CAST(1 AS "zetasql_test__.TestEnum"), [1, 1, 1], (1, 1)
 UNION ALL
-SELECT 3, CAST(1 AS `zetasql_test__.TestEnum`), [1, 1, 1], (1, 1)
+SELECT 3, CAST(1 AS "zetasql_test__.TestEnum"), [1, 1, 1], (1, 1)
 UNION ALL
-SELECT 4, CAST(1 AS `zetasql_test__.TestEnum`), [1, 1, 1], (1, 1)
+SELECT 4, CAST(1 AS "zetasql_test__.TestEnum"), [1, 1, 1], (1, 1)
 UNION ALL
 SELECT 5, NULL, NULL, NULL
 UNION ALL
@@ -236,11 +236,11 @@ ARRAY<STRUCT<
 ==
 [prepare_database]
 CREATE TABLE TableComplex2 AS
-SELECT cast(1 as int64) as primary_key, CAST(0 AS `zetasql_test__.TestEnum`) as enum_val,
+SELECT cast(1 as int64) as primary_key, CAST(0 AS "zetasql_test__.TestEnum") as enum_val,
        [0, 0, 0] AS array_val,
        (0, 0) AS struct_val
 UNION ALL
-SELECT 2, CAST(1 AS `zetasql_test__.TestEnum`), [1, 1, 1], (1, 1)
+SELECT 2, CAST(1 AS "zetasql_test__.TestEnum"), [1, 1, 1], (1, 1)
 UNION ALL
 SELECT 3, NULL, NULL, NULL
 UNION ALL

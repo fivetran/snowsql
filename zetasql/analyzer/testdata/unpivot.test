@@ -957,7 +957,7 @@ select 1, Value from KeyValue UNPIVOT(a for b in (Key));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 | +-$unpivot.Value#5 AS Value [STRING]
 +-query=
   +-ProjectScan
@@ -984,7 +984,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 | +-$unpivot.Value#5 AS Value [STRING]
 +-query=
   +-ProjectScan
@@ -2338,7 +2338,7 @@ SELECT * FROM (SELECT int_a + 1, int_b FROM MultipleColumns) UNPIVOT(x for y in 
 --
 QueryStmt
 +-output_column_list=
-| +-$unpivot.$col1#10 AS `$col1` [INT64]
+| +-$unpivot.$col1#10 AS "$col1" [INT64]
 | +-$unpivot.x#8 AS x [INT64]
 | +-$unpivot.y#9 AS y [STRING]
 +-query=
@@ -2372,7 +2372,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$unpivot.$col1#10 AS `$col1` [INT64]
+| +-$unpivot.$col1#10 AS "$col1" [INT64]
 | +-$unpivot.x#8 AS x [INT64]
 | +-$unpivot.y#9 AS y [STRING]
 +-query=

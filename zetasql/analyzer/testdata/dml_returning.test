@@ -1198,7 +1198,7 @@ DeleteStmt
 +-returning=
 | +-ReturningClause
 |   +-output_column_list=
-|   | +-KeyValue.$col1#11 AS `$col1` [INT64]
+|   | +-KeyValue.$col1#11 AS "$col1" [INT64]
 |   +-expr_list=
 |     +-$col1#11 :=
 |       +-SubqueryExpr
@@ -1315,7 +1315,7 @@ InsertStmt
 |   +-output_column_list=
 |   | +-KeyValue.Key#1 AS Key [INT64]
 |   | +-KeyValue.value#3 AS value [STRING]
-|   | +-KeyValue.$col2#4 AS `$col2` [INT64]
+|   | +-KeyValue.$col2#4 AS "$col2" [INT64]
 |   +-expr_list=
 |     +-value#3 := Literal(type=STRING, value="xxx")
 |     +-$col2#4 :=
@@ -1817,7 +1817,7 @@ DeleteStmt
   +-Literal(type=BOOL, value=true)
 ==
 
-# `value` is a proto column `TestBcPB`.
+# "value" is a proto column "TestBcPB".
 DELETE TestBcPBValueProtoTable WHERE TRUE
 THEN RETURN value.*
 --
@@ -1929,7 +1929,7 @@ DeleteStmt
 |   | +-TestTable.key#1 AS key [INT32]
 |   | +-TestTable.TestEnum#2 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 |   | +-TestTable.KitchenSink#3 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
-|   | +-TestTable.$col2#12 AS `$col2` [BOOL]
+|   | +-TestTable.$col2#12 AS "$col2" [BOOL]
 |   +-expr_list=
 |     +-$col2#12 :=
 |       +-SubqueryExpr
@@ -1995,7 +1995,7 @@ DeleteStmt
 | +-ReturningClause
 |   +-output_column_list=
 |   | +-KeyValue.Key#1 AS key [INT64]
-|   | +-T.$col2#5 AS `$col2` [BOOL]
+|   | +-T.$col2#5 AS "$col2" [BOOL]
 |   +-expr_list=
 |     +-$col2#5 :=
 |       +-SubqueryExpr

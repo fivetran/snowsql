@@ -3,8 +3,8 @@ select * from T
 --
 QueryStmt
 +-output_column_list=
-| +-T.$col1#3 AS `$col1` [INT64]
-| +-T.$col2#4 AS `$col2` [INT64]
+| +-T.$col1#3 AS "$col1" [INT64]
+| +-T.$col2#4 AS "$col2" [INT64]
 +-query=
   +-WithScan
     +-column_list=T.[$col1#3, $col2#4]
@@ -65,7 +65,7 @@ QueryStmt
 +-output_column_list=
 | +-$union_all.Key#17 AS Key [INT64]
 | +-$union_all.Value#18 AS Value [STRING]
-| +-$union_all.$col2#19 AS `$col2` [INT64]
+| +-$union_all.$col2#19 AS "$col2" [INT64]
 +-query=
   +-WithScan
     +-column_list=$union_all.[Key#17, Value#18, $col2#19]
@@ -131,7 +131,7 @@ QueryStmt
 +-output_column_list=
 | +-T2.xx#5 AS xx [INT64]
 | +-T2.vv#6 AS vv [STRING]
-| +-$query.$col3#7 AS `$col3` [STRING]
+| +-$query.$col3#7 AS "$col3" [STRING]
 | +-T2.xx#5 AS xx [INT64]
 | +-T2.vv#6 AS vv [STRING]
 +-query=
@@ -237,11 +237,11 @@ ERROR: Duplicate alias nAmE for WITH subquery [at 3:6]
      ^
 ==
 
-with `` as (select 1)
+with "" as (select 1)
 select 2
 --
 ERROR: Syntax error: Invalid empty identifier [at 1:6]
-with `` as (select 1)
+with "" as (select 1)
      ^
 ==
 
@@ -283,7 +283,7 @@ select 2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#2]
@@ -378,7 +378,7 @@ select * from q2
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#9 AS `$col1` [INT64]
+| +-$union_all.$col1#9 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$union_all.$col1#9]
@@ -610,8 +610,8 @@ QueryStmt
             +-output_column_list=[T2.b#7]
 ==
 
-with `a.b` as (select * from KeyValue)
-select * from `a.b`
+with "a.b" as (select * from KeyValue)
+select * from "a.b"
 --
 QueryStmt
 +-output_column_list=
@@ -703,7 +703,7 @@ QueryStmt
 ==
 
 # Proto value tables in with subqueries.
-with sq as (select as `zetasql_test__.KeyValueStruct` 55 key from TestTable)
+with sq as (select as "zetasql_test__.KeyValueStruct" 55 key from TestTable)
 select key, sq.value, sq, sq.* from sq
 where value!=0
 --
@@ -824,7 +824,7 @@ QueryStmt
 | +-Q.v#8 AS v [STRING]
 | +-Q.xxx#9 AS xxx [INT64]
 | +-Q.yyy#10 AS yyy [INT64]
-| +-Q.$col6#11 AS `$col6` [INT64]
+| +-Q.$col6#11 AS "$col6" [INT64]
 +-query=
   +-WithScan
     +-column_list=Q.[k1#7, k1#7, v#8, xxx#9, yyy#10, $col6#11]

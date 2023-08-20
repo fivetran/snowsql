@@ -228,7 +228,7 @@ AssignmentStmt
 
 # Assignment to system variable of proto type (proto value)
 SET @@proto_system_variable = (
-  SELECT AS `zetasql_test__.KitchenSinkPB`
+  SELECT AS "zetasql_test__.KitchenSinkPB"
     3 int64_key_1,
     4 int64_key_2,
     [5,6] repeated_int64_val
@@ -362,7 +362,7 @@ AssignmentStmt
 
 # Assignment to nested proto
 SET @@proto_system_variable.nested_value = (
-  SELECT AS `zetasql_test__.KitchenSinkPB.Nested`
+  SELECT AS "zetasql_test__.KitchenSinkPB.Nested"
     15 nested_int64,
     [5,6] nested_repeated_int64
 );

@@ -43,7 +43,7 @@ QueryStmt
         +-element_column=$array.val#4
 ==
 
-# The second `TestTable` is an alias for the first scan, not a new table scan.
+# The second "TestTable" is an alias for the first scan, not a new table scan.
 select repeated_int32_val
 from TestTable, TestTable.KitchenSink.repeated_int32_val;
 --
@@ -409,7 +409,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -438,7 +438,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -512,7 +512,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -543,7 +543,7 @@ from TestTable tt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -583,7 +583,7 @@ from TestTable tt JOIN tt.KitchenSink.int32_val;
 ==
 
 # Array scan from a subquery result.
-# `nrv` is unambiguous because the range variable always takes precedence
+# "nrv" is unambiguous because the range variable always takes precedence
 # over the column.
 select key, nrv.nested_int64
 from (select Key, KitchenSink.nested_repeated_value nrv from TestTable) subq,
@@ -625,7 +625,7 @@ QueryStmt
         +-element_column=$array.nrv#5
 ==
 
-# `nested_repeated_value` is unambiguous, like in the previous query.
+# "nested_repeated_value" is unambiguous, like in the previous query.
 select key, nested_repeated_value.nested_int64
 from (select Key, KitchenSink.nested_repeated_value from TestTable) subq,
      subq.nested_repeated_value;
@@ -666,7 +666,7 @@ QueryStmt
         +-element_column=$array.nested_repeated_value#5
 ==
 
-# `nested_repeated_int64` is unambiguous because the range variable version
+# "nested_repeated_int64" is unambiguous because the range variable version
 # (second clause in from) hides the column version (inside first clause in from).
 #
 # (This test uses nested_value.nested_repeated_int64 rather than
@@ -744,7 +744,7 @@ from TestTable tt,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -776,7 +776,7 @@ from TestTable tt,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -818,7 +818,7 @@ from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -879,7 +879,7 @@ from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -937,7 +937,7 @@ from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<d1 DATE, offset_idx INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<d1 DATE, offset_idx INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1001,7 +1001,7 @@ ALTERNATION GROUP: LEFT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<OFFSET_IDX INT64, elem_a INT64, elem_b INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<OFFSET_IDX INT64, elem_a INT64, elem_b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1069,7 +1069,7 @@ ALTERNATION GROUP: RIGHT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<OFFSET_IDX INT64, elem_a INT64, elem_b INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<OFFSET_IDX INT64, elem_a INT64, elem_b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1140,7 +1140,7 @@ ALTERNATION GROUP: FULL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<OFFSET_IDX INT64, elem_a INT64, elem_b INT64>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<OFFSET_IDX INT64, elem_a INT64, elem_b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -1233,7 +1233,7 @@ ALTERNATION GROUP: LEFT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<elem_a INT64, off1 INT64, elem_b INT64, off2 INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<elem_a INT64, off1 INT64, elem_b INT64, off2 INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1302,7 +1302,7 @@ ALTERNATION GROUP: RIGHT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<elem_a INT64, off1 INT64, elem_b INT64, off2 INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<elem_a INT64, off1 INT64, elem_b INT64, off2 INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1374,7 +1374,7 @@ ALTERNATION GROUP: FULL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<elem_a INT64, off1 INT64, elem_b INT64, off2 INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<elem_a INT64, off1 INT64, elem_b INT64, off2 INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]

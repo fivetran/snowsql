@@ -659,11 +659,11 @@ options (abc=def, xyz=@bad_param)
                       ^
 ==
 
-create model a.b.`c.d`.`e f g`.kk
+create model a.b."c.d"."e f g".kk
 as select 1 c
 --
 CreateModelStmt
-+-name_path=a.b.`c.d`.`e f g`.kk
++-name_path=a.b."c.d"."e f g".kk
 +-output_column_list=
 | +-$create_as.c#1 AS c [INT64]
 +-query=

@@ -1,6 +1,6 @@
 grant all on KeyValue to "mdbuser/user";
 --
-GrantStmt(object_type_list=``, name_path=KeyValue, grantee_list=[`mdbuser/user`])
+GrantStmt(object_type_list="", name_path=KeyValue, grantee_list=["mdbuser/user"])
 ==
 
 grant select on KeyValue to "mdbuser/user";
@@ -8,9 +8,9 @@ grant select on KeyValue to "mdbuser/user";
 GrantStmt
 +-privilege_list=
 | +-Privilege(action_type="select")
-+-object_type_list=``
++-object_type_list=""
 +-name_path=KeyValue
-+-grantee_list=[`mdbuser/user`]
++-grantee_list=["mdbuser/user"]
 ==
 
 [language_features={{|PARAMETERS_IN_GRANTEE_LIST}}]
@@ -29,7 +29,7 @@ RevokeStmt
 +-privilege_list=
 | +-Privilege(action_type="select")
 | +-Privilege(action_type="insert")
-+-object_type_list=``
++-object_type_list=""
 +-name_path=KeyValue
 +-grantee_expr_list=
   +-Literal(type=STRING, value="mdbuser/user")
@@ -37,16 +37,16 @@ RevokeStmt
   +-Literal(type=STRING, value="mdbgroup/group")
 ==
 
-# System variables are also allowed.  `sysvar.with.dots` is a system variable
+# System variables are also allowed.  "sysvar.with.dots" is a system variable
 # of STRING type.
 [language_features={{|PARAMETERS_IN_GRANTEE_LIST}}]
 revoke select,insert on KeyValue
-from "mdbuser/user", "mdbgroup/group", @@`sysvar.with.dots`;
+from "mdbuser/user", "mdbgroup/group", @@"sysvar.with.dots";
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: The GRANTEE list only supports string literals, not system variables [at 2:40]
-from "mdbuser/user", "mdbgroup/group", @@`sysvar.with.dots`;
+from "mdbuser/user", "mdbgroup/group", @@"sysvar.with.dots";
                                        ^
 --
 ALTERNATION GROUP: PARAMETERS_IN_GRANTEE_LIST
@@ -55,12 +55,12 @@ RevokeStmt
 +-privilege_list=
 | +-Privilege(action_type="select")
 | +-Privilege(action_type="insert")
-+-object_type_list=``
++-object_type_list=""
 +-name_path=KeyValue
 +-grantee_expr_list=
   +-Literal(type=STRING, value="mdbuser/user")
   +-Literal(type=STRING, value="mdbgroup/group")
-  +-SystemVariable(`sysvar.with.dots`, type=STRING)
+  +-SystemVariable("sysvar.with.dots", type=STRING)
 ==
 
 revoke select(col1, col2),insert(col2) on table KeyValue from "user@google.com";
@@ -78,7 +78,7 @@ RevokeStmt
 |     +-ObjectUnit(name_path=col2)
 +-object_type_list=table
 +-name_path=KeyValue
-+-grantee_list=[`user@google.com`]
++-grantee_list=["user@google.com"]
 ==
 
 # Test with parameter of non-string type.
@@ -120,7 +120,7 @@ GrantStmt
 | +-Privilege(action_type="select")
 +-object_type_list=materialized.view
 +-name_path=foo
-+-grantee_list=[`user@google.com`]
++-grantee_list=["user@google.com"]
 ==
 
 revoke select on materialized view foo from 'user@google.com'
@@ -130,5 +130,5 @@ RevokeStmt
 | +-Privilege(action_type="select")
 +-object_type_list=materialized.view
 +-name_path=foo
-+-grantee_list=[`user@google.com`]
++-grantee_list=["user@google.com"]
 ==

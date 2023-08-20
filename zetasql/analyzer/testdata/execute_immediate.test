@@ -24,11 +24,11 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 ==
 
-EXECUTE IMMEDIATE @@`sysvar.with.dots`;
+EXECUTE IMMEDIATE @@"sysvar.with.dots";
 --
 ExecuteImmediateStmt
 +-sql=
-| +-SystemVariable(`sysvar.with.dots`, type=STRING)
+| +-SystemVariable("sysvar.with.dots", type=STRING)
 +-into_identifier_list=[]
 ==
 
@@ -65,7 +65,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[string_variable_foo, string_variable_bar]
 ==
 
-EXECUTE IMMEDIATE "SELECT 1" INTO `string_variable_foo`;
+EXECUTE IMMEDIATE "SELECT 1" INTO "string_variable_foo";
 --
 ExecuteImmediateStmt
 +-sql=

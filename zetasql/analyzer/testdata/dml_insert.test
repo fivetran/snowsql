@@ -584,7 +584,7 @@ InsertStmt
 ==
 
 INSERT KitchenSinkValueTable
-select as `zetasql_test__.KitchenSinkPB` 1 as int64_key_1, 2 as int64_key_2
+select as "zetasql_test__.KitchenSinkPB" 1 as int64_key_1, 2 as int64_key_2
 --
 InsertStmt
 +-table_scan=
@@ -693,7 +693,7 @@ InsertStmt
 
 INSERT TestTable (key, KitchenSink)
 VALUES (CAST(1 as INT32),
-        (select as `zetasql_test__.KitchenSinkPB`
+        (select as "zetasql_test__.KitchenSinkPB"
            1 as int64_key_1, 2 as int64_key_2)),
        (1, "int64_key_1: 1, int64_key_2: 2")
 --
@@ -1726,7 +1726,7 @@ InsertStmt
 ==
 
 INSERT KitchenSinkValueTable
-select as `zetasql_test__.KitchenSinkPB`
+select as "zetasql_test__.KitchenSinkPB"
     1 as int64_key_1, 2 as int64_key_2,
     [] as repeated_int64_val, [] as repeated_int32_val,
     [] as repeated_string_val
@@ -1764,7 +1764,7 @@ InsertStmt
 ==
 
 INSERT KitchenSinkValueTable
-select as `zetasql_test__.KitchenSinkPB`
+select as "zetasql_test__.KitchenSinkPB"
     int64_key_1, int64_key_1 as int64_key_2
 from (select int64_key_1 from KitchenSinkValueTable)
 --

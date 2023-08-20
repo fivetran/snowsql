@@ -1338,7 +1338,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a1#2 AS a1 [INT64]
 | +-$groupby.a1#2 AS a2 [INT64]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.a1#2, $groupby.a1#2, $query.$col3#3]
@@ -1368,7 +1368,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a1#2 AS a1 [INT64]
 | +-$groupby.a1#2 AS a2 [INT64]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.a1#2, $groupby.a1#2, $query.$col3#3]
@@ -1397,7 +1397,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a2#2 AS a1 [INT64]
 | +-$groupby.a2#2 AS a2 [INT64]
-| +-$groupby.$col3#3 AS `$col3` [BOOL]
+| +-$groupby.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$groupby.[a2#2, a2#2, $col3#3]
@@ -1425,7 +1425,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a1#2 AS a1 [INT64]
 | +-$groupby.a1#2 AS a2 [INT64]
-| +-$groupby.$col3#3 AS `$col3` [BOOL]
+| +-$groupby.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$groupby.[a1#2, a1#2, $col3#3]

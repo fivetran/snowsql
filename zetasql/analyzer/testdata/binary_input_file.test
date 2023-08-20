@@ -8,9 +8,9 @@ def'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [BYTES]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -23,10 +23,18 @@ QueryStmt
 ==
 
 # Other newlines inside multi-line strings.
-select '''abcdef
-ghi''',
-r'''abcdef
-ghi'''
+select '''abc
+
+
+def
+
+ghi''',
+r'''abc
+""
+""
+def
+
+ghi'''
 --
 QueryStmt
 +-output_column_list=

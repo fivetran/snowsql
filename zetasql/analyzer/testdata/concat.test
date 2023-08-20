@@ -3,7 +3,7 @@ select concat("a", "b");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -21,7 +21,7 @@ select concat(b"a", b"b");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -55,7 +55,7 @@ select concat("a", 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -73,7 +73,7 @@ select concat(n, "a") from unnest([1,2,3]) n
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [STRING]
+| +-$query.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -97,7 +97,7 @@ select concat(NULL)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -116,7 +116,7 @@ select concat(x, NULL, @param) from unnest([1]) x
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [STRING]
+| +-$query.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -144,7 +144,7 @@ select concat(?, ?)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -166,7 +166,7 @@ select concat(@param, b"b")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -188,7 +188,7 @@ select concat(?, b"b")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -208,7 +208,7 @@ select concat(1 > 0, 0-5, 3.14+0, CAST(10 AS UINT64), CURRENT_TIMESTAMP, CURRENT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -241,7 +241,7 @@ select concat(CURRENT_DATETIME, CURRENT_TIME)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -261,7 +261,7 @@ select concat("a", current_date - '2000-01-01');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -282,7 +282,7 @@ select concat(CAST(9876543210.123 AS NUMERIC))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -323,7 +323,7 @@ select concat(new zetasql_test__.EmptyMessage())
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -341,7 +341,7 @@ select concat(CAST(1 as zetasql_test__.TestEnum))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -358,7 +358,7 @@ select safe.concat(x) from unnest([1.0, -3.2]) x
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [STRING]
+| +-$query.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -394,7 +394,7 @@ ALTERNATION GROUP: V_1_3_CONCAT_MIXED_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

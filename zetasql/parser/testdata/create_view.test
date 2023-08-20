@@ -67,16 +67,16 @@ FROM
   t2
 ==
 
-create {{temp|public|private}} view pkg1.`pkg2`.`t 2` as
+create {{temp|public|private}} view pkg1."pkg2"."t 2" as
 select 1 as a;
 --
 ALTERNATION GROUP: temp
 --
 CreateViewStatement(is_temp) [0-51] [create temp...select 1 as a]
-  PathExpression [17-34] [pkg1.`pkg2`.`t 2`]
+  PathExpression [17-34] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [17-21] [pkg1]
-    Identifier(pkg2) [22-28] [`pkg2`]
-    Identifier("t 2") [29-34] [`t 2`]
+    Identifier(pkg2) [22-28] ["pkg2"]
+    Identifier("t 2") [29-34] ["t 2"]
   Query [38-51] [select 1 as a]
     Select [38-51] [select 1 as a]
       SelectList [45-51] [1 as a]
@@ -85,17 +85,17 @@ CreateViewStatement(is_temp) [0-51] [create temp...select 1 as a]
           Alias [47-51] [as a]
             Identifier(a) [50-51] [a]
 --
-CREATE TEMP VIEW pkg1.pkg2.`t 2` AS
+CREATE TEMP VIEW pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 --
 ALTERNATION GROUP: public
 --
 CreateViewStatement(is_public) [0-53] [create public...select 1 as a]
-  PathExpression [19-36] [pkg1.`pkg2`.`t 2`]
+  PathExpression [19-36] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [19-23] [pkg1]
-    Identifier(pkg2) [24-30] [`pkg2`]
-    Identifier("t 2") [31-36] [`t 2`]
+    Identifier(pkg2) [24-30] ["pkg2"]
+    Identifier("t 2") [31-36] ["t 2"]
   Query [40-53] [select 1 as a]
     Select [40-53] [select 1 as a]
       SelectList [47-53] [1 as a]
@@ -104,17 +104,17 @@ CreateViewStatement(is_public) [0-53] [create public...select 1 as a]
           Alias [49-53] [as a]
             Identifier(a) [52-53] [a]
 --
-CREATE PUBLIC VIEW pkg1.pkg2.`t 2` AS
+CREATE PUBLIC VIEW pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 --
 ALTERNATION GROUP: private
 --
 CreateViewStatement(is_private) [0-54] [create private...select 1 as a]
-  PathExpression [20-37] [pkg1.`pkg2`.`t 2`]
+  PathExpression [20-37] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [20-24] [pkg1]
-    Identifier(pkg2) [25-31] [`pkg2`]
-    Identifier("t 2") [32-37] [`t 2`]
+    Identifier(pkg2) [25-31] ["pkg2"]
+    Identifier("t 2") [32-37] ["t 2"]
   Query [41-54] [select 1 as a]
     Select [41-54] [select 1 as a]
       SelectList [48-54] [1 as a]
@@ -123,7 +123,7 @@ CreateViewStatement(is_private) [0-54] [create private...select 1 as a]
           Alias [50-54] [as a]
             Identifier(a) [53-54] [a]
 --
-CREATE PRIVATE VIEW pkg1.pkg2.`t 2` AS
+CREATE PRIVATE VIEW pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 ==
@@ -135,14 +135,14 @@ CREATE TEMP MATERIALIZED VIEW v AS (SELECT 1 AS a);
             ^
 ==
 
-create temp view pkg1.`pkg2`.`t 2` as
+create temp view pkg1."pkg2"."t 2" as
 select 1 from t2 union all select 2 from t3 cross join t4
 --
 CreateViewStatement(is_temp) [0-95] [create temp...cross join t4]
-  PathExpression [17-34] [pkg1.`pkg2`.`t 2`]
+  PathExpression [17-34] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [17-21] [pkg1]
-    Identifier(pkg2) [22-28] [`pkg2`]
-    Identifier("t 2") [29-34] [`t 2`]
+    Identifier(pkg2) [22-28] ["pkg2"]
+    Identifier("t 2") [29-34] ["t 2"]
   Query [38-95] [select 1 from...cross join t4]
     SetOperation(UNION ALL) [38-95] [select 1 from...cross join t4]
       SetOperationMetadataList [54-64] [union all]
@@ -171,7 +171,7 @@ CreateViewStatement(is_temp) [0-95] [create temp...cross join t4]
               PathExpression [93-95] [t4]
                 Identifier(t4) [93-95] [t4]
 --
-CREATE TEMP VIEW pkg1.pkg2.`t 2` AS
+CREATE TEMP VIEW pkg1.pkg2."t 2" AS
 SELECT
   1
 FROM
@@ -438,27 +438,27 @@ SELECT
 ==
 
 create view tt
-options (y='b.c', z=`b.c`)
+options (y='b.c', z="b.c")
 as select 2
 --
 CreateViewStatement [0-53] [create view...as select 2]
   PathExpression [12-14] [tt]
     Identifier(tt) [12-14] [tt]
-  OptionsList [23-41] [(y='b.c', z=`b.c`)]
+  OptionsList [23-41] [(y='b.c', z="b.c")]
     OptionsEntry [24-31] [y='b.c']
       Identifier(y) [24-25] [y]
       StringLiteral('b.c') [26-31] ['b.c']
-    OptionsEntry [33-40] [z=`b.c`]
+    OptionsEntry [33-40] [z="b.c"]
       Identifier(z) [33-34] [z]
-      PathExpression [35-40] [`b.c`]
-        Identifier("b.c") [35-40] [`b.c`]
+      PathExpression [35-40] ["b.c"]
+        Identifier("b.c") [35-40] ["b.c"]
   Query [45-53] [select 2]
     Select [45-53] [select 2]
       SelectList [52-53] [2]
         SelectColumn [52-53] [2]
           IntLiteral(2) [52-53] [2]
 --
-CREATE VIEW tt OPTIONS(y = 'b.c', z = `b.c`) AS
+CREATE VIEW tt OPTIONS(y = 'b.c', z = "b.c") AS
 SELECT
   2
 ==
@@ -545,7 +545,7 @@ SELECT
   1 AS x
 ==
 
-# The parser thinks `options` is a view name.
+# The parser thinks "options" is a view name.
 create view options(x=y) as select 1 x;
 --
 ERROR: Syntax error: Expected ")" or "," but got "=" [at 1:22]
@@ -1232,7 +1232,7 @@ create view p-g-123.d456.v1 as select * from t2;
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `p-g-123.d456.v1` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "p-g-123.d456.v1" [at 1:13]
 create view p-g-123.d456.v1 as select * from t2;
             ^
 --
@@ -1253,7 +1253,7 @@ CreateViewStatement [0-47] [create view...* from t2]
           PathExpression [45-47] [t2]
             Identifier(t2) [45-47] [t2]
 --
-CREATE VIEW `p-g-123`.d456.v1 AS
+CREATE VIEW "p-g-123".d456.v1 AS
 SELECT
   *
 FROM
@@ -1266,7 +1266,7 @@ create materialized view p-b-c.d_123.mv1 as select sum(m1) from t2 group by d1, 
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `p-b-c.d_123.mv1` [at 1:26]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "p-b-c.d_123.mv1" [at 1:26]
 create materialized view p-b-c.d_123.mv1 as select sum(m1) from t2 group by d...
                          ^
 --
@@ -1298,7 +1298,7 @@ CreateMaterializedViewStatement [0-82] [create materializ...by d1, d2]
           PathExpression [80-82] [d2]
             Identifier(d2) [80-82] [d2]
 --
-CREATE MATERIALIZED VIEW `p-b-c`.d_123.mv1 AS
+CREATE MATERIALIZED VIEW "p-b-c".d_123.mv1 AS
 SELECT
   sum(m1)
 FROM
@@ -1306,22 +1306,22 @@ FROM
 GROUP BY d1, d2
 ==
 
-create {{|materialized|approx}} view t1 with connection `myproject.us-west-2.myconnection` as select * from t2;
+create {{|materialized|approx}} view t1 with connection "myproject.us-west-2.myconnection" as select * from t2;
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Syntax error: Expected keyword AS but got keyword WITH [at 1:17]
-create  view t1 with connection `myproject.us-west-2.myconnection` as select ...
+create  view t1 with connection "myproject.us-west-2.myconnection" as select ...
                 ^
 --
 ALTERNATION GROUP: materialized
 --
 ERROR: Syntax error: Expected keyword AS but got keyword WITH [at 1:29]
-create materialized view t1 with connection `myproject.us-west-2.myconnection...
+create materialized view t1 with connection "myproject.us-west-2.myconnection...
                             ^
 --
 ALTERNATION GROUP: approx
 --
 ERROR: Syntax error: Expected keyword AS but got keyword WITH [at 1:23]
-create approx view t1 with connection `myproject.us-west-2.myconnection` as s...
+create approx view t1 with connection "myproject.us-west-2.myconnection" as s...
                       ^

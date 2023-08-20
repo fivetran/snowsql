@@ -1,5 +1,5 @@
 # Test unclosed string.
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}
+select {{'a|"a|"a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}
 --
 ALTERNATION GROUP: 'a
 --
@@ -13,10 +13,10 @@ ERROR: Syntax error: Unclosed string literal [at 1:8]
 select "a
        ^
 --
-ALTERNATION GROUP: `a
+ALTERNATION GROUP: "a
 --
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a
+select "a
        ^
 --
 ALTERNATION GROUP: '''a
@@ -265,7 +265,7 @@ select br"""a""
 ==
 
 # Test unclosed string with a trailing backslash.
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\
+select {{'a|"a|"a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\
 --
 ALTERNATION GROUP: 'a
 --
@@ -279,10 +279,10 @@ ERROR: Syntax error: Unclosed string literal [at 1:8]
 select "a\
        ^
 --
-ALTERNATION GROUP: `a
+ALTERNATION GROUP: "a
 --
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a\
+select "a\
        ^
 --
 ALTERNATION GROUP: '''a
@@ -532,7 +532,7 @@ select br"""a""\
 
 # Test unclosed string with a trailing backslash and no newline.
 [strip_trailing_newline]
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\
+select {{'a|"a|"a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\
 --
 ALTERNATION GROUP: 'a
 --
@@ -546,10 +546,10 @@ ERROR: Syntax error: Unclosed string literal [at 1:8]
 select "a\
        ^
 --
-ALTERNATION GROUP: `a
+ALTERNATION GROUP: "a
 --
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a\
+select "a\
        ^
 --
 ALTERNATION GROUP: '''a
@@ -803,7 +803,7 @@ select br"""a""\
 
 # Test closed string with a trailing backslash and no newline.
 [strip_trailing_newline]
-select {{'a'|"a"|`a`|'''a'''||"""a"""}}\
+select {{'a'|"a"|"a"|'''a'''||"""a"""}}\
 --
 ALTERNATION GROUP: 'a'
 --
@@ -817,10 +817,10 @@ ERROR: Syntax error: Illegal input character "\\" [at 1:11]
 select "a"\
           ^
 --
-ALTERNATION GROUP: `a`
+ALTERNATION GROUP: "a"
 --
 ERROR: Syntax error: Illegal input character "\\" [at 1:11]
-select `a`\
+select "a"\
           ^
 --
 ALTERNATION GROUP: '''a'''
@@ -959,7 +959,7 @@ select br"""a"""\
 ==
 
 # Test unclosed string with a trailing illegal escape.
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\e
+select {{'a|"a|"a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\e
 --
 ALTERNATION GROUP: 'a
 --
@@ -973,10 +973,10 @@ ERROR: Syntax error: Unclosed string literal [at 1:8]
 select "a\e
        ^
 --
-ALTERNATION GROUP: `a
+ALTERNATION GROUP: "a
 --
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a\e
+select "a\e
        ^
 --
 ALTERNATION GROUP: '''a
@@ -1348,7 +1348,7 @@ select ""a""
 
 # Illegal escape (\e) inside string literals.
 select
-{{'a\e'|'\ea'|"a\e"|"\ea"|`a\e`|`\ea`|'''a\e'''|'''\ea'''|"""a\e"""|"""\ea"""}}
+{{'a\e'|'\ea'|"a\e"|"\ea"|"a\e"|"\ea"|'''a\e'''|'''\ea'''|"""a\e"""|"""\ea"""}}
 --
 ALTERNATION GROUP: 'a\e'
 --
@@ -1374,16 +1374,16 @@ ERROR: Syntax error: Illegal escape sequence: \e [at 2:2]
 "\ea"
  ^
 --
-ALTERNATION GROUP: `a\e`
+ALTERNATION GROUP: "a\e"
 --
 ERROR: Syntax error: Illegal escape sequence: \e [at 2:3]
-`a\e`
+"a\e"
   ^
 --
-ALTERNATION GROUP: `\ea`
+ALTERNATION GROUP: "\ea"
 --
 ERROR: Syntax error: Illegal escape sequence: \e [at 2:2]
-`\ea`
+"\ea"
  ^
 --
 ALTERNATION GROUP: '''a\e'''
@@ -1465,7 +1465,7 @@ b"""\ea"""
 ==
 
 # Illegal escape (\) inside string literals.
-select {{'\'|"\"|`\`|'''\'''|"""\"""}}
+select {{'\'|"\"|"\"|'''\'''|"""\"""}}
 --
 ALTERNATION GROUP: '\'
 --
@@ -1479,10 +1479,10 @@ ERROR: Syntax error: Unclosed string literal [at 1:8]
 select "\"
        ^
 --
-ALTERNATION GROUP: `\`
+ALTERNATION GROUP: "\"
 --
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `\`
+select "\"
        ^
 --
 ALTERNATION GROUP: '''\'''

@@ -379,13 +379,13 @@ ARRAY<STRUCT<UINT32, int64_val INT64, INT64>>[unknown order:
 
 [name=ntile_enum]
 SELECT enum_val, NTILE(6) OVER (ORDER BY enum_val DESC)
-FROM (SELECT CAST(0 AS `zetasql_test__.TestEnum`) enum_val UNION ALL
-      SELECT CAST(1 AS `zetasql_test__.TestEnum`)          UNION ALL
-      SELECT CAST(1 AS `zetasql_test__.TestEnum`)          UNION ALL
-      SELECT CAST(2 AS `zetasql_test__.TestEnum`)          UNION ALL
-      SELECT CAST(2 AS `zetasql_test__.TestEnum`)          UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`)       UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`))
+FROM (SELECT CAST(0 AS "zetasql_test__.TestEnum") enum_val UNION ALL
+      SELECT CAST(1 AS "zetasql_test__.TestEnum")          UNION ALL
+      SELECT CAST(1 AS "zetasql_test__.TestEnum")          UNION ALL
+      SELECT CAST(2 AS "zetasql_test__.TestEnum")          UNION ALL
+      SELECT CAST(2 AS "zetasql_test__.TestEnum")          UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum")       UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum"))
 --
 ARRAY<STRUCT<
         enum_val ENUM<zetasql_test__.TestEnum>,

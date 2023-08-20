@@ -339,7 +339,7 @@ CreateModelStatement [0-66] [create model...* from t2]
             Identifier(t2) [64-66] [t2]
 --
 CREATE MODEL t1 TRANSFORM(
-  ml.`cross`(a, b) AS c)
+  ml."cross"(a, b) AS c)
 AS
 SELECT
   *
@@ -381,16 +381,16 @@ FROM
   t2
 ==
 
-create {{temp|public|private}} model pkg1.`pkg2`.`t 2` as
+create {{temp|public|private}} model pkg1."pkg2"."t 2" as
 select 1 as a;
 --
 ALTERNATION GROUP: temp
 --
 CreateModelStatement(is_temp) [0-52] [create temp...select 1 as a]
-  PathExpression [18-35] [pkg1.`pkg2`.`t 2`]
+  PathExpression [18-35] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [18-22] [pkg1]
-    Identifier(pkg2) [23-29] [`pkg2`]
-    Identifier("t 2") [30-35] [`t 2`]
+    Identifier(pkg2) [23-29] ["pkg2"]
+    Identifier("t 2") [30-35] ["t 2"]
   Query [39-52] [select 1 as a]
     Select [39-52] [select 1 as a]
       SelectList [46-52] [1 as a]
@@ -399,17 +399,17 @@ CreateModelStatement(is_temp) [0-52] [create temp...select 1 as a]
           Alias [48-52] [as a]
             Identifier(a) [51-52] [a]
 --
-CREATE TEMP MODEL pkg1.pkg2.`t 2` AS
+CREATE TEMP MODEL pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 --
 ALTERNATION GROUP: public
 --
 CreateModelStatement(is_public) [0-54] [create public...select 1 as a]
-  PathExpression [20-37] [pkg1.`pkg2`.`t 2`]
+  PathExpression [20-37] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [20-24] [pkg1]
-    Identifier(pkg2) [25-31] [`pkg2`]
-    Identifier("t 2") [32-37] [`t 2`]
+    Identifier(pkg2) [25-31] ["pkg2"]
+    Identifier("t 2") [32-37] ["t 2"]
   Query [41-54] [select 1 as a]
     Select [41-54] [select 1 as a]
       SelectList [48-54] [1 as a]
@@ -418,17 +418,17 @@ CreateModelStatement(is_public) [0-54] [create public...select 1 as a]
           Alias [50-54] [as a]
             Identifier(a) [53-54] [a]
 --
-CREATE PUBLIC MODEL pkg1.pkg2.`t 2` AS
+CREATE PUBLIC MODEL pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 --
 ALTERNATION GROUP: private
 --
 CreateModelStatement(is_private) [0-55] [create private...select 1 as a]
-  PathExpression [21-38] [pkg1.`pkg2`.`t 2`]
+  PathExpression [21-38] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [21-25] [pkg1]
-    Identifier(pkg2) [26-32] [`pkg2`]
-    Identifier("t 2") [33-38] [`t 2`]
+    Identifier(pkg2) [26-32] ["pkg2"]
+    Identifier("t 2") [33-38] ["t 2"]
   Query [42-55] [select 1 as a]
     Select [42-55] [select 1 as a]
       SelectList [49-55] [1 as a]
@@ -437,19 +437,19 @@ CreateModelStatement(is_private) [0-55] [create private...select 1 as a]
           Alias [51-55] [as a]
             Identifier(a) [54-55] [a]
 --
-CREATE PRIVATE MODEL pkg1.pkg2.`t 2` AS
+CREATE PRIVATE MODEL pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 ==
 
-create temp model pkg1.`pkg2`.`t 2` as
+create temp model pkg1."pkg2"."t 2" as
 select 1 from t2 union all select 2 from t3 cross join t4
 --
 CreateModelStatement(is_temp) [0-96] [create temp...cross join t4]
-  PathExpression [18-35] [pkg1.`pkg2`.`t 2`]
+  PathExpression [18-35] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [18-22] [pkg1]
-    Identifier(pkg2) [23-29] [`pkg2`]
-    Identifier("t 2") [30-35] [`t 2`]
+    Identifier(pkg2) [23-29] ["pkg2"]
+    Identifier("t 2") [30-35] ["t 2"]
   Query [39-96] [select 1 from...cross join t4]
     SetOperation(UNION ALL) [39-96] [select 1 from...cross join t4]
       SetOperationMetadataList [55-65] [union all]
@@ -478,7 +478,7 @@ CreateModelStatement(is_temp) [0-96] [create temp...cross join t4]
               PathExpression [94-96] [t4]
                 Identifier(t4) [94-96] [t4]
 --
-CREATE TEMP MODEL pkg1.pkg2.`t 2` AS
+CREATE TEMP MODEL pkg1.pkg2."t 2" AS
 SELECT
   1
 FROM
@@ -803,27 +803,27 @@ SELECT
 ==
 
 create model tt
-options (y='b.c', z=`b.c`)
+options (y='b.c', z="b.c")
 as select 2
 --
 CreateModelStatement [0-54] [create model...as select 2]
   PathExpression [13-15] [tt]
     Identifier(tt) [13-15] [tt]
-  OptionsList [24-42] [(y='b.c', z=`b.c`)]
+  OptionsList [24-42] [(y='b.c', z="b.c")]
     OptionsEntry [25-32] [y='b.c']
       Identifier(y) [25-26] [y]
       StringLiteral('b.c') [27-32] ['b.c']
-    OptionsEntry [34-41] [z=`b.c`]
+    OptionsEntry [34-41] [z="b.c"]
       Identifier(z) [34-35] [z]
-      PathExpression [36-41] [`b.c`]
-        Identifier("b.c") [36-41] [`b.c`]
+      PathExpression [36-41] ["b.c"]
+        Identifier("b.c") [36-41] ["b.c"]
   Query [46-54] [select 2]
     Select [46-54] [select 2]
       SelectList [53-54] [2]
         SelectColumn [53-54] [2]
           IntLiteral(2) [53-54] [2]
 --
-CREATE MODEL tt OPTIONS(y = 'b.c', z = `b.c`) AS
+CREATE MODEL tt OPTIONS(y = 'b.c', z = "b.c") AS
 SELECT
   2
 ==
@@ -934,7 +934,7 @@ SELECT
   1 AS x
 ==
 
-# The parser thinks `options` is a model name.
+# The parser thinks "options" is a model name.
 create model options(x=y) as select 1 x;
 --
 ERROR: Syntax error: Expected end of input but got "(" [at 1:21]

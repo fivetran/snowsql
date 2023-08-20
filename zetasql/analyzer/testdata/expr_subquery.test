@@ -4,7 +4,7 @@ select (select 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -28,9 +28,9 @@ select (select 1), EXISTS(select 1.5), ARRAY(select 'ab')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
-| +-$query.$col2#5 AS `$col2` [BOOL]
-| +-$query.$col3#6 AS `$col3` [ARRAY<STRING>]
+| +-$query.$col1#4 AS "$col1" [INT64]
+| +-$query.$col2#5 AS "$col2" [BOOL]
+| +-$query.$col3#6 AS "$col3" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6]
@@ -77,7 +77,7 @@ select (select AS STRUCT 1 a,2 b)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRUCT<a INT64, b INT64>]
+| +-$query.$col1#4 AS "$col1" [STRUCT<a INT64, b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -126,7 +126,7 @@ select EXISTS(select 1, 2)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -155,9 +155,9 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [INT64]
-| +-$query.$col2#11 AS `$col2` [INT64]
-| +-$query.$col3#12 AS `$col3` [DOUBLE]
+| +-$query.$col1#10 AS "$col1" [INT64]
+| +-$query.$col2#11 AS "$col2" [INT64]
+| +-$query.$col3#12 AS "$col3" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#10, $col2#11, $col3#12]
@@ -226,12 +226,12 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#25 AS `$col1` [ARRAY<INT64>]
-| +-$query.$col2#26 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#27 AS `$col3` [ARRAY<INT64>]
-| +-$query.$col4#28 AS `$col4` [ARRAY<INT64>]
-| +-$query.$col5#29 AS `$col5` [ARRAY<INT64>]
-| +-$query.$col6#30 AS `$col6` [ARRAY<STRING>]
+| +-$query.$col1#25 AS "$col1" [ARRAY<INT64>]
+| +-$query.$col2#26 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#27 AS "$col3" [ARRAY<INT64>]
+| +-$query.$col4#28 AS "$col4" [ARRAY<INT64>]
+| +-$query.$col5#29 AS "$col5" [ARRAY<INT64>]
+| +-$query.$col6#30 AS "$col6" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#25, $col2#26, $col3#27, $col4#28, $col5#29, $col6#30]
@@ -361,9 +361,9 @@ select        (select 1 from TestTable where key=4),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#13 AS `$col1` [INT64]
-| +-$query.$col2#14 AS `$col2` [ARRAY<INT64>]
-| +-$query.$col3#15 AS `$col3` [BOOL]
+| +-$query.$col1#13 AS "$col1" [INT64]
+| +-$query.$col2#14 AS "$col2" [ARRAY<INT64>]
+| +-$query.$col3#15 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#13, $col2#14, $col3#15]
@@ -431,7 +431,7 @@ select (select array_agg(key) from TestTable)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -470,7 +470,7 @@ select ARRAY(select AS STRUCT array_agg(key) c1, array_agg(value) c2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<STRUCT<c1 ARRAY<INT64>, c2 ARRAY<STRING>>>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<STRUCT<c1 ARRAY<INT64>, c2 ARRAY<STRING>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -514,7 +514,7 @@ select ARRAY(select as struct array_agg(key) c1 from KeyValue group by value)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<STRUCT<c1 ARRAY<INT64>>>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<STRUCT<c1 ARRAY<INT64>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -555,7 +555,7 @@ select ARRAY(select AS STRUCT 1 a,2 b)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<STRUCT<a INT64, b INT64>>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<STRUCT<a INT64, b INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -591,7 +591,7 @@ select EXISTS(select 1,2)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -616,7 +616,7 @@ select (select AS STRUCT count(*) cnt, avg(key) avg from KeyValue)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [STRUCT<cnt INT64, avg DOUBLE>]
+| +-$query.$col1#6 AS "$col1" [STRUCT<cnt INT64, avg DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -656,7 +656,7 @@ select ARRAY(select AS STRUCT key, count(*) cnt, avg(key) avg from KeyValue grou
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<STRUCT<key INT64, cnt INT64, avg DOUBLE>>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<STRUCT<key INT64, cnt INT64, avg DOUBLE>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -781,8 +781,8 @@ select ARRAY(select AS STRUCT key, value from KeyValue),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<STRUCT<key INT64, value STRING>>]
-| +-$query.$col2#8 AS `$col2` [ARRAY<STRUCT<Key INT64, Value STRING>>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<STRUCT<key INT64, value STRING>>]
+| +-$query.$col2#8 AS "$col2" [ARRAY<STRUCT<Key INT64, Value STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#7, $col2#8]
@@ -834,7 +834,7 @@ select (select AS STRUCT 1 aaA, 2 b, 3 Aaa)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRUCT<aaA INT64, b INT64, Aaa INT64>]
+| +-$query.$col1#5 AS "$col1" [STRUCT<aaA INT64, b INT64, Aaa INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -927,7 +927,7 @@ from TestTable tt1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -959,7 +959,7 @@ select array_length(array(select 1 union all select 2))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1012,7 +1012,7 @@ group by (select 5)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [INT64]
+| +-$query.$col1#11 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -1109,7 +1109,7 @@ select (select key from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT32]
+| +-$query.$col1#6 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1160,7 +1160,7 @@ select ARRAY(select KitchenSink from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>]
+| +-$query.$col1#8 AS "$col1" [ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -1224,7 +1224,7 @@ select cast(5 as int32) IN
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [BOOL]
+| +-$query.$col1#6 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1277,7 +1277,7 @@ from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -1338,7 +1338,7 @@ from TestTable t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#13 AS `$col1` [BOOL]
+| +-$query.$col1#13 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#13]

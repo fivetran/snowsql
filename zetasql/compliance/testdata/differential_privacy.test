@@ -812,7 +812,7 @@ ERROR: generic::failed_precondition: Bin count threshold was too large to find a
 ==
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a contribution_bounds_per_group argument.
-# Because the `float_value` is indeterministic, we only output `noise_confidence_interval`
+# Because the "float_value" is indeterministic, we only output "noise_confidence_interval"
 [name=differential_privacy_sum_double_explicit_bounds_multi_user_with_report_proto_zero_rows]
 [required_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [labels=differential_privacy]
@@ -893,7 +893,7 @@ ERROR: generic::failed_precondition: Bin count threshold was too large to find a
 ==
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a contribution_bounds_per_group argument.
-# Because the `float_value` is indeterministic, we only output `noise_confidence_interval`
+# Because the "float_value" is indeterministic, we only output "noise_confidence_interval"
 [name=differential_privacy_avg_double_explicit_bounds_multi_user_with_report_proto_zero_rows]
 [required_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [labels=differential_privacy]
@@ -974,7 +974,7 @@ ERROR: generic::failed_precondition: Bin count threshold was too large to find a
 ==
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a contribution_bounds_per_group argument.
-# Because the `float_value` is indeterministic, we only output `noise_confidence_interval`
+# Because the "float_value" is indeterministic, we only output "noise_confidence_interval"
 [name=differential_privacy_count_double_explicit_bounds_multi_user_with_report_proto_zero_rows]
 [required_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [labels=differential_privacy]
@@ -1052,7 +1052,7 @@ ERROR: generic::failed_precondition: Bin count threshold was too large to find a
 ==
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a contribution_bounds_per_group argument.
-# Because the `float_value` is indeterministic, we only output `noise_confidence_interval`
+# Because the "float_value" is indeterministic, we only output "noise_confidence_interval"
 [required_features=JSON_TYPE,DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [name=differential_privacy_sum_double_explicit_bounds_multi_user_with_report_json_zero_rows]
 [labels=differential_privacy]
@@ -1107,7 +1107,7 @@ ERROR: generic::failed_precondition: Bin count threshold was too large to find a
 ==
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a contribution_bounds_per_group argument.
-# Because the `float_value` is indeterministic, we only output `noise_confidence_interval`
+# Because the "float_value" is indeterministic, we only output "noise_confidence_interval"
 [required_features=JSON_TYPE,DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [name=differential_privacy_avg_double_explicit_bounds_multi_user_with_report_json_zero_rows]
 [labels=differential_privacy_unit_column]
@@ -1160,7 +1160,7 @@ ERROR: generic::failed_precondition: Bin count threshold was too large to find a
 ==
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a contribution_bounds_per_group argument.
-# Because the `float_value` is indeterministic, we only output `noise_confidence_interval`
+# Because the "float_value" is indeterministic, we only output "noise_confidence_interval"
 [required_features=JSON_TYPE,DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [name=differential_privacy_count_double_explicit_bounds_multi_user_with_report_json_zero_rows]
 [labels=differential_privacy]
@@ -1363,7 +1363,7 @@ ARRAY<STRUCT<BOOL,
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a CLAMPED clause.
 # Because the output of a DP algorithm on an empty data set is indeterministic,
-# we only test that the `noise_confidence_interval` value.
+# we only test that the "noise_confidence_interval" value.
 [name=differential_privacy_approx_quantiles_double_explicit_bounds_multi_user_with_report_proto_zero_rows]
 [required_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [labels=differential_privacy]
@@ -1391,7 +1391,7 @@ ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL, BOOL, BOOL, BOOL, BOOL, BOOL>>[
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a CLAMPED clause.
 # Because the output of a DP algorithm on an empty data set is indeterministic,
-# we only test that the `noise_confidence_interval` value.
+# we only test that the "noise_confidence_interval" value.
 [name=differential_privacy_approx_quantiles_int64_explicit_bounds_multi_user_with_report_proto_zero_rows]
 [required_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS]
 [labels=differential_privacy]
@@ -1591,7 +1591,7 @@ ARRAY<STRUCT<BOOL,
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a CLAMPED clause.
 # Because the output of a DP algorithm on an empty data set is indeterministic,
-# we only test that the `noise_confidence_interval` value.
+# we only test that the "noise_confidence_interval" value.
 [required_features=DIFFERENTIAL_PRIVACY,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NAMED_ARGUMENTS,JSON_ARRAY_FUNCTIONS,JSON_TYPE,JSON_VALUE_EXTRACTION_FUNCTIONS]
 [name=differential_privacy_approx_quantiles_double_explicit_bounds_multi_user_with_report_json_zero_rows]
 [labels=differential_privacy]
@@ -1619,7 +1619,7 @@ ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL, BOOL, BOOL, BOOL, BOOL, BOOL>>[
 
 # Test 0 rows as inputs by a filter "WHERE id > 1000" with a CLAMPED clause.
 # Because the output of a DP algorithm on an empty data set is indeterministic,
-# we only test that the `noise_confidence_interval` value.
+# we only test that the "noise_confidence_interval" value.
 [required_features=DIFFERENTIAL_PRIVACY,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NAMED_ARGUMENTS,JSON_ARRAY_FUNCTIONS,JSON_TYPE,JSON_VALUE_EXTRACTION_FUNCTIONS]
 [name=differential_privacy_approx_quantiles_int64_explicit_bounds_multi_user_with_report_json_zero_rows]
 [labels=differential_privacy]

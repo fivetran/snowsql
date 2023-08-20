@@ -112,7 +112,7 @@ UpdateStatement [0-39] [update T set...extension) = 5]
 --
 UPDATE T
 SET
-  id.(path.`to`.extension) = 5
+  id.(path."to".extension) = 5
 ==
 
 update T
@@ -135,7 +135,7 @@ UpdateStatement [0-45] [update T set...= DEFAULT]
 --
 UPDATE T
 SET
-  id.(path.`to`.extension) = DEFAULT
+  id.(path."to".extension) = DEFAULT
 ==
 
 update T
@@ -180,7 +180,7 @@ UpdateStatement [0-44] [update T set...extension) = 5]
 --
 UPDATE T
 SET
-  id1.id2.(path.`to`.extension) = 5
+  id1.id2.(path."to".extension) = 5
 ==
 
 update T
@@ -564,7 +564,7 @@ set x=y
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `a-100.b.c` [at 1:8]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "a-100.b.c" [at 1:8]
 update a-100.b.c
        ^
 --
@@ -583,7 +583,7 @@ UpdateStatement [0-24] [update a-100.b.c set x=y]
         PathExpression [23-24] [y]
           Identifier(y) [23-24] [y]
 --
-UPDATE `a-100`.b.c
+UPDATE "a-100".b.c
 SET
   x = y
 ==

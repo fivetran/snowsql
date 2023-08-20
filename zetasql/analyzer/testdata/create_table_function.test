@@ -1817,7 +1817,7 @@ CreateTableFunctionStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [INT64]
+| +-$query.$col1#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 ==
 
@@ -1842,7 +1842,7 @@ CreateTableFunctionStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$value_column" [ARRAY<INT64>]
 +-is_value_table=TRUE
 ==
 
@@ -1897,7 +1897,7 @@ CreateTableFunctionStmt
 |   +-input_scan=
 |     +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$query.$col1#2 AS "$col1" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 ==
 
@@ -1951,7 +1951,7 @@ CreateTableFunctionStmt
 |       +-input_scan=
 |         +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
 +-output_column_list=
-| +-$make_proto.$proto#4 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#4 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 ==
 
@@ -2202,7 +2202,7 @@ CreateTableFunctionStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-is_value_table=TRUE
 ==
 
@@ -2210,11 +2210,11 @@ CreateTableFunctionStmt
 create table if not exists function as select 1 as x, 2 as y;
 --
 CreateTableAsSelectStmt
-+-name_path=`function`
++-name_path="function"
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=`function`.x#3)
-| +-ColumnDefinition(name="y", type=INT64, column=`function`.y#4)
+| +-ColumnDefinition(name="x", type=INT64, column="function".x#3)
+| +-ColumnDefinition(name="y", type=INT64, column="function".y#4)
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 | +-$create_as.y#2 AS y [INT64]
@@ -2229,9 +2229,9 @@ CreateTableAsSelectStmt
 ==
 
 # It is possible to drop a table named "function".
-drop table `function`;
+drop table "function";
 --
-DropStmt(object_type="TABLE", is_if_exists=FALSE, name_path=`function`)
+DropStmt(object_type="TABLE", is_if_exists=FALSE, name_path="function")
 ==
 
 # The table function may omit the output schema if it does not have a SQL body.
@@ -2382,10 +2382,10 @@ CreateTableFunctionStmt(name_path=f, argument_name_list=[x], signature=(ANY TABL
 # Create a table-valued function where an output column name contains '$'.
 # TODO: Make these cases work when the column name is explicitly
 # assigned in this way.
-create table function f() as select 42 as `$col1`;
+create table function f() as select 42 as "$col1";
 --
 ERROR: Table-valued function SQL body without a RETURNS TABLE clause is missing one or more explicit output column names [at 1:30]
-create table function f() as select 42 as `$col1`;
+create table function f() as select 42 as "$col1";
                              ^
 ==
 

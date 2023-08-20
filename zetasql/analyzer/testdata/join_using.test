@@ -50,7 +50,7 @@ QueryStmt
 # Things to note, and compare to other versions:
 # 1. Output columns have join columns, then the non-join columns from the
 #    left, then non-join columns from the right.
-# 2. Join column `value` is the rhs version because this is RIGHT JOIN.
+# 2. Join column "value" is the rhs version because this is RIGHT JOIN.
 select *
 from KeyValue kv1 right join KeyValue kv2 using (value)
 --
@@ -118,7 +118,7 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col2#5 AS `$col2` [STRING]
+| +-$query.$col2#5 AS "$col2" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
 +-query=
@@ -160,7 +160,7 @@ select value1
        ^
 ==
 
-# `key` is the column from the right with RIGHT JOIN USING (key).
+# "key" is the column from the right with RIGHT JOIN USING (key).
 select key, kv1.value, kv2.value, kv1.key, kv2.key
 from KeyValue kv1 right join KeyValue kv2 using (key)
 where key=5
@@ -196,7 +196,7 @@ QueryStmt
             +-Literal(type=INT64, value=5)
 ==
 
-# `key` is the column from the left with JOIN USING (key).
+# "key" is the column from the left with JOIN USING (key).
 select key from KeyValue kv1 join KeyValue kv2 using (key)
 --
 QueryStmt
@@ -218,7 +218,7 @@ QueryStmt
             +-ColumnRef(type=INT64, column=KeyValue.Key#3)
 ==
 
-# `key` is the column from the left with LEFT JOIN USING (key).
+# "key" is the column from the left with LEFT JOIN USING (key).
 select key from KeyValue kv1 left join KeyValue kv2 using (key)
 --
 QueryStmt
@@ -282,10 +282,10 @@ QueryStmt
 | +-$full_join.value#5 AS value [STRING]
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#3 AS key [INT64]
-| +-$query.$col5#7 AS `$col5` [STRING]
+| +-$query.$col5#7 AS "$col5" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col7#8 AS `$col7` [STRING]
+| +-$query.$col7#8 AS "$col7" [STRING]
 | +-$full_join.value#5 AS value [STRING]
 | +-$full_join.key#6 AS key [INT64]
 +-query=
@@ -393,7 +393,7 @@ select 1 from KeyValue join TestTable using (key)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -559,8 +559,8 @@ QueryStmt
 | +-q1.a1#1 AS a1 [STRING]
 | +-q1.a4#4 AS a4 [STRING]
 | +-q1.a2#2 AS a2 [INT64]
-| +-q2.$col2#6 AS `$col2` [INT64]
-| +-q2.$col3#7 AS `$col3` [STRING]
+| +-q2.$col2#6 AS "$col2" [INT64]
+| +-q2.$col3#7 AS "$col3" [STRING]
 | +-q2.a2#9 AS a2 [STRING]
 +-query=
   +-ProjectScan
@@ -648,7 +648,7 @@ ERROR: Column key in USING clause is ambiguous on right side of join [at 3:57]
                                                         ^
 ==
 
-# `key` propagates as the leftmost column through all the joins.
+# "key" propagates as the leftmost column through all the joins.
 select *, '--', kv1.*, '--', kv2.*, '--', kv3.*, '--', key
 from KeyValue kv1
 join KeyValue kv2 using (key)
@@ -660,16 +660,16 @@ QueryStmt
 | +-KeyValue.Value#2 AS Value [STRING]
 | +-KeyValue.Value#4 AS Value [STRING]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col2#7 AS `$col2` [STRING]
+| +-$query.$col2#7 AS "$col2" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col4#8 AS `$col4` [STRING]
+| +-$query.$col4#8 AS "$col4" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
-| +-$query.$col6#9 AS `$col6` [STRING]
+| +-$query.$col6#9 AS "$col6" [STRING]
 | +-KeyValue.Key#5 AS Key [INT64]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col8#10 AS `$col8` [STRING]
+| +-$query.$col8#10 AS "$col8" [STRING]
 | +-KeyValue.Key#1 AS key [INT64]
 +-query=
   +-ProjectScan
@@ -701,7 +701,7 @@ QueryStmt
             +-ColumnRef(type=INT64, column=KeyValue.Key#5)
 ==
 
-# `key` is the column from the third join since the inner joins take
+# "key" is the column from the third join since the inner joins take
 # the key from the left.
 select key
 from KeyValue kv1
@@ -799,7 +799,7 @@ QueryStmt
               +-ColumnRef(type=INT64, column=KeyValue.Key#3)
 ==
 
-# We resolve `key` on the lhs of the join, opaquely, and it resolves to a scan.
+# We resolve "key" on the lhs of the join, opaquely, and it resolves to a scan.
 # If we forced it to resolve only as a column, then the query would work.
 select 1
 from KeyValue key
@@ -824,16 +824,16 @@ QueryStmt
 +-output_column_list=
 | +-lhs.int32_val1#2 AS int32_val1 [INT64]
 | +-$query.lhs#8 AS lhs [STRUCT<xxx STRING, int32_val1 INT64>]
-| +-$query.$col3#9 AS `$col3` [STRING]
+| +-$query.$col3#9 AS "$col3" [STRING]
 | +-TestExtraValueTable.value#3 AS rhs [PROTO<zetasql_test__.TestExtraPB>]
-| +-$query.$col5#10 AS `$col5` [STRING]
+| +-$query.$col5#10 AS "$col5" [STRING]
 | +-lhs.xxx#1 AS xxx [STRING]
 | +-lhs.int32_val1#2 AS int32_val1 [INT64]
-| +-$query.$col7#11 AS `$col7` [STRING]
+| +-$query.$col7#11 AS "$col7" [STRING]
 | +-$query.int32_val1#12 AS int32_val1 [INT32]
 | +-$query.int32_val2#13 AS int32_val2 [INT32]
 | +-$query.str_value#14 AS str_value [ARRAY<STRING>]
-| +-$query.$col9#15 AS `$col9` [STRING]
+| +-$query.$col9#15 AS "$col9" [STRING]
 | +-lhs.int32_val1#2 AS int32_val1 [INT64]
 | +-lhs.xxx#1 AS xxx [STRING]
 | +-$query.int32_val2#16 AS int32_val2 [INT32]
@@ -1028,7 +1028,7 @@ ALTERNATION GROUP: V_1_1_ARRAY_EQUALITY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1110,15 +1110,15 @@ QueryStmt
 +-output_column_list=
 | +-TestExtraValueTable.value#1 AS t1 [PROTO<zetasql_test__.TestExtraPB>]
 | +-TestExtraValueTable.value#4 AS t2 [PROTO<zetasql_test__.TestExtraPB>]
-| +-$query.$col3#10 AS `$col3` [STRING]
+| +-$query.$col3#10 AS "$col3" [STRING]
 | +-$query.int32_val1#11 AS int32_val1 [INT32]
 | +-$query.int32_val2#12 AS int32_val2 [INT32]
 | +-$query.str_value#13 AS str_value [ARRAY<STRING>]
-| +-$query.$col5#14 AS `$col5` [STRING]
+| +-$query.$col5#14 AS "$col5" [STRING]
 | +-$query.int32_val1#15 AS int32_val1 [INT32]
 | +-$query.int32_val2#16 AS int32_val2 [INT32]
 | +-$query.str_value#17 AS str_value [ARRAY<STRING>]
-| +-$query.$col7#18 AS `$col7` [STRING]
+| +-$query.$col7#18 AS "$col7" [STRING]
 | +-$full_join.int32_val1#9 AS int32_val1 [INT32]
 | +-$query.int32_val2#19 AS int32_val2 [INT32]
 | +-$query.str_value#20 AS str_value [ARRAY<STRING>]
@@ -1796,11 +1796,11 @@ QueryStmt
 +-output_column_list=
 | +-Int32ValueTable.value#1 AS t1 [INT32]
 | +-$query.t2#6 AS t2 [STRUCT<x INT64, t1 INT64, y INT64>]
-| +-$query.$col3#7 AS `$col3` [STRING]
+| +-$query.$col3#7 AS "$col3" [STRING]
 | +-t2.x#2 AS x [INT64]
 | +-t2.t1#3 AS t1 [INT64]
 | +-t2.y#4 AS y [INT64]
-| +-$query.$col5#8 AS `$col5` [STRING]
+| +-$query.$col5#8 AS "$col5" [STRING]
 | +-Int32ValueTable.value#1 AS t1 [INT32]
 | +-t2.x#2 AS x [INT64]
 | +-t2.y#4 AS y [INT64]
@@ -1849,7 +1849,7 @@ QueryStmt
 +-output_column_list=
 | +-$array.t1#1 AS t1 [INT64]
 | +-$array.t2#5 AS t2 [STRUCT<a STRING, t1 INT64>]
-| +-$query.$col3#7 AS `$col3` [STRING]
+| +-$query.$col3#7 AS "$col3" [STRING]
 | +-$array.t1#1 AS t1 [INT64]
 | +-$query.a#8 AS a [STRING]
 +-query=

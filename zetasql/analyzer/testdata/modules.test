@@ -104,7 +104,7 @@ ImportStmt(import_kind=MODULE, name_path=module, alias_path=module)
 
 import module module.all;
 --
-ImportStmt(import_kind=MODULE, name_path=module.`all`, alias_path=`all`)
+ImportStmt(import_kind=MODULE, name_path=module."all", alias_path="all")
 ==
 
 # aliases are allowed
@@ -118,9 +118,9 @@ import module foo.bar as baz
 ImportStmt(import_kind=MODULE, name_path=foo.bar, alias_path=baz)
 ==
 
-import module foo.bar as `baz.zap`
+import module foo.bar as "baz.zap"
 --
-ImportStmt(import_kind=MODULE, name_path=foo.bar, alias_path=`baz.zap`)
+ImportStmt(import_kind=MODULE, name_path=foo.bar, alias_path="baz.zap")
 ==
 
 # options are allowed

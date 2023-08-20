@@ -48,10 +48,10 @@ select key from recursive_catalog.nested_catalog;
 # Java does not support recursive catalog.
 [no_java]
 select key
-from recursive_catalog.recursive_catalog.`bad name`.NestedKeyValue;
+from recursive_catalog.recursive_catalog."bad name".NestedKeyValue;
 --
-ERROR: Table not found: recursive_catalog.recursive_catalog.`bad name`.NestedKeyValue [at 2:6]
-from recursive_catalog.recursive_catalog.`bad name`.NestedKeyValue;
+ERROR: Table not found: recursive_catalog.recursive_catalog."bad name".NestedKeyValue [at 2:6]
+from recursive_catalog.recursive_catalog."bad name".NestedKeyValue;
      ^
 ==
 

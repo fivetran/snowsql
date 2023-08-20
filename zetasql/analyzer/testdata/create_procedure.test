@@ -89,11 +89,11 @@ CreateProcedureStmt
 ==
 
 # valid parameter with empty mode and backtick-quoted parameter name
-CREATE PROCEDURE procedure_name (`OUT` int32)
+CREATE PROCEDURE procedure_name ("OUT" int32)
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[`OUT`], signature=(INT32 OUT) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=["OUT"], signature=(INT32 OUT) -> <void>, procedure_body="BEGIN\nEND")
 ==
 
 # valid parameter with mode and "OUT" as parameter name
@@ -101,7 +101,7 @@ CREATE PROCEDURE procedure_name (OUT OUT int32)
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[`OUT`], signature=(INT32 {procedure_argument_mode: OUT} OUT) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=["OUT"], signature=(INT32 {procedure_argument_mode: OUT} OUT) -> <void>, procedure_body="BEGIN\nEND")
 ==
 
 # valid parameter with IN/OUT/INOUT and empty mode
@@ -131,7 +131,7 @@ CREATE PROCEDURE OUT(param_1 INT32)
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=`OUT`, argument_name_list=[param_1], signature=(INT32 param_1) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path="OUT", argument_name_list=[param_1], signature=(INT32 param_1) -> <void>, procedure_body="BEGIN\nEND")
 ==
 
 # invalid statement with unknown type

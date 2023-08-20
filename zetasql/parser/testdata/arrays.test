@@ -325,7 +325,7 @@ QueryStatement [0-12]
             Identifier("1") [11-12]
 --
 SELECT
-  ARRAY[1].`1`
+  ARRAY[1]."1"
 ==
 
 select [1].a[1]
@@ -430,7 +430,7 @@ SELECT
 ==
 
 # There is nothing special about OFFSET or ORDINAL as identifiers here.
-select a[default_offset], a[ordinal], a[`default_offset`], a[ordinal(ordinal)]
+select a[default_offset], a[ordinal], a["default_offset"], a[ordinal(ordinal)]
 --
 QueryStatement [0-78]
   Query [0-78]
@@ -841,7 +841,7 @@ QueryStatement [0-20]
             IntLiteral(5) [18-19]
 --
 SELECT
-  `function`()[5]
+  "function"()[5]
 ==
 
 select 5[6];

@@ -20,19 +20,19 @@ SimpleType [0-5] [a.b.c]
 a.b.c
 ==
 
-`a.b.c`
+"a.b.c"
 --
-SimpleType [0-7] [`a.b.c`]
-  PathExpression [0-7] [`a.b.c`]
-    Identifier("a.b.c") [0-7] [`a.b.c`]
+SimpleType [0-7] ["a.b.c"]
+  PathExpression [0-7] ["a.b.c"]
+    Identifier("a.b.c") [0-7] ["a.b.c"]
 --
-`a.b.c`
+"a.b.c"
 ==
 
-proto<`a.b.c`>
+proto<"a.b.c">
 --
 ERROR: Syntax error: Unexpected keyword PROTO [at 1:1]
-proto<`a.b.c`>
+proto<"a.b.c">
 ^
 ==
 

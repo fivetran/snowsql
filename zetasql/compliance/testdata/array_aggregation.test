@@ -130,9 +130,9 @@ ARRAY<STRUCT<ARRAY<>>>[
 ==
 [name=array_agg_enum_basic]
 SELECT ARRAY_AGG(elem) FROM (
-  SELECT CAST('TESTENUM0' AS `zetasql_test__.TestEnum`) AS elem UNION ALL
-  SELECT CAST('TESTENUM1' AS `zetasql_test__.TestEnum`) UNION ALL
-  SELECT CAST('TESTENUM2' AS `zetasql_test__.TestEnum`))
+  SELECT CAST('TESTENUM0' AS "zetasql_test__.TestEnum") AS elem UNION ALL
+  SELECT CAST('TESTENUM1' AS "zetasql_test__.TestEnum") UNION ALL
+  SELECT CAST('TESTENUM2' AS "zetasql_test__.TestEnum"))
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[unknown order:
@@ -531,7 +531,7 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 ]
 ==
 [name=array_of_protos]
-SELECT ARRAY(SELECT AS `zetasql_test__.MessageWithNulls`
+SELECT ARRAY(SELECT AS "zetasql_test__.MessageWithNulls"
                a as i1, b as i2, NULL as i3 -- i4 is not specified
              FROM UNNEST([1, NULL, 2]) b)
 FROM UNNEST([1, NULL, 3]) a
@@ -906,12 +906,12 @@ ERROR: generic::invalid_argument: Cannot construct array with element type ARRAY
 ==
 [name=array_concat_agg_proto]
 SELECT ARRAY_CONCAT_AGG(x) FROM (
-    SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[
+    SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
   '''] x UNION ALL
-    SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[
+    SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 21
     int64_key_2: 22
@@ -1122,11 +1122,11 @@ ARRAY<STRUCT<
 [required_features=V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE]
 [name=array_agg_PROTO_ignore_nulls]
 SELECT ARRAY_AGG(elem IGNORE NULLS)
-FROM (SELECT CAST("" AS `zetasql_test__.NullableInt`) AS elem
+FROM (SELECT CAST("" AS "zetasql_test__.NullableInt") AS elem
       UNION ALL
       SELECT null
       UNION ALL
-      SELECT CAST("value: 0" AS `zetasql_test__.NullableInt`));
+      SELECT CAST("value: 0" AS "zetasql_test__.NullableInt"));
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<PROTO<zetasql_test__.NullableInt>>[unknown order:{}, {value: 0}]}
@@ -1135,11 +1135,11 @@ ARRAY<STRUCT<ARRAY<>>>[
 [required_features=V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE]
 [name=array_agg_PROTO_respect_nulls]
 SELECT ARRAY_AGG(elem RESPECT NULLS)
-FROM (SELECT CAST("" AS `zetasql_test__.NullableInt`) AS elem
+FROM (SELECT CAST("" AS "zetasql_test__.NullableInt") AS elem
       UNION ALL
       SELECT null
       UNION ALL
-      SELECT CAST("value: 0" AS `zetasql_test__.NullableInt`));
+      SELECT CAST("value: 0" AS "zetasql_test__.NullableInt"));
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<PROTO<zetasql_test__.NullableInt>>[unknown order:NULL, {}, {value: 0}]}
@@ -1152,7 +1152,7 @@ SELECT
    x AS ARRAY_AGG(x RESPECT NULLS ORDER BY x.value),
    STRUCT(ARRAY_LENGTH(x) AS arr_len, x[OFFSET(0)] AS idx0, x[OFFSET(1)] AS idx1)
   ).*
-FROM UNNEST([CAST("value: 0" AS `zetasql_test__.NullableInt`), NULL]) AS x;
+FROM UNNEST([CAST("value: 0" AS "zetasql_test__.NullableInt"), NULL]) AS x;
 --
 ARRAY<STRUCT<
         arr_len INT64,

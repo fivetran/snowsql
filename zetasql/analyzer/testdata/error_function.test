@@ -2,7 +2,7 @@ select error('abc')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -18,7 +18,7 @@ select error(concat('abc', 'def'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -36,7 +36,7 @@ select if(true, error('e1'), error('e2'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -57,8 +57,8 @@ select if(true, struct(), error('e2')),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<>]
-| +-$query.$col2#2 AS `$col2` [STRUCT<>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<>]
+| +-$query.$col2#2 AS "$col2" [STRUCT<>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -91,7 +91,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -120,7 +120,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [UINT64]
+| +-$query.$col1#3 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -150,7 +150,7 @@ select concat('abc', error('def'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -176,7 +176,7 @@ select coalesce('abc', cast(error('def') as string))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -196,7 +196,7 @@ select coalesce('int64_key_1: 0 int64_key_2: 1',
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -215,7 +215,7 @@ select error(cast(sqrt(error('abc')) as string))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -237,7 +237,7 @@ select error(null)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -254,7 +254,7 @@ select cast(error(null) as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -273,7 +273,7 @@ select coalesce(error('xxx'), int32) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [INT32]
+| +-$query.$col1#19 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -293,7 +293,7 @@ select concat(b'123', safe.error('abc'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -313,8 +313,8 @@ select error('xxx'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [BYTES]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]

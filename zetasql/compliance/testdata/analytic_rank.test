@@ -317,13 +317,13 @@ ARRAY<STRUCT<bytes_val BYTES, INT64>>[unknown order:
 
 [name=rank_enum]
 SELECT enum_val, RANK() OVER (ORDER BY enum_val DESC)
-FROM unnest([CAST(0 AS `zetasql_test__.TestEnum`),
-             CAST(1 AS `zetasql_test__.TestEnum`),
-             CAST(1 AS `zetasql_test__.TestEnum`),
-             CAST(2 AS `zetasql_test__.TestEnum`),
-             CAST(2 AS `zetasql_test__.TestEnum`),
-             CAST(null AS `zetasql_test__.TestEnum`),
-             CAST(null AS `zetasql_test__.TestEnum`)]) as enum_val
+FROM unnest([CAST(0 AS "zetasql_test__.TestEnum"),
+             CAST(1 AS "zetasql_test__.TestEnum"),
+             CAST(1 AS "zetasql_test__.TestEnum"),
+             CAST(2 AS "zetasql_test__.TestEnum"),
+             CAST(2 AS "zetasql_test__.TestEnum"),
+             CAST(null AS "zetasql_test__.TestEnum"),
+             CAST(null AS "zetasql_test__.TestEnum")]) as enum_val
 --
 ARRAY<STRUCT<
         enum_val ENUM<zetasql_test__.TestEnum>,

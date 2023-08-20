@@ -5,7 +5,7 @@ select as struct 1 a, 2 b, 3 c
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#4 AS `$struct` [STRUCT<a INT64, b INT64, c INT64>]
+| +-$make_struct.$struct#4 AS "$struct" [STRUCT<a INT64, b INT64, c INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -34,7 +34,7 @@ select as struct 5
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#2 AS `$struct` [STRUCT<INT64>]
+| +-$make_struct.$struct#2 AS "$struct" [STRUCT<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -58,7 +58,7 @@ select as struct null
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#2 AS `$struct` [STRUCT<INT64>]
+| +-$make_struct.$struct#2 AS "$struct" [STRUCT<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -82,7 +82,7 @@ select as struct null as col
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#2 AS `$struct` [STRUCT<col INT64>]
+| +-$make_struct.$struct#2 AS "$struct" [STRUCT<col INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -106,7 +106,7 @@ select as struct null N from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#4 AS `$struct` [STRUCT<N INT64>]
+| +-$make_struct.$struct#4 AS "$struct" [STRUCT<N INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -149,7 +149,7 @@ select *, '--', S.* from (select as struct 1 abc) S
 QueryStmt
 +-output_column_list=
 | +-$query.abc#3 AS abc [INT64]
-| +-$query.$col2#4 AS `$col2` [STRING]
+| +-$query.$col2#4 AS "$col2" [STRING]
 | +-$query.abc#5 AS abc [INT64]
 +-query=
   +-ProjectScan

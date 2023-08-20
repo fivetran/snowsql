@@ -13,7 +13,7 @@ select 1 from tvf_no_args()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1246,7 +1246,7 @@ QueryStmt
 
 # The TVF accepts a templated argument.
 select column_bool from
-tvf_exactly_one_arg_enum_any(CAST(1 AS `zetasql_test__.TestEnum`))
+tvf_exactly_one_arg_enum_any(CAST(1 AS "zetasql_test__.TestEnum"))
 --
 QueryStmt
 +-output_column_list=
@@ -1459,7 +1459,7 @@ select (select column_bool from tvf_exactly_1_int64_arg(Key)) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [BOOL]
+| +-$query.$col1#5 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1587,7 +1587,7 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$array.$unnest1#5 AS `$unnest1` [BOOL]
+| +-$array.$unnest1#5 AS "$unnest1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $array.$unnest1#5]
@@ -1958,7 +1958,7 @@ select two_deprecation_warnings() from tvf_two_deprecation_warnings()
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#19 AS `$col1` [INT64]
+| +-$union_all.$col1#19 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#19]
@@ -2298,7 +2298,7 @@ from tvf_templated_select_x_with_required_value_table_output_schema("abc");
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_templated_select_x_with_required_value_table_output_schema.$col0#1 AS `$col0` [STRING]
+| +-tvf_templated_select_x_with_required_value_table_output_schema.$col0#1 AS "$col0" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_templated_select_x_with_required_value_table_output_schema.$col0#1]
@@ -2337,7 +2337,7 @@ from tvf_templated_select_as_value_x_with_required_value_table_output_schema(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_templated_select_as_value_x_with_required_value_table_output_schema.$col0#1 AS `$col0` [STRING]
+| +-tvf_templated_select_as_value_x_with_required_value_table_output_schema.$col0#1 AS "$col0" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_templated_select_as_value_x_with_required_value_table_output_schema.$col0#1]
@@ -2357,7 +2357,7 @@ With Templated SQL TVF signature:
 containing resolved templated query:
 QueryStmt
 +-output_column_list=
-| +-$query.x#1 AS `$value_column` [STRING]
+| +-$query.x#1 AS "$value_column" [STRING]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2376,7 +2376,7 @@ from tvf_templated_select_null_str_with_required_value_table_output_schema(
 --
 QueryStmt
 +-output_column_list=
-| +-tvf_templated_select_null_str_with_required_value_table_output_schema.$col0#1 AS `$col0` [STRING]
+| +-tvf_templated_select_null_str_with_required_value_table_output_schema.$col0#1 AS "$col0" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[tvf_templated_select_null_str_with_required_value_table_output_schema.$col0#1]
@@ -2396,7 +2396,7 @@ With Templated SQL TVF signature:
 containing resolved templated query:
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2857,7 +2857,7 @@ select * from tvf_exactly_1_int64_arg(select * from tvf_no_args(((abs(1 - 2)))))
 # The TVF name is the same as a reserved keyword.
 select * from if(true, (select 1), (select 2))
 --
-ERROR: Table-valued function not found: `if` [at 1:15]
+ERROR: Table-valued function not found: "if" [at 1:15]
 select * from if(true, (select 1), (select 2))
               ^
 ==
@@ -3015,7 +3015,7 @@ select * from my.dot.separated.tvf((select key from keyvalue))
 # not found.
 select * from my.42.dot.separated.tvf((select key from keyvalue))
 --
-ERROR: Table-valued function not found: my.`42`.dot.separated.tvf [at 1:15]
+ERROR: Table-valued function not found: my."42".dot.separated.tvf [at 1:15]
 select * from my.42.dot.separated.tvf((select key from keyvalue))
               ^
 ==
@@ -3024,7 +3024,7 @@ select * from my.42.dot.separated.tvf((select key from keyvalue))
 # not found.
 select * from my.42dot.separated.tvf((select key from keyvalue))
 --
-ERROR: Table-valued function not found: my.`42dot`.separated.tvf [at 1:15]
+ERROR: Table-valued function not found: my."42dot".separated.tvf [at 1:15]
 select * from my.42dot.separated.tvf((select key from keyvalue))
               ^
 ==
@@ -3042,7 +3042,7 @@ select * from my.dot42.separated.tvf((select key from keyvalue))
 # not found.
 select * from my.dot.separated.42((select key from keyvalue))
 --
-ERROR: Table-valued function not found: my.dot.separated.`42` [at 1:15]
+ERROR: Table-valued function not found: my.dot.separated."42" [at 1:15]
 select * from my.dot.separated.42((select key from keyvalue))
               ^
 ==

@@ -15,7 +15,7 @@ SELECT CAST(1 AS int64) as row_id,
        CAST("1" AS BYTES) as bytes_val,
        CAST('2014-01-01' AS DATE) as date_val,
        TIMESTAMP '2014-01-01 00:00:01 UTC' as timestamp_val,
-       cast(null as `zetasql_test__.TestEnum`) as enum_val,
+       cast(null as "zetasql_test__.TestEnum") as enum_val,
        cast(struct(2, 4) as struct<a int64, b int64>) as struct_val,
        NEW zetasql_test__.KitchenSinkPB(5 AS int64_key_1,
                                         7 AS int64_key_2) as proto_val UNION ALL

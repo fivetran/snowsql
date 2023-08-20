@@ -3,7 +3,7 @@ SELECT 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -18,7 +18,7 @@ SELECT 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#2 AS `$col1` [INT32]
+| +-$casted_column.$col1#2 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#2]
@@ -39,8 +39,8 @@ SELECT (SELECT 1), (SELECT "foo");
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#5 AS `$col1` [INT32]
-| +-$query.$col2#4 AS `$col2` [STRING]
+| +-$casted_column.$col1#5 AS "$col1" [INT32]
+| +-$query.$col2#4 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#5, $query.$col2#4]
@@ -85,8 +85,8 @@ SELECT (SELECT 1), (SELECT "foo");
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#5 AS `$col1` [INT32]
-| +-$query.$col2#4 AS `$col2` [STRING]
+| +-$casted_column.$col1#5 AS "$col1" [INT32]
+| +-$query.$col2#4 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#5, $query.$col2#4]
@@ -147,7 +147,7 @@ SELECT AS VALUE 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$value_column#2 AS `$value_column` [INT32]
+| +-$casted_column.$value_column#2 AS "$value_column" [INT32]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -168,7 +168,7 @@ SELECT AS VALUE 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$value_column#2 AS `$value_column` [INT32]
+| +-$casted_column.$value_column#2 AS "$value_column" [INT32]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -213,7 +213,7 @@ SELECT AS STRUCT 1, true;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#3 AS `$struct` [STRUCT<INT64, BOOL>]
+| +-$make_struct.$struct#3 AS "$struct" [STRUCT<INT64, BOOL>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -240,7 +240,7 @@ SELECT AS STRUCT 1 x, true y;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$struct#4 AS `$struct` [STRUCT<a INT64, b BOOL>]
+| +-$casted_column.$struct#4 AS "$struct" [STRUCT<a INT64, b BOOL>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -282,7 +282,7 @@ SELECT AS zetasql_test__.KitchenSinkPB 1 int64_key_1, 2 int64_key_2;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#3 AS `$proto` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$make_proto.$proto#3 AS "$proto" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -322,7 +322,7 @@ SELECT NULL;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#2 AS `$col1` [STRING]
+| +-$casted_column.$col1#2 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#2]
@@ -342,7 +342,7 @@ SELECT '2017-01-01';
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#2 AS `$col1` [TIMESTAMP]
+| +-$casted_column.$col1#2 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#2]
@@ -371,7 +371,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -389,7 +389,7 @@ SELECT @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#2 AS `$col1` [INT64]
+| +-$casted_column.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#2]
@@ -412,7 +412,7 @@ SELECT @test_param_int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$casted_column.$col1#2 AS `$col1` [INT32]
+| +-$casted_column.$col1#2 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#2]
@@ -522,7 +522,7 @@ QueryStmt
 +-hint_list=
 | +-key := Literal(type=STRING, value="value")
 +-output_column_list=
-| +-$casted_column.$col1#2 AS `$col1` [INT32]
+| +-$casted_column.$col1#2 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$casted_column.$col1#2]

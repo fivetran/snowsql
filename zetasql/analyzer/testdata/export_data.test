@@ -127,7 +127,7 @@ as select as struct 1 a, 2, 3 c, 4 c
 --
 ExportDataStmt
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<a INT64, INT64, c INT64, c INT64>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<a INT64, INT64, c INT64, c INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -155,11 +155,11 @@ ExportDataStmt
 
 # Create a value table with SELECT AS ProtoName.
 export data
-as select as `zetasql_test__.TestExtraPB` 55 int32_val1
+as select as "zetasql_test__.TestExtraPB" 55 int32_val1
 --
 ExportDataStmt
 +-output_column_list=
-| +-$make_proto.$proto#2 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#2 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -181,13 +181,13 @@ ExportDataStmt
 
 # Create a value table with UNION ALL of SELECT AS ProtoName.
 export data as
-select as `zetasql_test__.TestExtraPB` 55 int32_val1
+select as "zetasql_test__.TestExtraPB" 55 int32_val1
 union all
-select as `zetasql_test__.TestExtraPB` 77 int32_val1
+select as "zetasql_test__.TestExtraPB" 77 int32_val1
 --
 ExportDataStmt
 +-output_column_list=
-| +-$union_all.$proto#5 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$union_all.$proto#5 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan
@@ -235,14 +235,14 @@ ExportDataStmt
 # Create a value table with UNION ALL of SELECT AS VALUE.
 export data as
 select as value
-  new `zetasql_test__.TestExtraPB`(55 as int32_val1) f0_
+  new "zetasql_test__.TestExtraPB"(55 as int32_val1) f0_
 union all
 select as value
-  new `zetasql_test__.TestExtraPB`(77 as int32_val1) f1_
+  new "zetasql_test__.TestExtraPB"(77 as int32_val1) f1_
 --
 ExportDataStmt
 +-output_column_list=
-| +-$union_all.$value_column#3 AS `$value_column` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$union_all.$value_column#3 AS "$value_column" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan

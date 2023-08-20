@@ -646,7 +646,7 @@ select * from (select * from UNNEST([1, 2, 3])) TABLESAMPLE RESERVOIR (1 ROWS)
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#1 AS `$unnest1` [INT64]
+| +-$array.$unnest1#1 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#1]

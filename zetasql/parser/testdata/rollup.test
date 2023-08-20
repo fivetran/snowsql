@@ -81,8 +81,8 @@ QueryStatement [0-92] [SELECT x,...ROLLUP(x, y)]
 SELECT
   x,
   y,
-  `GROUPING`(x) = 1,
-  `IF`(`GROUPING`(y) = 0, "foo", "bar")
+  "GROUPING"(x) = 1,
+  "IF"("GROUPING"(y) = 0, "foo", "bar")
 FROM
   T
 GROUP BY ROLLUP(x, y)
@@ -191,7 +191,7 @@ SELECT
   x,
   y,
   z,
-  `GROUPING`(x)
+  "GROUPING"(x)
 FROM
   T
 GROUP BY 1, 2, ROLLUP(x + 2, y = 'foo', z), z, x, ROLLUP(y, x)
@@ -258,8 +258,8 @@ QueryStatement [0-57] [select x,...GROUP BY x]
 --
 SELECT
   x,
-  `GROUPING`(),
-  `GROUPING`(x, y, z)
+  "GROUPING"(),
+  "GROUPING"(x, y, z)
 FROM
   T
 GROUP BY x
@@ -294,26 +294,26 @@ select x FROM T GROUP BY x, y WITH ROLLUP;
                               ^
 ==
 
-select `rollup` FROM T GROUP BY `rollup`;
+select "rollup" FROM T GROUP BY "rollup";
 --
-QueryStatement [0-40] [select `rollup...BY `rollup`]
-  Query [0-40] [select `rollup...BY `rollup`]
-    Select [0-40] [select `rollup...BY `rollup`]
-      SelectList [7-15] [`rollup`]
-        SelectColumn [7-15] [`rollup`]
-          PathExpression [7-15] [`rollup`]
-            Identifier("rollup") [7-15] [`rollup`]
+QueryStatement [0-40] [select "rollup...BY "rollup"]
+  Query [0-40] [select "rollup...BY "rollup"]
+    Select [0-40] [select "rollup...BY "rollup"]
+      SelectList [7-15] ["rollup"]
+        SelectColumn [7-15] ["rollup"]
+          PathExpression [7-15] ["rollup"]
+            Identifier("rollup") [7-15] ["rollup"]
       FromClause [16-22] [FROM T]
         TablePathExpression [21-22] [T]
           PathExpression [21-22] [T]
             Identifier(T) [21-22] [T]
-      GroupBy [23-40] [GROUP BY `rollup`]
-        GroupingItem [32-40] [`rollup`]
-          PathExpression [32-40] [`rollup`]
-            Identifier("rollup") [32-40] [`rollup`]
+      GroupBy [23-40] [GROUP BY "rollup"]
+        GroupingItem [32-40] ["rollup"]
+          PathExpression [32-40] ["rollup"]
+            Identifier("rollup") [32-40] ["rollup"]
 --
 SELECT
-  `rollup`
+  "rollup"
 FROM
   T
-GROUP BY `rollup`
+GROUP BY "rollup"

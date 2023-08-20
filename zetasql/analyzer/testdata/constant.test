@@ -40,11 +40,11 @@ QueryStmt
 
 # Fully qualified references to known constants in nested catalogs, using
 # backticks to refer to the constant name.
-SELECT nested_catalog.`Test Constant-String`;
+SELECT nested_catalog."Test Constant-String";
 --
 QueryStmt
 +-output_column_list=
-| +-$query.Test Constant-String#1 AS `Test Constant-String` [STRING]
+| +-$query.Test Constant-String#1 AS "Test Constant-String" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.Test Constant-String#1]
@@ -99,7 +99,7 @@ SELECT TestConstantProto.int64_key_1 - TestConstantProto.int64_key_2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -304,7 +304,7 @@ FROM (SELECT STRUCT<e INT64, f INT64>(1, 2) AS TestConstantString)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRUCT<TestConstantString STRUCT<e INT64, f INT64>, INT64>]
+| +-$query.$col1#5 AS "$col1" [STRUCT<TestConstantString STRUCT<e INT64, f INT64>, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -548,7 +548,7 @@ SELECT STRUCT<s NameConflictType, t INT64>((1, "foo"), TestConstantInt64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<s STRUCT<Key INT64, Value STRING>, t INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<s STRUCT<Key INT64, Value STRING>, t INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -593,7 +593,7 @@ ALTERNATION GROUP: sort_count()
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -609,7 +609,7 @@ ALTERNATION GROUP: concat("a", "b")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRING]
+| +-$query.$col1#4 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -625,7 +625,7 @@ ALTERNATION GROUP: CURRENT_DATE()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DATE]
+| +-$query.$col1#4 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -673,7 +673,7 @@ ALTERNATION GROUP: CURRENT_DATE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DATE]
+| +-$query.$col1#4 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1023,7 +1023,7 @@ SELECT TestConstantStrct
 --
 ALTERNATION GROUP: nested_catalog.TestConstantStrct
 --
-ERROR: Unrecognized name: nested_catalog.TestConstantStrct; Did you mean nested_catalog.`Test Constant-String`? [at 1:8]
+ERROR: Unrecognized name: nested_catalog.TestConstantStrct; Did you mean nested_catalog."Test Constant-String"? [at 1:8]
 SELECT nested_catalog.TestConstantStrct
        ^
 ==

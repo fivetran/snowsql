@@ -77,7 +77,7 @@ select 1 from (select KEy, kEY from KeyValue);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -225,11 +225,11 @@ QueryStmt
           +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
 
-# The subquery produces a column internally called `col0` but it isn't selectable.
-select `$col0` from (select 1 from KeyValue);
+# The subquery produces a column internally called "col0" but it isn't selectable.
+select "$col0" from (select 1 from KeyValue);
 --
-ERROR: Unrecognized name: `$col0` [at 1:8]
-select `$col0` from (select 1 from KeyValue);
+ERROR: Unrecognized name: "$col0" [at 1:8]
+select "$col0" from (select 1 from KeyValue);
        ^
 ==
 
@@ -309,7 +309,7 @@ from KeyValue,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]

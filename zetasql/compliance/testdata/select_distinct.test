@@ -318,8 +318,8 @@ NOTE: Reference implementation reports non-determinism.
 
 [name=null_enum]
 SELECT DISTINCT val.NULL_ENUM
-from (select cast(NULL as `zetasql_test__.TestEnum`) NULL_ENUM union all
-      select cast(NULL as `zetasql_test__.TestEnum`)) val
+from (select cast(NULL as "zetasql_test__.TestEnum") NULL_ENUM union all
+      select cast(NULL as "zetasql_test__.TestEnum")) val
 --
 ARRAY<STRUCT<NULL_ENUM ENUM<zetasql_test__.TestEnum>>>[{NULL}]
 ==
@@ -484,11 +484,11 @@ ARRAY<STRUCT<DATE DATE>>[unknown order:{NULL}, {2014-01-01}, {2014-01-02}]
 
 [name=distinct_enum]
 SELECT DISTINCT val.ENUM_col
-from (select cast(0 AS `zetasql_test__.TestEnum`) ENUM_col union all
-      select cast(NULL as `zetasql_test__.TestEnum`) union all
-      select cast(1 AS `zetasql_test__.TestEnum`) union all
-      select cast("TESTENUM0" AS `zetasql_test__.TestEnum`) union all
-      select cast(NULL as `zetasql_test__.TestEnum`)) val
+from (select cast(0 AS "zetasql_test__.TestEnum") ENUM_col union all
+      select cast(NULL as "zetasql_test__.TestEnum") union all
+      select cast(1 AS "zetasql_test__.TestEnum") union all
+      select cast("TESTENUM0" AS "zetasql_test__.TestEnum") union all
+      select cast(NULL as "zetasql_test__.TestEnum")) val
 --
 ARRAY<STRUCT<ENUM_col ENUM<zetasql_test__.TestEnum>>>[unknown order:
   {NULL},

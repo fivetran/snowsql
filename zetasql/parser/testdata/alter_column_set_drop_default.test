@@ -27,32 +27,32 @@ ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET DEFAULT 12345
 ==
 
 # ALTER TABLE to set column default value with quoted reserved keyword.
-ALTER TABLE foo ALTER COLUMN `SELECT` SET DEFAULT struct(1, 2);
+ALTER TABLE foo ALTER COLUMN "SELECT" SET DEFAULT struct(1, 2);
 --
 AlterTableStatement [0-62] [ALTER TABLE...struct(1, 2)]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
   AlterActionList [16-62] [ALTER COLUMN...struct(1, 2)]
     AlterColumnSetDefaultAction [16-62] [ALTER COLUMN...struct(1, 2)]
-      Identifier("SELECT") [29-37] [`SELECT`]
+      Identifier("SELECT") [29-37] ["SELECT"]
       StructConstructorWithKeyword [50-62] [struct(1, 2)]
         StructConstructorArg [57-58] [1]
           IntLiteral(1) [57-58] [1]
         StructConstructorArg [60-61] [2]
           IntLiteral(2) [60-61] [2]
 --
-ALTER TABLE foo ALTER COLUMN `SELECT` SET DEFAULT STRUCT(1, 2)
+ALTER TABLE foo ALTER COLUMN "SELECT" SET DEFAULT STRUCT(1, 2)
 ==
 
 # Alter column set default with collate function.
-ALTER TABLE foo ALTER COLUMN `collate` SET DEFAULT collate(y, 'x')
+ALTER TABLE foo ALTER COLUMN "collate" SET DEFAULT collate(y, 'x')
 --
 AlterTableStatement [0-66] [ALTER TABLE...collate(y, 'x')]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
   AlterActionList [16-66] [ALTER COLUMN...collate(y, 'x')]
     AlterColumnSetDefaultAction [16-66] [ALTER COLUMN...collate(y, 'x')]
-      Identifier("collate") [29-38] [`collate`]
+      Identifier("collate") [29-38] ["collate"]
       FunctionCall [51-66] [collate(y, 'x')]
         PathExpression [51-58] [collate]
           Identifier("collate") [51-58] [collate]
@@ -60,7 +60,7 @@ AlterTableStatement [0-66] [ALTER TABLE...collate(y, 'x')]
           Identifier(y) [59-60] [y]
         StringLiteral('x') [62-65] ['x']
 --
-ALTER TABLE foo ALTER COLUMN `collate` SET DEFAULT `collate`(y, 'x')
+ALTER TABLE foo ALTER COLUMN "collate" SET DEFAULT "collate"(y, 'x')
 ==
 
 # ALTER TABLE to set column default value with reserved keyword (error)
