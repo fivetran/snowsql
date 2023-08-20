@@ -56,7 +56,7 @@ INSTANTIATE_TEST_SUITE_P(
         "FROM\n"
         "  foo\n",
         "SELECT\n"
-        "  (0).`0`\n"));
+        "  (0).\"0\"\n"));
 
 TEST_P(UnparserQueryTest, QueryStatementParsesThenUnparses) {
   std::string_view query_string = GetParam();
