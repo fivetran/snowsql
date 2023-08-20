@@ -119,9 +119,9 @@ TEST(SqlFormatterTest, InvalidSingleStatement) {
 TEST(SqlFormatterTest, ValidMultipleStatements) {
   std::string formatted_sql;
 
-  ZETASQL_ASSERT_OK(FormatSql(" define table t1 (a=1,b=\"a\",c=1.4,d=true) ; "
+  ZETASQL_ASSERT_OK(FormatSql(" define table t1 (a=1,b='a',c=1.4,d=true) ; "
                       "select a from t1; ", &formatted_sql));
-  EXPECT_EQ("DEFINE TABLE t1(a = 1, b = \"a\", c = 1.4, d = true);\n"
+  EXPECT_EQ("DEFINE TABLE t1(a = 1, b = 'a', c = 1.4, d = true);\n"
             "SELECT\n"
             "  a\n"
             "FROM\n"
@@ -146,21 +146,21 @@ TEST(SqlFormatterTest, InvalidMultipleStatements) {
   // through as-is since they do not parse successfully.
   EXPECT_THAT(
       FormatSql(
-          " drop foo.bar;  define table t1 (a=1,b=\"a\",c=1.4,d=true) ;\n"
+          " drop foo.bar;  define table t1 (a=1,b='a',c=1.4,d=true) ;\n"
           " select sum(f1) as a from T having a > 5 having a > 5;select 1",
           &formatted_sql),
       StatusIs(
           _,
           HasSubstr(
               "foo is not a supported object type [at 1:7]\n"
-              " drop foo.bar;  define table t1 (a=1,b=\"a\",c=1.4,d=true) ;\n"
+              " drop foo.bar;  define table t1 (a=1,b='a',c=1.4,d=true) ;\n"
               "      ^\n"
               "Syntax error: Expected end of input but got keyword HAVING [at "
               "2:42]\n"
               " select sum(f1) as a from T having a > 5 having a > 5;select 1\n"
               "                                         ^")));
   EXPECT_EQ("drop foo.bar;\n"
-            "DEFINE TABLE t1(a = 1, b = \"a\", c = 1.4, d = true);\n"
+            "DEFINE TABLE t1(a = 1, b = 'a', c = 1.4, d = true);\n"
             "select sum(f1) as a from T having a > 5 having a > 5;\n"
             "SELECT\n"
             "  1;",

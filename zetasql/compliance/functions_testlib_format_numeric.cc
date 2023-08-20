@@ -328,12 +328,12 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatNumeric() {
       {{"%g", NullNumeric()}, NullString()},
       {{"%10.20g", NullNumeric()}, NullString()},
 
-      {{"%T", NumericFromString("3.14")}, "NUMERIC \"3.14\""},
-      {{"%T", NumericFromString("-3.14")}, "NUMERIC \"-3.14\""},
+      {{"%T", NumericFromString("3.14")}, "NUMERIC '3.14'"},
+      {{"%T", NumericFromString("-3.14")}, "NUMERIC '-3.14'"},
       {{"%T", Numeric(NumericValue::MaxValue())},
-       "NUMERIC \"99999999999999999999999999999.999999999\""},
+       "NUMERIC '99999999999999999999999999999.999999999'"},
       {{"%T", Numeric(NumericValue::MinValue())},
-       "NUMERIC \"-99999999999999999999999999999.999999999\""},
+       "NUMERIC '-99999999999999999999999999999.999999999'"},
 
       {{"%10.*f", Int32(3), NumericFromString("1.5")}, "     1.500"},
       {{"%*.3f", Int32(10), NumericFromString("1.5")}, "     1.500"},
@@ -381,11 +381,11 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatNumeric() {
       {{"%T", BigNumericFromString("3.14")}, "BIGNUMERIC \"3.14\""},
       {{"%T", BigNumericFromString("-3.14")}, "BIGNUMERIC \"-3.14\""},
       {{"%T", BigNumeric(BigNumericValue::MaxValue())},
-       "BIGNUMERIC \"578960446186580977117854925043439539266."
-       "34992332820282019728792003956564819967\""},
+       "BIGNUMERIC '578960446186580977117854925043439539266."
+       "34992332820282019728792003956564819967'"},
       {{"%T", BigNumeric(BigNumericValue::MinValue())},
-       "BIGNUMERIC \"-578960446186580977117854925043439539266."
-       "34992332820282019728792003956564819968\""},
+       "BIGNUMERIC '-578960446186580977117854925043439539266."
+       "34992332820282019728792003956564819968'"},
 
       {{"%10.*f", Int32(3), BigNumericFromString("1.5")}, "     1.500"},
       {{"%*.3f", Int32(10), BigNumericFromString("1.5")}, "     1.500"},

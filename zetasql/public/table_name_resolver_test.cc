@@ -136,7 +136,7 @@ TEST(TableNameResolver, ScriptStatementWithTimeTravel) {
       const ResolvedExpr* resolved_expr =
           it->second.exprs[0].analyzer_output_with_expr->resolved_expr();
       ASSERT_EQ(resolved_expr->node_kind(), RESOLVED_LITERAL);
-      ASSERT_EQ("\"2020-01-01\"",
+      ASSERT_EQ("'2020-01-01'",
                 resolved_expr->GetAs<ResolvedLiteral>()->value().DebugString());
     }
   }
