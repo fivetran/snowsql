@@ -78,7 +78,7 @@ TEST(GetNextTokensTest, Locations) {
   ParseTokenOptions options;
   std::vector<ParseToken> parse_tokens;
   const std::string filename = "filename_Locations";
-  const std::string input = "seLect `aBc`\n123 gHi;";
+  const std::string input = "seLect \"aBc\"\n123 gHi;";
   ParseResumeLocation location =
       ParseResumeLocation::FromStringView(filename, input);
   ParseLocationTranslator location_translator(input);
@@ -101,7 +101,7 @@ TEST(GetNextTokensTest, Locations) {
   EXPECT_EQ("", parse_tokens[5].GetSQL());
 
   EXPECT_EQ("seLect", parse_tokens[0].GetImage());
-  EXPECT_EQ("`aBc`", parse_tokens[1].GetImage());
+  EXPECT_EQ("\"aBc\"", parse_tokens[1].GetImage());
   EXPECT_EQ("123", parse_tokens[2].GetImage());
   EXPECT_EQ("gHi", parse_tokens[3].GetImage());
   EXPECT_EQ(";", parse_tokens[4].GetImage());
@@ -142,7 +142,7 @@ TEST(GetNextTokensTest, MaxTokensNotResumable) {
   std::vector<ParseToken> parse_tokens;
   const std::string filename = "filename_MaxTokensNotResumable";
   ParseResumeLocation location =
-      ParseResumeLocation::FromString(filename, "seLect `aBc`\n123 gHi;");
+      ParseResumeLocation::FromString(filename, "seLect \"aBc\"\n123 gHi;");
 
   ZETASQL_ASSERT_OK(GetParseTokens(options, &location, &parse_tokens));
   ASSERT_EQ(2, parse_tokens.size());
@@ -160,7 +160,7 @@ TEST(GetNextTokensTest, LargeMaxTokensNotResumable) {
   std::vector<ParseToken> parse_tokens;
   const std::string filename = "filename_LargeMaxTokensNotResumable";
   ParseResumeLocation location =
-      ParseResumeLocation::FromString(filename, "seLect `aBc`\n123 gHi;");
+      ParseResumeLocation::FromString(filename, "seLect \"aBc\"\n123 gHi;");
 
   ZETASQL_ASSERT_OK(GetParseTokens(options, &location, &parse_tokens));
   ASSERT_EQ(6, parse_tokens.size());

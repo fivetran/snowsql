@@ -176,7 +176,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
 
           // Unclosed string literal followed by legal statement (the latter is
           // dropped due to the error)
-          {.ret = "\";\nSELECT 123; "},
+          {.ret = "';\nSELECT 123; "},
 
           {.ret = "SELECT\nsomething;"},
 
@@ -193,7 +193,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
           // Missing whitespace between literal and alias
           {.ret = "SELECT"},
           {.ret = " (", .want_continuation = true},
-          {.ret = "\"\"), 1", .want_continuation = true},
+          {.ret = "''), 1", .want_continuation = true},
           {.ret = "x);\n", .want_continuation = true},
 
           {.ret = std::nullopt},
@@ -203,7 +203,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
                          HasSubstr(": Unclosed string literal")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "\";\nSELECT 123;"
+                  text: "';\nSELECT 123;"
                 )pb"))),
           IsOkAndHolds("SELECT\nsomething;"),
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
@@ -217,7 +217,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
                          HasSubstr(
                              ": Missing whitespace between literal and alias")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "SELECT (\"\"), 1x);"
+                  text: "SELECT (''), 1x);"
                 )pb"))),
           IsOkAndHolds(std::nullopt),
       });
