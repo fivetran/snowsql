@@ -256,7 +256,7 @@ create external table `function` options();
 --
 CreateExternalTableStatement [0-42] [create external...options()]
   PathExpression [22-32] [`function`]
-    Identifier(`function`) [22-32] [`function`]
+    Identifier("function") [22-32] [`function`]
   OptionsList [40-42] [()]
 --
 CREATE EXTERNAL TABLE `function` OPTIONS()
@@ -295,7 +295,7 @@ create external table `function` options();
 --
 CreateExternalTableStatement [0-42] [create external...options()]
   PathExpression [22-32] [`function`]
-    Identifier(`function`) [22-32] [`function`]
+    Identifier("function") [22-32] [`function`]
   OptionsList [40-42] [()]
 --
 CREATE EXTERNAL TABLE `function` OPTIONS()
@@ -727,7 +727,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 CreateExternalTableStatement [0-49] [create external..., c="def")]
   PathExpression [22-26] [t1-2]
-    Identifier(`t1-2`) [22-26] [t1-2]
+    Identifier("t1-2") [22-26] [t1-2]
   OptionsList [35-49] [(a=b, c="def")]
     OptionsEntry [36-39] [a=b]
       Identifier(a) [36-37] [a]
@@ -1012,7 +1012,7 @@ CreateExternalTableStatement [0-155] [create external...ions (x=bar)]
   WithConnectionClause [84-139] [with connection...onnection_1`]
     ConnectionClause [89-139] [connection...connection_1`]
       PathExpression [100-139] [`project.country...nnection_1`]
-        Identifier(`project.country-region-5.connection_1`) [100-139] [`project.country...nnection_1`]
+        Identifier("project.country-region-5.connection_1") [100-139] [`project.country...nnection_1`]
   OptionsList [148-155] [(x=bar)]
     OptionsEntry [149-154] [x=bar]
       Identifier(x) [149-150] [x]

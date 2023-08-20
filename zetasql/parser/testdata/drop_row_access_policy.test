@@ -13,7 +13,7 @@ drop row access policy `all` on t1;
 --
 DropRowAccessPolicyStatement [0-34] [drop row access...all` on t1]
   PathExpression [23-28] [`all`]
-    Identifier(`all`) [23-28] [`all`]
+    Identifier("all") [23-28] [`all`]
   PathExpression [32-34] [t1]
     Identifier(t1) [32-34] [t1]
 --
@@ -34,7 +34,7 @@ DropRowAccessPolicyStatement [0-48] [drop row access...ace.`all`.t1]
     Identifier(foo) [23-26] [foo]
   PathExpression [30-48] [namespace.`all`.t1]
     Identifier(namespace) [30-39] [namespace]
-    Identifier(`all`) [40-45] [`all`]
+    Identifier("all") [40-45] [`all`]
     Identifier(t1) [46-48] [t1]
 --
 DROP ROW ACCESS POLICY foo ON namespace.`all`.t1
@@ -58,7 +58,7 @@ DropRowAccessPolicyStatement(is_if_exists) [0-58] [drop row access...ace.`all`.t
     Identifier(foo) [33-36] [foo]
   PathExpression [40-58] [namespace.`all`.t1]
     Identifier(namespace) [40-49] [namespace]
-    Identifier(`all`) [50-55] [`all`]
+    Identifier("all") [50-55] [`all`]
     Identifier(t1) [56-58] [t1]
 --
 DROP ROW ACCESS POLICY IF EXISTS foo ON namespace.`all`.t1
@@ -68,7 +68,7 @@ drop row access policy `if exists foo` on t1;
 --
 DropRowAccessPolicyStatement [0-44] [drop row access...foo` on t1]
   PathExpression [23-38] [`if exists foo`]
-    Identifier(`if exists foo`) [23-38] [`if exists foo`]
+    Identifier("if exists foo") [23-38] [`if exists foo`]
   PathExpression [42-44] [t1]
     Identifier(t1) [42-44] [t1]
 --

@@ -273,7 +273,7 @@ ALTERNATION GROUP: @
 --
 ParameterAssignment [0-20] [SET @AND="something"]
   ParameterExpr [4-8] [@AND]
-    Identifier(`AND`) [5-8] [AND]
+    Identifier("AND") [5-8] [AND]
   StringLiteral("something") [9-20] ["something"]
 --
 SET @`AND` = "something"
@@ -283,7 +283,7 @@ ALTERNATION GROUP: @@
 SystemVariableAssignment [0-21] [SET @@AND="something"]
   SystemVariableExpr [4-9] [@@AND]
     PathExpression [6-9] [AND]
-      Identifier(`AND`) [6-9] [AND]
+      Identifier("AND") [6-9] [AND]
   StringLiteral("something") [10-21] ["something"]
 --
 SET @@`AND` = "something"
@@ -350,7 +350,7 @@ ParameterAssignment [0-36] [SET @VAL =...TIMESTAMP() + 100]
   BinaryExpression(+) [11-36] [CURRENT_TIMESTAMP() + 100]
     FunctionCall [11-30] [CURRENT_TIMESTAMP()]
       PathExpression [11-28] [CURRENT_TIMESTAMP]
-        Identifier(`CURRENT_TIMESTAMP`) [11-28] [CURRENT_TIMESTAMP]
+        Identifier("CURRENT_TIMESTAMP") [11-28] [CURRENT_TIMESTAMP]
     IntLiteral(100) [33-36] [100]
 --
 SET @VAL = `CURRENT_TIMESTAMP`() + 100
@@ -364,7 +364,7 @@ SystemVariableAssignment [0-37] [SET @@VAL..._TIMESTAMP() + 100]
   BinaryExpression(+) [12-37] [CURRENT_TIMESTAMP() + 100]
     FunctionCall [12-31] [CURRENT_TIMESTAMP()]
       PathExpression [12-29] [CURRENT_TIMESTAMP]
-        Identifier(`CURRENT_TIMESTAMP`) [12-29] [CURRENT_TIMESTAMP]
+        Identifier("CURRENT_TIMESTAMP") [12-29] [CURRENT_TIMESTAMP]
     IntLiteral(100) [34-37] [100]
 --
 SET @@VAL = `CURRENT_TIMESTAMP`() + 100

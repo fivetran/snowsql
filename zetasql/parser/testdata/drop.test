@@ -9,7 +9,7 @@ drop external table `function`;
 --
 DropStatement EXTERNAL TABLE [0-30] [drop external table `function`]
   PathExpression [20-30] [`function`]
-    Identifier(`function`) [20-30] [`function`]
+    Identifier("function") [20-30] [`function`]
 --
 DROP EXTERNAL TABLE `function`
 ==
@@ -184,7 +184,7 @@ drop SNAPSHOT TABLE if exists `snapshot-1`;
 
 DropSnapshotTableStatement(is_if_exists) [0-42] [drop SNAPSHOT...snapshot-1`]
   PathExpression [30-42] [`snapshot-1`]
-    Identifier(`snapshot-1`) [30-42] [`snapshot-1`]
+    Identifier("snapshot-1") [30-42] [`snapshot-1`]
 --
 DROP SNAPSHOT TABLE IF EXISTS `snapshot-1`
 ==
@@ -780,7 +780,7 @@ ALTERNATION GROUP: <empty>
 --
 DropStatement SCHEMA(is_if_exists) [0-31] [DROP SCHEMA...`foo.bar`]
   PathExpression [22-31] [`foo.bar`]
-    Identifier(`foo.bar`) [22-31] [`foo.bar`]
+    Identifier("foo.bar") [22-31] [`foo.bar`]
 --
 DROP SCHEMA IF EXISTS `foo.bar`
 --
@@ -788,7 +788,7 @@ ALTERNATION GROUP: RESTRICT
 --
 DropStatement SCHEMA(is_if_exists, drop_mode=RESTRICT) [0-40] [DROP SCHEMA...` RESTRICT]
   PathExpression [22-31] [`foo.bar`]
-    Identifier(`foo.bar`) [22-31] [`foo.bar`]
+    Identifier("foo.bar") [22-31] [`foo.bar`]
 --
 DROP SCHEMA IF EXISTS `foo.bar` RESTRICT
 --
@@ -796,7 +796,7 @@ ALTERNATION GROUP: ResTRICT
 --
 DropStatement SCHEMA(is_if_exists, drop_mode=RESTRICT) [0-40] [DROP SCHEMA...` ResTRICT]
   PathExpression [22-31] [`foo.bar`]
-    Identifier(`foo.bar`) [22-31] [`foo.bar`]
+    Identifier("foo.bar") [22-31] [`foo.bar`]
 --
 DROP SCHEMA IF EXISTS `foo.bar` RESTRICT
 --
@@ -804,7 +804,7 @@ ALTERNATION GROUP: CASCADE
 --
 DropStatement SCHEMA(is_if_exists, drop_mode=CASCADE) [0-39] [DROP SCHEMA...bar` CASCADE]
   PathExpression [22-31] [`foo.bar`]
-    Identifier(`foo.bar`) [22-31] [`foo.bar`]
+    Identifier("foo.bar") [22-31] [`foo.bar`]
 --
 DROP SCHEMA IF EXISTS `foo.bar` CASCADE
 --
@@ -864,7 +864,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 DropStatement TABLE [0-22] [drop table foo-bar.baz]
   PathExpression [11-22] [foo-bar.baz]
-    Identifier(`foo-bar`) [11-18] [foo-bar]
+    Identifier("foo-bar") [11-18] [foo-bar]
     Identifier(baz) [19-22] [baz]
 --
 DROP TABLE `foo-bar`.baz

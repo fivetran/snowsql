@@ -93,7 +93,7 @@ DESCRIBE INDEX mynamespace.myindex
 describe FUNCTION myfunction;
 --
 DescribeStatement [0-28] [describe FUNCTION myfunction]
-  Identifier(`FUNCTION`) [9-17] [FUNCTION]
+  Identifier("FUNCTION") [9-17] [FUNCTION]
   PathExpression [18-28] [myfunction]
     Identifier(myfunction) [18-28] [myfunction]
 --
@@ -103,7 +103,7 @@ DESCRIBE `FUNCTION` myfunction
 describe FUNCTION mynamespace.myfunction;
 --
 DescribeStatement [0-40] [describe FUNCTION...myfunction]
-  Identifier(`FUNCTION`) [9-17] [FUNCTION]
+  Identifier("FUNCTION") [9-17] [FUNCTION]
   PathExpression [18-40] [mynamespace.myfunction]
     Identifier(mynamespace) [18-29] [mynamespace]
     Identifier(myfunction) [30-40] [myfunction]
@@ -230,7 +230,7 @@ DescribeStatement [0-52] [describe TYPE...With`.Dots]
     Identifier(name) [23-27] [name]
   PathExpression [33-52] [Catalog.`With`.Dots]
     Identifier(Catalog) [33-40] [Catalog]
-    Identifier(`With`) [41-47] [`With`]
+    Identifier("With") [41-47] [`With`]
     Identifier(Dots) [48-52] [Dots]
 --
 DESCRIBE TYPE prefixed.name FROM Catalog.`With`.Dots
@@ -244,7 +244,7 @@ DescribeStatement [0-48] [desc TYPE...With`.Dots]
     Identifier(name) [19-23] [name]
   PathExpression [29-48] [Catalog.`With`.Dots]
     Identifier(Catalog) [29-36] [Catalog]
-    Identifier(`With`) [37-43] [`With`]
+    Identifier("With") [37-43] [`With`]
     Identifier(Dots) [44-48] [Dots]
 --
 DESCRIBE TYPE prefixed.name FROM Catalog.`With`.Dots
@@ -271,7 +271,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 DescribeStatement [0-33] [DESCRIBE my...dataset.table]
   PathExpression [9-33] [my-project.dataset.table]
-    Identifier(`my-project`) [9-19] [my-project]
+    Identifier("my-project") [9-19] [my-project]
     Identifier(dataset) [20-27] [dataset]
     Identifier(table) [28-33] [table]
 --

@@ -66,7 +66,7 @@ QueryStatement [0-39] [SELECT * FROM...GROUP BY `ALL`]
       GroupBy [25-39] [GROUP BY `ALL`]
         GroupingItem [34-39] [`ALL`]
           PathExpression [34-39] [`ALL`]
-            Identifier(`ALL`) [34-39] [`ALL`]
+            Identifier("ALL") [34-39] [`ALL`]
 --
 SELECT
   *
@@ -87,7 +87,7 @@ QueryStatement [0-41] [SELECT * FROM...GROUP BY ALL]
           PathExpression [14-19] [table]
             Identifier(table) [14-19] [table]
           Alias [20-28] [AS `ALL`]
-            Identifier(`ALL`) [23-28] [`ALL`]
+            Identifier("ALL") [23-28] [`ALL`]
       GroupBy [29-41] [GROUP BY ALL]
         GroupByAll [38-41] [ALL]
 --
@@ -110,11 +110,11 @@ QueryStatement [0-43] [SELECT * FROM...GROUP BY `ALL`]
           PathExpression [14-19] [table]
             Identifier(table) [14-19] [table]
           Alias [20-28] [AS `ALL`]
-            Identifier(`ALL`) [23-28] [`ALL`]
+            Identifier("ALL") [23-28] [`ALL`]
       GroupBy [29-43] [GROUP BY `ALL`]
         GroupingItem [38-43] [`ALL`]
           PathExpression [38-43] [`ALL`]
-            Identifier(`ALL`) [38-43] [`ALL`]
+            Identifier("ALL") [38-43] [`ALL`]
 --
 SELECT
   *

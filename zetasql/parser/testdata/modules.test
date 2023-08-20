@@ -53,7 +53,7 @@ ImportStatement [0-34] [import module...`bar.baz`]
     Identifier(foo) [14-17] [foo]
     Identifier(bar) [18-21] [bar]
   Alias [22-34] [as `bar.baz`]
-    Identifier(`bar.baz`) [25-34] [`bar.baz`]
+    Identifier("bar.baz") [25-34] [`bar.baz`]
 --
 IMPORT MODULE foo.bar AS `bar.baz`
 ==
@@ -225,7 +225,7 @@ import module module.all;
 ImportStatement [0-24] [import module module.all]
   PathExpression [14-24] [module.all]
     Identifier(module) [14-20] [module]
-    Identifier(`all`) [21-24] [all]
+    Identifier("all") [21-24] [all]
 --
 IMPORT MODULE module.`all`
 ==
@@ -529,7 +529,7 @@ module module.all;
 ModuleStatement [0-17] [module module.all]
   PathExpression [7-17] [module.all]
     Identifier(module) [7-13] [module]
-    Identifier(`all`) [14-17] [all]
+    Identifier("all") [14-17] [all]
 --
 MODULE module.`all`
 ==
@@ -538,7 +538,7 @@ module `all`;
 --
 ModuleStatement [0-12] [module `all`]
   PathExpression [7-12] [`all`]
-    Identifier(`all`) [7-12] [`all`]
+    Identifier("all") [7-12] [`all`]
 --
 MODULE `all`
 ==
@@ -548,7 +548,7 @@ module module.`all`;
 ModuleStatement [0-19] [module module.`all`]
   PathExpression [7-19] [module.`all`]
     Identifier(module) [7-13] [module]
-    Identifier(`all`) [14-19] [`all`]
+    Identifier("all") [14-19] [`all`]
 --
 MODULE module.`all`
 ==

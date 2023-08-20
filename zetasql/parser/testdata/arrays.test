@@ -322,7 +322,7 @@ QueryStatement [0-12]
           DotIdentifier [7-12]
             ArrayConstructor [7-10]
               IntLiteral(1) [8-9]
-            Identifier(`1`) [11-12]
+            Identifier("1") [11-12]
 --
 SELECT
   ARRAY[1].`1`
@@ -836,7 +836,7 @@ QueryStatement [0-20]
           ArrayElement [7-20]
             FunctionCall [7-17]
               PathExpression [7-15]
-                Identifier(`function`) [7-15]
+                Identifier("function") [7-15]
             Location [17-18]
             IntLiteral(5) [18-19]
 --

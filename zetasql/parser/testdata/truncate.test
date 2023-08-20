@@ -114,7 +114,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 TruncateStatement [0-30] [TRUNCATE TABLE foo-567-bar.baz]
   PathExpression [15-30] [foo-567-bar.baz]
-    Identifier(`foo-567-bar`) [15-26] [foo-567-bar]
+    Identifier("foo-567-bar") [15-26] [foo-567-bar]
     Identifier(baz) [27-30] [baz]
 --
 TRUNCATE TABLE `foo-567-bar`.baz

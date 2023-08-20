@@ -45,7 +45,7 @@ QueryStatement [0-28] [select f1, f2 from T QUALIFY]
           PathExpression [19-20] [T]
             Identifier(T) [19-20] [T]
           Alias [21-28] [QUALIFY]
-            Identifier(`QUALIFY`) [21-28] [QUALIFY]
+            Identifier("QUALIFY") [21-28] [QUALIFY]
 --
 SELECT
   f1,
@@ -71,7 +71,7 @@ QueryStatement [0-31] [select f1,...AS QUALIFY]
           PathExpression [19-20] [T]
             Identifier(T) [19-20] [T]
           Alias [21-31] [AS QUALIFY]
-            Identifier(`QUALIFY`) [24-31] [QUALIFY]
+            Identifier("QUALIFY") [24-31] [QUALIFY]
 --
 SELECT
   f1,
@@ -97,7 +97,7 @@ QueryStatement [0-39] [select f1,...WHERE true]
           PathExpression [19-20] [T]
             Identifier(T) [19-20] [T]
           Alias [21-28] [QUALIFY]
-            Identifier(`QUALIFY`) [21-28] [QUALIFY]
+            Identifier("QUALIFY") [21-28] [QUALIFY]
       WhereClause [29-39] [WHERE true]
         BooleanLiteral(true) [35-39] [true]
 --
@@ -127,7 +127,7 @@ QueryStatement [0-43] [select f1,...WHERE false]
           PathExpression [19-20] [T]
             Identifier(T) [19-20] [T]
           Alias [21-31] [AS QUALIFY]
-            Identifier(`QUALIFY`) [24-31] [QUALIFY]
+            Identifier("QUALIFY") [24-31] [QUALIFY]
       WhereClause [32-43] [WHERE false]
         BooleanLiteral(false) [38-43] [false]
 --
@@ -159,7 +159,7 @@ QueryStatement [0-28] [select f1, f2 from T QUALIFY]
           PathExpression [19-20] [T]
             Identifier(T) [19-20] [T]
           Alias [21-28] [QUALIFY]
-            Identifier(`QUALIFY`) [21-28] [QUALIFY]
+            Identifier("QUALIFY") [21-28] [QUALIFY]
 --
 SELECT
   f1,

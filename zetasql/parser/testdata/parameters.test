@@ -245,7 +245,7 @@ QueryStatement [0-40] [SELECT @@FROM...bsequent_field]
         SelectColumn [7-40] [@@FROM.fieldname...quent_field]
           SystemVariableExpr [7-40] [@@FROM.fieldname...quent_field]
             PathExpression [9-40] [FROM.fieldname...sequent_field]
-              Identifier(`FROM`) [9-13] [FROM]
+              Identifier("FROM") [9-13] [FROM]
               Identifier(fieldname) [14-23] [fieldname]
               Identifier(subsequent_field) [24-40] [subsequent_field]
 --
@@ -603,7 +603,7 @@ QueryStatement [0-13] [select @proto]
       SelectList [7-13] [@proto]
         SelectColumn [7-13] [@proto]
           ParameterExpr [7-13] [@proto]
-            Identifier(`proto`) [8-13] [proto]
+            Identifier("proto") [8-13] [proto]
 --
 SELECT
   @`proto`
@@ -617,7 +617,7 @@ QueryStatement [0-14] [select @@proto]
         SelectColumn [7-14] [@@proto]
           SystemVariableExpr [7-14] [@@proto]
             PathExpression [9-14] [proto]
-              Identifier(`proto`) [9-14] [proto]
+              Identifier("proto") [9-14] [proto]
 --
 SELECT
   @@`proto`
@@ -634,7 +634,7 @@ QueryStatement [0-12] [select @FrOm]
       SelectList [7-12] [@FrOm]
         SelectColumn [7-12] [@FrOm]
           ParameterExpr [7-12] [@FrOm]
-            Identifier(`FrOm`) [8-12] [FrOm]
+            Identifier("FrOm") [8-12] [FrOm]
 --
 SELECT
   @`FrOm`
@@ -648,7 +648,7 @@ QueryStatement [0-13] [select @@FrOm]
         SelectColumn [7-13] [@@FrOm]
           SystemVariableExpr [7-13] [@@FrOm]
             PathExpression [9-13] [FrOm]
-              Identifier(`FrOm`) [9-13] [FrOm]
+              Identifier("FrOm") [9-13] [FrOm]
 --
 SELECT
   @@`FrOm`
@@ -716,7 +716,7 @@ QueryStatement [0-13] [SELECT @UNION]
       SelectList [7-13] [@UNION]
         SelectColumn [7-13] [@UNION]
           ParameterExpr [7-13] [@UNION]
-            Identifier(`UNION`) [8-13] [UNION]
+            Identifier("UNION") [8-13] [UNION]
 --
 SELECT
   @`UNION`
@@ -729,7 +729,7 @@ QueryStatement [0-17] [SELECT @INTERSECT]
       SelectList [7-17] [@INTERSECT]
         SelectColumn [7-17] [@INTERSECT]
           ParameterExpr [7-17] [@INTERSECT]
-            Identifier(`INTERSECT`) [8-17] [INTERSECT]
+            Identifier("INTERSECT") [8-17] [INTERSECT]
 --
 SELECT
   @`INTERSECT`
@@ -742,7 +742,7 @@ QueryStatement [0-14] [SELECT @EXCEPT]
       SelectList [7-14] [@EXCEPT]
         SelectColumn [7-14] [@EXCEPT]
           ParameterExpr [7-14] [@EXCEPT]
-            Identifier(`EXCEPT`) [8-14] [EXCEPT]
+            Identifier("EXCEPT") [8-14] [EXCEPT]
 --
 SELECT
   @`EXCEPT`
