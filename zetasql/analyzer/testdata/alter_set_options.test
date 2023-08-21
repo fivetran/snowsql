@@ -1,12 +1,12 @@
 [supported_statement_kinds={{ALTER_TABLE_SET_OPTIONS|ALTER_TABLE|}}]
-alter {{database|schema|table|view|materialized view|approx view|model}} if exists a.b.c.T set options (x = 5, y = abc, z = ("def", 1))
+alter {{database|schema|table|view|materialized view|approx view|model}} if exists a.b.c.T set options (x = 5, y = abc, z = ('def', 1))
 --
 ALTERNATION GROUPS:
     ALTER_TABLE_SET_OPTIONS,database
     ALTER_TABLE,database
 --
 ERROR: Statement not supported: AlterDatabaseStatement [at 1:1]
-alter database if exists a.b.c.T set options (x = 5, y = abc, z = ("def", 1))
+alter database if exists a.b.c.T set options (x = 5, y = abc, z = ('def', 1))
 ^
 --
 ALTERNATION GROUPS:
@@ -14,7 +14,7 @@ ALTERNATION GROUPS:
     ALTER_TABLE,schema
 --
 ERROR: Statement not supported: AlterSchemaStatement [at 1:1]
-alter schema if exists a.b.c.T set options (x = 5, y = abc, z = ("def", 1))
+alter schema if exists a.b.c.T set options (x = 5, y = abc, z = ('def', 1))
 ^
 --
 ALTERNATION GROUPS:
@@ -26,7 +26,7 @@ AlterTableSetOptionsStmt
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
 | +-y := Literal(type=STRING, value='abc')
-| +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+| +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUPS:
@@ -34,7 +34,7 @@ ALTERNATION GROUPS:
     ALTER_TABLE,view
 --
 ERROR: Statement not supported: AlterViewStatement [at 1:1]
-alter view if exists a.b.c.T set options (x = 5, y = abc, z = ("def", 1))
+alter view if exists a.b.c.T set options (x = 5, y = abc, z = ('def', 1))
 ^
 --
 ALTERNATION GROUPS:
@@ -42,7 +42,7 @@ ALTERNATION GROUPS:
     ALTER_TABLE,materialized view
 --
 ERROR: Statement not supported: AlterMaterializedViewStatement [at 1:1]
-alter materialized view if exists a.b.c.T set options (x = 5, y = abc, z = ("...
+alter materialized view if exists a.b.c.T set options (x = 5, y = abc, z = ('...
 ^
 --
 ALTERNATION GROUPS:
@@ -50,7 +50,7 @@ ALTERNATION GROUPS:
     ALTER_TABLE,approx view
 --
 ERROR: Statement not supported: AlterApproxViewStatement [at 1:1]
-alter approx view if exists a.b.c.T set options (x = 5, y = abc, z = ("def", 1))
+alter approx view if exists a.b.c.T set options (x = 5, y = abc, z = ('def', 1))
 ^
 --
 ALTERNATION GROUPS:
@@ -58,7 +58,7 @@ ALTERNATION GROUPS:
     ALTER_TABLE,model
 --
 ERROR: Statement not supported: AlterModelStatement [at 1:1]
-alter model if exists a.b.c.T set options (x = 5, y = abc, z = ("def", 1))
+alter model if exists a.b.c.T set options (x = 5, y = abc, z = ('def', 1))
 ^
 --
 ALTERNATION GROUP: ALTER_TABLE,table
@@ -70,7 +70,7 @@ AlterTableStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: database
@@ -82,7 +82,7 @@ AlterDatabaseStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: schema
@@ -94,7 +94,7 @@ AlterSchemaStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: view
@@ -106,7 +106,7 @@ AlterViewStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: materialized view
@@ -118,7 +118,7 @@ AlterMaterializedViewStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: approx view
@@ -130,7 +130,7 @@ AlterApproxViewStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: model
@@ -142,7 +142,7 @@ AlterModelStmt
 |   +-option_list=
 |     +-x := Literal(type=INT64, value=5)
 |     +-y := Literal(type=STRING, value='abc')
-|     +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+|     +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 +-is_if_exists=TRUE
 ==
 

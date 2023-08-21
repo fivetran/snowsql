@@ -43,7 +43,7 @@ AlterRowAccessPolicyStmt
 ==
 
 # Revoke from: single revokee.
-alter row access policy p1 on KeyValue revoke from ("bar@google.com");
+alter row access policy p1 on KeyValue revoke from ('bar@google.com');
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -71,10 +71,10 @@ AlterRowAccessPolicyStmt
 # Filter using, with multiple actions.
 alter row access policy p1 on KeyValue {{rename to p2,|}}
 {{grant to ('foo@google.com'),|}}
-{{revoke from ("bar@google.com"),|revoke from all,|}}
+{{revoke from ('bar@google.com'),|revoke from all,|}}
 filter using (key = 321);
 --
-ALTERNATION GROUP: rename to p2,,grant to ('foo@google.com'),,revoke from ("bar@google.com"),
+ALTERNATION GROUP: rename to p2,,grant to ('foo@google.com'),,revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -123,7 +123,7 @@ AlterRowAccessPolicyStmt
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: rename to p2,,,revoke from ("bar@google.com"),
+ALTERNATION GROUP: rename to p2,,,revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -175,7 +175,7 @@ AlterRowAccessPolicyStmt
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: grant to ('foo@google.com'),,revoke from ("bar@google.com"),
+ALTERNATION GROUP: grant to ('foo@google.com'),,revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -214,7 +214,7 @@ AlterRowAccessPolicyStmt
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),
+ALTERNATION GROUP: revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -266,10 +266,10 @@ AlterRowAccessPolicyStmt
 
 # Grant to, with multiple actions.
 alter row access policy p1 on Keyvalue
-{{revoke from ("bar@google.com"),|revoke from all,|}} {{rename to p2,|}}
+{{revoke from ('bar@google.com'),|revoke from all,|}} {{rename to p2,|}}
 {{filter using (key = 321),|}} grant to ('foo@google.com');
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,rename to p2,,filter using (key = 321),
+ALTERNATION GROUP: revoke from ('bar@google.com'),,rename to p2,,filter using (key = 321),
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
@@ -291,7 +291,7 @@ AlterRowAccessPolicyStmt
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,rename to p2,,
+ALTERNATION GROUP: revoke from ('bar@google.com'),,rename to p2,,
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
@@ -307,7 +307,7 @@ AlterRowAccessPolicyStmt
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,,filter using (key = 321),
+ALTERNATION GROUP: revoke from ('bar@google.com'),,,filter using (key = 321),
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
@@ -328,7 +328,7 @@ AlterRowAccessPolicyStmt
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,,
+ALTERNATION GROUP: revoke from ('bar@google.com'),,,
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
@@ -474,7 +474,7 @@ AlterRowAccessPolicyStmt
 
 # Grant to: multiple grantees.
 alter row access policy p1 on KeyValue
-grant to ('foo@google.com', {{@test_param_string,|}} "mdbuser/bar");
+grant to ('foo@google.com', {{@test_param_string,|}} 'mdbuser/bar');
 --
 ALTERNATION GROUP: @test_param_string,
 --
@@ -506,7 +506,7 @@ AlterRowAccessPolicyStmt
 
 # Revoke from: multiple revokees.
 alter row access policy p1 on KeyValue
-revoke from ('foo@google.com', {{@test_param_string,|}} "mdbuser/bar");
+revoke from ('foo@google.com', {{@test_param_string,|}} 'mdbuser/bar');
 --
 ALTERNATION GROUP: @test_param_string,
 --
@@ -631,8 +631,8 @@ AlterRowAccessPolicyStmt
 
 # Grant to: multiple grantees, revoke from: multiple grantees, change predicate: with param.
 alter row access policy p1 on KeyValue
-grant to ('foo@google.com', "mdbgroup/bar"{{|, @test_param_string}}),
-revoke from ("bar@google.com", "mdbgroup/baz"{{|, @test_param_string}}),
+grant to ('foo@google.com', 'mdbgroup/bar'{{|, @test_param_string}}),
+revoke from ('bar@google.com', 'mdbgroup/baz'{{|, @test_param_string}}),
 filter using(value = @test_param_string);
 --
 ALTERNATION GROUP: <empty>
@@ -735,8 +735,8 @@ AlterRowAccessPolicyStmt
 # Rename, revoke from: multiple, grant to: multiple, and change predicate: with function.
 alter row access policy p1 on KeyValue
 rename to p2,
-revoke from ("user:bar@google.com", "group:all-users@google.com"),
-grant to ('foo@google.com', "mdbgroup/bar"),
+revoke from ('user:bar@google.com', 'group:all-users@google.com'),
+grant to ('foo@google.com', 'mdbgroup/bar'),
 filter using(abs(key) = 321);
 --
 AlterRowAccessPolicyStmt
@@ -814,7 +814,7 @@ AlterRowAccessPolicyStmt
 |   |     | | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 |   |     | +-field_idx=1
 |   |     +-Literal(type=STRING, value='abc')
-|   +-predicate_str='a = 321 AND TestStructValueTable.b = 'abc''
+|   +-predicate_str='a = 321 AND TestStructValueTable.b = \'abc\''
 +-name='p1'
 +-table_scan=
   +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0])
@@ -899,20 +899,20 @@ ERROR: Multiple FILTER USING actions are not supported [at 1:60]
 
 # Multiple GRANT TO actions.
 alter row access policy p1 on Keyvalue grant to ('foo@google.com'),
-grant to ("bar@google.com");
+grant to ('bar@google.com');
 --
 ERROR: Multiple GRANT TO actions are not supported [at 2:1]
-grant to ("bar@google.com");
+grant to ('bar@google.com');
 ^
 ==
 
 # Multiple REVOKE FROM actions.
-alter row access policy p1 on Keyvalue revoke from {{('foo@google.com')|all}}, revoke from {{("bar@google.com")|all}};
+alter row access policy p1 on Keyvalue revoke from {{('foo@google.com')|all}}, revoke from {{('bar@google.com')|all}};
 --
-ALTERNATION GROUP: ('foo@google.com'),("bar@google.com")
+ALTERNATION GROUP: ('foo@google.com'),('bar@google.com')
 --
 ERROR: Multiple REVOKE FROM actions are not supported [at 1:72]
-...p1 on Keyvalue revoke from ('foo@google.com'), revoke from ("bar@google.co...
+...p1 on Keyvalue revoke from ('foo@google.com'), revoke from ('bar@google.co...
                                                   ^
 --
 ALTERNATION GROUP: ('foo@google.com'),all
@@ -921,10 +921,10 @@ ERROR: Multiple REVOKE FROM actions are not supported [at 1:72]
 ...p1 on Keyvalue revoke from ('foo@google.com'), revoke from all;
                                                   ^
 --
-ALTERNATION GROUP: all,("bar@google.com")
+ALTERNATION GROUP: all,('bar@google.com')
 --
 ERROR: Multiple REVOKE FROM actions are not supported [at 1:57]
-...row access policy p1 on Keyvalue revoke from all, revoke from ("bar@google...
+...row access policy p1 on Keyvalue revoke from all, revoke from ('bar@google...
                                                      ^
 --
 ALTERNATION GROUP: all,all
@@ -944,7 +944,7 @@ ERROR: REVOKE FROM ALL action after GRANT TO action is not supported [at 1:69]
 
 # ALTER ALL with multiple grantees.
 alter all row access policies on KeyValue
-revoke from ('foo@google.com', "bar@google.com");
+revoke from ('foo@google.com', 'bar@google.com');
 --
 AlterAllRowAccessPoliciesStmt
 +-name_path=KeyValue
@@ -973,7 +973,7 @@ AlterAllRowAccessPoliciesStmt
 
 # ALTER ALL with parameterized grantee list
 alter all row access policies on KeyValue
-revoke from ('foo@google.com', {{@test_param_string,|}} "mdbuser/bar");
+revoke from ('foo@google.com', {{@test_param_string,|}} 'mdbuser/bar');
 --
 ALTERNATION GROUP: @test_param_string,
 --
