@@ -19,7 +19,7 @@ CreateRowAccessPolicyStmt
 create row access policy p1 on KeyValue grant to ("foo@google.com") filter using(key = 321);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -95,7 +95,7 @@ create row access policy p1 on KeyValue grant to ("mdbgroup/foo", "bar@google.co
 filter using(key = +321);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["mdbgroup/foo", "bar@google.com"]
 +-table_scan=
@@ -121,7 +121,7 @@ create row access policy p1 on KeyValue
 filter using(key = 321);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -137,7 +137,7 @@ CreateRowAccessPolicyStmt
 create row access policy p1 on KeyValue grant to ("foo@google.com") filter using(abs(key) = 321);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -156,7 +156,7 @@ create row access policy p1 on KeyValue grant to ("foo@google.com")
 filter using(value = @test_param_string);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -174,7 +174,7 @@ create row access policy p1 on KeyValue grant to ("foo@google.com")
 filter using(abs(key) in (select 123));
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -205,7 +205,7 @@ create row access policy p1 on KeyValue grant to ("foo@google.com")
 filter using(abs(key) in (select key from KeyValue2));
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -234,7 +234,7 @@ create row access policy p1 on nested_catalog.KeyValue grant to ("foo@google.com
 filter using(KeyValue.key = 321);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=nested_catalog.KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -298,7 +298,7 @@ create row access policy p1 on KeyValue grant to ("foo@google.com")
 filter using(key in (SELECT Int32ValueTable FROM Int32ValueTable));
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -331,7 +331,7 @@ filter using(key = 321);
 --
 CreateRowAccessPolicyStmt
 +-create_mode=CREATE_OR_REPLACE
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -350,7 +350,7 @@ filter using(key = 321);
 --
 CreateRowAccessPolicyStmt
 +-create_mode=CREATE_IF_NOT_EXISTS
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -365,7 +365,7 @@ CreateRowAccessPolicyStmt
 create row access policy p1 on KeyValue grant to ("foo@google.com") filter using (NULL);
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=
@@ -465,7 +465,7 @@ create row {{access|}} policy p1 on KeyValue {{grant to ("foo@google.com")|to "f
 ALTERNATION GROUP: access,grant to ("foo@google.com"),filter
 --
 CreateRowAccessPolicyStmt
-+-name="p1"
++-name='p1'
 +-target_name_path=KeyValue
 +-grantee_list=["foo@google.com"]
 +-table_scan=

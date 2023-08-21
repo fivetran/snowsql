@@ -668,7 +668,7 @@ CreateTableAsSelectStmt
 +-name_path=t1
 +-column_definition_list=
 | +-ColumnDefinition
-| | +-name="c1"
+| | +-name='c1'
 | | +-type=INT32
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -678,7 +678,7 @@ CreateTableAsSelectStmt
 | | +-is_hidden=TRUE
 | | +-column=t1.c1#1
 | +-ColumnDefinition
-| | +-name="c2"
+| | +-name='c2'
 | | +-type=STRUCT<INT64, z STRING>
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -690,7 +690,7 @@ CreateTableAsSelectStmt
 | | |         +-y := Literal(type=INT64, value=3)
 | | +-column=t1.c2#2
 | +-ColumnDefinition
-|   +-name="c3"
+|   +-name='c3'
 |   +-type=STRUCT<>
 |   +-annotations=
 |   | +-ColumnAnnotations(not_null=TRUE)
@@ -1143,7 +1143,7 @@ CreateTableAsSelectStmt
 | +-key := Literal(type=STRING, value='value')
 +-column_definition_list=
 | +-ColumnDefinition
-| | +-name="c1"
+| | +-name='c1'
 | | +-type=INT32
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -1153,7 +1153,7 @@ CreateTableAsSelectStmt
 | | +-is_hidden=TRUE
 | | +-column=t1.c1#1
 | +-ColumnDefinition
-| | +-name="c2"
+| | +-name='c2'
 | | +-type=STRUCT<INT64, z STRING>
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -1165,7 +1165,7 @@ CreateTableAsSelectStmt
 | | |         +-y := Literal(type=INT64, value=3)
 | | +-column=t1.c2#2
 | +-ColumnDefinition
-|   +-name="c3"
+|   +-name='c3'
 |   +-type=STRUCT<>
 |   +-annotations=
 |   | +-ColumnAnnotations(not_null=TRUE)

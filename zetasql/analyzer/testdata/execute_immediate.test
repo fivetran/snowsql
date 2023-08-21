@@ -81,7 +81,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[string_variable_bar]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-    +-name=""
+    +-name=''
     +-expression=
       +-Literal(type=INT64, value=0)
 ==
@@ -96,7 +96,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-    +-name="y"
+    +-name='y'
     +-expression=
       +-Literal(type=INT64, value=NULL)
 --
@@ -108,7 +108,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-    +-name="y"
+    +-name='y'
     +-expression=
       +-Literal(type=STRING, value=NULL, has_explicit_type=TRUE)
 ==
@@ -123,7 +123,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-    +-name="y"
+    +-name='y'
     +-expression=
       +-Literal(type=INT64, value=5)
 --
@@ -135,11 +135,11 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-  | +-name="y"
+  | +-name='y'
   | +-expression=
   |   +-Literal(type=INT64, value=5)
   +-ExecuteImmediateArgument
-    +-name="x"
+    +-name='x'
     +-expression=
       +-Literal(type=INT64, value=6)
 --
@@ -151,11 +151,11 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-  | +-name="x"
+  | +-name='x'
   | +-expression=
   |   +-Literal(type=INT64, value=NULL)
   +-ExecuteImmediateArgument
-    +-name="y"
+    +-name='y'
     +-expression=
       +-Literal(type=INT64, value=NULL, has_explicit_type=TRUE)
 --
@@ -167,7 +167,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 +-using_argument_list=
   +-ExecuteImmediateArgument
-    +-name="y"
+    +-name='y'
     +-expression=
       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
         +-Literal(type=STRING, value='A')

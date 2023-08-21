@@ -6,7 +6,7 @@ AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RenameToAction(new_path=p2)
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -20,7 +20,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -37,7 +37,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -51,7 +51,7 @@ AlterRowAccessPolicyStmt
 | +-RevokeFromAction
 |   +-revokee_expr_list=
 |     +-Literal(type=STRING, value='bar@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -63,7 +63,7 @@ AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RevokeFromAction(is_revoke_from_all=TRUE)
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -92,7 +92,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -119,7 +119,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -138,7 +138,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -155,7 +155,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -171,7 +171,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -192,7 +192,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -210,7 +210,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -228,7 +228,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -244,7 +244,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -259,7 +259,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -287,7 +287,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -303,7 +303,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -324,7 +324,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -339,7 +339,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -359,7 +359,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -373,7 +373,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -392,7 +392,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -405,7 +405,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -424,7 +424,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -437,7 +437,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -455,7 +455,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -467,7 +467,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -486,7 +486,7 @@ AlterRowAccessPolicyStmt
 |     +-Literal(type=STRING, value='foo@google.com')
 |     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='mdbuser/bar')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -499,7 +499,7 @@ AlterRowAccessPolicyStmt
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
 |     +-Literal(type=STRING, value='mdbuser/bar')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -518,7 +518,7 @@ AlterRowAccessPolicyStmt
 |     +-Literal(type=STRING, value='foo@google.com')
 |     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='mdbuser/bar')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -531,7 +531,7 @@ AlterRowAccessPolicyStmt
 |   +-revokee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
 |     +-Literal(type=STRING, value='mdbuser/bar')
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -549,7 +549,7 @@ AlterRowAccessPolicyStmt
 |   |   | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="abs(key) = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -566,7 +566,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 |   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 ==
@@ -594,7 +594,7 @@ AlterRowAccessPolicyStmt
 |   |       +-input_scan=
 |   |         +-TableScan(column_list=[KeyValue2.Key#3], table=KeyValue2, column_index_list=[0])
 |   +-predicate_str="abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -624,7 +624,7 @@ AlterRowAccessPolicyStmt
 |   |       +-input_scan=
 |   |         +-TableScan(column_list=[KeyValue2.Key#3], table=KeyValue2, column_index_list=[0])
 |   +-predicate_str="abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -654,7 +654,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 |   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 --
@@ -678,7 +678,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 |   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 --
@@ -702,7 +702,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 |   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 --
@@ -727,7 +727,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 |   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 ==
@@ -758,7 +758,7 @@ AlterRowAccessPolicyStmt
 |   |   | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="abs(key) = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -782,7 +782,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
 |   +-predicate_str="KeyValue.key = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -815,7 +815,7 @@ AlterRowAccessPolicyStmt
 |   |     | +-field_idx=1
 |   |     +-Literal(type=STRING, value='abc')
 |   +-predicate_str="a = 321 AND TestStructValueTable.b = 'abc'"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0])
 ==
@@ -836,7 +836,7 @@ AlterRowAccessPolicyStmt
 |   |   +-ColumnRef(type=INT32, column=Int32ValueTable.value#1)
 |   |   +-Literal(type=INT32, value=321)
 |   +-predicate_str="Int32ValueTable = 321"
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0])
 ==

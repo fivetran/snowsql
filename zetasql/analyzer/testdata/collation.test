@@ -5453,7 +5453,7 @@ CreateTableStmt
 +-column_definition_list=
   +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
   +-ColumnDefinition
-    +-name="b"
+    +-name='b'
     +-type=STRING
     +-annotations=
     | +-ColumnAnnotations
@@ -5470,7 +5470,7 @@ CreateTableAsSelectStmt
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
 | +-ColumnDefinition
-|   +-name="b"
+|   +-name='b'
 |   +-type=STRING
 |   +-annotations=
 |   | +-ColumnAnnotations
@@ -5505,7 +5505,7 @@ CreateTableAsSelectStmt
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=t.a#5)
 | +-ColumnDefinition
-| | +-name="b"
+| | +-name='b'
 | | +-type=STRING
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -5513,7 +5513,7 @@ CreateTableAsSelectStmt
 | | |     +-Literal(type=STRING, value='und:ci')
 | | +-column=t.b#6{Collation:"und:ci"}
 | +-ColumnDefinition
-| | +-name="c"
+| | +-name='c'
 | | +-type=ARRAY<STRING>
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -5523,7 +5523,7 @@ CreateTableAsSelectStmt
 | | |         +-Literal(type=STRING, value='und:ci')
 | | +-column=t.c#7[{Collation:"und:ci"}]
 | +-ColumnDefinition
-|   +-name="d"
+|   +-name='d'
 |   +-type=STRUCT<STRING, STRING, STRING>
 |   +-annotations=
 |   | +-ColumnAnnotations
@@ -5629,7 +5629,7 @@ CreateViewStmt
 +-column_definition_list=
   +-ColumnDefinition(name="a", type=INT64, column=t.a#5)
   +-ColumnDefinition
-  | +-name="b"
+  | +-name='b'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5637,7 +5637,7 @@ CreateViewStmt
   | |     +-Literal(type=STRING, value='und:ci')
   | +-column=t.b#6{Collation:"und:ci"}
   +-ColumnDefinition
-  | +-name="c"
+  | +-name='c'
   | +-type=ARRAY<STRING>
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5647,7 +5647,7 @@ CreateViewStmt
   | |         +-Literal(type=STRING, value='und:ci')
   | +-column=t.c#7[{Collation:"und:ci"}]
   +-ColumnDefinition
-    +-name="d"
+    +-name='d'
     +-type=STRUCT<STRING, STRING, STRING>
     +-annotations=
     | +-ColumnAnnotations
@@ -5680,7 +5680,7 @@ CreateTableAsSelectStmt
 +-column_definition_list=
 | +-ColumnDefinition(name="x", type=INT64, column=t.x#1)
 | +-ColumnDefinition
-| | +-name="y"
+| | +-name='y'
 | | +-type=STRING
 | | +-annotations=
 | | | +-ColumnAnnotations
@@ -5689,7 +5689,7 @@ CreateTableAsSelectStmt
 | | +-column=t.y#2
 | +-ColumnDefinition(name="z", type=ARRAY<STRING>, column=t.z#3)
 | +-ColumnDefinition
-|   +-name="xx"
+|   +-name='xx'
 |   +-type=STRUCT<STRING, STRING, STRING>
 |   +-annotations=
 |   | +-ColumnAnnotations
@@ -5759,7 +5759,7 @@ CreateViewStmt
 +-sql="select * from CollatedTable"
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="string_ci"
+  | +-name='string_ci'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5767,7 +5767,7 @@ CreateViewStmt
   | |     +-Literal(type=STRING, value='und:ci')
   | +-column=t.string_ci#5{Collation:"und:ci"}
   +-ColumnDefinition
-  | +-name="string_binary"
+  | +-name='string_binary'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5775,7 +5775,7 @@ CreateViewStmt
   | |     +-Literal(type=STRING, value='binary')
   | +-column=t.string_binary#6{Collation:"binary"}
   +-ColumnDefinition
-  | +-name="struct_with_string_ci"
+  | +-name='struct_with_string_ci'
   | +-type=STRUCT<a INT32, b STRING>
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5786,7 +5786,7 @@ CreateViewStmt
   | |         +-Literal(type=STRING, value='und:ci')
   | +-column=t.struct_with_string_ci#7<_,{Collation:"und:ci"}>
   +-ColumnDefinition
-    +-name="array_with_string_ci"
+    +-name='array_with_string_ci'
     +-type=ARRAY<STRING>
     +-annotations=
     | +-ColumnAnnotations
@@ -5854,7 +5854,7 @@ CreateTableStmt
 +-column_definition_list=
   +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
   +-ColumnDefinition
-    +-name="b"
+    +-name='b'
     +-type=STRING
     +-annotations=
     | +-ColumnAnnotations
@@ -5896,7 +5896,7 @@ CreateMaterializedViewStmt
 +-sql="SELECT COLLATE('foo', 'und:ci') AS col1, STRUCT(COLLATE('bar', 'binary') AS col2_1, 1 AS col2_2) AS col2"
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="col1"
+  | +-name='col1'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5904,7 +5904,7 @@ CreateMaterializedViewStmt
   | |     +-Literal(type=STRING, value='und:ci')
   | +-column=mv.col1#3{Collation:"und:ci"}
   +-ColumnDefinition
-    +-name="col2"
+    +-name='col2'
     +-type=STRUCT<col2_1 STRING, col2_2 INT64>
     +-annotations=
     | +-ColumnAnnotations
@@ -5933,7 +5933,7 @@ CreateMaterializedViewStmt
 +-sql="SELECT * FROM CollatedTable"
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="string_ci"
+  | +-name='string_ci'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5941,7 +5941,7 @@ CreateMaterializedViewStmt
   | |     +-Literal(type=STRING, value='und:ci')
   | +-column=mv.string_ci#5{Collation:"und:ci"}
   +-ColumnDefinition
-  | +-name="string_binary"
+  | +-name='string_binary'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5949,7 +5949,7 @@ CreateMaterializedViewStmt
   | |     +-Literal(type=STRING, value='binary')
   | +-column=mv.string_binary#6{Collation:"binary"}
   +-ColumnDefinition
-  | +-name="struct_with_string_ci"
+  | +-name='struct_with_string_ci'
   | +-type=STRUCT<a INT32, b STRING>
   | +-annotations=
   | | +-ColumnAnnotations
@@ -5960,7 +5960,7 @@ CreateMaterializedViewStmt
   | |         +-Literal(type=STRING, value='und:ci')
   | +-column=mv.struct_with_string_ci#7<_,{Collation:"und:ci"}>
   +-ColumnDefinition
-    +-name="array_with_string_ci"
+    +-name='array_with_string_ci'
     +-type=ARRAY<STRING>
     +-annotations=
     | +-ColumnAnnotations
@@ -5985,7 +5985,7 @@ CreateTableStmt
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
 | +-ColumnDefinition
-|   +-name="b"
+|   +-name='b'
 |   +-type=STRING
 |   +-annotations=
 |   | +-ColumnAnnotations
@@ -6024,7 +6024,7 @@ CreateTableStmt
 +-column_definition_list=
   +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
   +-ColumnDefinition
-    +-name="b"
+    +-name='b'
     +-type=ARRAY<STRING>
     +-annotations=
     | +-ColumnAnnotations
@@ -6042,7 +6042,7 @@ CreateTableStmt
 +-column_definition_list=
   +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
   +-ColumnDefinition
-    +-name="b"
+    +-name='b'
     +-type=STRUCT<INT64, STRING, DOUBLE>
     +-annotations=
     | +-ColumnAnnotations
@@ -6061,7 +6061,7 @@ CreateTableStmt
 +-column_definition_list=
   +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
   +-ColumnDefinition
-    +-name="b"
+    +-name='b'
     +-type=ARRAY<STRING>
     +-annotations=
     | +-ColumnAnnotations
@@ -9575,7 +9575,7 @@ CreateTableAsSelectStmt
 +-name_path=t
 +-column_definition_list=
 | +-ColumnDefinition
-|   +-name="col_struct"
+|   +-name='col_struct'
 |   +-type=STRUCT<DOUBLE, STRING, ARRAY<STRING>>
 |   +-annotations=
 |   | +-ColumnAnnotations

@@ -344,7 +344,7 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AddSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-options_list=
     | +-a := Literal(type=STRING, value='b')
     +-is_if_not_exists=TRUE
@@ -363,7 +363,7 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AddSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-options_list=
       +-a := Literal(type=STRING, value='b')
 --
@@ -385,12 +385,12 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AddSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_name1"
+  | +-name='replica_name1'
   | +-options_list=
   |   +-a := Literal(type=STRING, value='b')
   +-AddSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name2"
+    +-name='replica_name2'
     +-options_list=
       +-c := Literal(type=STRING, value='d')
 ==
@@ -436,7 +436,7 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-alter_action=
     | +-SetOptionsAction
     |   +-option_list=
@@ -450,7 +450,7 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-alter_action=
       +-SetOptionsAction
         +-option_list=
@@ -467,14 +467,14 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_name1"
+  | +-name='replica_name1'
   | +-alter_action=
   |   +-SetOptionsAction
   |     +-option_list=
   |       +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name2"
+    +-name='replica_name2'
     +-alter_action=
       +-SetOptionsAction
         +-option_list=
@@ -493,20 +493,20 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_name1"
+  | +-name='replica_name1'
   | +-alter_action=
   |   +-AddSubEntityAction
   |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="child_1"
+  |     +-name='child_1'
   |     +-options_list=
   |       +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name1"
+    +-name='replica_name1'
     +-alter_action=
       +-AddSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="child_2"
+        +-name='child_2'
         +-options_list=
           +-c := Literal(type=STRING, value='d')
 ==
@@ -521,11 +521,11 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_name"
+        +-name='replica_child_name'
         +-alter_action=
           +-SetOptionsAction
             +-option_list=
@@ -541,22 +541,22 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_name"
+  | +-name='replica_name'
   | +-alter_action=
   |   +-AlterSubEntityAction
   |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="replica_child_name"
+  |     +-name='replica_child_name'
   |     +-alter_action=
   |       +-SetOptionsAction
   |         +-option_list=
   |           +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name2"
+    +-name='replica_name2'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_name2"
+        +-name='replica_child_name2'
         +-alter_action=
           +-SetOptionsAction
             +-option_list=
@@ -574,11 +574,11 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="child_name"
+        +-name='child_name'
         +-alter_action=
           +-AddSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name")
 ==
@@ -594,11 +594,11 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="child_name"
+        +-name='child_name'
         +-alter_action=
           +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name")
 ==
@@ -613,24 +613,24 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_1"
+  | +-name='replica_1'
   | +-alter_action=
   |   +-AlterSubEntityAction
   |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="replica_child_1"
+  |     +-name='replica_child_1'
   |     +-alter_action=
   |       +-AddSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_1")
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_2"
+    +-name='replica_2'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_2"
+        +-name='replica_child_2'
         +-alter_action=
           +-AddSubEntityAction
             +-entity_type="GRANDCHILD_OF_REPLICA"
-            +-name="grandchild_name_2"
+            +-name='grandchild_name_2'
             +-options_list=
               +-a := Literal(type=STRING, value='b')
 ==
@@ -645,20 +645,20 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_1"
+  | +-name='replica_1'
   | +-alter_action=
   |   +-AlterSubEntityAction
   |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="replica_child_1"
+  |     +-name='replica_child_1'
   |     +-alter_action=
   |       +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_1")
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_2"
+    +-name='replica_2'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_2"
+        +-name='replica_child_2'
         +-alter_action=
           +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_2")
 ==
@@ -674,23 +674,23 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_1"
+  | +-name='replica_1'
   | +-alter_action=
   |   +-SetOptionsAction
   |     +-option_list=
   |       +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="replica_2"
+  | +-name='replica_2'
   | +-alter_action=
   |   +-AddSubEntityAction(entity_type="CHILD_OF_REPLICA", name="replica_child_2")
   +-AlterSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_3"
+    +-name='replica_3'
     +-alter_action=
       +-AlterSubEntityAction
         +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_3"
+        +-name='replica_child_3'
         +-alter_action=
           +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_3")
 ==
@@ -703,7 +703,7 @@ AlterSchemaStmt
 +-alter_action_list=
   +-AddSubEntityAction
     +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-name='replica_name'
     +-options_list=
       +-a := Literal(type=STRING, value='b')
 ==
@@ -763,7 +763,7 @@ AlterTableStmt
 +-alter_action_list=
   +-AlterSubEntityAction
   | +-entity_type="REPLICA"
-  | +-name="r"
+  | +-name='r'
   | +-alter_action=
   |   +-SetOptionsAction
   |     +-option_list=

@@ -118,7 +118,7 @@ CreateExternalTableStmt
 | +-z := Literal(type=ARRAY<STRING>, value=["uri", "uri2"])
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="x"
+  | +-name='x'
   | +-type=INT64
   | +-annotations=
   | | +-ColumnAnnotations
@@ -136,7 +136,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
   +-ColumnDefinition
-    +-name="x"
+    +-name='x'
     +-type=INT64
     +-annotations=
     | +-ColumnAnnotations(not_null=TRUE)

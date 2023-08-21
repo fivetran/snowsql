@@ -201,7 +201,7 @@ AlterTableStmt
     +-is_if_not_exists=FALSE
     +-column_definition=
       +-ColumnDefinition
-        +-name="bar"
+        +-name='bar'
         +-type=STRING
         +-annotations=
         | +-ColumnAnnotations(not_null=TRUE)
@@ -328,7 +328,7 @@ AlterTableStmt
     +-is_if_not_exists=FALSE
     +-column_definition=
       +-ColumnDefinition
-        +-name="foo"
+        +-name='foo'
         +-type=STRING
         +-column=KeyValue.foo#1
         +-default_value=
@@ -448,7 +448,7 @@ AlterTableStmt
     +-is_if_not_exists=FALSE
     +-column_definition=
       +-ColumnDefinition
-        +-name="e"
+        +-name='e'
         +-type=ARRAY<STRING>
         +-column=KeyValue.e#2
         +-default_value=
@@ -482,7 +482,7 @@ AlterTableStmt
     +-is_if_not_exists=TRUE
     +-column_definition=
       +-ColumnDefinition
-        +-name="key"
+        +-name='key'
         +-type=STRING
         +-column=KeyValue.key#1
         +-default_value=
