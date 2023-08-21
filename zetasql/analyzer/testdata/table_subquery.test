@@ -157,7 +157,7 @@ QueryStmt
             +-column_list=$subquery1.[key#1, key#2]
             +-expr_list=
             | +-key#1 := Literal(type=INT64, value=1)
-            | +-key#2 := Literal(type=STRING, value="abc")
+            | +-key#2 := Literal(type=STRING, value='abc')
             +-input_scan=
               +-SingleRowScan
 ==
@@ -220,7 +220,7 @@ QueryStmt
         +-expr_list=
         | +-a#3 := Literal(type=INT64, value=1)
         | +-c#4 := Literal(type=DOUBLE, value=1.5)
-        | +-d#5 := Literal(type=STRING, value="abc")
+        | +-d#5 := Literal(type=STRING, value='abc')
         +-input_scan=
           +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -256,7 +256,7 @@ QueryStmt
         +-expr_list=
         | +-a#1 := Literal(type=INT64, value=1)
         | +-b#2 := Literal(type=INT64, value=2)
-        | +-c#3 := Literal(type=STRING, value="abc")
+        | +-c#3 := Literal(type=STRING, value='abc')
         +-input_scan=
           +-SingleRowScan
 ==

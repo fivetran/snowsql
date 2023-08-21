@@ -664,7 +664,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=$subquery1.[expr1#1, expr2#2]
         +-expr_list=
-        | +-expr1#1 := Literal(type=STRING, value="hello")
+        | +-expr1#1 := Literal(type=STRING, value='hello')
         | +-expr2#2 := Literal(type=INT64, value=123)
         +-input_scan=
           +-SingleRowScan
@@ -696,7 +696,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=$subquery1.[expr1#1, expr2#2]
             +-expr_list=
-            | +-expr1#1 := Literal(type=STRING, value="hello")
+            | +-expr1#1 := Literal(type=STRING, value='hello')
             | +-expr2#2 := Literal(type=INT64, value=123)
             +-input_scan=
               +-SingleRowScan

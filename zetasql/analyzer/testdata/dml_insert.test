@@ -1138,7 +1138,7 @@ InsertStmt
 |                   |             +-column_list=$expr_subquery.[a#7, b#8]
 |                   |             +-expr_list=
 |                   |             | +-a#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|                   |             | +-b#8 := Literal(type=STRING, value="a")
+|                   |             | +-b#8 := Literal(type=STRING, value='a')
 |                   |             +-input_scan=
 |                   |               +-SingleRowScan
 |                   +-input_scan=
@@ -1198,7 +1198,7 @@ InsertStmt
 |                     |             +-column_list=$expr_subquery.[z1#7, z2#8]
 |                     |             +-expr_list=
 |                     |             | +-z1#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|                     |             | +-z2#8 := Literal(type=STRING, value="a")
+|                     |             | +-z2#8 := Literal(type=STRING, value='a')
 |                     |             +-input_scan=
 |                     |               +-SingleRowScan
 |                     +-input_scan=
@@ -1287,7 +1287,7 @@ InsertStmt
 |       |             +-column_list=$expr_subquery.[a#7, b#8]
 |       |             +-expr_list=
 |       |             | +-a#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|       |             | +-b#8 := Literal(type=STRING, value="2")
+|       |             | +-b#8 := Literal(type=STRING, value='2')
 |       |             +-input_scan=
 |       |               +-SingleRowScan
 |       +-input_scan=
@@ -1346,7 +1346,7 @@ InsertStmt
 |           |             +-column_list=$expr_subquery.[z1#7, z2#8]
 |           |             +-expr_list=
 |           |             | +-z1#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|           |             | +-z2#8 := Literal(type=STRING, value="2")
+|           |             | +-z2#8 := Literal(type=STRING, value='2')
 |           |             +-input_scan=
 |           |               +-SingleRowScan
 |           +-input_scan=
@@ -1386,7 +1386,7 @@ InsertStmt
 |           |         +-column_list=$expr_subquery.[a#4, b#5]
 |           |         +-expr_list=
 |           |         | +-a#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|           |         | +-b#5 := Literal(type=STRING, value="b")
+|           |         | +-b#5 := Literal(type=STRING, value='b')
 |           |         +-input_scan=
 |           |           +-SingleRowScan
 |           +-Literal(type=STRUCT<a INT32, b STRING>, value=NULL)
@@ -1426,7 +1426,7 @@ InsertStmt
 |             |         +-column_list=$expr_subquery.[x#4, y#5]
 |             |         +-expr_list=
 |             |         | +-x#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             |         | +-y#5 := Literal(type=STRING, value="b")
+|             |         | +-y#5 := Literal(type=STRING, value='b')
 |             |         +-input_scan=
 |             |           +-SingleRowScan
 |             +-Literal(type=STRUCT<x INT32, y STRING>, value=NULL)
@@ -1475,7 +1475,7 @@ InsertStmt
 |               |         +-column_list=$expr_subquery.[a#4, b#5]
 |               |         +-expr_list=
 |               |         | +-a#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|               |         | +-b#5 := Literal(type=STRING, value="a")
+|               |         | +-b#5 := Literal(type=STRING, value='a')
 |               |         +-input_scan=
 |               |           +-SingleRowScan
 |               +-Literal(type=STRUCT<a INT32, b STRING>, value=NULL)
@@ -1526,7 +1526,7 @@ InsertStmt
 |                 |         +-column_list=$expr_subquery.[j1#4, k1#5]
 |                 |         +-expr_list=
 |                 |         | +-j1#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|                 |         | +-k1#5 := Literal(type=STRING, value="a")
+|                 |         | +-k1#5 := Literal(type=STRING, value='a')
 |                 |         +-input_scan=
 |                 |           +-SingleRowScan
 |                 +-Literal(type=STRUCT<j1 INT32, k1 STRING>, value=NULL)
@@ -2088,7 +2088,7 @@ InsertStmt
 | +-TableScan
 |   +-column_list=KeyValue.[Key#1, Value#2]
 |   +-hint_list=
-|   | +-hint_name := Literal(type=STRING, value="hint_value")
+|   | +-hint_name := Literal(type=STRING, value='hint_value')
 |   +-table=KeyValue
 |   +-column_index_list=[0, 1]
 +-insert_column_list=KeyValue.[Key#1, Value#2]

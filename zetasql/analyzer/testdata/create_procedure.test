@@ -29,7 +29,7 @@ CreateProcedureStmt
 +-signature=() -> <void>
 +-option_list=
 | +-a := Literal(type=INT64, value=1)
-| +-b := Literal(type=STRING, value="2")
+| +-b := Literal(type=STRING, value='2')
 +-procedure_body="BEGIN\n  SELECT 1;\n  RETURN;\nEND"
 ==
 
@@ -82,7 +82,7 @@ CreateProcedureStmt
 +-argument_name_list=[param_a]
 +-signature=(STRING {procedure_argument_mode: OUT} param_a) -> <void>
 +-option_list=
-| +-a := Literal(type=STRING, value="option a")
+| +-a := Literal(type=STRING, value='option a')
 | +-b := Literal(type=INT64, value=100)
 | +-c := Parameter(type=STRING, name="test_param_string")
 +-procedure_body='BEGIN\n  SET param_a = "test";\nEND'

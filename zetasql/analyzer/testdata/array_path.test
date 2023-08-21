@@ -3845,7 +3845,7 @@ QueryStmt
     |         +-type=JSON
     |         +-expr=
     |         | +-FlattenedArg(type=JSON)
-    |         +-field_name="field"
+    |         +-field_name='field'
     +-input_scan=
       +-TableScan(column_list=[ArrayTypes.JsonArray#17], table=ArrayTypes, column_index_list=[16])
 
@@ -3890,7 +3890,7 @@ QueryStmt
     |         |           |   |     +-type=JSON
     |         |           |   |     +-expr=
     |         |           |   |     | +-ColumnRef(type=JSON, column=$flatten.injected#20)
-    |         |           |   |     +-field_name="field"
+    |         |           |   |     +-field_name='field'
     |         |           |   +-input_scan=
     |         |           |     +-ArrayScan
     |         |           |       +-column_list=[$flatten.injected#20, $offset.injected#21]
@@ -3948,7 +3948,7 @@ QueryStmt
     |         +-type=JSON
     |         +-expr=
     |         | +-FlattenedArg(type=JSON)
-    |         +-field_name="field"
+    |         +-field_name='field'
     +-input_scan=
       +-SingleRowScan
 
@@ -3995,7 +3995,7 @@ QueryStmt
     |         |           |   |     |   +-expr=
     |         |           |   |     |   | +-ColumnRef(type=STRUCT<x JSON, y INT64>, column=$flatten.injected#3)
     |         |           |   |     |   +-field_idx=0
-    |         |           |   |     +-field_name="field"
+    |         |           |   |     +-field_name='field'
     |         |           |   +-input_scan=
     |         |           |     +-ArrayScan
     |         |           |       +-column_list=[$flatten.injected#3, $offset.injected#4]

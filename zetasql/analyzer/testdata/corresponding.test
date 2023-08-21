@@ -867,8 +867,8 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=$union_all1.[col#1, extra_col#2]
         | | |   +-expr_list=
-        | | |   | +-col#1 := Literal(type=STRING, value="abc")
-        | | |   | +-extra_col#2 := Literal(type=STRING, value="bcd")
+        | | |   | +-col#1 := Literal(type=STRING, value='abc')
+        | | |   | +-extra_col#2 := Literal(type=STRING, value='bcd')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-output_column_list=[$union_all1.col#1]
@@ -877,7 +877,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$union_all2.col#3]
         |   |   +-expr_list=
-        |   |   | +-col#3 := Literal(type=STRING, value="def")
+        |   |   | +-col#3 := Literal(type=STRING, value='def')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-output_column_list=[$union_all2.col#3]
@@ -904,8 +904,8 @@ QueryStmt
           | |     +-ProjectScan
           | |       +-column_list=$union_all1.[col#1, extra_col#2]
           | |       +-expr_list=
-          | |       | +-col#1 := Literal(type=STRING, value="abc")
-          | |       | +-extra_col#2 := Literal(type=STRING, value="bcd")
+          | |       | +-col#1 := Literal(type=STRING, value='abc')
+          | |       | +-extra_col#2 := Literal(type=STRING, value='bcd')
           | |       +-input_scan=
           | |         +-SingleRowScan
           | +-output_column_list=[$union_all1.col#1]
@@ -914,7 +914,7 @@ QueryStmt
             | +-ProjectScan
             |   +-column_list=[$union_all2.col#3]
             |   +-expr_list=
-            |   | +-col#3 := Literal(type=STRING, value="def")
+            |   | +-col#3 := Literal(type=STRING, value='def')
             |   +-input_scan=
             |     +-SingleRowScan
             +-output_column_list=[$union_all2.col#3]
@@ -956,7 +956,7 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=$union_all1.[a#1, v1#2]
     | | |       +-expr_list=
-    | | |       | +-a#1 := Literal(type=STRING, value="a")
+    | | |       | +-a#1 := Literal(type=STRING, value='a')
     | | |       | +-v1#2 :=
     | | |       |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     | | |       |     +-Literal(type=INT64, value=1)
@@ -969,7 +969,7 @@ QueryStmt
     |   | +-ProjectScan
     |   |   +-column_list=$union_all2.[b#3, v1#4]
     |   |   +-expr_list=
-    |   |   | +-b#3 := Literal(type=STRING, value="a")
+    |   |   | +-b#3 := Literal(type=STRING, value='a')
     |   |   | +-v1#4 :=
     |   |   |   +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
     |   |   |     +-Literal(type=DOUBLE, value=1)
@@ -1004,7 +1004,7 @@ QueryStmt
       | |         +-ProjectScan
       | |           +-column_list=$union_all1.[a#1, v1#2]
       | |           +-expr_list=
-      | |           | +-a#1 := Literal(type=STRING, value="a")
+      | |           | +-a#1 := Literal(type=STRING, value='a')
       | |           | +-v1#2 :=
       | |           |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
       | |           |     +-Literal(type=INT64, value=1)
@@ -1020,7 +1020,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=$union_all2.[b#3, v1#4]
         |       +-expr_list=
-        |       | +-b#3 := Literal(type=STRING, value="a")
+        |       | +-b#3 := Literal(type=STRING, value='a')
         |       | +-v1#4 :=
         |       |   +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
         |       |     +-Literal(type=DOUBLE, value=1)
@@ -1604,7 +1604,7 @@ QueryStmt
     |   |     +-ProjectScan
     |   |       +-column_list=[TestTable.KitchenSink#6, $union_all2.col#7]
     |   |       +-expr_list=
-    |   |       | +-col#7 := Literal(type=STRING, value="int64_key_1: 1, int64_key_2: 2")
+    |   |       | +-col#7 := Literal(type=STRING, value='int64_key_1: 1, int64_key_2: 2')
     |   |       +-input_scan=
     |   |         +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2])
     |   +-output_column_list=[$union_all2_cast.col#10, TestTable.KitchenSink#6]
@@ -1641,7 +1641,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[TestTable.KitchenSink#6, $union_all2.col#7]
         |           +-expr_list=
-        |           | +-col#7 := Literal(type=STRING, value="int64_key_1: 1, int64_key_2: 2")
+        |           | +-col#7 := Literal(type=STRING, value='int64_key_1: 1, int64_key_2: 2')
         |           +-input_scan=
         |             +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2])
         +-output_column_list=[$union_all2_cast.col#10, TestTable.KitchenSink#6]
@@ -3357,7 +3357,7 @@ QueryStmt
     | | | +-ProjectScan
     | | |   +-column_list=$union_all1.[c1#1, c2#2]
     | | |   +-expr_list=
-    | | |   | +-c1#1 := Literal(type=STRING, value="abc")
+    | | |   | +-c1#1 := Literal(type=STRING, value='abc')
     | | |   | +-c2#2 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
     | | |   +-input_scan=
     | | |     +-SingleRowScan
@@ -3377,7 +3377,7 @@ QueryStmt
     |   |         +-ProjectScan
     |   |           +-column_list=$subquery1.[c1#3, c2#4]
     |   |           +-expr_list=
-    |   |           | +-c1#3 := Literal(type=STRING, value="def")
+    |   |           | +-c1#3 := Literal(type=STRING, value='def')
     |   |           | +-c2#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
     |   |           +-input_scan=
     |   |             +-SingleRowScan
@@ -3400,7 +3400,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=$union_all1.[c1#1, c2#2]
       | |   +-expr_list=
-      | |   | +-c1#1 := Literal(type=STRING, value="abc")
+      | |   | +-c1#1 := Literal(type=STRING, value='abc')
       | |   | +-c2#2 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
       | |   +-input_scan=
       | |     +-SingleRowScan
@@ -3420,7 +3420,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=$subquery1.[c1#3, c2#4]
         |           +-expr_list=
-        |           | +-c1#3 := Literal(type=STRING, value="def")
+        |           | +-c1#3 := Literal(type=STRING, value='def')
         |           | +-c2#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
         |           +-input_scan=
         |             +-SingleRowScan
@@ -6727,7 +6727,7 @@ QueryStmt
     | | |   +-column_list=$union_distinct1.[A#1, B#2]
     | | |   +-expr_list=
     | | |   | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    | | |   | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+    | | |   | +-B#2 := Literal(type=STRING, value='STRING_VAL')
     | | |   +-input_scan=
     | | |     +-SingleRowScan
     | | +-output_column_list=$union_distinct1.[A#1, B#2]
@@ -6771,7 +6771,7 @@ QueryStmt
       | |   +-column_list=$union_distinct1.[A#1, B#2]
       | |   +-expr_list=
       | |   | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-      | |   | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+      | |   | +-B#2 := Literal(type=STRING, value='STRING_VAL')
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=$union_distinct1.[A#1, B#2]
@@ -6825,7 +6825,7 @@ QueryStmt
     | | |       +-column_list=$union_distinct1.[A#1, B#2]
     | | |       +-expr_list=
     | | |       | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    | | |       | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+    | | |       | +-B#2 := Literal(type=STRING, value='STRING_VAL')
     | | |       +-input_scan=
     | | |         +-SingleRowScan
     | | +-output_column_list=[$union_distinct1.A#1, $union_distinct1.B#2, $null_column_for_outer_set_op.C#11]
@@ -6842,7 +6842,7 @@ QueryStmt
     |   |       +-expr_list=
     |   |       | +-B#3 := Literal(type=INT64, value=NULL)
     |   |       | +-A#4 := Literal(type=INT64, value=1)
-    |   |       | +-C#5 := Literal(type=STRING, value="NO_MATCHING")
+    |   |       | +-C#5 := Literal(type=STRING, value='NO_MATCHING')
     |   |       +-input_scan=
     |   |         +-SingleRowScan
     |   +-output_column_list=[$union_distinct2_cast.A#10, $union_distinct2_cast.B#9, $union_distinct2.C#5]
@@ -6873,7 +6873,7 @@ QueryStmt
       | |       +-column_list=$union_distinct1.[A#1, B#2]
       | |       +-expr_list=
       | |       | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-      | |       | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+      | |       | +-B#2 := Literal(type=STRING, value='STRING_VAL')
       | |       +-input_scan=
       | |         +-SingleRowScan
       | +-output_column_list=[$union_distinct1.A#1, $union_distinct1.B#2, $null_column_for_outer_set_op.C#11]
@@ -6893,7 +6893,7 @@ QueryStmt
         |           +-expr_list=
         |           | +-B#3 := Literal(type=INT64, value=NULL)
         |           | +-A#4 := Literal(type=INT64, value=1)
-        |           | +-C#5 := Literal(type=STRING, value="NO_MATCHING")
+        |           | +-C#5 := Literal(type=STRING, value='NO_MATCHING')
         |           +-input_scan=
         |             +-SingleRowScan
         +-output_column_list=[$union_distinct2_cast.A#10, $union_distinct2_cast.B#9, $union_distinct2.C#5]

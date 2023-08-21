@@ -123,7 +123,7 @@ QueryStmt
     | |   +-ColumnRef(type=UINT64, column=SimpleTypes.uint64#4)
     | |   +-Cast(INT32 -> INT64)
     | |     +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
-    | +-$col7#25 := Literal(type=STRING, value="------------------------------")
+    | +-$col7#25 := Literal(type=STRING, value='------------------------------')
     | +-$col8#26 :=
     | | +-FunctionCall(ZetaSQL:$equal(INT64, UINT64) -> BOOL)
     | |   +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -1594,7 +1594,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[SimpleTypes.int32#1, SimpleTypes.int64#2, SimpleTypes.uint32#3, SimpleTypes.uint64#4, SimpleTypes.float#8, SimpleTypes.double#9, $query.separator#19, $query.$col8#20, $query.$col9#21, $query.$col10#22, $query.$col11#23]
     +-expr_list=
-    | +-separator#19 := Literal(type=STRING, value="------------------------")
+    | +-separator#19 := Literal(type=STRING, value='------------------------')
     | +-$col8#20 :=
     | | +-FunctionCall(ZetaSQL:$unary_minus(INT32) -> INT32)
     | |   +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
@@ -1695,7 +1695,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="555")
+    | +-$col1#1 := Literal(type=STRING, value='555')
     +-input_scan=
       +-SingleRowScan
 ==

@@ -127,9 +127,9 @@ CreateViewStmt
 +-name_path=X
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-z := Literal(type=STRING, value='abc')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS k1 [INT64]
@@ -164,9 +164,9 @@ CreateViewStmt
 +-create_scope=CREATE_TEMP
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-z := Literal(type=STRING, value='abc')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS k1 [INT64]
@@ -200,9 +200,9 @@ CreateMaterializedViewStmt
 +-name_path=X
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-z := Literal(type=STRING, value='abc')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS k1 [INT64]
@@ -236,9 +236,9 @@ CreateApproxViewStmt
 +-name_path=X
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-z := Literal(type=STRING, value='abc')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS k1 [INT64]
@@ -652,7 +652,7 @@ CreateViewStmt
 +-name_path=x.y
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-option_list=
-| +-x := Literal(type=STRING, value="y")
+| +-x := Literal(type=STRING, value='y')
 +-output_column_list=
 | +-$view.a#1 AS a [INT64]
 +-query=
@@ -1126,7 +1126,7 @@ CreateMaterializedViewStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |     +-description := Literal(type=STRING, value="col1")
+  | |     +-description := Literal(type=STRING, value='col1')
   | +-column=tt.$col1#4
   +-ColumnDefinition(name="c2", type=INT64, column=tt.$col2#5)
   +-ColumnDefinition(name="c3", type=INT64, column=tt.$col3#6)
@@ -1157,7 +1157,7 @@ CreateApproxViewStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |     +-description := Literal(type=STRING, value="col1")
+  | |     +-description := Literal(type=STRING, value='col1')
   | +-column=tt.$col1#4
   +-ColumnDefinition(name="c2", type=INT64, column=tt.$col2#5)
   +-ColumnDefinition(name="c3", type=INT64, column=tt.$col3#6)
@@ -1188,7 +1188,7 @@ CreateViewStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |     +-description := Literal(type=STRING, value="col1")
+  | |     +-description := Literal(type=STRING, value='col1')
   | +-column=tt.$col1#4
   +-ColumnDefinition(name="c2", type=INT64, column=tt.$col2#5)
   +-ColumnDefinition(name="c3", type=INT64, column=tt.$col3#6)

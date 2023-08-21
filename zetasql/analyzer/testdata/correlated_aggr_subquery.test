@@ -1600,7 +1600,7 @@ QueryStmt
         | |           +-column_list=$expr_subquery.[a#1, b#2]
         | |           +-expr_list=
         | |           | +-a#1 := Literal(type=INT64, value=1)
-        | |           | +-b#2 := Literal(type=STRING, value="a")
+        | |           | +-b#2 := Literal(type=STRING, value='a')
         | |           +-input_scan=
         | |             +-SingleRowScan
         | +-y#5 := Literal(type=ARRAY<INT64>, value=[2])
@@ -2740,7 +2740,7 @@ QueryStmt
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
-          +-foo#3 := Literal(type=STRING, value="foo")
+          +-foo#3 := Literal(type=STRING, value='foo')
           +-$groupbycol2#5 :=
             +-SubqueryExpr
               +-type=INT64
@@ -3445,7 +3445,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#5]
     +-expr_list=
-    | +-$col1#5 := Literal(type=STRING, value="foo")
+    | +-$col1#5 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-FilterScan
         +-column_list=[TestNestedStructValueTable.value#1]
@@ -3501,7 +3501,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#6]
     +-expr_list=
-    | +-$col1#6 := Literal(type=STRING, value="foo")
+    | +-$col1#6 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -3595,7 +3595,7 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[TestNestedStructValueTable.value#1, $query.$col1#2]
     |       +-expr_list=
-    |       | +-$col1#2 := Literal(type=STRING, value="foo")
+    |       | +-$col1#2 := Literal(type=STRING, value='foo')
     |       +-input_scan=
     |         +-TableScan(column_list=[TestNestedStructValueTable.value#1], table=TestNestedStructValueTable, column_index_list=[0])
     +-order_by_item_list=
@@ -3664,7 +3664,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#8]
     +-expr_list=
-    | +-$col1#8 := Literal(type=STRING, value="foo")
+    | +-$col1#8 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-FilterScan
         +-column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3]
@@ -3758,7 +3758,7 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[SimpleTypesWithStruct.key#1, SimpleTypesWithStruct.TestEnum#2, SimpleTypesWithStruct.TestStruct#3, $query.$col1#4]
     |       +-expr_list=
-    |       | +-$col1#4 := Literal(type=STRING, value="foo")
+    |       | +-$col1#4 := Literal(type=STRING, value='foo')
     |       +-input_scan=
     |         +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias='st')
     +-order_by_item_list=

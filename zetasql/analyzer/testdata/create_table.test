@@ -2376,11 +2376,11 @@ CreateTableStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |   | +-y := Literal(type=STRING, value="x")
+  | |   | +-y := Literal(type=STRING, value='x')
   | |   +-child_list=
   | |     +-ColumnAnnotations
   | |       +-option_list=
-  | |         +-x := Literal(type=STRING, value="y")
+  | |         +-x := Literal(type=STRING, value='y')
   | +-column=t1.c2#2
   +-ColumnDefinition(name="c3", type=STRUCT<x INT64, BYTES>, column=t1.c3#3)
   +-ColumnDefinition
@@ -2389,7 +2389,7 @@ CreateTableStmt
     +-annotations=
     | +-ColumnAnnotations
     |   +-option_list=
-    |     +-x := Literal(type=STRING, value="x")
+    |     +-x := Literal(type=STRING, value='x')
     +-column=t1.c4#4
 ==
 
@@ -3938,7 +3938,7 @@ CreateTableStmt
     +-annotations=
     | +-ColumnAnnotations
     |   +-option_list=
-    |     +-option_a := Literal(type=STRING, value="literal")
+    |     +-option_a := Literal(type=STRING, value='literal')
     +-column=t1.a#1
 ==
 
@@ -3956,7 +3956,7 @@ CreateTableStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |     +-option_a := Literal(type=STRING, value="literal")
+  | |     +-option_a := Literal(type=STRING, value='literal')
   | +-column=t1.a#1
   +-ColumnDefinition
     +-name="b"
@@ -3991,7 +3991,7 @@ CreateTableStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |     +-option_a := Literal(type=STRING, value="literal")
+  | |     +-option_a := Literal(type=STRING, value='literal')
   | +-column=t1.a#1
   +-ColumnDefinition
   | +-name="b"
@@ -5316,7 +5316,7 @@ options(x=foo);
 CreateTableStmt
 +-name_path=t
 +-option_list=
-| +-x := Literal(type=STRING, value="foo")
+| +-x := Literal(type=STRING, value='foo')
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
 +-connection=
@@ -5332,7 +5332,7 @@ options(x=foo);
 CreateTableStmt
 +-name_path=t
 +-option_list=
-| +-x := Literal(type=STRING, value="foo")
+| +-x := Literal(type=STRING, value='foo')
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
 +-connection=

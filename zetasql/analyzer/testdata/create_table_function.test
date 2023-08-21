@@ -158,7 +158,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=[$query.x#3]
 |   +-expr_list=
-|   | +-x#3 := Literal(type=STRING, value="foo")
+|   | +-x#3 := Literal(type=STRING, value='foo')
 |   +-input_scan=
 |     +-TVFScan(tvf=tvf_deprecation_warning(() -> TABLE<> (1 deprecation warning)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 +-output_column_list=
@@ -200,7 +200,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all1.x#3]
 |     | |   +-expr_list=
-|     | |   | +-x#3 := Literal(type=STRING, value="foo")
+|     | |   | +-x#3 := Literal(type=STRING, value='foo')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_deprecation_warning(() -> TABLE<> (1 deprecation warning)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all1.x#3]
@@ -209,7 +209,7 @@ CreateTableFunctionStmt
 |       | +-ProjectScan
 |       |   +-column_list=[$union_all2.$col1#6]
 |       |   +-expr_list=
-|       |   | +-$col1#6 := Literal(type=STRING, value="bar")
+|       |   | +-$col1#6 := Literal(type=STRING, value='bar')
 |       |   +-input_scan=
 |       |     +-TVFScan(tvf=tvf_deprecation_warning(() -> TABLE<> (1 deprecation warning)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |       +-output_column_list=[$union_all2.$col1#6]
@@ -244,7 +244,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=[$query.x#3]
 |   +-expr_list=
-|   | +-x#3 := Literal(type=STRING, value="foo")
+|   | +-x#3 := Literal(type=STRING, value='foo')
 |   +-input_scan=
 |     +-TVFScan(tvf=tvf_two_deprecation_warnings_same_kind(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 +-output_column_list=
@@ -278,7 +278,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=[$query.x#3]
 |   +-expr_list=
-|   | +-x#3 := Literal(type=STRING, value="foo")
+|   | +-x#3 := Literal(type=STRING, value='foo')
 |   +-input_scan=
 |     +-TVFScan(tvf=tvf_two_deprecation_warnings(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 +-output_column_list=
@@ -334,7 +334,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all1.x#3]
 |     | |   +-expr_list=
-|     | |   | +-x#3 := Literal(type=STRING, value="foo")
+|     | |   | +-x#3 := Literal(type=STRING, value='foo')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_deprecation_warning(() -> TABLE<> (1 deprecation warning)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all1.x#3]
@@ -343,7 +343,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all2.$col1#6]
 |     | |   +-expr_list=
-|     | |   | +-$col1#6 := Literal(type=STRING, value="bar")
+|     | |   | +-$col1#6 := Literal(type=STRING, value='bar')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_two_deprecation_warnings_same_kind(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all2.$col1#6]
@@ -352,7 +352,7 @@ CreateTableFunctionStmt
 |       | +-ProjectScan
 |       |   +-column_list=[$union_all3.$col1#9]
 |       |   +-expr_list=
-|       |   | +-$col1#9 := Literal(type=STRING, value="baz")
+|       |   | +-$col1#9 := Literal(type=STRING, value='baz')
 |       |   +-input_scan=
 |       |     +-TVFScan(tvf=tvf_two_deprecation_warnings(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |       +-output_column_list=[$union_all3.$col1#9]
@@ -430,7 +430,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all1.x#3]
 |     | |   +-expr_list=
-|     | |   | +-x#3 := Literal(type=STRING, value="foo1")
+|     | |   | +-x#3 := Literal(type=STRING, value='foo1')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_deprecation_warning(() -> TABLE<> (1 deprecation warning)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all1.x#3]
@@ -439,7 +439,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all2.x#6]
 |     | |   +-expr_list=
-|     | |   | +-x#6 := Literal(type=STRING, value="foo2")
+|     | |   | +-x#6 := Literal(type=STRING, value='foo2')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_deprecation_warning(() -> TABLE<> (1 deprecation warning)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all2.x#6]
@@ -448,7 +448,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all3.$col1#9]
 |     | |   +-expr_list=
-|     | |   | +-$col1#9 := Literal(type=STRING, value="bar1")
+|     | |   | +-$col1#9 := Literal(type=STRING, value='bar1')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_two_deprecation_warnings_same_kind(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all3.$col1#9]
@@ -457,7 +457,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all4.$col1#12]
 |     | |   +-expr_list=
-|     | |   | +-$col1#12 := Literal(type=STRING, value="bar2")
+|     | |   | +-$col1#12 := Literal(type=STRING, value='bar2')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_two_deprecation_warnings_same_kind(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all4.$col1#12]
@@ -466,7 +466,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=[$union_all5.$col1#15]
 |     | |   +-expr_list=
-|     | |   | +-$col1#15 := Literal(type=STRING, value="baz1")
+|     | |   | +-$col1#15 := Literal(type=STRING, value='baz1')
 |     | |   +-input_scan=
 |     | |     +-TVFScan(tvf=tvf_two_deprecation_warnings(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |     | +-output_column_list=[$union_all5.$col1#15]
@@ -475,7 +475,7 @@ CreateTableFunctionStmt
 |       | +-ProjectScan
 |       |   +-column_list=[$union_all6.$col1#18]
 |       |   +-expr_list=
-|       |   | +-$col1#18 := Literal(type=STRING, value="baz2")
+|       |   | +-$col1#18 := Literal(type=STRING, value='baz2')
 |       |   +-input_scan=
 |       |     +-TVFScan(tvf=tvf_two_deprecation_warnings(() -> TABLE<> (2 deprecation warnings)), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>)
 |       +-output_column_list=[$union_all6.$col1#18]
@@ -697,7 +697,7 @@ CreateTableFunctionStmt
 |   +-column_list=$query.[x#1, y#2]
 |   +-expr_list=
 |   | +-x#1 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
-|   | +-y#2 := Literal(type=STRING, value="abc")
+|   | +-y#2 := Literal(type=STRING, value='abc')
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
@@ -723,7 +723,7 @@ CreateTableFunctionStmt
 |   +-column_list=$query.[x#1, y#2]
 |   +-expr_list=
 |   | +-x#1 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
-|   | +-y#2 := Literal(type=STRING, value="abc")
+|   | +-y#2 := Literal(type=STRING, value='abc')
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
@@ -756,7 +756,7 @@ CreateTableFunctionStmt
 |       +-column_list=$query.[x#1, y#2, z#3]
 |       +-expr_list=
 |       | +-x#1 := ArgumentRef(type=INT64, name="x")
-|       | +-y#2 := Literal(type=STRING, value="abc")
+|       | +-y#2 := Literal(type=STRING, value='abc')
 |       | +-z#3 := Literal(type=INT64, value=42)
 |       +-input_scan=
 |         +-SingleRowScan
@@ -787,7 +787,7 @@ CreateTableFunctionStmt
 |     +-ProjectScan
 |       +-column_list=$query.[y#1, x#2]
 |       +-expr_list=
-|       | +-y#1 := Literal(type=STRING, value="abc")
+|       | +-y#1 := Literal(type=STRING, value='abc')
 |       | +-x#2 := ArgumentRef(type=INT64, name="x")
 |       +-input_scan=
 |         +-SingleRowScan
@@ -821,7 +821,7 @@ CreateTableFunctionStmt
 |       +-column_list=$query.[w#1, y#2, x#3, z#4]
 |       +-expr_list=
 |       | +-w#1 := Literal(type=BOOL, value=false)
-|       | +-y#2 := Literal(type=STRING, value="abc")
+|       | +-y#2 := Literal(type=STRING, value='abc')
 |       | +-x#3 := ArgumentRef(type=INT64, name="x")
 |       | +-z#4 := Literal(type=INT64, value=42)
 |       +-input_scan=
@@ -860,7 +860,7 @@ CreateTableFunctionStmt
 |       | +-x#1 :=
 |       | | +-Cast(INT64 -> INT32)
 |       | |   +-ArgumentRef(type=INT64, name="x")
-|       | +-y#2 := Literal(type=STRING, value="abc")
+|       | +-y#2 := Literal(type=STRING, value='abc')
 |       +-input_scan=
 |         +-SingleRowScan
 +-output_column_list=
@@ -899,7 +899,7 @@ CreateTableFunctionStmt
 |       | +-x#1 :=
 |       | | +-Cast(INT64 -> INT32)
 |       | |   +-ArgumentRef(type=INT64, name="x")
-|       | +-y#2 := Literal(type=STRING, value="abc")
+|       | +-y#2 := Literal(type=STRING, value='abc')
 |       | +-z#3 := Literal(type=INT64, value=42)
 |       +-input_scan=
 |         +-SingleRowScan
@@ -935,7 +935,7 @@ CreateTableFunctionStmt
 |     +-ProjectScan
 |       +-column_list=$query.[y#1, x#2]
 |       +-expr_list=
-|       | +-y#1 := Literal(type=STRING, value="abc")
+|       | +-y#1 := Literal(type=STRING, value='abc')
 |       | +-x#2 :=
 |       |   +-Cast(INT64 -> INT32)
 |       |     +-ArgumentRef(type=INT64, name="x")
@@ -1295,7 +1295,7 @@ CreateTableFunctionStmt
 |   |       +-column_list=t.[a#1, b#2]
 |   |       +-expr_list=
 |   |       | +-a#1 := Literal(type=INT64, value=1)
-|   |       | +-b#2 := Literal(type=STRING, value="abc")
+|   |       | +-b#2 := Literal(type=STRING, value='abc')
 |   |       +-input_scan=
 |   |         +-SingleRowScan
 |   +-query=
@@ -1356,8 +1356,8 @@ CreateTableFunctionStmt
 +-signature=(STRING s) -> TABLE<x STRING>
 +-has_explicit_return_schema=TRUE
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
-| +-bruce := Literal(type=STRING, value="lee")
+| +-a := Literal(type=STRING, value='b')
+| +-bruce := Literal(type=STRING, value='lee')
 +-language="testlang"
 +-code="return 'a';"
 ==
@@ -1375,15 +1375,15 @@ CreateTableFunctionStmt
 +-signature=(STRING s) -> TABLE<x STRING>
 +-has_explicit_return_schema=TRUE
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
-| +-bruce := Literal(type=STRING, value="lee")
+| +-a := Literal(type=STRING, value='b')
+| +-bruce := Literal(type=STRING, value='lee')
 +-language="SQL"
 +-code='select "abc" as x'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#1]
 |   +-expr_list=
-|   | +-x#1 := Literal(type=STRING, value="abc")
+|   | +-x#1 := Literal(type=STRING, value='abc')
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
@@ -1415,14 +1415,14 @@ CreateTableFunctionStmt
 +-signature=(STRING s) -> TABLE<x STRING>
 +-has_explicit_return_schema=TRUE
 +-option_list=
-| +-a := Literal(type=STRING, value="s")
+| +-a := Literal(type=STRING, value='s')
 +-language="SQL"
 +-code='select "abc" as x'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#1]
 |   +-expr_list=
-|   | +-x#1 := Literal(type=STRING, value="abc")
+|   | +-x#1 := Literal(type=STRING, value='abc')
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
@@ -2412,7 +2412,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=[$query.x#1]
 |   +-expr_list=
-|   | +-x#1 := Literal(type=STRING, value="abc")
+|   | +-x#1 := Literal(type=STRING, value='abc')
 |   +-input_scan=
 |     +-SingleRowScan
 +-output_column_list=
@@ -2894,8 +2894,8 @@ CreateTableFunctionStmt
 |     +-ProjectScan
 |       +-column_list=$query.[x#1, y#2]
 |       +-expr_list=
-|       | +-x#1 := Literal(type=STRING, value="abc")
-|       | +-y#2 := Literal(type=STRING, value="abc")
+|       | +-x#1 := Literal(type=STRING, value='abc')
+|       | +-y#2 := Literal(type=STRING, value='abc')
 |       +-input_scan=
 |         +-SingleRowScan
 +-output_column_list=

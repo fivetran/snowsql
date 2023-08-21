@@ -841,7 +841,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[k#4, m#5]
     |             +-expr_list=
-    |             | +-k#4 := Literal(type=STRING, value="foo")
+    |             | +-k#4 := Literal(type=STRING, value='foo')
     |             | +-m#5 :=
     |             |   +-GetProtoField
     |             |     +-type=ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>

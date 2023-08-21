@@ -137,7 +137,7 @@ QueryStmt
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1.col#1]
     | | |   +-expr_list=
-    | | |   | +-col#1 := Literal(type=STRING, value="b")
+    | | |   | +-col#1 := Literal(type=STRING, value='b')
     | | |   +-input_scan=
     | | |     +-SingleRowScan
     | | +-output_column_list=[$union_all1.col#1]
@@ -172,7 +172,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[$union_all1.col#1]
       | |   +-expr_list=
-      | |   | +-col#1 := Literal(type=STRING, value="b")
+      | |   | +-col#1 := Literal(type=STRING, value='b')
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=[$union_all1.col#1]
@@ -216,7 +216,7 @@ QueryStmt
     | | |   | |   +-type_annotation_map={Collation:"und:binary"}
     | | |   | |   +-Literal(type=STRING, value='b')
     | | |   | |   +-Literal(type=STRING, value="und:binary", preserve_in_literal_remover=TRUE)
-    | | |   | +-a#2 := Literal(type=STRING, value="a")
+    | | |   | +-a#2 := Literal(type=STRING, value='a')
     | | |   +-input_scan=
     | | |     +-SingleRowScan
     | | +-output_column_list=$union_all1.[b#1, a#2]
@@ -263,7 +263,7 @@ QueryStmt
       | |   | |   +-type_annotation_map={Collation:"und:binary"}
       | |   | |   +-Literal(type=STRING, value='b')
       | |   | |   +-Literal(type=STRING, value="und:binary", preserve_in_literal_remover=TRUE)
-      | |   | +-a#2 := Literal(type=STRING, value="a")
+      | |   | +-a#2 := Literal(type=STRING, value='a')
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=$union_all1.[b#1, a#2]

@@ -53,7 +53,7 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-hint_list=
     | +-other_qual.int32_hint := Literal(type=INT32, value=100)
-    | +-other_qual.anything_else := Literal(type=STRING, value="abc")
+    | +-other_qual.anything_else := Literal(type=STRING, value='abc')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -162,8 +162,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-hint_list=
     | +-qual.int32_hint := Literal(type=INT32, value=123)
-    | +-string_hint := Literal(type=STRING, value="abc")
-    | +-string_hint := Literal(type=STRING, value="def")
+    | +-string_hint := Literal(type=STRING, value='abc')
+    | +-string_hint := Literal(type=STRING, value='def')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -218,8 +218,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-hint_list=
     | +-untyped_hint := Literal(type=INT64, value=1)
-    | +-qual.untyped_hint := Literal(type=STRING, value="abc")
-    | +-untyped_hint := Literal(type=STRING, value="def")
+    | +-qual.untyped_hint := Literal(type=STRING, value='abc')
+    | +-untyped_hint := Literal(type=STRING, value='def')
     | +-untyped_hint := Literal(type=ARRAY<INT64>, value=[1, 2])
     | +-untyped_hint := Literal(type=INT64, value=NULL)
     +-input_scan=
@@ -683,7 +683,7 @@ as select 1 x
 ExportDataStmt
 +-option_list=
 | +-untyped_option := Literal(type=INT64, value=123)
-| +-untyped_option := Literal(type=STRING, value="abc")
+| +-untyped_option := Literal(type=STRING, value='abc')
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=

@@ -4,8 +4,8 @@ as select * from KeyValue
 --
 ExportDataStmt
 +-option_list=
-| +-format := Literal(type=STRING, value="sstable")
-| +-filename := Literal(type=STRING, value="/tmp/file.ss")
+| +-format := Literal(type=STRING, value='sstable')
+| +-filename := Literal(type=STRING, value='/tmp/file.ss')
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
@@ -40,7 +40,7 @@ select * from t3 where key=5
 --
 ExportDataStmt
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-output_column_list=
 | +-t3.key#7 AS key [INT64]
 +-query=
@@ -286,8 +286,8 @@ ExportDataStmt
 +-connection=
 | +-Connection(connection=connection1)
 +-option_list=
-| +-format := Literal(type=STRING, value="sstable")
-| +-filename := Literal(type=STRING, value="/tmp/file.ss")
+| +-format := Literal(type=STRING, value='sstable')
+| +-filename := Literal(type=STRING, value='/tmp/file.ss')
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]

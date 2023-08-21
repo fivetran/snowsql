@@ -340,7 +340,7 @@ QueryStmt
         |           +-ProjectScan
         |             +-column_list=$expr_subquery.[a#2, t1#3]
         |             +-expr_list=
-        |             | +-a#2 := Literal(type=STRING, value="x")
+        |             | +-a#2 := Literal(type=STRING, value='x')
         |             | +-t1#3 := Literal(type=DOUBLE, value=2)
         |             +-input_scan=
         |               +-SingleRowScan
@@ -399,7 +399,7 @@ QueryStmt
         |           +-ProjectScan
         |             +-column_list=$expr_subquery.[a#2, t1#3]
         |             +-expr_list=
-        |             | +-a#2 := Literal(type=STRING, value="x")
+        |             | +-a#2 := Literal(type=STRING, value='x')
         |             | +-t1#3 := Literal(type=INT64, value=2)
         |             +-input_scan=
         |               +-SingleRowScan
@@ -747,7 +747,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$array_offset.key#5, TestTable.key#1, $query.$col3#6, TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.d#4, $array_offset.key#5]
     +-expr_list=
-    | +-$col3#6 := Literal(type=STRING, value="--")
+    | +-$col3#6 := Literal(type=STRING, value='--')
     +-input_scan=
       +-ArrayScan
         +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.d#4, $array_offset.key#5]

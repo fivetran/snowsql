@@ -111,7 +111,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="a")
+    |             | +-input#2 := Literal(type=STRING, value='a')
     |             | +-patterns#3 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(3) STRING) -> ARRAY<STRING>)
     |             |     +-Literal(type=STRING, value='a')
@@ -209,7 +209,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="a")
+    |             | +-input#2 := Literal(type=STRING, value='a')
     |             | +-patterns#3 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(3) STRING) -> ARRAY<STRING>)
     |             |     +-Literal(type=STRING, value='a')
@@ -335,7 +335,7 @@ QueryStmt
     |             +-ProjectScan
     |               +-column_list=$subquery1.[input#2, patterns#3]
     |               +-expr_list=
-    |               | +-input#2 := Literal(type=STRING, value="abc")
+    |               | +-input#2 := Literal(type=STRING, value='abc')
     |               | +-patterns#3 :=
     |               |   +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRING) -> ARRAY<STRING>)
     |               |     +-Literal(type=STRING, value='abc')
@@ -443,7 +443,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#4, patterns#5]
     |             +-expr_list=
-    |             | +-input#4 := Literal(type=STRING, value="Value1")
+    |             | +-input#4 := Literal(type=STRING, value='Value1')
     |             | +-patterns#5 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-ColumnRef(type=STRING, column=KeyValue.Value#2, is_correlated=TRUE)
@@ -541,7 +541,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#4, patterns#5]
     |             +-expr_list=
-    |             | +-input#4 := Literal(type=STRING, value="Value1")
+    |             | +-input#4 := Literal(type=STRING, value='Value1')
     |             | +-patterns#5 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-ColumnRef(type=STRING, column=KeyValue.Value#2, is_correlated=TRUE)
@@ -944,7 +944,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="a")
+    |             | +-input#2 := Literal(type=STRING, value='a')
     |             | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
     |             +-input_scan=
     |               +-SingleRowScan
@@ -1036,7 +1036,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="a")
+    |             | +-input#2 := Literal(type=STRING, value='a')
     |             | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
     |             +-input_scan=
     |               +-SingleRowScan
@@ -1138,7 +1138,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#4, patterns#5]
     |             +-expr_list=
-    |             | +-input#4 := Literal(type=STRING, value="Value1")
+    |             | +-input#4 := Literal(type=STRING, value='Value1')
     |             | +-patterns#5 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-ColumnRef(type=STRING, column=KeyValue.Value#2, is_correlated=TRUE)
@@ -1237,7 +1237,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#4, patterns#5]
     |             +-expr_list=
-    |             | +-input#4 := Literal(type=STRING, value="Value1")
+    |             | +-input#4 := Literal(type=STRING, value='Value1')
     |             | +-patterns#5 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-ColumnRef(type=STRING, column=KeyValue.Value#2, is_correlated=TRUE)
@@ -1340,7 +1340,7 @@ QueryStmt
     |             +-ProjectScan
     |               +-column_list=$subquery1.[input#2, patterns#3]
     |               +-expr_list=
-    |               | +-input#2 := Literal(type=STRING, value="a")
+    |               | +-input#2 := Literal(type=STRING, value='a')
     |               | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
     |               +-input_scan=
     |                 +-SingleRowScan
@@ -1434,7 +1434,7 @@ QueryStmt
     |             +-ProjectScan
     |               +-column_list=$subquery1.[input#2, patterns#3]
     |               +-expr_list=
-    |               | +-input#2 := Literal(type=STRING, value="a")
+    |               | +-input#2 := Literal(type=STRING, value='a')
     |               | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
     |               +-input_scan=
     |                 +-SingleRowScan
@@ -1728,7 +1728,7 @@ QueryStmt
     |         +-ProjectScan
     |           +-column_list=[$expr_subquery.$col1#1]
     |           +-expr_list=
-    |           | +-$col1#1 := Literal(type=STRING, value="a")
+    |           | +-$col1#1 := Literal(type=STRING, value='a')
     |           +-input_scan=
     |             +-SingleRowScan
     +-input_scan=
@@ -1802,7 +1802,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#3, patterns#4]
     |             +-expr_list=
-    |             | +-input#3 := Literal(type=STRING, value="a")
+    |             | +-input#3 := Literal(type=STRING, value='a')
     |             | +-patterns#4 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRING) -> ARRAY<STRING>)
     |             |     +-SubqueryExpr
@@ -1812,7 +1812,7 @@ QueryStmt
     |             |         +-ProjectScan
     |             |           +-column_list=[$expr_subquery.$col1#1]
     |             |           +-expr_list=
-    |             |           | +-$col1#1 := Literal(type=STRING, value="a")
+    |             |           | +-$col1#1 := Literal(type=STRING, value='a')
     |             |           +-input_scan=
     |             |             +-SingleRowScan
     |             +-input_scan=
@@ -1839,7 +1839,7 @@ QueryStmt
     |         +-ProjectScan
     |           +-column_list=[$expr_subquery.$col1#1]
     |           +-expr_list=
-    |           | +-$col1#1 := Literal(type=STRING, value="a")
+    |           | +-$col1#1 := Literal(type=STRING, value='a')
     |           +-input_scan=
     |             +-SingleRowScan
     +-input_scan=
@@ -1914,7 +1914,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#3, patterns#4]
     |             +-expr_list=
-    |             | +-input#3 := Literal(type=STRING, value="a")
+    |             | +-input#3 := Literal(type=STRING, value='a')
     |             | +-patterns#4 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRING) -> ARRAY<STRING>)
     |             |     +-SubqueryExpr
@@ -1924,7 +1924,7 @@ QueryStmt
     |             |         +-ProjectScan
     |             |           +-column_list=[$expr_subquery.$col1#1]
     |             |           +-expr_list=
-    |             |           | +-$col1#1 := Literal(type=STRING, value="a")
+    |             |           | +-$col1#1 := Literal(type=STRING, value='a')
     |             |           +-input_scan=
     |             |             +-SingleRowScan
     |             +-input_scan=
@@ -2205,7 +2205,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[$expr_subquery.$col1#1]
     |             +-expr_list=
-    |             | +-$col1#1 := Literal(type=STRING, value="b")
+    |             | +-$col1#1 := Literal(type=STRING, value='b')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -2280,7 +2280,7 @@ QueryStmt
     |             +-ProjectScan
     |               +-column_list=$subquery1.[input#3, patterns#4]
     |               +-expr_list=
-    |               | +-input#3 := Literal(type=STRING, value="a")
+    |               | +-input#3 := Literal(type=STRING, value='a')
     |               | +-patterns#4 :=
     |               |   +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRING) -> ARRAY<STRING>)
     |               |     +-SubqueryExpr
@@ -2290,7 +2290,7 @@ QueryStmt
     |               |         +-ProjectScan
     |               |           +-column_list=[$expr_subquery.$col1#1]
     |               |           +-expr_list=
-    |               |           | +-$col1#1 := Literal(type=STRING, value="b")
+    |               |           | +-$col1#1 := Literal(type=STRING, value='b')
     |               |           +-input_scan=
     |               |             +-SingleRowScan
     |               +-input_scan=
@@ -2345,7 +2345,7 @@ QueryStmt
     |     |   +-ProjectScan
     |     |     +-column_list=[$expr_subquery.$col1#1]
     |     |     +-expr_list=
-    |     |     | +-$col1#1 := Literal(type=STRING, value="a")
+    |     |     | +-$col1#1 := Literal(type=STRING, value='a')
     |     |     +-input_scan=
     |     |       +-SingleRowScan
     |     +-SubqueryExpr
@@ -2355,7 +2355,7 @@ QueryStmt
     |         +-ProjectScan
     |           +-column_list=[$expr_subquery.$col1#2]
     |           +-expr_list=
-    |           | +-$col1#2 := Literal(type=STRING, value="b")
+    |           | +-$col1#2 := Literal(type=STRING, value='b')
     |           +-input_scan=
     |             +-SingleRowScan
     +-input_scan=
@@ -2429,7 +2429,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#4, patterns#5]
     |             +-expr_list=
-    |             | +-input#4 := Literal(type=STRING, value="a")
+    |             | +-input#4 := Literal(type=STRING, value='a')
     |             | +-patterns#5 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-SubqueryExpr
@@ -2439,7 +2439,7 @@ QueryStmt
     |             |     |   +-ProjectScan
     |             |     |     +-column_list=[$expr_subquery.$col1#1]
     |             |     |     +-expr_list=
-    |             |     |     | +-$col1#1 := Literal(type=STRING, value="a")
+    |             |     |     | +-$col1#1 := Literal(type=STRING, value='a')
     |             |     |     +-input_scan=
     |             |     |       +-SingleRowScan
     |             |     +-SubqueryExpr
@@ -2449,7 +2449,7 @@ QueryStmt
     |             |         +-ProjectScan
     |             |           +-column_list=[$expr_subquery.$col1#2]
     |             |           +-expr_list=
-    |             |           | +-$col1#2 := Literal(type=STRING, value="b")
+    |             |           | +-$col1#2 := Literal(type=STRING, value='b')
     |             |           +-input_scan=
     |             |             +-SingleRowScan
     |             +-input_scan=
@@ -2476,7 +2476,7 @@ QueryStmt
     |     |   +-ProjectScan
     |     |     +-column_list=[$expr_subquery.$col1#1]
     |     |     +-expr_list=
-    |     |     | +-$col1#1 := Literal(type=STRING, value="a")
+    |     |     | +-$col1#1 := Literal(type=STRING, value='a')
     |     |     +-input_scan=
     |     |       +-SingleRowScan
     |     +-SubqueryExpr
@@ -2486,7 +2486,7 @@ QueryStmt
     |         +-ProjectScan
     |           +-column_list=[$expr_subquery.$col1#2]
     |           +-expr_list=
-    |           | +-$col1#2 := Literal(type=STRING, value="b")
+    |           | +-$col1#2 := Literal(type=STRING, value='b')
     |           +-input_scan=
     |             +-SingleRowScan
     +-input_scan=
@@ -2561,7 +2561,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#4, patterns#5]
     |             +-expr_list=
-    |             | +-input#4 := Literal(type=STRING, value="a")
+    |             | +-input#4 := Literal(type=STRING, value='a')
     |             | +-patterns#5 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-SubqueryExpr
@@ -2571,7 +2571,7 @@ QueryStmt
     |             |     |   +-ProjectScan
     |             |     |     +-column_list=[$expr_subquery.$col1#1]
     |             |     |     +-expr_list=
-    |             |     |     | +-$col1#1 := Literal(type=STRING, value="a")
+    |             |     |     | +-$col1#1 := Literal(type=STRING, value='a')
     |             |     |     +-input_scan=
     |             |     |       +-SingleRowScan
     |             |     +-SubqueryExpr
@@ -2581,7 +2581,7 @@ QueryStmt
     |             |         +-ProjectScan
     |             |           +-column_list=[$expr_subquery.$col1#2]
     |             |           +-expr_list=
-    |             |           | +-$col1#2 := Literal(type=STRING, value="b")
+    |             |           | +-$col1#2 := Literal(type=STRING, value='b')
     |             |           +-input_scan=
     |             |             +-SingleRowScan
     |             +-input_scan=
@@ -3166,7 +3166,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="Google")
+    |             | +-input#2 := Literal(type=STRING, value='Google')
     |             | +-patterns#3 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-type_annotation_map=[{Collation:"und:ci"}]
@@ -3387,7 +3387,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="Google")
+    |             | +-input#2 := Literal(type=STRING, value='Google')
     |             | +-patterns#3 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-type_annotation_map=[{Collation:"und:ci"}]
@@ -3617,7 +3617,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
-    |             | +-input#2 := Literal(type=STRING, value="a")
+    |             | +-input#2 := Literal(type=STRING, value='a')
     |             | +-patterns#3 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |             |     +-type_annotation_map=[{Collation:"und:ci"}]

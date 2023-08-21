@@ -9,7 +9,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
-    +-column="value"
+    +-column='value'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -24,7 +24,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
-    +-column="ValuE"
+    +-column='ValuE'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -38,7 +38,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
-    +-column="value"
+    +-column='value'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -53,7 +53,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-AlterColumnSetDefaultAction
-|   +-column="key"
+|   +-column='key'
 |   +-default_value=
 |     +-ColumnDefaultValue
 |       +-expression=
@@ -68,7 +68,7 @@ AlterTableStmt
 +-name_path=not_a_table
 +-alter_action_list=
 | +-AlterColumnSetDefaultAction
-|   +-column="key"
+|   +-column='key'
 |   +-default_value=
 |     +-ColumnDefaultValue
 |       +-expression=
@@ -87,23 +87,23 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
-  | +-column="key"
+  | +-column='key'
   | +-default_value=
   |   +-ColumnDefaultValue
   |     +-expression=
   |     | +-Literal(type=INT64, value=666)
   |     +-sql="666"
   +-AlterColumnSetDefaultAction
-  | +-column="value"
+  | +-column='value'
   | +-default_value=
   |   +-ColumnDefaultValue
   |     +-expression=
   |     | +-Literal(type=STRING, value='abc')
   |     +-sql="'abc'"
   +-AlterColumnOptionsAction
-    +-column="key"
+    +-column='key'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 ==
 
 # Alter column if exists set default
@@ -114,7 +114,7 @@ AlterTableStmt
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
     +-is_if_exists=TRUE
-    +-column="key"
+    +-column='key'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -129,7 +129,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
-    +-column="value"
+    +-column='value'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -155,7 +155,7 @@ AlterTableStmt
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
     +-is_if_exists=TRUE
-    +-column="non_exist_column"
+    +-column='non_exist_column'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -219,7 +219,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDefaultAction
-    +-column="value"
+    +-column='value'
     +-default_value=
       +-ColumnDefaultValue
         +-expression=
@@ -310,9 +310,9 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnOptionsAction
-  | +-column="key"
+  | +-column='key'
   | +-option_list=
-  |   +-description := Literal(type=STRING, value="new description")
+  |   +-description := Literal(type=STRING, value='new description')
   +-AlterColumnDropDefaultAction(column="key")
 ==
 

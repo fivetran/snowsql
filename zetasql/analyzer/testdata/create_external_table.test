@@ -7,7 +7,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-option_list=
   +-x := Literal(type=INT64, value=5)
-  +-y := Literal(type=STRING, value="abc")
+  +-y := Literal(type=STRING, value='abc')
   +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
 ==
 
@@ -114,7 +114,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Literal(type=ARRAY<STRING>, value=["uri", "uri2"])
 +-column_definition_list=
   +-ColumnDefinition
@@ -123,7 +123,7 @@ CreateExternalTableStmt
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |     +-description := Literal(type=STRING, value="integer field")
+  | |     +-description := Literal(type=STRING, value='integer field')
   | +-column=a.b.c.T.x#1
   +-ColumnDefinition(name="y", type=STRING, column=a.b.c.T.y#2)
 ==
@@ -161,7 +161,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Literal(type=ARRAY<STRING>, value=["uri", "uri2"])
 +-column_definition_list=
 | +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
@@ -199,7 +199,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Literal(type=ARRAY<STRING>, value=["uri", "uri2"])
 +-column_definition_list=
 | +-ColumnDefinition(name="first", type=INT64, column=a.b.c.T.first#1)
@@ -217,7 +217,7 @@ ALTERNATION GROUP: <empty>
 CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-column_definition_list=
   +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
 --
@@ -227,7 +227,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-column_definition_list=
   +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
 --
@@ -239,7 +239,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-create_scope=CREATE_TEMP
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-column_definition_list=
   +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
 --
@@ -252,7 +252,7 @@ CreateExternalTableStmt
 +-create_scope=CREATE_TEMP
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-column_definition_list=
   +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
 --
@@ -262,7 +262,7 @@ CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-create_mode=CREATE_OR_REPLACE
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-column_definition_list=
   +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
 --
@@ -281,7 +281,7 @@ CreateExternalTableStmt
 +-create_scope=CREATE_TEMP
 +-create_mode=CREATE_OR_REPLACE
 +-option_list=
-| +-a := Literal(type=STRING, value="b")
+| +-a := Literal(type=STRING, value='b')
 +-column_definition_list=
   +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
 --
@@ -511,7 +511,7 @@ options (x=foo)
 CreateExternalTableStmt
 +-name_path=projectid.datasetid.tablename
 +-option_list=
-| +-x := Literal(type=STRING, value="foo")
+| +-x := Literal(type=STRING, value='foo')
 +-column_definition_list=
 | +-ColumnDefinition(name="x", type=INT64, column=projectid.datasetid.tablename.x#1)
 +-connection=
@@ -542,7 +542,7 @@ options (x=bar)
 CreateExternalTableStmt
 +-name_path=projectid.datasetid.tablename
 +-option_list=
-| +-x := Literal(type=STRING, value="bar")
+| +-x := Literal(type=STRING, value='bar')
 +-column_definition_list=
 | +-ColumnDefinition(name="x", type=INT64, column=projectid.datasetid.tablename.x#1)
 +-connection=
@@ -564,7 +564,7 @@ options (x=baz)
 CreateExternalTableStmt
 +-name_path=t
 +-option_list=
-| +-x := Literal(type=STRING, value="baz")
+| +-x := Literal(type=STRING, value='baz')
 +-column_definition_list=
 | +-ColumnDefinition(name="x", type=INT64, column=t.x#1)
 +-connection=
@@ -588,7 +588,7 @@ options (x=baz)
 CreateExternalTableStmt
 +-name_path=t
 +-option_list=
-| +-x := Literal(type=STRING, value="baz")
+| +-x := Literal(type=STRING, value='baz')
 +-column_definition_list=
 | +-ColumnDefinition(name="x", type=INT64, column=t.x#1)
 +-connection=

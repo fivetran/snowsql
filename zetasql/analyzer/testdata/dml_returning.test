@@ -1290,7 +1290,7 @@ InsertStmt
 |   | +-KeyValue.Key#1 AS Key [INT64]
 |   | +-KeyValue.value#3 AS value [STRING]
 |   +-expr_list=
-|     +-value#3 := Literal(type=STRING, value="xxx")
+|     +-value#3 := Literal(type=STRING, value='xxx')
 +-insert_column_list=KeyValue.[Key#1, Value#2]
 +-row_list=
 | +-InsertRow
@@ -1317,7 +1317,7 @@ InsertStmt
 |   | +-KeyValue.value#3 AS value [STRING]
 |   | +-KeyValue.$col2#4 AS "$col2" [INT64]
 |   +-expr_list=
-|     +-value#3 := Literal(type=STRING, value="xxx")
+|     +-value#3 := Literal(type=STRING, value='xxx')
 |     +-$col2#4 :=
 |       +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 |         +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -1449,7 +1449,7 @@ InsertStmt
 |   +-output_column_list=
 |   | +-KeyValue.value#3 AS value [STRING]
 |   +-expr_list=
-|     +-value#3 := Literal(type=STRING, value="xxx")
+|     +-value#3 := Literal(type=STRING, value='xxx')
 +-insert_column_list=KeyValue.[Key#1, Value#2]
 +-row_list=
 | +-InsertRow
@@ -1562,7 +1562,7 @@ UpdateStmt
 |   +-output_column_list=
 |   | +-KeyValue.value#3 AS value [STRING]
 |   +-expr_list=
-|     +-value#3 := Literal(type=STRING, value="xxx")
+|     +-value#3 := Literal(type=STRING, value='xxx')
 +-where_expr=
 | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)

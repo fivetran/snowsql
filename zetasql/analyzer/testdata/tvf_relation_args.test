@@ -362,7 +362,7 @@ QueryStmt
         |   |   | +-column_float#5 := Literal(type=FLOAT, value=42, has_explicit_type=TRUE)
         |   |   | +-column_double#6 := Literal(type=DOUBLE, value=42, has_explicit_type=TRUE)
         |   |   | +-column_bytes#7 := Literal(type=BYTES, value=b"", has_explicit_type=TRUE)
-        |   |   | +-column_string#8 := Literal(type=STRING, value="")
+        |   |   | +-column_string#8 := Literal(type=STRING, value='')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=$subquery1.[column_int32#1, column_int64#2, column_uint32#3, column_uint64#4, column_float#5, column_double#6, column_bytes#7, column_string#8]
@@ -545,7 +545,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[tvf_two_relation_args_return_proto_value_table.$col0#5, $query.$col2#6, $query.int32_val1#7, $query.$col4#8, $query.int32_val1#9, $query.$col6#10, $query.int32_val1#11, $query.int32_val2#12, $query.str_value#13, $query.$col8#14, $query.int32_val1#15, $query.int32_val2#16, $query.str_value#17]
     +-expr_list=
-    | +-$col2#6 := Literal(type=STRING, value="--")
+    | +-$col2#6 := Literal(type=STRING, value='--')
     | +-int32_val1#7 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -553,7 +553,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=tvf_two_relation_args_return_proto_value_table.$col0#5)
     | |   +-field_descriptor=int32_val1
     | |   +-default_value=0
-    | +-$col4#8 := Literal(type=STRING, value="--")
+    | +-$col4#8 := Literal(type=STRING, value='--')
     | +-int32_val1#9 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -561,7 +561,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=tvf_two_relation_args_return_proto_value_table.$col0#5)
     | |   +-field_descriptor=int32_val1
     | |   +-default_value=0
-    | +-$col6#10 := Literal(type=STRING, value="--")
+    | +-$col6#10 := Literal(type=STRING, value='--')
     | +-int32_val1#11 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -583,7 +583,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=tvf_two_relation_args_return_proto_value_table.$col0#5)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col8#14 := Literal(type=STRING, value="--")
+    | +-$col8#14 := Literal(type=STRING, value='--')
     | +-int32_val1#15 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1116,7 +1116,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.int32_val1#9, $query.$col2#12, tvf_one_relation_arg_output_schema_is_input_schema.int32_val1#9]
     +-expr_list=
-    | +-$col2#12 := Literal(type=STRING, value="--")
+    | +-$col2#12 := Literal(type=STRING, value='--')
     +-input_scan=
       +-TVFScan
         +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.int32_val1#9]
@@ -1907,7 +1907,7 @@ QueryStmt
         |   |   +-column_list=[$subquery1.bool#19, SimpleTypes.bytes#6, SimpleTypes.date#10, SimpleTypes.double#9, SimpleTypes.float#8, SimpleTypes.int32#1, SimpleTypes.int64#2, $subquery1.string#20, SimpleTypes.timestamp#15, SimpleTypes.uint32#3, SimpleTypes.uint64#4]
         |   |   +-expr_list=
         |   |   | +-bool#19 := Literal(type=BOOL, value=true)
-        |   |   | +-string#20 := Literal(type=STRING, value="abc")
+        |   |   | +-string#20 := Literal(type=STRING, value='abc')
         |   |   +-input_scan=
         |   |     +-TableScan(column_list=SimpleTypes.[int32#1, int64#2, uint32#3, uint64#4, bytes#6, float#8, double#9, date#10, timestamp#15], table=SimpleTypes, column_index_list=[0, 1, 2, 3, 5, 7, 8, 9, 14])
         |   +-argument_column_list=[$subquery1.bool#19, SimpleTypes.bytes#6, SimpleTypes.date#10, SimpleTypes.double#9, SimpleTypes.float#8, SimpleTypes.int32#1, SimpleTypes.int64#2, $subquery1.string#20, SimpleTypes.timestamp#15, SimpleTypes.uint32#3, SimpleTypes.uint64#4]
@@ -3203,7 +3203,7 @@ QueryStmt
       +-TVFScan
         +-column_list=tvf_one_relation_arg_with_fixed_output.[column_bool#2, column_bytes#3]
         +-hint_list=
-        | +-key := Literal(type=STRING, value="value")
+        | +-key := Literal(type=STRING, value='value')
         +-tvf=tvf_one_relation_arg_with_fixed_output((ANY TABLE) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(TABLE<bool_column BOOL>) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
@@ -4481,7 +4481,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[tvf_two_relation_args_return_proto_value_table.$col0#7, $query.$col2#8, $query.int32_val1#9, $query.$col4#10, $query.int32_val1#11, $query.$col6#12, $query.int32_val1#13, $query.int32_val2#14, $query.str_value#15, $query.$col8#16, $query.int32_val1#17, $query.int32_val2#18, $query.str_value#19]
     +-expr_list=
-    | +-$col2#8 := Literal(type=STRING, value="--")
+    | +-$col2#8 := Literal(type=STRING, value='--')
     | +-int32_val1#9 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -4489,7 +4489,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=tvf_two_relation_args_return_proto_value_table.$col0#7)
     | |   +-field_descriptor=int32_val1
     | |   +-default_value=0
-    | +-$col4#10 := Literal(type=STRING, value="--")
+    | +-$col4#10 := Literal(type=STRING, value='--')
     | +-int32_val1#11 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -4497,7 +4497,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=tvf_two_relation_args_return_proto_value_table.$col0#7)
     | |   +-field_descriptor=int32_val1
     | |   +-default_value=0
-    | +-$col6#12 := Literal(type=STRING, value="--")
+    | +-$col6#12 := Literal(type=STRING, value='--')
     | +-int32_val1#13 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -4519,7 +4519,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=tvf_two_relation_args_return_proto_value_table.$col0#7)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col8#16 := Literal(type=STRING, value="--")
+    | +-$col8#16 := Literal(type=STRING, value='--')
     | +-int32_val1#17 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -5797,7 +5797,7 @@ QueryStmt
         |   |   +-column_list=$subquery1.[y#1, z#2]
         |   |   +-expr_list=
         |   |   | +-y#1 := Literal(type=INT64, value=3)
-        |   |   | +-z#2 := Literal(type=STRING, value="4")
+        |   |   | +-z#2 := Literal(type=STRING, value='4')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=$subquery1.[y#1, z#2]
@@ -6115,7 +6115,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.$col1#1]
         | | |   +-expr_list=
-        | | |   | +-$col1#1 := Literal(type=STRING, value="a")
+        | | |   | +-$col1#1 := Literal(type=STRING, value='a')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.$col1#1]
@@ -6128,7 +6128,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[$expr_subquery.$col1#2]
         |           +-expr_list=
-        |           | +-$col1#2 := Literal(type=STRING, value="b")
+        |           | +-$col1#2 := Literal(type=STRING, value='b')
         |           +-input_scan=
         |             +-SingleRowScan
         +-column_index_list=[0, 1]
@@ -6159,7 +6159,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.$col1#1]
         | | |   +-expr_list=
-        | | |   | +-$col1#1 := Literal(type=STRING, value="a")
+        | | |   | +-$col1#1 := Literal(type=STRING, value='a')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.$col1#1]
@@ -6197,7 +6197,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.$col1#1]
         | | |   +-expr_list=
-        | | |   | +-$col1#1 := Literal(type=STRING, value="1")
+        | | |   | +-$col1#1 := Literal(type=STRING, value='1')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.$col1#1]
@@ -6206,7 +6206,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery2.$col1#2]
         | | |   +-expr_list=
-        | | |   | +-$col1#2 := Literal(type=STRING, value="2")
+        | | |   | +-$col1#2 := Literal(type=STRING, value='2')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery2.$col1#2]
@@ -6215,7 +6215,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery3.$col1#3]
         | | |   +-expr_list=
-        | | |   | +-$col1#3 := Literal(type=STRING, value="3")
+        | | |   | +-$col1#3 := Literal(type=STRING, value='3')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery3.$col1#3]
@@ -6224,7 +6224,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$subquery4.$col1#4]
         |   |   +-expr_list=
-        |   |   | +-$col1#4 := Literal(type=STRING, value="4")
+        |   |   | +-$col1#4 := Literal(type=STRING, value='4')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery4.$col1#4]
@@ -6260,7 +6260,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.$col1#1]
         | | |   +-expr_list=
-        | | |   | +-$col1#1 := Literal(type=STRING, value="1")
+        | | |   | +-$col1#1 := Literal(type=STRING, value='1')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.$col1#1]
@@ -6269,7 +6269,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery4.$col1#4]
         | | |   +-expr_list=
-        | | |   | +-$col1#4 := Literal(type=STRING, value="2")
+        | | |   | +-$col1#4 := Literal(type=STRING, value='2')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery4.$col1#4]
@@ -6278,7 +6278,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery3.$col1#3]
         | | |   +-expr_list=
-        | | |   | +-$col1#3 := Literal(type=STRING, value="3")
+        | | |   | +-$col1#3 := Literal(type=STRING, value='3')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery3.$col1#3]
@@ -6287,7 +6287,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$subquery2.$col1#2]
         |   |   +-expr_list=
-        |   |   | +-$col1#2 := Literal(type=STRING, value="4")
+        |   |   | +-$col1#2 := Literal(type=STRING, value='4')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery2.$col1#2]
@@ -6764,7 +6764,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=[$subquery1.mydate#1]
         |   |       +-expr_list=
-        |   |       | +-mydate#1 := Literal(type=STRING, value="2016-01-01")
+        |   |       | +-mydate#1 := Literal(type=STRING, value='2016-01-01')
         |   |       +-input_scan=
         |   |         +-SingleRowScan
         |   +-argument_column_list=[$subquery2.mydate#2]
@@ -6802,7 +6802,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=[$subquery1.mydate#1]
         |   |       +-expr_list=
-        |   |       | +-mydate#1 := Literal(type=STRING, value="2016-01-01@abcdefg")
+        |   |       | +-mydate#1 := Literal(type=STRING, value='2016-01-01@abcdefg')
         |   |       +-input_scan=
         |   |         +-SingleRowScan
         |   +-argument_column_list=[$subquery2.mydate#2]
@@ -6843,7 +6843,7 @@ QueryStmt
         |   |         +-ProjectScan
         |   |           +-column_list=[$subquery2.mydate#1]
         |   |           +-expr_list=
-        |   |           | +-mydate#1 := Literal(type=STRING, value="2016-01-01")
+        |   |           | +-mydate#1 := Literal(type=STRING, value='2016-01-01')
         |   |           +-input_scan=
         |   |             +-SingleRowScan
         |   +-argument_column_list=[$subquery3.mydate#2]
@@ -7178,7 +7178,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=[$subquery1.key#1]
         |   |       +-expr_list=
-        |   |       | +-key#1 := Literal(type=STRING, value="a")
+        |   |       | +-key#1 := Literal(type=STRING, value='a')
         |   |       +-input_scan=
         |   |         +-SingleRowScan
         |   +-argument_column_list=[$subquery2.key#2]

@@ -1667,7 +1667,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$subquery1.a#1, $subquery1.b#2, $query.foo#4]
         |   +-expr_list=
-        |   | +-foo#4 := Literal(type=STRING, value="a")
+        |   | +-foo#4 := Literal(type=STRING, value='a')
         |   +-input_scan=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1711,7 +1711,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$subquery1.a#1, $subquery1.b#2, $query.foo#4]
         |   +-expr_list=
-        |   | +-foo#4 := Literal(type=STRING, value="a")
+        |   | +-foo#4 := Literal(type=STRING, value='a')
         |   +-input_scan=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]

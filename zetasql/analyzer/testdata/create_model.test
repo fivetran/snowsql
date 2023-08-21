@@ -155,7 +155,7 @@ ALTERNATION GROUP: V_1_4_REMOTE_MODEL,
 CreateModelStmt
 +-name_path=t1
 +-option_list=
-  +-abc := Literal(type=STRING, value="def")
+  +-abc := Literal(type=STRING, value='def')
 --
 ALTERNATION GROUP: <empty>
 --
@@ -311,9 +311,9 @@ CreateModelStmt
 +-create_scope=CREATE_TEMP
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-z := Literal(type=STRING, value='abc')
 | +-sum :=
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-Literal(type=INT64, value=1)
@@ -722,7 +722,7 @@ CreateModelStmt
 +-name_path=X
 +-create_scope=CREATE_TEMP
 +-option_list=
-| +-k := Literal(type=STRING, value="key")
+| +-k := Literal(type=STRING, value='key')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Value#2 AS value [STRING]
@@ -805,7 +805,7 @@ CreateModelStmt
 +-name_path=x.y
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-option_list=
-| +-x := Literal(type=STRING, value="y")
+| +-x := Literal(type=STRING, value='y')
 +-output_column_list=
 | +-$create_as.a#1 AS a [INT64]
 | +-$create_as.b#2 AS b [INT64]
@@ -850,7 +850,7 @@ CreateModelStmt
     | |     +-column_list=t1.[label#1, value#2]
     | |     +-expr_list=
     | |     | +-label#1 := Literal(type=INT64, value=1)
-    | |     | +-value#2 := Literal(type=STRING, value="2")
+    | |     | +-value#2 := Literal(type=STRING, value='2')
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
@@ -953,7 +953,7 @@ options (abc = def)
 CreateModelStmt
 +-name_path=t1
 +-option_list=
-| +-abc := Literal(type=STRING, value="def")
+| +-abc := Literal(type=STRING, value='def')
 +-input_column_definition_list=
 | +-ColumnDefinition(name="i1", type=INT64, column=t1.i1#1)
 | +-ColumnDefinition(name="i2", type=DOUBLE, column=t1.i2#2)
@@ -991,7 +991,7 @@ AS SELECT COLLATE('5', 'und:ci') e;
 CreateModelStmt
 +-name_path=m
 +-option_list=
-| +-model_type := Literal(type=STRING, value="logistic_reg")
+| +-model_type := Literal(type=STRING, value='logistic_reg')
 +-output_column_list=
 | +-$create_as.e#1{Collation:"und:ci"} AS e [STRING]
 +-query=

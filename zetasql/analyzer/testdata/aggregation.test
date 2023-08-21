@@ -172,7 +172,7 @@ QueryStmt
 [no_enable_literal_replacement]
 select concat(cast(key as string), '.', value)
 from KeyValue
-group by Concat(CAST(key as STRING), ".", value)
+group by Concat(CAST(key as STRING), '.', value)
 --
 QueryStmt
 +-output_column_list=
@@ -2202,7 +2202,7 @@ QueryStmt
         +-element_column=$array.k#4
 ==
 
-select key, string_agg(value, 'a'), string_agg(cast(value as bytes), b'b')
+select key, string_agg(value, 'a'), string_agg(cast(value as bytes), b"b")
 from KeyValue group by key
 --
 QueryStmt
@@ -2229,7 +2229,7 @@ QueryStmt
             +-AggregateFunctionCall(ZetaSQL:string_agg(BYTES, BYTES) -> BYTES)
               +-Cast(STRING -> BYTES)
               | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-              +-Literal(type=BYTES, value=b'b')
+              +-Literal(type=BYTES, value=b"b")
 ==
 
 select key, string_agg(value, null)
@@ -6698,7 +6698,7 @@ QueryStmt
         |     | +-type=JSON
         |     | +-expr=
         |     | | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-        |     | +-field_name="c"
+        |     | +-field_name='c'
         |     +-Literal(type=STRING, value='$')
         +-aggregate_list=
           +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)

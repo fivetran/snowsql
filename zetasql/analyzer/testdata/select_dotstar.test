@@ -212,7 +212,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[t.c1#7, t.c2#8, $query.$col2#9, t.c1#7, $query.$field1#10, $query.$field2#11, $query.$col5#12, t.c2#8, $query.a#13, $query.b#14]
     +-expr_list=
-    | +-$col2#9 := Literal(type=STRING, value="---")
+    | +-$col2#9 := Literal(type=STRING, value='---')
     | +-$field1#10 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -225,7 +225,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<INT64, INT64>, column=t.c1#7)
     | |   +-field_idx=1
-    | +-$col5#12 := Literal(type=STRING, value="---")
+    | +-$col5#12 := Literal(type=STRING, value='---')
     | +-a#13 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -426,7 +426,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=$preproject.$struct#4)
     | |   +-field_idx=1
-    | +-$col2#10 := Literal(type=STRING, value="---")
+    | +-$col2#10 := Literal(type=STRING, value='---')
     | +-int32_val1#11 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1248,7 +1248,7 @@ QueryStmt
     |       +-column_list=my_table.[primary_key#1, value#2, modified_date#3]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-modified_date#3 :=
     |       |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |       |     +-Literal(type=TIMESTAMP, value=2016-11-09 08:00:00+00)
@@ -1332,7 +1332,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1392,7 +1392,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1476,7 +1476,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1547,7 +1547,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1619,7 +1619,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1699,7 +1699,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1784,7 +1784,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1897,7 +1897,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="a")
+    |       | +-value#2 := Literal(type=STRING, value='a')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -1977,7 +1977,7 @@ QueryStmt
     |       +-column_list=my_table.[key#1, value#2]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="a")
+    |       | +-value#2 := Literal(type=STRING, value='a')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -2071,7 +2071,7 @@ QueryStmt
     |       +-column_list=my_table.[primary_key#1, value#2]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -2150,7 +2150,7 @@ QueryStmt
     |       +-column_list=my_table.[primary_key#1, value#2, bool_val#3]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_val#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -2276,7 +2276,7 @@ QueryStmt
     |       +-column_list=my_table.[primary_key#1, value#2, modified_date#3]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-modified_date#3 :=
     |       |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |       |     +-Literal(type=TIMESTAMP, value=2016-11-09 08:00:00+00)
@@ -2382,7 +2382,7 @@ QueryStmt
     |         | |   +-column_list=$union_all1.[primary_key#1, value#2, modified_date#3]
     |         | |   +-expr_list=
     |         | |   | +-primary_key#1 := Literal(type=INT64, value=1)
-    |         | |   | +-value#2 := Literal(type=STRING, value="foo")
+    |         | |   | +-value#2 := Literal(type=STRING, value='foo')
     |         | |   | +-modified_date#3 :=
     |         | |   |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |         | |   |     +-Literal(type=TIMESTAMP, value=2016-11-09 08:00:00+00)
@@ -2395,7 +2395,7 @@ QueryStmt
     |         | |   +-column_list=$union_all2.[$col1#4, $col2#5, $col3#6]
     |         | |   +-expr_list=
     |         | |   | +-$col1#4 := Literal(type=INT64, value=1)
-    |         | |   | +-$col2#5 := Literal(type=STRING, value="bar")
+    |         | |   | +-$col2#5 := Literal(type=STRING, value='bar')
     |         | |   | +-$col3#6 :=
     |         | |   |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |         | |   |     +-Literal(type=TIMESTAMP, value=2016-11-10 08:00:00+00)
@@ -2408,7 +2408,7 @@ QueryStmt
     |           |   +-column_list=$union_all3.[$col1#7, $col2#8, $col3#9]
     |           |   +-expr_list=
     |           |   | +-$col1#7 := Literal(type=INT64, value=2)
-    |           |   | +-$col2#8 := Literal(type=STRING, value="baz")
+    |           |   | +-$col2#8 := Literal(type=STRING, value='baz')
     |           |   | +-$col3#9 :=
     |           |   |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |           |   |     +-Literal(type=TIMESTAMP, value=2016-01-01 08:00:00+00)
@@ -2508,7 +2508,7 @@ QueryStmt
         |   |   +-column_list=t.[key#1, value#2]
         |   |   +-expr_list=
         |   |   | +-key#1 := Literal(type=INT64, value=1)
-        |   |   | +-value#2 := Literal(type=STRING, value="a")
+        |   |   | +-value#2 := Literal(type=STRING, value='a')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-group_by_list=
@@ -2548,7 +2548,7 @@ QueryStmt
     |   |   +-column_list=t.[key#1, value#2]
     |   |   +-expr_list=
     |   |   | +-key#1 := Literal(type=INT64, value=1)
-    |   |   | +-value#2 := Literal(type=STRING, value="a")
+    |   |   | +-value#2 := Literal(type=STRING, value='a')
     |   |   +-input_scan=
     |   |     +-SingleRowScan
     |   +-function_group_list=
@@ -2626,7 +2626,7 @@ QueryStmt
     |   |           |   +-column_list=t.[key#1, value#2]
     |   |           |   +-expr_list=
     |   |           |   | +-key#1 := Literal(type=INT64, value=1)
-    |   |           |   | +-value#2 := Literal(type=STRING, value="a")
+    |   |           |   | +-value#2 := Literal(type=STRING, value='a')
     |   |           |   +-input_scan=
     |   |           |     +-SingleRowScan
     |   |           +-group_by_list=
@@ -2817,7 +2817,7 @@ QueryStmt
     |       +-column_list=Candidate_RowPartitions.[CompressedRowPartition#1, ResourcePath#2, ResourceModifiedTimestamp#3]
     |       +-expr_list=
     |       | +-CompressedRowPartition#1 := Literal(type=BYTES, value=b"x")
-    |       | +-ResourcePath#2 := Literal(type=STRING, value="a")
+    |       | +-ResourcePath#2 := Literal(type=STRING, value='a')
     |       | +-ResourceModifiedTimestamp#3 := Literal(type=TIMESTAMP, value=2017-01-01 08:00:00+00, has_explicit_type=TRUE)
     |       +-input_scan=
     |         +-SingleRowScan

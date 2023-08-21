@@ -39,7 +39,7 @@ QueryStmt
     |     +-type=JSON
     |     +-expr=
     |     | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     +-field_name="field"
+    |     +-field_name='field'
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
@@ -61,8 +61,8 @@ QueryStmt
     |     |   +-type=JSON
     |     |   +-expr=
     |     |   | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     |   +-field_name="field"
-    |     +-field_name="field2"
+    |     |   +-field_name='field'
+    |     +-field_name='field2'
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
@@ -81,7 +81,7 @@ QueryStmt
     |     +-type=JSON
     |     +-expr=
     |     | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     +-field_name="\"foo'bar[ ?@#\\123_baz"
+    |     +-field_name='\'foo'bar[ ?@#\\123_baz"
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
@@ -100,7 +100,7 @@ QueryStmt
     |     +-type=JSON
     |     +-expr=
     |     | +-ColumnRef(type=JSON, column=$array.json_val#18)
-    |     +-field_name="field"
+    |     +-field_name='field'
     +-input_scan=
       +-ArrayScan
         +-column_list=[ArrayTypes.JsonArray#17, $array.json_val#18]

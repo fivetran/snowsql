@@ -101,7 +101,7 @@ QueryStmt
     | +-$col5#23 :=
     | | +-Cast(BOOL -> UINT64)
     | |   +-ColumnRef(type=BOOL, column=SimpleTypes.bool#7)
-    | +-separator#24 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#24 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col7#25 :=
     | | +-Cast(STRING -> BOOL)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
@@ -167,7 +167,7 @@ QueryStmt
     | +-$col6#24 :=
     | | +-Cast(DOUBLE -> STRING)
     | |   +-ColumnRef(type=DOUBLE, column=SimpleTypes.double#9)
-    | +-separator#25 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#25 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col8#26 :=
     | | +-Cast(STRING -> INT32)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
@@ -1129,17 +1129,17 @@ QueryStmt
     | +-$col2#20 :=
     | | +-Cast(TIMESTAMP -> STRING)
     | |   +-ColumnRef(type=TIMESTAMP, column=SimpleTypes.timestamp#15)
-    | +-separator#21 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#21 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col4#22 :=
     | | +-Cast(STRING -> DATE)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     | +-$col5#23 :=
     | | +-Cast(STRING -> TIMESTAMP)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-    | +-separator2#24 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator2#24 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col7#25 := Literal(type=STRING, value="2012-02-29 01:23:45-08", has_explicit_type=TRUE)
     | +-$col8#26 := Literal(type=STRING, value="2012-02-29", has_explicit_type=TRUE)
-    | +-separator3#27 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator3#27 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col10#28 := Literal(type=DATE, value=2012-02-29, has_explicit_type=TRUE)
     | +-$col11#29 := Literal(type=TIMESTAMP, value=2012-02-29 09:23:45+00, has_explicit_type=TRUE)
     +-input_scan=
@@ -1184,7 +1184,7 @@ QueryStmt
     | | +-Cast(TIMESTAMP -> STRING)
     | |   +-ColumnRef(type=TIMESTAMP, column=SimpleTypes.timestamp#15)
     | |   +-return_null_on_error=TRUE
-    | +-separator#21 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#21 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col4#22 :=
     | | +-Cast(STRING -> DATE)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
@@ -1193,10 +1193,10 @@ QueryStmt
     | | +-Cast(STRING -> TIMESTAMP)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     | |   +-return_null_on_error=TRUE
-    | +-separator2#24 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator2#24 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col7#25 := Literal(type=STRING, value="2012-02-29 01:23:45-08", has_explicit_type=TRUE)
     | +-$col8#26 := Literal(type=STRING, value="2012-02-29", has_explicit_type=TRUE)
-    | +-separator3#27 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator3#27 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col10#28 := Literal(type=DATE, value=2012-02-29, has_explicit_type=TRUE)
     | +-$col11#29 := Literal(type=TIMESTAMP, value=2012-02-29 09:23:45+00, has_explicit_type=TRUE)
     +-input_scan=
@@ -2571,7 +2571,7 @@ QueryStmt
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=uint64_val
     | |     +-default_value=0
-    | +-separator#8 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#8 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col6#9 :=
     | | +-Cast(ENUM<zetasql_test__.TestEnum> -> INT32)
     | |   +-GetProtoField
@@ -2670,7 +2670,7 @@ QueryStmt
     | |     +-field_descriptor=uint64_val
     | |     +-default_value=0
     | |   +-return_null_on_error=TRUE
-    | +-separator#8 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#8 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col6#9 :=
     | | +-Cast(ENUM<zetasql_test__.TestEnum> -> INT32)
     | |   +-GetProtoField
@@ -5632,7 +5632,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="a")
+    | +-$col1#1 := Literal(type=STRING, value='a')
     | +-$col2#2 := Literal(type=STRING, value="b", has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan

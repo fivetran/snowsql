@@ -98,7 +98,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="abc")
+    | +-$col1#1 := Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -117,7 +117,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$subquery1.T#1]
         +-expr_list=
-        | +-T#1 := Literal(type=STRING, value="S")
+        | +-T#1 := Literal(type=STRING, value='S')
         +-input_scan=
           +-SingleRowScan
 ==

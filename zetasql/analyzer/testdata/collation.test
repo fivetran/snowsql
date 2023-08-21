@@ -554,7 +554,7 @@ QueryStmt
     |       |   |     | | +-ProjectScan
     |       |   |     | |   +-column_list=[$union_all1.n#1]
     |       |   |     | |   +-expr_list=
-    |       |   |     | |   | +-n#1 := Literal(type=STRING, value="1")
+    |       |   |     | |   | +-n#1 := Literal(type=STRING, value='1')
     |       |   |     | |   +-input_scan=
     |       |   |     | |     +-SingleRowScan
     |       |   |     | +-output_column_list=[$union_all1.n#1]
@@ -576,7 +576,7 @@ QueryStmt
     |       |   |       | +-ProjectScan
     |       |   |       |   +-column_list=[$union_all3.n#3]
     |       |   |       |   +-expr_list=
-    |       |   |       |   | +-n#3 := Literal(type=STRING, value="3")
+    |       |   |       |   | +-n#3 := Literal(type=STRING, value='3')
     |       |   |       |   +-input_scan=
     |       |   |       |     +-SingleRowScan
     |       |   |       +-output_column_list=[$union_all3.n#3]
@@ -1559,7 +1559,7 @@ QueryStmt
         +-column_list=$query.[$col1#5, $col2#6, $col3#7]
         +-expr_list=
         | +-$col1#5 := Literal(type=INT64, value=1)
-        | +-$col2#6 := Literal(type=STRING, value="abc")
+        | +-$col2#6 := Literal(type=STRING, value='abc')
         | +-$col3#7 :=
         |   +-MakeStruct
         |     +-type=STRUCT<STRING, STRUCT<STRING, STRING>>
@@ -3692,7 +3692,7 @@ QueryStmt
     |   +-column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, CollatedTable.string_binary#2{Collation:"binary"}, CollatedTable.struct_with_string_ci#3<_,{Collation:"und:ci"}>, $query.$col1#5, $query.$col2#6, $query.$col4#7{Collation:"binary"}]
     |   +-expr_list=
     |   | +-$col1#5 := Literal(type=INT64, value=1)
-    |   | +-$col2#6 := Literal(type=STRING, value="abc")
+    |   | +-$col2#6 := Literal(type=STRING, value='abc')
     |   | +-$col4#7 :=
     |   |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |   |     +-type_annotation_map={Collation:"binary"}
@@ -3799,7 +3799,7 @@ QueryStmt
     |   +-column_list=[KeyValue.Key#1, $query.$col1#3, $query.$col2#4, $query.$col3#5]
     |   +-expr_list=
     |   | +-$col1#3 := Literal(type=INT64, value=1)
-    |   | +-$col2#4 := Literal(type=STRING, value="abc")
+    |   | +-$col2#4 := Literal(type=STRING, value='abc')
     |   | +-$col3#5 :=
     |   |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |   |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -4662,7 +4662,7 @@ QueryStmt
         |   +-expr_list=
         |   | +-string_ci#5 := ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
         |   | +-string_binary#6 := ColumnRef(type=STRING, type_annotation_map={Collation:"binary"}, column=CollatedTable.string_binary#2{Collation:"binary"})
-        |   | +-value#7 := Literal(type=STRING, value="abc")
+        |   | +-value#7 := Literal(type=STRING, value='abc')
         |   +-input_scan=
         |     +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2], table=CollatedTable, column_index_list=[0, 1])
         +-group_by_list=
@@ -4712,7 +4712,7 @@ QueryStmt
         |   +-expr_list=
         |   | +-string_ci#5 := ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
         |   | +-string_binary#6 := ColumnRef(type=STRING, type_annotation_map={Collation:"binary"}, column=CollatedTable.string_binary#2{Collation:"binary"})
-        |   | +-value#7 := Literal(type=STRING, value="abc")
+        |   | +-value#7 := Literal(type=STRING, value='abc')
         |   +-input_scan=
         |     +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2], table=CollatedTable, column_index_list=[0, 1])
         +-group_by_list=
@@ -4762,7 +4762,7 @@ QueryStmt
         |   | | +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
         |   | |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"binary"}, column=CollatedTable.string_binary#2{Collation:"binary"})
         |   | |   +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
-        |   | +-value#7 := Literal(type=STRING, value="foo")
+        |   | +-value#7 := Literal(type=STRING, value='foo')
         |   +-input_scan=
         |     +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2], table=CollatedTable, column_index_list=[0, 1])
         +-group_by_list=
@@ -4812,7 +4812,7 @@ QueryStmt
         |       | | +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
         |       | |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"binary"}, column=CollatedTable.string_binary#2{Collation:"binary"})
         |       | |   +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
-        |       | +-value#7 := Literal(type=STRING, value="foo")
+        |       | +-value#7 := Literal(type=STRING, value='foo')
         |       +-input_scan=
         |         +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2], table=CollatedTable, column_index_list=[0, 1])
         +-group_by_list=
@@ -4877,7 +4877,7 @@ QueryStmt
                         +-expr_list=
                         | +-orig_arg#18 := ColumnRef(type=STRING, column=$pivot.$pivot_expr_arg#13, is_correlated=TRUE)
                         | +-pivot_column#19 := ColumnRef(type=STRING, column=$pivot.$pivot_value#12, is_correlated=TRUE)
-                        | +-pivot_value#20 := Literal(type=STRING, value="Value_2")
+                        | +-pivot_value#20 := Literal(type=STRING, value='Value_2')
                         +-input_scan=
                           +-SingleRowScan
               +-distinct=TRUE
@@ -4909,7 +4909,7 @@ QueryStmt
         |   | | +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
         |   | |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"binary"}, column=CollatedTable.string_binary#2{Collation:"binary"})
         |   | |   +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
-        |   | +-value#7 := Literal(type=STRING, value="foo")
+        |   | +-value#7 := Literal(type=STRING, value='foo')
         |   +-input_scan=
         |     +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2], table=CollatedTable, column_index_list=[0, 1])
         +-group_by_list=
@@ -4955,7 +4955,7 @@ QueryStmt
         |       | | +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
         |       | |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"binary"}, column=CollatedTable.string_binary#2{Collation:"binary"})
         |       | |   +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
-        |       | +-value#7 := Literal(type=STRING, value="foo")
+        |       | +-value#7 := Literal(type=STRING, value='foo')
         |       +-input_scan=
         |         +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2], table=CollatedTable, column_index_list=[0, 1])
         +-group_by_list=
@@ -5012,7 +5012,7 @@ QueryStmt
           |             +-expr_list=
           |             | +-orig_arg#14 := ColumnRef(type=STRING, column=$pivot.$pivot_expr_arg#13, is_correlated=TRUE)
           |             | +-pivot_column#15 := ColumnRef(type=STRING, column=$pivot.$pivot_value#12, is_correlated=TRUE)
-          |             | +-pivot_value#16 := Literal(type=STRING, value="Value_1")
+          |             | +-pivot_value#16 := Literal(type=STRING, value='Value_1')
           |             +-input_scan=
           |               +-SingleRowScan
           |   +-distinct=TRUE
@@ -5067,7 +5067,7 @@ QueryStmt
                         +-expr_list=
                         | +-orig_arg#21 := ColumnRef(type=STRING, column=$pivot.$pivot_expr_arg#13, is_correlated=TRUE)
                         | +-pivot_column#22 := ColumnRef(type=STRING, column=$pivot.$pivot_value#12, is_correlated=TRUE)
-                        | +-pivot_value#23 := Literal(type=STRING, value="Value_2")
+                        | +-pivot_value#23 := Literal(type=STRING, value='Value_2')
                         +-input_scan=
                           +-SingleRowScan
               +-distinct=TRUE
@@ -5112,8 +5112,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$union_distinct2.[$col1#5, $col2#6]
         |   +-expr_list=
-        |   | +-$col1#5 := Literal(type=STRING, value="abc")
-        |   | +-$col2#6 := Literal(type=STRING, value="xyz")
+        |   | +-$col1#5 := Literal(type=STRING, value='abc')
+        |   | +-$col2#6 := Literal(type=STRING, value='xyz')
         |   +-input_scan=
         |     +-SingleRowScan
         +-output_column_list=$union_distinct2.[$col1#5, $col2#6]
@@ -5141,8 +5141,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$except_distinct2.[$col1#5, $col2#6]
         |   +-expr_list=
-        |   | +-$col1#5 := Literal(type=STRING, value="abc")
-        |   | +-$col2#6 := Literal(type=STRING, value="xyz")
+        |   | +-$col1#5 := Literal(type=STRING, value='abc')
+        |   | +-$col2#6 := Literal(type=STRING, value='xyz')
         |   +-input_scan=
         |     +-SingleRowScan
         +-output_column_list=$except_distinct2.[$col1#5, $col2#6]
@@ -5170,8 +5170,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$intersect_distinct2.[$col1#5, $col2#6]
         |   +-expr_list=
-        |   | +-$col1#5 := Literal(type=STRING, value="abc")
-        |   | +-$col2#6 := Literal(type=STRING, value="xyz")
+        |   | +-$col1#5 := Literal(type=STRING, value='abc')
+        |   | +-$col2#6 := Literal(type=STRING, value='xyz')
         |   +-input_scan=
         |     +-SingleRowScan
         +-output_column_list=$intersect_distinct2.[$col1#5, $col2#6]
@@ -5204,8 +5204,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$union_all2.[$col1#5, $col2#6]
         |   +-expr_list=
-        |   | +-$col1#5 := Literal(type=STRING, value="abc")
-        |   | +-$col2#6 := Literal(type=STRING, value="xyz")
+        |   | +-$col1#5 := Literal(type=STRING, value='abc')
+        |   | +-$col2#6 := Literal(type=STRING, value='xyz')
         |   +-input_scan=
         |     +-SingleRowScan
         +-output_column_list=$union_all2.[$col1#5, $col2#6]
@@ -5233,8 +5233,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$except_all2.[$col1#5, $col2#6]
         |   +-expr_list=
-        |   | +-$col1#5 := Literal(type=STRING, value="abc")
-        |   | +-$col2#6 := Literal(type=STRING, value="xyz")
+        |   | +-$col1#5 := Literal(type=STRING, value='abc')
+        |   | +-$col2#6 := Literal(type=STRING, value='xyz')
         |   +-input_scan=
         |     +-SingleRowScan
         +-output_column_list=$except_all2.[$col1#5, $col2#6]
@@ -5262,8 +5262,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$intersect_all2.[$col1#5, $col2#6]
         |   +-expr_list=
-        |   | +-$col1#5 := Literal(type=STRING, value="abc")
-        |   | +-$col2#6 := Literal(type=STRING, value="xyz")
+        |   | +-$col1#5 := Literal(type=STRING, value='abc')
+        |   | +-$col2#6 := Literal(type=STRING, value='xyz')
         |   +-input_scan=
         |     +-SingleRowScan
         +-output_column_list=$intersect_all2.[$col1#5, $col2#6]
@@ -5318,7 +5318,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, $union_all1.$col2#5]
       | |   +-expr_list=
-      | |   | +-$col2#5 := Literal(type=STRING, value="abc")
+      | |   | +-$col2#5 := Literal(type=STRING, value='abc')
       | |   +-input_scan=
       | |     +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0])
       | +-output_column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, $union_all1.$col2#5]
@@ -5327,7 +5327,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$union_all2.$col1#10, CollatedTable.string_binary#7{Collation:"binary"}]
         |   +-expr_list=
-        |   | +-$col1#10 := Literal(type=STRING, value="abc")
+        |   | +-$col1#10 := Literal(type=STRING, value='abc')
         |   +-input_scan=
         |     +-TableScan(column_list=[CollatedTable.string_binary#7{Collation:"binary"}], table=CollatedTable, column_index_list=[1])
         +-output_column_list=[$union_all2.$col1#10, CollatedTable.string_binary#7{Collation:"binary"}]
@@ -5371,7 +5371,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$union_all2.$col1#12, ComplexCollatedTable.array_of_struct_ci#7[<_,{Collation:"und:ci"}>]]
         |   +-expr_list=
-        |   | +-$col1#12 := Literal(type=STRING, value="abc")
+        |   | +-$col1#12 := Literal(type=STRING, value='abc')
         |   +-input_scan=
         |     +-TableScan(column_list=[ComplexCollatedTable.array_of_struct_ci#7[<_,{Collation:"und:ci"}>]], table=ComplexCollatedTable, column_index_list=[1])
         +-output_column_list=[$union_all2.$col1#12, ComplexCollatedTable.array_of_struct_ci#7[<_,{Collation:"und:ci"}>]]
@@ -5397,7 +5397,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, $union_all1.$col2#5]
       | |   +-expr_list=
-      | |   | +-$col2#5 := Literal(type=STRING, value="abc")
+      | |   | +-$col2#5 := Literal(type=STRING, value='abc')
       | |   +-input_scan=
       | |     +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0])
       | +-output_column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, $union_all1.$col2#5]
@@ -5406,7 +5406,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[$union_all2.$col1#10, CollatedTable.string_binary#7{Collation:"binary"}]
       | |   +-expr_list=
-      | |   | +-$col1#10 := Literal(type=STRING, value="abc")
+      | |   | +-$col1#10 := Literal(type=STRING, value='abc')
       | |   +-input_scan=
       | |     +-TableScan(column_list=[CollatedTable.string_binary#7{Collation:"binary"}], table=CollatedTable, column_index_list=[1])
       | +-output_column_list=[$union_all2.$col1#10, CollatedTable.string_binary#7{Collation:"binary"}]
@@ -5485,7 +5485,7 @@ CreateTableAsSelectStmt
     +-column_list=$create_as.[$col1#3, $col2#4]
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
-    | +-$col2#4 := Literal(type=STRING, value="abc")
+    | +-$col2#4 := Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -6122,8 +6122,8 @@ CreateSchemaStmt
 +-collation_name=
 | +-Literal(type=STRING, value='und:ci')
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-c := Literal(type=STRING, value="d")
+  +-a := Literal(type=STRING, value='b')
+  +-c := Literal(type=STRING, value='d')
 ==
 
 create table t (a int64, b string collate 'und:cs') default collate cast(null as string);
@@ -8239,7 +8239,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.col_str#1]
         | | |   +-expr_list=
-        | | |   | +-col_str#1 := Literal(type=STRING, value="abc")
+        | | |   | +-col_str#1 := Literal(type=STRING, value='abc')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.col_str#1]
@@ -8643,7 +8643,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$subquery1.a#1]
         |   |   +-expr_list=
-        |   |   | +-a#1 := Literal(type=STRING, value="abc")
+        |   |   | +-a#1 := Literal(type=STRING, value='abc')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.a#1]
@@ -8680,7 +8680,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=[$subquery1.str_field#1]
         |   |       +-expr_list=
-        |   |       | +-str_field#1 := Literal(type=STRING, value="abc")
+        |   |       | +-str_field#1 := Literal(type=STRING, value='abc')
         |   |       +-input_scan=
         |   |         +-SingleRowScan
         |   +-argument_column_list=[$make_struct.$struct#2]

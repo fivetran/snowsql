@@ -1367,7 +1367,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[OneScalarView.ab#1]
         +-expr_list=
-        | +-ab#1 := Literal(type=STRING, value="123")
+        | +-ab#1 := Literal(type=STRING, value='123')
         +-input_scan=
           +-SingleRowScan
 --
@@ -1395,7 +1395,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[AsScalarView.$value_column#1]
         +-expr_list=
-        | +-$value_column#1 := Literal(type=STRING, value="123")
+        | +-$value_column#1 := Literal(type=STRING, value='123')
         +-input_scan=
           +-SingleRowScan
 --
@@ -1439,7 +1439,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[OneScalarView.ab#1]
         +-expr_list=
-        | +-ab#1 := Literal(type=STRING, value="123")
+        | +-ab#1 := Literal(type=STRING, value='123')
         +-input_scan=
           +-SingleRowScan
 --
@@ -1469,7 +1469,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$view.ab#3]
         +-expr_list=
-        | +-ab#3 := Literal(type=STRING, value="123")
+        | +-ab#3 := Literal(type=STRING, value='123')
         +-input_scan=
           +-SingleRowScan
 --
@@ -1499,7 +1499,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$view.$col1#3]
         +-expr_list=
-        | +-$col1#3 := Literal(type=STRING, value="123")
+        | +-$col1#3 := Literal(type=STRING, value='123')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -1709,7 +1709,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=ScanViewView.[a#1, b#2]
         +-expr_list=
-        | +-b#2 := Literal(type=STRING, value="b")
+        | +-b#2 := Literal(type=STRING, value='b')
         +-input_scan=
           +-ProjectScan
             +-column_list=[ScanViewView.a#1, ScanTableView.b#3]
@@ -1752,7 +1752,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=ScanViewView.[a#1, b#2]
         +-expr_list=
-        | +-b#2 := Literal(type=STRING, value="b")
+        | +-b#2 := Literal(type=STRING, value='b')
         +-input_scan=
           +-ProjectScan
             +-column_list=[ScanViewView.a#1, ScanTableView.b#5]
@@ -1783,7 +1783,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=ScanViewView.[a#1, b#2]
         +-expr_list=
-        | +-b#2 := Literal(type=STRING, value="b")
+        | +-b#2 := Literal(type=STRING, value='b')
         +-input_scan=
           +-ProjectScan
             +-column_list=[ScanViewView.a#1, ScanTableView.b#3]
@@ -1812,7 +1812,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[ScanViewView.a#1, $view.b#3]
         +-expr_list=
-        | +-b#3 := Literal(type=STRING, value="b")
+        | +-b#3 := Literal(type=STRING, value='b')
         +-input_scan=
           +-ProjectScan
             +-column_list=[ScanViewView.a#1, ScanTableView.b#4]
@@ -1841,7 +1841,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[ScanTableView.a#3, ScanViewView.b#2]
         +-expr_list=
-        | +-b#2 := Literal(type=STRING, value="b")
+        | +-b#2 := Literal(type=STRING, value='b')
         +-input_scan=
           +-ProjectScan
             +-column_list=ScanTableView.[a#3, b#4]
@@ -1874,7 +1874,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[ScanTableView.a#5, $view.b#4]
         +-expr_list=
-        | +-b#4 := Literal(type=STRING, value="b")
+        | +-b#4 := Literal(type=STRING, value='b')
         +-input_scan=
           +-ProjectScan
             +-column_list=ScanTableView.[a#5, b#6]
@@ -1980,7 +1980,7 @@ QueryStmt
         |   +-column_list=DefinerRightsView.[a#4, b#5, c#6]
         |   +-expr_list=
         |   | +-a#4 := Literal(type=INT64, value=1)
-        |   | +-b#5 := Literal(type=STRING, value="x")
+        |   | +-b#5 := Literal(type=STRING, value='x')
         |   | +-c#6 := Literal(type=BOOL, value=false)
         |   +-input_scan=
         |     +-SingleRowScan
@@ -2036,7 +2036,7 @@ QueryStmt
       +-TableScan
         +-column_list=TwoIntsView.[a#1, b#2]
         +-hint_list=
-        | +-scan_hint := Literal(type=STRING, value="whatever")
+        | +-scan_hint := Literal(type=STRING, value='whatever')
         +-table=TwoIntsView
         +-column_index_list=[0, 1]
         +-alias="v"

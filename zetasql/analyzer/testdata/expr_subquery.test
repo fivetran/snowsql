@@ -65,7 +65,7 @@ QueryStmt
     |       +-ProjectScan
     |         +-column_list=[$expr_subquery.$col1#3]
     |         +-expr_list=
-    |         | +-$col1#3 := Literal(type=STRING, value="ab")
+    |         | +-$col1#3 := Literal(type=STRING, value='ab')
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
@@ -725,8 +725,8 @@ QueryStmt
     |     |         +-ProjectScan
     |     |           +-column_list=$expr_subquery.[c1#1, c2#2]
     |     |           +-expr_list=
-    |     |           | +-c1#1 := Literal(type=STRING, value="abc")
-    |     |           | +-c2#2 := Literal(type=STRING, value="def")
+    |     |           | +-c1#1 := Literal(type=STRING, value='abc')
+    |     |           | +-c2#2 := Literal(type=STRING, value='def')
     |     |           +-input_scan=
     |     |             +-SingleRowScan
     |     +-field_idx=1
@@ -765,8 +765,8 @@ QueryStmt
     |     |   |       +-ProjectScan
     |     |   |         +-column_list=$expr_subquery.[c1#3, c2#4]
     |     |   |         +-expr_list=
-    |     |   |         | +-c1#3 := Literal(type=STRING, value="abc")
-    |     |   |         | +-c2#4 := Literal(type=STRING, value="def")
+    |     |   |         | +-c1#3 := Literal(type=STRING, value='abc')
+    |     |   |         | +-c2#4 := Literal(type=STRING, value='def')
     |     |   |         +-input_scan=
     |     |   |           +-TableScan(table=KeyValue)
     |     |   +-Literal(type=INT64, value=3)
@@ -907,7 +907,7 @@ QueryStmt
     |     |         +-ProjectScan
     |     |           +-column_list=[$expr_subquery.$col1#4, $expr_subquery.x#5, $aggregate.$agg1#3]
     |     |           +-expr_list=
-    |     |           | +-$col1#4 := Literal(type=STRING, value="abc")
+    |     |           | +-$col1#4 := Literal(type=STRING, value='abc')
     |     |           | +-x#5 := Literal(type=INT64, value=1)
     |     |           +-input_scan=
     |     |             +-AggregateScan

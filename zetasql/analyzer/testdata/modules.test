@@ -61,7 +61,7 @@ module a.b options(a=b);
 ModuleStmt
 +-name_path=a.b
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
+  +-a := Literal(type=STRING, value='b')
 ==
 
 # IMPORT tests
@@ -136,7 +136,7 @@ ImportStmt
 +-name_path=foo
 +-alias_path=foo
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
+  +-a := Literal(type=STRING, value='b')
 ==
 
 import module foo as bar options (a=b);
@@ -146,7 +146,7 @@ ImportStmt
 +-name_path=foo
 +-alias_path=bar
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
+  +-a := Literal(type=STRING, value='b')
 ==
 
 import module "string.literal";

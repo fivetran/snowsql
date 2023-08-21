@@ -25,7 +25,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Key"
+    +-column='Key'
     +-updated_type=NUMERIC
     +-updated_type_parameters=(precision=5,scale=1)
     +-updated_annotations=
@@ -42,7 +42,7 @@ AlterTableStmt
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction(column="Key", updated_type=NUMERIC)
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRING
     +-updated_type_parameters=(max_length=42)
     +-updated_annotations=
@@ -68,7 +68,7 @@ AlterTableStmt
 +-name_path=TestStructValueTable
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRUCT<a NUMERIC, b STRING>
     +-updated_type_parameters=[null,(max_length=42)]
     +-updated_annotations=
@@ -86,7 +86,7 @@ AlterTableStmt
 +-name_path=TestStructValueTable
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRUCT<a NUMERIC, b STRING>
     +-updated_type_parameters=[(precision=5,scale=1),null]
     +-updated_annotations=
@@ -103,7 +103,7 @@ AlterTableStmt
 +-name_path=TestStructValueTable
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRUCT<a NUMERIC, b STRING>
     +-updated_type_parameters=[(precision=5,scale=1),(max_length=42)]
     +-updated_annotations=
@@ -121,7 +121,7 @@ AlterTableStmt
 +-name_path=ComplexTypes
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="TestStruct"
+    +-column='TestStruct'
     +-updated_type=STRUCT<c INT32, d STRUCT<a NUMERIC, b STRING>>
     +-updated_type_parameters=[null,[null,(max_length=42)]]
     +-updated_annotations=
@@ -159,7 +159,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRING
     +-updated_type_parameters=(max_length=42)
     +-updated_annotations=
@@ -284,7 +284,7 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRING
     +-updated_annotations=
       +-ColumnAnnotations
@@ -300,7 +300,7 @@ AlterTableStmt
 +-name_path=TestStructValueTable
 +-alter_action_list=
   +-AlterColumnSetDataTypeAction
-    +-column="Value"
+    +-column='Value'
     +-updated_type=STRUCT<a NUMERIC, b STRING>
     +-updated_annotations=
       +-ColumnAnnotations

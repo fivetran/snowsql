@@ -453,7 +453,7 @@ QueryStmt
     |               +-column_list=$expr_subquery.[int_field#1, string_field#2]
     |               +-expr_list=
     |               | +-int_field#1 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
-    |               | +-string_field#2 := Literal(type=STRING, value="abc")
+    |               | +-string_field#2 := Literal(type=STRING, value='abc')
     |               +-input_scan=
     |                 +-SingleRowScan
     +-input_scan=
@@ -499,7 +499,7 @@ QueryStmt
     |               +-column_list=$expr_subquery.[int_field#1, string_field#2]
     |               +-expr_list=
     |               | +-int_field#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    |               | +-string_field#2 := Literal(type=STRING, value="abc")
+    |               | +-string_field#2 := Literal(type=STRING, value='abc')
     |               +-input_scan=
     |                 +-SingleRowScan
     +-input_scan=

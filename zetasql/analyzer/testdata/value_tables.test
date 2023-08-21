@@ -1132,8 +1132,8 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=a.[x#1, y#2]
         |   +-expr_list=
-        |   | +-x#1 := Literal(type=STRING, value="x")
-        |   | +-y#2 := Literal(type=STRING, value="y")
+        |   | +-x#1 := Literal(type=STRING, value='x')
+        |   | +-y#2 := Literal(type=STRING, value='y')
         |   +-input_scan=
         |     +-SingleRowScan
         +-right_scan=
@@ -1279,7 +1279,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$subquery1.[xxx#2, a#3]
         |   +-expr_list=
-        |   | +-xxx#2 := Literal(type=STRING, value="xxx")
+        |   | +-xxx#2 := Literal(type=STRING, value='xxx')
         |   | +-a#3 := Literal(type=INT64, value=15)
         |   +-input_scan=
         |     +-SingleRowScan
@@ -1337,7 +1337,7 @@ QueryStmt
         +-column_list=$query.[value#1, key#2]
         +-expr_list=
         | +-value#1 := Literal(type=INT64, value=17)
-        | +-key#2 := Literal(type=STRING, value="k")
+        | +-key#2 := Literal(type=STRING, value='k')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -1442,7 +1442,7 @@ QueryStmt
         +-column_list=t.[value#1, key#2]
         +-expr_list=
         | +-value#1 := Literal(type=INT64, value=17)
-        | +-key#2 := Literal(type=STRING, value="k")
+        | +-key#2 := Literal(type=STRING, value='k')
         +-input_scan=
           +-SingleRowScan
 --
@@ -1486,7 +1486,7 @@ QueryStmt
             +-column_list=t.[value#1, key#2]
             +-expr_list=
             | +-value#1 := Literal(type=INT64, value=17)
-            | +-key#2 := Literal(type=STRING, value="k")
+            | +-key#2 := Literal(type=STRING, value='k')
             +-input_scan=
               +-SingleRowScan
 ==
@@ -1676,7 +1676,7 @@ QueryStmt
     |     | |       +-column_list=$union_all1.[value#1, key#2]
     |     | |       +-expr_list=
     |     | |       | +-value#1 := Literal(type=INT64, value=17)
-    |     | |       | +-key#2 := Literal(type=STRING, value="k")
+    |     | |       | +-key#2 := Literal(type=STRING, value='k')
     |     | |       +-input_scan=
     |     | |         +-SingleRowScan
     |     | +-output_column_list=[$make_proto.$proto#3]
@@ -1694,7 +1694,7 @@ QueryStmt
     |       |     +-ProjectScan
     |       |       +-column_list=[$union_all2.key#7]
     |       |       +-expr_list=
-    |       |       | +-key#7 := Literal(type=STRING, value="abc")
+    |       |       | +-key#7 := Literal(type=STRING, value='abc')
     |       |       +-input_scan=
     |       |         +-TableScan(table=TestTable)
     |       +-output_column_list=[$make_proto.$proto#8]

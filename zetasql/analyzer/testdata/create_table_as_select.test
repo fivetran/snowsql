@@ -145,9 +145,9 @@ CreateTableAsSelectStmt
 +-create_scope=CREATE_TEMP
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 | +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-z := Literal(type=STRING, value='abc')
 | +-sum :=
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-Literal(type=INT64, value=1)
@@ -231,7 +231,7 @@ CreateTableAsSelectStmt
 +-name_path=X
 +-create_scope=CREATE_TEMP
 +-option_list=
-| +-k := Literal(type=STRING, value="key")
+| +-k := Literal(type=STRING, value='key')
 +-column_definition_list=
 | +-ColumnDefinition(name="key", type=INT64, column=X.key#3)
 +-output_column_list=
@@ -409,7 +409,7 @@ CreateTableAsSelectStmt
 +-name_path=x.y
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-option_list=
-| +-x := Literal(type=STRING, value="y")
+| +-x := Literal(type=STRING, value='y')
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=x.y.a#2)
 +-output_column_list=
@@ -843,7 +843,7 @@ CreateTableAsSelectStmt
     +-column_list=$create_as.[x#3, y#4]
     +-expr_list=
     | +-x#3 := Literal(type=INT64, value=1)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -875,7 +875,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#3, $create_as.y#4, KeyValue.Key#1, KeyValue.Value#2]
     +-expr_list=
     | +-a#3 := Literal(type=INT64, value=1)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -908,7 +908,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#3, $create_as.y#4, KeyValue.Key#1, KeyValue.Value#2]
     +-expr_list=
     | +-a#3 := Literal(type=INT64, value=1)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -969,7 +969,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#3, $create_as.y#4, KeyValue.Key#1, KeyValue.Value#2]
     +-expr_list=
     | +-a#3 := Literal(type=INT64, value=1)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -1002,7 +1002,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#3, $create_as.y#4, KeyValue.Key#1, KeyValue.Value#2]
     +-expr_list=
     | +-a#3 := Literal(type=INT64, value=1)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -1043,7 +1043,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#7, $create_as.y#8, KeyValue.Key#5, KeyValue.Value#6]
     +-expr_list=
     | +-a#7 := Literal(type=INT64, value=1)
-    | +-y#8 := Literal(type=STRING, value="foo")
+    | +-y#8 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -1077,7 +1077,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#3, $create_as.y#4, KeyValue.Key#1, KeyValue.Value#2]
     +-expr_list=
     | +-a#3 := Literal(type=INT64, value=1)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -1122,7 +1122,7 @@ CreateTableAsSelectStmt
     | | +-FunctionCall(ZetaSQL:st_geogpoint(DOUBLE, DOUBLE) -> GEOGRAPHY)
     | |   +-Literal(type=DOUBLE, value=1)
     | |   +-Literal(type=DOUBLE, value=3)
-    | +-y#4 := Literal(type=STRING, value="foo")
+    | +-y#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -1140,7 +1140,7 @@ select key, (key, value), struct<>() from KeyValue
 CreateTableAsSelectStmt
 +-name_path=t1
 +-option_list=
-| +-key := Literal(type=STRING, value="value")
+| +-key := Literal(type=STRING, value='value')
 +-column_definition_list=
 | +-ColumnDefinition
 | | +-name="c1"
@@ -1306,7 +1306,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#3, $create_as.b#4, KeyValue.Key#1]
     +-expr_list=
     | +-a#3 := Literal(type=INT64, value=1)
-    | +-b#4 := Literal(type=STRING, value="foo")
+    | +-b#4 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -1403,7 +1403,7 @@ CreateTableAsSelectStmt
     +-column_list=[$create_as.a#6, $create_as.b#7, KeyValue.Key#4]
     +-expr_list=
     | +-a#6 := Literal(type=INT64, value=1)
-    | +-b#7 := Literal(type=STRING, value="foo")
+    | +-b#7 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=[KeyValue.Key#4], table=KeyValue, column_index_list=[0])
 ==
@@ -1547,7 +1547,7 @@ CreateTableAsSelectStmt
 +-name_path=tt
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
 +-column_definition_list=
 | +-ColumnDefinition(name="a", type=INT64, column=tt.a#3)
 | +-ColumnDefinition(name="b", type=INT64, column=tt.b#4)

@@ -303,8 +303,8 @@ CreateFunctionStmt
 +-function_expression=
 | +-Literal(type=INT64, value=42)
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-bruce := Literal(type=STRING, value="lee")
+  +-a := Literal(type=STRING, value='b')
+  +-bruce := Literal(type=STRING, value='lee')
 ==
 
 # Function with options that tries to reference a function parameter.
@@ -329,7 +329,7 @@ CreateFunctionStmt
 +-function_expression=
 | +-Literal(type=INT64, value=42)
 +-option_list=
-  +-a := Literal(type=STRING, value="a")
+  +-a := Literal(type=STRING, value='a')
 ==
 
 # SQL expression without enclosing parentheses.

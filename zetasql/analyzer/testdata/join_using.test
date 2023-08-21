@@ -125,7 +125,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $query.$col2#5, KeyValue.Key#3, KeyValue.Value#4]
     +-expr_list=
-    | +-$col2#5 := Literal(type=STRING, value="---")
+    | +-$col2#5 := Literal(type=STRING, value='---')
     +-input_scan=
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
@@ -292,8 +292,8 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$full_join.key#6, $full_join.value#5, KeyValue.Key#1, KeyValue.Key#3, $query.$col5#7, KeyValue.Key#1, KeyValue.Value#2, $query.$col7#8, $full_join.value#5, $full_join.key#6]
     +-expr_list=
-    | +-$col5#7 := Literal(type=STRING, value="--")
-    | +-$col7#8 := Literal(type=STRING, value="--")
+    | +-$col5#7 := Literal(type=STRING, value='--')
+    | +-$col7#8 := Literal(type=STRING, value='--')
     +-input_scan=
       +-ProjectScan
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue.Key#3, KeyValue.Value#4, $full_join.value#5, $full_join.key#6]
@@ -572,10 +572,10 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=q1.[a1#1, a2#2, a3#3, a4#4]
         |   +-expr_list=
-        |   | +-a1#1 := Literal(type=STRING, value="abc")
+        |   | +-a1#1 := Literal(type=STRING, value='abc')
         |   | +-a2#2 := Literal(type=INT64, value=123)
         |   | +-a3#3 := Literal(type=INT64, value=456)
-        |   | +-a4#4 := Literal(type=STRING, value="def")
+        |   | +-a4#4 := Literal(type=STRING, value='def')
         |   +-input_scan=
         |     +-SingleRowScan
         +-right_scan=
@@ -584,10 +584,10 @@ QueryStmt
         |   +-expr_list=
         |   | +-a3#5 := Literal(type=INT64, value=333)
         |   | +-$col2#6 := Literal(type=INT64, value=17)
-        |   | +-$col3#7 := Literal(type=STRING, value="xxx")
-        |   | +-a1#8 := Literal(type=STRING, value="aaa")
-        |   | +-a2#9 := Literal(type=STRING, value="def")
-        |   | +-a4#10 := Literal(type=STRING, value="z")
+        |   | +-$col3#7 := Literal(type=STRING, value='xxx')
+        |   | +-a1#8 := Literal(type=STRING, value='aaa')
+        |   | +-a2#9 := Literal(type=STRING, value='def')
+        |   | +-a4#10 := Literal(type=STRING, value='z')
         |   +-input_scan=
         |     +-SingleRowScan
         +-join_expr=
@@ -675,10 +675,10 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue.Value#4, KeyValue.Value#6, $query.$col2#7, KeyValue.Key#1, KeyValue.Value#2, $query.$col4#8, KeyValue.Key#3, KeyValue.Value#4, $query.$col6#9, KeyValue.Key#5, KeyValue.Value#6, $query.$col8#10, KeyValue.Key#1]
     +-expr_list=
-    | +-$col2#7 := Literal(type=STRING, value="--")
-    | +-$col4#8 := Literal(type=STRING, value="--")
-    | +-$col6#9 := Literal(type=STRING, value="--")
-    | +-$col8#10 := Literal(type=STRING, value="--")
+    | +-$col2#7 := Literal(type=STRING, value='--')
+    | +-$col4#8 := Literal(type=STRING, value='--')
+    | +-$col6#9 := Literal(type=STRING, value='--')
+    | +-$col8#10 := Literal(type=STRING, value='--')
     +-input_scan=
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4, Key#5, Value#6]
@@ -848,9 +848,9 @@ QueryStmt
     | |   +-field_list=
     | |     +-ColumnRef(type=STRING, column=lhs.xxx#1)
     | |     +-ColumnRef(type=INT64, column=lhs.int32_val1#2)
-    | +-$col3#9 := Literal(type=STRING, value="--")
-    | +-$col5#10 := Literal(type=STRING, value="--")
-    | +-$col7#11 := Literal(type=STRING, value="--")
+    | +-$col3#9 := Literal(type=STRING, value='--')
+    | +-$col5#10 := Literal(type=STRING, value='--')
+    | +-$col7#11 := Literal(type=STRING, value='--')
     | +-int32_val1#12 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -872,7 +872,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#3)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col9#15 := Literal(type=STRING, value="--")
+    | +-$col9#15 := Literal(type=STRING, value='--')
     | +-int32_val2#16 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -894,7 +894,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=lhs.[xxx#1, int32_val1#2]
         |   +-expr_list=
-        |   | +-xxx#1 := Literal(type=STRING, value="xxx")
+        |   | +-xxx#1 := Literal(type=STRING, value='xxx')
         |   | +-int32_val1#2 := Literal(type=INT64, value=15)
         |   +-input_scan=
         |     +-SingleRowScan
@@ -1128,7 +1128,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestExtraValueTable.value#1, TestExtraValueTable.value#4, $query.$col3#10, $query.int32_val1#11, $query.int32_val2#12, $query.str_value#13, $query.$col5#14, $query.int32_val1#15, $query.int32_val2#16, $query.str_value#17, $query.$col7#18, $full_join.int32_val1#9, $query.int32_val2#19, $query.str_value#20, $query.int32_val2#21, $query.str_value#22]
     +-expr_list=
-    | +-$col3#10 := Literal(type=STRING, value="--")
+    | +-$col3#10 := Literal(type=STRING, value='--')
     | +-int32_val1#11 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1150,7 +1150,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#1)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col5#14 := Literal(type=STRING, value="--")
+    | +-$col5#14 := Literal(type=STRING, value='--')
     | +-int32_val1#15 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1172,7 +1172,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#4)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col7#18 := Literal(type=STRING, value="--")
+    | +-$col7#18 := Literal(type=STRING, value='--')
     | +-int32_val2#19 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1524,7 +1524,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#4)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-separator1#13 := Literal(type=STRING, value="----------------------------")
+    | +-separator1#13 := Literal(type=STRING, value='----------------------------')
     | +-int32_val1#14 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1546,7 +1546,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#1)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-separator2#17 := Literal(type=STRING, value="----------------------------")
+    | +-separator2#17 := Literal(type=STRING, value='----------------------------')
     | +-int32_val1#18 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1568,7 +1568,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#4)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-separator3#21 := Literal(type=STRING, value="----------------------------")
+    | +-separator3#21 := Literal(type=STRING, value='----------------------------')
     | +-int32_val1#22 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1815,8 +1815,8 @@ QueryStmt
     | |     +-ColumnRef(type=INT64, column=t2.x#2)
     | |     +-ColumnRef(type=INT64, column=t2.t1#3)
     | |     +-ColumnRef(type=INT64, column=t2.y#4)
-    | +-$col3#7 := Literal(type=STRING, value="--")
-    | +-$col5#8 := Literal(type=STRING, value="--")
+    | +-$col3#7 := Literal(type=STRING, value='--')
+    | +-$col5#8 := Literal(type=STRING, value='--')
     +-input_scan=
       +-JoinScan
         +-column_list=[Int32ValueTable.value#1, t2.x#2, t2.t1#3, t2.y#4]
@@ -1856,7 +1856,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$array.t1#1, $array.t2#5, $query.$col3#7, $array.t1#1, $query.a#8]
     +-expr_list=
-    | +-$col3#7 := Literal(type=STRING, value="--")
+    | +-$col3#7 := Literal(type=STRING, value='--')
     | +-a#8 :=
     |   +-GetStructField
     |     +-type=STRING
@@ -1891,7 +1891,7 @@ QueryStmt
         |           +-ProjectScan
         |             +-column_list=$expr_subquery.[a#2, t1#3]
         |             +-expr_list=
-        |             | +-a#2 := Literal(type=STRING, value="x")
+        |             | +-a#2 := Literal(type=STRING, value='x')
         |             | +-t1#3 := Literal(type=INT64, value=2)
         |             +-input_scan=
         |               +-SingleRowScan
@@ -1959,7 +1959,7 @@ QueryStmt
         |       |           +-ProjectScan
         |       |             +-column_list=$expr_subquery.[a#1, b#2]
         |       |             +-expr_list=
-        |       |             | +-a#1 := Literal(type=STRING, value="x")
+        |       |             | +-a#1 := Literal(type=STRING, value='x')
         |       |             | +-b#2 := Literal(type=INT64, value=2)
         |       |             +-input_scan=
         |       |               +-SingleRowScan
@@ -1968,7 +1968,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$subquery1.[c#5, b#6]
         |   +-expr_list=
-        |   | +-c#5 := Literal(type=STRING, value="y")
+        |   | +-c#5 := Literal(type=STRING, value='y')
         |   | +-b#6 := Literal(type=INT64, value=4)
         |   +-input_scan=
         |     +-SingleRowScan
@@ -2271,14 +2271,14 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$array.t1#1, $query.separator1#7, $array.t1#1, $query.t3#8, $query.separator2#9, $array.t2#5, $query.t1#10, $query.t3#11, $query.t3#12]
     +-expr_list=
-    | +-separator1#7 := Literal(type=STRING, value="---")
+    | +-separator1#7 := Literal(type=STRING, value='---')
     | +-t3#8 :=
     | | +-GetStructField
     | |   +-type=INT64
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<t1 INT64, t3 INT64>, column=$array.t2#5)
     | |   +-field_idx=1
-    | +-separator2#9 := Literal(type=STRING, value="---")
+    | +-separator2#9 := Literal(type=STRING, value='---')
     | +-t1#10 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2355,7 +2355,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$array.t1#1, $query.separator1#3, $array.t1#1]
     +-expr_list=
-    | +-separator1#3 := Literal(type=STRING, value="---")
+    | +-separator1#3 := Literal(type=STRING, value='---')
     +-input_scan=
       +-ArrayScan
         +-column_list=$array.[t1#1, t1#2]
@@ -2937,7 +2937,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#14 := Literal(type=STRING, value="---")
+    | +-sep1#14 := Literal(type=STRING, value='---')
     | +-c#15 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2956,7 +2956,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#18 := Literal(type=STRING, value="---")
+    | +-sep2#18 := Literal(type=STRING, value='---')
     | +-a#19 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2975,7 +2975,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#22 := Literal(type=STRING, value="---")
+    | +-sep3#22 := Literal(type=STRING, value='---')
     | +-a#23 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2994,7 +2994,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#26 := Literal(type=STRING, value="---")
+    | +-sep4#26 := Literal(type=STRING, value='---')
     | +-a#27 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3149,7 +3149,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#15 := Literal(type=STRING, value="---")
+    | +-sep1#15 := Literal(type=STRING, value='---')
     | +-c#16 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3168,7 +3168,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#19 := Literal(type=STRING, value="---")
+    | +-sep2#19 := Literal(type=STRING, value='---')
     | +-a#20 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3187,7 +3187,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#23 := Literal(type=STRING, value="---")
+    | +-sep3#23 := Literal(type=STRING, value='---')
     | +-a#24 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3206,7 +3206,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#27 := Literal(type=STRING, value="---")
+    | +-sep4#27 := Literal(type=STRING, value='---')
     | +-a#28 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3361,7 +3361,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#15 := Literal(type=STRING, value="---")
+    | +-sep1#15 := Literal(type=STRING, value='---')
     | +-c#16 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3380,7 +3380,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#19 := Literal(type=STRING, value="---")
+    | +-sep2#19 := Literal(type=STRING, value='---')
     | +-a#20 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3399,7 +3399,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#23 := Literal(type=STRING, value="---")
+    | +-sep3#23 := Literal(type=STRING, value='---')
     | +-a#24 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3418,7 +3418,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#27 := Literal(type=STRING, value="---")
+    | +-sep4#27 := Literal(type=STRING, value='---')
     | +-a#28 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3573,7 +3573,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#15 := Literal(type=STRING, value="---")
+    | +-sep1#15 := Literal(type=STRING, value='---')
     | +-c#16 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3592,7 +3592,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#19 := Literal(type=STRING, value="---")
+    | +-sep2#19 := Literal(type=STRING, value='---')
     | +-a#20 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3611,7 +3611,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#23 := Literal(type=STRING, value="---")
+    | +-sep3#23 := Literal(type=STRING, value='---')
     | +-a#24 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3630,7 +3630,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#27 := Literal(type=STRING, value="---")
+    | +-sep4#27 := Literal(type=STRING, value='---')
     | +-a#28 :=
     | | +-GetStructField
     | |   +-type=INT64

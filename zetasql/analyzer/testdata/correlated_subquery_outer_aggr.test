@@ -659,7 +659,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#5]
     +-expr_list=
-    | +-$col1#5 := Literal(type=STRING, value="foo")
+    | +-$col1#5 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -706,7 +706,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#7]
     +-expr_list=
-    | +-$col1#7 := Literal(type=STRING, value="foo")
+    | +-$col1#7 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -1650,7 +1650,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#6]
     +-expr_list=
-    | +-$col1#6 := Literal(type=STRING, value="foo")
+    | +-$col1#6 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -1695,7 +1695,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#8]
     +-expr_list=
-    | +-$col1#8 := Literal(type=STRING, value="foo")
+    | +-$col1#8 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -2834,7 +2834,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#5]
     +-expr_list=
-    | +-$col1#5 := Literal(type=STRING, value="a")
+    | +-$col1#5 := Literal(type=STRING, value='a')
     +-input_scan=
       +-AggregateScan
         +-input_scan=

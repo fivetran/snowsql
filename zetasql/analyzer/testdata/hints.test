@@ -39,9 +39,9 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1]
     +-hint_list=
-    | +-h := Literal(type=STRING, value="value")
+    | +-h := Literal(type=STRING, value='value')
     | +-k := Literal(type=DOUBLE, value=5)
-    | +-h := Literal(type=STRING, value="h2")
+    | +-h := Literal(type=STRING, value='h2')
     | +-neg := Literal(type=INT64, value=-5)
     +-input_scan=
       +-ProjectScan
@@ -63,8 +63,8 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-hint_list=
-    | +-h := Literal(type=STRING, value="v")
-    | +-h := Literal(type=STRING, value="v")
+    | +-h := Literal(type=STRING, value='v')
+    | +-h := Literal(type=STRING, value='v')
     | +-k := Constant(TestConstantString, type=STRING, value="foo")
     +-input_scan=
       +-ProjectScan
@@ -87,8 +87,8 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-hint_list=
     | +-key := Literal(type=INT64, value=1)
-    | +-db1.key := Literal(type=STRING, value="x")
-    | +-db2.key := Literal(type=STRING, value="y")
+    | +-db1.key := Literal(type=STRING, value='x')
+    | +-db2.key := Literal(type=STRING, value='y')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -107,7 +107,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-hint_list=
-    | +-"a b"."c d" := Literal(type=STRING, value="e f")
+    | +-"a b"."c d" := Literal(type=STRING, value='e f')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -185,7 +185,7 @@ QueryStmt
     +-column_list=[$query.$col1#1]
     +-hint_list=
     | +-num_shards := Literal(type=INT64, value=1234567890123456)
-    | +-a := Literal(type=STRING, value="b")
+    | +-a := Literal(type=STRING, value='b')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -270,7 +270,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestTable.KitchenSink#3]
     +-hint_list=
-    | +-key1 := Literal(type=STRING, value="KitchenSink")
+    | +-key1 := Literal(type=STRING, value='KitchenSink')
     +-input_scan=
       +-ProjectScan
         +-column_list=[TestTable.KitchenSink#3]
@@ -318,7 +318,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestTable.KitchenSink#3]
     +-hint_list=
-    | +-key1 := Literal(type=STRING, value="KitchenSink")
+    | +-key1 := Literal(type=STRING, value='KitchenSink')
     | +-key2 := Constant(TestConstantString, type=STRING, value="foo")
     +-input_scan=
       +-ProjectScan
@@ -344,7 +344,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestTable.KitchenSink#3]
     +-hint_list=
-    | +-key1 := Literal(type=STRING, value="KitchenSink")
+    | +-key1 := Literal(type=STRING, value='KitchenSink')
     | +-key2 := Constant(Test Constant-String, type=STRING, value="foo bar")
     | +-key3 := Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
     | +-key4 := Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
@@ -742,7 +742,7 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Key#3]
         +-hint_list=
         | +-num_shards := Literal(type=INT64, value=155)
-        | +-e := Literal(type=STRING, value="f")
+        | +-e := Literal(type=STRING, value='f')
         +-left_scan=
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Key#3]
@@ -753,13 +753,13 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=KeyValue.[Key#1, Key#3]
         |   |   +-hint_list=
-        |   |   | +-c := Literal(type=STRING, value="d")
+        |   |   | +-c := Literal(type=STRING, value='d')
         |   |   +-join_type=LEFT
         |   |   +-left_scan=
         |   |   | +-JoinScan
         |   |   |   +-column_list=KeyValue.[Key#1, Key#3]
         |   |   |   +-hint_list=
-        |   |   |   | +-a := Literal(type=STRING, value="b")
+        |   |   |   | +-a := Literal(type=STRING, value='b')
         |   |   |   +-left_scan=
         |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   |   |   +-right_scan=
@@ -803,11 +803,11 @@ QueryStmt
     +-input_scan=
       +-JoinScan
         +-hint_list=
-        | +-join_type := Literal(type=STRING, value="LOOKUP_JOIN")
+        | +-join_type := Literal(type=STRING, value='LOOKUP_JOIN')
         +-left_scan=
         | +-JoinScan
         |   +-hint_list=
-        |   | +-join_type := Literal(type=STRING, value="HASH_JOIN")
+        |   | +-join_type := Literal(type=STRING, value='HASH_JOIN')
         |   +-left_scan=
         |   | +-TableScan(table=KeyValue, alias='kv1')
         |   +-right_scan=
@@ -837,14 +837,14 @@ QueryStmt
     +-input_scan=
       +-JoinScan
         +-hint_list=
-        | +-join_type := Literal(type=STRING, value="LOOKUP_JOIN")
+        | +-join_type := Literal(type=STRING, value='LOOKUP_JOIN')
         | +-num_shards := Literal(type=INT64, value=123)
         +-left_scan=
         | +-JoinScan
         |   +-hint_list=
-        |   | +-join_type := Literal(type=STRING, value="HASH_JOIN")
-        |   | +-x := Literal(type=STRING, value="y")
-        |   | +-join_type := Literal(type=STRING, value="OTHER")
+        |   | +-join_type := Literal(type=STRING, value='HASH_JOIN')
+        |   | +-x := Literal(type=STRING, value='y')
+        |   | +-join_type := Literal(type=STRING, value='OTHER')
         |   +-join_type=LEFT
         |   +-left_scan=
         |   | +-TableScan(table=KeyValue, alias='kv1')
@@ -920,7 +920,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3]
         +-hint_list=
-        | +-join_type := Literal(type=STRING, value="HASH_JOIN")
+        | +-join_type := Literal(type=STRING, value='HASH_JOIN')
         | +-num_shards := Literal(type=INT64, value=555)
         | +-j1 := Literal(type=INT64, value=1)
         +-input_scan=
@@ -1194,12 +1194,12 @@ QueryStmt
         |   +-left_scan=
         |   | +-TableScan
         |   |   +-hint_list=
-        |   |   | +-hint := Literal(type=STRING, value="kv1")
+        |   |   | +-hint := Literal(type=STRING, value='kv1')
         |   |   +-table=KeyValue
         |   +-right_scan=
         |     +-TableScan
         |       +-hint_list=
-        |       | +-hint := Literal(type=STRING, value="kv2")
+        |       | +-hint := Literal(type=STRING, value='kv2')
         |       +-table=KeyValue
         |       +-alias="kv2"
         +-right_scan=
@@ -1231,7 +1231,7 @@ QueryStmt
         |   | +-TableScan
         |   |   +-column_list=[KeyValue.Key#1]
         |   |   +-hint_list=
-        |   |   | +-hint := Literal(type=STRING, value="kv2")
+        |   |   | +-hint := Literal(type=STRING, value='kv2')
         |   |   +-table=KeyValue
         |   |   +-column_index_list=[0]
         |   |   +-alias="k1"
@@ -1265,7 +1265,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3]
         +-hint_list=
-        | +-join_type := Literal(type=STRING, value="HASH_JOIN")
+        | +-join_type := Literal(type=STRING, value='HASH_JOIN')
         | +-num_shards := Literal(type=INT64, value=12)
         | +-abc := Literal(type=INT64, value=123)
         +-input_scan=
@@ -1381,7 +1381,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3]
         +-hint_list=
-        | +-join_type := Literal(type=STRING, value="LOOKUP_JOIN")
+        | +-join_type := Literal(type=STRING, value='LOOKUP_JOIN')
         | +-num_shards := Literal(type=INT64, value=1)
         | +-array_hint := Literal(type=BOOL, value=true)
         | +-num_shards := Literal(type=INT64, value=2)
@@ -1469,8 +1469,8 @@ QueryStmt
 --
 CreateTableAsSelectStmt
 +-hint_list=
-| +-a := Literal(type=STRING, value="b")
-| +-b := Literal(type=STRING, value="c")
+| +-a := Literal(type=STRING, value='b')
+| +-b := Literal(type=STRING, value='c')
 +-name_path=t
 +-column_definition_list=
 | +-ColumnDefinition(name="c", type=INT64, column=t.c#2)
@@ -1633,7 +1633,7 @@ QueryStmt
             |       +-element_column=$array.repeated_int32_val#4
             +-hint_list=
               +-a := Literal(type=INT64, value=1)
-              +-b := Literal(type=STRING, value="c")
+              +-b := Literal(type=STRING, value='c')
 
 ==
 
@@ -1661,7 +1661,7 @@ QueryStmt
     |     |     +-SingleRowScan
     |     +-hint_list=
     |       +-a := Literal(type=INT64, value=1)
-    |       +-b := Literal(type=STRING, value="c")
+    |       +-b := Literal(type=STRING, value='c')
     +-input_scan=
       +-SingleRowScan
 
@@ -1723,7 +1723,7 @@ QueryStmt
             |       +-output_column_list=[$union_all2.$col1#5]
             +-hint_list=
               +-a := Literal(type=INT64, value=1)
-              +-b := Literal(type=STRING, value="c")
+              +-b := Literal(type=STRING, value='c')
 
 ==
 
@@ -1796,7 +1796,7 @@ QueryStmt
               |       +-element_column=$array.repeated_int32_val#4
               +-hint_list=
                 +-a := Literal(type=INT64, value=1)
-                +-b := Literal(type=STRING, value="c")
+                +-b := Literal(type=STRING, value='c')
 
 ==
 
@@ -1825,7 +1825,7 @@ QueryStmt
     |       |     +-SingleRowScan
     |       +-hint_list=
     |         +-a := Literal(type=INT64, value=1)
-    |         +-b := Literal(type=STRING, value="c")
+    |         +-b := Literal(type=STRING, value='c')
     +-input_scan=
       +-SingleRowScan
 
@@ -1888,7 +1888,7 @@ QueryStmt
               |       +-output_column_list=[$union_all2.$col1#5]
               +-hint_list=
                 +-a := Literal(type=INT64, value=1)
-                +-b := Literal(type=STRING, value="c")
+                +-b := Literal(type=STRING, value='c')
 
 ==
 
@@ -1990,7 +1990,7 @@ QueryStmt
             |       +-element_column=$array.repeated_int32_val#4
             +-hint_list=
               +-a := Literal(type=INT64, value=1)
-              +-b := Literal(type=STRING, value="c")
+              +-b := Literal(type=STRING, value='c')
 
 ==
 
@@ -2017,7 +2017,7 @@ QueryStmt
     |     |     +-SingleRowScan
     |     +-hint_list=
     |       +-a := Literal(type=INT64, value=1)
-    |       +-b := Literal(type=STRING, value="c")
+    |       +-b := Literal(type=STRING, value='c')
     +-input_scan=
       +-SingleRowScan
 
@@ -2060,7 +2060,7 @@ QueryStmt
     |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |     +-hint_list=
     |       +-a := Literal(type=INT64, value=1)
-    |       +-b := Literal(type=STRING, value="c")
+    |       +-b := Literal(type=STRING, value='c')
     +-input_scan=
       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
 
@@ -2083,7 +2083,7 @@ QueryStmt
           +-cnt#3 :=
             +-AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
               +-hint_list=
-                +-a := Literal(type=STRING, value="b")
+                +-a := Literal(type=STRING, value='b')
 
 ==
 

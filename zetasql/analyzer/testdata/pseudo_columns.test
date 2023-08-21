@@ -73,7 +73,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[EnumTable.key#1, EnumTable.TestEnum#2, EnumTable.AnotherTestEnum#3, $query.$col2#6, EnumTable.Filename#4, EnumTable.RowId#5]
     +-expr_list=
-    | +-$col2#6 := Literal(type=STRING, value="--")
+    | +-$col2#6 := Literal(type=STRING, value='--')
     +-input_scan=
       +-TableScan(column_list=EnumTable.[key#1, TestEnum#2, AnotherTestEnum#3, Filename#4, RowId#5], table=EnumTable, column_index_list=[0, 1, 2, 3, 4])
 ==
@@ -182,7 +182,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#1)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col2#7 := Literal(type=STRING, value="--")
+    | +-$col2#7 := Literal(type=STRING, value='--')
     +-input_scan=
       +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias='v')
 ==

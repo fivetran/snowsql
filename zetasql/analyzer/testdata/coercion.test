@@ -972,7 +972,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1.$col1#4]
       | |       +-expr_list=
-      | |       | +-$col1#4 := Literal(type=STRING, value="int64_key_1:1 int64_key_2:2")
+      | |       | +-$col1#4 := Literal(type=STRING, value='int64_key_1:1 int64_key_2:2')
       | |       +-input_scan=
       | |         +-TableScan(table=TestTable)
       | +-output_column_list=[$union_all1_cast.$col1#10]

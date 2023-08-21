@@ -31,7 +31,7 @@ QueryStmt
         | | |   +-column_list=$subquery1.[a#1, b#2, c#3]
         | | |   +-expr_list=
         | | |   | +-a#1 := Literal(type=INT64, value=1)
-        | | |   | +-b#2 := Literal(type=STRING, value="2")
+        | | |   | +-b#2 := Literal(type=STRING, value='2')
         | | |   | +-c#3 := Literal(type=DATE, value=2020-08-22, has_explicit_type=TRUE)
         | | |   +-input_scan=
         | | |     +-SingleRowScan
@@ -86,7 +86,7 @@ QueryStmt
         | |     +-column_list=$subquery1.[a#1, b#2, c#3]
         | |     +-expr_list=
         | |     | +-a#1 := Literal(type=INT64, value=1)
-        | |     | +-b#2 := Literal(type=STRING, value="2")
+        | |     | +-b#2 := Literal(type=STRING, value='2')
         | |     | +-c#3 := Literal(type=DATE, value=2020-08-22, has_explicit_type=TRUE)
         | |     +-input_scan=
         | |       +-SingleRowScan
@@ -97,7 +97,7 @@ QueryStmt
         |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgsTempl.[x#7, y#8]
         |       +-expr_list=
         |       | +-x#7 := Literal(type=INT64, value=1)
-        |       | +-y#8 := Literal(type=STRING, value="b")
+        |       | +-y#8 := Literal(type=STRING, value='b')
         |       +-input_scan=
         |         +-SingleRowScan
         +-query=
@@ -179,7 +179,7 @@ QueryStmt
         | | |   +-column_list=$subquery1.[a#1, b#2, c#3]
         | | |   +-expr_list=
         | | |   | +-a#1 := Literal(type=INT64, value=1)
-        | | |   | +-b#2 := Literal(type=STRING, value="2")
+        | | |   | +-b#2 := Literal(type=STRING, value='2')
         | | |   | +-c#3 := Literal(type=DATE, value=2020-08-22, has_explicit_type=TRUE)
         | | |   +-input_scan=
         | | |     +-SingleRowScan
@@ -250,7 +250,7 @@ QueryStmt
                 | |     +-column_list=$subquery1.[a#4, b#5, c#6]
                 | |     +-expr_list=
                 | |     | +-a#4 := Literal(type=INT64, value=1)
-                | |     | +-b#5 := Literal(type=STRING, value="2")
+                | |     | +-b#5 := Literal(type=STRING, value='2')
                 | |     | +-c#6 := Literal(type=DATE, value=2020-08-22, has_explicit_type=TRUE)
                 | |     +-input_scan=
                 | |       +-SingleRowScan
@@ -261,7 +261,7 @@ QueryStmt
                 |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgsTempl.[x#8, y#9]
                 |       +-expr_list=
                 |       | +-x#8 := Literal(type=INT64, value=1)
-                |       | +-y#9 := Literal(type=STRING, value="b")
+                |       | +-y#9 := Literal(type=STRING, value='b')
                 |       +-input_scan=
                 |         +-SingleRowScan
                 +-query=

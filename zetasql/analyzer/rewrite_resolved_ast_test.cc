@@ -142,7 +142,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |         +-ProjectScan
 |           +-column_list=$subquery1.[k#1, m#2]
 |           +-expr_list=
-|           | +-k#1 := Literal(type=STRING, value="foo")
+|           | +-k#1 := Literal(type=STRING, value='foo')
 |           | +-m#2 :=
 |           |   +-GetProtoField
 |           |     +-type=ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>

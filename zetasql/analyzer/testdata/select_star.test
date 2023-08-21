@@ -185,9 +185,9 @@ QueryStmt
   +-ProjectScan
     +-column_list=[subq.$col1#3, subq.$col2#4, subq.c3#5, $query.$col2#9, TestTable.key#6, TestTable.TestEnum#7, TestTable.KitchenSink#8, $query.$col4#10, KeyValue.Key#1, KeyValue.Value#2, $query.$col6#11, KeyValue.Key#1, KeyValue.Value#2, subq.$col1#3, subq.$col2#4, subq.c3#5, TestTable.key#6, TestTable.TestEnum#7, TestTable.KitchenSink#8]
     +-expr_list=
-    | +-$col2#9 := Literal(type=STRING, value="---")
-    | +-$col4#10 := Literal(type=STRING, value="---")
-    | +-$col6#11 := Literal(type=STRING, value="---")
+    | +-$col2#9 := Literal(type=STRING, value='---')
+    | +-$col4#10 := Literal(type=STRING, value='---')
+    | +-$col6#11 := Literal(type=STRING, value='---')
     +-input_scan=
       +-JoinScan
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, subq.$col1#3, subq.$col2#4, subq.c3#5, TestTable.key#6, TestTable.TestEnum#7, TestTable.KitchenSink#8]
@@ -201,8 +201,8 @@ QueryStmt
         |       +-column_list=subq.[$col1#3, $col2#4, c3#5]
         |       +-expr_list=
         |       | +-$col1#3 := Literal(type=INT64, value=1)
-        |       | +-$col2#4 := Literal(type=STRING, value="abc")
-        |       | +-c3#5 := Literal(type=STRING, value="abc")
+        |       | +-$col2#4 := Literal(type=STRING, value='abc')
+        |       | +-c3#5 := Literal(type=STRING, value='abc')
         |       +-input_scan=
         |         +-SingleRowScan
         +-right_scan=
@@ -304,7 +304,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue.Key#3, KeyValue.Value#4, KeyValue.Key#5, KeyValue.Value#6, $query.$col2#7, KeyValue.Key#3, KeyValue.Value#4]
     +-expr_list=
-    | +-$col2#7 := Literal(type=STRING, value="---")
+    | +-$col2#7 := Literal(type=STRING, value='---')
     +-input_scan=
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4, Key#5, Value#6]

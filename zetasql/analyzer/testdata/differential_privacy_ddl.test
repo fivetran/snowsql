@@ -576,8 +576,8 @@ FROM SimpleTypesWithAnonymizationUid;
 --
 ExportDataStmt
 +-option_list=
-| +-format := Literal(type=STRING, value="sstable")
-| +-filename := Literal(type=STRING, value="/tmp/foo")
+| +-format := Literal(type=STRING, value='sstable')
+| +-filename := Literal(type=STRING, value='/tmp/foo')
 +-output_column_list=
 | +-$aggregate.count#13 AS count [INT64]
 +-query=
@@ -596,8 +596,8 @@ ExportDataStmt
 [REWRITTEN AST]
 ExportDataStmt
 +-option_list=
-| +-format := Literal(type=STRING, value="sstable")
-| +-filename := Literal(type=STRING, value="/tmp/foo")
+| +-format := Literal(type=STRING, value='sstable')
+| +-filename := Literal(type=STRING, value='/tmp/foo')
 +-output_column_list=
 | +-$aggregate.count#13 AS count [INT64]
 +-query=

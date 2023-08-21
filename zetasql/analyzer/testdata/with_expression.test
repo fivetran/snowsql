@@ -325,13 +325,13 @@ QueryStmt
     |   +-WithExpr
     |     +-type=STRING
     |     +-assignment_list=
-    |     | +-a#1 := Literal(type=STRING, value="abc")
+    |     | +-a#1 := Literal(type=STRING, value='abc')
     |     | +-b#4 :=
     |     |   +-WithExpr
     |     |     +-type=STRING
     |     |     +-assignment_list=
-    |     |     | +-a#2 := Literal(type=STRING, value="def")
-    |     |     | +-b#3 := Literal(type=STRING, value="ghi")
+    |     |     | +-a#2 := Literal(type=STRING, value='def')
+    |     |     | +-b#3 := Literal(type=STRING, value='ghi')
     |     |     +-expr=
     |     |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |     |         +-ColumnRef(type=STRING, column=$with_expr.a#2)
@@ -387,19 +387,19 @@ QueryStmt
     |             |           +-ProjectScan
     |             |             +-column_list=$with_expr.[a#2, b#3]
     |             |             +-expr_list=
-    |             |             | +-b#3 := Literal(type=STRING, value="ghi")
+    |             |             | +-b#3 := Literal(type=STRING, value='ghi')
     |             |             +-input_scan=
     |             |               +-ProjectScan
     |             |                 +-column_list=[$with_expr.a#2]
     |             |                 +-expr_list=
-    |             |                 | +-a#2 := Literal(type=STRING, value="def")
+    |             |                 | +-a#2 := Literal(type=STRING, value='def')
     |             |                 +-input_scan=
     |             |                   +-SingleRowScan
     |             +-input_scan=
     |               +-ProjectScan
     |                 +-column_list=[$with_expr.a#1]
     |                 +-expr_list=
-    |                 | +-a#1 := Literal(type=STRING, value="abc")
+    |                 | +-a#1 := Literal(type=STRING, value='abc')
     |                 +-input_scan=
     |                   +-SingleRowScan
     +-input_scan=

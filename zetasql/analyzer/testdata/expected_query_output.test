@@ -71,7 +71,7 @@ QueryStmt
         |       +-ProjectScan
         |         +-column_list=[$expr_subquery.$col1#2]
         |         +-expr_list=
-        |         | +-$col1#2 := Literal(type=STRING, value="foo")
+        |         | +-$col1#2 := Literal(type=STRING, value='foo')
         |         +-input_scan=
         |           +-SingleRowScan
         +-input_scan=
@@ -117,7 +117,7 @@ QueryStmt
         |       +-ProjectScan
         |         +-column_list=[$expr_subquery.$col1#2]
         |         +-expr_list=
-        |         | +-$col1#2 := Literal(type=STRING, value="foo")
+        |         | +-$col1#2 := Literal(type=STRING, value='foo')
         |         +-input_scan=
         |           +-SingleRowScan
         +-input_scan=
@@ -352,7 +352,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$query.$col1#1]
         +-expr_list=
-        | +-$col1#1 := Literal(type=STRING, value="2017-01-01")
+        | +-$col1#1 := Literal(type=STRING, value='2017-01-01')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -466,7 +466,7 @@ QueryStmt
     |       +-column_list=orders.[order_id#1, item_name#2, quantity#3]
     |       +-expr_list=
     |       | +-order_id#1 := Literal(type=INT64, value=5)
-    |       | +-item_name#2 := Literal(type=STRING, value="sprocket")
+    |       | +-item_name#2 := Literal(type=STRING, value='sprocket')
     |       | +-quantity#3 := Literal(type=INT64, value=200)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -497,7 +497,7 @@ QueryStmt
     |       +-column_list=orders.[order_id#1, item_name#2, quantity#3]
     |       +-expr_list=
     |       | +-order_id#1 := Literal(type=INT64, value=5)
-    |       | +-item_name#2 := Literal(type=STRING, value="sprocket")
+    |       | +-item_name#2 := Literal(type=STRING, value='sprocket')
     |       | +-quantity#3 := Literal(type=INT64, value=200)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -520,7 +520,7 @@ QueryStmt
 --
 QueryStmt
 +-hint_list=
-| +-key := Literal(type=STRING, value="value")
+| +-key := Literal(type=STRING, value='value')
 +-output_column_list=
 | +-$casted_column.$col1#2 AS "$col1" [INT32]
 +-query=

@@ -156,7 +156,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[T2.xx#5, T2.vv#6, $query.$col3#7, T2.xx#5, T2.vv#6]
         +-expr_list=
-        | +-$col3#7 := Literal(type=STRING, value="--")
+        | +-$col3#7 := Literal(type=STRING, value='--')
         +-input_scan=
           +-WithRefScan(column_list=T2.[xx#5, vv#6], with_query_name='T2')
 ==
@@ -728,7 +728,7 @@ QueryStmt
     |       |   +-MakeProto
     |       |     +-type=PROTO<zetasql_test__.KeyValueStruct>
     |       |     +-field_list=
-    |       |       +-key := Literal(type=STRING, value="55")
+    |       |       +-key := Literal(type=STRING, value='55')
     |       +-input_scan=
     |         +-ProjectScan
     |           +-column_list=[sq.key#4]

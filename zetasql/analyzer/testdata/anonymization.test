@@ -7827,7 +7827,7 @@ QueryStmt
         +-aggregate_list=
         | +-$agg1#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
         +-anonymization_option_list=
-          +-custom_option := Literal(type=STRING, value="option_value")
+          +-custom_option := Literal(type=STRING, value='option_value')
 
 [REWRITTEN AST]
 QueryStmt
@@ -7860,7 +7860,7 @@ QueryStmt
         +-k_threshold_expr=
         | +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#20)
         +-anonymization_option_list=
-          +-custom_option := Literal(type=STRING, value="option_value")
+          +-custom_option := Literal(type=STRING, value='option_value')
 ==
 
 [no_run_unparser]
