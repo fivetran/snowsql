@@ -57,7 +57,7 @@ CreateProcedureStatement [0-63] [CREATE PROCEDURE...BEGIN END]
       IntLiteral(1) [44-45] [1]
     OptionsEntry [47-52] [b="2"]
       Identifier(b) [47-48] [b]
-      StringLiteral("2") [49-52] ["2"]
+      StringLiteral('2') [49-52] ["2"]
   Script [54-63] [BEGIN END]
     StatementList [54-63] [BEGIN END]
       BeginEndBlock [54-63] [BEGIN END]
@@ -169,7 +169,7 @@ CreateProcedureStatement [0-117] [CREATE PROCEDURE...test"; END]
             IntLiteral(1) [87-88] [1]
           SingleAssignment [92-112] [SET param_a = "test"]
             Identifier(param_a) [96-103] [param_a]
-            StringLiteral("test") [106-112] ["test"]
+            StringLiteral('test') [106-112] ["test"]
 --
 CREATE PROCEDURE procedure_name(OUT param_a string)
 BEGIN
@@ -596,7 +596,7 @@ CreateProcedureStatement [0-182] [CREATE PROCEDURE...ython code"]
       PathExpression [114-127] [connection_id]
         Identifier(connection_id) [114-127] [connection_id]
   Identifier(PYTHON) [159-165] [PYTHON]
-  StringLiteral("python code") [169-182] ["python code"]
+  StringLiteral('python code') [169-182] ["python code"]
 --
 CREATE PROCEDURE procedure_name(param_a int32, OUT param_b string, INOUT param_c ANY TYPE)
 WITH CONNECTION connection_id OPTIONS
@@ -636,7 +636,7 @@ CreateProcedureStatement [0-170] [CREATE PROCEDURE...ython code"]
       PathExpression [114-127] [connection_id]
         Identifier(connection_id) [114-127] [connection_id]
   Identifier(PYTHON) [147-153] [PYTHON]
-  StringLiteral("python code") [157-170] ["python code"]
+  StringLiteral('python code') [157-170] ["python code"]
 --
 CREATE PROCEDURE procedure_name(param_a int32, OUT param_b string, INOUT param_c ANY TYPE)
 WITH CONNECTION connection_id OPTIONS
@@ -679,7 +679,7 @@ CreateProcedureStatement [0-152] [CREATE PROCEDURE...ython code"]
       PathExpression [117-118] [d]
         Identifier(d) [117-118] [d]
   Identifier(PYTHON) [129-135] [PYTHON]
-  StringLiteral("python code") [139-152] ["python code"]
+  StringLiteral('python code') [139-152] ["python code"]
 --
 CREATE PROCEDURE procedure_name(param_a int32, OUT param_b string, INOUT param_c ANY TYPE)
 OPTIONS
