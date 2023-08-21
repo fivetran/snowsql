@@ -1721,8 +1721,8 @@ QueryStmt
         +-for_expr=
         | +-ColumnRef(parse_location=67-68, type=STRING, column=t.y#2)
         +-pivot_value_list=
-        | +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
-        | +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
         | +-Literal(type=STRING, value=NULL, preserve_in_literal_remover=TRUE)
         +-pivot_column_list=
           +-PivotColumn(column=$pivot.sum_x_test#4, pivot_expr_index=0, pivot_value_index=0)
@@ -1757,8 +1757,8 @@ QueryStmt
         +-for_expr=
         | +-ColumnRef(parse_location=62-63, type=STRING, column=t.y#2)
         +-pivot_value_list=
-        | +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
-        | +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
         | +-Literal(type=STRING, value=NULL, preserve_in_literal_remover=TRUE)
         +-pivot_column_list=
           +-PivotColumn(column=$pivot.test#4, pivot_expr_index=0, pivot_value_index=0)
@@ -2581,8 +2581,8 @@ QueryStmt
             |   | +-ColumnRef(type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>, column=t.s#2)
             |   +-field_idx=1
             +-pivot_value_list=
-            | +-Literal(type=STRING, value="test1", preserve_in_literal_remover=TRUE)
-            | +-Literal(type=STRING, value="test2", preserve_in_literal_remover=TRUE)
+            | +-Literal(type=STRING, value='test1', preserve_in_literal_remover=TRUE)
+            | +-Literal(type=STRING, value='test2', preserve_in_literal_remover=TRUE)
             +-pivot_column_list=
               +-PivotColumn(column=$pivot.test1#4, pivot_expr_index=0, pivot_value_index=0)
               +-PivotColumn(column=$pivot.test2#5, pivot_expr_index=0, pivot_value_index=1)
@@ -2653,14 +2653,14 @@ QueryStmt
             | | +-type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>
             | | +-field_list=
             | |   +-Literal(type=INT64, value=1, preserve_in_literal_remover=TRUE)
-            | |   +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
+            | |   +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BOOL, value=true, preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BIGNUMERIC, value=3.14159265358979, has_explicit_type=TRUE, preserve_in_literal_remover=TRUE)
             | +-MakeStruct
             | | +-type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>
             | | +-field_list=
             | |   +-Literal(type=INT64, value=2, preserve_in_literal_remover=TRUE)
-            | |   +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
+            | |   +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BOOL, value=true, preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BIGNUMERIC, value=3.14159265358979, has_explicit_type=TRUE, preserve_in_literal_remover=TRUE)
             | +-Literal(type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>, value=NULL, preserve_in_literal_remover=TRUE)

@@ -51,7 +51,7 @@ QueryStmt
 
 [no_java]
 # TODO: Enable this test when enum debug string is fixed in Java
-SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), "LAST")
+SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), 'LAST')
 --
 QueryStmt
 +-output_column_list=
@@ -71,7 +71,7 @@ QueryStmt
 
 [no_java]
 # TODO: Enable this test when enum debug string is fixed in Java
-SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), CAST("LAST" AS ARRAY_FIND_MODE))
+SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), CAST('LAST' AS ARRAY_FIND_MODE))
 --
 QueryStmt
 +-output_column_list=
@@ -98,12 +98,12 @@ SELECT ARRAY_OFFSETS([new zetasql_test__.EmptyMessage()], new zetasql_test__....
 ==
 
 [language_features={{|V_1_4_ARRAY_FIND_FUNCTIONS}}]
-SELECT ARRAY_OFFSETS([""], "")
+SELECT ARRAY_OFFSETS([''], '')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Function not found: ARRAY_OFFSETS [at 1:8]
-SELECT ARRAY_OFFSETS([""], "")
+SELECT ARRAY_OFFSETS([''], '')
        ^
 --
 ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
@@ -133,12 +133,12 @@ SELECT ARRAY_FIND([4, 5.0], CAST(5 AS FLOAT))
 [language_features={{|V_1_4_ARRAY_FIND_FUNCTIONS}}]
 [no_java]
 # TODO: Enable this test when enum debug string is fixed in Java
-SELECT ARRAY_FIND([4, 5.0], 5, "LAST")
+SELECT ARRAY_FIND([4, 5.0], 5, 'LAST')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Function not found: ARRAY_FIND; Did you mean array_min? [at 2:8]
-SELECT ARRAY_FIND([4, 5.0], 5, "LAST")
+SELECT ARRAY_FIND([4, 5.0], 5, 'LAST')
        ^
 --
 ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS

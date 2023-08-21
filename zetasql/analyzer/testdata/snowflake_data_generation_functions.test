@@ -153,7 +153,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:random(optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='1.23', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -196,7 +196,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:randstr(STRING, INT32) -> STRING)
-    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='1.23', has_explicit_type=TRUE)
     |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan

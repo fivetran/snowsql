@@ -174,7 +174,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 [no_enable_literal_replacement]
@@ -1065,7 +1065,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 [no_enable_literal_replacement]
@@ -1789,7 +1789,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 [no_enable_literal_replacement]
@@ -2261,7 +2261,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 [no_enable_literal_replacement]
@@ -3191,7 +3191,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 # Sum of the expressions (equivalent to unqiue users count) might be Ok

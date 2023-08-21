@@ -6461,7 +6461,7 @@ QueryStmt
     |   |     +-ProjectScan
     |   |       +-column_list=$intersect_all2.[B#3, A#4]
     |   |       +-expr_list=
-    |   |       | +-B#3 := Literal(type=STRING, value="STRING_VAL", has_explicit_type=TRUE)
+    |   |       | +-B#3 := Literal(type=STRING, value='STRING_VAL', has_explicit_type=TRUE)
     |   |       | +-A#4 := Literal(type=INT64, value=100)
     |   |       +-input_scan=
     |   |         +-SingleRowScan
@@ -6508,7 +6508,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=$intersect_all2.[B#3, A#4]
         |           +-expr_list=
-        |           | +-B#3 := Literal(type=STRING, value="STRING_VAL", has_explicit_type=TRUE)
+        |           | +-B#3 := Literal(type=STRING, value='STRING_VAL', has_explicit_type=TRUE)
         |           | +-A#4 := Literal(type=INT64, value=100)
         |           +-input_scan=
         |             +-SingleRowScan

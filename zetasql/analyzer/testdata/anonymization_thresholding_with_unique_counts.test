@@ -174,7 +174,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 # Incorrect bounds for count star function. It doesn't correspond to
@@ -953,7 +953,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 # Incorrect bounds for count function. It doesn't correspond to
@@ -1519,7 +1519,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 # Incorrect bounds for count(uid) function (doesn't correspond to
@@ -1880,7 +1880,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 # sum(1) with uint64 type calculating unique users.
@@ -2057,7 +2057,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:int64(JSON) -> INT64)
             +-FunctionCall(ZetaSQL:json_query(JSON, STRING) -> JSON)
               +-ColumnRef(type=JSON, column=$aggregate.$agg1#13)
-              +-Literal(type=STRING, value="$.result.value", has_explicit_type=TRUE)
+              +-Literal(type=STRING, value='$.result.value', has_explicit_type=TRUE)
 ==
 
 # sum(1) with NUMERIC type calculating unique users.

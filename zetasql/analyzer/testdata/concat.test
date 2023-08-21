@@ -227,7 +227,7 @@ QueryStmt
     |     | +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
     |     |   +-Literal(type=DOUBLE, value=3.14)
     |     |   +-Literal(type=DOUBLE, value=0)
-    |     +-Literal(type=STRING, value="10", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='10', has_explicit_type=TRUE)
     |     +-Cast(TIMESTAMP -> STRING)
     |     | +-FunctionCall(ZetaSQL:current_timestamp() -> TIMESTAMP)
     |     +-Cast(DATE -> STRING)
@@ -289,7 +289,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(0) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="9876543210.123", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='9876543210.123', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -348,7 +348,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(0) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="TESTENUM1", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='TESTENUM1', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
