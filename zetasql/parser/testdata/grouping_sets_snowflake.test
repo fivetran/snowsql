@@ -34,13 +34,13 @@ GROUP BY GROUPING SETS(x)
 ==
 
 [language_features=V_1_4_GROUPING_SETS]
-SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, "foo", "bar")
+SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, 'foo', 'bar')
 FROM T GROUP BY GROUPING SETS(x, y);
 --
 QueryStatement [0-99] [SELECT x,...SETS(x, y)]
   Query [0-99] [SELECT x,...SETS(x, y)]
     Select [0-99] [SELECT x,...SETS(x, y)]
-      SelectList [7-63] [x, y, GROUPING...foo", "bar")]
+      SelectList [7-63] [x, y, GROUPING...foo', 'bar')]
         SelectColumn [7-8] [x]
           PathExpression [7-8] [x]
             Identifier(x) [7-8] [x]
@@ -55,8 +55,8 @@ QueryStatement [0-99] [SELECT x,...SETS(x, y)]
               PathExpression [22-23] [x]
                 Identifier(x) [22-23] [x]
             IntLiteral(1) [27-28] [1]
-        SelectColumn [30-63] [IF(GROUPING...foo", "bar")]
-          FunctionCall [30-63] [IF(GROUPING...foo", "bar")]
+        SelectColumn [30-63] [IF(GROUPING...foo', 'bar')]
+          FunctionCall [30-63] [IF(GROUPING...foo', 'bar')]
             PathExpression [30-32] [IF]
               Identifier("IF") [30-32] [IF]
             BinaryExpression(=) [33-48] [GROUPING(y) = 0]
@@ -66,8 +66,8 @@ QueryStatement [0-99] [SELECT x,...SETS(x, y)]
                 PathExpression [42-43] [y]
                   Identifier(y) [42-43] [y]
               IntLiteral(0) [47-48] [0]
-            StringLiteral('foo') [50-55] ["foo"]
-            StringLiteral('bar') [57-62] ["bar"]
+            StringLiteral('foo') [50-55] ['foo']
+            StringLiteral('bar') [57-62] ['bar']
       FromClause [64-70] [FROM T]
         TablePathExpression [69-70] [T]
           PathExpression [69-70] [T]
@@ -86,7 +86,7 @@ SELECT
   x,
   y,
   "GROUPING"(x) = 1,
-  "IF"("GROUPING"(y) = 0, "foo", "bar")
+  "IF"("GROUPING"(y) = 0, 'foo', 'bar')
 FROM
   T
 GROUP BY GROUPING SETS(x, y)

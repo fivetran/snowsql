@@ -158,7 +158,7 @@ AlterTableStatement [0-56] [ALTER TABLE...foo="bar")]
       OptionsList [45-56] [(foo="bar")]
         OptionsEntry [46-55] [foo="bar"]
           Identifier(foo) [46-49] [foo]
-          StringLiteral('bar') [50-55] ["bar"]
+          StringLiteral('bar') [50-55] ['bar']
 
 --
 ALTER TABLE foo ALTER COLUMN bar SET OPTIONS(foo = "bar")
@@ -177,7 +177,7 @@ AlterTableStatement [0-66] [ALTER TABLE...foo="bar")]
       OptionsList [55-66] [(foo="bar")]
         OptionsEntry [56-65] [foo="bar"]
           Identifier(foo) [56-59] [foo]
-          StringLiteral('bar') [60-65] ["bar"]
+          StringLiteral('bar') [60-65] ['bar']
 
 --
 ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET OPTIONS(foo = "bar")
@@ -257,7 +257,7 @@ AlterTableStatement [0-103] [ALTER TABLE...description")]
         OptionsList [72-103] [(description...description")]
           OptionsEntry [73-102] [description="new description"]
             Identifier(description) [73-84] [description]
-            StringLiteral('new description') [85-102] ["new description"]
+            StringLiteral('new description') [85-102] ['new description']
 --
 ALTER TABLE foo ALTER COLUMN bar SET DATA TYPE STRING NOT NULL OPTIONS(description = "new description")
 --
@@ -277,7 +277,7 @@ AlterTableStatement [0-112] [ALTER TABLE...description")]
         OptionsList [81-112] [(description...description")]
           OptionsEntry [82-111] [description="new description"]
             Identifier(description) [82-93] [description]
-            StringLiteral('new description') [94-111] ["new description"]
+            StringLiteral('new description') [94-111] ['new description']
 --
 ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET DATA TYPE STRING NOT NULL OPTIONS(description = "new description")
 ==
