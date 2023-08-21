@@ -183,7 +183,7 @@ CreateExternalTableStmt
 | +-ColumnDefinition(name='b', type=INT64, column=t.b#2)
 +-check_constraint_list=
   +-CheckConstraint
-    +-constraint_name=""
+    +-constraint_name=''
     +-expression=
     | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
     |   +-ColumnRef(type=INT64, column=t.a#1)

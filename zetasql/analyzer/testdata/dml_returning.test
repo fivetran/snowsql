@@ -8,19 +8,19 @@ DELETE TestTable WHERE KitchenSink.int32_val = 1 THEN RETURN *
 ==
 
 # UPDATE
-UPDATE KeyValue SET key=1, value="a" WHERE key > 10 THEN RETURN *
+UPDATE KeyValue SET key=1, value='a' WHERE key > 10 THEN RETURN *
 --
 ERROR: THEN RETURN is not supported [at 1:53]
-UPDATE KeyValue SET key=1, value="a" WHERE key > 10 THEN RETURN *
+UPDATE KeyValue SET key=1, value='a' WHERE key > 10 THEN RETURN *
                                                     ^
 ==
 
 # INSERT
 [language_features=]
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN WITH ACTION *
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN WITH ACTION *
 --
 ERROR: THEN RETURN is not supported [at 1:53]
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN WITH ACTION *
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN WITH ACTION *
                                                     ^
 ==
 
@@ -45,10 +45,10 @@ UPDATE KeyValue SET key=1 WHERE TRUE THEN RETURN WITH ACTION AS myaction key ...
                                      ^
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN WITH ACTION AS myaction key as myaction;
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN WITH ACTION AS myaction key as myaction;
 --
 ERROR: THEN RETURN is not supported [at 1:53]
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN WITH ACTION A...
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN WITH ACTION A...
                                                     ^
 ==
 
@@ -306,7 +306,7 @@ DeleteStmt
 ==
 
 # UPDATE
-UPDATE KeyValue SET key=1, value="a" WHERE key > 10 THEN RETURN *
+UPDATE KeyValue SET key=1, value='a' WHERE key > 10 THEN RETURN *
 --
 UpdateStmt
 +-table_scan=
@@ -338,7 +338,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN WITH ACTION *
+UPDATE KeyValue SET value='a' WHERE key > 10 THEN RETURN WITH ACTION *
 --
 UpdateStmt
 +-table_scan=
@@ -366,7 +366,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN WITH ACTION AS myaction *
+UPDATE KeyValue SET value='a' WHERE key > 10 THEN RETURN WITH ACTION AS myaction *
 --
 UpdateStmt
 +-table_scan=
@@ -394,7 +394,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN key, value
+UPDATE KeyValue SET value='a' WHERE key > 10 THEN RETURN key, value
 --
 UpdateStmt
 +-table_scan=
@@ -420,7 +420,7 @@ UpdateStmt
 
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10
+UPDATE KeyValue SET value='a' WHERE key > 10
 THEN RETURN WITH ACTION abs(key) abs_key, *
 --
 UpdateStmt
@@ -454,7 +454,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN *
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN *
 --
 InsertStmt
 +-table_scan=
@@ -477,7 +477,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN WITH ACTION *
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN WITH ACTION *
 --
 InsertStmt
 +-table_scan=
@@ -503,7 +503,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN WITH ACTION AS myaction *
 --
 InsertStmt
@@ -530,7 +530,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN key
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN key
 --
 InsertStmt
 +-table_scan=
@@ -552,7 +552,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,WRITE
 ==
 
-INSERT INTO nested_catalog.KeyValueNested (key, value) VALUES (1, "one") THEN RETURN KeyValueNested.key
+INSERT INTO nested_catalog.KeyValueNested (key, value) VALUES (1, 'one') THEN RETURN KeyValueNested.key
 --
 InsertStmt
 +-table_scan=
@@ -575,7 +575,7 @@ InsertStmt
 ==
 
 INSERT {{| IGNORE| REPLACE| UPDATE}} INTO KeyValue (key, value)
-VALUES (1, "one"), (2, "two") THEN RETURN *
+VALUES (1, 'one'), (2, 'two') THEN RETURN *
 --
 
 ALTERNATION GROUP: <empty>
@@ -703,7 +703,7 @@ InsertStmt
 ==
 
 INSERT {{| IGNORE| REPLACE| UPDATE}} INTO KeyValue (key, value)
-VALUES (1, "one"), (2, "two") THEN RETURN WITH ACTION *
+VALUES (1, 'one'), (2, 'two') THEN RETURN WITH ACTION *
 --
 ALTERNATION GROUP: <empty>
 
@@ -842,7 +842,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN WITH ACTION abs(key) as newkey
 --
 InsertStmt
@@ -1238,7 +1238,7 @@ DeleteStmt
 ==
 
 [language_features=V_1_3_DML_RETURNING]
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN * EXCEPT (KEY)
 --
 ERROR: SELECT * EXCEPT is not supported [at 2:13]
@@ -1247,15 +1247,15 @@ THEN RETURN * EXCEPT (KEY)
 ==
 
 [language_features=V_1_3_DML_RETURNING]
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
-THEN RETURN * REPLACE ("xxx" as value)
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
+THEN RETURN * REPLACE ('xxx' as value)
 --
 ERROR: SELECT * REPLACE is not supported [at 2:13]
-THEN RETURN * REPLACE ("xxx" as value)
+THEN RETURN * REPLACE ('xxx' as value)
             ^
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN * EXCEPT (KEY)
 --
 InsertStmt
@@ -1278,8 +1278,8 @@ InsertStmt
 +-column_access_list=WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
-THEN RETURN * REPLACE ("xxx" as value)
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
+THEN RETURN * REPLACE ('xxx' as value)
 --
 InsertStmt
 +-table_scan=
@@ -1304,8 +1304,8 @@ InsertStmt
 +-column_access_list=READ_WRITE,WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
-THEN RETURN * REPLACE ("xxx" as value), key + 1
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
+THEN RETURN * REPLACE ('xxx' as value), key + 1
 --
 InsertStmt
 +-table_scan=
@@ -1363,7 +1363,7 @@ InsertStmt
 
 
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN * EXCEPT(Key), key
 --
 InsertStmt
@@ -1387,7 +1387,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN key, * EXCEPT(Key)
 --
 InsertStmt
@@ -1411,7 +1411,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN WITH ACTION key, * EXCEPT(Key)
 --
 InsertStmt
@@ -1438,8 +1438,8 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
-THEN RETURN * EXCEPT (KEY) REPLACE ("xxx" as value)
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
+THEN RETURN * EXCEPT (KEY) REPLACE ('xxx' as value)
 --
 InsertStmt
 +-table_scan=
@@ -1463,7 +1463,7 @@ InsertStmt
 +-column_access_list=WRITE,WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN *, * EXCEPT (KEY), * REPLACE (2 AS KEY)
 --
 
@@ -1493,7 +1493,7 @@ InsertStmt
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one")
+INSERT INTO KeyValue (key, value) VALUES (1, 'one')
 THEN RETURN * EXCEPT (KEY), * EXCEPT (KEY)
 --
 
@@ -1519,14 +1519,14 @@ InsertStmt
 ==
 
 [language_features=V_1_3_DML_RETURNING]
-UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN * EXCEPT (key)
+UPDATE KeyValue SET value='a' WHERE key > 10 THEN RETURN * EXCEPT (key)
 --
 ERROR: SELECT * EXCEPT is not supported [at 1:58]
-UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN * EXCEPT (key)
+UPDATE KeyValue SET value='a' WHERE key > 10 THEN RETURN * EXCEPT (key)
                                                          ^
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN * EXCEPT (key)
+UPDATE KeyValue SET value='a' WHERE key > 10 THEN RETURN * EXCEPT (key)
 --
 UpdateStmt
 +-table_scan=
@@ -1550,8 +1550,8 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10
-THEN RETURN * EXCEPT (key) REPLACE ("xxx" as value)
+UPDATE KeyValue SET value='a' WHERE key > 10
+THEN RETURN * EXCEPT (key) REPLACE ('xxx' as value)
 --
 UpdateStmt
 +-table_scan=
@@ -1577,7 +1577,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue SET value="a" WHERE key > 10
+UPDATE KeyValue SET value='a' WHERE key > 10
 THEN RETURN * EXCEPT (key), *
 --
 UpdateStmt
@@ -1604,7 +1604,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue T SET value="a" WHERE key > 10
+UPDATE KeyValue T SET value='a' WHERE key > 10
 THEN RETURN T.*
 --
 
@@ -1631,7 +1631,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue T SET value="a" WHERE key > 10
+UPDATE KeyValue T SET value='a' WHERE key > 10
 THEN RETURN T.* EXCEPT(KEY)
 --
 UpdateStmt
@@ -1656,7 +1656,7 @@ UpdateStmt
           +-Literal(type=STRING, value='a')
 ==
 
-UPDATE KeyValue T SET value="a" WHERE key > 10
+UPDATE KeyValue T SET value='a' WHERE key > 10
 THEN RETURN T.* EXCEPT (KEY), * REPLACE (2 AS KEY)
 --
 UpdateStmt
@@ -2209,17 +2209,17 @@ DeleteStmt
     +-Literal(type=INT32, value=3)
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN COUNT(*) GROUP BY key
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN COUNT(*) GROUP BY key
 --
 ERROR: Syntax error: Expected end of input but got keyword GROUP [at 1:74]
-...key, value) VALUES (1, "one") THEN RETURN COUNT(*) GROUP BY key
+...key, value) VALUES (1, 'one') THEN RETURN COUNT(*) GROUP BY key
                                                       ^
 ==
 
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN COUNT(*)
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN COUNT(*)
 --
 ERROR: THEN RETURN clause cannot use aggregation [at 1:53]
-INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN COUNT(*)
+INSERT INTO KeyValue (key, value) VALUES (1, 'one') THEN RETURN COUNT(*)
                                                     ^
 ==
 

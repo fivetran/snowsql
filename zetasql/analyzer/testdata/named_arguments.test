@@ -2729,9 +2729,9 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 | | +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-ColumnRef(type=INT64, column=$aggregate.$agg2#2)
-| |   +-ArgumentRef(type=INT64, name="delta", argument_kind=NOT_AGGREGATE)
+| |   +-ArgumentRef(type=INT64, name='delta', argument_kind=NOT_AGGREGATE)
 | +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
-|   +-ArgumentRef(type=BOOL, name="allow_nulls", argument_kind=NOT_AGGREGATE)
+|   +-ArgumentRef(type=BOOL, name='allow_nulls', argument_kind=NOT_AGGREGATE)
 |   +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg3#3)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg4#4)
@@ -2744,18 +2744,18 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 
   $agg2#2 :=
     +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-      +-ArgumentRef(parse_location=38-42, type=STRING, name="cval", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=38-42, type=STRING, name='cval', argument_kind=AGGREGATE)
       +-distinct=TRUE
 
   $agg3#3 :=
     +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
       +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
         +-FunctionCall(ZetaSQL:$is_null(STRING) -> BOOL)
-          +-ArgumentRef(parse_location=91-95, type=STRING, name="cval", argument_kind=AGGREGATE)
+          +-ArgumentRef(parse_location=91-95, type=STRING, name='cval', argument_kind=AGGREGATE)
 
   $agg4#4 :=
     +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-      +-ArgumentRef(parse_location=126-130, type=STRING, name="cval", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=126-130, type=STRING, name='cval', argument_kind=AGGREGATE)
       +-distinct=TRUE
 ==
 
@@ -2795,9 +2795,9 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 | | +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-ColumnRef(type=INT64, column=$aggregate.$agg2#2)
-| |   +-ArgumentRef(type=INT64, name="delta", argument_kind=NOT_AGGREGATE)
+| |   +-ArgumentRef(type=INT64, name='delta', argument_kind=NOT_AGGREGATE)
 | +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
-|   +-ArgumentRef(type=BOOL, name="allow_nulls", argument_kind=NOT_AGGREGATE)
+|   +-ArgumentRef(type=BOOL, name='allow_nulls', argument_kind=NOT_AGGREGATE)
 |   +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg3#3)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg4#4)
@@ -2810,18 +2810,18 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 
   $agg2#2 :=
     +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-      +-ArgumentRef(parse_location=38-42, type=STRING, name="cval", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=38-42, type=STRING, name='cval', argument_kind=AGGREGATE)
       +-distinct=TRUE
 
   $agg3#3 :=
     +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
       +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
         +-FunctionCall(ZetaSQL:$is_null(STRING) -> BOOL)
-          +-ArgumentRef(parse_location=91-95, type=STRING, name="cval", argument_kind=AGGREGATE)
+          +-ArgumentRef(parse_location=91-95, type=STRING, name='cval', argument_kind=AGGREGATE)
 
   $agg4#4 :=
     +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-      +-ArgumentRef(parse_location=126-130, type=STRING, name="cval", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=126-130, type=STRING, name='cval', argument_kind=AGGREGATE)
       +-distinct=TRUE
 ==
 
@@ -2861,9 +2861,9 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 | | +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-ColumnRef(type=INT64, column=$aggregate.$agg2#2)
-| |   +-ArgumentRef(type=INT64, name="delta", argument_kind=NOT_AGGREGATE)
+| |   +-ArgumentRef(type=INT64, name='delta', argument_kind=NOT_AGGREGATE)
 | +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
-|   +-ArgumentRef(type=BOOL, name="allow_nulls", argument_kind=NOT_AGGREGATE)
+|   +-ArgumentRef(type=BOOL, name='allow_nulls', argument_kind=NOT_AGGREGATE)
 |   +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg3#3)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg4#4)
@@ -2876,18 +2876,18 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 
   $agg2#2 :=
     +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-      +-ArgumentRef(parse_location=38-42, type=STRING, name="cval", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=38-42, type=STRING, name='cval', argument_kind=AGGREGATE)
       +-distinct=TRUE
 
   $agg3#3 :=
     +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
       +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
         +-FunctionCall(ZetaSQL:$is_null(STRING) -> BOOL)
-          +-ArgumentRef(parse_location=91-95, type=STRING, name="cval", argument_kind=AGGREGATE)
+          +-ArgumentRef(parse_location=91-95, type=STRING, name='cval', argument_kind=AGGREGATE)
 
   $agg4#4 :=
     +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-      +-ArgumentRef(parse_location=126-130, type=STRING, name="cval", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=126-130, type=STRING, name='cval', argument_kind=AGGREGATE)
       +-distinct=TRUE
 ==
 

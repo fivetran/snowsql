@@ -116,8 +116,8 @@ FROM SimpleTypesWithAnonymizationUid;
 CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-signature=() -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.anon_count#13]
@@ -135,8 +135,8 @@ CreateTableFunctionStmt
 CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-signature=() -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.anon_count#13]
@@ -183,8 +183,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[table_arg]
 +-signature=(TABLE<a INT64> table_arg) -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT anon_count(*) AS anon_count\nFROM table_arg"
++-language='SQL'
++-code='SELECT anon_count(*) AS anon_count\nFROM table_arg'
 +-query=
 | +-ProjectScan
 |   +-parse_location=59-108
@@ -193,7 +193,7 @@ CreateTableFunctionStmt
 |     +-AnonymizedAggregateScan
 |       +-column_list=[$aggregate.anon_count#2]
 |       +-input_scan=
-|       | +-RelationArgumentScan(parse_location=99-108, name="table_arg")
+|       | +-RelationArgumentScan(parse_location=99-108, name='table_arg')
 |       +-aggregate_list=
 |         +-anon_count#2 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=66-76)
 +-output_column_list=
@@ -209,7 +209,7 @@ FROM table_arg;
 --
 ALTERNATION GROUP: ANY TABLE
 --
-CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg], signature=(ANY TABLE table_arg) -> ANY TABLE, language="SQL", code="SELECT anon_count(*) AS anon_count\nFROM table_arg")
+CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg], signature=(ANY TABLE table_arg) -> ANY TABLE, language='SQL', code='SELECT anon_count(*) AS anon_count\nFROM table_arg')
 [REPLACED_LITERALS]
 CREATE TABLE FUNCTION foo_tvf(table_arg ANY TABLE) AS
 SELECT anon_count(*) AS anon_count
@@ -228,8 +228,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[e, k]
 +-signature=(DOUBLE e, INT64 k) -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.anon_count#13]
@@ -251,8 +251,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[e, k]
 +-signature=(DOUBLE e, INT64 k) -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.anon_count#13]
@@ -304,8 +304,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[table_arg, e, k]
 +-signature=(TABLE<a INT64> table_arg, DOUBLE e, INT64 k) -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg"
++-language='SQL'
++-code='SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg'
 +-query=
 | +-ProjectScan
 |   +-parse_location=108-218
@@ -314,16 +314,16 @@ CreateTableFunctionStmt
 |     +-AnonymizedAggregateScan
 |       +-column_list=[$aggregate.anon_count#2]
 |       +-input_scan=
-|       | +-RelationArgumentScan(parse_location=209-218, name="table_arg")
+|       | +-RelationArgumentScan(parse_location=209-218, name='table_arg')
 |       +-aggregate_list=
 |       | +-anon_count#2 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=176-186)
 |       +-anonymization_option_list=
 |         +-epsilon=
 |         | +-parse_location=142-153
-|         | +-ArgumentRef(parse_location=151-152, type=DOUBLE, name="e")
+|         | +-ArgumentRef(parse_location=151-152, type=DOUBLE, name='e')
 |         +-k_threshold=
 |           +-parse_location=155-170
-|           +-ArgumentRef(parse_location=168-169, type=INT64, name="k")
+|           +-ArgumentRef(parse_location=168-169, type=INT64, name='k')
 +-output_column_list=
   +-$aggregate.anon_count#2 AS anon_count [INT64]
 [REPLACED_LITERALS]
@@ -339,7 +339,7 @@ FROM table_arg
 --
 ALTERNATION GROUP: ANY TABLE
 --
-CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, k], signature=(ANY TABLE table_arg, DOUBLE e, INT64 k) -> ANY TABLE, language="SQL", code="SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg")
+CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, k], signature=(ANY TABLE table_arg, DOUBLE e, INT64 k) -> ANY TABLE, language='SQL', code='SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg')
 [REPLACED_LITERALS]
 CREATE TABLE FUNCTION foo_tvf(table_arg ANY TABLE,
                               e DOUBLE, k INT64) AS
@@ -379,8 +379,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[table_arg, e, k]
 +-signature=(TABLE<a INT64> table_arg, DOUBLE e, INT64 k) -> TABLE<anon_count INT64>
-+-language="SQL"
-+-code="SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)"
++-language='SQL'
++-code='SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)'
 +-query=
 | +-ProjectScan
 |   +-parse_location=108-282
@@ -393,7 +393,7 @@ CreateTableFunctionStmt
 |       |   +-parse_location=219-223
 |       |   +-column_list=[table_arg.a#1, SimpleTypesWithAnonymizationUid.uid#12]
 |       |   +-left_scan=
-|       |   | +-RelationArgumentScan(parse_location=209-218, column_list=[table_arg.a#1], name="table_arg")
+|       |   | +-RelationArgumentScan(parse_location=209-218, column_list=[table_arg.a#1], name='table_arg')
 |       |   +-right_scan=
 |       |   | +-TableScan(parse_location=224-255, column_list=[SimpleTypesWithAnonymizationUid.uid#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t')
 |       |   +-join_expr=
@@ -405,10 +405,10 @@ CreateTableFunctionStmt
 |       +-anonymization_option_list=
 |         +-epsilon=
 |         | +-parse_location=142-153
-|         | +-ArgumentRef(parse_location=151-152, type=DOUBLE, name="e")
+|         | +-ArgumentRef(parse_location=151-152, type=DOUBLE, name='e')
 |         +-k_threshold=
 |           +-parse_location=155-170
-|           +-ArgumentRef(parse_location=168-169, type=INT64, name="k")
+|           +-ArgumentRef(parse_location=168-169, type=INT64, name='k')
 +-output_column_list=
   +-$aggregate.anon_count#14 AS anon_count [INT64]
 [REPLACED_LITERALS]
@@ -424,7 +424,7 @@ FROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)
 --
 ALTERNATION GROUP: ANY TABLE
 --
-CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, k], signature=(ANY TABLE table_arg, DOUBLE e, INT64 k) -> ANY TABLE, language="SQL", code="SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)")
+CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, k], signature=(ANY TABLE table_arg, DOUBLE e, INT64 k) -> ANY TABLE, language='SQL', code='SELECT WITH ANONYMIZATION OPTIONS(epsilon=(e), k_threshold=(k))\n    anon_count(*) AS anon_count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)')
 [REPLACED_LITERALS]
 CREATE TABLE FUNCTION foo_tvf(table_arg ANY TABLE,
                               e DOUBLE, k INT64) AS

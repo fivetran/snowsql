@@ -93,8 +93,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="SUM(42)"
++-language='SQL'
++-code='SUM(42)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -119,14 +119,14 @@ CreateFunctionStmt
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="SUM(x+y)"
++-language='SQL'
++-code='SUM(x+y)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
 |     +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|       +-ArgumentRef(parse_location=60-61, type=INT64, name="x", argument_kind=AGGREGATE)
-|       +-ArgumentRef(parse_location=62-63, type=INT64, name="y", argument_kind=AGGREGATE)
+|       +-ArgumentRef(parse_location=60-61, type=INT64, name='x', argument_kind=AGGREGATE)
+|       +-ArgumentRef(parse_location=62-63, type=INT64, name='y', argument_kind=AGGREGATE)
 +-function_expression=
 | +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 +-option_list=
@@ -221,8 +221,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="SUM(42)"
++-language='SQL'
++-code='SUM(42)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -238,8 +238,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="SUM(42)"
++-language='SQL'
++-code='SUM(42)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)

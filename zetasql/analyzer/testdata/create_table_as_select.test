@@ -1276,14 +1276,14 @@ CreateTableAsSelectStmt
 +-pseudo_column_list=t1.[pseudo_column_int32#8, pseudo_column_kitchensink#9, pseudo_column_timestamp#10]
 +-check_constraint_list=
 | +-CheckConstraint
-| | +-constraint_name=""
+| | +-constraint_name=''
 | | +-expression=
 | | | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=t1.a#5)
 | | |   +-Literal(type=INT64, value=10)
 | | +-enforced=TRUE
 | +-CheckConstraint
-| | +-constraint_name=""
+| | +-constraint_name=''
 | | +-expression=
 | | | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
 | | |   +-FunctionCall(ZetaSQL:length(STRING) -> INT64)
@@ -1291,7 +1291,7 @@ CreateTableAsSelectStmt
 | | |   +-Literal(type=INT64, value=3)
 | | +-enforced=TRUE
 | +-CheckConstraint
-|   +-constraint_name=""
+|   +-constraint_name=''
 |   +-expression=
 |   | +-FunctionCall(ZetaSQL:$not_equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=t1.key#7)
@@ -1317,7 +1317,7 @@ CreateTableAsSelectStmt
 create table t1
 (
   check (key > 100),
-  check (value != "foo")
+  check (value != 'foo')
 ) as select * from KeyValue;
 --
 CreateTableAsSelectStmt
@@ -1328,14 +1328,14 @@ CreateTableAsSelectStmt
 +-pseudo_column_list=t1.[pseudo_column_int32#5, pseudo_column_kitchensink#6, pseudo_column_timestamp#7]
 +-check_constraint_list=
 | +-CheckConstraint
-| | +-constraint_name=""
+| | +-constraint_name=''
 | | +-expression=
 | | | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=t1.Key#3)
 | | |   +-Literal(type=INT64, value=100)
 | | +-enforced=TRUE
 | +-CheckConstraint
-|   +-constraint_name=""
+|   +-constraint_name=''
 |   +-expression=
 |   | +-FunctionCall(ZetaSQL:$not_equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=t1.Value#4)
@@ -1373,21 +1373,21 @@ CreateTableAsSelectStmt
 +-pseudo_column_list=t1.[pseudo_column_int32#8, pseudo_column_kitchensink#9, pseudo_column_timestamp#10]
 +-check_constraint_list=
 | +-CheckConstraint
-| | +-constraint_name=""
+| | +-constraint_name=''
 | | +-expression=
 | | | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=t1.a1#1)
 | | |   +-Literal(type=INT64, value=10)
 | | +-enforced=TRUE
 | +-CheckConstraint
-| | +-constraint_name=""
+| | +-constraint_name=''
 | | +-expression=
 | | | +-FunctionCall(ZetaSQL:$not_equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=t1.c1#3)
 | | |   +-Literal(type=INT64, value=0)
 | | +-enforced=TRUE
 | +-CheckConstraint
-|   +-constraint_name=""
+|   +-constraint_name=''
 |   +-expression=
 |   | +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
 |   |   +-FunctionCall(ZetaSQL:length(STRING) -> INT64)

@@ -1768,7 +1768,7 @@ ERROR: struct_field ambiguously references multiple columns in previous FROM cla
 
 select *
 from (select struct<arraycol array<int64>>([0,1,2]) as struct_field,
-             struct<arraycol array<string>>(["a","b"]) as struct_field) t1,
+             struct<arraycol array<string>>(['a','b']) as struct_field) t1,
      {{t1.|}}struct_field.arraycol
 --
 ALTERNATION GROUP: t1.

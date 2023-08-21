@@ -390,8 +390,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[TestConstantInt64]
 +-signature=(INT64 TestConstantInt64) -> INT64
-+-language="SQL"
-+-code="TestConstantInt64 + IF(nested_catalog.TestConstantBool, 1, 0)"
++-language='SQL'
++-code='TestConstantInt64 + IF(nested_catalog.TestConstantBool, 1, 0)'
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     +-ArgumentRef(type=INT64, name='TestConstantInt64')

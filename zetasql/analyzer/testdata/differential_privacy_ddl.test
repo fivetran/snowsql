@@ -120,8 +120,8 @@ FROM SimpleTypesWithAnonymizationUid;
 CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-signature=() -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.count#13]
@@ -141,8 +141,8 @@ CreateTableFunctionStmt
 CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-signature=() -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.count#13]
@@ -189,8 +189,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[table_arg]
 +-signature=(TABLE<a INT64> table_arg) -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM table_arg"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM table_arg'
 +-query=
 | +-ProjectScan
 |   +-parse_location=59-124
@@ -199,7 +199,7 @@ CreateTableFunctionStmt
 |     +-DifferentialPrivacyAggregateScan
 |       +-column_list=[$aggregate.count#2]
 |       +-input_scan=
-|       | +-RelationArgumentScan(parse_location=115-124, name="table_arg")
+|       | +-RelationArgumentScan(parse_location=115-124, name='table_arg')
 |       +-aggregate_list=
 |         +-count#2 :=
 |           +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -218,7 +218,7 @@ FROM table_arg;
 --
 ALTERNATION GROUP: ANY TABLE
 --
-CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg], signature=(ANY TABLE table_arg) -> ANY TABLE, language="SQL", code="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM table_arg")
+CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg], signature=(ANY TABLE table_arg) -> ANY TABLE, language='SQL', code='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM table_arg')
 [REPLACED_LITERALS]
 CREATE TABLE FUNCTION foo_tvf(table_arg ANY TABLE) AS
 SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count
@@ -237,8 +237,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[e, d]
 +-signature=(DOUBLE e, DOUBLE d) -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.count#13]
@@ -262,8 +262,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[e, d]
 +-signature=(DOUBLE e, DOUBLE d) -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$aggregate.count#13]
@@ -315,8 +315,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[table_arg, e, d]
 +-signature=(TABLE<a INT64> table_arg, DOUBLE e, DOUBLE d) -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg'
 +-query=
 | +-ProjectScan
 |   +-parse_location=109-210
@@ -325,7 +325,7 @@ CreateTableFunctionStmt
 |     +-DifferentialPrivacyAggregateScan
 |       +-column_list=[$aggregate.count#2]
 |       +-input_scan=
-|       | +-RelationArgumentScan(parse_location=201-210, name="table_arg")
+|       | +-RelationArgumentScan(parse_location=201-210, name='table_arg')
 |       +-aggregate_list=
 |       | +-count#2 :=
 |       |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -334,10 +334,10 @@ CreateTableFunctionStmt
 |       +-option_list=
 |         +-epsilon=
 |         | +-parse_location=150-161
-|         | +-ArgumentRef(parse_location=159-160, type=DOUBLE, name="e")
+|         | +-ArgumentRef(parse_location=159-160, type=DOUBLE, name='e')
 |         +-delta=
 |           +-parse_location=163-172
-|           +-ArgumentRef(parse_location=170-171, type=DOUBLE, name="d")
+|           +-ArgumentRef(parse_location=170-171, type=DOUBLE, name='d')
 +-output_column_list=
   +-$aggregate.count#2 AS count [INT64]
 [REPLACED_LITERALS]
@@ -353,7 +353,7 @@ FROM table_arg
 --
 ALTERNATION GROUP: ANY TABLE
 --
-CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, d], signature=(ANY TABLE table_arg, DOUBLE e, DOUBLE d) -> ANY TABLE, language="SQL", code="SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg")
+CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, d], signature=(ANY TABLE table_arg, DOUBLE e, DOUBLE d) -> ANY TABLE, language='SQL', code='SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg')
 [REPLACED_LITERALS]
 CREATE TABLE FUNCTION foo_tvf(table_arg ANY TABLE,
                               e DOUBLE, d DOUBLE) AS
@@ -393,8 +393,8 @@ CreateTableFunctionStmt
 +-name_path=foo_tvf
 +-argument_name_list=[table_arg, e, d]
 +-signature=(TABLE<a INT64> table_arg, DOUBLE e, DOUBLE d) -> TABLE<count INT64>
-+-language="SQL"
-+-code="SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)"
++-language='SQL'
++-code='SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)'
 +-query=
 | +-ProjectScan
 |   +-parse_location=109-274
@@ -407,7 +407,7 @@ CreateTableFunctionStmt
 |       |   +-parse_location=211-215
 |       |   +-column_list=[table_arg.a#1, SimpleTypesWithAnonymizationUid.uid#12]
 |       |   +-left_scan=
-|       |   | +-RelationArgumentScan(parse_location=201-210, column_list=[table_arg.a#1], name="table_arg")
+|       |   | +-RelationArgumentScan(parse_location=201-210, column_list=[table_arg.a#1], name='table_arg')
 |       |   +-right_scan=
 |       |   | +-TableScan(parse_location=216-247, column_list=[SimpleTypesWithAnonymizationUid.uid#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t')
 |       |   +-join_expr=
@@ -422,10 +422,10 @@ CreateTableFunctionStmt
 |       +-option_list=
 |         +-epsilon=
 |         | +-parse_location=150-161
-|         | +-ArgumentRef(parse_location=159-160, type=DOUBLE, name="e")
+|         | +-ArgumentRef(parse_location=159-160, type=DOUBLE, name='e')
 |         +-delta=
 |           +-parse_location=163-172
-|           +-ArgumentRef(parse_location=170-171, type=DOUBLE, name="d")
+|           +-ArgumentRef(parse_location=170-171, type=DOUBLE, name='d')
 +-output_column_list=
   +-$aggregate.count#14 AS count [INT64]
 [REPLACED_LITERALS]
@@ -441,7 +441,7 @@ FROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)
 --
 ALTERNATION GROUP: ANY TABLE
 --
-CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, d], signature=(ANY TABLE table_arg, DOUBLE e, DOUBLE d) -> ANY TABLE, language="SQL", code="SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)")
+CreateTableFunctionStmt(parse_location=22-29, name_path=foo_tvf, argument_name_list=[table_arg, e, d], signature=(ANY TABLE table_arg, DOUBLE e, DOUBLE d) -> ANY TABLE, language='SQL', code='SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=(e), delta=(d))\n    count(*) AS count\nFROM table_arg JOIN SimpleTypesWithAnonymizationUid t ON (table_arg.a = t.uid)')
 [REPLACED_LITERALS]
 CREATE TABLE FUNCTION foo_tvf(table_arg ANY TABLE,
                               e DOUBLE, d DOUBLE) AS

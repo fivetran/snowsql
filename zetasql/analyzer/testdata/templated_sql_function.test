@@ -615,7 +615,7 @@ ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-      +-ArgumentRef(parse_location=4-5, type=INT64, name="x", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=4-5, type=INT64, name='x', argument_kind=AGGREGATE)
 ==
 
 # Call a SQL UDA with a valid templated SQL body that refers to a NOT
@@ -641,7 +641,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:uda_valid_templated_return_int64_not_aggregate_arg(INT64 {is_not_aggregate: true}) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="y", argument_kind=NOT_AGGREGATE)
+ArgumentRef(type=INT64, name='y', argument_kind=NOT_AGGREGATE)
 ==
 
 # Call a SQL UDA with a valid templated SQL body that refers to an AGGREGATE
@@ -671,11 +671,11 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
-+-ArgumentRef(type=INT64, name="y", argument_kind=NOT_AGGREGATE)
++-ArgumentRef(type=INT64, name='y', argument_kind=NOT_AGGREGATE)
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-      +-ArgumentRef(parse_location=4-5, type=INT64, name="x", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=4-5, type=INT64, name='x', argument_kind=AGGREGATE)
 ==
 
 ################################################################################

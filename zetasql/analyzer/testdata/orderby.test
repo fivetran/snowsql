@@ -645,10 +645,10 @@ order by 1.0;
 ==
 
 select * from TestTable
-order by "foo";
+order by 'foo';
 --
 ERROR: Cannot ORDER BY literal values [at 2:10]
-order by "foo";
+order by 'foo';
          ^
 ==
 
@@ -2519,7 +2519,7 @@ QueryStmt
 ==
 
 # Can order by a subquery.
-select "a" from KeyValue order by (select count(*) from TestTable)
+select 'a' from KeyValue order by (select count(*) from TestTable)
 --
 QueryStmt
 +-output_column_list=
@@ -2968,7 +2968,7 @@ QueryStmt
 # This was originally b/20529177, which failed with an internal error about
 # an incorrect column reference.
 select string_agg(ex)
-from UNNEST(["a", "b", "c"]) ex
+from UNNEST(['a', 'b', 'c']) ex
 order by ex;
 --
 ERROR: ORDER BY clause expression references table alias ex which is neither grouped nor aggregated [at 3:10]
@@ -2977,7 +2977,7 @@ order by ex;
 ==
 
 select string_agg(ex.a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 order by ex
 --
 ERROR: ORDER BY clause expression references table alias ex which is neither grouped nor aggregated [at 3:10]
@@ -2986,7 +2986,7 @@ order by ex
 ==
 
 select string_agg({{ex.|}}a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 order by ex.a
 --
 ERROR: ORDER BY clause expression references ex.a which is neither grouped nor aggregated [at 3:10]
@@ -2995,7 +2995,7 @@ order by ex.a
 ==
 
 select string_agg({{ex.|}}a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 order by a
 --
 ERROR: ORDER BY clause expression references column a which is neither grouped nor aggregated [at 3:10]
@@ -3004,7 +3004,7 @@ order by a
 ==
 
 select string_agg(ex.a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 group by ex.b
 order by ex.b
 --
@@ -3022,7 +3022,7 @@ QueryStmt
     |   | +-ArrayScan
     |   |   +-column_list=[$array.ex#1]
     |   |   +-array_expr=
-    |   |   | +-Literal(type=ARRAY<STRUCT<a STRING, b INT32>>, value=[{a:"a", b:1}, {a:"b", b:2}], has_explicit_type=TRUE)
+    |   |   | +-Literal(type=ARRAY<STRUCT<a STRING, b INT32>>, value=[{a:'a', b:1}, {a:'b', b:2}], has_explicit_type=TRUE)
     |   |   +-element_column=$array.ex#1
     |   +-group_by_list=
     |   | +-b#3 :=
@@ -3046,7 +3046,7 @@ QueryStmt
 ==
 
 select string_agg(ex.a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 group by ex.b
 order by ex.b, ex.a
 --
