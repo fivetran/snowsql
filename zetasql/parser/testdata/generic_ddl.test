@@ -63,13 +63,13 @@ AS JSON '{"key": "value"}'
 # Generic CREATE with text literal body, instead of json
 CREATE EXPLORE myProject.myExplore
 OPTIONS(a=b, c=d)
-AS """
+AS '''
 explore: test_explore {
 
 }
-""";
+''';
 --
-CreateEntityStatement [0-90] [CREATE EXPLORE...lore {  } """]
+CreateEntityStatement [0-90] [CREATE EXPLORE...lore {  } ''']
   Identifier(EXPLORE) [7-14] [EXPLORE]
   PathExpression [15-34] [myProject.myExplore]
     Identifier(myProject) [15-24] [myProject]
@@ -83,19 +83,19 @@ CreateEntityStatement [0-90] [CREATE EXPLORE...lore {  } """]
       Identifier(c) [48-49] [c]
       PathExpression [50-51] [d]
         Identifier(d) [50-51] [d]
-  StringLiteral("""
+  StringLiteral('''
 explore: test_explore {
 
 }
-""") [56-90] [""" explore...explore {  } """]
+''') [56-90] [''' explore...explore {  } ''']
 --
 CREATE EXPLORE myProject.myExplore
 OPTIONS(a = b, c = d)
-AS """
+AS '''
 explore: test_explore {
 
 }
-"""
+'''
 ==
 
 # Generic CREATE doesn't support multi-parts entity type
@@ -191,18 +191,18 @@ AlterEntityStatement [0-95] [ALTER RESERVATION..."value"}']
 ALTER RESERVATION myProject.myReservation SET OPTIONS(a = b), SET AS JSON '{"key": "value"}'
 ==
 
-ALTER EXPLORE myProject.myExplore SET AS "explore: test_explore { }";
+ALTER EXPLORE myProject.myExplore SET AS 'explore: test_explore { }';
 --
-AlterEntityStatement [0-68] [ALTER EXPLORE...t_explore { }"]
+AlterEntityStatement [0-68] [ALTER EXPLORE...t_explore { }']
   Identifier(EXPLORE) [6-13] [EXPLORE]
   PathExpression [14-33] [myProject.myExplore]
     Identifier(myProject) [14-23] [myProject]
     Identifier(myExplore) [24-33] [myExplore]
-  AlterActionList [34-68] [SET AS "explore...explore { }"]
-    SetAsAction [34-68] [SET AS "explore...explore { }"]
+  AlterActionList [34-68] [SET AS 'explore...explore { }']
+    SetAsAction [34-68] [SET AS 'explore...explore { }']
       StringLiteral('explore: test_explore { }') [41-68] ['explore: test_explore { }']
 --
-ALTER EXPLORE myProject.myExplore SET AS "explore: test_explore { }"
+ALTER EXPLORE myProject.myExplore SET AS 'explore: test_explore { }'
 ==
 
 # Incomplete generic ALTER statement

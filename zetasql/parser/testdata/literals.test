@@ -1,14 +1,14 @@
-select NULL, TRUE, "x", b"y", 1, 1.0
+select NULL, TRUE, 'x', b"y", 1, 1.0
 --
 QueryStatement [0-36] [select NULL...y", 1, 1.0]
   Query [0-36] [select NULL...y", 1, 1.0]
     Select [0-36] [select NULL...y", 1, 1.0]
-      SelectList [7-36] [NULL, TRUE, "x", b"y", 1, 1.0]
+      SelectList [7-36] [NULL, TRUE, 'x', b"y", 1, 1.0]
         SelectColumn [7-11] [NULL]
           NullLiteral(NULL) [7-11] [NULL]
         SelectColumn [13-17] [TRUE]
           BooleanLiteral(TRUE) [13-17] [TRUE]
-        SelectColumn [19-22] ["x"]
+        SelectColumn [19-22] ['x']
           StringLiteral('x') [19-22] ['x']
         SelectColumn [24-28] [b"y"]
           BytesLiteral(b"y") [24-28] [b"y"]
@@ -20,7 +20,7 @@ QueryStatement [0-36] [select NULL...y", 1, 1.0]
 SELECT
   NULL,
   TRUE,
-  "x",
+  'x',
   b"y",
   1,
   1.0
@@ -60,48 +60,32 @@ SELECT
   1.e-10
 ==
 
-select 'abc', 'a\b', "def", '\\x53', '\\u1235', "\\U00012346"
+select 'abc', 'a\b', 'def', '\\x53', '\\u1235', '\\U00012346'
 --
-QueryStatement [0-61] [select 'abc...U00012346"]
-  Query [0-61] [select 'abc...U00012346"]
-    Select [0-61] [select 'abc...U00012346"]
-      SelectList [7-61] ['abc', 'a\...U00012346"]
+QueryStatement [0-61] [select 'abc...U00012346']
+  Query [0-61] [select 'abc...U00012346']
+    Select [0-61] [select 'abc...U00012346']
+      SelectList [7-61] ['abc', 'a\...U00012346']
         SelectColumn [7-12] ['abc']
           StringLiteral('abc') [7-12] ['abc']
         SelectColumn [14-19] ['a\b']
           StringLiteral('a\b') [14-19] ['a\b']
-        SelectColumn [21-26] ["def"]
+        SelectColumn [21-26] ['def']
           StringLiteral('def') [21-26] ['def']
         SelectColumn [28-35] ['\\x53']
           StringLiteral('\\x53') [28-35] ['\\x53']
         SelectColumn [37-46] ['\\u1235']
           StringLiteral('\\u1235') [37-46] ['\\u1235']
-        SelectColumn [48-61] ["\\U00012346"]
+        SelectColumn [48-61] ['\\U00012346']
           StringLiteral('\\U00012346') [48-61] ['\\U00012346']
 --
 SELECT
   'abc',
   'a\b',
-  "def",
+  'def',
   '\\x53',
   '\\u1235',
-  "\\U00012346"
-==
-
-select """line1""", '''line1'''
---
-QueryStatement [0-31] [select """...''line1''']
-  Query [0-31] [select """...''line1''']
-    Select [0-31] [select """...''line1''']
-      SelectList [7-31] ["""line1""", '''line1''']
-        SelectColumn [7-18] ["""line1"""]
-          StringLiteral('""line1""') [7-18] ['""line1""']
-        SelectColumn [20-31] ['''line1''']
-          StringLiteral('''line1''') [20-31] ['''line1''']
---
-SELECT
-  """line1""",
-  '''line1'''
+  '\\U00012346'
 ==
 
 select '''abc\'''', '''abc\\'''
@@ -137,57 +121,6 @@ SELECT
   '''abc''\\'def'''
 ==
 
-# Escaped quotes prevent triple-quote detection.
-select """abc"\\""def""", """abc""\\"def"""
---
-QueryStatement [0-43] [select """..."\\"def"""]
-  Query [0-43] [select """..."\\"def"""]
-    Select [0-43] [select """..."\\"def"""]
-      SelectList [7-43] ["""abc"\\"..."\\"def"""]
-        SelectColumn [7-24] ["""abc"\\""def"""]
-          StringLiteral('""abc"\\""def""') [7-24] ['""abc"\\""def""']
-        SelectColumn [26-43] ["""abc""\\"def"""]
-          StringLiteral('""abc""\\"def""') [26-43] ['""abc""\\"def""']
---
-SELECT
-  """abc"\\""def""",
-  """abc""\\"def"""
-==
-
-# "a" inside """ quotes won't work as well.
-select """"a""""
---
-ERROR: Syntax error: Unclosed string literal [at 1:16]
-select """"a""""
-               ^
-==
-
-select """"a" """
---
-QueryStatement [0-17] [select """"a" """]
-  Query [0-17] [select """"a" """]
-    Select [0-17] [select """"a" """]
-      SelectList [7-17] [""""a" """]
-        SelectColumn [7-17] [""""a" """]
-          StringLiteral('"""a" ""') [7-17] ['"""a" ""']
---
-SELECT
-  """"a" """
-==
-
-select """line1 'single_quote' "double_quote" \\x41g \\u22FD \\U000022FD"""
---
-QueryStatement [0-75] [select """...U000022FD"""]
-  Query [0-75] [select """...U000022FD"""]
-    Select [0-75] [select """...U000022FD"""]
-      SelectList [7-75] ["""line1 '...U000022FD"""]
-        SelectColumn [7-75] ["""line1 '...U000022FD"""]
-          StringLiteral('""line1 'single_quote' "double_quote" \\x41g \\u22FD \\U000022FD""') [7-75] ['""line1 '...U000022FD""']
---
-SELECT
-  """line1 'single_quote' "double_quote" \\x41g \\u22FD \\U000022FD"""
-==
-
 select '''line1 'single_quote' "double_quote" \\x41g \\u22FD \\U000022FD'''
 --
 QueryStatement [0-75] [select '''...U000022FD''']
@@ -201,36 +134,22 @@ SELECT
   '''line1 'single_quote' "double_quote" \\x41g \\u22FD \\U000022FD'''
 ==
 
-select """\u123"""
---
-ERROR: Syntax error: Illegal escape sequence: \u must be followed by 4 hex digits but saw: \u123 [at 1:11]
-select """\u123"""
-          ^
-==
-
-select """\U123"""
---
-ERROR: Syntax error: Illegal escape sequence: \U must be followed by 8 hex digits but saw: \U123 [at 1:11]
-select """\U123"""
-          ^
-==
-
-select """line1
+select '''line1
 line2
-line3""",
+line3''',
 '--------------------------',
 '''line1
 line2
 line3'''
 --
-QueryStatement [0-85] [select """...line2 line3''']
-  Query [0-85] [select """...line2 line3''']
-    Select [0-85] [select """...line2 line3''']
-      SelectList [7-85] ["""line1 line2...ine2 line3''']
-        SelectColumn [7-30] ["""line1 line2 line3"""]
-          StringLiteral("""line1
+QueryStatement [0-85] [select '''...line2 line3''']
+  Query [0-85] [select '''...line2 line3''']
+    Select [0-85] [select '''...line2 line3''']
+      SelectList [7-85] ['''line1 line2...ine2 line3''']
+        SelectColumn [7-30] ['''line1 line2 line3''']
+          StringLiteral('''line1
 line2
-line3""") [7-30] ["""line1 line2 line3"""]
+line3''') [7-30] ['''line1 line2 line3''']
         SelectColumn [32-60] ['--------------------------']
           StringLiteral('--------------------------') [32-60] ['--------------------------']
         SelectColumn [62-85] ['''line1 line2 line3''']
@@ -239,23 +158,15 @@ line2
 line3''') [62-85] ['''line1 line2 line3''']
 --
 SELECT
-  """line1
+  '''line1
 line2
-line3""",
+line3''',
   '--------------------------',
   '''line1
 line2
 line3'''
 ==
 
-select """line1\
-line2"""
---
-ERROR: Syntax error: Illegal escaped newline [at 1:16]
-select """line1\
-               ^
-==
-
 select '''line1\
 line2'''
 --
@@ -264,53 +175,13 @@ select '''line1\
                ^
 ==
 
-select """line1\\
-line2""",
-'-----------------------------',
-'''line1\\
-line2'''
---
-QueryStatement [0-80] [select """...\ line2''']
-  Query [0-80] [select """...\ line2''']
-    Select [0-80] [select """...\ line2''']
-      SelectList [7-80] ["""line1\\...\ line2''']
-        SelectColumn [7-26] ["""line1\\ line2"""]
-          StringLiteral("""line1\\
-line2""") [7-26] ["""line1\\ line2"""]
-        SelectColumn [28-59] ['---------...---------']
-          StringLiteral('-----------------------------') [28-59] ['---------...---------']
-        SelectColumn [61-80] ['''line1\\ line2''']
-          StringLiteral('''line1\\
-line2''') [61-80] ['''line1\\ line2''']
---
-SELECT
-  """line1\\
-line2""",
-  '-----------------------------',
-  '''line1\\
-line2'''
-==
-
-select """line1
+select '''line1
 line2\
-line3"""
+line3'''
 --
 ERROR: Syntax error: Illegal escaped newline [at 2:6]
 line2\
      ^
-==
-
-select """a'''a'''a"""
---
-QueryStatement [0-22] [select """a'''a'''a"""]
-  Query [0-22] [select """a'''a'''a"""]
-    Select [0-22] [select """a'''a'''a"""]
-      SelectList [7-22] ["""a'''a'''a"""]
-        SelectColumn [7-22] ["""a'''a'''a"""]
-          StringLiteral('""a'''a'''a""') [7-22] ['""a'''a'''a""']
---
-SELECT
-  """a'''a'''a"""
 ==
 
 select '''a"""a"""a'''
@@ -324,98 +195,6 @@ QueryStatement [0-22] [select '''a"""a"""a''']
 --
 SELECT
   '''a"""a"""a'''
-==
-
-select """line1""""""line2""""""line3"""
---
-ERROR: Syntax error: Expected end of input but got string literal """line2""" [at 1:19]
-select """line1""""""line2""""""line3"""
-                  ^
-==
-
-select """line1"""
-"""line2"""
-"""line3"""
---
-ERROR: Syntax error: Expected end of input but got string literal """line2""" [at 2:1]
-"""line2"""
-^
-==
-
-select
-"""line1""",
-"""line2""",
-"""line3"""
---
-QueryStatement [0-44] [select """...""line3"""]
-  Query [0-44] [select """...""line3"""]
-    Select [0-44] [select """...""line3"""]
-      SelectList [7-44] ["""line1""...""line3"""]
-        SelectColumn [7-18] ["""line1"""]
-          StringLiteral('""line1""') [7-18] ['""line1""']
-        SelectColumn [20-31] ["""line2"""]
-          StringLiteral('""line2""') [20-31] ['""line2""']
-        SelectColumn [33-44] ["""line3"""]
-          StringLiteral('""line3""') [33-44] ['""line3""']
---
-SELECT
-  """line1""",
-  """line2""",
-  """line3"""
-==
-
-select /* comment "a"*/ "a", /* comment """a*/ """a"""
---
-QueryStatement [0-54] [select /*...*/ """a"""]
-  Query [0-54] [select /*...*/ """a"""]
-    Select [0-54] [select /*...*/ """a"""]
-      SelectList [24-54] ["a", /* comment """a*/ """a"""]
-        SelectColumn [24-27] ["a"]
-          StringLiteral('a') [24-27] ['a']
-        SelectColumn [47-54] ["""a"""]
-          StringLiteral('""a""') [47-54] ['""a""']
---
-SELECT
-  "a",
-  """a"""
-==
-
-select "a /* comment */ ", """a /* comment */"""
---
-QueryStatement [0-48] [select "a...comment */"""]
-  Query [0-48] [select "a...comment */"""]
-    Select [0-48] [select "a...comment */"""]
-      SelectList [7-48] ["a /* comment...comment */"""]
-        SelectColumn [7-25] ["a /* comment */ "]
-          StringLiteral('a /* comment */ ') [7-25] ['a /* comment */ ']
-        SelectColumn [27-48] ["""a /* comment */"""]
-          StringLiteral('""a /* comment */""') [27-48] ['""a /* comment */""']
---
-SELECT
-  "a /* comment */ ",
-  """a /* comment */"""
-==
-
-select """abc # """, """ def -- """, """ ghi /* """, """ */ jkl """
---
-QueryStatement [0-67] [select """...*/ jkl """]
-  Query [0-67] [select """...*/ jkl """]
-    Select [0-67] [select """...*/ jkl """]
-      SelectList [7-67] ["""abc # "...*/ jkl """]
-        SelectColumn [7-19] ["""abc # """]
-          StringLiteral('""abc # ""') [7-19] ['""abc # ""']
-        SelectColumn [21-35] [""" def -- """]
-          StringLiteral('"" def -- ""') [21-35] ['"" def -- ""']
-        SelectColumn [37-51] [""" ghi /* """]
-          StringLiteral('"" ghi /* ""') [37-51] ['"" ghi /* ""']
-        SelectColumn [53-67] [""" */ jkl """]
-          StringLiteral('"" */ jkl ""') [53-67] ['"" */ jkl ""']
---
-SELECT
-  """abc # """,
-  """ def -- """,
-  """ ghi /* """,
-  """ */ jkl """
 ==
 
 # Basic tests for all the valid escapes.
@@ -434,9 +213,9 @@ select '\x53'        as OneHexByte
       ,'\"...'       as single_double_quote
       ,'\'...'       as single_single_quote
       ,'\"...'       as single_back_tick
-      ,"\"..."       as double_double_quote
-      ,"\'..."       as double_single_quote
-      ,"\"..."       as double_back_tick
+      ,'\"...'       as double_double_quote
+      ,'\'...'       as double_single_quote
+      ,'\"...'       as double_back_tick
       ,'\uabcd'      as short_UTF8_char
       ,'\U0010FFFF'  as long_UTF8_char
 --
@@ -504,15 +283,15 @@ QueryStatement [0-695] [select '\x53...long_UTF8_char]
           StringLiteral('\"...') [454-461] ['\"...']
           Alias [468-487] [as single_back_tick]
             Identifier(single_back_tick) [471-487] [single_back_tick]
-        SelectColumn [495-531] ["\"..."...double_double_quote]
+        SelectColumn [495-531] ['\"...'...double_double_quote]
           StringLiteral('\"...') [495-502] ['\"...']
           Alias [509-531] [as double_double_quote]
             Identifier(double_double_quote) [512-531] [double_double_quote]
-        SelectColumn [539-575] ["\'..."...double_single_quote]
+        SelectColumn [539-575] ['\'...'...double_single_quote]
           StringLiteral('\'...') [539-546] ['\'...']
           Alias [553-575] [as double_single_quote]
             Identifier(double_single_quote) [556-575] [double_single_quote]
-        SelectColumn [583-616] ["\"..."...double_back_tick]
+        SelectColumn [583-616] ['\"...'...double_back_tick]
           StringLiteral('\"...') [583-590] ['\"...']
           Alias [597-616] [as double_back_tick]
             Identifier(double_back_tick) [600-616] [double_back_tick]
@@ -541,9 +320,9 @@ SELECT
   '\"...' AS single_double_quote,
   '\'...' AS single_single_quote,
   '\"...' AS single_back_tick,
-  "\"..." AS double_double_quote,
-  "\'..." AS double_single_quote,
-  "\"..." AS double_back_tick,
+  '\"...' AS double_double_quote,
+  '\'...' AS double_single_quote,
+  '\"...' AS double_back_tick,
   '\uabcd' AS short_UTF8_char,
   '\U0010FFFF' AS long_UTF8_char
 ==
@@ -822,17 +601,17 @@ SELECT
 ==
 
 # Zero length strings
-select '', "", """""", ''''''
+select '', "", '''''', ''''''
 --
-QueryStatement [0-29] [select '', "", """""", '''''']
-  Query [0-29] [select '', "", """""", '''''']
-    Select [0-29] [select '', "", """""", '''''']
-      SelectList [7-29] ['', "", """""", '''''']
+QueryStatement [0-29] [select '', "", '''''', '''''']
+  Query [0-29] [select '', "", '''''', '''''']
+    Select [0-29] [select '', "", '''''', '''''']
+      SelectList [7-29] ['', "", '''''', '''''']
         SelectColumn [7-9] ['']
           StringLiteral('') [7-9] ['']
         SelectColumn [11-13] [""]
           StringLiteral('') [11-13] ['']
-        SelectColumn [15-21] [""""""]
+        SelectColumn [15-21] ['''''']
           StringLiteral('""""') [15-21] ['""""']
         SelectColumn [23-29] ['''''']
           StringLiteral('''''') [23-29] ['''''']
@@ -840,11 +619,11 @@ QueryStatement [0-29] [select '', "", """""", '''''']
 SELECT
   '',
   "",
-  """""",
+  '''''',
   ''''''
 ==
 
-select b'abc', B"def", B'"', B"'", B'"', B"""
+select b'abc', B'def', B'"', B"'", B'"', B"""
 --
 QueryStatement [0-45] [select b'abc...B'"', B"""]
   Query [0-45] [select b'abc...B'"', B"""]
@@ -852,8 +631,8 @@ QueryStatement [0-45] [select b'abc...B'"', B"""]
       SelectList [7-45] [b'abc', B"...B'"', B"""]
         SelectColumn [7-13] [b'abc']
           BytesLiteral(b'abc') [7-13] [b'abc']
-        SelectColumn [15-21] [B"def"]
-          BytesLiteral(B"def") [15-21] [B"def"]
+        SelectColumn [15-21] [B'def']
+          BytesLiteral(B'def') [15-21] [B'def']
         SelectColumn [23-27] [B'"']
           BytesLiteral(B'"') [23-27] [B'"']
         SelectColumn [29-33] [B"'"]
@@ -865,7 +644,7 @@ QueryStatement [0-45] [select b'abc...B'"', B"""]
 --
 SELECT
   b'abc',
-  B"def",
+  B'def',
   B'"',
   B"'",
   B'"',
