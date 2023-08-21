@@ -401,7 +401,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$query.$col1#1]
         +-expr_list=
-        | +-$col1#1 := Parameter(type=INT32, name="test_param_int32")
+        | +-$col1#1 := Parameter(type=INT32, name='test_param_int32')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -424,7 +424,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$query.$col1#1]
         +-expr_list=
-        | +-$col1#1 := Parameter(type=INT64, name="test_param_int64")
+        | +-$col1#1 := Parameter(type=INT64, name='test_param_int64')
         +-input_scan=
           +-SingleRowScan
 ==

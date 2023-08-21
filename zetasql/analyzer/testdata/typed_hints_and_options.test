@@ -589,9 +589,9 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-hint_list=
-    | +-string_hint := Parameter(type=STRING, name="test_param_string")
-    | +-enum_hint := Parameter(type=ENUM<zetasql_test__.TestEnum>, name="test_param_enum")
-    | +-int32_hint := Parameter(type=INT32, name="test_param_int32")
+    | +-string_hint := Parameter(type=STRING, name='test_param_string')
+    | +-enum_hint := Parameter(type=ENUM<zetasql_test__.TestEnum>, name='test_param_enum')
+    | +-int32_hint := Parameter(type=INT32, name='test_param_int32')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]

@@ -402,7 +402,7 @@ QueryStmt
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
         |     +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
         +-option_list=
-          +-max_rows_contributed := Parameter(type=INT64, name="test_param_int64")
+          +-max_rows_contributed := Parameter(type=INT64, name='test_param_int64')
 
 Rewrite ERROR: Option MAX_ROWS_CONTRIBUTED must be an INT64 literal between 1 and 2147483647
 ==

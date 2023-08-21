@@ -312,7 +312,7 @@ CreateModelStmt
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
 | +-y := Literal(type=STRING, value='abc')
-| +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
+| +-z := Parameter(type=ARRAY<INT32>, name='test_param_array')
 | +-z := Literal(type=STRING, value='abc')
 | +-sum :=
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)

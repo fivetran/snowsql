@@ -2492,7 +2492,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[$union_all.key#5, $orderby.$orderbycol1#6]
     |   +-expr_list=
-    |   | +-$orderbycol1#6 := Parameter(type=INT32, name="test_param_int32")
+    |   | +-$orderbycol1#6 := Parameter(type=INT32, name='test_param_int32')
     |   +-input_scan=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.key#5]
@@ -2584,7 +2584,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[KeyValue.Key#1, $orderby.$orderbycol1#3]
     |   +-expr_list=
-    |   | +-$orderbycol1#3 := Parameter(type=INT32, name="test_param_int32")
+    |   | +-$orderbycol1#3 := Parameter(type=INT32, name='test_param_int32')
     |   +-input_scan=
     |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
     +-order_by_item_list=

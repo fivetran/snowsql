@@ -39,7 +39,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=BOOL, name="test_param_bool")
+    | +-$col1#1 := Parameter(type=BOOL, name='test_param_bool')
     +-input_scan=
       +-SingleRowScan
 
@@ -58,7 +58,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=BOOL, name="select")
+    | +-$col1#1 := Parameter(type=BOOL, name='select')
     +-input_scan=
       +-SingleRowScan
 
@@ -182,11 +182,11 @@ QueryStmt
           +-ProjectScan
             +-column_list=t.[bool_#1, int32_#2, bytes_#3, string_#4, array_#5]
             +-expr_list=
-            | +-bool_#1 := Parameter(type=BOOL, name="test_param_bool")
-            | +-int32_#2 := Parameter(type=INT32, name="test_param_int32")
-            | +-bytes_#3 := Parameter(type=BYTES, name="test_param_bytes")
-            | +-string_#4 := Parameter(type=STRING, name="test_param_string")
-            | +-array_#5 := Parameter(type=ARRAY<INT32>, name="test_param_array")
+            | +-bool_#1 := Parameter(type=BOOL, name='test_param_bool')
+            | +-int32_#2 := Parameter(type=INT32, name='test_param_int32')
+            | +-bytes_#3 := Parameter(type=BYTES, name='test_param_bytes')
+            | +-string_#4 := Parameter(type=STRING, name='test_param_string')
+            | +-array_#5 := Parameter(type=ARRAY<INT32>, name='test_param_array')
             +-input_scan=
               +-SingleRowScan
 ==
@@ -206,7 +206,7 @@ QueryStmt
         +-input_scan=
         | +-TableScan(table=KeyValue)
         +-group_by_list=
-          +-$groupbycol1#3 := Parameter(type=INT32, name="test_param_int32")
+          +-$groupbycol1#3 := Parameter(type=INT32, name='test_param_int32')
 ==
 
 select key, value from KeyValue group by 1, 2 order by 1
@@ -338,10 +338,10 @@ QueryStmt
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=STRING, name="test_param_mixedcase")
-    | +-$col2#2 := Parameter(type=STRING, name="test_param_mixedcase")
-    | +-$col3#3 := Parameter(type=STRING, name="test_param_mixedcase")
-    | +-$col4#4 := Parameter(type=STRING, name="test_param_mixedcase")
+    | +-$col1#1 := Parameter(type=STRING, name='test_param_mixedcase')
+    | +-$col2#2 := Parameter(type=STRING, name='test_param_mixedcase')
+    | +-$col3#3 := Parameter(type=STRING, name='test_param_mixedcase')
+    | +-$col4#4 := Parameter(type=STRING, name='test_param_mixedcase')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -528,7 +528,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -785,7 +785,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=ENUM<zetasql_test__.TestEnum>, name="test_param_enum")
+    | +-$col1#1 := Parameter(type=ENUM<zetasql_test__.TestEnum>, name='test_param_enum')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -914,7 +914,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=ARRAY<INT32>, name="test_param_array")
+    | +-$col1#1 := Parameter(type=ARRAY<INT32>, name='test_param_array')
     +-input_scan=
       +-SingleRowScan
 --
@@ -969,7 +969,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=BOOL, name="select")
+    | +-$col1#1 := Parameter(type=BOOL, name='select')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -985,8 +985,8 @@ QueryStmt
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="proto")
-    | +-$col2#2 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='proto')
+    | +-$col2#2 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     +-input_scan=
       +-SingleRowScan
 ==

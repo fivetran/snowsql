@@ -36,7 +36,7 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   +-input_scan=
         |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=5)
         |   +-unit=ROWS
@@ -150,7 +150,7 @@ QueryStmt
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#14]
         |   +-input_scan=
         |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10])
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=3)
         |   +-unit=ROWS
@@ -213,7 +213,7 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   +-input_scan=
         |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=3)
         |   +-unit=ROWS
@@ -266,7 +266,7 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   +-input_scan=
         |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=3)
         |   +-unit=ROWS
@@ -511,7 +511,7 @@ QueryStmt
         +-aggregate_list=
         | +-$agg1#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
         +-anonymization_option_list=
-          +-max_rows_contributed := Parameter(type=INT64, name="test_param_int64")
+          +-max_rows_contributed := Parameter(type=INT64, name='test_param_int64')
 
 Rewrite ERROR: Option MAX_ROWS_CONTRIBUTED must be an INT64 literal between 1 and 2147483647
 ==

@@ -614,7 +614,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-kappa := Parameter(type=INT64, name="test_param_int64")
+          +-kappa := Parameter(type=INT64, name='test_param_int64')
 
 
 DEPRECATION WARNING:
@@ -642,7 +642,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-k_threshold := Parameter(type=INT64, name="test_param_int64")
+          +-k_threshold := Parameter(type=INT64, name='test_param_int64')
 ==
 
 select with anonymization options(
@@ -669,7 +669,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-delta := Parameter(type=DOUBLE, name="test_param_double")
+          +-delta := Parameter(type=DOUBLE, name='test_param_double')
 --
 ALTERNATION GROUP: epsilon
 --
@@ -690,7 +690,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-epsilon := Parameter(type=DOUBLE, name="test_param_double")
+          +-epsilon := Parameter(type=DOUBLE, name='test_param_double')
 --
 ALTERNATION GROUP: kappa
 --
@@ -2744,7 +2744,7 @@ QueryStmt
         | +-SampleScan
         |   +-input_scan=
         |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="reservoir"
+        |   +-method='reservoir'
         |   +-size=
         |   | +-Literal(parse_location=126-127, type=INT64, value=1)
         |   +-unit=ROWS
@@ -2778,7 +2778,7 @@ QueryStmt
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="reservoir"
+        |   |   +-method='reservoir'
         |   |   +-size=
         |   |   | +-Literal(parse_location=126-127, type=INT64, value=1)
         |   |   +-unit=ROWS
@@ -2823,7 +2823,7 @@ QueryStmt
         | +-SampleScan
         |   +-input_scan=
         |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="system"
+        |   +-method='system'
         |   +-size=
         |   | +-Cast(UINT64 -> INT64)
         |   |   +-parse_location=150-155
@@ -2861,7 +2861,7 @@ QueryStmt
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="system"
+        |   |   +-method='system'
         |   |   +-size=
         |   |   | +-Cast(UINT64 -> INT64)
         |   |   |   +-parse_location=150-155
@@ -2910,7 +2910,7 @@ QueryStmt
         | +-SampleScan
         |   +-input_scan=
         |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="some_random"
+        |   +-method='some_random'
         |   +-size=
         |   | +-Literal(parse_location=128-129, type=INT64, value=1)
         |   +-unit=PERCENT
@@ -2947,7 +2947,7 @@ QueryStmt
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="some_random"
+        |   |   +-method='some_random'
         |   |   +-size=
         |   |   | +-Literal(parse_location=128-129, type=INT64, value=1)
         |   |   +-unit=PERCENT
@@ -3003,13 +3003,13 @@ QueryStmt
         |   |       +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12]
         |   |       +-input_scan=
         |   |       | +-TableScan(parse_location=86-117, column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-        |   |       +-method="reservoir"
+        |   |       +-method='reservoir'
         |   |       +-size=
         |   |       | +-Literal(parse_location=147-149, type=INT64, value=10)
         |   |       +-unit=ROWS
         |   |       +-partition_by_list=
         |   |         +-ColumnRef(parse_location=168-173, type=INT32, column=SimpleTypesWithAnonymizationUid.int32#1)
-        |   +-method="system"
+        |   +-method='system'
         |   +-size=
         |   | +-Literal(parse_location=196-197, type=INT64, value=1)
         |   +-unit=PERCENT
@@ -3050,13 +3050,13 @@ QueryStmt
         |   |   |       +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12]
         |   |   |       +-input_scan=
         |   |   |       | +-TableScan(parse_location=86-117, column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-        |   |   |       +-method="reservoir"
+        |   |   |       +-method='reservoir'
         |   |   |       +-size=
         |   |   |       | +-Literal(parse_location=147-149, type=INT64, value=10)
         |   |   |       +-unit=ROWS
         |   |   |       +-partition_by_list=
         |   |   |         +-ColumnRef(parse_location=168-173, type=INT32, column=SimpleTypesWithAnonymizationUid.int32#1)
-        |   |   +-method="system"
+        |   |   +-method='system'
         |   |   +-size=
         |   |   | +-Literal(parse_location=196-197, type=INT64, value=1)
         |   |   +-unit=PERCENT
@@ -3104,7 +3104,7 @@ QueryStmt
         |   +-column_list=[$sample_weight.weight#13]
         |   +-input_scan=
         |   | +-TableScan(parse_location=79-110, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="reservoir"
+        |   +-method='reservoir'
         |   +-size=
         |   | +-Literal(parse_location=134-137, type=INT64, value=100)
         |   +-unit=ROWS
@@ -3144,7 +3144,7 @@ QueryStmt
         |   |   +-column_list=[$sample_weight.weight#13, SimpleTypesWithAnonymizationUid.uid#16]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=79-110, column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="reservoir"
+        |   |   +-method='reservoir'
         |   |   +-size=
         |   |   | +-Literal(parse_location=134-137, type=INT64, value=100)
         |   |   +-unit=ROWS

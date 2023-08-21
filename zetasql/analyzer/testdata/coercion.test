@@ -1025,7 +1025,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1.$col1#4]
       | |       +-expr_list=
-      | |       | +-$col1#4 := Parameter(type=STRING, name="test_param_string")
+      | |       | +-$col1#4 := Parameter(type=STRING, name='test_param_string')
       | |       +-input_scan=
       | |         +-TableScan(table=TestTable)
       | +-output_column_list=[$union_all1_cast.$col1#10]
@@ -1071,7 +1071,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[$union_all1.$col1#4]
       | |   +-expr_list=
-      | |   | +-$col1#4 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+      | |   | +-$col1#4 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
       | |   +-input_scan=
       | |     +-TableScan(table=TestTable)
       | +-output_column_list=[$union_all1.$col1#4]

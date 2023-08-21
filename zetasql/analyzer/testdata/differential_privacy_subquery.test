@@ -578,7 +578,7 @@ QueryStmt
     |   |   |   | +-$uid#11 := ColumnRef(type=INT64, column=ArrayWithAnonymizationUid.uid#3)
     |   |   |   +-aggregate_list=
     |   |   |     +-weight_partial#9 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-    |   |   +-method="RESERVOIR"
+    |   |   +-method='RESERVOIR'
     |   |   +-size=
     |   |   | +-Literal(type=INT64, value=100)
     |   |   +-unit=ROWS

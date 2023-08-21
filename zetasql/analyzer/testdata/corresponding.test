@@ -2804,7 +2804,7 @@ QueryStmt
     |   |       | +-ProjectScan
     |   |       |   +-column_list=[$union_all2.col#2]
     |   |       |   +-expr_list=
-    |   |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |   |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     |   |       |   +-input_scan=
     |   |       |     +-SingleRowScan
     |   |       +-limit=
@@ -2851,7 +2851,7 @@ QueryStmt
         |       | +-ProjectScan
         |       |   +-column_list=[$union_all2.col#2]
         |       |   +-expr_list=
-        |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+        |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
         |       |   +-input_scan=
         |       |     +-SingleRowScan
         |       +-limit=

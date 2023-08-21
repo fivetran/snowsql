@@ -20,7 +20,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='RESERVOIR')
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -41,7 +41,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -60,7 +60,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100, has_explicit_type=TRUE)
         +-unit=ROWS
@@ -79,7 +79,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=DOUBLE, value=0.1)
         +-unit=PERCENT
@@ -100,7 +100,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="bernoulli"
+        +-method='bernoulli'
         +-size=
         | +-Literal(type=INT64, value=0)
         +-unit=PERCENT
@@ -119,7 +119,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=PERCENT
@@ -161,7 +161,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=0)
         +-unit=ROWS
@@ -194,7 +194,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Parameter(type=INT64, name='test_param_int64')
         +-unit=ROWS
@@ -213,7 +213,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Cast(INT32 -> INT64)
         |   +-Parameter(type=INT32, name='test_param_int32')
@@ -233,7 +233,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Cast(UINT32 -> INT64)
         |   +-Parameter(type=UINT32, name='test_param_uint32')
@@ -253,7 +253,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Cast(UINT64 -> INT64)
         |   +-Parameter(type=UINT64, name='test_param_uint64')
@@ -273,7 +273,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Cast(UINT64 -> INT64)
         |   +-Parameter(type=UINT64, name='test_param_uint64')
@@ -307,7 +307,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Parameter(type=INT64, name='test_param_int64')
         +-unit=PERCENT
@@ -354,7 +354,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Parameter(type=DOUBLE, name='test_param_double')
         +-unit=PERCENT
@@ -373,7 +373,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -394,7 +394,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -416,7 +416,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -438,7 +438,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -474,7 +474,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
-        +-method="some_random"
+        +-method='some_random'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -511,7 +511,7 @@ QueryStmt
         |   |   +-column_list=KeyValue.[Key#1, Value#2]
         |   |   +-input_scan=
         |   |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        |   |   +-method="random1"
+        |   |   +-method='random1'
         |   |   +-size=
         |   |   | +-Literal(type=INT64, value=100)
         |   |   +-unit=ROWS
@@ -523,7 +523,7 @@ QueryStmt
         |       |   +-column_list=KeyValue.[Key#3, Value#4]
         |       |   +-input_scan=
         |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1])
-        |       +-method="random2"
+        |       +-method='random2'
         |       +-size=
         |       | +-Literal(type=INT64, value=100)
         |       +-unit=ROWS
@@ -541,7 +541,7 @@ QueryStmt
             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |       +-ColumnRef(type=INT64, column=KeyValue.Key#5)
             |       +-ColumnRef(type=INT64, column=KeyValue.Key#7)
-            +-method="random3"
+            +-method='random3'
             +-size=
             | +-Literal(type=INT64, value=10)
             +-unit=PERCENT
@@ -576,7 +576,7 @@ QueryStmt
         |       |   +-column_list=KeyValue.[Key#3, Value#4]
         |       |   +-input_scan=
         |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1])
-        |       +-method="reservoir"
+        |       +-method='reservoir'
         |       +-size=
         |       | +-Literal(type=INT64, value=5)
         |       +-unit=ROWS
@@ -622,7 +622,7 @@ QueryStmt
         |       |   +-field_descriptor=repeated_int32_val
         |       |   +-default_value=[]
         |       +-element_column=$array.val#4
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -662,7 +662,7 @@ QueryStmt
         |       +-array_expr=
         |       | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3])
         |       +-element_column=$array.$unnest1#1
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -712,7 +712,7 @@ QueryStmt
     |   |               +-column_list=[TestTable.KitchenSink#5]
     |   |               +-input_scan=
     |   |               | +-TableScan(column_list=[TestTable.KitchenSink#5], table=TestTable, column_index_list=[2])
-    |   |               +-method="reservoir"
+    |   |               +-method='reservoir'
     |   |               +-size=
     |   |               | +-Literal(type=INT64, value=1)
     |   |               +-unit=ROWS
@@ -764,11 +764,11 @@ QueryStmt
             |       +-column_list=[T.val#5]
             |       +-input_scan=
             |       | +-WithRefScan(column_list=[T.val#5], with_query_name='T')
-            |       +-method="system"
+            |       +-method='system'
             |       +-size=
             |       | +-Literal(type=INT64, value=1)
             |       +-unit=ROWS
-            +-method="system"
+            +-method='system'
             +-size=
             | +-Literal(type=INT64, value=1)
             +-unit=ROWS
@@ -799,7 +799,7 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -850,7 +850,7 @@ QueryStmt
             +-column_list=T.[key#3, value#4]
             +-input_scan=
             | +-WithRefScan(column_list=T.[key#3, value#4], with_query_name='T')
-            +-method="reservoir"
+            +-method='reservoir'
             +-size=
             | +-Literal(type=INT64, value=10)
             +-unit=ROWS
@@ -908,7 +908,7 @@ QueryStmt
             |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |           +-ColumnRef(type=INT64, column=t1.k1#5)
             |           +-ColumnRef(type=INT64, column=t2.k2#6)
-            +-method="reservoir"
+            +-method='reservoir'
             +-size=
             | +-Literal(type=INT64, value=100)
             +-unit=ROWS
@@ -946,7 +946,7 @@ QueryStmt
         |   |   +-column_list=KeyValue.[Key#1, Value#2]
         |   |   +-input_scan=
         |   |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        |   |   +-method="random1"
+        |   |   +-method='random1'
         |   |   +-size=
         |   |   | +-Literal(type=INT64, value=100)
         |   |   +-unit=ROWS
@@ -958,7 +958,7 @@ QueryStmt
         |       |   +-column_list=KeyValue.[Key#3, Value#4]
         |       |   +-input_scan=
         |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1])
-        |       +-method="random2"
+        |       +-method='random2'
         |       +-size=
         |       | +-Literal(type=INT64, value=100)
         |       +-unit=ROWS
@@ -976,7 +976,7 @@ QueryStmt
             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |       +-ColumnRef(type=INT64, column=KeyValue.Key#5)
             |       +-ColumnRef(type=INT64, column=KeyValue.Key#7)
-            +-method="reservoir"
+            +-method='reservoir'
             +-size=
             | +-Literal(type=INT64, value=10)
             +-unit=ROWS
@@ -999,7 +999,7 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1036,7 +1036,7 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1080,7 +1080,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.weight#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1102,7 +1102,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.weight#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1128,7 +1128,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.scale#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1152,7 +1152,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.scale#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1176,7 +1176,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.Value#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1198,7 +1198,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.Value#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1224,7 +1224,7 @@ QueryStmt
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.weight#3]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1247,7 +1247,7 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -1301,7 +1301,7 @@ QueryStmt
             +-column_list=[t.value#3, t.weight#4, $sample_weight.weight#5]
             +-input_scan=
             | +-WithRefScan(column_list=t.[value#3, weight#4], with_query_name='t')
-            +-method="reservoir"
+            +-method='reservoir'
             +-size=
             | +-Literal(type=INT64, value=100)
             +-unit=ROWS
@@ -1337,7 +1337,7 @@ QueryStmt
             +-column_list=[t.foo#2, $sample_weight.foo#3]
             +-input_scan=
             | +-WithRefScan(column_list=[t.foo#2], with_query_name='t')
-            +-method="reservoir"
+            +-method='reservoir'
             +-size=
             | +-Literal(type=INT64, value=100)
             +-unit=ROWS
@@ -1374,7 +1374,7 @@ QueryStmt
       | |       +-column_list=[$sample_weight.foo#3]
       | |       +-input_scan=
       | |       | +-TableScan(table=KeyValue)
-      | |       +-method="reservoir"
+      | |       +-method='reservoir'
       | |       +-size=
       | |       | +-Literal(type=INT64, value=100)
       | |       +-unit=ROWS
@@ -1390,7 +1390,7 @@ QueryStmt
         |       +-column_list=[$sample_weight.bar#6]
         |       +-input_scan=
         |       | +-TableScan(table=KeyValue)
-        |       +-method="reservoir"
+        |       +-method='reservoir'
         |       +-size=
         |       | +-Literal(type=INT64, value=100)
         |       +-unit=ROWS
@@ -1425,7 +1425,7 @@ QueryStmt
     | |         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.weight#3]
     | |         +-input_scan=
     | |         | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
-    | |         +-method="reservoir"
+    | |         +-method='reservoir'
     | |         +-size=
     | |         | +-Literal(type=INT64, value=100)
     | |         +-unit=ROWS
@@ -1441,7 +1441,7 @@ QueryStmt
     |           +-column_list=[KeyValue.Key#4, KeyValue.Value#5, $sample_weight.weight#6]
     |           +-input_scan=
     |           | +-TableScan(column_list=KeyValue.[Key#4, Value#5], table=KeyValue, column_index_list=[0, 1])
-    |           +-method="reservoir"
+    |           +-method='reservoir'
     |           +-size=
     |           | +-Literal(type=INT64, value=100)
     |           +-unit=ROWS
@@ -1489,7 +1489,7 @@ QueryStmt
         +-column_list=[$sample_weight.Value#3]
         +-input_scan=
         | +-TableScan(table=KeyValue)
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -1511,7 +1511,7 @@ QueryStmt
         +-column_list=[KeyValue.Value#2]
         +-input_scan=
         | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS

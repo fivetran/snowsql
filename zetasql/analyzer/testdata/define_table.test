@@ -17,7 +17,7 @@ DefineTableStmt
 +-option_list=
   +-x := Literal(type=STRING, value='\nfoo')
   +-y := Literal(type=STRING, value='2011-10-22')
-  +-z := Parameter(type=INT64, name="test_param_int64")
+  +-z := Parameter(type=INT64, name='test_param_int64')
 ==
 
 define table a."b"."c 2" (x='''foo''',y="2011-10-22",z=@bad_param)

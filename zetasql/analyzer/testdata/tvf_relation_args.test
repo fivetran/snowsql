@@ -3989,7 +3989,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$subquery1.bool_column#1]
         |   |   +-expr_list=
-        |   |   | +-bool_column#1 := Parameter(type=BOOL, name="test_param_bool")
+        |   |   | +-bool_column#1 := Parameter(type=BOOL, name='test_param_bool')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.bool_column#1]
@@ -4021,7 +4021,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[$expr_subquery.$col1#1]
         |           +-expr_list=
-        |           | +-$col1#1 := Parameter(type=BOOL, name="test_param_bool")
+        |           | +-$col1#1 := Parameter(type=BOOL, name='test_param_bool')
         |           +-input_scan=
         |             +-SingleRowScan
         +-column_index_list=[0]
@@ -4624,7 +4624,7 @@ QueryStmt
         |   |   |     +-SingleRowScan
         |   |   +-argument_column_list=[$subquery1.bool_column#1]
         |   +-column_index_list=[0, 1]
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -4661,7 +4661,7 @@ QueryStmt
         |   |   |     +-SingleRowScan
         |   |   +-argument_column_list=[$subquery1.bool_column#1]
         |   +-column_index_list=[0, 1]
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -4698,7 +4698,7 @@ QueryStmt
         |   |   |     +-SingleRowScan
         |   |   +-argument_column_list=[$subquery1.bool_column#1]
         |   +-column_index_list=[0, 1]
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Parameter(type=INT64, name='test_param_int64')
         +-unit=ROWS
@@ -4735,7 +4735,7 @@ QueryStmt
         |   |   |     +-SingleRowScan
         |   |   +-argument_column_list=[$subquery1.bool_column#1]
         |   +-column_index_list=[0, 1]
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=INT64, value=100)
         +-unit=ROWS
@@ -4774,7 +4774,7 @@ QueryStmt
         |   |   |     +-SingleRowScan
         |   |   +-argument_column_list=[$subquery1.bool_column#1]
         |   +-column_index_list=[0, 1]
-        +-method="reservoir"
+        +-method='reservoir'
         +-size=
         | +-Literal(type=DOUBLE, value=0.1)
         +-unit=PERCENT

@@ -1817,7 +1817,7 @@ QueryStmt
         |       | +-ProjectScan
         |       |   +-column_list=[$union_all2.$col1#2]
         |       |   +-expr_list=
-        |       |   | +-$col1#2 := Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+        |       |   | +-$col1#2 := Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
         |       |   +-input_scan=
         |       |     +-SingleRowScan
         |       +-limit=
