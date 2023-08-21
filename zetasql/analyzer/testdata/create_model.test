@@ -1075,7 +1075,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-    +-alias="training_data"
+    +-alias='training_data'
     +-query=
     | +-ProjectScan
     |   +-column_list=[training_data.a#1]
@@ -1100,7 +1100,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-  | +-alias="training_data"
+  | +-alias='training_data'
   | +-query=
   | | +-ProjectScan
   | |   +-column_list=[training_data.a#1]
@@ -1111,7 +1111,7 @@ CreateModelStmt
   | +-output_column_list=
   |   +-training_data.a#1 AS a [INT64]
   +-CreateModelAliasedQuery
-    +-alias="custom_holiday"
+    +-alias='custom_holiday'
     +-query=
     | +-ProjectScan
     |   +-column_list=[custom_holiday.b#2]
@@ -1139,7 +1139,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-    +-alias="training_data"
+    +-alias='training_data'
     +-query=
     | +-WithScan
     |   +-column_list=[a1.t1#2]
@@ -1180,7 +1180,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-    +-alias="training_data"
+    +-alias='training_data'
     +-query=
     | +-WithScan
     |   +-column_list=[training_data.t1#2]
@@ -1243,7 +1243,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-  | +-alias="training_data"
+  | +-alias='training_data'
   | +-query=
   | | +-ProjectScan
   | |   +-column_list=[user_training_data.data#1]
@@ -1252,7 +1252,7 @@ CreateModelStmt
   | +-output_column_list=
   |   +-user_training_data.data#1 AS data [INT32]
   +-CreateModelAliasedQuery
-    +-alias="custom_holiday"
+    +-alias='custom_holiday'
     +-query=
     | +-ProjectScan
     |   +-column_list=user_custom_holiday.[region#2, holiday_name#3, primary_date#4]

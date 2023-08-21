@@ -111,7 +111,7 @@ QueryStmt
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.$col1#1]
         +-column_index_list=[0, 1]
-        +-alias="mytvf"
+        +-alias='mytvf'
 ==
 
 # A TVF accepts one relation argument and sets the output schema to be equal to
@@ -334,8 +334,8 @@ select * from tvf_one_relation_arg_with_fixed_output(
             cast(42 as uint64) as column_uint64,
             cast(42 as float) as column_float,
             cast(42 as double) as column_double,
-            cast("" as bytes) as column_bytes,
-            "" as column_string))
+            cast('' as bytes) as column_bytes,
+            '' as column_string))
 --
 QueryStmt
 +-output_column_list=
@@ -632,7 +632,7 @@ QueryStmt
         |   |     +-SingleRowScan
         |   +-argument_column_list=$subquery2.[$col1#3, $col2#4]
         +-column_index_list=[0]
-        +-alias="mytvf"
+        +-alias='mytvf'
 ==
 
 # A TVF relation argument includes a table subquery.
@@ -674,7 +674,7 @@ QueryStmt
         |   |         +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
         |   +-argument_column_list=[KeyValue.Key#1]
         +-column_index_list=[0]
-        +-alias="tvfscan_3"
+        +-alias='tvfscan_3'
 ==
 
 # A TVF accepts two relation arguments.
@@ -792,7 +792,7 @@ QueryStmt
         |   |     +-SingleRowScan
         |   +-argument_column_list=$subquery2.[$col1#3, $col2#4]
         +-column_index_list=[0]
-        +-alias="t"
+        +-alias='t'
 ==
 
 # A TVF accepts two relation arguments and returns a proto value table.
@@ -963,11 +963,11 @@ QueryStmt
 # ML.EVALUATE.
 # Java error:
 # Model not found: onedoublemodel [at 2:9]
-#   model onedoublemodel, (select 1, 2), struct("e" as string, 123 as int64))
+#   model onedoublemodel, (select 1, 2), struct('e' as string, 123 as int64))
 #         ^
 [no_java]
 select * from tvf_model_evaluation_args(
-  model onedoublemodel, (select 1, 2), struct("e" as string, 123 as int64))
+  model onedoublemodel, (select 1, 2), struct('e' as string, 123 as int64))
 --
 QueryStmt
 +-output_column_list=
@@ -997,7 +997,7 @@ QueryStmt
         | | +-argument_column_list=$subquery1.[$col1#1, $col2#2]
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRUCT<string STRING, int64 INT64>, value={string:"e", int64:123})
+        |     +-Literal(type=STRUCT<string STRING, int64 INT64>, value={string:'e', int64:123})
         +-column_index_list=[0, 1]
 ==
 
@@ -1068,7 +1068,7 @@ QueryStmt
 #                                               ^
 [no_java]
 select * from tvf_model_evaluation_args(model onedoublemodel,
-  (select struct("e" as string, 123 as int64)))
+  (select struct('e' as string, 123 as int64)))
 --
 QueryStmt
 +-output_column_list=
@@ -1091,7 +1091,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$subquery1.$col1#1]
         |   |   +-expr_list=
-        |   |   | +-$col1#1 := Literal(type=STRUCT<string STRING, int64 INT64>, value={string:"e", int64:123})
+        |   |   | +-$col1#1 := Literal(type=STRUCT<string STRING, int64 INT64>, value={string:'e', int64:123})
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.$col1#1]
@@ -1176,10 +1176,10 @@ QueryStmt
         |   |       |   |     +-SingleRowScan
         |   |       |   +-argument_column_list=$subquery3.[$col1#3, $col2#4]
         |   |       +-column_index_list=[0]
-        |   |       +-alias="innertvf"
+        |   |       +-alias='innertvf'
         |   +-argument_column_list=$subquery1.[int32_val1#6, int32_val2#7, str_value#8]
         +-column_index_list=[0]
-        +-alias="outertvf"
+        +-alias='outertvf'
 ==
 
 # Chain together two TVFs. The innermost TVF returns a fixed proto value table
@@ -1296,7 +1296,7 @@ QueryStmt
         |   |   |       +-element_column=$array.x#1
         |   |   +-argument_column_list=[$array.x#1]
         |   +-column_index_list=[0]
-        |   +-alias="tvf_left"
+        |   +-alias='tvf_left'
         +-right_scan=
         | +-TVFScan
         |   +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.$col0#4]
@@ -1315,7 +1315,7 @@ QueryStmt
         |   |   |       +-element_column=$array.x#3
         |   |   +-argument_column_list=[$array.x#3]
         |   +-column_index_list=[0]
-        |   +-alias="tvf_right"
+        |   +-alias='tvf_right'
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=tvf_one_relation_arg_output_schema_is_input_schema.$col0#2)
@@ -2419,7 +2419,7 @@ QueryStmt
         |   |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
         |   +-argument_column_list=[KeyValue.Key#1]
         +-column_index_list=[0]
-        +-alias="inputscan"
+        +-alias='inputscan'
 ==
 
 # There are two chained TVFs. The innermost one returns a proto value table and
@@ -2475,7 +2475,7 @@ QueryStmt
         |   |       |   |     +-SingleRowScan
         |   |       |   +-argument_column_list=$subquery3.[$col1#3, $col2#4]
         |   |       +-column_index_list=[0]
-        |   |       +-alias="mytvf"
+        |   |       +-alias='mytvf'
         |   +-argument_column_list=[tvf_two_relation_args_return_proto_value_table.$col0#5]
         +-column_index_list=[0, 1]
 ==
@@ -2624,7 +2624,7 @@ select (
     from tvf_one_relation_arg_return_proto_value_table(
         (select * from i.structval)))
 from (
-    select [struct("e" as string, 123 as int64)] as structval) as i
+    select [struct('e' as string, 123 as int64)] as structval) as i
 --
 QueryStmt
 +-output_column_list=
@@ -2710,7 +2710,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[i.structval#1]
         +-expr_list=
-        | +-structval#1 := Literal(type=ARRAY<STRUCT<string STRING, int64 INT64>>, value=[{string:"e", int64:123}])
+        | +-structval#1 := Literal(type=ARRAY<STRUCT<string STRING, int64 INT64>>, value=[{string:'e', int64:123}])
         +-input_scan=
           +-SingleRowScan
 ==
@@ -2719,7 +2719,7 @@ QueryStmt
 # variable for a table reference to its left in the FROM cluase via the lateral
 # behavior of UNNEST.
 select *
-from (select [struct("e" as string, 123 as int64)] as structval) as i,
+from (select [struct('e' as string, 123 as int64)] as structval) as i,
       unnest(array(select as struct *
                    from tvf_one_relation_arg_return_proto_value_table(
                        (select * from unnest(i.structval))))) as u
@@ -2759,7 +2759,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[i.structval#1]
         |   +-expr_list=
-        |   | +-structval#1 := Literal(type=ARRAY<STRUCT<string STRING, int64 INT64>>, value=[{string:"e", int64:123}])
+        |   | +-structval#1 := Literal(type=ARRAY<STRUCT<string STRING, int64 INT64>>, value=[{string:'e', int64:123}])
         |   +-input_scan=
         |     +-SingleRowScan
         +-array_expr=
@@ -3251,7 +3251,7 @@ QueryStmt
 
 # Show a case where the same template resolves to two different signatures:
 # part one.
-select * from tvf_templated_select_any_scalar_arg("abc");
+select * from tvf_templated_select_any_scalar_arg('abc');
 --
 QueryStmt
 +-output_column_list=
@@ -3393,7 +3393,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=t.[key#1, value#2]
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[key#1, value#2], name="t")
+      +-RelationArgumentScan(column_list=t.[key#1, value#2], name='t')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to a relation argument.
@@ -3435,7 +3435,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=t.[key#2, value#1]
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[value#1, key#2], name="t")
+      +-RelationArgumentScan(column_list=t.[value#1, key#2], name='t')
 ==
 
 # Call a TVF with an extra unused column in the relation argument. This extra
@@ -3478,7 +3478,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=t.[key#2, value#1]
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[value#1, key#2], name="t")
+      +-RelationArgumentScan(column_list=t.[value#1, key#2], name='t')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to a relation argument.
@@ -3518,7 +3518,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=t.[Key#1, Value#2]
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[Key#1, Value#2], name="t")
+      +-RelationArgumentScan(column_list=t.[Key#1, Value#2], name='t')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to a scalar integer
@@ -3566,7 +3566,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.Key#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.Key#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.Key#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.Key#1)
@@ -3576,7 +3576,7 @@ QueryStmt
 # Call a TVF with a valid templated SQL body that refers to both a scalar
 # argument of any type and a relation argument of any table.
 select * from tvf_templated_any_scalar_and_relation_args(
-    "2000-09-04", TABLE SimpleTypes);
+    '2000-09-04', TABLE SimpleTypes);
 --
 QueryStmt
 +-output_column_list=
@@ -3647,13 +3647,13 @@ QueryStmt
     +-expr_list=
     | +-s#19 := ArgumentRef(type=STRING, name='s')
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp_seconds#11, timestamp_millis#12, timestamp_micros#13, timestamp_nanos#14, timestamp#15, numeric#16, bignumeric#17, json#18], name="t")
+      +-RelationArgumentScan(column_list=t.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp_seconds#11, timestamp_millis#12, timestamp_micros#13, timestamp_nanos#14, timestamp#15, numeric#16, bignumeric#17, json#18], name='t')
 ==
 
 # Same as previous, but selecting a subset of columns
 select uint32, int32, s, date, json, bool
 from tvf_templated_any_scalar_and_relation_args(
-    "2000-09-04", TABLE SimpleTypes);
+    '2000-09-04', TABLE SimpleTypes);
 --
 QueryStmt
 +-output_column_list=
@@ -3711,13 +3711,13 @@ QueryStmt
     +-expr_list=
     | +-s#19 := ArgumentRef(type=STRING, name='s')
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp_seconds#11, timestamp_millis#12, timestamp_micros#13, timestamp_nanos#14, timestamp#15, numeric#16, bignumeric#17, json#18], name="t")
+      +-RelationArgumentScan(column_list=t.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp_seconds#11, timestamp_millis#12, timestamp_micros#13, timestamp_nanos#14, timestamp#15, numeric#16, bignumeric#17, json#18], name='t')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to a scalar integer
 # argument and also a relation argument.
 select * from tvf_templated_scalar_date_and_relation_args(
-    "2000-09-04", TABLE SimpleTypes);
+    '2000-09-04', TABLE SimpleTypes);
 --
 QueryStmt
 +-output_column_list=
@@ -3756,7 +3756,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.date#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.date#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.date#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(DATE, DATE) -> BOOL)
             +-ColumnRef(type=DATE, column=t.date#1)
@@ -3820,7 +3820,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.key#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.key#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.key#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
@@ -3868,7 +3868,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=t.[Key#1, Value#2]
       | |   +-input_scan=
-      | |     +-RelationArgumentScan(column_list=t.[Key#1, Value#2], name="t")
+      | |     +-RelationArgumentScan(column_list=t.[Key#1, Value#2], name='t')
       | +-output_column_list=t.[Key#1, Value#2]
       +-SetOperationItem
         +-scan=
@@ -3932,14 +3932,14 @@ QueryStmt
     | |   +-ProjectScan
     | |     +-column_list=s.[value#1, key#2]
     | |     +-input_scan=
-    | |       +-RelationArgumentScan(column_list=s.[value#1, key#2], name="s")
+    | |       +-RelationArgumentScan(column_list=s.[value#1, key#2], name='s')
     | +-WithEntry
     |   +-with_query_name='w2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.key#3]
     |       +-input_scan=
-    |         +-RelationArgumentScan(column_list=[t.key#3], name="t")
+    |         +-RelationArgumentScan(column_list=[t.key#3], name='t')
     +-query=
       +-LimitOffsetScan
         +-column_list=w1.[key#5, value#4]
@@ -4172,7 +4172,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=x.$value_column#1)
     |     +-field_idx=0
     +-input_scan=
-      +-RelationArgumentScan(column_list=[x.$value_column#1], name="x", is_value_table=TRUE)
+      +-RelationArgumentScan(column_list=[x.$value_column#1], name='x', is_value_table=TRUE)
 ==
 
 # Call a templated SQL TVF that selects one field from a value table, using the
@@ -4218,7 +4218,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=x.$value_column#1)
     |     +-field_idx=0
     +-input_scan=
-      +-RelationArgumentScan(column_list=[x.$value_column#1], name="x", is_value_table=TRUE)
+      +-RelationArgumentScan(column_list=[x.$value_column#1], name='x', is_value_table=TRUE)
 ==
 
 # TVF call with "TABLE path(argument, ...)" syntax with a single nested relation
@@ -4590,7 +4590,7 @@ QueryStmt
         |   |       +-column_index_list=[0, 1]
         |   +-argument_column_list=tvf_one_relation_arg_with_fixed_output.[column_bool#5, column_bytes#6]
         +-column_index_list=[0]
-        +-alias="mytvf"
+        +-alias='mytvf'
 ==
 
 # TABLESAMPLE clause for TVF calls.
@@ -4863,7 +4863,7 @@ QueryStmt
             |   |     +-WithRefScan(column_list=[w.val#2], with_query_name='w')
             |   +-argument_column_list=[w.val#2]
             +-column_index_list=[0]
-            +-alias="mytvf"
+            +-alias='mytvf'
 ==
 
 # A query calls a TVF passing a reference to a WITH clause that returns a value
@@ -4903,7 +4903,7 @@ QueryStmt
             |   |     +-WithRefScan(column_list=[w.$value_column#3], with_query_name='w')
             |   +-argument_column_list=[w.$value_column#3]
             +-column_index_list=[1]
-            +-alias="mytvf"
+            +-alias='mytvf'
 ==
 
 # A query calls a TVF passing a reference to a WITH clause that returns a value
@@ -4943,7 +4943,7 @@ QueryStmt
             |   |     +-WithRefScan(column_list=[w.t#2], with_query_name='w')
             |   +-argument_column_list=[w.t#2]
             +-column_index_list=[0]
-            +-alias="mytvf"
+            +-alias='mytvf'
 ==
 
 # A query calls a TVF passing a reference to a WITH clause that shadows a
@@ -4985,7 +4985,7 @@ QueryStmt
             |   |     +-WithRefScan(column_list=[keyvalue.result#2], with_query_name='keyvalue')
             |   +-argument_column_list=[keyvalue.result#2]
             +-column_index_list=[0]
-            +-alias="mytvf"
+            +-alias='mytvf'
 ==
 
 # The TVF is in a table subquery, and references a WITH clause from the
@@ -5351,7 +5351,7 @@ QueryStmt
             |   | +-TableScan(column_list=KeyValue.[Key#2, Value#3], table=KeyValue, column_index_list=[0, 1])
             |   +-argument_column_list=KeyValue.[Key#2, Value#3]
             +-column_index_list=[0]
-            +-alias="mytvf"
+            +-alias='mytvf'
 ==
 
 # This tvf appends some columns to output schema. Check if a part of appended
@@ -5382,7 +5382,7 @@ QueryStmt
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.key#1]
         +-column_index_list=[1, 14]
-        +-alias="mytvf"
+        +-alias='mytvf'
 ==
 
 # This tvf appends some columns to output schema. Select all columns to
@@ -5429,7 +5429,7 @@ QueryStmt
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.key#1]
         +-column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14]
-        +-alias="mytvf"
+        +-alias='mytvf'
 ==
 
 # This tvf appends some columns to output schema. Select all columns to
@@ -5613,7 +5613,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.key#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.key#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.key#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
@@ -5664,7 +5664,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.key#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.key#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.key#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
@@ -5712,7 +5712,7 @@ QueryStmt
       +-FilterScan
         +-column_list=t.[key#1, x#2]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=t.[key#1, x#2], name="t")
+        | +-RelationArgumentScan(column_list=t.[key#1, x#2], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
@@ -5760,7 +5760,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.key#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.key#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.key#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
@@ -5771,8 +5771,8 @@ QueryStmt
 # struct field (for an argument struct) or a qualified column name (for a table
 # scanned in the FROM clause).
 [language_features=TABLE_VALUED_FUNCTIONS]
-SELECT * FROM tvf_templated_with_struct_param(STRUCT(1 as y, "2" as z),
-                                              (select 3 as {{y|a}}, "4" as z));
+SELECT * FROM tvf_templated_with_struct_param(STRUCT(1 as y, '2' as z),
+                                              (select 3 as {{y|a}}, '4' as z));
 --
 ALTERNATION GROUP: y
 --
@@ -5790,7 +5790,7 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRUCT<y INT64, z STRING>, value={y:1, z:"2"})
+        | |   +-Literal(type=STRUCT<y INT64, z STRING>, value={y:1, z:'2'})
         | +-FunctionArgument
         |   +-scan=
         |   | +-ProjectScan
@@ -5813,12 +5813,12 @@ QueryStmt
   +-ProjectScan
     +-column_list=[t.y#1]
     +-input_scan=
-      +-RelationArgumentScan(column_list=[t.y#1], name="t")
+      +-RelationArgumentScan(column_list=[t.y#1], name='t')
 --
 ALTERNATION GROUP: a
 --
 ERROR: Invalid table-valued function tvf_templated_with_struct_param [at 1:15]
-SELECT * FROM tvf_templated_with_struct_param(STRUCT(1 as y, "2" as z),
+SELECT * FROM tvf_templated_with_struct_param(STRUCT(1 as y, '2' as z),
               ^
 Analysis of table-valued function tvf_templated_with_struct_param failed [at 1:10]
 select x.y from t as x
@@ -5872,7 +5872,7 @@ QueryStmt
             |   |   |     +-WithRefScan(column_list=t.[a#3, b#4], with_query_name='t')
             |   |   +-argument_column_list=t.[a#3, b#4]
             |   +-column_index_list=[0, 1]
-            |   +-alias="t0"
+            |   +-alias='t0'
             +-array_expr=
             | +-ColumnRef(type=ARRAY<INT64>, column=tvf_one_relation_arg_output_schema_is_input_schema.b#6)
             +-element_column=$array.b#7
@@ -6107,7 +6107,7 @@ QueryStmt
     +-input_scan=
       +-TVFScan
         +-column_list=tvf_optional_table_default_mandatory_string.[column_bool#3, column_bytes#4]
-        +-tvf=tvf_optional_table_default_mandatory_string((optional ANY TABLE, optional STRING {default_value: "default"} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-tvf=tvf_optional_table_default_mandatory_string((optional ANY TABLE, optional STRING {default_value: 'default'} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(TABLE<$col1 STRING>, STRING) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
         | +-FunctionArgument
@@ -6151,7 +6151,7 @@ QueryStmt
     +-input_scan=
       +-TVFScan
         +-column_list=tvf_optional_table_default_mandatory_string.[column_bool#2, column_bytes#3]
-        +-tvf=tvf_optional_table_default_mandatory_string((optional ANY TABLE, optional STRING {default_value: "default"} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-tvf=tvf_optional_table_default_mandatory_string((optional ANY TABLE, optional STRING {default_value: 'default'} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(TABLE<$col1 STRING>, literal STRING) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
         | +-FunctionArgument
@@ -6347,10 +6347,10 @@ select column_bytes from tvf_two_relation_args(1, 2)
 
 # A TVF accepts one relation argument, but the query passes a scalar argument
 # instead.
-select * from tvf_one_relation_arg_output_schema_is_input_schema("abc")
+select * from tvf_one_relation_arg_output_schema_is_input_schema('abc')
 --
 ERROR: Table-valued function tvf_one_relation_arg_output_schema_is_input_schema argument 1 must be a relation (i.e. table subquery) [at 1:66]
-select * from tvf_one_relation_arg_output_schema_is_input_schema("abc")
+select * from tvf_one_relation_arg_output_schema_is_input_schema('abc')
                                                                  ^
 ==
 
@@ -6449,10 +6449,10 @@ select column_bytes from tvf_one_relation_arg_repeating_int64_args(1, 2, 3)
 # A TVF accepts one relation argument and final repeating int64 arguments,
 # but the query passes one relation argument and one string argument instead.
 select column_bytes from tvf_one_relation_arg_repeating_int64_args(
-    (select 1, 2), "abc")
+    (select 1, 2), 'abc')
 --
-ERROR: Could not cast literal "abc" to type INT64 [at 2:20]
-    (select 1, 2), "abc")
+ERROR: Could not cast literal 'abc' to type INT64 [at 2:20]
+    (select 1, 2), 'abc')
                    ^
 ==
 
@@ -6480,10 +6480,10 @@ ERROR: Scalar subquery cannot have more than one column unless using SELECT AS S
 # the same type, but the query passes one relation argument and two final
 # arguments of different types instead.
 select column_bytes from tvf_one_relation_arg_repeating_any_one_type_args(
-    (select 1, 2), 3, "abc")
+    (select 1, 2), 3, 'abc')
 --
-ERROR: Could not cast literal "abc" to type INT64 [at 2:23]
-    (select 1, 2), 3, "abc")
+ERROR: Could not cast literal 'abc' to type INT64 [at 2:23]
+    (select 1, 2), 3, 'abc')
                       ^
 ==
 
@@ -6551,13 +6551,13 @@ ERROR: Table-valued function tvf_one_relation_arg_one_int64_arg argument 1 must 
 # This TVF accepts only two arguments to mock ML.EVALUATE with model name and
 # struct, which is not allowed.
 # Model not found: onedoublemodel [at 1:47]
-# select * from tvf_model_evaluation_args(model onedoublemodel, struct("e" as s...
+# select * from tvf_model_evaluation_args(model onedoublemodel, struct('e' as s...
 #                                               ^
 [no_java]
-select * from tvf_model_evaluation_args(model onedoublemodel, struct("e" as string, 123 as int64))
+select * from tvf_model_evaluation_args(model onedoublemodel, struct('e' as string, 123 as int64))
 --
 ERROR: Table-valued function tvf_model_evaluation_args argument 2 must be a relation (i.e. table subquery) [at 1:63]
-...tvf_model_evaluation_args(model onedoublemodel, struct("e" as string, 123 ...
+...tvf_model_evaluation_args(model onedoublemodel, struct('e' as string, 123 ...
                                                    ^
 ==
 
@@ -7098,7 +7098,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=t.[value#1, key#2]
       | |       +-input_scan=
-      | |         +-RelationArgumentScan(column_list=t.[value#1, key#2], name="t")
+      | |         +-RelationArgumentScan(column_list=t.[value#1, key#2], name='t')
       | +-output_column_list=[$union_all1_cast.value#7, t.key#2]
       +-SetOperationItem
         +-scan=
@@ -7197,7 +7197,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[t.key#1]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=[t.key#1], name="t")
+        | +-RelationArgumentScan(column_list=[t.key#1], name='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
@@ -7288,7 +7288,7 @@ Syntax error: Unexpected end of statement [at 1:1]
 # passing a string value instead.
 select * from tvf_templated_select_int64_arg('aaa');
 --
-ERROR: Could not cast literal "aaa" to type INT64 [at 1:46]
+ERROR: Could not cast literal 'aaa' to type INT64 [at 1:46]
 select * from tvf_templated_select_int64_arg('aaa');
                                              ^
 ==

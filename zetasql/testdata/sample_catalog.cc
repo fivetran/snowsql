@@ -5271,7 +5271,7 @@ void SampleCatalog::LoadTemplatedSQLTableValuedFunctions() {
                                               FunctionArgumentType::REQUIRED)},
                         context_id++),
       /*arg_name_list=*/{"$col1"},
-      ParseResumeLocation::FromString("select `$col1` as x")));
+      ParseResumeLocation::FromString("select \"$col1\" as x")));
 
   // Add a TVF with a valid templated SQL body that returns an output column
   // where the name contains '$'. The function signature accepts a single
@@ -5283,7 +5283,7 @@ void SampleCatalog::LoadTemplatedSQLTableValuedFunctions() {
                                               FunctionArgumentType::REQUIRED)},
                         context_id++),
       /*arg_name_list=*/{"x"},
-      ParseResumeLocation::FromString("select x as `$col1`")));
+      ParseResumeLocation::FromString("select x as \"$col1\"")));
 
   // Add a TVF with a valid templated SQL body that performs concatenation on a
   // scalar argument. The function signature accepts a single argument of any
@@ -5422,7 +5422,7 @@ void SampleCatalog::LoadTemplatedSQLTableValuedFunctions() {
           context_id++),
       /*arg_name_list=*/{"d", "t"},
       ParseResumeLocation::FromString(
-          "select `date` from t where `date` < d")));
+          "select \"date\" from t where \"date\" < d")));
 
   // Add a TVF with a valid templated SQL body that refers to both a scalar
   // argument of any type and a relation argument of any table.

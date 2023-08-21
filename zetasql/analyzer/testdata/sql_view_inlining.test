@@ -1917,7 +1917,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=t.[a#1, b#2]
     +-input_scan=
-      +-RelationArgumentScan(column_list=t.[a#1, b#2], name="t")
+      +-RelationArgumentScan(column_list=t.[a#1, b#2], name='t')
 
 [REWRITTEN AST]
 QueryStmt
@@ -2039,7 +2039,7 @@ QueryStmt
         | +-scan_hint := Literal(type=STRING, value='whatever')
         +-table=TwoIntsView
         +-column_index_list=[0, 1]
-        +-alias="v"
+        +-alias='v'
 
 Rewrite ERROR: generic::unimplemented: Hints are not supported on invocations of inlined views.
 ==

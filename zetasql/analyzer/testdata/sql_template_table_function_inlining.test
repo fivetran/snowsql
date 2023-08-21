@@ -56,7 +56,7 @@ QueryStmt
       +-FilterScan
         +-column_list=arg0.[a#1, b#2, c#3]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=arg0.[a#1, b#2, c#3], name="arg0")
+        | +-RelationArgumentScan(column_list=arg0.[a#1, b#2, c#3], name='arg0')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -204,7 +204,7 @@ QueryStmt
       +-FilterScan
         +-column_list=arg0.[a#1, b#2, c#3]
         +-input_scan=
-        | +-RelationArgumentScan(column_list=arg0.[a#1, b#2, c#3], name="arg0")
+        | +-RelationArgumentScan(column_list=arg0.[a#1, b#2, c#3], name='arg0')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)

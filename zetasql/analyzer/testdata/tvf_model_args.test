@@ -261,7 +261,7 @@ QueryStmt
     +-input_scan=
       +-TVFScan
         +-column_list=tvf_model_optional_table_named_string_default.[column_bool#2, column_bytes#3]
-        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: "default"} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: 'default'} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(ANY MODEL, TABLE<$col1 STRING>, literal STRING) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
         | +-FunctionArgument
@@ -297,7 +297,7 @@ QueryStmt
     +-input_scan=
       +-TVFScan
         +-column_list=tvf_model_optional_table_named_string_default.[column_bool#3, column_bytes#4]
-        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: "default"} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: 'default'} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(ANY MODEL, TABLE<$col1 STRING>, STRING) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
         | +-FunctionArgument

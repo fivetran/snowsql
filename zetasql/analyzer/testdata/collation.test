@@ -8283,7 +8283,7 @@ QueryStmt
     |       | +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
     |       +-ArgumentRef(type=INT64, name='y')
     +-input_scan=
-      +-RelationArgumentScan(column_list=[x.col_str#1], name="x")
+      +-RelationArgumentScan(column_list=[x.col_str#1], name='x')
 ==
 
 select * from tvf_templated_select_collated_output_column_as_value_table('a', 'b')
@@ -8477,7 +8477,7 @@ CreateTableFunctionStmt
 |   |       | +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 |   |       +-ArgumentRef(type=INT64, name='y')
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[x.col_str#1], name="x")
+|     +-RelationArgumentScan(column_list=[x.col_str#1], name='x')
 +-output_column_list=
   +-$query.col_ci#2{Collation:"und:ci"} AS col_ci [STRING]
   +-$query.col_array_ci#3[{Collation:"und:ci"}] AS col_array_ci [ARRAY<STRING>]
@@ -8538,7 +8538,7 @@ CreateTableFunctionStmt
 |   |       | +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 |   |       +-Literal(type=INT64, value=1)
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[x.$value_column#1], name="x", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[x.$value_column#1], name='x', is_value_table=TRUE)
 +-output_column_list=
   +-$query.col_ci#2{Collation:"und:ci"} AS col_ci [STRING]
   +-$query.col_array_ci#3[{Collation:"und:ci"}] AS col_array_ci [ARRAY<STRING>]

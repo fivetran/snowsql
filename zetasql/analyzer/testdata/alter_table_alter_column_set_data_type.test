@@ -5,7 +5,7 @@ ALTER TABLE KeyValue ALTER COLUMN Key SET DATA TYPE NUMERIC;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnSetDataTypeAction(column="Key", updated_type=NUMERIC)
+  +-AlterColumnSetDataTypeAction(column='Key', updated_type=NUMERIC)
 
 ==
 
@@ -15,7 +15,7 @@ ALTER TABLE KeyValue ALTER COLUMN kEY SET DATA TYPE NUMERIC;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnSetDataTypeAction(column="kEY", updated_type=NUMERIC)
+  +-AlterColumnSetDataTypeAction(column='kEY', updated_type=NUMERIC)
 ==
 
 # INT64 -> NUMERIC(P,S)
@@ -40,7 +40,7 @@ ALTER TABLE KeyValue ALTER COLUMN Key SET DATA TYPE NUMERIC,
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnSetDataTypeAction(column="Key", updated_type=NUMERIC)
+  +-AlterColumnSetDataTypeAction(column='Key', updated_type=NUMERIC)
   +-AlterColumnSetDataTypeAction
     +-column='Value'
     +-updated_type=STRING
@@ -57,7 +57,7 @@ ALTER TABLE TestStructValueTable
 AlterTableStmt
 +-name_path=TestStructValueTable
 +-alter_action_list=
-  +-AlterColumnSetDataTypeAction(column="Value", updated_type=STRUCT<a NUMERIC, b STRING>)
+  +-AlterColumnSetDataTypeAction(column='Value', updated_type=STRUCT<a NUMERIC, b STRING>)
 ==
 
 # STRUCT<INT32,STRING> -> STRUCT<NUMERIC,STRING(42)>
@@ -172,7 +172,7 @@ ALTER TABLE KeyValue ALTER COLUMN IF EXISTS qux SET DATA TYPE NUMERIC;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnSetDataTypeAction(is_if_exists=TRUE, column="qux", updated_type=NUMERIC)
+  +-AlterColumnSetDataTypeAction(is_if_exists=TRUE, column='qux', updated_type=NUMERIC)
 ==
 
 # Old type not assignable to new type

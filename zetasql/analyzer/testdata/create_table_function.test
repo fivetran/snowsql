@@ -1030,7 +1030,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=t.[x#1, y#2]
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=t.[x#1, y#2], name="t")
+|     +-RelationArgumentScan(column_list=t.[x#1, y#2], name='t')
 +-output_column_list=
   +-t.x#1 AS x [INT64]
   +-t.y#2 AS y [STRING]
@@ -1061,14 +1061,14 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=t1.[x#1, y#2]
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name="t1")
+|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name='t1')
 |     | +-output_column_list=t1.[x#1, y#2]
 |     +-SetOperationItem
 |       +-scan=
 |       | +-ProjectScan
 |       |   +-column_list=t2.[a#3, b#4]
 |       |   +-input_scan=
-|       |     +-RelationArgumentScan(column_list=t2.[a#3, b#4], name="t2")
+|       |     +-RelationArgumentScan(column_list=t2.[a#3, b#4], name='t2')
 |       +-output_column_list=t2.[a#3, b#4]
 +-output_column_list=
   +-$union_all.x#5 AS x [INT64]
@@ -1099,14 +1099,14 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=t1.[x#1, y#2]
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name="t1")
+|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name='t1')
 |     | +-output_column_list=t1.[x#1, y#2]
 |     +-SetOperationItem
 |       +-scan=
 |       | +-ProjectScan
 |       |   +-column_list=t2.[a#3, b#4]
 |       |   +-input_scan=
-|       |     +-RelationArgumentScan(column_list=t2.[a#3, b#4], name="t2")
+|       |     +-RelationArgumentScan(column_list=t2.[a#3, b#4], name='t2')
 |       +-output_column_list=t2.[a#3, b#4]
 +-output_column_list=
   +-$union_all.x#5 AS x [INT64]
@@ -1148,7 +1148,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=t1.[x#1, y#2]
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name="t1")
+|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name='t1')
 |     | +-output_column_list=t1.[x#1, y#2]
 |     +-SetOperationItem
 |       +-scan=
@@ -1158,7 +1158,7 @@ CreateTableFunctionStmt
 |       |     +-FilterScan
 |       |       +-column_list=t2.[x#3, y#4]
 |       |       +-input_scan=
-|       |       | +-RelationArgumentScan(column_list=t2.[x#3, y#4], name="t2")
+|       |       | +-RelationArgumentScan(column_list=t2.[x#3, y#4], name='t2')
 |       |       +-filter_expr=
 |       |         +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
 |       |           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
@@ -1205,7 +1205,7 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=t1.[x#1, y#2]
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name="t1")
+|     | |     +-RelationArgumentScan(column_list=t1.[x#1, y#2], name='t1')
 |     | +-output_column_list=t1.[x#1, y#2]
 |     +-SetOperationItem
 |       +-scan=
@@ -1215,7 +1215,7 @@ CreateTableFunctionStmt
 |       |     +-FilterScan
 |       |       +-column_list=t2.[x#3, y#4]
 |       |       +-input_scan=
-|       |       | +-RelationArgumentScan(column_list=t2.[x#3, y#4], name="t2")
+|       |       | +-RelationArgumentScan(column_list=t2.[x#3, y#4], name='t2')
 |       |       +-filter_expr=
 |       |         +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
 |       |           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
@@ -1255,7 +1255,7 @@ CreateTableFunctionStmt
 |   |     +-ProjectScan
 |   |       +-column_list=t.[x#1, y#2]
 |   |       +-input_scan=
-|   |         +-RelationArgumentScan(column_list=t.[x#1, y#2], name="t")
+|   |         +-RelationArgumentScan(column_list=t.[x#1, y#2], name='t')
 |   +-query=
 |     +-ProjectScan
 |       +-column_list=w1.[x#3, y#4]
@@ -1327,7 +1327,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=keyvalue.[x#1, y#2]
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=keyvalue.[x#1, y#2], name="keyvalue")
+|     +-RelationArgumentScan(column_list=keyvalue.[x#1, y#2], name='keyvalue')
 +-output_column_list=
   +-keyvalue.x#1 AS x [INT64]
   +-keyvalue.y#2 AS y [STRING]
@@ -1481,7 +1481,7 @@ CreateTableFunctionStmt
 |   |     | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=valuetable.$value_column#1)
 |   |     +-field_idx=1
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 +-output_column_list=
   +-$query.x#2 AS x [INT64]
   +-$query.y#3 AS y [STRING]
@@ -1517,7 +1517,7 @@ CreateTableFunctionStmt
 |   |     | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=valuetable.$value_column#1)
 |   |     +-field_idx=1
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 +-output_column_list=
   +-$query.x#2 AS x [INT64]
   +-$query.y#3 AS y [STRING]
@@ -1541,7 +1541,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=[valuetable.$value_column#1]
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 +-output_column_list=
   +-valuetable.$value_column#1 AS v [STRUCT<x INT64, y STRING>]
 ==
@@ -1570,7 +1570,7 @@ CreateTableFunctionStmt
 |     +-FilterScan
 |       +-column_list=[valuetable.$value_column#1]
 |       +-input_scan=
-|       | +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|       | +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 |       +-filter_expr=
 |         +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
 |           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -1625,7 +1625,7 @@ CreateTableFunctionStmt
 |   |     | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=valuetable.$value_column#1)
 |   |     +-field_idx=1
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 +-output_column_list=
   +-$query.x#2 AS x [INT64]
   +-$query.y#3 AS y [STRING]
@@ -1674,7 +1674,7 @@ CreateTableFunctionStmt
 |     | |   |     | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=valuetable.$value_column#1)
 |     | |   |     +-field_idx=1
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|     | |     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 |     | +-output_column_list=$union_all1.[first#2, second#3]
 |     +-SetOperationItem
 |       +-scan=
@@ -1694,7 +1694,7 @@ CreateTableFunctionStmt
 |       |   |     | +-ColumnRef(type=STRUCT<a INT64, b STRING>, column=othervaluetable.$value_column#4)
 |       |   |     +-field_idx=1
 |       |   +-input_scan=
-|       |     +-RelationArgumentScan(column_list=[othervaluetable.$value_column#4], name="othervaluetable", is_value_table=TRUE)
+|       |     +-RelationArgumentScan(column_list=[othervaluetable.$value_column#4], name='othervaluetable', is_value_table=TRUE)
 |       +-output_column_list=$union_all2.[first#5, second#6]
 +-output_column_list=
   +-$union_all.first#7 AS first [INT64]
@@ -1744,7 +1744,7 @@ CreateTableFunctionStmt
 |     | |   |     | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=valuetable.$value_column#1)
 |     | |   |     +-field_idx=1
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name="valuetable", is_value_table=TRUE)
+|     | |     +-RelationArgumentScan(column_list=[valuetable.$value_column#1], name='valuetable', is_value_table=TRUE)
 |     | +-output_column_list=$union_all1.[first#2, second#3]
 |     +-SetOperationItem
 |       +-scan=
@@ -1764,7 +1764,7 @@ CreateTableFunctionStmt
 |       |   |     | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=othervaluetable.$value_column#4)
 |       |   |     +-field_idx=1
 |       |   +-input_scan=
-|       |     +-RelationArgumentScan(column_list=[othervaluetable.$value_column#4], name="othervaluetable", is_value_table=TRUE)
+|       |     +-RelationArgumentScan(column_list=[othervaluetable.$value_column#4], name='othervaluetable', is_value_table=TRUE)
 |       +-output_column_list=$union_all2.[first#5, second#6]
 +-output_column_list=
   +-$union_all.first#7 AS first [INT64]
@@ -1790,7 +1790,7 @@ CreateTableFunctionStmt
 | +-ProjectScan
 |   +-column_list=[t.column#1]
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[t.column#1], name="t")
+|     +-RelationArgumentScan(column_list=[t.column#1], name='t')
 +-output_column_list=
 | +-t.column#1 AS column [STRUCT<x INT64, y STRING>]
 +-is_value_table=TRUE
@@ -1895,7 +1895,7 @@ CreateTableFunctionStmt
 |   |             | +-ColumnRef(type=STRUCT<x INT32, y STRING>, column=t.$value_column#1)
 |   |             +-field_idx=1
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[t.$value_column#1], name='t', is_value_table=TRUE)
 +-output_column_list=
 | +-$query.$col1#2 AS "$col1" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
@@ -1949,7 +1949,7 @@ CreateTableFunctionStmt
 |       |       | +-ColumnRef(type=STRUCT<x INT32, y STRING>, column=t.$value_column#1)
 |       |       +-field_idx=1
 |       +-input_scan=
-|         +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
+|         +-RelationArgumentScan(column_list=[t.$value_column#1], name='t', is_value_table=TRUE)
 +-output_column_list=
 | +-$make_proto.$proto#4 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
@@ -1988,7 +1988,7 @@ CreateTableFunctionStmt
 |       |     | +-ColumnRef(type=STRUCT<x INT32, y STRING>, column=t.column#1)
 |       |     +-field_idx=0
 |       +-input_scan=
-|         +-RelationArgumentScan(column_list=[t.column#1], name="t")
+|         +-RelationArgumentScan(column_list=[t.column#1], name='t')
 +-output_column_list=
 | +-$subquery1.x#3 AS x [INT64]
 +-is_value_table=TRUE
@@ -2037,7 +2037,7 @@ CreateTableFunctionStmt
 |   |             | +-ColumnRef(type=STRUCT<x INT32, y STRING>, column=t.$value_column#1)
 |   |             +-field_idx=1
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[t.$value_column#1], name='t', is_value_table=TRUE)
 +-output_column_list=
 | +-$query.test_extra_pb#2 AS test_extra_pb [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
@@ -2087,7 +2087,7 @@ CreateTableFunctionStmt
 |   |             | +-ColumnRef(type=STRUCT<x INT32, y STRING>, column=t.$value_column#1)
 |   |             +-field_idx=1
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[t.$value_column#1], name='t', is_value_table=TRUE)
 +-output_column_list=
   +-$query.outputcol#2 AS outputcol [PROTO<zetasql_test__.TestExtraPB>]
 ==
@@ -2145,7 +2145,7 @@ CreateTableFunctionStmt
 |           |       | +-ColumnRef(type=STRUCT<x INT32, y STRING>, column=t.$value_column#1)
 |           |       +-field_idx=1
 |           +-input_scan=
-|             +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
+|             +-RelationArgumentScan(column_list=[t.$value_column#1], name='t', is_value_table=TRUE)
 +-output_column_list=
   +-$make_proto.$proto#4 AS outputcol [PROTO<zetasql_test__.TestExtraPB>]
 ==
@@ -2175,7 +2175,7 @@ CreateTableFunctionStmt
 |   |     | +-ColumnRef(type=STRUCT<x INT64>, column=t.$value_column#1)
 |   |     +-field_idx=0
 |   +-input_scan=
-|     +-RelationArgumentScan(column_list=[t.$value_column#1], name="t", is_value_table=TRUE)
+|     +-RelationArgumentScan(column_list=[t.$value_column#1], name='t', is_value_table=TRUE)
 +-output_column_list=
 | +-$query.x#2 AS x [INT64]
 +-is_value_table=TRUE
@@ -2473,7 +2473,7 @@ CreateTableFunctionStmt
 |       +-expr_list=
 |       | +-result#2 := Literal(type=INT64, value=42)
 |       +-input_scan=
-|         +-RelationArgumentScan(column_list=[t.col#1], name="t")
+|         +-RelationArgumentScan(column_list=[t.col#1], name='t')
 +-output_column_list=
   +-$query.result#2 AS result [INT64]
 ==
@@ -2500,7 +2500,7 @@ CreateTableFunctionStmt
 |       +-argument_list=
 |       | +-FunctionArgument
 |       |   +-scan=
-|       |   | +-RelationArgumentScan(column_list=[t.col#1], name="t")
+|       |   | +-RelationArgumentScan(column_list=[t.col#1], name='t')
 |       |   +-argument_column_list=[t.col#1]
 |       +-column_index_list=[0, 1]
 +-output_column_list=
@@ -2768,14 +2768,14 @@ CreateTableFunctionStmt
 |     | | +-ProjectScan
 |     | |   +-column_list=t.[x#1, y#2]
 |     | |   +-input_scan=
-|     | |     +-RelationArgumentScan(column_list=t.[x#1, y#2], name="t")
+|     | |     +-RelationArgumentScan(column_list=t.[x#1, y#2], name='t')
 |     | +-output_column_list=t.[x#1, y#2]
 |     +-SetOperationItem
 |       +-scan=
 |       | +-ProjectScan
 |       |   +-column_list=t.[x#3, y#4]
 |       |   +-input_scan=
-|       |     +-RelationArgumentScan(column_list=t.[x#3, y#4], name="t")
+|       |     +-RelationArgumentScan(column_list=t.[x#3, y#4], name='t')
 |       +-output_column_list=t.[x#3, y#4]
 +-output_column_list=
   +-$union_all.x#5 AS x [INT64]
@@ -2802,9 +2802,9 @@ CreateTableFunctionStmt
 |     +-JoinScan
 |       +-column_list=t.[x#1, y#4]
 |       +-left_scan=
-|       | +-RelationArgumentScan(column_list=[t.x#1], name="t")
+|       | +-RelationArgumentScan(column_list=[t.x#1], name='t')
 |       +-right_scan=
-|         +-RelationArgumentScan(column_list=[t.y#4], name="t")
+|         +-RelationArgumentScan(column_list=[t.y#4], name='t')
 +-output_column_list=
   +-t.x#1 AS x [INT64]
   +-t.y#4 AS y [STRING]

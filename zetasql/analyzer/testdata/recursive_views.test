@@ -480,7 +480,7 @@ CreateMaterializedViewStmt
 |       |   |           +-ColumnRef(type=INT64, column=$view.n#8)
 |       |   +-recursive=TRUE
 |       +-output_column_list=[x-y.z.n#7]
-+-sql='SELECT 1 AS n\n  UNION ALL (\n    WITH RECURSIVE 'x-y.z" AS (\n       SELECT 1 AS n\n       UNION ALL\n       SELECT n + 1 FROM "x-y.z"\n    ) SELECT * FROM "x-y.z" INNER JOIN "a-b.c".d USING (n)\n  )"
++-sql='SELECT 1 AS n\n  UNION ALL (\n    WITH RECURSIVE "x-y.z" AS (\n       SELECT 1 AS n\n       UNION ALL\n       SELECT n + 1 FROM "x-y.z"\n    ) SELECT * FROM "x-y.z" INNER JOIN "a-b.c".d USING (n)\n  )'
 +-recursive=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name='n', type=INT64, column="a-b.c".d.n#9)
