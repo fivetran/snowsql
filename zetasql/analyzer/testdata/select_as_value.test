@@ -233,7 +233,7 @@ QueryStmt
     +-column_list=[$query.q#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q.$col1#1]
@@ -265,7 +265,7 @@ QueryStmt
     +-column_list=[q.$struct#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#2]
@@ -300,7 +300,7 @@ QueryStmt
     +-column_list=[q.$value_column#2]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q.$col1#1]

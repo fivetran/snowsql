@@ -195,7 +195,7 @@ QueryStmt
     +-column_list=[$query.$col1#9{Collation:"und:ci"}, test.string_binary#6{Collation:"binary"}]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="test"
+    |   +-with_query_name='test'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=CollatedTable.[string_ci#1, string_binary#2, struct_with_string_ci#3, array_with_string_ci#4]
@@ -231,7 +231,7 @@ QueryStmt
     +-column_list=t.[ind#8, string_ci#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=$union_all.[ind#3, string_ci#4]
@@ -289,7 +289,7 @@ QueryStmt
     +-column_list=t.[ind#8, string_ci#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=$union_distinct.[ind#3, string_ci#4]
@@ -373,7 +373,7 @@ QueryStmt
     +-column_list=t.[ind#12, string_ci#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=$union_all.[ind#6, string_ci#7]
@@ -431,7 +431,7 @@ QueryStmt
     +-column_list=t.[ind#12, string_ci#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=$union_distinct.[ind#6, string_ci#7]
@@ -537,7 +537,7 @@ QueryStmt
     +-column_list=[t.n#8{Collation:"und:ci"}]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#4{Collation:"und:ci"}]
@@ -633,7 +633,7 @@ QueryStmt
     +-column_list=t1.[$unnest2#7, $unnest1#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t4"
+    | | +-with_query_name='t4'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1{Collation:"und:ci"}]
@@ -651,7 +651,7 @@ QueryStmt
     | |         |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
     | |         +-element_column=$array.$unnest1#1{Collation:"und:ci"}
     | +-WithEntry
-    | | +-with_query_name="t3"
+    | | +-with_query_name='t3'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest2#2{Collation:"und:ci"}]
@@ -669,7 +669,7 @@ QueryStmt
     | |         |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
     | |         +-element_column=$array.$unnest2#2{Collation:"und:ci"}
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t3.$unnest2#3{Collation:"und:ci"}, t4.$unnest1#4{Collation:"und:ci"}]
@@ -681,7 +681,7 @@ QueryStmt
     | |         +-right_scan=
     | |           +-WithRefScan(column_list=[t4.$unnest1#4{Collation:"und:ci"}], with_query_name="t4")
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$unnest2#5, $unnest1#6]
@@ -708,7 +708,7 @@ QueryStmt
     +-column_list=[t1.n#5{Collation:"und:ci"}]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2{Collation:"und:ci"}]
@@ -771,7 +771,7 @@ QueryStmt
     +-column_list=[t1.$unnest1#3{Collation:"und:ci"}]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="KeyValue"
+    | | +-with_query_name='KeyValue'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1{Collation:"und:ci"}]
@@ -788,7 +788,7 @@ QueryStmt
     | |         |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
     | |         +-element_column=$array.$unnest1#1{Collation:"und:ci"}
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}]
@@ -816,7 +816,7 @@ QueryStmt
     +-column_list=[t1.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="KeyValue"
+    | | +-with_query_name='KeyValue'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.key#1{Collation:"und:ci"}]
@@ -833,7 +833,7 @@ QueryStmt
     | |         |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
     | |         +-element_column=$array.key#1{Collation:"und:ci"}
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t1.$col1#3]
@@ -866,7 +866,7 @@ QueryStmt
     +-column_list=[t1.$unnest1#3{Collation:"und:ci"}]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="KeyValue"
+    | | +-with_query_name='KeyValue'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1{Collation:"und:ci"}]
@@ -883,7 +883,7 @@ QueryStmt
     | |         |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
     | |         +-element_column=$array.$unnest1#1{Collation:"und:ci"}
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}]
@@ -913,13 +913,13 @@ QueryStmt
     +-column_list=[t1_2.$col1#4{Collation:"und:ci"}]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t1.$col1#2{Collation:"und:ci"}]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t1"
+    | |     |   +-with_query_name='t1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t1.$col1#1{Collation:"und:ci"}]
@@ -937,7 +937,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-WithRefScan(column_list=[t1.$col1#2{Collation:"und:ci"}], with_query_name="t1")
     | +-WithEntry
-    |   +-with_query_name="t1_2"
+    |   +-with_query_name='t1_2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#3{Collation:"und:ci"}]
@@ -969,13 +969,13 @@ QueryStmt
     +-column_list=t1_3.[$col1#7, $col1#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t1.$col1#3{Collation:"und:ci"}, t3.$col1#4{Collation:"und:ci"}]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     | | +-with_query_name="t3"
+    | |     | | +-with_query_name='t3'
     | |     | | +-with_subquery=
     | |     | |   +-ProjectScan
     | |     | |     +-column_list=[t3.$col1#1{Collation:"und:ci"}]
@@ -988,7 +988,7 @@ QueryStmt
     | |     | |     +-input_scan=
     | |     | |       +-SingleRowScan
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t1"
+    | |     |   +-with_query_name='t1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t3.$col1#2{Collation:"und:ci"}]
@@ -1006,7 +1006,7 @@ QueryStmt
     | |     |         +-WithRefScan(column_list=[t3.$col1#4{Collation:"und:ci"}], with_query_name="t3")
     | |     +-recursive=TRUE
     | +-WithEntry
-    |   +-with_query_name="t1_3"
+    |   +-with_query_name='t1_3'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$col1#5, $col1#6]
@@ -1036,13 +1036,13 @@ QueryStmt
     +-column_list=[t1.$col1#4{Collation:"und:ci"}]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t2_1.$col1#2{Collation:"und:ci"}]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t2_1"
+    | |     |   +-with_query_name='t2_1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t2.$col1#1{Collation:"und:ci"}]
@@ -1061,7 +1061,7 @@ QueryStmt
     | |     |     +-WithRefScan(column_list=[t2_1.$col1#2{Collation:"und:ci"}], with_query_name="t2_1")
     | |     +-recursive=TRUE
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#3{Collation:"und:ci"}]
@@ -3950,7 +3950,7 @@ QueryStmt
     +-column_list=[t1.col_a#5{Collation:"und:ci"}, t1.col_b#6, t2.col_c#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[col_a#1, col_b#2]
@@ -3964,7 +3964,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[col_a#3, col_c#4]
@@ -4006,7 +4006,7 @@ QueryStmt
     +-column_list=[t2.col_a#7{Collation:"und:ci"}, t1.col_b#6, t2.col_c#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[col_a#1, col_b#2]
@@ -4020,7 +4020,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[col_a#3, col_c#4]
@@ -4062,7 +4062,7 @@ QueryStmt
     +-column_list=[$full_join.col_a#9{Collation:"und:ci"}, t1.col_b#6, t2.col_c#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[col_a#1, col_b#2]
@@ -4076,7 +4076,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[col_a#3, col_c#4]
@@ -4137,7 +4137,7 @@ QueryStmt
     +-column_list=[$join_left.col_a#9{Collation:"und:ci"}, $query.col_b#11, $query.col_c#12]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$make_struct.$struct#3<{Collation:"und:ci"},_>]
@@ -4162,7 +4162,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#6<{Collation:"und:ci"},_>]
@@ -4249,7 +4249,7 @@ QueryStmt
     +-column_list=[$join_left.col_a#9{Collation:"und:ci"}, $query.col_b#11, $query.col_c#12]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$make_struct.$struct#3<{Collation:"und:ci"},_>]
@@ -4274,7 +4274,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#6<{Collation:"und:ci"},_>]
@@ -4362,7 +4362,7 @@ QueryStmt
     +-column_list=[$join_right.col_a#10{Collation:"und:ci"}, $query.col_b#11, $query.col_c#12]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$make_struct.$struct#3<{Collation:"und:ci"},_>]
@@ -4387,7 +4387,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#6<{Collation:"und:ci"},_>]
@@ -4475,7 +4475,7 @@ QueryStmt
     +-column_list=[$full_join.col_a#11{Collation:"und:ci"}, $query.col_b#12, $query.col_c#13]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$make_struct.$struct#3<{Collation:"und:ci"},_>]
@@ -4500,7 +4500,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#6<{Collation:"und:ci"},_>]
@@ -9361,7 +9361,7 @@ QueryStmt
     +-column_list=t.[col_struct#14, n#15]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=$union_all.[col_struct#5, n#6]
@@ -9471,7 +9471,7 @@ QueryStmt
     +-column_list=t.[col_struct#14, n#15]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=$union_all.[col_struct#5, n#6]

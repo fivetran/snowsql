@@ -449,7 +449,7 @@ CreateTableAsSelectStmt
     +-column_list=[t3.key#7]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t1.key#1]
@@ -458,14 +458,14 @@ CreateTableAsSelectStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[KeyValue.Key#2]
     | |     +-input_scan=
     | |       +-TableScan(column_list=[KeyValue.Key#2], table=KeyValue, column_index_list=[0])
     | +-WithEntry
-    |   +-with_query_name="t3"
+    |   +-with_query_name='t3'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.key#6]

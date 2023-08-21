@@ -844,7 +844,7 @@ CreateModelStmt
     +-column_list=t3.[label#11, value#12]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[label#1, value#2]
@@ -854,14 +854,14 @@ CreateModelStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=KeyValue.[Key#3, Value#4]
     | |     +-input_scan=
     | |       +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1])
     | +-WithEntry
-    |   +-with_query_name="t3"
+    |   +-with_query_name='t3'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=$union_all.[label#9, value#10]
@@ -1145,7 +1145,7 @@ CreateModelStmt
     |   +-column_list=[a1.t1#2]
     |   +-with_entry_list=
     |   | +-WithEntry
-    |   |   +-with_query_name="a1"
+    |   |   +-with_query_name='a1'
     |   |   +-with_subquery=
     |   |     +-ProjectScan
     |   |       +-column_list=[a1.t1#1]
@@ -1186,7 +1186,7 @@ CreateModelStmt
     |   +-column_list=[training_data.t1#2]
     |   +-with_entry_list=
     |   | +-WithEntry
-    |   |   +-with_query_name="training_data"
+    |   |   +-with_query_name='training_data'
     |   |   +-with_subquery=
     |   |     +-ProjectScan
     |   |       +-column_list=[training_data.t1#1]

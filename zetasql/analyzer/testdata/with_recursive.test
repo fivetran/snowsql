@@ -16,7 +16,7 @@ QueryStmt
     +-column_list=t1.[$unnest2#7, $unnest1#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t4"
+    | | +-with_query_name='t4'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1]
@@ -27,7 +27,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[5, 6, 7, 8])
     | |         +-element_column=$array.$unnest1#1
     | +-WithEntry
-    | | +-with_query_name="t3"
+    | | +-with_query_name='t3'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest2#2]
@@ -38,7 +38,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.$unnest2#2
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t3.$unnest2#3, t4.$unnest1#4]
@@ -50,7 +50,7 @@ QueryStmt
     | |         +-right_scan=
     | |           +-WithRefScan(column_list=[t4.$unnest1#4], with_query_name="t4")
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$unnest2#5, $unnest1#6]
@@ -79,7 +79,7 @@ QueryStmt
     +-column_list=[t1.n#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -131,7 +131,7 @@ QueryStmt
     +-column_list=[t1.n#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_distinct.n#2]
@@ -200,7 +200,7 @@ QueryStmt
     +-column_list=[t1.$unnest1#3]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="KeyValue"
+    | | +-with_query_name='KeyValue'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1]
@@ -211,7 +211,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.$unnest1#1
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.$unnest1#2]
@@ -240,7 +240,7 @@ QueryStmt
     +-column_list=[t1.$unnest1#3]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="KeyValue"
+    | | +-with_query_name='KeyValue'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1]
@@ -251,7 +251,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.$unnest1#1
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.$unnest1#2]
@@ -292,13 +292,13 @@ QueryStmt
     +-column_list=[t1_2.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t1.$col1#2]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t1"
+    | |     |   +-with_query_name='t1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t1.$col1#1]
@@ -312,7 +312,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-WithRefScan(column_list=[t1.$col1#2], with_query_name="t1")
     | +-WithEntry
-    |   +-with_query_name="t1_2"
+    |   +-with_query_name='t1_2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#3]
@@ -366,13 +366,13 @@ QueryStmt
     +-column_list=t1_3.[$col1#7, $col1#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t1.$col1#3, t3.$col1#4]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     | | +-with_query_name="t3"
+    | |     | | +-with_query_name='t3'
     | |     | | +-with_subquery=
     | |     | |   +-ProjectScan
     | |     | |     +-column_list=[t3.$col1#1]
@@ -381,7 +381,7 @@ QueryStmt
     | |     | |     +-input_scan=
     | |     | |       +-SingleRowScan
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t1"
+    | |     |   +-with_query_name='t1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t3.$col1#2]
@@ -399,7 +399,7 @@ QueryStmt
     | |     |         +-WithRefScan(column_list=[t3.$col1#4], with_query_name="t3")
     | |     +-recursive=TRUE
     | +-WithEntry
-    |   +-with_query_name="t1_3"
+    |   +-with_query_name='t1_3'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$col1#5, $col1#6]
@@ -427,13 +427,13 @@ QueryStmt
     +-column_list=[t1.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t2_1.$col1#2]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t2_1"
+    | |     |   +-with_query_name='t2_1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t2.$col1#1]
@@ -448,7 +448,7 @@ QueryStmt
     | |     |     +-WithRefScan(column_list=[t2_1.$col1#2], with_query_name="t2_1")
     | |     +-recursive=TRUE
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#3]
@@ -476,13 +476,13 @@ QueryStmt
     +-column_list=[t1_2.$col1#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t2.$col1#4]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t1"
+    | |     |   +-with_query_name='t1'
     | |     |   +-with_subquery=
     | |     |     +-RecursiveScan
     | |     |       +-column_list=[$union_all.$col1#2]
@@ -514,7 +514,7 @@ QueryStmt
     | |     |     +-SingleRowScan
     | |     +-recursive=TRUE
     | +-WithEntry
-    |   +-with_query_name="t1_2"
+    |   +-with_query_name='t1_2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#5]
@@ -547,25 +547,25 @@ QueryStmt
     +-column_list=[t1_4.$col1#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[t1.$col1#4]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     |   +-with_query_name="t1"
+    | |     |   +-with_query_name='t1'
     | |     |   +-with_subquery=
     | |     |     +-WithScan
     | |     |       +-column_list=[t1_2.$col1#3]
     | |     |       +-with_entry_list=
     | |     |       | +-WithEntry
-    | |     |       |   +-with_query_name="t1_2"
+    | |     |       |   +-with_query_name='t1_2'
     | |     |       |   +-with_subquery=
     | |     |       |     +-WithScan
     | |     |       |       +-column_list=[t1_3.$col1#2]
     | |     |       |       +-with_entry_list=
     | |     |       |       | +-WithEntry
-    | |     |       |       |   +-with_query_name="t1_3"
+    | |     |       |       |   +-with_query_name='t1_3'
     | |     |       |       |   +-with_subquery=
     | |     |       |       |     +-ProjectScan
     | |     |       |       |       +-column_list=[t1.$col1#1]
@@ -589,7 +589,7 @@ QueryStmt
     | |         +-input_scan=
     | |           +-WithRefScan(column_list=[t1.$col1#4], with_query_name="t1")
     | +-WithEntry
-    |   +-with_query_name="t1_4"
+    |   +-with_query_name='t1_4'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#5]
@@ -662,7 +662,7 @@ QueryStmt
     +-column_list=t1.[$unnest2#7, $unnest1#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t4"
+    | | +-with_query_name='t4'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest1#1]
@@ -673,7 +673,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[5, 6, 7, 8])
     | |         +-element_column=$array.$unnest1#1
     | +-WithEntry
-    | | +-with_query_name="t3"
+    | | +-with_query_name='t3'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.$unnest2#2]
@@ -684,7 +684,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.$unnest2#2
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t3.$unnest2#3, t4.$unnest1#4]
@@ -696,7 +696,7 @@ QueryStmt
     | |         +-right_scan=
     | |           +-WithRefScan(column_list=[t4.$unnest1#4], with_query_name="t4")
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$unnest2#5, $unnest1#6]
@@ -744,13 +744,13 @@ QueryStmt
     +-column_list=t1_3.[$col1#7, $col1#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-WithScan
     | |     +-column_list=[T1.$col1#3, t3.$col1#4]
     | |     +-with_entry_list=
     | |     | +-WithEntry
-    | |     | | +-with_query_name="t3"
+    | |     | | +-with_query_name='t3'
     | |     | | +-with_subquery=
     | |     | |   +-ProjectScan
     | |     | |     +-column_list=[t3.$col1#1]
@@ -759,7 +759,7 @@ QueryStmt
     | |     | |     +-input_scan=
     | |     | |       +-SingleRowScan
     | |     | +-WithEntry
-    | |     |   +-with_query_name="T1"
+    | |     |   +-with_query_name='T1'
     | |     |   +-with_subquery=
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t3.$col1#2]
@@ -777,7 +777,7 @@ QueryStmt
     | |     |         +-WithRefScan(column_list=[t3.$col1#4], with_query_name="t3")
     | |     +-recursive=TRUE
     | +-WithEntry
-    |   +-with_query_name="t1_3"
+    |   +-with_query_name='t1_3'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$col1#5, $col1#6]
@@ -808,7 +808,7 @@ QueryStmt
     +-column_list=A.[$col1#6, $col1#7]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="D"
+    | | +-with_query_name='D'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[D.$col1#1]
@@ -817,21 +817,21 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="C"
+    | | +-with_query_name='C'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[D.$col1#2]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=[D.$col1#2], with_query_name="D")
     | +-WithEntry
-    | | +-with_query_name="B"
+    | | +-with_query_name='B'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[D.$col1#3]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=[D.$col1#3], with_query_name="D")
     | +-WithEntry
-    |   +-with_query_name="A"
+    |   +-with_query_name='A'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[B.$col1#4, C.$col1#5]
@@ -867,7 +867,7 @@ QueryStmt
     +-column_list=A.[$col1#6, $col1#7]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="D"
+    | | +-with_query_name='D'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[D.$col1#1]
@@ -876,21 +876,21 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="B"
+    | | +-with_query_name='B'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[D.$col1#2]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=[D.$col1#2], with_query_name="D")
     | +-WithEntry
-    | | +-with_query_name="C"
+    | | +-with_query_name='C'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[D.$col1#3]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=[D.$col1#3], with_query_name="D")
     | +-WithEntry
-    |   +-with_query_name="A"
+    |   +-with_query_name='A'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[B.$col1#4, C.$col1#5]
@@ -933,7 +933,7 @@ QueryStmt
     +-column_list=A.[$col1#16, $col1#17, $col1#18, $col1#19, $col1#20, $col1#21]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="G"
+    | | +-with_query_name='G'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[G.$col1#1]
@@ -942,21 +942,21 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="F"
+    | | +-with_query_name='F'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[G.$col1#2]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=[G.$col1#2], with_query_name="G")
     | +-WithEntry
-    | | +-with_query_name="E"
+    | | +-with_query_name='E'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[G.$col1#3]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=[G.$col1#3], with_query_name="G")
     | +-WithEntry
-    | | +-with_query_name="D"
+    | | +-with_query_name='D'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[E.$col1#4, F.$col1#5]
@@ -968,7 +968,7 @@ QueryStmt
     | |         +-right_scan=
     | |           +-WithRefScan(column_list=[F.$col1#5], with_query_name="F")
     | +-WithEntry
-    | | +-with_query_name="C"
+    | | +-with_query_name='C'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[E.$col1#6, F.$col1#7]
@@ -980,7 +980,7 @@ QueryStmt
     | |         +-right_scan=
     | |           +-WithRefScan(column_list=[F.$col1#7], with_query_name="F")
     | +-WithEntry
-    | | +-with_query_name="B"
+    | | +-with_query_name='B'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[E.$col1#8, F.$col1#9]
@@ -992,7 +992,7 @@ QueryStmt
     | |         +-right_scan=
     | |           +-WithRefScan(column_list=[F.$col1#9], with_query_name="F")
     | +-WithEntry
-    |   +-with_query_name="A"
+    |   +-with_query_name='A'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[B.$col1#10, B.$col1#11, C.$col1#12, C.$col1#13, D.$col1#14, D.$col1#15]
@@ -1087,7 +1087,7 @@ QueryStmt
     +-column_list=[t.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.$col1#2]
@@ -1127,7 +1127,7 @@ QueryStmt
     +-column_list=[t.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_distinct.$col1#2]
@@ -1172,7 +1172,7 @@ QueryStmt
     +-column_list=[t.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.$col1#2]
@@ -1212,7 +1212,7 @@ QueryStmt
     +-column_list=[t.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_distinct.$col1#2]
@@ -1268,7 +1268,7 @@ QueryStmt
     +-column_list=[t.$col1#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.$col1#4]
@@ -1338,7 +1338,7 @@ QueryStmt
     +-column_list=[t.$col1#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.$col1#4]
@@ -1418,7 +1418,7 @@ QueryStmt
     +-column_list=[t.$col1#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.$col1#2]
@@ -1516,7 +1516,7 @@ QueryStmt
     +-column_list=[t.$col1#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.$col1#2]
@@ -1599,7 +1599,7 @@ QueryStmt
     +-column_list=[t1.n#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -1651,7 +1651,7 @@ QueryStmt
     +-column_list=[t1.n#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -1747,7 +1747,7 @@ QueryStmt
     +-column_list=[t1.n#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -1769,7 +1769,7 @@ QueryStmt
     |           |   +-column_list=[t1.n#7]
     |           |   +-with_entry_list=
     |           |   | +-WithEntry
-    |           |   |   +-with_query_name="t2"
+    |           |   |   +-with_query_name='t2'
     |           |   |   +-with_subquery=
     |           |   |     +-RecursiveScan
     |           |   |       +-column_list=[$union_all.n#4]
@@ -1887,7 +1887,7 @@ QueryStmt
     +-column_list=[t1.n#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -1909,7 +1909,7 @@ QueryStmt
     |           |   +-column_list=[t1.n#6]
     |           |   +-with_entry_list=
     |           |   | +-WithEntry
-    |           |   |   +-with_query_name="t2"
+    |           |   |   +-with_query_name='t2'
     |           |   |   +-with_subquery=
     |           |   |     +-RecursiveScan
     |           |   |       +-column_list=[$union_all.n#4]
@@ -1996,7 +1996,7 @@ QueryStmt
     +-column_list=[t1.n#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -2026,7 +2026,7 @@ QueryStmt
     |           |           +-column_list=[t2.n#7]
     |           |           +-with_entry_list=
     |           |           | +-WithEntry
-    |           |           |   +-with_query_name="t2"
+    |           |           |   +-with_query_name='t2'
     |           |           |   +-with_subquery=
     |           |           |     +-RecursiveScan
     |           |           |       +-column_list=[$union_all.n#5]
@@ -2082,7 +2082,7 @@ QueryStmt
     +-column_list=[t1.n#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -2104,7 +2104,7 @@ QueryStmt
     |           |   +-column_list=[t1.n#7]
     |           |   +-with_entry_list=
     |           |   | +-WithEntry
-    |           |   |   +-with_query_name="t2"
+    |           |   |   +-with_query_name='t2'
     |           |   |   +-with_subquery=
     |           |   |     +-RecursiveScan
     |           |   |       +-column_list=[$union_all.n#4]
@@ -2176,7 +2176,7 @@ QueryStmt
     +-column_list=[t1.n#19]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.n#18]
@@ -2197,7 +2197,7 @@ QueryStmt
     |           |   +-column_list=[t4.n#17]
     |           |   +-with_entry_list=
     |           |   | +-WithEntry
-    |           |   | | +-with_query_name="t2"
+    |           |   | | +-with_query_name='t2'
     |           |   | | +-with_subquery=
     |           |   | |   +-RecursiveScan
     |           |   | |     +-column_list=[$union_all.n#3]
@@ -2226,7 +2226,7 @@ QueryStmt
     |           |   | |         |     +-RecursiveRefScan(column_list=[t2.n#4])
     |           |   | |         +-output_column_list=[$union_all2.$col1#5]
     |           |   | +-WithEntry
-    |           |   | | +-with_query_name="t3"
+    |           |   | | +-with_query_name='t3'
     |           |   | | +-with_subquery=
     |           |   | |   +-RecursiveScan
     |           |   | |     +-column_list=[$union_all.n#7]
@@ -2260,13 +2260,13 @@ QueryStmt
     |           |   | |         |         +-RecursiveRefScan(column_list=[t3.n#9])
     |           |   | |         +-output_column_list=[$union_all2.$col1#10]
     |           |   | +-WithEntry
-    |           |   |   +-with_query_name="t4"
+    |           |   |   +-with_query_name='t4'
     |           |   |   +-with_subquery=
     |           |   |     +-WithScan
     |           |   |       +-column_list=[t5.n#16]
     |           |   |       +-with_entry_list=
     |           |   |       | +-WithEntry
-    |           |   |       |   +-with_query_name="t5"
+    |           |   |       |   +-with_query_name='t5'
     |           |   |       |   +-with_subquery=
     |           |   |       |     +-RecursiveScan
     |           |   |       |       +-column_list=[$union_all.n#12]
@@ -2404,7 +2404,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -2462,7 +2462,7 @@ QueryStmt
     +-column_list=[t.n#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -2519,7 +2519,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -2627,7 +2627,7 @@ QueryStmt
     +-column_list=[t.n#10]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="a"
+    | | +-with_query_name='a'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -2638,7 +2638,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<DOUBLE>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -2765,7 +2765,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.n#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -2879,7 +2879,7 @@ QueryStmt
     +-column_list=[t2.n2#10]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-RecursiveScan
     | |     +-column_list=[$union_all.n1#2]
@@ -2908,7 +2908,7 @@ QueryStmt
     | |         |     +-RecursiveRefScan(column_list=[t1.n1#3])
     | |         +-output_column_list=[$union_all2.$col1#4]
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n2#6]
@@ -2982,7 +2982,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -3123,7 +3123,7 @@ QueryStmt
     +-column_list=[t.n#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -3338,7 +3338,7 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#2]
@@ -3409,7 +3409,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="tbl"
+    | | +-with_query_name='tbl'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3420,7 +3420,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3502,7 +3502,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="tbl"
+    | | +-with_query_name='tbl'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3513,7 +3513,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3594,7 +3594,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3605,7 +3605,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3654,7 +3654,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3665,7 +3665,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3727,7 +3727,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3738,7 +3738,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3790,7 +3790,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3801,7 +3801,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3875,7 +3875,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3886,7 +3886,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -3935,7 +3935,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -3946,7 +3946,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -4010,7 +4010,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -4021,7 +4021,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -4071,7 +4071,7 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t_other"
+    | | +-with_query_name='t_other'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[$array.n#1]
@@ -4082,7 +4082,7 @@ QueryStmt
     | |         | +-Literal(type=ARRAY<INT64>, value=[1, 2, 3, 4])
     | |         +-element_column=$array.n#1
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -4173,13 +4173,13 @@ QueryStmt
     +-column_list=[a.n#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="a"
+    |   +-with_query_name='a'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[$union_all.n#4]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       | | +-with_query_name="unused"
+    |       | | +-with_query_name='unused'
     |       | | +-with_subquery=
     |       | |   +-ProjectScan
     |       | |     +-column_list=[unused.$col1#1]
@@ -4188,7 +4188,7 @@ QueryStmt
     |       | |     +-input_scan=
     |       | |       +-SingleRowScan
     |       | +-WithEntry
-    |       |   +-with_query_name="b"
+    |       |   +-with_query_name='b'
     |       |   +-with_subquery=
     |       |     +-ProjectScan
     |       |       +-column_list=[b.n#2]
@@ -4253,13 +4253,13 @@ QueryStmt
     +-column_list=[a.n#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="a"
+    |   +-with_query_name='a'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[$union_all.n#4]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       | | +-with_query_name="b"
+    |       | | +-with_query_name='b'
     |       | | +-with_subquery=
     |       | |   +-ProjectScan
     |       | |     +-column_list=[b.n#1]
@@ -4268,7 +4268,7 @@ QueryStmt
     |       | |     +-input_scan=
     |       | |       +-SingleRowScan
     |       | +-WithEntry
-    |       |   +-with_query_name="unused"
+    |       |   +-with_query_name='unused'
     |       |   +-with_subquery=
     |       |     +-ProjectScan
     |       |       +-column_list=[unused.$col1#2]
@@ -4334,13 +4334,13 @@ QueryStmt
     +-column_list=[a.n#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="a"
+    |   +-with_query_name='a'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[$union_all.n#7]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       | | +-with_query_name="b"
+    |       | | +-with_query_name='b'
     |       | | +-with_subquery=
     |       | |   +-RecursiveScan
     |       | |     +-column_list=[$union_all.n#2]
@@ -4376,7 +4376,7 @@ QueryStmt
     |       | |         |           +-Literal(type=INT64, value=5)
     |       | |         +-output_column_list=[$union_all2.$col1#4]
     |       | +-WithEntry
-    |       |   +-with_query_name="unused"
+    |       |   +-with_query_name='unused'
     |       |   +-with_subquery=
     |       |     +-ProjectScan
     |       |       +-column_list=[unused.$col1#5]
@@ -4472,7 +4472,7 @@ QueryStmt
     +-column_list=[a.n#10]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="a0"
+    | | +-with_query_name='a0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[a0.n#1]
@@ -4481,13 +4481,13 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="a"
+    |   +-with_query_name='a'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[$union_all.n#6]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       | | +-with_query_name="unused"
+    |       | | +-with_query_name='unused'
     |       | | +-with_subquery=
     |       | |   +-ProjectScan
     |       | |     +-column_list=[unused.$col1#2]
@@ -4496,7 +4496,7 @@ QueryStmt
     |       | |     +-input_scan=
     |       | |       +-SingleRowScan
     |       | +-WithEntry
-    |       |   +-with_query_name="b"
+    |       |   +-with_query_name='b'
     |       |   +-with_subquery=
     |       |     +-ProjectScan
     |       |       +-column_list=[b.n#4]
@@ -4568,7 +4568,7 @@ QueryStmt
     +-column_list=[a.n#10]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="a0"
+    | | +-with_query_name='a0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[a0.n#1]
@@ -4577,13 +4577,13 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="a"
+    |   +-with_query_name='a'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[$union_all.n#6]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       | | +-with_query_name="unused"
+    |       | | +-with_query_name='unused'
     |       | | +-with_subquery=
     |       | |   +-ProjectScan
     |       | |     +-column_list=[unused.$col1#2]
@@ -4592,7 +4592,7 @@ QueryStmt
     |       | |     +-input_scan=
     |       | |       +-SingleRowScan
     |       | +-WithEntry
-    |       |   +-with_query_name="b"
+    |       |   +-with_query_name='b'
     |       |   +-with_subquery=
     |       |     +-ProjectScan
     |       |       +-column_list=[b.n#4]
@@ -4758,7 +4758,7 @@ QueryStmt
     +-column_list=[t.n#10]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t0"
+    | | +-with_query_name='t0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t0.n#1]
@@ -4767,7 +4767,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="t"
+    | | +-with_query_name='t'
     | | +-with_subquery=
     | |   +-RecursiveScan
     | |     +-column_list=[$union_all.n#3]
@@ -4815,7 +4815,7 @@ QueryStmt
     | |         |       +-output_column_list=[$except_all2.$col1#7]
     | |         +-output_column_list=[$except_all.$col1#8]
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t1.n#9]
@@ -4882,7 +4882,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t0"
+    | | +-with_query_name='t0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t0.n#1]
@@ -4891,7 +4891,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -4966,7 +4966,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t0"
+    | | +-with_query_name='t0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t0.n#1]
@@ -4975,7 +4975,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -5061,7 +5061,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t0"
+    | | +-with_query_name='t0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t0.n#1]
@@ -5070,7 +5070,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -5145,7 +5145,7 @@ QueryStmt
     +-column_list=[t.n#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t0"
+    | | +-with_query_name='t0'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[t0.n#1]
@@ -5154,7 +5154,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-RecursiveScan
     |       +-column_list=[$union_all.n#3]
@@ -5281,7 +5281,7 @@ QueryStmt
     |         +-column_list=[$aggregate.$agg1#7]
     |         +-with_entry_list=
     |         | +-WithEntry
-    |         |   +-with_query_name="t1"
+    |         |   +-with_query_name='t1'
     |         |   +-with_subquery=
     |         |     +-RecursiveScan
     |         |       +-column_list=[$union_all.n#3]
@@ -5359,7 +5359,7 @@ QueryStmt
         +-column_list=[$aggregate.n_arr#6]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="t1"
+        |   +-with_query_name='t1'
         |   +-with_subquery=
         |     +-RecursiveScan
         |       +-column_list=[$union_all.n#2]
@@ -5426,13 +5426,13 @@ QueryStmt
     +-column_list=[t.n#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[t1.n#5]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       |   +-with_query_name="t1"
+    |       |   +-with_query_name='t1'
     |       |   +-with_subquery=
     |       |     +-RecursiveScan
     |       |       +-column_list=[$union_all.n#2]

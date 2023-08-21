@@ -2542,7 +2542,7 @@ QueryStmt
     +-column_list=$pivot.[test1#4, test2#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
@@ -2615,7 +2615,7 @@ QueryStmt
     +-column_list=$pivot.[x_1_y_test_true_pi_3_point_14159265358979#4, x_2_y_test_true_pi_3_point_14159265358979#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
@@ -2779,7 +2779,7 @@ QueryStmt
     +-column_list=$pivot.[xy_x_1_y_2_ab_a_test_a_b_false#4, xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5, xy_x_minus_1_y_NULL_ab_NULL#6, NULL#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
@@ -2848,7 +2848,7 @@ QueryStmt
     +-column_list=[$query.$col1#20]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -2858,7 +2858,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -2963,7 +2963,7 @@ QueryStmt
     +-column_list=[$query.$col1#20]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -2973,7 +2973,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3079,7 +3079,7 @@ QueryStmt
     +-column_list=[$query.$col1#18]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3089,7 +3089,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[a#3, b#4]
@@ -3206,7 +3206,7 @@ QueryStmt
     +-column_list=[$query.$col1#20]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3216,7 +3216,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3321,7 +3321,7 @@ QueryStmt
     +-column_list=[$query.$col1#16]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3331,7 +3331,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3405,7 +3405,7 @@ QueryStmt
     +-column_list=[$query.$col1#16]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3415,7 +3415,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3596,7 +3596,7 @@ QueryStmt
     +-column_list=[$groupby.w#10, $groupby.z#11, $pivot.one#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[w#1, x#2, y#3, z#4]
@@ -3649,7 +3649,7 @@ QueryStmt
     +-column_list=[$groupby.w#11, $pivot.s1_one#15, $pivot.s2_one#16, $pivot.s1_zero#13, $pivot.s2_zero#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[w#1, x#2, y#3, z#4]
@@ -3704,7 +3704,7 @@ QueryStmt
     +-column_list=[$query.$col1#17]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[w#1, x#2, y#3, z#4]
@@ -3758,7 +3758,7 @@ QueryStmt
     +-column_list=[$groupby.$col1#10, $groupby.$col2#11, $pivot.s_zero#12, $pivot.s_one#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[$col1#1, $col2#2, y#3, z#4]
@@ -5305,7 +5305,7 @@ QueryStmt
     +-column_list=[$groupby.v#14, $pivot.sum_x_0#15, $pivot.avg_y_0#16, $pivot.max_z_0#17, $pivot.sum_x_1#18, $pivot.avg_y_1#19, $pivot.max_z_1#20]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[v#1, w#2, x#3, y#4, z#5]
@@ -5772,7 +5772,7 @@ QueryStmt
     +-column_list=[$groupby.c#9, $groupby.d#10, $pivot._2#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$subquery1.c#1, t.a#2, t.b#3, $subquery1.c#1]

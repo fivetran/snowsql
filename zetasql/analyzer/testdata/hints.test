@@ -1414,7 +1414,7 @@ QueryStmt
     +-column_list=[w.Key#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=KeyValue.[Key#1, Value#2]
@@ -1433,7 +1433,7 @@ QueryStmt
             +-column_list=w.[Key#3, Value#4]
             +-hint_list=
             | +-num_shards := Literal(type=INT64, value=456)
-            +-with_query_name="w"
+            +-with_query_name='w'
 ==
 
 with w as (select * from KeyValue @123)

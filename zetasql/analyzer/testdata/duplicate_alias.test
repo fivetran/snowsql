@@ -20,7 +20,7 @@ QueryStmt
     +-column_list=w2.[c1#7, c2#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="w1"
+    | | +-with_query_name='w1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=w1.[item#1, event#2]
@@ -30,7 +30,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="w2"
+    |   +-with_query_name='w2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=w1.[item#3, item#5]
@@ -67,7 +67,7 @@ QueryStmt
     +-column_list=w1.[item#3, item#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w1"
+    |   +-with_query_name='w1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=w1.[item#1, event#2]
@@ -109,7 +109,7 @@ QueryStmt
     +-column_list=w1.[item#3, item#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w1"
+    |   +-with_query_name='w1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=w1.[item#1, event#2]

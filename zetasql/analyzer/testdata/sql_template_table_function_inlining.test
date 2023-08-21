@@ -80,7 +80,7 @@ QueryStmt
         +-column_list=UnaryAbTableArgWithScalarArgsTempl.[a#4, b#5, c#6]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-ProjectScan
         | |     +-column_list=$subquery1.[a#1, b#2, c#3]
@@ -91,7 +91,7 @@ QueryStmt
         | |     +-input_scan=
         | |       +-SingleRowScan
         | +-WithEntry
-        |   +-with_query_name="$inlined_UnaryAbTableArgWithScalarArgsTempl_scalar_args"
+        |   +-with_query_name='$inlined_UnaryAbTableArgWithScalarArgsTempl_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgsTempl.[x#7, y#8]
@@ -228,7 +228,7 @@ QueryStmt
         +-column_list=CallsUnaryAbTableArgWithScalarArgsTempl.[a#1, b#2, c#3]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_CallsUnaryAbTableArgWithScalarArgsTempl_scalar_args"
+        |   +-with_query_name='$inlined_CallsUnaryAbTableArgWithScalarArgsTempl_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_CallsUnaryAbTableArgWithScalarArgsTempl.ignored_param#7]
@@ -244,7 +244,7 @@ QueryStmt
                 +-column_list=CallsUnaryAbTableArgWithScalarArgsTempl.[a#1, b#2, c#3]
                 +-with_entry_list=
                 | +-WithEntry
-                | | +-with_query_name="arg0"
+                | | +-with_query_name='arg0'
                 | | +-with_subquery=
                 | |   +-ProjectScan
                 | |     +-column_list=$subquery1.[a#4, b#5, c#6]
@@ -255,7 +255,7 @@ QueryStmt
                 | |     +-input_scan=
                 | |       +-SingleRowScan
                 | +-WithEntry
-                |   +-with_query_name="$inlined_UnaryAbTableArgWithScalarArgsTempl_scalar_args"
+                |   +-with_query_name='$inlined_UnaryAbTableArgWithScalarArgsTempl_scalar_args'
                 |   +-with_subquery=
                 |     +-ProjectScan
                 |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgsTempl.[x#8, y#9]
@@ -360,7 +360,7 @@ QueryStmt
         +-column_list=definer_rights_templated_tvf.[Key#2, Value#3]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_definer_rights_templated_tvf_scalar_args"
+        |   +-with_query_name='$inlined_definer_rights_templated_tvf_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_definer_rights_templated_tvf.x#6]

@@ -356,7 +356,7 @@ QueryStmt
     +-column_list=[q.key#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-OrderByScan
     |       +-column_list=[TestTable.key#1]
@@ -388,7 +388,7 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="T1"
+    | | +-with_query_name='T1'
     | | +-with_subquery=
     | |   +-OrderByScan
     | |     +-column_list=[TestTable.key#1]
@@ -400,7 +400,7 @@ QueryStmt
     | |         +-column_ref=
     | |           +-ColumnRef(type=INT32, column=TestTable.key#1)
     | +-WithEntry
-    |   +-with_query_name="T2"
+    |   +-with_query_name='T2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[T1.key#4]

@@ -460,7 +460,7 @@ QueryStmt
     +-column_list=orders.[order_id#4, item_name#5, quantity#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="orders"
+    |   +-with_query_name='orders'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=orders.[order_id#1, item_name#2, quantity#3]
@@ -491,7 +491,7 @@ QueryStmt
     +-column_list=[orders.order_id#4, orders.item_name#5, $casted_column.quantity#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="orders"
+    |   +-with_query_name='orders'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=orders.[order_id#1, item_name#2, quantity#3]

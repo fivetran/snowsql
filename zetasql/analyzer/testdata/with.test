@@ -10,7 +10,7 @@ QueryStmt
     +-column_list=T.[$col1#3, $col2#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="T"
+    |   +-with_query_name='T'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=T.[$col1#1, $col2#2]
@@ -40,7 +40,7 @@ QueryStmt
     +-column_list=[Q.key#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Q"
+    |   +-with_query_name='Q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=KeyValue.[Key#1, Value#2]
@@ -71,21 +71,21 @@ QueryStmt
     +-column_list=$union_all.[Key#17, Value#18, $col2#19]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="suBQ1"
+    | | +-with_query_name='suBQ1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=KeyValue.[Key#1, Value#2]
     | |     +-input_scan=
     | |       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
     | +-WithEntry
-    | | +-with_query_name="suBQ2"
+    | | +-with_query_name='suBQ2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=suBQ1.[Key#3, Value#4]
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=suBQ1.[Key#3, Value#4], with_query_name="suBQ1")
     | +-WithEntry
-    | | +-with_query_name="suBQ3"
+    | | +-with_query_name='suBQ3'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[suBQ2.Key#5, suBQ2.Value#6, suBQ3.$col2#7]
@@ -94,7 +94,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-WithRefScan(column_list=suBQ2.[Key#5, Value#6], with_query_name="suBQ2")
     | +-WithEntry
-    |   +-with_query_name="suBQ4"
+    |   +-with_query_name='suBQ4'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=suBQ3.[Key#8, Value#9, $col2#10]
@@ -139,14 +139,14 @@ QueryStmt
     +-column_list=[T2.xx#5, T2.vv#6, $query.$col3#7, T2.xx#5, T2.vv#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="T1"
+    | | +-with_query_name='T1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=KeyValue.[Key#1, Value#2]
     | |     +-input_scan=
     | |       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
     | +-WithEntry
-    |   +-with_query_name="T2"
+    |   +-with_query_name='T2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=T1.[kk#3, vv#4]
@@ -196,7 +196,7 @@ QueryStmt
     +-column_list=subq.[key#4, TestEnum#5, KitchenSink#6, TestEnum#8, KitchenSink#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="subq"
+    |   +-with_query_name='subq'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
@@ -289,7 +289,7 @@ QueryStmt
     +-column_list=[$query.$col1#2]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="r1"
+    |   +-with_query_name='r1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[r1.$col1#1]
@@ -346,14 +346,14 @@ QueryStmt
     +-column_list=[KeyValue.Value#7]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="T"
+    | | +-with_query_name='T'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[KeyValue.Key#1]
     | |     +-input_scan=
     | |       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
     | +-WithEntry
-    |   +-with_query_name="T2"
+    |   +-with_query_name='T2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[T2.$col1#5]
@@ -384,7 +384,7 @@ QueryStmt
     +-column_list=[$union_all.$col1#9]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="q1"
+    | | +-with_query_name='q1'
     | | +-with_subquery=
     | |   +-SetOperationScan
     | |     +-column_list=[$union_all.$col1#3]
@@ -409,7 +409,7 @@ QueryStmt
     | |         |     +-SingleRowScan
     | |         +-output_column_list=[$union_all2.$col1#2]
     | +-WithEntry
-    |   +-with_query_name="q2"
+    |   +-with_query_name='q2'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.$col1#6]
@@ -464,7 +464,7 @@ QueryStmt
     +-column_list=[Q1.REP#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Q1"
+    |   +-with_query_name='Q1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[Q1.REP#4]
@@ -505,7 +505,7 @@ QueryStmt
     +-column_list=[$aggregate.Q1#7, $aggregate.Q1#7, $array.Q3#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="Q1"
+    | | +-with_query_name='Q1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[Q1.$col1#1]
@@ -514,7 +514,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="Q2"
+    | | +-with_query_name='Q2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[Q2.$col1#2]
@@ -523,7 +523,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="Q3"
+    |   +-with_query_name='Q3'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[Q3.$col1#3]
@@ -569,7 +569,7 @@ QueryStmt
     +-column_list=[$union_all.a#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="KeyValue"
+    | | +-with_query_name='KeyValue'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[KeyValue.a#3]
@@ -578,7 +578,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-TableScan(table=KeyValue)
     | +-WithEntry
-    |   +-with_query_name="T2"
+    |   +-with_query_name='T2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[T2.b#5]
@@ -622,7 +622,7 @@ QueryStmt
     +-column_list=a.b.[Key#3, Value#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="a.b"
+    |   +-with_query_name='a.b'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=KeyValue.[Key#1, Value#2]
@@ -651,7 +651,7 @@ QueryStmt
     +-column_list=[$query.s#8, $query.t#9, sq.$struct#7, $query.s#10, $query.t#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="sq"
+    |   +-with_query_name='sq'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#6]
@@ -719,7 +719,7 @@ QueryStmt
     +-column_list=[$query.key#7, $query.value#8, sq.$proto#6, $query.key#9, $query.value#10]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="sq"
+    |   +-with_query_name='sq'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_proto.$proto#5]
@@ -799,7 +799,7 @@ QueryStmt
     +-column_list=Q.[key#4, key#4, value#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Q"
+    |   +-with_query_name='Q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=TwoIntegers.[key#1, key#1, value#2]
@@ -830,7 +830,7 @@ QueryStmt
     +-column_list=Q.[k1#7, k1#7, v#8, xxx#9, yyy#10, $col6#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Q"
+    |   +-with_query_name='Q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1, KeyValue.Key#1, KeyValue.Value#2, Q.xxx#3, Q.yyy#4, Q.$col6#5]
@@ -859,7 +859,7 @@ QueryStmt
     +-column_list=Q.[k1#7, xxx#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Q"
+    |   +-with_query_name='Q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1, KeyValue.Key#1, KeyValue.Value#2, Q.xxx#3, Q.yyy#4, Q.$col6#5]
@@ -887,7 +887,7 @@ QueryStmt
     +-column_list=[Q.k1#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Q"
+    |   +-with_query_name='Q'
     |   +-with_subquery=
     |     +-AggregateScan
     |       +-column_list=$distinct.[Key#3, Value#4]
@@ -917,7 +917,7 @@ QueryStmt
     +-column_list=KeyValue.[Key#2, Value#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="nested_catalog"
+    |   +-with_query_name='nested_catalog'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[nested_catalog.a#1]
@@ -946,7 +946,7 @@ QueryStmt
     +-column_list=[nested_catalog.a#2]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="nested_catalog"
+    |   +-with_query_name='nested_catalog'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[nested_catalog.a#1]
@@ -978,7 +978,7 @@ QueryStmt
     +-column_list=[KeyValue.Key#2, KeyValue.Value#3, nested_catalog.a#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="nested_catalog"
+    |   +-with_query_name='nested_catalog'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[nested_catalog.a#1]

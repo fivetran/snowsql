@@ -1250,7 +1250,7 @@ CreateTableFunctionStmt
 |   +-column_list=w1.[x#3, y#4]
 |   +-with_entry_list=
 |   | +-WithEntry
-|   |   +-with_query_name="w1"
+|   |   +-with_query_name='w1'
 |   |   +-with_subquery=
 |   |     +-ProjectScan
 |   |       +-column_list=t.[x#1, y#2]
@@ -1289,7 +1289,7 @@ CreateTableFunctionStmt
 |   +-column_list=t.[a#3, b#4]
 |   +-with_entry_list=
 |   | +-WithEntry
-|   |   +-with_query_name="t"
+|   |   +-with_query_name='t'
 |   |   +-with_subquery=
 |   |     +-ProjectScan
 |   |       +-column_list=t.[a#1, b#2]
@@ -2525,7 +2525,7 @@ CreateTableFunctionStmt
 |   +-column_list=tvf_one_relation_arg_with_fixed_output.[column_bool#3, column_bytes#4]
 |   +-with_entry_list=
 |   | +-WithEntry
-|   |   +-with_query_name="t"
+|   |   +-with_query_name='t'
 |   |   +-with_subquery=
 |   |     +-ProjectScan
 |   |       +-column_list=[t.col#1]

@@ -160,7 +160,7 @@ QueryStmt
         +-column_list=NullarySelectCTE.[a#1, b#2]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="t"
+        |   +-with_query_name='t'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=t.[a#3, b#4]
@@ -341,7 +341,7 @@ QueryStmt
         +-column_list=[UnaryScalarArg.arg0#1]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_UnaryScalarArg_scalar_args"
+        |   +-with_query_name='$inlined_UnaryScalarArg_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_UnaryScalarArg.arg0#2]
@@ -415,7 +415,7 @@ QueryStmt
         |   +-column_list=[UnaryScalarArg.arg0#1]
         |   +-with_entry_list=
         |   | +-WithEntry
-        |   |   +-with_query_name="$inlined_UnaryScalarArg_scalar_args"
+        |   |   +-with_query_name='$inlined_UnaryScalarArg_scalar_args'
         |   |   +-with_subquery=
         |   |     +-ProjectScan
         |   |       +-column_list=[$inlined_UnaryScalarArg.arg0#3]
@@ -443,7 +443,7 @@ QueryStmt
             +-column_list=[UnaryScalarArg.arg0#2]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="$inlined_UnaryScalarArg_scalar_args"
+            |   +-with_query_name='$inlined_UnaryScalarArg_scalar_args'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=[$inlined_UnaryScalarArg.arg0#5]
@@ -504,7 +504,7 @@ QueryStmt
         +-column_list=UnaryScalarArgMultipleReferences.[ret0#1, ret1#2]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_UnaryScalarArgMultipleReferences_scalar_args"
+        |   +-with_query_name='$inlined_UnaryScalarArgMultipleReferences_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_UnaryScalarArgMultipleReferences.arg0#3]
@@ -589,7 +589,7 @@ QueryStmt
         +-column_list=BinaryScalarArg.[arg0#1, arg1#2, ret2#3]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_BinaryScalarArg_scalar_args"
+        |   +-with_query_name='$inlined_BinaryScalarArg_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$inlined_BinaryScalarArg.[arg0#4, arg1#5]
@@ -705,7 +705,7 @@ QueryStmt
         |   +-column_list=BinaryScalarArg.[arg0#1, arg1#2, ret2#3]
         |   +-with_entry_list=
         |   | +-WithEntry
-        |   |   +-with_query_name="$inlined_BinaryScalarArg_scalar_args"
+        |   |   +-with_query_name='$inlined_BinaryScalarArg_scalar_args'
         |   |   +-with_subquery=
         |   |     +-ProjectScan
         |   |       +-column_list=$inlined_BinaryScalarArg.[arg0#7, arg1#8]
@@ -761,7 +761,7 @@ QueryStmt
             +-column_list=BinaryScalarArg.[arg0#4, arg1#5, ret2#6]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="$inlined_BinaryScalarArg_scalar_args"
+            |   +-with_query_name='$inlined_BinaryScalarArg_scalar_args'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=$inlined_BinaryScalarArg.[arg0#17, arg1#18]
@@ -845,7 +845,7 @@ QueryStmt
         +-column_list=[UnaryScalarArgSubqueryReference.ret0#1]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_UnaryScalarArgSubqueryReference_scalar_args"
+        |   +-with_query_name='$inlined_UnaryScalarArgSubqueryReference_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_UnaryScalarArgSubqueryReference.arg0#3]
@@ -1040,7 +1040,7 @@ QueryStmt
         +-column_list=[UnaryTableArg.a#2]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$subquery1.a#1]
@@ -1087,7 +1087,7 @@ QueryStmt
         +-column_list=[ScalarParamUsedAsTVFArgument.arg0#1]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_ScalarParamUsedAsTVFArgument_scalar_args"
+        |   +-with_query_name='$inlined_ScalarParamUsedAsTVFArgument_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_ScalarParamUsedAsTVFArgument.arg0#2]
@@ -1103,7 +1103,7 @@ QueryStmt
                 +-column_list=[ScalarParamUsedAsTVFArgument.arg0#1]
                 +-with_entry_list=
                 | +-WithEntry
-                |   +-with_query_name="$inlined_UnaryScalarArg_scalar_args"
+                |   +-with_query_name='$inlined_UnaryScalarArg_scalar_args'
                 |   +-with_subquery=
                 |     +-ProjectScan
                 |       +-column_list=[$inlined_UnaryScalarArg.arg0#4]
@@ -1220,7 +1220,7 @@ QueryStmt
         +-column_list=UnaryAbTableArg.[a#3, b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1270,7 +1270,7 @@ QueryStmt
         +-column_list=UnaryAbTableArg.[a#3, b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1324,7 +1324,7 @@ QueryStmt
         +-column_list=UnaryAbTableArgSelfJoin.[a#3, b#4, a#5, b#6]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1383,7 +1383,7 @@ QueryStmt
         +-column_list=UnaryAbTableArgSelfJoin.[a#3, b#4, a#5, b#6]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1438,7 +1438,7 @@ QueryStmt
         +-column_list=UnaryAbTableArgScannedInCTE.[a#3, b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1446,7 +1446,7 @@ QueryStmt
             +-column_list=UnaryAbTableArgScannedInCTE.[a#3, b#4]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="t"
+            |   +-with_query_name='t'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=arg0.[a#5, b#6]
@@ -1499,7 +1499,7 @@ QueryStmt
         +-column_list=UnaryAbTableArgScannedInCTE.[a#3, b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1513,7 +1513,7 @@ QueryStmt
             +-column_list=UnaryAbTableArgScannedInCTE.[a#3, b#4]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="t"
+            |   +-with_query_name='t'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=arg0.[a#5, b#6]
@@ -1558,7 +1558,7 @@ QueryStmt
         +-column_list=[UnaryAbTableArg.a#3, arg0.b#5]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1606,7 +1606,7 @@ QueryStmt
         +-column_list=[UnaryAbTableArg.a#3, arg0.b#5]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1662,7 +1662,7 @@ QueryStmt
         +-column_list=[UnaryAbTableArgScannedInCTE.a#3, t.b#7]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1670,7 +1670,7 @@ QueryStmt
             +-column_list=[UnaryAbTableArgScannedInCTE.a#3, t.b#7]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="t"
+            |   +-with_query_name='t'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=arg0.[a#5, b#6]
@@ -1721,7 +1721,7 @@ QueryStmt
         +-column_list=[UnaryAbTableArgScannedInCTE.a#3, t.b#7]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1735,7 +1735,7 @@ QueryStmt
             +-column_list=[UnaryAbTableArgScannedInCTE.a#3, t.b#7]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="t"
+            |   +-with_query_name='t'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=arg0.[a#5, b#6]
@@ -1780,7 +1780,7 @@ QueryStmt
         +-column_list=[arg0.a#5, UnaryAbTableArg.b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1828,7 +1828,7 @@ QueryStmt
         +-column_list=[arg0.a#5, UnaryAbTableArg.b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1884,7 +1884,7 @@ QueryStmt
         +-column_list=[t.a#7, UnaryAbTableArgScannedInCTE.b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -1892,7 +1892,7 @@ QueryStmt
             +-column_list=[t.a#7, UnaryAbTableArgScannedInCTE.b#4]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="t"
+            |   +-with_query_name='t'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=arg0.[a#5, b#6]
@@ -1943,7 +1943,7 @@ QueryStmt
         +-column_list=[t.a#7, UnaryAbTableArgScannedInCTE.b#4]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#1, b#2]
@@ -1957,7 +1957,7 @@ QueryStmt
             +-column_list=[t.a#7, UnaryAbTableArgScannedInCTE.b#4]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="t"
+            |   +-with_query_name='t'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=arg0.[a#5, b#6]
@@ -2022,11 +2022,11 @@ QueryStmt
         +-column_list=BinaryTableArg.[a#5, b#6, c#7, d#8]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         | +-WithEntry
-        |   +-with_query_name="arg1"
+        |   +-with_query_name='arg1'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[c#3, d#4]
@@ -2100,7 +2100,7 @@ QueryStmt
         +-column_list=BinaryTableArg.[a#5, b#6, c#7, d#8]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-ProjectScan
         | |     +-column_list=$subquery1.[a#1, b#2]
@@ -2110,7 +2110,7 @@ QueryStmt
         | |     +-input_scan=
         | |       +-SingleRowScan
         | +-WithEntry
-        |   +-with_query_name="arg1"
+        |   +-with_query_name='arg1'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery2.[c#3, d#4]
@@ -2180,11 +2180,11 @@ QueryStmt
         +-column_list=BinaryAbTableArg.[a#5, b#6, a#7, b#8]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         | +-WithEntry
-        |   +-with_query_name="arg1"
+        |   +-with_query_name='arg1'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#3, b#4], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -2247,11 +2247,11 @@ QueryStmt
         +-column_list=BinaryAbTableArg.[a#5, b#6, a#7, b#8]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         | +-WithEntry
-        |   +-with_query_name="arg1"
+        |   +-with_query_name='arg1'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery1.[a#3, b#4]
@@ -2320,7 +2320,7 @@ QueryStmt
         +-column_list=BinaryAbTableArg.[a#5, b#6, a#7, b#8]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-ProjectScan
         | |     +-column_list=$subquery1.[a#1, b#2]
@@ -2330,7 +2330,7 @@ QueryStmt
         | |     +-input_scan=
         | |       +-SingleRowScan
         | +-WithEntry
-        |   +-with_query_name="arg1"
+        |   +-with_query_name='arg1'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#3, b#4], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -2399,7 +2399,7 @@ QueryStmt
         +-column_list=BinaryAbTableArg.[a#5, b#6, a#7, b#8]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-ProjectScan
         | |     +-column_list=$subquery1.[a#1, b#2]
@@ -2409,7 +2409,7 @@ QueryStmt
         | |     +-input_scan=
         | |       +-SingleRowScan
         | +-WithEntry
-        |   +-with_query_name="arg1"
+        |   +-with_query_name='arg1'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$subquery2.[a#3, b#4]
@@ -2475,11 +2475,11 @@ QueryStmt
         +-column_list=UnaryAbTableArgWithScalarArgs.[a#3, b#4]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         | +-WithEntry
-        |   +-with_query_name="$inlined_UnaryAbTableArgWithScalarArgs_scalar_args"
+        |   +-with_query_name='$inlined_UnaryAbTableArgWithScalarArgs_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgs.[x#5, y#6]
@@ -2565,7 +2565,7 @@ QueryStmt
         +-column_list=UnaryAbTableArgWithScalarArgs.[a#3, b#4]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg0"
+        | | +-with_query_name='arg0'
         | | +-with_subquery=
         | |   +-ProjectScan
         | |     +-column_list=$subquery1.[a#1, b#2]
@@ -2575,7 +2575,7 @@ QueryStmt
         | |     +-input_scan=
         | |       +-SingleRowScan
         | +-WithEntry
-        |   +-with_query_name="$inlined_UnaryAbTableArgWithScalarArgs_scalar_args"
+        |   +-with_query_name='$inlined_UnaryAbTableArgWithScalarArgs_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgs.[x#5, y#6]
@@ -2714,11 +2714,11 @@ QueryStmt
     |                 +-column_list=UnaryAbTableArgWithScalarArgs.[a#7, b#8]
     |                 +-with_entry_list=
     |                 | +-WithEntry
-    |                 | | +-with_query_name="arg0"
+    |                 | | +-with_query_name='arg0'
     |                 | | +-with_subquery=
     |                 | |   +-TableScan(column_list=abTable.[a#5, b#6], table=abTable, column_index_list=[0, 1])
     |                 | +-WithEntry
-    |                 |   +-with_query_name="$inlined_UnaryAbTableArgWithScalarArgs_scalar_args"
+    |                 |   +-with_query_name='$inlined_UnaryAbTableArgWithScalarArgs_scalar_args'
     |                 |   +-with_subquery=
     |                 |     +-ProjectScan
     |                 |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgs.[x#11, y#12]
@@ -2762,7 +2762,7 @@ QueryStmt
         +-column_list=arg0.[a#17, b#18]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -2924,7 +2924,7 @@ QueryStmt
     |                 +-column_list=UnaryAbTableArgWithScalarArgs.[a#7, b#8]
     |                 +-with_entry_list=
     |                 | +-WithEntry
-    |                 | | +-with_query_name="arg0"
+    |                 | | +-with_query_name='arg0'
     |                 | | +-with_subquery=
     |                 | |   +-ProjectScan
     |                 | |     +-column_list=$subquery1.[a#5, b#6]
@@ -2934,7 +2934,7 @@ QueryStmt
     |                 | |     +-input_scan=
     |                 | |       +-SingleRowScan
     |                 | +-WithEntry
-    |                 |   +-with_query_name="$inlined_UnaryAbTableArgWithScalarArgs_scalar_args"
+    |                 |   +-with_query_name='$inlined_UnaryAbTableArgWithScalarArgs_scalar_args'
     |                 |   +-with_subquery=
     |                 |     +-ProjectScan
     |                 |       +-column_list=$inlined_UnaryAbTableArgWithScalarArgs.[x#11, y#12]
@@ -2978,7 +2978,7 @@ QueryStmt
         +-column_list=arg0.[a#17, b#18]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="arg0"
+        |   +-with_query_name='arg0'
         |   +-with_subquery=
         |     +-TableScan(column_list=abTable.[a#1, b#2], table=abTable, column_index_list=[0, 1])
         +-query=
@@ -3701,7 +3701,7 @@ QueryStmt
         +-column_list=DefinerRightsTvf.[Key#4, Value#5]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="$inlined_DefinerRightsTvf_scalar_args"
+        |   +-with_query_name='$inlined_DefinerRightsTvf_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_DefinerRightsTvf.a#8]
@@ -3792,14 +3792,14 @@ QueryStmt
         +-column_list=JoinsTableArgToScannedTable.[c#3, key#4, value#5]
         +-with_entry_list=
         | +-WithEntry
-        | | +-with_query_name="arg_table"
+        | | +-with_query_name='arg_table'
         | | +-with_subquery=
         | |   +-ProjectScan
         | |     +-column_list=TwoIntegers.[key#1, value#2]
         | |     +-input_scan=
         | |       +-TableScan(column_list=TwoIntegers.[key#1, value#2], table=TwoIntegers, column_index_list=[0, 1])
         | +-WithEntry
-        |   +-with_query_name="$inlined_JoinsTableArgToScannedTable_scalar_args"
+        |   +-with_query_name='$inlined_JoinsTableArgToScannedTable_scalar_args'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[$inlined_JoinsTableArgToScannedTable.arg_scalar#8]

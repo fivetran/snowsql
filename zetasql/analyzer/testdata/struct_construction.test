@@ -733,7 +733,7 @@ QueryStmt
     +-column_list=[T1.s#7, T2.y#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="T1"
+    | | +-with_query_name='T1'
     | | +-with_subquery=
     | |   +-SetOperationScan
     | |     +-column_list=[$union_all.s#3]
@@ -758,7 +758,7 @@ QueryStmt
     | |         |     +-SingleRowScan
     | |         +-output_column_list=[$union_all2.s#2]
     | +-WithEntry
-    |   +-with_query_name="T2"
+    |   +-with_query_name='T2'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.y#6]
@@ -831,7 +831,7 @@ QueryStmt
     +-column_list=[T1.s#7, T2.a#8, t2.b#9]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="T1"
+    | | +-with_query_name='T1'
     | | +-with_subquery=
     | |   +-SetOperationScan
     | |     +-column_list=[$union_all.s#3]
@@ -856,7 +856,7 @@ QueryStmt
     | |         |     +-SingleRowScan
     | |         +-output_column_list=[$union_all2.s#2]
     | +-WithEntry
-    |   +-with_query_name="T2"
+    |   +-with_query_name='T2'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.a#6]

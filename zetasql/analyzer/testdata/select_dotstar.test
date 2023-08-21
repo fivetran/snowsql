@@ -1242,7 +1242,7 @@ QueryStmt
     +-column_list=$query.[primary_key#11, value#12, modified_date#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2, modified_date#3]
@@ -1326,7 +1326,7 @@ QueryStmt
     +-column_list=[$query.k#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1386,7 +1386,7 @@ QueryStmt
     +-column_list=[$query.k#10]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1470,7 +1470,7 @@ QueryStmt
     +-column_list=$query.[k#10, value#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1541,7 +1541,7 @@ QueryStmt
     +-column_list=$query.[k#10, value#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1613,7 +1613,7 @@ QueryStmt
     +-column_list=$distinct.[k#12, value#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1693,7 +1693,7 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1778,7 +1778,7 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
@@ -1891,7 +1891,7 @@ QueryStmt
     +-column_list=$query.[key#8, value#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2]
@@ -1971,7 +1971,7 @@ QueryStmt
     +-column_list=[$query.t#11, $analytic.$analytic1#12, $query.key#13, $query.value#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2]
@@ -2065,7 +2065,7 @@ QueryStmt
     +-column_list=[$query.primary_key#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2]
@@ -2144,7 +2144,7 @@ QueryStmt
     +-column_list=$query.[primary_key#13, value#14, bool_val#15, pk1#16, pk2#17]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2, bool_val#3]
@@ -2270,7 +2270,7 @@ QueryStmt
     +-column_list=$query.[primary_key#12, value#13, modified_date#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2, modified_date#3]
@@ -2370,7 +2370,7 @@ QueryStmt
     +-column_list=$query.[any_val#21, primary_key#22]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=$union_all.[primary_key#10, value#11, modified_date#12]
@@ -2685,7 +2685,7 @@ QueryStmt
     +-column_list=[$groupby.CustomerId#19, $subquery1.service_channel#20, $subquery1.division_id#21, $subquery1.sub_pod_id#22, $subquery1.division_name#23, $subquery1.sub_pod_name#24, $subquery1.region#25]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Perf_Accounts_D"
+    |   +-with_query_name='Perf_Accounts_D'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=Perf_Accounts_D.[customer_id#1, service_channel#2, division_id#3, sub_pod_id#4, division_name#5, sub_pod_name#6, region#7, ratio#8]
@@ -2811,7 +2811,7 @@ QueryStmt
     +-column_list=$query.[time_micros#11, time_micros_default#12, datetime_micros#13, datetime_micros_default#14, repeated_time_micros#15, repeated_datetime_micros#16, nested_civil_time_fields#17, nested_civil_time_repeated_fields#18, int64_key_1#19, int64_key_2#20]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Candidate_RowPartitions"
+    |   +-with_query_name='Candidate_RowPartitions'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=Candidate_RowPartitions.[CompressedRowPartition#1, ResourcePath#2, ResourceModifiedTimestamp#3]

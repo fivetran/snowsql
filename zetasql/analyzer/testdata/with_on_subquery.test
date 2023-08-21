@@ -19,7 +19,7 @@ QueryStmt
         +-column_list=[$subquery1.y#3]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="q"
+        |   +-with_query_name='q'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[q.x#1]
@@ -50,13 +50,13 @@ QueryStmt
     +-column_list=[q1.$col1#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q1"
+    |   +-with_query_name='q1'
     |   +-with_subquery=
     |     +-WithScan
     |       +-column_list=[q2.$col1#2]
     |       +-with_entry_list=
     |       | +-WithEntry
-    |       |   +-with_query_name="q2"
+    |       |   +-with_query_name='q2'
     |       |   +-with_subquery=
     |       |     +-ProjectScan
     |       |       +-column_list=[q2.$col1#1]
@@ -98,7 +98,7 @@ QueryStmt
     | |       +-column_list=[q.x#2]
     | |       +-with_entry_list=
     | |       | +-WithEntry
-    | |       |   +-with_query_name="q"
+    | |       |   +-with_query_name='q'
     | |       |   +-with_subquery=
     | |       |     +-ProjectScan
     | |       |       +-column_list=[q.x#1]
@@ -120,7 +120,7 @@ QueryStmt
     |         +-column_list=[q_1.$col1#4]
     |         +-with_entry_list=
     |         | +-WithEntry
-    |         |   +-with_query_name="q_1"
+    |         |   +-with_query_name='q_1'
     |         |   +-with_subquery=
     |         |     +-ProjectScan
     |         |       +-column_list=[q.$col1#3]
@@ -158,7 +158,7 @@ QueryStmt
     |         +-column_list=[q.$col1#2]
     |         +-with_entry_list=
     |         | +-WithEntry
-    |         |   +-with_query_name="q"
+    |         |   +-with_query_name='q'
     |         |   +-with_subquery=
     |         |     +-ProjectScan
     |         |       +-column_list=[q.$col1#1]
@@ -191,7 +191,7 @@ QueryStmt
     +-column_list=[$union_all.$col1#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q1"
+    |   +-with_query_name='q1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q1.$col1#1]
@@ -219,7 +219,7 @@ QueryStmt
           | |   +-column_list=[q2.$col1#4]
           | |   +-with_entry_list=
           | |   | +-WithEntry
-          | |   |   +-with_query_name="q2"
+          | |   |   +-with_query_name='q2'
           | |   |   +-with_subquery=
           | |   |     +-ProjectScan
           | |   |       +-column_list=[q2.$col1#3]
@@ -273,7 +273,7 @@ QueryStmt
     +-column_list=[T1.a#2, T1_1.b#4, T1.a#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="T1"
+    |   +-with_query_name='T1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[T1.a#1]
@@ -297,7 +297,7 @@ QueryStmt
             |       +-column_list=[T1_1.b#4]
             |       +-with_entry_list=
             |       | +-WithEntry
-            |       |   +-with_query_name="T1_1"
+            |       |   +-with_query_name='T1_1'
             |       |   +-with_subquery=
             |       |     +-ProjectScan
             |       |       +-column_list=[T1.b#3]
@@ -333,7 +333,7 @@ QueryStmt
     +-column_list=[TtTt_2_2.c#4, tTTt_2.a#5]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="TTtt"
+    | | +-with_query_name='TTtt'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=[TTtt.a#1]
@@ -342,7 +342,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="tTTt_2"
+    |   +-with_query_name='tTTt_2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[tTTt_2.a#2]
@@ -358,7 +358,7 @@ QueryStmt
             +-column_list=[TtTt_2_2.c#4, tTTt_2.a#5]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="TtTt_2_2"
+            |   +-with_query_name='TtTt_2_2'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=[TtTt.c#3]
@@ -434,7 +434,7 @@ QueryStmt
     |         +-column_list=[$expr_subquery.$col1#5]
     |         +-with_entry_list=
     |         | +-WithEntry
-    |         |   +-with_query_name="q"
+    |         |   +-with_query_name='q'
     |         |   +-with_subquery=
     |         |     +-ProjectScan
     |         |       +-column_list=[q.z#3]
@@ -477,7 +477,7 @@ QueryStmt
     +-column_list=[q2.x#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q1"
+    |   +-with_query_name='q1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q1.x#1]
@@ -493,7 +493,7 @@ QueryStmt
             +-column_list=[q2.x#3]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="q2"
+            |   +-with_query_name='q2'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=[q1.x#2]
@@ -520,7 +520,7 @@ QueryStmt
     +-column_list=[q1_1.x#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q1"
+    |   +-with_query_name='q1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q1.x#1]
@@ -536,7 +536,7 @@ QueryStmt
             +-column_list=[q1_1.x#3]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="q1_1"
+            |   +-with_query_name='q1_1'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=[q1.x#2]
@@ -560,7 +560,7 @@ QueryStmt
     +-column_list=[d.x#2]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="d"
+    |   +-with_query_name='d'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[d.x#1]
@@ -587,7 +587,7 @@ QueryStmt
     +-column_list=[table2.col2#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="table1"
+    |   +-with_query_name='table1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[table1.col1#1]
@@ -600,7 +600,7 @@ QueryStmt
         +-column_list=[table2.col2#3]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="table2"
+        |   +-with_query_name='table2'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[table2.col2#2]

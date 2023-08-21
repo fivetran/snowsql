@@ -686,7 +686,7 @@ QueryStmt
     +-column_list=t1.[enum1#5, enum2#6]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[enum1#1, enum2#2]
@@ -696,7 +696,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[enum1#3, enum2#4]
@@ -793,7 +793,7 @@ QueryStmt
     +-column_list=t1.[enum1#3, enum2#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t1"
+    |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t1.[enum1#1, enum2#2]

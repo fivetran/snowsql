@@ -3927,14 +3927,14 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="w1"
+    | | +-with_query_name='w1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=s.[value#1, key#2]
     | |     +-input_scan=
     | |       +-RelationArgumentScan(column_list=s.[value#1, key#2], name="s")
     | +-WithEntry
-    |   +-with_query_name="w2"
+    |   +-with_query_name='w2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.key#3]
@@ -4808,7 +4808,7 @@ QueryStmt
         |   |   +-column_list=[w1.mydate#19]
         |   |   +-with_entry_list=
         |   |   | +-WithEntry
-        |   |   |   +-with_query_name="w1"
+        |   |   |   +-with_query_name='w1'
         |   |   |   +-with_subquery=
         |   |   |     +-ProjectScan
         |   |   |       +-column_list=[SimpleTypes.date#10]
@@ -4838,7 +4838,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_with_fixed_output.column_bool#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[w.val#1]
@@ -4880,7 +4880,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_with_fixed_output.column_bytes#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1]
@@ -4920,7 +4920,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_with_fixed_output.column_bool#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[TestStructValueTable.value#1]
@@ -4960,7 +4960,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_with_fixed_output.column_bool#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="keyvalue"
+    |   +-with_query_name='keyvalue'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[keyvalue.result#1]
@@ -5003,7 +5003,7 @@ QueryStmt
     +-column_list=tvf_one_relation_arg_with_fixed_output.[column_bool#4, column_bytes#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1]
@@ -5050,7 +5050,7 @@ QueryStmt
     +-column_list=tvf_one_relation_arg_with_fixed_output.[column_bool#4, column_bytes#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1]
@@ -5105,7 +5105,7 @@ QueryStmt
         +-column_list=tvf_one_relation_arg_with_fixed_output.[column_bool#4, column_bytes#5]
         +-with_entry_list=
         | +-WithEntry
-        |   +-with_query_name="w"
+        |   +-with_query_name='w'
         |   +-with_subquery=
         |     +-ProjectScan
         |       +-column_list=[KeyValue.Value#2]
@@ -5148,7 +5148,7 @@ QueryStmt
     +-column_list=$subquery1.[int32_val1#8, int32_val2#9, str_value#10]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w1"
+    |   +-with_query_name='w1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1]
@@ -5162,7 +5162,7 @@ QueryStmt
             +-column_list=$subquery1.[int32_val1#8, int32_val2#9, str_value#10]
             +-with_entry_list=
             | +-WithEntry
-            |   +-with_query_name="w2"
+            |   +-with_query_name='w2'
             |   +-with_subquery=
             |     +-ProjectScan
             |       +-column_list=[KeyValue.Value#4]
@@ -5230,7 +5230,7 @@ QueryStmt
     +-column_list=[$query.$col1#6]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1]
@@ -5280,7 +5280,7 @@ QueryStmt
     +-column_list=KeyValue.[Key#3, Value#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w"
+    |   +-with_query_name='w'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[KeyValue.Key#1]
@@ -5329,7 +5329,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_with_fixed_output.column_bool#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="nested_catalog"
+    |   +-with_query_name='nested_catalog'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[nested_catalog.val#1]
@@ -5843,7 +5843,7 @@ QueryStmt
     +-column_list=[tvf_one_relation_arg_output_schema_is_input_schema.a#5, tvf_one_relation_arg_output_schema_is_input_schema.b#6, $array.b#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[a#1, b#2]
