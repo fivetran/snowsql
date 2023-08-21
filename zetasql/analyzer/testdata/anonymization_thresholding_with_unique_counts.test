@@ -598,7 +598,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(STRING, optional(1) INT64, optional(1) INT64) -> INT64)
-              +-Literal(type=STRING, value="1")
+              +-Literal(type=STRING, value='1')
               +-Literal(type=INT64, value=0)
               +-Literal(type=INT64, value=1)
 
@@ -622,7 +622,7 @@ QueryStmt
         |   +-aggregate_list=
         |     +-$agg1_partial#16 :=
         |       +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-        |         +-Literal(type=STRING, value="1")
+        |         +-Literal(type=STRING, value='1')
         +-aggregate_list=
         | +-$agg1#13 :=
         |   +-AggregateFunctionCall(ZetaSQL:anon_sum(INT64, optional(1) INT64, optional(1) INT64) -> INT64)

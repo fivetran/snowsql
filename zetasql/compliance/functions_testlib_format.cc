@@ -466,7 +466,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       // Timestamps
       {"format", {"%t", timestamp}, "2001-05-21 13:51:36+00"},
       {"format", {"%t", timestamp_null}, "NULL"},
-      {"format", {"%T", timestamp}, "TIMESTAMP \"2001-05-21 13:51:36+00\""},
+      {"format", {"%T", timestamp}, "TIMESTAMP '2001-05-21 13:51:36+00'"},
       {"format", {"%T", timestamp_null}, "NULL"},
 
       // Enums

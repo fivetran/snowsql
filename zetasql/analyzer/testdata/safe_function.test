@@ -18,7 +18,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:concat(STRING, repeated(0) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="a")
+    |     +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -307,7 +307,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:net.parse_ip(STRING) -> INT64)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==

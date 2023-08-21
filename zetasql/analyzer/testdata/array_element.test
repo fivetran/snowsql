@@ -646,9 +646,9 @@ QueryStmt
     | +-$col1#3 :=
     |   +-FunctionCall(ZetaSQL:$array_at_ordinal(ARRAY<STRING>, INT64) -> STRING)
     |     +-FunctionCall(ZetaSQL:$make_array(repeated(3) STRING) -> ARRAY<STRING>)
-    |     | +-Literal(type=STRING, value="str1")
+    |     | +-Literal(type=STRING, value='str1')
     |     | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    |     | +-Literal(type=STRING, value="str2")
+    |     | +-Literal(type=STRING, value='str2')
     |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
@@ -715,7 +715,7 @@ QueryStmt
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.MessageWithMapField>, column=MapFieldTable.MessageWithMapField#2)
     |     | +-field_descriptor=string_int32_map
     |     | +-default_value=[]
-    |     +-Literal(type=STRING, value="foo")
+    |     +-Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=[MapFieldTable.MessageWithMapField#2], table=MapFieldTable, column_index_list=[1])
 ==
@@ -756,7 +756,7 @@ QueryStmt
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.MessageWithMapField>, column=MapFieldTable.MessageWithMapField#2)
     |     | +-field_descriptor=string_int32_map
     |     | +-default_value=[]
-    |     +-Literal(type=STRING, value="foo")
+    |     +-Literal(type=STRING, value='foo')
     +-input_scan=
       +-TableScan(column_list=[MapFieldTable.MessageWithMapField#2], table=MapFieldTable, column_index_list=[1])
 
@@ -962,7 +962,7 @@ QueryStmt
     |         |       +-Cast(UINT64 -> UINT64)
     |         |         +-FunctionCall(ZetaSQL:error(STRING) -> UINT64)
     |         |           +-FunctionCall(ZetaSQL:format(STRING, repeated(1) INT64) -> STRING)
-    |         |             +-Literal(type=STRING, value="Key not found in map: %T")
+    |         |             +-Literal(type=STRING, value='Key not found in map: %T')
     |         |             +-ColumnRef(type=INT64, column=$subquery1.k#4)
     |         +-input_scan=
     |           +-ProjectScan

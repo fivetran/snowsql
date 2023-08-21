@@ -21,8 +21,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args(STRING format_string, STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%x")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%x')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -49,14 +49,14 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args(STRING format_string, STRING date_string) -> BOOL)
     |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |     | +-Literal(type=STRING, value="%")
-    |     | +-Literal(type=STRING, value="x")
+    |     | +-Literal(type=STRING, value='%')
+    |     | +-Literal(type=STRING, value='x')
     |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |       +-Cast(INT64 -> STRING)
     |       | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |       |   +-Literal(type=INT64, value=10)
     |       |   +-Literal(type=INT64, value=2)
-    |       +-Literal(type=STRING, value="/25/08")
+    |       +-Literal(type=STRING, value='/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -78,8 +78,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args(STRING format_string, STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%x")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%x')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -98,8 +98,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args_two_signatures(STRING format_string, STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -117,9 +117,9 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_three_named_args_two_signatures(STRING, STRING, STRING format_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
-    |     +-Literal(type=STRING, value="%X")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
+    |     +-Literal(type=STRING, value='%X')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -137,9 +137,9 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_three_named_args_two_signatures(STRING, STRING, STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -198,8 +198,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args_optional(optional(1) STRING format_string, optional(1) STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -217,7 +217,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args_optional(optional(1) STRING format_string, optional(1) STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
+    |     +-Literal(type=STRING, value='%X')
     |     +-Literal(type=STRING, value=NULL)
     +-input_scan=
       +-SingleRowScan
@@ -237,7 +237,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args_optional(optional(1) STRING format_string, optional(1) STRING date_string) -> BOOL)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -261,10 +261,10 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRING, value="%X")
+        | |   +-Literal(type=STRING, value='%X')
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="12/25/08")
+        |     +-Literal(type=STRING, value='12/25/08')
         +-column_index_list=[0, 1]
 ==
 
@@ -287,10 +287,10 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRING, value="%X")
+        | |   +-Literal(type=STRING, value='%X')
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="12/25/08")
+        |     +-Literal(type=STRING, value='12/25/08')
         +-column_index_list=[0, 1]
 ==
 
@@ -313,7 +313,7 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRING, value="%X")
+        | |   +-Literal(type=STRING, value='%X')
         | +-FunctionArgument
         |   +-expr=
         |     +-Literal(type=STRING, value=NULL)
@@ -342,7 +342,7 @@ QueryStmt
         | |   +-Literal(type=STRING, value=NULL)
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="12/25/08")
+        |     +-Literal(type=STRING, value='12/25/08')
         +-column_index_list=[0, 1]
 ==
 
@@ -420,7 +420,7 @@ QueryStmt
         | | +-argument_column_list=[$subquery1.x#1]
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="abc")
+        |     +-Literal(type=STRING, value='abc')
         +-column_index_list=[0, 1]
 ==
 
@@ -592,7 +592,7 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRING, value="%X")
+        | |   +-Literal(type=STRING, value='%X')
         | +-FunctionArgument
         |   +-scan=
         |   | +-ProjectScan
@@ -627,7 +627,7 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRING, value="%X")
+        | |   +-Literal(type=STRING, value='%X')
         | +-FunctionArgument
         |   +-scan=
         |   | +-ProjectScan
@@ -801,8 +801,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args_error_if_positional(STRING format_string, STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -822,8 +822,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_optional_args_error_if_positional(STRING format_string, optional(1) STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -843,8 +843,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_args_error_if_positional_second_arg(STRING format_string, STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="%X")
-    |     +-Literal(type=STRING, value="12/25/08")
+    |     +-Literal(type=STRING, value='%X')
+    |     +-Literal(type=STRING, value='12/25/08')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -863,7 +863,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_optional_named_optional_args(optional(1) STRING, optional(1) STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="foo")
+    |     +-Literal(type=STRING, value='foo')
     |     +-Literal(type=STRING, value=NULL)
     +-input_scan=
       +-SingleRowScan
@@ -887,7 +887,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_optional_named_optional_not_null_args(optional(1) STRING, optional(1) STRING arg, optional(1) STRING date_string) -> BOOL)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Literal(type=STRING, value="foo")
+    |     +-Literal(type=STRING, value='foo')
     |     +-Literal(type=STRING, value=NULL)
     +-input_scan=
       +-SingleRowScan
@@ -1256,7 +1256,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_regular_and_named_signatures(STRING, optional(0) STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="foo")
+    |     +-Literal(type=STRING, value='foo')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1275,8 +1275,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_regular_and_named_signatures(STRING, optional(1) STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="foo")
-    |     +-Literal(type=STRING, value="bar")
+    |     +-Literal(type=STRING, value='foo')
+    |     +-Literal(type=STRING, value='bar')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1294,8 +1294,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_regular_and_named_signatures(STRING, optional(1) STRING date_string) -> BOOL)
-    |     +-Literal(type=STRING, value="foo")
-    |     +-Literal(type=STRING, value="bar")
+    |     +-Literal(type=STRING, value='foo')
+    |     +-Literal(type=STRING, value='bar')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1360,43 +1360,43 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(1) STRING r0, repeated(1) STRING r1, repeated(1) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(2) STRING r0, repeated(2) STRING r1, repeated(2) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="r0-1")
-    | |   +-Literal(type=STRING, value="r1-1")
-    | |   +-Literal(type=STRING, value="r2-1")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='r0-1')
+    | |   +-Literal(type=STRING, value='r1-1')
+    | |   +-Literal(type=STRING, value='r2-1')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
-    | |   +-Literal(type=STRING, value="o0")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
+    | |   +-Literal(type=STRING, value='o0')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col5#5 :=
     |   +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    |     +-Literal(type=STRING, value="a0")
-    |     +-Literal(type=STRING, value="a1")
-    |     +-Literal(type=STRING, value="o0")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='a0')
+    |     +-Literal(type=STRING, value='a1')
+    |     +-Literal(type=STRING, value='o0')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1426,40 +1426,40 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
-    | |   +-Literal(type=STRING, value="o0")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
+    | |   +-Literal(type=STRING, value='o0')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
-    | |   +-Literal(type=STRING, value="o0")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
+    | |   +-Literal(type=STRING, value='o0')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col6#6 :=
     |   +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(0) STRING r0, repeated(0) STRING r1, repeated(0) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    |     +-Literal(type=STRING, value="a0")
-    |     +-Literal(type=STRING, value="a1")
-    |     +-Literal(type=STRING, value="o0")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='a0')
+    |     +-Literal(type=STRING, value='a1')
+    |     +-Literal(type=STRING, value='o0')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1490,67 +1490,67 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(1) STRING r0, repeated(1) STRING r1, repeated(1) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(2) STRING r0, repeated(2) STRING r1, repeated(2) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="a1")
-    | |   +-Literal(type=STRING, value="o0")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='a1')
+    | |   +-Literal(type=STRING, value='o0')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(1) STRING r0, repeated(1) STRING r1, repeated(1) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(3) STRING r0, repeated(3) STRING r1, repeated(3) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="a1")
-    | |   +-Literal(type=STRING, value="o0")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='a1')
+    | |   +-Literal(type=STRING, value='o0')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(1) STRING r0, repeated(1) STRING r1, repeated(1) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="a0")
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="r2")
-    | |   +-Literal(type=STRING, value="a1")
+    | |   +-Literal(type=STRING, value='a0')
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='r2')
+    | |   +-Literal(type=STRING, value='a1')
     | |   +-Literal(type=STRING, value=NULL)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col6#6 :=
     |   +-FunctionCall(sample_functions:fn_rep_opt(STRING a0, repeated(1) STRING r0, repeated(1) STRING r1, repeated(1) STRING r2, STRING a1, optional(1) STRING o0, optional(1) STRING o1) -> INT64)
-    |     +-Literal(type=STRING, value="a0")
-    |     +-Literal(type=STRING, value="r0")
-    |     +-Literal(type=STRING, value="r1")
-    |     +-Literal(type=STRING, value="r2")
-    |     +-Literal(type=STRING, value="a1")
-    |     +-Literal(type=STRING, value="o0")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='a0')
+    |     +-Literal(type=STRING, value='r0')
+    |     +-Literal(type=STRING, value='r1')
+    |     +-Literal(type=STRING, value='r2')
+    |     +-Literal(type=STRING, value='a1')
+    |     +-Literal(type=STRING, value='o0')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1621,31 +1621,31 @@ QueryStmt
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_only(repeated(0) STRING, repeated(0) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_only(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_only(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_only(repeated(2) STRING, repeated(2) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0-1")
-    | |   +-Literal(type=STRING, value="r1-1")
-    | |   +-Literal(type=STRING, value="r0-2")
-    | |   +-Literal(type=STRING, value="r1-2")
+    | |   +-Literal(type=STRING, value='r0-1')
+    | |   +-Literal(type=STRING, value='r1-1')
+    | |   +-Literal(type=STRING, value='r0-2')
+    | |   +-Literal(type=STRING, value='r1-2')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col6#6 :=
     |   +-FunctionCall(sample_functions:fn_repeated_with_optional_named_only(repeated(2) STRING, repeated(2) STRING, optional(1) STRING o1) -> STRING)
-    |     +-Literal(type=STRING, value="r0-1")
-    |     +-Literal(type=STRING, value="r1-1")
-    |     +-Literal(type=STRING, value="r0-2")
-    |     +-Literal(type=STRING, value="r1-2")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='r0-1')
+    |     +-Literal(type=STRING, value='r1-1')
+    |     +-Literal(type=STRING, value='r0-2')
+    |     +-Literal(type=STRING, value='r1-2')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1708,26 +1708,26 @@ QueryStmt
     | |   +-Literal(type=BOOL, value=true)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_only(repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
+    | |   +-Literal(type=STRING, value='r0')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=NULL)
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_only(repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
+    | |   +-Literal(type=STRING, value='r0')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_only(repeated(2) STRING, repeated(2) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0-1")
+    | |   +-Literal(type=STRING, value='r0-1')
     | |   +-Literal(type=INT64, value=1)
-    | |   +-Literal(type=STRING, value="r0-2")
+    | |   +-Literal(type=STRING, value='r0-2')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=NULL)
     | +-$col6#6 :=
     |   +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_only(repeated(2) STRING, repeated(2) INT64, optional(1) BOOL o1) -> STRING)
-    |     +-Literal(type=STRING, value="r0-1")
+    |     +-Literal(type=STRING, value='r0-1')
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="r0-2")
+    |     +-Literal(type=STRING, value='r0-2')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=BOOL, value=true)
     +-input_scan=
@@ -1776,7 +1776,7 @@ QueryStmt
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated ANY TYPE, repeated ANY TYPE, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) INT64, repeated(1) DOUBLE, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
@@ -1784,8 +1784,8 @@ QueryStmt
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) STRING, repeated(1) STRING, optional(1) INT64 o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) INT64, repeated(1) DOUBLE, optional(1) BOOL o1) -> STRING)
@@ -1794,37 +1794,37 @@ QueryStmt
     | |   +-Literal(type=BOOL, value=true)
     | +-$col6#6 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col7#7 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) INT64, repeated(1) DOUBLE, repeated(1) STRING, repeated(1) INT64, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=DOUBLE, value=2)
-    | |   +-Literal(type=STRING, value="1-2")
+    | |   +-Literal(type=STRING, value='1-2')
     | |   +-Literal(type=INT64, value=21)
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col8#8 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, optional(1) INT64 o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="1-2")
-    | |   +-Literal(type=STRING, value="21")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='1-2')
+    | |   +-Literal(type=STRING, value='21')
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col9#9 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) INT64, repeated(1) DOUBLE, repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=DOUBLE, value=2)
-    | |   +-Literal(type=STRING, value="1-2")
+    | |   +-Literal(type=STRING, value='1-2')
     | |   +-Literal(type=INT64, value=21)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col10#10 :=
     |   +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_only(repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    |     +-Literal(type=STRING, value="1")
-    |     +-Literal(type=STRING, value="2.0")
-    |     +-Literal(type=STRING, value="1-2")
-    |     +-Literal(type=STRING, value="21")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='1')
+    |     +-Literal(type=STRING, value='2.0')
+    |     +-Literal(type=STRING, value='1-2')
+    |     +-Literal(type=STRING, value='21')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1861,31 +1861,31 @@ QueryStmt
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_or_positional(repeated(0) STRING, repeated(0) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
-    | |   +-Literal(type=STRING, value="r1")
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='r0')
+    | |   +-Literal(type=STRING, value='r1')
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_optional_named_or_positional(repeated(2) STRING, repeated(2) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0-1")
-    | |   +-Literal(type=STRING, value="r1-1")
-    | |   +-Literal(type=STRING, value="r0-2")
-    | |   +-Literal(type=STRING, value="r1-2")
+    | |   +-Literal(type=STRING, value='r0-1')
+    | |   +-Literal(type=STRING, value='r1-1')
+    | |   +-Literal(type=STRING, value='r0-2')
+    | |   +-Literal(type=STRING, value='r1-2')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col6#6 :=
     |   +-FunctionCall(sample_functions:fn_repeated_with_optional_named_or_positional(repeated(2) STRING, repeated(2) STRING, optional(1) STRING o1) -> STRING)
-    |     +-Literal(type=STRING, value="r0-1")
-    |     +-Literal(type=STRING, value="r1-1")
-    |     +-Literal(type=STRING, value="r0-2")
-    |     +-Literal(type=STRING, value="r1-2")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='r0-1')
+    |     +-Literal(type=STRING, value='r1-1')
+    |     +-Literal(type=STRING, value='r0-2')
+    |     +-Literal(type=STRING, value='r1-2')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1935,38 +1935,38 @@ QueryStmt
     | |   +-Literal(type=BOOL, value=true)
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_or_positional(repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
+    | |   +-Literal(type=STRING, value='r0')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=NULL)
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_or_positional(repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
+    | |   +-Literal(type=STRING, value='r0')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col6#6 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_or_positional(repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
+    | |   +-Literal(type=STRING, value='r0')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col7#7 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_or_positional(repeated(2) STRING, repeated(2) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0-1")
+    | |   +-Literal(type=STRING, value='r0-1')
     | |   +-Literal(type=INT64, value=1)
-    | |   +-Literal(type=STRING, value="r0-2")
+    | |   +-Literal(type=STRING, value='r0-2')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=NULL)
     | +-$col8#8 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_or_positional(repeated(2) STRING, repeated(2) INT64, optional(1) BOOL o1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0-1")
+    | |   +-Literal(type=STRING, value='r0-1')
     | |   +-Literal(type=INT64, value=1)
-    | |   +-Literal(type=STRING, value="r0-2")
+    | |   +-Literal(type=STRING, value='r0-2')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col9#9 :=
     |   +-FunctionCall(sample_functions:fn_repeated_diff_args_optional_named_or_positional(repeated(2) STRING, repeated(2) INT64, optional(1) BOOL o1) -> STRING)
-    |     +-Literal(type=STRING, value="r0-1")
+    |     +-Literal(type=STRING, value='r0-1')
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="r0-2")
+    |     +-Literal(type=STRING, value='r0-2')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=BOOL, value=true)
     +-input_scan=
@@ -2025,10 +2025,10 @@ QueryStmt
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated ANY TYPE, repeated ANY TYPE, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated ANY TYPE, repeated ANY TYPE, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) INT64, repeated(1) DOUBLE, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
@@ -2036,8 +2036,8 @@ QueryStmt
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col5#5 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, optional(1) INT64 o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col6#6 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) INT64, repeated(1) DOUBLE, optional(1) BOOL o1) -> STRING)
@@ -2051,56 +2051,56 @@ QueryStmt
     | |   +-Literal(type=BOOL, value=true)
     | +-$col8#8 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col9#9 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col10#10 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) INT64, repeated(1) DOUBLE, repeated(1) STRING, repeated(1) INT64, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=DOUBLE, value=2)
-    | |   +-Literal(type=STRING, value="1-2")
+    | |   +-Literal(type=STRING, value='1-2')
     | |   +-Literal(type=INT64, value=21)
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col11#11 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, optional(1) INT64 o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="1-2")
-    | |   +-Literal(type=STRING, value="21")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='1-2')
+    | |   +-Literal(type=STRING, value='21')
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col12#12 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) INT64, repeated(1) DOUBLE, repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=DOUBLE, value=2)
-    | |   +-Literal(type=STRING, value="1-2")
+    | |   +-Literal(type=STRING, value='1-2')
     | |   +-Literal(type=INT64, value=21)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col13#13 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) INT64, repeated(1) DOUBLE, repeated(1) STRING, repeated(1) INT64, optional(1) BOOL o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=DOUBLE, value=2)
-    | |   +-Literal(type=STRING, value="1-2")
+    | |   +-Literal(type=STRING, value='1-2')
     | |   +-Literal(type=INT64, value=21)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col14#14 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="1-2")
-    | |   +-Literal(type=STRING, value="21")
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='1-2')
+    | |   +-Literal(type=STRING, value='21')
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col15#15 :=
     |   +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_optional_named_or_positional(repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, optional(1) STRING o1) -> STRING)
-    |     +-Literal(type=STRING, value="1")
-    |     +-Literal(type=STRING, value="2.0")
-    |     +-Literal(type=STRING, value="1-2")
-    |     +-Literal(type=STRING, value="21")
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='1')
+    |     +-Literal(type=STRING, value='2.0')
+    |     +-Literal(type=STRING, value='1-2')
+    |     +-Literal(type=STRING, value='21')
+    |     +-Literal(type=STRING, value='o1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2125,19 +2125,19 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_required_named(repeated(0) STRING, repeated(0) STRING, STRING r1) -> STRING)
-    | |   +-Literal(type=STRING, value="r1")
+    | |   +-Literal(type=STRING, value='r1')
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_with_required_named(repeated(1) STRING, repeated(1) STRING, STRING r1) -> STRING)
-    | |   +-Literal(type=STRING, value="0")
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="r1")
+    | |   +-Literal(type=STRING, value='0')
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='r1')
     | +-$col3#3 :=
     |   +-FunctionCall(sample_functions:fn_repeated_with_required_named(repeated(2) STRING, repeated(2) STRING, STRING r1) -> STRING)
-    |     +-Literal(type=STRING, value="0-1")
-    |     +-Literal(type=STRING, value="1-1")
-    |     +-Literal(type=STRING, value="0-2")
-    |     +-Literal(type=STRING, value="1-2")
-    |     +-Literal(type=STRING, value="r1")
+    |     +-Literal(type=STRING, value='0-1')
+    |     +-Literal(type=STRING, value='1-1')
+    |     +-Literal(type=STRING, value='0-2')
+    |     +-Literal(type=STRING, value='1-2')
+    |     +-Literal(type=STRING, value='r1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2166,14 +2166,14 @@ QueryStmt
     | |   +-Literal(type=BOOL, value=true)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_diff_args_required_named(repeated(1) STRING, repeated(1) INT64, BOOL r1) -> STRING)
-    | |   +-Literal(type=STRING, value="r0")
+    | |   +-Literal(type=STRING, value='r0')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col3#3 :=
     |   +-FunctionCall(sample_functions:fn_repeated_diff_args_required_named(repeated(2) STRING, repeated(2) INT64, BOOL r1) -> STRING)
-    |     +-Literal(type=STRING, value="r0-1")
+    |     +-Literal(type=STRING, value='r0-1')
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="r0-2")
+    |     +-Literal(type=STRING, value='r0-2')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=BOOL, value=true)
     +-input_scan=
@@ -2205,7 +2205,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_required_named(repeated ANY TYPE, repeated ANY TYPE, STRING r1) -> STRING)
-    | |   +-Literal(type=STRING, value="r1")
+    | |   +-Literal(type=STRING, value='r1')
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_required_named(repeated(1) INT64, repeated(1) DOUBLE, BOOL r1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
@@ -2213,23 +2213,23 @@ QueryStmt
     | |   +-Literal(type=BOOL, value=true)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_required_named(repeated(1) STRING, repeated(1) STRING, STRING r1) -> STRING)
-    | |   +-Literal(type=STRING, value="1")
-    | |   +-Literal(type=STRING, value="2.0")
-    | |   +-Literal(type=STRING, value="r1")
+    | |   +-Literal(type=STRING, value='1')
+    | |   +-Literal(type=STRING, value='2.0')
+    | |   +-Literal(type=STRING, value='r1')
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_required_named(repeated(1) INT64, repeated(1) DOUBLE, repeated(1) STRING, repeated(1) INT64, BOOL r1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=DOUBLE, value=2)
-    | |   +-Literal(type=STRING, value="1-2")
+    | |   +-Literal(type=STRING, value='1-2')
     | |   +-Literal(type=INT64, value=21)
     | |   +-Literal(type=BOOL, value=true)
     | +-$col5#5 :=
     |   +-FunctionCall(sample_functions:fn_repeated_arbitrary_with_required_named(repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, repeated(1) STRING, STRING r1) -> STRING)
-    |     +-Literal(type=STRING, value="1")
-    |     +-Literal(type=STRING, value="2.0")
-    |     +-Literal(type=STRING, value="1-2")
-    |     +-Literal(type=STRING, value="21")
-    |     +-Literal(type=STRING, value="r1")
+    |     +-Literal(type=STRING, value='1')
+    |     +-Literal(type=STRING, value='2.0')
+    |     +-Literal(type=STRING, value='1-2')
+    |     +-Literal(type=STRING, value='21')
+    |     +-Literal(type=STRING, value='r1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2259,29 +2259,29 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_req_opt_unnamed_named(STRING, optional(1) STRING, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="abc")
+    | |   +-Literal(type=STRING, value='abc')
     | |   +-Literal(type=STRING, value=NULL)
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_req_opt_unnamed_named(STRING, optional(1) STRING, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="abc")
-    | |   +-Literal(type=STRING, value="def")
+    | |   +-Literal(type=STRING, value='abc')
+    | |   +-Literal(type=STRING, value='def')
     | |   +-Literal(type=STRING, value=NULL)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_req_opt_unnamed_named(STRING, optional(1) STRING, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="abc")
-    | |   +-Literal(type=STRING, value="def")
-    | |   +-Literal(type=STRING, value="ghi")
+    | |   +-Literal(type=STRING, value='abc')
+    | |   +-Literal(type=STRING, value='def')
+    | |   +-Literal(type=STRING, value='ghi')
     | +-$col4#4 :=
     | | +-FunctionCall(sample_functions:fn_req_opt_unnamed_named(STRING, optional(1) STRING, optional(1) STRING o1) -> INT64)
-    | |   +-Literal(type=STRING, value="abc")
+    | |   +-Literal(type=STRING, value='abc')
     | |   +-Literal(type=STRING, value=NULL)
-    | |   +-Literal(type=STRING, value="ghi")
+    | |   +-Literal(type=STRING, value='ghi')
     | +-$col5#5 :=
     |   +-FunctionCall(sample_functions:fn_req_opt_unnamed_named(STRING, optional(1) STRING, optional(1) STRING o1) -> INT64)
-    |     +-Literal(type=STRING, value="abc")
-    |     +-Literal(type=STRING, value="def")
-    |     +-Literal(type=STRING, value="ghi")
+    |     +-Literal(type=STRING, value='abc')
+    |     +-Literal(type=STRING, value='def')
+    |     +-Literal(type=STRING, value='ghi')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2310,26 +2310,26 @@ QueryStmt
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_repeated_t1_t2_with_optional_named_t1(repeated(1) INT64, repeated(1) STRING, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
-    | |   +-Literal(type=STRING, value="2")
+    | |   +-Literal(type=STRING, value='2')
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_repeated_t1_t2_with_optional_named_t1(repeated(1) INT64, repeated(1) STRING, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
-    | |   +-Literal(type=STRING, value="2")
+    | |   +-Literal(type=STRING, value='2')
     | |   +-Literal(type=INT64, value=1)
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_repeated_t1_t2_with_optional_named_t1(repeated(2) INT64, repeated(2) STRING, optional(1) INT64 o1) -> STRING)
     | |   +-Literal(type=INT64, value=1)
-    | |   +-Literal(type=STRING, value="2")
+    | |   +-Literal(type=STRING, value='2')
     | |   +-Literal(type=INT64, value=3)
-    | |   +-Literal(type=STRING, value="4")
+    | |   +-Literal(type=STRING, value='4')
     | |   +-Literal(type=INT64, value=NULL)
     | +-$col4#4 :=
     |   +-FunctionCall(sample_functions:fn_repeated_t1_t2_with_optional_named_t1(repeated(2) INT64, repeated(2) STRING, optional(1) INT64 o1) -> STRING)
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="2")
+    |     +-Literal(type=STRING, value='2')
     |     +-Literal(type=INT64, value=3)
-    |     +-Literal(type=STRING, value="4")
+    |     +-Literal(type=STRING, value='4')
     |     +-Literal(type=INT64, value=4)
     +-input_scan=
       +-SingleRowScan
@@ -2564,7 +2564,7 @@ QueryStmt
       | |       | |   +-Literal(type=BOOL, value=true)
       | |       | +-FunctionArgument
       | |       |   +-expr=
-      | |       |     +-Literal(type=STRING, value="abc")
+      | |       |     +-Literal(type=STRING, value='abc')
       | |       +-column_index_list=[0]
       | +-output_column_list=[tvf_optional_unnamed_named.x#4]
       +-SetOperationItem
@@ -2591,10 +2591,10 @@ QueryStmt
       | |       | |   +-Literal(type=BOOL, value=true)
       | |       | +-FunctionArgument
       | |       | | +-expr=
-      | |       | |   +-Literal(type=STRING, value="abc")
+      | |       | |   +-Literal(type=STRING, value='abc')
       | |       | +-FunctionArgument
       | |       |   +-expr=
-      | |       |     +-Literal(type=STRING, value="def")
+      | |       |     +-Literal(type=STRING, value='def')
       | |       +-column_index_list=[0]
       | +-output_column_list=[tvf_optional_unnamed_named.x#6]
       +-SetOperationItem
@@ -2621,10 +2621,10 @@ QueryStmt
         |       | |   +-Literal(type=BOOL, value=true)
         |       | +-FunctionArgument
         |       | | +-expr=
-        |       | |   +-Literal(type=STRING, value="abc")
+        |       | |   +-Literal(type=STRING, value='abc')
         |       | +-FunctionArgument
         |       |   +-expr=
-        |       |     +-Literal(type=STRING, value="def")
+        |       |     +-Literal(type=STRING, value='def')
         |       +-column_index_list=[0]
         +-output_column_list=[tvf_optional_unnamed_named.x#8]
 ==
@@ -2688,7 +2688,7 @@ QueryStmt
         |         |         +-filter_expr=
         |         |           +-FunctionCall(ZetaSQL:$not_equal(STRING, STRING) -> BOOL)
         |         |             +-ColumnRef(type=STRING, column=$array.v#1)
-        |         |             +-Literal(type=STRING, value="")
+        |         |             +-Literal(type=STRING, value='')
         |         +-Literal(type=ARRAY<STRING>, value=[""])
         +-column_index_list=[0, 1]
 ==
@@ -2736,7 +2736,7 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg3#3)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg4#4)
 +-Literal(type=STRING, value=NULL)
-+-Literal(type=STRING, value="NOT NULL")
++-Literal(type=STRING, value='NOT NULL')
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:count(INT64) -> INT64)
@@ -2802,7 +2802,7 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg3#3)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg4#4)
 +-Literal(type=STRING, value=NULL)
-+-Literal(type=STRING, value="NOT NULL")
++-Literal(type=STRING, value='NOT NULL')
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:count(INT64) -> INT64)
@@ -2868,7 +2868,7 @@ FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg3#3)
 |     +-ColumnRef(type=INT64, column=$aggregate.$agg4#4)
 +-Literal(type=STRING, value=NULL)
-+-Literal(type=STRING, value="NOT NULL")
++-Literal(type=STRING, value='NOT NULL')
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:count(INT64) -> INT64)
@@ -2939,7 +2939,7 @@ QueryStmt
     |         |         +-filter_expr=
     |         |           +-FunctionCall(ZetaSQL:$not_equal(STRING, STRING) -> BOOL)
     |         |             +-ColumnRef(type=STRING, column=$array.v#1)
-    |         |             +-Literal(type=STRING, value="")
+    |         |             +-Literal(type=STRING, value='')
     |         +-Literal(type=ARRAY<STRING>, value=[""], has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan

@@ -15,7 +15,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -23,7 +23,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 --
 ALTERNATION GROUP:  IGNORE
@@ -41,7 +41,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -49,7 +49,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 --
 ALTERNATION GROUP:  REPLACE
@@ -67,7 +67,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -75,7 +75,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 --
 ALTERNATION GROUP:  UPDATE
@@ -93,7 +93,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -101,7 +101,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 ==
 
@@ -174,7 +174,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,WRITE
 ==
 
@@ -190,7 +190,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |     | +-value=
-|     |   +-Literal(type=STRING, value="one")
+|     |   +-Literal(type=STRING, value='one')
 |     +-DMLValue
 |       +-value=
 |         +-Literal(type=INT64, value=1)
@@ -455,7 +455,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=0)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="abc")
+|         +-Literal(type=STRING, value='abc')
 +-column_access_list=WRITE,WRITE
 ==
 
@@ -861,7 +861,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="name")
+|         +-Literal(type=STRING, value='name')
 +-column_access_list=WRITE
 ==
 
@@ -1029,7 +1029,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |     | +-value=
-|     |   +-Literal(type=STRING, value="a")
+|     |   +-Literal(type=STRING, value='a')
 |     +-DMLValue
 |       +-value=
 |         +-DMLDefault(type=INT64)
@@ -1455,7 +1455,7 @@ InsertStmt
 |             | +-type=STRUCT<a INT32, b STRING>
 |             | +-field_list=
 |             |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             |   +-Literal(type=STRING, value="b")
+|             |   +-Literal(type=STRING, value='b')
 |             +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRUCT<a INT32, b STRING>) -> ARRAY<STRUCT<a INT32, b STRING>>)
 |               +-SubqueryExpr
 |               | +-type=STRUCT<a INT32, b STRING>
@@ -1505,7 +1505,7 @@ InsertStmt
 |             | +-type=STRUCT<a INT32, b STRING>
 |             | +-field_list=
 |             |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             |   +-Literal(type=STRING, value="b")
+|             |   +-Literal(type=STRING, value='b')
 |             +-Cast(ARRAY<STRUCT<j1 INT32, k1 STRING>> -> ARRAY<STRUCT<a INT32, b STRING>>)
 |               +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRUCT<j1 INT32, k1 STRING>) -> ARRAY<STRUCT<j1 INT32, k1 STRING>>)
 |                 +-SubqueryExpr
@@ -1701,7 +1701,7 @@ InsertStmt
 | |             | +-$col1#4 :=
 | |             |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
 | |             |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-| |             |       +-Literal(type=STRING, value="int64_key_1: 1 int64_key_2")
+| |             |       +-Literal(type=STRING, value='int64_key_1: 1 int64_key_2')
 | |             +-input_scan=
 | |               +-SingleRowScan
 | +-InsertRow
@@ -1719,7 +1719,7 @@ InsertStmt
 |                 | +-$col1#5 :=
 |                 |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
 |                 |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-|                 |       +-Literal(type=STRING, value="int64_key_1: 1 int64_key_2")
+|                 |       +-Literal(type=STRING, value='int64_key_1: 1 int64_key_2')
 |                 +-input_scan=
 |                   +-SingleRowScan
 +-column_access_list=WRITE
@@ -2100,7 +2100,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,WRITE
 ==
 

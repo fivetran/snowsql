@@ -476,7 +476,7 @@ QueryStmt
               | +-AnalyticFunctionCall(ZetaSQL:lag(STRING, optional(1) INT64, optional(1) STRING) -> STRING)
               |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
               |   +-Literal(type=INT64, value=0)
-              |   +-Literal(type=STRING, value="string_constant")
+              |   +-Literal(type=STRING, value='string_constant')
               +-$analytic6#14 :=
                 +-AnalyticFunctionCall(ZetaSQL:lag(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)

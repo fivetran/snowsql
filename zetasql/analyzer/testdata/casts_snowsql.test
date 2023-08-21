@@ -91,7 +91,7 @@ QueryStmt
     | +-$col21#21 := Literal(type=DATE, value=2023-06-19, has_explicit_type=TRUE)
     | +-$col22#22 :=
     | | +-Cast(STRING -> TIME)
-    | |   +-Literal(type=STRING, value="20:57")
+    | |   +-Literal(type=STRING, value='20:57')
     | +-$col23#23 := Literal(type=TIMESTAMP, value=2023-06-19 19:34:56+00, has_explicit_type=TRUE)
     | +-$col24#24 :=
     | | +-Cast(INT64 -> VARIANT)
@@ -99,7 +99,7 @@ QueryStmt
     | +-$col25#25 :=
     |   +-Cast(VARIANT -> OBJECT)
     |     +-Cast(STRING -> VARIANT)
-    |       +-Literal(type=STRING, value="{}")
+    |       +-Literal(type=STRING, value='{}')
     +-input_scan=
       +-SingleRowScan
 ==

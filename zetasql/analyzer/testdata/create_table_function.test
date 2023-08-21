@@ -1586,7 +1586,7 @@ CreateTableFunctionStmt
 |             | +-expr=
 |             | | +-ColumnRef(type=STRUCT<x INT64, y STRING>, column=valuetable.$value_column#1)
 |             | +-field_idx=1
-|             +-Literal(type=STRING, value="abc")
+|             +-Literal(type=STRING, value='abc')
 +-output_column_list=
   +-$query.constant#2 AS constant [INT64]
 ==
@@ -2405,7 +2405,7 @@ CreateTableFunctionStmt
 | +-a :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
 |     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="_param")
+|     +-Literal(type=STRING, value='_param')
 +-language="SQL"
 +-code='select "abc" as x'
 +-query=

@@ -375,7 +375,7 @@ QueryStmt
             +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
             | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
             | +-ColumnRef(type=STRING, column=KeyValue.Value#4)
-            +-Literal(type=STRING, value="abc")
+            +-Literal(type=STRING, value='abc')
 ==
 
 select 1 from KeyValue kv1 full join KeyValue kv2 on kv1.key = kv2.key

@@ -1282,11 +1282,11 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
-            | +-Literal(type=STRING, value="foo")
-            | +-Literal(type=STRING, value="foo")
+            | +-Literal(type=STRING, value='foo')
+            | +-Literal(type=STRING, value='foo')
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
-              +-Literal(type=STRING, value="bar")
-              +-Literal(type=STRING, value="bar")
+              +-Literal(type=STRING, value='bar')
+              +-Literal(type=STRING, value='bar')
 ==
 
 [language_features={{NUMERIC_TYPE|}}]

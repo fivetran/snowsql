@@ -747,7 +747,7 @@ QueryStmt
     |   |             | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
     |   |             |   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |   |             |     +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    |   |             |     +-Literal(type=STRING, value="")
+    |   |             |     +-Literal(type=STRING, value='')
     |   |             +-$agg3#7 :=
     |   |               +-AggregateFunctionCall(ZetaSQL:max(INT64) -> INT64)
     |   |                 +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -2363,7 +2363,7 @@ QueryStmt
             |       +-column_ref=
             |       | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
             |       +-collation_name=
-            |         +-Literal(type=STRING, value="en_US")
+            |         +-Literal(type=STRING, value='en_US')
             +-analytic_function_list=
               +-$analytic1#4 := AnalyticFunctionCall(ZetaSQL:dense_rank() -> INT64)
 --
@@ -2390,7 +2390,7 @@ QueryStmt
             |       +-column_ref=
             |       | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
             |       +-collation_name=
-            |         +-Literal(type=STRING, value="en_US")
+            |         +-Literal(type=STRING, value='en_US')
             +-analytic_function_list=
               +-$analytic1#4 := AnalyticFunctionCall(ZetaSQL:cume_dist() -> DOUBLE)
 --
@@ -2417,7 +2417,7 @@ QueryStmt
             |       +-column_ref=
             |       | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
             |       +-collation_name=
-            |         +-Literal(type=STRING, value="en_US")
+            |         +-Literal(type=STRING, value='en_US')
             +-analytic_function_list=
               +-$analytic1#4 := AnalyticFunctionCall(ZetaSQL:percent_rank() -> DOUBLE)
 --
@@ -2444,7 +2444,7 @@ QueryStmt
             |       +-column_ref=
             |       | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
             |       +-collation_name=
-            |         +-Literal(type=STRING, value="en_US")
+            |         +-Literal(type=STRING, value='en_US')
             +-analytic_function_list=
               +-$analytic1#4 := AnalyticFunctionCall(ZetaSQL:rank() -> INT64)
 --
@@ -2471,7 +2471,7 @@ QueryStmt
             |       +-column_ref=
             |       | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
             |       +-collation_name=
-            |         +-Literal(type=STRING, value="en_US")
+            |         +-Literal(type=STRING, value='en_US')
             +-analytic_function_list=
               +-$analytic1#4 :=
                 +-AnalyticFunctionCall(ZetaSQL:ntile(INT64) -> INT64)

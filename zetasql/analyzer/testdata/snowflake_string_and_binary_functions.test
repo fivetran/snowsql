@@ -14,7 +14,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:base64_decode_string(STRING, optional(0) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="U25vd2ZsYWtl")
+    |     +-Literal(type=STRING, value='U25vd2ZsYWtl')
     +-input_scan=
       +-SingleRowScan
 --
@@ -29,8 +29,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:base64_decode_string(STRING, optional(1) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="U25vd2ZsYWtl")
-    |     +-Literal(type=STRING, value="+/=")
+    |     +-Literal(type=STRING, value='U25vd2ZsYWtl')
+    |     +-Literal(type=STRING, value='+/=')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -51,7 +51,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:try_base64_decode_string(STRING, optional(0) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="U25vd2ZsYWtl")
+    |     +-Literal(type=STRING, value='U25vd2ZsYWtl')
     +-input_scan=
       +-SingleRowScan
 --
@@ -66,8 +66,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:try_base64_decode_string(STRING, optional(1) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="U25vd2ZsYWtl")
-    |     +-Literal(type=STRING, value="+/=")
+    |     +-Literal(type=STRING, value='U25vd2ZsYWtl')
+    |     +-Literal(type=STRING, value='+/=')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -86,8 +86,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:contains(STRING, STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="1234")
-    |     +-Literal(type=STRING, value="23")
+    |     +-Literal(type=STRING, value='1234')
+    |     +-Literal(type=STRING, value='23')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -106,8 +106,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:endswith(STRING, STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="1234")
-    |     +-Literal(type=STRING, value="34")
+    |     +-Literal(type=STRING, value='1234')
+    |     +-Literal(type=STRING, value='34')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -126,10 +126,10 @@ QueryStmt
     +-expr_list=
     | +-str#1 :=
     |   +-FunctionCall(ZetaSQL:insert(STRING, INT64, INT64, STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abcdef")
+    |     +-Literal(type=STRING, value='abcdef')
     |     +-Literal(type=INT64, value=3)
     |     +-Literal(type=INT64, value=2)
-    |     +-Literal(type=STRING, value="zzz")
+    |     +-Literal(type=STRING, value='zzz')
     +-input_scan=
       +-SingleRowScan
 ==

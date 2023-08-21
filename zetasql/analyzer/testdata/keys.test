@@ -31,7 +31,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |     +-Literal(type=STRING, value="AEAD_AES_GCM_256")
+    |     +-Literal(type=STRING, value='AEAD_AES_GCM_256')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -49,9 +49,9 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$not_equal(BYTES, BYTES) -> BOOL)
     |     +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |     | +-Literal(type=STRING, value="AEAD_AES_GCM_256")
+    |     | +-Literal(type=STRING, value='AEAD_AES_GCM_256')
     |     +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |       +-Literal(type=STRING, value="AEAD_AES_GCM_256")
+    |       +-Literal(type=STRING, value='AEAD_AES_GCM_256')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -67,7 +67,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |     +-Literal(type=STRING, value="DETERMINISTIC_AEAD_AES_SIV_CMAC_256")
+    |     +-Literal(type=STRING, value='DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -85,9 +85,9 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$not_equal(BYTES, BYTES) -> BOOL)
     |     +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |     | +-Literal(type=STRING, value="DETERMINISTIC_AEAD_AES_SIV_CMAC_256")
+    |     | +-Literal(type=STRING, value='DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
     |     +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |       +-Literal(type=STRING, value="DETERMINISTIC_AEAD_AES_SIV_CMAC_256")
+    |       +-Literal(type=STRING, value='DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -130,7 +130,7 @@ QueryStmt
     |       +-expr_list=
     |       | +-keyset#1 :=
     |       |   +-FunctionCall(ZetaSQL:keys.new_keyset(STRING) -> BYTES)
-    |       |     +-Literal(type=STRING, value="AEAD_AES_GCM_256")
+    |       |     +-Literal(type=STRING, value='AEAD_AES_GCM_256')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -178,7 +178,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:keys.add_key_from_raw_bytes(BYTES, STRING, BYTES) -> BYTES)
     |     +-Literal(type=BYTES, value=b"")
-    |     +-Literal(type=STRING, value="AES_GCM")
+    |     +-Literal(type=STRING, value='AES_GCM')
     |     +-Literal(type=BYTES, value=b"0123456789abcdef")
     +-input_scan=
       +-SingleRowScan
@@ -196,7 +196,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:keys.add_key_from_raw_bytes(BYTES, STRING, BYTES) -> BYTES)
     |     +-Literal(type=BYTES, value=b"")
-    |     +-Literal(type=STRING, value="AES_GCM")
+    |     +-Literal(type=STRING, value='AES_GCM')
     |     +-Parameter(type=BYTES, name="test_param_bytes")
     +-input_scan=
       +-SingleRowScan
@@ -222,7 +222,7 @@ QueryStmt
     | +-$col1#3 :=
     |   +-FunctionCall(ZetaSQL:keys.add_key_from_raw_bytes(BYTES, STRING, BYTES) -> BYTES)
     |     +-Literal(type=BYTES, value=b"")
-    |     +-Literal(type=STRING, value="AES_GCM")
+    |     +-Literal(type=STRING, value='AES_GCM')
     |     +-Cast(STRING -> BYTES)
     |       +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     +-input_scan=
@@ -276,7 +276,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:keys.rotate_keyset(BYTES, STRING) -> BYTES)
     |     +-Literal(type=BYTES, value=b"")
-    |     +-Literal(type=STRING, value="AEAD_AES_GCM_256")
+    |     +-Literal(type=STRING, value='AEAD_AES_GCM_256')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -293,7 +293,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:keys.rotate_keyset(BYTES, STRING) -> BYTES)
     |     +-Literal(type=BYTES, value=b"")
-    |     +-Literal(type=STRING, value="DETERMINISTIC_AEAD_AES_SIV_CMAC_256")
+    |     +-Literal(type=STRING, value='DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
     +-input_scan=
       +-SingleRowScan
 ==

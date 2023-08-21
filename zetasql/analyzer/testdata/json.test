@@ -123,7 +123,7 @@ QueryStmt
     | +-$col1#2 :=
     |   +-FunctionCall(ZetaSQL:$subscript(JSON, STRING) -> JSON)
     |     +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     +-Literal(type=STRING, value="field")
+    |     +-Literal(type=STRING, value='field')
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
@@ -141,7 +141,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$subscript(JSON, STRING) -> JSON)
     |     +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
     |     +-FunctionCall(ZetaSQL:substr(STRING, INT64, optional(1) INT64) -> STRING)
-    |       +-Literal(type=STRING, value="bar")
+    |       +-Literal(type=STRING, value='bar')
     |       +-Literal(type=INT64, value=0)
     |       +-Literal(type=INT64, value=2)
     +-input_scan=
@@ -227,7 +227,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$subscript(JSON, STRING) -> JSON)
     |     +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
     |     +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:substr(STRING, INT64, optional(1) INT64) -> STRING)
-    |       +-Literal(type=STRING, value="bar")
+    |       +-Literal(type=STRING, value='bar')
     |       +-Literal(type=INT64, value=0)
     |       +-Literal(type=INT64, value=2)
     +-input_scan=

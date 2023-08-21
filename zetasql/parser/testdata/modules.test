@@ -576,10 +576,10 @@ module foo.bar options;
                       ^
 ==
 
-module foo.bar options("abc");
+module foo.bar options('abc');
 --
-ERROR: Syntax error: Unexpected string literal "abc" [at 1:24]
-module foo.bar options("abc");
+ERROR: Syntax error: Unexpected string literal 'abc' [at 1:24]
+module foo.bar options('abc');
                        ^
 ==
 
@@ -612,12 +612,12 @@ create or replace module foo;
 ==
 
 # Invalid statement due to expecting path expression but successfully parsed
-import module "file.proto";
+import module 'file.proto';
 --
-ImportStatement [0-26] [import module "file.proto"]
+ImportStatement [0-26] [import module 'file.proto']
   StringLiteral('file.proto') [14-26] ['file.proto']
 --
-IMPORT MODULE "file.proto"
+IMPORT MODULE 'file.proto'
 ==
 
 # The parser supports IMPORT MODULE with INTO, but the statements fail

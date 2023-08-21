@@ -294,7 +294,7 @@ CreateConstantStmt
 +-create_scope=CREATE_PRIVATE
 +-expr=
   +-Cast(STRING -> PROTO<zetasql_test__.EmptyMessage>)
-    +-Literal(type=STRING, value="")
+    +-Literal(type=STRING, value='')
 ==
 
 # CREATE CONSTANT statements of type ENUM resolve correctly.
@@ -363,7 +363,7 @@ CreateConstantStmt
 +-name_path=TestConstantInt64
 +-create_scope=CREATE_PRIVATE
 +-expr=
-  +-Literal(type=STRING, value="foo")
+  +-Literal(type=STRING, value='foo')
 --
 ALTERNATION GROUP: PUBLIC,1
 --
@@ -387,4 +387,4 @@ CreateConstantStmt
 +-name_path=TestConstantInt64
 +-create_scope=CREATE_PUBLIC
 +-expr=
-  +-Literal(type=STRING, value="foo")
+  +-Literal(type=STRING, value='foo')

@@ -2,7 +2,7 @@ EXECUTE IMMEDIATE "SELECT 1";
 --
 ExecuteImmediateStmt
 +-sql=
-| +-Literal(type=STRING, value="SELECT 1")
+| +-Literal(type=STRING, value='SELECT 1')
 +-into_identifier_list=[]
 ==
 
@@ -11,8 +11,8 @@ EXECUTE IMMEDIATE CONCAT("SELECT ", "1");
 ExecuteImmediateStmt
 +-sql=
 | +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-|   +-Literal(type=STRING, value="SELECT ")
-|   +-Literal(type=STRING, value="1")
+|   +-Literal(type=STRING, value='SELECT ')
+|   +-Literal(type=STRING, value='1')
 +-into_identifier_list=[]
 ==
 
@@ -45,7 +45,7 @@ ALTERNATION GROUP: "NULL"
 --
 ExecuteImmediateStmt
 +-sql=
-| +-Literal(type=STRING, value="NULL")
+| +-Literal(type=STRING, value='NULL')
 +-into_identifier_list=[]
 ==
 
@@ -53,7 +53,7 @@ EXECUTE IMMEDIATE "SELECT 1" INTO string_variable_foo;
 --
 ExecuteImmediateStmt
 +-sql=
-| +-Literal(type=STRING, value="SELECT 1")
+| +-Literal(type=STRING, value='SELECT 1')
 +-into_identifier_list=[string_variable_foo]
 ==
 
@@ -61,7 +61,7 @@ EXECUTE IMMEDIATE "SELECT 1" INTO string_variable_foo, string_variable_bar;
 --
 ExecuteImmediateStmt
 +-sql=
-| +-Literal(type=STRING, value="SELECT 1")
+| +-Literal(type=STRING, value='SELECT 1')
 +-into_identifier_list=[string_variable_foo, string_variable_bar]
 ==
 
@@ -69,7 +69,7 @@ EXECUTE IMMEDIATE "SELECT 1" INTO "string_variable_foo";
 --
 ExecuteImmediateStmt
 +-sql=
-| +-Literal(type=STRING, value="SELECT 1")
+| +-Literal(type=STRING, value='SELECT 1')
 +-into_identifier_list=[string_variable_foo]
 ==
 
@@ -170,8 +170,8 @@ ExecuteImmediateStmt
     +-name="y"
     +-expression=
       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-        +-Literal(type=STRING, value="A")
-        +-Literal(type=STRING, value="B")
+        +-Literal(type=STRING, value='A')
+        +-Literal(type=STRING, value='B')
 ==
 
 EXECUTE IMMEDIATE 10;

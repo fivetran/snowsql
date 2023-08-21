@@ -616,8 +616,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="a")
-    |     +-Literal(type=STRING, value="b")
+    |     +-Literal(type=STRING, value='a')
+    |     +-Literal(type=STRING, value='b')
     +-input_scan=
       +-TableScan(table=TestTable)
 --

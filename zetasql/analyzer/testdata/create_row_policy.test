@@ -61,8 +61,8 @@ ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX,PARAMETERS_IN_GRANTEE_L
 CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
 +-grantee_expr_list=
-| +-Literal(type=STRING, value="foo@google.com")
-| +-Literal(type=STRING, value="mdbuser/bar")
+| +-Literal(type=STRING, value='foo@google.com')
+| +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -76,9 +76,9 @@ ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX,PARAMETERS_IN_GRANTEE_L
 CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
 +-grantee_expr_list=
-| +-Literal(type=STRING, value="foo@google.com")
+| +-Literal(type=STRING, value='foo@google.com')
 | +-Parameter(type=STRING, name="test_param_string")
-| +-Literal(type=STRING, value="mdbuser/bar")
+| +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -295,7 +295,7 @@ CreateRowAccessPolicyStmt
 |     | +-expr=
 |     | | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 |     | +-field_idx=1
-|     +-Literal(type=STRING, value="abc")
+|     +-Literal(type=STRING, value='abc')
 +-predicate_str="a = 321 AND TestStructValueTable.b = 'abc'"
 ==
 

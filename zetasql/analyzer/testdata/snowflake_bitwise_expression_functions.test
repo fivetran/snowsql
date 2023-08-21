@@ -13,7 +13,7 @@ QueryStmt
     | +-bit_and#1 :=
     |   +-FunctionCall(ZetaSQL:bitand(INT64, STRING) -> INT64)
     |     +-Literal(type=INT64, value=1234)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -52,7 +52,7 @@ QueryStmt
     | +-bit_or#1 :=
     |   +-FunctionCall(ZetaSQL:bitor(INT64, STRING) -> INT64)
     |     +-Literal(type=INT64, value=1234)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -128,8 +128,8 @@ QueryStmt
     +-expr_list=
     | +-bit_xor#1 :=
     |   +-FunctionCall(ZetaSQL:bitxor(STRING, STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1234")
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -146,7 +146,7 @@ QueryStmt
     | +-bit_xor#1 :=
     |   +-FunctionCall(ZetaSQL:bitxor(INT64, STRING) -> INT64)
     |     +-Literal(type=INT64, value=1234)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 ==

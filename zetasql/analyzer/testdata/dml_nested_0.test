@@ -208,7 +208,7 @@ UpdateStmt
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkExtension>, column=$array.elt#4)
             | +-field_descriptor=value
             | +-default_value=""
-            +-Literal(type=STRING, value="foo")
+            +-Literal(type=STRING, value='foo')
 ==
 
 # Nested DELETE inside an array element.
@@ -652,7 +652,7 @@ UpdateStmt
             +-set_value=
               +-DMLValue
                 +-value=
-                  +-Literal(type=STRING, value="foo")
+                  +-Literal(type=STRING, value='foo')
 ==
 
 # Nested UPDATE on a subfield of an extension field.
@@ -698,7 +698,7 @@ UpdateStmt
             +-set_value=
               +-DMLValue
                 +-value=
-                  +-Literal(type=STRING, value="foo")
+                  +-Literal(type=STRING, value='foo')
 ==
 
 # Nested UPDATE on an extension field with an alias.
@@ -1349,7 +1349,7 @@ UpdateStmt
             +-value_list=
               +-DMLValue
                 +-value=
-                  +-Literal(type=STRING, value="foo")
+                  +-Literal(type=STRING, value='foo')
 ==
 
 # Nested INSERT inside an array element.

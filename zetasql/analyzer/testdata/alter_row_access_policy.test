@@ -19,7 +19,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -50,7 +50,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="bar@google.com")
+|     +-Literal(type=STRING, value='bar@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -82,10 +82,10 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -112,7 +112,7 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -131,7 +131,7 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -182,10 +182,10 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -203,7 +203,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -221,7 +221,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -276,7 +276,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-RenameToAction(new_path=p2)
 | +-FilterUsingAction
 | | +-predicate=
@@ -286,7 +286,7 @@ AlterRowAccessPolicyStmt
 | | +-predicate_str="key = 321"
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -298,11 +298,11 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -314,7 +314,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 | | +-predicate=
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -323,7 +323,7 @@ AlterRowAccessPolicyStmt
 | | +-predicate_str="key = 321"
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -335,10 +335,10 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -358,7 +358,7 @@ AlterRowAccessPolicyStmt
 | | +-predicate_str="key = 321"
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -372,7 +372,7 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -391,7 +391,7 @@ AlterRowAccessPolicyStmt
 | | +-predicate_str="key = 321"
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -404,7 +404,7 @@ AlterRowAccessPolicyStmt
 | +-RevokeFromAction(is_revoke_from_all=TRUE)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -423,7 +423,7 @@ AlterRowAccessPolicyStmt
 | | +-predicate_str="key = 321"
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -436,7 +436,7 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -454,7 +454,7 @@ AlterRowAccessPolicyStmt
 | | +-predicate_str="key = 321"
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -466,7 +466,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -483,9 +483,9 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 |     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -497,8 +497,8 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -515,9 +515,9 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 |     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -529,8 +529,8 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-name="p1"
 +-table_scan=
   +-TableScan(table=KeyValue)
@@ -642,12 +642,12 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
@@ -665,12 +665,12 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
 | |   +-Parameter(type=STRING, name="test_param_string")
 | +-FilterUsingAction
 |   +-predicate=
@@ -689,13 +689,13 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | |   +-Parameter(type=STRING, name="test_param_string")
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
@@ -713,13 +713,13 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | |   +-Parameter(type=STRING, name="test_param_string")
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
 | |   +-Parameter(type=STRING, name="test_param_string")
 | +-FilterUsingAction
 |   +-predicate=
@@ -745,12 +745,12 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="user:bar@google.com")
-| |   +-Literal(type=STRING, value="group:all-users@google.com")
+| |   +-Literal(type=STRING, value='user:bar@google.com')
+| |   +-Literal(type=STRING, value='group:all-users@google.com')
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -775,7 +775,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -796,7 +796,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
@@ -813,7 +813,7 @@ AlterRowAccessPolicyStmt
 |   |     | +-expr=
 |   |     | | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 |   |     | +-field_idx=1
-|   |     +-Literal(type=STRING, value="abc")
+|   |     +-Literal(type=STRING, value='abc')
 |   +-predicate_str="a = 321 AND TestStructValueTable.b = 'abc'"
 +-name="p1"
 +-table_scan=
@@ -829,7 +829,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
@@ -951,8 +951,8 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="bar@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='bar@google.com')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -966,7 +966,7 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -982,9 +982,9 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 |     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -995,8 +995,8 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -1028,7 +1028,7 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="all")
+|     +-Literal(type=STRING, value='all')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==

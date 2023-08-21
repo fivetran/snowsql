@@ -17,22 +17,22 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(0) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFC)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKC)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFD)
     | +-$col5#5 :=
     |   +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    |     +-Literal(type=STRING, value="abcdefg")
+    |     +-Literal(type=STRING, value='abcdefg')
     |     +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKD)
     +-input_scan=
       +-SingleRowScan
@@ -58,22 +58,22 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(0) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFC)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKC)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFD)
     | +-$col5#5 :=
     |   +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    |     +-Literal(type=STRING, value="abcdefg")
+    |     +-Literal(type=STRING, value='abcdefg')
     |     +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKD)
     +-input_scan=
       +-SingleRowScan
@@ -105,22 +105,22 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(0) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFC)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKC)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFD)
     | +-$col5#5 :=
     |   +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    |     +-Literal(type=STRING, value="abcdefg")
+    |     +-Literal(type=STRING, value='abcdefg')
     |     +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKD)
     +-input_scan=
       +-SingleRowScan
@@ -146,22 +146,22 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(0) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFC)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKC)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    | |   +-Literal(type=STRING, value="abcdefg")
+    | |   +-Literal(type=STRING, value='abcdefg')
     | |   +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFD)
     | +-$col5#5 :=
     |   +-FunctionCall(ZetaSQL:normalize_and_casefold(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    |     +-Literal(type=STRING, value="abcdefg")
+    |     +-Literal(type=STRING, value='abcdefg')
     |     +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFKD)
     +-input_scan=
       +-SingleRowScan
@@ -362,7 +362,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:normalize(STRING, optional(1) ENUM<zetasql.functions.NormalizeMode>) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     |     +-Literal(type=ENUM<zetasql.functions.NormalizeMode>, value=NFC)
     +-input_scan=
       +-SingleRowScan

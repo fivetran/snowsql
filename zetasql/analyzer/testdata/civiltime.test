@@ -1520,7 +1520,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:time(STRING, optional(0) STRING) -> TIME)
-    |     +-Literal(type=STRING, value="2015-12-28 15:42:56-08:00")
+    |     +-Literal(type=STRING, value='2015-12-28 15:42:56-08:00')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3475,7 +3475,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:format_time(STRING, TIME) -> STRING)
-    |     +-Literal(type=STRING, value="aaa")
+    |     +-Literal(type=STRING, value='aaa')
     |     +-Literal(type=TIME, value=12:34:56.123456)
     +-input_scan=
       +-SingleRowScan
@@ -3491,7 +3491,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:format_time(STRING, TIME) -> STRING)
-    |     +-Literal(type=STRING, value="aaa")
+    |     +-Literal(type=STRING, value='aaa')
     |     +-Literal(type=TIME, value=12:34:56.123456, has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
@@ -3523,7 +3523,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:format_datetime(STRING, DATETIME) -> STRING)
-    |     +-Literal(type=STRING, value="aaa")
+    |     +-Literal(type=STRING, value='aaa')
     |     +-Literal(type=DATETIME, value=2016-05-06 12:34:56.123456)
     +-input_scan=
       +-SingleRowScan
@@ -3539,7 +3539,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:format_datetime(STRING, DATETIME) -> STRING)
-    |     +-Literal(type=STRING, value="aaa")
+    |     +-Literal(type=STRING, value='aaa')
     |     +-Literal(type=DATETIME, value=2016-05-06 12:34:56.123456, has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
@@ -3571,8 +3571,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:parse_time(STRING, STRING) -> TIME)
-    |     +-Literal(type=STRING, value="aaa")
-    |     +-Literal(type=STRING, value="12:34:56.123456")
+    |     +-Literal(type=STRING, value='aaa')
+    |     +-Literal(type=STRING, value='12:34:56.123456')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3598,8 +3598,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
-    |     +-Literal(type=STRING, value="aaa")
-    |     +-Literal(type=STRING, value="2016-05-06 12:34:56.123456")
+    |     +-Literal(type=STRING, value='aaa')
+    |     +-Literal(type=STRING, value='2016-05-06 12:34:56.123456')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3725,7 +3725,7 @@ QueryStmt
     | |     +-FunctionCall(ZetaSQL:current_time(optional(0) STRING) -> TIME)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:datetime(STRING) -> DATETIME)
-    | |   +-Literal(type=STRING, value="2000-01-02 03:04:05")
+    | |   +-Literal(type=STRING, value='2000-01-02 03:04:05')
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:string(DATETIME) -> STRING)
     | |   +-FunctionCall(ZetaSQL:current_datetime(optional(0) STRING) -> DATETIME)
@@ -3764,11 +3764,11 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:date_trunc(STRING, DATE) -> DATE)
-    | |   +-Literal(type=STRING, value="year")
+    | |   +-Literal(type=STRING, value='year')
     | |   +-Literal(type=DATE, value=1999-12-31)
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:date_trunc(STRING, DATE) -> DATE)
-    | |   +-Literal(type=STRING, value="year")
+    | |   +-Literal(type=STRING, value='year')
     | |   +-Cast(STRING -> DATE)
     | |     +-Parameter(type=STRING, name="test_param_string")
     | +-$col3#3 :=
@@ -4052,29 +4052,29 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:format_date(STRING, DATE) -> STRING)
-    | |   +-Literal(type=STRING, value="%D")
+    | |   +-Literal(type=STRING, value='%D')
     | |   +-Literal(type=DATE, value=2000-01-01)
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:format_date(STRING, DATE) -> STRING)
-    | |   +-Literal(type=STRING, value="%D")
+    | |   +-Literal(type=STRING, value='%D')
     | |   +-Cast(STRING -> DATE)
     | |     +-Parameter(type=STRING, name="test_param_string")
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:format_datetime(STRING, DATETIME) -> STRING)
-    | |   +-Literal(type=STRING, value="%D")
+    | |   +-Literal(type=STRING, value='%D')
     | |   +-Literal(type=DATETIME, value=2000-01-01 00:00:00)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:format_datetime(STRING, DATETIME) -> STRING)
-    | |   +-Literal(type=STRING, value="%D")
+    | |   +-Literal(type=STRING, value='%D')
     | |   +-Cast(STRING -> DATETIME)
     | |     +-Parameter(type=STRING, name="test_param_string")
     | +-$col5#5 :=
     | | +-FunctionCall(ZetaSQL:format_timestamp(STRING, TIMESTAMP, optional(0) STRING) -> STRING)
-    | |   +-Literal(type=STRING, value="%D")
+    | |   +-Literal(type=STRING, value='%D')
     | |   +-Literal(type=TIMESTAMP, value=2000-01-01 08:00:00+00)
     | +-$col6#6 :=
     |   +-FunctionCall(ZetaSQL:format_timestamp(STRING, TIMESTAMP, optional(0) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="%D")
+    |     +-Literal(type=STRING, value='%D')
     |     +-Cast(STRING -> TIMESTAMP)
     |       +-Parameter(type=STRING, name="test_param_string")
     +-input_scan=

@@ -133,7 +133,7 @@ CreateFunctionStmt
   +-param1 :=
     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
       +-Parameter(type=STRING, name="test_param_string")
-      +-Literal(type=STRING, value="_param")
+      +-Literal(type=STRING, value='_param')
 ==
 
 # Templated types are not allowed in the RETURNS clause.

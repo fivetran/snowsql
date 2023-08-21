@@ -154,7 +154,7 @@ CreateTableAsSelectStmt
 | |   +-Literal(type=INT64, value=2)
 | +-func :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-|     +-Literal(type=STRING, value="abc")
+|     +-Literal(type=STRING, value='abc')
 |     +-Parameter(type=STRING, name="test_param_string")
 +-column_definition_list=
 | +-ColumnDefinition(name="key", type=INT64, column=X.key#4)
@@ -1339,7 +1339,7 @@ CreateTableAsSelectStmt
 |   +-expression=
 |   | +-FunctionCall(ZetaSQL:$not_equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=t1.Value#4)
-|   |   +-Literal(type=STRING, value="foo")
+|   |   +-Literal(type=STRING, value='foo')
 |   +-enforced=TRUE
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]

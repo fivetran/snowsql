@@ -240,7 +240,7 @@ QueryStmt
     |       +-expr_list=
     |       | +-$col1#1 :=
     |       |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |       |     +-Literal(type=STRING, value="int32_val1: 1")
+    |       |     +-Literal(type=STRING, value='int32_val1: 1')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -281,7 +281,7 @@ QueryStmt
     |           +-expr_list=
     |           | +-$col1#1 :=
     |           |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |           |     +-Literal(type=STRING, value="int32_val1: 1")
+    |           |     +-Literal(type=STRING, value='int32_val1: 1')
     |           +-input_scan=
     |             +-SingleRowScan
     +-query=
@@ -307,7 +307,7 @@ QueryStmt
     |       +-expr_list=
     |       | +-$col1#1 :=
     |       |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |       |     +-Literal(type=STRING, value="int32_val1: 1")
+    |       |     +-Literal(type=STRING, value='int32_val1: 1')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=

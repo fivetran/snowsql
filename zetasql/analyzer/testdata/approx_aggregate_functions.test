@@ -107,7 +107,7 @@ QueryStmt
             +-AggregateFunctionCall(ZetaSQL:approx_count_distinct(ARRAY<STRING>) -> INT64)
               +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
                 +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-                +-Literal(type=STRING, value="a")
+                +-Literal(type=STRING, value='a')
 ==
 
 # ARRAY of non-groupable elements.
@@ -666,7 +666,7 @@ QueryStmt
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:approx_top_count(ARRAY<STRING>, INT64) -> ARRAY<STRUCT<value ARRAY<STRING>, count INT64>>)
               +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
-              | +-Literal(type=STRING, value="a")
+              | +-Literal(type=STRING, value='a')
               | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
               +-Literal(type=INT64, value=10)
 ==
@@ -950,7 +950,7 @@ QueryStmt
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:approx_top_sum(ARRAY<STRING>, INT64, INT64) -> ARRAY<STRUCT<value ARRAY<STRING>, sum INT64>>)
               +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
-              | +-Literal(type=STRING, value="a")
+              | +-Literal(type=STRING, value='a')
               | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
               +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
               +-Literal(type=INT64, value=10)
@@ -1579,7 +1579,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:d3a_count.init(STRING, INT64, optional(1) INT64) -> BYTES)
-              +-Literal(type=STRING, value="ABC")
+              +-Literal(type=STRING, value='ABC')
               +-Parameter(type=INT64, name="test_param_int64")
               +-Parameter(type=INT64, name="test_param_int64")
 ==

@@ -16,8 +16,8 @@ QueryStmt
     | +-result#1 :=
     |   +-FunctionCall(ZetaSQL:add_months(DATE, DOUBLE) -> DATE)
     |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
-    |     | +-Literal(type=STRING, value="%m/%d/%Y")
-    |     | +-Literal(type=STRING, value="1/1/2023")
+    |     | +-Literal(type=STRING, value='%m/%d/%Y')
+    |     | +-Literal(type=STRING, value='1/1/2023')
     |     +-Literal(type=DOUBLE, value=1)
     +-input_scan=
       +-SingleRowScan
@@ -34,8 +34,8 @@ QueryStmt
     | +-result#1 :=
     |   +-FunctionCall(ZetaSQL:add_months(DATETIME, DOUBLE) -> DATETIME)
     |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
-    |     | +-Literal(type=STRING, value="%D %T,000000")
-    |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |     | +-Literal(type=STRING, value='%D %T,000000')
+    |     | +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
     |     +-Literal(type=DOUBLE, value=1)
     +-input_scan=
       +-SingleRowScan
@@ -52,8 +52,8 @@ QueryStmt
     | +-result#1 :=
     |   +-FunctionCall(ZetaSQL:add_months(TIMESTAMP, DOUBLE) -> TIMESTAMP)
     |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
-    |     | +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
-    |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |     | +-Literal(type=STRING, value='%d/%m/%y %H:%M:%S,000000')
+    |     | +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
     |     +-Literal(type=DOUBLE, value=1)
     +-input_scan=
       +-SingleRowScan
@@ -77,8 +77,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:dayname(DATE) -> STRING)
     |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
-    |       +-Literal(type=STRING, value="%m/%d/%Y")
-    |       +-Literal(type=STRING, value="1/1/2023")
+    |       +-Literal(type=STRING, value='%m/%d/%Y')
+    |       +-Literal(type=STRING, value='1/1/2023')
     +-input_scan=
       +-SingleRowScan
 --
@@ -94,8 +94,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:dayname(DATETIME) -> STRING)
     |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
-    |       +-Literal(type=STRING, value="%D %T,000000")
-    |       +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |       +-Literal(type=STRING, value='%D %T,000000')
+    |       +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
     +-input_scan=
       +-SingleRowScan
 --
@@ -111,8 +111,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:dayname(TIMESTAMP) -> STRING)
     |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
-    |       +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
-    |       +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |       +-Literal(type=STRING, value='%d/%m/%y %H:%M:%S,000000')
+    |       +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -135,8 +135,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:monthname(DATE) -> STRING)
     |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
-    |       +-Literal(type=STRING, value="%m/%d/%Y")
-    |       +-Literal(type=STRING, value="1/1/2023")
+    |       +-Literal(type=STRING, value='%m/%d/%Y')
+    |       +-Literal(type=STRING, value='1/1/2023')
     +-input_scan=
       +-SingleRowScan
 --
@@ -152,8 +152,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:monthname(DATETIME) -> STRING)
     |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
-    |       +-Literal(type=STRING, value="%D %T,000000")
-    |       +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |       +-Literal(type=STRING, value='%D %T,000000')
+    |       +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
     +-input_scan=
       +-SingleRowScan
 --
@@ -169,8 +169,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:monthname(TIMESTAMP) -> STRING)
     |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
-    |       +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
-    |       +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
+    |       +-Literal(type=STRING, value='%d/%m/%y %H:%M:%S,000000')
+    |       +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -193,9 +193,9 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:next_day(DATE, STRING) -> DATE)
     |     +-FunctionCall(ZetaSQL:parse_date(STRING, STRING) -> DATE)
-    |     | +-Literal(type=STRING, value="%m/%d/%Y")
-    |     | +-Literal(type=STRING, value="1/1/2023")
-    |     +-Literal(type=STRING, value="Friday")
+    |     | +-Literal(type=STRING, value='%m/%d/%Y')
+    |     | +-Literal(type=STRING, value='1/1/2023')
+    |     +-Literal(type=STRING, value='Friday')
     +-input_scan=
       +-SingleRowScan
 --
@@ -211,9 +211,9 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:next_day(DATETIME, STRING) -> DATE)
     |     +-FunctionCall(ZetaSQL:parse_datetime(STRING, STRING) -> DATETIME)
-    |     | +-Literal(type=STRING, value="%D %T,000000")
-    |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
-    |     +-Literal(type=STRING, value="Friday")
+    |     | +-Literal(type=STRING, value='%D %T,000000')
+    |     | +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
+    |     +-Literal(type=STRING, value='Friday')
     +-input_scan=
       +-SingleRowScan
 --
@@ -229,9 +229,9 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:next_day(TIMESTAMP, STRING) -> DATE)
     |     +-FunctionCall(ZetaSQL:parse_timestamp(STRING, STRING, optional(0) STRING) -> TIMESTAMP)
-    |     | +-Literal(type=STRING, value="%d/%m/%y %H:%M:%S,000000")
-    |     | +-Literal(type=STRING, value="01/01/23 00:00:00,000000")
-    |     +-Literal(type=STRING, value="Friday")
+    |     | +-Literal(type=STRING, value='%d/%m/%y %H:%M:%S,000000')
+    |     | +-Literal(type=STRING, value='01/01/23 00:00:00,000000')
+    |     +-Literal(type=STRING, value='Friday')
     +-input_scan=
       +-SingleRowScan
 ==

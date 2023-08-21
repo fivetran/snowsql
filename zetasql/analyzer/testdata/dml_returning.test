@@ -335,7 +335,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN WITH ACTION *
@@ -363,7 +363,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN WITH ACTION AS myaction *
@@ -391,7 +391,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue SET value="a" WHERE key > 10 THEN RETURN key, value
@@ -416,7 +416,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 
 ==
 
@@ -451,7 +451,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 INSERT INTO KeyValue (key, value) VALUES (1, "one") THEN RETURN *
@@ -473,7 +473,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -499,7 +499,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -526,7 +526,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -548,7 +548,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,WRITE
 ==
 
@@ -570,7 +570,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,WRITE
 ==
 
@@ -597,7 +597,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -605,7 +605,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 --
 ALTERNATION GROUP:  IGNORE
@@ -628,7 +628,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -636,7 +636,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 --
 ALTERNATION GROUP:  REPLACE
@@ -659,7 +659,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -667,7 +667,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 --
 ALTERNATION GROUP:  UPDATE
@@ -690,7 +690,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -698,7 +698,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -728,7 +728,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -736,7 +736,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 --
 ALTERNATION GROUP:  IGNORE
@@ -762,7 +762,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -770,7 +770,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 --
 ALTERNATION GROUP:  REPLACE
@@ -796,7 +796,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -804,7 +804,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 --
 ALTERNATION GROUP:  UPDATE
@@ -830,7 +830,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -838,7 +838,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -868,7 +868,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,WRITE
 ==
 
@@ -1233,7 +1233,7 @@ DeleteStmt
 +-where_expr=
   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    +-Literal(type=STRING, value="Value_1")
+    +-Literal(type=STRING, value='Value_1')
 
 ==
 
@@ -1274,7 +1274,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,READ_WRITE
 ==
 
@@ -1300,7 +1300,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,WRITE
 ==
 
@@ -1331,7 +1331,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,WRITE
 ==
 
@@ -1383,7 +1383,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -1407,7 +1407,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -1434,7 +1434,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -1459,7 +1459,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,WRITE
 ==
 
@@ -1489,7 +1489,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=READ_WRITE,READ_WRITE
 ==
 
@@ -1514,7 +1514,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,READ_WRITE
 ==
 
@@ -1547,7 +1547,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue SET value="a" WHERE key > 10
@@ -1574,7 +1574,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue SET value="a" WHERE key > 10
@@ -1601,7 +1601,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue T SET value="a" WHERE key > 10
@@ -1628,7 +1628,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue T SET value="a" WHERE key > 10
@@ -1653,7 +1653,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 UPDATE KeyValue T SET value="a" WHERE key > 10
@@ -1682,7 +1682,7 @@ UpdateStmt
     +-set_value=
       +-DMLValue
         +-value=
-          +-Literal(type=STRING, value="a")
+          +-Literal(type=STRING, value='a')
 ==
 
 [language_features=V_1_3_DML_RETURNING]
@@ -2010,7 +2010,7 @@ DeleteStmt
 +-where_expr=
   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    +-Literal(type=STRING, value="Value_1")
+    +-Literal(type=STRING, value='Value_1')
 ==
 
 DELETE KeyValue T WHERE T.key = (SELECT count(*) FROM (SELECT P.* FROM KeyValue AS P) )

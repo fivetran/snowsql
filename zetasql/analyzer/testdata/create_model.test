@@ -320,7 +320,7 @@ CreateModelStmt
 | |   +-Literal(type=INT64, value=2)
 | +-func :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-|     +-Literal(type=STRING, value="abc")
+|     +-Literal(type=STRING, value='abc')
 |     +-Parameter(type=STRING, name="test_param_string")
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
@@ -1001,7 +1001,7 @@ CreateModelStmt
 |   | +-e#1 :=
 |   |   +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 |   |     +-type_annotation_map={Collation:"und:ci"}
-|   |     +-Literal(type=STRING, value="5")
+|   |     +-Literal(type=STRING, value='5')
 |   |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
 |   +-input_scan=
 |     +-SingleRowScan
@@ -1012,7 +1012,7 @@ CreateModelStmt
 |   +-annotations=
 |   | +-ColumnAnnotations
 |   |   +-collation_name=
-|   |     +-Literal(type=STRING, value="und:ci")
+|   |     +-Literal(type=STRING, value='und:ci')
 |   +-column=m.e#2{Collation:"und:ci"}
 +-transform_list=
 | +-k#3 :=

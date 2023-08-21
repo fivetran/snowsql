@@ -3026,7 +3026,7 @@ QueryStmt
     |   | +-$orderbycol1#4 :=
     |   |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |   |     +-ColumnRef(type=STRING, column=$groupby.b#2)
-    |   |     +-Literal(type=STRING, value="b")
+    |   |     +-Literal(type=STRING, value='b')
     |   +-input_scan=
     |     +-FilterScan
     |       +-column_list=[$groupby.b#2, $query.$col1#3]
@@ -3037,7 +3037,7 @@ QueryStmt
     |       |   | +-$col1#3 :=
     |       |   |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |       |   |     +-ColumnRef(type=STRING, column=$groupby.b#2)
-    |       |   |     +-Literal(type=STRING, value="a")
+    |       |   |     +-Literal(type=STRING, value='a')
     |       |   +-input_scan=
     |       |     +-AggregateScan
     |       |       +-column_list=[$groupby.b#2]
@@ -3061,7 +3061,7 @@ QueryStmt
     |       +-filter_expr=
     |         +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |           +-ColumnRef(type=STRING, column=$groupby.b#2)
-    |           +-Literal(type=STRING, value="foo")
+    |           +-Literal(type=STRING, value='foo')
     +-order_by_item_list=
       +-OrderByItem
         +-column_ref=

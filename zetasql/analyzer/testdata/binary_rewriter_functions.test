@@ -14,7 +14,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
@@ -99,7 +99,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
@@ -184,7 +184,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
@@ -206,7 +206,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_find_all(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<STRING>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
@@ -286,7 +286,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_find_all(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<STRING>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 

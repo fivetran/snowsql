@@ -360,7 +360,7 @@ QueryStmt
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, column=$groupby.value#4)
-                +-Literal(type=STRING, value="foo")
+                +-Literal(type=STRING, value='foo')
 ==
 
 # HAVING clause aggregation functions can reference columns not available in
@@ -425,7 +425,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=$aggregate.$agg1#4)
-            +-Literal(type=STRING, value="foo")
+            +-Literal(type=STRING, value='foo')
 ==
 
 # ERROR cases.

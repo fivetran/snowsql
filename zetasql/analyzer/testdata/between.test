@@ -85,8 +85,8 @@ QueryStmt
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
             | +-default_value="default_name"
-            +-Literal(type=STRING, value="A")
-            +-Literal(type=STRING, value="Z")
+            +-Literal(type=STRING, value='A')
+            +-Literal(type=STRING, value='Z')
 ==
 
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
@@ -127,7 +127,7 @@ QueryStmt
               | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
               | +-field_descriptor=string_val
               | +-default_value="default_name"
-              +-Literal(type=STRING, value="A")
+              +-Literal(type=STRING, value='A')
               +-Literal(type=STRING, value=NULL)
 ==
 

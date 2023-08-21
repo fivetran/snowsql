@@ -875,7 +875,7 @@ QueryStmt
     |   +-FunctionCall(sample_functions:fn_fp_named_then_lambda(STRING format_string, FUNCTION<INT64->INT64>) -> INT64)
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=STRING, value="123")
+    |     |   +-Literal(type=STRING, value='123')
     |     +-FunctionArgument
     |       +-inline_lambda=
     |         +-InlineLambda
@@ -927,7 +927,7 @@ QueryStmt
     |     |       +-ColumnRef(type=INT64, column=$lambda_arg.e#1)
     |     +-FunctionArgument
     |       +-expr=
-    |         +-Literal(type=STRING, value="123")
+    |         +-Literal(type=STRING, value='123')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -951,7 +951,7 @@ QueryStmt
     |     |       +-ColumnRef(type=INT64, column=$lambda_arg.e#1)
     |     +-FunctionArgument
     |       +-expr=
-    |         +-Literal(type=STRING, value="123")
+    |         +-Literal(type=STRING, value='123')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1052,10 +1052,10 @@ QueryStmt
     |   +-FunctionCall(sample_functions:fn_fp_repeated_arg_then_lambda_string(repeated(2) STRING, FUNCTION<STRING->STRING>) -> STRING)
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=STRING, value="1")
+    |     |   +-Literal(type=STRING, value='1')
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=STRING, value="2")
+    |     |   +-Literal(type=STRING, value='2')
     |     +-FunctionArgument
     |       +-inline_lambda=
     |         +-InlineLambda

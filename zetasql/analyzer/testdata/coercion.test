@@ -876,7 +876,7 @@ QueryStmt
     |     +-Literal(type=PROTO<zetasql_test__.KitchenSinkPB>, value={int64_key_1: 1 int64_key_2: 2})
     |     +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     | +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     |   +-Literal(type=STRING, value="")
+    |     |   +-Literal(type=STRING, value='')
     |     +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> PROTO<zetasql_test__.KitchenSinkPB>)
     |       +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     +-input_scan=
@@ -897,7 +897,7 @@ QueryStmt
     |     | +-Parameter(type=STRING, name="test_param_string")
     |     +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     | +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     |   +-Literal(type=STRING, value="")
+    |     |   +-Literal(type=STRING, value='')
     |     +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> PROTO<zetasql_test__.KitchenSinkPB>)
     |       +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     +-input_scan=
@@ -918,7 +918,7 @@ QueryStmt
     |     +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     | +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     |     +-Literal(type=STRING, value="")
+    |     |     +-Literal(type=STRING, value='')
     |     +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
@@ -938,7 +938,7 @@ QueryStmt
     |     +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     | +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     |     +-Literal(type=STRING, value="")
+    |     |     +-Literal(type=STRING, value='')
     |     +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
@@ -984,7 +984,7 @@ QueryStmt
       | |   | +-$col1#5 :=
       | |   |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
       | |   |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-      | |   |       +-Literal(type=STRING, value="")
+      | |   |       +-Literal(type=STRING, value='')
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=[$union_all2.$col1#5]
@@ -1037,7 +1037,7 @@ QueryStmt
       | |   | +-$col1#5 :=
       | |   |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
       | |   |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-      | |   |       +-Literal(type=STRING, value="")
+      | |   |       +-Literal(type=STRING, value='')
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=[$union_all2.$col1#5]
@@ -1090,7 +1090,7 @@ QueryStmt
       | |       | +-$col1#5 :=
       | |       |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
       | |       |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-      | |       |       +-Literal(type=STRING, value="")
+      | |       |       +-Literal(type=STRING, value='')
       | |       +-input_scan=
       | |         +-SingleRowScan
       | +-output_column_list=[$union_all2_cast.$col1#10]
@@ -1134,7 +1134,7 @@ QueryStmt
       | |       | +-$col1#4 :=
       | |       |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
       | |       |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-      | |       |       +-Literal(type=STRING, value="")
+      | |       |       +-Literal(type=STRING, value='')
       | |       +-input_scan=
       | |         +-SingleRowScan
       | +-output_column_list=[$union_all2_cast.$col1#9]

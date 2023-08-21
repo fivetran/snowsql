@@ -35,9 +35,9 @@ ASSERT "123" IN ("123", "456") AS "test description";
 AssertStmt
 +-expression=
 | +-FunctionCall(ZetaSQL:$in(STRING, repeated(2) STRING) -> BOOL)
-|   +-Literal(type=STRING, value="123")
-|   +-Literal(type=STRING, value="123")
-|   +-Literal(type=STRING, value="456")
+|   +-Literal(type=STRING, value='123')
+|   +-Literal(type=STRING, value='123')
+|   +-Literal(type=STRING, value='456')
 +-description="test description"
 ==
 

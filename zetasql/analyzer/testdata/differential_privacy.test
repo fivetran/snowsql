@@ -8653,8 +8653,8 @@ QueryStmt
         |     |       +-body=
         |     |         +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |     |           +-ColumnRef(type=STRING, column=$lambda_arg.e#13)
-        |     |           +-Literal(type=STRING, value="x")
-        |     +-Literal(type=STRING, value=",")
+        |     |           +-Literal(type=STRING, value='x')
+        |     +-Literal(type=STRING, value=',')
         +-aggregate_list=
           +-$agg1#14 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_sum(INT64, optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -8693,8 +8693,8 @@ QueryStmt
         |   | |   |       +-body=
         |   | |   |         +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   | |   |           +-ColumnRef(type=STRING, column=$lambda_arg.e#13)
-        |   | |   |           +-Literal(type=STRING, value="x")
-        |   | |   +-Literal(type=STRING, value=",")
+        |   | |   |           +-Literal(type=STRING, value='x')
+        |   | |   +-Literal(type=STRING, value=',')
         |   | +-$uid#22 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#17)
         |   +-aggregate_list=
         |     +-$agg1_partial#19 :=

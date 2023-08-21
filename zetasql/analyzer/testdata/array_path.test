@@ -1599,9 +1599,9 @@ QueryStmt
     |     +-expr=
     |     | +-FunctionCall(ZetaSQL:$make_array(repeated(2) PROTO<zetasql_test__.RecursivePB>) -> ARRAY<PROTO<zetasql_test__.RecursivePB>>)
     |     |   +-Cast(STRING -> PROTO<zetasql_test__.RecursivePB>)
-    |     |   | +-Literal(type=STRING, value="repeated_recursive_pb { int64_val: 1 }")
+    |     |   | +-Literal(type=STRING, value='repeated_recursive_pb { int64_val: 1 }')
     |     |   +-Cast(STRING -> PROTO<zetasql_test__.RecursivePB>)
-    |     |     +-Literal(type=STRING, value="repeated_recursive_pb { int64_val: 2 } repeated_recursive_pb { int64_val: 3 }")
+    |     |     +-Literal(type=STRING, value='repeated_recursive_pb { int64_val: 2 } repeated_recursive_pb { int64_val: 3 }')
     |     +-get_field_list=
     |       +-GetProtoField
     |       | +-type=ARRAY<PROTO<zetasql_test__.RecursivePB>>
@@ -1694,9 +1694,9 @@ QueryStmt
     |             | +-injected#2 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(2) PROTO<zetasql_test__.RecursivePB>) -> ARRAY<PROTO<zetasql_test__.RecursivePB>>)
     |             |     +-Cast(STRING -> PROTO<zetasql_test__.RecursivePB>)
-    |             |     | +-Literal(type=STRING, value="repeated_recursive_pb { int64_val: 1 }")
+    |             |     | +-Literal(type=STRING, value='repeated_recursive_pb { int64_val: 1 }')
     |             |     +-Cast(STRING -> PROTO<zetasql_test__.RecursivePB>)
-    |             |       +-Literal(type=STRING, value="repeated_recursive_pb { int64_val: 2 } repeated_recursive_pb { int64_val: 3 }")
+    |             |       +-Literal(type=STRING, value='repeated_recursive_pb { int64_val: 2 } repeated_recursive_pb { int64_val: 3 }')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=

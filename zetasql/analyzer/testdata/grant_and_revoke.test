@@ -32,9 +32,9 @@ RevokeStmt
 +-object_type_list=""
 +-name_path=KeyValue
 +-grantee_expr_list=
-  +-Literal(type=STRING, value="mdbuser/user")
+  +-Literal(type=STRING, value='mdbuser/user')
   +-Parameter(type=STRING, name="test_param_string")
-  +-Literal(type=STRING, value="mdbgroup/group")
+  +-Literal(type=STRING, value='mdbgroup/group')
 ==
 
 # System variables are also allowed.  "sysvar.with.dots" is a system variable
@@ -58,8 +58,8 @@ RevokeStmt
 +-object_type_list=""
 +-name_path=KeyValue
 +-grantee_expr_list=
-  +-Literal(type=STRING, value="mdbuser/user")
-  +-Literal(type=STRING, value="mdbgroup/group")
+  +-Literal(type=STRING, value='mdbuser/user')
+  +-Literal(type=STRING, value='mdbgroup/group')
   +-SystemVariable("sysvar.with.dots", type=STRING)
 ==
 

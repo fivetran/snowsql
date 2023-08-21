@@ -2459,7 +2459,7 @@ QueryStmt
         | | +-argument_column_list=abTable.[a#1, b#2]
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="six")
+        |     +-Literal(type=STRING, value='six')
         +-column_index_list=[0, 1]
 
 [REWRITTEN AST]
@@ -2549,7 +2549,7 @@ QueryStmt
         | | +-argument_column_list=$subquery1.[a#1, b#2]
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="six")
+        |     +-Literal(type=STRING, value='six')
         +-column_index_list=[0, 1]
 
 [REWRITTEN AST]
@@ -2670,7 +2670,7 @@ QueryStmt
     |                 | | +-argument_column_list=abTable.[a#5, b#6]
     |                 | +-FunctionArgument
     |                 |   +-expr=
-    |                 |     +-Literal(type=STRING, value="two")
+    |                 |     +-Literal(type=STRING, value='two')
     |                 +-column_index_list=[0, 1]
     +-input_scan=
       +-TVFScan
@@ -2880,7 +2880,7 @@ QueryStmt
     |                 | | +-argument_column_list=$subquery1.[a#5, b#6]
     |                 | +-FunctionArgument
     |                 |   +-expr=
-    |                 |     +-Literal(type=STRING, value="two")
+    |                 |     +-Literal(type=STRING, value='two')
     |                 +-column_index_list=[0, 1]
     +-input_scan=
       +-TVFScan
@@ -3105,7 +3105,7 @@ QueryStmt
     |                 | | +-argument_column_list=$subquery1.[a#5, b#6]
     |                 | +-FunctionArgument
     |                 |   +-expr=
-    |                 |     +-Literal(type=STRING, value="two")
+    |                 |     +-Literal(type=STRING, value='two')
     |                 +-column_index_list=[0, 1]
     +-input_scan=
       +-TVFScan
@@ -3236,7 +3236,7 @@ QueryStmt
     |                 | | +-argument_column_list=abTable.[a#5, b#6]
     |                 | +-FunctionArgument
     |                 |   +-expr=
-    |                 |     +-Literal(type=STRING, value="two")
+    |                 |     +-Literal(type=STRING, value='two')
     |                 +-column_index_list=[0, 1]
     +-input_scan=
       +-TVFScan
@@ -3367,7 +3367,7 @@ QueryStmt
     |                 | | +-argument_column_list=$subquery1.[a#5, b#6]
     |                 | +-FunctionArgument
     |                 |   +-expr=
-    |                 |     +-Literal(type=STRING, value="two")
+    |                 |     +-Literal(type=STRING, value='two')
     |                 +-column_index_list=[0, 1]
     +-input_scan=
       +-TVFScan
@@ -3504,7 +3504,7 @@ QueryStmt
     |                 | | +-argument_column_list=$subquery1.[a#5, b#6]
     |                 | +-FunctionArgument
     |                 |   +-expr=
-    |                 |     +-Literal(type=STRING, value="two")
+    |                 |     +-Literal(type=STRING, value='two')
     |                 +-column_index_list=[0, 1]
     +-input_scan=
       +-TVFScan
@@ -3775,7 +3775,7 @@ QueryStmt
         | | +-argument_column_list=TwoIntegers.[key#1, value#2]
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="arg")
+        |     +-Literal(type=STRING, value='arg')
         +-column_index_list=[0, 1, 2]
 
 [REWRITTEN AST]

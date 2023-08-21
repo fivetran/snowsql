@@ -111,7 +111,7 @@ QueryStmt
     |     +-Literal(type=TIMESTAMP, value=2000-09-03 01:00:02+00)
     |     +-Literal(type=INT64, value=14)
     |     +-FunctionCall(ZetaSQL:timestamp(STRING, optional(0) STRING) -> TIMESTAMP)
-    |     | +-Literal(type=STRING, value="2000-01-01")
+    |     | +-Literal(type=STRING, value='2000-01-01')
     |     +-Literal(type=TIMESTAMP, value=NULL)
     +-input_scan=
       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])

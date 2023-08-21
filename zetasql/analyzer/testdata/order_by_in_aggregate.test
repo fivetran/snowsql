@@ -225,7 +225,7 @@ QueryStmt
     |     +-s2#4 :=
     |     | +-AggregateFunctionCall(ZetaSQL:string_agg(STRING, STRING) -> STRING)
     |     |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    |     |   +-Literal(type=STRING, value=",")
+    |     |   +-Literal(type=STRING, value=',')
     |     |   +-order_by_item_list=
     |     |     +-OrderByItem
     |     |       +-column_ref=
@@ -572,7 +572,7 @@ QueryStmt
                   +-column_ref=
                   | +-ColumnRef(type=STRING, column=$orderby.$orderbycol1#4)
                   +-collation_name=
-                  | +-Literal(type=STRING, value="en_US")
+                  | +-Literal(type=STRING, value='en_US')
                   +-is_descending=TRUE
 
 ==
@@ -724,7 +724,7 @@ QueryStmt
                   +-column_ref=
                   | +-ColumnRef(type=STRING, column=$orderby.$orderbycol3#6)
                   +-collation_name=
-                  | +-Literal(type=STRING, value="en_US")
+                  | +-Literal(type=STRING, value='en_US')
                   +-is_descending=TRUE
 
 ==

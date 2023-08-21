@@ -1597,7 +1597,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=$groupby.value#4)
-            +-Literal(type=STRING, value="abc")
+            +-Literal(type=STRING, value='abc')
 ==
 
 # Qualify clause can reference scalar, aggregate and analytical functions.
@@ -1650,7 +1650,7 @@ QueryStmt
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(2) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=$groupby.value#4)
-            | +-Literal(type=STRING, value="abc")
+            | +-Literal(type=STRING, value='abc')
             +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
             | +-ColumnRef(type=INT64, column=$aggregate.$agg1#6)
             | +-Literal(type=INT64, value=10)

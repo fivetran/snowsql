@@ -40,7 +40,7 @@ QueryStmt
             | +-Literal(type=INT64, value=8)
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-            | +-Literal(type=STRING, value="aaa")
+            | +-Literal(type=STRING, value='aaa')
             +-FunctionCall(ZetaSQL:$equal(BYTES, BYTES) -> BOOL)
             | +-ColumnRef(type=BYTES, column=SimpleTypes.bytes#6)
             | +-Literal(type=BYTES, value=b"aaa")
@@ -444,7 +444,7 @@ QueryStmt
             | +-Literal(type=INT64, value=8)
             +-FunctionCall(ZetaSQL:$not_equal(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-            | +-Literal(type=STRING, value="aaa")
+            | +-Literal(type=STRING, value='aaa')
             +-FunctionCall(ZetaSQL:$not_equal(BYTES, BYTES) -> BOOL)
             | +-ColumnRef(type=BYTES, column=SimpleTypes.bytes#6)
             | +-Literal(type=BYTES, value=b"bbb")
@@ -574,7 +574,7 @@ QueryStmt
             | +-Literal(type=INT64, value=8)
             +-FunctionCall(ZetaSQL:$less(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-            | +-Literal(type=STRING, value="aaa")
+            | +-Literal(type=STRING, value='aaa')
             +-FunctionCall(ZetaSQL:$less(BYTES, BYTES) -> BOOL)
             | +-ColumnRef(type=BYTES, column=SimpleTypes.bytes#6)
             | +-Literal(type=BYTES, value=b"bbb")
@@ -675,7 +675,7 @@ QueryStmt
             | +-Literal(type=INT64, value=8)
             +-FunctionCall(ZetaSQL:$less_or_equal(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-            | +-Literal(type=STRING, value="aaa")
+            | +-Literal(type=STRING, value='aaa')
             +-FunctionCall(ZetaSQL:$less_or_equal(BYTES, BYTES) -> BOOL)
             | +-ColumnRef(type=BYTES, column=SimpleTypes.bytes#6)
             | +-Literal(type=BYTES, value=b"bbb")
@@ -776,7 +776,7 @@ QueryStmt
             | +-Literal(type=INT64, value=8)
             +-FunctionCall(ZetaSQL:$greater_or_equal(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-            | +-Literal(type=STRING, value="aaa")
+            | +-Literal(type=STRING, value='aaa')
             +-FunctionCall(ZetaSQL:$greater_or_equal(BYTES, BYTES) -> BOOL)
             | +-ColumnRef(type=BYTES, column=SimpleTypes.bytes#6)
             | +-Literal(type=BYTES, value=b"bbb")
@@ -877,7 +877,7 @@ QueryStmt
             | +-Literal(type=INT64, value=8)
             +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
             | +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-            | +-Literal(type=STRING, value="aaa")
+            | +-Literal(type=STRING, value='aaa')
             +-FunctionCall(ZetaSQL:$greater(BYTES, BYTES) -> BOOL)
             | +-ColumnRef(type=BYTES, column=SimpleTypes.bytes#6)
             | +-Literal(type=BYTES, value=b"bbb")
@@ -2323,7 +2323,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$is_distinct_from(STRING, STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="test")
+    |     +-Literal(type=STRING, value='test')
     |     +-Literal(type=STRING, value=NULL)
     +-input_scan=
       +-SingleRowScan
@@ -2343,7 +2343,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$is_distinct_from(STRING, STRING) -> BOOL)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Literal(type=STRING, value="test")
+    |     +-Literal(type=STRING, value='test')
     +-input_scan=
       +-SingleRowScan
 ==

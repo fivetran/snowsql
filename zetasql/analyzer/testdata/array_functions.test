@@ -85,7 +85,7 @@ QueryStmt
     |     +-Literal(type=ARRAY<STRUCT<a INT64>>, value=[{a:1}, {a:2}, {a:3}])
     |     +-Literal(type=STRUCT<a INT64>, value={a:3})
     |     +-Cast(STRING -> ENUM<ARRAY_FIND_MODE>)
-    |       +-Literal(type=STRING, value="LAST")
+    |       +-Literal(type=STRING, value='LAST')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -118,7 +118,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[""])
-    |     +-Literal(type=STRING, value="")
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -391,10 +391,10 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#3)
-    |         |           +-Literal(type=STRING, value=" in ARRAY_OFFSET is unsupported.")
+    |         |           +-Literal(type=STRING, value=' in ARRAY_OFFSET is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#3, input_array#4]
@@ -547,10 +547,10 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#3)
-    |         |           +-Literal(type=STRING, value=" in ARRAY_OFFSET is unsupported.")
+    |         |           +-Literal(type=STRING, value=' in ARRAY_OFFSET is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#3, input_array#4]
@@ -703,10 +703,10 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#3)
-    |         |           +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |           +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#3, input_array#4]
@@ -887,7 +887,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_FIRST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_FIRST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=ARRAY
@@ -985,7 +985,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_LAST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_LAST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=SCALAR
@@ -1105,7 +1105,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_REMOVE_FIRST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_REMOVE_FIRST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=ARRAY
@@ -1203,7 +1203,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_REMOVE_LAST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_REMOVE_LAST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=SCALAR
@@ -1423,10 +1423,10 @@ QueryStmt
     |         |       +-Cast(STRING -> STRING)
     |         |         +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
     |         |           +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |             +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |             +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |             +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |             | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#4)
-    |         |             +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |             +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#4, input_array#5]
@@ -1601,10 +1601,10 @@ QueryStmt
     |         |       +-Cast(STRING -> STRING)
     |         |         +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
     |         |           +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |             +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |             +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |             +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |             | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#6)
-    |         |             +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |             +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#6, input_array#7]

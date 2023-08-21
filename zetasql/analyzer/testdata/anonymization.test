@@ -8286,8 +8286,8 @@ QueryStmt
         |     |       +-body=
         |     |         +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |     |           +-ColumnRef(type=STRING, column=$lambda_arg.e#13)
-        |     |           +-Literal(type=STRING, value="x")
-        |     +-Literal(type=STRING, value=",")
+        |     |           +-Literal(type=STRING, value='x')
+        |     +-Literal(type=STRING, value=',')
         +-aggregate_list=
           +-$agg1#14 :=
             +-AggregateFunctionCall(ZetaSQL:anon_sum(INT64, optional(0) INT64, optional(0) INT64) -> INT64)
@@ -8349,7 +8349,7 @@ QueryStmt
         |   | |   |     |           |   +-filter_expr=
         |   | |   |     |           |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   | |   |     |           |       +-ColumnRef(type=STRING, column=$array.element#27)
-        |   | |   |     |           |       +-Literal(type=STRING, value="x")
+        |   | |   |     |           |       +-Literal(type=STRING, value='x')
         |   | |   |     |           +-order_by_item_list=
         |   | |   |     |             +-OrderByItem
         |   | |   |     |               +-column_ref=
@@ -8361,7 +8361,7 @@ QueryStmt
         |   | |   |         | +-array_to_filter#26 := Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
         |   | |   |         +-input_scan=
         |   | |   |           +-SingleRowScan
-        |   | |   +-Literal(type=STRING, value=",")
+        |   | |   +-Literal(type=STRING, value=',')
         |   | +-$uid#22 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#17)
         |   +-aggregate_list=
         |     +-$agg1_partial#19 :=

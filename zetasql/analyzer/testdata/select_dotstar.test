@@ -2938,7 +2938,7 @@ QueryStmt
                 |   |       |               +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
                 |   |       |                 +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 |   |       |                 | +-ColumnRef(type=STRING, column=Candidate_RowPartitions.ResourcePath#5)
-                |   |       |                 | +-Literal(type=STRING, value="Candidate/qa.google.com-4008600339")
+                |   |       |                 | +-Literal(type=STRING, value='Candidate/qa.google.com-4008600339')
                 |   |       |                 +-FunctionCall(ZetaSQL:$equal(TIMESTAMP, TIMESTAMP) -> BOOL)
                 |   |       |                   +-ColumnRef(type=TIMESTAMP, column=Candidate_RowPartitions.ResourceModifiedTimestamp#6)
                 |   |       |                   +-Literal(type=TIMESTAMP, value=2017-11-13 20:35:19.260426+00)

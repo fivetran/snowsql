@@ -842,7 +842,7 @@ QueryStmt
         | +-$col2#4 :=
         |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
         |     +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-        |     +-Literal(type=STRING, value="foo")
+        |     +-Literal(type=STRING, value='foo')
         +-grouping_set_list=
         | +-GroupingSet
         | | +-group_by_column_list=

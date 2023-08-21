@@ -211,7 +211,7 @@ QueryStmt
     |   +-Cast(STRING -> BYTES)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |       +-Literal(type=STRING, value="hex")
+    |       +-Literal(type=STRING, value='hex')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -299,7 +299,7 @@ QueryStmt
     |   +-Cast(STRING -> BYTES)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 --
@@ -317,7 +317,7 @@ QueryStmt
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-return_null_on_error=TRUE
     |     +-format=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -359,7 +359,7 @@ QueryStmt
     |   +-Cast(STRING -> BYTES)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="hex")
+    |     | +-Literal(type=STRING, value='hex')
     |     +-type_modifiers=type_parameters:(max_length=10)
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
@@ -397,9 +397,9 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="UTC")
+    |       +-Literal(type=STRING, value='UTC')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -441,9 +441,9 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="abc")
+    |     | +-Literal(type=STRING, value='abc')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="UTC")
+    |       +-Literal(type=STRING, value='UTC')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 --
@@ -460,7 +460,7 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -481,7 +481,7 @@ QueryStmt
     |   +-Cast(DATE -> STRING)
     |     +-Literal(type=DATE, value=1234-05-06, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="HH")
+    |       +-Literal(type=STRING, value='HH')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -502,7 +502,7 @@ QueryStmt
     |   +-Cast(DATETIME -> STRING)
     |     +-Literal(type=DATETIME, value=1234-05-06 07:08:09, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="TZH")
+    |       +-Literal(type=STRING, value='TZH')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -523,7 +523,7 @@ QueryStmt
     |   +-Cast(TIME -> STRING)
     |     +-Literal(type=TIME, value=07:08:09, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="MM")
+    |       +-Literal(type=STRING, value='MM')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -544,7 +544,7 @@ QueryStmt
     |   +-Cast(TIMESTAMP -> STRING)
     |     +-Literal(type=TIMESTAMP, value=1234-05-06 17:08:09+00, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="a")
+    |       +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -570,22 +570,22 @@ QueryStmt
     | | +-Cast(DATE -> STRING)
     | |   +-Literal(type=DATE, value=1234-05-06, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="YYYY")
+    | |     +-Literal(type=STRING, value='YYYY')
     | +-$col2#2 :=
     | | +-Cast(DATETIME -> STRING)
     | |   +-Literal(type=DATETIME, value=1234-05-06 07:08:09, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="HH")
+    | |     +-Literal(type=STRING, value='HH')
     | +-$col3#3 :=
     | | +-Cast(TIME -> STRING)
     | |   +-Literal(type=TIME, value=07:08:09, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="MI")
+    | |     +-Literal(type=STRING, value='MI')
     | +-$col4#4 :=
     |   +-Cast(TIMESTAMP -> STRING)
     |     +-Literal(type=TIMESTAMP, value=1234-05-06 17:08:09+00, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="MM")
+    |       +-Literal(type=STRING, value='MM')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -605,7 +605,7 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
     |       +-Literal(type=STRING, value=NULL, has_explicit_type=TRUE)
     +-input_scan=
@@ -627,7 +627,7 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
     |       +-Literal(type=STRING, value=NULL)
     +-input_scan=
@@ -659,9 +659,9 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="xyz")
+    |       +-Literal(type=STRING, value='xyz')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -682,9 +682,9 @@ QueryStmt
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-return_null_on_error=TRUE
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="xyz")
+    |       +-Literal(type=STRING, value='xyz')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -703,9 +703,9 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATE)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="hh24")
+    |       +-Literal(type=STRING, value='hh24')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -724,9 +724,9 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="tzh")
+    |       +-Literal(type=STRING, value='tzh')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -745,9 +745,9 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIME)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="yyyy")
+    |       +-Literal(type=STRING, value='yyyy')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -766,9 +766,9 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="a")
+    |       +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -787,11 +787,11 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -817,31 +817,31 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-Cast(STRING -> DATE)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="yyyy")
+    | |     +-Literal(type=STRING, value='yyyy')
     | +-$col2#2 :=
     | | +-Cast(STRING -> DATETIME)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="yyyy")
+    | |     +-Literal(type=STRING, value='yyyy')
     | +-$col3#3 :=
     | | +-Cast(STRING -> TIME)
-    | |   +-Literal(type=STRING, value="01:02:03")
+    | |   +-Literal(type=STRING, value='01:02:03')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="hh24:mi:ss")
+    | |     +-Literal(type=STRING, value='hh24:mi:ss')
     | +-$col4#4 :=
     | | +-Cast(STRING -> TIMESTAMP)
-    | |   +-Literal(type=STRING, value="1234 01:02:03")
+    | |   +-Literal(type=STRING, value='1234 01:02:03')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    | |     +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     | +-$col5#5 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234 01:02:03")
+    |     +-Literal(type=STRING, value='1234 01:02:03')
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    |     | +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="+7:00")
+    |       +-Literal(type=STRING, value='+7:00')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -869,43 +869,43 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-Cast(STRING -> DATE)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="yyyy")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='yyyy')
     | +-$col2#2 :=
     | | +-Cast(STRING -> DATETIME)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="yyyy")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='yyyy')
     | +-$col3#3 :=
     | | +-Cast(STRING -> TIME)
-    | |   +-Literal(type=STRING, value="01:02:03")
+    | |   +-Literal(type=STRING, value='01:02:03')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="hh24:mi:ss")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='hh24:mi:ss')
     | +-$col4#4 :=
     | | +-Cast(STRING -> TIMESTAMP)
-    | |   +-Literal(type=STRING, value="1234 01:02:03")
+    | |   +-Literal(type=STRING, value='1234 01:02:03')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     | +-$col5#5 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234 01:02:03")
+    |     +-Literal(type=STRING, value='1234 01:02:03')
     |     +-format=
     |     | +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |     |   +-Literal(type=STRING, value="invalid")
-    |     |   +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    |     |   +-Literal(type=STRING, value='invalid')
+    |     |   +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     |     +-time_zone=
     |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |         +-Literal(type=STRING, value="invalid")
-    |         +-Literal(type=STRING, value="+7:00")
+    |         +-Literal(type=STRING, value='invalid')
+    |         +-Literal(type=STRING, value='+7:00')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -939,42 +939,42 @@ QueryStmt
     | | +-Cast(INT32 -> STRING)
     | |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col2#2 :=
     | | +-Cast(UINT32 -> STRING)
     | |   +-Literal(type=UINT32, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col3#3 :=
     | | +-Cast(INT64 -> STRING)
     | |   +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col4#4 :=
     | | +-Cast(UINT64 -> STRING)
     | |   +-Literal(type=UINT64, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col5#5 :=
     | | +-Cast(FLOAT -> STRING)
     | |   +-Literal(type=FLOAT, value=1.23, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col6#6 :=
     | | +-Cast(DOUBLE -> STRING)
     | |   +-Literal(type=DOUBLE, value=1.23, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col7#7 :=
     | | +-Cast(NUMERIC -> STRING)
     | |   +-Literal(type=NUMERIC, value=1.23, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col8#8 :=
     |   +-Cast(BIGNUMERIC -> STRING)
     |     +-Literal(type=BIGNUMERIC, value=1.23, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="99")
+    |       +-Literal(type=STRING, value='99')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -994,7 +994,7 @@ QueryStmt
     |   +-Cast(INT32 -> STRING)
     |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value=",99")
+    |       +-Literal(type=STRING, value=',99')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2381,7 +2381,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> ENUM<zetasql_test__.TestEnum>)
-    |     +-Literal(type=STRING, value="TestEnum0")
+    |     +-Literal(type=STRING, value='TestEnum0')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2400,7 +2400,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> ENUM<zetasql_test__.TestEnum>)
-    |     +-Literal(type=STRING, value="TESTENUM1000")
+    |     +-Literal(type=STRING, value='TESTENUM1000')
     +-input_scan=
       +-SingleRowScan
 --
@@ -2826,7 +2826,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2860,7 +2860,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     +-input_scan=
       +-SingleRowScan
 --
@@ -2875,7 +2875,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     |     +-return_null_on_error=TRUE
     +-input_scan=
       +-SingleRowScan
@@ -2894,7 +2894,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     +-input_scan=
       +-SingleRowScan
 --
@@ -2909,7 +2909,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     |     +-return_null_on_error=TRUE
     +-input_scan=
       +-SingleRowScan
@@ -2948,7 +2948,7 @@ QueryStmt
     | +-$col1#1 :=
     | | +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> STRING)
     | |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    | |     +-Literal(type=STRING, value="1")
+    | |     +-Literal(type=STRING, value='1')
     | +-$col2#2 :=
     |   +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> BYTES)
     |     +-Cast(BYTES -> PROTO<zetasql_test__.KitchenSinkPB>)
@@ -3144,10 +3144,10 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |     +-Cast(INT32 -> INT64)
     |     | +-Cast(STRING -> INT32)
-    |     |   +-Literal(type=STRING, value="abc")
+    |     |   +-Literal(type=STRING, value='abc')
     |     +-Cast(INT32 -> INT64)
     |       +-Cast(STRING -> INT32)
-    |         +-Literal(type=STRING, value="def")
+    |         +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -3537,7 +3537,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIME)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3562,7 +3562,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIME)
-    |     +-Literal(type=STRING, value="24:00:00")
+    |     +-Literal(type=STRING, value='24:00:00')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3649,7 +3649,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3674,7 +3674,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="2015-13-05 01:02:03")
+    |     +-Literal(type=STRING, value='2015-13-05 01:02:03')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3699,7 +3699,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="2006-01-02 01:02:03.123456 UTC")
+    |     +-Literal(type=STRING, value='2006-01-02 01:02:03.123456 UTC')
     +-input_scan=
       +-SingleRowScan
 --
@@ -4239,7 +4239,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> INT64)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 --
@@ -4382,7 +4382,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> UINT32)
-    |     +-Literal(type=STRING, value="-0x100")
+    |     +-Literal(type=STRING, value='-0x100')
     +-input_scan=
       +-SingleRowScan
 --
@@ -4410,7 +4410,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> UINT64)
-    |     +-Literal(type=STRING, value="-0x100")
+    |     +-Literal(type=STRING, value='-0x100')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -4426,7 +4426,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> INT32)
-    |     +-Literal(type=STRING, value="- 0x10")
+    |     +-Literal(type=STRING, value='- 0x10')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -4540,7 +4540,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> NUMERIC)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -4557,7 +4557,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> NUMERIC)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     |     +-type_modifiers=type_parameters:(precision=2,scale=0)
     +-input_scan=
       +-SingleRowScan
@@ -4903,7 +4903,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> BIGNUMERIC)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==

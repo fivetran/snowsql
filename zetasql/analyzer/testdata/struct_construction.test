@@ -240,7 +240,7 @@ QueryStmt
     |     | +-type=STRUCT<INT32, STRING>
     |     | +-field_list=
     |     |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    |     |   +-Literal(type=STRING, value="abc")
+    |     |   +-Literal(type=STRING, value='abc')
     |     +-Literal(type=STRUCT<INT32, STRING>, value={2, "def"})
     |     +-Literal(type=STRUCT<INT32, STRING>, value={3, "ghi"})
     +-input_scan=
@@ -329,7 +329,7 @@ QueryStmt
     |       +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     |       +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
     |         +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    |         +-Literal(type=STRING, value="abc")
+    |         +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==

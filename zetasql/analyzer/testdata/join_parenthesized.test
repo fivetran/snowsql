@@ -159,7 +159,7 @@ QueryStmt
             | +-Literal(type=INT64, value=5)
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
               +-ColumnRef(type=STRING, column=KeyValue.Value#6)
-              +-Literal(type=STRING, value="xx")
+              +-Literal(type=STRING, value='xx')
 ==
 
 # Brackets that still make a left-deep query don't change anything.

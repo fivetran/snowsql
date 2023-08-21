@@ -132,7 +132,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_return_any_scalar_arg(STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -204,7 +204,7 @@ QueryStmt
     | |   +-Literal(type=INT64, value=42)
     | +-$col2#2 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_concat_string(STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -220,7 +220,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
 +-ArgumentRef(type=STRING, name="x")
-+-Literal(type=STRING, value="abc")
++-Literal(type=STRING, value='abc')
 ==
 
 # The function takes two arguments.
@@ -235,8 +235,8 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_concat_two_strings(STRING, STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
-    |     +-Literal(type=STRING, value="def")
+    |     +-Literal(type=STRING, value='abc')
+    |     +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 
@@ -578,7 +578,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_return_42_return_type_int32(STRING) -> INT32)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -749,7 +749,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_plus_integer(STRING) -> INT64)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -805,7 +805,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_like_any(STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="y")
+    |     +-Literal(type=STRING, value='y')
     +-input_scan=
       +-SingleRowScan
 
@@ -814,7 +814,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$like_any(STRING, repeated(1) STRING) -> BOOL)
 +-ArgumentRef(type=STRING, name="x")
-+-Literal(type=STRING, value="z")
++-Literal(type=STRING, value='z')
 ==
 
 # Call a UDF that refers to 'udf_templated_analysis_error' to show two levels
@@ -1044,7 +1044,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_one_templated_arg_return_date(STRING) -> DATE)
-    |     +-Literal(type=STRING, value="2018-07-01")
+    |     +-Literal(type=STRING, value='2018-07-01')
     +-input_scan=
       +-SingleRowScan
 

@@ -9,10 +9,10 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in(STRING, repeated(3) STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="a")
-    |     +-Literal(type=STRING, value="a")
-    |     +-Literal(type=STRING, value="b")
-    |     +-Literal(type=STRING, value="c")
+    |     +-Literal(type=STRING, value='a')
+    |     +-Literal(type=STRING, value='a')
+    |     +-Literal(type=STRING, value='b')
+    |     +-Literal(type=STRING, value='c')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -49,10 +49,10 @@ QueryStmt
         | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$in(STRING, repeated(3) STRING) -> BOOL)
-            +-Literal(type=STRING, value="a")
-            +-Literal(type=STRING, value="a")
-            +-Literal(type=STRING, value="b")
-            +-Literal(type=STRING, value="c")
+            +-Literal(type=STRING, value='a')
+            +-Literal(type=STRING, value='a')
+            +-Literal(type=STRING, value='b')
+            +-Literal(type=STRING, value='c')
 ==
 
 select false from TestTable where true IN ('a');

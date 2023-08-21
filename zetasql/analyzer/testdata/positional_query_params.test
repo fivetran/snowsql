@@ -405,7 +405,7 @@ QueryStmt
         | +-$groupbycol2#7 :=
         | | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         | |   +-ColumnRef(type=STRING, column=$subquery1.b#3)
-        | |   +-Literal(type=STRING, value="foo")
+        | |   +-Literal(type=STRING, value='foo')
         | +-c#8 := ColumnRef(type=TIMESTAMP, column=$subquery1.c#4)
         +-aggregate_list=
           +-$agg1#5 :=
@@ -463,7 +463,7 @@ QueryStmt
             | +-$groupbycol2#10 :=
             | | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             | |   +-ColumnRef(type=STRING, column=T.b#6)
-            | |   +-Literal(type=STRING, value="foo")
+            | |   +-Literal(type=STRING, value='foo')
             | +-c#11 := ColumnRef(type=TIMESTAMP, column=T.c#7)
             +-aggregate_list=
               +-$agg1#8 :=
