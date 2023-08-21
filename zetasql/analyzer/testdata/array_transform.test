@@ -486,7 +486,7 @@ QueryStmt
     |               +-ColumnRef(type=INT64, column=$lambda_arg.Key#3)
     |               +-ColumnRef(type=INT64, column=KeyValue.Key#1, is_correlated=TRUE)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -553,7 +553,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Array input has ARRAY_TRANSFORM and column ref.
@@ -595,7 +595,7 @@ QueryStmt
     |               +-ColumnRef(type=INT64, column=$lambda_arg.e#4)
     |               +-Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -711,7 +711,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Array input has ARRAY_TRANSFORM and correlated column ref.
@@ -765,7 +765,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -893,7 +893,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda body has ARRAY_TRANSFORM and column ref.
@@ -938,7 +938,7 @@ QueryStmt
     |                             +-ColumnRef(type=INT64, column=$lambda_arg.e#4)
     |                             +-Literal(type=INT64, value=0)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1055,7 +1055,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda body has ARRAY_TRANSFORM and correlated column ref.
@@ -1111,7 +1111,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1240,7 +1240,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda arg has with same name as a potential correlated column.
@@ -1283,7 +1283,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1361,7 +1361,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda arg has with same name as a potential correlated column. Lambda body
@@ -1406,7 +1406,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1485,7 +1485,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 SELECT SAFE.ARRAY_TRANSFORM([1,2,3], e -> e>0);

@@ -242,7 +242,7 @@ select key * rand()
 # Struct fields
 [no_enable_literal_replacement]
 select s.x + 1, string_agg(s.y)
-from (select struct<x int64, y string>(1, "foo") s)
+from (select struct<x int64, y string>(1, 'foo') s)
 group by s.x+1
 --
 QueryStmt
@@ -259,7 +259,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$subquery1.s#1]
         |   +-expr_list=
-        |   | +-s#1 := Literal(type=STRUCT<x INT64, y STRING>, value={x:1, y:"foo"}, has_explicit_type=TRUE)
+        |   | +-s#1 := Literal(type=STRUCT<x INT64, y STRING>, value={x:1, y:'foo'}, has_explicit_type=TRUE)
         |   +-input_scan=
         |     +-SingleRowScan
         +-group_by_list=
@@ -365,7 +365,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#3]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-group_by_list=
           +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -402,9 +402,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(table=KeyValue, alias="kv2")
+        |     +-TableScan(table=KeyValue, alias='kv2')
         +-group_by_list=
         | +-key#6 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-aggregate_list=
@@ -428,9 +428,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(table=KeyValue, alias="kv2")
+        |     +-TableScan(table=KeyValue, alias='kv2')
         +-group_by_list=
           +-key#5 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -451,9 +451,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(table=KeyValue, alias="kv2")
+        |     +-TableScan(table=KeyValue, alias='kv2')
         +-group_by_list=
           +-foo#5 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -2294,18 +2294,18 @@ select string_agg(value, @test_param_int32)
 ==
 
 # string_agg(string, bytes) is not supported
-SELECT string_agg(value, b"foo") from KeyValue;
+SELECT string_agg(value, b'foo') from KeyValue;
 --
 ERROR: No matching signature for aggregate function STRING_AGG for argument types: STRING, BYTES. Supported signatures: STRING_AGG(STRING); STRING_AGG(STRING, STRING); STRING_AGG(BYTES); STRING_AGG(BYTES, BYTES) [at 1:8]
-SELECT string_agg(value, b"foo") from KeyValue;
+SELECT string_agg(value, b'foo') from KeyValue;
        ^
 ==
 
 # string_agg(bytes, string) is not supported
-SELECT string_agg(cast(value as bytes), "foo") from KeyValue;
+SELECT string_agg(cast(value as bytes), 'foo') from KeyValue;
 --
 ERROR: No matching signature for aggregate function STRING_AGG for argument types: BYTES, STRING. Supported signatures: STRING_AGG(STRING); STRING_AGG(STRING, STRING); STRING_AGG(BYTES); STRING_AGG(BYTES, BYTES) [at 1:8]
-SELECT string_agg(cast(value as bytes), "foo") from KeyValue;
+SELECT string_agg(cast(value as bytes), 'foo') from KeyValue;
        ^
 ==
 
@@ -3015,7 +3015,7 @@ QueryStmt
     |       |     +-AggregateScan
     |       |       +-column_list=[$groupby.nested_int64#4]
     |       |       +-input_scan=
-    |       |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+    |       |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
     |       |       +-group_by_list=
     |       |         +-nested_int64#4 :=
     |       |           +-GetProtoField
@@ -3087,7 +3087,7 @@ QueryStmt
     |       |   |     +-ArrayScan
     |       |   |       +-column_list=[TestTable.KitchenSink#3, $array.n#4]
     |       |   |       +-input_scan=
-    |       |   |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+    |       |   |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
     |       |   |       +-array_expr=
     |       |   |       | +-GetProtoField
     |       |   |       |   +-type=ARRAY<DOUBLE>
@@ -6003,7 +6003,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
           +-d#8 :=
@@ -6077,7 +6077,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=$groupby.[TestStruct#7, TestStruct#8]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 :=
           | +-GetStructField
@@ -6312,7 +6312,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
@@ -6366,7 +6366,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.foo#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
         +-group_by_list=
           +-foo#2 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 --
@@ -6390,7 +6390,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.vt#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
         +-group_by_list=
           +-vt#2 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 ==

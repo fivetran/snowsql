@@ -17,7 +17,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestStructValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="t")
+      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='t')
 ==
 
 select TestStructValueTable from TestStructValueTable
@@ -48,7 +48,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
     |     +-field_idx=1
     +-input_scan=
-      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="t")
+      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='t')
 ==
 
 select TestStructValueTable.b from TestStructValueTable
@@ -93,7 +93,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
     |     +-field_idx=1
     +-input_scan=
-      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="t")
+      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='t')
 ==
 
 select TestStructValueTable.* from TestStructValueTable
@@ -147,7 +147,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
     |     +-field_idx=0
     +-input_scan=
-      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="t")
+      +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='t')
 ==
 
 # Star returns the fields of a value table, not the value.
@@ -204,7 +204,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestExtraValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="k")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='k')
 ==
 
 # We can implicitly access fields and has_ fields of protos without qualifiers.
@@ -241,7 +241,7 @@ QueryStmt
     |     +-field_descriptor=int32_val2
     |     +-get_has_bit=TRUE
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="k")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='k')
 ==
 
 # We can implicitly access fields and has_ fields of protos from an outer
@@ -303,7 +303,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="k")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='k')
 ==
 
 select k.* from TestExtraValueTable k
@@ -339,7 +339,7 @@ QueryStmt
     |     +-field_descriptor=str_value
     |     +-default_value=[]
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="k")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='k')
 ==
 
 select k.* from TestExtraValueTable k
@@ -365,7 +365,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestExtraValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="int32_val1")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='int32_val1')
 ==
 
 select int32_val1.int32_val1 from TestExtraValueTable int32_val1
@@ -385,7 +385,7 @@ QueryStmt
     |     +-field_descriptor=int32_val1
     |     +-default_value=0
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="int32_val1")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='int32_val1')
 ==
 
 select int32_val1.int32_val1.int32_val1 from TestExtraValueTable int32_val1
@@ -404,7 +404,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[EmptyMessageValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[EmptyMessageValueTable.value#1], table=EmptyMessageValueTable, column_index_list=[0], alias="e")
+      +-TableScan(column_list=[EmptyMessageValueTable.value#1], table=EmptyMessageValueTable, column_index_list=[0], alias='e')
 ==
 
 # The empty proto has no fields so we get the proto back instead of an empty
@@ -418,7 +418,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[EmptyMessageValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[EmptyMessageValueTable.value#1], table=EmptyMessageValueTable, column_index_list=[0], alias="e")
+      +-TableScan(column_list=[EmptyMessageValueTable.value#1], table=EmptyMessageValueTable, column_index_list=[0], alias='e')
 ==
 
 select e.* from EmptyMessageValueTable e
@@ -449,7 +449,7 @@ QueryStmt
         +-input_scan=
         | +-FilterScan
         |   +-input_scan=
-        |   | +-TableScan(table=EmptyMessageValueTable, alias="e")
+        |   | +-TableScan(table=EmptyMessageValueTable, alias='e')
         |   +-filter_expr=
         |     +-Literal(type=BOOL, value=true)
         +-aggregate_list=
@@ -477,7 +477,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[Int32ValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias="i")
+      +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias='i')
 ==
 
 # SELECT * from a scalar value table returns the scalar value.
@@ -509,7 +509,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[Int32ArrayValueTable.value#1]
     +-input_scan=
-      +-TableScan(column_list=[Int32ArrayValueTable.value#1], table=Int32ArrayValueTable, column_index_list=[0], alias="a")
+      +-TableScan(column_list=[Int32ArrayValueTable.value#1], table=Int32ArrayValueTable, column_index_list=[0], alias='a')
 ==
 
 select * from Int32ArrayValueTable a
@@ -537,7 +537,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[Int32ArrayValueTable.value#1, $array.b#2]
         +-input_scan=
-        | +-TableScan(column_list=[Int32ArrayValueTable.value#1], table=Int32ArrayValueTable, column_index_list=[0], alias="a")
+        | +-TableScan(column_list=[Int32ArrayValueTable.value#1], table=Int32ArrayValueTable, column_index_list=[0], alias='a')
         +-array_expr=
         | +-ColumnRef(type=ARRAY<INT32>, column=Int32ArrayValueTable.value#1)
         +-element_column=$array.b#2
@@ -587,11 +587,11 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[TestStructValueTable.value#1, Int32ValueTable.value#2]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="s")
+        |   | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='s')
         |   +-right_scan=
-        |     +-TableScan(column_list=[Int32ValueTable.value#2], table=Int32ValueTable, column_index_list=[0], alias="i")
+        |     +-TableScan(column_list=[Int32ValueTable.value#2], table=Int32ValueTable, column_index_list=[0], alias='i')
         +-right_scan=
-          +-TableScan(column_list=[TestExtraValueTable.value#3], table=TestExtraValueTable, column_index_list=[0], alias="p")
+          +-TableScan(column_list=[TestExtraValueTable.value#3], table=TestExtraValueTable, column_index_list=[0], alias='p')
 ==
 
 select * from TestStructValueTable s, Int32ValueTable i, TestExtraValueTable p
@@ -648,11 +648,11 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[TestStructValueTable.value#1, Int32ValueTable.value#2]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="s")
+        |   | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='s')
         |   +-right_scan=
-        |     +-TableScan(column_list=[Int32ValueTable.value#2], table=Int32ValueTable, column_index_list=[0], alias="i")
+        |     +-TableScan(column_list=[Int32ValueTable.value#2], table=Int32ValueTable, column_index_list=[0], alias='i')
         +-right_scan=
-          +-TableScan(column_list=[TestExtraValueTable.value#3], table=TestExtraValueTable, column_index_list=[0], alias="p")
+          +-TableScan(column_list=[TestExtraValueTable.value#3], table=TestExtraValueTable, column_index_list=[0], alias='p')
 ==
 
 # Select implicit fields from cross product of value tables.
@@ -744,9 +744,9 @@ QueryStmt
       +-JoinScan
         +-column_list=TestStructValueTable.[value#1, value#2]
         +-left_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt1")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt1')
         +-right_scan=
-          +-TableScan(column_list=[TestStructValueTable.value#2], table=TestStructValueTable, column_index_list=[0], alias="vt2")
+          +-TableScan(column_list=[TestStructValueTable.value#2], table=TestStructValueTable, column_index_list=[0], alias='vt2')
 --
 ALTERNATION GROUP: , a
 --
@@ -1057,7 +1057,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.x#2]
         +-input_scan=
-        | +-TableScan(column_list=[StructWithOneFieldValueTable.value#1], table=StructWithOneFieldValueTable, column_index_list=[0], alias="t")
+        | +-TableScan(column_list=[StructWithOneFieldValueTable.value#1], table=StructWithOneFieldValueTable, column_index_list=[0], alias='t')
         +-group_by_list=
           +-x#2 :=
             +-GetStructField
@@ -1137,7 +1137,7 @@ QueryStmt
         |   +-input_scan=
         |     +-SingleRowScan
         +-right_scan=
-          +-TableScan(column_list=[TestStructValueTable.value#3], table=TestStructValueTable, column_index_list=[0], alias="t")
+          +-TableScan(column_list=[TestStructValueTable.value#3], table=TestStructValueTable, column_index_list=[0], alias='t')
 ==
 
 # When we do an array scan of a proto, we can access fields of that
@@ -1172,7 +1172,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3, $array.nrv#4]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.Nested>>
@@ -1219,7 +1219,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[TestTable.KitchenSink#3, $array.nrv#4]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+        |   | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
         |   +-array_expr=
         |   | +-GetProtoField
         |   |   +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.Nested>>
@@ -1773,7 +1773,7 @@ QueryStmt
     |         +-FilterScan
     |           +-column_list=[KitchenSinkValueTable.value#1]
     |           +-input_scan=
-    |           | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="k")
+    |           | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='k')
     |           +-filter_expr=
     |             +-FunctionCall(ZetaSQL:$greater(DOUBLE, DOUBLE) -> BOOL)
     |               +-Cast(FLOAT -> DOUBLE)
@@ -1816,7 +1816,7 @@ QueryStmt
     | +-FilterScan
     |   +-column_list=[Int32ValueTable.value#1]
     |   +-input_scan=
-    |   | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias="i")
+    |   | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias='i')
     |   +-filter_expr=
     |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
     |       +-ColumnRef(type=INT32, column=Int32ValueTable.value#1)
@@ -1993,7 +1993,7 @@ QueryStmt
     |   |   |     +-field_descriptor=int32_val1
     |   |   |     +-default_value=0
     |   |   +-input_scan=
-    |   |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="k")
+    |   |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='k')
     |   +-group_by_list=
     |     +-int32_val1#5 := ColumnRef(type=INT32, column=$pre_groupby.int32_val1#4)
     +-order_by_item_list=
@@ -2035,7 +2035,7 @@ QueryStmt
     |   |   |   |     +-field_descriptor=int32_val1
     |   |   |   |     +-default_value=0
     |   |   |   +-input_scan=
-    |   |   |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="k")
+    |   |   |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='k')
     |   |   +-group_by_list=
     |   |     +-int32_val1#5 := ColumnRef(type=INT32, column=$pre_groupby.int32_val1#4)
     |   +-filter_expr=
@@ -2748,7 +2748,7 @@ QueryStmt
     |   |   |   |     +-field_descriptor=nested_int64
     |   |   |   |     +-default_value=88
     |   |   |   +-input_scan=
-    |   |   |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="k")
+    |   |   |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='k')
     |   |   +-group_by_list=
     |   |   | +-int64_key_1#6 := ColumnRef(type=INT64, column=$pre_groupby.int64_key_1#2)
     |   |   | +-int64_key_2#7 := ColumnRef(type=INT64, column=$pre_groupby.int64_key_2#3)
@@ -2898,7 +2898,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.f#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestNestedStructValueTable.value#1], table=TestNestedStructValueTable, column_index_list=[0], alias="f")
+        | +-TableScan(column_list=[TestNestedStructValueTable.value#1], table=TestNestedStructValueTable, column_index_list=[0], alias='f')
         +-group_by_list=
           +-f#2 := ColumnRef(type=STRUCT<e INT32, f STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, column=TestNestedStructValueTable.value#1)
 --
@@ -3042,7 +3042,7 @@ QueryStmt
     |       |     +-AggregateScan
     |       |       +-column_list=[$groupby.b#2]
     |       |       +-input_scan=
-    |       |       | +-TableScan(column_list=[TestNestedStructValueTable.value#1], table=TestNestedStructValueTable, column_index_list=[0], alias="T")
+    |       |       | +-TableScan(column_list=[TestNestedStructValueTable.value#1], table=TestNestedStructValueTable, column_index_list=[0], alias='T')
     |       |       +-group_by_list=
     |       |         +-b#2 :=
     |       |           +-GetStructField

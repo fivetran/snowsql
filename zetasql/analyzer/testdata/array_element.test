@@ -878,7 +878,7 @@ QueryStmt
     |     +-Cast(INT32 -> INT64)
     |       +-ColumnRef(type=INT32, column=MapFieldTable.key#1)
     +-input_scan=
-      +-TableScan(column_list=MapFieldTable.[key#1, MessageWithMapField#2], table=MapFieldTable, column_index_list=[0, 1], alias="table")
+      +-TableScan(column_list=MapFieldTable.[key#1, MessageWithMapField#2], table=MapFieldTable, column_index_list=[0, 1], alias='table')
 
 [REWRITTEN AST]
 QueryStmt
@@ -981,7 +981,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=MapFieldTable.[key#1, MessageWithMapField#2], table=MapFieldTable, column_index_list=[0, 1], alias="table")
+      +-TableScan(column_list=MapFieldTable.[key#1, MessageWithMapField#2], table=MapFieldTable, column_index_list=[0, 1], alias='table')
 ==
 
 [language_features=V_1_3_PROTO_MAPS]

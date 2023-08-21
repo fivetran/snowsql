@@ -16,11 +16,11 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Key#3]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |     +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-right_scan=
-          +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0], alias="kv3")
+          +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0], alias='kv3')
 ==
 
 select 1
@@ -77,7 +77,7 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Key#3]
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-right_scan=
           +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0])
 ==
@@ -100,7 +100,7 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Key#3]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
         |     +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0])
         +-filter_expr=
@@ -122,9 +122,9 @@ QueryStmt
     +-input_scan=
       +-JoinScan
         +-left_scan=
-        | +-TableScan(table=KeyValue, alias="kv1")
+        | +-TableScan(table=KeyValue, alias='kv1')
         +-right_scan=
-        | +-TableScan(table=KeyValue, alias="kv2")
+        | +-TableScan(table=KeyValue, alias='kv2')
         +-join_expr=
           +-Literal(type=BOOL, value=true)
 ==
@@ -143,9 +143,9 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Key#3]
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -180,9 +180,9 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Key#3]
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -232,13 +232,13 @@ QueryStmt
     +-input_scan=
       +-JoinScan
         +-left_scan=
-        | +-TableScan(table=KeyValue, alias="kv1")
+        | +-TableScan(table=KeyValue, alias='kv1')
         +-right_scan=
           +-JoinScan
             +-left_scan=
-            | +-TableScan(table=KeyValue, alias="kv2")
+            | +-TableScan(table=KeyValue, alias='kv2')
             +-right_scan=
-              +-TableScan(table=KeyValue, alias="kv3")
+              +-TableScan(table=KeyValue, alias='kv3')
 ==
 
 select 1 from KeyValue kv1 cross join KeyValue kv2
@@ -254,9 +254,9 @@ QueryStmt
     +-input_scan=
       +-JoinScan
         +-left_scan=
-        | +-TableScan(table=KeyValue, alias="kv1")
+        | +-TableScan(table=KeyValue, alias='kv1')
         +-right_scan=
-          +-TableScan(table=KeyValue, alias="kv2")
+          +-TableScan(table=KeyValue, alias='kv2')
 ==
 
 select 1 from KeyValue kv1 cross join KeyValue kv2 on true
@@ -300,9 +300,9 @@ QueryStmt
     +-input_scan=
       +-JoinScan
         +-left_scan=
-        | +-TableScan(table=KeyValue, alias="kv1")
+        | +-TableScan(table=KeyValue, alias='kv1')
         +-right_scan=
-        | +-TableScan(table=KeyValue, alias="kv2")
+        | +-TableScan(table=KeyValue, alias='kv2')
         +-join_expr=
           +-Literal(type=BOOL, value=true)
 ==
@@ -321,9 +321,9 @@ QueryStmt
       +-JoinScan
         +-join_type=LEFT
         +-left_scan=
-        | +-TableScan(table=KeyValue, alias="kv1")
+        | +-TableScan(table=KeyValue, alias='kv1')
         +-right_scan=
-        | +-TableScan(table=KeyValue, alias="kv2")
+        | +-TableScan(table=KeyValue, alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-Literal(type=INT64, value=1)
@@ -344,9 +344,9 @@ QueryStmt
       +-JoinScan
         +-join_type=LEFT
         +-left_scan=
-        | +-TableScan(table=KeyValue, alias="kv1")
+        | +-TableScan(table=KeyValue, alias='kv1')
         +-right_scan=
-        | +-TableScan(table=KeyValue, alias="kv2")
+        | +-TableScan(table=KeyValue, alias='kv2')
         +-join_expr=
           +-Literal(type=BOOL, value=NULL)
 ==
@@ -367,7 +367,7 @@ QueryStmt
         +-column_list=KeyValue.[Value#2, Value#4]
         +-join_type=RIGHT
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias='kv1')
         +-right_scan=
         | +-TableScan(column_list=[KeyValue.Value#4], table=KeyValue, column_index_list=[1])
         +-join_expr=
@@ -393,9 +393,9 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Key#3]
         +-join_type=FULL
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -426,9 +426,9 @@ QueryStmt
             +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue2.Key#3, KeyValue2.Value2#4]
             +-join_type=FULL
             +-left_scan=
-            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="k1")
+            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='k1')
             +-right_scan=
-            | +-TableScan(column_list=KeyValue2.[Key#3, Value2#4], table=KeyValue2, column_index_list=[0, 1], alias="k2")
+            | +-TableScan(column_list=KeyValue2.[Key#3, Value2#4], table=KeyValue2, column_index_list=[0, 1], alias='k2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
                 +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -460,9 +460,9 @@ QueryStmt
             +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue2.Key#3, KeyValue2.Value2#4]
             +-join_type=FULL
             +-left_scan=
-            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="k1")
+            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='k1')
             +-right_scan=
-            | +-TableScan(column_list=KeyValue2.[Key#3, Value2#4], table=KeyValue2, column_index_list=[0, 1], alias="k2")
+            | +-TableScan(column_list=KeyValue2.[Key#3, Value2#4], table=KeyValue2, column_index_list=[0, 1], alias='k2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
                 +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -528,43 +528,43 @@ QueryStmt
         |   |   |   |   |   |   | +-JoinScan
         |   |   |   |   |   |   |   +-column_list=KeyValue.[Key#1, Key#3]
         |   |   |   |   |   |   |   +-left_scan=
-        |   |   |   |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   |   |   |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   |   |   |   |   |   |   +-right_scan=
-        |   |   |   |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |   |   |   |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         |   |   |   |   |   |   |   +-join_expr=
         |   |   |   |   |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |   |   |   |   |   |       +-Literal(type=INT64, value=1)
         |   |   |   |   |   |   |       +-Literal(type=INT64, value=1)
         |   |   |   |   |   |   +-right_scan=
-        |   |   |   |   |   |     +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0], alias="kv3")
+        |   |   |   |   |   |     +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0], alias='kv3')
         |   |   |   |   |   +-right_scan=
-        |   |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#7], table=KeyValue, column_index_list=[0], alias="kv4")
+        |   |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#7], table=KeyValue, column_index_list=[0], alias='kv4')
         |   |   |   |   |   +-join_expr=
         |   |   |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |   |   |   |       +-Literal(type=INT64, value=2)
         |   |   |   |   |       +-Literal(type=INT64, value=2)
         |   |   |   |   +-right_scan=
-        |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#9], table=KeyValue, column_index_list=[0], alias="kv5")
+        |   |   |   |   | +-TableScan(column_list=[KeyValue.Key#9], table=KeyValue, column_index_list=[0], alias='kv5')
         |   |   |   |   +-join_expr=
         |   |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |   |   |       +-Literal(type=INT64, value=3)
         |   |   |   |       +-Literal(type=INT64, value=4)
         |   |   |   +-right_scan=
-        |   |   |   | +-TableScan(column_list=[KeyValue.Value#12], table=KeyValue, column_index_list=[1], alias="kv6")
+        |   |   |   | +-TableScan(column_list=[KeyValue.Value#12], table=KeyValue, column_index_list=[1], alias='kv6')
         |   |   |   +-join_expr=
         |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |   |       +-Literal(type=INT64, value=4)
         |   |   |       +-Literal(type=INT64, value=4)
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[KeyValue.Value#14], table=KeyValue, column_index_list=[1], alias="kv7")
+        |   |     +-TableScan(column_list=[KeyValue.Value#14], table=KeyValue, column_index_list=[1], alias='kv7')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[KeyValue.Value#16], table=KeyValue, column_index_list=[1], alias="kv8")
+        |   | +-TableScan(column_list=[KeyValue.Value#16], table=KeyValue, column_index_list=[1], alias='kv8')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-Literal(type=INT64, value=5)
         |       +-Literal(type=INT64, value=5)
         +-right_scan=
-          +-TableScan(table=KeyValue, alias="kv9")
+          +-TableScan(table=KeyValue, alias='kv9')
 ==
 
 select *
@@ -592,12 +592,12 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=KeyValue.[Key#1, Value#2, Key#1, Value#2]
         |   +-input_scan=
-        |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=KeyValue.[Key#3, Value#4, Key#3, Value#4]
         |   +-input_scan=
-        |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         +-join_expr=
           +-Literal(type=BOOL, value=true)
 ==
@@ -634,9 +634,9 @@ QueryStmt
       +-JoinScan
         +-column_list=ComplexTypes.[key#1, Int32Array#4, Int32Array#10]
         +-left_scan=
-        | +-TableScan(column_list=ComplexTypes.[key#1, Int32Array#4], table=ComplexTypes, column_index_list=[0, 3], alias="a")
+        | +-TableScan(column_list=ComplexTypes.[key#1, Int32Array#4], table=ComplexTypes, column_index_list=[0, 3], alias='a')
         +-right_scan=
-        | +-TableScan(column_list=[ComplexTypes.Int32Array#10], table=ComplexTypes, column_index_list=[3], alias="b")
+        | +-TableScan(column_list=[ComplexTypes.Int32Array#10], table=ComplexTypes, column_index_list=[3], alias='b')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(ARRAY<INT32>, ARRAY<INT32>) -> BOOL)
             +-ColumnRef(type=ARRAY<INT32>, column=ComplexTypes.Int32Array#4)

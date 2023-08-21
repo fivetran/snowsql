@@ -379,7 +379,7 @@ DELETE TestTable {{AS|}} T WHERE T.key > 1
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.key#1], table=TestTable, column_index_list=[0], alias="T")
+| +-TableScan(column_list=[TestTable.key#1], table=TestTable, column_index_list=[0], alias='T')
 +-column_access_list=READ
 +-where_expr=
   +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
@@ -409,7 +409,7 @@ WHERE T.float_val > int32_val
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="T")
+| +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='T')
 +-column_access_list=READ
 +-where_expr=
   +-FunctionCall(ZetaSQL:$greater(DOUBLE, DOUBLE) -> BOOL)
@@ -442,7 +442,7 @@ WHERE S.int64 IN (select key from KeyValue)
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="S")
+| +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='S')
 +-column_access_list=READ
 +-where_expr=
   +-SubqueryExpr

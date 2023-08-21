@@ -395,7 +395,7 @@ CreateTableFunctionStmt
 |       |   +-left_scan=
 |       |   | +-RelationArgumentScan(parse_location=209-218, column_list=[table_arg.a#1], name="table_arg")
 |       |   +-right_scan=
-|       |   | +-TableScan(parse_location=224-255, column_list=[SimpleTypesWithAnonymizationUid.uid#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="t")
+|       |   | +-TableScan(parse_location=224-255, column_list=[SimpleTypesWithAnonymizationUid.uid#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t')
 |       |   +-join_expr=
 |       |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |       |       +-ColumnRef(parse_location=262-273, type=INT64, column=table_arg.a#1)

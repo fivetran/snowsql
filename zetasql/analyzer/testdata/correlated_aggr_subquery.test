@@ -2098,7 +2098,7 @@ QueryStmt
     |                     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
     |                       +-ColumnRef(type=INT64, column=$array.y#2)
     +-input_scan=
-      +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+      +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
 ==
 
 # Tests with correlated PROTO references start here.
@@ -2152,7 +2152,7 @@ QueryStmt
     |                   +-field_descriptor=int32_val
     |                   +-default_value=77
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 ==
 
 # SUM(correlation reference), without GROUP BY
@@ -2197,7 +2197,7 @@ QueryStmt
     |                       +-field_descriptor=int32_val
     |                       +-default_value=77
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 ==
 
 # SELECT and GROUP BY correlation reference, and SUM(correlation reference)
@@ -2270,7 +2270,7 @@ QueryStmt
     |                         +-field_descriptor=int64_val
     |                         +-default_value=0
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 ==
 
 # GROUP BY correlation reference, with SUM(correlation reference)
@@ -2324,7 +2324,7 @@ QueryStmt
     |                     +-field_descriptor=int64_val
     |                     +-default_value=0
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 ==
 
 # SELECT correlation reference, with SUM(correlation reference), without
@@ -2389,7 +2389,7 @@ QueryStmt
     |                         +-field_descriptor=int64_val
     |                         +-default_value=0
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 ==
 
 # SELECT correlation references, with SUM(correlation reference), without
@@ -2471,7 +2471,7 @@ QueryStmt
     |                         +-field_descriptor=int64_val
     |                         +-default_value=0
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[key#1, TestEnum#2, KitchenSink#3, Int32Array#4, TestStruct#5, TestProto#6], table=ComplexTypes, column_index_list=[0, 1, 2, 3, 4, 5], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[key#1, TestEnum#2, KitchenSink#3, Int32Array#4, TestStruct#5, TestProto#6], table=ComplexTypes, column_index_list=[0, 1, 2, 3, 4, 5], alias='ct')
 ==
 
 # More deeply nested proto path expression, with and without GROUP BY.
@@ -2564,7 +2564,7 @@ QueryStmt
     |                       +-Cast(INT32 -> INT64)
     |                         +-ColumnRef(type=INT32, column=$array.y#7)
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 --
 ALTERNATION GROUP: GROUP BY KitchenSink.nested_value.nested_int64
 --
@@ -2639,7 +2639,7 @@ QueryStmt
     |                       +-Cast(INT32 -> INT64)
     |                         +-ColumnRef(type=INT32, column=$array.y#7)
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 --
 ALTERNATION GROUP: k,GROUP BY KitchenSink.nested_value.nested_int64
 --
@@ -2721,7 +2721,7 @@ QueryStmt
     |                       +-Cast(INT32 -> INT64)
     |                         +-ColumnRef(type=INT32, column=$array.y#7)
     +-input_scan=
-      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias="ct")
+      +-TableScan(column_list=ComplexTypes.[KitchenSink#3, Int32Array#4], table=ComplexTypes, column_index_list=[2, 3], alias='ct')
 ==
 
 SELECT 'foo' as foo
@@ -2738,7 +2738,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.foo#3]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-foo#3 := Literal(type=STRING, value="foo")
           +-$groupbycol2#5 :=
@@ -3648,7 +3648,7 @@ QueryStmt
     |                     +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=SimpleTypesWithStruct.TestEnum#2, is_correlated=TRUE)
     |                     +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=SimpleTypesWithStruct.TestStruct#3, is_correlated=TRUE)
     +-input_scan=
-      +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias="st")
+      +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias='st')
 ==
 
 # Correlated subquery in WHERE, 'st.key' is resolved as a correlation reference
@@ -3669,7 +3669,7 @@ QueryStmt
       +-FilterScan
         +-column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3]
         +-input_scan=
-        | +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias="st")
+        | +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias='st')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
             +-SubqueryExpr
@@ -3760,7 +3760,7 @@ QueryStmt
     |       +-expr_list=
     |       | +-$col1#4 := Literal(type=STRING, value="foo")
     |       +-input_scan=
-    |         +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias="st")
+    |         +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias='st')
     +-order_by_item_list=
       +-OrderByItem
         +-column_ref=

@@ -667,7 +667,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=KeyValue.[Key#1, Value#2]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -720,7 +720,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=KeyValue.[Key#1, Value#2]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -778,7 +778,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(STRUCT<key INT64, key INT64>, STRUCT<key INT64, key INT64>) -> BOOL)
             +-MakeStruct
@@ -819,7 +819,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(STRUCT<INT64, INT64>, STRUCT<INT64, INT64>) -> BOOL)
             +-MakeStruct
@@ -867,7 +867,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(STRUCT<key INT64, key INT64>, STRUCT<key INT64, key INT64>) -> BOOL)
             +-MakeStruct
@@ -892,7 +892,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$not_equal(STRUCT<key INT64, key INT64>, STRUCT<key INT64, key INT64>) -> BOOL)
             +-MakeStruct
@@ -917,7 +917,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(STRUCT<INT64, INT64>, STRUCT<INT64, INT64>) -> BOOL)
             +-MakeStruct
@@ -942,7 +942,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$not_equal(STRUCT<INT64, INT64>, STRUCT<INT64, INT64>) -> BOOL)
             +-MakeStruct
@@ -969,7 +969,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#10 :=
         |   +-SubqueryExpr
@@ -1030,7 +1030,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(STRUCT<key INT64, key INT64>, STRUCT<key INT64, key INT64>) -> BOOL)
             +-MakeStruct
@@ -1057,7 +1057,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$in(STRUCT<key INT64, key INT64>, repeated(2) STRUCT<key INT64, key INT64>) -> BOOL)
             +-MakeStruct

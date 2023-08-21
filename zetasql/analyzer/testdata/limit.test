@@ -386,7 +386,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=KeyValue.[Key#1, Value#2]
     |   +-input_scan=
-    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
     +-limit=
     | +-Literal(type=INT64, value=1)
     +-offset=
@@ -415,14 +415,14 @@ QueryStmt
     |     | | +-ProjectScan
     |     | |   +-column_list=KeyValue.[Key#1, Value#2]
     |     | |   +-input_scan=
-    |     | |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+    |     | |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
     |     | +-output_column_list=KeyValue.[Key#1, Value#2]
     |     +-SetOperationItem
     |       +-scan=
     |       | +-ProjectScan
     |       |   +-column_list=KeyValue.[Key#3, Value#4]
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+    |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
     |       +-output_column_list=KeyValue.[Key#3, Value#4]
     +-limit=
     | +-Literal(type=INT64, value=5)

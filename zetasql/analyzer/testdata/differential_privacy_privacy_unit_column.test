@@ -177,9 +177,9 @@ QueryStmt
         |   +-column_list=SimpleTypes.[int64#2, int32#19, int64#20]
         |   +-join_type=RIGHT
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="s1")
+        |   | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='s1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=SimpleTypes.[int32#19, int64#20], table=SimpleTypes, column_index_list=[0, 1], alias="s2")
+        |   | +-TableScan(column_list=SimpleTypes.[int32#19, int64#20], table=SimpleTypes, column_index_list=[0, 1], alias='s2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -210,9 +210,9 @@ QueryStmt
         |   |   +-column_list=SimpleTypes.[int64#2, int32#19, int64#20]
         |   |   +-join_type=RIGHT
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="s1")
+        |   |   | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='s1')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=SimpleTypes.[int32#19, int64#20], table=SimpleTypes, column_index_list=[0, 1], alias="s2")
+        |   |   | +-TableScan(column_list=SimpleTypes.[int32#19, int64#20], table=SimpleTypes, column_index_list=[0, 1], alias='s2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -252,9 +252,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypes.int32#19]
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypes, alias="s1")
+        |   | +-TableScan(table=SimpleTypes, alias='s1')
         |   +-right_scan=
-        |     +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias="s2")
+        |     +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias='s2')
         +-aggregate_list=
         | +-$agg1#37 :=
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -280,9 +280,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[SimpleTypes.int32#19]
         |   |   +-left_scan=
-        |   |   | +-TableScan(table=SimpleTypes, alias="s1")
+        |   |   | +-TableScan(table=SimpleTypes, alias='s1')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias="s2")
+        |   |     +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias='s2')
         |   +-group_by_list=
         |   | +-$uid#40 := ColumnRef(type=INT32, column=SimpleTypes.int32#19)
         |   +-aggregate_list=

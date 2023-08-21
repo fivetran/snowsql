@@ -15,12 +15,12 @@ QueryStmt
       +-JoinScan
         +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3, key#4, TestEnum#5, KitchenSink#6]
         +-left_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="A")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='A')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=TestTable.[key#4, TestEnum#5, KitchenSink#6]
         |   +-input_scan=
-        |     +-TableScan(column_list=TestTable.[key#4, TestEnum#5, KitchenSink#6], table=TestTable, column_index_list=[0, 1, 2], alias="B")
+        |     +-TableScan(column_list=TestTable.[key#4, TestEnum#5, KitchenSink#6], table=TestTable, column_index_list=[0, 1, 2], alias='B')
         +-lateral=TRUE
 ==
 

@@ -19,7 +19,7 @@ QueryStmt
       +-SampleScan
         +-column_list=[KeyValue.Key#1]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="RESERVOIR")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='RESERVOIR')
         +-method="reservoir"
         +-size=
         | +-Literal(type=INT64, value=100)
@@ -534,9 +534,9 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=KeyValue.[Key#5, Value#6, Key#7, Value#8]
             |   +-left_scan=
-            |   | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+            |   | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias='kv1')
             |   +-right_scan=
-            |   | +-TableScan(column_list=KeyValue.[Key#7, Value#8], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+            |   | +-TableScan(column_list=KeyValue.[Key#7, Value#8], table=KeyValue, column_index_list=[0, 1], alias='kv2')
             |   +-join_expr=
             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |       +-ColumnRef(type=INT64, column=KeyValue.Key#5)
@@ -613,7 +613,7 @@ QueryStmt
         |     +-ArrayScan
         |       +-column_list=[TestTable.KitchenSink#3, $array.val#4]
         |       +-input_scan=
-        |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         |       +-array_expr=
         |       | +-GetProtoField
         |       |   +-type=ARRAY<INT32>
@@ -969,9 +969,9 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=KeyValue.[Key#5, Value#6, Key#7, Value#8]
             |   +-left_scan=
-            |   | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+            |   | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias='kv1')
             |   +-right_scan=
-            |   | +-TableScan(column_list=KeyValue.[Key#7, Value#8], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+            |   | +-TableScan(column_list=KeyValue.[Key#7, Value#8], table=KeyValue, column_index_list=[0, 1], alias='kv2')
             |   +-join_expr=
             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |       +-ColumnRef(type=INT64, column=KeyValue.Key#5)
@@ -1223,7 +1223,7 @@ QueryStmt
       +-SampleScan
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $sample_weight.weight#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="t")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
         +-method="reservoir"
         +-size=
         | +-Literal(type=INT64, value=100)
@@ -1246,7 +1246,7 @@ QueryStmt
       +-SampleScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="t")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
         +-method="reservoir"
         +-size=
         | +-Literal(type=INT64, value=100)

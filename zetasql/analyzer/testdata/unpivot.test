@@ -777,7 +777,7 @@ QueryStmt
       +-UnpivotScan
         +-column_list=$unpivot.[Value#5, a#3, b#4]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-value_column_list=[$unpivot.a#3]
         +-label_column=$unpivot.b#4
         +-label_list=
@@ -823,7 +823,7 @@ QueryStmt
             | +-ArrayScan
             |   +-column_list=[KeyValue.Key#1, KeyValue.Value#2, unpivot_array_0.unpivot_unnest#6]
             |   +-input_scan=
-            |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+            |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
             |   +-array_expr=
             |   | +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRUCT<a INT64, b STRING>) -> ARRAY<STRUCT<a INT64, b STRING>>)
             |   |   +-MakeStruct

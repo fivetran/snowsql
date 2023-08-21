@@ -892,7 +892,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=$distinct.[Key#3, Value#4]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="k")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='k')
     |       +-group_by_list=
     |         +-Key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |         +-Value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)

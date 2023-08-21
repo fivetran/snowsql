@@ -1258,7 +1258,7 @@ QueryStmt
     |     +-FunctionCall(ZetaSQL:$make_array(repeated(1) INT32) -> ARRAY<INT32>)
     |       +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
     +-input_scan=
-      +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0], alias="s")
+      +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0], alias='s')
 --
 ALTERNATION GROUPS:
     s.int64
@@ -1522,7 +1522,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL
@@ -1741,7 +1741,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$in_array(STRING, ARRAY<STRING>) -> BOOL)
             +-GetProtoField
@@ -1811,7 +1811,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$in_array(DATE, ARRAY<DATE>) -> BOOL)
             +-GetProtoField
@@ -1881,7 +1881,7 @@ QueryStmt
       +-FilterScan
         +-column_list=SimpleTypes.[int32#1, int64#2, double#9]
         +-input_scan=
-        | +-TableScan(column_list=SimpleTypes.[int32#1, int64#2, double#9], table=SimpleTypes, column_index_list=[0, 1, 8], alias="T")
+        | +-TableScan(column_list=SimpleTypes.[int32#1, int64#2, double#9], table=SimpleTypes, column_index_list=[0, 1, 8], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL

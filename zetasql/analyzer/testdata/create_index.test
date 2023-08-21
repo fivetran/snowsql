@@ -61,7 +61,7 @@ CreateIndexStmt
 +-name_path=i1
 +-table_name_path=KeyValue
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="foo")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='foo')
 +-is_unique=FALSE
 +-index_item_list=
   +-IndexItem
@@ -208,7 +208,7 @@ CreateIndexStmt
 +-name_path=i1
 +-table_name_path=TestTable
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="foo")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='foo')
 +-is_unique=FALSE
 +-index_item_list=
 | +-IndexItem

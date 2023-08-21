@@ -328,9 +328,9 @@ QueryStmt
     | |         +-JoinScan
     | |           +-column_list=KeyValue.[Key#18, Key#20]
     | |           +-left_scan=
-    | |           | +-TableScan(column_list=[KeyValue.Key#18], table=KeyValue, column_index_list=[0], alias="kv1")
+    | |           | +-TableScan(column_list=[KeyValue.Key#18], table=KeyValue, column_index_list=[0], alias='kv1')
     | |           +-right_scan=
-    | |           | +-TableScan(column_list=[KeyValue.Key#20], table=KeyValue, column_index_list=[0], alias="kv2")
+    | |           | +-TableScan(column_list=[KeyValue.Key#20], table=KeyValue, column_index_list=[0], alias='kv2')
     | |           +-join_expr=
     | |             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
     | |               +-ColumnRef(type=INT64, column=KeyValue.Key#18)
@@ -935,7 +935,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#8]
         +-input_scan=
-        | +-TableScan(table=TestTable, alias="tt1")
+        | +-TableScan(table=TestTable, alias='tt1')
         +-aggregate_list=
           +-$agg1#8 :=
             +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -949,7 +949,7 @@ QueryStmt
                       +-AggregateScan
                         +-column_list=[$aggregate.$agg1#7]
                         +-input_scan=
-                        | +-TableScan(table=TestTable, alias="tt2")
+                        | +-TableScan(table=TestTable, alias='tt2')
                         +-aggregate_list=
                           +-$agg1#7 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==
@@ -1328,7 +1328,7 @@ QueryStmt
     |             +-column_ref=
     |               +-ColumnRef(type=INT32, column=$orderby.$orderbycol1#8)
     +-input_scan=
-      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
 ==
 
 select EXISTS(select key, t.KitchenSink.double_val from KeyValue
@@ -1403,4 +1403,4 @@ QueryStmt
     |             +-column_ref=
     |               +-ColumnRef(type=INT32, column=$orderby.$orderbycol1#12)
     +-input_scan=
-      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')

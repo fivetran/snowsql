@@ -12,7 +12,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3, $array.value#4, $array_offset.pos#5]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<INT32>
@@ -42,7 +42,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.value#4, $array_offset.offset_idx#5]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<INT32>
@@ -79,7 +79,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.val1#4, $array_offset.pos1#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         |   +-array_expr=
         |   | +-GetProtoField
         |   |   +-type=ARRAY<INT32>
@@ -128,7 +128,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.val1#4, $array_offset.pos1#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         |   +-array_expr=
         |   | +-GetProtoField
         |   |   +-type=ARRAY<INT32>
@@ -752,7 +752,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.d#4, $array_offset.key#5]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<DATE>
@@ -801,7 +801,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3, $array.nrv#4, $array_offset.offset_idx#5]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.Nested>>
@@ -858,7 +858,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.repeated_int64_val#4, $array_offset.pos#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         |   +-array_expr=
         |   | +-GetProtoField
         |   |   +-type=ARRAY<INT64>
@@ -901,7 +901,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[TestTable.KitchenSink#3, $array.arr1#4, $array_offset.pos#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        |   | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         |   +-array_expr=
         |   | +-GetProtoField
         |   |   +-type=ARRAY<INT64>
@@ -953,7 +953,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.arr1#4, $array_offset.pos1#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         |   +-array_expr=
         |   | +-GetProtoField
         |   |   +-type=ARRAY<INT64>
@@ -1021,7 +1021,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3, $array.K#9]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-array_expr=
         | +-SubqueryExpr
         |   +-type=ARRAY<STRUCT<pos INT64, arr1 INT64, arr2 INT64>>
@@ -1091,7 +1091,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.KitchenSink#3, $array.arr#4, $array_offset.pos#5]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<INT64>

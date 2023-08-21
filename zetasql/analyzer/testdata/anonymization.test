@@ -1303,7 +1303,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int64#2]
         |   +-input_scan=
-        |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1363,7 +1363,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11]
         |       +-input_scan=
-        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1398,7 +1398,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11]
         |       +-input_scan=
-        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1587,7 +1587,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#13]
         |       +-input_scan=
-        |       | +-TableScan(parse_location=93-124, table=SimpleTypesWithAnonymizationUid, alias="a")
+        |       | +-TableScan(parse_location=93-124, table=SimpleTypesWithAnonymizationUid, alias='a')
         |       +-aggregate_list=
         |         +-$agg1#13 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)(parse_location=79-84)
         +-aggregate_list=
@@ -1635,7 +1635,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#13]
         |       +-input_scan=
-        |       | +-TableScan(parse_location=98-129, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=98-129, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-group_by_list=
         |       | +-uid#14 := ColumnRef(parse_location=143-146, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
         |       +-aggregate_list=
@@ -1838,7 +1838,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$groupby.x#14, $aggregate.$agg1#13]
         |       +-input_scan=
-        |       | +-TableScan(parse_location=111-142, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=111-142, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-group_by_list=
         |       | +-x#14 :=
         |       |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -1972,7 +1972,7 @@ QueryStmt
         |   |   |       |   |       +-aggregate_list=
         |   |   |       |   |         +-int64#13 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         |   |   |       |   +-right_scan=
-        |   |   |       |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |       |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   |       +-filter_expr=
         |   |   |         +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
         |   |   |           +-ColumnRef(type=INT64, column=$aggregate.int64#13)
@@ -2043,7 +2043,7 @@ QueryStmt
         |   |   |   |       |   |       +-aggregate_list=
         |   |   |   |       |   |         +-int64#13 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         |   |   |   |       |   +-right_scan=
-        |   |   |   |       |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |   |       |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   |   |       +-filter_expr=
         |   |   |   |         +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
         |   |   |   |           +-ColumnRef(type=INT64, column=$aggregate.int64#13)
@@ -2551,7 +2551,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[ArrayWithAnonymizationUid.int64_array#1, $array.a#4]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias="t")
+        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias='t')
         |   +-array_expr=
         |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   +-element_column=$array.a#4
@@ -2577,7 +2577,7 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=[ArrayWithAnonymizationUid.int64_array#1, $array.a#4, ArrayWithAnonymizationUid.uid#7]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#7], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias="t")
+        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#7], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias='t')
         |   |   +-array_expr=
         |   |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   |   +-element_column=$array.a#4
@@ -2619,7 +2619,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[ArrayWithAnonymizationUid.int64_array#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias="t")
+        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias='t')
         |   +-array_expr=
         |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   +-element_column=$array.a#4
@@ -2645,7 +2645,7 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#6]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#6], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias="t")
+        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#6], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias='t')
         |   |   +-array_expr=
         |   |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   |   +-element_column=$array.a#4
@@ -4707,7 +4707,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#2]
         |       +-input_scan=
-        |       | +-TableScan(table=KitchenSinkWithUidValueTable, alias="t")
+        |       | +-TableScan(table=KitchenSinkWithUidValueTable, alias='t')
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -5142,7 +5142,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#2]
         |       +-input_scan=
-        |       | +-TableScan(table=TestStructWithUidValueTable, alias="t")
+        |       | +-TableScan(table=TestStructWithUidValueTable, alias='t')
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -5630,9 +5630,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=TestWithDoublyNestedStructUidValueTable.[value#1, value#2]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t1")
+        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t2")
+        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
         |       +-GetStructField
@@ -5699,7 +5699,7 @@ QueryStmt
         |   |   |   |     |   +-field_idx=1
         |   |   |   |     +-field_idx=0
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t1")
+        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[TestWithDoublyNestedStructUidValueTable.value#2, $project.$a#9]
@@ -5719,7 +5719,7 @@ QueryStmt
         |   |   |   |     |   +-field_idx=1
         |   |   |   |     +-field_idx=0
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t2")
+        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
         |   |       +-GetStructField

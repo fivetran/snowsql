@@ -1479,7 +1479,7 @@ QueryStmt
     |       +-expr=
     |         +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1614,4 +1614,4 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')

@@ -3154,7 +3154,7 @@ QueryStmt
     |       |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     |       |   |     +-field_idx=1
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |       +-group_by_list=
     |         +-TestStruct#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.TestStruct#7)
     |         +-TestStruct#9 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)

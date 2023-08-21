@@ -778,7 +778,7 @@ QueryStmt
       +-PivotScan
         +-column_list=[$groupby.Value#4, $pivot.one#5, $pivot.two#6]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-Value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)
         +-pivot_expr_list=
@@ -846,7 +846,7 @@ QueryStmt
       +-PivotScan
         +-column_list=[$groupby.Value#4, $pivot.one#5, $pivot.two#6]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-Value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)
         +-pivot_expr_list=

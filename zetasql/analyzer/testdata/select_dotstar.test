@@ -122,7 +122,7 @@ QueryStmt
     |       +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#2)
     |       +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     +-input_scan=
-      +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+      +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
 ==
 
 select kv.key.* from KeyValue kv
@@ -685,7 +685,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="t")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
 ==
 
 # Shows extracting fields from a CorrelatedColumnRef without first projecting
@@ -751,7 +751,7 @@ QueryStmt
     |                 +-input_scan=
     |                   +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[ComplexTypes.TestProto#6], table=ComplexTypes, column_index_list=[5], alias="t")
+      +-TableScan(column_list=[ComplexTypes.TestProto#6], table=ComplexTypes, column_index_list=[5], alias='t')
 ==
 
 # Creates a proto from proto field members expanded as columns through

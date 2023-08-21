@@ -1107,7 +1107,7 @@ QueryStmt
             |   +-left_scan=
             |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
             |   +-right_scan=
-            |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#35], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="t2")
+            |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#35], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t2')
             |   +-join_expr=
             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |       +-ColumnRef(type=INT64, column=t1.uid#23)
@@ -1147,7 +1147,7 @@ QueryStmt
             |   |   +-left_scan=
             |   |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
             |   |   +-right_scan=
-            |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#35], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="t2")
+            |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#35], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t2')
             |   |   +-join_expr=
             |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |   |       +-ColumnRef(type=INT64, column=t1.uid#23)
@@ -1207,7 +1207,7 @@ QueryStmt
             |   +-left_scan=
             |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
             |   +-right_scan=
-            |     +-TableScan(parse_location=129-160, table=SimpleTypesWithAnonymizationUid, alias="t2")
+            |     +-TableScan(parse_location=129-160, table=SimpleTypesWithAnonymizationUid, alias='t2')
             +-aggregate_list=
               +-count#37 :=
                 +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -1346,7 +1346,7 @@ QueryStmt
             |   +-left_scan=
             |   | +-WithRefScan(column_list=[t1.$col1#2], with_query_name="t1")
             |   +-right_scan=
-            |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="t2")
+            |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='t2')
             +-aggregate_list=
               +-count#15 :=
                 +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -1384,7 +1384,7 @@ QueryStmt
             |   |   +-left_scan=
             |   |   | +-WithRefScan(column_list=[t1.$col1#2], with_query_name="t1")
             |   |   +-right_scan=
-            |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="t2")
+            |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t2')
             |   +-group_by_list=
             |   | +-$uid#19 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#16)
             |   +-aggregate_list=

@@ -120,7 +120,7 @@ QueryStmt
     |     +-field_descriptor=str_value
     |     +-default_value=[]
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='v')
 ==
 
 # Value table pseudo-columns can be selected unqualified or qualified.
@@ -143,7 +143,7 @@ QueryStmt
     |     +-field_descriptor=int32_val1
     |     +-default_value=0
     +-input_scan=
-      +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias="v")
+      +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias='v')
 ==
 
 # .* doesn't show the pseudo-columns.
@@ -184,7 +184,7 @@ QueryStmt
     | |   +-default_value=[]
     | +-$col2#7 := Literal(type=STRING, value="--")
     +-input_scan=
-      +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias="v")
+      +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias='v')
 ==
 
 # In strict mode, value table pseudo-columns are only reachable qualified.
@@ -203,7 +203,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=TestExtraValueTable.[RowId#3, RowId#3]
     +-input_scan=
-      +-TableScan(column_list=[TestExtraValueTable.RowId#3], table=TestExtraValueTable, column_index_list=[2], alias="v")
+      +-TableScan(column_list=[TestExtraValueTable.RowId#3], table=TestExtraValueTable, column_index_list=[2], alias='v')
 ==
 
 # This table only has pseudo-columns.  * cannot expand to zero columns.
@@ -233,7 +233,7 @@ QueryStmt
     +-expr_list=
     | +-t#4 := MakeStruct(type=STRUCT<>)
     +-input_scan=
-      +-TableScan(table=AllPseudoColumns, alias="t")
+      +-TableScan(table=AllPseudoColumns, alias='t')
 ==
 
 select Key from (select * from AllPseudoColumns)
@@ -253,7 +253,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=AllPseudoColumns.[Key#1, Value#2]
     +-input_scan=
-      +-TableScan(column_list=AllPseudoColumns.[Key#1, Value#2], table=AllPseudoColumns, column_index_list=[0, 1], alias="t")
+      +-TableScan(column_list=AllPseudoColumns.[Key#1, Value#2], table=AllPseudoColumns, column_index_list=[0, 1], alias='t')
 ==
 
 select count(*) from AllPseudoColumns
@@ -312,9 +312,9 @@ QueryStmt
       +-JoinScan
         +-column_list=EnumTable.[RowId#5, RowId#10]
         +-left_scan=
-        | +-TableScan(column_list=[EnumTable.RowId#5], table=EnumTable, column_index_list=[4], alias="t1")
+        | +-TableScan(column_list=[EnumTable.RowId#5], table=EnumTable, column_index_list=[4], alias='t1')
         +-right_scan=
-          +-TableScan(column_list=[EnumTable.RowId#10], table=EnumTable, column_index_list=[4], alias="t2")
+          +-TableScan(column_list=[EnumTable.RowId#10], table=EnumTable, column_index_list=[4], alias='t2')
 ==
 
 # JOIN USING on a pseudo-column.
@@ -332,9 +332,9 @@ QueryStmt
       +-JoinScan
         +-column_list=AllPseudoColumns.[Key#1, Key#3]
         +-left_scan=
-        | +-TableScan(column_list=[AllPseudoColumns.Key#1], table=AllPseudoColumns, column_index_list=[0], alias="t1")
+        | +-TableScan(column_list=[AllPseudoColumns.Key#1], table=AllPseudoColumns, column_index_list=[0], alias='t1')
         +-right_scan=
-        | +-TableScan(column_list=[AllPseudoColumns.Key#3], table=AllPseudoColumns, column_index_list=[0], alias="t2")
+        | +-TableScan(column_list=[AllPseudoColumns.Key#3], table=AllPseudoColumns, column_index_list=[0], alias='t2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
             +-ColumnRef(type=INT32, column=AllPseudoColumns.Key#1)
@@ -439,7 +439,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=EnumTable.[key#1, Filename#4, RowId#5], table=EnumTable, column_index_list=[0, 3, 4], alias="t")
+      +-TableScan(column_list=EnumTable.[key#1, Filename#4, RowId#5], table=EnumTable, column_index_list=[0, 3, 4], alias='t')
 
 ==
 
@@ -497,7 +497,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias="t")
+      +-TableScan(column_list=TestExtraValueTable.[value#1, Filename#2, RowId#3], table=TestExtraValueTable, column_index_list=[0, 1, 2], alias='t')
 ==
 
 # This table has int32_val1 as both a field and a pseudo-column.

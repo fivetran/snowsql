@@ -340,7 +340,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#5, $aggregate.$agg1#4]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2], alias="t")
+        | +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2], alias='t')
         +-group_by_list=
         | +-key#5 := ColumnRef(type=INT32, column=TestTable.key#1)
         +-aggregate_list=
@@ -386,7 +386,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.x#5, $aggregate.$agg1#4]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
         +-group_by_list=
         | +-x#5 :=
         |   +-GetProtoField
@@ -850,7 +850,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#8, $aggregate.$agg1#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
         | +-TestStruct#8 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         | +-d#9 :=

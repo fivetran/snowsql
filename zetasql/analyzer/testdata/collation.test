@@ -7202,9 +7202,9 @@ QueryStmt
     |     |           | +-JoinScan
     |     |           |   +-column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, TestStructValueTable.value#5]
     |     |           |   +-left_scan=
-    |     |           |   | +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias="x")
+    |     |           |   | +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias='x')
     |     |           |   +-right_scan=
-    |     |           |     +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias="y")
+    |     |           |     +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias='y')
     |     |           +-filter_expr=
     |     |             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |     |               +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
@@ -7289,9 +7289,9 @@ QueryStmt
     |             |             | +-JoinScan
     |             |             |   +-column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}, TestStructValueTable.value#5]
     |             |             |   +-left_scan=
-    |             |             |   | +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias="x")
+    |             |             |   | +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias='x')
     |             |             |   +-right_scan=
-    |             |             |     +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias="y")
+    |             |             |     +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias='y')
     |             |             +-filter_expr=
     |             |               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |             |                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
@@ -7336,7 +7336,7 @@ QueryStmt
     |     |         +-FilterScan
     |     |           +-column_list=[TestStructValueTable.value#5]
     |     |           +-input_scan=
-    |     |           | +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias="y")
+    |     |           | +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias='y')
     |     |           +-filter_expr=
     |     |             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |     |               +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"}, is_correlated=TRUE)
@@ -7349,7 +7349,7 @@ QueryStmt
     |         | +-FlattenedArg(type=STRUCT<a INT32, b STRING>)
     |         +-field_idx=0
     +-input_scan=
-      +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias="x")
+      +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias='x')
 
 [REWRITTEN AST]
 QueryStmt
@@ -7422,7 +7422,7 @@ QueryStmt
     |             |           +-FilterScan
     |             |             +-column_list=[TestStructValueTable.value#5]
     |             |             +-input_scan=
-    |             |             | +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias="y")
+    |             |             | +-TableScan(column_list=[TestStructValueTable.value#5], table=TestStructValueTable, column_index_list=[0], alias='y')
     |             |             +-filter_expr=
     |             |               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |             |                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"}, is_correlated=TRUE)
@@ -7431,7 +7431,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias="x")
+      +-TableScan(column_list=[CollatedTable.string_ci#1{Collation:"und:ci"}], table=CollatedTable, column_index_list=[0], alias='x')
 ==
 
 # The collated column is part of the arguments of NULLIFERROR(), which gets

@@ -761,23 +761,23 @@ QueryStmt
         |   |   |   +-hint_list=
         |   |   |   | +-a := Literal(type=STRING, value="b")
         |   |   |   +-left_scan=
-        |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   |   |   +-right_scan=
-        |   |   |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |   |   |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         |   |   |   +-join_expr=
         |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |   |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   |   |       +-ColumnRef(type=INT64, column=KeyValue.Key#3)
         |   |   +-right_scan=
-        |   |   | +-TableScan(table=KeyValue, alias="kv3")
+        |   |   | +-TableScan(table=KeyValue, alias='kv3')
         |   |   +-join_expr=
         |   |     +-Literal(type=BOOL, value=true)
         |   +-right_scan=
-        |   | +-TableScan(table=KeyValue, alias="kv4")
+        |   | +-TableScan(table=KeyValue, alias='kv4')
         |   +-join_expr=
         |     +-Literal(type=BOOL, value=true)
         +-right_scan=
-          +-TableScan(table=KeyValue, alias="kv5")
+          +-TableScan(table=KeyValue, alias='kv5')
 ==
 
 select 1 from KeyValue kv1 cross join @{x=@bad_param} KeyValue kv2
@@ -809,13 +809,13 @@ QueryStmt
         |   +-hint_list=
         |   | +-join_type := Literal(type=STRING, value="HASH_JOIN")
         |   +-left_scan=
-        |   | +-TableScan(table=KeyValue, alias="kv1")
+        |   | +-TableScan(table=KeyValue, alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(table=KeyValue, alias="kv2")
+        |   | +-TableScan(table=KeyValue, alias='kv2')
         |   +-join_expr=
         |     +-Literal(type=BOOL, value=true)
         +-right_scan=
-        | +-TableScan(table=KeyValue, alias="kv3")
+        | +-TableScan(table=KeyValue, alias='kv3')
         +-join_expr=
           +-Literal(type=BOOL, value=true)
 ==
@@ -847,13 +847,13 @@ QueryStmt
         |   | +-join_type := Literal(type=STRING, value="OTHER")
         |   +-join_type=LEFT
         |   +-left_scan=
-        |   | +-TableScan(table=KeyValue, alias="kv1")
+        |   | +-TableScan(table=KeyValue, alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(table=KeyValue, alias="kv2")
+        |   | +-TableScan(table=KeyValue, alias='kv2')
         |   +-join_expr=
         |     +-Literal(type=BOOL, value=true)
         +-right_scan=
-          +-TableScan(table=KeyValue, alias="kv3")
+          +-TableScan(table=KeyValue, alias='kv3')
 ==
 
 #
@@ -1345,7 +1345,7 @@ QueryStmt
     |             |   +-format=DATE
     |             +-element_column=$array.d#6
     +-input_scan=
-      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="tt")
+      +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='tt')
 ==
 
 select 1 from TestTable @{k=@bad_param}
@@ -1603,7 +1603,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL
@@ -1685,7 +1685,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL
@@ -1765,7 +1765,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
             +-SubqueryExpr
@@ -1849,7 +1849,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
             +-SubqueryExpr
@@ -1967,7 +1967,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[TestTable.KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL
@@ -2062,7 +2062,7 @@ QueryStmt
     |       +-a := Literal(type=INT64, value=1)
     |       +-b := Literal(type=STRING, value="c")
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
 
 ==
 

@@ -18,9 +18,9 @@ QueryStmt
         +-input_scan=
         | +-JoinScan
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="b")
+        |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#25 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -49,9 +49,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -79,9 +79,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -128,9 +128,9 @@ QueryStmt
         |   +-parse_location=105-115
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#11]
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=116-147, table=SimpleTypesWithAnonymizationUid, alias="b")
+        |   | +-TableScan(parse_location=116-147, table=SimpleTypesWithAnonymizationUid, alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=153-158, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -174,9 +174,9 @@ QueryStmt
         |   +-parse_location=105-115
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11, int64#14]
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-102, column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |   | +-TableScan(parse_location=71-102, column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=116-147, column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=116-147, column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$or(BOOL, repeated(1) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -224,9 +224,9 @@ QueryStmt
         |   +-parse_location=105-115
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#23]
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=116-147, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(parse_location=116-147, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=153-158, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#23)
@@ -268,9 +268,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-Cast(INT64 -> STRING)
@@ -312,9 +312,9 @@ QueryStmt
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-join_type=FULL
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -349,9 +349,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -379,9 +379,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -428,9 +428,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -469,7 +469,7 @@ QueryStmt
         |   |   +-left_scan=
         |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -539,13 +539,13 @@ QueryStmt
         |   |   +-left_scan=
         |   |   | +-JoinScan
         |   |   |   +-left_scan=
-        |   |   |   | +-TableScan(table=SimpleTypes, alias="a")
+        |   |   |   | +-TableScan(table=SimpleTypes, alias='a')
         |   |   |   +-right_scan=
-        |   |   |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="c")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='c')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="d")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='d')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#47)
@@ -578,13 +578,13 @@ QueryStmt
         |   |   |   +-left_scan=
         |   |   |   | +-JoinScan
         |   |   |   |   +-left_scan=
-        |   |   |   |   | +-TableScan(table=SimpleTypes, alias="a")
+        |   |   |   |   | +-TableScan(table=SimpleTypes, alias='a')
         |   |   |   |   +-right_scan=
-        |   |   |   |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |   |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   |   +-right_scan=
-        |   |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="c")
+        |   |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='c')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="d")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='d')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#47)
@@ -628,9 +628,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, int64#14]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -664,9 +664,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11, int32#13, int64#14, string#17, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="a")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="b")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(2) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -705,9 +705,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11, int32#13, int64#14, string#17, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="a")
+        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="b")
+        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(2) BOOL) -> BOOL)
         |   |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -761,9 +761,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -795,9 +795,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
         |   |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -845,9 +845,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, int32#13, int64#14]
         |   +-left_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias="a")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias="b")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -889,9 +889,9 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypes.int64#14]
         |   +-join_type=RIGHT
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=116-127, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=116-127, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=133-140, type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -938,9 +938,9 @@ QueryStmt
         |       +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20, SimpleTypesWithAnonymizationUid.uid#29]
         |       +-join_type=RIGHT
         |       +-left_scan=
-        |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="b")
+        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -972,9 +972,9 @@ QueryStmt
         |   |       +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20, SimpleTypesWithAnonymizationUid.uid#29]
         |   |       +-join_type=RIGHT
         |   |       +-left_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |   |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |   |       +-right_scan=
-        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="b")
+        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='b')
         |   |       +-join_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -1030,9 +1030,9 @@ QueryStmt
         |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |       +-join_type=RIGHT
         |       +-left_scan=
-        |       | +-TableScan(parse_location=99-130, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=99-130, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(parse_location=148-179, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |       | +-TableScan(parse_location=148-179, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(parse_location=185-190, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1082,9 +1082,9 @@ QueryStmt
         |       +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypesWithAnonymizationUid.uid#11, SimpleTypes.int64#14]
         |       +-join_type=LEFT
         |       +-left_scan=
-        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -1116,9 +1116,9 @@ QueryStmt
         |   |       +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypesWithAnonymizationUid.uid#11, SimpleTypes.int64#14]
         |   |       +-join_type=LEFT
         |   |       +-left_scan=
-        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |   |       +-right_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   |       +-join_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -1166,9 +1166,9 @@ QueryStmt
         |   +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20]
         |   +-join_type=LEFT
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-82, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=71-82, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=95-126, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=95-126, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=132-139, type=INT64, column=SimpleTypes.int64#2)
@@ -1221,9 +1221,9 @@ QueryStmt
         |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |       +-join_type=LEFT
         |       +-left_scan=
-        |       | +-TableScan(parse_location=99-130, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=99-130, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(parse_location=147-178, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |       | +-TableScan(parse_location=147-178, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(parse_location=184-189, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1271,9 +1271,9 @@ QueryStmt
         |   +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20]
         |   +-join_type=FULL
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-82, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=71-82, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=101-132, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=101-132, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=138-145, type=INT64, column=SimpleTypes.int64#2)
@@ -1318,9 +1318,9 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypes.int64#14]
         |   +-join_type=FULL
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=121-132, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=121-132, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=138-145, type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -1361,9 +1361,9 @@ QueryStmt
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-join_type=FULL
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1400,9 +1400,9 @@ QueryStmt
         |   |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23, uid#11, uid#23]
         |   |       +-join_type=FULL
         |   |       +-left_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |       +-right_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |       +-join_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1459,9 +1459,9 @@ QueryStmt
         |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |       +-join_type=FULL
         |       +-left_scan=
-        |       | +-TableScan(parse_location=108-139, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=108-139, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(parse_location=162-193, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |       | +-TableScan(parse_location=162-193, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(parse_location=199-204, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1507,9 +1507,9 @@ QueryStmt
         | +-JoinScan
         |   +-parse_location=104-105
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(parse_location=106-130, table=T1StringAnonymizationUid, alias="b")
+        |     +-TableScan(parse_location=106-130, table=T1StringAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#15 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1546,9 +1546,9 @@ QueryStmt
         | +-JoinScan
         |   +-parse_location=94-95
         |   +-left_scan=
-        |   | +-TableScan(parse_location=71-92, table=ProtoAnonymizationUid, alias="a")
+        |   | +-TableScan(parse_location=71-92, table=ProtoAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(parse_location=96-117, table=ProtoAnonymizationUid, alias="b")
+        |     +-TableScan(parse_location=96-117, table=ProtoAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#3 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1704,7 +1704,7 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#11, $aggregate.$agg1#25, $groupby.uid#26]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[$aggregate.$agg1#25, $groupby.uid#26]
@@ -1744,7 +1744,7 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#11, $aggregate.$agg1#25, $groupby.uid#26]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[$aggregate.$agg1#25, $groupby.uid#26]
@@ -1904,9 +1904,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypes.int64#14]
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         +-group_by_list=
         | +-int64#32 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         +-aggregate_list=
@@ -1932,9 +1932,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[SimpleTypes.int64#14, SimpleTypesWithAnonymizationUid.uid#33]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   +-group_by_list=
         |   | +-int64_partial#36 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         |   | +-$uid#37 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#33)
@@ -1981,9 +1981,9 @@ QueryStmt
         |   +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
         |   +-join_type=LEFT
         |   +-left_scan=
-        |   | +-TableScan(parse_location=35-63, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   | +-TableScan(parse_location=35-63, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=85-113, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   | +-TableScan(parse_location=85-113, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-GetProtoField
@@ -2048,7 +2048,7 @@ QueryStmt
         |   |   |   |     +-field_descriptor=string_val
         |   |   |   |     +-default_value="default_name"
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(parse_location=35-63, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |   |     +-TableScan(parse_location=35-63, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $project.$string_val#5]
@@ -2061,7 +2061,7 @@ QueryStmt
         |   |   |   |     +-field_descriptor=string_val
         |   |   |   |     +-default_value="default_name"
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(parse_location=85-113, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |   |     +-TableScan(parse_location=85-113, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   |       +-GetProtoField
@@ -2155,9 +2155,9 @@ QueryStmt
         |       |   +-parse_location=117-121
         |       |   +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
         |       |   +-left_scan=
-        |       |   | +-TableScan(parse_location=81-109, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |       |   | +-TableScan(parse_location=81-109, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |       |   +-right_scan=
-        |       |   | +-TableScan(parse_location=122-150, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |       |   | +-TableScan(parse_location=122-150, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |       |   +-join_expr=
         |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       |       +-GetProtoField
@@ -2251,7 +2251,7 @@ QueryStmt
         |   |       |   |   |     +-field_descriptor=string_val
         |   |       |   |   |     +-default_value="default_name"
         |   |       |   |   +-input_scan=
-        |   |       |   |     +-TableScan(parse_location=81-109, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |       |   |     +-TableScan(parse_location=81-109, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |       |   +-right_scan=
         |   |       |   | +-ProjectScan
         |   |       |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $project.$string_val#7]
@@ -2264,7 +2264,7 @@ QueryStmt
         |   |       |   |   |     +-field_descriptor=string_val
         |   |       |   |   |     +-default_value="default_name"
         |   |       |   |   +-input_scan=
-        |   |       |   |     +-TableScan(parse_location=122-150, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |       |   |     +-TableScan(parse_location=122-150, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |       |   +-join_expr=
         |   |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   |       |       +-GetProtoField
@@ -2361,9 +2361,9 @@ QueryStmt
         |       |   +-parse_location=100-104
         |       |   +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
         |       |   +-left_scan=
-        |       |   | +-TableScan(parse_location=64-92, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |       |   | +-TableScan(parse_location=64-92, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |       |   +-right_scan=
-        |       |   | +-TableScan(parse_location=105-133, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |       |   | +-TableScan(parse_location=105-133, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |       |   +-join_expr=
         |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       |       +-GetProtoField
@@ -2437,7 +2437,7 @@ QueryStmt
         |   |   |     +-field_descriptor=string_val
         |   |   |     +-default_value="default_name"
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=26-54, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |     +-TableScan(parse_location=26-54, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $join_right.string_val#4]
@@ -2451,7 +2451,7 @@ QueryStmt
         |   |   |     +-field_descriptor=string_val
         |   |   |     +-default_value="default_name"
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=63-91, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |     +-TableScan(parse_location=63-91, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-ColumnRef(type=STRING, column=$join_left.string_val#3)
@@ -2499,7 +2499,7 @@ QueryStmt
         |   |   |       |     +-field_descriptor=string_val
         |   |   |       |     +-default_value="default_name"
         |   |   |       +-input_scan=
-        |   |   |         +-TableScan(parse_location=26-54, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |   |         +-TableScan(parse_location=26-54, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $join_right.string_val#4]
@@ -2517,7 +2517,7 @@ QueryStmt
         |   |   |       |     +-field_descriptor=string_val
         |   |   |       |     +-default_value="default_name"
         |   |   |       +-input_scan=
-        |   |   |         +-TableScan(parse_location=63-91, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |   |         +-TableScan(parse_location=63-91, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   |       +-ColumnRef(type=STRING, column=$join_left.string_val#3)
@@ -2578,7 +2578,7 @@ QueryStmt
         |   |   |     +-field_descriptor=int64_val
         |   |   |     +-default_value=0
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=26-54, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |     +-TableScan(parse_location=26-54, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $join_right.int64_val#4]
@@ -2592,7 +2592,7 @@ QueryStmt
         |   |   |     +-field_descriptor=int64_val
         |   |   |     +-default_value=0
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=63-91, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |     +-TableScan(parse_location=63-91, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=$join_left.int64_val#3)
@@ -2893,9 +2893,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -2923,9 +2923,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)

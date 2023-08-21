@@ -199,7 +199,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-Literal(type=BOOL, value=true)
 ==
@@ -217,7 +217,7 @@ QueryStmt
       +-FilterScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-filter_expr=
           +-Literal(type=BOOL, value=NULL)
 ==
@@ -240,7 +240,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=KeyValue.[Key#1, Key#1, Value#2]
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
 ==
 
 # Introducing an alias prevents using the original table name as an alias.
@@ -288,7 +288,7 @@ QueryStmt
     |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
 ==
 
 select key, kv.key, kv, (kv).key from KeyValue kv;
@@ -320,7 +320,7 @@ QueryStmt
     |     |     +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     |     +-field_idx=0
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
 ==
 
 select * from (select KeyValue from KeyValue);
@@ -362,7 +362,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1]
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 select key from KeyValue as key;
@@ -381,7 +381,7 @@ QueryStmt
     |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="key")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='key')
 ==
 
 select key.key as k from KeyValue AS key
@@ -393,7 +393,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1]
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="key")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='key')
 ==
 
 select key as keyvalue from KeyValue as kv;
@@ -405,7 +405,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[KeyValue.Key#1]
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # We can't see alias kv from inside kv. (No cyclic lookups in NameList.)
@@ -427,7 +427,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=KeyValue.[Value#2, Value#2]
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias="key")
+      +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias='key')
 ==
 
 select kv1.xxx from KeyValue kv1, KeyValue kv2
@@ -794,7 +794,7 @@ QueryStmt
     | +-SELect#4 := Literal(type=INT64, value=2)
     | +-options#5 := Literal(type=INT64, value=3)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="from")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='from')
 ==
 
 # Reserved keyword in an identifier in an error message.
@@ -860,9 +860,9 @@ QueryStmt
         |   +-input_scan=
         |   | +-JoinScan
         |   |   +-left_scan=
-        |   |   | +-TableScan(table=NoColumns, alias="nc1")
+        |   |   | +-TableScan(table=NoColumns, alias='nc1')
         |   |   +-right_scan=
-        |   |     +-TableScan(table=NoColumns, alias="nc2")
+        |   |     +-TableScan(table=NoColumns, alias='nc2')
         |   +-filter_expr=
         |     +-Literal(type=BOOL, value=true)
         +-aggregate_list=

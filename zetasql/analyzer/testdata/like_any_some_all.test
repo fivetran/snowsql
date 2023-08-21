@@ -2609,7 +2609,7 @@ QueryStmt
       +-FilterScan
         +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$like_any(STRING, repeated(1) STRING) -> BOOL)
             +-GetProtoField
@@ -2651,7 +2651,7 @@ QueryStmt
       +-FilterScan
         +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL
@@ -2773,7 +2773,7 @@ QueryStmt
       +-FilterScan
         +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$like_any_array(STRING, ARRAY<STRING>) -> BOOL)
             +-GetProtoField
@@ -2814,7 +2814,7 @@ QueryStmt
       +-FilterScan
         +-column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
         +-filter_expr=
           +-SubqueryExpr
             +-type=BOOL

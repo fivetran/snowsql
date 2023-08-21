@@ -169,7 +169,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[KitchenSinkValueTable.value#1]
         +-input_scan=
-        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-GetProtoField
@@ -192,7 +192,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[KitchenSinkValueTable.value#1]
         +-input_scan=
-        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-GetProtoField
@@ -216,7 +216,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[KitchenSinkValueTable.value#1]
         +-input_scan=
-          +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+          +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
 ==
 
 with q as (select {{|as struct|as value}}

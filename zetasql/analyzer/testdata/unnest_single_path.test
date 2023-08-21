@@ -85,7 +85,7 @@ QueryStmt
     +-input_scan=
       +-ArrayScan
         +-input_scan=
-        | +-TableScan(column_list=[StructWithKitchenSinkTable.t#3], table=StructWithKitchenSinkTable, column_index_list=[2], alias="StructWithKitchenSinkTable")
+        | +-TableScan(column_list=[StructWithKitchenSinkTable.t#3], table=StructWithKitchenSinkTable, column_index_list=[2], alias='StructWithKitchenSinkTable')
         +-array_expr=
         | +-GetStructField
         |   +-type=ARRAY<STRUCT<kitchen_sink PROTO<zetasql_test__.KitchenSinkPB>>>
@@ -106,7 +106,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[$array.e#4]
         +-input_scan=
-        | +-TableScan(column_list=[StructWithKitchenSinkTable.t#3], table=StructWithKitchenSinkTable, column_index_list=[2], alias="StructWithKitchenSinkTable")
+        | +-TableScan(column_list=[StructWithKitchenSinkTable.t#3], table=StructWithKitchenSinkTable, column_index_list=[2], alias='StructWithKitchenSinkTable')
         +-array_expr=
         | +-GetStructField
         |   +-type=ARRAY<STRUCT<kitchen_sink PROTO<zetasql_test__.KitchenSinkPB>>>
@@ -173,7 +173,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[$array.ri#4]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="TestTable")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='TestTable')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<INT64>
@@ -450,7 +450,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[$array.value#4]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="TestTable")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='TestTable')
         +-array_expr=
         | +-Flatten
         |   +-type=ARRAY<INT32>
@@ -521,7 +521,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[$array.value#2]
         +-input_scan=
-        | +-TableScan(column_list=[RecursivePBTable.RecursivePB#1], table=RecursivePBTable, column_index_list=[0], alias="RecursivePBTable")
+        | +-TableScan(column_list=[RecursivePBTable.RecursivePB#1], table=RecursivePBTable, column_index_list=[0], alias='RecursivePBTable')
         +-array_expr=
         | +-Flatten
         |   +-type=ARRAY<INT64>
@@ -601,7 +601,7 @@ QueryStmt
                 |   |   | +-ArrayScan
                 |   |   |   +-column_list=[RecursivePBTable.RecursivePB#1, $flatten.injected#3]
                 |   |   |   +-input_scan=
-                |   |   |   | +-TableScan(column_list=[RecursivePBTable.RecursivePB#1], table=RecursivePBTable, column_index_list=[0], alias="RecursivePBTable")
+                |   |   |   | +-TableScan(column_list=[RecursivePBTable.RecursivePB#1], table=RecursivePBTable, column_index_list=[0], alias='RecursivePBTable')
                 |   |   |   +-array_expr=
                 |   |   |   | +-GetProtoField
                 |   |   |   |   +-type=ARRAY<PROTO<zetasql_test__.RecursivePB>>
@@ -676,7 +676,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[$array.Value#18]
         +-input_scan=
-        | +-TableScan(column_list=[ArrayTypes.ProtoArray#15], table=ArrayTypes, column_index_list=[14], alias="ArrayTypes")
+        | +-TableScan(column_list=[ArrayTypes.ProtoArray#15], table=ArrayTypes, column_index_list=[14], alias='ArrayTypes')
         +-array_expr=
         | +-Flatten
         |   +-type=ARRAY<INT32>
@@ -718,7 +718,7 @@ QueryStmt
               +-ArrayScan
                 +-column_list=[ArrayTypes.ProtoArray#15, $flatten.injected#19]
                 +-input_scan=
-                | +-TableScan(column_list=[ArrayTypes.ProtoArray#15], table=ArrayTypes, column_index_list=[14], alias="ArrayTypes")
+                | +-TableScan(column_list=[ArrayTypes.ProtoArray#15], table=ArrayTypes, column_index_list=[14], alias='ArrayTypes')
                 +-array_expr=
                 | +-ColumnRef(type=ARRAY<PROTO<zetasql_test__.TestExtraPB>>, column=ArrayTypes.ProtoArray#15)
                 +-element_column=$flatten.injected#19
@@ -852,7 +852,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.repeated_int32_val#4]
         +-input_scan=
-        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="TestTable")
+        | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='TestTable')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<INT32>
@@ -882,7 +882,7 @@ QueryStmt
           +-ArrayScan
             +-column_list=[$array.original_alias#4]
             +-input_scan=
-            | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="TestTable")
+            | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='TestTable')
             +-array_expr=
             | +-GetProtoField
             |   +-type=ARRAY<INT32>

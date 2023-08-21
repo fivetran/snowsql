@@ -284,7 +284,7 @@ THEN RETURN T.key, 100 AS exp1, T.TestEnum as exp2
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+| +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
 +-returning=
 | +-ReturningClause
 |   +-output_column_list=
@@ -1610,7 +1610,7 @@ THEN RETURN T.*
 
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="T")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='T')
 +-column_access_list=READ,READ_WRITE
 +-returning=
 | +-ReturningClause
@@ -1636,7 +1636,7 @@ THEN RETURN T.* EXCEPT(KEY)
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="T")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='T')
 +-column_access_list=READ,READ_WRITE
 +-returning=
 | +-ReturningClause
@@ -1661,7 +1661,7 @@ THEN RETURN T.* EXCEPT (KEY), * REPLACE (2 AS KEY)
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="T")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='T')
 +-column_access_list=READ,READ_WRITE
 +-returning=
 | +-ReturningClause
@@ -1786,7 +1786,7 @@ DELETE KeyValue T WHERE TRUE THEN RETURN *, T.* EXCEPT(KEY)
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="T")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='T')
 +-returning=
 | +-ReturningClause
 |   +-output_column_list=
@@ -1802,7 +1802,7 @@ DELETE KeyValue T WHERE TRUE THEN RETURN WITH ACTION AS action *, T.* EXCEPT(KEY
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="T")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='T')
 +-returning=
 | +-ReturningClause
 |   +-output_column_list=
@@ -1990,7 +1990,7 @@ DELETE KeyValue T WHERE T.Value = 'Value_1'
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="T")
+| +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='T')
 +-returning=
 | +-ReturningClause
 |   +-output_column_list=
@@ -2005,7 +2005,7 @@ DeleteStmt
 |           +-ProjectScan
 |             +-column_list=KeyValue.[Key#3, Value#4]
 |             +-input_scan=
-|               +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="P")
+|               +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='P')
 +-column_access_list=READ,READ
 +-where_expr=
   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
@@ -2018,7 +2018,7 @@ DELETE KeyValue T WHERE T.key = (SELECT count(*) FROM (SELECT P.* FROM KeyValue 
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="T")
+| +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='T')
 +-returning=
 | +-ReturningClause
 |   +-output_column_list=
@@ -2040,7 +2040,7 @@ DeleteStmt
               | +-ProjectScan
               |   +-column_list=KeyValue.[Key#3, Value#4]
               |   +-input_scan=
-              |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="P")
+              |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='P')
               +-aggregate_list=
                 +-$agg1#5 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==
@@ -2121,7 +2121,7 @@ DeleteStmt
               |       |     +-field_descriptor=nested_value
               |       |     +-default_value=NULL
               |       +-input_scan=
-              |         +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2], alias="P")
+              |         +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2], alias='P')
               +-aggregate_list=
                 +-$agg1#12 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 
@@ -2194,7 +2194,7 @@ DeleteStmt
 |                 |       |     +-field_descriptor=nested_value
 |                 |       |     +-default_value=NULL
 |                 |       +-input_scan=
-|                 |         +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2], alias="P")
+|                 |         +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2], alias='P')
 |                 +-aggregate_list=
 |                   +-$agg1#12 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-column_access_list=READ,READ

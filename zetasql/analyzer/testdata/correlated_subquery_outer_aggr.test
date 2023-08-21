@@ -74,7 +74,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#4]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 --
@@ -105,7 +105,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#4]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
         | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-grouping_set_list=
@@ -150,7 +150,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#4]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 --
@@ -181,7 +181,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#4]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
         | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-grouping_set_list=
@@ -363,7 +363,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.$col1#6]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="tt")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='tt')
         +-group_by_list=
           +-$col1#6 :=
             +-SubqueryExpr
@@ -516,7 +516,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-SubqueryExpr
@@ -555,7 +555,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=KeyValue.[Key#1, Value#2]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-SubqueryExpr
@@ -594,7 +594,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=TestTable.[TestEnum#2, KitchenSink#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=TestTable.[TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[1, 2], alias="tt")
+        |   | +-TableScan(column_list=TestTable.[TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[1, 2], alias='tt')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-SubqueryExpr
@@ -663,7 +663,7 @@ QueryStmt
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-$groupbycol1#4 :=
             +-SubqueryExpr
@@ -710,7 +710,7 @@ QueryStmt
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="tt")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='tt')
         +-group_by_list=
           +-$groupbycol1#6 :=
             +-SubqueryExpr
@@ -764,7 +764,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-group_by_list=
         |     +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-filter_expr=
@@ -803,7 +803,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-group_by_list=
         |     +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-filter_expr=
@@ -976,7 +976,7 @@ QueryStmt
         |       |   +-expr_list=
         |       |   | +-ct#3 := Literal(type=INT64, value=1)
         |       |   +-input_scan=
-        |       |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |       |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |       +-group_by_list=
         |         +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-filter_expr=
@@ -1020,7 +1020,7 @@ QueryStmt
         |       |   +-expr_list=
         |       |   | +-ct#3 := Literal(type=INT64, value=1)
         |       |   +-input_scan=
-        |       |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |       |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |       +-group_by_list=
         |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |       +-grouping_set_list=
@@ -1110,7 +1110,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
     |       +-group_by_list=
     |         +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     +-order_by_item_list=
@@ -1156,7 +1156,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
     |       +-group_by_list=
     |         +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     +-order_by_item_list=
@@ -1248,7 +1248,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#5]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#5 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -1298,7 +1298,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.value#8]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias='kv')
         +-group_by_list=
           +-value#8 := ColumnRef(type=STRING, column=KeyValue.Value#2)
 ==
@@ -1366,7 +1366,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#5]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#5 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -1408,7 +1408,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.$col1#7]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="tt")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='tt')
         +-group_by_list=
           +-$col1#7 :=
             +-SubqueryExpr
@@ -1463,7 +1463,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#7]
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="tt")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='tt')
         +-aggregate_list=
           +-$agg1#7 :=
             +-AggregateFunctionCall(ZetaSQL:avg(INT64) -> DOUBLE)
@@ -1537,7 +1537,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=KeyValue.[Key#1, Value#2]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-SubqueryExpr
@@ -1594,7 +1594,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=TestTable.[TestEnum#2, KitchenSink#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=TestTable.[TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[1, 2], alias="tt")
+        |   | +-TableScan(column_list=TestTable.[TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[1, 2], alias='tt')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-SubqueryExpr
@@ -1654,7 +1654,7 @@ QueryStmt
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-$groupbycol1#5 :=
             +-SubqueryExpr
@@ -1699,7 +1699,7 @@ QueryStmt
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="tt")
+        | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='tt')
         +-group_by_list=
           +-$groupbycol1#7 :=
             +-SubqueryExpr
@@ -1759,7 +1759,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-group_by_list=
         |     +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-filter_expr=
@@ -1809,7 +1809,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-group_by_list=
         |     +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-filter_expr=
@@ -1923,7 +1923,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
     |       +-group_by_list=
     |         +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     +-order_by_item_list=
@@ -1980,7 +1980,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
     |       +-group_by_list=
     |         +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     +-order_by_item_list=
@@ -2046,7 +2046,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#10, $aggregate.$agg1#9]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
         | +-key#10 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-aggregate_list=
@@ -2105,7 +2105,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.value#10, $aggregate.$agg1#9]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias='kv')
         +-group_by_list=
         | +-value#10 := ColumnRef(type=STRING, column=KeyValue.Value#2)
         +-aggregate_list=
@@ -2181,7 +2181,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.value#11, $aggregate.$agg1#10]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1], alias='kv')
         +-group_by_list=
         | +-value#11 := ColumnRef(type=STRING, column=KeyValue.Value#2)
         +-aggregate_list=
@@ -2217,7 +2217,7 @@ QueryStmt
                       +-AggregateScan
                         +-column_list=[$groupby.TestEnum#7]
                         +-input_scan=
-                        | +-TableScan(column_list=[TestTable.TestEnum#4], table=TestTable, column_index_list=[1], alias="TT")
+                        | +-TableScan(column_list=[TestTable.TestEnum#4], table=TestTable, column_index_list=[1], alias='TT')
                         +-group_by_list=
                           +-TestEnum#7 := ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#4)
 ==
@@ -2266,7 +2266,7 @@ QueryStmt
             |         | +-AggregateScan
             |         |   +-column_list=[$groupby.TestEnum#7]
             |         |   +-input_scan=
-            |         |   | +-TableScan(column_list=[TestTable.TestEnum#5], table=TestTable, column_index_list=[1], alias="TT")
+            |         |   | +-TableScan(column_list=[TestTable.TestEnum#5], table=TestTable, column_index_list=[1], alias='TT')
             |         |   +-group_by_list=
             |         |     +-TestEnum#7 := ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#5)
             |         +-filter_expr=
@@ -2346,7 +2346,7 @@ QueryStmt
     |   |         |     +-AggregateScan
     |   |         |       +-column_list=[$groupby.TestEnum#7]
     |   |         |       +-input_scan=
-    |   |         |       | +-TableScan(column_list=[TestTable.TestEnum#5], table=TestTable, column_index_list=[1], alias="TT")
+    |   |         |       | +-TableScan(column_list=[TestTable.TestEnum#5], table=TestTable, column_index_list=[1], alias='TT')
     |   |         |       +-group_by_list=
     |   |         |         +-TestEnum#7 := ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#5)
     |   |         +-order_by_item_list=
@@ -2429,7 +2429,7 @@ QueryStmt
             |         | +-AggregateScan
             |         |   +-column_list=[$groupby.TestEnum#7]
             |         |   +-input_scan=
-            |         |   | +-TableScan(column_list=[TestTable.TestEnum#5], table=TestTable, column_index_list=[1], alias="TT")
+            |         |   | +-TableScan(column_list=[TestTable.TestEnum#5], table=TestTable, column_index_list=[1], alias='TT')
             |         |   +-group_by_list=
             |         |     +-TestEnum#7 := ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#5)
             |         +-filter_expr=
@@ -2520,7 +2520,7 @@ QueryStmt
     |   |   |       |     +-ArrayScan
     |   |   |       |       +-column_list=[TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.__flat1#4]
     |   |   |       |       +-input_scan=
-    |   |   |       |       | +-TableScan(column_list=TestTable.[TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[1, 2], alias="__table0")
+    |   |   |       |       | +-TableScan(column_list=TestTable.[TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[1, 2], alias='__table0')
     |   |   |       |       +-array_expr=
     |   |   |       |       | +-GetProtoField
     |   |   |       |       |   +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.Nested>>
@@ -2660,7 +2660,7 @@ QueryStmt
         |   |     +-ArrayScan
         |   |       +-column_list=[KitchenSinkValueTable.value#1, $array.t1#2]
         |   |       +-input_scan=
-        |   |       | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t0")
+        |   |       | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t0')
         |   |       +-array_expr=
         |   |       | +-GetProtoField
         |   |       |   +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.Nested>>
@@ -2767,7 +2767,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#4]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -2800,7 +2800,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=KeyValue.[Key#1, Value#2]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -2838,7 +2838,7 @@ QueryStmt
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-$groupbycol1#4 :=
             +-SubqueryExpr
@@ -2876,7 +2876,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-group_by_list=
         |     +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-filter_expr=
@@ -2932,7 +2932,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+    |       | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
     |       +-group_by_list=
     |         +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     +-order_by_item_list=
@@ -2980,7 +2980,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#6]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#6 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -3025,7 +3025,7 @@ QueryStmt
     |               +-AggregateScan
     |                 +-column_list=[$aggregate.$agg1#12]
     |                 +-input_scan=
-    |                 | +-TableScan(column_list=KeyValue.[Key#10, Value#11], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+    |                 | +-TableScan(column_list=KeyValue.[Key#10, Value#11], table=KeyValue, column_index_list=[0, 1], alias='kv1')
     |                 +-group_by_list=
     |                 | +-value#13 := ColumnRef(type=STRING, column=KeyValue.Value#11)
     |                 +-aggregate_list=
@@ -3036,7 +3036,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#9]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#9 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -3073,7 +3073,7 @@ QueryStmt
     |             | +-FilterScan
     |             |   +-column_list=KeyValue.[Key#8, Value#9]
     |             |   +-input_scan=
-    |             |   | +-TableScan(column_list=KeyValue.[Key#8, Value#9], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+    |             |   | +-TableScan(column_list=KeyValue.[Key#8, Value#9], table=KeyValue, column_index_list=[0, 1], alias='kv1')
     |             |   +-filter_expr=
     |             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
     |             |       +-ColumnRef(type=INT64, column=KeyValue.Key#8)
@@ -3088,7 +3088,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#7]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#7 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -3121,7 +3121,7 @@ QueryStmt
     |           +-AggregateScan
     |             +-column_list=[$aggregate.$agg1#11]
     |             +-input_scan=
-    |             | +-TableScan(column_list=[KeyValue.Key#9], table=KeyValue, column_index_list=[0], alias="kv1")
+    |             | +-TableScan(column_list=[KeyValue.Key#9], table=KeyValue, column_index_list=[0], alias='kv1')
     |             +-group_by_list=
     |             | +-key#12 := ColumnRef(type=INT64, column=KeyValue.Key#9)
     |             | +-key#13 := ColumnRef(type=INT64, column=$groupby.key#8, is_correlated=TRUE)
@@ -3133,7 +3133,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#8]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#8 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -3170,7 +3170,7 @@ QueryStmt
     |             | +-AggregateScan
     |             |   +-column_list=[$aggregate.$agg1#10]
     |             |   +-input_scan=
-    |             |   | +-TableScan(column_list=[KeyValue.Key#8], table=KeyValue, column_index_list=[0], alias="kv1")
+    |             |   | +-TableScan(column_list=[KeyValue.Key#8], table=KeyValue, column_index_list=[0], alias='kv1')
     |             |   +-group_by_list=
     |             |   | +-key#11 := ColumnRef(type=INT64, column=KeyValue.Key#8)
     |             |   +-aggregate_list=
@@ -3185,7 +3185,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#7]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#7 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -3224,7 +3224,7 @@ QueryStmt
     |         |     +-AggregateScan
     |         |       +-column_list=[$aggregate.$agg1#11]
     |         |       +-input_scan=
-    |         |       | +-TableScan(column_list=[KeyValue.Key#9], table=KeyValue, column_index_list=[0], alias="kv1")
+    |         |       | +-TableScan(column_list=[KeyValue.Key#9], table=KeyValue, column_index_list=[0], alias='kv1')
     |         |       +-group_by_list=
     |         |       | +-key#12 := ColumnRef(type=INT64, column=KeyValue.Key#9)
     |         |       +-aggregate_list=
@@ -3239,7 +3239,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#8]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-key#8 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -3266,7 +3266,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -3312,7 +3312,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -3358,7 +3358,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -3413,7 +3413,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=KeyValue.[Key#1, Value#2]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -3465,7 +3465,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -3521,7 +3521,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -3576,7 +3576,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#8 :=
         |   +-SubqueryExpr
@@ -3623,7 +3623,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#11 :=
         |   +-SubqueryExpr
@@ -3688,7 +3688,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#7 :=
         |   +-SubqueryExpr
@@ -3732,7 +3732,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#8 :=
         |   +-SubqueryExpr
@@ -3786,7 +3786,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#9 :=
         |   +-SubqueryExpr
@@ -3835,7 +3835,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#8 :=
         |   +-SubqueryExpr
@@ -3890,7 +3890,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#3]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-$groupbycol1#9 :=
         |   +-SubqueryExpr
@@ -3952,7 +3952,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-group_by_list=
         |   | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-aggregate_list=
@@ -4004,7 +4004,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-group_by_list=
         |   | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-aggregate_list=
@@ -4053,7 +4053,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-group_by_list=
         |   | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-aggregate_list=
@@ -4112,7 +4112,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-group_by_list=
         |   | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-aggregate_list=
@@ -4166,7 +4166,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-group_by_list=
         |   | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-aggregate_list=
@@ -4226,7 +4226,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-group_by_list=
         |   | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-aggregate_list=
@@ -4311,7 +4311,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |       +-group_by_list=
     |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-aggregate_list=
@@ -4363,7 +4363,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |       +-group_by_list=
     |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-aggregate_list=
@@ -4427,7 +4427,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |       +-group_by_list=
     |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-aggregate_list=
@@ -4484,7 +4484,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |       +-group_by_list=
     |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-aggregate_list=
@@ -4548,7 +4548,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |       +-group_by_list=
     |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-aggregate_list=
@@ -4614,7 +4614,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
     |       +-input_scan=
-    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |       | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |       +-group_by_list=
     |       | +-key#4 := ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       +-aggregate_list=
@@ -4674,9 +4674,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Key#3]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -4731,9 +4731,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Key#3]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -4872,7 +4872,7 @@ QueryStmt
     |       |   |     +-field_descriptor=int32_val
     |       |   |     +-get_has_bit=TRUE
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t0")
+    |       |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t0')
     |       +-group_by_list=
     |         +-has_int32_val#3 := ColumnRef(type=BOOL, column=$pre_groupby.has_int32_val#2)
     +-order_by_item_list=
@@ -4926,7 +4926,7 @@ QueryStmt
     |       |   |     +-field_descriptor=int32_val
     |       |   |     +-get_has_bit=TRUE
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t0")
+    |       |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t0')
     |       +-group_by_list=
     |         +-has_int32_val#3 := ColumnRef(type=BOOL, column=$query.has_int32_val#2)
     +-order_by_item_list=

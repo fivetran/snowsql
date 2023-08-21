@@ -344,7 +344,7 @@ WHERE target.KitchenSink.bool_val
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="target")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='target')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-GetProtoField
@@ -958,7 +958,7 @@ WHERE target.KitchenSink.bool_val
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="target")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='target')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-GetProtoField
@@ -2062,7 +2062,7 @@ WHERE true
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2155,7 +2155,7 @@ WHERE true
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2227,7 +2227,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2295,7 +2295,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Key#1, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[0, 2], alias="t")
+| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Key#1, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[0, 2], alias='t')
 +-column_access_list=READ,READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2348,7 +2348,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias="t")
+| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias='t')
 +-column_access_list=READ,READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2405,7 +2405,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias="t")
+| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias='t')
 +-column_access_list=READ,READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)

@@ -21,7 +21,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=TwoIntsView.[a#1, b#2]
     +-input_scan=
-      +-TableScan(column_list=TwoIntsView.[a#1, b#2], table=TwoIntsView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=TwoIntsView.[a#1, b#2], table=TwoIntsView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -50,7 +50,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=TwoIntsView.[b#2, a#1]
     +-input_scan=
-      +-TableScan(column_list=TwoIntsView.[a#1, b#2], table=TwoIntsView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=TwoIntsView.[a#1, b#2], table=TwoIntsView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -78,7 +78,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TwoIntsView.a#1]
     +-input_scan=
-      +-TableScan(column_list=[TwoIntsView.a#1], table=TwoIntsView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[TwoIntsView.a#1], table=TwoIntsView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -105,7 +105,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TwoIntsView.b#2]
     +-input_scan=
-      +-TableScan(column_list=[TwoIntsView.b#2], table=TwoIntsView, column_index_list=[1], alias="v")
+      +-TableScan(column_list=[TwoIntsView.b#2], table=TwoIntsView, column_index_list=[1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -134,7 +134,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=TwoIntsView, alias="v")
+      +-TableScan(table=TwoIntsView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -169,9 +169,9 @@ QueryStmt
       +-JoinScan
         +-column_list=TwoIntsView.[a#1, b#4]
         +-left_scan=
-        | +-TableScan(column_list=[TwoIntsView.a#1], table=TwoIntsView, column_index_list=[0], alias="v1")
+        | +-TableScan(column_list=[TwoIntsView.a#1], table=TwoIntsView, column_index_list=[0], alias='v1')
         +-right_scan=
-          +-TableScan(column_list=[TwoIntsView.b#4], table=TwoIntsView, column_index_list=[1], alias="v2")
+          +-TableScan(column_list=[TwoIntsView.b#4], table=TwoIntsView, column_index_list=[1], alias='v2')
 
 [REWRITTEN AST]
 QueryStmt
@@ -223,7 +223,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[TwoIntsView.a#1, $array.v2#6]
         +-input_scan=
-        | +-TableScan(column_list=[TwoIntsView.a#1], table=TwoIntsView, column_index_list=[0], alias="v1")
+        | +-TableScan(column_list=[TwoIntsView.a#1], table=TwoIntsView, column_index_list=[0], alias='v1')
         +-array_expr=
         | +-SubqueryExpr
         |   +-type=ARRAY<STRUCT<a INT64, b INT64>>
@@ -316,14 +316,14 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=TwoIntsView.[a#1, b#2]
       | |   +-input_scan=
-      | |     +-TableScan(column_list=TwoIntsView.[a#1, b#2], table=TwoIntsView, column_index_list=[0, 1], alias="v1")
+      | |     +-TableScan(column_list=TwoIntsView.[a#1, b#2], table=TwoIntsView, column_index_list=[0, 1], alias='v1')
       | +-output_column_list=TwoIntsView.[a#1, b#2]
       +-SetOperationItem
         +-scan=
         | +-ProjectScan
         |   +-column_list=TwoIntsView.[a#3, b#4]
         |   +-input_scan=
-        |     +-TableScan(column_list=TwoIntsView.[a#3, b#4], table=TwoIntsView, column_index_list=[0, 1], alias="v2")
+        |     +-TableScan(column_list=TwoIntsView.[a#3, b#4], table=TwoIntsView, column_index_list=[0, 1], alias='v2')
         +-output_column_list=TwoIntsView.[a#3, b#4]
 
 [REWRITTEN AST]
@@ -380,7 +380,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=UnprojectedColumnView.[a#1, b#2]
     +-input_scan=
-      +-TableScan(column_list=UnprojectedColumnView.[a#1, b#2], table=UnprojectedColumnView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=UnprojectedColumnView.[a#1, b#2], table=UnprojectedColumnView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -413,7 +413,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=UnprojectedColumnView.[b#2, a#1]
     +-input_scan=
-      +-TableScan(column_list=UnprojectedColumnView.[a#1, b#2], table=UnprojectedColumnView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=UnprojectedColumnView.[a#1, b#2], table=UnprojectedColumnView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -445,7 +445,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[UnprojectedColumnView.a#1]
     +-input_scan=
-      +-TableScan(column_list=[UnprojectedColumnView.a#1], table=UnprojectedColumnView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[UnprojectedColumnView.a#1], table=UnprojectedColumnView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -476,7 +476,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[UnprojectedColumnView.b#2]
     +-input_scan=
-      +-TableScan(column_list=[UnprojectedColumnView.b#2], table=UnprojectedColumnView, column_index_list=[1], alias="v")
+      +-TableScan(column_list=[UnprojectedColumnView.b#2], table=UnprojectedColumnView, column_index_list=[1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -509,7 +509,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=UnprojectedColumnView, alias="v")
+      +-TableScan(table=UnprojectedColumnView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -550,7 +550,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=ColumnListView.[a#1, b#2]
     +-input_scan=
-      +-TableScan(column_list=ColumnListView.[a#1, b#2], table=ColumnListView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ColumnListView.[a#1, b#2], table=ColumnListView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -579,7 +579,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=ColumnListView.[b#2, a#1]
     +-input_scan=
-      +-TableScan(column_list=ColumnListView.[a#1, b#2], table=ColumnListView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ColumnListView.[a#1, b#2], table=ColumnListView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -607,7 +607,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[ColumnListView.a#1]
     +-input_scan=
-      +-TableScan(column_list=[ColumnListView.a#1], table=ColumnListView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[ColumnListView.a#1], table=ColumnListView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -634,7 +634,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[ColumnListView.b#2]
     +-input_scan=
-      +-TableScan(column_list=[ColumnListView.b#2], table=ColumnListView, column_index_list=[1], alias="v")
+      +-TableScan(column_list=[ColumnListView.b#2], table=ColumnListView, column_index_list=[1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -663,7 +663,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=ColumnListView, alias="v")
+      +-TableScan(table=ColumnListView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -702,7 +702,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=CteView.[a#1, b#2]
     +-input_scan=
-      +-TableScan(column_list=CteView.[a#1, b#2], table=CteView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=CteView.[a#1, b#2], table=CteView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -742,7 +742,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=CteView.[b#2, a#1]
     +-input_scan=
-      +-TableScan(column_list=CteView.[a#1, b#2], table=CteView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=CteView.[a#1, b#2], table=CteView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -781,7 +781,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[CteView.a#1]
     +-input_scan=
-      +-TableScan(column_list=[CteView.a#1], table=CteView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[CteView.a#1], table=CteView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -819,7 +819,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[CteView.b#2]
     +-input_scan=
-      +-TableScan(column_list=[CteView.b#2], table=CteView, column_index_list=[1], alias="v")
+      +-TableScan(column_list=[CteView.b#2], table=CteView, column_index_list=[1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -859,7 +859,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=CteView, alias="v")
+      +-TableScan(table=CteView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -908,7 +908,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[OneStructView.ab#1]
     +-input_scan=
-      +-TableScan(column_list=[OneStructView.ab#1], table=OneStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[OneStructView.ab#1], table=OneStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -951,7 +951,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=AsStructView.$struct#1)
     |     +-field_idx=1
     +-input_scan=
-      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1008,7 +1008,7 @@ QueryStmt
     |     +-field_list=
     |       +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=OneStructView.ab#1)
     +-input_scan=
-      +-TableScan(column_list=[OneStructView.ab#1], table=OneStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[OneStructView.ab#1], table=OneStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1040,7 +1040,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[AsStructView.$struct#1]
     +-input_scan=
-      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1104,7 +1104,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=AsStructView.$struct#1)
     |     +-field_idx=0
     +-input_scan=
-      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1168,7 +1168,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=AsStructView.$struct#1)
     |     +-field_idx=0
     +-input_scan=
-      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1225,7 +1225,7 @@ QueryStmt
     |     | +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=AsStructView.$struct#1)
     |     +-field_idx=1
     +-input_scan=
-      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[AsStructView.$struct#1], table=AsStructView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1277,7 +1277,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#2 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=OneStructView, alias="v")
+      +-TableScan(table=OneStructView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1307,7 +1307,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#2 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=AsStructView, alias="v")
+      +-TableScan(table=AsStructView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1354,7 +1354,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[OneScalarView.ab#1]
     +-input_scan=
-      +-TableScan(column_list=[OneScalarView.ab#1], table=OneScalarView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[OneScalarView.ab#1], table=OneScalarView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1382,7 +1382,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[AsScalarView.$value_column#1]
     +-input_scan=
-      +-TableScan(column_list=[AsScalarView.$value_column#1], table=AsScalarView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[AsScalarView.$value_column#1], table=AsScalarView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1420,7 +1420,7 @@ QueryStmt
     |     +-field_list=
     |       +-ColumnRef(type=STRING, column=OneScalarView.ab#1)
     +-input_scan=
-      +-TableScan(column_list=[OneScalarView.ab#1], table=OneScalarView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[OneScalarView.ab#1], table=OneScalarView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1454,7 +1454,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#2 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=OneScalarView, alias="v")
+      +-TableScan(table=OneScalarView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1484,7 +1484,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#2 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=AsScalarView, alias="v")
+      +-TableScan(table=AsScalarView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1521,7 +1521,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=ScanTableView.[a#1, b#2]
     +-input_scan=
-      +-TableScan(column_list=ScanTableView.[a#1, b#2], table=ScanTableView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ScanTableView.[a#1, b#2], table=ScanTableView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1553,7 +1553,7 @@ QueryStmt
     |       +-ColumnRef(type=INT64, column=ScanTableView.a#1)
     |       +-ColumnRef(type=INT64, column=ScanTableView.b#2)
     +-input_scan=
-      +-TableScan(column_list=ScanTableView.[a#1, b#2], table=ScanTableView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ScanTableView.[a#1, b#2], table=ScanTableView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1585,7 +1585,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=ScanTableView.[b#2, a#1]
     +-input_scan=
-      +-TableScan(column_list=ScanTableView.[a#1, b#2], table=ScanTableView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ScanTableView.[a#1, b#2], table=ScanTableView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1610,7 +1610,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[ScanTableView.a#1]
     +-input_scan=
-      +-TableScan(column_list=[ScanTableView.a#1], table=ScanTableView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[ScanTableView.a#1], table=ScanTableView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1634,7 +1634,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[ScanTableView.b#2]
     +-input_scan=
-      +-TableScan(column_list=[ScanTableView.b#2], table=ScanTableView, column_index_list=[1], alias="v")
+      +-TableScan(column_list=[ScanTableView.b#2], table=ScanTableView, column_index_list=[1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1660,7 +1660,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=ScanTableView, alias="v")
+      +-TableScan(table=ScanTableView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1695,7 +1695,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=ScanViewView.[a#1, b#2]
     +-input_scan=
-      +-TableScan(column_list=ScanViewView.[a#1, b#2], table=ScanViewView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ScanViewView.[a#1, b#2], table=ScanViewView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1732,7 +1732,7 @@ QueryStmt
     |       +-ColumnRef(type=INT64, column=ScanViewView.a#1)
     |       +-ColumnRef(type=STRING, column=ScanViewView.b#2)
     +-input_scan=
-      +-TableScan(column_list=ScanViewView.[a#1, b#2], table=ScanViewView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ScanViewView.[a#1, b#2], table=ScanViewView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1769,7 +1769,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=ScanViewView.[b#2, a#1]
     +-input_scan=
-      +-TableScan(column_list=ScanViewView.[a#1, b#2], table=ScanViewView, column_index_list=[0, 1], alias="v")
+      +-TableScan(column_list=ScanViewView.[a#1, b#2], table=ScanViewView, column_index_list=[0, 1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1799,7 +1799,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[ScanViewView.a#1]
     +-input_scan=
-      +-TableScan(column_list=[ScanViewView.a#1], table=ScanViewView, column_index_list=[0], alias="v")
+      +-TableScan(column_list=[ScanViewView.a#1], table=ScanViewView, column_index_list=[0], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1828,7 +1828,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[ScanViewView.b#2]
     +-input_scan=
-      +-TableScan(column_list=[ScanViewView.b#2], table=ScanViewView, column_index_list=[1], alias="v")
+      +-TableScan(column_list=[ScanViewView.b#2], table=ScanViewView, column_index_list=[1], alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -1859,7 +1859,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 := Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(table=ScanViewView, alias="v")
+      +-TableScan(table=ScanViewView, alias='v')
 
 [REWRITTEN AST]
 QueryStmt
@@ -2057,9 +2057,9 @@ QueryStmt
       +-JoinScan
         +-column_list=ScanTableView.[a#1, b#4]
         +-left_scan=
-        | +-TableScan(column_list=[ScanTableView.a#1], table=ScanTableView, column_index_list=[0], alias="v1")
+        | +-TableScan(column_list=[ScanTableView.a#1], table=ScanTableView, column_index_list=[0], alias='v1')
         +-right_scan=
-          +-TableScan(column_list=[ScanTableView.b#4], table=ScanTableView, column_index_list=[1], alias="v2")
+          +-TableScan(column_list=[ScanTableView.b#4], table=ScanTableView, column_index_list=[1], alias='v2')
 
 [REWRITTEN AST]
 QueryStmt

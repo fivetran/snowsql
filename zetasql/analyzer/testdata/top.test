@@ -232,7 +232,7 @@ QueryStmt
       | |   | +-ProjectScan
       | |   |   +-column_list=KeyValue.[Key#1, Value#2]
       | |   |   +-input_scan=
-      | |   |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+      | |   |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
       | |   +-top=
       | |     +-Literal(type=INT64, value=5)
       | +-output_column_list=KeyValue.[Key#1, Value#2]
@@ -244,7 +244,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=KeyValue.[Key#3, Value#4]
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |   |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         |   +-top=
         |     +-Literal(type=INT64, value=5)
         +-output_column_list=KeyValue.[Key#3, Value#4]

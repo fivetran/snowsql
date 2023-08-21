@@ -1882,7 +1882,7 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=SimpleTypes.[int32#1, uint32#3, string#5]
     | | |       +-input_scan=
-    | | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias="s1")
+    | | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias='s1')
     | | +-output_column_list=[$union_all1_cast.int32#40, $union_all1_cast.uint32#41, SimpleTypes.string#5]
     | +-SetOperationItem
     |   +-scan=
@@ -1896,7 +1896,7 @@ QueryStmt
     |   |     +-ProjectScan
     |   |       +-column_list=SimpleTypes.[string#23, int32#19, int64#20]
     |   |       +-input_scan=
-    |   |         +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias="s2")
+    |   |         +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias='s2')
     |   +-output_column_list=[SimpleTypes.int64#20, $union_all2_cast.int32#42, SimpleTypes.string#23]
     +-column_match_mode=CORRESPONDING
     +-column_propagation_mode=INNER
@@ -1927,7 +1927,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=SimpleTypes.[int32#1, uint32#3, string#5]
       | |       +-input_scan=
-      | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias="s1")
+      | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias='s1')
       | +-output_column_list=[$union_all1_cast.int32#40, $union_all1_cast.uint32#41, SimpleTypes.string#5]
       +-SetOperationItem
         +-scan=
@@ -1944,7 +1944,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=SimpleTypes.[string#23, int32#19, int64#20]
         |           +-input_scan=
-        |             +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias="s2")
+        |             +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias='s2')
         +-output_column_list=[SimpleTypes.int64#20, $union_all2_cast.int32#42, SimpleTypes.string#23]
 ==
 
@@ -3068,7 +3068,7 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=[SimpleTypes.uint32#3]
     | | |       +-input_scan=
-    | | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias="s1")
+    | | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias='s1')
     | | +-output_column_list=[$union_all1_cast.uint32#62]
     | +-SetOperationItem
     |   +-scan=
@@ -3088,7 +3088,7 @@ QueryStmt
     |   |   | | |     +-ProjectScan
     |   |   | | |       +-column_list=[SimpleTypes.int32#19]
     |   |   | | |       +-input_scan=
-    |   |   | | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias="s2")
+    |   |   | | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias='s2')
     |   |   | | +-output_column_list=[$intersect_all1_cast.int32#59]
     |   |   | +-SetOperationItem
     |   |   |   +-scan=
@@ -3108,7 +3108,7 @@ QueryStmt
     |   |   |   |       | | | +-ProjectScan
     |   |   |   |       | | |   +-column_list=[SimpleTypes.float#44]
     |   |   |   |       | | |   +-input_scan=
-    |   |   |   |       | | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias="s3")
+    |   |   |   |       | | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias='s3')
     |   |   |   |       | | +-output_column_list=[SimpleTypes.float#44]
     |   |   |   |       | +-SetOperationItem
     |   |   |   |       |   +-scan=
@@ -3154,7 +3154,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[SimpleTypes.uint32#3]
       | |       +-input_scan=
-      | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias="s1")
+      | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias='s1')
       | +-output_column_list=[$union_all1_cast.uint32#62]
       +-SetOperationItem
         +-scan=
@@ -3174,7 +3174,7 @@ QueryStmt
         |     | |     +-ProjectScan
         |     | |       +-column_list=[SimpleTypes.int32#19]
         |     | |       +-input_scan=
-        |     | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias="s2")
+        |     | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias='s2')
         |     | +-output_column_list=[$intersect_all1_cast.int32#59]
         |     +-SetOperationItem
         |       +-scan=
@@ -3194,7 +3194,7 @@ QueryStmt
         |       |         | | +-ProjectScan
         |       |         | |   +-column_list=[SimpleTypes.float#44]
         |       |         | |   +-input_scan=
-        |       |         | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias="s3")
+        |       |         | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias='s3')
         |       |         | +-output_column_list=[SimpleTypes.float#44]
         |       |         +-SetOperationItem
         |       |           +-scan=
