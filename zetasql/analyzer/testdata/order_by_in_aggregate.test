@@ -534,7 +534,7 @@ QueryStmt
 
 select Key,
        string_agg(KitchenSink.string_val
-           order by KitchenSink.string_val COLLATE "en_US" DESC) as s
+           order by KitchenSink.string_val COLLATE 'en_US' DESC) as s
 from TestTable
 group by Key
 --
@@ -579,12 +579,12 @@ QueryStmt
 
 select Key,
        array_agg(KitchenSink.int64_val
-           order by KitchenSink.int64_val COLLATE "en_US" DESC) as a
+           order by KitchenSink.int64_val COLLATE 'en_US' DESC) as a
 from TestTable
 group by Key
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT64 [at 3:21]
-           order by KitchenSink.int64_val COLLATE "en_US" DESC) as a
+           order by KitchenSink.int64_val COLLATE 'en_US' DESC) as a
                     ^
 
 ==
@@ -610,7 +610,7 @@ select Key,
        string_agg(KitchenSink.string_val
            order by KitchenSink.int32_val,
                     KitchenSink.int64_val DESC,
-                    KitchenSink.string_val COLLATE "en_US" DESC) as c
+                    KitchenSink.string_val COLLATE 'en_US' DESC) as c
 from TestTable
 group by Key
 --

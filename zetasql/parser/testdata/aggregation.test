@@ -585,26 +585,26 @@ FROM
 GROUP BY x
 ==
 
-select x, string_agg(y order by y collate "en_US" desc) from T group by x
+select x, string_agg(y order by y collate 'en_US' desc) from T group by x
 --
 QueryStatement [0-73] [select x,...group by x]
   Query [0-73] [select x,...group by x]
     Select [0-73] [select x,...group by x]
-      SelectList [7-55] [x, string_agg...en_US" desc)]
+      SelectList [7-55] [x, string_agg...en_US' desc)]
         SelectColumn [7-8] [x]
           PathExpression [7-8] [x]
             Identifier(x) [7-8] [x]
-        SelectColumn [10-55] [string_agg...en_US" desc)]
-          FunctionCall [10-55] [string_agg...en_US" desc)]
+        SelectColumn [10-55] [string_agg...en_US' desc)]
+          FunctionCall [10-55] [string_agg...en_US' desc)]
             PathExpression [10-20] [string_agg]
               Identifier(string_agg) [10-20] [string_agg]
             PathExpression [21-22] [y]
               Identifier(y) [21-22] [y]
-            OrderBy [23-54] [order by y...en_US" desc]
-              OrderingExpression(DESC) [32-54] [y collate "en_US" desc]
+            OrderBy [23-54] [order by y...en_US' desc]
+              OrderingExpression(DESC) [32-54] [y collate 'en_US' desc]
                 PathExpression [32-33] [y]
                   Identifier(y) [32-33] [y]
-                Collate [34-49] [collate "en_US"]
+                Collate [34-49] [collate 'en_US']
                   StringLiteral('en_US') [42-49] ['en_US']
       FromClause [56-62] [from T]
         TablePathExpression [61-62] [T]
@@ -618,7 +618,7 @@ QueryStatement [0-73] [select x,...group by x]
 SELECT
   x,
   string_agg(y
-    ORDER BY y COLLATE "en_US" DESC)
+    ORDER BY y COLLATE 'en_US' DESC)
 FROM
   T
 GROUP BY x

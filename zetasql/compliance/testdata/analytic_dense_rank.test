@@ -162,9 +162,9 @@ ARRAY<STRUCT<str_val STRING, int64_val INT64, INT64>>[unknown order:
 [required_features=ANALYTIC_FUNCTIONS,V_1_1_ORDER_BY_COLLATE]
 [name=dense_rank_collate]
 SELECT str_val, int64_val,
-       DENSE_RANK() OVER (ORDER BY str_val COLLATE "en_US", int64_val DESC)
+       DENSE_RANK() OVER (ORDER BY str_val COLLATE 'en_US', int64_val DESC)
 FROM TestTable
-ORDER BY str_val COLLATE "en_US"
+ORDER BY str_val COLLATE 'en_US'
 --
 ARRAY<STRUCT<str_val STRING, int64_val INT64, INT64>>[unknown order:
   {NULL, NULL, 1},

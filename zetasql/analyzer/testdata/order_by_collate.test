@@ -1,11 +1,11 @@
 [default language_features=V_1_1_ORDER_BY_COLLATE,ANALYTIC_FUNCTIONS]
 
 select "string" col from SimpleTypes
-order by col COLLATE {{"en_US"|@test_param_string|r"en_US"}}
+order by col COLLATE {{'en_US'|@test_param_string|r'en_US'}}
 --
 ALTERNATION GROUPS:
-    "en_US"
-    r"en_US"
+    'en_US'
+    r'en_US'
 --
 QueryStmt
 +-output_column_list=
@@ -71,28 +71,28 @@ order by col COLLATE @test_param_enum
                      ^
 ==
 
-select {{"int32"|"bytes"|"date"}} col from SimpleTypes order by col COLLATE "en_US"
+select {{"int32"|"bytes"|"date"}} col from SimpleTypes order by col COLLATE 'en_US'
 --
 ALTERNATION GROUP: "int32"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT32 [at 1:46]
-select "int32" col from SimpleTypes order by col COLLATE "en_US"
+select "int32" col from SimpleTypes order by col COLLATE 'en_US'
                                              ^
 --
 ALTERNATION GROUP: "bytes"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BYTES [at 1:46]
-select "bytes" col from SimpleTypes order by col COLLATE "en_US"
+select "bytes" col from SimpleTypes order by col COLLATE 'en_US'
                                              ^
 --
 ALTERNATION GROUP: "date"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to DATE [at 1:45]
-select "date" col from SimpleTypes order by col COLLATE "en_US"
+select "date" col from SimpleTypes order by col COLLATE 'en_US'
                                             ^
 ==
 
-select value from KeyValue order by concat(value, "b") COLLATE "en_US"
+select value from KeyValue order by concat(value, "b") COLLATE 'en_US'
 --
 QueryStmt
 +-output_column_list=
@@ -120,18 +120,18 @@ QueryStmt
 ==
 
 select value from KeyValue
-order by {{(value="a")|length(value)}} COLLATE "en_US"
+order by {{(value="a")|length(value)}} COLLATE 'en_US'
 --
 ALTERNATION GROUP: (value="a")
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BOOL [at 2:10]
-order by (value="a") COLLATE "en_US"
+order by (value="a") COLLATE 'en_US'
          ^
 --
 ALTERNATION GROUP: length(value)
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT64 [at 2:10]
-order by length(value) COLLATE "en_US"
+order by length(value) COLLATE 'en_US'
          ^
 ==
 
@@ -211,7 +211,7 @@ QueryStmt
 ==
 
 select afn_agg()
-       over (order by value COLLATE "en_US",
+       over (order by value COLLATE 'en_US',
                       value COLLATE @test_param_string)
 from KeyValue
 --
@@ -275,30 +275,30 @@ ERROR: COLLATE must be followed by a string literal or a string parameter [at 2:
                                 ^
 ==
 
-select afn_agg() over (order by {{"int32"|"bytes"|"date"}} COLLATE "en_US")
+select afn_agg() over (order by {{"int32"|"bytes"|"date"}} COLLATE 'en_US')
 from SimpleTypes
 --
 ALTERNATION GROUP: "int32"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT32 [at 1:33]
-select afn_agg() over (order by "int32" COLLATE "en_US")
+select afn_agg() over (order by "int32" COLLATE 'en_US')
                                 ^
 --
 ALTERNATION GROUP: "bytes"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BYTES [at 1:33]
-select afn_agg() over (order by "bytes" COLLATE "en_US")
+select afn_agg() over (order by "bytes" COLLATE 'en_US')
                                 ^
 --
 ALTERNATION GROUP: "date"
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to DATE [at 1:33]
-select afn_agg() over (order by "date" COLLATE "en_US")
+select afn_agg() over (order by "date" COLLATE 'en_US')
                                 ^
 ==
 
 select afn_agg() over (partition by key
-                       order by concat(value, "b") COLLATE "en_US")
+                       order by concat(value, "b") COLLATE 'en_US')
 from KeyValue
 --
 QueryStmt
@@ -345,19 +345,19 @@ QueryStmt
                         +-WindowFrameExpr(boundary_type=CURRENT ROW)
 ==
 
-select afn_agg() over (order by {{(value="a")|length(value)}} COLLATE "en_US")
+select afn_agg() over (order by {{(value="a")|length(value)}} COLLATE 'en_US')
 from KeyValue
 --
 ALTERNATION GROUP: (value="a")
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BOOL [at 1:33]
-select afn_agg() over (order by (value="a") COLLATE "en_US")
+select afn_agg() over (order by (value="a") COLLATE 'en_US')
                                 ^
 --
 ALTERNATION GROUP: length(value)
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT64 [at 1:33]
-select afn_agg() over (order by length(value) COLLATE "en_US")
+select afn_agg() over (order by length(value) COLLATE 'en_US')
                                 ^
 ==
 
@@ -419,7 +419,7 @@ QueryStmt
 ==
 
 [language_features={{V_1_1_ORDER_BY_COLLATE|}}]
-select "string" from SimpleTypes order by 1 COLLATE "en_US"
+select "string" from SimpleTypes order by 1 COLLATE 'en_US'
 --
 ALTERNATION GROUP: V_1_1_ORDER_BY_COLLATE
 --
@@ -442,12 +442,12 @@ QueryStmt
 ALTERNATION GROUP: <empty>
 --
 ERROR: COLLATE is not supported [at 1:45]
-select "string" from SimpleTypes order by 1 COLLATE "en_US"
+select "string" from SimpleTypes order by 1 COLLATE 'en_US'
                                             ^
 ==
 
 [language_features={{V_1_1_ORDER_BY_COLLATE,ANALYTIC_FUNCTIONS|V_1_1_ORDER_BY_COLLATE|ANALYTIC_FUNCTIONS|}}]
-select afn_agg() over (order by value COLLATE "en_US") from KeyValue
+select afn_agg() over (order by value COLLATE 'en_US') from KeyValue
 --
 ALTERNATION GROUP: V_1_1_ORDER_BY_COLLATE,ANALYTIC_FUNCTIONS
 --
@@ -487,11 +487,11 @@ ALTERNATION GROUPS:
     <empty>
 --
 ERROR: Analytic functions not supported [at 1:8]
-select afn_agg() over (order by value COLLATE "en_US") from KeyValue
+select afn_agg() over (order by value COLLATE 'en_US') from KeyValue
        ^
 --
 ALTERNATION GROUP: ANALYTIC_FUNCTIONS
 --
 ERROR: COLLATE is not supported [at 1:39]
-select afn_agg() over (order by value COLLATE "en_US") from KeyValue
+select afn_agg() over (order by value COLLATE 'en_US') from KeyValue
                                       ^

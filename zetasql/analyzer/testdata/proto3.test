@@ -587,7 +587,7 @@ QueryStmt
         +-element_column=$array.m#3
 ==
 
-SELECT CAST('key: "hello", value: 123'
+SELECT CAST('key: \'hello\', value: 123'
             as zetasql_test__.Proto3KitchenSink.TestMapEntry)
 FROM Proto3Table
 --
@@ -600,7 +600,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>)
-    |     +-Literal(type=STRING, value='key: "hello", value: 123')
+    |     +-Literal(type=STRING, value='key: \'hello\', value: 123')
     +-input_scan=
       +-TableScan(table=Proto3Table)
 ==
@@ -643,7 +643,7 @@ QueryStmt
 
 SELECT NEW zetasql_test__.Proto3KitchenSink.TestMapEntry(expr1 as key,
                                                          expr2 as value)
-FROM (SELECT "hello" as expr1, 123 as expr2)
+FROM (SELECT 'hello' as expr1, 123 as expr2)
 --
 QueryStmt
 +-output_column_list=
@@ -671,7 +671,7 @@ QueryStmt
 ==
 
 SELECT AS zetasql_test__.Proto3KitchenSink.TestMapEntry expr1 key, expr2 value
-FROM (SELECT "hello" as expr1, 123 as expr2)
+FROM (SELECT 'hello' as expr1, 123 as expr2)
 --
 QueryStmt
 +-output_column_list=
@@ -735,7 +735,7 @@ QueryStmt
 
 SELECT NEW zetasql_test__.Proto3KitchenSink.TestMapEntry(expr1 as key,
                                                          expr2 as value)
-FROM (SELECT "hello" as expr1, b"123" as expr2)
+FROM (SELECT 'hello' as expr1, b"123" as expr2)
 --
 ERROR: Could not store value with type BYTES into proto field zetasql_test__.Proto3KitchenSink.TestMapEntry.value which has SQL type INT32 [at 2:58]
                                                          expr2 as value)

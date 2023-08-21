@@ -551,7 +551,7 @@ ARRAY<STRUCT<array_val ARRAY<>, INT64>>[unknown order:
 [name=orderby_collate_binary_us]
 SELECT str_val,
        RANK() OVER (ORDER BY str_val COLLATE "binary"),
-       RANK() OVER (ORDER BY str_val COLLATE "en_US")
+       RANK() OVER (ORDER BY str_val COLLATE 'en_US')
 FROM unnest(['A', 'e', 'a', 'b', 'C', 'd', 'A']) as str_val
 --
 ARRAY<STRUCT<str_val STRING, INT64, INT64>>[unknown order:
