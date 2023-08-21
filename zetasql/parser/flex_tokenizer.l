@@ -241,8 +241,8 @@ dq3text_0          {dq3}(({dq}|{dq}{dq})?({no_backslash_dq}|{any_escape}))*
 dq3text            {dq3text_0}{dq3}
 string_literal                  r?({sqtext}|{sq3text})
 bytes_literal                   (b|rb|br)({sqtext}|{dqtext}|{sq3text}|{dq3text})
-unterminated_string_literal     ({sqtext_0}|{dqtext_0})
-unterminated_triple_quoted_string_literal ({sq3text_0}|{dq3text_0})
+unterminated_string_literal     ({sqtext_0})
+unterminated_triple_quoted_string_literal ({sq3text_0})
 unterminated_raw_string_literal r({sqtext_0}|{dqtext_0})
 unterminated_triple_quoted_raw_string_literal r({sq3text_0}|{dq3text_0})
 unterminated_bytes_literal      b({sqtext_0}|{dqtext_0})

@@ -1984,7 +1984,7 @@ FROM
 
 # Valid "TABLE path(arguments...)" syntax for table-valued function call:
 # multiple arguments in argument list.
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, "abc", [true]));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, 'abc', [true]));
 --
 QueryStatement [0-79] [select * from..., [true]))]
   Query [0-79] [select * from..., [true]))]
@@ -1996,15 +1996,15 @@ QueryStatement [0-79] [select * from..., [true]))]
         TVF [14-79] [tvf_one_relation_..., [true]))]
           PathExpression [14-52] [tvf_one_relation_...xed_output]
             Identifier(tvf_one_relation_arg_with_fixed_output) [14-52] [tvf_one_relation_...xed_output]
-          TVFArgument [53-78] [table t(1, "abc", [true])]
-            TableClause [53-78] [table t(1, "abc", [true])]
-              TVF [59-78] [t(1, "abc", [true])]
+          TVFArgument [53-78] [table t(1, 'abc', [true])]
+            TableClause [53-78] [table t(1, 'abc', [true])]
+              TVF [59-78] [t(1, 'abc', [true])]
                 PathExpression [59-60] [t]
                   Identifier(t) [59-60] [t]
                 TVFArgument [61-62] [1]
                   IntLiteral(1) [61-62] [1]
-                TVFArgument [64-69] ["abc"]
-                  StringLiteral("abc") [64-69] ["abc"]
+                TVFArgument [64-69] ['abc']
+                  StringLiteral('abc') [64-69] ['abc']
                 TVFArgument [71-77] [[true]]
                   ArrayConstructor [71-77] [[true]]
                     BooleanLiteral(true) [72-76] [true]
@@ -2012,7 +2012,7 @@ QueryStatement [0-79] [select * from..., [true]))]
 SELECT
   *
 FROM
-  tvf_one_relation_arg_with_fixed_output(TABLE t(1, "abc", ARRAY[true]))
+  tvf_one_relation_arg_with_fixed_output(TABLE t(1, 'abc', ARRAY[true]))
 ==
 
 # Valid "TABLE path(arguments...)" syntax for table-valued function call:
@@ -2368,49 +2368,49 @@ ERROR: Syntax error: Expected end of input but got "@" [at 3:1]
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call:
 # missing argument between commas.
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, , "abc"));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, , 'abc'));
 --
 ERROR: Syntax error: Unexpected "," [at 1:65]
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, , "abc"));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, , 'abc'));
                                                                 ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call:
 # extra comma after arguments.
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, "abc",));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, 'abc',));
 --
 ERROR: Syntax error: Unexpected ")" [at 1:71]
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, "abc",));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, 'abc',));
                                                                       ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call.
 # the ORDER BY clause is not supported.
 select * from tvf_one_relation_arg_with_fixed_output(
-    table t(1, "abc" order by 1));
+    table t(1, 'abc' order by 1));
 --
 ERROR: Syntax error: Expected ")" or "," but got keyword ORDER [at 2:22]
-    table t(1, "abc" order by 1));
+    table t(1, 'abc' order by 1));
                      ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call.
 # the LIMIT clause is not supported.
 select * from tvf_one_relation_arg_with_fixed_output(
-    table t(1, "abc" limit 10));
+    table t(1, 'abc' limit 10));
 --
 ERROR: Syntax error: Expected ")" or "," but got keyword LIMIT [at 2:22]
-    table t(1, "abc" limit 10));
+    table t(1, 'abc' limit 10));
                      ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call.
 # the HAVING clause is not supported.
 select * from tvf_one_relation_arg_with_fixed_output(
-    table t(1, "abc" having true));
+    table t(1, 'abc' having true));
 --
 ERROR: Syntax error: Expected ")" or "," but got keyword HAVING [at 2:22]
-    table t(1, "abc" having true));
+    table t(1, 'abc' having true));
                      ^
 ==
 
