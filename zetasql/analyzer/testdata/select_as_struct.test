@@ -137,10 +137,10 @@ select (select as struct 5).f
 # ProjectScan into a named struct type.
 # TODO Make this work, and test it matches columns by
 # name and coerces types.
-select as TestStruct 1 key, "v" value
+select as TestStruct 1 key, 'v' value
 --
 ERROR: Constructing named STRUCT types in subqueries not implemented yet [at 1:11]
-select as TestStruct 1 key, "v" value
+select as TestStruct 1 key, 'v' value
           ^
 ==
 

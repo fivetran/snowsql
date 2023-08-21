@@ -1,14 +1,14 @@
 [default ddl_pseudo_column_mode=none]
 
 create external table a.b.c.T
-options (x = 5, y = abc, z = ("def", 1))
+options (x = 5, y = abc, z = ('def', 1))
 --
 CreateExternalTableStmt
 +-name_path=a.b.c.T
 +-option_list=
   +-x := Literal(type=INT64, value=5)
   +-y := Literal(type=STRING, value='abc')
-  +-z := Literal(type=STRUCT<STRING, INT64>, value={"def", 1})
+  +-z := Literal(type=STRUCT<STRING, INT64>, value={'def', 1})
 ==
 
 create temp external table a.T

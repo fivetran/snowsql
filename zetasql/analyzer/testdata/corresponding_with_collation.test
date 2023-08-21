@@ -21,7 +21,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1.b#1{Collation:"und:binary"}, $null_column_for_outer_set_op.a#5]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#5 := Literal(type=STRING, value=NULL)
     | | |   +-input_scan=
@@ -40,7 +40,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.b#6, $union_all2.a#2{Collation:"und:ci"}]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#6 := Literal(type=STRING, value=NULL)
     |   |   +-input_scan=
@@ -73,7 +73,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1.b#1{Collation:"und:binary"}, $null_column_for_outer_set_op.a#5]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#5 := Literal(type=STRING, value=NULL)
       | |   +-input_scan=
@@ -92,7 +92,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.b#6, $union_all2.a#2{Collation:"und:ci"}]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#6 := Literal(type=STRING, value=NULL)
         |   +-input_scan=
@@ -224,7 +224,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.b#6, $union_all2.a#3{Collation:"und:ci"}]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#6 := Literal(type=STRING, value=NULL)
     |   |   +-input_scan=
@@ -271,7 +271,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.b#6, $union_all2.a#3{Collation:"und:ci"}]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#6 := Literal(type=STRING, value=NULL)
         |   +-input_scan=
@@ -308,7 +308,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-b#7 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -328,7 +328,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#8, $union_all2.b#2]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#8 := Literal(type=STRUCT<FLOAT, STRING>, value=NULL)
     | | |   +-input_scan=
@@ -343,7 +343,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all3.a#3<_,{Collation:"und:ci"}>, $null_column_for_outer_set_op.b#9]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#9 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -381,7 +381,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-b#7 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -401,7 +401,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#8, $union_all2.b#2]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#8 := Literal(type=STRUCT<FLOAT, STRING>, value=NULL)
       | |   +-input_scan=
@@ -416,7 +416,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all3.a#3<_,{Collation:"und:ci"}>, $null_column_for_outer_set_op.b#9]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#9 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -459,7 +459,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-b#7 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -479,7 +479,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#8, $union_all2.b#2]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#8 := Literal(type=STRUCT<FLOAT, STRING>, value=NULL)
     | | |   +-input_scan=
@@ -494,7 +494,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all3.a#3<_,{Collation:"und:ci"}>, $null_column_for_outer_set_op.b#9]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#9 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -532,7 +532,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-b#7 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -552,7 +552,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#8, $union_all2.b#2]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#8 := Literal(type=STRUCT<FLOAT, STRING>, value=NULL)
       | |   +-input_scan=
@@ -567,7 +567,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all3.a#3<_,{Collation:"und:ci"}>, $null_column_for_outer_set_op.b#9]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#9 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -612,7 +612,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-b#8 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -632,7 +632,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#2]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#9 := Literal(type=STRUCT<DOUBLE, STRING>, value=NULL)
     | | |   +-input_scan=
@@ -647,7 +647,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all3_cast.a#7, $null_column_for_outer_set_op.b#10]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#10 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -692,7 +692,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-b#8 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -712,7 +712,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#2]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#9 := Literal(type=STRUCT<DOUBLE, STRING>, value=NULL)
       | |   +-input_scan=
@@ -727,7 +727,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all3_cast.a#7, $null_column_for_outer_set_op.b#10]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#10 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -780,7 +780,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-b#8 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -800,7 +800,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#2]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#9 := Literal(type=STRUCT<DOUBLE, STRING>, value=NULL)
     | | |   +-input_scan=
@@ -815,7 +815,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all3_cast.a#7<_,{Collation:"und:ci"}>, $null_column_for_outer_set_op.b#10]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#10 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -862,7 +862,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-b#8 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -882,7 +882,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#2]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#9 := Literal(type=STRUCT<DOUBLE, STRING>, value=NULL)
       | |   +-input_scan=
@@ -897,7 +897,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all3_cast.a#7<_,{Collation:"und:ci"}>, $null_column_for_outer_set_op.b#10]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#10 := Literal(type=INT64, value=NULL)
         |   +-input_scan=

@@ -816,7 +816,7 @@ join KeyValue kv2 using(key)
 # name from both sides of the join (lhs.int32_val1, rhs.int32_val1).
 select int32_val1, lhs, '--', rhs, '--', lhs.*, '--', rhs.*, '--', *
 from
-     (select "xxx" xxx, 15 int32_val1) lhs
+     (select 'xxx' xxx, 15 int32_val1) lhs
   join TestExtraValueTable rhs
      using (int32_val1)
 --
@@ -1466,9 +1466,9 @@ QueryStmt
 # all the fields of t2 except the using column.  Additionally, we still
 # get all the USING fields of t1 and t2 if we select t1.* and t2.*, and
 # we get the using columns directly as t1.int32_val1 and t2.int32_val1.
-select *, "----------------------------" as separator1,
-       t1.*, "----------------------------" as separator2,
-       t2.*, "----------------------------" as separator3,
+select *, '----------------------------' as separator1,
+       t1.*, '----------------------------' as separator2,
+       t2.*, '----------------------------' as separator3,
        t1.int32_val1,
        t2.int32_val1
 from TestExtraValueTable t1 JOIN
@@ -2861,10 +2861,10 @@ QueryStmt
 # struct fields, and different qualifiers for 'a'.
 select
   {{|t1.|t2.|t3.}}a, t1.b, {{|t1.}}c, {{|t2.}}d, {{|t3.}}e,
-  "---" as sep1, *,
-  "---" as sep2, t1.*,
-  "---" as sep3, t2.*,
-  "---" as sep4, t3.*
+  '---' as sep1, *,
+  '---' as sep2, t1.*,
+  '---' as sep3, t2.*,
+  '---' as sep4, t3.*
 FROM
   (UNNEST([struct(0 as a, 1 as b, 2 as c)]) t1
    JOIN
