@@ -1215,7 +1215,7 @@ UpdateStmt
 |                 +-expr=
 |                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>, column=$array.c#4)
 |                 +-field_descriptor=idstr
-|                 +-default_value=""
+|                 +-default_value=''
 +-update_item_list=
   +-UpdateItem
     +-target=
@@ -1237,7 +1237,7 @@ UpdateStmt
             |   +-expr=
             |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>, column=$array.c#5)
             |   +-field_descriptor=idstr
-            |   +-default_value=""
+            |   +-default_value=''
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
               +-GetProtoField
               | +-type=INT64
@@ -1317,7 +1317,7 @@ UpdateStmt
 |                 +-expr=
 |                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>, column=$array.c#4)
 |                 +-field_descriptor=idstr
-|                 +-default_value=""
+|                 +-default_value=''
 +-update_item_list=
   +-UpdateItem
     +-target=
@@ -1338,7 +1338,7 @@ UpdateStmt
         |     +-expr=
         |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>, column=$array.c#5)
         |     +-field_descriptor=idstr
-        |     +-default_value=""
+        |     +-default_value=''
         +-update_item_list=
           +-UpdateItem
             +-target=

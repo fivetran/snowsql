@@ -635,7 +635,7 @@ QueryStmt
             |   +-expr=
             |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             |   +-field_descriptor=string_val
-            |   +-default_value="default_name"
+            |   +-default_value='default_name'
             +-GetProtoField
               +-type=ENUM<zetasql_test__.TestEnum>
               +-expr=
@@ -684,7 +684,7 @@ QueryStmt
             |   +-expr=
             |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             |   +-field_descriptor=string_val
-            |   +-default_value="default_name"
+            |   +-default_value='default_name'
             +-Cast(INT64 -> ENUM<zetasql_test__.TestEnum>)
             | +-GetProtoField
             |   +-type=INT64

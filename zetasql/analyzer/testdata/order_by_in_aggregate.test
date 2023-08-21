@@ -181,7 +181,7 @@ QueryStmt
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
               +-order_by_item_list=
                 +-OrderByItem
                   +-column_ref=
@@ -298,7 +298,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -558,7 +558,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -653,7 +653,7 @@ QueryStmt
         |   | |   +-expr=
         |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   | |   +-field_descriptor=string_val
-        |   | |   +-default_value="default_name"
+        |   | |   +-default_value='default_name'
         |   | +-$orderbycol3#8 :=
         |   | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |   | |   +-Cast(INT32 -> INT64)
@@ -1087,7 +1087,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-aggregate_list=
@@ -1153,7 +1153,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1248,7 +1248,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1320,7 +1320,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1588,7 +1588,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1653,7 +1653,7 @@ QueryStmt
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
               +-limit=
                 +-Literal(type=INT64, value=5)
 ==
@@ -1963,7 +1963,7 @@ QueryStmt
         |   |     | | |   +-expr=
         |   |     | | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     | | |   +-field_descriptor=string_val
-        |   |     | | |   +-default_value="default_name"
+        |   |     | | |   +-default_value='default_name'
         |   |     | | | +-return_null_on_error=TRUE
         |   |     | | +-Cast(INT32 -> INT64)
         |   |     | |   +-ColumnRef(type=INT32, column=TestTable.key#1)
@@ -2010,7 +2010,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
         +-aggregate_list=

@@ -254,7 +254,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink>, column=Proto3Table.Proto3KitchenSink#2)
     | |   +-field_descriptor=string_val
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-float_val#8 :=
     | | +-GetProtoField
     | |   +-type=FLOAT
@@ -469,7 +469,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>, column=$array.m#3)
     | |   +-field_descriptor=key
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-value#5 :=
     |   +-GetProtoField
     |     +-type=INT32
@@ -509,7 +509,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>, column=$array.m#3)
     | |   +-field_descriptor=key
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-value#5 :=
     |   +-GetProtoField
     |     +-type=INT32
@@ -928,7 +928,7 @@ QueryStmt
     | |   |   +-field_descriptor=any_wkt
     | |   |   +-default_value=NULL
     | |   +-field_descriptor=type_url
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-value#5 :=
     | | +-GetProtoField
     | |   +-type=BYTES
@@ -1237,7 +1237,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink>, column=Proto3Table.Proto3KitchenSink#2)
     | |   +-field_descriptor=nullable_string
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-nullable_date#4 :=
     |   +-GetProtoField
     |     +-type=DATE
@@ -1500,7 +1500,7 @@ QueryStmt
     |     +-expr=
     |     | +-ColumnRef(type=PROTO<zetasql_test__.Proto3SmallMessageWithNoUseDefaults>, column=$preproject.$proto#3)
     |     +-field_descriptor=s1
-    |     +-default_value=""
+    |     +-default_value=''
     +-input_scan=
       +-ProjectScan
         +-column_list=[Proto3Table.Proto3KitchenSink#2, $preproject.$proto#3]

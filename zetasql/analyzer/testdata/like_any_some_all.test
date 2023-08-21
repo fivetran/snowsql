@@ -2617,7 +2617,7 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
+            | +-default_value='default_name'
             +-SubqueryExpr
               +-type=STRING
               +-subquery_type=SCALAR
@@ -2720,7 +2720,7 @@ QueryStmt
                     | |   +-expr=
                     | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
                     | |   +-field_descriptor=string_val
-                    | |   +-default_value="default_name"
+                    | |   +-default_value='default_name'
                     | +-patterns#6 :=
                     |   +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRING) -> ARRAY<STRING>)
                     |     +-SubqueryExpr
@@ -2781,7 +2781,7 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
+            | +-default_value='default_name'
             +-SubqueryExpr
               +-type=ARRAY<STRING>
               +-subquery_type=ARRAY
@@ -2797,7 +2797,7 @@ QueryStmt
                   |     +-expr=
                   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
                   |     +-field_descriptor=string_val
-                  |     +-default_value="default_name"
+                  |     +-default_value='default_name'
                   +-input_scan=
                     +-SingleRowScan
 
@@ -2883,7 +2883,7 @@ QueryStmt
                     | |   +-expr=
                     | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
                     | |   +-field_descriptor=string_val
-                    | |   +-default_value="default_name"
+                    | |   +-default_value='default_name'
                     | +-patterns#6 :=
                     |   +-SubqueryExpr
                     |     +-type=ARRAY<STRING>
@@ -2900,7 +2900,7 @@ QueryStmt
                     |         |     +-expr=
                     |         |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
                     |         |     +-field_descriptor=string_val
-                    |         |     +-default_value="default_name"
+                    |         |     +-default_value='default_name'
                     |         +-input_scan=
                     |           +-SingleRowScan
                     +-input_scan=
@@ -2933,7 +2933,7 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
+    |     | +-default_value='default_name'
     |     +-SubqueryExpr
     |       +-type=STRING
     |       +-subquery_type=SCALAR
@@ -2950,13 +2950,13 @@ QueryStmt
     |           |     | +-expr=
     |           |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
     |           |     | +-field_descriptor=string_val
-    |           |     | +-default_value="default_name"
+    |           |     | +-default_value='default_name'
     |           |     +-GetProtoField
     |           |       +-type=STRING
     |           |       +-expr=
     |           |       | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
     |           |       +-field_descriptor=MIXED_case
-    |           |       +-default_value=""
+    |           |       +-default_value=''
     |           +-input_scan=
     |             +-SingleRowScan
     +-input_scan=
@@ -3038,7 +3038,7 @@ QueryStmt
     |             | |   +-expr=
     |             | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
     |             | |   +-field_descriptor=string_val
-    |             | |   +-default_value="default_name"
+    |             | |   +-default_value='default_name'
     |             | +-patterns#7 :=
     |             |   +-FunctionCall(ZetaSQL:$make_array(repeated(1) STRING) -> ARRAY<STRING>)
     |             |     +-SubqueryExpr
@@ -3057,13 +3057,13 @@ QueryStmt
     |             |           |     | +-expr=
     |             |           |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
     |             |           |     | +-field_descriptor=string_val
-    |             |           |     | +-default_value="default_name"
+    |             |           |     | +-default_value='default_name'
     |             |           |     +-GetProtoField
     |             |           |       +-type=STRING
     |             |           |       +-expr=
     |             |           |       | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3, is_correlated=TRUE)
     |             |           |       +-field_descriptor=MIXED_case
-    |             |           |       +-default_value=""
+    |             |           |       +-default_value=''
     |             |           +-input_scan=
     |             |             +-SingleRowScan
     |             +-input_scan=

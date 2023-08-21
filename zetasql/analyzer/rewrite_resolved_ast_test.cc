@@ -129,7 +129,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |       |           |   |           | +-expr=
 |       |           |   |           | | +-ColumnRef(type=PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>, column=$array.elem#3)
 |       |           |   |           | +-field_descriptor=key
-|       |           |   |           | +-default_value=""
+|       |           |   |           | +-default_value=''
 |       |           |   |           +-ColumnRef(type=STRING, column=$subquery1.k#1, is_correlated=TRUE)
 |       |           |   +-order_by_item_list=
 |       |           |     +-OrderByItem

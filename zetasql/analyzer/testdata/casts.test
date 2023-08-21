@@ -2466,7 +2466,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col2#5 :=
     |   +-Cast(ENUM<zetasql_test__.TestEnum> -> STRING)
     |     +-GetProtoField
@@ -2498,7 +2498,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | |   +-return_null_on_error=TRUE
     | +-$col2#5 :=
     |   +-Cast(ENUM<zetasql_test__.TestEnum> -> STRING)
@@ -2993,7 +2993,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col2#5 :=
     | | +-Cast(BYTES -> PROTO<zetasql_test__.KitchenSinkPB>)
     | |   +-GetProtoField
@@ -3783,7 +3783,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col2#5 :=
     | | +-Cast(STRING -> DATETIME)
     | |   +-GetProtoField
@@ -3791,7 +3791,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col3#6 :=
     | | +-Cast(TIME -> STRING)
     | |   +-Cast(STRING -> TIME)
@@ -3800,7 +3800,7 @@ QueryStmt
     | |       +-expr=
     | |       | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |       +-field_descriptor=string_val
-    | |       +-default_value="default_name"
+    | |       +-default_value='default_name'
     | +-$col4#7 :=
     |   +-Cast(DATETIME -> STRING)
     |     +-Cast(STRING -> DATETIME)
@@ -3809,7 +3809,7 @@ QueryStmt
     |         +-expr=
     |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |         +-field_descriptor=string_val
-    |         +-default_value="default_name"
+    |         +-default_value='default_name'
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 --

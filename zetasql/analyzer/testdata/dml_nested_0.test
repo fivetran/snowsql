@@ -207,7 +207,7 @@ UpdateStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkExtension>, column=$array.elt#4)
             | +-field_descriptor=value
-            | +-default_value=""
+            | +-default_value=''
             +-Literal(type=STRING, value='foo')
 ==
 
@@ -648,7 +648,7 @@ UpdateStmt
             |   +-expr=
             |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkExtension>, column=$array.$element#4)
             |   +-field_descriptor=value
-            |   +-default_value=""
+            |   +-default_value=''
             +-set_value=
               +-DMLValue
                 +-value=

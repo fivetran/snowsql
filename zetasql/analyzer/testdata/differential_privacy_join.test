@@ -1936,14 +1936,14 @@ QueryStmt
         |       | +-expr=
         |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       | +-field_descriptor=string_val
-        |       | +-default_value="default_name"
+        |       | +-default_value='default_name'
         |       +-GetProtoField
         |         +-parse_location=162-172
         |         +-type=STRING
         |         +-expr=
         |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |         +-field_descriptor=string_val
-        |         +-default_value="default_name"
+        |         +-default_value='default_name'
         +-aggregate_list=
           +-$agg1#3 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_sum(INT64, optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -1991,7 +1991,7 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
         |   |   |     +-TableScan(parse_location=56-84, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
@@ -2004,7 +2004,7 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
         |   |   |     +-TableScan(parse_location=106-134, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
@@ -2015,14 +2015,14 @@ QueryStmt
         |   |       | +-expr=
         |   |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       | +-field_descriptor=string_val
-        |   |       | +-default_value="default_name"
+        |   |       | +-default_value='default_name'
         |   |       +-GetProtoField
         |   |         +-parse_location=162-172
         |   |         +-type=STRING
         |   |         +-expr=
         |   |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |         +-field_descriptor=string_val
-        |   |         +-default_value="default_name"
+        |   |         +-default_value='default_name'
         |   +-group_by_list=
         |   | +-$uid#8 := ColumnRef(type=STRING, column=$project.$string_val#4)
         |   +-aggregate_list=
@@ -2083,7 +2083,7 @@ QueryStmt
         |   | |   +-expr=
         |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   | |   +-field_descriptor=string_val
-        |   | |   +-default_value="default_name"
+        |   | |   +-default_value='default_name'
         |   | +-n#4 :=
         |   |   +-GetProtoField
         |   |     +-parse_location=78-87
@@ -2111,14 +2111,14 @@ QueryStmt
         |       |       | +-expr=
         |       |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       |       | +-field_descriptor=string_val
-        |       |       | +-default_value="default_name"
+        |       |       | +-default_value='default_name'
         |       |       +-GetProtoField
         |       |         +-parse_location=203-213
         |       |         +-type=STRING
         |       |         +-expr=
         |       |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |       |         +-field_descriptor=string_val
-        |       |         +-default_value="default_name"
+        |       |         +-default_value='default_name'
         |       +-filter_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-FunctionCall(ZetaSQL:mod(INT64, INT64) -> INT64)
@@ -2195,7 +2195,7 @@ QueryStmt
         |   |       |   |   |     +-expr=
         |   |       |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       |   |   |     +-field_descriptor=string_val
-        |   |       |   |   |     +-default_value="default_name"
+        |   |       |   |   |     +-default_value='default_name'
         |   |       |   |   +-input_scan=
         |   |       |   |     +-TableScan(parse_location=102-130, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |       |   +-right_scan=
@@ -2208,7 +2208,7 @@ QueryStmt
         |   |       |   |   |     +-expr=
         |   |       |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |       |   |   |     +-field_descriptor=string_val
-        |   |       |   |   |     +-default_value="default_name"
+        |   |       |   |   |     +-default_value='default_name'
         |   |       |   |   +-input_scan=
         |   |       |   |     +-TableScan(parse_location=143-171, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |       |   +-join_expr=
@@ -2219,14 +2219,14 @@ QueryStmt
         |   |       |       | +-expr=
         |   |       |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       |       | +-field_descriptor=string_val
-        |   |       |       | +-default_value="default_name"
+        |   |       |       | +-default_value='default_name'
         |   |       |       +-GetProtoField
         |   |       |         +-parse_location=203-213
         |   |       |         +-type=STRING
         |   |       |         +-expr=
         |   |       |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |       |         +-field_descriptor=string_val
-        |   |       |         +-default_value="default_name"
+        |   |       |         +-default_value='default_name'
         |   |       +-filter_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-FunctionCall(ZetaSQL:mod(INT64, INT64) -> INT64)
@@ -2298,7 +2298,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-FilterScan
         |       +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
@@ -2318,14 +2318,14 @@ QueryStmt
         |       |       | +-expr=
         |       |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       |       | +-field_descriptor=string_val
-        |       |       | +-default_value="default_name"
+        |       |       | +-default_value='default_name'
         |       |       +-GetProtoField
         |       |         +-parse_location=186-196
         |       |         +-type=STRING
         |       |         +-expr=
         |       |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |       |         +-field_descriptor=string_val
-        |       |         +-default_value="default_name"
+        |       |         +-default_value='default_name'
         |       +-filter_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-Literal(parse_location=207-208, type=INT64, value=1)
@@ -2384,7 +2384,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
@@ -2398,7 +2398,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
@@ -2449,7 +2449,7 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
         |   |   |         +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
@@ -2467,7 +2467,7 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
         |   |   |         +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
@@ -2600,7 +2600,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#3 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=72-82
@@ -2608,7 +2608,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=93-121, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-right_scan=
@@ -2623,7 +2623,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#6 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=156-166
@@ -2631,7 +2631,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=177-205, column_list=[KitchenSinkWithUidValueTable.value#4], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-join_expr=
@@ -2680,7 +2680,7 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
         |   |   |     +-ProjectScan
         |   |   |       +-column_list=[KitchenSinkWithUidValueTable.value#1, $project.$string_val#8]
@@ -2691,7 +2691,7 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
         |   |   |         +-TableScan(parse_location=93-121, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   |   +-right_scan=
@@ -2707,7 +2707,7 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
         |   |   |     +-ProjectScan
         |   |   |       +-column_list=[KitchenSinkWithUidValueTable.value#4, $project.$string_val#9]
@@ -2718,7 +2718,7 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
         |   |   |         +-TableScan(parse_location=177-205, column_list=[KitchenSinkWithUidValueTable.value#4], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   |   +-join_expr=
@@ -2778,7 +2778,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#3 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=72-82
@@ -2786,7 +2786,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=93-121, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-right_scan=
@@ -2801,7 +2801,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#6 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=156-166
@@ -2809,7 +2809,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=177-205, column_list=[KitchenSinkWithUidValueTable.value#4], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-join_expr=

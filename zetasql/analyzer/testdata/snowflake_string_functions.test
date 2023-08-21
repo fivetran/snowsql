@@ -19,7 +19,7 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
+    |     | +-default_value='default_name'
     |     +-Literal(type=STRING, value='[[:punct:]][[:alnum:]]+[[:punct:]]')
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
@@ -40,7 +40,7 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
+    |     | +-default_value='default_name'
     |     +-Literal(type=STRING, value='[[:punct:]][[:alnum:]]+[[:punct:]]')
     |     +-Literal(type=INT64, value=1)
     +-input_scan=
@@ -62,7 +62,7 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
+    |     | +-default_value='default_name'
     |     +-Literal(type=STRING, value='[[:punct:]][[:alnum:]]+[[:punct:]]')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=STRING, value='i')
@@ -99,7 +99,7 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
+            | +-default_value='default_name'
             +-Literal(type=STRING, value='san.*')
 --
 ALTERNATION GROUPS:
@@ -126,7 +126,7 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
+            | +-default_value='default_name'
             +-Literal(type=STRING, value='san.*')
             +-Literal(type=STRING, value='i')
 ==

@@ -34,7 +34,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |   +-field_descriptor=string_val
-    | |   +-default_value="default_name"
+    | |   +-default_value='default_name'
     | +-bytes_val#5 :=
     |   +-GetProtoField
     |     +-type=BYTES
@@ -1749,7 +1749,7 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
+            | +-default_value='default_name'
             +-GetProtoField
               +-type=ARRAY<STRING>
               +-expr=
