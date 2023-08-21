@@ -59,7 +59,7 @@ FROM SimpleTypesWithAnonymizationUid;
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="anon_count", type=INT64, column=foo_table.anon_count#14)
+| +-ColumnDefinition(name='anon_count', type=INT64, column=foo_table.anon_count#14)
 +-output_column_list=
 | +-$aggregate.anon_count#13 AS anon_count [INT64]
 +-query=
@@ -77,7 +77,7 @@ CreateTableAsSelectStmt
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="anon_count", type=INT64, column=foo_table.anon_count#14)
+| +-ColumnDefinition(name='anon_count', type=INT64, column=foo_table.anon_count#14)
 +-output_column_list=
 | +-$aggregate.anon_count#13 AS anon_count [INT64]
 +-query=
@@ -453,7 +453,7 @@ CreateMaterializedViewStmt
 |         +-anon_count#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 +-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="anon_count", type=INT64, column=foo_materialized_view.anon_count#14)
+  +-ColumnDefinition(name='anon_count', type=INT64, column=foo_materialized_view.anon_count#14)
 
 [REWRITTEN AST]
 CreateMaterializedViewStmt
@@ -488,7 +488,7 @@ CreateMaterializedViewStmt
 |         +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#21)
 +-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="anon_count", type=INT64, column=foo_materialized_view.anon_count#14)
+  +-ColumnDefinition(name='anon_count', type=INT64, column=foo_materialized_view.anon_count#14)
 ==
 
 CREATE VIEW foo_view AS
@@ -511,7 +511,7 @@ CreateViewStmt
 |         +-anon_count#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 +-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="anon_count", type=INT64, column=foo_view.anon_count#14)
+  +-ColumnDefinition(name='anon_count', type=INT64, column=foo_view.anon_count#14)
 
 [REWRITTEN AST]
 CreateViewStmt
@@ -546,7 +546,7 @@ CreateViewStmt
 |         +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#21)
 +-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="anon_count", type=INT64, column=foo_view.anon_count#14)
+  +-ColumnDefinition(name='anon_count', type=INT64, column=foo_view.anon_count#14)
 ==
 
 EXPORT DATA options (format=sstable, filename='/tmp/foo') AS
@@ -616,7 +616,7 @@ FROM SimpleTypesWithAnonymizationUid;
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="anon_count", type=INT64, column=foo_table.anon_count#14)
+| +-ColumnDefinition(name='anon_count', type=INT64, column=foo_table.anon_count#14)
 +-output_column_list=
 | +-$aggregate.anon_count#13 AS anon_count [INT64]
 +-query=
@@ -637,7 +637,7 @@ CreateTableAsSelectStmt
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="anon_count", type=INT64, column=foo_table.anon_count#14)
+| +-ColumnDefinition(name='anon_count', type=INT64, column=foo_table.anon_count#14)
 +-output_column_list=
 | +-$aggregate.anon_count#13 AS anon_count [INT64]
 +-query=

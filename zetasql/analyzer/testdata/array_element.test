@@ -531,7 +531,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<STRING>, INT64) -> STRING)
-    | |   +-Literal(type=ARRAY<STRING>, value=["a", "b"])
+    | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b'])
     | |   +-Literal(type=INT64, value=-1)
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:$array_at_ordinal(ARRAY<BOOL>, INT64) -> BOOL)

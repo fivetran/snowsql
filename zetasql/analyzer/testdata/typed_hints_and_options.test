@@ -471,7 +471,7 @@ CreateTableAsSelectStmt
 +-option_list=
 | +-STRUct_option := Literal(type=STRUCT<a INT32, b ENUM<zetasql_test__.TestEnum>>, value={a:1, b:TESTENUM1})
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=foo.x#2)
+| +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=
@@ -494,7 +494,7 @@ CreateTableAsSelectStmt
 +-option_list=
 | +-struct_option := Literal(type=STRUCT<a INT32, b ENUM<zetasql_test__.TestEnum>>, value={a:2, b:TESTENUM1}, has_explicit_type=TRUE)
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=foo.x#2)
+| +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=
@@ -515,7 +515,7 @@ CreateTableAsSelectStmt
 +-option_list=
 | +-untyped_option := Literal(type=STRUCT<INT64, STRING>, value={1, "TESTENUM1"})
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=foo.x#2)
+| +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=
@@ -539,7 +539,7 @@ CreateTableAsSelectStmt
 +-option_list=
 | +-untyped_option := Literal(type=STRUCT<foo INT64, bar STRING>, value={foo:1, bar:"TESTENUM1"})
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=foo.x#2)
+| +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=
@@ -567,7 +567,7 @@ CreateTableAsSelectStmt
 +-option_list=
 | +-untyped_option := Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:"a"}, has_explicit_type=TRUE)
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=foo.x#2)
+| +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=
@@ -846,10 +846,10 @@ AS (
 CreateTableAsSelectStmt
 +-name_path=Foo
 +-option_list=
-| +-string_array_option := Literal(type=ARRAY<STRING>, value=["hello"])
+| +-string_array_option := Literal(type=ARRAY<STRING>, value=['hello'])
 | +-int64_option := Literal(type=INT64, value=42)
 +-column_definition_list=
-| +-ColumnDefinition(name="foo", type=INT64, column=Foo.foo#2)
+| +-ColumnDefinition(name='foo', type=INT64, column=Foo.foo#2)
 +-output_column_list=
 | +-$create_as.foo#1 AS foo [INT64]
 +-query=

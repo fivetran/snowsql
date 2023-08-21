@@ -3415,7 +3415,7 @@ QueryStmt
         |     +-MakeStruct
         |       +-type=STRUCT<field1 ARRAY<STRING>, field2 ARRAY<STRING>, field3 ARRAY<STRING>>
         |       +-field_list=
-        |         +-Literal(type=ARRAY<STRING>, value=[""])
+        |         +-Literal(type=ARRAY<STRING>, value=[''])
         |         +-SubqueryExpr
         |         | +-type=ARRAY<STRING>
         |         | +-subquery_type=ARRAY
@@ -3429,11 +3429,11 @@ QueryStmt
         |         |         | +-ArrayScan
         |         |         |   +-column_list=[$array.v#1]
         |         |         |   +-array_expr=
-        |         |         |   | +-Literal(type=ARRAY<STRING>, value=[""])
+        |         |         |   | +-Literal(type=ARRAY<STRING>, value=[''])
         |         |         |   +-element_column=$array.v#1
         |         |         +-filter_expr=
         |         |           +-FunctionCall(ZetaSQL:$not_equal(STRING, STRING) -> BOOL)
         |         |             +-ColumnRef(type=STRING, column=$array.v#1)
         |         |             +-Literal(type=STRING, value='')
-        |         +-Literal(type=ARRAY<STRING>, value=[""])
+        |         +-Literal(type=ARRAY<STRING>, value=[''])
         +-column_index_list=[0, 1]

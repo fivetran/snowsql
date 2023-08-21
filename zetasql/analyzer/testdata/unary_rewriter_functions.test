@@ -749,7 +749,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_min(ARRAY<STRING> input_array) -> STRING)
-    |     +-Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |     +-Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     +-input_scan=
       +-SingleRowScan
 
@@ -814,7 +814,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[$subquery1.input_array#2]
     |             +-expr_list=
-    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -831,7 +831,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_min(ARRAY<STRING> input_array) -> STRING)
-    |     +-Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |     +-Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     +-input_scan=
       +-SingleRowScan
 
@@ -898,7 +898,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[$subquery1.input_array#2]
     |             +-expr_list=
-    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=

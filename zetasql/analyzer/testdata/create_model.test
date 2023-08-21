@@ -31,10 +31,10 @@ ALTERNATION GROUP: V_1_4_REMOTE_MODEL,
 CreateModelStmt
 +-name_path=t1
 +-input_column_definition_list=
-| +-ColumnDefinition(name="i1", type=INT64, column=t1.i1#1)
-| +-ColumnDefinition(name="i2", type=DOUBLE, column=t1.i2#2)
+| +-ColumnDefinition(name='i1', type=INT64, column=t1.i1#1)
+| +-ColumnDefinition(name='i2', type=DOUBLE, column=t1.i2#2)
 +-output_column_definition_list=
-  +-ColumnDefinition(name="o1", type=BOOL, column=t1.o1#3)
+  +-ColumnDefinition(name='o1', type=BOOL, column=t1.o1#3)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -363,8 +363,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="c", type=INT64, column=Z.c#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='c', type=INT64, column=Z.c#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-A#6 := ColumnRef(type=INT64, column=Z.c#3)
 | +-d#5 :=
@@ -410,8 +410,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="c", type=INT64, column=Z.c#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='c', type=INT64, column=Z.c#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-A#10 := ColumnRef(type=INT64, column=$analytic.A#5)
 | +-d#11 := ColumnRef(type=INT64, column=$analytic.d#6)
@@ -502,8 +502,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="c", type=INT64, column=Z.c#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='c', type=INT64, column=Z.c#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-c#6 := ColumnRef(type=INT64, column=Z.c#3)
 | +-d#5 := Literal(type=INT64, value=1)
@@ -531,8 +531,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="a", type=INT64, column=Z.a#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='a', type=INT64, column=Z.a#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-a#5 :=
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -955,10 +955,10 @@ CreateModelStmt
 +-option_list=
 | +-abc := Literal(type=STRING, value='def')
 +-input_column_definition_list=
-| +-ColumnDefinition(name="i1", type=INT64, column=t1.i1#1)
-| +-ColumnDefinition(name="i2", type=DOUBLE, column=t1.i2#2)
+| +-ColumnDefinition(name='i1', type=INT64, column=t1.i1#1)
+| +-ColumnDefinition(name='i2', type=DOUBLE, column=t1.i2#2)
 +-output_column_definition_list=
-| +-ColumnDefinition(name="o1", type=BOOL, column=t1.o1#3)
+| +-ColumnDefinition(name='o1', type=BOOL, column=t1.o1#3)
 +-is_remote=TRUE
 +-connection=
   +-Connection(connection=connection1)

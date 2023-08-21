@@ -872,7 +872,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$like_any_array(STRING, ARRAY<STRING>) -> BOOL)
     |     +-Literal(type=STRING, value='a')
-    |     +-Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |     +-Literal(type=ARRAY<STRING>, value=['a', 'b'])
     +-input_scan=
       +-SingleRowScan
 
@@ -945,7 +945,7 @@ QueryStmt
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
     |             | +-input#2 := Literal(type=STRING, value='a')
-    |             | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |             | +-patterns#3 := Literal(type=ARRAY<STRING>, value=['a', 'b'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -963,7 +963,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$like_all_array(STRING, ARRAY<STRING>) -> BOOL)
     |     +-Literal(type=STRING, value='a')
-    |     +-Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |     +-Literal(type=ARRAY<STRING>, value=['a', 'b'])
     +-input_scan=
       +-SingleRowScan
 
@@ -1037,7 +1037,7 @@ QueryStmt
     |             +-column_list=$subquery1.[input#2, patterns#3]
     |             +-expr_list=
     |             | +-input#2 := Literal(type=STRING, value='a')
-    |             | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |             | +-patterns#3 := Literal(type=ARRAY<STRING>, value=['a', 'b'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -1267,7 +1267,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
     |     +-FunctionCall(ZetaSQL:$like_any_array(STRING, ARRAY<STRING>) -> BOOL)
     |       +-Literal(type=STRING, value='a')
-    |       +-Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |       +-Literal(type=ARRAY<STRING>, value=['a', 'b'])
     +-input_scan=
       +-SingleRowScan
 
@@ -1341,7 +1341,7 @@ QueryStmt
     |               +-column_list=$subquery1.[input#2, patterns#3]
     |               +-expr_list=
     |               | +-input#2 := Literal(type=STRING, value='a')
-    |               | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |               | +-patterns#3 := Literal(type=ARRAY<STRING>, value=['a', 'b'])
     |               +-input_scan=
     |                 +-SingleRowScan
     +-input_scan=
@@ -1360,7 +1360,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$not(BOOL) -> BOOL)
     |     +-FunctionCall(ZetaSQL:$like_all_array(STRING, ARRAY<STRING>) -> BOOL)
     |       +-Literal(type=STRING, value='a')
-    |       +-Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |       +-Literal(type=ARRAY<STRING>, value=['a', 'b'])
     +-input_scan=
       +-SingleRowScan
 
@@ -1435,7 +1435,7 @@ QueryStmt
     |               +-column_list=$subquery1.[input#2, patterns#3]
     |               +-expr_list=
     |               | +-input#2 := Literal(type=STRING, value='a')
-    |               | +-patterns#3 := Literal(type=ARRAY<STRING>, value=["a", "b"])
+    |               | +-patterns#3 := Literal(type=ARRAY<STRING>, value=['a', 'b'])
     |               +-input_scan=
     |                 +-SingleRowScan
     +-input_scan=

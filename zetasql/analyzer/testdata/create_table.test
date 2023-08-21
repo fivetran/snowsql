@@ -13,13 +13,13 @@ create table t1 (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-  +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-  +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
-  +-ColumnDefinition(name="c4", type=ENUM<zetasql_test__.TestEnum>, column=t1.c4#4)
-  +-ColumnDefinition(name="c5", type=PROTO<zetasql_test__.TestExtraPB>, column=t1.c5#5)
-  +-ColumnDefinition(name="c6", type=STRUCT<x INT32, y STRING>, column=t1.c6#6)
-  +-ColumnDefinition(name="c7", type=ARRAY<INT64>, column=t1.c7#7)
+  +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+  +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+  +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
+  +-ColumnDefinition(name='c4', type=ENUM<zetasql_test__.TestEnum>, column=t1.c4#4)
+  +-ColumnDefinition(name='c5', type=PROTO<zetasql_test__.TestExtraPB>, column=t1.c5#5)
+  +-ColumnDefinition(name='c6', type=STRUCT<x INT32, y STRING>, column=t1.c6#6)
+  +-ColumnDefinition(name='c7', type=ARRAY<INT64>, column=t1.c7#7)
 ==
 
 # Create table with RANGE columns without RANGE_TYPE enabled
@@ -42,21 +42,21 @@ ALTERNATION GROUP: date
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="c1", type=RANGE<DATE>, column=t1.c1#1)
+  +-ColumnDefinition(name='c1', type=RANGE<DATE>, column=t1.c1#1)
 --
 ALTERNATION GROUP: datetime
 --
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="c1", type=RANGE<DATETIME>, column=t1.c1#1)
+  +-ColumnDefinition(name='c1', type=RANGE<DATETIME>, column=t1.c1#1)
 --
 ALTERNATION GROUP: timestamp
 --
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="c1", type=RANGE<TIMESTAMP>, column=t1.c1#1)
+  +-ColumnDefinition(name='c1', type=RANGE<TIMESTAMP>, column=t1.c1#1)
 --
 ALTERNATION GROUP: int64
 --
@@ -118,9 +118,9 @@ create table t1 (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=t1.a#1)
-  +-ColumnDefinition(name="b", type=RANGE<DATETIME>, column=t1.b#2)
-  +-ColumnDefinition(name="c", type=RANGE<TIMESTAMP>, column=t1.c#3)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=t1.a#1)
+  +-ColumnDefinition(name='b', type=RANGE<DATETIME>, column=t1.b#2)
+  +-ColumnDefinition(name='c', type=RANGE<TIMESTAMP>, column=t1.c#3)
 ==
 
 # PRIMARY KEY ENFORCED/NOT ENFORCED on RANGE column.
@@ -138,7 +138,7 @@ ALTERNATION GROUPS:
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT32, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT32, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=RANGE<DATE>
@@ -155,7 +155,7 @@ ALTERNATION GROUP: NOT ENFORCED
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT32, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT32, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=RANGE<DATE>
@@ -181,7 +181,7 @@ ALTERNATION GROUP: <empty>
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=RANGE<DATE>, column=t1.a#1)
+| +-ColumnDefinition(name='a', type=RANGE<DATE>, column=t1.a#1)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[0], column_name_list=[a])
 --
@@ -275,7 +275,7 @@ ALTERNATION GROUPS:
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=RANGE<DATE>, column=t.a#1)
+| +-ColumnDefinition(name='a', type=RANGE<DATE>, column=t.a#1)
 +-primary_key=
   +-PrimaryKey
     +-column_offset_list=[0]
@@ -289,7 +289,7 @@ ALTERNATION GROUP:  NOT ENFORCED
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=RANGE<DATE>, column=t.a#1)
+| +-ColumnDefinition(name='a', type=RANGE<DATE>, column=t.a#1)
 +-primary_key=
   +-PrimaryKey
     +-column_offset_list=[0]
@@ -310,7 +310,7 @@ ALTERNATION GROUP: <empty>
 CreateTableStmt
 +-name_path=T
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUP: if not exists
 --
@@ -318,7 +318,7 @@ CreateTableStmt
 +-name_path=T
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUPS:
     temporary,
@@ -328,7 +328,7 @@ CreateTableStmt
 +-name_path=T
 +-create_scope=CREATE_TEMP
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUPS:
     temporary,if not exists
@@ -339,7 +339,7 @@ CreateTableStmt
 +-create_scope=CREATE_TEMP
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUP: or replace,,
 --
@@ -347,7 +347,7 @@ CreateTableStmt
 +-name_path=T
 +-create_mode=CREATE_OR_REPLACE
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUP: or replace,,if not exists
 --
@@ -364,7 +364,7 @@ CreateTableStmt
 +-create_scope=CREATE_TEMP
 +-create_mode=CREATE_OR_REPLACE
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUP: or replace,temporary,if not exists
 --
@@ -392,7 +392,7 @@ CreateTableStmt
 +-name_path=T
 +-create_scope=CREATE_TEMP
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=RANGE<DATE>, column=T.a#1)
+  +-ColumnDefinition(name='a', type=RANGE<DATE>, column=T.a#1)
 --
 ALTERNATION GROUP: public
 --
@@ -419,9 +419,9 @@ create table t1 (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=RANGE<DATE>, is_hidden=TRUE, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=RANGE<DATE>, is_hidden=TRUE, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[2], column_name_list=[c3])
 ==
@@ -561,8 +561,8 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=RANGE<DATE>, column=t.c1#1)
-| +-ColumnDefinition(name="c2", type=RANGE<DATE>, column=t.c2#2)
+| +-ColumnDefinition(name='c1', type=RANGE<DATE>, column=t.c1#1)
+| +-ColumnDefinition(name='c2', type=RANGE<DATE>, column=t.c2#2)
 +-pseudo_column_list=t.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-check_constraint_list=
   +-CheckConstraint
@@ -626,7 +626,7 @@ create table t1 ("range" range<date>);
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="range", type=RANGE<DATE>, column=t1.range#1)
+  +-ColumnDefinition(name='range', type=RANGE<DATE>, column=t1.range#1)
 ==
 
 # column-level COLLATE with unamed parameters on RANGE is parseable but will
@@ -667,9 +667,9 @@ partition by c1, c3, c2
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=RANGE<DATE>, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=RANGE<DATETIME>, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=RANGE<TIMESTAMP>, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=RANGE<DATE>, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=RANGE<DATETIME>, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=RANGE<TIMESTAMP>, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=RANGE<DATE>, column=t1.c1#1)
@@ -690,9 +690,9 @@ cluster by c1, c3, c2
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=RANGE<DATE>, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=RANGE<DATETIME>, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=RANGE<TIMESTAMP>, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=RANGE<DATE>, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=RANGE<DATETIME>, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=RANGE<TIMESTAMP>, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-cluster_by_list=
   +-ColumnRef(type=RANGE<DATE>, column=t1.c1#1)
@@ -1074,8 +1074,8 @@ CreateTableStmt
 +-option_list=
 | +-table_option := Literal(type=INT64, value=1)
 +-column_definition_list=
-| +-ColumnDefinition(name="Key", type=INT64, column=t1.Key#1)
-| +-ColumnDefinition(name="Value", type=STRING, column=t1.Value#2)
+| +-ColumnDefinition(name='Key', type=INT64, column=t1.Key#1)
+| +-ColumnDefinition(name='Value', type=STRING, column=t1.Value#2)
 +-pseudo_column_list=t1.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-like_table=KeyValue
 +-partition_by_list=
@@ -1115,8 +1115,8 @@ create table t1 (c1 int32, c2 int64 primary key);
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[1], column_name_list=[c2])
 ==
@@ -1126,8 +1126,8 @@ create table t1 (c1 int32, primary key(c1,C3) options(x=1,y=2), c3 string);
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#2)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#2)
 +-primary_key=
   +-PrimaryKey
     +-column_offset_list=[0, 1]
@@ -1142,7 +1142,7 @@ create table t (a int64, b int32 PRIMARY KEY OPTIONS(x=1));
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=INT32
@@ -1161,7 +1161,7 @@ create table t (primary key(), a int64);
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[])
 ==
@@ -1171,8 +1171,8 @@ create table t (aaA int64, b int32, PRIMARY KEY(Aaa));
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="aaA", type=INT64, column=t.aaA#1)
-| +-ColumnDefinition(name="b", type=INT32, column=t.b#2)
+| +-ColumnDefinition(name='aaA', type=INT64, column=t.aaA#1)
+| +-ColumnDefinition(name='b', type=INT32, column=t.b#2)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[0], column_name_list=[Aaa])
 ==
@@ -1182,11 +1182,11 @@ create table t1 (c1 int32, c2 int32, c3 int32, c4 int32, c5 int32, primary key (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT32, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=INT32, column=t1.c3#3)
-| +-ColumnDefinition(name="c4", type=INT32, column=t1.c4#4)
-| +-ColumnDefinition(name="c5", type=INT32, column=t1.c5#5)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT32, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=INT32, column=t1.c3#3)
+| +-ColumnDefinition(name='c4', type=INT32, column=t1.c4#4)
+| +-ColumnDefinition(name='c5', type=INT32, column=t1.c5#5)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[2, 4, 0], column_name_list=[c3, c5, c1])
 ==
@@ -1278,7 +1278,7 @@ create table a.b.t3 (a int64);
 CreateTableStmt
 +-name_path=a.b.t3
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=a.b.t3.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=a.b.t3.a#1)
 ==
 
 create {{|or replace}} {{|temporary|temp}} table {{|if not exists}} T
@@ -1289,7 +1289,7 @@ ALTERNATION GROUP: <empty>
 CreateTableStmt
 +-name_path=T
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#1)
 --
 ALTERNATION GROUP: if not exists
 --
@@ -1297,7 +1297,7 @@ CreateTableStmt
 +-name_path=T
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#1)
 --
 ALTERNATION GROUPS:
     temporary,
@@ -1307,7 +1307,7 @@ CreateTableStmt
 +-name_path=T
 +-create_scope=CREATE_TEMP
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#1)
 --
 ALTERNATION GROUPS:
     temporary,if not exists
@@ -1318,7 +1318,7 @@ CreateTableStmt
 +-create_scope=CREATE_TEMP
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#1)
 --
 ALTERNATION GROUP: or replace,,
 --
@@ -1326,7 +1326,7 @@ CreateTableStmt
 +-name_path=T
 +-create_mode=CREATE_OR_REPLACE
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#1)
 --
 ALTERNATION GROUP: or replace,,if not exists
 --
@@ -1343,7 +1343,7 @@ CreateTableStmt
 +-create_scope=CREATE_TEMP
 +-create_mode=CREATE_OR_REPLACE
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#1)
 --
 ALTERNATION GROUP: or replace,temporary,if not exists
 --
@@ -1396,9 +1396,9 @@ create table t1 (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, is_hidden=TRUE, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, is_hidden=TRUE, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[2], column_name_list=[c3])
 ==
@@ -1413,9 +1413,9 @@ create table t1 (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, is_hidden=TRUE, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, is_hidden=TRUE, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[1], column_name_list=[c2])
 ==
@@ -1430,9 +1430,9 @@ create table t1 (
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, is_hidden=TRUE, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, is_hidden=TRUE, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[1], column_name_list=[c2])
 ==
@@ -1498,9 +1498,9 @@ ALTERNATION GROUPS:
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT64, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT32, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT64, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT32, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=INT32, column=t1.c2#2)
@@ -1521,9 +1521,9 @@ partition by c1, c3.x, ARRAY_LENGTH(c3.y)
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRUCT<x INT64, y ARRAY<STRUCT<a BOOL, b STRING>>>, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRUCT<x INT64, y ARRAY<STRUCT<a BOOL, b STRING>>>, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=INT32, column=t1.c1#1)
@@ -1617,9 +1617,9 @@ partition by c1, c2, (select min(b) AS c2 from unnest(c3.y))
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRUCT<x INT64, y ARRAY<STRUCT<a BOOL, b STRING>>>, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRUCT<x INT64, y ARRAY<STRUCT<a BOOL, b STRING>>>, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=INT32, column=t1.c1#1)
@@ -1666,9 +1666,9 @@ partition by pseudo_column_int32, c2
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=INT32, column=t1.pseudo_column_int32#4)
@@ -1700,9 +1700,9 @@ partition by c2
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="pseudo_column_int32", type=INT32, column=t1.pseudo_column_int32#1)
-| +-ColumnDefinition(name="c2", type=INT32, column=t1.c2#2)
-| +-ColumnDefinition(name="pseudo_column_timestamp", type=TIMESTAMP, column=t1.pseudo_column_timestamp#3)
+| +-ColumnDefinition(name='pseudo_column_int32', type=INT32, column=t1.pseudo_column_int32#1)
+| +-ColumnDefinition(name='c2', type=INT32, column=t1.c2#2)
+| +-ColumnDefinition(name='pseudo_column_timestamp', type=TIMESTAMP, column=t1.pseudo_column_timestamp#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=INT32, column=t1.c2#2)
@@ -1720,9 +1720,9 @@ partition by c3, date(pseudo_column_timestamp),
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=STRING, column=t1.c3#3)
@@ -1767,9 +1767,9 @@ partition by extra_pseudo_column_table_int64
 CreateTableStmt
 +-name_path=table_with_extra_pseudo_column
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=table_with_extra_pseudo_column.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=table_with_extra_pseudo_column.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=table_with_extra_pseudo_column.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=table_with_extra_pseudo_column.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=table_with_extra_pseudo_column.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=table_with_extra_pseudo_column.c3#3)
 +-pseudo_column_list=[table_with_extra_pseudo_column.extra_pseudo_column_table_int64#4]
 +-partition_by_list=
   +-ColumnRef(type=INT64, column=table_with_extra_pseudo_column.extra_pseudo_column_table_int64#4)
@@ -1807,9 +1807,9 @@ CreateTableStmt
 | +-option1 := Literal(type=INT64, value=1)
 | +-pseudo_column_option := Literal(type=BOOL, value=true)
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=table_with_extra_pseudo_column.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=table_with_extra_pseudo_column.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=table_with_extra_pseudo_column.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=table_with_extra_pseudo_column.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=table_with_extra_pseudo_column.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=table_with_extra_pseudo_column.c3#3)
 +-pseudo_column_list=table_with_extra_pseudo_column.[extra_pseudo_column_option_string#4, extra_pseudo_column_table_int64#5]
 +-partition_by_list=
   +-ColumnRef(type=STRING, column=table_with_extra_pseudo_column.extra_pseudo_column_option_string#4)
@@ -1839,9 +1839,9 @@ partition by cluster
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="cluster", type=STRING, column=t1.cluster#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='cluster', type=STRING, column=t1.cluster#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=STRING, column=t1.cluster#3)
@@ -1861,9 +1861,9 @@ CreateTableStmt
 +-option_list=
 | +-foo := Literal(type=BOOL, value=true)
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-ColumnRef(type=INT32, column=t1.c1#1)
@@ -1897,9 +1897,9 @@ ALTERNATION GROUPS:
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT64, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT32, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT64, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT32, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-cluster_by_list=
   +-ColumnRef(type=INT32, column=t1.c2#2)
@@ -1920,9 +1920,9 @@ cluster by pseudo_column_int32, c2
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-cluster_by_list=
   +-ColumnRef(type=INT32, column=t1.pseudo_column_int32#4)
@@ -1941,9 +1941,9 @@ cluster by c3, date(pseudo_column_timestamp),
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-cluster_by_list=
   +-ColumnRef(type=STRING, column=t1.c3#3)
@@ -2020,9 +2020,9 @@ ALTERNATION GROUP: CREATE_TABLE_CLUSTER_BY,GEOGRAPHY
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=GEOGRAPHY, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=GEOGRAPHY, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-cluster_by_list=
   +-ColumnRef(type=INT32, column=t1.c1#1)
@@ -2099,9 +2099,9 @@ ALTERNATION GROUP: CREATE_TABLE_PARTITION_BY,CREATE_TABLE_CLUSTER_BY
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
 | +-ColumnRef(type=INT32, column=t1.c1#1)
@@ -2128,9 +2128,9 @@ cluster by c3, pseudo_column_KitchenSink.int64_key_1 + pseudo_column_int32 + c2
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
 | +-ColumnRef(type=TIMESTAMP, column=t1.pseudo_column_timestamp#6)
@@ -2163,9 +2163,9 @@ CreateTableStmt
 +-option_list=
 | +-foo := Literal(type=BOOL, value=true)
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
 | +-ColumnRef(type=INT32, column=t1.c1#1)
@@ -2191,9 +2191,9 @@ partition by concat(c3, @test_param_string)
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-partition_by_list=
   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
@@ -2212,9 +2212,9 @@ cluster by concat(c3, @test_param_string)
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
-| +-ColumnDefinition(name="c2", type=INT64, column=t1.c2#2)
-| +-ColumnDefinition(name="c3", type=STRING, column=t1.c3#3)
+| +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
+| +-ColumnDefinition(name='c2', type=INT64, column=t1.c2#2)
+| +-ColumnDefinition(name='c3', type=STRING, column=t1.c3#3)
 +-pseudo_column_list=t1.[pseudo_column_int32#4, pseudo_column_kitchensink#5, pseudo_column_timestamp#6]
 +-cluster_by_list=
   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
@@ -2369,7 +2369,7 @@ ALTERNATION GROUP: CREATE_TABLE_FIELD_ANNOTATIONS
 CreateTableStmt
 +-name_path=t1
 +-column_definition_list=
-  +-ColumnDefinition(name="c1", type=INT32, column=t1.c1#1)
+  +-ColumnDefinition(name='c1', type=INT32, column=t1.c1#1)
   +-ColumnDefinition
   | +-name='c2'
   | +-type=STRUCT<x INT64, y BYTES>
@@ -2382,7 +2382,7 @@ CreateTableStmt
   | |       +-option_list=
   | |         +-x := Literal(type=STRING, value='y')
   | +-column=t1.c2#2
-  +-ColumnDefinition(name="c3", type=STRUCT<x INT64, BYTES>, column=t1.c3#3)
+  +-ColumnDefinition(name='c3', type=STRUCT<x INT64, BYTES>, column=t1.c3#3)
   +-ColumnDefinition
     +-name='c4'
     +-type=ARRAY<STRUCT<>>
@@ -2475,7 +2475,7 @@ CreateTableStmt
 | | |       +-option_list=
 | | |         +-y := Literal(type=INT64, value=3)
 | | +-column=t1.c3#3
-| +-ColumnDefinition(name="c4", type=ARRAY<STRUCT<>>, is_hidden=TRUE, column=t1.c4#4)
+| +-ColumnDefinition(name='c4', type=ARRAY<STRUCT<>>, is_hidden=TRUE, column=t1.c4#4)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[0], column_name_list=[c1])
 
@@ -2581,7 +2581,7 @@ create table t (a int64, b AS (CAST(a as INT32)), c AS (CAST(b as UINT32)));
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
   | +-name='b'
   | +-type=INT32
@@ -2619,7 +2619,7 @@ CreateTableStmt
   |     +-expression=
   |       +-Cast(INT32 -> INT64)
   |         +-ColumnRef(type=INT32, column=t.a#1)
-  +-ColumnDefinition(name="a", type=INT32, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT32, column=t.a#1)
 ==
 
 # Generated Columns: With Stored
@@ -2809,7 +2809,7 @@ CreateTableStmt
   |   +-GeneratedColumnInfo
   |     +-expression=
   |       +-ColumnRef(type=STRING, column=t.c#1)
-  +-ColumnDefinition(name="c", type=STRING, column=t.c#1)
+  +-ColumnDefinition(name='c', type=STRING, column=t.c#1)
 ==
 
 # Generated Columns: Two dependencies from the same function
@@ -2846,9 +2846,9 @@ CreateTableStmt
   |     +-expression=
   |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(0) STRING) -> STRING)
   |         +-ColumnRef(type=STRING, column=T.a#1)
-  +-ColumnDefinition(name="a", type=STRING, column=T.a#1)
-  +-ColumnDefinition(name="d", type=STRING, column=T.d#2)
-  +-ColumnDefinition(name="e", type=STRING, column=T.e#3)
+  +-ColumnDefinition(name='a', type=STRING, column=T.a#1)
+  +-ColumnDefinition(name='d', type=STRING, column=T.d#2)
+  +-ColumnDefinition(name='e', type=STRING, column=T.e#3)
 ==
 
 
@@ -2860,7 +2860,7 @@ create table t (a int32, b int32 as (a), c ARRAY<int32> as ([a,b]));
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT32, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT32, column=t.a#1)
   +-ColumnDefinition
   | +-name='b'
   | +-type=INT32
@@ -2917,7 +2917,7 @@ CreateTableStmt
   |         +-field_list=
   |           +-Literal(type=INT64, value=1)
   |           +-ColumnRef(type=STRING, column=t.c#1)
-  +-ColumnDefinition(name="c", type=STRING, column=t.c#1)
+  +-ColumnDefinition(name='c', type=STRING, column=t.c#1)
 ==
 
 # Generated Columns: Reference another column with dot
@@ -2989,7 +2989,7 @@ CreateTableStmt
   |   +-GeneratedColumnInfo
   |     +-expression=
   |       +-ColumnRef(type=INT64, column=t1.k2#1)
-  +-ColumnDefinition(name="k2", type=INT64, column=t1.k2#1)
+  +-ColumnDefinition(name='k2', type=INT64, column=t1.k2#1)
   +-ColumnDefinition
     +-name='b'
     +-type=PROTO<zetasql_test__.KitchenSinkPB>
@@ -3098,7 +3098,7 @@ CreateTableStmt
   |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
   |         +-ColumnRef(type=STRING, column=t.c#1)
   |         +-ColumnRef(type=STRING, column=t.d#2)
-  +-ColumnDefinition(name="c", type=STRING, column=t.c#1)
+  +-ColumnDefinition(name='c', type=STRING, column=t.c#1)
   +-ColumnDefinition
     +-name='d'
     +-type=STRING
@@ -3131,8 +3131,8 @@ CreateTableStmt
 | |   +-GeneratedColumnInfo
 | |     +-expression=
 | |       +-ColumnRef(type=STRING, column=t.c#2)
-| +-ColumnDefinition(name="b", type=INT64, column=t.b#1)
-| +-ColumnDefinition(name="c", type=STRING, column=t.c#2)
+| +-ColumnDefinition(name='b', type=INT64, column=t.b#1)
+| +-ColumnDefinition(name='c', type=STRING, column=t.c#2)
 +-foreign_key_list=
   +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[4], match_mode=SIMPLE, update_action=CASCADE, delete_action=CASCADE, enforced=TRUE, referencing_column_list=a)
 
@@ -3207,8 +3207,8 @@ CreateTableStmt
   |   +-GeneratedColumnInfo
   |     +-expression=
   |       +-ColumnRef(type=STRING, column=t.c1#2)
-  +-ColumnDefinition(name="b1", type=STRING, column=t.b1#1)
-  +-ColumnDefinition(name="c1", type=STRING, column=t.c1#2)
+  +-ColumnDefinition(name='b1', type=STRING, column=t.b1#1)
+  +-ColumnDefinition(name='c1', type=STRING, column=t.c1#2)
 ==
 
 # Foreign key column and table constraints.
@@ -3238,8 +3238,8 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=STRING, column=t.a#1)
-| +-ColumnDefinition(name="b", type=UINT64, is_hidden=TRUE, column=t.b#2)
+| +-ColumnDefinition(name='a', type=STRING, column=t.a#1)
+| +-ColumnDefinition(name='b', type=UINT64, is_hidden=TRUE, column=t.b#2)
 +-primary_key=
 | +-PrimaryKey(column_offset_list=[0], column_name_list=[a])
 +-foreign_key_list=
@@ -3262,13 +3262,13 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
-| +-ColumnDefinition(name="b", type=INT64, column=t.b#2)
-| +-ColumnDefinition(name="c", type=INT64, column=t.c#3)
-| +-ColumnDefinition(name="d", type=INT64, column=t.d#4)
-| +-ColumnDefinition(name="e", type=INT64, column=t.e#5)
-| +-ColumnDefinition(name="f", type=INT64, column=t.f#6)
-| +-ColumnDefinition(name="g", type=INT64, column=t.g#7)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='b', type=INT64, column=t.b#2)
+| +-ColumnDefinition(name='c', type=INT64, column=t.c#3)
+| +-ColumnDefinition(name='d', type=INT64, column=t.d#4)
+| +-ColumnDefinition(name='e', type=INT64, column=t.e#5)
+| +-ColumnDefinition(name='f', type=INT64, column=t.f#6)
+| +-ColumnDefinition(name='g', type=INT64, column=t.g#7)
 +-foreign_key_list=
   +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
   +-ForeignKey(constraint_name="", referencing_column_offset_list=[1], referenced_table=Value, referenced_column_offset_list=[0], match_mode=FULL, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
@@ -3336,8 +3336,8 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
-| +-ColumnDefinition(name="b", type=STRING, column=t.b#2)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='b', type=STRING, column=t.b#2)
 +-foreign_key_list=
   +-ForeignKey(constraint_name="c", referencing_column_offset_list=[0, 1], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a.b)
   +-ForeignKey(constraint_name="d", referencing_column_offset_list=[0, 1], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a.b)
@@ -3426,12 +3426,12 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
-| +-ColumnDefinition(name="b", type=STRING, column=t.b#2)
-| +-ColumnDefinition(name="c", type=BYTES, column=t.c#3)
-| +-ColumnDefinition(name="d", type=BOOL, column=t.d#4)
-| +-ColumnDefinition(name="e", type=DATE, column=t.e#5)
-| +-ColumnDefinition(name="f", type=TIMESTAMP, column=t.f#6)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='b', type=STRING, column=t.b#2)
+| +-ColumnDefinition(name='c', type=BYTES, column=t.c#3)
+| +-ColumnDefinition(name='d', type=BOOL, column=t.d#4)
+| +-ColumnDefinition(name='e', type=DATE, column=t.e#5)
+| +-ColumnDefinition(name='f', type=TIMESTAMP, column=t.f#6)
 +-foreign_key_list=
   +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[1], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
   +-ForeignKey(constraint_name="", referencing_column_offset_list=[1], referenced_table=SimpleTypes, referenced_column_offset_list=[4], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
@@ -3472,7 +3472,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-foreign_key_list=
   +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
 ==
@@ -3538,8 +3538,8 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
-| +-ColumnDefinition(name="b", type=INT64, column=t.b#2)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='b', type=INT64, column=t.b#2)
 +-pseudo_column_list=t.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-check_constraint_list=
   +-CheckConstraint
@@ -3607,7 +3607,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=INT64
@@ -3640,7 +3640,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-pseudo_column_list=t.[pseudo_column_int32#2, pseudo_column_kitchensink#3, pseudo_column_timestamp#4]
 +-check_constraint_list=
   +-CheckConstraint
@@ -3663,7 +3663,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=ARRAY<INT64>, column=t.a#1)
+| +-ColumnDefinition(name='a', type=ARRAY<INT64>, column=t.a#1)
 +-pseudo_column_list=t.[pseudo_column_int32#2, pseudo_column_kitchensink#3, pseudo_column_timestamp#4]
 +-check_constraint_list=
   +-CheckConstraint
@@ -3687,7 +3687,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-pseudo_column_list=t.[pseudo_column_int32#2, pseudo_column_kitchensink#3, pseudo_column_timestamp#4]
 +-check_constraint_list=
   +-CheckConstraint
@@ -3903,7 +3903,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=DOUBLE
@@ -4066,8 +4066,8 @@ ALTERNATION GROUP: x + 2, y
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-partition_by_list=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -4086,8 +4086,8 @@ ALTERNATION GROUP: x + y
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-partition_by_list=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -4099,8 +4099,8 @@ ALTERNATION GROUP: x * y
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-partition_by_list=
   +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
@@ -4112,8 +4112,8 @@ ALTERNATION GROUP: mod(x, y)
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-partition_by_list=
   +-FunctionCall(ZetaSQL:mod(INT64, INT64) -> INT64)
@@ -4151,7 +4151,7 @@ ALTERNATION GROUP: boolean
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=BOOL, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='x', type=BOOL, column=a.b.c.T.x#1)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#2, pseudo_column_kitchensink#3, pseudo_column_timestamp#4]
 +-cluster_by_list=
   +-ColumnRef(type=BOOL, column=a.b.c.T.x#1)
@@ -4161,7 +4161,7 @@ ALTERNATION GROUP: date
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=DATE, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='x', type=DATE, column=a.b.c.T.x#1)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#2, pseudo_column_kitchensink#3, pseudo_column_timestamp#4]
 +-cluster_by_list=
   +-ColumnRef(type=DATE, column=a.b.c.T.x#1)
@@ -4190,8 +4190,8 @@ ALTERNATION GROUP: x + 2
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-cluster_by_list=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -4203,8 +4203,8 @@ ALTERNATION GROUP: x + 2, y
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-cluster_by_list=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -4223,8 +4223,8 @@ ALTERNATION GROUP: x * y
 CreateTableStmt
 +-name_path=a.b.c.T
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=a.b.c.T.x#1)
-| +-ColumnDefinition(name="y", type=INT64, column=a.b.c.T.y#2)
+| +-ColumnDefinition(name='x', type=INT64, column=a.b.c.T.x#1)
+| +-ColumnDefinition(name='y', type=INT64, column=a.b.c.T.y#2)
 +-pseudo_column_list=a.b.c.T.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-cluster_by_list=
   +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
@@ -4283,8 +4283,8 @@ create table t (aaA int64, b int32, PRIMARY KEY(Aaa) NOT ENFORCED);
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="aaA", type=INT64, column=t.aaA#1)
-| +-ColumnDefinition(name="b", type=INT32, column=t.b#2)
+| +-ColumnDefinition(name='aaA', type=INT64, column=t.aaA#1)
+| +-ColumnDefinition(name='b', type=INT32, column=t.b#2)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[0], unenforced=TRUE, column_name_list=[Aaa])
 ==
@@ -4294,8 +4294,8 @@ create table t (aaA int64, b int32 PRIMARY KEY NOT ENFORCED);
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="aaA", type=INT64, column=t.aaA#1)
-| +-ColumnDefinition(name="b", type=INT32, column=t.b#2)
+| +-ColumnDefinition(name='aaA', type=INT64, column=t.aaA#1)
+| +-ColumnDefinition(name='b', type=INT32, column=t.b#2)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[1], unenforced=TRUE, column_name_list=[b])
 
@@ -4860,7 +4860,7 @@ CreateTableStmt
   |         +-Cast(INT32 -> INT64)
   |         | +-ColumnRef(type=INT32, column=t.d#1)
   |         +-Literal(type=INT64, value=1)
-  +-ColumnDefinition(name="d", type=INT32, column=t.d#1)
+  +-ColumnDefinition(name='d', type=INT32, column=t.d#1)
 ==
 
 # Column default value: using volatile function.
@@ -4980,7 +4980,7 @@ CreateTableStmt
         | +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |   +-FunctionArgument
         |   | +-expr=
-        |   |   +-Literal(type=ARRAY<STRING>, value=["a"])
+        |   |   +-Literal(type=ARRAY<STRING>, value=['a'])
         |   +-FunctionArgument
         |     +-inline_lambda=
         |       +-InlineLambda
@@ -4989,7 +4989,7 @@ CreateTableStmt
         |           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |             +-ColumnRef(type=STRING, column=$lambda_arg.c#1)
         |             +-Literal(type=STRING, value='a')
-        +-sql="ARRAY_FILTER(['a'], c -> c = 'a')"
+        +-sql='ARRAY_FILTER([\'a\'], c -> c = \'a\')'
 ==
 
 # CREATE TABLE DEFAULT with lambda and using previous column as argument.
@@ -5000,7 +5000,7 @@ CREATE TABLE t (a STRING, c ARRAY<STRING> DEFAULT ARRAY_FILTER(['a'], a -> a = '
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=STRING, column=t.a#1)
+  +-ColumnDefinition(name='a', type=STRING, column=t.a#1)
   +-ColumnDefinition
     +-name='c'
     +-type=ARRAY<STRING>
@@ -5011,7 +5011,7 @@ CreateTableStmt
         | +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |   +-FunctionArgument
         |   | +-expr=
-        |   |   +-Literal(type=ARRAY<STRING>, value=["a"])
+        |   |   +-Literal(type=ARRAY<STRING>, value=['a'])
         |   +-FunctionArgument
         |     +-inline_lambda=
         |       +-InlineLambda
@@ -5020,7 +5020,7 @@ CreateTableStmt
         |           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |             +-ColumnRef(type=STRING, column=$lambda_arg.a#2)
         |             +-Literal(type=STRING, value='a')
-        +-sql="ARRAY_FILTER(['a'], a -> a = 'a')"
+        +-sql='ARRAY_FILTER([\'a\'], a -> a = \'a\')'
 ==
 
 # CREATE TABLE DEFAULT with lambda and accessing previous column.
@@ -5062,7 +5062,7 @@ ALTERNATION GROUP: V_1_3_COLLATION_SUPPORT,V_1_3_ANNOTATION_FRAMEWORK
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=STRING
@@ -5109,8 +5109,8 @@ ALTERNATION GROUP: V_1_3_COLLATION_SUPPORT,V_1_3_ANNOTATION_FRAMEWORK,
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
-| +-ColumnDefinition(name="b", type=STRING, column=t.b#2)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='b', type=STRING, column=t.b#2)
 +-collation_name=
   +-Literal(type=STRING, value='und:ci')
 --
@@ -5120,8 +5120,8 @@ CreateTableStmt
 +-name_path=t
 +-create_scope=CREATE_TEMP
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
-| +-ColumnDefinition(name="b", type=STRING, column=t.b#2)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='b', type=STRING, column=t.b#2)
 +-collation_name=
   +-Literal(type=STRING, value='und:ci')
 ==
@@ -5157,7 +5157,7 @@ ALTERNATION GROUP: CREATE_TABLE_FIELD_ANNOTATIONS,V_1_3_COLLATION_SUPPORT,V_1_3_
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=STRING
@@ -5184,7 +5184,7 @@ ALTERNATION GROUP: CREATE_TABLE_FIELD_ANNOTATIONS,V_1_3_COLLATION_SUPPORT,V_1_3_
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=ARRAY<STRING>
@@ -5211,7 +5211,7 @@ ALTERNATION GROUP: CREATE_TABLE_FIELD_ANNOTATIONS,V_1_3_COLLATION_SUPPORT,V_1_3_
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=STRUCT<INT64, STRING, DOUBLE>
@@ -5243,7 +5243,7 @@ create table t (
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="p", type=PROTO<zetasql_test__.TestExtraPB>, column=t.p#1)
+| +-ColumnDefinition(name='p', type=PROTO<zetasql_test__.TestExtraPB>, column=t.p#1)
 +-primary_key=
   +-PrimaryKey(column_offset_list=[0], column_name_list=[p])
 ==
@@ -5279,7 +5279,7 @@ create table t (a int64) with connection connection2;
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-connection=
   +-Connection(connection=connection2)
 
@@ -5302,7 +5302,7 @@ create table t (a int64) with connection "connection2";
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-connection=
   +-Connection(connection=connection2)
 
@@ -5318,7 +5318,7 @@ CreateTableStmt
 +-option_list=
 | +-x := Literal(type=STRING, value='foo')
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-connection=
   +-Connection(connection=connection2)
 
@@ -5334,7 +5334,7 @@ CreateTableStmt
 +-option_list=
 | +-x := Literal(type=STRING, value='foo')
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-connection=
   +-Connection(connection=connection2)
 

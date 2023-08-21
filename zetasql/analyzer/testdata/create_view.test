@@ -19,8 +19,8 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a, 2 b"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=tt.a#3)
-  +-ColumnDefinition(name="b", type=INT64, column=tt.b#4)
+  +-ColumnDefinition(name='a', type=INT64, column=tt.a#3)
+  +-ColumnDefinition(name='b', type=INT64, column=tt.b#4)
 ==
 
 create temp view MyView as select * from KeyValue
@@ -38,8 +38,8 @@ CreateViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select * from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="Key", type=INT64, column=MyView.Key#3)
-  +-ColumnDefinition(name="Value", type=STRING, column=MyView.Value#4)
+  +-ColumnDefinition(name='Key', type=INT64, column=MyView.Key#3)
+  +-ColumnDefinition(name='Value', type=STRING, column=MyView.Value#4)
 ==
 
 [statement_context={{|module}}]
@@ -152,10 +152,10 @@ CreateViewStmt
 |     +-Literal(type=INT64, value=5)
 +-sql="select key, key k1, key k2, key+1 k3 from keYvalue limit 5"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=X.key#4)
-  +-ColumnDefinition(name="k1", type=INT64, column=X.k1#5)
-  +-ColumnDefinition(name="k2", type=INT64, column=X.k2#6)
-  +-ColumnDefinition(name="k3", type=INT64, column=X.k3#7)
+  +-ColumnDefinition(name='key', type=INT64, column=X.key#4)
+  +-ColumnDefinition(name='k1', type=INT64, column=X.k1#5)
+  +-ColumnDefinition(name='k2', type=INT64, column=X.k2#6)
+  +-ColumnDefinition(name='k3', type=INT64, column=X.k3#7)
 --
 ALTERNATION GROUP: temporary
 --
@@ -189,10 +189,10 @@ CreateViewStmt
 |     +-Literal(type=INT64, value=5)
 +-sql="select key, key k1, key k2, key+1 k3 from keYvalue limit 5"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=X.key#4)
-  +-ColumnDefinition(name="k1", type=INT64, column=X.k1#5)
-  +-ColumnDefinition(name="k2", type=INT64, column=X.k2#6)
-  +-ColumnDefinition(name="k3", type=INT64, column=X.k3#7)
+  +-ColumnDefinition(name='key', type=INT64, column=X.key#4)
+  +-ColumnDefinition(name='k1', type=INT64, column=X.k1#5)
+  +-ColumnDefinition(name='k2', type=INT64, column=X.k2#6)
+  +-ColumnDefinition(name='k3', type=INT64, column=X.k3#7)
 --
 ALTERNATION GROUP: materialized
 --
@@ -225,10 +225,10 @@ CreateMaterializedViewStmt
 |     +-Literal(type=INT64, value=5)
 +-sql="select key, key k1, key k2, key+1 k3 from keYvalue limit 5"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=X.key#4)
-  +-ColumnDefinition(name="k1", type=INT64, column=X.k1#5)
-  +-ColumnDefinition(name="k2", type=INT64, column=X.k2#6)
-  +-ColumnDefinition(name="k3", type=INT64, column=X.k3#7)
+  +-ColumnDefinition(name='key', type=INT64, column=X.key#4)
+  +-ColumnDefinition(name='k1', type=INT64, column=X.k1#5)
+  +-ColumnDefinition(name='k2', type=INT64, column=X.k2#6)
+  +-ColumnDefinition(name='k3', type=INT64, column=X.k3#7)
 --
 ALTERNATION GROUP: approx
 --
@@ -261,10 +261,10 @@ CreateApproxViewStmt
 |     +-Literal(type=INT64, value=5)
 +-sql="select key, key k1, key k2, key+1 k3 from keYvalue limit 5"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=X.key#4)
-  +-ColumnDefinition(name="k1", type=INT64, column=X.k1#5)
-  +-ColumnDefinition(name="k2", type=INT64, column=X.k2#6)
-  +-ColumnDefinition(name="k3", type=INT64, column=X.k3#7)
+  +-ColumnDefinition(name='key', type=INT64, column=X.key#4)
+  +-ColumnDefinition(name='k1', type=INT64, column=X.k1#5)
+  +-ColumnDefinition(name='k2', type=INT64, column=X.k2#6)
+  +-ColumnDefinition(name='k3', type=INT64, column=X.k3#7)
 ==
 
 create {{|materialized|approx}} view Z
@@ -286,7 +286,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 c"
 +-column_definition_list=
-  +-ColumnDefinition(name="c", type=INT64, column=Z.c#2)
+  +-ColumnDefinition(name='c', type=INT64, column=Z.c#2)
 --
 ALTERNATION GROUP: materialized
 --
@@ -303,7 +303,7 @@ CreateMaterializedViewStmt
 |     +-SingleRowScan
 +-sql="select 1 c"
 +-column_definition_list=
-  +-ColumnDefinition(name="c", type=INT64, column=Z.c#2)
+  +-ColumnDefinition(name='c', type=INT64, column=Z.c#2)
 --
 ALTERNATION GROUP: approx
 --
@@ -320,7 +320,7 @@ CreateApproxViewStmt
 |     +-SingleRowScan
 +-sql="select 1 c"
 +-column_definition_list=
-  +-ColumnDefinition(name="c", type=INT64, column=Z.c#2)
+  +-ColumnDefinition(name='c', type=INT64, column=Z.c#2)
 ==
 
 create {{|materialized|approx}} view Z
@@ -348,7 +348,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 c"
 +-column_definition_list=
-  +-ColumnDefinition(name="c", type=INT64, column=a.b."c.d"."e f g".kk.c#2)
+  +-ColumnDefinition(name='c', type=INT64, column=a.b."c.d"."e f g".kk.c#2)
 ==
 
 # Anonymous columns not allowed.
@@ -434,7 +434,7 @@ CreateViewStmt
 +-sql="select as struct 1 a, 2, 3 c, 4 c"
 +-is_value_table=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="$struct", type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
+  +-ColumnDefinition(name='$struct', type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
 --
 ALTERNATION GROUP: materialized
 --
@@ -467,7 +467,7 @@ CreateMaterializedViewStmt
 +-sql="select as struct 1 a, 2, 3 c, 4 c"
 +-is_value_table=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="$struct", type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
+  +-ColumnDefinition(name='$struct', type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
 --
 ALTERNATION GROUP: approx
 --
@@ -500,7 +500,7 @@ CreateApproxViewStmt
 +-sql="select as struct 1 a, 2, 3 c, 4 c"
 +-is_value_table=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="$struct", type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
+  +-ColumnDefinition(name='$struct', type=STRUCT<a INT64, INT64, c INT64, c INT64>, column=tt.$struct#6)
 ==
 
 # Create a value view with SELECT AS ProtoName.
@@ -532,7 +532,7 @@ CreateViewStmt
 +-sql="select as "zetasql_test__.TestExtraPB" 55 int32_val1"
 +-is_value_table=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
+  +-ColumnDefinition(name='$proto', type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
 --
 ALTERNATION GROUP: materialized
 --
@@ -559,7 +559,7 @@ CreateMaterializedViewStmt
 +-sql="select as "zetasql_test__.TestExtraPB" 55 int32_val1"
 +-is_value_table=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
+  +-ColumnDefinition(name='$proto', type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
 --
 ALTERNATION GROUP: approx
 --
@@ -586,7 +586,7 @@ CreateApproxViewStmt
 +-sql="select as "zetasql_test__.TestExtraPB" 55 int32_val1"
 +-is_value_table=TRUE
 +-column_definition_list=
-  +-ColumnDefinition(name="$proto", type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
+  +-ColumnDefinition(name='$proto', type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
 ==
 
 create or replace {{|materialized|approx}} view x.y as (select 1 a)
@@ -607,7 +607,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=x.y.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=x.y.a#2)
 --
 ALTERNATION GROUP: materialized
 --
@@ -625,7 +625,7 @@ CreateMaterializedViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=x.y.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=x.y.a#2)
 --
 ALTERNATION GROUP: approx
 --
@@ -643,7 +643,7 @@ CreateApproxViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=x.y.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=x.y.a#2)
 ==
 
 create view if not exists x.y options (x=y) as (select 1 a)
@@ -664,7 +664,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=x.y.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=x.y.a#2)
 ==
 
 create or replace {{|materialized|approx}} view if not exists T as (select 1 a)
@@ -755,7 +755,7 @@ CreateViewStmt
 |               +-Literal(type=INT64, value=5)
 +-sql="WITH t1 as (select 1 key),\n     t2 as (select key from KeyValue),\n     t3 as (select * from t1 union all select * from t2)\nselect * from t3 where key=5"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=T.key#8)
+  +-ColumnDefinition(name='key', type=INT64, column=T.key#8)
 ==
 
 # Create view with a WITH statement with an error in a with subquery.
@@ -822,7 +822,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#2)
 --
 ALTERNATION GROUP: materialized
 --
@@ -861,7 +861,7 @@ CreateMaterializedViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#2)
 --
 ALTERNATION GROUP: approx
 --
@@ -900,7 +900,7 @@ CreateApproxViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#2)
 ==
 
 [parse_multiple]
@@ -943,7 +943,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=T.a#2)
 ==
 
 [parse_multiple]
@@ -990,7 +990,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T1.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=T1.a#2)
 --
 QueryStmt
 +-output_column_list=
@@ -1027,7 +1027,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 2 a"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=T2.a#2)
+  +-ColumnDefinition(name='a', type=INT64, column=T2.a#2)
 --
 QueryStmt
 +-output_column_list=
@@ -1128,8 +1128,8 @@ CreateMaterializedViewStmt
   | |   +-option_list=
   | |     +-description := Literal(type=STRING, value='col1')
   | +-column=tt.$col1#4
-  +-ColumnDefinition(name="c2", type=INT64, column=tt.$col2#5)
-  +-ColumnDefinition(name="c3", type=INT64, column=tt.$col3#6)
+  +-ColumnDefinition(name='c2', type=INT64, column=tt.$col2#5)
+  +-ColumnDefinition(name='c3', type=INT64, column=tt.$col3#6)
 --
 ALTERNATION GROUP: CREATE_VIEW_WITH_COLUMN_LIST,CREATE_VIEWS_WITH_COLUMN_OPTIONS,approx
 --
@@ -1159,8 +1159,8 @@ CreateApproxViewStmt
   | |   +-option_list=
   | |     +-description := Literal(type=STRING, value='col1')
   | +-column=tt.$col1#4
-  +-ColumnDefinition(name="c2", type=INT64, column=tt.$col2#5)
-  +-ColumnDefinition(name="c3", type=INT64, column=tt.$col3#6)
+  +-ColumnDefinition(name='c2', type=INT64, column=tt.$col2#5)
+  +-ColumnDefinition(name='c3', type=INT64, column=tt.$col3#6)
 --
 ALTERNATION GROUP: CREATE_VIEW_WITH_COLUMN_LIST,CREATE_VIEWS_WITH_COLUMN_OPTIONS,
 --
@@ -1190,8 +1190,8 @@ CreateViewStmt
   | |   +-option_list=
   | |     +-description := Literal(type=STRING, value='col1')
   | +-column=tt.$col1#4
-  +-ColumnDefinition(name="c2", type=INT64, column=tt.$col2#5)
-  +-ColumnDefinition(name="c3", type=INT64, column=tt.$col3#6)
+  +-ColumnDefinition(name='c2', type=INT64, column=tt.$col2#5)
+  +-ColumnDefinition(name='c3', type=INT64, column=tt.$col3#6)
 --
 ALTERNATION GROUP: CREATE_VIEW_WITH_COLUMN_LIST,materialized
 --
@@ -1236,8 +1236,8 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a, 2 b"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=v.a#3)
-  +-ColumnDefinition(name="b", type=INT64, column=v.b#4)
+  +-ColumnDefinition(name='a', type=INT64, column=v.a#3)
+  +-ColumnDefinition(name='b', type=INT64, column=v.b#4)
 --
 ALTERNATION GROUP: (a,b)
 --
@@ -1257,8 +1257,8 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a, 2 b"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=v.a#3)
-  +-ColumnDefinition(name="b", type=INT64, column=v.b#4)
+  +-ColumnDefinition(name='a', type=INT64, column=v.a#3)
+  +-ColumnDefinition(name='b', type=INT64, column=v.b#4)
 ==
 
 # Create view with column name list, view sql columns have no name.
@@ -1284,8 +1284,8 @@ CreateMaterializedViewStmt
 |     +-SingleRowScan
 +-sql="select 1, 2"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=tt.$col1#3)
-  +-ColumnDefinition(name="b", type=INT64, column=tt.$col2#4)
+  +-ColumnDefinition(name='a', type=INT64, column=tt.$col1#3)
+  +-ColumnDefinition(name='b', type=INT64, column=tt.$col2#4)
 --
 ALTERNATION GROUP: approx
 --
@@ -1305,8 +1305,8 @@ CreateApproxViewStmt
 |     +-SingleRowScan
 +-sql="select 1, 2"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=tt.$col1#3)
-  +-ColumnDefinition(name="b", type=INT64, column=tt.$col2#4)
+  +-ColumnDefinition(name='a', type=INT64, column=tt.$col1#3)
+  +-ColumnDefinition(name='b', type=INT64, column=tt.$col2#4)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -1326,8 +1326,8 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1, 2"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=tt.$col1#3)
-  +-ColumnDefinition(name="b", type=INT64, column=tt.$col2#4)
+  +-ColumnDefinition(name='a', type=INT64, column=tt.$col1#3)
+  +-ColumnDefinition(name='b', type=INT64, column=tt.$col2#4)
 ==
 
 # Create view with column name list size < view sql column count
@@ -1519,8 +1519,8 @@ CreateMaterializedViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select * from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="k", type=INT64, column=tt.Key#3)
-  +-ColumnDefinition(name="v", type=STRING, column=tt.Value#4)
+  +-ColumnDefinition(name='k', type=INT64, column=tt.Key#3)
+  +-ColumnDefinition(name='v', type=STRING, column=tt.Value#4)
 --
 ALTERNATION GROUP: approx
 --
@@ -1537,8 +1537,8 @@ CreateApproxViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select * from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="k", type=INT64, column=tt.Key#3)
-  +-ColumnDefinition(name="v", type=STRING, column=tt.Value#4)
+  +-ColumnDefinition(name='k', type=INT64, column=tt.Key#3)
+  +-ColumnDefinition(name='v', type=STRING, column=tt.Value#4)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -1555,8 +1555,8 @@ CreateViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select * from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="k", type=INT64, column=tt.Key#3)
-  +-ColumnDefinition(name="v", type=STRING, column=tt.Value#4)
+  +-ColumnDefinition(name='k', type=INT64, column=tt.Key#3)
+  +-ColumnDefinition(name='v', type=STRING, column=tt.Value#4)
 
 ==
 
@@ -1579,8 +1579,8 @@ CreateMaterializedViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select key AS value, value AS key from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.value#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.key#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.value#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.key#4)
 --
 ALTERNATION GROUP: approx
 --
@@ -1597,8 +1597,8 @@ CreateApproxViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select key AS value, value AS key from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.value#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.key#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.value#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.key#4)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -1615,8 +1615,8 @@ CreateViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select key AS value, value AS key from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.value#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.key#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.value#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.key#4)
 
 ==
 
@@ -1639,8 +1639,8 @@ CreateMaterializedViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select key AS value, value from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.value#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.value#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: approx
 --
@@ -1657,8 +1657,8 @@ CreateApproxViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select key AS value, value from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.value#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.value#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -1675,8 +1675,8 @@ CreateViewStmt
 |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 +-sql="select key AS value, value from KeyValue"
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.value#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.value#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 ==
 
 [disallow_duplicate_options]
@@ -1707,8 +1707,8 @@ CreateMaterializedViewStmt
 +-sql="select key, value from KeyValue"
 +-sql_security=SQL_SECURITY_INVOKER
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.key#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.key#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: materialized,definer
 --
@@ -1725,8 +1725,8 @@ CreateMaterializedViewStmt
 +-sql="select key, value from KeyValue"
 +-sql_security=SQL_SECURITY_DEFINER
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.key#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.key#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: approx,invoker
 --
@@ -1743,8 +1743,8 @@ CreateApproxViewStmt
 +-sql="select key, value from KeyValue"
 +-sql_security=SQL_SECURITY_INVOKER
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.key#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.key#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: approx,definer
 --
@@ -1761,8 +1761,8 @@ CreateApproxViewStmt
 +-sql="select key, value from KeyValue"
 +-sql_security=SQL_SECURITY_DEFINER
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.key#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.key#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: invoker
 --
@@ -1779,8 +1779,8 @@ CreateViewStmt
 +-sql="select key, value from KeyValue"
 +-sql_security=SQL_SECURITY_INVOKER
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.key#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.key#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)
 --
 ALTERNATION GROUP: definer
 --
@@ -1797,5 +1797,5 @@ CreateViewStmt
 +-sql="select key, value from KeyValue"
 +-sql_security=SQL_SECURITY_DEFINER
 +-column_definition_list=
-  +-ColumnDefinition(name="key", type=INT64, column=tt.key#3)
-  +-ColumnDefinition(name="value", type=STRING, column=tt.value#4)
+  +-ColumnDefinition(name='key', type=INT64, column=tt.key#3)
+  +-ColumnDefinition(name='value', type=STRING, column=tt.value#4)

@@ -1738,7 +1738,7 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=[$array.ex#1]
         |   |   +-array_expr=
-        |   |   | +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |   |   | +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |   |   +-element_column=$array.ex#1
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
@@ -2261,7 +2261,7 @@ QueryStmt
     |             |       |   | +-ArrayScan
     |             |       |   |   +-column_list=[$array.x#3]
     |             |       |   |   +-array_expr=
-    |             |       |   |   | +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+    |             |       |   |   | +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
     |             |       |   |   +-element_column=$array.x#3
     |             |       |   +-filter_expr=
     |             |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)

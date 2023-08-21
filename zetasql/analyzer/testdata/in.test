@@ -1353,7 +1353,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(STRING, ARRAY<STRING>) -> BOOL)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Literal(type=ARRAY<STRING>, value=["foo", "bar", "baz"])
+    |     +-Literal(type=ARRAY<STRING>, value=['foo', 'bar', 'baz'])
     +-input_scan=
       +-SingleRowScan
 ==

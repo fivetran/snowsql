@@ -8278,7 +8278,7 @@ QueryStmt
         |     +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |     | +-FunctionArgument
         |     | | +-expr=
-        |     | |   +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |     | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |     | +-FunctionArgument
         |     |   +-inline_lambda=
         |     |     +-InlineLambda
@@ -8358,7 +8358,7 @@ QueryStmt
         |   | |   |       +-ProjectScan
         |   | |   |         +-column_list=[$subquery1.array_to_filter#26]
         |   | |   |         +-expr_list=
-        |   | |   |         | +-array_to_filter#26 := Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |   | |   |         | +-array_to_filter#26 := Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |   | |   |         +-input_scan=
         |   | |   |           +-SingleRowScan
         |   | |   +-Literal(type=STRING, value=',')

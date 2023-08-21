@@ -1811,7 +1811,7 @@ QueryStmt
     |     +-type_annotation_map=[{Collation:"und:ci"}]
     |     +-Literal(type=BOOL, value=true)
     |     +-ColumnRef(type=ARRAY<STRING>, type_annotation_map=[{Collation:"und:ci"}], column=CollatedTable.array_with_string_ci#4[{Collation:"und:ci"}])
-    |     +-Literal(type=ARRAY<STRING>, value=["abc"])
+    |     +-Literal(type=ARRAY<STRING>, value=['abc'])
     +-input_scan=
       +-TableScan(column_list=CollatedTable.[string_ci#1, struct_with_string_ci#3, array_with_string_ci#4], table=CollatedTable, column_index_list=[0, 2, 3])
 ==
@@ -2594,7 +2594,7 @@ QueryStmt
     | +-$col20#24 :=
     | | +-FunctionCall(ZetaSQL:range_bucket(STRING, ARRAY<STRING>) -> INT64)
     | |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
-    | |   +-Literal(type=ARRAY<STRING>, value=["a", "b"])
+    | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b'])
     | |   +-collation_list=[und:ci]
     | +-$col21#25 :=
     |   +-FunctionCall(ZetaSQL:range_bucket(STRING, ARRAY<STRING>) -> INT64)
@@ -5079,7 +5079,7 @@ create table t (a int64) default collate 'und:ci';
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-collation_name=
   +-Literal(type=STRING, value='und:ci')
 
@@ -5451,7 +5451,7 @@ create table t (a int64, b string collate 'und:ci');
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=STRING
@@ -5468,7 +5468,7 @@ as select 1, 'abc'
 CreateTableAsSelectStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=STRING
@@ -5503,7 +5503,7 @@ as select 1 a,
 CreateTableAsSelectStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#5)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#5)
 | +-ColumnDefinition
 | | +-name='b'
 | | +-type=STRING
@@ -5627,7 +5627,7 @@ CreateViewStmt
 |     +-SingleRowScan
 +-sql="select 1 a,\n   collate('abc', 'und:ci') b,\n   [collate('abc', 'und:ci')] c,\n   (collate('abc', 'und:ci'), collate('def', 'binary'), 'ghi') d"
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#5)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#5)
   +-ColumnDefinition
   | +-name='b'
   | +-type=STRING
@@ -5678,7 +5678,7 @@ as select 1 a,
 CreateTableAsSelectStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="x", type=INT64, column=t.x#1)
+| +-ColumnDefinition(name='x', type=INT64, column=t.x#1)
 | +-ColumnDefinition
 | | +-name='y'
 | | +-type=STRING
@@ -5687,7 +5687,7 @@ CreateTableAsSelectStmt
 | | |   +-collation_name=
 | | |     +-Literal(type=STRING, value='binary')
 | | +-column=t.y#2
-| +-ColumnDefinition(name="z", type=ARRAY<STRING>, column=t.z#3)
+| +-ColumnDefinition(name='z', type=ARRAY<STRING>, column=t.z#3)
 | +-ColumnDefinition
 |   +-name='xx'
 |   +-type=STRUCT<STRING, STRING, STRING>
@@ -5852,7 +5852,7 @@ create table t (a int64, b string(50) collate 'und:ci');
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=STRING
@@ -5983,7 +5983,7 @@ create table t (a int64, b string collate 'und:cs') default collate 'und:ci';
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+| +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition
 |   +-name='b'
 |   +-type=STRING
@@ -6022,7 +6022,7 @@ create table t (a int64, b array<string collate 'und:ci'>);
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=ARRAY<STRING>
@@ -6040,7 +6040,7 @@ create table t (a int64, b struct<int64, string collate 'und:ci', float64>);
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=STRUCT<INT64, STRING, DOUBLE>
@@ -6059,7 +6059,7 @@ create table t (a int64, b array<string collate 'und:ci'>);
 CreateTableStmt
 +-name_path=t
 +-column_definition_list=
-  +-ColumnDefinition(name="a", type=INT64, column=t.a#1)
+  +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
   +-ColumnDefinition
     +-name='b'
     +-type=ARRAY<STRING>
@@ -6088,8 +6088,8 @@ CreateTableStmt
 +-option_list=
 | +-table_option := Literal(type=INT64, value=1)
 +-column_definition_list=
-| +-ColumnDefinition(name="Key", type=INT64, column=t1.Key#1)
-| +-ColumnDefinition(name="Value", type=STRING, column=t1.Value#2)
+| +-ColumnDefinition(name='Key', type=INT64, column=t1.Key#1)
+| +-ColumnDefinition(name='Value', type=STRING, column=t1.Value#2)
 +-pseudo_column_list=t1.[pseudo_column_int32#3, pseudo_column_kitchensink#4, pseudo_column_timestamp#5]
 +-like_table=KeyValue
 +-collation_name=
@@ -6487,7 +6487,7 @@ InsertStmt
 |       +-value=
 |         +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
 |           +-type_annotation_map=[{Collation:"und:ci"}]
-|           +-Literal(type=ARRAY<STRING>, value=["c"])
+|           +-Literal(type=ARRAY<STRING>, value=['c'])
 |           +-type_modifiers=collation:[und:ci]
 +-column_access_list=WRITE
 ==
@@ -6755,7 +6755,7 @@ QueryStmt
     | +-$col1#5 :=
     | | +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
     | |   +-type_annotation_map=[{Collation:"und:ci"}]
-    | |   +-Literal(type=ARRAY<STRING>, value=["a", "b"], has_explicit_type=TRUE)
+    | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b'], has_explicit_type=TRUE)
     | |   +-type_modifiers=collation:[und:ci]
     | +-$col2#6 :=
     | | +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
@@ -7110,7 +7110,7 @@ QueryStmt
     | +-$col1#5 :=
     | | +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
     | |   +-type_annotation_map=[{Collation:"und:ci"}]
-    | |   +-Literal(type=ARRAY<STRING>, value=["string"], has_explicit_type=TRUE)
+    | |   +-Literal(type=ARRAY<STRING>, value=['string'], has_explicit_type=TRUE)
     | |   +-type_modifiers=type_parameters:[(max_length=10)], collation:[und:ci]
     | +-$col2#6 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<STRING>)

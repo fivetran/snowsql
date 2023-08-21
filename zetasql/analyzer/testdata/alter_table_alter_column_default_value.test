@@ -14,7 +14,7 @@ AlterTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=STRING, value='banana')
-        +-sql="'banana'"
+        +-sql='\'banana\''
 ==
 
 # Alter column with case-insensitive column name.
@@ -29,7 +29,7 @@ AlterTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=STRING, value='banana')
-        +-sql="'banana'"
+        +-sql='\'banana\''
 ==
 
 ALTER TABLE KeyValue ALTER COLUMN value SET DEFAULT NULL;
@@ -73,7 +73,7 @@ AlterTableStmt
 |     +-ColumnDefaultValue
 |       +-expression=
 |       | +-Literal(type=STRING, value='abcdefg')
-|       +-sql="'abcdefg'"
+|       +-sql='\'abcdefg\''
 +-is_if_exists=TRUE
 ==
 
@@ -99,7 +99,7 @@ AlterTableStmt
   |   +-ColumnDefaultValue
   |     +-expression=
   |     | +-Literal(type=STRING, value='abc')
-  |     +-sql="'abc'"
+  |     +-sql='\'abc\''
   +-AlterColumnOptionsAction
     +-column='key'
     +-option_list=
@@ -160,7 +160,7 @@ AlterTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=STRING, value='abc')
-        +-sql="'abc'"
+        +-sql='\'abc\''
 ==
 
 # Set default to a subquery (disallowed)
@@ -227,7 +227,7 @@ AlterTableStmt
         |   +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |   | +-FunctionArgument
         |   | | +-expr=
-        |   | |   +-Literal(type=ARRAY<STRING>, value=["a"])
+        |   | |   +-Literal(type=ARRAY<STRING>, value=['a'])
         |   | +-FunctionArgument
         |   |   +-inline_lambda=
         |   |     +-InlineLambda

@@ -130,7 +130,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:REVERSE_ARRAY(ARRAY<STRING> input_arr) -> ARRAY<STRING>)
-    |     +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+    |     +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
     +-input_scan=
       +-SingleRowScan
 
@@ -174,7 +174,7 @@ QueryStmt
     |   +-WithExpr
     |     +-type=ARRAY<STRING>
     |     +-assignment_list=
-    |     | +-input_arr#4 := Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+    |     | +-input_arr#4 := Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
     |     +-expr=
     |       +-FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
     |         +-FunctionCall(ZetaSQL:$is_null(ARRAY<STRING>) -> BOOL)

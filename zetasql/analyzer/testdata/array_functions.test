@@ -117,7 +117,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
-    |     +-Literal(type=ARRAY<STRING>, value=[""])
+    |     +-Literal(type=ARRAY<STRING>, value=[''])
     |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
@@ -1289,7 +1289,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:array_find(ARRAY<STRING> input_array, FUNCTION<STRING->BOOL> condition, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> STRING)
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=ARRAY<STRING>, value=["A"])
+    |     |   +-Literal(type=ARRAY<STRING>, value=['A'])
     |     +-FunctionArgument
     |     | +-inline_lambda=
     |     |   +-InlineLambda
@@ -1432,7 +1432,7 @@ QueryStmt
     |             +-column_list=$subquery1.[find_mode#4, input_array#5]
     |             +-expr_list=
     |             | +-find_mode#4 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
-    |             | +-input_array#5 := Literal(type=ARRAY<STRING>, value=["A"])
+    |             | +-input_array#5 := Literal(type=ARRAY<STRING>, value=['A'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -1455,7 +1455,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:array_find(ARRAY<STRING> input_array, FUNCTION<STRING->BOOL> condition, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> STRING)
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=ARRAY<STRING>, value=["A"])
+    |     |   +-Literal(type=ARRAY<STRING>, value=['A'])
     |     +-FunctionArgument
     |     | +-inline_lambda=
     |     |   +-InlineLambda
@@ -1610,7 +1610,7 @@ QueryStmt
     |             +-column_list=$subquery1.[find_mode#6, input_array#7]
     |             +-expr_list=
     |             | +-find_mode#6 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
-    |             | +-input_array#7 := Literal(type=ARRAY<STRING>, value=["A"])
+    |             | +-input_array#7 := Literal(type=ARRAY<STRING>, value=['A'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=

@@ -8645,7 +8645,7 @@ QueryStmt
         |     +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |     | +-FunctionArgument
         |     | | +-expr=
-        |     | |   +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |     | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |     | +-FunctionArgument
         |     |   +-inline_lambda=
         |     |     +-InlineLambda
@@ -8685,7 +8685,7 @@ QueryStmt
         |   | |   +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |   | |   | +-FunctionArgument
         |   | |   | | +-expr=
-        |   | |   | |   +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |   | |   | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |   | |   | +-FunctionArgument
         |   | |   |   +-inline_lambda=
         |   | |   |     +-InlineLambda

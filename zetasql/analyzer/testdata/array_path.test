@@ -1437,7 +1437,7 @@ QueryStmt
         |   |     | +-FlattenedArg(type=PROTO<zetasql_test__.TestExtraPB>)
         |   |     +-field_descriptor=str_value
         |   |     +-default_value=[]
-        |   +-Literal(type=ARRAY<STRING>, value=["foo"])
+        |   +-Literal(type=ARRAY<STRING>, value=['foo'])
         +-element_column=$array.value#18
 
 [[ REWRITER ARTIFACTS FOR RULE GROUPS 'DEFAULTS,-WITH_EXPR' ]]
@@ -1501,7 +1501,7 @@ QueryStmt
         |   |             +-OrderByItem
         |   |               +-column_ref=
         |   |                 +-ColumnRef(type=INT64, column=$offset.injected#23)
-        |   +-Literal(type=ARRAY<STRING>, value=["foo"])
+        |   +-Literal(type=ARRAY<STRING>, value=['foo'])
         +-element_column=$array.value#18
 
 [[ REWRITER ARTIFACTS FOR RULE GROUPS 'DEFAULTS' ]]
@@ -1577,7 +1577,7 @@ QueryStmt
         |   |         | +-injected#19 := ColumnRef(type=ARRAY<PROTO<zetasql_test__.TestExtraPB>>, column=ArrayTypes.ProtoArray#15, is_correlated=TRUE)
         |   |         +-input_scan=
         |   |           +-SingleRowScan
-        |   +-Literal(type=ARRAY<STRING>, value=["foo"])
+        |   +-Literal(type=ARRAY<STRING>, value=['foo'])
         +-element_column=$array.value#18
 ==
 

@@ -1877,7 +1877,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=ARRAY<STRING>, value=["0", "1", "2"], has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=ARRAY<STRING>, value=['0', '1', '2'], has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -4271,7 +4271,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<INT64>)
-    |     +-Literal(type=ARRAY<STRING>, value=["100", "abc"])
+    |     +-Literal(type=ARRAY<STRING>, value=['100', 'abc'])
     +-input_scan=
       +-SingleRowScan
 --

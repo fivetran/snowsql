@@ -470,7 +470,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
-    |     +-Literal(type=ARRAY<STRING>, value=["hi", "hello", "hola"], has_explicit_type=TRUE)
+    |     +-Literal(type=ARRAY<STRING>, value=['hi', 'hello', 'hola'], has_explicit_type=TRUE)
     |     +-type_modifiers=type_parameters:[(max_length=12)]
     +-input_scan=
       +-SingleRowScan
@@ -497,7 +497,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
-    |     +-Literal(type=ARRAY<STRING>, value=["0", "1", "2"], has_explicit_type=TRUE)
+    |     +-Literal(type=ARRAY<STRING>, value=['0', '1', '2'], has_explicit_type=TRUE)
     |     +-type_modifiers=type_parameters:[(max_length=12)]
     +-input_scan=
       +-SingleRowScan

@@ -61,7 +61,7 @@ FROM SimpleTypesWithAnonymizationUid;
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="count", type=INT64, column=foo_table.count#14)
+| +-ColumnDefinition(name='count', type=INT64, column=foo_table.count#14)
 +-output_column_list=
 | +-$aggregate.count#13 AS count [INT64]
 +-query=
@@ -81,7 +81,7 @@ CreateTableAsSelectStmt
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="count", type=INT64, column=foo_table.count#14)
+| +-ColumnDefinition(name='count', type=INT64, column=foo_table.count#14)
 +-output_column_list=
 | +-$aggregate.count#13 AS count [INT64]
 +-query=
@@ -472,7 +472,7 @@ CreateMaterializedViewStmt
 |             +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
 +-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="count", type=INT64, column=foo_materialized_view.count#14)
+  +-ColumnDefinition(name='count', type=INT64, column=foo_materialized_view.count#14)
 
 [REWRITTEN AST]
 CreateMaterializedViewStmt
@@ -507,7 +507,7 @@ CreateMaterializedViewStmt
 |         +-ColumnRef(type=INT64, column=$differential_privacy.$group_selection_threshold_col#21)
 +-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="count", type=INT64, column=foo_materialized_view.count#14)
+  +-ColumnDefinition(name='count', type=INT64, column=foo_materialized_view.count#14)
 ==
 
 CREATE VIEW foo_view AS
@@ -532,7 +532,7 @@ CreateViewStmt
 |             +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
 +-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="count", type=INT64, column=foo_view.count#14)
+  +-ColumnDefinition(name='count', type=INT64, column=foo_view.count#14)
 
 [REWRITTEN AST]
 CreateViewStmt
@@ -567,7 +567,7 @@ CreateViewStmt
 |         +-ColumnRef(type=INT64, column=$differential_privacy.$group_selection_threshold_col#21)
 +-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
 +-column_definition_list=
-  +-ColumnDefinition(name="count", type=INT64, column=foo_view.count#14)
+  +-ColumnDefinition(name='count', type=INT64, column=foo_view.count#14)
 ==
 
 EXPORT DATA options (format=sstable, filename='/tmp/foo') AS
@@ -639,7 +639,7 @@ FROM SimpleTypesWithAnonymizationUid;
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="dp_count", type=INT64, column=foo_table.dp_count#14)
+| +-ColumnDefinition(name='dp_count', type=INT64, column=foo_table.dp_count#14)
 +-output_column_list=
 | +-$aggregate.dp_count#13 AS dp_count [INT64]
 +-query=
@@ -659,7 +659,7 @@ CreateTableAsSelectStmt
 CreateTableAsSelectStmt
 +-name_path=foo_table
 +-column_definition_list=
-| +-ColumnDefinition(name="dp_count", type=INT64, column=foo_table.dp_count#14)
+| +-ColumnDefinition(name='dp_count', type=INT64, column=foo_table.dp_count#14)
 +-output_column_list=
 | +-$aggregate.dp_count#13 AS dp_count [INT64]
 +-query=
