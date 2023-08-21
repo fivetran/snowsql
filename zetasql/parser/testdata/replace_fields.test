@@ -127,7 +127,7 @@ SELECT
   REPLACE_FIELDS(some_proto, 0 AS nested.(extension_field).extension_field)
 ==
 
-select replace_fields(some_proto, 0 as int32_field, "string" as string_field)
+select replace_fields(some_proto, 0 as int32_field, 'string' as string_field)
 --
 QueryStatement [0-77] [select replace_fi...ing_field)]
   Query [0-77] [select replace_fi...ing_field)]
@@ -141,17 +141,17 @@ QueryStatement [0-77] [select replace_fi...ing_field)]
               IntLiteral(0) [34-35] [0]
               PathExpression [39-50] [int32_field]
                 Identifier(int32_field) [39-50] [int32_field]
-            ReplaceFieldsArg [52-76] ["string" as string_field]
+            ReplaceFieldsArg [52-76] ['string' as string_field]
               StringLiteral('string') [52-60] ['string']
               PathExpression [64-76] [string_field]
                 Identifier(string_field) [64-76] [string_field]
 --
 SELECT
-  REPLACE_FIELDS(some_proto, 0 AS int32_field, "string" AS string_field)
+  REPLACE_FIELDS(some_proto, 0 AS int32_field, 'string' AS string_field)
 ==
 
 select
-  replace_fields(some_proto, 0 as int32_field, "string" as (path.to.extension))
+  replace_fields(some_proto, 0 as int32_field, 'string' as (path.to.extension))
 --
 QueryStatement [0-86] [select   replace_...xtension))]
   Query [0-86] [select   replace_...xtension))]
@@ -165,7 +165,7 @@ QueryStatement [0-86] [select   replace_...xtension))]
               IntLiteral(0) [36-37] [0]
               PathExpression [41-52] [int32_field]
                 Identifier(int32_field) [41-52] [int32_field]
-            ReplaceFieldsArg [54-85] ["string" as...extension)]
+            ReplaceFieldsArg [54-85] ['string' as...extension)]
               StringLiteral('string') [54-62] ['string']
               PathExpression [67-84] [path.to.extension]
                 Identifier(path) [67-71] [path]
@@ -173,12 +173,12 @@ QueryStatement [0-86] [select   replace_...xtension))]
                 Identifier(extension) [75-84] [extension]
 --
 SELECT
-  REPLACE_FIELDS(some_proto, 0 AS int32_field, "string" AS (path."to".extension))
+  REPLACE_FIELDS(some_proto, 0 AS int32_field, 'string' AS (path."to".extension))
 ==
 
 select
   replace_fields(
-    some_proto, 0 as int32_field, "string" as string_field, 2.5 as double_field
+    some_proto, 0 as int32_field, 'string' as string_field, 2.5 as double_field
   )
 --
 QueryStatement [0-108] [select   replace_..._field   )]
@@ -193,7 +193,7 @@ QueryStatement [0-108] [select   replace_..._field   )]
               IntLiteral(0) [41-42] [0]
               PathExpression [46-57] [int32_field]
                 Identifier(int32_field) [46-57] [int32_field]
-            ReplaceFieldsArg [59-83] ["string" as string_field]
+            ReplaceFieldsArg [59-83] ['string' as string_field]
               StringLiteral('string') [59-67] ['string']
               PathExpression [71-83] [string_field]
                 Identifier(string_field) [71-83] [string_field]
@@ -203,7 +203,7 @@ QueryStatement [0-108] [select   replace_..._field   )]
                 Identifier(double_field) [92-104] [double_field]
 --
 SELECT
-  REPLACE_FIELDS(some_proto, 0 AS int32_field, "string" AS string_field, 2.5 AS double_field)
+  REPLACE_FIELDS(some_proto, 0 AS int32_field, 'string' AS string_field, 2.5 AS double_field)
 ==
 
 select replace_fields(STRUCT(32 as int_field), 0 as int_field)

@@ -235,25 +235,25 @@ SELECT
 ==
 
 # No comments inside strings.
-select "abc -- def",
-       "abc # def",
-       "abc /* def */ ghi"
+select 'abc -- def',
+       'abc # def',
+       'abc /* def */ ghi'
 --
-QueryStatement [0-67] [select "abc...def */ ghi"]
-  Query [0-67] [select "abc...def */ ghi"]
-    Select [0-67] [select "abc...def */ ghi"]
-      SelectList [7-67] ["abc -- def...def */ ghi"]
-        SelectColumn [7-19] ["abc -- def"]
+QueryStatement [0-67] [select 'abc...def */ ghi']
+  Query [0-67] [select 'abc...def */ ghi']
+    Select [0-67] [select 'abc...def */ ghi']
+      SelectList [7-67] ['abc -- def...def */ ghi']
+        SelectColumn [7-19] ['abc -- def']
           StringLiteral('abc -- def') [7-19] ['abc -- def']
-        SelectColumn [28-39] ["abc # def"]
+        SelectColumn [28-39] ['abc # def']
           StringLiteral('abc # def') [28-39] ['abc # def']
-        SelectColumn [48-67] ["abc /* def */ ghi"]
+        SelectColumn [48-67] ['abc /* def */ ghi']
           StringLiteral('abc /* def */ ghi') [48-67] ['abc /* def */ ghi']
 --
 SELECT
-  "abc -- def",
-  "abc # def",
-  "abc /* def */ ghi"
+  'abc -- def',
+  'abc # def',
+  'abc /* def */ ghi'
 ==
 
 select /* no nested comments # -- /* */ 1;
@@ -370,11 +370,11 @@ WHERE
   b
 ==
 
-select f1, f2 from (select 1 f1, "b" f2);
+select f1, f2 from (select 1 f1, 'b' f2);
 --
-QueryStatement [0-40] [select f1,...f1, "b" f2)]
-  Query [0-40] [select f1,...f1, "b" f2)]
-    Select [0-40] [select f1,...f1, "b" f2)]
+QueryStatement [0-40] [select f1,...f1, 'b' f2)]
+  Query [0-40] [select f1,...f1, 'b' f2)]
+    Select [0-40] [select f1,...f1, 'b' f2)]
       SelectList [7-13] [f1, f2]
         SelectColumn [7-9] [f1]
           PathExpression [7-9] [f1]
@@ -382,16 +382,16 @@ QueryStatement [0-40] [select f1,...f1, "b" f2)]
         SelectColumn [11-13] [f2]
           PathExpression [11-13] [f2]
             Identifier(f2) [11-13] [f2]
-      FromClause [14-40] [from (select 1 f1, "b" f2)]
-        TableSubquery [19-40] [(select 1 f1, "b" f2)]
-          Query [20-39] [select 1 f1, "b" f2]
-            Select [20-39] [select 1 f1, "b" f2]
-              SelectList [27-39] [1 f1, "b" f2]
+      FromClause [14-40] [from (select 1 f1, 'b' f2)]
+        TableSubquery [19-40] [(select 1 f1, 'b' f2)]
+          Query [20-39] [select 1 f1, 'b' f2]
+            Select [20-39] [select 1 f1, 'b' f2]
+              SelectList [27-39] [1 f1, 'b' f2]
                 SelectColumn [27-31] [1 f1]
                   IntLiteral(1) [27-28] [1]
                   Alias [29-31] [f1]
                     Identifier(f1) [29-31] [f1]
-                SelectColumn [33-39] ["b" f2]
+                SelectColumn [33-39] ['b' f2]
                   StringLiteral('b') [33-36] ['b']
                   Alias [37-39] [f2]
                     Identifier(f2) [37-39] [f2]
@@ -403,7 +403,7 @@ FROM
   (
     SELECT
       1 AS f1,
-      "b" AS f2
+      'b' AS f2
   )
 ==
 
@@ -709,14 +709,14 @@ select foo AS (path) from T
               ^
 ==
 
-select f(1, x, "a", true, g(y)) AS bar from T;
+select f(1, x, 'a', true, g(y)) AS bar from T;
 --
 QueryStatement [0-45] [select f(1...bar from T]
   Query [0-45] [select f(1...bar from T]
     Select [0-45] [select f(1...bar from T]
-      SelectList [7-38] [f(1, x, "a...y)) AS bar]
-        SelectColumn [7-38] [f(1, x, "a...y)) AS bar]
-          FunctionCall [7-31] [f(1, x, "a", true, g(y))]
+      SelectList [7-38] [f(1, x, 'a...y)) AS bar]
+        SelectColumn [7-38] [f(1, x, 'a...y)) AS bar]
+          FunctionCall [7-31] [f(1, x, 'a', true, g(y))]
             PathExpression [7-8] [f]
               Identifier(f) [7-8] [f]
             IntLiteral(1) [9-10] [1]
@@ -737,7 +737,7 @@ QueryStatement [0-45] [select f(1...bar from T]
             Identifier(T) [44-45] [T]
 --
 SELECT
-  f(1, x, "a", true, g(y)) AS bar
+  f(1, x, 'a', true, g(y)) AS bar
 FROM
   T
 ==
@@ -833,7 +833,7 @@ SELECT
   '\\x53' AS "\\x54"
 ==
 
-select '\\u1235' as "\\u1234", "\\U00012346" as "\\U00012345";
+select '\\u1235' as "\\u1234", '\\U00012346' as "\\U00012345";
 --
 QueryStatement [0-61] [select '\\...U00012345"]
   Query [0-61] [select '\\...U00012345"]
@@ -843,14 +843,14 @@ QueryStatement [0-61] [select '\\...U00012345"]
           StringLiteral('\\u1235') [7-16] ['\\u1235']
           Alias [17-29] [as "\\u1234"]
             Identifier("\\u1234") [20-29] ["\\u1234"]
-        SelectColumn [31-61] ["\\U00012346" as "\\U00012345"]
+        SelectColumn [31-61] ['\\U00012346' as "\\U00012345"]
           StringLiteral('\\U00012346') [31-44] ['\\U00012346']
           Alias [45-61] [as "\\U00012345"]
             Identifier("\\U00012345") [48-61] ["\\U00012345"]
 --
 SELECT
   '\\u1235' AS "\\u1234",
-  "\\U00012346" AS "\\U00012345"
+  '\\U00012346' AS "\\U00012345"
 ==
 
 SELECT fake_alias_function(1 as example_alias)
@@ -899,41 +899,41 @@ SELECT
   safe."cast"(1 AS int32)
 ==
 
-select {{safe_cast|cast}}("1" as int32);
+select {{safe_cast|cast}}('1' as int32);
 --
 ALTERNATION GROUP: safe_cast
 --
-QueryStatement [0-30] [select safe_cast("1" as int32)]
-  Query [0-30] [select safe_cast("1" as int32)]
-    Select [0-30] [select safe_cast("1" as int32)]
-      SelectList [7-30] [safe_cast("1" as int32)]
-        SelectColumn [7-30] [safe_cast("1" as int32)]
-          FunctionCall [7-30] [safe_cast("1" as int32)]
+QueryStatement [0-30] [select safe_cast('1' as int32)]
+  Query [0-30] [select safe_cast('1' as int32)]
+    Select [0-30] [select safe_cast('1' as int32)]
+      SelectList [7-30] [safe_cast('1' as int32)]
+        SelectColumn [7-30] [safe_cast('1' as int32)]
+          FunctionCall [7-30] [safe_cast('1' as int32)]
             PathExpression [7-16] [safe_cast]
               Identifier(safe_cast) [7-16] [safe_cast]
-            ExpressionWithAlias [17-29] ["1" as int32]
+            ExpressionWithAlias [17-29] ['1' as int32]
               StringLiteral('1') [17-20] ['1']
               Alias [21-29] [as int32]
                 Identifier(int32) [24-29] [int32]
 --
 SELECT
-  safe_cast("1" AS int32)
+  safe_cast('1' AS int32)
 --
 ALTERNATION GROUP: cast
 --
-QueryStatement [0-25] [select cast("1" as int32)]
-  Query [0-25] [select cast("1" as int32)]
-    Select [0-25] [select cast("1" as int32)]
-      SelectList [7-25] [cast("1" as int32)]
-        SelectColumn [7-25] [cast("1" as int32)]
-          CastExpression [7-25] [cast("1" as int32)]
+QueryStatement [0-25] [select cast('1' as int32)]
+  Query [0-25] [select cast('1' as int32)]
+    Select [0-25] [select cast('1' as int32)]
+      SelectList [7-25] [cast('1' as int32)]
+        SelectColumn [7-25] [cast('1' as int32)]
+          CastExpression [7-25] [cast('1' as int32)]
             StringLiteral('1') [12-15] ['1']
             SimpleType [19-24] [int32]
               PathExpression [19-24] [int32]
                 Identifier(int32) [19-24] [int32]
 --
 SELECT
-  CAST("1" AS int32)
+  CAST('1' AS int32)
 ==
 
 select cast(x as string(10));
@@ -1177,7 +1177,7 @@ SELECT
   TRY_CAST(ARRAY[1, 2, 3] AS ARRAY< string >)
 ==
 
-select cast("1" as int32), cast(1 as string),
+select cast('1' as int32), cast(1 as string),
        cast(t as TimeStamp_Millis),
        cast(u as TimeStamp_Micros),
        cast(v as TimeStamp_seconds),
@@ -1188,9 +1188,9 @@ select cast("1" as int32), cast(1 as string),
 QueryStatement [0-272] [select cast...myenum") from T]
   Query [0-272] [select cast...myenum") from T]
     Select [0-272] [select cast...myenum") from T]
-      SelectList [7-265] [cast("1" as...package.myenum")]
-        SelectColumn [7-25] [cast("1" as int32)]
-          CastExpression [7-25] [cast("1" as int32)]
+      SelectList [7-265] [cast('1' as...package.myenum")]
+        SelectColumn [7-25] [cast('1' as int32)]
+          CastExpression [7-25] [cast('1' as int32)]
             StringLiteral('1') [12-15] ['1']
             SimpleType [19-24] [int32]
               PathExpression [19-24] [int32]
@@ -1249,7 +1249,7 @@ QueryStatement [0-272] [select cast...myenum") from T]
             Identifier(T) [271-272] [T]
 --
 SELECT
-  CAST("1" AS int32),
+  CAST('1' AS int32),
   CAST(1 AS string),
   CAST(t AS TimeStamp_Millis),
   CAST(u AS TimeStamp_Micros),
@@ -1261,7 +1261,7 @@ FROM
   T
 ==
 
-select try_cast("1" as int32),
+select try_cast('1' as int32),
        try_cast(1 as string),
        try_cast(t as TimeStamp_Millis),
        try_cast(u as TimeStamp_Micros),
@@ -1274,9 +1274,9 @@ select try_cast("1" as int32),
 QueryStatement [0-311] [select try_cast...num") from T]
   Query [0-311] [select try_cast...num") from T]
     Select [0-311] [select try_cast...num") from T]
-      SelectList [7-304] [try_cast("...ypackage.myenum")]
-        SelectColumn [7-29] [try_cast("1" as int32)]
-          CastExpression(return_null_on_error=true) [7-29] [try_cast("1" as int32)]
+      SelectList [7-304] [try_cast('...ypackage.myenum")]
+        SelectColumn [7-29] [try_cast('1' as int32)]
+          CastExpression(return_null_on_error=true) [7-29] [try_cast('1' as int32)]
             StringLiteral('1') [16-19] ['1']
             SimpleType [23-28] [int32]
               PathExpression [23-28] [int32]
@@ -1335,7 +1335,7 @@ QueryStatement [0-311] [select try_cast...num") from T]
             Identifier(T) [310-311] [T]
 --
 SELECT
-  TRY_CAST("1" AS int32),
+  TRY_CAST('1' AS int32),
   TRY_CAST(1 AS string),
   TRY_CAST(t AS TimeStamp_Millis),
   TRY_CAST(u AS TimeStamp_Micros),
@@ -1350,7 +1350,7 @@ FROM
 select cast(x as foo),
        cast(x as a.b),
        cast(x > 5 as timestamp_seconds),
-       cast("1" as "int64") as cast_1_as_int64,
+       cast('1' as "int64") as cast_1_as_int64,
        cast(x < 10 as b),
        cast(x as struct<x int, y double>),
        cast(x as struct<int, double>),
@@ -1385,8 +1385,8 @@ QueryStatement [0-306] [select cast...bytes>) from T]
             SimpleType [67-84] [timestamp_seconds]
               PathExpression [67-84] [timestamp_seconds]
                 Identifier(timestamp_seconds) [67-84] [timestamp_seconds]
-        SelectColumn [94-133] [cast("1" as...cast_1_as_int64]
-          CastExpression [94-114] [cast("1" as "int64")]
+        SelectColumn [94-133] [cast('1' as...cast_1_as_int64]
+          CastExpression [94-114] [cast('1' as "int64")]
             StringLiteral('1') [99-102] ['1']
             SimpleType [106-113] ["int64"]
               PathExpression [106-113] ["int64"]
@@ -1462,7 +1462,7 @@ SELECT
   CAST(x AS foo),
   CAST(x AS a.b),
   CAST(x > 5 AS timestamp_seconds),
-  CAST("1" AS int64) AS cast_1_as_int64,
+  CAST('1' AS int64) AS cast_1_as_int64,
   CAST(x < 10 AS b),
   CAST(x AS STRUCT< x int, y double >),
   CAST(x AS STRUCT< int, double >),
@@ -1474,7 +1474,7 @@ FROM
 select try_cast(x as foo),
        try_cast(x as a.b),
        try_cast(x > 5 as timestamp_seconds),
-       try_cast("1" as "int64") as try_cast_1_as_int64,
+       try_cast('1' as "int64") as try_cast_1_as_int64,
        try_cast(x < 10 as b),
        try_cast(x as struct<x int, y double>),
        try_cast(x as struct<int, double>),
@@ -1509,8 +1509,8 @@ QueryStatement [0-342] [select try_cast...tes>) from T]
             SimpleType [79-96] [timestamp_seconds]
               PathExpression [79-96] [timestamp_seconds]
                 Identifier(timestamp_seconds) [79-96] [timestamp_seconds]
-        SelectColumn [106-153] [try_cast("...y_cast_1_as_int64]
-          CastExpression(return_null_on_error=true) [106-130] [try_cast("1" as "int64")]
+        SelectColumn [106-153] [try_cast('...y_cast_1_as_int64]
+          CastExpression(return_null_on_error=true) [106-130] [try_cast('1' as "int64")]
             StringLiteral('1') [115-118] ['1']
             SimpleType [122-129] ["int64"]
               PathExpression [122-129] ["int64"]
@@ -1586,7 +1586,7 @@ SELECT
   TRY_CAST(x AS foo),
   TRY_CAST(x AS a.b),
   TRY_CAST(x > 5 AS timestamp_seconds),
-  TRY_CAST("1" AS int64) AS try_cast_1_as_int64,
+  TRY_CAST('1' AS int64) AS try_cast_1_as_int64,
   TRY_CAST(x < 10 AS b),
   TRY_CAST(x AS STRUCT< x int, y double >),
   TRY_CAST(x AS STRUCT< int, double >),
