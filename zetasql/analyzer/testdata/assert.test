@@ -136,7 +136,7 @@ AssertStmt
     |         |   +-filter_expr=
     |         |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
     |         |       +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
-    |         |       +-Parameter(type=INT32, name="test_param_int32")
+    |         |       +-Parameter(type=INT32, name='test_param_int32')
     |         +-aggregate_list=
     |           +-$agg1#19 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
     +-Literal(type=INT64, value=0)

@@ -14,7 +14,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |     +-Cast(STRING -> TIMESTAMP)
-    |       +-Parameter(type=STRING, name="test_param_string")
+    |       +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-SingleRowScan
 --
@@ -29,7 +29,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:date(STRING) -> DATE)
-    |     +-Parameter(type=STRING, name="test_param_string")
+    |     +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -894,7 +894,7 @@ QueryStmt
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:coalesce(repeated(3) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     | +-Parameter(type=STRING, name="test_param_string")
+    |     | +-Parameter(type=STRING, name='test_param_string')
     |     +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     | +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     |   +-Literal(type=STRING, value='')
@@ -914,7 +914,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:coalesce(repeated(3) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    |     +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     |     +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     | +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
     |     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
@@ -1746,7 +1746,7 @@ QueryStmt
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     | |   +-Literal(type=BOOL, value=true)
-    | |   +-Parameter(type=DOUBLE, name="test_param_double")
+    | |   +-Parameter(type=DOUBLE, name='test_param_double')
     | |   +-Literal(type=DOUBLE, value=0.94, has_explicit_type=TRUE)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
@@ -1764,19 +1764,19 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:if(BOOL, NUMERIC, NUMERIC) -> NUMERIC)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Literal(type=NUMERIC, value=0.92)
-    | |   +-Parameter(type=NUMERIC, name="test_param_numeric")
+    | |   +-Parameter(type=NUMERIC, name='test_param_numeric')
     | +-$col7#7 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Literal(type=DOUBLE, value=0.93, has_explicit_type=TRUE)
     | |   +-Cast(NUMERIC -> DOUBLE)
-    | |     +-Parameter(type=NUMERIC, name="test_param_numeric")
+    | |     +-Parameter(type=NUMERIC, name='test_param_numeric')
     | +-$col8#8 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     | |   +-Literal(type=BOOL, value=true)
-    | |   +-Parameter(type=DOUBLE, name="test_param_double")
+    | |   +-Parameter(type=DOUBLE, name='test_param_double')
     | |   +-Cast(NUMERIC -> DOUBLE)
-    | |     +-Parameter(type=NUMERIC, name="test_param_numeric")
+    | |     +-Parameter(type=NUMERIC, name='test_param_numeric')
     | +-$col9#9 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     |     +-Literal(type=BOOL, value=true)
@@ -1784,7 +1784,7 @@ QueryStmt
     |     | +-Literal(type=DOUBLE, value=0.93, float_literal_id=9)
     |     | +-Literal(type=DOUBLE, value=0.93, float_literal_id=10)
     |     +-Cast(NUMERIC -> DOUBLE)
-    |       +-Parameter(type=NUMERIC, name="test_param_numeric")
+    |       +-Parameter(type=NUMERIC, name='test_param_numeric')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1820,7 +1820,7 @@ QueryStmt
     |     +-Literal(type=BOOL, value=true)
     |     +-Cast(NUMERIC -> DOUBLE)
     |     | +-ColumnRef(type=NUMERIC, column=NumericTypeTable.numeric_col#1)
-    |     +-Parameter(type=DOUBLE, name="test_param_double")
+    |     +-Parameter(type=DOUBLE, name='test_param_double')
     +-input_scan=
       +-TableScan(column_list=[NumericTypeTable.numeric_col#1], table=NumericTypeTable, column_index_list=[0])
 ==
@@ -2107,7 +2107,7 @@ QueryStmt
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     | |   +-Literal(type=BOOL, value=true)
-    | |   +-Parameter(type=DOUBLE, name="test_param_double")
+    | |   +-Parameter(type=DOUBLE, name='test_param_double')
     | |   +-Literal(type=DOUBLE, value=0.94, has_explicit_type=TRUE)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
@@ -2125,19 +2125,19 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:if(BOOL, BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Literal(type=BIGNUMERIC, value=0.92)
-    | |   +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    | |   +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     | +-$col7#7 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Literal(type=DOUBLE, value=0.93, has_explicit_type=TRUE)
     | |   +-Cast(BIGNUMERIC -> DOUBLE)
-    | |     +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    | |     +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     | +-$col8#8 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     | |   +-Literal(type=BOOL, value=true)
-    | |   +-Parameter(type=DOUBLE, name="test_param_double")
+    | |   +-Parameter(type=DOUBLE, name='test_param_double')
     | |   +-Cast(BIGNUMERIC -> DOUBLE)
-    | |     +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    | |     +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     | +-$col9#9 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, DOUBLE, DOUBLE) -> DOUBLE)
     |     +-Literal(type=BOOL, value=true)
@@ -2145,7 +2145,7 @@ QueryStmt
     |     | +-Literal(type=DOUBLE, value=0.93, float_literal_id=9)
     |     | +-Literal(type=DOUBLE, value=0.93, float_literal_id=10)
     |     +-Cast(BIGNUMERIC -> DOUBLE)
-    |       +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    |       +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2186,7 +2186,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:if(BOOL, BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Cast(NUMERIC -> BIGNUMERIC)
-    | |   | +-Parameter(type=NUMERIC, name="test_param_numeric")
+    | |   | +-Parameter(type=NUMERIC, name='test_param_numeric')
     | |   +-Literal(type=BIGNUMERIC, value=0.94, has_explicit_type=TRUE)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
@@ -2197,18 +2197,18 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:if(BOOL, BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Literal(type=BIGNUMERIC, value=0.93, has_explicit_type=TRUE)
-    | |   +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    | |   +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     | +-$col6#6 :=
     | | +-FunctionCall(ZetaSQL:if(BOOL, BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
     | |   +-Literal(type=BOOL, value=true)
     | |   +-Literal(type=BIGNUMERIC, value=0.93, has_explicit_type=TRUE)
-    | |   +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    | |   +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     | +-$col7#7 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, BIGNUMERIC, BIGNUMERIC) -> BIGNUMERIC)
     |     +-Literal(type=BOOL, value=true)
     |     +-Cast(NUMERIC -> BIGNUMERIC)
-    |     | +-Parameter(type=NUMERIC, name="test_param_numeric")
-    |     +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    |     | +-Parameter(type=NUMERIC, name='test_param_numeric')
+    |     +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2244,7 +2244,7 @@ QueryStmt
     |     +-Literal(type=BOOL, value=true)
     |     +-Cast(BIGNUMERIC -> DOUBLE)
     |     | +-ColumnRef(type=BIGNUMERIC, column=BigNumericTypeTable.bignumeric_col#1)
-    |     +-Parameter(type=DOUBLE, name="test_param_double")
+    |     +-Parameter(type=DOUBLE, name='test_param_double')
     +-input_scan=
       +-TableScan(column_list=[BigNumericTypeTable.bignumeric_col#1], table=BigNumericTypeTable, column_index_list=[0])
 ==
@@ -2281,7 +2281,7 @@ QueryStmt
     |     +-Literal(type=BOOL, value=true)
     |     +-Cast(NUMERIC -> BIGNUMERIC)
     |     | +-ColumnRef(type=NUMERIC, column=NumericTypeTable.numeric_col#1)
-    |     +-Parameter(type=BIGNUMERIC, name="test_param_bignumeric")
+    |     +-Parameter(type=BIGNUMERIC, name='test_param_bignumeric')
     +-input_scan=
       +-TableScan(column_list=[NumericTypeTable.numeric_col#1], table=NumericTypeTable, column_index_list=[0])
 ==

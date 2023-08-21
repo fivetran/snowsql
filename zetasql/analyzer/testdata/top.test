@@ -64,7 +64,7 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 SELECT TOP @test_param_int64 1;
@@ -83,7 +83,7 @@ QueryStmt
     |   +-input_scan=
     |     +-SingleRowScan
     +-top=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 SELECT TOP @test_param_uint32 1;
@@ -103,7 +103,7 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(UINT32 -> INT64)
-        +-Parameter(type=UINT32, name="test_param_uint32")
+        +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 SELECT TOP @test_param_uint64 1;
@@ -123,7 +123,7 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(UINT64 -> INT64)
-        +-Parameter(type=UINT64, name="test_param_uint64")
+        +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 # Casting of literals to integer and parameters to int64 works.
@@ -163,7 +163,7 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select top cast(@test_param_int64 as int32) 1

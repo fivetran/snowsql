@@ -131,7 +131,7 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 SELECT 1 LIMIT @test_param_int64;
@@ -150,7 +150,7 @@ QueryStmt
     |   +-input_scan=
     |     +-SingleRowScan
     +-limit=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 SELECT 1 LIMIT @test_param_uint32;
@@ -170,7 +170,7 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(UINT32 -> INT64)
-        +-Parameter(type=UINT32, name="test_param_uint32")
+        +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 SELECT 1 LIMIT @test_param_uint64;
@@ -190,7 +190,7 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(UINT64 -> INT64)
-        +-Parameter(type=UINT64, name="test_param_uint64")
+        +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_int32;
@@ -212,7 +212,7 @@ QueryStmt
     | +-Literal(type=INT64, value=1)
     +-offset=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_int64;
@@ -233,7 +233,7 @@ QueryStmt
     +-limit=
     | +-Literal(type=INT64, value=1)
     +-offset=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_uint32;
@@ -255,7 +255,7 @@ QueryStmt
     | +-Literal(type=INT64, value=1)
     +-offset=
       +-Cast(UINT32 -> INT64)
-        +-Parameter(type=UINT32, name="test_param_uint32")
+        +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_uint64;
@@ -277,7 +277,7 @@ QueryStmt
     | +-Literal(type=INT64, value=1)
     +-offset=
       +-Cast(UINT64 -> INT64)
-        +-Parameter(type=UINT64, name="test_param_uint64")
+        +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 # Casting of literals to integer and parameters to int64 works.
@@ -300,7 +300,7 @@ QueryStmt
     | +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
     +-offset=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select 1 limit cast(@test_param_int32 as int32)
@@ -320,7 +320,7 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select 1 limit cast(@test_param_int64 as int32)

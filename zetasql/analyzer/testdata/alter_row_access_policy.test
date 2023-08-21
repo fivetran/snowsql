@@ -484,7 +484,7 @@ AlterRowAccessPolicyStmt
 | +-GrantToAction
 |   +-grantee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='mdbuser/bar')
 +-name="p1"
 +-table_scan=
@@ -516,7 +516,7 @@ AlterRowAccessPolicyStmt
 | +-RevokeFromAction
 |   +-revokee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='mdbuser/bar')
 +-name="p1"
 +-table_scan=
@@ -564,7 +564,7 @@ AlterRowAccessPolicyStmt
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
+|   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
 +-name="p1"
 +-table_scan=
@@ -652,7 +652,7 @@ AlterRowAccessPolicyStmt
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
+|   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
 +-name="p1"
 +-table_scan=
@@ -671,12 +671,12 @@ AlterRowAccessPolicyStmt
 | | +-revokee_expr_list=
 | |   +-Literal(type=STRING, value='bar@google.com')
 | |   +-Literal(type=STRING, value='mdbgroup/baz')
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
+|   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
 +-name="p1"
 +-table_scan=
@@ -691,7 +691,7 @@ AlterRowAccessPolicyStmt
 | | +-grantee_expr_list=
 | |   +-Literal(type=STRING, value='foo@google.com')
 | |   +-Literal(type=STRING, value='mdbgroup/bar')
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
 | |   +-Literal(type=STRING, value='bar@google.com')
@@ -700,7 +700,7 @@ AlterRowAccessPolicyStmt
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
+|   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
 +-name="p1"
 +-table_scan=
@@ -715,17 +715,17 @@ AlterRowAccessPolicyStmt
 | | +-grantee_expr_list=
 | |   +-Literal(type=STRING, value='foo@google.com')
 | |   +-Literal(type=STRING, value='mdbgroup/bar')
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
 | |   +-Literal(type=STRING, value='bar@google.com')
 | |   +-Literal(type=STRING, value='mdbgroup/baz')
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
+|   |   +-Parameter(type=STRING, name='test_param_string')
 |   +-predicate_str="value = @test_param_string"
 +-name="p1"
 +-table_scan=
@@ -983,7 +983,7 @@ AlterAllRowAccessPoliciesStmt
 | +-RevokeFromAction
 |   +-revokee_expr_list=
 |     +-Literal(type=STRING, value='foo@google.com')
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
   +-TableScan(table=KeyValue)

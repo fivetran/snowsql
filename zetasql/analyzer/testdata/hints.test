@@ -136,7 +136,7 @@ QueryStmt
     | +-key2 :=
     | | +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     | |   +-Literal(type=STRING, value='a')
-    | |   +-Parameter(type=STRING, name="test_param_string")
+    | |   +-Parameter(type=STRING, name='test_param_string')
     | +-key3 :=
     |   +-GetStructField
     |     +-type=INT64

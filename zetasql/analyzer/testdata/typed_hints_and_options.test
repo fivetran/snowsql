@@ -612,7 +612,7 @@ QueryStmt
     +-hint_list=
     | +-int64_hint :=
     |   +-Cast(INT32 -> INT64)
-    |     +-Parameter(type=INT32, name="test_param_int32")
+    |     +-Parameter(type=INT32, name='test_param_int32')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -633,7 +633,7 @@ QueryStmt
     +-hint_list=
     | +-int64_hint :=
     |   +-Cast(STRING -> INT64)
-    |     +-Parameter(type=STRING, name="test_param_string")
+    |     +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -658,16 +658,16 @@ QueryStmt
     +-hint_list=
     | +-date_hint :=
     | | +-Cast(STRING -> DATE)
-    | |   +-Parameter(type=STRING, name="test_param_string")
+    | |   +-Parameter(type=STRING, name='test_param_string')
     | +-enum_hint :=
     | | +-Cast(STRING -> ENUM<zetasql_test__.TestEnum>)
-    | |   +-Parameter(type=STRING, name="test_param_string")
+    | |   +-Parameter(type=STRING, name='test_param_string')
     | +-enum_hint :=
     | | +-Cast(INT32 -> ENUM<zetasql_test__.TestEnum>)
-    | |   +-Parameter(type=INT32, name="test_param_int32")
+    | |   +-Parameter(type=INT32, name='test_param_int32')
     | +-proto_hint :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |     +-Parameter(type=STRING, name="test_param_string")
+    |     +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -800,10 +800,10 @@ ExportDataStmt
 +-option_list=
 | +-int64_option :=
 | | +-Cast(INT32 -> INT64)
-| |   +-Parameter(type=INT32, name="test_param_int32")
+| |   +-Parameter(type=INT32, name='test_param_int32')
 | +-date_option :=
 |   +-Cast(STRING -> DATE)
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=
@@ -822,7 +822,7 @@ ExportDataStmt
 +-option_list=
 | +-int64_option :=
 |   +-Cast(STRING -> INT64)
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 +-output_column_list=
 | +-$create_as.x#1 AS x [INT64]
 +-query=

@@ -210,7 +210,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[$array.$unnest1#1]
         +-array_expr=
-        | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         +-element_column=$array.$unnest1#1
 ==
 
@@ -236,13 +236,13 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=[$array.a1#1]
         |   |   +-array_expr=
-        |   |   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        |   |   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         |   |   +-element_column=$array.a1#1
         |   +-array_expr=
-        |   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        |   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         |   +-element_column=$array.a2#2
         +-array_expr=
-        | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         +-element_column=$array.a3#3
         +-join_expr=
           +-FunctionCall(ZetaSQL:$less(INT32, INT32) -> BOOL)
@@ -276,12 +276,12 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[$array.a1#1, $array_offset.pos#2]
         |   +-array_expr=
-        |   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        |   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         |   +-element_column=$array.a1#1
         |   +-array_offset_column=
         |     +-ColumnHolder(column=$array_offset.pos#2)
         +-array_expr=
-        | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         +-element_column=$array.a2#3
         +-array_offset_column=
         | +-ColumnHolder(column=$array_offset.pos#4)
@@ -314,12 +314,12 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=[$array.a1#1, $array_offset.pos1#2]
         |   |   +-array_expr=
-        |   |   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        |   |   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         |   |   +-element_column=$array.a1#1
         |   |   +-array_offset_column=
         |   |     +-ColumnHolder(column=$array_offset.pos1#2)
         |   +-array_expr=
-        |   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+        |   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
         |   +-element_column=$array.a2#3
         |   +-array_offset_column=
         |   | +-ColumnHolder(column=$array_offset.pos2#4)
@@ -743,11 +743,11 @@ QueryStmt
         | +-FunctionCall(ZetaSQL:$make_array(repeated(3) INT64) -> ARRAY<INT64>)
         |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   +-Cast(INT32 -> INT64)
-        |   | +-Parameter(type=INT32, name="test_param_int32")
+        |   | +-Parameter(type=INT32, name='test_param_int32')
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
         |     +-Cast(INT32 -> INT64)
-        |       +-Parameter(type=INT32, name="test_param_int32")
+        |       +-Parameter(type=INT32, name='test_param_int32')
         +-element_column=$array.$unnest1#3
 ==
 

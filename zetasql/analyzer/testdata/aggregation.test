@@ -126,7 +126,7 @@ QueryStmt
             +-FunctionCall(ZetaSQL:substr(STRING, INT64, optional(0) INT64) -> STRING)
               +-ColumnRef(type=STRING, column=KeyValue.Value#2)
               +-Cast(INT32 -> INT64)
-                +-Parameter(type=INT32, name="test_param_int32")
+                +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 # Different parameters in GROUP BY expression
@@ -2229,7 +2229,7 @@ QueryStmt
             +-AggregateFunctionCall(ZetaSQL:string_agg(BYTES, BYTES) -> BYTES)
               +-Cast(STRING -> BYTES)
               | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-              +-Literal(type=BYTES, value=b"b")
+              +-Literal(type=BYTES, value=b'b')
 ==
 
 select key, string_agg(value, null)
@@ -2277,12 +2277,12 @@ QueryStmt
           +-$agg1#3 :=
           | +-AggregateFunctionCall(ZetaSQL:string_agg(STRING, STRING) -> STRING)
           |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-          |   +-Parameter(type=STRING, name="test_param_string")
+          |   +-Parameter(type=STRING, name='test_param_string')
           +-$agg2#4 :=
             +-AggregateFunctionCall(ZetaSQL:string_agg(BYTES, BYTES) -> BYTES)
               +-Cast(STRING -> BYTES)
               | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-              +-Parameter(type=BYTES, name="test_param_bytes")
+              +-Parameter(type=BYTES, name='test_param_bytes')
 ==
 
 select string_agg(value, @test_param_int32)
@@ -4847,7 +4847,7 @@ QueryStmt
 ==
 
 select array_concat_agg(x)
-from (select ['a', "b"] x union all select [] x) foo;
+from (select ['a', 'b'] x union all select [] x) foo;
 --
 QueryStmt
 +-output_column_list=
@@ -4868,7 +4868,7 @@ QueryStmt
         |     | | +-ProjectScan
         |     | |   +-column_list=[$union_all1.x#1]
         |     | |   +-expr_list=
-        |     | |   | +-x#1 := Literal(type=ARRAY<STRING>, value=['a', "b"])
+        |     | |   | +-x#1 := Literal(type=ARRAY<STRING>, value=['a', 'b'])
         |     | |   +-input_scan=
         |     | |     +-SingleRowScan
         |     | +-output_column_list=[$union_all1.x#1]
@@ -5246,7 +5246,7 @@ QueryStmt
               +-ColumnRef(type=INT32, column=TestTable.key#1)
               +-limit=
                 +-Cast(INT32 -> INT64)
-                  +-Parameter(type=INT32, name="test_param_int32")
+                  +-Parameter(type=INT32, name='test_param_int32')
 --
 ALTERNATION GROUP: <empty>
 --

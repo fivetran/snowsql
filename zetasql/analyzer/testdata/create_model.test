@@ -321,7 +321,7 @@ CreateModelStmt
 | +-func :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
 |     +-Literal(type=STRING, value='abc')
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS k1 [INT64]

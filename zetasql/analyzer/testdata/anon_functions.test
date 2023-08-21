@@ -222,7 +222,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
-              +-Parameter(type=INT64, name="test_param_int64")
+              +-Parameter(type=INT64, name='test_param_int64')
               +-Literal(type=INT64, value=6)
 --
 ALTERNATION GROUP: string
@@ -242,7 +242,7 @@ QueryStmt
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(STRING, optional(1) INT64, optional(1) INT64) -> INT64)
               +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-              +-Parameter(type=INT64, name="test_param_int64")
+              +-Parameter(type=INT64, name='test_param_int64')
               +-Literal(type=INT64, value=6)
 ==
 
@@ -825,9 +825,9 @@ QueryStmt
             +-AggregateFunctionCall(ZetaSQL:anon_quantiles(DOUBLE, INT64, DOUBLE, DOUBLE) -> ARRAY<DOUBLE>)
               +-Cast(INT64 -> DOUBLE)
               | +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
-              +-Parameter(type=INT64, name="test_param_int64")
-              +-Parameter(type=DOUBLE, name="test_param_double")
-              +-Parameter(type=DOUBLE, name="test_param_double")
+              +-Parameter(type=INT64, name='test_param_int64')
+              +-Parameter(type=DOUBLE, name='test_param_double')
+              +-Parameter(type=DOUBLE, name='test_param_double')
 ==
 
 [language_features=ANONYMIZATION]

@@ -2404,7 +2404,7 @@ CreateTableFunctionStmt
 +-option_list=
 | +-a :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='_param')
 +-language="SQL"
 +-code='select "abc" as x'

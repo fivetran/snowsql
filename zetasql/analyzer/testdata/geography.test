@@ -525,7 +525,7 @@ QueryStmt
     | +-$col6#10 :=
     | | +-FunctionCall(ZetaSQL:st_geogfromtext(STRING, optional(1) BOOL) -> GEOGRAPHY)
     | |   +-ColumnRef(type=STRING, column=GeographyTable.text#2)
-    | |   +-Parameter(type=BOOL, name="test_param_bool")
+    | |   +-Parameter(type=BOOL, name='test_param_bool')
     | +-$col7#11 :=
     | | +-FunctionCall(ZetaSQL:st_geogfromkml(STRING) -> GEOGRAPHY)
     | |   +-ColumnRef(type=STRING, column=GeographyTable.text#2)

@@ -220,7 +220,7 @@ QueryStmt
         |   +-table=SimpleTypes
         |   +-for_system_time_expr=
         |     +-Cast(STRING -> TIMESTAMP)
-        |       +-Parameter(type=STRING, name="test_param_string")
+        |       +-Parameter(type=STRING, name='test_param_string')
         +-aggregate_list=
           +-$agg1#19 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==

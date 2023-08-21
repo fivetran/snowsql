@@ -137,7 +137,7 @@ InsertStmt
 +-assert_rows_modified=
 | +-AssertRowsModified
 |   +-rows=
-|     +-Parameter(type=INT64, name="test_param_int64")
+|     +-Parameter(type=INT64, name='test_param_int64')
 +-insert_column_list=KeyValue.[Key#1, Value#2]
 +-query=
 | +-WithScan
@@ -211,7 +211,7 @@ InsertStmt
 |     +-DMLValue
 |       +-value=
 |         +-Cast(INT32 -> INT64)
-|           +-Parameter(type=INT32, name="test_param_int32")
+|           +-Parameter(type=INT32, name='test_param_int32')
 +-column_access_list=WRITE
 ==
 
@@ -251,7 +251,7 @@ InsertStmt
 |     +-DMLValue
 |       +-value=
 |         +-Cast(UINT32 -> INT64)
-|           +-Parameter(type=UINT32, name="test_param_uint32")
+|           +-Parameter(type=UINT32, name='test_param_uint32')
 +-column_access_list=WRITE
 ==
 
@@ -291,7 +291,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |       +-value=
-|         +-Parameter(type=STRING, name="test_param_string")
+|         +-Parameter(type=STRING, name='test_param_string')
 +-column_access_list=WRITE
 ==
 
@@ -843,7 +843,7 @@ InsertStmt
 |                 +-ArrayScan
 |                   +-column_list=[$array.$unnest1#19]
 |                   +-array_expr=
-|                   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+|                   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
 |                   +-element_column=$array.$unnest1#19
 +-column_access_list=WRITE,WRITE
 ==

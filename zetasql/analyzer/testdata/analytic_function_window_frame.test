@@ -414,7 +414,7 @@ QueryStmt
                       +-end_expr=
                         +-WindowFrameExpr(boundary_type=OFFSET FOLLOWING)
                           +-Cast(INT32 -> INT64)
-                            +-Parameter(type=INT32, name="test_param_int32")
+                            +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select afn_agg() over (order by "uint64"
@@ -815,7 +815,7 @@ QueryStmt
           |           +-start_expr=
           |           | +-WindowFrameExpr(boundary_type=OFFSET PRECEDING)
           |           |   +-Cast(UINT32 -> INT64)
-          |           |     +-Parameter(type=UINT32, name="test_param_uint32")
+          |           |     +-Parameter(type=UINT32, name='test_param_uint32')
           |           +-end_expr=
           |             +-WindowFrameExpr(boundary_type=CURRENT ROW)
           +-AnalyticFunctionGroup
@@ -833,7 +833,7 @@ QueryStmt
           |           +-start_expr=
           |           | +-WindowFrameExpr(boundary_type=OFFSET PRECEDING)
           |           |   +-Cast(UINT32 -> INT64)
-          |           |     +-Parameter(type=UINT32, name="test_param_uint32")
+          |           |     +-Parameter(type=UINT32, name='test_param_uint32')
           |           +-end_expr=
           |             +-WindowFrameExpr(boundary_type=CURRENT ROW)
           +-AnalyticFunctionGroup
@@ -868,7 +868,7 @@ QueryStmt
           |           +-start_expr=
           |           | +-WindowFrameExpr(boundary_type=OFFSET PRECEDING)
           |           |   +-Cast(UINT64 -> DOUBLE)
-          |           |     +-Parameter(type=UINT64, name="test_param_uint64")
+          |           |     +-Parameter(type=UINT64, name='test_param_uint64')
           |           +-end_expr=
           |             +-WindowFrameExpr(boundary_type=CURRENT ROW)
           +-AnalyticFunctionGroup

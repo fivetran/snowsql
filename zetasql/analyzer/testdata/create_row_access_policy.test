@@ -78,7 +78,7 @@ CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
 +-grantee_expr_list=
 | +-Literal(type=STRING, value='foo@google.com')
-| +-Parameter(type=STRING, name="test_param_string")
+| +-Parameter(type=STRING, name='test_param_string')
 | +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
@@ -164,7 +164,7 @@ CreateRowAccessPolicyStmt
 +-predicate=
 | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   +-Parameter(type=STRING, name="test_param_string")
+|   +-Parameter(type=STRING, name='test_param_string')
 +-predicate_str="value = @test_param_string"
 ==
 

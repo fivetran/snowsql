@@ -164,7 +164,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
-              +-Parameter(type=STRUCT<INT64, INT64>, name="test_param_struct_two_int64")
+              +-Parameter(type=STRUCT<INT64, INT64>, name='test_param_struct_two_int64')
 ==
 
 # Support GROUP BY

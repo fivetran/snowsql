@@ -3770,7 +3770,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:date_trunc(STRING, DATE) -> DATE)
     | |   +-Literal(type=STRING, value='year')
     | |   +-Cast(STRING -> DATE)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:datetime_trunc(DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> DATETIME)
     | |   +-Literal(type=DATETIME, value=1999-12-31 00:00:00)
@@ -3778,7 +3778,7 @@ QueryStmt
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:datetime_trunc(DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> DATETIME)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=YEAR)
     | +-$col5#5 :=
     | | +-FunctionCall(ZetaSQL:timestamp_trunc(TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>, optional(0) STRING) -> TIMESTAMP)
@@ -3787,7 +3787,7 @@ QueryStmt
     | +-$col6#6 :=
     |   +-FunctionCall(ZetaSQL:timestamp_trunc(TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>, optional(0) STRING) -> TIMESTAMP)
     |     +-Cast(STRING -> TIMESTAMP)
-    |     | +-Parameter(type=STRING, name="test_param_string")
+    |     | +-Parameter(type=STRING, name='test_param_string')
     |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=YEAR)
     +-input_scan=
       +-SingleRowScan
@@ -3828,7 +3828,7 @@ QueryStmt
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:date_add(DATE, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> DATE)
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col3#3 :=
@@ -3839,7 +3839,7 @@ QueryStmt
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:date_sub(DATE, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> DATE)
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col5#5 :=
@@ -3850,7 +3850,7 @@ QueryStmt
     | +-$col6#6 :=
     | | +-FunctionCall(ZetaSQL:datetime_add(DATETIME, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> DATETIME)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col7#7 :=
@@ -3861,7 +3861,7 @@ QueryStmt
     | +-$col8#8 :=
     | | +-FunctionCall(ZetaSQL:datetime_sub(DATETIME, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> DATETIME)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col9#9 :=
@@ -3872,7 +3872,7 @@ QueryStmt
     | +-$col10#10 :=
     | | +-FunctionCall(ZetaSQL:timestamp_add(TIMESTAMP, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> TIMESTAMP)
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=INT64, value=1)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col11#11 :=
@@ -3883,7 +3883,7 @@ QueryStmt
     | +-$col12#12 :=
     |   +-FunctionCall(ZetaSQL:timestamp_sub(TIMESTAMP, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> TIMESTAMP)
     |     +-Cast(STRING -> TIMESTAMP)
-    |     | +-Parameter(type=STRING, name="test_param_string")
+    |     | +-Parameter(type=STRING, name='test_param_string')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     +-input_scan=
@@ -3934,9 +3934,9 @@ QueryStmt
     | +-$col2#2 :=
     | | +-FunctionCall(ZetaSQL:date_diff(DATE, DATE, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:date_diff(DATE, DATE, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
@@ -3947,7 +3947,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:date_diff(DATE, DATE, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Literal(type=DATE, value=2000-01-01, has_explicit_type=TRUE)
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col5#5 :=
     | | +-FunctionCall(ZetaSQL:date_diff(DATE, DATE, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
@@ -3957,7 +3957,7 @@ QueryStmt
     | +-$col6#6 :=
     | | +-FunctionCall(ZetaSQL:date_diff(DATE, DATE, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=DATE, value=1999-12-31, has_explicit_type=TRUE)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col7#7 :=
@@ -3968,9 +3968,9 @@ QueryStmt
     | +-$col8#8 :=
     | | +-FunctionCall(ZetaSQL:datetime_diff(DATETIME, DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col9#9 :=
     | | +-FunctionCall(ZetaSQL:datetime_diff(DATETIME, DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
@@ -3981,7 +3981,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:datetime_diff(DATETIME, DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Literal(type=DATETIME, value=2000-01-01 00:00:00, has_explicit_type=TRUE)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col11#11 :=
     | | +-FunctionCall(ZetaSQL:datetime_diff(DATETIME, DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
@@ -3991,7 +3991,7 @@ QueryStmt
     | +-$col12#12 :=
     | | +-FunctionCall(ZetaSQL:datetime_diff(DATETIME, DATETIME, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=DATETIME, value=1999-12-31 00:00:00, has_explicit_type=TRUE)
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col13#13 :=
@@ -4002,9 +4002,9 @@ QueryStmt
     | +-$col14#14 :=
     | | +-FunctionCall(ZetaSQL:timestamp_diff(TIMESTAMP, TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col15#15 :=
     | | +-FunctionCall(ZetaSQL:timestamp_diff(TIMESTAMP, TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
@@ -4015,7 +4015,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:timestamp_diff(TIMESTAMP, TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     | |   +-Literal(type=TIMESTAMP, value=2000-01-01 08:00:00+00, has_explicit_type=TRUE)
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col17#17 :=
     | | +-FunctionCall(ZetaSQL:timestamp_diff(TIMESTAMP, TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
@@ -4025,7 +4025,7 @@ QueryStmt
     | +-$col18#18 :=
     |   +-FunctionCall(ZetaSQL:timestamp_diff(TIMESTAMP, TIMESTAMP, ENUM<zetasql.functions.DateTimestampPart>) -> INT64)
     |     +-Cast(STRING -> TIMESTAMP)
-    |     | +-Parameter(type=STRING, name="test_param_string")
+    |     | +-Parameter(type=STRING, name='test_param_string')
     |     +-Literal(type=TIMESTAMP, value=1999-12-31 08:00:00+00, has_explicit_type=TRUE)
     |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     +-input_scan=
@@ -4058,7 +4058,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:format_date(STRING, DATE) -> STRING)
     | |   +-Literal(type=STRING, value='%D')
     | |   +-Cast(STRING -> DATE)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:format_datetime(STRING, DATETIME) -> STRING)
     | |   +-Literal(type=STRING, value='%D')
@@ -4067,7 +4067,7 @@ QueryStmt
     | | +-FunctionCall(ZetaSQL:format_datetime(STRING, DATETIME) -> STRING)
     | |   +-Literal(type=STRING, value='%D')
     | |   +-Cast(STRING -> DATETIME)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col5#5 :=
     | | +-FunctionCall(ZetaSQL:format_timestamp(STRING, TIMESTAMP, optional(0) STRING) -> STRING)
     | |   +-Literal(type=STRING, value='%D')
@@ -4076,7 +4076,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:format_timestamp(STRING, TIMESTAMP, optional(0) STRING) -> STRING)
     |     +-Literal(type=STRING, value='%D')
     |     +-Cast(STRING -> TIMESTAMP)
-    |       +-Parameter(type=STRING, name="test_param_string")
+    |       +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -4132,19 +4132,19 @@ QueryStmt
     | +-$col3#3 :=
     | | +-FunctionCall(ZetaSQL:timestamp_bucket(TIMESTAMP, INTERVAL, optional(0) TIMESTAMP) -> TIMESTAMP)
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
     | |     +-Literal(type=INT64, value=1)
     | |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col4#4 :=
     | | +-FunctionCall(ZetaSQL:timestamp_bucket(TIMESTAMP, INTERVAL, optional(1) TIMESTAMP) -> TIMESTAMP)
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
     | |   | +-Literal(type=INT64, value=1)
     | |   | +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | |   +-Cast(STRING -> TIMESTAMP)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col5#5 :=
     | | +-FunctionCall(ZetaSQL:datetime_bucket(DATETIME, INTERVAL, optional(0) DATETIME) -> DATETIME)
     | |   +-Literal(type=DATETIME, value=1999-12-31 00:00:00)
@@ -4161,19 +4161,19 @@ QueryStmt
     | +-$col7#7 :=
     | | +-FunctionCall(ZetaSQL:datetime_bucket(DATETIME, INTERVAL, optional(0) DATETIME) -> DATETIME)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
     | |     +-Literal(type=INT64, value=1)
     | |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col8#8 :=
     | | +-FunctionCall(ZetaSQL:datetime_bucket(DATETIME, INTERVAL, optional(1) DATETIME) -> DATETIME)
     | |   +-Cast(STRING -> DATETIME)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
     | |   | +-Literal(type=INT64, value=1)
     | |   | +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | |   +-Cast(STRING -> DATETIME)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col9#9 :=
     | | +-FunctionCall(ZetaSQL:date_bucket(DATE, INTERVAL, optional(0) DATE) -> DATE)
     | |   +-Literal(type=DATE, value=1999-12-31)
@@ -4190,19 +4190,19 @@ QueryStmt
     | +-$col11#11 :=
     | | +-FunctionCall(ZetaSQL:date_bucket(DATE, INTERVAL, optional(0) DATE) -> DATE)
     | |   +-Cast(STRING -> DATE)
-    | |   | +-Parameter(type=STRING, name="test_param_string")
+    | |   | +-Parameter(type=STRING, name='test_param_string')
     | |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
     | |     +-Literal(type=INT64, value=1)
     | |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     | +-$col12#12 :=
     |   +-FunctionCall(ZetaSQL:date_bucket(DATE, INTERVAL, optional(1) DATE) -> DATE)
     |     +-Cast(STRING -> DATE)
-    |     | +-Parameter(type=STRING, name="test_param_string")
+    |     | +-Parameter(type=STRING, name='test_param_string')
     |     +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
     |     | +-Literal(type=INT64, value=1)
     |     | +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     |     +-Cast(STRING -> DATE)
-    |       +-Parameter(type=STRING, name="test_param_string")
+    |       +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-SingleRowScan
 

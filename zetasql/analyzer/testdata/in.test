@@ -1605,7 +1605,7 @@ QueryStmt
             | +-Literal(type=INT64, value=1)
             | +-Literal(type=INT64, value=2)
             +-FunctionCall(ZetaSQL:$is_true(BOOL) -> BOOL)
-              +-Parameter(type=BOOL, name="test_param_bool")
+              +-Parameter(type=BOOL, name='test_param_bool')
 ==
 
 select 1 IN ([1])
@@ -1642,7 +1642,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(INT32, ARRAY<INT32>) -> BOOL)
     |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    |     +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+    |     +-Parameter(type=ARRAY<INT32>, name='test_param_array')
     +-input_scan=
       +-SingleRowScan
 ==

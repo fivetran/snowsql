@@ -259,7 +259,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
-    |     +-Parameter(type=INT64, name="test_param_int64")
+    |     +-Parameter(type=INT64, name='test_param_int64')
     |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     +-input_scan=
       +-SingleRowScan

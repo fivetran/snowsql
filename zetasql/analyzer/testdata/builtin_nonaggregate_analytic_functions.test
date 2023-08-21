@@ -466,7 +466,7 @@ QueryStmt
               | +-AnalyticFunctionCall(ZetaSQL:lag(STRING, optional(1) INT64, optional(0) STRING) -> STRING)
               |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
               |   +-Cast(INT32 -> INT64)
-              |     +-Parameter(type=INT32, name="test_param_int32")
+              |     +-Parameter(type=INT32, name='test_param_int32')
               +-$analytic4#12 :=
               | +-AnalyticFunctionCall(ZetaSQL:lead(STRING, optional(1) INT64, optional(1) STRING) -> STRING)
               |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -605,7 +605,7 @@ QueryStmt
               |         +-WindowFrameExpr(boundary_type=CURRENT ROW)
               +-$analytic3#24 :=
                 +-AnalyticFunctionCall(ZetaSQL:first_value(INT32) -> INT32)
-                  +-Parameter(type=INT32, name="test_param_int32")
+                  +-Parameter(type=INT32, name='test_param_int32')
                   +-window_frame=
                     +-WindowFrame(frame_unit=RANGE)
                       +-start_expr=
@@ -769,7 +769,7 @@ QueryStmt
               +-$analytic1#20 :=
                 +-AnalyticFunctionCall(ZetaSQL:nth_value(UINT32, INT64) -> UINT32)
                   +-ColumnRef(type=UINT32, column=SimpleTypes.uint32#3)
-                  +-Parameter(type=INT64, name="test_param_int64")
+                  +-Parameter(type=INT64, name='test_param_int64')
                   +-window_frame=
                     +-WindowFrame(frame_unit=RANGE)
                       +-start_expr=
@@ -891,7 +891,7 @@ QueryStmt
               +-$analytic3#24 :=
                 +-AnalyticFunctionCall(ZetaSQL:nth_value(UINT32, INT64) -> UINT32)
                   +-ColumnRef(type=UINT32, column=SimpleTypes.uint32#3)
-                  +-Parameter(type=INT64, name="test_param_int64")
+                  +-Parameter(type=INT64, name='test_param_int64')
                   +-null_handling_modifier=IGNORE_NULLS
                   +-window_frame=
                     +-WindowFrame(frame_unit=RANGE)
@@ -942,7 +942,7 @@ QueryStmt
           |   +-$analytic1#22 :=
           |     +-AnalyticFunctionCall(ZetaSQL:nth_value(UINT32, INT64) -> UINT32)
           |       +-ColumnRef(type=UINT32, column=SimpleTypes.uint32#3)
-          |       +-Parameter(type=INT64, name="test_param_int64")
+          |       +-Parameter(type=INT64, name='test_param_int64')
           |       +-null_handling_modifier=RESPECT_NULLS
           |       +-window_frame=
           |         +-WindowFrame(frame_unit=RANGE)

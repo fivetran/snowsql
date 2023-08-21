@@ -196,7 +196,7 @@ QueryStmt
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
         +-method="system"
         +-size=
-        | +-Parameter(type=INT64, name="test_param_int64")
+        | +-Parameter(type=INT64, name='test_param_int64')
         +-unit=ROWS
 ==
 
@@ -216,7 +216,7 @@ QueryStmt
         +-method="system"
         +-size=
         | +-Cast(INT32 -> INT64)
-        |   +-Parameter(type=INT32, name="test_param_int32")
+        |   +-Parameter(type=INT32, name='test_param_int32')
         +-unit=ROWS
 ==
 
@@ -236,7 +236,7 @@ QueryStmt
         +-method="system"
         +-size=
         | +-Cast(UINT32 -> INT64)
-        |   +-Parameter(type=UINT32, name="test_param_uint32")
+        |   +-Parameter(type=UINT32, name='test_param_uint32')
         +-unit=ROWS
 ==
 
@@ -256,7 +256,7 @@ QueryStmt
         +-method="system"
         +-size=
         | +-Cast(UINT64 -> INT64)
-        |   +-Parameter(type=UINT64, name="test_param_uint64")
+        |   +-Parameter(type=UINT64, name='test_param_uint64')
         +-unit=ROWS
 ==
 
@@ -276,7 +276,7 @@ QueryStmt
         +-method="system"
         +-size=
         | +-Cast(UINT64 -> INT64)
-        |   +-Parameter(type=UINT64, name="test_param_uint64")
+        |   +-Parameter(type=UINT64, name='test_param_uint64')
         +-unit=ROWS
 ==
 
@@ -309,7 +309,7 @@ QueryStmt
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
         +-method="system"
         +-size=
-        | +-Parameter(type=INT64, name="test_param_int64")
+        | +-Parameter(type=INT64, name='test_param_int64')
         +-unit=PERCENT
 ==
 
@@ -356,7 +356,7 @@ QueryStmt
         | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
         +-method="system"
         +-size=
-        | +-Parameter(type=DOUBLE, name="test_param_double")
+        | +-Parameter(type=DOUBLE, name='test_param_double')
         +-unit=PERCENT
 ==
 
@@ -378,7 +378,7 @@ QueryStmt
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
         +-repeatable_argument=
-          +-Parameter(type=INT64, name="test_param_int64")
+          +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 select key from KeyValue TABLESAMPLE SYSTEM (1 ROWS) REPEATABLE(@test_param_int32)
@@ -400,7 +400,7 @@ QueryStmt
         +-unit=ROWS
         +-repeatable_argument=
           +-Cast(INT32 -> INT64)
-            +-Parameter(type=INT32, name="test_param_int32")
+            +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select key from KeyValue TABLESAMPLE SYSTEM (1 ROWS) REPEATABLE(@test_param_uint32)
@@ -422,7 +422,7 @@ QueryStmt
         +-unit=ROWS
         +-repeatable_argument=
           +-Cast(UINT32 -> INT64)
-            +-Parameter(type=UINT32, name="test_param_uint32")
+            +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 select key from KeyValue TABLESAMPLE SYSTEM (1 ROWS) REPEATABLE(@test_param_uint64)
@@ -444,7 +444,7 @@ QueryStmt
         +-unit=ROWS
         +-repeatable_argument=
           +-Cast(UINT64 -> INT64)
-            +-Parameter(type=UINT64, name="test_param_uint64")
+            +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 select key from KeyValue TABLESAMPLE SYSTEM (1 ROWS) REPEATABLE(@test_param_string)

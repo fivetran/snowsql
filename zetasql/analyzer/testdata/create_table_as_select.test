@@ -155,7 +155,7 @@ CreateTableAsSelectStmt
 | +-func :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
 |     +-Literal(type=STRING, value='abc')
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Parameter(type=STRING, name='test_param_string')
 +-column_definition_list=
 | +-ColumnDefinition(name="key", type=INT64, column=X.key#4)
 | +-ColumnDefinition(name="k1", type=INT64, column=X.k1#5)

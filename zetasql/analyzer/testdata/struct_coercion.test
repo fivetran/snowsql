@@ -342,7 +342,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<INT64, DATE>)
-    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     +-input_scan=
       +-SingleRowScan
 ==
