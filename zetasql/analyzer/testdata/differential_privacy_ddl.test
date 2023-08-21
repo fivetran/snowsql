@@ -252,8 +252,8 @@ CreateTableFunctionStmt
 |       |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
 |       |     +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
 |       +-option_list=
-|         +-epsilon := ArgumentRef(type=DOUBLE, name="e")
-|         +-delta := ArgumentRef(type=DOUBLE, name="d")
+|         +-epsilon := ArgumentRef(type=DOUBLE, name='e')
+|         +-delta := ArgumentRef(type=DOUBLE, name='d')
 +-output_column_list=
   +-$aggregate.count#13 AS count [INT64]
 
@@ -291,8 +291,8 @@ CreateTableFunctionStmt
 |       +-group_selection_threshold_expr=
 |       | +-ColumnRef(type=INT64, column=$differential_privacy.$group_selection_threshold_col#20)
 |       +-option_list=
-|         +-epsilon := ArgumentRef(type=DOUBLE, name="e")
-|         +-delta := ArgumentRef(type=DOUBLE, name="d")
+|         +-epsilon := ArgumentRef(type=DOUBLE, name='e')
+|         +-delta := ArgumentRef(type=DOUBLE, name='d')
 +-output_column_list=
   +-$aggregate.count#13 AS count [INT64]
 ==

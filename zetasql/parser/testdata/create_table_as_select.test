@@ -797,18 +797,18 @@ SELECT
 ==
 
 # This was originally crash bug b/34282868
-create {{|or replace}} table foo as "must be a query not a string";
+create {{|or replace}} table foo as 'must be a query not a string';
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Expected "(" or keyword SELECT or keyword WITH but got string literal "must be a query not a string" [at 1:22]
-create  table foo as "must be a query not a string";
+ERROR: Syntax error: Expected "(" or keyword SELECT or keyword WITH but got string literal 'must be a query not a string' [at 1:22]
+create  table foo as 'must be a query not a string';
                      ^
 --
 ALTERNATION GROUP: or replace
 --
-ERROR: Syntax error: Expected "(" or keyword SELECT or keyword WITH but got string literal "must be a query not a string" [at 1:32]
-create or replace table foo as "must be a query not a string";
+ERROR: Syntax error: Expected "(" or keyword SELECT or keyword WITH but got string literal 'must be a query not a string' [at 1:32]
+create or replace table foo as 'must be a query not a string';
                                ^
 ==
 

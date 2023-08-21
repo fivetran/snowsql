@@ -3280,7 +3280,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.x#1]
     +-expr_list=
-    | +-x#1 := ArgumentRef(type=STRING, name="x")
+    | +-x#1 := ArgumentRef(type=STRING, name='x')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -3316,7 +3316,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.x#1]
     +-expr_list=
-    | +-x#1 := ArgumentRef(type=BOOL, name="x")
+    | +-x#1 := ArgumentRef(type=BOOL, name='x')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -3351,7 +3351,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.x#1]
     +-expr_list=
-    | +-x#1 := ArgumentRef(type=INT64, name="x")
+    | +-x#1 := ArgumentRef(type=INT64, name='x')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -3570,7 +3570,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.Key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to both a scalar
@@ -3645,7 +3645,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[t.int32#1, t.int64#2, t.uint32#3, t.uint64#4, t.string#5, t.bytes#6, t.bool#7, t.float#8, t.double#9, t.date#10, t.timestamp_seconds#11, t.timestamp_millis#12, t.timestamp_micros#13, t.timestamp_nanos#14, t.timestamp#15, t.numeric#16, t.bignumeric#17, t.json#18, $query.s#19]
     +-expr_list=
-    | +-s#19 := ArgumentRef(type=STRING, name="s")
+    | +-s#19 := ArgumentRef(type=STRING, name='s')
     +-input_scan=
       +-RelationArgumentScan(column_list=t.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp_seconds#11, timestamp_millis#12, timestamp_micros#13, timestamp_nanos#14, timestamp#15, numeric#16, bignumeric#17, json#18], name="t")
 ==
@@ -3709,7 +3709,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[t.int32#1, t.int64#2, t.uint32#3, t.uint64#4, t.string#5, t.bytes#6, t.bool#7, t.float#8, t.double#9, t.date#10, t.timestamp_seconds#11, t.timestamp_millis#12, t.timestamp_micros#13, t.timestamp_nanos#14, t.timestamp#15, t.numeric#16, t.bignumeric#17, t.json#18, $query.s#19]
     +-expr_list=
-    | +-s#19 := ArgumentRef(type=STRING, name="s")
+    | +-s#19 := ArgumentRef(type=STRING, name='s')
     +-input_scan=
       +-RelationArgumentScan(column_list=t.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp_seconds#11, timestamp_millis#12, timestamp_micros#13, timestamp_nanos#14, timestamp#15, numeric#16, bignumeric#17, json#18], name="t")
 ==
@@ -3760,7 +3760,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(DATE, DATE) -> BOOL)
             +-ColumnRef(type=DATE, column=t.date#1)
-            +-ArgumentRef(type=DATE, name="d")
+            +-ArgumentRef(type=DATE, name='d')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to a scalar argument
@@ -3824,7 +3824,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a TVF with a valid templated SQL body that refers to a relation argument
@@ -4036,7 +4036,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.x#1]
     +-expr_list=
-    | +-x#1 := ArgumentRef(type=BOOL, name="$col1")
+    | +-x#1 := ArgumentRef(type=BOOL, name='$col1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -5617,7 +5617,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 --
 ALTERNATION GROUP: y
 --
@@ -5668,7 +5668,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 --
 ALTERNATION GROUP: _no_schema,x
 --
@@ -5764,7 +5764,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 ==
 
 # A function where the SELECT list path expression could resolve to a qualifed
@@ -7201,7 +7201,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=t.key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a simple templated SQL TVF with a missing output column name.

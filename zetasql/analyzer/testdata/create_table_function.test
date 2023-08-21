@@ -755,7 +755,7 @@ CreateTableFunctionStmt
 |     +-ProjectScan
 |       +-column_list=$query.[x#1, y#2, z#3]
 |       +-expr_list=
-|       | +-x#1 := ArgumentRef(type=INT64, name="x")
+|       | +-x#1 := ArgumentRef(type=INT64, name='x')
 |       | +-y#2 := Literal(type=STRING, value='abc')
 |       | +-z#3 := Literal(type=INT64, value=42)
 |       +-input_scan=
@@ -788,7 +788,7 @@ CreateTableFunctionStmt
 |       +-column_list=$query.[y#1, x#2]
 |       +-expr_list=
 |       | +-y#1 := Literal(type=STRING, value='abc')
-|       | +-x#2 := ArgumentRef(type=INT64, name="x")
+|       | +-x#2 := ArgumentRef(type=INT64, name='x')
 |       +-input_scan=
 |         +-SingleRowScan
 +-output_column_list=
@@ -822,7 +822,7 @@ CreateTableFunctionStmt
 |       +-expr_list=
 |       | +-w#1 := Literal(type=BOOL, value=false)
 |       | +-y#2 := Literal(type=STRING, value='abc')
-|       | +-x#3 := ArgumentRef(type=INT64, name="x")
+|       | +-x#3 := ArgumentRef(type=INT64, name='x')
 |       | +-z#4 := Literal(type=INT64, value=42)
 |       +-input_scan=
 |         +-SingleRowScan
@@ -859,7 +859,7 @@ CreateTableFunctionStmt
 |       +-expr_list=
 |       | +-x#1 :=
 |       | | +-Cast(INT64 -> INT32)
-|       | |   +-ArgumentRef(type=INT64, name="x")
+|       | |   +-ArgumentRef(type=INT64, name='x')
 |       | +-y#2 := Literal(type=STRING, value='abc')
 |       +-input_scan=
 |         +-SingleRowScan
@@ -898,7 +898,7 @@ CreateTableFunctionStmt
 |       +-expr_list=
 |       | +-x#1 :=
 |       | | +-Cast(INT64 -> INT32)
-|       | |   +-ArgumentRef(type=INT64, name="x")
+|       | |   +-ArgumentRef(type=INT64, name='x')
 |       | +-y#2 := Literal(type=STRING, value='abc')
 |       | +-z#3 := Literal(type=INT64, value=42)
 |       +-input_scan=
@@ -938,7 +938,7 @@ CreateTableFunctionStmt
 |       | +-y#1 := Literal(type=STRING, value='abc')
 |       | +-x#2 :=
 |       |   +-Cast(INT64 -> INT32)
-|       |     +-ArgumentRef(type=INT64, name="x")
+|       |     +-ArgumentRef(type=INT64, name='x')
 |       +-input_scan=
 |         +-SingleRowScan
 +-output_column_list=
@@ -969,7 +969,7 @@ CreateTableFunctionStmt
 |       | +-ArrayScan
 |       |   +-column_list=[$array.x#1]
 |       |   +-array_expr=
-|       |   | +-ArgumentRef(type=ARRAY<INT64>, name="arr")
+|       |   | +-ArgumentRef(type=ARRAY<INT64>, name='arr')
 |       |   +-element_column=$array.x#1
 |       +-filter_expr=
 |         +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
@@ -1002,7 +1002,7 @@ CreateTableFunctionStmt
 |       | +-ArrayScan
 |       |   +-column_list=[$array.x#1]
 |       |   +-array_expr=
-|       |   | +-ArgumentRef(type=ARRAY<INT64>, name="arr")
+|       |   | +-ArgumentRef(type=ARRAY<INT64>, name='arr')
 |       |   +-element_column=$array.x#1
 |       +-filter_expr=
 |         +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
@@ -1163,10 +1163,10 @@ CreateTableFunctionStmt
 |       |         +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
 |       |           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
 |       |           | +-ColumnRef(type=INT64, column=t2.x#3)
-|       |           | +-ArgumentRef(type=INT64, name="a")
+|       |           | +-ArgumentRef(type=INT64, name='a')
 |       |           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |       |             +-ColumnRef(type=STRING, column=t2.y#4)
-|       |             +-ArgumentRef(type=STRING, name="b")
+|       |             +-ArgumentRef(type=STRING, name='b')
 |       +-output_column_list=t2.[x#3, y#4]
 +-output_column_list=
   +-$union_all.x#5 AS x [INT64]
@@ -1220,10 +1220,10 @@ CreateTableFunctionStmt
 |       |         +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
 |       |           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
 |       |           | +-ColumnRef(type=INT64, column=t2.x#3)
-|       |           | +-ArgumentRef(type=INT64, name="a")
+|       |           | +-ArgumentRef(type=INT64, name='a')
 |       |           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |       |             +-ColumnRef(type=STRING, column=t2.y#4)
-|       |             +-ArgumentRef(type=STRING, name="b")
+|       |             +-ArgumentRef(type=STRING, name='b')
 |       +-output_column_list=t2.[x#3, y#4]
 +-output_column_list=
   +-$union_all.x#5 AS x [INT64]

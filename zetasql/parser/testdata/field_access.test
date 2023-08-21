@@ -3427,19 +3427,19 @@ select abc..1e5;
            ^
 ==
 
-select 1,2,'abc',"def" from Customer where 5;
+select 1,2,'abc','def' from Customer where 5;
 --
 QueryStatement [0-44] [select 1,2...Customer where 5]
   Query [0-44] [select 1,2...Customer where 5]
     Select [0-44] [select 1,2...Customer where 5]
-      SelectList [7-22] [1,2,'abc',"def"]
+      SelectList [7-22] [1,2,'abc','def']
         SelectColumn [7-8] [1]
           IntLiteral(1) [7-8] [1]
         SelectColumn [9-10] [2]
           IntLiteral(2) [9-10] [2]
         SelectColumn [11-16] ['abc']
           StringLiteral('abc') [11-16] ['abc']
-        SelectColumn [17-22] ["def"]
+        SelectColumn [17-22] ['def']
           StringLiteral('def') [17-22] ['def']
       FromClause [23-36] [from Customer]
         TablePathExpression [28-36] [Customer]
@@ -3452,7 +3452,7 @@ SELECT
   1,
   2,
   'abc',
-  "def"
+  'def'
 FROM
   Customer
 WHERE

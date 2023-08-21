@@ -241,8 +241,8 @@ CreateTableFunctionStmt
 |       +-aggregate_list=
 |       | +-anon_count#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 |       +-anonymization_option_list=
-|         +-epsilon := ArgumentRef(type=DOUBLE, name="e")
-|         +-k_threshold := ArgumentRef(type=INT64, name="k")
+|         +-epsilon := ArgumentRef(type=DOUBLE, name='e')
+|         +-k_threshold := ArgumentRef(type=INT64, name='k')
 +-output_column_list=
   +-$aggregate.anon_count#13 AS anon_count [INT64]
 
@@ -280,8 +280,8 @@ CreateTableFunctionStmt
 |       +-k_threshold_expr=
 |       | +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#20)
 |       +-anonymization_option_list=
-|         +-epsilon := ArgumentRef(type=DOUBLE, name="e")
-|         +-k_threshold := ArgumentRef(type=INT64, name="k")
+|         +-epsilon := ArgumentRef(type=DOUBLE, name='e')
+|         +-k_threshold := ArgumentRef(type=INT64, name='k')
 +-output_column_list=
   +-$aggregate.anon_count#13 AS anon_count [INT64]
 ==

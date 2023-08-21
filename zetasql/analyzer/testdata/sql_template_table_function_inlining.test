@@ -61,10 +61,10 @@ QueryStmt
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             | +-ColumnRef(type=INT64, column=arg0.a#1)
-            | +-ArgumentRef(type=INT64, name="x")
+            | +-ArgumentRef(type=INT64, name='x')
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
               +-ColumnRef(type=STRING, column=arg0.b#2)
-              +-ArgumentRef(type=STRING, name="y")
+              +-ArgumentRef(type=STRING, name='y')
 
 [REWRITTEN AST]
 QueryStmt
@@ -209,10 +209,10 @@ QueryStmt
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             | +-ColumnRef(type=INT64, column=arg0.a#1)
-            | +-ArgumentRef(type=INT64, name="x")
+            | +-ArgumentRef(type=INT64, name='x')
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
               +-ColumnRef(type=STRING, column=arg0.b#2)
-              +-ArgumentRef(type=STRING, name="y")
+              +-ArgumentRef(type=STRING, name='y')
 
 [REWRITTEN AST]
 QueryStmt
@@ -344,7 +344,7 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
-            +-ArgumentRef(type=INT64, name="x")
+            +-ArgumentRef(type=INT64, name='x')
 
 
 [REWRITTEN AST]

@@ -558,12 +558,12 @@ QueryStmt
 [language_features=TABLE_VALUED_FUNCTIONS,INTERVAL_TYPE]
 # Test several TVFs, each of which accepts one argument of some POD type.
 select column_bool from tvf_exactly_1_bool_arg(true) union all
-select column_bool from tvf_exactly_1_bytes_arg(cast("" as bytes)) union all
+select column_bool from tvf_exactly_1_bytes_arg(cast('' as bytes)) union all
 select column_bool from tvf_exactly_1_double_arg(cast(42 as double)) union all
 select column_bool from tvf_exactly_1_float_arg(cast(42 as float)) union all
 select column_bool from tvf_exactly_1_int32_arg(cast(42 as int32)) union all
 select column_bool from tvf_exactly_1_int64_arg(cast(42 as int64)) union all
-select column_bool from tvf_exactly_1_string_arg("abc") union all
+select column_bool from tvf_exactly_1_string_arg('abc') union all
 select column_bool from tvf_exactly_1_uint32_arg(cast(42 as uint32)) union all
 select column_bool from tvf_exactly_1_uint64_arg(cast(42 as uint64)) union all
 select column_bool from tvf_exactly_1_interval_arg(INTERVAL 5 MINUTE)
@@ -1336,7 +1336,7 @@ QueryStmt
 
 # The TVF accepts a templated repeating final argument.
 select column_bool from
-tvf_repeating_arbitrary_type_args(1, "a", 2, "b")
+tvf_repeating_arbitrary_type_args(1, 'a', 2, 'b')
 --
 QueryStmt
 +-output_column_list=
@@ -2242,7 +2242,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.key#1]
     +-expr_list=
-    | +-key#1 := ArgumentRef(type=INT64, name="x")
+    | +-key#1 := ArgumentRef(type=INT64, name='x')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2286,7 +2286,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$query.key#1]
         +-expr_list=
-        | +-key#1 := ArgumentRef(type=INT32, name="x")
+        | +-key#1 := ArgumentRef(type=INT32, name='x')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -2294,7 +2294,7 @@ QueryStmt
 # This query calls a TVF with a required value-table output schema and the SQL
 # body returns a non-value table with a column of the same type.
 select *
-from tvf_templated_select_x_with_required_value_table_output_schema("abc");
+from tvf_templated_select_x_with_required_value_table_output_schema('abc');
 --
 QueryStmt
 +-output_column_list=
@@ -2324,7 +2324,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.x#1]
     +-expr_list=
-    | +-x#1 := ArgumentRef(type=STRING, name="x")
+    | +-x#1 := ArgumentRef(type=STRING, name='x')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2333,7 +2333,7 @@ QueryStmt
 # body returns a value table of the same type.
 select *
 from tvf_templated_select_as_value_x_with_required_value_table_output_schema(
-    "abc");
+    'abc');
 --
 QueryStmt
 +-output_column_list=
@@ -2363,7 +2363,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.x#1]
     +-expr_list=
-    | +-x#1 := ArgumentRef(type=STRING, name="x")
+    | +-x#1 := ArgumentRef(type=STRING, name='x')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -2372,7 +2372,7 @@ QueryStmt
 # body returns NULL casted to string type.
 select *
 from tvf_templated_select_null_str_with_required_value_table_output_schema(
-    "abc");
+    'abc');
 --
 QueryStmt
 +-output_column_list=
@@ -2410,7 +2410,7 @@ QueryStmt
 # This query calls a TVF with a required output schema with two columns. The
 # function body returns the two columns in opposite order.
 select *
-from tvf_templated_return_swapped_cols_required_output_schema(42, "value");
+from tvf_templated_return_swapped_cols_required_output_schema(42, 'value');
 --
 QueryStmt
 +-output_column_list=
@@ -2447,8 +2447,8 @@ QueryStmt
       +-ProjectScan
         +-column_list=$query.[value#1, key#2]
         +-expr_list=
-        | +-value#1 := ArgumentRef(type=STRING, name="value")
-        | +-key#2 := ArgumentRef(type=INT64, name="key")
+        | +-value#1 := ArgumentRef(type=STRING, name='value')
+        | +-key#2 := ArgumentRef(type=INT64, name='key')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -2457,7 +2457,7 @@ QueryStmt
 # function body returns the two columns in opposite order, plus an extra column.
 select *
 from tvf_templated_return_swapped_cols_plus_extra_required_output_schema(
-    42, "value");
+    42, 'value');
 --
 QueryStmt
 +-output_column_list=
@@ -2494,8 +2494,8 @@ QueryStmt
       +-ProjectScan
         +-column_list=$query.[value#1, key#2, x#3]
         +-expr_list=
-        | +-value#1 := ArgumentRef(type=STRING, name="value")
-        | +-key#2 := ArgumentRef(type=INT64, name="key")
+        | +-value#1 := ArgumentRef(type=STRING, name='value')
+        | +-key#2 := ArgumentRef(type=INT64, name='key')
         | +-x#3 := Literal(type=INT64, value=42)
         +-input_scan=
           +-SingleRowScan
@@ -2607,10 +2607,10 @@ select * from tvf_exactly_3_int64_args()
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_bool_arg("invalid")
+select column_bool from tvf_exactly_1_bool_arg('invalid')
 --
-ERROR: Could not cast literal "invalid" to type BOOL [at 1:48]
-select column_bool from tvf_exactly_1_bool_arg("invalid")
+ERROR: Could not cast literal 'invalid' to type BOOL [at 1:48]
+select column_bool from tvf_exactly_1_bool_arg('invalid')
                                                ^
 ==
 
@@ -2631,18 +2631,18 @@ select column_bool from tvf_exactly_1_bytes_arg(42)
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_double_arg("invalid")
+select column_bool from tvf_exactly_1_double_arg('invalid')
 --
-ERROR: Could not cast literal "invalid" to type DOUBLE [at 1:50]
-select column_bool from tvf_exactly_1_double_arg("invalid")
+ERROR: Could not cast literal 'invalid' to type DOUBLE [at 1:50]
+select column_bool from tvf_exactly_1_double_arg('invalid')
                                                  ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_float_arg("invalid")
+select column_bool from tvf_exactly_1_float_arg('invalid')
 --
 ERROR: No matching signature for tvf_exactly_1_float_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_FLOAT_ARG(FLOAT) [at 1:25]
-select column_bool from tvf_exactly_1_float_arg("invalid")
+select column_bool from tvf_exactly_1_float_arg('invalid')
                         ^
 --
 Signature Mismatch Details:
@@ -2650,31 +2650,31 @@ ERROR: No matching signature for tvf_exactly_1_float_arg
   Argument types: STRING
   Signature: TVF_EXACTLY_1_FLOAT_ARG(FLOAT)
     Argument 1: Unable to coerce type STRING to expected type FLOAT [at 1:25]
-select column_bool from tvf_exactly_1_float_arg("invalid")
+select column_bool from tvf_exactly_1_float_arg('invalid')
                         ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_int32_arg("invalid")
+select column_bool from tvf_exactly_1_int32_arg('invalid')
 --
-ERROR: Could not cast literal "invalid" to type INT32 [at 1:49]
-select column_bool from tvf_exactly_1_int32_arg("invalid")
+ERROR: Could not cast literal 'invalid' to type INT32 [at 1:49]
+select column_bool from tvf_exactly_1_int32_arg('invalid')
                                                 ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_int64_arg("invalid")
+select column_bool from tvf_exactly_1_int64_arg('invalid')
 --
-ERROR: Could not cast literal "invalid" to type INT64 [at 1:49]
-select column_bool from tvf_exactly_1_int64_arg("invalid")
+ERROR: Could not cast literal 'invalid' to type INT64 [at 1:49]
+select column_bool from tvf_exactly_1_int64_arg('invalid')
                                                 ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_uint32_arg("invalid")
+select column_bool from tvf_exactly_1_uint32_arg('invalid')
 --
 ERROR: No matching signature for tvf_exactly_1_uint32_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_UINT32_ARG(UINT32) [at 1:25]
-select column_bool from tvf_exactly_1_uint32_arg("invalid")
+select column_bool from tvf_exactly_1_uint32_arg('invalid')
                         ^
 --
 Signature Mismatch Details:
@@ -2682,15 +2682,15 @@ ERROR: No matching signature for tvf_exactly_1_uint32_arg
   Argument types: STRING
   Signature: TVF_EXACTLY_1_UINT32_ARG(UINT32)
     Argument 1: Unable to coerce type STRING to expected type UINT32 [at 1:25]
-select column_bool from tvf_exactly_1_uint32_arg("invalid")
+select column_bool from tvf_exactly_1_uint32_arg('invalid')
                         ^
 ==
 
 # Test several TVFs, each of which accepts one argument of some POD type.
-select column_bool from tvf_exactly_1_uint64_arg("invalid")
+select column_bool from tvf_exactly_1_uint64_arg('invalid')
 --
 ERROR: No matching signature for tvf_exactly_1_uint64_arg for argument types: STRING. Supported signature: TVF_EXACTLY_1_UINT64_ARG(UINT64) [at 1:25]
-select column_bool from tvf_exactly_1_uint64_arg("invalid")
+select column_bool from tvf_exactly_1_uint64_arg('invalid')
                         ^
 --
 Signature Mismatch Details:
@@ -2698,7 +2698,7 @@ ERROR: No matching signature for tvf_exactly_1_uint64_arg
   Argument types: STRING
   Signature: TVF_EXACTLY_1_UINT64_ARG(UINT64)
     Argument 1: Unable to coerce type STRING to expected type UINT64 [at 1:25]
-select column_bool from tvf_exactly_1_uint64_arg("invalid")
+select column_bool from tvf_exactly_1_uint64_arg('invalid')
                         ^
 ==
 
@@ -2831,18 +2831,18 @@ select column_bool from tvf_exactly_one_arg_enum_any(42)
 ==
 
 # The TVF accepts a repeating final int64 argument.
-select column_bool from tvf_repeating_int64_args("a", "b", "c")
+select column_bool from tvf_repeating_int64_args('a', 'b', 'c')
 --
-ERROR: Could not cast literal "a" to type INT64 [at 1:50]
-select column_bool from tvf_repeating_int64_args("a", "b", "c")
+ERROR: Could not cast literal 'a' to type INT64 [at 1:50]
+select column_bool from tvf_repeating_int64_args('a', 'b', 'c')
                                                  ^
 ==
 
 # The TVF accepts a templated repeating final argument.
-select column_bool from tvf_repeating_any_one_type_args(1, "a")
+select column_bool from tvf_repeating_any_one_type_args(1, 'a')
 --
-ERROR: Could not cast literal "a" to type INT64 [at 1:60]
-select column_bool from tvf_repeating_any_one_type_args(1, "a")
+ERROR: Could not cast literal 'a' to type INT64 [at 1:60]
+select column_bool from tvf_repeating_any_one_type_args(1, 'a')
                                                            ^
 ==
 
@@ -3148,7 +3148,7 @@ Recursive dependencies detected when resolving table function tvf_calls_self_ind
 # This query calls a TVF with a required output schema, passing an input value
 # of a type that is not equal or coercible to the required output column.
 select *
-from tvf_templated_select_x_with_required_output_schema("abc");
+from tvf_templated_select_x_with_required_output_schema('abc');
 --
 QueryStmt
 +-output_column_list=
@@ -3184,7 +3184,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[$query.key#1]
         +-expr_list=
-        | +-key#1 := ArgumentRef(type=STRING, name="x")
+        | +-key#1 := ArgumentRef(type=STRING, name='x')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -3192,10 +3192,10 @@ QueryStmt
 # This query calls a TVF with a required output schema, but the SQL body does
 # not return a column with the required name.
 select *
-from tvf_templated_missing_output_column_with_required_output_schema("abc");
+from tvf_templated_missing_output_column_with_required_output_schema('abc');
 --
 ERROR: Invalid table-valued function tvf_templated_missing_output_column_with_required_output_schema [at 2:6]
-from tvf_templated_missing_output_column_with_required_output_schema("abc");
+from tvf_templated_missing_output_column_with_required_output_schema('abc');
      ^
 Analysis of table-valued function tvf_templated_missing_output_column_with_required_output_schema failed [at 1:1]
 select x
@@ -3206,10 +3206,10 @@ Required column name key not returned from SQL body of CREATE TABLE FUNCTION sta
 # This query calls a TVF with a required output schema, but the SQL body returns
 # two columns with the same name as the required column. This is not allowed.
 select *
-from tvf_templated_duplicate_output_column_with_required_output_schema("abc");
+from tvf_templated_duplicate_output_column_with_required_output_schema('abc');
 --
 ERROR: Invalid table-valued function tvf_templated_duplicate_output_column_with_required_output_schema [at 2:6]
-from tvf_templated_duplicate_output_column_with_required_output_schema("abc");
+from tvf_templated_duplicate_output_column_with_required_output_schema('abc');
      ^
 Analysis of table-valued function tvf_templated_duplicate_output_column_with_required_output_schema failed [at 1:1]
 select x as key, 42 as key
@@ -3234,10 +3234,10 @@ Value-table column for the output table of a CREATE TABLE FUNCTION statement has
 # This query calls a TVF with a required value-table output schema and the SQL
 # body returns untyped NULL.
 select *
-from tvf_templated_select_null_with_required_value_table_output_schema("abc");
+from tvf_templated_select_null_with_required_value_table_output_schema('abc');
 --
 ERROR: Invalid table-valued function tvf_templated_select_null_with_required_value_table_output_schema [at 2:6]
-from tvf_templated_select_null_with_required_value_table_output_schema("abc");
+from tvf_templated_select_null_with_required_value_table_output_schema('abc');
      ^
 Analysis of table-valued function tvf_templated_select_null_with_required_value_table_output_schema failed [at 1:1]
 select null
@@ -3388,11 +3388,11 @@ QueryStmt
 # Note the TVF call here specifies a wrong struct field name ('feild2__'
 # instead of 'field2').
 SELECT * FROM tvf_named_struct_args(
-    STRUCT([""] AS field1, ["A","B"]AS field2),
+    STRUCT([''] AS field1, ['a','b']AS field2),
     STRUCT(
-        [""] AS field1,
-        (ARRAY(SELECT v FROM UNNEST([""]) v WHERE v <> "")) AS field2__,
-        [""] AS field3));
+        [''] AS field1,
+        (ARRAY(SELECT v FROM UNNEST(['']) v WHERE v <> '')) AS field2__,
+        [''] AS field3));
 --
 QueryStmt
 +-output_column_list=
@@ -3409,7 +3409,7 @@ QueryStmt
         +-argument_list=
         | +-FunctionArgument
         | | +-expr=
-        | |   +-Literal(type=STRUCT<field1 ARRAY<STRING>, field2 ARRAY<STRING>>, value={field1:[""], field2:["A", "B"]})
+        | |   +-Literal(type=STRUCT<field1 ARRAY<STRING>, field2 ARRAY<STRING>>, value={field1:[''], field2:['a', 'b']})
         | +-FunctionArgument
         |   +-expr=
         |     +-MakeStruct

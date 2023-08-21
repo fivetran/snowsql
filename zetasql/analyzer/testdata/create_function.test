@@ -577,10 +577,10 @@ CreateFunctionStmt
     +-type=STRUCT<x INT64, y STRING>
     +-field_list=
       +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-      | +-ArgumentRef(type=INT64, name="x")
+      | +-ArgumentRef(type=INT64, name='x')
       | +-Literal(type=INT64, value=5)
       +-FunctionCall(ZetaSQL:substr(STRING, INT64, optional(1) INT64) -> STRING)
-        +-ArgumentRef(type=STRING, name="y")
+        +-ArgumentRef(type=STRING, name='y')
         +-Literal(type=INT64, value=0)
         +-Literal(type=INT64, value=10)
 ==
@@ -606,8 +606,8 @@ CreateFunctionStmt
     +-field_list=
       +-Cast(INT32 -> INT64)
       | +-Cast(INT64 -> INT32)
-      |   +-ArgumentRef(type=INT64, name="x")
-      +-ArgumentRef(type=STRING, name="y")
+      |   +-ArgumentRef(type=INT64, name='x')
+      +-ArgumentRef(type=STRING, name='y')
 --
 ALTERNATION GROUP: <empty>
 --
@@ -626,8 +626,8 @@ CreateFunctionStmt
     +-field_list=
       +-Cast(INT32 -> INT64)
       | +-Cast(INT64 -> INT32)
-      |   +-ArgumentRef(type=INT64, name="x")
-      +-ArgumentRef(type=STRING, name="y")
+      |   +-ArgumentRef(type=INT64, name='x')
+      +-ArgumentRef(type=STRING, name='y')
 ==
 
 # Struct return type with field type coercion (b/28942765).
@@ -648,16 +648,16 @@ CreateFunctionStmt
   +-Cast(STRUCT<first INT64> -> STRUCT<x DOUBLE>)
     +-FunctionCall(ZetaSQL:if(BOOL, STRUCT<first INT64>, STRUCT<first INT64>) -> STRUCT<first INT64>)
       +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
-      | +-ArgumentRef(type=INT64, name="first")
-      | +-ArgumentRef(type=INT64, name="second")
+      | +-ArgumentRef(type=INT64, name='first')
+      | +-ArgumentRef(type=INT64, name='second')
       +-MakeStruct
       | +-type=STRUCT<first INT64>
       | +-field_list=
-      |   +-ArgumentRef(type=INT64, name="first")
+      |   +-ArgumentRef(type=INT64, name='first')
       +-MakeStruct
         +-type=STRUCT<first INT64>
         +-field_list=
-          +-ArgumentRef(type=INT64, name="second")
+          +-ArgumentRef(type=INT64, name='second')
 ==
 
 # Struct return type without possible coercion (b/28942765).
@@ -699,7 +699,7 @@ CreateFunctionStmt
             |   | +-ArrayScan
             |   |   +-column_list=[$array.x#1]
             |   |   +-array_expr=
-            |   |   | +-ArgumentRef(type=ARRAY<INT64>, name="arr")
+            |   |   | +-ArgumentRef(type=ARRAY<INT64>, name='arr')
             |   |   +-element_column=$array.x#1
             |   +-filter_expr=
             |     +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)

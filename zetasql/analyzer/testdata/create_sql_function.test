@@ -74,7 +74,7 @@ CreateFunctionStmt
 +-code="x"
 +-function_expression=
   +-Cast(INT32 -> INT64)
-    +-ArgumentRef(type=INT32, name="x")
+    +-ArgumentRef(type=INT32, name='x')
 ==
 
 # Struct return type.
@@ -352,8 +352,8 @@ CreateFunctionStmt
 +-code="x + y"
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-    +-ArgumentRef(type=INT64, name="x")
-    +-ArgumentRef(type=INT64, name="y")
+    +-ArgumentRef(type=INT64, name='x')
+    +-ArgumentRef(type=INT64, name='y')
 ==
 
 # Argument definition and references use different case mixes.
@@ -368,8 +368,8 @@ CreateFunctionStmt
 +-code="NumBEr * nuMBeR"
 +-function_expression=
   +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
-    +-ArgumentRef(type=INT64, name="nUmbEr")
-    +-ArgumentRef(type=INT64, name="nUmbEr")
+    +-ArgumentRef(type=INT64, name='nUmbEr')
+    +-ArgumentRef(type=INT64, name='nUmbEr')
 ==
 
 # SELECT statement in function body.
@@ -466,8 +466,8 @@ CreateFunctionStmt
         +-expr_list=
         | +-$col1#1 :=
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-        |     +-ArgumentRef(type=INT64, name="x")
-        |     +-ArgumentRef(type=INT64, name="y")
+        |     +-ArgumentRef(type=INT64, name='x')
+        |     +-ArgumentRef(type=INT64, name='y')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -494,7 +494,7 @@ CreateFunctionStmt
         | +-$col1#2 :=
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |     +-ColumnRef(type=INT64, column=$subquery1.x#1)
-        |     +-ArgumentRef(type=INT64, name="y")
+        |     +-ArgumentRef(type=INT64, name='y')
         +-input_scan=
           +-ProjectScan
             +-column_list=[$subquery1.x#1]
@@ -563,8 +563,8 @@ CreateFunctionStmt
 +-code="x + y"
 +-function_expression=
 | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|   +-ArgumentRef(type=INT64, name="x")
-|   +-ArgumentRef(type=INT64, name="y")
+|   +-ArgumentRef(type=INT64, name='x')
+|   +-ArgumentRef(type=INT64, name='y')
 +-option_list=
   +-param1 :=
     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
@@ -610,9 +610,9 @@ CreateFunctionStmt
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     +-Cast(INT32 -> INT64)
-    | +-ArgumentRef(type=INT32, name="a b")
+    | +-ArgumentRef(type=INT32, name='a b')
     +-Cast(INT32 -> INT64)
-      +-ArgumentRef(type=INT32, name="c d")
+      +-ArgumentRef(type=INT32, name='c d')
 ==
 
 # An initial test with AS alias, showing that the statement fails resolution
@@ -685,8 +685,8 @@ CreateFunctionStmt
 +-code="x + y"
 +-function_expression=
 | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|   +-ArgumentRef(type=INT64, name="x")
-|   +-ArgumentRef(type=INT64, name="y")
+|   +-ArgumentRef(type=INT64, name='x')
+|   +-ArgumentRef(type=INT64, name='y')
 +-option_list=
   +-ui_hints := Literal(type=STRUCT<semantic_type STRING, paths STRUCT<STRING, STRING>>, value={semantic_type:"ui_hints.LegacySemanticType.CURRENCY", paths:{"impressions.clicks", "impressions.clicks.conversions"}})
 ==
@@ -707,7 +707,7 @@ CreateFunctionStmt
 +-code="x + y"
 +-function_expression=
 | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|   +-ArgumentRef(type=INT64, name="x")
-|   +-ArgumentRef(type=INT64, name="y")
+|   +-ArgumentRef(type=INT64, name='x')
+|   +-ArgumentRef(type=INT64, name='y')
 +-option_list=
   +-ui_hints := Literal(type=STRUCT<semantic_type STRING, paths ARRAY<STRUCT<STRING, STRING>>>, value={semantic_type:"CURRENCY", paths:[{"impressions.clicks", "impressions.clicks.conversions"}, {"clicks2", "clicks2.conversions"}]})

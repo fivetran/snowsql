@@ -887,18 +887,18 @@ SELECT
 ==
 
 # Create view with explicit column name list with column options
-create {{|materialized|approx}} view v (a1 OPTIONS(description="test view"), b2) as select 1 a, 2 b;
+create {{|materialized|approx}} view v (a1 OPTIONS(description='test view'), b2) as select 1 a, 2 b;
 --
 ALTERNATION GROUP: <empty>
 --
 CreateViewStatement [0-75] [create  view...select 1 a, 2 b]
   PathExpression [13-14] [v]
     Identifier(v) [13-14] [v]
-  ColumnWithOptionsList [15-56] [(a1 OPTIONS...view"), b2)]
-    ColumnWithOptions [16-51] [a1 OPTIONS...test view")]
+  ColumnWithOptionsList [15-56] [(a1 OPTIONS...view'), b2)]
+    ColumnWithOptions [16-51] [a1 OPTIONS...test view')]
       Identifier(a1) [16-18] [a1]
-      OptionsList [26-51] [(description="test view")]
-        OptionsEntry [27-50] [description="test view"]
+      OptionsList [26-51] [(description='test view')]
+        OptionsEntry [27-50] [description='test view']
           Identifier(description) [27-38] [description]
           StringLiteral('test view') [39-50] ['test view']
     ColumnWithOptions [53-55] [b2]
@@ -915,7 +915,7 @@ CreateViewStatement [0-75] [create  view...select 1 a, 2 b]
           Alias [74-75] [b]
             Identifier(b) [74-75] [b]
 --
-CREATE VIEW v(a1 OPTIONS(description = "test view"), b2) AS
+CREATE VIEW v(a1 OPTIONS(description = 'test view'), b2) AS
 SELECT
   1 AS a,
   2 AS b
@@ -925,11 +925,11 @@ ALTERNATION GROUP: materialized
 CreateMaterializedViewStatement [0-87] [create materializ...t 1 a, 2 b]
   PathExpression [25-26] [v]
     Identifier(v) [25-26] [v]
-  ColumnWithOptionsList [27-68] [(a1 OPTIONS...view"), b2)]
-    ColumnWithOptions [28-63] [a1 OPTIONS...test view")]
+  ColumnWithOptionsList [27-68] [(a1 OPTIONS...view'), b2)]
+    ColumnWithOptions [28-63] [a1 OPTIONS...test view')]
       Identifier(a1) [28-30] [a1]
-      OptionsList [38-63] [(description="test view")]
-        OptionsEntry [39-62] [description="test view"]
+      OptionsList [38-63] [(description='test view')]
+        OptionsEntry [39-62] [description='test view']
           Identifier(description) [39-50] [description]
           StringLiteral('test view') [51-62] ['test view']
     ColumnWithOptions [65-67] [b2]
@@ -946,7 +946,7 @@ CreateMaterializedViewStatement [0-87] [create materializ...t 1 a, 2 b]
           Alias [86-87] [b]
             Identifier(b) [86-87] [b]
 --
-CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = "test view"), b2) AS
+CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = 'test view'), b2) AS
 SELECT
   1 AS a,
   2 AS b
@@ -956,11 +956,11 @@ ALTERNATION GROUP: approx
 CreateApproxViewStatement [0-81] [create approx...elect 1 a, 2 b]
   PathExpression [19-20] [v]
     Identifier(v) [19-20] [v]
-  ColumnWithOptionsList [21-62] [(a1 OPTIONS...view"), b2)]
-    ColumnWithOptions [22-57] [a1 OPTIONS...test view")]
+  ColumnWithOptionsList [21-62] [(a1 OPTIONS...view'), b2)]
+    ColumnWithOptions [22-57] [a1 OPTIONS...test view')]
       Identifier(a1) [22-24] [a1]
-      OptionsList [32-57] [(description="test view")]
-        OptionsEntry [33-56] [description="test view"]
+      OptionsList [32-57] [(description='test view')]
+        OptionsEntry [33-56] [description='test view']
           Identifier(description) [33-44] [description]
           StringLiteral('test view') [45-56] ['test view']
     ColumnWithOptions [59-61] [b2]
@@ -977,7 +977,7 @@ CreateApproxViewStatement [0-81] [create approx...elect 1 a, 2 b]
           Alias [80-81] [b]
             Identifier(b) [80-81] [b]
 --
-CREATE APPROX VIEW v(a1 OPTIONS(description = "test view"), b2) AS
+CREATE APPROX VIEW v(a1 OPTIONS(description = 'test view'), b2) AS
 SELECT
   1 AS a,
   2 AS b
@@ -985,7 +985,7 @@ SELECT
 
 # Create view with explicit column name list with all columns having column
 # options
-create {{|materialized|approx}} view v (a1 OPTIONS(description="test view"), b2 OPTIONS()) as select 1 a, 2 b;
+create {{|materialized|approx}} view v (a1 OPTIONS(description='test view'), b2 OPTIONS()) as select 1 a, 2 b;
 --
 ALTERNATION GROUP: <empty>
 --
@@ -993,10 +993,10 @@ CreateViewStatement [0-85] [create  view...select 1 a, 2 b]
   PathExpression [13-14] [v]
     Identifier(v) [13-14] [v]
   ColumnWithOptionsList [15-66] [(a1 OPTIONS...OPTIONS())]
-    ColumnWithOptions [16-51] [a1 OPTIONS...test view")]
+    ColumnWithOptions [16-51] [a1 OPTIONS...test view')]
       Identifier(a1) [16-18] [a1]
-      OptionsList [26-51] [(description="test view")]
-        OptionsEntry [27-50] [description="test view"]
+      OptionsList [26-51] [(description='test view')]
+        OptionsEntry [27-50] [description='test view']
           Identifier(description) [27-38] [description]
           StringLiteral('test view') [39-50] ['test view']
     ColumnWithOptions [53-65] [b2 OPTIONS()]
@@ -1014,7 +1014,7 @@ CreateViewStatement [0-85] [create  view...select 1 a, 2 b]
           Alias [84-85] [b]
             Identifier(b) [84-85] [b]
 --
-CREATE VIEW v(a1 OPTIONS(description = "test view"), b2 OPTIONS()) AS
+CREATE VIEW v(a1 OPTIONS(description = 'test view'), b2 OPTIONS()) AS
 SELECT
   1 AS a,
   2 AS b
@@ -1025,10 +1025,10 @@ CreateMaterializedViewStatement [0-97] [create materializ...t 1 a, 2 b]
   PathExpression [25-26] [v]
     Identifier(v) [25-26] [v]
   ColumnWithOptionsList [27-78] [(a1 OPTIONS...OPTIONS())]
-    ColumnWithOptions [28-63] [a1 OPTIONS...test view")]
+    ColumnWithOptions [28-63] [a1 OPTIONS...test view')]
       Identifier(a1) [28-30] [a1]
-      OptionsList [38-63] [(description="test view")]
-        OptionsEntry [39-62] [description="test view"]
+      OptionsList [38-63] [(description='test view')]
+        OptionsEntry [39-62] [description='test view']
           Identifier(description) [39-50] [description]
           StringLiteral('test view') [51-62] ['test view']
     ColumnWithOptions [65-77] [b2 OPTIONS()]
@@ -1046,7 +1046,7 @@ CreateMaterializedViewStatement [0-97] [create materializ...t 1 a, 2 b]
           Alias [96-97] [b]
             Identifier(b) [96-97] [b]
 --
-CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = "test view"), b2 OPTIONS()) AS
+CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = 'test view'), b2 OPTIONS()) AS
 SELECT
   1 AS a,
   2 AS b
@@ -1057,10 +1057,10 @@ CreateApproxViewStatement [0-91] [create approx...elect 1 a, 2 b]
   PathExpression [19-20] [v]
     Identifier(v) [19-20] [v]
   ColumnWithOptionsList [21-72] [(a1 OPTIONS...OPTIONS())]
-    ColumnWithOptions [22-57] [a1 OPTIONS...test view")]
+    ColumnWithOptions [22-57] [a1 OPTIONS...test view')]
       Identifier(a1) [22-24] [a1]
-      OptionsList [32-57] [(description="test view")]
-        OptionsEntry [33-56] [description="test view"]
+      OptionsList [32-57] [(description='test view')]
+        OptionsEntry [33-56] [description='test view']
           Identifier(description) [33-44] [description]
           StringLiteral('test view') [45-56] ['test view']
     ColumnWithOptions [59-71] [b2 OPTIONS()]
@@ -1078,7 +1078,7 @@ CreateApproxViewStatement [0-91] [create approx...elect 1 a, 2 b]
           Alias [90-91] [b]
             Identifier(b) [90-91] [b]
 --
-CREATE APPROX VIEW v(a1 OPTIONS(description = "test view"), b2 OPTIONS()) AS
+CREATE APPROX VIEW v(a1 OPTIONS(description = 'test view'), b2 OPTIONS()) AS
 SELECT
   1 AS a,
   2 AS b

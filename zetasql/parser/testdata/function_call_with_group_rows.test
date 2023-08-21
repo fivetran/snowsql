@@ -1091,11 +1091,11 @@ GROUP BY f1
 
 # GROUP_ROWS() as TVF with params
 SELECT COUNT(f1)
-FROM GROUP_ROWS(1, "a");
+FROM GROUP_ROWS(1, 'a');
 --
-QueryStatement [0-40] [SELECT COUNT...UP_ROWS(1, "a")]
-  Query [0-40] [SELECT COUNT...UP_ROWS(1, "a")]
-    Select [0-40] [SELECT COUNT...UP_ROWS(1, "a")]
+QueryStatement [0-40] [SELECT COUNT...UP_ROWS(1, 'a')]
+  Query [0-40] [SELECT COUNT...UP_ROWS(1, 'a')]
+    Select [0-40] [SELECT COUNT...UP_ROWS(1, 'a')]
       SelectList [7-16] [COUNT(f1)]
         SelectColumn [7-16] [COUNT(f1)]
           FunctionCall [7-16] [COUNT(f1)]
@@ -1103,19 +1103,19 @@ QueryStatement [0-40] [SELECT COUNT...UP_ROWS(1, "a")]
               Identifier(COUNT) [7-12] [COUNT]
             PathExpression [13-15] [f1]
               Identifier(f1) [13-15] [f1]
-      FromClause [17-40] [FROM GROUP_ROWS(1, "a")]
-        TVF [22-40] [GROUP_ROWS(1, "a")]
+      FromClause [17-40] [FROM GROUP_ROWS(1, 'a')]
+        TVF [22-40] [GROUP_ROWS(1, 'a')]
           PathExpression [22-32] [GROUP_ROWS]
             Identifier(GROUP_ROWS) [22-32] [GROUP_ROWS]
           TVFArgument [33-34] [1]
             IntLiteral(1) [33-34] [1]
-          TVFArgument [36-39] ["a"]
+          TVFArgument [36-39] ['a']
             StringLiteral('a') [36-39] ['a']
 --
 SELECT
   COUNT(f1)
 FROM
-  GROUP_ROWS(1, "a")
+  GROUP_ROWS(1, 'a')
 
 ==
 
@@ -1377,28 +1377,28 @@ SELECT f(x) WITH GROUP_ROWS (SELECT x FROM GROUP_ROWS()) FROM T;
 ==
 
 # Function call hints.
-@{hint_statement_int=123} SELECT f(x) @{hint_call_int=789, hint_call_string="a b c"} FROM T;
+@{hint_statement_int=123} SELECT f(x) @{hint_call_int=789, hint_call_string='a b c'} FROM T;
 --
-HintedStatement [0-91] [@{hint_statement_...c"} FROM T]
+HintedStatement [0-91] [@{hint_statement_...c'} FROM T]
   Hint [0-25] [@{hint_statement_int=123}]
     HintEntry [2-24] [hint_statement_int=123]
       Identifier(hint_statement_int) [2-20] [hint_statement_int]
       IntLiteral(123) [21-24] [123]
-  QueryStatement [26-91] [SELECT f(x...c"} FROM T]
-    Query [26-91] [SELECT f(x...c"} FROM T]
-      Select [26-91] [SELECT f(x...c"} FROM T]
-        SelectList [33-84] [f(x) @{hint_call_...g="a b c"}]
-          SelectColumn [33-84] [f(x) @{hint_call_...g="a b c"}]
-            FunctionCall [33-84] [f(x) @{hint_call_...g="a b c"}]
+  QueryStatement [26-91] [SELECT f(x...c'} FROM T]
+    Query [26-91] [SELECT f(x...c'} FROM T]
+      Select [26-91] [SELECT f(x...c'} FROM T]
+        SelectList [33-84] [f(x) @{hint_call_...g='a b c'}]
+          SelectColumn [33-84] [f(x) @{hint_call_...g='a b c'}]
+            FunctionCall [33-84] [f(x) @{hint_call_...g='a b c'}]
               PathExpression [33-34] [f]
                 Identifier(f) [33-34] [f]
               PathExpression [35-36] [x]
                 Identifier(x) [35-36] [x]
-              Hint [38-84] [@{hint_call_int...ing="a b c"}]
+              Hint [38-84] [@{hint_call_int...ing='a b c'}]
                 HintEntry [40-57] [hint_call_int=789]
                   Identifier(hint_call_int) [40-53] [hint_call_int]
                   IntLiteral(789) [54-57] [789]
-                HintEntry [59-83] [hint_call_string="a b c"]
+                HintEntry [59-83] [hint_call_string='a b c']
                   Identifier(hint_call_string) [59-75] [hint_call_string]
                   StringLiteral('a b c') [76-83] ['a b c']
         FromClause [85-91] [FROM T]
@@ -1408,6 +1408,6 @@ HintedStatement [0-91] [@{hint_statement_...c"} FROM T]
 --
 @{ hint_statement_int = 123 }
 SELECT
-  f(x) @{ hint_call_int = 789, hint_call_string = "a b c" }
+  f(x) @{ hint_call_int = 789, hint_call_string = 'a b c' }
 FROM
   T

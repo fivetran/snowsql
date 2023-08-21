@@ -116,7 +116,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_bool_arg(BOOL) -> BOOL
 containing resolved templated expression:
-ArgumentRef(type=BOOL, name="x")
+ArgumentRef(type=BOOL, name='x')
 ==
 
 # Show a case where the same template resolves to two different signatures:
@@ -139,7 +139,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_any_scalar_arg(STRING) -> STRING
 containing resolved templated expression:
-ArgumentRef(type=STRING, name="x")
+ArgumentRef(type=STRING, name='x')
 ==
 
 # Show a case where the same template resolves to two different signatures:
@@ -162,7 +162,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_any_scalar_arg(BOOL) -> BOOL
 containing resolved templated expression:
-ArgumentRef(type=BOOL, name="x")
+ArgumentRef(type=BOOL, name='x')
 ==
 
 # Call a UDF with a valid templated SQL body that refers to a scalar argument.
@@ -184,7 +184,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_int64_arg(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="x")
+ArgumentRef(type=INT64, name='x')
 ==
 
 # The function performs a projection.
@@ -212,14 +212,14 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_plus_integer(INT64) -> INT64
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-+-ArgumentRef(type=INT64, name="x")
++-ArgumentRef(type=INT64, name='x')
 +-Literal(type=INT64, value=42)
 
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_concat_string(STRING) -> STRING
 containing resolved templated expression:
 FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-+-ArgumentRef(type=STRING, name="x")
++-ArgumentRef(type=STRING, name='x')
 +-Literal(type=STRING, value='abc')
 ==
 
@@ -244,8 +244,8 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_concat_two_strings(STRING, STRING) -> STRING
 containing resolved templated expression:
 FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-+-ArgumentRef(type=STRING, name="x")
-+-ArgumentRef(type=STRING, name="y")
++-ArgumentRef(type=STRING, name='x')
++-ArgumentRef(type=STRING, name='y')
 ==
 
 # The function has a $ in its internal argument name.
@@ -267,7 +267,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_plus_integer_accept_dollars_col_name(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="$col1")
+ArgumentRef(type=INT64, name='$col1')
 ==
 
 # Call a templated SQL UDF that calls another templated SQL UDF.
@@ -347,7 +347,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="x")
+ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a templated SQL UDF with a literal NULL argument value, and an expected
@@ -370,7 +370,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="x")
+ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a templated SQL UDF with literal NULL explicitly casted to DATE, and an
@@ -393,7 +393,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_date(DATE) -> DATE
 containing resolved templated expression:
-ArgumentRef(type=DATE, name="x")
+ArgumentRef(type=DATE, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type that does not exactly match its
@@ -418,7 +418,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(INT32) -> INT64
 containing resolved templated expression:
 Cast(INT32 -> INT64)
-+-ArgumentRef(type=INT32, name="x")
++-ArgumentRef(type=INT32, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type that exactly matches its
@@ -462,7 +462,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_struct_int64_string(STRUCT<int_field INT64, string_field STRING>) -> STRUCT<int_field INT64, string_field STRING>
 containing resolved templated expression:
-ArgumentRef(type=STRUCT<int_field INT64, string_field STRING>, name="x")
+ArgumentRef(type=STRUCT<int_field INT64, string_field STRING>, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type comprising a struct with
@@ -509,7 +509,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_struct_int64_string(STRUCT<int_field INT32, string_field STRING>) -> STRUCT<int_field INT64, string_field STRING>
 containing resolved templated expression:
 Cast(STRUCT<int_field INT32, string_field STRING> -> STRUCT<int_field INT64, string_field STRING>)
-+-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name="x")
++-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type comprising a struct with
@@ -562,7 +562,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_struct_int64_string(STRUCT<int_field INT32, string_field STRING>) -> STRUCT<int_field INT64, string_field STRING>
 containing resolved templated expression:
 Cast(STRUCT<int_field INT32, string_field STRING> -> STRUCT<int_field INT64, string_field STRING>)
-+-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name="x")
++-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name='x')
 ==
 
 # Call a templated SQL function with a 32-bit integer return type that returns
@@ -758,7 +758,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 +-Cast(STRING -> INT64)
-| +-ArgumentRef(type=STRING, name="x")
+| +-ArgumentRef(type=STRING, name='x')
 +-Literal(type=INT64, value=42)
 ==
 
@@ -813,7 +813,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_templated_like_any(STRING) -> BOOL
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$like_any(STRING, repeated(1) STRING) -> BOOL)
-+-ArgumentRef(type=STRING, name="x")
++-ArgumentRef(type=STRING, name='x')
 +-Literal(type=STRING, value='z')
 ==
 
@@ -1052,7 +1052,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_date(STRING) -> DATE
 containing resolved templated expression:
 Cast(STRING -> DATE)
-+-ArgumentRef(type=STRING, name="x")
++-ArgumentRef(type=STRING, name='x')
 ==
 
 # Call a templated SQL UDF with a 64-bit integer argument type that fits under
@@ -1098,7 +1098,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(STRING) -> INT64
 containing resolved templated expression:
 Cast(STRING -> INT64)
-+-ArgumentRef(type=STRING, name="x")
++-ArgumentRef(type=STRING, name='x')
 ==
 
 # Call a SQL UDA with an invalid templated SQL body that refers to an AGGREGATE

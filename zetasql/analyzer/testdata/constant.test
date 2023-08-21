@@ -394,7 +394,7 @@ CreateFunctionStmt
 +-code="TestConstantInt64 + IF(nested_catalog.TestConstantBool, 1, 0)"
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-    +-ArgumentRef(type=INT64, name="TestConstantInt64")
+    +-ArgumentRef(type=INT64, name='TestConstantInt64')
     +-FunctionCall(ZetaSQL:if(BOOL, INT64, INT64) -> INT64)
       +-Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
       +-Literal(type=INT64, value=1)

@@ -120,7 +120,7 @@ QueryStmt
 # TODO: Tricky case *for unparsing*. May need an extra project on
 # the named struct so as to extract the fields with unambiguous aliases.
 [no_run_unparser]
-select * from (select as struct 1 key, "abc" key)
+select * from (select as struct 1 key, 'abc' key)
 --
 QueryStmt
 +-output_column_list=
@@ -203,7 +203,7 @@ select k1 from (select k1 as k2 from (select key as k1 from KeyValue));
 ==
 
 
-select A,b,d from (select 1 a, key B, 1.5 c, "abc" d, value e from KeyValue);
+select A,b,d from (select 1 a, key B, 1.5 c, 'abc' d, value e from KeyValue);
 --
 
 QueryStmt
