@@ -10,7 +10,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=123)
-+-predicate_str="key = 123"
++-predicate_str='key = 123'
 ==
 
 # Create named policy.
@@ -27,7 +27,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="key = 321"
++-predicate_str='key = 321'
 ==
 
 # Create unnamed policy, multiple users.
@@ -48,7 +48,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=123)
-+-predicate_str="key = 123"
++-predicate_str='key = 123'
 --
 ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX, @test_param_string,
 --
@@ -69,7 +69,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=123)
-+-predicate_str="key = 123"
++-predicate_str='key = 123'
 --
 ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX,PARAMETERS_IN_GRANTEE_LIST, @test_param_string,
 --
@@ -85,7 +85,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=123)
-+-predicate_str="key = 123"
++-predicate_str='key = 123'
 ==
 
 # Create policy with reference to another table
@@ -117,7 +117,7 @@ CreateRowAccessPolicyStmt
 |           +-column_list=[Int32ValueTable.value#3]
 |           +-input_scan=
 |             +-TableScan(column_list=[Int32ValueTable.value#3], table=Int32ValueTable, column_index_list=[0])
-+-predicate_str="key IN (\n  SELECT\n    Int32ValueTable\n  FROM\n    Int32ValueTable\n)"
++-predicate_str='key IN (\n  SELECT\n    Int32ValueTable\n  FROM\n    Int32ValueTable\n)'
 ==
 
 # Create named policy, multiple users.
@@ -135,7 +135,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="key = +321"
++-predicate_str='key = +321'
 ==
 
 # Create named policy, no grant to clause.
@@ -171,7 +171,7 @@ CreateRowAccessPolicyStmt
 |   +-FunctionCall(ZetaSQL:abs(INT64) -> INT64)
 |   | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="abs(key) = 321"
++-predicate_str='abs(key) = 321'
 ==
 
 # Create named policy, predicate with parameter.
@@ -189,7 +189,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 |   +-Parameter(type=STRING, name='test_param_string')
-+-predicate_str="value = @test_param_string"
++-predicate_str='value = @test_param_string'
 ==
 
 # Create named policy, predicate with in subquery.
@@ -217,7 +217,7 @@ CreateRowAccessPolicyStmt
 |       | +-$col1#3 := Literal(type=INT64, value=123)
 |       +-input_scan=
 |         +-SingleRowScan
-+-predicate_str="abs(key) IN (\n  SELECT\n    123\n)"
++-predicate_str='abs(key) IN (\n  SELECT\n    123\n)'
 ==
 
 # Create named policy, predicate with subquery of another table.
@@ -246,7 +246,7 @@ CreateRowAccessPolicyStmt
 |       +-column_list=[KeyValue2.Key#3]
 |       +-input_scan=
 |         +-TableScan(column_list=[KeyValue2.Key#3], table=KeyValue2, column_index_list=[0])
-+-predicate_str="abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)"
++-predicate_str='abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)'
 ==
 
 # Using table name as alias rather than full name should work too.
@@ -267,7 +267,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="KeyValue.key = 321"
++-predicate_str='KeyValue.key = 321'
 ==
 
 # Create policy on struct value table.
@@ -296,7 +296,7 @@ CreateRowAccessPolicyStmt
 |     | | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 |     | +-field_idx=1
 |     +-Literal(type=STRING, value='abc')
-+-predicate_str="a = 321 AND TestStructValueTable.b = 'abc'"
++-predicate_str='a = 321 AND TestStructValueTable.b = 'abc''
 ==
 
 # Create policy on int32 value table.
@@ -313,7 +313,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 |   +-ColumnRef(type=INT32, column=Int32ValueTable.value#1)
 |   +-Literal(type=INT32, value=321)
-+-predicate_str="Int32ValueTable = 321"
++-predicate_str='Int32ValueTable = 321'
 ==
 
 # Create or replace named policy.
@@ -332,7 +332,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="key = 321"
++-predicate_str='key = 321'
 ==
 
 # Create named policy if not exists.
@@ -351,7 +351,7 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="key = 321"
++-predicate_str='key = 321'
 ==
 
 create row policy p1 on KeyValue to "foo@google.com" using (NULL);
@@ -364,7 +364,7 @@ CreateRowAccessPolicyStmt
 | +-TableScan(table=KeyValue)
 +-predicate=
 | +-Literal(type=BOOL, value=NULL)
-+-predicate_str="NULL"
++-predicate_str='NULL'
 ==
 
 # Create or replace named policy if not exists.
@@ -465,4 +465,4 @@ CreateRowAccessPolicyStmt
 | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   +-Literal(type=INT64, value=321)
-+-predicate_str="key = 321"
++-predicate_str='key = 321'
