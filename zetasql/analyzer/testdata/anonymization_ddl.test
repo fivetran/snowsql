@@ -451,7 +451,7 @@ CreateMaterializedViewStmt
 |       | +-TableScan(table=SimpleTypesWithAnonymizationUid)
 |       +-aggregate_list=
 |         +-anon_count#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
-+-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='anon_count', type=INT64, column=foo_materialized_view.anon_count#14)
 
@@ -486,7 +486,7 @@ CreateMaterializedViewStmt
 |       |     +-Literal(type=INT64, value=1)
 |       +-k_threshold_expr=
 |         +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#21)
-+-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='anon_count', type=INT64, column=foo_materialized_view.anon_count#14)
 ==
@@ -509,7 +509,7 @@ CreateViewStmt
 |       | +-TableScan(table=SimpleTypesWithAnonymizationUid)
 |       +-aggregate_list=
 |         +-anon_count#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
-+-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='anon_count', type=INT64, column=foo_view.anon_count#14)
 
@@ -544,7 +544,7 @@ CreateViewStmt
 |       |     +-Literal(type=INT64, value=1)
 |       +-k_threshold_expr=
 |         +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#21)
-+-sql="SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT anon_count(*) AS anon_count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='anon_count', type=INT64, column=foo_view.anon_count#14)
 ==

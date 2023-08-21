@@ -43,7 +43,7 @@ AlterTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=STRING, value=NULL)
-        +-sql="NULL"
+        +-sql='NULL'
 ==
 
 # Alter table if exists set default
@@ -58,7 +58,7 @@ AlterTableStmt
 |     +-ColumnDefaultValue
 |       +-expression=
 |       | +-Literal(type=INT64, value=123)
-|       +-sql="123"
+|       +-sql='123'
 +-is_if_exists=TRUE
 ==
 
@@ -92,7 +92,7 @@ AlterTableStmt
   |   +-ColumnDefaultValue
   |     +-expression=
   |     | +-Literal(type=INT64, value=666)
-  |     +-sql="666"
+  |     +-sql='666'
   +-AlterColumnSetDefaultAction
   | +-column='value'
   | +-default_value=
@@ -119,11 +119,11 @@ AlterTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=INT64, value=123)
-        +-sql="123"
+        +-sql='123'
 ==
 
 # Set default to a complex expression
-ALTER TABLE KeyValue ALTER COLUMN value SET DEFAULT concat("prefix_", generate_uuid());
+ALTER TABLE KeyValue ALTER COLUMN value SET DEFAULT concat('prefix_', generate_uuid());
 --
 AlterTableStmt
 +-name_path=KeyValue
@@ -136,7 +136,7 @@ AlterTableStmt
         | +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
         |   +-Literal(type=STRING, value='prefix_')
         |   +-FunctionCall(ZetaSQL:generate_uuid() -> STRING)
-        +-sql='concat("prefix_", generate_uuid())'
+        +-sql='concat(\'prefix_\', generate_uuid())'
 ==
 
 # Set default on a non_exist column (disallowed)
@@ -237,7 +237,7 @@ AlterTableStmt
         |   |           +-ColumnRef(type=STRING, column=$lambda_arg.value#1)
         |   |           +-Literal(type=STRING, value='a')
         |   +-Literal(type=STRING, value=',')
-        +-sql="ARRAY_TO_STRING(ARRAY_FILTER(['a'], value -> value = 'a'), ',')"
+        +-sql='ARRAY_TO_STRING(ARRAY_FILTER([\'a\'], value -> value = \'a\'), \',\')'
 ==
 
 [language_features=]
@@ -255,7 +255,7 @@ ALTER TABLE KeyValue ALTER COLUMN key DROP DEFAULT;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnDropDefaultAction(column="key")
+  +-AlterColumnDropDefaultAction(column='key')
 ==
 
 # Drop default with case-insensitive column.
@@ -264,7 +264,7 @@ ALTER TABLE KeyValue ALTER COLUMN KeY DROP DEFAULT;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnDropDefaultAction(column="KeY")
+  +-AlterColumnDropDefaultAction(column='KeY')
 ==
 
 ALTER TABLE IF EXISTS KeyValue ALTER COLUMN key DROP DEFAULT;
@@ -272,7 +272,7 @@ ALTER TABLE IF EXISTS KeyValue ALTER COLUMN key DROP DEFAULT;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-| +-AlterColumnDropDefaultAction(column="key")
+| +-AlterColumnDropDefaultAction(column='key')
 +-is_if_exists=TRUE
 ==
 
@@ -281,7 +281,7 @@ ALTER TABLE IF EXISTS not_a_table ALTER COLUMN key DROP DEFAULT;
 AlterTableStmt
 +-name_path=not_a_table
 +-alter_action_list=
-| +-AlterColumnDropDefaultAction(column="key")
+| +-AlterColumnDropDefaultAction(column='key')
 +-is_if_exists=TRUE
 ==
 
@@ -290,7 +290,7 @@ ALTER TABLE KeyValue ALTER COLUMN IF EXISTS not_a_column DROP DEFAULT;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnDropDefaultAction(is_if_exists=TRUE, column="not_a_column")
+  +-AlterColumnDropDefaultAction(is_if_exists=TRUE, column='not_a_column')
 ==
 
 ALTER TABLE KeyValue ALTER COLUMN IF EXISTS value DROP DEFAULT;
@@ -298,7 +298,7 @@ ALTER TABLE KeyValue ALTER COLUMN IF EXISTS value DROP DEFAULT;
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnDropDefaultAction(is_if_exists=TRUE, column="value")
+  +-AlterColumnDropDefaultAction(is_if_exists=TRUE, column='value')
 ==
 
 # Combine drop default with other alter column actions.
@@ -313,7 +313,7 @@ AlterTableStmt
   | +-column='key'
   | +-option_list=
   |   +-description := Literal(type=STRING, value='new description')
-  +-AlterColumnDropDefaultAction(column="key")
+  +-AlterColumnDropDefaultAction(column='key')
 ==
 
 # Multiple drop default actions
@@ -324,8 +324,8 @@ ALTER TABLE KeyValue
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-AlterColumnDropDefaultAction(column="key")
-  +-AlterColumnDropDefaultAction(column="value")
+  +-AlterColumnDropDefaultAction(column='key')
+  +-AlterColumnDropDefaultAction(column='value')
 ==
 
 ALTER TABLE not_a_table ALTER COLUMN key DROP DEFAULT;

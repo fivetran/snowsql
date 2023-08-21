@@ -5625,7 +5625,7 @@ CreateViewStmt
 |   |       +-Literal(type=STRING, value='ghi')
 |   +-input_scan=
 |     +-SingleRowScan
-+-sql="select 1 a,\n   collate('abc', 'und:ci') b,\n   [collate('abc', 'und:ci')] c,\n   (collate('abc', 'und:ci'), collate('def', 'binary'), 'ghi') d"
++-sql='select 1 a,\n   collate('abc', 'und:ci') b,\n   [collate('abc', 'und:ci')] c,\n   (collate('abc', 'und:ci'), collate('def', 'binary'), 'ghi') d'
 +-column_definition_list=
   +-ColumnDefinition(name='a', type=INT64, column=t.a#5)
   +-ColumnDefinition
@@ -5756,7 +5756,7 @@ CreateViewStmt
 |   +-column_list=CollatedTable.[string_ci#1, string_binary#2, struct_with_string_ci#3, array_with_string_ci#4]
 |   +-input_scan=
 |     +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2, struct_with_string_ci#3, array_with_string_ci#4], table=CollatedTable, column_index_list=[0, 1, 2, 3])
-+-sql="select * from CollatedTable"
++-sql='select * from CollatedTable'
 +-column_definition_list=
   +-ColumnDefinition
   | +-name='string_ci'
@@ -5893,7 +5893,7 @@ CreateMaterializedViewStmt
 |   |       +-Literal(type=INT64, value=1)
 |   +-input_scan=
 |     +-SingleRowScan
-+-sql="SELECT COLLATE('foo', 'und:ci') AS col1, STRUCT(COLLATE('bar', 'binary') AS col2_1, 1 AS col2_2) AS col2"
++-sql='SELECT COLLATE('foo', 'und:ci') AS col1, STRUCT(COLLATE('bar', 'binary') AS col2_1, 1 AS col2_2) AS col2'
 +-column_definition_list=
   +-ColumnDefinition
   | +-name='col1'
@@ -5930,7 +5930,7 @@ CreateMaterializedViewStmt
 |   +-column_list=CollatedTable.[string_ci#1, string_binary#2, struct_with_string_ci#3, array_with_string_ci#4]
 |   +-input_scan=
 |     +-TableScan(column_list=CollatedTable.[string_ci#1, string_binary#2, struct_with_string_ci#3, array_with_string_ci#4], table=CollatedTable, column_index_list=[0, 1, 2, 3])
-+-sql="SELECT * FROM CollatedTable"
++-sql='SELECT * FROM CollatedTable'
 +-column_definition_list=
   +-ColumnDefinition
   | +-name='string_ci'

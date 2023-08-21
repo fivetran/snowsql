@@ -4357,7 +4357,7 @@ CreateTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-        +-sql="CAST(1 as INT32)"
+        +-sql='CAST(1 as INT32)'
 ==
 
 # Column default value with mismatched but assignable type.
@@ -4837,7 +4837,7 @@ CreateTableStmt
   |   +-ColumnDefaultValue
   |     +-expression=
   |     | +-Literal(type=INT32, value=1)
-  |     +-sql="1"
+  |     +-sql='1'
   +-ColumnDefinition
   | +-name='b'
   | +-type=INT64
@@ -4879,7 +4879,7 @@ CreateTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-FunctionCall(ZetaSQL:rand() -> DOUBLE)
-        +-sql="rand()"
+        +-sql='rand()'
 ==
 
 # Column default value: Array
@@ -4898,7 +4898,7 @@ CreateTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=ARRAY<INT64>, value=[1, 2])
-        +-sql="[1,2]"
+        +-sql='[1,2]'
 ==
 
 # Column default value: Struct type
@@ -4938,7 +4938,7 @@ CreateTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=INT32, value=NULL)
-        +-sql="NULL"
+        +-sql='NULL'
 ==
 
 # Column default value is 1 and NOT NULL attribute.
@@ -4959,7 +4959,7 @@ CreateTableStmt
       +-ColumnDefaultValue
         +-expression=
         | +-Literal(type=INT32, value=1)
-        +-sql="1"
+        +-sql='1'
 ==
 
 # CREATE TABLE DEFAULT with lambda

@@ -470,7 +470,7 @@ CreateMaterializedViewStmt
 |         +-count#13 :=
 |           +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
 |             +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
-+-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='count', type=INT64, column=foo_materialized_view.count#14)
 
@@ -505,7 +505,7 @@ CreateMaterializedViewStmt
 |       |     +-Literal(type=STRUCT<INT64, INT64>, value={0, 1})
 |       +-group_selection_threshold_expr=
 |         +-ColumnRef(type=INT64, column=$differential_privacy.$group_selection_threshold_col#21)
-+-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='count', type=INT64, column=foo_materialized_view.count#14)
 ==
@@ -530,7 +530,7 @@ CreateViewStmt
 |         +-count#13 :=
 |           +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
 |             +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
-+-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='count', type=INT64, column=foo_view.count#14)
 
@@ -565,7 +565,7 @@ CreateViewStmt
 |       |     +-Literal(type=STRUCT<INT64, INT64>, value={0, 1})
 |       +-group_selection_threshold_expr=
 |         +-ColumnRef(type=INT64, column=$differential_privacy.$group_selection_threshold_col#21)
-+-sql="SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid"
++-sql='SELECT WITH DIFFERENTIAL_PRIVACY count(*) AS count\nFROM SimpleTypesWithAnonymizationUid'
 +-column_definition_list=
   +-ColumnDefinition(name='count', type=INT64, column=foo_view.count#14)
 ==
