@@ -201,7 +201,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[MyTable.int32#19]
         +-input_scan=
-          +-WithRefScan(column_list=[MyTable.int32#19], with_query_name="MyTable")
+          +-WithRefScan(column_list=[MyTable.int32#19], with_query_name='MyTable')
 ==
 
 SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF CAST(@test_param_string AS TIMESTAMP)

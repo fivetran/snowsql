@@ -457,7 +457,7 @@ QueryStmt
           +-AggregateScan
             +-column_list=[$groupby.a#9, $groupby.c#11, $aggregate.$agg1#8]
             +-input_scan=
-            | +-WithRefScan(column_list=T.[a#5, b#6, c#7], with_query_name="T")
+            | +-WithRefScan(column_list=T.[a#5, b#6, c#7], with_query_name='T')
             +-group_by_list=
             | +-a#9 := ColumnRef(type=INT64, column=T.a#5)
             | +-$groupbycol2#10 :=

@@ -178,7 +178,7 @@ QueryStmt
     |                 | +-ArrayScan
     |                 |   +-column_list=[t.arr#4, $array.e#5]
     |                 |   +-input_scan=
-    |                 |   | +-WithRefScan(column_list=[t.arr#4], with_query_name="t")
+    |                 |   | +-WithRefScan(column_list=[t.arr#4], with_query_name='t')
     |                 |   +-array_expr=
     |                 |   | +-ColumnRef(type=ARRAY<INT64>, column=t.arr#4)
     |                 |   +-element_column=$array.e#5
@@ -1188,7 +1188,7 @@ QueryStmt
     |                 |     +-ColumnRef(type=INT64, column=t.c#4)
     |                 |     +-ColumnRef(type=INT64, column=$inlined_ReferencesArgOutsideCte.a#5, is_correlated=TRUE)
     |                 +-input_scan=
-    |                   +-WithRefScan(column_list=[t.c#4], with_query_name="t")
+    |                   +-WithRefScan(column_list=[t.c#4], with_query_name='t')
     +-input_scan=
       +-SingleRowScan
 ==

@@ -622,7 +622,7 @@ QueryStmt
           +-UnpivotScan
             +-column_list=$unpivot.[x#5, y#6]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[s1#3, s2#4], with_query_name="t")
+            | +-WithRefScan(column_list=t.[s1#3, s2#4], with_query_name='t')
             +-value_column_list=[$unpivot.x#5]
             +-label_column=$unpivot.y#6
             +-label_list=
@@ -682,7 +682,7 @@ QueryStmt
                 | +-ArrayScan
                 |   +-column_list=[t.s1#3, t.s2#4, unpivot_array_0.unpivot_unnest#7]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=t.[s1#3, s2#4], with_query_name="t")
+                |   | +-WithRefScan(column_list=t.[s1#3, s2#4], with_query_name='t')
                 |   +-array_expr=
                 |   | +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRUCT<x STRUCT<a INT64, b INT64>, y STRING>) -> ARRAY<STRUCT<x STRUCT<a INT64, b INT64>, y STRING>>)
                 |   |   +-MakeStruct

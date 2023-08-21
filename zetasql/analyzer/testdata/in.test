@@ -712,7 +712,7 @@ QueryStmt
           +-FilterScan
             +-column_list=t1.[enum1#5, enum2#6]
             +-input_scan=
-            | +-WithRefScan(column_list=t1.[enum1#5, enum2#6], with_query_name="t1")
+            | +-WithRefScan(column_list=t1.[enum1#5, enum2#6], with_query_name='t1')
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$or(BOOL, repeated(1) BOOL) -> BOOL)
                 +-SubqueryExpr
@@ -731,7 +731,7 @@ QueryStmt
                 |       +-ProjectScan
                 |         +-column_list=[t2.enum2#8]
                 |         +-input_scan=
-                |           +-WithRefScan(column_list=t2.[enum1#7, enum2#8], with_query_name="t2")
+                |           +-WithRefScan(column_list=t2.[enum1#7, enum2#8], with_query_name='t2')
                 +-SubqueryExpr
                   +-type=BOOL
                   +-subquery_type=IN
@@ -748,7 +748,7 @@ QueryStmt
                         +-ProjectScan
                           +-column_list=[t2.enum1#11]
                           +-input_scan=
-                            +-WithRefScan(column_list=t2.[enum1#11, enum2#12], with_query_name="t2")
+                            +-WithRefScan(column_list=t2.[enum1#11, enum2#12], with_query_name='t2')
 ==
 
 select
@@ -809,7 +809,7 @@ QueryStmt
           +-FilterScan
             +-column_list=t1.[enum1#3, enum2#4]
             +-input_scan=
-            | +-WithRefScan(column_list=t1.[enum1#3, enum2#4], with_query_name="t1")
+            | +-WithRefScan(column_list=t1.[enum1#3, enum2#4], with_query_name='t1')
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$or(BOOL, repeated(1) BOOL) -> BOOL)
                 +-FunctionCall(ZetaSQL:$equal(ENUM<zetasql_test__.TestEnum>, ENUM<zetasql_test__.TestEnum>) -> BOOL)

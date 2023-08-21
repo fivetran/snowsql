@@ -792,12 +792,12 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[T1.s#7, T2.y#8]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=[T1.s#7], with_query_name="T1")
+            |   | +-WithRefScan(column_list=[T1.s#7], with_query_name='T1')
             |   +-right_scan=
             |     +-ProjectScan
             |       +-column_list=[T2.y#8]
             |       +-input_scan=
-            |         +-WithRefScan(column_list=[T2.y#8], with_query_name="T2")
+            |         +-WithRefScan(column_list=[T2.y#8], with_query_name='T2')
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$in(STRUCT<x BOOL>, repeated(1) STRUCT<x BOOL>) -> BOOL)
                 +-ColumnRef(type=STRUCT<x BOOL>, column=T1.s#7)
@@ -890,7 +890,7 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[T1.s#7, T2.a#8, t2.b#9]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=[T1.s#7], with_query_name="T1")
+            |   | +-WithRefScan(column_list=[T1.s#7], with_query_name='T1')
             |   +-right_scan=
             |     +-ProjectScan
             |       +-column_list=[T2.a#8, t2.b#9]
@@ -901,7 +901,7 @@ QueryStmt
             |       |     +-Literal(type=INT64, value=1)
             |       |     +-Literal(type=INT64, value=2)
             |       +-input_scan=
-            |         +-WithRefScan(column_list=[T2.a#8], with_query_name="T2")
+            |         +-WithRefScan(column_list=[T2.a#8], with_query_name='T2')
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$in(STRUCT<x BOOL, y DOUBLE>, repeated(1) STRUCT<x BOOL, y DOUBLE>) -> BOOL)
                 +-ColumnRef(type=STRUCT<x BOOL, y DOUBLE>, column=T1.s#7)

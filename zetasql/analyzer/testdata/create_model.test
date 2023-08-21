@@ -872,14 +872,14 @@ CreateModelStmt
     |         | | +-ProjectScan
     |         | |   +-column_list=t1.[label#5, value#6]
     |         | |   +-input_scan=
-    |         | |     +-WithRefScan(column_list=t1.[label#5, value#6], with_query_name="t1")
+    |         | |     +-WithRefScan(column_list=t1.[label#5, value#6], with_query_name='t1')
     |         | +-output_column_list=t1.[label#5, value#6]
     |         +-SetOperationItem
     |           +-scan=
     |           | +-ProjectScan
     |           |   +-column_list=t2.[label#7, value#8]
     |           |   +-input_scan=
-    |           |     +-WithRefScan(column_list=t2.[label#7, value#8], with_query_name="t2")
+    |           |     +-WithRefScan(column_list=t2.[label#7, value#8], with_query_name='t2')
     |           +-output_column_list=t2.[label#7, value#8]
     +-query=
       +-ProjectScan
@@ -888,7 +888,7 @@ CreateModelStmt
           +-FilterScan
             +-column_list=t3.[label#11, value#12]
             +-input_scan=
-            | +-WithRefScan(column_list=t3.[label#11, value#12], with_query_name="t3")
+            | +-WithRefScan(column_list=t3.[label#11, value#12], with_query_name='t3')
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
                 +-ColumnRef(type=INT64, column=t3.label#11)
@@ -1157,7 +1157,7 @@ CreateModelStmt
     |     +-ProjectScan
     |       +-column_list=[a1.t1#2]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[a1.t1#2], with_query_name="a1")
+    |         +-WithRefScan(column_list=[a1.t1#2], with_query_name='a1')
     +-output_column_list=
       +-a1.t1#2 AS t1 [INT64]
 
@@ -1198,7 +1198,7 @@ CreateModelStmt
     |     +-ProjectScan
     |       +-column_list=[training_data.t1#2]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[training_data.t1#2], with_query_name="training_data")
+    |         +-WithRefScan(column_list=[training_data.t1#2], with_query_name='training_data')
     +-output_column_list=
       +-training_data.t1#2 AS c1 [INT64]
 

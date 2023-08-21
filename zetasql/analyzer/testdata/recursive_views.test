@@ -316,7 +316,7 @@ CreateMaterializedViewStmt
 |   | +-ProjectScan
 |   |   +-column_list=[a.n#5]
 |   |   +-input_scan=
-|   |     +-WithRefScan(column_list=[a.n#5], with_query_name="a")
+|   |     +-WithRefScan(column_list=[a.n#5], with_query_name='a')
 |   +-recursive=TRUE
 +-sql="WITH RECURSIVE a AS (SELECT 1 AS n UNION ALL SELECT n + 1 FROM a)\n  SELECT n AS view_n FROM a"
 +-recursive=TRUE
@@ -366,7 +366,7 @@ CreateViewStmt
 |   | +-ProjectScan
 |   |   +-column_list=[a.n#5]
 |   |   +-input_scan=
-|   |     +-WithRefScan(column_list=[a.n#5], with_query_name="a")
+|   |     +-WithRefScan(column_list=[a.n#5], with_query_name='a')
 |   +-recursive=TRUE
 +-sql="WITH RECURSIVE a AS (SELECT 1 AS n UNION ALL SELECT n + 1 FROM a)\n  SELECT n AS view_n FROM a"
 +-recursive=TRUE
@@ -471,7 +471,7 @@ CreateMaterializedViewStmt
 |       |   |     +-JoinScan
 |       |   |       +-column_list=[x-y.z.n#7, $view.n#8]
 |       |   |       +-left_scan=
-|       |   |       | +-WithRefScan(column_list=[x-y.z.n#7], with_query_name="x-y.z")
+|       |   |       | +-WithRefScan(column_list=[x-y.z.n#7], with_query_name='x-y.z')
 |       |   |       +-right_scan=
 |       |   |       | +-RecursiveRefScan(column_list=[$view.n#8])
 |       |   |       +-join_expr=

@@ -732,14 +732,14 @@ CreateViewStmt
 |   |         | | +-ProjectScan
 |   |         | |   +-column_list=[t1.key#4]
 |   |         | |   +-input_scan=
-|   |         | |     +-WithRefScan(column_list=[t1.key#4], with_query_name="t1")
+|   |         | |     +-WithRefScan(column_list=[t1.key#4], with_query_name='t1')
 |   |         | +-output_column_list=[t1.key#4]
 |   |         +-SetOperationItem
 |   |           +-scan=
 |   |           | +-ProjectScan
 |   |           |   +-column_list=[t2.key#5]
 |   |           |   +-input_scan=
-|   |           |     +-WithRefScan(column_list=[t2.key#5], with_query_name="t2")
+|   |           |     +-WithRefScan(column_list=[t2.key#5], with_query_name='t2')
 |   |           +-output_column_list=[t2.key#5]
 |   +-query=
 |     +-ProjectScan
@@ -748,7 +748,7 @@ CreateViewStmt
 |         +-FilterScan
 |           +-column_list=[t3.key#7]
 |           +-input_scan=
-|           | +-WithRefScan(column_list=[t3.key#7], with_query_name="t3")
+|           | +-WithRefScan(column_list=[t3.key#7], with_query_name='t3')
 |           +-filter_expr=
 |             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |               +-ColumnRef(type=INT64, column=t3.key#7)

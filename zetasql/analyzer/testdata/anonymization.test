@@ -3966,7 +3966,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t.anon_count#14]
         +-input_scan=
-          +-WithRefScan(column_list=[t.anon_count#14], with_query_name="t")
+          +-WithRefScan(column_list=[t.anon_count#14], with_query_name='t')
 
 [REWRITTEN AST]
 QueryStmt
@@ -4008,7 +4008,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t.anon_count#14]
         +-input_scan=
-          +-WithRefScan(column_list=[t.anon_count#14], with_query_name="t")
+          +-WithRefScan(column_list=[t.anon_count#14], with_query_name='t')
 ==
 
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]

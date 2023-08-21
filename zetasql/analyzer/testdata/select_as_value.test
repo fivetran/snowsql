@@ -253,7 +253,7 @@ QueryStmt
         |     +-field_list=
         |       +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=q.$col1#2)
         +-input_scan=
-          +-WithRefScan(column_list=[q.$col1#2], with_query_name="q")
+          +-WithRefScan(column_list=[q.$col1#2], with_query_name='q')
 --
 ALTERNATION GROUP: as struct
 --
@@ -288,7 +288,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[q.$struct#3]
         +-input_scan=
-          +-WithRefScan(column_list=[q.$struct#3], with_query_name="q")
+          +-WithRefScan(column_list=[q.$struct#3], with_query_name='q')
 --
 ALTERNATION GROUP: as value
 --
@@ -314,7 +314,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[q.$value_column#2]
         +-input_scan=
-          +-WithRefScan(column_list=[q.$value_column#2], with_query_name="q")
+          +-WithRefScan(column_list=[q.$value_column#2], with_query_name='q')
 ==
 
 select as value value value

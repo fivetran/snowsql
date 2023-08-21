@@ -211,7 +211,7 @@ QueryStmt
         |     +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=test.string_ci#5{Collation:"und:ci"})
         |     +-Literal(type=STRING, value='abc')
         +-input_scan=
-          +-WithRefScan(column_list=test.[string_ci#5, string_binary#6, struct_with_string_ci#7, array_with_string_ci#8], with_query_name="test")
+          +-WithRefScan(column_list=test.[string_ci#5, string_binary#6, struct_with_string_ci#7, array_with_string_ci#8], with_query_name='test')
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_3_WITH_RECURSIVE,V_1_4_COLLATION_IN_WITH_RECURSIVE]
@@ -275,7 +275,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t.[ind#8, string_ci#9]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t.[ind#8, string_ci#9], with_query_name="t")
+    |     +-WithRefScan(column_list=t.[ind#8, string_ci#9], with_query_name='t')
     +-recursive=TRUE
 --
 ALTERNATION GROUP: distinct
@@ -333,7 +333,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t.[ind#8, string_ci#9]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t.[ind#8, string_ci#9], with_query_name="t")
+    |     +-WithRefScan(column_list=t.[ind#8, string_ci#9], with_query_name='t')
     +-recursive=TRUE
 ==
 
@@ -417,7 +417,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t.[ind#12, string_ci#13]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t.[ind#12, string_ci#13], with_query_name="t")
+    |     +-WithRefScan(column_list=t.[ind#12, string_ci#13], with_query_name='t')
     +-recursive=TRUE
 --
 ALTERNATION GROUP: distinct
@@ -475,7 +475,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t.[ind#12, string_ci#13]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t.[ind#12, string_ci#13], with_query_name="t")
+    |     +-WithRefScan(column_list=t.[ind#12, string_ci#13], with_query_name='t')
     +-recursive=TRUE
 
 ==
@@ -599,7 +599,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[t.n#8{Collation:"und:ci"}]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t.n#8{Collation:"und:ci"}], with_query_name="t")
+    |     +-WithRefScan(column_list=[t.n#8{Collation:"und:ci"}], with_query_name='t')
     +-recursive=TRUE
 ==
 
@@ -677,21 +677,21 @@ QueryStmt
     | |       +-JoinScan
     | |         +-column_list=[t3.$unnest2#3{Collation:"und:ci"}, t4.$unnest1#4{Collation:"und:ci"}]
     | |         +-left_scan=
-    | |         | +-WithRefScan(column_list=[t3.$unnest2#3{Collation:"und:ci"}], with_query_name="t3")
+    | |         | +-WithRefScan(column_list=[t3.$unnest2#3{Collation:"und:ci"}], with_query_name='t3')
     | |         +-right_scan=
-    | |           +-WithRefScan(column_list=[t4.$unnest1#4{Collation:"und:ci"}], with_query_name="t4")
+    | |           +-WithRefScan(column_list=[t4.$unnest1#4{Collation:"und:ci"}], with_query_name='t4')
     | +-WithEntry
     |   +-with_query_name='t1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[$unnest2#5, $unnest1#6]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=t2.[$unnest2#5, $unnest1#6], with_query_name="t2")
+    |         +-WithRefScan(column_list=t2.[$unnest2#5, $unnest1#6], with_query_name='t2')
     +-query=
     | +-ProjectScan
     |   +-column_list=t1.[$unnest2#7, $unnest1#8]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t1.[$unnest2#7, $unnest1#8], with_query_name="t1")
+    |     +-WithRefScan(column_list=t1.[$unnest2#7, $unnest1#8], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -753,7 +753,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[t1.n#5{Collation:"und:ci"}]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.n#5{Collation:"und:ci"}], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.n#5{Collation:"und:ci"}], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -793,12 +793,12 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}], with_query_name="KeyValue")
+    |         +-WithRefScan(column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}], with_query_name='KeyValue')
     +-query=
     | +-ProjectScan
     |   +-column_list=[t1.$unnest1#3{Collation:"und:ci"}]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.$unnest1#3{Collation:"und:ci"}], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.$unnest1#3{Collation:"und:ci"}], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -843,12 +843,12 @@ QueryStmt
     |       |     +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=KeyValue.key#2{Collation:"und:ci"})
     |       |     +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[KeyValue.key#2{Collation:"und:ci"}], with_query_name="KeyValue")
+    |         +-WithRefScan(column_list=[KeyValue.key#2{Collation:"und:ci"}], with_query_name='KeyValue')
     +-query=
     | +-ProjectScan
     |   +-column_list=[t1.$col1#4]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.$col1#4], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.$col1#4], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -888,12 +888,12 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}], with_query_name="KeyValue")
+    |         +-WithRefScan(column_list=[KeyValue.$unnest1#2{Collation:"und:ci"}], with_query_name='KeyValue')
     +-query=
     | +-ProjectScan
     |   +-column_list=[t1.$unnest1#3{Collation:"und:ci"}]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.$unnest1#3{Collation:"und:ci"}], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.$unnest1#3{Collation:"und:ci"}], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -935,19 +935,19 @@ QueryStmt
     | |       +-ProjectScan
     | |         +-column_list=[t1.$col1#2{Collation:"und:ci"}]
     | |         +-input_scan=
-    | |           +-WithRefScan(column_list=[t1.$col1#2{Collation:"und:ci"}], with_query_name="t1")
+    | |           +-WithRefScan(column_list=[t1.$col1#2{Collation:"und:ci"}], with_query_name='t1')
     | +-WithEntry
     |   +-with_query_name='t1_2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#3{Collation:"und:ci"}]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[t2.$col1#3{Collation:"und:ci"}], with_query_name="t2")
+    |         +-WithRefScan(column_list=[t2.$col1#3{Collation:"und:ci"}], with_query_name='t2')
     +-query=
     | +-ProjectScan
     |   +-column_list=[t1_2.$col1#4{Collation:"und:ci"}]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1_2.$col1#4{Collation:"und:ci"}], with_query_name="t1_2")
+    |     +-WithRefScan(column_list=[t1_2.$col1#4{Collation:"und:ci"}], with_query_name='t1_2')
     +-recursive=TRUE
 ==
 
@@ -993,7 +993,7 @@ QueryStmt
     | |     |     +-ProjectScan
     | |     |       +-column_list=[t3.$col1#2{Collation:"und:ci"}]
     | |     |       +-input_scan=
-    | |     |         +-WithRefScan(column_list=[t3.$col1#2{Collation:"und:ci"}], with_query_name="t3")
+    | |     |         +-WithRefScan(column_list=[t3.$col1#2{Collation:"und:ci"}], with_query_name='t3')
     | |     +-query=
     | |     | +-ProjectScan
     | |     |   +-column_list=[t1.$col1#3{Collation:"und:ci"}, t3.$col1#4{Collation:"und:ci"}]
@@ -1001,9 +1001,9 @@ QueryStmt
     | |     |     +-JoinScan
     | |     |       +-column_list=[t1.$col1#3{Collation:"und:ci"}, t3.$col1#4{Collation:"und:ci"}]
     | |     |       +-left_scan=
-    | |     |       | +-WithRefScan(column_list=[t1.$col1#3{Collation:"und:ci"}], with_query_name="t1")
+    | |     |       | +-WithRefScan(column_list=[t1.$col1#3{Collation:"und:ci"}], with_query_name='t1')
     | |     |       +-right_scan=
-    | |     |         +-WithRefScan(column_list=[t3.$col1#4{Collation:"und:ci"}], with_query_name="t3")
+    | |     |         +-WithRefScan(column_list=[t3.$col1#4{Collation:"und:ci"}], with_query_name='t3')
     | |     +-recursive=TRUE
     | +-WithEntry
     |   +-with_query_name='t1_3'
@@ -1011,12 +1011,12 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=t2.[$col1#5, $col1#6]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=t2.[$col1#5, $col1#6], with_query_name="t2")
+    |         +-WithRefScan(column_list=t2.[$col1#5, $col1#6], with_query_name='t2')
     +-query=
     | +-ProjectScan
     |   +-column_list=t1_3.[$col1#7, $col1#8]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t1_3.[$col1#7, $col1#8], with_query_name="t1_3")
+    |     +-WithRefScan(column_list=t1_3.[$col1#7, $col1#8], with_query_name='t1_3')
     +-recursive=TRUE
 ==
 
@@ -1058,7 +1058,7 @@ QueryStmt
     | |     | +-ProjectScan
     | |     |   +-column_list=[t2_1.$col1#2{Collation:"und:ci"}]
     | |     |   +-input_scan=
-    | |     |     +-WithRefScan(column_list=[t2_1.$col1#2{Collation:"und:ci"}], with_query_name="t2_1")
+    | |     |     +-WithRefScan(column_list=[t2_1.$col1#2{Collation:"und:ci"}], with_query_name='t2_1')
     | |     +-recursive=TRUE
     | +-WithEntry
     |   +-with_query_name='t1'
@@ -1066,12 +1066,12 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[t2.$col1#3{Collation:"und:ci"}]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[t2.$col1#3{Collation:"und:ci"}], with_query_name="t2")
+    |         +-WithRefScan(column_list=[t2.$col1#3{Collation:"und:ci"}], with_query_name='t2')
     +-query=
     | +-ProjectScan
     |   +-column_list=[t1.$col1#4{Collation:"und:ci"}]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.$col1#4{Collation:"und:ci"}], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.$col1#4{Collation:"und:ci"}], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -3985,9 +3985,9 @@ QueryStmt
             +-column_list=[t1.col_a#5{Collation:"und:ci"}, t1.col_b#6, t2.col_a#7{Collation:"und:ci"}, t2.col_c#8]
             +-join_type=LEFT
             +-left_scan=
-            | +-WithRefScan(column_list=t1.[col_a#5, col_b#6], with_query_name="t1")
+            | +-WithRefScan(column_list=t1.[col_a#5, col_b#6], with_query_name='t1')
             +-right_scan=
-            | +-WithRefScan(column_list=t2.[col_a#7, col_c#8], with_query_name="t2")
+            | +-WithRefScan(column_list=t2.[col_a#7, col_c#8], with_query_name='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=t1.col_a#5{Collation:"und:ci"})
@@ -4041,9 +4041,9 @@ QueryStmt
             +-column_list=[t1.col_a#5{Collation:"und:ci"}, t1.col_b#6, t2.col_a#7{Collation:"und:ci"}, t2.col_c#8]
             +-join_type=RIGHT
             +-left_scan=
-            | +-WithRefScan(column_list=t1.[col_a#5, col_b#6], with_query_name="t1")
+            | +-WithRefScan(column_list=t1.[col_a#5, col_b#6], with_query_name='t1')
             +-right_scan=
-            | +-WithRefScan(column_list=t2.[col_a#7, col_c#8], with_query_name="t2")
+            | +-WithRefScan(column_list=t2.[col_a#7, col_c#8], with_query_name='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=t1.col_a#5{Collation:"und:ci"})
@@ -4106,9 +4106,9 @@ QueryStmt
                 +-column_list=[t1.col_a#5{Collation:"und:ci"}, t1.col_b#6, t2.col_a#7{Collation:"und:ci"}, t2.col_c#8]
                 +-join_type=FULL
                 +-left_scan=
-                | +-WithRefScan(column_list=t1.[col_a#5, col_b#6], with_query_name="t1")
+                | +-WithRefScan(column_list=t1.[col_a#5, col_b#6], with_query_name='t1')
                 +-right_scan=
-                | +-WithRefScan(column_list=t2.[col_a#7, col_c#8], with_query_name="t2")
+                | +-WithRefScan(column_list=t2.[col_a#7, col_c#8], with_query_name='t2')
                 +-join_expr=
                   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                     +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=t1.col_a#5{Collation:"und:ci"})
@@ -4217,7 +4217,7 @@ QueryStmt
             |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_b INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t1.$struct#7<{Collation:"und:ci"},_>)
             |   |     +-field_idx=0
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name="t1")
+            |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[t2.$struct#8<{Collation:"und:ci"},_>, $join_right.col_a#10{Collation:"und:ci"}]
@@ -4230,7 +4230,7 @@ QueryStmt
             |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_c INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t2.$struct#8<{Collation:"und:ci"},_>)
             |   |     +-field_idx=0
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name="t2")
+            |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=$join_left.col_a#9{Collation:"und:ci"})
@@ -4330,7 +4330,7 @@ QueryStmt
             |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_b INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t1.$struct#7<{Collation:"und:ci"},_>)
             |   |     +-field_idx=0
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name="t1")
+            |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[t2.$struct#8<{Collation:"und:ci"},_>, $join_right.col_a#10{Collation:"und:ci"}]
@@ -4343,7 +4343,7 @@ QueryStmt
             |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_c INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t2.$struct#8<{Collation:"und:ci"},_>)
             |   |     +-field_idx=0
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name="t2")
+            |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=$join_left.col_a#9{Collation:"und:ci"})
@@ -4443,7 +4443,7 @@ QueryStmt
             |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_b INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t1.$struct#7<{Collation:"und:ci"},_>)
             |   |     +-field_idx=0
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name="t1")
+            |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[t2.$struct#8<{Collation:"und:ci"},_>, $join_right.col_a#10{Collation:"und:ci"}]
@@ -4456,7 +4456,7 @@ QueryStmt
             |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_c INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t2.$struct#8<{Collation:"und:ci"},_>)
             |   |     +-field_idx=0
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name="t2")
+            |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=$join_left.col_a#9{Collation:"und:ci"})
@@ -4565,7 +4565,7 @@ QueryStmt
                 |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_b INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t1.$struct#7<{Collation:"und:ci"},_>)
                 |   |     +-field_idx=0
                 |   +-input_scan=
-                |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name="t1")
+                |     +-WithRefScan(column_list=[t1.$struct#7<{Collation:"und:ci"},_>], with_query_name='t1')
                 +-right_scan=
                 | +-ProjectScan
                 |   +-column_list=[t2.$struct#8<{Collation:"und:ci"},_>, $join_right.col_a#10{Collation:"und:ci"}]
@@ -4578,7 +4578,7 @@ QueryStmt
                 |   |     | +-ColumnRef(type=STRUCT<col_a STRING, col_c INT64>, type_annotation_map=<{Collation:"und:ci"},_>, column=t2.$struct#8<{Collation:"und:ci"},_>)
                 |   |     +-field_idx=0
                 |   +-input_scan=
-                |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name="t2")
+                |     +-WithRefScan(column_list=[t2.$struct#8<{Collation:"und:ci"},_>], with_query_name='t2')
                 +-join_expr=
                   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                     +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=$join_left.col_a#9{Collation:"und:ci"})
@@ -9446,7 +9446,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t.[col_struct#14, n#15]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t.[col_struct#14, n#15], with_query_name="t")
+    |     +-WithRefScan(column_list=t.[col_struct#14, n#15], with_query_name='t')
     +-recursive=TRUE
 ==
 
@@ -9556,7 +9556,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t.[col_struct#14, n#15]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t.[col_struct#14, n#15], with_query_name="t")
+    |     +-WithRefScan(column_list=t.[col_struct#14, n#15], with_query_name='t')
     +-recursive=TRUE
 ==
 

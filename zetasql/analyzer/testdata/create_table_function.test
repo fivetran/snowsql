@@ -1260,7 +1260,7 @@ CreateTableFunctionStmt
 |     +-ProjectScan
 |       +-column_list=w1.[x#3, y#4]
 |       +-input_scan=
-|         +-WithRefScan(column_list=w1.[x#3, y#4], with_query_name="w1")
+|         +-WithRefScan(column_list=w1.[x#3, y#4], with_query_name='w1')
 +-output_column_list=
   +-w1.x#3 AS x [INT64]
   +-w1.y#4 AS y [STRING]
@@ -1302,7 +1302,7 @@ CreateTableFunctionStmt
 |     +-ProjectScan
 |       +-column_list=t.[a#3, b#4]
 |       +-input_scan=
-|         +-WithRefScan(column_list=t.[a#3, b#4], with_query_name="t")
+|         +-WithRefScan(column_list=t.[a#3, b#4], with_query_name='t')
 +-output_column_list=
   +-t.a#3 AS a [INT64]
   +-t.b#4 AS b [STRING]
@@ -2547,7 +2547,7 @@ CreateTableFunctionStmt
 |           |   | +-ProjectScan
 |           |   |   +-column_list=[t.col#2]
 |           |   |   +-input_scan=
-|           |   |     +-WithRefScan(column_list=[t.col#2], with_query_name="t")
+|           |   |     +-WithRefScan(column_list=[t.col#2], with_query_name='t')
 |           |   +-argument_column_list=[t.col#2]
 |           +-column_index_list=[0, 1]
 +-output_column_list=

@@ -371,7 +371,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[q.key#4]
         +-input_scan=
-          +-WithRefScan(column_list=[q.key#4], with_query_name="q")
+          +-WithRefScan(column_list=[q.key#4], with_query_name='q')
 ==
 
 # The outer WithScan node is ordered if the main query inside it is ordered.
@@ -405,13 +405,13 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[T1.key#4]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[T1.key#4], with_query_name="T1")
+    |         +-WithRefScan(column_list=[T1.key#4], with_query_name='T1')
     +-query=
       +-OrderByScan
         +-column_list=[T2.key#5]
         +-is_ordered=TRUE
         +-input_scan=
-        | +-WithRefScan(column_list=[T2.key#5], with_query_name="T2")
+        | +-WithRefScan(column_list=[T2.key#5], with_query_name='T2')
         +-order_by_item_list=
           +-OrderByItem
             +-column_ref=

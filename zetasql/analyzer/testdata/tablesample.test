@@ -763,7 +763,7 @@ QueryStmt
             |     +-SampleScan
             |       +-column_list=[T.val#5]
             |       +-input_scan=
-            |       | +-WithRefScan(column_list=[T.val#5], with_query_name="T")
+            |       | +-WithRefScan(column_list=[T.val#5], with_query_name='T')
             |       +-method="system"
             |       +-size=
             |       | +-Literal(type=INT64, value=1)
@@ -849,7 +849,7 @@ QueryStmt
           +-SampleScan
             +-column_list=T.[key#3, value#4]
             +-input_scan=
-            | +-WithRefScan(column_list=T.[key#3, value#4], with_query_name="T")
+            | +-WithRefScan(column_list=T.[key#3, value#4], with_query_name='T')
             +-method="reservoir"
             +-size=
             | +-Literal(type=INT64, value=10)
@@ -901,9 +901,9 @@ QueryStmt
             |     +-JoinScan
             |       +-column_list=[t1.k1#5, t2.k2#6]
             |       +-left_scan=
-            |       | +-WithRefScan(column_list=[t1.k1#5], with_query_name="t1")
+            |       | +-WithRefScan(column_list=[t1.k1#5], with_query_name='t1')
             |       +-right_scan=
-            |       | +-WithRefScan(column_list=[t2.k2#6], with_query_name="t2")
+            |       | +-WithRefScan(column_list=[t2.k2#6], with_query_name='t2')
             |       +-join_expr=
             |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |           +-ColumnRef(type=INT64, column=t1.k1#5)
@@ -1300,7 +1300,7 @@ QueryStmt
           +-SampleScan
             +-column_list=[t.value#3, t.weight#4, $sample_weight.weight#5]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[value#3, weight#4], with_query_name="t")
+            | +-WithRefScan(column_list=t.[value#3, weight#4], with_query_name='t')
             +-method="reservoir"
             +-size=
             | +-Literal(type=INT64, value=100)
@@ -1336,7 +1336,7 @@ QueryStmt
           +-SampleScan
             +-column_list=[t.foo#2, $sample_weight.foo#3]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.foo#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.foo#2], with_query_name='t')
             +-method="reservoir"
             +-size=
             | +-Literal(type=INT64, value=100)
@@ -1454,9 +1454,9 @@ QueryStmt
           +-JoinScan
             +-column_list=[t1.Key#7, t1.Value#8, t1.weight#9, t2.Key#10, t2.Value#11, t2.weight#12]
             +-left_scan=
-            | +-WithRefScan(column_list=t1.[Key#7, Value#8, weight#9], with_query_name="t1")
+            | +-WithRefScan(column_list=t1.[Key#7, Value#8, weight#9], with_query_name='t1')
             +-right_scan=
-            | +-WithRefScan(column_list=t2.[Key#10, Value#11, weight#12], with_query_name="t2")
+            | +-WithRefScan(column_list=t2.[Key#10, Value#11, weight#12], with_query_name='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(DOUBLE, DOUBLE) -> BOOL)
                 +-ColumnRef(type=DOUBLE, column=t1.weight#9)

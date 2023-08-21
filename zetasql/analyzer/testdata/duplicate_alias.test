@@ -38,9 +38,9 @@ QueryStmt
     |         +-JoinScan
     |           +-column_list=w1.[item#3, event#4, item#5, event#6]
     |           +-left_scan=
-    |           | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name="w1")
+    |           | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name='w1')
     |           +-right_scan=
-    |           | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name="w1")
+    |           | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name='w1')
     |           +-join_expr=
     |             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |               +-ColumnRef(type=STRING, column=w1.event#4)
@@ -49,7 +49,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=w2.[c1#7, c2#8]
         +-input_scan=
-          +-WithRefScan(column_list=w2.[c1#7, c2#8], with_query_name="w2")
+          +-WithRefScan(column_list=w2.[c1#7, c2#8], with_query_name='w2')
 ==
 
 WITH w1 AS (
@@ -83,9 +83,9 @@ QueryStmt
           +-JoinScan
             +-column_list=w1.[item#3, event#4, item#5, event#6]
             +-left_scan=
-            | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name="w1")
+            | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name='w1')
             +-right_scan=
-            | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name="w1")
+            | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name='w1')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, column=w1.event#4)
@@ -128,9 +128,9 @@ QueryStmt
               +-JoinScan
                 +-column_list=w1.[item#3, event#4, item#5, event#6]
                 +-left_scan=
-                | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name="w1")
+                | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name='w1')
                 +-right_scan=
-                | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name="w1")
+                | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name='w1')
                 +-join_expr=
                   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                     +-ColumnRef(type=STRING, column=w1.event#4)

@@ -1288,7 +1288,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$aggregate.$agg1#8]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-primary_key#10 := ColumnRef(type=INT64, column=my_table.primary_key#4)
                 +-aggregate_list=
@@ -1362,7 +1362,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-aggregate_list=
                   +-$agg1#7 :=
                     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -1422,7 +1422,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
                 +-aggregate_list=
@@ -1513,7 +1513,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
                 +-aggregate_list=
@@ -1586,7 +1586,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
                 +-aggregate_list=
@@ -1661,7 +1661,7 @@ QueryStmt
         |         +-AggregateScan
         |           +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
         |           +-input_scan=
-        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
         |           +-group_by_list=
         |           | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
         |           +-aggregate_list=
@@ -1742,7 +1742,7 @@ QueryStmt
         |         +-AggregateScan
         |           +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
         |           +-input_scan=
-        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
         |           +-group_by_list=
         |           | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
         |           +-aggregate_list=
@@ -1830,7 +1830,7 @@ QueryStmt
         |   |         +-AggregateScan
         |   |           +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
         |   |           +-input_scan=
-        |   |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+        |   |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
         |   |           +-group_by_list=
         |   |           | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
         |   |           +-aggregate_list=
@@ -1928,7 +1928,7 @@ QueryStmt
               +-AnalyticScan
                 +-column_list=[my_table.key#3, my_table.value#4, $analytic.$analytic1#11]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name='my_table')
                 +-function_group_list=
                   +-AnalyticFunctionGroup
                     +-analytic_function_list=
@@ -2018,7 +2018,7 @@ QueryStmt
                 |   |       +-ColumnRef(type=INT64, column=my_table.key#3)
                 |   |       +-ColumnRef(type=STRING, column=my_table.value#4)
                 |   +-input_scan=
-                |     +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name="my_table")
+                |     +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name='my_table')
                 +-function_group_list=
                   +-AnalyticFunctionGroup
                     +-analytic_function_list=
@@ -2099,7 +2099,7 @@ QueryStmt
                 | +-AggregateScan
                 |   +-column_list=[$groupby.primary_key#7]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=my_table.[primary_key#3, value#4], with_query_name="my_table")
+                |   | +-WithRefScan(column_list=my_table.[primary_key#3, value#4], with_query_name='my_table')
                 |   +-group_by_list=
                 |     +-primary_key#7 := ColumnRef(type=INT64, column=my_table.primary_key#3)
                 +-function_group_list=
@@ -2215,7 +2215,7 @@ QueryStmt
                 |         +-AggregateScan
                 |           +-column_list=[$groupby.primary_key#12, $aggregate.$agg1#8]
                 |           +-input_scan=
-                |           | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, bool_val#6], with_query_name="my_table")
+                |           | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, bool_val#6], with_query_name='my_table')
                 |           +-group_by_list=
                 |           | +-primary_key#12 := ColumnRef(type=INT64, column=my_table.primary_key#4)
                 |           +-aggregate_list=
@@ -2319,7 +2319,7 @@ QueryStmt
                 | +-AggregateScan
                 |   +-column_list=[$aggregate.$agg1#8]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name="my_table")
+                |   | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name='my_table')
                 |   +-group_by_list=
                 |   | +-primary_key#11 := ColumnRef(type=INT64, column=my_table.primary_key#4)
                 |   +-aggregate_list=
@@ -2451,7 +2451,7 @@ QueryStmt
                 | +-AggregateScan
                 |   +-column_list=[$groupby.primary_key#20, $aggregate.$agg1#17]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=my_table.[primary_key#13, value#14, modified_date#15], with_query_name="my_table")
+                |   | +-WithRefScan(column_list=my_table.[primary_key#13, value#14, modified_date#15], with_query_name='my_table')
                 |   +-group_by_list=
                 |   | +-primary_key#20 := ColumnRef(type=INT64, column=my_table.primary_key#13)
                 |   +-aggregate_list=
@@ -2758,7 +2758,7 @@ QueryStmt
         |             +-AggregateScan
         |               +-column_list=[$groupby.CustomerId#19, $aggregate.$agg1#17]
         |               +-input_scan=
-        |               | +-WithRefScan(column_list=Perf_Accounts_D.[customer_id#9, service_channel#10, division_id#11, sub_pod_id#12, division_name#13, sub_pod_name#14, region#15, ratio#16], with_query_name="Perf_Accounts_D")
+        |               | +-WithRefScan(column_list=Perf_Accounts_D.[customer_id#9, service_channel#10, division_id#11, sub_pod_id#12, division_name#13, sub_pod_name#14, region#15, ratio#16], with_query_name='Perf_Accounts_D')
         |               +-group_by_list=
         |               | +-CustomerId#19 := ColumnRef(type=INT64, column=Perf_Accounts_D.customer_id#9)
         |               +-aggregate_list=
@@ -2933,7 +2933,7 @@ QueryStmt
                 |   |       |           +-FilterScan
                 |   |       |             +-column_list=Candidate_RowPartitions.[CompressedRowPartition#4, ResourcePath#5, ResourceModifiedTimestamp#6]
                 |   |       |             +-input_scan=
-                |   |       |             | +-WithRefScan(column_list=Candidate_RowPartitions.[CompressedRowPartition#4, ResourcePath#5, ResourceModifiedTimestamp#6], with_query_name="Candidate_RowPartitions")
+                |   |       |             | +-WithRefScan(column_list=Candidate_RowPartitions.[CompressedRowPartition#4, ResourcePath#5, ResourceModifiedTimestamp#6], with_query_name='Candidate_RowPartitions')
                 |   |       |             +-filter_expr=
                 |   |       |               +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
                 |   |       |                 +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)

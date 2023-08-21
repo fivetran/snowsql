@@ -6502,7 +6502,7 @@ QueryStmt
             |       |   |     +-ColumnRef(type=INT64, column=x.a#3)
             |       |   |     +-Literal(type=INT64, value=1)
             |       |   +-input_scan=
-            |       |     +-WithRefScan(column_list=x.[a#3, b#4], with_query_name="x")
+            |       |     +-WithRefScan(column_list=x.[a#3, b#4], with_query_name='x')
             |       +-group_by_list=
             |       | +-a#7 := ColumnRef(type=INT64, column=x.a#3)
             |       +-aggregate_list=
@@ -6556,7 +6556,7 @@ QueryStmt
         |   | +-AggregateScan
         |   |   +-column_list=[$groupby.$field1#6, $groupby.$field2#7, $groupby.$field3#8, $aggregate.$agg1#5]
         |   |   +-input_scan=
-        |   |   | +-WithRefScan(column_list=t.[a#3, b#4], with_query_name="t")
+        |   |   | +-WithRefScan(column_list=t.[a#3, b#4], with_query_name='t')
         |   |   +-group_by_list=
         |   |   | +-$field1#6 :=
         |   |   | | +-GetStructField

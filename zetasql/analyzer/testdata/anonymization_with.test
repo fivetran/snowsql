@@ -26,7 +26,7 @@ QueryStmt
           +-AnonymizedAggregateScan
             +-column_list=[$aggregate.anon_count#25]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t")
+            | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t')
             +-aggregate_list=
               +-anon_count#25 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
@@ -55,7 +55,7 @@ QueryStmt
             | +-AggregateScan
             |   +-column_list=[$aggregate.anon_count_partial#27, $group_by.$uid#28]
             |   +-input_scan=
-            |   | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t")
+            |   | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t')
             |   +-group_by_list=
             |   | +-$uid#28 := ColumnRef(type=INT64, column=t.uid#23)
             |   +-aggregate_list=
@@ -106,7 +106,7 @@ QueryStmt
           +-AnonymizedAggregateScan
             +-column_list=[$aggregate.$agg1#3]
             +-input_scan=
-            | +-WithRefScan(column_list=[with_scan.$col1#2], with_query_name="with_scan")
+            | +-WithRefScan(column_list=[with_scan.$col1#2], with_query_name='with_scan')
             +-aggregate_list=
               +-$agg1#3 :=
                 +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -158,7 +158,7 @@ QueryStmt
             |   +-parse_location=131-147
             |   +-column_list=[t1.$col1#14]
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t1.$col1#14], with_query_name="t1")
+            |     +-WithRefScan(column_list=[t1.$col1#14], with_query_name='t1')
             +-aggregate_list=
               +-$agg1#15 :=
                 +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -205,7 +205,7 @@ QueryStmt
             | +-ProjectScan
             |   +-column_list=[t1.uid#13]
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[t1.uid#13], with_query_name="t1")
+            |     +-WithRefScan(column_list=[t1.uid#13], with_query_name='t1')
             +-aggregate_list=
               +-$agg1#14 :=
                 +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -240,7 +240,7 @@ QueryStmt
             |   | +-ProjectScan
             |   |   +-column_list=[t1.uid#13]
             |   |   +-input_scan=
-            |   |     +-WithRefScan(column_list=[t1.uid#13], with_query_name="t1")
+            |   |     +-WithRefScan(column_list=[t1.uid#13], with_query_name='t1')
             |   +-group_by_list=
             |   | +-$uid#17 := ColumnRef(type=INT64, column=t1.uid#13)
             |   +-aggregate_list=
@@ -306,7 +306,7 @@ QueryStmt
             | +-ProjectScan
             |   +-column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54]
             |   +-input_scan=
-            |     +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name="t1")
+            |     +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name='t1')
             +-aggregate_list=
               +-$agg1#55 :=
                 +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -355,7 +355,7 @@ QueryStmt
             |   | +-ProjectScan
             |   |   +-column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54]
             |   |   +-input_scan=
-            |   |     +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name="t1")
+            |   |     +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name='t1')
             |   +-group_by_list=
             |   | +-$uid#58 := ColumnRef(type=INT64, column=t1.uid#53)
             |   +-aggregate_list=
@@ -435,7 +435,7 @@ QueryStmt
     |     +-AnonymizedAggregateScan
     |       +-column_list=[$aggregate.$agg1#20]
     |       +-input_scan=
-    |       | +-WithRefScan(column_list=t1.[int64#18, uid#19], with_query_name="t1")
+    |       | +-WithRefScan(column_list=t1.[int64#18, uid#19], with_query_name='t1')
     |       +-aggregate_list=
     |         +-$agg1#20 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=164-174)
     +-recursive=TRUE
@@ -506,7 +506,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[t1.c#17]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.c#17], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.c#17], with_query_name='t1')
     +-recursive=TRUE
 
 [REWRITTEN AST]
@@ -574,7 +574,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[t1.c#17]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=[t1.c#17], with_query_name="t1")
+    |     +-WithRefScan(column_list=[t1.c#17], with_query_name='t1')
     +-recursive=TRUE
 ==
 
@@ -640,7 +640,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=t1.[int64#19, uid#20]
     |   +-input_scan=
-    |     +-WithRefScan(column_list=t1.[int64#19, uid#20], with_query_name="t1")
+    |     +-WithRefScan(column_list=t1.[int64#19, uid#20], with_query_name='t1')
     +-recursive=TRUE
 [REPLACED_LITERALS]
 with recursive t1 as (
@@ -694,7 +694,7 @@ QueryStmt
           +-AnonymizedAggregateScan
             +-column_list=[$aggregate.$agg1#17]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[uid#15, $col2#16], with_query_name="t")
+            | +-WithRefScan(column_list=t.[uid#15, $col2#16], with_query_name='t')
             +-aggregate_list=
               +-$agg1#17 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=169-179)
 [REPLACED_LITERALS]
@@ -742,7 +742,7 @@ QueryStmt
         +-expr_list=
         | +-$col1#49 := Literal(type=INT64, value=1)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, timestamp_seconds#41, timestamp_millis#42, timestamp_micros#43, timestamp_nanos#44, timestamp#45, numeric#46, bignumeric#47, json#48], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, timestamp_seconds#41, timestamp_millis#42, timestamp_micros#43, timestamp_nanos#44, timestamp#45, numeric#46, bignumeric#47, json#48], with_query_name='t2')
 ==
 
 # Extraneous with clauses
@@ -783,7 +783,7 @@ QueryStmt
         +-expr_list=
         | +-$col1#50 := Literal(type=INT64, value=1)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[int32#32, int64#33, uint32#34, uint64#35, string#36, bytes#37, bool#38, float#39, double#40, date#41, timestamp_seconds#42, timestamp_millis#43, timestamp_micros#44, timestamp_nanos#45, timestamp#46, numeric#47, bignumeric#48, json#49], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[int32#32, int64#33, uint32#34, uint64#35, string#36, bytes#37, bool#38, float#39, double#40, date#41, timestamp_seconds#42, timestamp_millis#43, timestamp_micros#44, timestamp_nanos#45, timestamp#46, numeric#47, bignumeric#48, json#49], with_query_name='t2')
 
 [REWRITTEN AST]
 QueryStmt
@@ -834,7 +834,7 @@ QueryStmt
         +-expr_list=
         | +-$col1#50 := Literal(type=INT64, value=1)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[int32#32, int64#33, uint32#34, uint64#35, string#36, bytes#37, bool#38, float#39, double#40, date#41, timestamp_seconds#42, timestamp_millis#43, timestamp_micros#44, timestamp_nanos#45, timestamp#46, numeric#47, bignumeric#48, json#49], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[int32#32, int64#33, uint32#34, uint64#35, string#36, bytes#37, bool#38, float#39, double#40, date#41, timestamp_seconds#42, timestamp_millis#43, timestamp_micros#44, timestamp_nanos#45, timestamp#46, numeric#47, bignumeric#48, json#49], with_query_name='t2')
 ==
 
 
@@ -884,7 +884,7 @@ QueryStmt
           | |       | +-ProjectScan
           | |       |   +-column_list=t1.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, uid#41, numeric#42]
           | |       |   +-input_scan=
-          | |       |     +-WithRefScan(column_list=t1.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, uid#41, numeric#42], with_query_name="t1")
+          | |       |     +-WithRefScan(column_list=t1.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, uid#41, numeric#42], with_query_name='t1')
           | |       +-aggregate_list=
           | |         +-$agg1#43 :=
           | |           +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -899,7 +899,7 @@ QueryStmt
             |     +-AggregateScan
             |       +-column_list=[$aggregate.$agg1#62]
             |       +-input_scan=
-            |       | +-WithRefScan(column_list=t2.[int32#44, int64#45, uint32#46, uint64#47, string#48, bytes#49, bool#50, float#51, double#52, date#53, timestamp_seconds#54, timestamp_millis#55, timestamp_micros#56, timestamp_nanos#57, timestamp#58, numeric#59, bignumeric#60, json#61], with_query_name="t2")
+            |       | +-WithRefScan(column_list=t2.[int32#44, int64#45, uint32#46, uint64#47, string#48, bytes#49, bool#50, float#51, double#52, date#53, timestamp_seconds#54, timestamp_millis#55, timestamp_micros#56, timestamp_nanos#57, timestamp#58, numeric#59, bignumeric#60, json#61], with_query_name='t2')
             |       +-aggregate_list=
             |         +-$agg1#62 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
             +-output_column_list=[$aggregate.$agg1#62]
@@ -945,7 +945,7 @@ QueryStmt
           | |       |   | +-ProjectScan
           | |       |   |   +-column_list=t1.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, uid#41, numeric#42]
           | |       |   |   +-input_scan=
-          | |       |   |     +-WithRefScan(column_list=t1.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, uid#41, numeric#42], with_query_name="t1")
+          | |       |   |     +-WithRefScan(column_list=t1.[int32#31, int64#32, uint32#33, uint64#34, string#35, bytes#36, bool#37, float#38, double#39, date#40, uid#41, numeric#42], with_query_name='t1')
           | |       |   +-group_by_list=
           | |       |   | +-$uid#66 := ColumnRef(type=INT64, column=t1.uid#41)
           | |       |   +-aggregate_list=
@@ -972,7 +972,7 @@ QueryStmt
             |     +-AggregateScan
             |       +-column_list=[$aggregate.$agg1#62]
             |       +-input_scan=
-            |       | +-WithRefScan(column_list=t2.[int32#44, int64#45, uint32#46, uint64#47, string#48, bytes#49, bool#50, float#51, double#52, date#53, timestamp_seconds#54, timestamp_millis#55, timestamp_micros#56, timestamp_nanos#57, timestamp#58, numeric#59, bignumeric#60, json#61], with_query_name="t2")
+            |       | +-WithRefScan(column_list=t2.[int32#44, int64#45, uint32#46, uint64#47, string#48, bytes#49, bool#50, float#51, double#52, date#53, timestamp_seconds#54, timestamp_millis#55, timestamp_micros#56, timestamp_nanos#57, timestamp#58, numeric#59, bignumeric#60, json#61], with_query_name='t2')
             |       +-aggregate_list=
             |         +-$agg1#62 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
             +-output_column_list=[$aggregate.$agg1#62]
@@ -1005,7 +1005,7 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+    |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
     +-query=
       +-ProjectScan
         +-column_list=[$aggregate.anon_count#37]
@@ -1013,7 +1013,7 @@ QueryStmt
           +-AnonymizedAggregateScan
             +-column_list=[$aggregate.anon_count#37]
             +-input_scan=
-            | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t2")
+            | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t2')
             +-aggregate_list=
               +-anon_count#37 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
@@ -1038,7 +1038,7 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+    |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
     +-query=
       +-ProjectScan
         +-column_list=[$aggregate.anon_count#37]
@@ -1049,7 +1049,7 @@ QueryStmt
             | +-AggregateScan
             |   +-column_list=[$aggregate.anon_count_partial#39, $group_by.$uid#40]
             |   +-input_scan=
-            |   | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t2")
+            |   | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t2')
             |   +-group_by_list=
             |   | +-$uid#40 := ColumnRef(type=INT64, column=t2.uid#35)
             |   +-aggregate_list=
@@ -1098,7 +1098,7 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[t1.int32#13, t1.int64#14, t1.uint32#15, t1.uint64#16, t1.string#17, t1.bytes#18, t1.bool#19, t1.float#20, t1.double#21, t1.date#22, t1.uid#23, t1.numeric#24, SimpleTypesWithAnonymizationUid.uid#35]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   +-right_scan=
             |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#35], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t2')
             |   +-join_expr=
@@ -1136,7 +1136,7 @@ QueryStmt
             |   | +-JoinScan
             |   |   +-column_list=[t1.int32#13, t1.int64#14, t1.uint32#15, t1.uint64#16, t1.string#17, t1.bytes#18, t1.bool#19, t1.float#20, t1.double#21, t1.date#22, t1.uid#23, t1.numeric#24, SimpleTypesWithAnonymizationUid.uid#35]
             |   |   +-left_scan=
-            |   |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   |   +-right_scan=
             |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#35], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t2')
             |   |   +-join_expr=
@@ -1196,7 +1196,7 @@ QueryStmt
             |   +-parse_location=121-131
             |   +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   +-right_scan=
             |     +-TableScan(parse_location=132-163, table=SimpleTypesWithAnonymizationUid, alias='t2')
             +-aggregate_list=
@@ -1243,7 +1243,7 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   +-right_scan=
             |     +-TableScan(table=SimpleTypes)
             +-aggregate_list=
@@ -1277,7 +1277,7 @@ QueryStmt
             |   | +-JoinScan
             |   |   +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |   |   +-left_scan=
-            |   |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   |   | +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   |   +-right_scan=
             |   |     +-TableScan(table=SimpleTypes)
             |   +-group_by_list=
@@ -1330,7 +1330,7 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[t1.$col1#2]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=[t1.$col1#2], with_query_name="t1")
+            |   | +-WithRefScan(column_list=[t1.$col1#2], with_query_name='t1')
             |   +-right_scan=
             |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='t2')
             +-aggregate_list=
@@ -1366,7 +1366,7 @@ QueryStmt
             |   | +-JoinScan
             |   |   +-column_list=[t1.$col1#2, SimpleTypesWithAnonymizationUid.uid#16]
             |   |   +-left_scan=
-            |   |   | +-WithRefScan(column_list=[t1.$col1#2], with_query_name="t1")
+            |   |   | +-WithRefScan(column_list=[t1.$col1#2], with_query_name='t1')
             |   |   +-right_scan=
             |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='t2')
             |   +-group_by_list=
@@ -1425,9 +1425,9 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[t1.int32#25, t1.int64#26, t1.uint32#27, t1.uint64#28, t1.string#29, t1.bytes#30, t1.bool#31, t1.float#32, t1.double#33, t1.date#34, t1.uid#35, t1.numeric#36, t2.int32#37, t2.int64#38, t2.uint32#39, t2.uint64#40, t2.string#41, t2.bytes#42, t2.bool#43, t2.float#44, t2.double#45, t2.date#46, t2.uid#47, t2.numeric#48]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=t1.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t1")
+            |   | +-WithRefScan(column_list=t1.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t1')
             |   +-right_scan=
-            |   | +-WithRefScan(column_list=t2.[int32#37, int64#38, uint32#39, uint64#40, string#41, bytes#42, bool#43, float#44, double#45, date#46, uid#47, numeric#48], with_query_name="t2")
+            |   | +-WithRefScan(column_list=t2.[int32#37, int64#38, uint32#39, uint64#40, string#41, bytes#42, bool#43, float#44, double#45, date#46, uid#47, numeric#48], with_query_name='t2')
             |   +-join_expr=
             |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |       +-ColumnRef(type=INT64, column=t1.uid#35)
@@ -1470,9 +1470,9 @@ QueryStmt
             |   | +-JoinScan
             |   |   +-column_list=[t1.int32#25, t1.int64#26, t1.uint32#27, t1.uint64#28, t1.string#29, t1.bytes#30, t1.bool#31, t1.float#32, t1.double#33, t1.date#34, t1.uid#35, t1.numeric#36, t2.int32#37, t2.int64#38, t2.uint32#39, t2.uint64#40, t2.string#41, t2.bytes#42, t2.bool#43, t2.float#44, t2.double#45, t2.date#46, t2.uid#47, t2.numeric#48]
             |   |   +-left_scan=
-            |   |   | +-WithRefScan(column_list=t1.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t1")
+            |   |   | +-WithRefScan(column_list=t1.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t1')
             |   |   +-right_scan=
-            |   |   | +-WithRefScan(column_list=t2.[int32#37, int64#38, uint32#39, uint64#40, string#41, bytes#42, bool#43, float#44, double#45, date#46, uid#47, numeric#48], with_query_name="t2")
+            |   |   | +-WithRefScan(column_list=t2.[int32#37, int64#38, uint32#39, uint64#40, string#41, bytes#42, bool#43, float#44, double#45, date#46, uid#47, numeric#48], with_query_name='t2')
             |   |   +-join_expr=
             |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |   |       +-ColumnRef(type=INT64, column=t1.uid#35)
@@ -1539,9 +1539,9 @@ QueryStmt
             |   +-parse_location=181-191
             |   +-column_list=[t1.int32#25, t1.int64#26, t1.uint32#27, t1.uint64#28, t1.string#29, t1.bytes#30, t1.bool#31, t1.float#32, t1.double#33, t1.date#34, t1.uid#35, t1.numeric#36, t2.int32#37, t2.int64#38, t2.uint32#39, t2.uint64#40, t2.string#41, t2.bytes#42, t2.bool#43, t2.float#44, t2.double#45, t2.date#46, t2.uid#47, t2.numeric#48]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=t1.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t1")
+            |   | +-WithRefScan(column_list=t1.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t1')
             |   +-right_scan=
-            |     +-WithRefScan(column_list=t2.[int32#37, int64#38, uint32#39, uint64#40, string#41, bytes#42, bool#43, float#44, double#45, date#46, uid#47, numeric#48], with_query_name="t2")
+            |     +-WithRefScan(column_list=t2.[int32#37, int64#38, uint32#39, uint64#40, string#41, bytes#42, bool#43, float#44, double#45, date#46, uid#47, numeric#48], with_query_name='t2')
             +-aggregate_list=
               +-anon_count#49 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=145-155)
 [REPLACED_LITERALS]
@@ -1597,9 +1597,9 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[t1.int32#14, t1.int64#15, t1.uint32#16, t1.uint64#17, t1.string#18, t1.bytes#19, t1.bool#20, t1.float#21, t1.double#22, t1.date#23, t1.uid#24, t1.numeric#25, t2.$col1#26]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name="t1")
+            |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name='t1')
             |   +-right_scan=
-            |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name="t2")
+            |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name='t2')
             +-aggregate_list=
               +-anon_count#27 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
@@ -1640,9 +1640,9 @@ QueryStmt
             |   | +-JoinScan
             |   |   +-column_list=[t1.int32#14, t1.int64#15, t1.uint32#16, t1.uint64#17, t1.string#18, t1.bytes#19, t1.bool#20, t1.float#21, t1.double#22, t1.date#23, t1.uid#24, t1.numeric#25, t2.$col1#26]
             |   |   +-left_scan=
-            |   |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name="t1")
+            |   |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name='t1')
             |   |   +-right_scan=
-            |   |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name="t2")
+            |   |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name='t2')
             |   +-group_by_list=
             |   | +-$uid#30 := ColumnRef(type=INT64, column=t1.uid#24)
             |   +-aggregate_list=
@@ -1709,17 +1709,17 @@ QueryStmt
             |   |   | +-JoinScan
             |   |   |   +-column_list=[t1.int32#14, t1.int64#15, t1.uint32#16, t1.uint64#17, t1.string#18, t1.bytes#19, t1.bool#20, t1.float#21, t1.double#22, t1.date#23, t1.uid#24, t1.numeric#25, t2.$col1#26]
             |   |   |   +-left_scan=
-            |   |   |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name="t1")
+            |   |   |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name='t1')
             |   |   |   +-right_scan=
-            |   |   |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name="t2")
+            |   |   |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name='t2')
             |   |   +-right_scan=
-            |   |   | +-WithRefScan(column_list=t1.[int32#27, int64#28, uint32#29, uint64#30, string#31, bytes#32, bool#33, float#34, double#35, date#36, uid#37, numeric#38], with_query_name="t1")
+            |   |   | +-WithRefScan(column_list=t1.[int32#27, int64#28, uint32#29, uint64#30, string#31, bytes#32, bool#33, float#34, double#35, date#36, uid#37, numeric#38], with_query_name='t1')
             |   |   +-join_expr=
             |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |   |       +-ColumnRef(type=INT64, column=t1.uid#24)
             |   |       +-ColumnRef(type=INT64, column=t1.uid#37)
             |   +-right_scan=
-            |     +-WithRefScan(column_list=[t2.$col1#39], with_query_name="t2")
+            |     +-WithRefScan(column_list=[t2.$col1#39], with_query_name='t2')
             +-aggregate_list=
               +-anon_count#40 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
@@ -1766,17 +1766,17 @@ QueryStmt
             |   |   |   | +-JoinScan
             |   |   |   |   +-column_list=[t1.int32#14, t1.int64#15, t1.uint32#16, t1.uint64#17, t1.string#18, t1.bytes#19, t1.bool#20, t1.float#21, t1.double#22, t1.date#23, t1.uid#24, t1.numeric#25, t2.$col1#26]
             |   |   |   |   +-left_scan=
-            |   |   |   |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name="t1")
+            |   |   |   |   | +-WithRefScan(column_list=t1.[int32#14, int64#15, uint32#16, uint64#17, string#18, bytes#19, bool#20, float#21, double#22, date#23, uid#24, numeric#25], with_query_name='t1')
             |   |   |   |   +-right_scan=
-            |   |   |   |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name="t2")
+            |   |   |   |     +-WithRefScan(column_list=[t2.$col1#26], with_query_name='t2')
             |   |   |   +-right_scan=
-            |   |   |   | +-WithRefScan(column_list=t1.[int32#27, int64#28, uint32#29, uint64#30, string#31, bytes#32, bool#33, float#34, double#35, date#36, uid#37, numeric#38], with_query_name="t1")
+            |   |   |   | +-WithRefScan(column_list=t1.[int32#27, int64#28, uint32#29, uint64#30, string#31, bytes#32, bool#33, float#34, double#35, date#36, uid#37, numeric#38], with_query_name='t1')
             |   |   |   +-join_expr=
             |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             |   |   |       +-ColumnRef(type=INT64, column=t1.uid#24)
             |   |   |       +-ColumnRef(type=INT64, column=t1.uid#37)
             |   |   +-right_scan=
-            |   |     +-WithRefScan(column_list=[t2.$col1#39], with_query_name="t2")
+            |   |     +-WithRefScan(column_list=[t2.$col1#39], with_query_name='t2')
             |   +-group_by_list=
             |   | +-$uid#43 := ColumnRef(type=INT64, column=t1.uid#24)
             |   +-aggregate_list=
@@ -1829,7 +1829,7 @@ QueryStmt
             |     +-ProjectScan
             |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |       +-input_scan=
-            |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             +-query=
               +-ProjectScan
                 +-column_list=[$aggregate.anon_count#37]
@@ -1837,7 +1837,7 @@ QueryStmt
                   +-AnonymizedAggregateScan
                     +-column_list=[$aggregate.anon_count#37]
                     +-input_scan=
-                    | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t2")
+                    | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t2')
                     +-aggregate_list=
                       +-anon_count#37 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
@@ -1869,7 +1869,7 @@ QueryStmt
             |     +-ProjectScan
             |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |       +-input_scan=
-            |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             +-query=
               +-ProjectScan
                 +-column_list=[$aggregate.anon_count#37]
@@ -1880,7 +1880,7 @@ QueryStmt
                     | +-AggregateScan
                     |   +-column_list=[$aggregate.anon_count_partial#39, $group_by.$uid#40]
                     |   +-input_scan=
-                    |   | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t2")
+                    |   | +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t2')
                     |   +-group_by_list=
                     |   | +-$uid#40 := ColumnRef(type=INT64, column=t2.uid#35)
                     |   +-aggregate_list=
@@ -1930,7 +1930,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
         |       +-input_scan=
-        |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+        |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
         +-aggregate_list=
           +-$agg1#25 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1965,7 +1965,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
         |   |       +-input_scan=
-        |   |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+        |   |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
         |   +-group_by_list=
         |   | +-$uid#28 := ColumnRef(type=INT64, column=t1.uid#23)
         |   +-aggregate_list=
@@ -2023,12 +2023,12 @@ QueryStmt
             |   |     +-ProjectScan
             |   |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |   |       +-input_scan=
-            |   |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   +-query=
             |     +-ProjectScan
             |       +-column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36]
             |       +-input_scan=
-            |         +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t2")
+            |         +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t2')
             +-aggregate_list=
               +-$agg1#37 :=
                 +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -2069,12 +2069,12 @@ QueryStmt
             |   |   |     +-ProjectScan
             |   |   |       +-column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24]
             |   |   |       +-input_scan=
-            |   |   |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t1")
+            |   |   |         +-WithRefScan(column_list=t1.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t1')
             |   |   +-query=
             |   |     +-ProjectScan
             |   |       +-column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36]
             |   |       +-input_scan=
-            |   |         +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name="t2")
+            |   |         +-WithRefScan(column_list=t2.[int32#25, int64#26, uint32#27, uint64#28, string#29, bytes#30, bool#31, float#32, double#33, date#34, uid#35, numeric#36], with_query_name='t2')
             |   +-group_by_list=
             |   | +-$uid#40 := ColumnRef(type=INT64, column=t2.uid#35)
             |   +-aggregate_list=
@@ -2124,7 +2124,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t1.$col1#14]
         +-input_scan=
-          +-WithRefScan(column_list=[t1.$col1#14], with_query_name="t1")
+          +-WithRefScan(column_list=[t1.$col1#14], with_query_name='t1')
 
 [REWRITTEN AST]
 QueryStmt
@@ -2166,7 +2166,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t1.$col1#14]
         +-input_scan=
-          +-WithRefScan(column_list=[t1.$col1#14], with_query_name="t1")
+          +-WithRefScan(column_list=[t1.$col1#14], with_query_name='t1')
 ==
 
 # Extraneous WithScan inside SELECT WITH ANONYMIZATION
@@ -2216,7 +2216,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54]
         |       +-input_scan=
-        |         +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name="t1")
+        |         +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name='t1')
         +-aggregate_list=
           +-$agg1#55 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -2265,7 +2265,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54]
         |   |       +-input_scan=
-        |   |         +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name="t1")
+        |   |         +-WithRefScan(column_list=t1.[int32#43, int64#44, uint32#45, uint64#46, string#47, bytes#48, bool#49, float#50, double#51, date#52, uid#53, numeric#54], with_query_name='t1')
         |   +-group_by_list=
         |   | +-$uid#58 := ColumnRef(type=INT64, column=t1.uid#53)
         |   +-aggregate_list=
@@ -2332,7 +2332,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=t1.[int32#26, int64#27, uint32#28, uint64#29, string#30, bytes#31, bool#32, float#33, double#34, date#35, uid#36, numeric#37]
         |       +-input_scan=
-        |         +-WithRefScan(column_list=t1.[int32#26, int64#27, uint32#28, uint64#29, string#30, bytes#31, bool#32, float#33, double#34, date#35, uid#36, numeric#37], with_query_name="t1")
+        |         +-WithRefScan(column_list=t1.[int32#26, int64#27, uint32#28, uint64#29, string#30, bytes#31, bool#32, float#33, double#34, date#35, uid#36, numeric#37], with_query_name='t1')
         +-aggregate_list=
           +-$agg1#38 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -2396,7 +2396,7 @@ QueryStmt
           +-AnonymizedAggregateScan
             +-column_list=[$aggregate.aggregation_count#15]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.int64#14], with_query_name="t")
+            | +-WithRefScan(column_list=[t.int64#14], with_query_name='t')
             +-aggregate_list=
             | +-aggregation_count#15 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=161-171)
             +-anonymization_option_list=
@@ -2451,7 +2451,7 @@ QueryStmt
           +-AnonymizedAggregateScan
             +-column_list=[$aggregate.anon_count#25]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t")
+            | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t')
             +-aggregate_list=
               +-anon_count#25 :=
                 +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -2490,7 +2490,7 @@ QueryStmt
             | +-AggregateScan
             |   +-column_list=[$aggregate.anon_count_partial#27, $group_by.$uid#28]
             |   +-input_scan=
-            |   | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name="t")
+            |   | +-WithRefScan(column_list=t.[int32#13, int64#14, uint32#15, uint64#16, string#17, bytes#18, bool#19, float#20, double#21, date#22, uid#23, numeric#24], with_query_name='t')
             |   +-group_by_list=
             |   | +-$uid#28 := ColumnRef(type=INT64, column=t.uid#23)
             |   +-aggregate_list=

@@ -730,7 +730,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=CteView.[a#1, b#2]
             +-input_scan=
-              +-WithRefScan(column_list=CteView.[a#1, b#2], with_query_name="t")
+              +-WithRefScan(column_list=CteView.[a#1, b#2], with_query_name='t')
 --
 ALTERNATION GROUP: b, a
 --
@@ -770,7 +770,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=CteView.[a#1, b#2]
             +-input_scan=
-              +-WithRefScan(column_list=CteView.[a#1, b#2], with_query_name="t")
+              +-WithRefScan(column_list=CteView.[a#1, b#2], with_query_name='t')
 --
 ALTERNATION GROUP: a
 --
@@ -808,7 +808,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=[CteView.a#1, t.b#5]
             +-input_scan=
-              +-WithRefScan(column_list=[CteView.a#1, t.b#5], with_query_name="t")
+              +-WithRefScan(column_list=[CteView.a#1, t.b#5], with_query_name='t')
 --
 ALTERNATION GROUP: b
 --
@@ -846,7 +846,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=[t.a#5, CteView.b#2]
             +-input_scan=
-              +-WithRefScan(column_list=[t.a#5, CteView.b#2], with_query_name="t")
+              +-WithRefScan(column_list=[t.a#5, CteView.b#2], with_query_name='t')
 --
 ALTERNATION GROUP: 1
 --
@@ -888,7 +888,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=t.[a#6, b#7]
             +-input_scan=
-              +-WithRefScan(column_list=t.[a#6, b#7], with_query_name="t")
+              +-WithRefScan(column_list=t.[a#6, b#7], with_query_name='t')
 ==
 
 # Scan columns from a view that either returns a SQL table with a single struct
@@ -1945,7 +1945,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=tvf_templated_select_relation_arg_using_select_star.[a#3, b#4]
             +-input_scan=
-              +-WithRefScan(column_list=tvf_templated_select_relation_arg_using_select_star.[a#3, b#4], with_query_name="t")
+              +-WithRefScan(column_list=tvf_templated_select_relation_arg_using_select_star.[a#3, b#4], with_query_name='t')
 ==
 
 [no_run_unparser]

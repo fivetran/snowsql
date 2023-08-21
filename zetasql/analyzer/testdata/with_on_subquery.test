@@ -36,7 +36,7 @@ QueryStmt
             |     +-ColumnRef(type=INT64, column=q.x#2)
             |     +-Literal(type=INT64, value=1)
             +-input_scan=
-              +-WithRefScan(column_list=[q.x#2], with_query_name="q")
+              +-WithRefScan(column_list=[q.x#2], with_query_name='q')
 ==
 
 # WITH inside WITH
@@ -68,12 +68,12 @@ QueryStmt
     |         +-ProjectScan
     |           +-column_list=[q2.$col1#2]
     |           +-input_scan=
-    |             +-WithRefScan(column_list=[q2.$col1#2], with_query_name="q2")
+    |             +-WithRefScan(column_list=[q2.$col1#2], with_query_name='q2')
     +-query=
       +-ProjectScan
         +-column_list=[q1.$col1#3]
         +-input_scan=
-          +-WithRefScan(column_list=[q1.$col1#3], with_query_name="q1")
+          +-WithRefScan(column_list=[q1.$col1#3], with_query_name='q1')
 ==
 
 # WITH in an expression subquery.
@@ -110,7 +110,7 @@ QueryStmt
     | |         +-ProjectScan
     | |           +-column_list=[q.x#2]
     | |           +-input_scan=
-    | |             +-WithRefScan(column_list=[q.x#2], with_query_name="q")
+    | |             +-WithRefScan(column_list=[q.x#2], with_query_name='q')
     | +-$col2#6 :=
     |   +-SubqueryExpr
     |     +-type=ARRAY<STRING>
@@ -132,7 +132,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[q_1.$col1#4]
     |             +-input_scan=
-    |               +-WithRefScan(column_list=[q_1.$col1#4], with_query_name="q_1")
+    |               +-WithRefScan(column_list=[q_1.$col1#4], with_query_name='q_1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -170,7 +170,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[q.$col1#2]
     |             +-input_scan=
-    |               +-WithRefScan(column_list=[q.$col1#2], with_query_name="q")
+    |               +-WithRefScan(column_list=[q.$col1#2], with_query_name='q')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -231,14 +231,14 @@ QueryStmt
           | |     +-ProjectScan
           | |       +-column_list=[q2.$col1#4]
           | |       +-input_scan=
-          | |         +-WithRefScan(column_list=[q2.$col1#4], with_query_name="q2")
+          | |         +-WithRefScan(column_list=[q2.$col1#4], with_query_name='q2')
           | +-output_column_list=[q2.$col1#4]
           +-SetOperationItem
             +-scan=
             | +-ProjectScan
             |   +-column_list=[q1.$col1#5]
             |   +-input_scan=
-            |     +-WithRefScan(column_list=[q1.$col1#5], with_query_name="q1")
+            |     +-WithRefScan(column_list=[q1.$col1#5], with_query_name='q1')
             +-output_column_list=[q1.$col1#5]
 ==
 
@@ -291,7 +291,7 @@ QueryStmt
             | +-JoinScan
             |   +-column_list=[T1.a#2, T1_1.b#4]
             |   +-left_scan=
-            |   | +-WithRefScan(column_list=[T1.a#2], with_query_name="T1")
+            |   | +-WithRefScan(column_list=[T1.a#2], with_query_name='T1')
             |   +-right_scan=
             |     +-WithScan
             |       +-column_list=[T1_1.b#4]
@@ -309,9 +309,9 @@ QueryStmt
             |         +-ProjectScan
             |           +-column_list=[T1_1.b#4]
             |           +-input_scan=
-            |             +-WithRefScan(column_list=[T1_1.b#4], with_query_name="T1_1")
+            |             +-WithRefScan(column_list=[T1_1.b#4], with_query_name='T1_1')
             +-right_scan=
-              +-WithRefScan(column_list=[T1.a#5], with_query_name="T1")
+              +-WithRefScan(column_list=[T1.a#5], with_query_name='T1')
 ==
 
 # Test unique name generation for WITH clause renaming in the case
@@ -373,9 +373,9 @@ QueryStmt
                   +-JoinScan
                     +-column_list=[TtTt_2_2.c#4, tTTt_2.a#5]
                     +-left_scan=
-                    | +-WithRefScan(column_list=[TtTt_2_2.c#4], with_query_name="TtTt_2_2")
+                    | +-WithRefScan(column_list=[TtTt_2_2.c#4], with_query_name='TtTt_2_2')
                     +-right_scan=
-                      +-WithRefScan(column_list=[tTTt_2.a#5], with_query_name="tTTt_2")
+                      +-WithRefScan(column_list=[tTTt_2.a#5], with_query_name='tTTt_2')
 ==
 
 # WITH subqueries currently cannot be correlated.  No names from outside are
@@ -453,7 +453,7 @@ QueryStmt
     |             |     | +-ColumnRef(type=INT64, column=T.y#2, is_correlated=TRUE)
     |             |     +-ColumnRef(type=INT64, column=q.z#4)
     |             +-input_scan=
-    |               +-WithRefScan(column_list=[q.z#4], with_query_name="q")
+    |               +-WithRefScan(column_list=[q.z#4], with_query_name='q')
     +-input_scan=
       +-ProjectScan
         +-column_list=T.[x#1, y#2]
@@ -498,12 +498,12 @@ QueryStmt
             |     +-ProjectScan
             |       +-column_list=[q1.x#2]
             |       +-input_scan=
-            |         +-WithRefScan(column_list=[q1.x#2], with_query_name="q1")
+            |         +-WithRefScan(column_list=[q1.x#2], with_query_name='q1')
             +-query=
               +-ProjectScan
                 +-column_list=[q2.x#3]
                 +-input_scan=
-                  +-WithRefScan(column_list=[q2.x#3], with_query_name="q2")
+                  +-WithRefScan(column_list=[q2.x#3], with_query_name='q2')
 ==
 
 # A WITH subquery alias is visible inside a WITH clause subquery,
@@ -541,12 +541,12 @@ QueryStmt
             |     +-ProjectScan
             |       +-column_list=[q1.x#2]
             |       +-input_scan=
-            |         +-WithRefScan(column_list=[q1.x#2], with_query_name="q1")
+            |         +-WithRefScan(column_list=[q1.x#2], with_query_name='q1')
             +-query=
               +-ProjectScan
                 +-column_list=[q1_1.x#3]
                 +-input_scan=
-                  +-WithRefScan(column_list=[q1_1.x#3], with_query_name="q1_1")
+                  +-WithRefScan(column_list=[q1_1.x#3], with_query_name='q1_1')
 ==
 
 # Query starting with "(With" (b/70510110)
@@ -572,7 +572,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[d.x#2]
         +-input_scan=
-          +-WithRefScan(column_list=[d.x#2], with_query_name="d")
+          +-WithRefScan(column_list=[d.x#2], with_query_name='d')
 ==
 
 WITH table1 AS (SELECT 1 AS col1 )
@@ -612,4 +612,4 @@ QueryStmt
           +-ProjectScan
             +-column_list=[table2.col2#3]
             +-input_scan=
-              +-WithRefScan(column_list=[table2.col2#3], with_query_name="table2")
+              +-WithRefScan(column_list=[table2.col2#3], with_query_name='table2')

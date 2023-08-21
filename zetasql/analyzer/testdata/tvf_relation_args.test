@@ -3952,9 +3952,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[w1.value#4, w1.key#5, w2.key#6]
         |   |   +-left_scan=
-        |   |   | +-WithRefScan(column_list=w1.[value#4, key#5], with_query_name="w1")
+        |   |   | +-WithRefScan(column_list=w1.[value#4, key#5], with_query_name='w1')
         |   |   +-right_scan=
-        |   |   | +-WithRefScan(column_list=[w2.key#6], with_query_name="w2")
+        |   |   | +-WithRefScan(column_list=[w2.key#6], with_query_name='w2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=w1.key#5)
@@ -4818,7 +4818,7 @@ QueryStmt
         |   |     +-ProjectScan
         |   |       +-column_list=[w1.mydate#19]
         |   |       +-input_scan=
-        |   |         +-WithRefScan(column_list=[w1.mydate#19], with_query_name="w1")
+        |   |         +-WithRefScan(column_list=[w1.mydate#19], with_query_name='w1')
         |   +-argument_column_list=[w1.mydate#19]
         +-column_index_list=[0, 1]
 ==
@@ -4860,7 +4860,7 @@ QueryStmt
             |   | +-ProjectScan
             |   |   +-column_list=[w.val#2]
             |   |   +-input_scan=
-            |   |     +-WithRefScan(column_list=[w.val#2], with_query_name="w")
+            |   |     +-WithRefScan(column_list=[w.val#2], with_query_name='w')
             |   +-argument_column_list=[w.val#2]
             +-column_index_list=[0]
             +-alias="mytvf"
@@ -4900,7 +4900,7 @@ QueryStmt
             |   | +-ProjectScan
             |   |   +-column_list=[w.$value_column#3]
             |   |   +-input_scan=
-            |   |     +-WithRefScan(column_list=[w.$value_column#3], with_query_name="w")
+            |   |     +-WithRefScan(column_list=[w.$value_column#3], with_query_name='w')
             |   +-argument_column_list=[w.$value_column#3]
             +-column_index_list=[1]
             +-alias="mytvf"
@@ -4940,7 +4940,7 @@ QueryStmt
             |   | +-ProjectScan
             |   |   +-column_list=[w.t#2]
             |   |   +-input_scan=
-            |   |     +-WithRefScan(column_list=[w.t#2], with_query_name="w")
+            |   |     +-WithRefScan(column_list=[w.t#2], with_query_name='w')
             |   +-argument_column_list=[w.t#2]
             +-column_index_list=[0]
             +-alias="mytvf"
@@ -4982,7 +4982,7 @@ QueryStmt
             |   | +-ProjectScan
             |   |   +-column_list=[keyvalue.result#2]
             |   |   +-input_scan=
-            |   |     +-WithRefScan(column_list=[keyvalue.result#2], with_query_name="keyvalue")
+            |   |     +-WithRefScan(column_list=[keyvalue.result#2], with_query_name='keyvalue')
             |   +-argument_column_list=[keyvalue.result#2]
             +-column_index_list=[0]
             +-alias="mytvf"
@@ -5026,7 +5026,7 @@ QueryStmt
                 |   | +-ProjectScan
                 |   |   +-column_list=[w.key#3]
                 |   |   +-input_scan=
-                |   |     +-WithRefScan(column_list=[w.key#3], with_query_name="w")
+                |   |     +-WithRefScan(column_list=[w.key#3], with_query_name='w')
                 |   +-argument_column_list=[w.key#3]
                 +-column_index_list=[0, 1]
 ==
@@ -5082,7 +5082,7 @@ QueryStmt
                             |   | +-ProjectScan
                             |   |   +-column_list=[w.key#3]
                             |   |   +-input_scan=
-                            |   |     +-WithRefScan(column_list=[w.key#3], with_query_name="w")
+                            |   |     +-WithRefScan(column_list=[w.key#3], with_query_name='w')
                             |   +-argument_column_list=[w.key#3]
                             +-column_index_list=[0, 1]
 ==
@@ -5125,7 +5125,7 @@ QueryStmt
                 |   | +-ProjectScan
                 |   |   +-column_list=[w.value#3]
                 |   |   +-input_scan=
-                |   |     +-WithRefScan(column_list=[w.value#3], with_query_name="w")
+                |   |     +-WithRefScan(column_list=[w.value#3], with_query_name='w')
                 |   +-argument_column_list=[w.value#3]
                 +-column_index_list=[0, 1]
 ==
@@ -5204,14 +5204,14 @@ QueryStmt
                     | | | +-ProjectScan
                     | | |   +-column_list=[w1.key#5]
                     | | |   +-input_scan=
-                    | | |     +-WithRefScan(column_list=[w1.key#5], with_query_name="w1")
+                    | | |     +-WithRefScan(column_list=[w1.key#5], with_query_name='w1')
                     | | +-argument_column_list=[w1.key#5]
                     | +-FunctionArgument
                     |   +-scan=
                     |   | +-ProjectScan
                     |   |   +-column_list=[w2.value#6]
                     |   |   +-input_scan=
-                    |   |     +-WithRefScan(column_list=[w2.value#6], with_query_name="w2")
+                    |   |     +-WithRefScan(column_list=[w2.value#6], with_query_name='w2')
                     |   +-argument_column_list=[w2.value#6]
                     +-column_index_list=[0]
 ==
@@ -5258,7 +5258,7 @@ QueryStmt
         |             |   | +-ProjectScan
         |             |   |   +-column_list=[w.key#3]
         |             |   |   +-input_scan=
-        |             |   |     +-WithRefScan(column_list=[w.key#3], with_query_name="w")
+        |             |   |     +-WithRefScan(column_list=[w.key#3], with_query_name='w')
         |             |   +-argument_column_list=[w.key#3]
         |             +-column_index_list=[1]
         +-input_scan=
@@ -5312,7 +5312,7 @@ QueryStmt
                         |   | +-ProjectScan
                         |   |   +-column_list=[w.key#5]
                         |   |   +-input_scan=
-                        |   |     +-WithRefScan(column_list=[w.key#5], with_query_name="w")
+                        |   |     +-WithRefScan(column_list=[w.key#5], with_query_name='w')
                         |   +-argument_column_list=[w.key#5]
                         +-column_index_list=[0, 1]
 ==
@@ -5869,7 +5869,7 @@ QueryStmt
             |   |   | +-ProjectScan
             |   |   |   +-column_list=t.[a#3, b#4]
             |   |   |   +-input_scan=
-            |   |   |     +-WithRefScan(column_list=t.[a#3, b#4], with_query_name="t")
+            |   |   |     +-WithRefScan(column_list=t.[a#3, b#4], with_query_name='t')
             |   |   +-argument_column_list=t.[a#3, b#4]
             |   +-column_index_list=[0, 1]
             |   +-alias="t0"

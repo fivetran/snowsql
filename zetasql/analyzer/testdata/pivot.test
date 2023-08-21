@@ -2564,7 +2564,7 @@ QueryStmt
           +-PivotScan
             +-column_list=$pivot.[test1#4, test2#5]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.s#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.s#2], with_query_name='t')
             +-pivot_expr_list=
             | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
             |   +-parse_location=160-168
@@ -2637,7 +2637,7 @@ QueryStmt
           +-PivotScan
             +-column_list=$pivot.[x_1_y_test_true_pi_3_point_14159265358979#4, x_2_y_test_true_pi_3_point_14159265358979#5]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.s#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.s#2], with_query_name='t')
             +-pivot_expr_list=
             | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
             |   +-parse_location=253-261
@@ -2794,7 +2794,7 @@ QueryStmt
           +-PivotScan
             +-column_list=$pivot.[xy_x_1_y_2_ab_a_test_a_b_false#4, xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5, xy_x_minus_1_y_NULL_ab_NULL#6, NULL#7]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.s#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.s#2], with_query_name='t')
             +-pivot_expr_list=
             | +-AggregateFunctionCall(ZetaSQL:any_value(STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>) -> STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>)
             |   +-parse_location=265-277
@@ -2901,7 +2901,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_one#11, sum_one#12, count_two#13, sum_two#14, count_three#15, sum_three#16, count_four#17, sum_four#18]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-160
@@ -2941,7 +2941,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_four#17, pivot_expr_index=0, pivot_value_index=3)
         |                   +-PivotColumn(column=$pivot.sum_four#18, pivot_expr_index=1, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references from PIVOT expressions (qualified)
@@ -3016,7 +3016,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_one#11, sum_one#12, count_two#13, sum_two#14, count_three#15, sum_three#16, count_four#17, sum_four#18]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-172
@@ -3056,7 +3056,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_four#17, pivot_expr_index=0, pivot_value_index=3)
         |                   +-PivotColumn(column=$pivot.sum_four#18, pivot_expr_index=1, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references from PIVOT expressions (name collision)
@@ -3130,7 +3130,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_t#11, sum_t#12, count_f#13, sum_f#14, count_n#15, sum_n#16]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-180
@@ -3183,7 +3183,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_n#15, pivot_expr_index=0, pivot_value_index=2)
         |                   +-PivotColumn(column=$pivot.sum_n#16, pivot_expr_index=1, pivot_value_index=2)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[a#5, b#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[a#5, b#6], with_query_name='t2')
 ==
 
 
@@ -3259,7 +3259,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_one#11, sum_one#12, count_two#13, sum_two#14, count_three#15, sum_three#16, count_four#17, sum_four#18]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-172
@@ -3299,7 +3299,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_four#17, pivot_expr_index=0, pivot_value_index=3)
         |                   +-PivotColumn(column=$pivot.sum_four#18, pivot_expr_index=1, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references for FOR expression (qualified and unqualified)
@@ -3370,7 +3370,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=[$groupby.b#10, $pivot.one#11, $pivot.two#12, $pivot.three#13, $pivot.four#14]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-group_by_list=
         |                 | +-b#10 := ColumnRef(type=INT64, column=t1.b#8)
         |                 +-pivot_expr_list=
@@ -3393,7 +3393,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.three#13, pivot_expr_index=0, pivot_value_index=2)
         |                   +-PivotColumn(column=$pivot.four#14, pivot_expr_index=0, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 --
 ALTERNATION GROUP: t2.c
 --
@@ -3454,7 +3454,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=[$groupby.b#10, $pivot.one#11, $pivot.two#12, $pivot.three#13, $pivot.four#14]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-group_by_list=
         |                 | +-b#10 := ColumnRef(type=INT64, column=t1.b#8)
         |                 +-pivot_expr_list=
@@ -3477,7 +3477,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.three#13, pivot_expr_index=0, pivot_value_index=2)
         |                   +-PivotColumn(column=$pivot.four#14, pivot_expr_index=0, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references in PIVOT value expressions.
@@ -3614,7 +3614,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.w#10, $groupby.z#11, $pivot.one#13]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-w#10 := ColumnRef(type=INT64, column=t.w#5)
             | +-z#11 := ColumnRef(type=INT64, column=t.z#8)
@@ -3667,7 +3667,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.w#11, $pivot.s1_zero#13, $pivot.s2_zero#14, $pivot.s1_one#15, $pivot.s2_one#16]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-w#11 := ColumnRef(type=INT64, column=t.w#5)
             | +-z#12 := ColumnRef(type=INT64, column=t.z#8)
@@ -3723,7 +3723,7 @@ QueryStmt
         +-input_scan=
           +-PivotScan
             +-input_scan=
-            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-w#11 := ColumnRef(type=INT64, column=t.w#5)
             | +-z#12 := ColumnRef(type=INT64, column=t.z#8)
@@ -3776,7 +3776,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.$col1#10, $groupby.$col2#11, $pivot.s_zero#12, $pivot.s_one#13]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[$col1#5, $col2#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[$col1#5, $col2#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-$col1#10 := ColumnRef(type=INT64, column=t.$col1#5)
             | +-$col2#11 := ColumnRef(type=INT64, column=t.$col2#6)
@@ -5324,7 +5324,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.v#14, $pivot.sum_x_0#15, $pivot.avg_y_0#16, $pivot.max_z_0#17, $pivot.sum_x_1#18, $pivot.avg_y_1#19, $pivot.max_z_1#20]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[v#6, w#7, x#8, y#9, z#10], with_query_name="t")
+            | +-WithRefScan(column_list=t.[v#6, w#7, x#8, y#9, z#10], with_query_name='t')
             +-group_by_list=
             | +-v#14 := ColumnRef(type=INT64, column=t.v#6)
             +-pivot_expr_list=
@@ -5793,7 +5793,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.c#9, $groupby.d#10, $pivot._2#11]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[c#4, a#5, b#6, c#7], with_query_name="t")
+            | +-WithRefScan(column_list=t.[c#4, a#5, b#6, c#7], with_query_name='t')
             +-group_by_list=
             | +-c#9 := ColumnRef(type=INT64, column=t.c#7)
             | +-d#10 := ColumnRef(type=INT64, column=t.c#7)

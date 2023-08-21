@@ -474,7 +474,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=orders.[order_id#4, item_name#5, quantity#6]
         +-input_scan=
-          +-WithRefScan(column_list=orders.[order_id#4, item_name#5, quantity#6], with_query_name="orders")
+          +-WithRefScan(column_list=orders.[order_id#4, item_name#5, quantity#6], with_query_name='orders')
 ==
 
 [coerced_query_output_types=struct<int64, string, int32>]
@@ -512,7 +512,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=orders.[order_id#4, item_name#5, quantity#6]
             +-input_scan=
-              +-WithRefScan(column_list=orders.[order_id#4, item_name#5, quantity#6], with_query_name="orders")
+              +-WithRefScan(column_list=orders.[order_id#4, item_name#5, quantity#6], with_query_name='orders')
 ==
 
 [coerced_query_output_types=struct<int32>]

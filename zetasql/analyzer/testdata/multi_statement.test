@@ -84,7 +84,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t.$col1#2]
         +-input_scan=
-          +-WithRefScan(column_list=[t.$col1#2], with_query_name="t")
+          +-WithRefScan(column_list=[t.$col1#2], with_query_name='t')
 --
 ERROR: Table not found: t [at 2:15]
 select * from t;

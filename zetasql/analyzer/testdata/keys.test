@@ -137,7 +137,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=T.[keyset#2, keyset#2]
         +-input_scan=
-          +-WithRefScan(column_list=[T.keyset#2], with_query_name="T")
+          +-WithRefScan(column_list=[T.keyset#2], with_query_name='T')
 ==
 
 SELECT KEYS.ADD_KEY_FROM_RAW_BYTES(b'', NULL, CAST(value AS BYTES))
