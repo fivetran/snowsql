@@ -3134,7 +3134,7 @@ CreateTableStmt
 | +-ColumnDefinition(name='b', type=INT64, column=t.b#1)
 | +-ColumnDefinition(name='c', type=STRING, column=t.c#2)
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[4], match_mode=SIMPLE, update_action=CASCADE, delete_action=CASCADE, enforced=TRUE, referencing_column_list=a)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[4], match_mode=SIMPLE, update_action=CASCADE, delete_action=CASCADE, enforced=TRUE, referencing_column_list=a)
 
 ==
 
@@ -3243,9 +3243,9 @@ CreateTableStmt
 +-primary_key=
 | +-PrimaryKey(column_offset_list=[0], column_name_list=[a])
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="f", referencing_column_offset_list=[1], referenced_table=Value, referenced_column_offset_list=[0], match_mode=FULL, update_action=RESTRICT, delete_action=CASCADE, enforced=TRUE, referencing_column_list=b)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[1], referenced_table=KeyValue, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
-  +-ForeignKey(constraint_name="c", referencing_column_offset_list=[1, 0], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=FALSE, referencing_column_list=b.a)
+  +-ForeignKey(constraint_name='f', referencing_column_offset_list=[1], referenced_table=Value, referenced_column_offset_list=[0], match_mode=FULL, update_action=RESTRICT, delete_action=CASCADE, enforced=TRUE, referencing_column_list=b)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[1], referenced_table=KeyValue, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
+  +-ForeignKey(constraint_name='c', referencing_column_offset_list=[1, 0], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=FALSE, referencing_column_list=b.a)
 ==
 
 # Foreign key enums.
@@ -3270,13 +3270,13 @@ CreateTableStmt
 | +-ColumnDefinition(name='f', type=INT64, column=t.f#6)
 | +-ColumnDefinition(name='g', type=INT64, column=t.g#7)
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[1], referenced_table=Value, referenced_column_offset_list=[0], match_mode=FULL, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[2], referenced_table=Value, referenced_column_offset_list=[0], match_mode=NOT_DISTINCT, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=c)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[3], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=d)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[4], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=RESTRICT, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=e)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[5], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=CASCADE, enforced=TRUE, referencing_column_list=f)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[6], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=SET_NULL, enforced=TRUE, referencing_column_list=g)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[1], referenced_table=Value, referenced_column_offset_list=[0], match_mode=FULL, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[2], referenced_table=Value, referenced_column_offset_list=[0], match_mode=NOT_DISTINCT, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=c)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[3], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=d)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[4], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=RESTRICT, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=e)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[5], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=CASCADE, enforced=TRUE, referencing_column_list=f)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[6], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=SET_NULL, enforced=TRUE, referencing_column_list=g)
 ==
 
 # Foreign key column constraints not supported.
@@ -3339,8 +3339,8 @@ CreateTableStmt
 | +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 | +-ColumnDefinition(name='b', type=STRING, column=t.b#2)
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="c", referencing_column_offset_list=[0, 1], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a.b)
-  +-ForeignKey(constraint_name="d", referencing_column_offset_list=[0, 1], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a.b)
+  +-ForeignKey(constraint_name='c', referencing_column_offset_list=[0, 1], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a.b)
+  +-ForeignKey(constraint_name='d', referencing_column_offset_list=[0, 1], referenced_table=KeyValue, referenced_column_offset_list=[0, 1], match_mode=SIMPLE, update_action=SET_NULL, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a.b)
 ==
 
 # Foreign key column list is empty.
@@ -3433,12 +3433,12 @@ CreateTableStmt
 | +-ColumnDefinition(name='e', type=DATE, column=t.e#5)
 | +-ColumnDefinition(name='f', type=TIMESTAMP, column=t.f#6)
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[1], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[1], referenced_table=SimpleTypes, referenced_column_offset_list=[4], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[2], referenced_table=SimpleTypes, referenced_column_offset_list=[5], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=c)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[3], referenced_table=SimpleTypes, referenced_column_offset_list=[6], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=d)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[4], referenced_table=SimpleTypes, referenced_column_offset_list=[9], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=e)
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[5], referenced_table=SimpleTypes, referenced_column_offset_list=[14], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=f)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[1], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[1], referenced_table=SimpleTypes, referenced_column_offset_list=[4], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=b)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[2], referenced_table=SimpleTypes, referenced_column_offset_list=[5], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=c)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[3], referenced_table=SimpleTypes, referenced_column_offset_list=[6], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=d)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[4], referenced_table=SimpleTypes, referenced_column_offset_list=[9], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=e)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[5], referenced_table=SimpleTypes, referenced_column_offset_list=[14], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=f)
 ==
 
 # Foreign key incompatible column type.
@@ -3474,7 +3474,7 @@ CreateTableStmt
 +-column_definition_list=
 | +-ColumnDefinition(name='a', type=INT64, column=t.a#1)
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=SimpleTypes, referenced_column_offset_list=[2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=a)
 ==
 
 # Foreign key duplicate attributes.

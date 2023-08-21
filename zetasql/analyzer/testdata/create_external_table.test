@@ -205,7 +205,7 @@ CreateExternalTableStmt
 | +-ColumnDefinition(name='first', type=INT64, column=a.b.c.T.first#1)
 | +-ColumnDefinition(name='second', type=STRING, column=a.b.c.T.second#2)
 +-foreign_key_list=
-  +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=first)
+  +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=Value, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=first)
 ==
 
 [language_features=CREATE_EXTERNAL_TABLE_WITH_TABLE_ELEMENT_LIST]

@@ -8,7 +8,7 @@ AlterTableStmt
   +-AddConstraintAction
     +-is_if_not_exists=FALSE
     +-constraint=
-    | +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=FourIntegers, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key)
+    | +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=FourIntegers, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key)
     +-table=TwoIntegers
 
 [UNPARSED_SQL]
@@ -23,7 +23,7 @@ AlterTableStmt
   +-AddConstraintAction
     +-is_if_not_exists=FALSE
     +-constraint=
-    | +-ForeignKey(constraint_name="", referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
+    | +-ForeignKey(constraint_name='', referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
     +-table=TwoIntegers
 ==
 
@@ -35,7 +35,7 @@ AlterTableStmt
   +-AddConstraintAction
     +-is_if_not_exists=FALSE
     +-constraint=
-    | +-ForeignKey(constraint_name="", referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
+    | +-ForeignKey(constraint_name='', referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
     +-table=TwoIntegers
 ==
 
@@ -47,7 +47,7 @@ AlterTableStmt
   +-AddConstraintAction
     +-is_if_not_exists=FALSE
     +-constraint=
-    | +-ForeignKey(constraint_name="foo", referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
+    | +-ForeignKey(constraint_name='foo', referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
     +-table=TwoIntegers
 ==
 
@@ -59,7 +59,7 @@ AlterTableStmt
   +-AddConstraintAction
     +-is_if_not_exists=FALSE
     +-constraint=
-    | +-ForeignKey(constraint_name="foo", referencing_column_offset_list=[0], referenced_table=FourIntegers, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=FALSE, referencing_column_list=key)
+    | +-ForeignKey(constraint_name='foo', referencing_column_offset_list=[0], referenced_table=FourIntegers, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=FALSE, referencing_column_list=key)
     +-table=TwoIntegers
 ==
 
@@ -71,7 +71,7 @@ AlterTableStmt
   +-AddConstraintAction
     +-is_if_not_exists=FALSE
     +-constraint=
-    | +-ForeignKey(constraint_name="foo", referencing_column_offset_list=[0], referenced_table=FourIntegers, referenced_column_offset_list=[0], match_mode=FULL, update_action=CASCADE, delete_action=CASCADE, enforced=TRUE, referencing_column_list=key)
+    | +-ForeignKey(constraint_name='foo', referencing_column_offset_list=[0], referenced_table=FourIntegers, referenced_column_offset_list=[0], match_mode=FULL, update_action=CASCADE, delete_action=CASCADE, enforced=TRUE, referencing_column_list=key)
     +-table=TwoIntegers
 ==
 
@@ -83,7 +83,7 @@ AlterTableStmt
 | +-AddConstraintAction
 |   +-is_if_not_exists=FALSE
 |   +-constraint=
-|     +-ForeignKey(constraint_name="", referencing_column_offset_list=[0], referenced_table=TwoIntegers, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key)
+|     +-ForeignKey(constraint_name='', referencing_column_offset_list=[0], referenced_table=TwoIntegers, referenced_column_offset_list=[0], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key)
 +-is_if_exists=TRUE
 
 ==
@@ -96,7 +96,7 @@ AlterTableStmt
 | +-AddConstraintAction
 |   +-is_if_not_exists=FALSE
 |   +-constraint=
-|   | +-ForeignKey(constraint_name="", referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
+|   | +-ForeignKey(constraint_name='', referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
 |   +-table=TwoIntegers
 +-is_if_exists=TRUE
 
@@ -110,7 +110,7 @@ AlterTableStmt
 | +-AddConstraintAction
 |   +-is_if_not_exists=FALSE
 |   +-constraint=
-|     +-ForeignKey(constraint_name="", referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
+|     +-ForeignKey(constraint_name='', referencing_column_offset_list=[0, 1], referenced_table=FourIntegers, referenced_column_offset_list=[0, 2], match_mode=SIMPLE, update_action=NO_ACTION, delete_action=NO_ACTION, enforced=TRUE, referencing_column_list=key.value)
 +-is_if_exists=TRUE
 
 ==
