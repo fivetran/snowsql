@@ -886,17 +886,17 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT fn_fp_named_then_lambda(format_string => "123", (e) -> e);
+SELECT fn_fp_named_then_lambda(format_string => '123', (e) -> e);
 --
 ERROR: Call to function sample_functions:fn_fp_named_then_lambda must not specify positional arguments after named arguments; named arguments must be specified last in the argument list [at 1:32]
-SELECT fn_fp_named_then_lambda(format_string => "123", (e) -> e);
+SELECT fn_fp_named_then_lambda(format_string => '123', (e) -> e);
                                ^
 ==
 
-SELECT fn_fp_named_then_lambda((e) -> e, format_string => "123");
+SELECT fn_fp_named_then_lambda((e) -> e, format_string => '123');
 --
 ERROR: Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:42]
-SELECT fn_fp_named_then_lambda((e) -> e, format_string => "123");
+SELECT fn_fp_named_then_lambda((e) -> e, format_string => '123');
                                          ^
 --
 Signature Mismatch Details:
@@ -904,7 +904,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_FP_NAMED_THEN_LAMB
   Argument types: LAMBDA, format_string => STRING
   Signature: FN_FP_NAMED_THEN_LAMBDA([format_string=>]STRING, FUNCTION<INT64->T1>)
     Named argument "format_string" duplicates positional argument 1, which also provides "format_string" [at 1:8]
-SELECT fn_fp_named_then_lambda((e) -> e, format_string => "123");
+SELECT fn_fp_named_then_lambda((e) -> e, format_string => '123');
        ^
 ==
 
@@ -932,7 +932,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT fn_fp_lambda_then_named((e) -> e, format_string => "123");
+SELECT fn_fp_lambda_then_named((e) -> e, format_string => '123');
 --
 QueryStmt
 +-output_column_list=

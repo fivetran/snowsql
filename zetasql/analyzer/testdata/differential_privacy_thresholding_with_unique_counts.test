@@ -62,7 +62,7 @@ QueryStmt
 # We should use this count (extracted from the result PROTO) for
 # group_selection_threshold.
 [no_enable_literal_replacement]
-select with differential_privacy count(*, contribution_bounds_per_group => (0, 1),  report_format => "PROTO")
+select with differential_privacy count(*, contribution_bounds_per_group => (0, 1),  report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -125,7 +125,7 @@ QueryStmt
 # We should use this count (extracted from the result JSON) for
 # group_selection_threshold.
 [no_enable_literal_replacement]
-select with differential_privacy count(*, contribution_bounds_per_group => (0, 1),  report_format => "JSON")
+select with differential_privacy count(*, contribution_bounds_per_group => (0, 1),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -181,7 +181,7 @@ QueryStmt
 # Incorrect bounds for count star function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy count(*, contribution_bounds_per_group => (0, 2), report_format => "PROTO")
+select with differential_privacy count(*, contribution_bounds_per_group => (0, 2), report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -238,7 +238,7 @@ QueryStmt
 # Incorrect bounds for count star function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy count(*, contribution_bounds_per_group => (0, 2), report_format => "JSON")
+select with differential_privacy count(*, contribution_bounds_per_group => (0, 2), report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -947,7 +947,7 @@ QueryStmt
 # We should use this count (extracted from the result PROTO) for
 # group_selection_threshold.
 [no_enable_literal_replacement]
-select with differential_privacy count(1, contribution_bounds_per_group => (0, 1),  report_format => "PROTO")
+select with differential_privacy count(1, contribution_bounds_per_group => (0, 1),  report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1013,7 +1013,7 @@ QueryStmt
 # Count(1) counting unique users with JSON result.
 # We should use this count (extracted from the result JSON) for
 # group_selection_threshold.
-select with differential_privacy count(1, contribution_bounds_per_group => (0, 1),  report_format => "JSON")
+select with differential_privacy count(1, contribution_bounds_per_group => (0, 1),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1072,7 +1072,7 @@ QueryStmt
 # Incorrect bounds for count function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy count(1, contribution_bounds_per_group => (0, 2), report_format => "PROTO")
+select with differential_privacy count(1, contribution_bounds_per_group => (0, 2), report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1132,7 +1132,7 @@ QueryStmt
 # Incorrect bounds for count function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy count(1, contribution_bounds_per_group => (0, 2), report_format => "JSON")
+select with differential_privacy count(1, contribution_bounds_per_group => (0, 2), report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1671,7 +1671,7 @@ QueryStmt
 # We should use this count (extracted from the result PROTO) for
 # group_selection_threshold.
 [no_enable_literal_replacement]
-select with differential_privacy count(uid, contribution_bounds_per_group => (0, 1),  report_format => "PROTO")
+select with differential_privacy count(uid, contribution_bounds_per_group => (0, 1),  report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1737,7 +1737,7 @@ QueryStmt
 # Count(uid) counting unique users with JSON result.
 # We should use this count (extracted from the result JSON) for
 # group_selection_threshold.
-select with differential_privacy count(uid, contribution_bounds_per_group => (0, 1),  report_format => "JSON")
+select with differential_privacy count(uid, contribution_bounds_per_group => (0, 1),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1796,7 +1796,7 @@ QueryStmt
 # Incorrect bounds for count(uid) function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy count(uid, contribution_bounds_per_group => (0, 2), report_format => "PROTO")
+select with differential_privacy count(uid, contribution_bounds_per_group => (0, 2), report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -1856,7 +1856,7 @@ QueryStmt
 # Incorrect bounds for count(uid) function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy count(uid, contribution_bounds_per_group => (0, 2), report_format => "JSON")
+select with differential_privacy count(uid, contribution_bounds_per_group => (0, 2), report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -2143,7 +2143,7 @@ QueryStmt
 # We should use this count (extracted from the result PROTO) for
 # group_selection_threshold.
 [no_enable_literal_replacement]
-select with differential_privacy sum(1, contribution_bounds_per_group => (0, 1),  report_format => "PROTO")
+select with differential_privacy sum(1, contribution_bounds_per_group => (0, 1),  report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -2209,7 +2209,7 @@ QueryStmt
 # Sum(1) counting unique users with JSON result.
 # We should use this count (extracted from the result JSON) for
 # group_selection_threshold.
-select with differential_privacy sum(1, contribution_bounds_per_group => (0, 1),  report_format => "JSON")
+select with differential_privacy sum(1, contribution_bounds_per_group => (0, 1),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -2268,7 +2268,7 @@ QueryStmt
 # Incorrect bounds for sum(1) function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy sum(1, contribution_bounds_per_group => (0, 2), report_format => "PROTO")
+select with differential_privacy sum(1, contribution_bounds_per_group => (0, 2), report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -2328,7 +2328,7 @@ QueryStmt
 # Incorrect bounds for sum(1) function. It doesn't correspond to
 # unique users count, therefore we shouldn't replace group_selection_threshold
 # with this count.
-select with differential_privacy sum(1, contribution_bounds_per_group => (0, 2), report_format => "JSON")
+select with differential_privacy sum(1, contribution_bounds_per_group => (0, 2), report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -2445,7 +2445,7 @@ QueryStmt
 # We should not use this count for group_selection_threshold because for the
 # new syntax group_selection_threshold is expected to be int64.
 [no_enable_literal_replacement]
-select with differential_privacy sum(cast(1 as uint64), contribution_bounds_per_group => (0, 1),  report_format => "PROTO")
+select with differential_privacy sum(cast(1 as uint64), contribution_bounds_per_group => (0, 1),  report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -2505,7 +2505,7 @@ QueryStmt
 # Sum(1) with uint64 type counting unique users with JSON result.
 # We should not use this count for group_selection_threshold because for the
 # new syntax group_selection_threshold is expected to be int64.
-select with differential_privacy sum(cast(1 as uint64), contribution_bounds_per_group => (0, 1),  report_format => "JSON")
+select with differential_privacy sum(cast(1 as uint64), contribution_bounds_per_group => (0, 1),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -3019,7 +3019,7 @@ QueryStmt
 # Sum of doubles with PROTO result. We are not supporting these functions for
 # group_selection_threshold_expr replacement due to possible accumulation of floating point errors.
 [no_enable_literal_replacement]
-select with differential_privacy sum(1.0, contribution_bounds_per_group => (0.0, 1.0),  report_format => "PROTO")
+select with differential_privacy sum(1.0, contribution_bounds_per_group => (0.0, 1.0),  report_format => 'PROTO')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -3078,7 +3078,7 @@ QueryStmt
 [no_enable_literal_replacement]
 # Sum of doubles with JSON result. We are not supporting these functions for
 # group_selection_threshold_expr replacement due to possible accumulation of floating point errors.
-select with differential_privacy sum(1.0, contribution_bounds_per_group => (0.0, 1.0),  report_format => "JSON")
+select with differential_privacy sum(1.0, contribution_bounds_per_group => (0.0, 1.0),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -3139,7 +3139,7 @@ QueryStmt
 # we will replace it with an artificially added function which
 # counts unique users.
 [no_enable_literal_replacement]
-select with differential_privacy sum(1, contribution_bounds_per_group => (0, 1),  report_format => "JSON")
+select with differential_privacy sum(1, contribution_bounds_per_group => (0, 1),  report_format => 'JSON')
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt

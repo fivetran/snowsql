@@ -875,7 +875,7 @@ QueryStmt
 # In this invocation we omit all named arguments.
 # This currently fails, as mandatory-named argument substitution makes
 # the omitted named arguments NULL.
-select fn_optional_named_optional_not_null_args(arg => "foo")
+select fn_optional_named_optional_not_null_args(arg => 'foo')
 --
 QueryStmt
 +-output_column_list=
@@ -912,10 +912,10 @@ select fn_optional_named_optional_not_null_args("foo")
 # In this invocation we omit first named argument, that cannot be NULL.
 # This currently fails, as mandatory-named argument substitution makes
 # the omitted named arguments NULL.
-select fn_optional_named_optional_not_null_args("foo", date_string => "bar")
+select fn_optional_named_optional_not_null_args("foo", date_string => 'bar')
 --
 ERROR: Argument 2 to SAMPLE_FUNCTIONS:FN_OPTIONAL_NAMED_OPTIONAL_NOT_NULL_ARGS must be non-NULL [at 1:8]
-select fn_optional_named_optional_not_null_args("foo", date_string => "bar")
+select fn_optional_named_optional_not_null_args("foo", date_string => 'bar')
        ^
 ==
 
@@ -923,7 +923,7 @@ select fn_optional_named_optional_not_null_args("foo", date_string => "bar")
 # named that cannot be specified positionally and cannot be null, and
 # named cannot be specified positionally.
 # In this call we pass NULL to first named argument, that cannot be NULL.
-select fn_optional_named_optional_not_null_args("foo", arg => NULL, date_string => "bar")
+select fn_optional_named_optional_not_null_args("foo", arg => NULL, date_string => 'bar')
 --
 ERROR: Argument 'arg' to SAMPLE_FUNCTIONS:FN_OPTIONAL_NAMED_OPTIONAL_NOT_NULL_ARGS must be non-NULL [at 1:56]
 ...fn_optional_named_optional_not_null_args("foo", arg => NULL, date_string =...
@@ -1036,10 +1036,10 @@ select * from tvf_exactly_3_int64_args(first => 1, second => 2, third => 3)
 # of the positional arguments corresponds to an argument type declaration in the
 # function signature with the same name as one of the provided named arguments.
 select *
-from tvf_named_optional_scalar_args("abc", "def", format_string => "hgi")
+from tvf_named_optional_scalar_args("abc", "def", format_string => 'hgi')
 --
 ERROR: No matching signature for tvf_named_optional_scalar_args for argument types: STRING, STRING, STRING. Supported signature: TVF_NAMED_OPTIONAL_SCALAR_ARGS([STRING], [STRING]) [at 2:6]
-from tvf_named_optional_scalar_args("abc", "def", format_string => "hgi")
+from tvf_named_optional_scalar_args("abc", "def", format_string => 'hgi')
      ^
 --
 Signature Mismatch Details:
@@ -1047,7 +1047,7 @@ ERROR: No matching signature for tvf_named_optional_scalar_args
   Argument types: STRING, STRING, STRING
   Signature: TVF_NAMED_OPTIONAL_SCALAR_ARGS([format_string => STRING], [date_string => STRING])
     Signature accepts at most 2 arguments, found 3 arguments [at 2:6]
-from tvf_named_optional_scalar_args("abc", "def", format_string => "hgi")
+from tvf_named_optional_scalar_args("abc", "def", format_string => 'hgi')
      ^
 ==
 
@@ -1055,10 +1055,10 @@ from tvf_named_optional_scalar_args("abc", "def", format_string => "hgi")
 # of the positional arguments corresponds to an argument type declaration in the
 # function signature with the same name as one of the provided named arguments.
 select *
-from tvf_named_optional_scalar_args("abc", "def", date_string => "hgi")
+from tvf_named_optional_scalar_args("abc", "def", date_string => 'hgi')
 --
 ERROR: No matching signature for tvf_named_optional_scalar_args for argument types: STRING, STRING, STRING. Supported signature: TVF_NAMED_OPTIONAL_SCALAR_ARGS([STRING], [STRING]) [at 2:6]
-from tvf_named_optional_scalar_args("abc", "def", date_string => "hgi")
+from tvf_named_optional_scalar_args("abc", "def", date_string => 'hgi')
      ^
 --
 Signature Mismatch Details:
@@ -1066,7 +1066,7 @@ ERROR: No matching signature for tvf_named_optional_scalar_args
   Argument types: STRING, STRING, STRING
   Signature: TVF_NAMED_OPTIONAL_SCALAR_ARGS([format_string => STRING], [date_string => STRING])
     Signature accepts at most 2 arguments, found 3 arguments [at 2:6]
-from tvf_named_optional_scalar_args("abc", "def", date_string => "hgi")
+from tvf_named_optional_scalar_args("abc", "def", date_string => 'hgi')
      ^
 ==
 
@@ -1283,7 +1283,7 @@ QueryStmt
 
 # Call to a function that provides two similar signatures, one with regular
 # argument, and one with named argument of same type.
-select fn_regular_and_named_signatures("foo", date_string => "bar")
+select fn_regular_and_named_signatures("foo", date_string => 'bar')
 --
 QueryStmt
 +-output_column_list=
@@ -1302,10 +1302,10 @@ QueryStmt
 
 # Invalid call to a function that provides two similar signatures, one with
 # regular argument, and one with named argument of same type.
-select fn_regular_and_named_signatures("foo", "bar", date_string => "baz")
+select fn_regular_and_named_signatures("foo", "bar", date_string => 'baz')
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REGULAR_AND_NAMED_SIGNATURES for argument types: STRING, STRING, date_string => STRING. Supported signatures: FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [STRING]); FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [date_string => STRING]) [at 1:8]
-select fn_regular_and_named_signatures("foo", "bar", date_string => "baz")
+select fn_regular_and_named_signatures("foo", "bar", date_string => 'baz')
        ^
 --
 Signature Mismatch Details:
@@ -1315,16 +1315,16 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REGULAR_AND_NAMED_
     Signature accepts at most 2 arguments, found 3 arguments
   Signature: FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [date_string => STRING])
     Signature accepts at most 2 arguments, found 3 arguments [at 1:8]
-select fn_regular_and_named_signatures("foo", "bar", date_string => "baz")
+select fn_regular_and_named_signatures("foo", "bar", date_string => 'baz')
        ^
 ==
 
 # Invalid call to a function that provides two similar signatures, one with
 # regular argument, and one with named argument of same type.
-select fn_regular_and_named_signatures("foo", unknown_arg => "baz")
+select fn_regular_and_named_signatures("foo", unknown_arg => 'baz')
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REGULAR_AND_NAMED_SIGNATURES for argument types: STRING, unknown_arg => STRING. Supported signatures: FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [STRING]); FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [date_string => STRING]) [at 1:8]
-select fn_regular_and_named_signatures("foo", unknown_arg => "baz")
+select fn_regular_and_named_signatures("foo", unknown_arg => 'baz')
        ^
 --
 Signature Mismatch Details:
@@ -1334,7 +1334,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REGULAR_AND_NAMED_
     Named argument "unknown_arg" does not exist in signature
   Signature: FN_REGULAR_AND_NAMED_SIGNATURES(STRING, [date_string => STRING])
     Named argument "unknown_arg" does not exist in signature [at 1:8]
-select fn_regular_and_named_signatures("foo", unknown_arg => "baz")
+select fn_regular_and_named_signatures("foo", unknown_arg => 'baz')
        ^
 ==
 
@@ -1405,12 +1405,12 @@ QueryStmt
 # arguments with positional and named arguments, but does not specify the
 # repeated arguments.
 SELECT
- fn_rep_opt("a0", a1 => "a1"),
- fn_rep_opt("a0", a1 => "a1", o0 => "o0"),
- fn_rep_opt("a0", a1 => "a1", o1 => "o1"),
- fn_rep_opt("a0", o0 => "o0", a1 => "a1"),
- fn_rep_opt("a0", o1 => "o1", a1 => "a1"),
- fn_rep_opt("a0", o1 => "o1", o0 => "o0", a1 => "a1");
+ fn_rep_opt("a0", a1 => 'a1'),
+ fn_rep_opt("a0", a1 => 'a1', o0 => 'o0'),
+ fn_rep_opt("a0", a1 => 'a1', o1 => 'o1'),
+ fn_rep_opt("a0", o0 => 'o0', a1 => 'a1'),
+ fn_rep_opt("a0", o1 => 'o1', a1 => 'a1'),
+ fn_rep_opt("a0", o1 => 'o1', o0 => 'o0', a1 => 'a1');
 --
 QueryStmt
 +-output_column_list=
@@ -1468,13 +1468,13 @@ QueryStmt
 # arguments with positional and named arguments, including the repeated
 # arguments.
 SELECT
- fn_rep_opt("a0", "r0", "r1", "r2", a1 => "a1"),
- fn_rep_opt("a0", "r0", "r1", "r2", "r0", "r1", "r2", a1 => "a1", o0 => "o0"),
- fn_rep_opt("a0", "r0", "r1", "r2", a1 => "a1", o1 => "o1"),
+ fn_rep_opt("a0", "r0", "r1", "r2", a1 => 'a1'),
+ fn_rep_opt("a0", "r0", "r1", "r2", "r0", "r1", "r2", a1 => 'a1', o0 => 'o0'),
+ fn_rep_opt("a0", "r0", "r1", "r2", a1 => 'a1', o1 => 'o1'),
  fn_rep_opt("a0", "r0", "r1", "r2", "r0", "r1", "r2", "r0", "r1", "r2",
-            o0 => "o0", a1 => "a1"),
- fn_rep_opt("a0", "r0", "r1", "r2", o1 => "o1", a1 => "a1"),
- fn_rep_opt("a0", "r0", "r1", "r2", o1 => "o1", o0 => "o0", a1 => "a1");
+            o0 => 'o0', a1 => 'a1'),
+ fn_rep_opt("a0", "r0", "r1", "r2", o1 => 'o1', a1 => 'a1'),
+ fn_rep_opt("a0", "r0", "r1", "r2", o1 => 'o1', o0 => 'o0', a1 => 'a1');
 --
 QueryStmt
 +-output_column_list=
@@ -1557,18 +1557,18 @@ QueryStmt
 
 # An invalid function call: a named argument notation comes before a positional
 # arguments.
-SELECT fn_rep_opt("a0", "r0", "r1", a1 => "a1", "r2");
+SELECT fn_rep_opt("a0", "r0", "r1", a1 => 'a1', "r2");
 --
 ERROR: Call to function sample_functions:fn_rep_opt must not specify positional arguments after named arguments; named arguments must be specified last in the argument list [at 1:37]
-SELECT fn_rep_opt("a0", "r0", "r1", a1 => "a1", "r2");
+SELECT fn_rep_opt("a0", "r0", "r1", a1 => 'a1', "r2");
                                     ^
 ==
 
 # An invalid function call: the required named argument "a1" is omitted.
-SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => "o0", o1 => "o1");
+SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => 'o0', o1 => 'o1');
 --
 ERROR: Call to function sample_functions:fn_rep_opt does not include the required named argument 'a1' [at 1:8]
-SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => "o0", o1 => "o1");
+SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => 'o0', o1 => 'o1');
        ^
 --
 Signature Mismatch Details:
@@ -1576,7 +1576,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_REP_OPT
   Argument types: STRING, STRING, STRING, STRING, o0 => STRING, o1 => STRING
   Signature: FN_REP_OPT([a0=>]STRING, [[r0=>]STRING, ...], [[r1=>]STRING, ...], [[r2=>]STRING, ...], [a1=>]STRING, [[o0=>]STRING], [[o1=>]STRING])
     Required named argument "a1" is not provided [at 1:8]
-SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => "o0", o1 => "o1");
+SELECT fn_rep_opt("a0", "r0", "r1", "r2", o0 => 'o0', o1 => 'o1');
        ^
 ==
 
@@ -2243,8 +2243,8 @@ SELECT
   fn_req_opt_unnamed_named("abc"),
   fn_req_opt_unnamed_named("abc", "def"),
   fn_req_opt_unnamed_named("abc", "def", "ghi"),
-  fn_req_opt_unnamed_named("abc", o1 => "ghi"),
-  fn_req_opt_unnamed_named("abc", "def", o1 => "ghi");
+  fn_req_opt_unnamed_named("abc", o1 => 'ghi'),
+  fn_req_opt_unnamed_named("abc", "def", o1 => 'ghi');
 --
 QueryStmt
 +-output_column_list=
@@ -2506,7 +2506,7 @@ SELECT *
 FROM tvf_optional_unnamed_named((SELECT 1 as x), true, "abc", "def")
 UNION ALL
 SELECT *
-FROM tvf_optional_unnamed_named((SELECT 1 as x), true, "abc", o1 => "def")
+FROM tvf_optional_unnamed_named((SELECT 1 as x), true, "abc", o1 => 'def')
 --
 QueryStmt
 +-output_column_list=

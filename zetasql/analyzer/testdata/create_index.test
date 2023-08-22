@@ -1373,8 +1373,8 @@ ERROR: UNNEST expression used with CREATE INDEX does not allow multiple argument
 ==
 
 # Array zip mode not allowed.
-CREATE index i1 on TestTable UNNEST(KitchenSink.repeated_int32_val, mode => "PAD") (repeated_int32_val)
+CREATE index i1 on TestTable UNNEST(KitchenSink.repeated_int32_val, mode => 'PAD') (repeated_int32_val)
 --
 ERROR: UNNEST expression used with CREATE INDEX does not allow named arguments [at 1:69]
-...on TestTable UNNEST(KitchenSink.repeated_int32_val, mode => "PAD") (repeat...
+...on TestTable UNNEST(KitchenSink.repeated_int32_val, mode => 'PAD') (repeat...
                                                        ^

@@ -1939,8 +1939,8 @@ SELECT 1 IN UNNEST([1] AS array_alias, [2])
 ==
 
 # Array zip mode is not allowed.
-SELECT 1 IN UNNEST([1], mode => "STRICT")
+SELECT 1 IN UNNEST([1], mode => 'STRICT')
 --
 ERROR: UNNEST expression used with IN operator does not allow named arguments [at 1:25]
-SELECT 1 IN UNNEST([1], mode => "STRICT")
+SELECT 1 IN UNNEST([1], mode => 'STRICT')
                         ^
