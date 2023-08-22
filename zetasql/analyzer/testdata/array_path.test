@@ -1402,16 +1402,16 @@ QueryStmt
 ==
 
 select value
-from ArrayTypes t, unnest(array_concat(t.ProtoArray.str_value, ["foo"])) value
+from ArrayTypes t, unnest(array_concat(t.ProtoArray.str_value, ['foo'])) value
 --
 ERROR: Cannot access field str_value on a value with type ARRAY<zetasql_test__.TestExtraPB>. You may need an explicit call to FLATTEN, and the flattened argument may only contain 'dot' after the first array [at 2:53]
-from ArrayTypes t, unnest(array_concat(t.ProtoArray.str_value, ["foo"])) value
+from ArrayTypes t, unnest(array_concat(t.ProtoArray.str_value, ['foo'])) value
                                                     ^
 ==
 
 [enabled_ast_rewrites=DEFAULTS,-WITH_EXPR|DEFAULTS]
 select value
-from ArrayTypes t, unnest(array_concat(flatten(t.ProtoArray.str_value), ["foo"])) value
+from ArrayTypes t, unnest(array_concat(flatten(t.ProtoArray.str_value), ['foo'])) value
 --
 QueryStmt
 +-output_column_list=
@@ -4742,7 +4742,7 @@ QueryStmt
 
 SELECT *
 FROM (SELECT FLATTEN(t.ProtoArray.str_value) AS elements FROM ArrayTypes t)
-JOIN UNNEST(FLATTEN([STRUCT("hello" AS a)].a)) AS key
+JOIN UNNEST(FLATTEN([STRUCT('hello' AS a)].a)) AS key
 ON key IN UNNEST(elements)
 --
 QueryStmt
@@ -4777,7 +4777,7 @@ QueryStmt
         | +-Flatten
         |   +-type=ARRAY<STRING>
         |   +-expr=
-        |   | +-Literal(type=ARRAY<STRUCT<a STRING>>, value=[{a:"hello"}])
+        |   | +-Literal(type=ARRAY<STRUCT<a STRING>>, value=[{a:'hello'}])
         |   +-get_field_list=
         |     +-GetStructField
         |       +-type=STRING
@@ -4886,7 +4886,7 @@ QueryStmt
         |           +-input_scan=
         |           | +-SingleRowScan
         |           +-array_expr=
-        |           | +-Literal(type=ARRAY<STRUCT<a STRING>>, value=[{a:"hello"}])
+        |           | +-Literal(type=ARRAY<STRUCT<a STRING>>, value=[{a:'hello'}])
         |           +-element_column=$flatten.injected#25
         +-element_column=$array.key#19
         +-join_expr=
@@ -5797,7 +5797,7 @@ QueryStmt
     |     |     +-ProjectScan
     |     |       +-column_list=[$expr_subquery.$col1#1]
     |     |       +-expr_list=
-    |     |       | +-$col1#1 := Literal(type=ARRAY<STRUCT<f11 ARRAY<STRING>>>, value=[{f11:["A"]}])
+    |     |       | +-$col1#1 := Literal(type=ARRAY<STRUCT<f11 ARRAY<STRING>>>, value=[{f11:['A']}])
     |     |       +-input_scan=
     |     |         +-SingleRowScan
     |     +-get_field_list=
@@ -5944,7 +5944,7 @@ QueryStmt
     |             |       +-ProjectScan
     |             |         +-column_list=[$expr_subquery.$col1#1]
     |             |         +-expr_list=
-    |             |         | +-$col1#1 := Literal(type=ARRAY<STRUCT<f11 ARRAY<STRING>>>, value=[{f11:["A"]}])
+    |             |         | +-$col1#1 := Literal(type=ARRAY<STRUCT<f11 ARRAY<STRING>>>, value=[{f11:['A']}])
     |             |         +-input_scan=
     |             |           +-SingleRowScan
     |             +-input_scan=

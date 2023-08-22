@@ -2433,7 +2433,7 @@ QueryStmt
 SELECT *
 FROM UnaryAbTableArgWithScalarArgs(5,
                                    {{TABLE abTable|(SELECT 1 AS a, 'two' AS b)}},
-                                   "six");
+                                   'six');
 --
 ALTERNATION GROUP: TABLE abTable
 --
@@ -3750,7 +3750,7 @@ QueryStmt
 
 SELECT *
 FROM JoinsTableArgToScannedTable(
-  (SELECT "key", "value" FROM TwoIntegers), "arg");
+  (SELECT "key", "value" FROM TwoIntegers), 'arg');
 --
 QueryStmt
 +-output_column_list=

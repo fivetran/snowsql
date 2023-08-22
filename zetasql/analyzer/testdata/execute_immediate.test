@@ -1,4 +1,4 @@
-EXECUTE IMMEDIATE "SELECT 1";
+EXECUTE IMMEDIATE 'SELECT 1';
 --
 ExecuteImmediateStmt
 +-sql=
@@ -6,7 +6,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 ==
 
-EXECUTE IMMEDIATE CONCAT("SELECT ", "1");
+EXECUTE IMMEDIATE CONCAT('SELECT ', '1');
 --
 ExecuteImmediateStmt
 +-sql=
@@ -32,7 +32,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 ==
 
-EXECUTE IMMEDIATE {{NULL|"NULL"}};
+EXECUTE IMMEDIATE {{NULL|'NULL'}};
 --
 ALTERNATION GROUP: NULL
 --
@@ -41,7 +41,7 @@ ExecuteImmediateStmt
 | +-Literal(type=STRING, value=NULL)
 +-into_identifier_list=[]
 --
-ALTERNATION GROUP: "NULL"
+ALTERNATION GROUP: 'NULL'
 --
 ExecuteImmediateStmt
 +-sql=
@@ -49,7 +49,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[]
 ==
 
-EXECUTE IMMEDIATE "SELECT 1" INTO string_variable_foo;
+EXECUTE IMMEDIATE 'SELECT 1' INTO string_variable_foo;
 --
 ExecuteImmediateStmt
 +-sql=
@@ -57,7 +57,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[string_variable_foo]
 ==
 
-EXECUTE IMMEDIATE "SELECT 1" INTO string_variable_foo, string_variable_bar;
+EXECUTE IMMEDIATE 'SELECT 1' INTO string_variable_foo, string_variable_bar;
 --
 ExecuteImmediateStmt
 +-sql=
@@ -65,7 +65,7 @@ ExecuteImmediateStmt
 +-into_identifier_list=[string_variable_foo, string_variable_bar]
 ==
 
-EXECUTE IMMEDIATE "SELECT 1" INTO "string_variable_foo";
+EXECUTE IMMEDIATE 'SELECT 1' INTO "string_variable_foo";
 --
 ExecuteImmediateStmt
 +-sql=
@@ -113,7 +113,7 @@ ExecuteImmediateStmt
       +-Literal(type=STRING, value=NULL, has_explicit_type=TRUE)
 ==
 
-EXECUTE IMMEDIATE string_variable_bar USING {{5 AS y| 5 AS y, 6 AS x|NULL AS x, CAST(NULL AS INT64) AS y|CONCAT("A", "B") as y}};
+EXECUTE IMMEDIATE string_variable_bar USING {{5 AS y| 5 AS y, 6 AS x|NULL AS x, CAST(NULL AS INT64) AS y|CONCAT('A', 'B') as y}};
 --
 ALTERNATION GROUP: 5 AS y
 --
@@ -159,7 +159,7 @@ ExecuteImmediateStmt
     +-expression=
       +-Literal(type=INT64, value=NULL, has_explicit_type=TRUE)
 --
-ALTERNATION GROUP: CONCAT("A", "B") as y
+ALTERNATION GROUP: CONCAT('A', 'B') as y
 --
 ExecuteImmediateStmt
 +-sql=
@@ -181,24 +181,24 @@ EXECUTE IMMEDIATE 10;
                   ^
 ==
 
-EXECUTE IMMEDIATE "select 1" INTO string_variable_foo, string_variable_foo;
+EXECUTE IMMEDIATE 'select 1' INTO string_variable_foo, string_variable_foo;
 --
 ERROR: The same parameter cannot be assigned multiple times in an INTO clause: string_variable_foo [at 1:56]
-EXECUTE IMMEDIATE "select 1" INTO string_variable_foo, string_variable_foo;
+EXECUTE IMMEDIATE 'select 1' INTO string_variable_foo, string_variable_foo;
                                                        ^
 ==
 
-EXECUTE IMMEDIATE "select 1" USING 1 AS x, 2 AS x;
+EXECUTE IMMEDIATE 'select 1' USING 1 AS x, 2 AS x;
 --
 
 
 ERROR: The same parameter cannot be assigned multiple times in a USING clause: x [at 1:49]
-EXECUTE IMMEDIATE "select 1" USING 1 AS x, 2 AS x;
+EXECUTE IMMEDIATE 'select 1' USING 1 AS x, 2 AS x;
                                                 ^
 ==
 
-EXECUTE IMMEDIATE "select 1" USING 1, 2 AS x;
+EXECUTE IMMEDIATE 'select 1' USING 1, 2 AS x;
 --
 ERROR: Cannot mix named and positional parameters [at 1:39]
-EXECUTE IMMEDIATE "select 1" USING 1, 2 AS x;
+EXECUTE IMMEDIATE 'select 1' USING 1, 2 AS x;
                                       ^

@@ -68,7 +68,7 @@ select uint64 = int64,
        uint64 <= int32,
        uint64 < int64,
        uint64 != int32,
-       "------------------------------",
+       '------------------------------',
        int64 = uint64,
        int32 > uint64,
        int64 >= uint64,
@@ -1573,7 +1573,7 @@ QueryStmt
 ==
 
 select +int32, + int64, +uint32, +uint64, +float, +double,
-       "------------------------" as separator,
+       '------------------------' as separator,
        -int32, - int64, -float, -double
 from SimpleTypes
 --
@@ -1686,7 +1686,7 @@ select -bool from SimpleTypes
        ^
 ==
 
-select +"555"
+select +'555'
 --
 QueryStmt
 +-output_column_list=

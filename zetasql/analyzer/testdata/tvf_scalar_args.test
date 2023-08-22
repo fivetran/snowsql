@@ -2575,7 +2575,7 @@ select column_bytes from tvf_no_args(42)
                          ^
 ==
 
-# Empty output schema using "select 1".
+# Empty output schema using 'select 1'.
 select 1 from tvf_empty_output_schema()
 --
 ERROR: Table-valued functions must return at least one column, but TVF tvf_empty_output_schema returned no columns [at 1:15]
