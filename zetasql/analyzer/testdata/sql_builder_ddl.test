@@ -457,7 +457,7 @@ options(abc=xyz)
 as select timestamp as c1, string as c2, int32 as c3 from SimpleTypes
 --
 [UNPARSED_SQL]
-CREATE MATERIALIZED VIEW mv PARTITION BY c1 CLUSTER BY c2 OPTIONS(abc = "xyz") AS
+CREATE MATERIALIZED VIEW mv PARTITION BY c1 CLUSTER BY c2 OPTIONS(abc = 'xyz') AS
 SELECT
   simpletypes_4.a_3 AS c1,
   simpletypes_4.a_2 AS c2,
@@ -638,13 +638,13 @@ FROM
 
 # CV / CMV with column list with options
 [language_features=CREATE_VIEW_WITH_COLUMN_LIST,CREATE_VIEWS_WITH_COLUMN_OPTIONS]
-create {{|materialized}} view tt(c1 OPTIONS(description="col1"), c2, c3 OPTIONS())
+create {{|materialized}} view tt(c1 OPTIONS(description='col1'), c2, c3 OPTIONS())
 as select timestamp, string, date from SimpleTypes
 --
 ALTERNATION GROUP: <empty>
 --
 [UNPARSED_SQL]
-CREATE VIEW tt(c1 OPTIONS(description = "col1"), c2, c3) AS
+CREATE VIEW tt(c1 OPTIONS(description = 'col1'), c2, c3) AS
 SELECT
   simpletypes_4.a_3 AS c1,
   simpletypes_4.a_1 AS c2,
@@ -662,7 +662,7 @@ FROM
 ALTERNATION GROUP: materialized
 --
 [UNPARSED_SQL]
-CREATE MATERIALIZED VIEW tt(c1 OPTIONS(description = "col1"), c2, c3) AS
+CREATE MATERIALIZED VIEW tt(c1 OPTIONS(description = 'col1'), c2, c3) AS
 SELECT
   simpletypes_4.a_3 AS c1,
   simpletypes_4.a_1 AS c2,
@@ -767,22 +767,22 @@ CREATE SNAPSHOT TABLE s1 CLONE KeyValue
 
 [language_features=CREATE_SNAPSHOT_TABLE]
 CREATE SNAPSHOT TABLE s1 CLONE KeyValue OPTIONS(
-    expiration_timestamp=TIMESTAMP "2019-05-22 00:00:00 UTC",
-    description="mydataset.source_table snapshot",
-    label=[("experiments")])
+    expiration_timestamp=TIMESTAMP '2019-05-22 00:00:00 UTC',
+    description='mydataset.source_table snapshot',
+    label=[('experiments')])
 --
 [UNPARSED_SQL]
 CREATE SNAPSHOT TABLE s1 CLONE KeyValue
-OPTIONS(expiration_timestamp = '2019-05-22 00:00:00+00', description = "mydataset.source_table snapshot",
-  label = ARRAY< STRING >["experiments"]);
+OPTIONS(expiration_timestamp = '2019-05-22 00:00:00+00', description = 'mydataset.source_table snapshot',
+  label = ARRAY< STRING >['experiments']);
 ==
 
 [privilege_restriction_table_not_scanned]
-create privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ("obsessed@google.com", "mdb/datahub-eng");
+create privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ('obsessed@google.com', 'mdb/datahub-eng');
 --
 [UNPARSED_SQL]
-CREATE PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ("obsessed@google.com",
-"mdb/datahub-eng");
+CREATE PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ('obsessed@google.com',
+'mdb/datahub-eng');
 ==
 
 [privilege_restriction_table_not_scanned]
@@ -821,11 +821,11 @@ DROP PRIVILEGE RESTRICTION ON "select"(doubly_nested_struct.e, doubly_nested_str
 ==
 
 [privilege_restriction_table_not_scanned]
-alter privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ("obsessed@google.com", "mdb/datahub-eng");
+alter privilege restriction on select (int_a, string_a) on table MultipleColumns restrict to ('obsessed@google.com', 'mdb/datahub-eng');
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ("obsessed@google.com",
-  "mdb/datahub-eng");
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns RESTRICT TO ('obsessed@google.com',
+  'mdb/datahub-eng');
 ==
 
 [privilege_restriction_table_not_scanned]
@@ -836,19 +836,19 @@ ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumn
 ==
 
 [privilege_restriction_table_not_scanned]
-alter privilege restriction on select (int_a, string_a) on table MultipleColumns add ("obsessed@google.com", "mdb/datahub-eng");
+alter privilege restriction on select (int_a, string_a) on table MultipleColumns add ('obsessed@google.com', 'mdb/datahub-eng');
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD ("obsessed@google.com",
-  "mdb/datahub-eng");
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD ('obsessed@google.com',
+  'mdb/datahub-eng');
 ==
 
 [privilege_restriction_table_not_scanned]
-alter privilege restriction on select (int_a, string_a) on table MultipleColumns add if not exists ("obsessed@google.com", "mdb/datahub-eng");
+alter privilege restriction on select (int_a, string_a) on table MultipleColumns add if not exists ('obsessed@google.com', 'mdb/datahub-eng');
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD IF NOT EXISTS ("obsessed@google.com",
-  "mdb/datahub-eng");
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns ADD IF NOT EXISTS ('obsessed@google.com',
+  'mdb/datahub-eng');
 ==
 
 [privilege_restriction_table_not_scanned]
@@ -859,26 +859,19 @@ ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumn
 ==
 
 [privilege_restriction_table_not_scanned]
-alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ("obsessed@google.com", "mdb/datahub-eng");
+alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ('obsessed@google.com', 'mdb/datahub-eng');
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ("obsessed@google.com",
-  "mdb/datahub-eng");
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ('obsessed@google.com',
+  'mdb/datahub-eng');
 ==
 
 [privilege_restriction_table_not_scanned]
-alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove if exists ("obsessed@google.com", "mdb/datahub-eng");
+alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove if exists ('obsessed@google.com', 'mdb/datahub-eng');
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE IF EXISTS ("obsessed@google.com",
-  "mdb/datahub-eng");
-==
-
-[privilege_restriction_table_not_scanned]
-alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ();
---
-[UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ();
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE IF EXISTS ('obsessed@google.com',
+  'mdb/datahub-eng');
 ==
 
 [privilege_restriction_table_not_scanned]
@@ -889,11 +882,18 @@ ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumn
 ==
 
 [privilege_restriction_table_not_scanned]
-alter privilege restriction on select (doubly_nested_struct.e, doubly_nested_struct.f.c) on table DoublyNestedStructTable restrict to ("obsessed@google.com", "mdb/datahub-eng");
+alter privilege restriction on select (int_a, string_a) on table MultipleColumns remove ();
 --
 [UNPARSED_SQL]
-ALTER PRIVILEGE RESTRICTION ON "select"(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable RESTRICT TO ("obsessed@google.com",
-  "mdb/datahub-eng");
+ALTER PRIVILEGE RESTRICTION ON "select"(int_a, string_a) ON table MultipleColumns REMOVE ();
+==
+
+[privilege_restriction_table_not_scanned]
+alter privilege restriction on select (doubly_nested_struct.e, doubly_nested_struct.f.c) on table DoublyNestedStructTable restrict to ('obsessed@google.com', 'mdb/datahub-eng');
+--
+[UNPARSED_SQL]
+ALTER PRIVILEGE RESTRICTION ON "select"(doubly_nested_struct.e, doubly_nested_struct.f.c) ON table DoublyNestedStructTable RESTRICT TO ('obsessed@google.com',
+  'mdb/datahub-eng');
 ==
 
 # Generated Columns: Simple
@@ -906,7 +906,7 @@ FROM FILES (
 --
 [UNPARSED_SQL]
 LOAD DATA INTO KeyValue
-FROM FILES(uris = ARRAY< STRING >["gs://mybucket/myfile.csv"], format = "csv");
+FROM FILES(uris = ARRAY< STRING >['gs://mybucket/myfile.csv'], format = 'csv');
 ==
 
 # Generated Columns: Simple
@@ -919,7 +919,7 @@ FROM FILES (
 --
 [UNPARSED_SQL]
 LOAD DATA OVERWRITE KeyValue
-FROM FILES(uris = ARRAY< STRING >["gs://mybucket/myfile.csv"], format = "csv");
+FROM FILES(uris = ARRAY< STRING >['gs://mybucket/myfile.csv'], format = 'csv');
 ==
 
 # Generated Columns: Simple
@@ -934,7 +934,7 @@ FROM FILES (
 --
 [UNPARSED_SQL]
 LOAD DATA INTO KeyValue OVERWRITE PARTITIONS(Key = 1)
-FROM FILES(uris = ARRAY< STRING >["gs://mybucket/myfile.csv"], format = "csv");
+FROM FILES(uris = ARRAY< STRING >['gs://mybucket/myfile.csv'], format = 'csv');
 ==
 
 # Generated Columns: Simple
@@ -949,5 +949,5 @@ FROM FILES (
 --
 [UNPARSED_SQL]
 LOAD DATA INTO KeyValue PARTITIONS(Key = 1)
-FROM FILES(uris = ARRAY< STRING >["gs://mybucket/myfile.csv"], format = "csv");
+FROM FILES(uris = ARRAY< STRING >['gs://mybucket/myfile.csv'], format = 'csv');
 ==

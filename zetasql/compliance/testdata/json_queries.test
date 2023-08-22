@@ -136,7 +136,7 @@ ARRAY<STRUCT<field JSON, fie JSON, array JSON, field2 JSON>>[
 ]
 ==
 [name=json_subscript_int64_and_string]
-SELECT (JSON '[{"a": "foo"}, {"a": "bar"}]')[0]["a"]
+SELECT (JSON '[{"a": "foo"}, {"a": "bar"}]')[0]['a']
 --
 ARRAY<STRUCT<JSON>>[{"foo"}]
 ==

@@ -35,14 +35,14 @@ CreateRowAccessPolicyStmt
 
 [language_features={{|PARAMETERS_IN_GRANTEE_LIST}}]
 create row access policy on KeyValue
-grant to ('foo@google.com',{{| @test_param_string,}} "mdbuser/bar")
+grant to ('foo@google.com',{{| @test_param_string,}} 'mdbuser/bar')
 filter using(key = 123);
 --
 ALTERNATION GROUP: <empty>
 --
 CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com', "mdbuser/bar"]
++-grantee_list=['foo@google.com', 'mdbuser/bar']
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -54,7 +54,7 @@ CreateRowAccessPolicyStmt
 ALTERNATION GROUP:  @test_param_string,
 --
 ERROR: The GRANTEE list only supports string literals, not parameters [at 2:29]
-grant to ('foo@google.com', @test_param_string, "mdbuser/bar")
+grant to ('foo@google.com', @test_param_string, 'mdbuser/bar')
                             ^
 --
 ALTERNATION GROUP: PARAMETERS_IN_GRANTEE_LIST,

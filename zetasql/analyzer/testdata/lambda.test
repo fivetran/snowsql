@@ -1280,7 +1280,7 @@ QueryStmt
     |               +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |                 +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
     |                 | +-ColumnRef(type=INT64, column=$lambda_arg.i#2)
-    |                 | +-Parameter(parse_location=49-56, type=INT64, name="factor", is_untyped=TRUE)
+    |                 | +-Parameter(parse_location=49-56, type=INT64, name='factor', is_untyped=TRUE)
     |                 +-ColumnRef(type=INT64, column=$lambda_arg.e#1)
     +-input_scan=
       +-SingleRowScan
@@ -1326,7 +1326,7 @@ QueryStmt
     |         |           |   |     +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |         |           |   |       +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
     |         |           |   |       | +-ColumnRef(type=INT64, column=$array_offset.off#6)
-    |         |           |   |       | +-Parameter(parse_location=49-56, type=INT64, name="factor", is_untyped=TRUE)
+    |         |           |   |       | +-Parameter(parse_location=49-56, type=INT64, name='factor', is_untyped=TRUE)
     |         |           |   |       +-ColumnRef(type=INT64, column=$array.element#5)
     |         |           |   +-input_scan=
     |         |           |     +-ArrayScan
@@ -1378,7 +1378,7 @@ QueryStmt
     |               +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |                 +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
     |                 | +-ColumnRef(type=INT64, column=$lambda_arg.i#2)
-    |                 | +-Parameter(parse_location=49-61, type=INT64, name="array_input", is_untyped=TRUE)
+    |                 | +-Parameter(parse_location=49-61, type=INT64, name='array_input', is_untyped=TRUE)
     |                 +-ColumnRef(type=INT64, column=$lambda_arg.e#1)
     +-input_scan=
       +-SingleRowScan
@@ -1424,7 +1424,7 @@ QueryStmt
     |         |           |   |     +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |         |           |   |       +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
     |         |           |   |       | +-ColumnRef(type=INT64, column=$array_offset.off#6)
-    |         |           |   |       | +-Parameter(parse_location=49-61, type=INT64, name="array_input", is_untyped=TRUE)
+    |         |           |   |       | +-Parameter(parse_location=49-61, type=INT64, name='array_input', is_untyped=TRUE)
     |         |           |   |       +-ColumnRef(type=INT64, column=$array.element#5)
     |         |           |   +-input_scan=
     |         |           |     +-ArrayScan

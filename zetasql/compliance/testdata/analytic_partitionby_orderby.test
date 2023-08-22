@@ -568,7 +568,7 @@ ARRAY<STRUCT<str_val STRING, INT64, INT64>>[unknown order:
 [required_features=ANALYTIC_FUNCTIONS,V_1_1_ORDER_BY_COLLATE]
 [name=orderby_collate_und_ci]
 SELECT str_val,
-       RANK() OVER (ORDER BY str_val COLLATE "und:ci"),
+       RANK() OVER (ORDER BY str_val COLLATE 'und:ci'),
        RANK() OVER (ORDER BY str_val)
 FROM unnest(['A', 'e', 'a', 'b', 'C', 'd', 'A']) as str_val
 --

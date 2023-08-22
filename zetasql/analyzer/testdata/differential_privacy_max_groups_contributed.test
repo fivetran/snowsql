@@ -393,7 +393,7 @@ QueryStmt
         +-option_list=
           +-max_groups_contributed=
             +-parse_location=41-83
-            +-Parameter(parse_location=66-83, type=INT64, name="test_param_int64")
+            +-Parameter(parse_location=66-83, type=INT64, name='test_param_int64')
 [REPLACED_LITERALS]
 select with differential_privacy options(max_groups_contributed = @test_param_int64) count(*)
 from SimpleTypesWithAnonymizationUid a

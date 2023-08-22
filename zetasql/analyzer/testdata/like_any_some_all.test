@@ -3519,7 +3519,7 @@ select
   string_ci LIKE ALL unnest(array_with_string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:13]
+ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:13]
   string_ci LIKE ALL unnest(array_with_string_ci),
             ^
 ==
@@ -3642,7 +3642,7 @@ select
   string_ci LIKE ANY (string_binary, COLLATE('a', 'und:ci'))
 FROM CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function LIKE ANY is not compatible with other arguments [at 5:13]
+ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function LIKE ANY is not compatible with other arguments [at 5:13]
   string_ci LIKE ANY (string_binary, COLLATE('a', 'und:ci'))
             ^
 ==
@@ -3655,7 +3655,7 @@ select
   string_ci LIKE ALL (string_binary, COLLATE('a', 'und:ci'))
 FROM CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function LIKE ALL is not compatible with other arguments [at 3:13]
+ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function LIKE ALL is not compatible with other arguments [at 3:13]
   string_ci LIKE ALL (string_binary, COLLATE('a', 'und:ci'))
             ^
 ==
@@ -3670,7 +3670,7 @@ SELECT
   string_ci LIKE ANY UNNEST(array_with_string_ci)
 FROM COLLATEdTable
 --
-ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 4:13]
+ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 4:13]
   string_ci LIKE ANY UNNEST(array_with_string_ci)
             ^
 
@@ -3685,7 +3685,7 @@ SELECT
   string_ci LIKE ALL UNNEST(array_with_string_ci)
 FROM COLLATEdTable
 --
-ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 4:13]
+ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 4:13]
   string_ci LIKE ALL UNNEST(array_with_string_ci)
             ^
 ==
@@ -3699,19 +3699,19 @@ SELECT 'a' LIKE {{ANY|SOME|ALL}} UNNEST(['a', COLLATE('A', 'und:ci')])
 --
 ALTERNATION GROUP: ANY
 --
-ERROR: Collation is not allowed on argument 2 (["und:ci"]) [at 3:12]
+ERROR: Collation is not allowed on argument 2 (['und:ci']) [at 3:12]
 SELECT 'a' LIKE ANY UNNEST(['a', COLLATE('A', 'und:ci')])
            ^
 --
 ALTERNATION GROUP: SOME
 --
-ERROR: Collation is not allowed on argument 2 (["und:ci"]) [at 3:12]
+ERROR: Collation is not allowed on argument 2 (['und:ci']) [at 3:12]
 SELECT 'a' LIKE SOME UNNEST(['a', COLLATE('A', 'und:ci')])
            ^
 --
 ALTERNATION GROUP: ALL
 --
-ERROR: Collation is not allowed on argument 2 (["und:ci"]) [at 3:12]
+ERROR: Collation is not allowed on argument 2 (['und:ci']) [at 3:12]
 SELECT 'a' LIKE ALL UNNEST(['a', COLLATE('A', 'und:ci')])
            ^
 ==
@@ -3725,18 +3725,18 @@ SELECT COLLATE('a', 'und:ci') LIKE {{ANY|SOME|ALL}} UNNEST(['a', 'A'])
 --
 ALTERNATION GROUP: ANY
 --
-ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:31]
+ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:31]
 SELECT COLLATE('a', 'und:ci') LIKE ANY UNNEST(['a', 'A'])
                               ^
 --
 ALTERNATION GROUP: SOME
 --
-ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:31]
+ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:31]
 SELECT COLLATE('a', 'und:ci') LIKE SOME UNNEST(['a', 'A'])
                               ^
 --
 ALTERNATION GROUP: ALL
 --
-ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:31]
+ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:31]
 SELECT COLLATE('a', 'und:ci') LIKE ALL UNNEST(['a', 'A'])
                               ^

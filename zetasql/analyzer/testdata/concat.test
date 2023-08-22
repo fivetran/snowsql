@@ -126,7 +126,7 @@ QueryStmt
     |     +-Cast(INT64 -> STRING)
     |     | +-ColumnRef(type=INT64, column=$array.x#1)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Parameter(parse_location=23-29, type=STRING, name="param")
+    |     +-Parameter(parse_location=23-29, type=STRING, name='param')
     +-input_scan=
       +-ArrayScan
         +-column_list=[$array.x#1]
@@ -173,7 +173,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:concat(BYTES, repeated(1) BYTES) -> BYTES)
-    |     +-Parameter(parse_location=14-20, type=BYTES, name="param")
+    |     +-Parameter(parse_location=14-20, type=BYTES, name='param')
     |     +-Literal(type=BYTES, value=b"b")
     +-input_scan=
       +-SingleRowScan

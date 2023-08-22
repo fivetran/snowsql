@@ -208,12 +208,12 @@ SELECT "a" IN (NULL, "b", NULL)
 ARRAY<STRUCT<BOOL>>[{NULL}]
 ==
 [name=comparison_function_in_array_1]
-SELECT "a" IN UNNEST(["a"])
+SELECT "a" IN UNNEST(['a'])
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 [name=comparison_function_in_array_2]
-SELECT "a" IN UNNEST(["b"])
+SELECT "a" IN UNNEST(['b'])
 --
 ARRAY<STRUCT<BOOL>>[{false}]
 ==

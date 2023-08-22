@@ -34,14 +34,14 @@ CreateRowAccessPolicyStmt
 
 [language_features={{ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX|ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX,PARAMETERS_IN_GRANTEE_LIST}}]
 create row policy on KeyValue
-to 'foo@google.com',{{| @test_param_string,}} "mdbuser/bar"
+to 'foo@google.com',{{| @test_param_string,}} 'mdbuser/bar'
 using(key = 123);
 --
 ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX,
 --
 CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com', "mdbuser/bar"]
++-grantee_list=['foo@google.com', 'mdbuser/bar']
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -53,7 +53,7 @@ CreateRowAccessPolicyStmt
 ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX, @test_param_string,
 --
 ERROR: The GRANTEE list only supports string literals, not parameters [at 2:22]
-to 'foo@google.com', @test_param_string, "mdbuser/bar"
+to 'foo@google.com', @test_param_string, 'mdbuser/bar'
                      ^
 --
 ALTERNATION GROUP: ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX,PARAMETERS_IN_GRANTEE_LIST,

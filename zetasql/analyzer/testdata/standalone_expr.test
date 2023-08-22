@@ -84,7 +84,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
   +-parse_location=4-25
   +-Literal(parse_location=4-5, type=INT64, value=2)
   +-Cast(INT32 -> INT64)
-    +-Parameter(parse_location=8-25, type=INT32, name="test_param_int32")
+    +-Parameter(parse_location=8-25, type=INT32, name='test_param_int32')
 ==
 
 [parameter_mode=positional]
@@ -126,7 +126,7 @@ column_int32 = @test_param_int32
 FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 +-parse_location=0-32
 +-ExpressionColumn(parse_location=0-12, type=INT32, name="column_int32")
-+-Parameter(parse_location=15-32, type=INT32, name="test_param_int32")
++-Parameter(parse_location=15-32, type=INT32, name='test_param_int32')
 ==
 
 [parameter_mode=positional]
@@ -506,7 +506,7 @@ FunctionCall(ZetaSQL:$make_array(repeated(2) INT64) -> ARRAY<INT64>)
 |     +-input_scan=
 |       +-TableScan(parse_location=23-31, column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-Cast(INT32 -> INT64)
-  +-Parameter(parse_location=34-51, type=INT32, name="test_param_int32")
+  +-Parameter(parse_location=34-51, type=INT32, name='test_param_int32')
 ==
 
 [parameter_mode=positional]

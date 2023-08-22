@@ -432,7 +432,7 @@ from (select 1 primary_key, "Ca" col UNION ALL
       select 2, "ca" UNION ALL
       select 3, "Cb" UNION ALL
       select 4, "cb")
-ORDER BY col COLLATE "und:ci"
+ORDER BY col COLLATE 'und:ci'
 --
 ARRAY<STRUCT<primary_key INT64, col STRING>>[unknown order:
   {2, "ca"},
@@ -443,7 +443,7 @@ ARRAY<STRUCT<primary_key INT64, col STRING>>[unknown order:
 ==
 
 [name=orderby_collate_und_ci_parameter]
-[parameters="und:ci" collation_name]
+[parameters='und:ci' collation_name]
 select primary_key, col
 from (select 1 primary_key, "Ca" col UNION ALL
       select 2, "ca" UNION ALL

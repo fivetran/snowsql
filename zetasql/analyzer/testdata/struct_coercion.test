@@ -63,7 +63,7 @@ QueryStmt
 
 # Timezone is propogated correctly inside the struct.
 [default_timezone=EST]
-select cast(("1970-01-01 01:01:06 UTC", '1970-01-01 01:01:06')
+select cast(('1970-01-01 01:01:06 UTC', '1970-01-01 01:01:06')
             AS STRUCT<TIMESTAMP, TIMESTAMP>)
 --
 QueryStmt

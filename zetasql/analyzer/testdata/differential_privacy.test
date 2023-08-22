@@ -2668,7 +2668,7 @@ QueryStmt
         |   +-size=
         |   | +-Cast(UINT64 -> INT64)
         |   |   +-parse_location=168-173
-        |   |   +-Parameter(parse_location=146-164, type=UINT64, name="test_param_uint64")
+        |   |   +-Parameter(parse_location=146-164, type=UINT64, name='test_param_uint64')
         |   +-unit=ROWS
         |   +-repeatable_argument=
         |     +-Literal(parse_location=192-194, type=INT64, value=10)
@@ -2705,7 +2705,7 @@ QueryStmt
         |   |   +-size=
         |   |   | +-Cast(UINT64 -> INT64)
         |   |   |   +-parse_location=168-173
-        |   |   |   +-Parameter(parse_location=146-164, type=UINT64, name="test_param_uint64")
+        |   |   |   +-Parameter(parse_location=146-164, type=UINT64, name='test_param_uint64')
         |   |   +-unit=ROWS
         |   |   +-repeatable_argument=
         |   |     +-Literal(parse_location=192-194, type=INT64, value=10)
@@ -2754,7 +2754,7 @@ QueryStmt
         |   +-unit=PERCENT
         |   +-repeatable_argument=
         |     +-Cast(INT32 -> INT64)
-        |       +-Parameter(parse_location=168-185, type=INT32, name="test_param_int32")
+        |       +-Parameter(parse_location=168-185, type=INT32, name='test_param_int32')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -2790,7 +2790,7 @@ QueryStmt
         |   |   +-unit=PERCENT
         |   |   +-repeatable_argument=
         |   |     +-Cast(INT32 -> INT64)
-        |   |       +-Parameter(parse_location=168-185, type=INT32, name="test_param_int32")
+        |   |       +-Parameter(parse_location=168-185, type=INT32, name='test_param_int32')
         |   +-group_by_list=
         |   | +-$uid#17 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#14)
         |   +-aggregate_list=

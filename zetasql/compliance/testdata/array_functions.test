@@ -377,12 +377,12 @@ SELECT ARRAY<BOOL>[true] || ARRAY<BOOL>[false]
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BOOL>[known order:true, false]}]
 ==
 [name=array_concat_string]
-SELECT ARRAY_CONCAT(ARRAY<STRING>["a"], ARRAY<STRING>["b"])
+SELECT ARRAY_CONCAT(ARRAY<STRING>['a'], ARRAY<STRING>['b'])
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"a", "b"]}]
 ==
 [name=array_concat_operator_string]
-SELECT ARRAY<STRING>["a"] || ARRAY<STRING>["b"]
+SELECT ARRAY<STRING>['a'] || ARRAY<STRING>['b']
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"a", "b"]}]
 ==

@@ -4,9 +4,9 @@
 [default no_run_unparser]
 [default enabled_ast_rewrites=DEFAULTS]
 [default language_features=V_1_4_CORRESPONDING,V_1_4_SET_OPERATION_COLUMN_PROPAGATION_MODE,V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT]
-SELECT COLLATE("b", "und:binary") AS b
+SELECT COLLATE('b', 'und:binary') AS b
 FULL UNION ALL CORRESPONDING
-SELECT COLLATE("a", "und:ci") AS a
+SELECT COLLATE('a', 'und:ci') AS a
 --
 QueryStmt
 +-output_column_list=
@@ -110,19 +110,19 @@ QueryStmt
 ==
 
 # Different collations for the matching columns throws an error.
-SELECT COLLATE("b", "und:binary") AS a
+SELECT COLLATE('b', 'und:binary') AS a
 FULL UNION ALL CORRESPONDING
-SELECT COLLATE("a", "und:ci") AS a
+SELECT COLLATE('a', 'und:ci') AS a
 --
 ERROR: Collation conflict: "und:ci" vs. "und:binary"; in column 1, item 2 of set operation scan [at 1:1]
-SELECT COLLATE("b", "und:binary") AS a
+SELECT COLLATE('b', 'und:binary') AS a
 ^
 ==
 
 # Collation annotation is preserved: collation in the 2nd query.
-SELECT "b" AS col
+SELECT 'b' AS col
 FULL UNION ALL CORRESPONDING
-SELECT COLLATE("a", "und:ci") AS col
+SELECT COLLATE('a', 'und:ci') AS col
 --
 QueryStmt
 +-output_column_list=
@@ -193,9 +193,9 @@ QueryStmt
 
 # COLLATION annotations are preserved for columns for both columns w/ and w/o
 # padded NULLs.
-SELECT COLLATE("b", "und:binary") AS b, "a" AS a
+SELECT COLLATE('b', 'und:binary') AS b, 'a' AS a
 FULL UNION ALL CORRESPONDING
-SELECT COLLATE("a", "und:ci") AS a
+SELECT COLLATE('a', 'und:ci') AS a
 --
 QueryStmt
 +-output_column_list=
@@ -289,11 +289,11 @@ QueryStmt
 ==
 
 # Collation annotation is preserved when merging with literal struct.
-SELECT (1, "str") AS a
+SELECT (1, 'str') AS a
 FULL UNION ALL CORRESPONDING
 SELECT 2 AS b
 FULL UNION ALL CORRESPONDING
-SELECT (CAST(1.0 AS float), COLLATE("str", "und:ci")) AS a
+SELECT (CAST(1.0 AS float), COLLATE('str', 'und:ci')) AS a
 --
 QueryStmt
 +-output_column_list=
@@ -315,12 +315,12 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=[$union_all1_cast.a#6]
     | | |       +-expr_list=
-    | | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, "str"})
+    | | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, 'str'})
     | | |       +-input_scan=
     | | |         +-ProjectScan
     | | |           +-column_list=[$union_all1.a#1]
     | | |           +-expr_list=
-    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"})
+    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'})
     | | |           +-input_scan=
     | | |             +-SingleRowScan
     | | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
@@ -388,12 +388,12 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1_cast.a#6]
       | |       +-expr_list=
-      | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, "str"})
+      | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, 'str'})
       | |       +-input_scan=
       | |         +-ProjectScan
       | |           +-column_list=[$union_all1.a#1]
       | |           +-expr_list=
-      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"})
+      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'})
       | |           +-input_scan=
       | |             +-SingleRowScan
       | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
@@ -440,11 +440,11 @@ QueryStmt
 
 # Collation annotation is preserved when merging with literals.
 [language_features=V_1_4_CORRESPONDING,V_1_4_SET_OPERATION_COLUMN_PROPAGATION_MODE,V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_PRESERVE_ANNOTATION_IN_IMPLICIT_CAST_IN_SCAN]
-SELECT (1, "str") AS a
+SELECT (1, 'str') AS a
 FULL UNION ALL CORRESPONDING
 SELECT 2 AS b
 FULL UNION ALL CORRESPONDING
-SELECT (CAST(1.0 AS float), COLLATE("str", "und:ci")) AS a
+SELECT (CAST(1.0 AS float), COLLATE('str', 'und:ci')) AS a
 --
 QueryStmt
 +-output_column_list=
@@ -466,12 +466,12 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=[$union_all1_cast.a#6]
     | | |       +-expr_list=
-    | | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, "str"})
+    | | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, 'str'})
     | | |       +-input_scan=
     | | |         +-ProjectScan
     | | |           +-column_list=[$union_all1.a#1]
     | | |           +-expr_list=
-    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"})
+    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'})
     | | |           +-input_scan=
     | | |             +-SingleRowScan
     | | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
@@ -539,12 +539,12 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1_cast.a#6]
       | |       +-expr_list=
-      | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, "str"})
+      | |       | +-a#6 := Literal(type=STRUCT<FLOAT, STRING>, value={1, 'str'})
       | |       +-input_scan=
       | |         +-ProjectScan
       | |           +-column_list=[$union_all1.a#1]
       | |           +-expr_list=
-      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"})
+      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'})
       | |           +-input_scan=
       | |             +-SingleRowScan
       | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#7]
@@ -593,11 +593,11 @@ QueryStmt
 # language feature FEATURE_V_1_4_PRESERVE_ANNOTATION_IN_IMPLICIT_CAST_IN_SCAN is
 # not enabled. Specifically, the annotations of string_ci of struct_val is
 # dropped.
-SELECT CAST((1, "str") AS STRUCT<INT64, STRING>) AS a
+SELECT CAST((1, 'str') AS STRUCT<INT64, STRING>) AS a
 FULL UNION ALL CORRESPONDING
 SELECT 2 AS b
 FULL UNION ALL CORRESPONDING
-SELECT (CAST(1.0 AS float), COLLATE("str", "und:ci")) AS a
+SELECT (CAST(1.0 AS float), COLLATE('str', 'und:ci')) AS a
 --
 QueryStmt
 +-output_column_list=
@@ -619,12 +619,12 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=[$union_all1_cast.a#6]
     | | |       +-expr_list=
-    | | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+    | | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
     | | |       +-input_scan=
     | | |         +-ProjectScan
     | | |           +-column_list=[$union_all1.a#1]
     | | |           +-expr_list=
-    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
     | | |           +-input_scan=
     | | |             +-SingleRowScan
     | | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
@@ -699,12 +699,12 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1_cast.a#6]
       | |       +-expr_list=
-      | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+      | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
       | |       +-input_scan=
       | |         +-ProjectScan
       | |           +-column_list=[$union_all1.a#1]
       | |           +-expr_list=
-      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
       | |           +-input_scan=
       | |             +-SingleRowScan
       | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
@@ -761,11 +761,11 @@ QueryStmt
 # FEATURE_V_1_4_PRESERVE_ANNOTATION_IN_IMPLICIT_CAST_IN_SCAN is *ENABLED*.
 # Specifically, the annotations of string_ci of struct_val is preserved.
 [language_features=V_1_4_CORRESPONDING,V_1_4_SET_OPERATION_COLUMN_PROPAGATION_MODE,V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_PRESERVE_ANNOTATION_IN_IMPLICIT_CAST_IN_SCAN]
-SELECT CAST((1, "str") AS STRUCT<INT64, STRING>) AS a
+SELECT CAST((1, 'str') AS STRUCT<INT64, STRING>) AS a
 FULL UNION ALL CORRESPONDING
 SELECT 2 AS b
 FULL UNION ALL CORRESPONDING
-SELECT (CAST(1.0 AS float), COLLATE("str", "und:ci")) AS a
+SELECT (CAST(1.0 AS float), COLLATE('str', 'und:ci')) AS a
 --
 QueryStmt
 +-output_column_list=
@@ -787,12 +787,12 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=[$union_all1_cast.a#6]
     | | |       +-expr_list=
-    | | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+    | | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
     | | |       +-input_scan=
     | | |         +-ProjectScan
     | | |           +-column_list=[$union_all1.a#1]
     | | |           +-expr_list=
-    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+    | | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
     | | |           +-input_scan=
     | | |             +-SingleRowScan
     | | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
@@ -869,12 +869,12 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1_cast.a#6]
       | |       +-expr_list=
-      | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+      | |       | +-a#6 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
       | |       +-input_scan=
       | |         +-ProjectScan
       | |           +-column_list=[$union_all1.a#1]
       | |           +-expr_list=
-      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "str"}, has_explicit_type=TRUE)
+      | |           | +-a#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'str'}, has_explicit_type=TRUE)
       | |           +-input_scan=
       | |             +-SingleRowScan
       | +-output_column_list=[$union_all1_cast.a#6, $null_column_for_outer_set_op.b#8]
