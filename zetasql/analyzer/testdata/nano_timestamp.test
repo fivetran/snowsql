@@ -62,14 +62,14 @@ QueryStmt
 select case key when 0 then '2000-09-03'
                 when 1 then '2000-09-03 00:00:01'
                 when 2 then '2000-09-03 00:00:01.001'
-                when 3 then "2000-09-03 00:00:01.001001001"
-                when 5 then "2000-09-03 00:00:01.999999999"
+                when 3 then '2000-09-03 00:00:01.001001001'
+                when 5 then '2000-09-03 00:00:01.999999999'
                 when 6 then '2000-09-03 00:00:02'
-                when 7 then "2000-09-03 -01"
+                when 7 then '2000-09-03 -01'
                 when 8 then '2000-09-03 00:00:01-01'
-                when 9 then "2000-09-03 00:00:01.001-01"
-                when 10 then "2000-09-03 00:00:01.001001001-01"
-                when 12 then "2000-09-03 00:00:01.999999999-01"
+                when 9 then '2000-09-03 00:00:01.001-01'
+                when 10 then '2000-09-03 00:00:01.001001001-01'
+                when 12 then '2000-09-03 00:00:01.999999999-01'
                 when 13 then '2000-09-03 00:00:02-01'
                 when 14 then timestamp('2000-01-01')
                 else null end
@@ -117,11 +117,11 @@ QueryStmt
       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
 
-select if (int32 > 0, timestamp, "2001-01-01 12:34:56.7890000123")
+select if (int32 > 0, timestamp, '2001-01-01 12:34:56.7890000123')
 from simpletypes
 --
-ERROR: Could not cast literal "2001-01-01 12:34:56.7890000123" to type TIMESTAMP [at 1:34]
-select if (int32 > 0, timestamp, "2001-01-01 12:34:56.7890000123")
+ERROR: Could not cast literal '2001-01-01 12:34:56.7890000123' to type TIMESTAMP [at 1:34]
+select if (int32 > 0, timestamp, '2001-01-01 12:34:56.7890000123')
                                  ^
 ==
 

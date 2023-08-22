@@ -23,7 +23,7 @@ AssertStatement [0-13]
 ASSERT(5 + a)
 ==
 
-ASSERT (SELECT 1) = 1 {{|AS "simple test"}};
+ASSERT (SELECT 1) = 1 {{|AS 'simple test'}};
 --
 ALTERNATION GROUP: <empty>
 --
@@ -42,7 +42,7 @@ ASSERT(
     1
 ) = 1
 --
-ALTERNATION GROUP: AS "simple test"
+ALTERNATION GROUP: AS 'simple test'
 --
 AssertStatement [0-38]
   BinaryExpression(=) [7-21]
@@ -58,7 +58,7 @@ AssertStatement [0-38]
 ASSERT(
   SELECT
     1
-) = 1 AS "simple test"
+) = 1 AS 'simple test'
 ==
 
 ASSERT NOT EXISTS(Select 1);
@@ -78,7 +78,7 @@ ASSERT NOT EXISTS(
 )
 ==
 
-ASSERT @param = 1 AS "param test";
+ASSERT @param = 1 AS 'param test';
 --
 AssertStatement [0-33]
   BinaryExpression(=) [7-17]
@@ -87,10 +87,10 @@ AssertStatement [0-33]
     IntLiteral(1) [16-17]
   StringLiteral('param test') [21-33]
 --
-ASSERT @param = 1 AS "param test"
+ASSERT @param = 1 AS 'param test'
 ==
 
-ASSERT @@sysvar = 1 AS "sysvar test";
+ASSERT @@sysvar = 1 AS 'sysvar test';
 --
 AssertStatement [0-36]
   BinaryExpression(=) [7-19]
@@ -100,10 +100,10 @@ AssertStatement [0-36]
     IntLiteral(1) [18-19]
   StringLiteral('sysvar test') [23-36]
 --
-ASSERT @@sysvar = 1 AS "sysvar test"
+ASSERT @@sysvar = 1 AS 'sysvar test'
 ==
 
-ASSERT "123" IN ("123", "456");
+ASSERT '123' IN ('123', '456');
 --
 AssertStatement [0-30]
   InExpression(IN) [7-30]
@@ -113,10 +113,10 @@ AssertStatement [0-30]
       StringLiteral('123') [17-22]
       StringLiteral('456') [24-29]
 --
-ASSERT "123" IN ("123", "456")
+ASSERT '123' IN ('123', '456')
 ==
 
-ASSERT IS_NAN(NULL) {{AND|OR}} ENDS_WITH("suffix", "fix") AS "abc";
+ASSERT IS_NAN(NULL) {{AND|OR}} ENDS_WITH('suffix', 'fix') AS 'abc';
 --
 ALTERNATION GROUP: AND
 --
@@ -133,7 +133,7 @@ AssertStatement [0-59]
       StringLiteral('fix') [44-49]
   StringLiteral('abc') [54-59]
 --
-ASSERT IS_NAN(NULL) AND ENDS_WITH("suffix", "fix") AS "abc"
+ASSERT IS_NAN(NULL) AND ENDS_WITH('suffix', 'fix') AS 'abc'
 --
 ALTERNATION GROUP: OR
 --
@@ -150,17 +150,17 @@ AssertStatement [0-58]
       StringLiteral('fix') [43-48]
   StringLiteral('abc') [53-58]
 --
-ASSERT IS_NAN(NULL) OR ENDS_WITH("suffix", "fix") AS "abc"
+ASSERT IS_NAN(NULL) OR ENDS_WITH('suffix', 'fix') AS 'abc'
 ==
 
-ASSERT "123" IS NOT NULL;
+ASSERT '123' IS NOT NULL;
 --
 AssertStatement [0-24]
   BinaryExpression(IS NOT) [7-24]
     StringLiteral('123') [7-12]
     NullLiteral(NULL) [20-24]
 --
-ASSERT "123" IS NOT NULL
+ASSERT '123' IS NOT NULL
 ==
 
 ASSERT CASE {{|TRUE}} WHEN TRUE THEN FALSE END;
@@ -268,11 +268,11 @@ ASSERT SELECT TRUE;
        ^
 ==
 
-ASSERT (SELECT TRUE) "description";
+ASSERT (SELECT TRUE) 'description';
 --
 
-ERROR: Syntax error: Expected end of input but got string literal "description" [at 1:22]
-ASSERT (SELECT TRUE) "description";
+ERROR: Syntax error: Expected end of input but got string literal 'description' [at 1:22]
+ASSERT (SELECT TRUE) 'description';
                      ^
 ==
 
