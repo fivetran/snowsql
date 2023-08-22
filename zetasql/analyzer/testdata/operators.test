@@ -1752,7 +1752,7 @@ select
   case
   when KitchenSink.int64_key_1 = 0 then @test_param_string
   when KitchenSink.int64_key_1 = 1 then @test_param_bytes
-  when KitchenSink.int64_key_1 = 2 then "int64_key_1: 1, int64_key_2: 2"
+  when KitchenSink.int64_key_1 = 2 then 'int64_key_1: 1, int64_key_2: 2'
   when KitchenSink.int64_key_1 = 3 then b"""int64_key_1: 3, int64_key_2: 4"""
   when KitchenSink.int64_key_1 = 4 then NULL
   else KitchenSink
