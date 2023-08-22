@@ -13,13 +13,13 @@
 
 [name=timestamp_to_string_1]
 select [cast(timestamp '2015-01-28' as string),
-        cast(timestamp "2015-01-28 00:00:00" as string),
-        cast(timestamp "2015-01-28 00:00:00.0" as string),
-        cast(timestamp "2015-01-28 00:00:00.00" as string),
-        cast(timestamp "2015-01-28 00:00:00.000" as string),
-        cast(timestamp "2015-01-28 00:00:00.0000" as string),
-        cast(timestamp "2015-01-28 00:00:00.00000" as string),
-        cast(timestamp "2015-01-28 00:00:00.000000" as string),
+        cast(timestamp '2015-01-28 00:00:00' as string),
+        cast(timestamp '2015-01-28 00:00:00.0' as string),
+        cast(timestamp '2015-01-28 00:00:00.00' as string),
+        cast(timestamp '2015-01-28 00:00:00.000' as string),
+        cast(timestamp '2015-01-28 00:00:00.0000' as string),
+        cast(timestamp '2015-01-28 00:00:00.00000' as string),
+        cast(timestamp '2015-01-28 00:00:00.000000' as string),
         cast(timestamp "2015-01-28 00:00:00.0000000" as string),
         cast(timestamp "2015-01-28 00:00:00.00000000" as string),
         cast(timestamp "2015-01-28 00:00:00.000000000" as string)]
@@ -45,13 +45,13 @@ ARRAY<STRUCT<ARRAY<>>>[
 # 6-digit TIMESTAMP values. So the last 3 digits in the subseconds are truncated
 # right after the literal is resolved.
 [name=timestamp_to_string_2]
-select [cast(timestamp "2015-01-28 00:00:00" as string),
-        cast(timestamp "2015-01-28 00:00:00.1" as string),
-        cast(timestamp "2015-01-28 00:00:00.01" as string),
-        cast(timestamp "2015-01-28 00:00:00.001" as string),
-        cast(timestamp "2015-01-28 00:00:00.0001" as string),
-        cast(timestamp "2015-01-28 00:00:00.00001" as string),
-        cast(timestamp "2015-01-28 00:00:00.000001" as string),
+select [cast(timestamp '2015-01-28 00:00:00' as string),
+        cast(timestamp '2015-01-28 00:00:00.1' as string),
+        cast(timestamp '2015-01-28 00:00:00.01' as string),
+        cast(timestamp '2015-01-28 00:00:00.001' as string),
+        cast(timestamp '2015-01-28 00:00:00.0001' as string),
+        cast(timestamp '2015-01-28 00:00:00.00001' as string),
+        cast(timestamp '2015-01-28 00:00:00.000001' as string),
         cast(timestamp "2015-01-28 00:00:00.0000001" as string),
         cast(timestamp "2015-01-28 00:00:00.00000001" as string),
         cast(timestamp "2015-01-28 00:00:00.000000001" as string)]

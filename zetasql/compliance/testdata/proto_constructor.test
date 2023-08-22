@@ -636,7 +636,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     ts AS timestamp_seconds,
     d AS date_default,
     d AS date_decimal)
-FROM (SELECT TIMESTAMP "1890-10-11 19:33:20+00:00" as ts,
+FROM (SELECT TIMESTAMP '1890-10-11 19:33:20+00:00' as ts,
              DATE '1890-10-11' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
@@ -660,7 +660,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     ts AS timestamp_seconds,
     d AS date_default,
     d AS date_decimal)
-FROM (SELECT TIMESTAMP "2049-03-22 04:26:40+00:00" as ts,
+FROM (SELECT TIMESTAMP '2049-03-22 04:26:40+00:00' as ts,
              DATE '2049-03-22' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
@@ -684,7 +684,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     ts AS timestamp_seconds,
     d AS date_default,
     d AS date_decimal)
-FROM (SELECT TIMESTAMP "1970-01-01 00:00:00+00:00" as ts,
+FROM (SELECT TIMESTAMP '1970-01-01 00:00:00+00:00' as ts,
              DATE '1970-01-01' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
@@ -708,7 +708,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     ts AS timestamp_seconds,
     d AS date_default,
     d AS date_decimal)
-FROM (SELECT TIMESTAMP "1969-12-31 23:59:59.999999+00:00" as ts,
+FROM (SELECT TIMESTAMP '1969-12-31 23:59:59.999999+00:00' as ts,
              DATE '1969-12-31' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[

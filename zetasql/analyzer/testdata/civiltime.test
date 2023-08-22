@@ -3630,7 +3630,7 @@ select timestamp(1);
 
 # DATETIME is supertype of DATE
 [language_features=V_1_2_CIVIL_TIME]
-select if(current_time > "12:00:00", current_date, current_datetime)
+select if(current_time > '12:00:00', current_date, current_datetime)
 --
 QueryStmt
 +-output_column_list=

@@ -320,8 +320,8 @@ ARRAY<STRUCT<TIME, TIME, STRING, STRING, STRING, TIME>>[
   {NULL,
    12:34:56.123456,
    NULL,
-   "12:34:56.123456",
-   "12:34:56.123456",
+   '12:34:56.123456',
+   '12:34:56.123456',
    12:34:56.123456}
 ]
 ==
@@ -357,8 +357,8 @@ ARRAY<STRUCT<DATETIME, DATETIME, STRING, STRING, STRING, DATETIME>>[
     NULL,
     2006-01-02 03:04:05.123456,
     NULL,
-    "2006-01-02 03:04:05.123456",
-    "2006-01-02 03:04:05.123456",
+    '2006-01-02 03:04:05.123456',
+    '2006-01-02 03:04:05.123456',
     2006-01-02 03:04:05.123456
   }
 ]
@@ -1004,7 +1004,7 @@ ARRAY<STRUCT<STRING, STRING, STRING, STRING>>[
   {
     "06-05 1234",
     "07:08:09 AM 06/05/1234",
-    "07:08:09",
+    '07:08:09',
     "09:08:09 AM 06/05/1234  -08:00"
   }
 ]
@@ -1409,7 +1409,7 @@ ERROR: generic::out_of_range: Invalid time string "abc"
 [required_features=V_1_2_CIVIL_TIME]
 select cast('24:00:00' as time)
 --
-ERROR: generic::out_of_range: Invalid time string "24:00:00"
+ERROR: generic::out_of_range: Invalid time string '24:00:00'
 ==
 
 [name=cast_invalid_literal_to_datetime_with_civil_time_enabled]
@@ -1423,7 +1423,7 @@ ERROR: generic::out_of_range: Invalid datetime string "abc"
 [required_features=V_1_2_CIVIL_TIME]
 select cast('2015-13-05 01:02:03' as datetime)
 --
-ERROR: generic::out_of_range: Invalid datetime string "2015-13-05 01:02:03"
+ERROR: generic::out_of_range: Invalid datetime string '2015-13-05 01:02:03'
 ==
 
 [name=cast_utc_timestamp_to_datetime_with_civil_time_enabled]
@@ -1734,7 +1734,7 @@ ERROR: generic::out_of_range: Invalid date: '2023-13-01'
 [required_features=RANGE_TYPE,V_1_2_CIVIL_TIME]
 select cast('[2022-01-01 12:00:00, 2023-13-01 24:00:00)' as RANGE<DATETIME>);
 --
-ERROR: generic::out_of_range: Invalid datetime string "2023-13-01 24:00:00"
+ERROR: generic::out_of_range: Invalid datetime string '2023-13-01 24:00:00'
 
 
 ==

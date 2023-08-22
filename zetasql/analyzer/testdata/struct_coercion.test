@@ -63,7 +63,7 @@ QueryStmt
 
 # Timezone is propogated correctly inside the struct.
 [default_timezone=EST]
-select cast(("1970-01-01 01:01:06 UTC", "1970-01-01 01:01:06")
+select cast(("1970-01-01 01:01:06 UTC", '1970-01-01 01:01:06')
             AS STRUCT<TIMESTAMP, TIMESTAMP>)
 --
 QueryStmt
@@ -228,7 +228,7 @@ QueryStmt
       +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0])
 ==
 
-select cast((int32, timestamp "2014-01-01 12:34:56.000001",
+select cast((int32, timestamp '2014-01-01 12:34:56.000001',
              '2014-01-01') AS STRUCT<INT32, DATE, DATE>)
 from SimpleTypes
 --
@@ -461,7 +461,7 @@ select STRUCT<INT32, BYTES>(1, "b")
 ==
 
 select STRUCT<"zetasql_test__.TestEnum", TIMESTAMP>
-    (1, "2014-01-01 12:34:56.000001")
+    (1, '2014-01-01 12:34:56.000001')
 --
 QueryStmt
 +-output_column_list=

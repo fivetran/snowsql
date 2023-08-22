@@ -60,11 +60,11 @@ QueryStmt
 # 4) Each of these, with and without explicit time zone (the default is
 #    America/Los_Angeles)
 select case key when 0 then '2000-09-03'
-                when 1 then "2000-09-03 00:00:01"
-                when 2 then "2000-09-03 00:00:01.001"
+                when 1 then '2000-09-03 00:00:01'
+                when 2 then '2000-09-03 00:00:01.001'
                 when 3 then "2000-09-03 00:00:01.001001001"
                 when 5 then "2000-09-03 00:00:01.999999999"
-                when 6 then "2000-09-03 00:00:02"
+                when 6 then '2000-09-03 00:00:02'
                 when 7 then "2000-09-03 -01"
                 when 8 then '2000-09-03 00:00:01-01'
                 when 9 then "2000-09-03 00:00:01.001-01"
