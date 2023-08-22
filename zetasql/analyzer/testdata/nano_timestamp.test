@@ -59,7 +59,7 @@ QueryStmt
 # 3) Date and time with varying number of subsecond digits
 # 4) Each of these, with and without explicit time zone (the default is
 #    America/Los_Angeles)
-select case key when 0 then "2000-09-03"
+select case key when 0 then '2000-09-03'
                 when 1 then "2000-09-03 00:00:01"
                 when 2 then "2000-09-03 00:00:01.001"
                 when 3 then "2000-09-03 00:00:01.001001001"

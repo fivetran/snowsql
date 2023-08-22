@@ -1074,19 +1074,19 @@ SELECT *
 ==
 
 # Ambiguous name because it occurs as two fields in the same value table.
-select c from (select AS STRUCT 1 C, "a" c)
+select c from (select AS STRUCT 1 C, 'a' c)
 --
 ERROR: Column name c is ambiguous [at 1:8]
-select c from (select AS STRUCT 1 C, "a" c)
+select c from (select AS STRUCT 1 C, 'a' c)
        ^
 ==
 
 # Same thing where we get a value table because we are unnesting
 # an array (of structs).
-select c from UNNEST(ARRAY(select AS STRUCT 1 c, "a" c))
+select c from UNNEST(ARRAY(select AS STRUCT 1 c, 'a' c))
 --
 ERROR: Column name c is ambiguous [at 1:8]
-select c from UNNEST(ARRAY(select AS STRUCT 1 c, "a" c))
+select c from UNNEST(ARRAY(select AS STRUCT 1 c, 'a' c))
        ^
 ==
 
@@ -1243,7 +1243,7 @@ QueryStmt
 # See join_using.test for more JOIN USING tests on value tables.
 select *
 from TestStructValueTable join
-     (select "xxx" xxx, 15 a) using (a)
+     (select 'xxx' xxx, 15 a) using (a)
 --
 QueryStmt
 +-output_column_list=
@@ -3006,11 +3006,11 @@ QueryStmt
               +-field_idx=1
 ==
 
-select concat({{T.|}}f.d.b, "a")
+select concat({{T.|}}f.d.b, 'a')
 from TestNestedStructValueTable T
 group by {{T.|}}f.d.b
 having {{T.|}}f.d.b = 'foo'
-order by concat({{T.|}}f.d.b, "b")
+order by concat({{T.|}}f.d.b, 'b')
 --
 QueryStmt
 +-output_column_list=

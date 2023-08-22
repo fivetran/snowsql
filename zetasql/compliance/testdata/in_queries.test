@@ -495,8 +495,8 @@ ARRAY<STRUCT<x INT64>>[{1}]
 ==
 [name=in_clause_enum_type]
 SELECT x FROM TestEnum WHERE enum_col IN (
-  CAST("TESTENUM0" AS "zetasql_test__.TestEnum"),
-  CAST("TESTENUM2" AS "zetasql_test__.TestEnum")) ORDER BY x;
+  CAST('TESTENUM0' AS "zetasql_test__.TestEnum"),
+  CAST('TESTENUM2' AS "zetasql_test__.TestEnum")) ORDER BY x;
 --
 ARRAY<STRUCT<x INT64>>[known order:{1}, {3}]
 ==

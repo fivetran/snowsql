@@ -1303,7 +1303,7 @@ select cast(1 as int64) IN UNNEST(ARRAY<INT32>[1, 2, 3])
 
 # Another variant from b/24130693 (fixed).
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select "TESTENUM0" IN UNNEST([TestEnum]) from EnumTable
+select 'TESTENUM0' IN UNNEST([TestEnum]) from EnumTable
 --
 QueryStmt
 +-output_column_list=

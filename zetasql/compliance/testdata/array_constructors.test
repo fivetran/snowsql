@@ -48,7 +48,7 @@ SELECT ARRAY<BYTES>[b"a", b"b", b"c"];
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[known order:b"a", b"b", b"c"]}]
 ==
 [name=construct_DATE_array_basic]
-SELECT ARRAY<DATE>["1984-08-02", "2000-01-01", "2014-09-11"];
+SELECT ARRAY<DATE>['1984-08-02', '2000-01-01', '2014-09-11'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<DATE>[known order:1984-08-02, 2000-01-01, 2014-09-11]}
@@ -68,7 +68,7 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_enum_array_basic]
-SELECT ARRAY<zetasql_test__.TestEnum>["TESTENUM0", "TESTENUM1", "TESTENUM2"];
+SELECT ARRAY<zetasql_test__.TestEnum>['TESTENUM0', 'TESTENUM1', 'TESTENUM2'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:
@@ -172,8 +172,8 @@ SELECT ARRAY<BYTES>[@a, @b, @c];
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[known order:b"a", b"b", NULL]}]
 ==
 [name=construct_DATE_array_from_params]
-[parameters=cast("1984-08-02" as date) a,
-            cast("2000-01-01" as date) b,
+[parameters=cast('1984-08-02' as date) a,
+            cast('2000-01-01' as date) b,
             cast(NULL as date) c]
 SELECT ARRAY<DATE>[@a, @b, @c];
 --
@@ -196,8 +196,8 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_enum_array_from_params]
-[parameters=cast("TESTENUM0" as zetasql_test__.TestEnum) a,
-            cast("TESTENUM1" as zetasql_test__.TestEnum) b,
+[parameters=cast('TESTENUM0' as zetasql_test__.TestEnum) a,
+            cast('TESTENUM1' as zetasql_test__.TestEnum) b,
             cast(NULL as zetasql_test__.TestEnum) c]
 SELECT ARRAY<zetasql_test__.TestEnum>[@a, @b, @c];
 --
@@ -292,8 +292,8 @@ SELECT ARRAY<BYTES>[SUBSTR(b"abc", 2), a] FROM (SELECT b'def' a);
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[known order:b"bc", b"def"]}]
 ==
 [name=construct_DATE_array_from_non_literals]
-SELECT ARRAY<DATE>[CAST(SUBSTR("1984-08-02", 0) AS DATE), a]
-FROM (SELECT cast("1984-08-02" AS DATE) a);
+SELECT ARRAY<DATE>[CAST(SUBSTR('1984-08-02', 0) AS DATE), a]
+FROM (SELECT cast('1984-08-02' AS DATE) a);
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[known order:1984-08-02, 1984-08-02]}]
 ==
@@ -305,8 +305,8 @@ ARRAY<STRUCT<ARRAY<>>>[{ARRAY<TIMESTAMP>[1984-08-02 01:01:01.001001+00]}]
 ==
 [name=construct_enum_array_from_non_literals]
 SELECT ARRAY<zetasql_test__.TestEnum>[
-    cast(SUBSTR("TESTENUM0", 0) AS zetasql_test__.TestEnum), a]
-FROM (SELECT cast("TESTENUM1" AS zetasql_test__.TestEnum) a);
+    cast(SUBSTR('TESTENUM0', 0) AS zetasql_test__.TestEnum), a]
+FROM (SELECT cast('TESTENUM1' AS zetasql_test__.TestEnum) a);
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:TESTENUM0, TESTENUM1]}
@@ -397,7 +397,7 @@ SELECT ARRAY<BYTES>[b"a", NULL, b"c"];
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[known order:b"a", NULL, b"c"]}]
 ==
 [name=construct_DATE_array_with_null]
-SELECT ARRAY<DATE>["1984-08-02", NULL, "2014-09-11"];
+SELECT ARRAY<DATE>['1984-08-02', NULL, '2014-09-11'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<DATE>[known order:1984-08-02, NULL, 2014-09-11]}
@@ -416,7 +416,7 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_enum_array_with_null]
-SELECT ARRAY<zetasql_test__.TestEnum>["TESTENUM0", NULL, "TESTENUM2"];
+SELECT ARRAY<zetasql_test__.TestEnum>['TESTENUM0', NULL, 'TESTENUM2'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:TESTENUM0, NULL, TESTENUM2]}

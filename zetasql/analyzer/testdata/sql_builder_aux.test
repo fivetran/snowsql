@@ -42,10 +42,10 @@ SELECT
 ==
 
 define table a."b"."c 2" (x='''
-foo''',y="2011-10-22",z=@test_param_int64)
+foo''',y='2011-10-22',z=@test_param_int64)
 --
 [UNPARSED_SQL]
-DEFINE TABLE a.b."c 2"(x = "\nfoo", y = "2011-10-22", z = @test_param_int64);
+DEFINE TABLE a.b."c 2"(x = "\nfoo", y = '2011-10-22', z = @test_param_int64);
 ==
 
 define table t1 ()

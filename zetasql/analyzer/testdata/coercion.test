@@ -35,7 +35,7 @@ QueryStmt
 ==
 
 [language_features={{|V_1_3_DATE_TIME_CONSTRUCTORS}}]
-select date("2019-08-01 21:00:00+00");
+select date('2019-08-01 21:00:00+00');
 --
 QueryStmt
 +-output_column_list=
@@ -581,10 +581,10 @@ select 1 FROM TestTable WHERE KitchenSink.test_enum = 123456890123;
                                                       ^
 ==
 
-select 1 FROM TestTable WHERE KitchenSink.test_enum = "a";
+select 1 FROM TestTable WHERE KitchenSink.test_enum = 'a';
 --
-ERROR: Could not cast literal "a" to type zetasql_test__.TestEnum [at 1:55]
-select 1 FROM TestTable WHERE KitchenSink.test_enum = "a";
+ERROR: Could not cast literal 'a' to type zetasql_test__.TestEnum [at 1:55]
+select 1 FROM TestTable WHERE KitchenSink.test_enum = 'a';
                                                       ^
 ==
 
@@ -755,7 +755,7 @@ ERROR: No matching signature for operator IN for argument types ENUM<zetasql_tes
 # cast to PROTO.
 select if(false,
           KitchenSink,
-          """int64_key_1: 1, int64_key_2: 2""")
+          '''int64_key_1: 1, int64_key_2: 2''')
 from TestTable
 --
 QueryStmt
@@ -779,7 +779,7 @@ QueryStmt
 # constant-folded STRING literal does not work.
 select if(false,
           KitchenSink,
-          CAST("""int64_key_1: 1, int64_key_2: 2""" AS STRING))
+          CAST('''int64_key_1: 1, int64_key_2: 2''' AS STRING))
 from TestTable
 --
 ERROR: No matching signature for function IF for argument types: BOOL, zetasql_test__.KitchenSinkPB, STRING. Supported signature: IF(BOOL, ANY, ANY) [at 1:8]
@@ -791,11 +791,11 @@ select if(false,
 # string literal is not valid.
 select if(false,
           KitchenSink,
-          """int64_key_1: int64_key_2: 2""")
+          '''int64_key_1: int64_key_2: 2''')
 from TestTable
 --
-ERROR: Could not cast literal "int64_key_1: int64_key_2: 2" to type zetasql_test__.KitchenSinkPB (Error parsing proto: Expected integer, got: int64_key_2 [1:14]) [at 3:11]
-          """int64_key_1: int64_key_2: 2""")
+ERROR: Could not cast literal 'int64_key_1: int64_key_2: 2' to type zetasql_test__.KitchenSinkPB (Error parsing proto: Expected integer, got: int64_key_2 [1:14]) [at 3:11]
+          '''int64_key_1: int64_key_2: 2''')
           ^
 ==
 
@@ -1990,8 +1990,8 @@ QueryStmt
 [language_features=NUMERIC_TYPE]
 SELECT cast(99999999999999999999999999999.999999999 as NUMERIC),
        cast(-99999999999999999999999999999.999999999 as NUMERIC),
-       cast(cast("99999999999999999999999999999.999999999" as DOUBLE) as NUMERIC),
-       cast(cast("-99999999999999999999999999999.999999999" as DOUBLE) as NUMERIC),
+       cast(cast('99999999999999999999999999999.999999999' as DOUBLE) as NUMERIC),
+       cast(cast('-99999999999999999999999999999.999999999' as DOUBLE) as NUMERIC),
        cast(x as NUMERIC)
 FROM (SELECT 99999999999999999999999999999.999999999 x)
 --
@@ -2505,8 +2505,8 @@ QueryStmt
 [language_features=BIGNUMERIC_TYPE]
 SELECT cast(578960446186580977117854925043439539266.34992332820282019728792003956564819967 as BIGNUMERIC),
        cast(-578960446186580977117854925043439539266.34992332820282019728792003956564819968 as BIGNUMERIC),
-       cast(cast("578960446186580977117854925043439539266.34992332820282019728792003956564819967" as DOUBLE) as BIGNUMERIC),
-       cast(cast("-578960446186580977117854925043439539266.34992332820282019728792003956564819968" as DOUBLE) as BIGNUMERIC),
+       cast(cast('578960446186580977117854925043439539266.34992332820282019728792003956564819967' as DOUBLE) as BIGNUMERIC),
+       cast(cast('-578960446186580977117854925043439539266.34992332820282019728792003956564819968' as DOUBLE) as BIGNUMERIC),
        cast(x as BIGNUMERIC)
 FROM (SELECT 578960446186580977117854925043439539266.34992332820282019728792003956564819967 x)
 --
@@ -2698,7 +2698,7 @@ select fn_on_int32_array_returns_int32(ARRAY<INT64>[])
 # doesn't have access to the underlying proto to determine the
 # meaning of the integer.
 #
-SELECT ROUND(NUMERIC "1", 1, 1);
+SELECT ROUND(NUMERIC '1', 1, 1);
 --
 ALTERNATION GROUP: internal
 
@@ -2721,7 +2721,7 @@ QueryStmt
 ALTERNATION GROUP: external
 --
 ERROR: No matching signature for function ROUND for argument types: NUMERIC, INT64, INT64. Supported signatures: ROUND(FLOAT64); ROUND(NUMERIC); ROUND(FLOAT64, INT64); ROUND(NUMERIC, INT64); ROUND(NUMERIC, INT64, ROUNDING_MODE) [at 7:8]
-SELECT ROUND(NUMERIC "1", 1, 1);
+SELECT ROUND(NUMERIC '1', 1, 1);
        ^
 ==
 
@@ -2846,7 +2846,7 @@ select CAST(1 as "zetasql.functions.RoundingMode") = CAST(1 as ROUNDING_MODE)
 # 'zetasql.functions.RoundingMode')
 select 'ROUNDING_MODE_UNSPECIFIED' = CAST(1 as ROUNDING_MODE)
 --
-ERROR: Could not cast literal "ROUNDING_MODE_UNSPECIFIED" to type ROUNDING_MODE [at 3:8]
+ERROR: Could not cast literal 'ROUNDING_MODE_UNSPECIFIED' to type ROUNDING_MODE [at 3:8]
 select 'ROUNDING_MODE_UNSPECIFIED' = CAST(1 as ROUNDING_MODE)
        ^
 ==

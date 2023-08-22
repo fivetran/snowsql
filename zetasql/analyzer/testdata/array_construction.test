@@ -420,7 +420,7 @@ select [1].a
            ^
 ==
 
-select ARRAY<date>["1970-01-01"]
+select ARRAY<date>['1970-01-01']
 --
 QueryStmt
 +-output_column_list=
@@ -465,7 +465,7 @@ select ARRAY<date>[" 1970-01-01"]
                    ^
 ==
 
-select ["1970-01-01", "date"] from SimpleTypes
+select ['1970-01-01', "date"] from SimpleTypes
 --
 QueryStmt
 +-output_column_list=

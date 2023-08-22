@@ -271,6 +271,6 @@ select 'TESTENUM' = cast('TESTENUM1' as zetasql_test__.TestEnum)
 
 select 'testenum0' = cast('TESTENUM1' as zetasql_test__.TestEnum)
 --
-ERROR: Could not cast literal "testenum0" to type zetasql_test__.TestEnum; Did you mean 'TESTENUM0'? (Note: ENUM values are case sensitive) [at 1:8]
+ERROR: Could not cast literal 'TESTENUM0' to type zetasql_test__.TestEnum; Did you mean 'TESTENUM0'? (Note: ENUM values are case sensitive) [at 1:8]
 select 'testenum0' = cast('TESTENUM1' as zetasql_test__.TestEnum)
        ^

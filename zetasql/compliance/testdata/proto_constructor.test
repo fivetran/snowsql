@@ -174,7 +174,7 @@ ERROR: generic::out_of_range: Error parsing proto: Message type "zetasql_test__.
 SELECT NEW zetasql_test__.KitchenSinkPB(
     1 AS int64_key_1,
     2 AS int64_key_2,
-    DATE "2017-06-15" AS (zetasql_test__.date_extension))
+    DATE '2017-06-15' AS (zetasql_test__.date_extension))
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{
@@ -589,7 +589,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     d AS date_default,
     d AS date_decimal)
 FROM (SELECT TIMESTAMP "1890-08-03 01:33:11.634390+00" as ts,
-             DATE "1890-08-03" as d)
+             DATE '1890-08-03' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{
@@ -613,7 +613,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     d AS date_default,
     d AS date_decimal)
 FROM (SELECT TIMESTAMP "2049-05-30 22:26:48.36561+00:00" as ts,
-             DATE "2049-05-30" as d)
+             DATE '2049-05-30' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{
@@ -637,7 +637,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     d AS date_default,
     d AS date_decimal)
 FROM (SELECT TIMESTAMP "1890-10-11 19:33:20+00:00" as ts,
-             DATE "1890-10-11" as d)
+             DATE '1890-10-11' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{
@@ -661,7 +661,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     d AS date_default,
     d AS date_decimal)
 FROM (SELECT TIMESTAMP "2049-03-22 04:26:40+00:00" as ts,
-             DATE "2049-03-22" as d)
+             DATE '2049-03-22' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{
@@ -685,7 +685,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     d AS date_default,
     d AS date_decimal)
 FROM (SELECT TIMESTAMP "1970-01-01 00:00:00+00:00" as ts,
-             DATE "1970-01-01" as d)
+             DATE '1970-01-01' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{
@@ -709,7 +709,7 @@ SELECT NEW zetasql_test__.KitchenSinkPB(
     d AS date_default,
     d AS date_decimal)
 FROM (SELECT TIMESTAMP "1969-12-31 23:59:59.999999+00:00" as ts,
-             DATE "1969-12-31" as d)
+             DATE '1969-12-31' as d)
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[
   {{

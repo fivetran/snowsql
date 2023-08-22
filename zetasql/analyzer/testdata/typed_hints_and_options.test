@@ -329,7 +329,7 @@ select @{ enum_hint='bad value' } 1
 # Enum values are case sensitive.
 select @{ ENUM_hint='TestEnum2' } 1
 --
-ERROR: Could not cast literal "TestEnum2" to type zetasql_test__.TestEnum; Did you mean 'TESTENUM2'? (Note: ENUM values are case sensitive) [at 1:21]
+ERROR: Could not cast literal 'TESTENUM2' to type zetasql_test__.TestEnum; Did you mean 'TESTENUM2'? (Note: ENUM values are case sensitive) [at 1:21]
 select @{ ENUM_hint='TestEnum2' } 1
                     ^
 ==
@@ -362,7 +362,7 @@ QueryStmt
           +-SingleRowScan
 ==
 
-select @{ enum_hint="TESTENUM2",
+select @{ enum_hint='TESTENUM2',
           proto_hint="int32_val2:5",
           proto_hint=b'',
           struct_hint=(17, 'TESTENUM1') } 1
@@ -486,7 +486,7 @@ CreateTableAsSelectStmt
 # More interesting STRUCT option syntax.
 CREATE TABLE foo
 OPTIONS(
-    struct_option = struct<a int32, b zetasql_test__.TestEnum>(2, "TESTENUM1"))
+    struct_option = struct<a int32, b zetasql_test__.TestEnum>(2, 'TESTENUM1'))
 as select 1 x;
 --
 CreateTableAsSelectStmt
@@ -513,7 +513,7 @@ as select 1 x;
 CreateTableAsSelectStmt
 +-name_path=foo
 +-option_list=
-| +-untyped_option := Literal(type=STRUCT<INT64, STRING>, value={1, "TESTENUM1"})
+| +-untyped_option := Literal(type=STRUCT<INT64, STRING>, value={1, 'TESTENUM1'})
 +-column_definition_list=
 | +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=
@@ -537,7 +537,7 @@ ALTERNATION GROUP: struct
 CreateTableAsSelectStmt
 +-name_path=foo
 +-option_list=
-| +-untyped_option := Literal(type=STRUCT<foo INT64, bar STRING>, value={foo:1, bar:"TESTENUM1"})
+| +-untyped_option := Literal(type=STRUCT<foo INT64, bar STRING>, value={foo:1, bar:'TESTENUM1'})
 +-column_definition_list=
 | +-ColumnDefinition(name='x', type=INT64, column=foo.x#2)
 +-output_column_list=

@@ -305,9 +305,9 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 ==
 [name=array_agg_with_null_DATE_analytic]
 SELECT ARRAY_AGG(elem)
-  OVER(PARTITION BY (elem >= DATE "2000-01-01")
+  OVER(PARTITION BY (elem >= DATE '2000-01-01')
      ORDER BY elem ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
-FROM UNNEST(ARRAY<DATE>["2000-01-01", "1984-08-02", "2014-09-11"]) elem;
+FROM UNNEST(ARRAY<DATE>['2000-01-01', '1984-08-02', '2014-09-11']) elem;
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<DATE>[1984-08-02]},
@@ -335,7 +335,7 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 [name=array_agg_with_null_enum_analytic]
 SELECT ARRAY_AGG(elem) OVER(PARTITION BY elem)
 FROM UNNEST(ARRAY<zetasql_test__.TestEnum>[
-    "TESTENUM0", "TESTENUM1", "TESTENUM0", "TESTENUM2", "TESTENUM2"]) elem;
+    'TESTENUM0', 'TESTENUM1', 'TESTENUM0', 'TESTENUM2', 'TESTENUM2']) elem;
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[unknown order:TESTENUM0, TESTENUM0]},
@@ -811,9 +811,9 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 ==
 [name=array_agg_without_null_DATE_analytic]
 SELECT ARRAY_AGG(elem)
-  OVER(PARTITION BY (elem >= DATE "2000-01-01")
+  OVER(PARTITION BY (elem >= DATE '2000-01-01')
      ORDER BY elem ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
-FROM UNNEST(ARRAY<DATE>["2000-01-01", "1984-08-02", "2014-09-11"]) elem;
+FROM UNNEST(ARRAY<DATE>['2000-01-01', '1984-08-02', '2014-09-11']) elem;
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<DATE>[1984-08-02]},
@@ -841,7 +841,7 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 [name=array_agg_without_null_enum_analytic]
 SELECT ARRAY_AGG(elem) OVER(PARTITION BY elem)
 FROM UNNEST(ARRAY<zetasql_test__.TestEnum>[
-    "TESTENUM0", "TESTENUM1", "TESTENUM0", "TESTENUM2", "TESTENUM2"]) elem;
+    'TESTENUM0', 'TESTENUM1', 'TESTENUM0', 'TESTENUM2', 'TESTENUM2']) elem;
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[unknown order:TESTENUM0, TESTENUM0]},

@@ -13,12 +13,12 @@
     ARRAY<DOUBLE>[1.1, 0.0, -1.1] double_arr,
     ARRAY<STRING>['σ', 'π', '⨝'] string_arr,
     ARRAY<BYTES>[b"a", b"b", b"c"] bytes_arr,
-    ARRAY<DATE>["1984-08-02", "2000-01-01", "2014-09-11"] date_arr,
+    ARRAY<DATE>['1984-08-02', '2000-01-01', '2014-09-11'] date_arr,
     ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC",
                      "2000-01-01 01:01:01.001001 UTC",
                      "2014-09-11 01:01:01.001001 UTC"] micros_arr,
     ARRAY<zetasql_test__.TestEnum>[
-      "TESTENUM0", "TESTENUM1", "TESTENUM2"] enum_arr,
+      'TESTENUM0', 'TESTENUM1', 'TESTENUM2'] enum_arr,
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11
@@ -98,10 +98,10 @@ ARRAY<STRUCT<ARRAY<>,
     ARRAY<DOUBLE>[1.1, NULL, -1.1] as double_arr,
     ARRAY<STRING>['σ', NULL, '⨝'] as string_arr,
     ARRAY<BYTES>[b"a", NULL, b"c"] as bytes_arr,
-    ARRAY<DATE>["1984-08-02", NULL, "2014-09-11"] as date_arr,
+    ARRAY<DATE>['1984-08-02', NULL, '2014-09-11'] as date_arr,
     ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC", NULL,
                      "2014-09-11 01:01:01.001001 UTC"] as micros_arr,
-    ARRAY<zetasql_test__.TestEnum>["TESTENUM0", NULL, "TESTENUM2"] enum_arr,
+    ARRAY<zetasql_test__.TestEnum>['TESTENUM0', NULL, 'TESTENUM2'] enum_arr,
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11
@@ -175,9 +175,9 @@ ARRAY<STRUCT<ARRAY<>,
     ARRAY<DOUBLE>[NULL, -1.1] double_arr,
     ARRAY<STRING>[NULL, '⨝'] string_arr,
     ARRAY<BYTES>[NULL, b"c"] bytes_arr,
-    ARRAY<DATE>[NULL, "2014-09-11"] date_arr,
+    ARRAY<DATE>[NULL, '2014-09-11'] date_arr,
     ARRAY<TIMESTAMP>[NULL, "2014-09-11 01:01:01.001001 UTC"] micros_arr,
-    ARRAY<zetasql_test__.TestEnum>[NULL, "TESTENUM2"] enum_arr,
+    ARRAY<zetasql_test__.TestEnum>[NULL, 'TESTENUM2'] enum_arr,
     ARRAY<zetasql_test__.KitchenSinkPB>[
       NULL,
       '''
@@ -238,9 +238,9 @@ ARRAY<STRUCT<ARRAY<>,
     ARRAY<DOUBLE>[1.1, NULL] double_arr,
     ARRAY<STRING>['σ', NULL] string_arr,
     ARRAY<BYTES>[b"a", NULL] bytes_arr,
-    ARRAY<DATE>["1984-08-02", NULL] date_arr,
+    ARRAY<DATE>['1984-08-02', NULL] date_arr,
     ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC", NULL] micros_arr,
-    ARRAY<zetasql_test__.TestEnum>["TESTENUM0", NULL] enum_arr,
+    ARRAY<zetasql_test__.TestEnum>['TESTENUM0', NULL] enum_arr,
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11
@@ -403,9 +403,9 @@ ARRAY<STRUCT<ARRAY<>,
     ARRAY<DOUBLE>[1.1] double_arr,
     ARRAY<STRING>['σ'] string_arr,
     ARRAY<BYTES>[b"a"] bytes_arr,
-    ARRAY<DATE>["1984-08-02"] date_arr,
+    ARRAY<DATE>['1984-08-02'] date_arr,
     ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC"] micros_arr,
-    ARRAY<zetasql_test__.TestEnum>["TESTENUM0"] enum_arr,
+    ARRAY<zetasql_test__.TestEnum>['TESTENUM0'] enum_arr,
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11

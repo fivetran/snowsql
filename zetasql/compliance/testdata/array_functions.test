@@ -397,12 +397,12 @@ SELECT ARRAY<BYTES>[b"f1"] || ARRAY<BYTES>[b"f2"]
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[known order:b"f1", b"f2"]}]
 ==
 [name=array_concat_date]
-SELECT ARRAY_CONCAT(ARRAY<DATE>["2000-01-01"], ARRAY<DATE>["2015-12-30"])
+SELECT ARRAY_CONCAT(ARRAY<DATE>['2000-01-01'], ARRAY<DATE>['2015-12-30'])
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[known order:2000-01-01, 2015-12-30]}]
 ==
 [name=array_concat_operator_date]
-SELECT ARRAY<DATE>["2000-01-01"] || ARRAY<DATE>["2015-12-30"]
+SELECT ARRAY<DATE>['2000-01-01'] || ARRAY<DATE>['2015-12-30']
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[known order:2000-01-01, 2015-12-30]}]
 ==
@@ -429,16 +429,16 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=array_concat_enum]
-SELECT ARRAY_CONCAT(ARRAY<zetasql_test__.TestEnum>["TESTENUM0"],
-       ARRAY<zetasql_test__.TestEnum>["TESTENUM1"]);
+SELECT ARRAY_CONCAT(ARRAY<zetasql_test__.TestEnum>['TESTENUM0'],
+       ARRAY<zetasql_test__.TestEnum>['TESTENUM1']);
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:TESTENUM0, TESTENUM1]}
 ]
 ==
 [name=array_concat_operator_enum]
-SELECT ARRAY<zetasql_test__.TestEnum>["TESTENUM0"] ||
-       ARRAY<zetasql_test__.TestEnum>["TESTENUM1"];
+SELECT ARRAY<zetasql_test__.TestEnum>['TESTENUM0'] ||
+       ARRAY<zetasql_test__.TestEnum>['TESTENUM1'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:TESTENUM0, TESTENUM1]}

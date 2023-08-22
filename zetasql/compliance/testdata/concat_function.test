@@ -42,7 +42,7 @@ ARRAY<STRUCT<STRING>>[{"2000-01-02 03:04:05.678-08"}]
 [name=concat_date]
 SELECT CONCAT(x) FROM UNNEST([DATE '2020-10-10']) x
 --
-ARRAY<STRUCT<STRING>>[{"2020-10-10"}]
+ARRAY<STRUCT<STRING>>[{'2020-10-10'}]
 ==
 [name=concat_datetime]
 [required_features=V_1_3_CONCAT_MIXED_TYPES,V_1_2_CIVIL_TIME]

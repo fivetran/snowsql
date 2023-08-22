@@ -1,7 +1,7 @@
 [name=strings_basic]
-SELECT "abc"
+SELECT 'abc'
 --
-ARRAY<STRUCT<STRING>>[{"abc"}]
+ARRAY<STRUCT<STRING>>[{'abc'}]
 ==
 # Test all the accepted escaped characters.
 [name=strings_accepted_escaped_characters]
@@ -28,7 +28,7 @@ ARRAY<STRUCT<STRING,
   "a\\b",
   "a?b",
   "a'b",
-  "a"b"}]
+  'a'b"}]
 ==
 
 #Test that unaccepted escaped characters error out.
@@ -67,7 +67,7 @@ SELECT "a\/b"
 [name=strings_triple_single_quotes_1]
 SELECT '''abc''', '''abc\n'''
 --
-ARRAY<STRUCT<STRING, STRING>>[{"abc", "abc\n"}]
+ARRAY<STRUCT<STRING, STRING>>[{'abc', "abc\n"}]
 ==
 
 [name=strings_triple_single_quotes_embedded_new_line]
@@ -115,18 +115,18 @@ ARRAY<STRUCT<STRING>>[{"a'b\""}]
 ==
 
 [name=strings_unescaped_quote_types_4]
-SELECT "a"b"
+SELECT 'a'b"
 --
 ERROR: generic::invalid_argument: Syntax error: Unclosed bytes literal [at 1:11]
-SELECT "a"b"
+SELECT 'a'b"
           ^
 ==
 
 [name=strings_unescaped_quote_types_5]
-SELECT "a""b"
+SELECT 'a'"b"
 --
 ERROR: generic::invalid_argument: Syntax error: Expected end of input but got string literal "b" [at 1:11]
-SELECT "a""b"
+SELECT 'a'"b"
           ^
 ==
 
@@ -165,7 +165,7 @@ SELECT '''a''''''b'''
 [name=strings_unescaped_quote_types_10]
 SELECT 'a"b'
 --
-ARRAY<STRUCT<STRING>>[{"a"b"}]
+ARRAY<STRUCT<STRING>>[{'a'b"}]
 ==
 
 # Test octals.
@@ -193,7 +193,7 @@ ARRAY<STRUCT<STRING>>[{"S4"}]
 [name=strings_hex_1]
 SELECT "\x41"
 --
-ARRAY<STRUCT<STRING>>[{"A"}]
+ARRAY<STRUCT<STRING>>[{'a'}]
 ==
 
 [name=strings_hex_2]
@@ -219,7 +219,7 @@ ARRAY<STRUCT<STRING>>[{"A67"}]
 [name=strings_hex_5]
 SELECT "\X41"
 --
-ARRAY<STRUCT<STRING>>[{"A"}]
+ARRAY<STRUCT<STRING>>[{'a'}]
 ==
 
 [name=strings_hex_6]
@@ -294,9 +294,9 @@ SELECT "\U0!00E282"
 
 # Unicode can be unescaped in strings.
 [name=strings_utf8_9]
-SELECT "€"
+SELECT '€'
 --
-ARRAY<STRUCT<STRING>>[{"€"}]
+ARRAY<STRUCT<STRING>>[{'€'}]
 ==
 
 # Test that STRING -> BYTES casting might not preserve the byte length.
@@ -307,7 +307,7 @@ ARRAY<STRUCT<BYTES, STRING>>[{b"", ""}]
 ==
 
 [name=diff_strings_and_bytes_0]
-SELECT "\u20AC" = "€", CAST(b"\xE2\x82\xAC" AS STRING) = "€"
+SELECT "\u20AC" = '€', CAST(b'\xE2\x82\xAC' AS STRING) = '€'
 --
 ARRAY<STRUCT<BOOL, BOOL>>[{true, true}]
 ==
@@ -319,31 +319,31 @@ ARRAY<STRUCT<INT64, INT64, INT64>>[{1, 1, 2}]
 ==
 
 [name=diff_strings_and_bytes_2]
-SELECT LENGTH("€"), LENGTH("\xE2\x82\xAC"), LENGTH(b"\xE2\x82\xAC")
+SELECT LENGTH('€'), LENGTH('\xE2\x82\xAC'), LENGTH(b'\xE2\x82\xAC')
 --
 ARRAY<STRUCT<INT64, INT64, INT64>>[{1, 3, 3}]
 ==
 
 [name=diff_strings_and_bytes_3]
-SELECT LENGTH("\u20AC"), LENGTH("€"), LENGTH(CAST("\u20AC" AS BYTES)), LENGTH(CAST(CAST("\u20AC" AS BYTES) AS STRING))
+SELECT LENGTH("\u20AC"), LENGTH('€'), LENGTH(CAST("\u20AC" AS BYTES)), LENGTH(CAST(CAST("\u20AC" AS BYTES) AS STRING))
 --
 ARRAY<STRUCT<INT64, INT64, INT64, INT64>>[{1, 1, 3, 1}]
 ==
 
 [name=diff_strings_and_bytes_12]
-SELECT LENGTH("€"), LENGTH(b"€")
+SELECT LENGTH('€'), LENGTH(b'€')
 --
 ARRAY<STRUCT<INT64, INT64>>[{1, 3}]
 ==
 
 [name=diff_strings_and_bytes_4]
-SELECT SUBSTR("€", 1, 1) = "€", SUBSTR(b"€", 1, 1) = b"\xe2", SUBSTR(CAST("€" AS BYTES), 1, 1) = b"\xe2", SUBSTR(CAST(CAST("€" AS BYTES) AS STRING), 1, 1) = "€"
+SELECT SUBSTR('€', 1, 1) = '€', SUBSTR(b'€', 1, 1) = b"\xe2", SUBSTR(CAST('€' AS BYTES), 1, 1) = b"\xe2", SUBSTR(CAST(CAST('€' AS BYTES) AS STRING), 1, 1) = '€'
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL>>[{true, true, true, true}]
 ==
 
 [name=diff_strings_and_bytes_5]
-SELECT SUBSTR("\xE2\x82\xAC", 1, 1) = "\xE2", SUBSTR(b"\xE2\x82\xAC", 1, 1) = b"\xE2", CAST("\xE2\x82\xAC" AS BYTES), SUBSTR(CAST("\xE2\x82\xAC" AS BYTES), 1, 1)
+SELECT SUBSTR('\xE2\x82\xAC', 1, 1) = "\xE2", SUBSTR(b'\xE2\x82\xAC', 1, 1) = b"\xE2", CAST('\xE2\x82\xAC' AS BYTES), SUBSTR(CAST('\xE2\x82\xAC' AS BYTES), 1, 1)
 --
 ARRAY<STRUCT<BOOL, BOOL, BYTES, BYTES>>[
   {
@@ -356,56 +356,56 @@ ARRAY<STRUCT<BOOL, BOOL, BYTES, BYTES>>[
 ==
 
 [name=diff_strings_and_bytes_6]
-SELECT SUBSTR("\u20AC", 1, 1) = "€", SUBSTR(b"€", 1, 1) =  b"\xe2", SUBSTR(CAST("€" AS BYTES), 1, 1) = b"\xe2"
+SELECT SUBSTR("\u20AC", 1, 1) = '€', SUBSTR(b'€', 1, 1) =  b"\xe2", SUBSTR(CAST('€' AS BYTES), 1, 1) = b"\xe2"
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{true, true, true}]
 ==
 
 [name=diff_strings_and_bytes_7]
-SELECT CHAR_LENGTH("€"), CHAR_LENGTH("\xE2\x82\xAC")
+SELECT CHAR_LENGTH('€'), CHAR_LENGTH('\xE2\x82\xAC')
 --
 ARRAY<STRUCT<INT64, INT64>>[{1, 3}]
 ==
 
 [name=diff_strings_and_bytes_8]
-SELECT BYTE_LENGTH("€"), BYTE_LENGTH("\xE2\x82\xAC"), BYTE_LENGTH(b"\xE2\x82\xAC"), BYTE_LENGTH(CAST("\xE2\x82\xAC" AS BYTES))
+SELECT BYTE_LENGTH('€'), BYTE_LENGTH('\xE2\x82\xAC'), BYTE_LENGTH(b'\xE2\x82\xAC'), BYTE_LENGTH(CAST('\xE2\x82\xAC' AS BYTES))
 --
 ARRAY<STRUCT<INT64, INT64, INT64, INT64>>[{3, 6, 3, 6}]
 ==
 
 [name=diff_strings_and_bytes_9]
-SELECT STRPOS("€", "€") = 1, STRPOS("\xE2\x82\xAC", "€") = 0, STRPOS("\xE2\x82\xAC", "\x82") = 2
+SELECT STRPOS('€', '€') = 1, STRPOS('\xE2\x82\xAC', '€') = 0, STRPOS('\xE2\x82\xAC', "\x82") = 2
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{true, true, true}]
 ==
 
 [name=diff_strings_and_bytes_10]
-SELECT STRPOS(b"€", b"€") = 1, STRPOS(b"\xE2\x82\xAC", CAST("€" AS BYTES)) = 1, STRPOS(b"\xE2\x82\xAC", b"\x82") = 2
+SELECT STRPOS(b'€', b'€') = 1, STRPOS(b'\xE2\x82\xAC', CAST('€' AS BYTES)) = 1, STRPOS(b'\xE2\x82\xAC', b"\x82") = 2
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{true, true, true}]
 ==
 
 [required_features=V_1_3_ADDITIONAL_STRING_FUNCTIONS]
 [name=substring]
-SELECT SUBSTRING("abc", 1), SUBSTRING("abc", 1, 1), SUBSTRING("\xE2\x82\xAC", 2, 1), SUBSTRING("abc", 0, 1), SUBSTRING("abc", -3, 5)
+SELECT SUBSTRING('abc', 1), SUBSTRING('abc', 1, 1), SUBSTRING('\xE2\x82\xAC', 2, 1), SUBSTRING('abc', 0, 1), SUBSTRING('abc', -3, 5)
 --
 ARRAY<STRUCT<STRING, STRING, STRING, STRING, STRING>>[
-  {"abc", "a", "", "a", "abc"}
+  {'abc', 'a', '', 'a', 'abc'}
 ]
 ==
 
 [name=octet_length]
-SELECT OCTET_LENGTH("€"), OCTET_LENGTH("\xE2\x82\xAC"), OCTET_LENGTH(b"\xE2\x82\xAC"), OCTET_LENGTH(CAST("\xE2\x82\xAC" AS BYTES))
+SELECT OCTET_LENGTH('€'), OCTET_LENGTH('\xE2\x82\xAC'), OCTET_LENGTH(b'\xE2\x82\xAC'), OCTET_LENGTH(CAST('\xE2\x82\xAC' AS BYTES))
 --
 ARRAY<STRUCT<INT64, INT64, INT64, INT64>>[{3, 6, 3, 6}]
 ==
 
 [name=strings_no_embedded_new_line]
-SELECT "a
+SELECT 'a
 c"
 --
 ERROR: generic::invalid_argument: Syntax error: Unclosed string literal [at 1:8]
-SELECT "a
+SELECT 'a
        ^
 ==
 
@@ -432,7 +432,7 @@ ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL, BOOL, BOOL>>[
 ==
 
 [name=strings_comparison_case_sensitivity_4]
-SELECT "abc" <= "aBc", "abc" < "aBc", "abc" >= "aBc", "abc" > "aBc", "abc" = "aBc", "abc" != "aBc"
+SELECT 'abc' <= 'abc', 'abc' < 'abc', 'abc' >= 'abc', 'abc' > 'abc', 'abc' = 'abc', 'abc' != 'abc'
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL, BOOL, BOOL>>[
   {false, false, true, true, false, true}
@@ -448,21 +448,21 @@ ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL, BOOL, BOOL>>[
 ==
 
 [name=strings_comparison_3]
-SELECT "" IS NULL, "" IS NOT NULL, "abc" IS NULL, "abc" IS NOT NULL
+SELECT "" IS NULL, "" IS NOT NULL, 'abc' IS NULL, 'abc' IS NOT NULL
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL>>[{false, true, false, true}]
 ==
 
 [name=strings_function_concat]
-SELECT CONCAT("a", "b", "c")
+SELECT CONCAT('a', "b", "c")
 --
-ARRAY<STRUCT<STRING>>[{"abc"}]
+ARRAY<STRUCT<STRING>>[{'abc'}]
 ==
 
 [name=strings_concat_operator]
-SELECT "a" || "b" || "c"
+SELECT 'a' || "b" || "c"
 --
-ARRAY<STRUCT<STRING>>[{"abc"}]
+ARRAY<STRUCT<STRING>>[{'abc'}]
 ==
 [name=strings_function_concat_1]
 SELECT CONCAT()
@@ -473,14 +473,14 @@ SELECT CONCAT()
 ==
 
 [name=strings_function_strpos]
-SELECT STRPOS("abc", "b")
+SELECT STRPOS('abc', "b")
 --
 ARRAY<STRUCT<INT64>>[{2}]
 ==
 
 [required_features=V_1_3_ADDITIONAL_STRING_FUNCTIONS]
 [name=strings_function_instr]
-SELECT INSTR("abc", "b"), INSTR("abbba", "bb"), INSTR("abbba", "bb", 2, 2), INSTR("abbba", "bb", -2)
+SELECT INSTR('abc', "b"), INSTR("abbba", "bb"), INSTR("abbba", "bb", 2, 2), INSTR("abbba", "bb", -2)
 --
 ARRAY<STRUCT<INT64, INT64, INT64, INT64>>[{2, 2, 3, 3}]
 ==
@@ -505,25 +505,25 @@ ARRAY<STRUCT<STRING>>[{"AbcD E"}]
 ==
 
 [name=strings_function_length]
-SELECT LENGTH("AbCdE"), LENGTH("\xE2\x82\xAC"), LENGTH("\u20AC")
+SELECT LENGTH("AbCdE"), LENGTH('\xE2\x82\xAC'), LENGTH("\u20AC")
 --
 ARRAY<STRUCT<INT64, INT64, INT64>>[{5, 3, 1}]
 ==
 
 [name=strings_function_char_length]
-SELECT CHAR_LENGTH("AbCdE"), CHAR_LENGTH("\xE2\x82\xAC"), CHAR_LENGTH("\u20AC")
+SELECT CHAR_LENGTH("AbCdE"), CHAR_LENGTH('\xE2\x82\xAC'), CHAR_LENGTH("\u20AC")
 --
 ARRAY<STRUCT<INT64, INT64, INT64>>[{5, 3, 1}]
 ==
 
 [name=strings_function_ascii]
-SELECT ASCII(""), ASCII("a"), ASCII("\x41")
+SELECT ASCII(""), ASCII('a'), ASCII("\x41")
 --
 ARRAY<STRUCT<INT64, INT64, INT64>>[{0, 97, 65}]
 ==
 
 [name=strings_function_unicode]
-SELECT UNICODE(""), UNICODE("a"), UNICODE("\uE000")
+SELECT UNICODE(""), UNICODE('a'), UNICODE("\uE000")
 --
 ARRAY<STRUCT<INT64, INT64, INT64>>[{0, 97, 57344}]
 ==
@@ -531,31 +531,31 @@ ARRAY<STRUCT<INT64, INT64, INT64>>[{0, 97, 57344}]
 [name=strings_function_chr]
 SELECT CHR(0), CHR(97), CHR(1076), CHR(1078)
 --
-ARRAY<STRUCT<STRING, STRING, STRING, STRING>>[{"\x00", "a", "д", "ж"}]
+ARRAY<STRUCT<STRING, STRING, STRING, STRING>>[{"\x00", 'a', "д", "ж"}]
 ==
 
 [name=strings_function_starts_with]
-SELECT STARTS_WITH("abc", "a")
+SELECT STARTS_WITH('abc', 'a')
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 
 [name=strings_function_ends_with]
-SELECT ENDS_WITH("abc", "c")
+SELECT ENDS_WITH('abc', "c")
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 
 [name=strings_function_substr_error]
-SELECT SUBSTR("abc", 1, -3)
+SELECT SUBSTR('abc', 1, -3)
 --
 ERROR: generic::out_of_range: Third argument in SUBSTR() cannot be negative
 ==
 
 [name=strings_function_substr]
-SELECT SUBSTR("abc", 1), SUBSTR("abc", 1, 1)
+SELECT SUBSTR('abc', 1), SUBSTR('abc', 1, 1)
 --
-ARRAY<STRUCT<STRING, STRING>>[{"abc", "a"}]
+ARRAY<STRUCT<STRING, STRING>>[{'abc', 'a'}]
 ==
 
 [name=strings_function_trim]
@@ -583,31 +583,31 @@ ARRAY<STRUCT<STRING, STRING, STRING>>[{NULL, NULL, NULL}]
 ==
 
 [name=strings_function_lpad_default]
-SELECT LPAD("abc", 10)
+SELECT LPAD('abc', 10)
 --
 ARRAY<STRUCT<STRING>>[{"       abc"}]
 ==
 
 [name=strings_function_lpad_default_bytes]
-SELECT LPAD(b"abc", 10)
+SELECT LPAD(b'abc', 10)
 --
 ARRAY<STRUCT<BYTES>>[{b"       abc"}]
 ==
 
 [name=strings_function_lpad_char]
-SELECT LPAD("abc", 10, "*")
+SELECT LPAD('abc', 10, "*")
 --
 ARRAY<STRUCT<STRING>>[{"*******abc"}]
 ==
 
 [name=strings_function_lpad_char_bytes]
-SELECT LPAD(b"abc", 10, b"*")
+SELECT LPAD(b'abc', 10, b"*")
 --
 ARRAY<STRUCT<BYTES>>[{b"*******abc"}]
 ==
 
 [name=strings_function_lpad_multi_char]
-SELECT LPAD("abc", 10, "-*=")
+SELECT LPAD('abc', 10, "-*=")
 --
 ARRAY<STRUCT<STRING>>[{"-*=-*=-abc"}]
 ==
@@ -625,13 +625,13 @@ ARRAY<STRUCT<STRING>>[{" goog goog"}]
 ==
 
 [name=strings_function_lpad_error]
-SELECT LPAD("abc", -15)
+SELECT LPAD('abc', -15)
 --
 ERROR: generic::out_of_range: Second argument (output size) for LPAD/RPAD cannot be negative
 ==
 
 [name=strings_function_lpad_mem_error]
-SELECT LPAD("abc", 1000000000)
+SELECT LPAD('abc', 1000000000)
 --
 ERROR: generic::out_of_range: Output of LPAD/RPAD exceeds max allowed output size of 1MB
 ==
@@ -643,37 +643,37 @@ ARRAY<STRUCT<STRING, STRING, STRING>>[{NULL, NULL, NULL}]
 ==
 
 [name=strings_function_rpad_default]
-SELECT RPAD("abc", 10)
+SELECT RPAD('abc', 10)
 --
 ARRAY<STRUCT<STRING>>[{"abc       "}]
 ==
 
 [name=strings_function_rpad_default_bytes]
-SELECT RPAD(b"abc", 10)
+SELECT RPAD(b'abc', 10)
 --
 ARRAY<STRUCT<BYTES>>[{b"abc       "}]
 ==
 
 [name=strings_function_rpad_char]
-SELECT RPAD("abc", 10, "*")
+SELECT RPAD('abc', 10, "*")
 --
 ARRAY<STRUCT<STRING>>[{"abc*******"}]
 ==
 
 [name=strings_function_rpad_char_bytes]
-SELECT RPAD(b"abc", 10, b"*")
+SELECT RPAD(b'abc', 10, b"*")
 --
 ARRAY<STRUCT<BYTES>>[{b"abc*******"}]
 ==
 
 [name=strings_function_rpad_multi_char]
-SELECT RPAD("abc", 10, "-*=")
+SELECT RPAD('abc', 10, "-*=")
 --
 ARRAY<STRUCT<STRING>>[{"abc-*=-*=-"}]
 ==
 
 [name=strings_function_rpad_multi_char_bytes]
-SELECT RPAD(b"abc", 10, b"-*=")
+SELECT RPAD(b'abc', 10, b"-*=")
 --
 ARRAY<STRUCT<BYTES>>[{b"abc-*=-*=-"}]
 ==
@@ -691,39 +691,39 @@ ARRAY<STRUCT<STRING>>[{"goog goog "}]
 ==
 
 [name=strings_function_rpad_error]
-SELECT RPAD("abc", -15)
+SELECT RPAD('abc', -15)
 --
 ERROR: generic::out_of_range: Second argument (output size) for LPAD/RPAD cannot be negative
 ==
 
 [name=strings_function_rpad_mem_error]
-SELECT RPAD("abc", 1000000000)
+SELECT RPAD('abc', 1000000000)
 --
 ERROR: generic::out_of_range: Output of LPAD/RPAD exceeds max allowed output size of 1MB
 ==
 
 [name=strings_function_left_error]
-SELECT LEFT("abc", -2)
+SELECT LEFT('abc', -2)
 --
 ERROR: generic::out_of_range: Second argument in LEFT() cannot be negative
 ==
 
 [name=strings_function_left]
-SELECT LEFT("abc", 0), LEFT("abc", 2), LEFT("abc", 5)
+SELECT LEFT('abc', 0), LEFT('abc', 2), LEFT('abc', 5)
 --
-ARRAY<STRUCT<STRING, STRING, STRING>>[{"", "ab", "abc"}]
+ARRAY<STRUCT<STRING, STRING, STRING>>[{"", "ab", 'abc'}]
 ==
 
 [name=strings_function_right_error]
-SELECT RIGHT("abc", -2)
+SELECT RIGHT('abc', -2)
 --
 ERROR: generic::out_of_range: Second argument in RIGHT() cannot be negative
 ==
 
 [name=strings_function_right]
-SELECT RIGHT("abc", 0), RIGHT("abc", 2), RIGHT("abc", 5)
+SELECT RIGHT('abc', 0), RIGHT('abc', 2), RIGHT('abc', 5)
 --
-ARRAY<STRUCT<STRING, STRING, STRING>>[{"", "bc", "abc"}]
+ARRAY<STRUCT<STRING, STRING, STRING>>[{"", "bc", 'abc'}]
 ==
 
 [name=strings_function_repeat_nulls]
@@ -757,25 +757,25 @@ ARRAY<STRUCT<STRING>>[{"googgooggoog"}]
 ==
 
 [name=strings_function_repeat_error]
-SELECT REPEAT("abc", -15)
+SELECT REPEAT('abc', -15)
 --
 ERROR: generic::out_of_range: Second argument (repeat count) for REPEAT cannot be negative
 ==
 
 [name=strings_function_repeat_mem_error]
-SELECT REPEAT("abc", 1000000000)
+SELECT REPEAT('abc', 1000000000)
 --
 ERROR: generic::out_of_range: Output of REPEAT exceeds max allowed output size of 1MB
 ==
 
 [name=strings_function_replace]
-SELECT REPLACE("abcabc", "a", "z")
+SELECT REPLACE("abcabc", 'a', "z")
 --
 ARRAY<STRUCT<STRING>>[{"zbczbc"}]
 ==
 
 [name=strings_function_regexp_match]
-SELECT REGEXP_MATCH("abc", "a|db?")
+SELECT REGEXP_MATCH('abc', "a|db?")
 --
 ARRAY<STRUCT<BOOL>>[{false}]
 ==
@@ -798,7 +798,7 @@ ARRAY<STRUCT<STRING>>[{"ab"}]
 [name=strings_function_regexp_extract_all]
 SELECT REGEXP_EXTRACT_ALL("abc dbc ac", "[a|d]b?")
 --
-ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"ab", "db", "a"]}]
+ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"ab", "db", 'a']}]
 ==
 
 [name=strings_function_regex_replace]
@@ -816,7 +816,7 @@ ARRAY<STRUCT<STRING, STRING, STRING>>[{"", "I413", "A261"}]
 
 [required_features=V_1_3_ADDITIONAL_STRING_FUNCTIONS]
 [name=strings_function_translate]
-SELECT TRANSLATE("abc", "abd", "xy"), TRANSLATE("abcabc", "ab", "\tд")
+SELECT TRANSLATE('abc', "abd", "xy"), TRANSLATE("abcabc", "ab", "\tд")
 --
 ARRAY<STRUCT<STRING, STRING>>[{"xyc", "\tдc\tдc"}]
 ==
@@ -989,7 +989,7 @@ select split("", ""), split("abcd", "")
 ARRAY<STRUCT<ARRAY<>, ARRAY<>>>[
   {
     ARRAY<STRING>[""],
-    ARRAY<STRING>[known order:"a", "b", "c", "d"]
+    ARRAY<STRING>[known order:'a', "b", "c", "d"]
   }
 ]
 ==
@@ -1037,34 +1037,34 @@ ARRAY<STRUCT<ARRAY<>, ARRAY<>, ARRAY<>, ARRAY<>>>[
 ]
 ==
 [name=split_multichar_delimiter]
-select split("aaaaa", "aa"), split("ab", "abc"), split("a123bb123ccc123dddd", "123")
+select split("aaaaa", "aa"), split("ab", 'abc'), split("a123bb123ccc123dddd", "123")
 --
 ARRAY<STRUCT<ARRAY<>, ARRAY<>, ARRAY<>>>[
   {
-    ARRAY<STRING>[known order:"", "", "a"],
+    ARRAY<STRING>[known order:"", "", 'a'],
     ARRAY<STRING>["ab"],
-    ARRAY<STRING>[known order:"a", "bb", "ccc", "dddd"]
+    ARRAY<STRING>[known order:'a', "bb", "ccc", "dddd"]
   }
 ]
 ==
 [name=json_extract_literal_path]
 select
-  json_extract('{"a": "foo"}', '$.a'),
-  json_extract_scalar('{"a": "foo"}', '$.a')
+  json_extract('{'a': "foo"}', '$.a'),
+  json_extract_scalar('{'a': "foo"}', '$.a')
 --
 ARRAY<STRUCT<STRING, STRING>>[{'"foo"', "foo"}]
 ==
 [name=json_extract_duplicate_elements]
 select
-  json_extract('{"a": "foo1", "a": "foo2", "a": "foo3"}', '$.a'),
-  json_extract_scalar('{"a": "foo1", "a": "foo2", "a": "foo3"}', '$.a')
+  json_extract('{'a': "foo1", 'a': "foo2", 'a': "foo3"}', '$.a'),
+  json_extract_scalar('{'a': "foo1", 'a': "foo2", 'a': "foo3"}', '$.a')
 --
 ARRAY<STRUCT<STRING, STRING>>[{'"foo1"', "foo1"}]
 ==
 [name=json_value_duplicate_elements]
 select
-  json_query('{"a": "foo1", "a": "foo2", "a": "foo3"}', '$.a'),
-  json_value('{"a": "foo1", "a": "foo2", "a": "foo3"}', '$.a')
+  json_query('{'a': "foo1", 'a': "foo2", 'a': "foo3"}', '$.a'),
+  json_value('{'a': "foo1", 'a': "foo2", 'a': "foo3"}', '$.a')
 --
 ARRAY<STRUCT<STRING, STRING>>[{'"foo1"', "foo1"}]
 ==
@@ -1072,7 +1072,7 @@ ARRAY<STRUCT<STRING, STRING>>[{'"foo1"', "foo1"}]
 select
   json_extract(s, '$.a'),
   json_extract_scalar(s, '$.a.b')
-from unnest(['{"a" : { "b" : 4 } }', '{"a" : 3}', '{"a" : { "b" : "bar" } }']) s
+from unnest(['{'a' : { "b" : 4 } }', '{'a' : 3}', '{'a' : { "b" : "bar" } }']) s
 --
 ARRAY<STRUCT<STRING, STRING>>[unknown order:
   {"3", NULL},
@@ -1089,28 +1089,28 @@ ARRAY<STRUCT<STRING>>[{'" \\ \x08 \x0c \n \r \t ⎋'}]
 [name=json_extract_parameter_path]
 [parameters='$.a' as path]
 select
-  json_extract('{"a": "foo"}', @path),
-  json_extract_scalar('{"a": "foo"}', @path)
+  json_extract('{'a': "foo"}', @path),
+  json_extract_scalar('{'a': "foo"}', @path)
 --
 ARRAY<STRUCT<STRING, STRING>>[{'"foo"', "foo"}]
 ==
 [name=json_extract_non_literal_path]
 select
-  json_extract('{"a": "foo"}', path),
-  json_extract_scalar('{"a": "foo"}', path)
+  json_extract('{'a': "foo"}', path),
+  json_extract_scalar('{'a': "foo"}', path)
 from (select '$.a' as path union all select '$.b')
 --
 ERROR: generic::invalid_argument: JSONPath must be a string literal or query parameter [at 2:3]
-  json_extract('{"a": "foo"}', path),
+  json_extract('{'a': "foo"}', path),
   ^
 ==
 [name=json_extract_subquery_path]
 select
-  json_extract('{"a": "foo"}', (select '$.a')),
-  json_extract_scalar('{"a": "foo"}', (select '$.a'))
+  json_extract('{'a': "foo"}', (select '$.a')),
+  json_extract_scalar('{'a': "foo"}', (select '$.a'))
 --
 ERROR: generic::invalid_argument: JSONPath must be a string literal or query parameter [at 2:3]
-  json_extract('{"a": "foo"}', (select '$.a')),
+  json_extract('{'a': "foo"}', (select '$.a')),
   ^
 ==
 [name=json_extract_no_arguments]
@@ -1124,22 +1124,22 @@ ERROR: generic::invalid_argument: Number of arguments does not match for functio
 ==
 [name=json_extract_one_argument]
 select
-  json_extract('{"a": "foo"}')
+  json_extract('{'a': "foo"}')
 --
 ERROR: generic::invalid_argument: Number of arguments does not match for function JSON_EXTRACT. Supported signature: JSON_EXTRACT(STRING, STRING) [at 2:3]
-  json_extract('{"a": "foo"}')
+  json_extract('{'a': "foo"}')
   ^
 ==
 [name=json_extract_array_literal_path]
 select
-  json_extract_array('{"a": ["foo"]}', '$.a')
+  json_extract_array('{'a': ["foo"]}', '$.a')
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>['"foo"']}]
 ==
 [name=json_extract_array_multiple_inputs]
 select
   json_extract_array(s, '$.a')
-from unnest(['{"a" : ["foo"]}', '{"a" : ["bar", "baz"]}', '{"a" : { "b" : "bar" } }']) as s
+from unnest(['{'a' : ["foo"]}', '{'a' : ["bar", "baz"]}', '{'a' : { "b" : "bar" } }']) as s
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<STRING>[known order:'"bar"', '"baz"']},
@@ -1150,31 +1150,31 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 [name=json_extract_array_parameter_path]
 [parameters='$.a' as path]
 select
-  json_extract_array('{"a": ["foo"]}', @path)
+  json_extract_array('{'a': ["foo"]}', @path)
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>['"foo"']}]
 ==
 [name=json_extract_array_non_literal_path]
 select
-  json_extract_array('{"a": ["foo"]}', path)
+  json_extract_array('{'a': ["foo"]}', path)
 from (select '$.a' as path)
 --
 ERROR: generic::invalid_argument: JSONPath must be a string literal or query parameter [at 2:3]
-  json_extract_array('{"a": ["foo"]}', path)
+  json_extract_array('{'a': ["foo"]}', path)
   ^
 ==
 [name=json_extract_array_literal_null_path]
 select
-  json_extract_array('{"a": ["foo"]}', NULL)
+  json_extract_array('{'a': ["foo"]}', NULL)
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>(NULL)}]
 ==
 [name=json_extract_array_subquery_path]
 select
-  json_extract_array('{"a": ["foo"]}', (select '$.a'))
+  json_extract_array('{'a': ["foo"]}', (select '$.a'))
 --
 ERROR: generic::invalid_argument: JSONPath must be a string literal or query parameter [at 2:3]
-  json_extract_array('{"a": ["foo"]}', (select '$.a'))
+  json_extract_array('{'a': ["foo"]}', (select '$.a'))
   ^
 ==
 [name=json_extract_array_no_arguments]
@@ -1200,7 +1200,7 @@ ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>(NULL)}]
 [required_features=JSON_ARRAY_FUNCTIONS]
 [name=json_extract_string_array_literal_path]
 select
-  json_extract_string_array('{"a": ["foo"]}', '$.a')
+  json_extract_string_array('{'a': ["foo"]}', '$.a')
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>["foo"]}]
 ==
@@ -1209,9 +1209,9 @@ ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>["foo"]}]
 select
   json_extract_string_array(s, '$.a')
 from unnest([
-  '{"a" : ["foo"]}',
-  '{"a" : ["bar", "baz"]}',
-  '{"a" : { "b" : "bar" }}'
+  '{'a' : ["foo"]}',
+  '{'a' : ["bar", "baz"]}',
+  '{'a' : { "b" : "bar" }}'
 ]) as s
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
@@ -1224,34 +1224,34 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 [name=json_extract_string_array_parameter_path]
 [parameters='$.a' as path]
 select
-  json_extract_string_array('{"a": ["foo"]}', @path)
+  json_extract_string_array('{'a': ["foo"]}', @path)
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>["foo"]}]
 ==
 [required_features=JSON_ARRAY_FUNCTIONS]
 [name=json_extract_string_array_non_literal_path]
 select
-  json_extract_string_array('{"a": ["foo"]}', path)
+  json_extract_string_array('{'a': ["foo"]}', path)
 from (select '$.a' as path)
 --
 ERROR: generic::invalid_argument: JSONPath must be a string literal or query parameter [at 2:3]
-  json_extract_string_array('{"a": ["foo"]}', path)
+  json_extract_string_array('{'a': ["foo"]}', path)
   ^
 ==
 [required_features=JSON_ARRAY_FUNCTIONS]
 [name=json_extract_string_array_literal_null_path]
 select
-  json_extract_string_array('{"a": ["foo"]}', NULL)
+  json_extract_string_array('{'a': ["foo"]}', NULL)
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>(NULL)}]
 ==
 [required_features=JSON_ARRAY_FUNCTIONS]
 [name=json_extract_string_array_subquery_path]
 select
-  json_extract_string_array('{"a": ["foo"]}', (select '$.a'))
+  json_extract_string_array('{'a': ["foo"]}', (select '$.a'))
 --
 ERROR: generic::invalid_argument: JSONPath must be a string literal or query parameter [at 2:3]
-  json_extract_string_array('{"a": ["foo"]}', (select '$.a'))
+  json_extract_string_array('{'a': ["foo"]}', (select '$.a'))
   ^
 ==
 [required_features=JSON_ARRAY_FUNCTIONS]
@@ -1332,16 +1332,16 @@ FROM (
 --
 ARRAY<STRUCT<STRING, STRING, STRING, STRING, STRING, STRING>>[unknown order:
   {
-    '{"a":{"b":{"c":[],"d":true}},"x":3}',
-    '{\n  "a": {\n    "b": {\n      "c": [],\n      "d": true\n    }\n  },\n  "x": 3\n}',
+    '{'a':{"b":{"c":[],"d":true}},"x":3}',
+    '{\n  'a': {\n    "b": {\n      "c": [],\n      "d": true\n    }\n  },\n  "x": 3\n}',
     '{"b":{"c":[],"d":true}}',
     '{"b":{"c":[],"d":true}}',
     NULL,
     NULL
   },
   {
-    '{"a":{"b":{"c":[1,2,3],"d":true}},"x":2}',
-    '{\n  "a": {\n    "b": {\n      "c": [\n        1,\n        2,\n        3\n      ],\n      "d": true\n    }\n  },\n  "x": 2\n}',
+    '{'a':{"b":{"c":[1,2,3],"d":true}},"x":2}',
+    '{\n  'a': {\n    "b": {\n      "c": [\n        1,\n        2,\n        3\n      ],\n      "d": true\n    }\n  },\n  "x": 2\n}',
     '{"b":{"c":[1,2,3],"d":true}}',
     '{"b":{"c":[1,2,3],"d":true}}',
     "2",

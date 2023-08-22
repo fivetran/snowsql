@@ -649,7 +649,7 @@ QueryStmt
 
 # Another test involving IN UNNEST inspired by b/24130693 (fixed).
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select "TESTENUM0" IN UNNEST(@test_param_array_enum)
+select 'TESTENUM0' IN UNNEST(@test_param_array_enum)
 --
 QueryStmt
 +-output_column_list=

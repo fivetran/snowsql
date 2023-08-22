@@ -10,7 +10,7 @@ DefineTableStmt
 ==
 
 define table a."b"."c 2" (x='''
-foo''',y="2011-10-22",z=@test_param_int64)
+foo''',y='2011-10-22',z=@test_param_int64)
 --
 DefineTableStmt
 +-name_path=a.b."c 2"
@@ -20,10 +20,10 @@ DefineTableStmt
   +-z := Parameter(type=INT64, name='test_param_int64')
 ==
 
-define table a."b"."c 2" (x='''foo''',y="2011-10-22",z=@bad_param)
+define table a."b"."c 2" (x='''foo''',y='2011-10-22',z=@bad_param)
 --
 ERROR: Query parameter 'bad_param' not found [at 1:56]
-define table a."b"."c 2" (x='''foo''',y="2011-10-22",z=@bad_param)
+define table a."b"."c 2" (x='''foo''',y='2011-10-22',z=@bad_param)
                                                        ^
 ==
 

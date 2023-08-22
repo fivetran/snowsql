@@ -26,7 +26,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRUCT<INT64, x STRING>, value={5, x:"2014-01-01"}, has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRUCT<INT64, x STRING>, value={5, x:'2014-01-01'}, has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -41,7 +41,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRUCT<INT32, x STRING>, value={5, x:"2014-01-01"}, has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRUCT<INT32, x STRING>, value={5, x:'2014-01-01'}, has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -90,7 +90,7 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRUCT<INT64, STRING> -> STRUCT<STRING, INT32>)
-    |     +-Literal(type=STRUCT<INT64, STRING>, value={5, "2014-01-01"})
+    |     +-Literal(type=STRUCT<INT64, STRING>, value={5, '2014-01-01'})
     +-input_scan=
       +-SingleRowScan
 ==
@@ -229,7 +229,7 @@ QueryStmt
 ==
 
 select cast((int32, timestamp "2014-01-01 12:34:56.000001",
-             "2014-01-01") AS STRUCT<INT32, DATE, DATE>)
+             '2014-01-01') AS STRUCT<INT32, DATE, DATE>)
 from SimpleTypes
 --
 QueryStmt
@@ -432,7 +432,7 @@ select STRUCT<INT64, INT32>(1, cast(1 as INT64))
                                ^
 ==
 
-select STRUCT<INT32, DATE>(1, "2014-01-01")
+select STRUCT<INT32, DATE>(1, '2014-01-01')
 --
 QueryStmt
 +-output_column_list=

@@ -96,7 +96,7 @@ SELECT
       "int64_key_1:1, int64_key_2:2, date:10950, nested_dates:{timestamp_millis:0}"
         as zetasql_test__.KitchenSinkPB
     ),
-    "2023-06-01"
+    '2023-06-01'
       as date, "2008-12-25 15:30:00 UTC" as nested_dates.timestamp_millis
   )
 --
@@ -171,7 +171,7 @@ SELECT
         2 as int64_key_2,
         "nested_int64:3" as nested_value,
         13 as (zetasql_test__.int_top_level_extension),
-        "1980-08-08" as (zetasql_test__.date_extension),
+        '1980-08-08' as (zetasql_test__.date_extension),
         "value:'abc'"
             as (zetasql_test__.KitchenSinkExtension.optional_extension)
       ),

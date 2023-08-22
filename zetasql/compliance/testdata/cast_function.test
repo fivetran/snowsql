@@ -524,7 +524,7 @@ ERROR: generic::out_of_range: Bad int64 value: 0xFFFFFFFFFFFFFFFF
 ==
 
 [name=cast_proto_to_bytes]
-SELECT CAST(NEW zetasql_test__.NullableDate(DATE "1707-04-05" AS value)
+SELECT CAST(NEW zetasql_test__.NullableDate(DATE '1707-04-05' AS value)
             AS BYTES)
 --
 ARRAY<STRUCT<BYTES>>[{b"\x08\xa3\x92\xfa\xff\xff\xff\xff\xff\xff\x01"}]

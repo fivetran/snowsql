@@ -27,13 +27,13 @@ ARRAY<STRUCT<offset INT64, key INT64, value INT64>>[
 [name=safe_scalar_func]
 select value, safe.parse_date("%Y-%m-%d", value),
               safe.parse_date("%Y-%m-%d", value) IS NULL
-from unnest(["2003-02-04", "", "xxx", "2004-05-06"]) value
+from unnest(['2003-02-04', "", 'xxx', '2004-05-06']) value
 --
 ARRAY<STRUCT<value STRING, DATE, BOOL>>[unknown order:
   {"", NULL, true},
-  {"2004-05-06", 2004-05-06, false},
-  {"2003-02-04", 2003-02-04, false},
-  {"xxx", NULL, true}
+  {'2004-05-06', 2004-05-06, false},
+  {'2003-02-04', 2003-02-04, false},
+  {'xxx', NULL, true}
 ]
 ==
 

@@ -197,34 +197,34 @@ string(-9)
 ==
 
 [language_features={{|PARAMETERIZED_TYPES}}]
-string("MAX")
+string('MAX')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Parameterized types are not supported [at 1:7]
-string("MAX")
+string('MAX')
       ^
 --
 ALTERNATION GROUP: PARAMETERIZED_TYPES
 --
 ERROR: STRING length parameter must be an integer or MAX keyword [at 1:7]
-string("MAX")
+string('MAX')
       ^
 ==
 
 [language_features={{|PARAMETERIZED_TYPES}}]
-string("hello")
+string('hello')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Parameterized types are not supported [at 1:7]
-string("hello")
+string('hello')
       ^
 --
 ALTERNATION GROUP: PARAMETERIZED_TYPES
 --
 ERROR: STRING length parameter must be an integer or MAX keyword [at 1:7]
-string("hello")
+string('hello')
       ^
 ==
 
@@ -445,18 +445,18 @@ numeric(MAX)
 ==
 
 [language_features={{|PARAMETERIZED_TYPES,NUMERIC_TYPE}}]
-numeric("hello")
+numeric('hello')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Type not found: numeric [at 1:1]
-numeric("hello")
+numeric('hello')
 ^
 --
 ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE
 --
 ERROR: NUMERIC precision must be an integer [at 1:8]
-numeric("hello")
+numeric('hello')
        ^
 ==
 
@@ -669,18 +669,18 @@ bignumeric(MAX, 39)
 ==
 
 [language_features={{|PARAMETERIZED_TYPES,BIGNUMERIC_TYPE}}]
-bignumeric("hello")
+bignumeric('hello')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Type not found: bignumeric [at 1:1]
-bignumeric("hello")
+bignumeric('hello')
 ^
 --
 ALTERNATION GROUP: PARAMETERIZED_TYPES,BIGNUMERIC_TYPE
 --
 ERROR: BIGNUMERIC precision must be an integer or MAX keyword [at 1:11]
-bignumeric("hello")
+bignumeric('hello')
           ^
 ==
 

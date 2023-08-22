@@ -106,9 +106,9 @@ ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[unknown order:b"b", b"a", b"c"]}]
 ==
 [name=array_agg_DATE_basic]
 SELECT ARRAY_AGG(elem) FROM (
-  SELECT DATE("1984-08-02") AS elem UNION ALL
-  SELECT DATE("2000-01-01") UNION ALL
-  SELECT DATE("2014-09-11"))
+  SELECT DATE('1984-08-02') AS elem UNION ALL
+  SELECT DATE('2000-01-01') UNION ALL
+  SELECT DATE('2014-09-11'))
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<DATE>[unknown order:2000-01-01, 1984-08-02, 2014-09-11]}
@@ -858,8 +858,8 @@ SELECT ARRAY_CONCAT_AGG(x) FROM (SELECT ARRAY<BYTES>[b"a", b"f"] x UNION ALL
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[unknown order:b"c", b"r", b"a", b"f"]}]
 ==
 [name=array_concat_agg_date]
-SELECT ARRAY_CONCAT_AGG(x) FROM (SELECT ARRAY<DATE>["2000-01-01"] x UNION ALL
-                                 SELECT ARRAY<DATE>["2015-12-30"]) foo
+SELECT ARRAY_CONCAT_AGG(x) FROM (SELECT ARRAY<DATE>['2000-01-01'] x UNION ALL
+                                 SELECT ARRAY<DATE>['2015-12-30']) foo
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[unknown order:2015-12-30, 2000-01-01]}]
 ==
@@ -877,8 +877,8 @@ ARRAY<STRUCT<ARRAY<>>>[
 ==
 [name=array_concat_agg_enum]
 SELECT ARRAY_CONCAT_AGG(x) FROM (
-    SELECT ARRAY<zetasql_test__.TestEnum>["TESTENUM0", "TESTENUM2"] x UNION ALL
-    SELECT ARRAY<zetasql_test__.TestEnum>["TESTENUM1"]) foo
+    SELECT ARRAY<zetasql_test__.TestEnum>['TESTENUM0', 'TESTENUM2'] x UNION ALL
+    SELECT ARRAY<zetasql_test__.TestEnum>['TESTENUM1']) foo
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[unknown order:
