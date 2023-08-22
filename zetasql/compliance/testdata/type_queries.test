@@ -49,7 +49,7 @@ SELECT DATE '2014-07-18' date_val
 ARRAY<STRUCT<date_val DATE>>[{2014-07-18}]
 ==
 [name=type_13]
-SELECT TIMESTAMP "2014-07-18 00:00:00.000013 UTC" ts_micros_val
+SELECT TIMESTAMP '2014-07-18 00:00:00.000013 UTC' ts_micros_val
 --
 ARRAY<STRUCT<ts_micros_val TIMESTAMP>>[{2014-07-18 00:00:00.000013+00}]
 ==
@@ -118,7 +118,7 @@ SELECT IF(FALSE, DATE '2014-07-18', NULL) date_val
 ARRAY<STRUCT<date_val DATE>>[{NULL}]
 ==
 [name=type_29]
-SELECT IF(FALSE, TIMESTAMP "2014-07-18 00:00:00.000013 UTC", NULL)
+SELECT IF(FALSE, TIMESTAMP '2014-07-18 00:00:00.000013 UTC', NULL)
   ts_micros_val
 --
 ARRAY<STRUCT<ts_micros_val TIMESTAMP>>[{NULL}]
@@ -198,7 +198,7 @@ ARRAY<STRUCT<date_val ARRAY<>>>[
 ]
 ==
 [name=type_46]
-SELECT [NULL, TIMESTAMP "2014-07-18 00:00:00.000013 UTC"] ts_micros_val
+SELECT [NULL, TIMESTAMP '2014-07-18 00:00:00.000013 UTC'] ts_micros_val
 --
 ARRAY<STRUCT<ts_micros_val ARRAY<>>>[
   {ARRAY<TIMESTAMP>[known order:
@@ -253,7 +253,7 @@ ARRAY<STRUCT<struct_val STRUCT<int32_val INT32,
 SELECT (
   SELECT AS STRUCT
   DATE '2014-07-18' date_val,
-  TIMESTAMP "2014-07-18 00:00:00.000013 UTC" ts_micros_val)
+  TIMESTAMP '2014-07-18 00:00:00.000013 UTC' ts_micros_val)
     struct_val
 --
 ARRAY<STRUCT<struct_val STRUCT<

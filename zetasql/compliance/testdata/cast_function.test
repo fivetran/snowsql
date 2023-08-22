@@ -1430,7 +1430,7 @@ ERROR: generic::out_of_range: Invalid datetime string "2015-13-05 01:02:03"
 [required_features=V_1_2_CIVIL_TIME]
 select cast('2006-01-02 01:02:03.123456 UTC' as datetime)
 --
-ERROR: generic::out_of_range: Invalid datetime string "2006-01-02 01:02:03.123456 UTC"
+ERROR: generic::out_of_range: Invalid datetime string '2006-01-02 01:02:03.123456 UTC'
 ==
 
 [name=cast_array_with_literals_larger_than_target_element_type]

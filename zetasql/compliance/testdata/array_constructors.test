@@ -55,9 +55,9 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_TIMESTAMP_array_basic]
-SELECT ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC",
-                        "2000-01-01 01:01:01.001001 UTC",
-                        "2014-09-11 01:01:01.001001 UTC"];
+SELECT ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC',
+                        '2000-01-01 01:01:01.001001 UTC',
+                        '2014-09-11 01:01:01.001001 UTC'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<TIMESTAMP>[known order:
@@ -182,8 +182,8 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_TIMESTAMP_array_from_params]
-[parameters=cast("1984-08-02 01:01:01.001001 UTC" as TIMESTAMP) a,
-            cast("2000-01-01 01:01:01.001001 UTC" as TIMESTAMP) b,
+[parameters=cast('1984-08-02 01:01:01.001001 UTC' as TIMESTAMP) a,
+            cast('2000-01-01 01:01:01.001001 UTC' as TIMESTAMP) b,
             cast(NULL as TIMESTAMP) c]
 SELECT ARRAY<TIMESTAMP>[@a, @b, @c];
 --
@@ -299,7 +299,7 @@ ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[known order:1984-08-02, 1984-08-02]}]
 ==
 [name=construct_TIMESTAMP_array_from_non_literals]
 SELECT ARRAY<TIMESTAMP>[a]
-FROM (SELECT cast("1984-08-02 01:01:01.001001 UTC" AS TIMESTAMP) a);
+FROM (SELECT cast('1984-08-02 01:01:01.001001 UTC' AS TIMESTAMP) a);
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<TIMESTAMP>[1984-08-02 01:01:01.001001+00]}]
 ==
@@ -404,8 +404,8 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=construct_TIMESTAMP_array_with_null]
-SELECT ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC", NULL,
-                        "2014-09-11 01:01:01.001001 UTC"];
+SELECT ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC', NULL,
+                        '2014-09-11 01:01:01.001001 UTC'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<TIMESTAMP>[known order:

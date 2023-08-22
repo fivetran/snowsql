@@ -3,7 +3,7 @@
 # invalid duplicate column names for these resolved ASTs.
 
 WITH w1 AS (
-  SELECT "a" as item, "b" as event
+  SELECT 'a' as item, 'b' as event
 ),
 w2 AS (
   SELECT m1.item as c1, m2.item as c2
@@ -53,7 +53,7 @@ QueryStmt
 ==
 
 WITH w1 AS (
-  SELECT "a" as item, "b" as event
+  SELECT 'a' as item, 'b' as event
 )
   SELECT m1.item as c1, m2.item as c2
   FROM w1 as m1 join w1 as m2 USING (event)
@@ -93,7 +93,7 @@ QueryStmt
 ==
 
 WITH w1 AS (
-  SELECT "a" as item, "b" as event
+  SELECT 'a' as item, 'b' as event
 )
 select * from (
   SELECT m1.item as c1, m2.item as c2

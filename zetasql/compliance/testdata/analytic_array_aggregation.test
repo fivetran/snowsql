@@ -319,9 +319,9 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 SELECT ARRAY_AGG(elem)
   OVER(PARTITION BY EXTRACT(MONTH FROM elem)
      ORDER BY elem ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING)
-FROM UNNEST(ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC",
-                             "2000-01-01 01:01:01.001001 UTC",
-                             "2014-08-11 01:01:01.001001 UTC"]) elem;
+FROM UNNEST(ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC',
+                             '2000-01-01 01:01:01.001001 UTC',
+                             '2014-08-11 01:01:01.001001 UTC']) elem;
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<TIMESTAMP>[unknown order:
@@ -825,9 +825,9 @@ ARRAY<STRUCT<ARRAY<>>>[unknown order:
 SELECT ARRAY_AGG(elem)
   OVER(PARTITION BY EXTRACT(MONTH FROM elem)
      ORDER BY elem ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING)
-FROM UNNEST(ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC",
-                             "2000-01-01 01:01:01.001001 UTC",
-                             "2014-08-11 01:01:01.001001 UTC"]) elem;
+FROM UNNEST(ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC',
+                             '2000-01-01 01:01:01.001001 UTC',
+                             '2014-08-11 01:01:01.001001 UTC']) elem;
 --
 ARRAY<STRUCT<ARRAY<>>>[unknown order:
   {ARRAY<TIMESTAMP>[unknown order:
