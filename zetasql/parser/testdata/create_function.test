@@ -424,9 +424,9 @@ create function fn( s string )
 returns string language testlang
 as ''' return
   "presto!" + s + '\n';
-"""
+'''
 --
-CreateFunctionStatement [0-105] [create function...'\n'; """]
+CreateFunctionStatement [0-105] [create function...'\n'; ''']
   FunctionDeclaration [16-30] [fn( s string )]
     PathExpression [16-18] [fn]
       Identifier(fn) [16-18] [fn]
@@ -440,19 +440,19 @@ CreateFunctionStatement [0-105] [create function...'\n'; """]
     PathExpression [39-45] [string]
       Identifier(string) [39-45] [string]
   Identifier(testlang) [55-63] [testlang]
-  StringLiteral(""" return
+  StringLiteral(''' return
   "presto!" + s + '\n';
-""") [67-105] [""" return...'\n'; """]
+''') [67-105] [''' return...'\n'; ''']
 --
 CREATE FUNCTION fn(s string)
-RETURNS string LANGUAGE testlang as ''' return
+RETURNS string LANGUAGE testlang AS ''' return
   "presto!" + s + '\n';
-"""
+'''
 ==
 
 # Function with options.
 create function fn( s string )
-returns string language testlang as 'return \'a\';'
+returns string language testlang as 'return "a";'
 options ( a=b, bruce=lee ) ;
 --
 CreateFunctionStatement [0-107] [create function...bruce=lee )]
@@ -469,7 +469,7 @@ CreateFunctionStatement [0-107] [create function...bruce=lee )]
     PathExpression [39-45] [string]
       Identifier(string) [39-45] [string]
   Identifier(testlang) [55-63] [testlang]
-  StringLiteral('return 'a';') [67-80] ['return 'a';']
+  StringLiteral('return "a";') [67-80] ['return "a";']
   OptionsList [89-107] [( a=b, bruce=lee )]
     OptionsEntry [91-94] [a=b]
       Identifier(a) [91-92] [a]
@@ -481,16 +481,16 @@ CreateFunctionStatement [0-107] [create function...bruce=lee )]
         Identifier(lee) [102-105] [lee]
 --
 CREATE FUNCTION fn(s string)
-RETURNS string LANGUAGE testlang as 'return \'a\';' OPTIONS
+RETURNS string LANGUAGE testlang AS 'return "a";' OPTIONS
   (a = b, bruce = lee)
 ==
 
 # Invalid but parseable node : argument name not given.  Missing argument
 # names are only valid in the context of DROP FUNCTION statements.
 create function fn( string )
-returns string language testlang as 'return \'a\';';
+returns string language testlang as 'return "a";';
 --
-CreateFunctionStatement [0-78] [create function...return 'a';"]
+CreateFunctionStatement [0-78] [create function...return "a";']
   FunctionDeclaration [16-28] [fn( string )]
     PathExpression [16-18] [fn]
       Identifier(fn) [16-18] [fn]
@@ -503,18 +503,18 @@ CreateFunctionStatement [0-78] [create function...return 'a';"]
     PathExpression [37-43] [string]
       Identifier(string) [37-43] [string]
   Identifier(testlang) [53-61] [testlang]
-  StringLiteral('return 'a';') [65-78] ['return 'a';']
+  StringLiteral('return "a";') [65-78] ['return "a";']
 --
 CREATE FUNCTION fn(string)
-RETURNS string LANGUAGE testlang as 'return \'a\';'
+RETURNS string LANGUAGE testlang AS 'return "a";'
 ==
 
 # Invalid but parseable node : some argument names not given.  Missing argument
 # names are only valid in the context of DROP FUNCTION statements.
 create function fn( string, s string, int32, i int32 )
-returns string language testlang as "return 'a'";
+returns string language testlang as 'return "a"';
 --
-CreateFunctionStatement [0-103] [create function...return 'a'"]
+CreateFunctionStatement [0-103] [create function...return "a"']
   FunctionDeclaration [16-54] [fn( string...i int32 )]
     PathExpression [16-18] [fn]
       Identifier(fn) [16-18] [fn]
@@ -541,10 +541,10 @@ CreateFunctionStatement [0-103] [create function...return 'a'"]
     PathExpression [63-69] [string]
       Identifier(string) [63-69] [string]
   Identifier(testlang) [79-87] [testlang]
-  StringLiteral('return 'a'') [91-103] ['return 'a'']
+  StringLiteral('return "a"') [91-103] ['return "a"']
 --
 CREATE FUNCTION fn(string, s string, int32, i int32)
-RETURNS string LANGUAGE testlang AS "return 'a'"
+RETURNS string LANGUAGE testlang AS 'return "a"'
 ==
 
 # functions cannot accept multi-element paths for argument names.
@@ -933,19 +933,19 @@ RETURNS interval
 ==
 
 # Create a scalar function with a default argument.
-create function myfunc(a int64, b string default "abc") returns double
+create function myfunc(a int64, b string default 'abc') returns double
 --
 CreateFunctionStatement [0-70] [create function...turns double]
-  FunctionDeclaration [16-55] [myfunc(a int64...efault "abc")]
+  FunctionDeclaration [16-55] [myfunc(a int64...efault 'abc')]
     PathExpression [16-22] [myfunc]
       Identifier(myfunc) [16-22] [myfunc]
-    FunctionParameters [22-55] [(a int64,...default "abc")]
+    FunctionParameters [22-55] [(a int64,...default 'abc')]
       FunctionParameter [23-30] [a int64]
         Identifier(a) [23-24] [a]
         SimpleType [25-30] [int64]
           PathExpression [25-30] [int64]
             Identifier(int64) [25-30] [int64]
-      FunctionParameter(default_value=(StringLiteral('abc'))) [32-54] [b string default "abc"]
+      FunctionParameter(default_value=(StringLiteral('abc'))) [32-54] [b string default 'abc']
         Identifier(b) [32-33] [b]
         SimpleType [34-40] [string]
           PathExpression [34-40] [string]
@@ -955,13 +955,13 @@ CreateFunctionStatement [0-70] [create function...turns double]
     PathExpression [64-70] [double]
       Identifier(double) [64-70] [double]
 --
-CREATE FUNCTION myfunc(a int64, b string DEFAULT "abc")
+CREATE FUNCTION myfunc(a int64, b string DEFAULT 'abc')
 RETURNS double
 ==
 
 # Create a scalar function with multiple default arguments.
 CREATE FUNCTION myfunc(a int64 DEFAULT -314,
-                       b string DEFAULT "abc",
+                       b string DEFAULT 'abc',
                        c double DEFAULT 3.14)
 returns double
 --
@@ -977,7 +977,7 @@ CreateFunctionStatement [0-152] [CREATE FUNCTION...turns double]
             Identifier(int64) [25-30] [int64]
         UnaryExpression(-) [39-43] [-314]
           IntLiteral(314) [40-43] [314]
-      FunctionParameter(default_value=(StringLiteral('abc'))) [68-90] [b string DEFAULT "abc"]
+      FunctionParameter(default_value=(StringLiteral('abc'))) [68-90] [b string DEFAULT 'abc']
         Identifier(b) [68-69] [b]
         SimpleType [70-76] [string]
           PathExpression [70-76] [string]
@@ -993,13 +993,13 @@ CreateFunctionStatement [0-152] [CREATE FUNCTION...turns double]
     PathExpression [146-152] [double]
       Identifier(double) [146-152] [double]
 --
-CREATE FUNCTION myfunc(a int64 DEFAULT -314, b string DEFAULT "abc", c double DEFAULT 3.14)
+CREATE FUNCTION myfunc(a int64 DEFAULT -314, b string DEFAULT 'abc', c double DEFAULT 3.14)
 RETURNS double
 ==
 
 # Create a scalar function with templated default arguments.
 Create Function myfunc(a int64,
-                       b ANY TYPE Default "abc",
+                       b ANY TYPE Default 'abc',
                        c ANY TYPE Default 3.14)
 returns double
 --
@@ -1013,7 +1013,7 @@ CreateFunctionStatement [0-143] [Create Function...turns double]
         SimpleType [25-30] [int64]
           PathExpression [25-30] [int64]
             Identifier(int64) [25-30] [int64]
-      FunctionParameter(default_value=(StringLiteral('abc'))) [55-79] [b ANY TYPE Default "abc"]
+      FunctionParameter(default_value=(StringLiteral('abc'))) [55-79] [b ANY TYPE Default 'abc']
         Identifier(b) [55-56] [b]
         TemplatedParameterType [57-65] [ANY TYPE]
         StringLiteral('abc') [74-79] ['abc']
@@ -1025,7 +1025,7 @@ CreateFunctionStatement [0-143] [Create Function...turns double]
     PathExpression [137-143] [double]
       Identifier(double) [137-143] [double]
 --
-CREATE FUNCTION myfunc(a int64, b ANY TYPE DEFAULT "abc", c ANY TYPE DEFAULT 3.14)
+CREATE FUNCTION myfunc(a int64, b ANY TYPE DEFAULT 'abc', c ANY TYPE DEFAULT 3.14)
 RETURNS double
 ==
 
@@ -1519,9 +1519,9 @@ CREATE PUBLIC FUNCTION MatchesBucket(
 RETURNS BOOL
 AS (
   CASE bucket.type
-    WHEN "point" THEN value = bucket.point
-    WHEN "range" THEN bucket.range.low <= value AND value < bucket.range.high
-    ELSE ERROR("Unsupported bucket type")
+    WHEN 'point' THEN value = bucket.point
+    WHEN 'range' THEN bucket.range.low <= value AND value < bucket.range.high
+    ELSE ERROR('Unsupported bucket type')
     END
 );
 --
@@ -1545,7 +1545,7 @@ CreateFunctionStatement(is_public) [0-296] [CREATE PUBLIC...END )]
     PathExpression [95-99] [BOOL]
       Identifier(BOOL) [95-99] [BOOL]
   SqlFunctionBody [103-296] [(   CASE bucket...END )]
-    CaseValueExpression [107-294] [CASE bucket...")     END]
+    CaseValueExpression [107-294] [CASE bucket...')     END]
       PathExpression [112-123] [bucket.type]
         Identifier(bucket) [112-118] [bucket]
         Identifier(type) [119-123] [type]
@@ -1572,7 +1572,7 @@ CreateFunctionStatement(is_public) [0-296] [CREATE PUBLIC...END )]
             Identifier(bucket) [227-233] [bucket]
             Identifier("range") [234-239] [range]
             Identifier(high) [240-244] [high]
-      FunctionCall [254-286] [ERROR("Unsupporte...ket type")]
+      FunctionCall [254-286] [ERROR('Unsupporte...ket type')]
         PathExpression [254-259] [ERROR]
           Identifier(ERROR) [254-259] [ERROR]
         StringLiteral('Unsupported bucket type') [260-285] ['Unsupported bucket type']
@@ -1581,9 +1581,9 @@ CreateFunctionStatement(is_public) [0-296] [CREATE PUBLIC...END )]
 CREATE PUBLIC FUNCTION MatchesBucket(value DOUBLE, bucket project_namespace.Bucket)
 RETURNS BOOL AS (
   CASE bucket.type
-    WHEN "point" THEN value = bucket.point
-    WHEN "range" THEN bucket."range".low <= value AND value < bucket."range".high
-    ELSE ERROR("Unsupported bucket type")
+    WHEN 'point' THEN value = bucket.point
+    WHEN 'range' THEN bucket."range".low <= value AND value < bucket."range".high
+    ELSE ERROR('Unsupported bucket type')
   END
 )
 

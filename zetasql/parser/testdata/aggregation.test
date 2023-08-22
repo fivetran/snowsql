@@ -1484,7 +1484,7 @@ QueryStatement [0-62] [select anon_count...s a from T]
 --
 SELECT
   anon_count(*
-    WITH REPORT(format = 'PROTO')) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -1517,7 +1517,7 @@ QueryStatement [0-72] [select anon_count...s a from T]
 --
 SELECT
   anon_count(*
-    WITH REPORT(format = 'PROTO')
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T
@@ -1686,7 +1686,7 @@ QueryStatement [0-85] [select anon_count...s a from T]
 SELECT
   anon_count(*
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = 'PROTO')) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -1723,7 +1723,7 @@ QueryStatement [0-95] [select anon_count...s a from T]
 SELECT
   anon_count(*
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = 'PROTO')
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T
@@ -1877,7 +1877,7 @@ QueryStatement [0-65] [select anon_count...s a from T]
 --
 SELECT
   anon_count(expr
-    WITH REPORT(format = 'PROTO')) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -1911,7 +1911,7 @@ QueryStatement [0-75] [select anon_count...s a from T]
 --
 SELECT
   anon_count(expr
-    WITH REPORT(format = 'PROTO')
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T
@@ -2085,7 +2085,7 @@ QueryStatement [0-88] [select anon_count...s a from T]
 SELECT
   anon_count(expr
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = 'PROTO')) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -2123,7 +2123,7 @@ QueryStatement [0-98] [select anon_count...s a from T]
 SELECT
   anon_count(expr
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = 'PROTO')
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T

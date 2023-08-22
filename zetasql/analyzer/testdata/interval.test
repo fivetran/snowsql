@@ -2,12 +2,12 @@
 [default no_java]
 
 [language_features={{|INTERVAL_TYPE}}]
-SELECT INTERVAL "1" YEAR
+SELECT INTERVAL '1' YEAR
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Unexpected INTERVAL expression [at 1:8]
-SELECT INTERVAL "1" YEAR
+SELECT INTERVAL '1' YEAR
        ^
 --
 ALTERNATION GROUP: INTERVAL_TYPE
@@ -48,18 +48,18 @@ QueryStmt
 ==
 
 [language_features={{|INTERVAL_TYPE}}]
-select interval concat("1", "2") month
+select interval concat('1', '2') month
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Unexpected INTERVAL expression [at 1:8]
-select interval concat("1", "2") month
+select interval concat('1', '2') month
        ^
 --
 ALTERNATION GROUP: INTERVAL_TYPE
 --
 ERROR: Invalid interval literal. Expected INTERVAL keyword to be followed by an INT64 expression or STRING literal [at 1:17]
-select interval concat("1", "2") month
+select interval concat('1', '2') month
                 ^
 ==
 

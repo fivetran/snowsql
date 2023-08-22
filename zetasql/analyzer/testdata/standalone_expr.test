@@ -16,12 +16,12 @@ Literal(parse_location=0-5, type=INT64, value=291)
 
 'abc'
 --
-Literal(parse_location=0-5, type=STRING, value="abc")
+Literal(parse_location=0-5, type=STRING, value='abc')
 ==
 
 column_KitchenSink
 --
-ExpressionColumn(parse_location=0-18, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+ExpressionColumn(parse_location=0-18, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
 ==
 
 # The columns are only visible in AnalyzeStatement mode, not AnalyzeQuery.
@@ -37,7 +37,7 @@ coLUMN_int32 = 10
 --
 FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 +-parse_location=0-17
-+-ExpressionColumn(parse_location=0-12, type=INT32, name="column_int32")
++-ExpressionColumn(parse_location=0-12, type=INT32, name='column_int32')
 +-Literal(parse_location=15-17, type=INT32, value=10)
 ==
 
@@ -61,7 +61,7 @@ FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
 +-parse_location=0-56
 +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 | +-parse_location=0-16
-| +-ExpressionColumn(parse_location=0-12, type=INT32, name="column_int32")
+| +-ExpressionColumn(parse_location=0-12, type=INT32, name='column_int32')
 | +-Literal(parse_location=15-16, type=INT32, value=5)
 +-FunctionCall(ZetaSQL:$greater_or_equal(FLOAT, FLOAT) -> BOOL)
   +-parse_location=21-56
@@ -69,7 +69,7 @@ FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
   | +-parse_location=21-49
   | +-type=FLOAT
   | +-expr=
-  | | +-ExpressionColumn(parse_location=21-49, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+  | | +-ExpressionColumn(parse_location=21-49, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
   | +-field_descriptor=float_val
   | +-default_value=0
   +-Literal(parse_location=53-56, type=FLOAT, value=0)
@@ -125,7 +125,7 @@ column_int32 = @test_param_int32
 --
 FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 +-parse_location=0-32
-+-ExpressionColumn(parse_location=0-12, type=INT32, name="column_int32")
++-ExpressionColumn(parse_location=0-12, type=INT32, name='column_int32')
 +-Parameter(parse_location=15-32, type=INT32, name='test_param_int32')
 ==
 
@@ -136,7 +136,7 @@ column_int32 = ?
 --
 FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 +-parse_location=0-16
-+-ExpressionColumn(parse_location=0-12, type=INT32, name="column_int32")
++-ExpressionColumn(parse_location=0-12, type=INT32, name='column_int32')
 +-Parameter(parse_location=15-16, type=INT32, position=1)
 ==
 
@@ -147,7 +147,7 @@ column_int32 = ?
 --
 FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 +-parse_location=0-16
-+-ExpressionColumn(parse_location=0-12, type=INT32, name="column_int32")
++-ExpressionColumn(parse_location=0-12, type=INT32, name='column_int32')
 +-Parameter(parse_location=15-16, type=INT32, position=1)
 [UNDECLARED_PARAMETERS]
 INT32
@@ -238,7 +238,7 @@ SubqueryExpr
         +-column_list=$expr_subquery.[$col1#1, $col2#2]
         +-expr_list=
         | +-$col1#1 := Literal(parse_location=18-19, type=INT64, value=1)
-        | +-$col2#2 := Literal(parse_location=21-26, type=STRING, value="abc")
+        | +-$col2#2 := Literal(parse_location=21-26, type=STRING, value='abc')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -338,7 +338,7 @@ SubqueryExpr
         |   |   +-parse_location=23-54
         |   |   +-column_list=[s1.ks#1]
         |   |   +-expr_list=
-        |   |   | +-ks#1 := ExpressionColumn(parse_location=30-48, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+        |   |   | +-ks#1 := ExpressionColumn(parse_location=30-48, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-array_expr=
@@ -376,7 +376,7 @@ SubqueryExpr
         |   |   +-parse_location=29-61
         |   |   +-type=ARRAY<DATE>
         |   |   +-expr=
-        |   |   | +-ExpressionColumn(parse_location=29-61, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+        |   |   | +-ExpressionColumn(parse_location=29-61, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
         |   |   +-field_descriptor=repeated_date
         |   |   +-default_value=[]
         |   |   +-format=DATE
@@ -540,11 +540,11 @@ current_timestamp()
 FunctionCall(ZetaSQL:current_timestamp() -> TIMESTAMP)(parse_location=0-19)
 ==
 
-current_date("UTC")
+current_date('UTC')
 --
 FunctionCall(ZetaSQL:current_date(optional(1) STRING) -> DATE)
 +-parse_location=0-19
-+-Literal(parse_location=13-18, type=STRING, value="UTC")
++-Literal(parse_location=13-18, type=STRING, value='UTC')
 
 ==
 
@@ -726,7 +726,7 @@ datetime '2006-13-02 03:04:05.123456 UTC'
 [in_scope_expression_column_name=value]
 value
 --
-ExpressionColumn(parse_location=0-5, type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+ExpressionColumn(parse_location=0-5, type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
 ==
 
 # Setting the [in_scope_expression_column_name] switches us to have one
@@ -738,7 +738,7 @@ GetProtoField
 +-parse_location=0-11
 +-type=INT64
 +-expr=
-| +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+| +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
 +-field_descriptor=int64_key_1
 ==
 
@@ -749,7 +749,7 @@ GetProtoField
 +-parse_location=0-15
 +-type=BOOL
 +-expr=
-| +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+| +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
 +-field_descriptor=int64_key_1
 +-get_has_bit=TRUE
 ==
@@ -768,7 +768,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-parse_location=0-12
 | |   +-type=PROTO<zetasql_test__.KitchenSinkPB.Nested>
 | |   +-expr=
-| |   | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+| |   | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
 | |   +-field_descriptor=nested_value
 | |   +-default_value=NULL
 | +-field_descriptor=nested_int64
@@ -789,7 +789,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
   |   | |   | +-parse_location=28-55
   |   | |   | +-type=ARRAY<PROTO<zetasql_test__.KitchenSinkPB.NestedRepeatedGroup>>
   |   | |   | +-expr=
-  |   | |   | | +-ExpressionColumn(parse_location=28-55, type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+  |   | |   | | +-ExpressionColumn(parse_location=28-55, type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
   |   | |   | +-field_descriptor=nested_repeated_group
   |   | |   | +-default_value=[]
   |   | |   +-Literal(parse_location=71-72, type=INT64, value=0)
@@ -819,26 +819,26 @@ MakeStruct
   | | +-parse_location=1-17
   | | +-type=INT64
   | | +-expr=
-  | | | +-ExpressionColumn(parse_location=1-17, type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  | | | +-ExpressionColumn(parse_location=1-17, type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   | | +-field_descriptor=int64_key_1
   | +-GetProtoField
   |   +-parse_location=20-31
   |   +-type=INT64
   |   +-expr=
-  |   | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  |   | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   |   +-field_descriptor=int64_key_2
   +-GetProtoField
   | +-parse_location=34-47
   | +-type=BOOL
   | +-expr=
-  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   | +-field_descriptor=int32_val
   | +-get_has_bit=TRUE
   +-GetProtoField
   | +-parse_location=50-63
   | +-type=ARRAY<DATE>
   | +-expr=
-  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   | +-field_descriptor=repeated_date
   | +-default_value=[]
   | +-format=DATE
@@ -846,24 +846,24 @@ MakeStruct
   | +-parse_location=66-91
   | +-type=BOOL
   | +-expr=
-  | | +-ExpressionColumn(parse_location=66-91, type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  | | +-ExpressionColumn(parse_location=66-91, type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   | +-field_descriptor=timestamp_micros
   | +-get_has_bit=TRUE
   +-GetProtoField
   | +-parse_location=94-104
   | +-type=STRING
   | +-expr=
-  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   | +-field_descriptor=MIXED_case
   | +-default_value=''
   +-GetProtoField
   | +-parse_location=107-126
   | +-type=BOOL
   | +-expr=
-  | | +-ExpressionColumn(parse_location=107-126, type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  | | +-ExpressionColumn(parse_location=107-126, type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
   | +-field_descriptor=MIXED_case
   | +-get_has_bit=TRUE
-  +-ExpressionColumn(parse_location=129-133, type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+  +-ExpressionColumn(parse_location=129-133, type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
 ==
 
 # We can use UNNEST to scan an array field of the value column.
@@ -888,7 +888,7 @@ SubqueryExpr
         |   |   +-parse_location=29-42
         |   |   +-type=ARRAY<DATE>
         |   |   +-expr=
-        |   |   | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="sink")
+        |   |   | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='sink')
         |   |   +-field_descriptor=repeated_date
         |   |   +-default_value=[]
         |   |   +-format=DATE
@@ -926,13 +926,13 @@ MakeStruct
   | +-parse_location=1-12
   | +-type=INT64
   | +-expr=
-  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="")
+  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='')
   | +-field_descriptor=int64_key_1
   +-GetProtoField
     +-parse_location=14-22
     +-type=BOOL
     +-expr=
-    | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="")
+    | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='')
     +-field_descriptor=date
     +-get_has_bit=TRUE
 ==
@@ -987,7 +987,7 @@ value.has_bad_name
 [in_scope_expression_column_type=INT32]
 value
 --
-ExpressionColumn(parse_location=0-5, type=INT32, name="value")
+ExpressionColumn(parse_location=0-5, type=INT32, name='value')
 ==
 
 [in_scope_expression_column_name=value]
@@ -1009,18 +1009,18 @@ value.xyz
 MakeStruct
 +-type=STRUCT<STRUCT<xxxXXX INT32, DOUBLE, s STRING>, INT32, STRING>
 +-field_list=
-  +-ExpressionColumn(parse_location=1-6, type=STRUCT<xxxXXX INT32, DOUBLE, s STRING>, name="value")
+  +-ExpressionColumn(parse_location=1-6, type=STRUCT<xxxXXX INT32, DOUBLE, s STRING>, name='value')
   +-GetStructField
   | +-parse_location=9-21
   | +-type=INT32
   | +-expr=
-  | | +-ExpressionColumn(parse_location=9-21, type=STRUCT<xxxXXX INT32, DOUBLE, s STRING>, name="value")
+  | | +-ExpressionColumn(parse_location=9-21, type=STRUCT<xxxXXX INT32, DOUBLE, s STRING>, name='value')
   | +-field_idx=0
   +-GetStructField
     +-parse_location=24-25
     +-type=STRING
     +-expr=
-    | +-ExpressionColumn(type=STRUCT<xxxXXX INT32, DOUBLE, s STRING>, name="value")
+    | +-ExpressionColumn(type=STRUCT<xxxXXX INT32, DOUBLE, s STRING>, name='value')
     +-field_idx=2
 ==
 
@@ -1035,13 +1035,13 @@ MakeStruct
   | +-parse_location=1-2
   | +-type=INT32
   | +-expr=
-  | | +-ExpressionColumn(type=STRUCT<x INT32, DOUBLE, s STRING>, name="")
+  | | +-ExpressionColumn(type=STRUCT<x INT32, DOUBLE, s STRING>, name='')
   | +-field_idx=0
   +-GetStructField
     +-parse_location=4-5
     +-type=STRING
     +-expr=
-    | +-ExpressionColumn(type=STRUCT<x INT32, DOUBLE, s STRING>, name="")
+    | +-ExpressionColumn(type=STRUCT<x INT32, DOUBLE, s STRING>, name='')
     +-field_idx=2
 ==
 
@@ -1077,7 +1077,7 @@ value.bad
 [in_scope_expression_column_type=array<date>]
 value
 --
-ExpressionColumn(parse_location=0-5, type=ARRAY<DATE>, name="value")
+ExpressionColumn(parse_location=0-5, type=ARRAY<DATE>, name='value')
 ==
 
 [in_scope_expression_column_name=value]
@@ -1101,20 +1101,20 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | | +-parse_location=0-30
 | | +-type=INT64
 | | +-expr=
-| | | +-ExpressionColumn(parse_location=0-30, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+| | | +-ExpressionColumn(parse_location=0-30, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
 | | +-field_descriptor=int64_key_1
 | +-GetProtoField
 |   +-parse_location=33-50
 |   +-type=INT64
 |   +-expr=
-|   | +-ExpressionColumn(parse_location=33-50, type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+|   | +-ExpressionColumn(parse_location=33-50, type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
 |   +-field_descriptor=int64_key_2
 +-Cast(INT32 -> INT64)
   +-GetProtoField
     +-parse_location=53-62
     +-type=INT32
     +-expr=
-    | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+    | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
     +-field_descriptor=int32_val
     +-default_value=77
 ==
@@ -1128,12 +1128,12 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 MakeStruct
 +-type=STRUCT<PROTO<zetasql_test__.KitchenSinkPB>, INT32>
 +-field_list=
-  +-ExpressionColumn(parse_location=1-10, type=PROTO<zetasql_test__.KitchenSinkPB>, name="int32_val")
+  +-ExpressionColumn(parse_location=1-10, type=PROTO<zetasql_test__.KitchenSinkPB>, name='int32_val')
   +-GetProtoField
     +-parse_location=12-31
     +-type=INT32
     +-expr=
-    | +-ExpressionColumn(parse_location=12-31, type=PROTO<zetasql_test__.KitchenSinkPB>, name="int32_val")
+    | +-ExpressionColumn(parse_location=12-31, type=PROTO<zetasql_test__.KitchenSinkPB>, name='int32_val')
     +-field_descriptor=int32_val
     +-default_value=77
 ==
@@ -1173,7 +1173,7 @@ SubqueryExpr
             |     +-parse_location=74-85
             |     +-type=INT64
             |     +-expr=
-            |     | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="value")
+            |     | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='value')
             |     +-field_descriptor=int64_key_2
             +-input_scan=
               +-SingleRowScan
@@ -1243,7 +1243,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 ==
 
 NEW zetasql_test__.TestExtraPB(
-  ["abc", "def"] AS str_value,
+  ['abc', 'def'] AS str_value,
   17 AS int32_val1)
 --
 MakeProto
@@ -1267,7 +1267,7 @@ ALTERNATION GROUP: V_1_2_SAFE_FUNCTION_CALL
 --
 FunctionCall({SAFE_ERROR_MODE} ZetaSQL:concat(STRING, repeated(0) STRING) -> STRING)
 +-parse_location=0-18
-+-Literal(parse_location=12-17, type=STRING, value="abc")
++-Literal(parse_location=12-17, type=STRING, value='abc')
 ==
 
 [language_features={{|V_1_2_SAFE_FUNCTION_CALL}}]
@@ -1329,13 +1329,13 @@ SubqueryExpr
       +-ProjectScan
         +-column_list=$expr_subquery.[column_KitchenSink#1, float_val#2, TestConstantInt64#3]
         +-expr_list=
-        | +-column_KitchenSink#1 := ExpressionColumn(parse_location=18-36, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+        | +-column_KitchenSink#1 := ExpressionColumn(parse_location=18-36, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
         | +-float_val#2 :=
         | | +-GetProtoField
         | |   +-parse_location=38-66
         | |   +-type=FLOAT
         | |   +-expr=
-        | |   | +-ExpressionColumn(parse_location=38-66, type=PROTO<zetasql_test__.KitchenSinkPB>, name="column_kitchensink")
+        | |   | +-ExpressionColumn(parse_location=38-66, type=PROTO<zetasql_test__.KitchenSinkPB>, name='column_kitchensink')
         | |   +-field_descriptor=float_val
         | |   +-default_value=0
         | +-TestConstantInt64#3 := Constant(TestConstantInt64, parse_location=68-85, type=INT64, value=1)
