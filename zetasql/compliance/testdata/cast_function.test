@@ -1288,7 +1288,7 @@ ARRAY<STRUCT<BOOL>>[{true}]
 
 [name=cast_string_as_bool_2]
 select CAST(string_val as BOOL)
-FROM (SELECT "abc" as string_val);
+FROM (SELECT 'abc' as string_val);
 --
 ERROR: generic::out_of_range: Bad bool value: abc
 ==

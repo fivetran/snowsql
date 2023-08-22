@@ -813,7 +813,7 @@ ARRAY<STRUCT<INT64, int32_val INT32>>[known order:
 # ----------------------------------------------------------------------------
 [name=aggregation_distinct_array_agg_1]
 SELECT ARRAY_AGG(DISTINCT x)
-FROM ((SELECT "abc" x) UNION ALL (SELECT "abc") UNION ALL (SELECT "abc"))
+FROM ((SELECT 'abc' x) UNION ALL (SELECT 'abc') UNION ALL (SELECT 'abc'))
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>["abc"]}]
 ==

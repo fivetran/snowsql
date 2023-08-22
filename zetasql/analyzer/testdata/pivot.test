@@ -710,7 +710,7 @@ PIVOT(SUM(Key) FOR Key IN (1, volatile_function(1)));
 SELECT * FROM KeyValue
 PIVOT(SUM(Key) FOR Key IN (1, 'test'));
 --
-ERROR: Could not cast literal "test" to type INT64 [at 2:31]
+ERROR: Could not cast literal 'test' to type INT64 [at 2:31]
 PIVOT(SUM(Key) FOR Key IN (1, 'test'));
                               ^
 ==
@@ -1987,7 +1987,7 @@ PIVOT(
   FOR y IN ('Not a valid date')
 );
 --
-ERROR: Could not cast literal "Not a valid date" to type DATE [at 4:13]
+ERROR: Could not cast literal 'Not a valid date' to type DATE [at 4:13]
   FOR y IN ('Not a valid date')
             ^
 ==
@@ -2784,7 +2784,7 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
     |       +-expr_list=
-    |       | +-s#1 := Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:"test_a", b:true}})
+    |       | +-s#1 := Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:'test_a', b:true}})
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -2802,7 +2802,7 @@ QueryStmt
             +-for_expr=
             | +-ColumnRef(parse_location=282-283, type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, column=t.s#2)
             +-pivot_value_list=
-            | +-Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:"test_a", b:false}}, preserve_in_literal_remover=TRUE)
+            | +-Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:'test_a', b:false}}, preserve_in_literal_remover=TRUE)
             | +-MakeStruct
             | | +-type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>
             | | +-field_list=

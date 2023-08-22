@@ -2299,13 +2299,13 @@ SELECT 'test' IS {{NOT|}} DISTINCT FROM 2;
 --
 ALTERNATION GROUP: NOT
 --
-ERROR: Could not cast literal "test" to type INT64 [at 1:8]
+ERROR: Could not cast literal 'test' to type INT64 [at 1:8]
 SELECT 'test' IS NOT DISTINCT FROM 2;
        ^
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Could not cast literal "test" to type INT64 [at 1:8]
+ERROR: Could not cast literal 'test' to type INT64 [at 1:8]
 SELECT 'test' IS  DISTINCT FROM 2;
        ^
 ==

@@ -610,7 +610,7 @@ ARRAY<STRUCT<STRING>>[{"12"}]
 ==
 [name=concat_op_wrong_type_string_int]
 [required_features=V_1_3_CONCAT_MIXED_TYPES]
-SELECT "abc" || 2
+SELECT 'abc' || 2
 --
 ARRAY<STRUCT<STRING>>[{"abc2"}]
 ==

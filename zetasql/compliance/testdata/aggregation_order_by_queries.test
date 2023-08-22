@@ -240,21 +240,21 @@ ARRAY<STRUCT<
 [default required_features=V_1_1_ORDER_BY_IN_AGGREGATE]
 [name=aggregation_order_by_array_agg]
 SELECT ARRAY_AGG(x ORDER BY x)
-FROM ((SELECT "abc" x) UNION ALL (SELECT "def") UNION ALL (SELECT "xyz"))
+FROM ((SELECT 'abc' x) UNION ALL (SELECT "def") UNION ALL (SELECT "xyz"))
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"abc", "def", "xyz"]}]
 ==
 
 [name=aggregation_order_by_array_agg_desc]
 SELECT ARRAY_AGG(x ORDER BY x DESC)
-FROM ((SELECT "abc" x) UNION ALL (SELECT "def") UNION ALL (SELECT "xyz"))
+FROM ((SELECT 'abc' x) UNION ALL (SELECT "def") UNION ALL (SELECT "xyz"))
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"xyz", "def", "abc"]}]
 ==
 
 [name=aggregation_order_by_string_agg]
 SELECT STRING_AGG(x ORDER BY x)
-FROM ((SELECT "abc" x) UNION ALL (SELECT "def") UNION ALL (SELECT "xyz"))
+FROM ((SELECT 'abc' x) UNION ALL (SELECT "def") UNION ALL (SELECT "xyz"))
 --
 ARRAY<STRUCT<STRING>>[{"abc,def,xyz"}]
 
@@ -263,7 +263,7 @@ NOTE: Reference implementation reports non-determinism.
 
 [name=aggregation_order_by_string_agg_delimiter]
 SELECT STRING_AGG(x, "|" ORDER BY x)
-FROM ((SELECT "xyz" x) UNION ALL (SELECT "def") UNION ALL(SELECT "abc"))
+FROM ((SELECT "xyz" x) UNION ALL (SELECT "def") UNION ALL(SELECT 'abc'))
 --
 ARRAY<STRUCT<STRING>>[{"abc|def|xyz"}]
 

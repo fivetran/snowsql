@@ -3117,7 +3117,7 @@ void SampleCatalog::LoadTemplatedSQLUDFs() {
                                               FunctionArgumentType::REQUIRED)},
                         context_id++),
       /*argument_names=*/{"$col1"},
-      ParseResumeLocation::FromString("`$col1`")));
+      ParseResumeLocation::FromString("\"$col1\"")));
 
   // Add a UDF with a valid templated SQL body that performs concatenation on an
   // argument. The function signature accepts a single argument of any type.

@@ -3378,7 +3378,7 @@ QueryStmt
 # This was http://b/22000298.  We use GetASTNodeForColumn(column_idx) to get
 # an ASTLocation for a column that we are casting during a set operation, but
 # that function wasn't accounting for SELECT * changing column indexes.
-select "abc" c1, cast(1 as int64) c2
+select 'abc' c1, cast(1 as int64) c2
 union all
 select * from (
   select "def" c1, cast(1 as int32) c2
