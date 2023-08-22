@@ -305,7 +305,7 @@ SELECT * FROM KeyValue UNPIVOT(a for b in (x));
 ==
 
 # Select certain columns from input table and new unpivot columns.
-SELECT a , int_a FROM MultipleColumns UNPIVOT((a , b) for c in (( int_c, int_d ) AS "Label" ));
+SELECT a , int_a FROM MultipleColumns UNPIVOT((a , b) for c in (( int_c, int_d ) AS 'Label' ));
 --
 QueryStmt
 +-output_column_list=
@@ -1494,7 +1494,7 @@ SELECT * FROM MultipleColumns UNPIVOT(x for z in ((int_a, int_b)));
 ==
 
 # Unpivot with explicit label assigns the label value correctly.
-SELECT * FROM KeyValue UNPIVOT(a for b in (Key AS "Label"));
+SELECT * FROM KeyValue UNPIVOT(a for b in (Key AS 'Label'));
 --
 QueryStmt
 +-output_column_list=
@@ -1773,10 +1773,10 @@ SELECT * FROM MultipleColumns UNPIVOT(a for b in (int_a AS 1, int_b));
 ==
 
 # Unpivot with labels of mixed datatypes gives error.
-SELECT * FROM MultipleColumns UNPIVOT(a for b in (int_a AS "Label", int_b as 1));
+SELECT * FROM MultipleColumns UNPIVOT(a for b in (int_a AS 'Label', int_b as 1));
 --
 ERROR: All UNPIVOT labels must be the same type; when non-string labels are present then all labels must be explicitly provided [at 1:69]
-...UNPIVOT(a for b in (int_a AS "Label", int_b as 1));
+...UNPIVOT(a for b in (int_a AS 'Label', int_b as 1));
                                          ^
 ==
 
@@ -2197,10 +2197,10 @@ SELECT * from MultipleColumns UNPIVOT(x FOR y IN (int_a, int_a));
 ==
 
 # Duplicate columns in IN clause with different labels.
-SELECT * from MultipleColumns UNPIVOT(x FOR y IN (int_a AS "Label1", int_a AS "Label2"));
+SELECT * from MultipleColumns UNPIVOT(x FOR y IN (int_a AS 'Label1', int_a AS 'Label2'));
 --
 ERROR: Column names in UNPIVOT IN clause cannot be repeated [at 1:70]
-...UNPIVOT(x FOR y IN (int_a AS "Label1", int_a AS "Label2"));
+...UNPIVOT(x FOR y IN (int_a AS 'Label1', int_a AS 'Label2'));
                                           ^
 ==
 
@@ -2224,7 +2224,7 @@ ERROR: Column names in UNPIVOT IN clause cannot be repeated [at 1:80]
 ==
 
 # Duplicate labels are allowed.
-SELECT * from MultipleColumns UNPIVOT(x for y in (int_a AS "Label1", int_b AS "Label1"));
+SELECT * from MultipleColumns UNPIVOT(x for y in (int_a AS 'Label1', int_b AS 'Label1'));
 --
 QueryStmt
 +-output_column_list=
@@ -2431,7 +2431,7 @@ QueryStmt
 
 # Two unpivots, one inside a sub-query (with both include and exclude nulls)
 SELECT * FROM (SELECT * FROM KeyValue
-UNPIVOT INCLUDE NULLS(a for b in (Key AS "Label"))) UNPIVOT EXCLUDE NULLS(x for y in (a));
+UNPIVOT INCLUDE NULLS(a for b in (Key AS 'Label'))) UNPIVOT EXCLUDE NULLS(x for y in (a));
 
 --
 QueryStmt
