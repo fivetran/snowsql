@@ -1857,8 +1857,8 @@ QueryStmt
           +-TestStruct#17 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
 
-# 7.2 Error because the correlated "TestStruct.c" resolves to the middle query
-# and fails to resolve since "TestStruct.c" is not visible to post-GROUP BY
+# 7.2 Error because the correlated 'TestStruct.c' resolves to the middle query
+# and fails to resolve since 'TestStruct.c' is not visible to post-GROUP BY
 # in the middle query.
 SELECT TestStruct,
        (SELECT (TestStruct.d.a, (SELECT TestStruct.c))

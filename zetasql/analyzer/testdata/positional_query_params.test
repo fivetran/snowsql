@@ -368,7 +368,7 @@ INT64
 
 select a, any_value(b), c
 from (select ? as a, ? as b, ? as c from (select 1) where ?)
-group by a, b = "foo", c;
+group by a, b = 'foo', c;
 --
 QueryStmt
 +-output_column_list=
@@ -418,7 +418,7 @@ QueryStmt
 with T as (select ? as a, ? as b, ? as c from (select 1) where ?)
 select a, any_value(b), c
 from T
-group by a, b = "foo", c;
+group by a, b = 'foo', c;
 --
 QueryStmt
 +-output_column_list=
@@ -750,7 +750,7 @@ SELECT ?, ?.a
 
 # Mix of named and positional parameters
 
-select 1, "foo" = ?
+select 1, 'foo' = ?
 from TestTable
 where KitchenSink.bool_val = @test_param_bool and ?;
 --
@@ -762,7 +762,7 @@ where KitchenSink.bool_val = @test_param_bool and ?;
 # Mix of named and positional parameters
 [parameter_mode=named]
 
-select 1, "foo" = ?
+select 1, 'foo' = ?
 from TestTable
 where KitchenSink.bool_val = @test_param_bool and ?;
 --
@@ -775,7 +775,7 @@ where KitchenSink.bool_val = @test_param_bool and ?;
 # No parameters allowed
 [parameter_mode=none]
 
-select 1, "foo" = ?
+select 1, 'foo' = ?
 from TestTable
 where KitchenSink.bool_val = ?;
 --
@@ -788,7 +788,7 @@ where KitchenSink.bool_val = ?;
 # No parameters allowed
 [parameter_mode=none]
 
-select 1, "foo" = @test_param_string
+select 1, 'foo' = @test_param_string
 from TestTable
 where KitchenSink.bool_val = @test_param_bool;
 --
@@ -800,7 +800,7 @@ where KitchenSink.bool_val = @test_param_bool;
 
 # No positional parameters defined
 
-select 1, "foo" = ?
+select 1, 'foo' = ?
 from TestTable
 where KitchenSink.bool_val = ? and ?;
 --
@@ -814,7 +814,7 @@ where KitchenSink.bool_val = ? and ?;
 
 [positional_parameter_types=string,bool]
 
-select 1, "foo" = ?
+select 1, 'foo' = ?
 from TestTable
 where KitchenSink.bool_val = ? and ?;
 --
@@ -829,7 +829,7 @@ where KitchenSink.bool_val = ? and ?;
 [no_expect_error_location]
 [parameter_mode=positional]
 
-select 1, "foo" = @test_param_string
+select 1, 'foo' = @test_param_string
 from TestTable
 where KitchenSink.bool_val = @test_param_bool;
 --

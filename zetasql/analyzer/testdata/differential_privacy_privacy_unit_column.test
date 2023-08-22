@@ -645,21 +645,21 @@ ERROR: Syntax error: Unexpected keyword AS [at 1:78]
 
 # Non path expression
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column=("TestStruct.c"))
+select with differential_privacy options(privacy_unit_column=('TestStruct.c'))
 count(*) FROM SimpleTypesWithStruct;
 --
 ERROR: Differential privacy option must be a path expression [at 1:63]
-select with differential_privacy options(privacy_unit_column=("TestStruct.c"))
+select with differential_privacy options(privacy_unit_column=('TestStruct.c'))
                                                               ^
 ==
 
 # Non path expression
 [no_run_unparser]
-select with differential_privacy options(privacy_unit_column="TestStruct.c")
+select with differential_privacy options(privacy_unit_column='TestStruct.c')
 count(*) FROM SimpleTypesWithStruct;
 --
 ERROR: Differential privacy option must be a path expression [at 1:62]
-select with differential_privacy options(privacy_unit_column="TestStruct.c")
+select with differential_privacy options(privacy_unit_column='TestStruct.c')
                                                              ^
 ==
 

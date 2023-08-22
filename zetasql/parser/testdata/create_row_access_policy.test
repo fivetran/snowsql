@@ -171,7 +171,7 @@ CREATE ROW ACCESS POLICY ON t1 GRANT TO (@test_param_string) FILTER USING (true)
 ==
 
 # Test edge cases in GRANTEE LIST.
-create row access policy on t1 grant to ({{|concat("mdbuser/", "foo")|NULL|""|1}}) filter using(true);
+create row access policy on t1 grant to ({{|concat('mdbuser/', "foo")|NULL|""|1}}) filter using(true);
 --
 ALTERNATION GROUP: <empty>
 --
@@ -179,10 +179,10 @@ ERROR: Syntax error: Expected "@" or "@@" or string literal but got ")" [at 1:42
 create row access policy on t1 grant to () filter using(true);
                                          ^
 --
-ALTERNATION GROUP: concat("mdbuser/", "foo")
+ALTERNATION GROUP: concat('mdbuser/', "foo")
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier "concat" [at 1:42]
-create row access policy on t1 grant to (concat("mdbuser/", "foo")) filter us...
+create row access policy on t1 grant to (concat('mdbuser/', "foo")) filter us...
                                          ^
 --
 ALTERNATION GROUP: NULL
@@ -212,7 +212,7 @@ create row access policy on t1 grant to (1) filter using(true);
 ==
 
 # Test GRANTEE LIST must have a list / parentheses.
-create row access policy on t1 grant to {{|concat("mdbuser/", "foo")|NULL|""|1}} filter using(true);
+create row access policy on t1 grant to {{|concat('mdbuser/', "foo")|NULL|""|1}} filter using(true);
 --
 ALTERNATION GROUP: <empty>
 --
@@ -220,10 +220,10 @@ ERROR: Syntax error: Expected "(" but got keyword FILTER [at 1:42]
 create row access policy on t1 grant to  filter using(true);
                                          ^
 --
-ALTERNATION GROUP: concat("mdbuser/", "foo")
+ALTERNATION GROUP: concat('mdbuser/', "foo")
 --
 ERROR: Syntax error: Expected "(" but got identifier "concat" [at 1:41]
-create row access policy on t1 grant to concat("mdbuser/", "foo") filter usin...
+create row access policy on t1 grant to concat('mdbuser/', "foo") filter usin...
                                         ^
 --
 ALTERNATION GROUP: NULL

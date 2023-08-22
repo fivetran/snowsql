@@ -937,10 +937,10 @@ ALTER ROW ACCESS POLICY p1 ON t1 GRANT TO (@@sysvar)
 ==
 
 # Grant to: invalid function grantee.
-alter row access policy p1 on t1 grant to (concat("mdbuser/", 'foo')), filter using(true);
+alter row access policy p1 on t1 grant to (concat('mdbuser/', 'foo')), filter using(true);
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier "concat" [at 1:44]
-alter row access policy p1 on t1 grant to (concat("mdbuser/", 'foo')), filter...
+alter row access policy p1 on t1 grant to (concat('mdbuser/', 'foo')), filter...
                                            ^
 ==
 
@@ -1058,10 +1058,10 @@ ALTER ROW ACCESS POLICY p1 ON t1 REVOKE FROM (@param_user)
 ==
 
 # Revoke from: invalid function revokee.
-alter row access policy p1 on t1 revoke from (concat("mdbuser/", 'foo')), filter using(true);
+alter row access policy p1 on t1 revoke from (concat('mdbuser/', 'foo')), filter using(true);
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier "concat" [at 1:47]
-alter row access policy p1 on t1 revoke from (concat("mdbuser/", 'foo')), fil...
+alter row access policy p1 on t1 revoke from (concat('mdbuser/', 'foo')), fil...
                                               ^
 ==
 

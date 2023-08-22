@@ -192,7 +192,7 @@ CREATE ROW POLICY ON t1 TO @@sysvar USING (true)
 ==
 
 # Grantee list edge cases.
-create row policy on t1 to {{|concat("mdbuser/", "foo")|NULL|""|1}} using(true);
+create row policy on t1 to {{|concat('mdbuser/', "foo")|NULL|""|1}} using(true);
 --
 ALTERNATION GROUP: <empty>
 --
@@ -200,10 +200,10 @@ ERROR: Syntax error: Expected "@" or "@@" or string literal but got keyword USIN
 create row policy on t1 to  using(true);
                             ^
 --
-ALTERNATION GROUP: concat("mdbuser/", "foo")
+ALTERNATION GROUP: concat('mdbuser/', "foo")
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier "concat" [at 1:28]
-create row policy on t1 to concat("mdbuser/", "foo") using(true);
+create row policy on t1 to concat('mdbuser/', "foo") using(true);
                            ^
 --
 ALTERNATION GROUP: NULL

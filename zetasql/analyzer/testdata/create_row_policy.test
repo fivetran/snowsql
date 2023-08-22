@@ -122,13 +122,13 @@ CreateRowAccessPolicyStmt
 
 # Create named policy, multiple users.
 
-create row policy p1 on KeyValue to "mdbgroup/foo", 'bar@google.com'
+create row policy p1 on KeyValue to 'mdbgroup/foo', 'bar@google.com'
 using(key = +321);
 --
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=["mdbgroup/foo", 'bar@google.com']
++-grantee_list=['mdbgroup/foo', 'bar@google.com']
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=

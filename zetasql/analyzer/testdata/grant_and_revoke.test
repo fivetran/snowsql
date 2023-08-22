@@ -1,13 +1,13 @@
-grant all on KeyValue to "mdbuser/user";
+grant all on KeyValue to 'mdbuser/user';
 --
 GrantStmt(object_type_list="", name_path=KeyValue, grantee_list=["mdbuser/user"])
 ==
 
-grant select on KeyValue to "mdbuser/user";
+grant select on KeyValue to 'mdbuser/user';
 --
 GrantStmt
 +-privilege_list=
-| +-Privilege(action_type="select")
+| +-Privilege(action_type='select')
 +-object_type_list=""
 +-name_path=KeyValue
 +-grantee_list=["mdbuser/user"]
@@ -15,20 +15,20 @@ GrantStmt
 
 [language_features={{|PARAMETERS_IN_GRANTEE_LIST}}]
 revoke select,insert on KeyValue
-from "mdbuser/user", @test_param_string, "mdbgroup/group";
+from 'mdbuser/user', @test_param_string, 'mdbgroup/group';
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: The GRANTEE list only supports string literals, not parameters [at 2:22]
-from "mdbuser/user", @test_param_string, "mdbgroup/group";
+from 'mdbuser/user', @test_param_string, 'mdbgroup/group';
                      ^
 --
 ALTERNATION GROUP: PARAMETERS_IN_GRANTEE_LIST
 --
 RevokeStmt
 +-privilege_list=
-| +-Privilege(action_type="select")
-| +-Privilege(action_type="insert")
+| +-Privilege(action_type='select')
+| +-Privilege(action_type='insert')
 +-object_type_list=""
 +-name_path=KeyValue
 +-grantee_expr_list=
@@ -41,20 +41,20 @@ RevokeStmt
 # of STRING type.
 [language_features={{|PARAMETERS_IN_GRANTEE_LIST}}]
 revoke select,insert on KeyValue
-from "mdbuser/user", "mdbgroup/group", @@"sysvar.with.dots";
+from 'mdbuser/user', 'mdbgroup/group', @@"sysvar.with.dots";
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: The GRANTEE list only supports string literals, not system variables [at 2:40]
-from "mdbuser/user", "mdbgroup/group", @@"sysvar.with.dots";
+from 'mdbuser/user', 'mdbgroup/group', @@"sysvar.with.dots";
                                        ^
 --
 ALTERNATION GROUP: PARAMETERS_IN_GRANTEE_LIST
 --
 RevokeStmt
 +-privilege_list=
-| +-Privilege(action_type="select")
-| +-Privilege(action_type="insert")
+| +-Privilege(action_type='select')
+| +-Privilege(action_type='insert')
 +-object_type_list=""
 +-name_path=KeyValue
 +-grantee_expr_list=
@@ -63,17 +63,17 @@ RevokeStmt
   +-SystemVariable("sysvar.with.dots", type=STRING)
 ==
 
-revoke select(col1, col2),insert(col2) on table KeyValue from "user@google.com";
+revoke select(col1, col2),insert(col2) on table KeyValue from 'user@google.com';
 --
 RevokeStmt
 +-privilege_list=
 | +-Privilege
-| | +-action_type="select"
+| | +-action_type='select'
 | | +-unit_list=
 | |   +-ObjectUnit(name_path=col1)
 | |   +-ObjectUnit(name_path=col2)
 | +-Privilege
-|   +-action_type="insert"
+|   +-action_type='insert'
 |   +-unit_list=
 |     +-ObjectUnit(name_path=col2)
 +-object_type_list=table
@@ -99,14 +99,14 @@ from @test_param_int64;
      ^
 ==
 
-grant select (doubly_nested_struct.e, doubly_nested_struct.f.c) on DoublyNestedStructTable to "mdbuser/user";
+grant select (doubly_nested_struct.e, doubly_nested_struct.f.c) on DoublyNestedStructTable to 'mdbuser/user';
 --
 ERROR: Privileges on nested fields are not supported in GRANT [at 1:15]
 grant select (doubly_nested_struct.e, doubly_nested_struct.f.c) on DoublyNest...
               ^
 ==
 
-revoke select (doubly_nested_struct.e, doubly_nested_struct.f.c) on DoublyNestedStructTable from "mdbuser/user";
+revoke select (doubly_nested_struct.e, doubly_nested_struct.f.c) on DoublyNestedStructTable from 'mdbuser/user';
 --
 ERROR: Privileges on nested fields are not supported in REVOKE [at 1:16]
 revoke select (doubly_nested_struct.e, doubly_nested_struct.f.c) on DoublyNes...
@@ -117,7 +117,7 @@ grant select on materialized view foo to 'user@google.com'
 --
 GrantStmt
 +-privilege_list=
-| +-Privilege(action_type="select")
+| +-Privilege(action_type='select')
 +-object_type_list=materialized.view
 +-name_path=foo
 +-grantee_list=["user@google.com"]
@@ -127,7 +127,7 @@ revoke select on materialized view foo from 'user@google.com'
 --
 RevokeStmt
 +-privilege_list=
-| +-Privilege(action_type="select")
+| +-Privilege(action_type='select')
 +-object_type_list=materialized.view
 +-name_path=foo
 +-grantee_list=["user@google.com"]

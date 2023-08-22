@@ -1473,7 +1473,7 @@ WITH RECURSIVE t AS (
     UNION ALL SELECT 'test' FROM t
 ) SELECT * FROM t;
 --
-ERROR: Could not cast literal "test" to type DOUBLE [at 2:10]
+ERROR: Could not cast literal 'test' to type DOUBLE [at 2:10]
   SELECT 2.5
          ^
 ==
@@ -1527,7 +1527,7 @@ QueryStmt
     |       |   | +-ProjectScan
     |       |   |   +-column_list=[$union_all1.$col1#1]
     |       |   |   +-expr_list=
-    |       |   |   | +-$col1#1 := Literal(type=STRUCT<STRING, STRING>, value={"a", "b"})
+    |       |   |   | +-$col1#1 := Literal(type=STRUCT<STRING, STRING>, value={'a', 'b'})
     |       |   |   +-input_scan=
     |       |   |     +-SingleRowScan
     |       |   +-output_column_list=[$union_all1.$col1#1]

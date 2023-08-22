@@ -121,7 +121,7 @@ ArgumentRef(type=BOOL, name='x')
 
 # Show a case where the same template resolves to two different signatures:
 # part one.
-select udf_templated_return_any_scalar_arg("abc");
+select udf_templated_return_any_scalar_arg('abc');
 --
 QueryStmt
 +-output_column_list=
@@ -189,7 +189,7 @@ ArgumentRef(type=INT64, name='x')
 
 # The function performs a projection.
 select udf_templated_arg_plus_integer(42),
-       udf_templated_arg_concat_string("abc");
+       udf_templated_arg_concat_string('abc');
 --
 QueryStmt
 +-output_column_list=
@@ -224,7 +224,7 @@ FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
 ==
 
 # The function takes two arguments.
-select udf_templated_arg_concat_two_strings("abc", "def");
+select udf_templated_arg_concat_two_strings('abc', 'def');
 --
 QueryStmt
 +-output_column_list=
@@ -424,7 +424,7 @@ Cast(INT32 -> INT64)
 # Call a templated SQL UDF with an argument type that exactly matches its
 # expected return type. The function call finishes successfully.
 select udf_one_templated_arg_return_struct_int64_string(
-    (select as struct cast(1 as int64) as int_field, "abc" as string_field))
+    (select as struct cast(1 as int64) as int_field, 'abc' as string_field))
 --
 QueryStmt
 +-output_column_list=
@@ -470,7 +470,7 @@ ArgumentRef(type=STRUCT<int_field INT64, string_field STRING>, name='x')
 # coercible. The resolver adds a coercion and the function call finishes
 # successfully.
 select udf_one_templated_arg_return_struct_int64_string(
-    (select as struct cast(1 as int32) as int_field, "abc" as string_field))
+    (select as struct cast(1 as int32) as int_field, 'abc' as string_field))
 --
 QueryStmt
 +-output_column_list=
@@ -567,7 +567,7 @@ Cast(STRUCT<int_field INT32, string_field STRING> -> STRUCT<int_field INT64, str
 
 # Call a templated SQL function with a 32-bit integer return type that returns
 # the literal value 42.
-select udf_templated_return_42_return_type_int32("abc")
+select udf_templated_return_42_return_type_int32('abc')
 --
 QueryStmt
 +-output_column_list=
@@ -738,7 +738,7 @@ Recursive dependencies detected when resolving function Templated_SQL_Function:u
 ==
 
 # The function performs an invalid projection.
-select udf_templated_arg_plus_integer("abc");
+select udf_templated_arg_plus_integer('abc');
 --
 QueryStmt
 +-output_column_list=
@@ -834,7 +834,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-Could not cast literal "abc" to type INT64 [at 1:1]
+Could not cast literal 'abc' to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -862,7 +862,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-Could not cast literal "abc" to type INT64 [at 1:1]
+Could not cast literal 'abc' to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -896,7 +896,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-Could not cast literal "abc" to type INT64 [at 1:1]
+Could not cast literal 'abc' to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -931,10 +931,10 @@ x.int32_field
 
 # Call a templated SQL UDF with duplicate argument names, to show the error
 # messages.
-select udf_templated_duplicate_arg_names("abc", "def");
+select udf_templated_duplicate_arg_names('abc', 'def');
 --
 ERROR: Invalid function udf_templated_duplicate_arg_names [at 1:8]
-select udf_templated_duplicate_arg_names("abc", "def");
+select udf_templated_duplicate_arg_names('abc', 'def');
        ^
 Analysis of function Templated_SQL_Function:udf_templated_duplicate_arg_names failed:
 Duplicate argument name x
@@ -1023,10 +1023,10 @@ Function declared to return STRING but the function body produces incompatible t
 
 # Call a templated SQL function with a 32-bit integer return type that returns
 # an integer too large to fit into 32 bits..
-select udf_templated_return_999999999999999_return_type_int32("abc")
+select udf_templated_return_999999999999999_return_type_int32('abc')
 --
 ERROR: Invalid function udf_templated_return_999999999999999_return_type_int32 [at 1:8]
-select udf_templated_return_999999999999999_return_type_int32("abc")
+select udf_templated_return_999999999999999_return_type_int32('abc')
        ^
 Analysis of function Templated_SQL_Function:udf_templated_return_999999999999999_return_type_int32 failed:
 Could not cast literal 999999999999999 to type INT32

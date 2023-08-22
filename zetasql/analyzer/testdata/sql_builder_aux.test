@@ -146,10 +146,10 @@ grant delete on "temporary table" to 'bar@google.com'
 GRANT delete ON "temporary table" TO 'bar@google.com';
 ==
 
-revoke all on table foo from "mdbuser/user", 'mdbgroup/group'
+revoke all on table foo from 'mdbuser/user', 'mdbgroup/group'
 --
 [UNPARSED_SQL]
-REVOKE ALL PRIVILEGES ON table foo FROM "mdbuser/user", "mdbgroup/group";
+REVOKE ALL PRIVILEGES ON table foo FROM 'mdbuser/user', 'mdbgroup/group';
 ==
 
 drop table foo
