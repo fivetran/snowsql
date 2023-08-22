@@ -1659,9 +1659,9 @@ select with differential_privacy count(*, contribution_bounds_per_group => (0, 1
 from (select * from T1StringAnonymizationUid
       union all
       select * from T1StringAnonymizationUid)
-cross join (select "a", "b"
+cross join (select 'a', 'b'
             union all
-            select "c", "d");
+            select 'b', 'd');
 --
 QueryStmt
 +-output_column_list=
@@ -1708,8 +1708,8 @@ QueryStmt
         |         | | +-ProjectScan
         |         | |   +-column_list=$union_all1.[$col1#7, $col2#8]
         |         | |   +-expr_list=
-        |         | |   | +-$col1#7 := Literal(parse_location=211-214, type=STRING, value="a")
-        |         | |   | +-$col2#8 := Literal(parse_location=216-219, type=STRING, value="b")
+        |         | |   | +-$col1#7 := Literal(parse_location=211-214, type=STRING, value='a')
+        |         | |   | +-$col2#8 := Literal(parse_location=216-219, type=STRING, value='b')
         |         | |   +-input_scan=
         |         | |     +-SingleRowScan
         |         | +-output_column_list=$union_all1.[$col1#7, $col2#8]
@@ -1718,8 +1718,8 @@ QueryStmt
         |           | +-ProjectScan
         |           |   +-column_list=$union_all2.[$col1#9, $col2#10]
         |           |   +-expr_list=
-        |           |   | +-$col1#9 := Literal(parse_location=261-264, type=STRING, value="c")
-        |           |   | +-$col2#10 := Literal(parse_location=266-269, type=STRING, value="d")
+        |           |   | +-$col1#9 := Literal(parse_location=261-264, type=STRING, value='b')
+        |           |   | +-$col2#10 := Literal(parse_location=266-269, type=STRING, value='d')
         |           |   +-input_scan=
         |           |     +-SingleRowScan
         |           +-output_column_list=$union_all2.[$col1#9, $col2#10]
@@ -1784,8 +1784,8 @@ QueryStmt
         |   |         | | +-ProjectScan
         |   |         | |   +-column_list=$union_all1.[$col1#7, $col2#8]
         |   |         | |   +-expr_list=
-        |   |         | |   | +-$col1#7 := Literal(parse_location=211-214, type=STRING, value="a")
-        |   |         | |   | +-$col2#8 := Literal(parse_location=216-219, type=STRING, value="b")
+        |   |         | |   | +-$col1#7 := Literal(parse_location=211-214, type=STRING, value='a')
+        |   |         | |   | +-$col2#8 := Literal(parse_location=216-219, type=STRING, value='b')
         |   |         | |   +-input_scan=
         |   |         | |     +-SingleRowScan
         |   |         | +-output_column_list=$union_all1.[$col1#7, $col2#8]
@@ -1794,8 +1794,8 @@ QueryStmt
         |   |           | +-ProjectScan
         |   |           |   +-column_list=$union_all2.[$col1#9, $col2#10]
         |   |           |   +-expr_list=
-        |   |           |   | +-$col1#9 := Literal(parse_location=261-264, type=STRING, value="c")
-        |   |           |   | +-$col2#10 := Literal(parse_location=266-269, type=STRING, value="d")
+        |   |           |   | +-$col1#9 := Literal(parse_location=261-264, type=STRING, value='b')
+        |   |           |   | +-$col2#10 := Literal(parse_location=266-269, type=STRING, value='d')
         |   |           |   +-input_scan=
         |   |           |     +-SingleRowScan
         |   |           +-output_column_list=$union_all2.[$col1#9, $col2#10]

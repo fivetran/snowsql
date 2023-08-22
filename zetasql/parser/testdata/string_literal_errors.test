@@ -742,7 +742,7 @@ select 'a'\
 ALTERNATION GROUP: "a"
 --
 ERROR: Syntax error: Illegal input character "\\" [at 1:11]
-select "a"\
+SELECT 'a'\
           ^
 --
 ALTERNATION GROUP: '''a'''
@@ -1210,7 +1210,7 @@ select {{"a"a"|""""a""""|"""a"""a"""|''a''|""a""}}
 ALTERNATION GROUP: "a"a"
 --
 ERROR: Syntax error: Unclosed string literal [at 1:12]
-select "a"a"
+SELECT 'a'a"
            ^
 --
 ALTERNATION GROUP: """"a""""
