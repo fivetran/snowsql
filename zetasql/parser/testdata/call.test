@@ -23,7 +23,7 @@ CALL schema.myprocedure()
 ==
 
 # Various expressions as parameters.
-call myprocedure(1 + 2, "a", cast(NULL as string))
+call myprocedure(1 + 2, 'a', cast(NULL as string))
 --
 CallStatement [0-50]
   PathExpression [5-16]
@@ -41,7 +41,7 @@ CallStatement [0-50]
         PathExpression [42-48]
           Identifier(string) [42-48]
 --
-CALL myprocedure(1 + 2, "a", CAST(NULL AS string))
+CALL myprocedure(1 + 2, 'a', CAST(NULL AS string))
 ==
 
 # Model-typed parameters.
