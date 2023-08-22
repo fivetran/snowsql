@@ -422,7 +422,7 @@ RETURNS string LANGUAGE testlang
 # Multi-line quoted string for function body.
 create function fn( s string )
 returns string language testlang
-as """ return
+as ''' return
   "presto!" + s + '\n';
 """
 --
@@ -445,14 +445,14 @@ CreateFunctionStatement [0-105] [create function...'\n'; """]
 """) [67-105] [""" return...'\n'; """]
 --
 CREATE FUNCTION fn(s string)
-RETURNS string LANGUAGE testlang AS """ return
+RETURNS string LANGUAGE testlang as ''' return
   "presto!" + s + '\n';
 """
 ==
 
 # Function with options.
 create function fn( s string )
-returns string language testlang as "return 'a';"
+returns string language testlang as 'return \'a\';'
 options ( a=b, bruce=lee ) ;
 --
 CreateFunctionStatement [0-107] [create function...bruce=lee )]
@@ -481,14 +481,14 @@ CreateFunctionStatement [0-107] [create function...bruce=lee )]
         Identifier(lee) [102-105] [lee]
 --
 CREATE FUNCTION fn(s string)
-RETURNS string LANGUAGE testlang AS "return 'a';" OPTIONS
+RETURNS string LANGUAGE testlang as 'return \'a\';' OPTIONS
   (a = b, bruce = lee)
 ==
 
 # Invalid but parseable node : argument name not given.  Missing argument
 # names are only valid in the context of DROP FUNCTION statements.
 create function fn( string )
-returns string language testlang as "return 'a';";
+returns string language testlang as 'return \'a\';';
 --
 CreateFunctionStatement [0-78] [create function...return 'a';"]
   FunctionDeclaration [16-28] [fn( string )]
@@ -506,7 +506,7 @@ CreateFunctionStatement [0-78] [create function...return 'a';"]
   StringLiteral('return 'a';') [65-78] ['return 'a';']
 --
 CREATE FUNCTION fn(string)
-RETURNS string LANGUAGE testlang AS "return 'a';"
+RETURNS string LANGUAGE testlang as 'return \'a\';'
 ==
 
 # Invalid but parseable node : some argument names not given.  Missing argument
@@ -549,7 +549,7 @@ RETURNS string LANGUAGE testlang AS "return 'a'"
 
 # functions cannot accept multi-element paths for argument names.
 create function fn(my.path.s string )
-returns string language testlang as "return 'a';"
+returns string language testlang as 'return \'a\';'
 options ( a=b, bruce=lee ) ;
 --
 ERROR: Syntax error: Expected ")" or "," but got identifier "string" [at 1:30]
@@ -559,11 +559,11 @@ create function fn(my.path.s string )
 
 # Scalar functions cannot return table-valued types.
 create function fn(s string)
-returns table<s string> language testlang as "return 'a';"
+returns table<s string> language testlang as 'return \'a\';'
 options ( a=b, bruce=lee ) ;
 --
 ERROR: Syntax error: Unexpected TABLE [at 2:1]
-returns table<s string> language testlang as "return 'a';"
+returns table<s string> language testlang as 'return \'a\';'
 ^
 ==
 

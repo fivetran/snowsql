@@ -8368,7 +8368,7 @@ CreateTableFunctionStmt
 +-argument_name_list=[x, y]
 +-signature=(STRING x, INT64 y) -> TABLE<col_ci STRING COLLATE 'und:ci', col_array_ci ARRAY<STRING COLLATE 'und:ci'>, col_struct_ci STRUCT<STRING COLLATE 'und:ci', INT64>>
 +-language='SQL'
-+-code='select\n    COLLATE(x, 'und:ci') as col_ci,\n    [COLLATE(x, 'und:ci')] as col_array_ci,\n    (COLLATE(x, 'und:ci'), y) as col_struct_ci'
++-code='select\n    COLLATE(x, \'und:ci\') as col_ci,\n    [COLLATE(x, \'und:ci\')] as col_array_ci,\n    (COLLATE(x, \'und:ci\'), y) as col_struct_ci'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[col_ci#1, col_array_ci#2, col_struct_ci#3]
@@ -8449,7 +8449,7 @@ CreateTableFunctionStmt
 +-argument_name_list=[x, y]
 +-signature=(TABLE<col_str STRING> x, INT64 y) -> TABLE<col_ci STRING COLLATE 'und:ci', col_array_ci ARRAY<STRING COLLATE 'und:ci'>, col_struct_ci STRUCT<STRING COLLATE 'und:ci', INT64>>
 +-language='SQL'
-+-code='select\n    COLLATE(col_str, 'und:ci') as col_ci,\n    [COLLATE(col_str, 'und:ci')] as col_array_ci,\n    (COLLATE(col_str, 'und:ci'), y) as col_struct_ci\n  from x'
++-code='select\n    COLLATE(col_str, \'und:ci\') as col_ci,\n    [COLLATE(col_str, \'und:ci\')] as col_array_ci,\n    (COLLATE(col_str, \'und:ci\'), y) as col_struct_ci\n  from x'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[col_ci#2, col_array_ci#3, col_struct_ci#4]
@@ -8498,7 +8498,7 @@ CreateTableFunctionStmt
 +-argument_name_list=[x]
 +-signature=(TABLE<STRUCT<str_field STRING>> x) -> TABLE<col_ci STRING COLLATE 'und:ci', col_array_ci ARRAY<STRING COLLATE 'und:ci'>, col_struct_ci STRUCT<STRING COLLATE 'und:ci', INT64>>
 +-language='SQL'
-+-code='select\n    COLLATE(str_field, 'und:ci') as col_ci,\n    [COLLATE(str_field, 'und:ci')] as col_array_ci,\n    (COLLATE(str_field, 'und:ci'), 1) as col_struct_ci\n  from x'
++-code='select\n    COLLATE(str_field, \'und:ci\') as col_ci,\n    [COLLATE(str_field, \'und:ci\')] as col_array_ci,\n    (COLLATE(str_field, \'und:ci\'), 1) as col_struct_ci\n  from x'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[col_ci#2, col_array_ci#3, col_struct_ci#4]
@@ -8555,7 +8555,7 @@ CreateTableFunctionStmt
 +-argument_name_list=[x]
 +-signature=(STRING x) -> TABLE<STRUCT<col_ci STRING COLLATE 'und:ci', col_binary STRING COLLATE 'binary'>>
 +-language='SQL'
-+-code='select as value struct(COLLATE(x, 'und:ci') as col_ci, COLLATE(x, 'binary') as col_binary)'
++-code='select as value struct(COLLATE(x, \'und:ci\') as col_ci, COLLATE(x, \'binary\') as col_binary)'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.$col1#1<{Collation:"und:ci"},{Collation:"binary"}>]
@@ -8859,7 +8859,7 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(STRING x) -> STRING rejects_collation=TRUE
 +-language='SQL'
-+-code='COLLATE(x, '')'
++-code='COLLATE(x, \'\')'
 +-function_expression=
   +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
     +-ArgumentRef(type=STRING, name='x')

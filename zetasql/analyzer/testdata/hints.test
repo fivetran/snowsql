@@ -65,7 +65,7 @@ QueryStmt
     +-hint_list=
     | +-h := Literal(type=STRING, value='v')
     | +-h := Literal(type=STRING, value='v')
-    | +-k := Constant(TestConstantString, type=STRING, value="foo")
+    | +-k := Constant(TestConstantString, type=STRING, value='foo')
     +-input_scan=
       +-ProjectScan
         +-column_list=[$query.$col1#1]
@@ -319,7 +319,7 @@ QueryStmt
     +-column_list=[TestTable.KitchenSink#3]
     +-hint_list=
     | +-key1 := Literal(type=STRING, value='KitchenSink')
-    | +-key2 := Constant(TestConstantString, type=STRING, value="foo")
+    | +-key2 := Constant(TestConstantString, type=STRING, value='foo')
     +-input_scan=
       +-ProjectScan
         +-column_list=[TestTable.KitchenSink#3]
@@ -345,11 +345,11 @@ QueryStmt
     +-column_list=[TestTable.KitchenSink#3]
     +-hint_list=
     | +-key1 := Literal(type=STRING, value='KitchenSink')
-    | +-key2 := Constant(Test Constant-String, type=STRING, value="foo bar")
+    | +-key2 := Constant(Test Constant-String, type=STRING, value='foo bar')
     | +-key3 := Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
     | +-key4 := Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
-    | +-key5 := Constant(nested_catalog.Test Constant-String, type=STRING, value="Test constant in nested catalog")
-    | +-key6 := Constant(nested_catalog.Test Constant-String, type=STRING, value="Test constant in nested catalog")
+    | +-key5 := Constant(nested_catalog.Test Constant-String, type=STRING, value='Test constant in nested catalog')
+    | +-key6 := Constant(nested_catalog.Test Constant-String, type=STRING, value='Test constant in nested catalog')
     +-input_scan=
       +-ProjectScan
         +-column_list=[TestTable.KitchenSink#3]
@@ -588,7 +588,7 @@ QueryStmt
 
 select @{ h1=[1, 'a', null] } key from Keyvalue
 --
-ERROR: Could not cast literal "a" to type INT64 [at 1:18]
+ERROR: Could not cast literal 'a' to type INT64 [at 1:18]
 select @{ h1=[1, 'a', null] } key from Keyvalue
                  ^
 ==

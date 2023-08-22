@@ -749,7 +749,7 @@ ERROR: Duplicate argument name duMMyARg [at 2:36]
 # Multi-line function body.
 create function fn( s string )
 returns string language testlang
-as """ return
+as ''' return
   "presto!" + s + '\n';
 """
 --
@@ -779,7 +779,7 @@ create function fn( s string )
 
 # Function with options.
 create function fn( s string )
-returns string language testlang as "return 'a';"
+returns string language testlang as 'return \'a\';'
 options ( a=b, bruce=lee, c=@test_param_string ) ;
 --
 CreateFunctionStmt
@@ -789,7 +789,7 @@ CreateFunctionStmt
 +-argument_name_list=[s]
 +-signature=(STRING s) -> STRING
 +-language='testlang'
-+-code='return 'a';'
++-code='return \'a\';'
 +-option_list=
   +-a := Literal(type=STRING, value='b')
   +-bruce := Literal(type=STRING, value='lee')
@@ -798,7 +798,7 @@ CreateFunctionStmt
 
 # Function missing parameter names.
 create function fn( a int32, string ) returns string
-language testlang as "return 's';"
+language testlang as 'return \'s\';'
 --
 ERROR: Parameters in function declarations must include both name and type [at 1:30]
 create function fn( a int32, string ) returns string
@@ -831,7 +831,7 @@ CreateFunctionStmt(name_path=fn, has_explicit_return_type=TRUE, return_type=STRI
 
 # Scalar functions cannot accept table-valued arguments.
 create function fn(s table<t string>)
-returns string language testlang as "return 'a';"
+returns string language testlang as 'return \'a\';'
 options ( a=b, bruce=lee ) ;
 --
 ERROR: TABLE parameters are not allowed in CREATE FUNCTION statement [at 1:20]
@@ -903,7 +903,7 @@ CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRIN
 # clause is also present.
 create function f(x any type)
   language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -915,7 +915,7 @@ create function f(x any type)
 # ANY TYPE parameters are allowed with the LANGUAGE clause.
 create function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -926,7 +926,7 @@ CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRIN
 # clause.
 create or replace function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -937,7 +937,7 @@ CreateFunctionStmt(name_path=f, create_mode=CREATE_OR_REPLACE, has_explicit_retu
 # clause.
 create function if not exists f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -1105,7 +1105,7 @@ ERROR: Parameterized types are not supported in function signatures [at 2:17]
 ==
 
 create function fn( a int32, b string(10) ) returns string
-language testlang as "return 's';"
+language testlang as 'return \'s\';'
 --
 ERROR: Parameterized types are not supported in function arguments [at 1:38]
 create function fn( a int32, b string(10) ) returns string
@@ -1122,7 +1122,7 @@ ERROR: Type with collation name is not supported in function signatures [at 2:18
 ==
 
 create function fn( a int32, b string 'und:ci' ) returns string
-language testlang as "return 's';"
+language testlang as 'return \'s\';'
 --
 ERROR: Syntax error: Expected ")" or "," but got string literal 'und:ci' [at 1:39]
 create function fn( a int32, b string 'und:ci' ) returns string
@@ -1142,7 +1142,7 @@ create function myfunc(x FUNCTION<()->INT64>) as (false);
 
 [disallow_duplicate_options]
 create function fn( s string )
-returns string language testlang as "return 'a';"
+returns string language testlang as 'return \'a\';'
 options ( a=b, b=c, c=d, a=z );
 --
 ERROR: Duplicate option specified for 'a' [at 3:26]

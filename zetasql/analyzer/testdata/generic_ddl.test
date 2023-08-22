@@ -169,12 +169,12 @@ ERROR: ALTER VIEW does not support SET AS [at 2:3]
 
 DROP RESERVATION myProject.myReservation
 --
-DropStmt(object_type="RESERVATION", is_if_exists=FALSE, name_path=myProject.myReservation)
+DropStmt(object_type='RESERVATION', is_if_exists=FALSE, name_path=myProject.myReservation)
 ==
 
 DROP RESERVATION IF EXISTS myProject.myReservation
 --
-DropStmt(object_type="RESERVATION", is_if_exists=TRUE, name_path=myProject.myReservation)
+DropStmt(object_type='RESERVATION', is_if_exists=TRUE, name_path=myProject.myReservation)
 
 ==
 

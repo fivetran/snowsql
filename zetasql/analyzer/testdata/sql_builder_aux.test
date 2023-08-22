@@ -405,18 +405,18 @@ ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ("allA
 # Create external language function.
 create function foo.fn( x struct<a string, b int32>, y boolean )
 returns string language testlang
-as "return 'hi';"
+as 'return \'hi\';'
 --
 [UNPARSED_SQL]
 CREATE FUNCTION foo.fn(x STRUCT< a STRING, b INT32 >, y BOOL)
-RETURNS STRING LANGUAGE testlang AS "return 'hi';";
+RETURNS STRING LANGUAGE testlang as 'return \'hi\';';
 ==
 
 # Create multi-line external language function, with modifiers (if not exists).
 create temporary function if not exists
 fn( x struct<a string, b int32>, y boolean )
 returns string language testlang
-as """ return
+as ''' return
   "presto!" + s + '\n';
 """
 --
@@ -429,7 +429,7 @@ RETURNS STRING LANGUAGE testlang AS " return\n  \"presto!\" + s + '\n';\n";
 create or replace temporary function
 fn( x struct<a string, b int32>, y boolean )
 returns string language testlang
-as """ return
+as ''' return
   "presto!" + s + '\n';
 """
 --

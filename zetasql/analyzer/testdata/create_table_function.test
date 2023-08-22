@@ -145,7 +145,7 @@ some caret string for foo_2
 # The function calls another function that has a deprecation warning. The
 # warning should propagate to this function.
 create table function myfunc( msg zetasql_test__.Proto3KitchenSink )
-  returns table<x string> as (select "foo" x from tvf_deprecation_warning());
+  returns table<x string> as (select 'foo' x from tvf_deprecation_warning());
 --
 CreateTableFunctionStmt
 +-name_path=myfunc
@@ -153,7 +153,7 @@ CreateTableFunctionStmt
 +-signature=(PROTO<zetasql_test__.Proto3KitchenSink> msg) -> TABLE<x STRING> (1 deprecation warning)
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "foo" x from tvf_deprecation_warning()'
++-code='select \'foo\' x from tvf_deprecation_warning()'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#3]
@@ -167,7 +167,7 @@ CreateTableFunctionStmt
 
 DEPRECATION WARNING:
 Table-valued function tvf_deprecation_warning triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 2:51]
-  returns table<x string> as (select "foo" x from tvf_deprecation_warning());
+  returns table<x string> as (select 'foo' x from tvf_deprecation_warning());
                                                   ^
 Operation <foo11> is deprecated [at module11.sqlm:21:31]
 some caret string for foo_11
@@ -179,9 +179,9 @@ some caret string for foo_11
 # warning should propagate to this function, but should be de-duplicated.
 create table function myfunc( msg zetasql_test__.Proto3KitchenSink )
   returns table<x string> as
-    (select "foo" x from tvf_deprecation_warning()
+    (select 'foo' x from tvf_deprecation_warning()
      union all
-     select "bar" from tvf_deprecation_warning());
+     select 'bar' from tvf_deprecation_warning());
 --
 CreateTableFunctionStmt
 +-name_path=myfunc
@@ -189,7 +189,7 @@ CreateTableFunctionStmt
 +-signature=(PROTO<zetasql_test__.Proto3KitchenSink> msg) -> TABLE<x STRING> (1 deprecation warning)
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "foo" x from tvf_deprecation_warning()\n     union all\n     select "bar" from tvf_deprecation_warning()'
++-code='select \'foo\' x from tvf_deprecation_warning()\n     union all\n     select \'bar\' from tvf_deprecation_warning()'
 +-query=
 | +-SetOperationScan
 |   +-column_list=[$union_all.x#7]
@@ -219,7 +219,7 @@ CreateTableFunctionStmt
 
 DEPRECATION WARNING:
 Table-valued function tvf_deprecation_warning triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 3:26]
-    (select "foo" x from tvf_deprecation_warning()
+    (select 'foo' x from tvf_deprecation_warning()
                          ^
 Operation <foo11> is deprecated [at module11.sqlm:21:31]
 some caret string for foo_11
@@ -231,7 +231,7 @@ some caret string for foo_11
 # kind. The first warning should propagate to this function.
 create table function myfunc( msg zetasql_test__.Proto3KitchenSink )
   returns table<x string> as
-    (select "foo" x from tvf_two_deprecation_warnings_same_kind());
+    (select 'foo' x from tvf_two_deprecation_warnings_same_kind());
 --
 CreateTableFunctionStmt
 +-name_path=myfunc
@@ -239,7 +239,7 @@ CreateTableFunctionStmt
 +-signature=(PROTO<zetasql_test__.Proto3KitchenSink> msg) -> TABLE<x STRING> (1 deprecation warning)
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "foo" x from tvf_two_deprecation_warnings_same_kind()'
++-code='select \'foo\' x from tvf_two_deprecation_warnings_same_kind()'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#3]
@@ -253,7 +253,7 @@ CreateTableFunctionStmt
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings_same_kind triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 3:26]
-    (select "foo" x from tvf_two_deprecation_warnings_same_kind());
+    (select 'foo' x from tvf_two_deprecation_warnings_same_kind());
                          ^
 Operation <foo12> is deprecated [at module12.sqlm:22:32]
 some caret string for foo_12
@@ -265,7 +265,7 @@ some caret string for foo_12
 # kinds. Both should propagate to this function.
 create table function myfunc( msg zetasql_test__.Proto3KitchenSink )
   returns table<x string> as
-    (select "foo" x from tvf_two_deprecation_warnings());
+    (select 'foo' x from tvf_two_deprecation_warnings());
 --
 CreateTableFunctionStmt
 +-name_path=myfunc
@@ -273,7 +273,7 @@ CreateTableFunctionStmt
 +-signature=(PROTO<zetasql_test__.Proto3KitchenSink> msg) -> TABLE<x STRING> (2 deprecation warnings)
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "foo" x from tvf_two_deprecation_warnings()'
++-code='select \'foo\' x from tvf_two_deprecation_warnings()'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#3]
@@ -287,7 +287,7 @@ CreateTableFunctionStmt
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 3:26]
-    (select "foo" x from tvf_two_deprecation_warnings());
+    (select 'foo' x from tvf_two_deprecation_warnings());
                          ^
 Operation <foo14> is deprecated [at module14.sqlm:24:34]
 some caret string for foo_14
@@ -296,7 +296,7 @@ some caret string for foo_14
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings triggers a deprecation warning with kind DEPRECATED_FUNCTION_SIGNATURE [at 3:26]
-    (select "foo" x from tvf_two_deprecation_warnings());
+    (select 'foo' x from tvf_two_deprecation_warnings());
                          ^
 Operation <foo15> is deprecated [at module15.sqlm:25:35]
 some caret string for foo_15
@@ -311,11 +311,11 @@ some caret string for foo_15
 # each kind, for a total of 4 warnings.
 create table function myfunc( msg zetasql_test__.Proto3KitchenSink )
   returns table<x string> as
-    (select "foo" x from tvf_deprecation_warning()
+    (select 'foo' x from tvf_deprecation_warning()
      union all
-     select "bar" from tvf_two_deprecation_warnings_same_kind()
+     select 'bar' from tvf_two_deprecation_warnings_same_kind()
      union all
-     select "baz" from tvf_two_deprecation_warnings());
+     select 'baz' from tvf_two_deprecation_warnings());
 --
 CreateTableFunctionStmt
 +-name_path=myfunc
@@ -323,7 +323,7 @@ CreateTableFunctionStmt
 +-signature=(PROTO<zetasql_test__.Proto3KitchenSink> msg) -> TABLE<x STRING> (4 deprecation warnings)
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "foo" x from tvf_deprecation_warning()\n     union all\n     select "bar" from tvf_two_deprecation_warnings_same_kind()\n     union all\n     select "baz" from tvf_two_deprecation_warnings()'
++-code='select \'foo\' x from tvf_deprecation_warning()\n     union all\n     select \'bar\' from tvf_two_deprecation_warnings_same_kind()\n     union all\n     select \'baz\' from tvf_two_deprecation_warnings()'
 +-query=
 | +-SetOperationScan
 |   +-column_list=[$union_all.x#10]
@@ -362,7 +362,7 @@ CreateTableFunctionStmt
 
 DEPRECATION WARNING:
 Table-valued function tvf_deprecation_warning triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 3:26]
-    (select "foo" x from tvf_deprecation_warning()
+    (select 'foo' x from tvf_deprecation_warning()
                          ^
 Operation <foo11> is deprecated [at module11.sqlm:21:31]
 some caret string for foo_11
@@ -371,7 +371,7 @@ some caret string for foo_11
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings_same_kind triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 5:24]
-     select "bar" from tvf_two_deprecation_warnings_same_kind()
+     select 'bar' from tvf_two_deprecation_warnings_same_kind()
                        ^
 Operation <foo12> is deprecated [at module12.sqlm:22:32]
 some caret string for foo_12
@@ -380,7 +380,7 @@ some caret string for foo_12
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 7:24]
-     select "baz" from tvf_two_deprecation_warnings());
+     select 'baz' from tvf_two_deprecation_warnings());
                        ^
 Operation <foo14> is deprecated [at module14.sqlm:24:34]
 some caret string for foo_14
@@ -389,7 +389,7 @@ some caret string for foo_14
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings triggers a deprecation warning with kind DEPRECATED_FUNCTION_SIGNATURE [at 7:24]
-     select "baz" from tvf_two_deprecation_warnings());
+     select 'baz' from tvf_two_deprecation_warnings());
                        ^
 Operation <foo15> is deprecated [at module15.sqlm:25:35]
 some caret string for foo_15
@@ -401,17 +401,17 @@ some caret string for foo_15
 # deprecation warnings are de-duplicated, so there are still only 4 warnings.
 create table function myfunc( msg zetasql_test__.Proto3KitchenSink )
   returns table<x string> as
-    (select "foo1" x from tvf_deprecation_warning()
+    (select 'foo1' x from tvf_deprecation_warning()
      union all
-     select "foo2" x from tvf_deprecation_warning()
+     select 'foo2' x from tvf_deprecation_warning()
      union all
-     select "bar1" from tvf_two_deprecation_warnings_same_kind()
+     select 'bar1' from tvf_two_deprecation_warnings_same_kind()
      union all
-     select "bar2" from tvf_two_deprecation_warnings_same_kind()
+     select 'bar2' from tvf_two_deprecation_warnings_same_kind()
      union all
-     select "baz1" from tvf_two_deprecation_warnings()
+     select 'baz1' from tvf_two_deprecation_warnings()
      union all
-     select "baz2" from tvf_two_deprecation_warnings());
+     select 'baz2' from tvf_two_deprecation_warnings());
 --
 CreateTableFunctionStmt
 +-name_path=myfunc
@@ -419,7 +419,7 @@ CreateTableFunctionStmt
 +-signature=(PROTO<zetasql_test__.Proto3KitchenSink> msg) -> TABLE<x STRING> (4 deprecation warnings)
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "foo1" x from tvf_deprecation_warning()\n     union all\n     select "foo2" x from tvf_deprecation_warning()\n     union all\n     select "bar1" from tvf_two_deprecation_warnings_same_kind()\n     union all\n     select "bar2" from tvf_two_deprecation_warnings_same_kind()\n     union all\n     select "baz1" from tvf_two_deprecation_warnings()\n     union all\n     select "baz2" from tvf_two_deprecation_warnings()'
++-code='select \'foo1\' x from tvf_deprecation_warning()\n     union all\n     select \'foo2\' x from tvf_deprecation_warning()\n     union all\n     select \'bar1\' from tvf_two_deprecation_warnings_same_kind()\n     union all\n     select \'bar2\' from tvf_two_deprecation_warnings_same_kind()\n     union all\n     select \'baz1\' from tvf_two_deprecation_warnings()\n     union all\n     select \'baz2\' from tvf_two_deprecation_warnings()'
 +-query=
 | +-SetOperationScan
 |   +-column_list=[$union_all.x#19]
@@ -485,7 +485,7 @@ CreateTableFunctionStmt
 
 DEPRECATION WARNING:
 Table-valued function tvf_deprecation_warning triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 3:27]
-    (select "foo1" x from tvf_deprecation_warning()
+    (select 'foo1' x from tvf_deprecation_warning()
                           ^
 Operation <foo11> is deprecated [at module11.sqlm:21:31]
 some caret string for foo_11
@@ -494,7 +494,7 @@ some caret string for foo_11
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings_same_kind triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 7:25]
-     select "bar1" from tvf_two_deprecation_warnings_same_kind()
+     select 'bar1' from tvf_two_deprecation_warnings_same_kind()
                         ^
 Operation <foo12> is deprecated [at module12.sqlm:22:32]
 some caret string for foo_12
@@ -503,7 +503,7 @@ some caret string for foo_12
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings triggers a deprecation warning with kind PROTO3_FIELD_PRESENCE [at 11:25]
-     select "baz1" from tvf_two_deprecation_warnings()
+     select 'baz1' from tvf_two_deprecation_warnings()
                         ^
 Operation <foo14> is deprecated [at module14.sqlm:24:34]
 some caret string for foo_14
@@ -512,7 +512,7 @@ some caret string for foo_14
 
 DEPRECATION WARNING:
 Table-valued function tvf_two_deprecation_warnings triggers a deprecation warning with kind DEPRECATED_FUNCTION_SIGNATURE [at 11:25]
-     select "baz1" from tvf_two_deprecation_warnings()
+     select 'baz1' from tvf_two_deprecation_warnings()
                         ^
 Operation <foo15> is deprecated [at module15.sqlm:25:35]
 some caret string for foo_15
@@ -682,7 +682,7 @@ CreateTableFunctionStmt(name_path=maketable, create_scope=CREATE_TEMP, argument_
 # Table return type with required column list and the function has a SQL body.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select cast(1 as int64) as x, "abc" as y
+    select cast(1 as int64) as x, 'abc' as y
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -691,7 +691,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select cast(1 as int64) as x, "abc" as y'
++-code='select cast(1 as int64) as x, \'abc\' as y'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[x#1, y#2]
@@ -709,7 +709,7 @@ CreateTableFunctionStmt
 # SQL body.
 create temporary table function maketable(x int64, y string)
   as
-    select cast(1 as int64) as x, "abc" as y
+    select cast(1 as int64) as x, 'abc' as y
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -717,7 +717,7 @@ CreateTableFunctionStmt
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-language='SQL'
-+-code='select cast(1 as int64) as x, "abc" as y'
++-code='select cast(1 as int64) as x, \'abc\' as y'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[x#1, y#2]
@@ -738,7 +738,7 @@ CreateTableFunctionStmt
 # literal 'abc'.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select x, "abc" as y, 42 as z
+    select x, 'abc' as y, 42 as z
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -747,7 +747,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select x, "abc" as y, 42 as z'
++-code='select x, \'abc\' as y, 42 as z'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[x#1, y#2]
@@ -770,7 +770,7 @@ CreateTableFunctionStmt
 # adds a projection to rearrange the columns as needed.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select "abc" as y, x
+    select 'abc' as y, x
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -779,7 +779,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "abc" as y, x'
++-code='select \'abc\' as y, x'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[x#2, y#1]
@@ -803,7 +803,7 @@ CreateTableFunctionStmt
 # as needed.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select false as w, "abc" as y, x, 42 as z
+    select false as w, 'abc' as y, x, 42 as z
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -812,7 +812,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select false as w, "abc" as y, x, 42 as z'
++-code='select false as w, \'abc\' as y, x, 42 as z'
 +-query=
 | +-ProjectScan
 |   +-column_list=$query.[x#3, y#2]
@@ -836,7 +836,7 @@ CreateTableFunctionStmt
 # adds a projection to perform the necessary type coercion.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select cast(x as int32) as x, "abc" as y
+    select cast(x as int32) as x, 'abc' as y
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -845,7 +845,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select cast(x as int32) as x, "abc" as y'
++-code='select cast(x as int32) as x, \'abc\' as y'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$subquery1.x#3, $query.y#2]
@@ -875,7 +875,7 @@ CreateTableFunctionStmt
 # column.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select cast(x as int32) as x, "abc" as y, 42 as z
+    select cast(x as int32) as x, 'abc' as y, 42 as z
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -884,7 +884,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select cast(x as int32) as x, "abc" as y, 42 as z'
++-code='select cast(x as int32) as x, \'abc\' as y, 42 as z'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$subquery1.x#4, $query.y#2]
@@ -914,7 +914,7 @@ CreateTableFunctionStmt
 # columns. ZetaSQL adds a projection to perform the necessary type coercion.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select "abc" as y, cast(x as int32) as x
+    select 'abc' as y, cast(x as int32) as x
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -923,7 +923,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "abc" as y, cast(x as int32) as x'
++-code='select \'abc\' as y, cast(x as int32) as x'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$subquery1.x#3, $query.y#1]
@@ -1273,7 +1273,7 @@ CreateTableFunctionStmt
 [language_features=V_1_1_WITH_ON_SUBQUERY,TABLE_VALUED_FUNCTIONS,CREATE_TABLE_FUNCTION,TEMPLATE_FUNCTIONS]
 create temporary table function maketable(t table<x int64, y string>)
   returns table<a int64, b string> as
-    with t as (select 1 as a, "abc" as b)
+    with t as (select 1 as a, 'abc' as b)
     select a, b from t
 --
 CreateTableFunctionStmt
@@ -1283,7 +1283,7 @@ CreateTableFunctionStmt
 +-signature=(TABLE<x INT64, y STRING> t) -> TABLE<a INT64, b STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='with t as (select 1 as a, "abc" as b)\n    select a, b from t'
++-code='with t as (select 1 as a, \'abc\' as b)\n    select a, b from t'
 +-query=
 | +-WithScan
 |   +-column_list=t.[a#3, b#4]
@@ -1336,11 +1336,11 @@ CreateTableFunctionStmt
 # Multi-line function body.
 create table function fn( s string )
   returns table<x string> language testlang
-    as """ return
-      "presto!" + s + '\n';
-    """
+    as ''' return
+      'presto!' + s + '\n';
+    '''
 --
-CreateTableFunctionStmt(name_path=fn, argument_name_list=[s], signature=(STRING s) -> TABLE<x STRING>, has_explicit_return_schema=TRUE, language='testlang", code=' return\n      \"presto!\' + s + '\n';\n    ')
+CreateTableFunctionStmt(name_path=fn, argument_name_list=[s], signature=(STRING s) -> TABLE<x STRING>, has_explicit_return_schema=TRUE, language='testlang', code=' return\n      \'presto!\' + s + \'\n\';\n    ')
 ==
 
 # Function with options.
@@ -1348,7 +1348,7 @@ create table function fn(s string)
   returns table<x string>
   options ( a=b, bruce=lee )
    language testlang
-     as "return 'a';"
+     as 'return \'a\';'
 --
 CreateTableFunctionStmt
 +-name_path=fn
@@ -1359,7 +1359,7 @@ CreateTableFunctionStmt
 | +-a := Literal(type=STRING, value='b')
 | +-bruce := Literal(type=STRING, value='lee')
 +-language='testlang'
-+-code='return 'a';'
++-code='return \'a\';'
 ==
 
 # SQL function with options.
@@ -1367,7 +1367,7 @@ create table function fn(s string)
   returns table<x string>
   options ( a=b, bruce=lee )
   as
-    select "abc" as x;
+    select 'abc' as x;
 --
 CreateTableFunctionStmt
 +-name_path=fn
@@ -1378,7 +1378,7 @@ CreateTableFunctionStmt
 | +-a := Literal(type=STRING, value='b')
 | +-bruce := Literal(type=STRING, value='lee')
 +-language='SQL'
-+-code='select "abc" as x'
++-code='select \'abc\' as x'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#1]
@@ -1395,7 +1395,7 @@ CreateTableFunctionStmt
 create table function fn(s string)
   returns table<x string>
   options ( a=CONCAT(s,s) )
-  as select "abc" as x;
+  as select 'abc' as x;
 --
 ERROR: Unrecognized name: s [at 3:22]
   options ( a=CONCAT(s,s) )
@@ -1407,7 +1407,7 @@ ERROR: Unrecognized name: s [at 3:22]
 create table function fn(s string)
   returns table<x string>
   options ( a=s )
-  as select "abc" as x;
+  as select 'abc' as x;
 --
 CreateTableFunctionStmt
 +-name_path=fn
@@ -1417,7 +1417,7 @@ CreateTableFunctionStmt
 +-option_list=
 | +-a := Literal(type=STRING, value='s')
 +-language='SQL'
-+-code='select "abc" as x'
++-code='select \'abc\' as x'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#1]
@@ -1444,7 +1444,7 @@ options ( a=(select y from t) )
 create table function myfunc()
   returns table<x string>
   language SQL
-    as """5""";
+    as '''5''';
 --
 ERROR: To write SQL table-valued functions, omit the LANGUAGE clause and write the function body using 'AS SELECT ...' [at 3:12]
   language SQL
@@ -1553,14 +1553,14 @@ create table function fn(
   as
     select 1 as constant
     from valuetable
-    where x = 1 and y = "abc";
+    where x = 1 and y = 'abc';
 --
 CreateTableFunctionStmt
 +-name_path=fn
 +-argument_name_list=[valuetable]
 +-signature=(TABLE<STRUCT<x INT64, y STRING>> valuetable) -> TABLE<constant INT64>
 +-language='SQL'
-+-code='select 1 as constant\n    from valuetable\n    where x = 1 and y = "abc"'
++-code='select 1 as constant\n    from valuetable\n    where x = 1 and y = \'abc\''
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.constant#2]
@@ -2206,7 +2206,7 @@ CreateTableFunctionStmt
 +-is_value_table=TRUE
 ==
 
-# It is possible to create a table named "function".
+# It is possible to create a table named 'function'.
 create table if not exists function as select 1 as x, 2 as y;
 --
 CreateTableAsSelectStmt
@@ -2228,10 +2228,10 @@ CreateTableAsSelectStmt
       +-SingleRowScan
 ==
 
-# It is possible to drop a table named "function".
+# It is possible to drop a table named 'function'.
 drop table "function";
 --
-DropStmt(object_type="TABLE", is_if_exists=FALSE, name_path="function")
+DropStmt(object_type='TABLE', is_if_exists=FALSE, name_path="function")
 ==
 
 # The table function may omit the output schema if it does not have a SQL body.
@@ -2300,11 +2300,11 @@ CreateTableFunctionStmt(name_path=f, argument_name_list=[x, y], signature=(ANY T
 # ANY TYPE parameters are allowed with the LANGUAGE clause.
 create table function f(x any type)
   returns table<x string> language testlang
-    as """ return
-      "presto!" + s + '\n';
-    """
+    as ''' return
+      'presto!' + s + '\n';
+    '''
 --
-CreateTableFunctionStmt(name_path=f, argument_name_list=[x], signature=(ANY TYPE x) -> TABLE<x STRING>, has_explicit_return_schema=TRUE, language='testlang", code=' return\n      \"presto!\' + s + '\n';\n    ')
+CreateTableFunctionStmt(name_path=f, argument_name_list=[x], signature=(ANY TYPE x) -> TABLE<x STRING>, has_explicit_return_schema=TRUE, language='testlang', code=' return\n      \'presto!\' + s + \'\n\';\n    ')
 ==
 
 # A mix of ANY TYPE and ANY TABLE parameters are allowed when the function does
@@ -2372,11 +2372,11 @@ CreateTableFunctionStmt(name_path=f, argument_name_list=[x, y], signature=(ANY T
 # ANY TABLE parameters are allowed with the LANGUAGE clause.
 create table function f(x any table)
   returns table<x string> language testlang
-    as """ return
-      "presto!" + s + '\n';
-    """
+    as ''' return
+      'presto!' + s + '\n';
+    '''
 --
-CreateTableFunctionStmt(name_path=f, argument_name_list=[x], signature=(ANY TABLE x) -> TABLE<x STRING>, has_explicit_return_schema=TRUE, language='testlang", code=' return\n      \"presto!\' + s + '\n';\n    ')
+CreateTableFunctionStmt(name_path=f, argument_name_list=[x], signature=(ANY TABLE x) -> TABLE<x STRING>, has_explicit_return_schema=TRUE, language='testlang', code=' return\n      \'presto!\' + s + \'\n\';\n    ')
 ==
 
 # Create a table-valued function where an output column name contains '$'.
@@ -2394,7 +2394,7 @@ create table function fn(s string)
   returns table<x string>
   options (a=CONCAT(@test_param_string, '_param'))
   as
-    select "abc" as x;
+    select 'abc' as x;
 --
 CreateTableFunctionStmt
 +-name_path=fn
@@ -2407,7 +2407,7 @@ CreateTableFunctionStmt
 |     +-Parameter(type=STRING, name='test_param_string')
 |     +-Literal(type=STRING, value='_param')
 +-language='SQL'
-+-code='select "abc" as x'
++-code='select \'abc\' as x'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$query.x#1]
@@ -2699,7 +2699,7 @@ CreateTableFunctionStmt
 |     +-AggregateScan
 |       +-column_list=[$aggregate.count_star#3]
 |       +-input_scan=
-|       | +-RelationArgumentScan(name="KeyValue")
+|       | +-RelationArgumentScan(name='KeyValue')
 |       +-aggregate_list=
 |         +-count_star#3 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-output_column_list=
@@ -2829,7 +2829,7 @@ create table function myfunc (  )
 # A required column name is not found in the output of the SQL body.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select 3.14, "abc"
+    select 3.14, 'abc'
 --
 ERROR: Required column name x not returned from SQL body of CREATE TABLE FUNCTION statement [at 1:1]
 create temporary table function maketable(x int64, y string)
@@ -2873,7 +2873,7 @@ ERROR: Table-valued function SQL body without a RETURNS TABLE clause is missing 
 # incompatible type.
 create temporary table function maketable(x int64, y string)
   returns table<x int64, y string> as
-    select "abc" as x, "abc" as y
+    select 'abc' as x, 'abc' as y
 --
 CreateTableFunctionStmt
 +-name_path=maketable
@@ -2882,7 +2882,7 @@ CreateTableFunctionStmt
 +-signature=(INT64 x, STRING y) -> TABLE<x INT64, y STRING>
 +-has_explicit_return_schema=TRUE
 +-language='SQL'
-+-code='select "abc" as x, "abc" as y'
++-code='select \'abc\' as x, \'abc\' as y'
 +-query=
 | +-ProjectScan
 |   +-column_list=[$subquery1.x#3, $query.y#2]
@@ -3079,7 +3079,7 @@ create table function fn(s string )
 # Function missing parameter names.
 create table function fn(a int32, string)
   returns table<x string>
-    language testlang as "return 's';"
+    language testlang as 'return \'s\';'
 --
 ERROR: Parameters in function declarations must include both name and type [at 1:35]
 create table function fn(a int32, string)
@@ -3091,7 +3091,7 @@ create table function fn(s string, t table<u int32>)
   returns table<t table>
   options ( a=b, bruce=lee )
    language testlang
-     as "return 'a';"
+     as 'return \'a\';'
 --
 ERROR: Type not found: table [at 2:19]
   returns table<t table>
@@ -3103,7 +3103,7 @@ create table function fn(s string, t table<u int32>)
   returns table<t invalidtype>
   options ( a=b, bruce=lee )
    language testlang
-     as "return 'a';"
+     as 'return \'a\';'
 --
 ERROR: Type not found: invalidtype [at 2:19]
   returns table<t invalidtype>
@@ -3212,7 +3212,7 @@ ERROR: TABLE parameters are not allowed in CREATE FUNCTION statement [at 2:30]
 
 create function foo.fn( x table<a string, b int32>, y boolean )
 returns string language testlang
-as "return 'hi';"
+as 'return \'hi\';'
 --
 ERROR: TABLE parameters are not allowed in CREATE FUNCTION statement [at 1:25]
 create function foo.fn( x table<a string, b int32>, y boolean )
@@ -3374,9 +3374,9 @@ create table function f(x any table, y int64)
 # A LANGUAGE is required when a literal string body is present.
 create table function f(x any table, y int64)
   returns table<value string>
-    as """ return
-      "presto!" + s + '\n';
-    """
+    as ''' return
+      'presto!' + s + '\n';
+    '''
 --
 ERROR: Function cannot specify a literal string body without a LANGUAGE [at 1:1]
 create table function f(x any table, y int64)
@@ -3634,7 +3634,7 @@ create table function fn(s string)
   returns table<x string>
   options ( a=b, a=c )
   as
-    select "abc" as x;
+    select 'abc' as x;
 --
 ERROR: Duplicate option specified for 'a' [at 3:18]
   options ( a=b, a=c )

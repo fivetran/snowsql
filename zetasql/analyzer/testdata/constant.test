@@ -49,7 +49,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.Test Constant-String#1]
     +-expr_list=
-    | +-Test Constant-String#1 := Constant(nested_catalog.Test Constant-String, type=STRING, value="Test constant in nested catalog")
+    | +-Test Constant-String#1 := Constant(nested_catalog.Test Constant-String, type=STRING, value='Test constant in nested catalog')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -890,7 +890,7 @@ QueryStmt
     | +-TestConstantBool#1 := Constant(nested_catalog_with_catalog.TestConstantBool, type=BOOL, value=false)
     | +-c#2 := Constant(nested_catalog_with_catalog.c, type=DOUBLE, value=-9999.999)
     | +-a#3 := Constant(nested_catalog_with_catalog.nested_catalog_catalog.a, type=FLOAT, value=-1.4987)
-    | +-c#4 := Constant(nested_catalog_with_catalog.nested_catalog_catalog.c, type=STRING, value="foo")
+    | +-c#4 := Constant(nested_catalog_with_catalog.nested_catalog_catalog.c, type=STRING, value='foo')
     +-input_scan=
       +-SingleRowScan
 ==

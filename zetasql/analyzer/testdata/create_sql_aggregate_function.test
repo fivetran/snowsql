@@ -792,7 +792,7 @@ CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=INT64
 # ANY TYPE parameters are allowed with the LANGUAGE clause.
 create aggregate function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -803,7 +803,7 @@ CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRIN
 # clause.
 create or replace aggregate function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -814,7 +814,7 @@ CreateFunctionStmt(name_path=f, create_mode=CREATE_OR_REPLACE, has_explicit_retu
 # clause.
 create aggregate function if not exists f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
@@ -825,7 +825,7 @@ CreateFunctionStmt(name_path=f, create_mode=CREATE_IF_NOT_EXISTS, has_explicit_r
 # clause.
 create aggregate function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
    options ( a=b, bruce=lee ) ;
@@ -838,7 +838,7 @@ CreateFunctionStmt
 +-signature=(ANY TYPE x) -> STRING
 +-is_aggregate=TRUE
 +-language='testlang'
-+-code=' return\n      \'presto!\" + s + '\n';\n    "
++-code=' return\n      \'presto!\" + s + \'\n\';\n    "
 +-option_list=
   +-a := Literal(type=STRING, value='b')
   +-bruce := Literal(type=STRING, value='lee')
@@ -847,7 +847,7 @@ CreateFunctionStmt
 # The LANGUAGE clause is not allowed without the RETURNS <type> clause.
 create aggregate function f(x any type)
   language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
     """
 --
