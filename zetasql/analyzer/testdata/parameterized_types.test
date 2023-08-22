@@ -325,10 +325,10 @@ create table t (s1 struct<f1 string>(200, 200));
                                     ^
 ==
 
-create table t (s1 string("abc"));
+create table t (s1 string('abc'));
 --
 ERROR: STRING length parameter must be an integer or MAX keyword [at 1:26]
-create table t (s1 string("abc"));
+create table t (s1 string('abc'));
                          ^
 ==
 
@@ -395,10 +395,10 @@ create table t (n1 bignumeric(70, 30));
                              ^
 ==
 
-create table t (n1 numeric("random"));
+create table t (n1 numeric('random'));
 --
 ERROR: NUMERIC precision must be an integer [at 1:27]
-create table t (n1 numeric("random"));
+create table t (n1 numeric('random'));
                           ^
 ==
 
@@ -459,7 +459,7 @@ select cast(1.2 as NUMERIC(8,2));
 ==
 
 # Test cast with a string Array with type parameters.
-select cast(["hi", "hello", "hola"] as ARRAY<STRING(12)>);
+select cast(['hi', 'hello', 'hola'] as ARRAY<STRING(12)>);
 --
 QueryStmt
 +-output_column_list=
@@ -505,7 +505,7 @@ QueryStmt
 
 # Test cast with a nested struct with subfields having type parameters.
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES,PARAMETERIZED_TYPES,NUMERIC_TYPE,BIGNUMERIC_TYPE}}]
-select cast(struct(false, 2, struct(123, [5], struct(true, 1000)), "hello", ["123", "123456", "1"]) as
+select cast(struct(false, 2, struct(123, [5], struct(true, 1000)), 'hello', ['123', '123456', '1']) as
             STRUCT<BOOL, NUMERIC(8), STRUCT<BIGNUMERIC(MAX, 2), ARRAY<STRING(2)>, STRUCT<BOOL, NUMERIC(6, 1)>>, BYTES(10), ARRAY<STRING(5)>>);
 --
 ALTERNATION GROUP: <empty>
@@ -525,14 +525,14 @@ QueryStmt
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>> -> STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>)
-    |     +-Literal(type=STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>, value={false, 2, {123, ["5"], {true, 1000}}, b"hello", ["123", "123456", "1"]}, has_explicit_type=TRUE)
+    |     +-Literal(type=STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>, value={false, 2, {123, ['5'], {true, 1000}}, b"hello", ['123', '123456', '1']}, has_explicit_type=TRUE)
     |     +-type_modifiers=type_parameters:[null,(precision=8,scale=0),[(precision=MAX,scale=2),[(max_length=2)],[null,(precision=6,scale=1)]],(max_length=10),[(max_length=5)]]
     +-input_scan=
       +-SingleRowScan
 ==
 
 select cast(coalesce(struct(false, 1.23,
-                            array<zetasql_test__.TestExtraPB>[""],
+                            array<zetasql_test__.TestExtraPB>[''],
                             CAST(1 AS zetasql_test__.TestEnum))) AS
             STRUCT<BOOL, STRING(MAX), ARRAY<alt_descriptor_pool.zetasql_test__.TestExtraPB>,
                    alt_descriptor_pool.zetasql_test__.TestEnum>)
@@ -559,7 +559,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast((2, [("hello", 3, (Numeric "121", Numeric "4"))]) as
+select cast((2, [('hello', 3, (Numeric '121', Numeric '4'))]) as
 STRUCT<a NUMERIC(5), b ARRAY<STRUCT<STRING(5), INT64, STRUCT<NUMERIC(5), NUMERIC>>>>);
 --
 QueryStmt
@@ -589,7 +589,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast((2, cast("hello" as STRING(5))) as STRUCT<a INT32, b STRING(2)>);
+select cast((2, cast('hello' as STRING(5))) as STRUCT<a INT32, b STRING(2)>);
 --
 QueryStmt
 +-output_column_list=

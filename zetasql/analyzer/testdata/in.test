@@ -364,17 +364,17 @@ QueryStmt
             +-Literal(type=INT64, value=5)
 ==
 
-select 1 IN (select "a")
+select 1 IN (select 'a')
 --
 ERROR: Cannot execute IN subquery with uncomparable types INT64 and STRING [at 1:8]
-select 1 IN (select "a")
+select 1 IN (select 'a')
        ^
 ==
 
-select "a" IN (select 1)
+select 'a' IN (select 1)
 --
 ERROR: Cannot execute IN subquery with uncomparable types STRING and INT64 [at 1:8]
-select "a" IN (select 1)
+select 'a' IN (select 1)
        ^
 ==
 
@@ -1341,7 +1341,7 @@ QueryStmt
 ==
 
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select null in unnest(["foo", "bar", "baz"])
+select null in unnest(['foo', 'bar', 'baz'])
 --
 QueryStmt
 +-output_column_list=
@@ -1414,7 +1414,7 @@ QueryStmt
 
 select struct(1) IN (struct('abc'))
 --
-ERROR: Could not cast literal {"abc"} to type STRUCT<INT64> [at 1:22]
+ERROR: Could not cast literal {'abc'} to type STRUCT<INT64> [at 1:22]
 select struct(1) IN (struct('abc'))
                      ^
 ==

@@ -307,7 +307,7 @@ SELECT NORMALIZE_AND_CASEFOLD(1)
 ==
 
 SELECT NORMALIZE(NFC, NFC)
-FROM (SELECT "NFC" AS NFC)
+FROM (SELECT 'NFC' AS NFC)
 --
 QueryStmt
 +-output_column_list=
@@ -343,15 +343,15 @@ SELECT NORMALIZE_AND_CASEFOLD()
        ^
 ==
 
-SELECT NORMALIZE("abc", "NFC")
+SELECT NORMALIZE('abc', 'NFC')
 --
 ERROR: Argument is not a valid NORMALIZE mode [at 1:25]
-SELECT NORMALIZE("abc", "NFC")
+SELECT NORMALIZE('abc', 'NFC')
                         ^
 ==
 
 # Backquoted identifiers are accepted.
-SELECT NORMALIZE("abc", "NFC")
+SELECT NORMALIZE('abc', "NFC")
 --
 QueryStmt
 +-output_column_list=
@@ -368,43 +368,43 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT NORMALIZE("abc", 0)
+SELECT NORMALIZE('abc', 0)
 --
 ERROR: Argument is not a valid NORMALIZE mode [at 1:25]
-SELECT NORMALIZE("abc", 0)
+SELECT NORMALIZE('abc', 0)
                         ^
 ==
 
-SELECT NORMALIZE("abc", NFC, "xyz")
+SELECT NORMALIZE('abc', NFC, 'xyz')
 --
 ERROR: Number of arguments does not match for function NORMALIZE. Supported signature: NORMALIZE(STRING, [NORMALIZE_MODE]) [at 1:8]
-SELECT NORMALIZE("abc", NFC, "xyz")
+SELECT NORMALIZE('abc', NFC, 'xyz')
        ^
 ==
 
-SELECT NORMALIZE_AND_CASEFOLD("abc", "NFC")
+SELECT NORMALIZE_AND_CASEFOLD('abc', 'NFC')
 --
 ERROR: Argument is not a valid NORMALIZE mode [at 1:38]
-SELECT NORMALIZE_AND_CASEFOLD("abc", "NFC")
+SELECT NORMALIZE_AND_CASEFOLD('abc', 'NFC')
                                      ^
 ==
 
-SELECT NORMALIZE_AND_CASEFOLD("abc", 0)
+SELECT NORMALIZE_AND_CASEFOLD('abc', 0)
 --
 ERROR: Argument is not a valid NORMALIZE mode [at 1:38]
-SELECT NORMALIZE_AND_CASEFOLD("abc", 0)
+SELECT NORMALIZE_AND_CASEFOLD('abc', 0)
                                      ^
 ==
 
-SELECT NORMALIZE_AND_CASEFOLD("abc", NFC, "xyz")
+SELECT NORMALIZE_AND_CASEFOLD('abc', NFC, 'xyz')
 --
 ERROR: Number of arguments does not match for function NORMALIZE_AND_CASEFOLD. Supported signature: NORMALIZE_AND_CASEFOLD(STRING, [NORMALIZE_MODE]) [at 1:8]
-SELECT NORMALIZE_AND_CASEFOLD("abc", NFC, "xyz")
+SELECT NORMALIZE_AND_CASEFOLD('abc', NFC, 'xyz')
        ^
 ==
 
-SELECT NORMALIZE_AND_CASEFOLD("abc", NFC.NFC)
+SELECT NORMALIZE_AND_CASEFOLD('abc', NFC.NFC)
 --
 ERROR: Argument is not a valid NORMALIZE mode [at 1:38]
-SELECT NORMALIZE_AND_CASEFOLD("abc", NFC.NFC)
+SELECT NORMALIZE_AND_CASEFOLD('abc', NFC.NFC)
                                      ^
