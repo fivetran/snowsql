@@ -85,7 +85,7 @@ class MapFunctionVisitor : public ResolvedASTDeepCopyVisitor {
       ELSE IFNULL( ( SELECT elem.value FROM UNNEST(m) elem WITH OFFSET offset_idx
                      WHERE elem.key = k ORDER BY offset_idx DESC LIMIT 1 ),
                    -- If the key isn't found, then it's an error.
-                   ERROR(FORMAT("Key not found in map: %T", k)) )
+                   ERROR(FORMAT('Key not found in map: %T', k)) )
     END
     )sql";
     constexpr absl::string_view safe_map_at_sql = R"sql(

@@ -516,7 +516,7 @@ select 1.5[DEFAULT_OFFSET(5)]
 ==
 
 # No analysis-time errors for out of range values.
-select ["a","b"][DEFAULT_OFFSET(-1)],
+select ['a','b'][DEFAULT_OFFSET(-1)],
        array<bool>[][ORDINAL(0)],
        cast(null as array<double>)[ORDINAL(NULL)]
 --
@@ -632,8 +632,8 @@ select [1,2,3][default_offset(1+x+2)]
 
 # The following would be equivalent to an ELT() function, though
 # without any short circuit semantics:
-# ELT(key, "str1", value, "str2")
-select ["str1", value, "str2"][ordinal(key)]
+# ELT(key, 'str1', value, 'str2')
+select ['str1', value, 'str2'][ordinal(key)]
 from KeyValue;
 --
 QueryStmt
@@ -673,31 +673,31 @@ QueryStmt
 ==
 
 [language_features=V_1_3_PROTO_MAPS]
-select SAFE_KEY("FOO")
+select SAFE_KEY('FOO')
 --
 ERROR: SAFE_KEY is not a function. It can only be used for map element access using map[SAFE_KEY(key)] [at 1:8]
-select SAFE_KEY("FOO")
+select SAFE_KEY('FOO')
        ^
 ==
 
 [language_features=V_1_3_PROTO_MAPS]
-select KEY("FOO")
+select KEY('FOO')
 --
 ERROR: KEY is not a function. It can only be used for map element access using map[KEY(key)] [at 1:8]
-select KEY("FOO")
+select KEY('FOO')
        ^
 ==
 
 [language_features=V_1_3_PROTO_MAPS]
-select [][KEY("FOO")]
+select [][KEY('FOO')]
 --
 ERROR: Only proto maps can be accessed using KEY or SAFE_KEY; tried to use map accessor on ARRAY<INT64> [at 1:11]
-select [][KEY("FOO")]
+select [][KEY('FOO')]
           ^
 ==
 
 [language_features=V_1_3_PROTO_MAPS]
-select MessageWithMapField.string_int32_map[KEY("foo")]
+select MessageWithMapField.string_int32_map[KEY('foo')]
 from MapFieldTable
 --
 QueryStmt
@@ -720,25 +720,25 @@ QueryStmt
       +-TableScan(column_list=[MapFieldTable.MessageWithMapField#2], table=MapFieldTable, column_index_list=[1])
 ==
 
-select MessageWithMapField.string_int32_map[{{SAFE_|}}KEY("foo")]
+select MessageWithMapField.string_int32_map[{{SAFE_|}}KEY('foo')]
 from MapFieldTable
 --
 ALTERNATION GROUP: SAFE_
 --
 ERROR: Element access using [SAFE_KEY()] is not supported on values of type ARRAY<zetasql_test__.MessageWithMapField.StringInt32MapEntry> [at 1:44]
-select MessageWithMapField.string_int32_map[SAFE_KEY("foo")]
+select MessageWithMapField.string_int32_map[SAFE_KEY('foo')]
                                            ^
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Element access using [KEY()] is not supported on values of type ARRAY<zetasql_test__.MessageWithMapField.StringInt32MapEntry> [at 1:44]
-select MessageWithMapField.string_int32_map[KEY("foo")]
+select MessageWithMapField.string_int32_map[KEY('foo')]
                                            ^
 ==
 
 [enabled_ast_rewrites=DEFAULTS]
 [language_features=V_1_3_PROTO_MAPS]
-select MessageWithMapField.string_int32_map[SAFE_KEY("foo")]
+select MessageWithMapField.string_int32_map[SAFE_KEY('foo')]
 from MapFieldTable
 --
 QueryStmt

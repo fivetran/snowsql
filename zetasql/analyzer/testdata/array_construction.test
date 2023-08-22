@@ -434,18 +434,18 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select ARRAY<date>["bad_date"]
+select ARRAY<date>['bad_date']
 --
-ERROR: Could not cast literal "bad_date" to type DATE [at 1:20]
-select ARRAY<date>["bad_date"]
+ERROR: Could not cast literal 'bad_date' to type DATE [at 1:20]
+select ARRAY<date>['bad_date']
                    ^
 ==
 
 # Out of bounds.
-select ARRAY<date>["10000-01-01"]
+select ARRAY<date>['10000-01-01']
 --
-ERROR: Could not cast literal "10000-01-01" to type DATE [at 1:20]
-select ARRAY<date>["10000-01-01"]
+ERROR: Could not cast literal '10000-01-01' to type DATE [at 1:20]
+select ARRAY<date>['10000-01-01']
                    ^
 ==
 
@@ -458,10 +458,10 @@ select ARRAY<date>['1970-01-01 ']
 ==
 
 # Leading blank.
-select ARRAY<date>[" 1970-01-01"]
+select ARRAY<date>[' 1970-01-01']
 --
-ERROR: Could not cast literal " 1970-01-01" to type DATE [at 1:20]
-select ARRAY<date>[" 1970-01-01"]
+ERROR: Could not cast literal ' 1970-01-01' to type DATE [at 1:20]
+select ARRAY<date>[' 1970-01-01']
                    ^
 ==
 
