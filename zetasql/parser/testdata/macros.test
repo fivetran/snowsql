@@ -35,10 +35,10 @@ $x + /* ;intermediate comment; */ $y
 ==
 
 # Invalid tokens are still invalid in macros
-DEFINE MACRO m1 "unfinished literal
+DEFINE MACRO m1 'unfinished literal
 --
 ERROR: Syntax error: Unclosed string literal [at 1:17]
-DEFINE MACRO m1 "unfinished literal
+DEFINE MACRO m1 'unfinished literal
                 ^
 ==
 

@@ -143,7 +143,7 @@ QueryStmt
     | | +-GetStructField
     | |   +-type=INT32
     | |   +-expr=
-    | |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   +-field_idx=0
     | +-c#2 :=
     | | +-GetStructField
@@ -152,7 +152,7 @@ QueryStmt
     | |   | +-GetStructField
     | |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     | |   |   +-expr=
-    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   |   +-field_idx=1
     | |   +-field_idx=0
     | +-d#3 :=
@@ -162,7 +162,7 @@ QueryStmt
     | |   | +-GetStructField
     | |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     | |   |   +-expr=
-    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   |   +-field_idx=1
     | |   +-field_idx=1
     | +-a#4 :=
@@ -175,7 +175,7 @@ QueryStmt
     | |   |   | +-GetStructField
     | |   |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     | |   |   |   +-expr=
-    | |   |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   |   |   +-field_idx=1
     | |   |   +-field_idx=1
     | |   +-field_idx=0
@@ -189,7 +189,7 @@ QueryStmt
     |     |   | +-GetStructField
     |     |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     |     |   |   +-expr=
-    |     |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    |     |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     |     |   |   +-field_idx=1
     |     |   +-field_idx=1
     |     +-field_idx=1
@@ -544,7 +544,7 @@ QueryStmt
 # when a type reference is expected.
 #
 # Catalog contains constant NameConflictType and type NameConflictType.
-SELECT STRUCT<s NameConflictType, t INT64>((1, "foo"), TestConstantInt64)
+SELECT STRUCT<s NameConflictType, t INT64>((1, 'foo'), TestConstantInt64)
 --
 QueryStmt
 +-output_column_list=
@@ -557,7 +557,7 @@ QueryStmt
     |   +-MakeStruct
     |     +-type=STRUCT<s STRUCT<Key INT64, Value STRING>, t INT64>
     |     +-field_list=
-    |       +-Literal(type=STRUCT<Key INT64, Value STRING>, value={Key:1, Value:"foo"}, has_explicit_type=TRUE)
+    |       +-Literal(type=STRUCT<Key INT64, Value STRING>, value={Key:1, Value:'foo'}, has_explicit_type=TRUE)
     |       +-Constant(TestConstantInt64, type=INT64, value=1)
     +-input_scan=
       +-SingleRowScan
@@ -586,7 +586,7 @@ QueryStmt
 #
 # Catalog contains constants sort_count, concat, CURRENT_DATE and functions
 # sort_count, concat, CURRENT_DATE.
-SELECT {{sort_count()|concat("a", "b")|CURRENT_DATE()}}
+SELECT {{sort_count()|concat('a', 'b')|CURRENT_DATE()}}
 FROM TestTable
 --
 ALTERNATION GROUP: sort_count()
@@ -605,7 +605,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#4 := AggregateFunctionCall(sample_functions:sort_count() -> INT64)
 --
-ALTERNATION GROUP: concat("a", "b")
+ALTERNATION GROUP: concat('a', 'b')
 --
 QueryStmt
 +-output_column_list=

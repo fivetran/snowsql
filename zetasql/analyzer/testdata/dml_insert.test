@@ -406,10 +406,10 @@ InsertStmt
 ==
 
 INSERT TestTable (TestEnum)
-VALUES ("INVALID_ENUM")
+VALUES ('INVALID_ENUM')
 --
-ERROR: Could not cast literal "INVALID_ENUM" to type zetasql_test__.TestEnum [at 2:9]
-VALUES ("INVALID_ENUM")
+ERROR: Could not cast literal 'INVALID_ENUM' to type zetasql_test__.TestEnum [at 2:9]
+VALUES ('INVALID_ENUM')
         ^
 ==
 
@@ -614,10 +614,10 @@ InsertStmt
 
 INSERT KitchenSinkValueTable
 VALUES ((select KitchenSink from TestTable)),
-       (1, "a")
+       (1, 'a')
 --
 ERROR: Inserted row has wrong column count; Has 2, expected 1 [at 3:8]
-       (1, "a")
+       (1, 'a')
        ^
 ==
 
@@ -742,10 +742,10 @@ InsertStmt
 ==
 
 INSERT TestTable (KitchenSink)
-VALUES ("aaa")
+VALUES ('aaa')
 --
-ERROR: Could not cast literal "aaa" to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "aaa". [1:4]) [at 2:9]
-VALUES ("aaa")
+ERROR: Could not cast literal 'aaa' to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "aaa". [1:4]) [at 2:9]
+VALUES ('aaa')
         ^
 ==
 
@@ -850,7 +850,7 @@ InsertStmt
 
 # Inserting values into a pseudo column.
 INSERT EnumTable (Filename)
-VALUES ("name")
+VALUES ('name')
 --
 InsertStmt
 +-table_scan=
@@ -1002,7 +1002,7 @@ select []
 INSERT KeyValue (value, key)
 VALUES (DEFAULT, DEFAULT),
        (DEFAULT, 5),
-       ("a", DEFAULT)
+       ('a', DEFAULT)
 --
 InsertStmt
 +-table_scan=
@@ -1081,16 +1081,16 @@ InsertStmt
 ==
 
 INSERT ComplexTypes (TestStruct)
-VALUES ((select as struct 1 c, (select as struct 1 a, "a" b) d))
+VALUES ((select as struct 1 c, (select as struct 1 a, 'a' b) d))
 --
 ERROR: Value has type STRUCT<c INT64, d STRUCT<a INT64, b STRING>> which cannot be inserted into column TestStruct, which has type STRUCT<c INT32, d STRUCT<a INT32, b STRING>> [at 2:9]
-VALUES ((select as struct 1 c, (select as struct 1 a, "a" b) d))
+VALUES ((select as struct 1 c, (select as struct 1 a, 'a' b) d))
         ^
 ==
 
 INSERT ComplexTypes (TestStruct)
 VALUES ((select as struct CAST(1 AS INT32) c,
-         (select as struct CAST(1 AS INT32) a, "a" b) d))
+         (select as struct CAST(1 AS INT32) a, 'a' b) d))
 --
 InsertStmt
 +-table_scan=
@@ -1149,7 +1149,7 @@ InsertStmt
 # Same test as previous, but with different field names.
 INSERT ComplexTypes (TestStruct)
 VALUES ((select as struct CAST(1 AS INT32) x,
-         (select as struct CAST(1 AS INT32) z1, "a" z2) y))
+         (select as struct CAST(1 AS INT32) z1, 'a' z2) y))
 --
 InsertStmt
 +-table_scan=
@@ -1209,7 +1209,7 @@ InsertStmt
 # Similar test as previous (with different field names) but with
 # a struct constructor literal that is coerced to the target type.
 INSERT ComplexTypes (TestStruct)
-VALUES (STRUCT(1 AS x, STRUCT(1 as z1, "a" AS z2) AS y));
+VALUES (STRUCT(1 AS x, STRUCT(1 as z1, 'a' AS z2) AS y));
 --
 InsertStmt
 +-table_scan=
@@ -1220,14 +1220,14 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:1, d:{a:1, b:"a"}})
+|         +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:1, d:{a:1, b:'a'}})
 +-column_access_list=WRITE
 ==
 
 # Similar test as previous (with different field names) but with
 # a non-literal struct constructor.
 INSERT ComplexTypes (TestStruct)
-VALUES (STRUCT(CAST(1 AS INT32) AS x, STRUCT(1 as z1, "a" AS z2) AS y));
+VALUES (STRUCT(CAST(1 AS INT32) AS x, STRUCT(1 as z1, 'a' AS z2) AS y));
 --
 InsertStmt
 +-table_scan=
@@ -1242,12 +1242,12 @@ InsertStmt
 |           +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
 |           +-field_list=
 |             +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:"a"})
+|             +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:'a'})
 +-column_access_list=WRITE
 ==
 
 INSERT ComplexTypes (TestStruct)
-select as struct CAST(1 AS INT32) c, (select as struct CAST(1 AS INT32) a, "2" b) d
+select as struct CAST(1 AS INT32) c, (select as struct CAST(1 AS INT32) a, '2' b) d
 --
 InsertStmt
 +-table_scan=
@@ -1299,7 +1299,7 @@ InsertStmt
 # Same test as previous, but with different field names.
 INSERT ComplexTypes (TestStruct)
 select as struct CAST(1 AS INT32) x,
-                 (select as struct CAST(1 AS INT32) z1, "2" z2) y
+                 (select as struct CAST(1 AS INT32) z1, '2' z2) y
 --
 InsertStmt
 +-table_scan=
@@ -1356,7 +1356,7 @@ InsertStmt
 ==
 
 INSERT MoreComplexTypes (ArrayOfStruct)
-VALUES ([(select as struct CAST(1 AS INT32) a, "b" b), NULL]);
+VALUES ([(select as struct CAST(1 AS INT32) a, 'b' b), NULL]);
 --
 InsertStmt
 +-table_scan=
@@ -1395,7 +1395,7 @@ InsertStmt
 
 # Same test as previous, but with different struct field names.
 INSERT MoreComplexTypes (ArrayOfStruct)
-VALUES ([(select as struct CAST(1 AS INT32) x, "b" y), NULL]);
+VALUES ([(select as struct CAST(1 AS INT32) x, 'b' y), NULL]);
 --
 InsertStmt
 +-table_scan=
@@ -1435,8 +1435,8 @@ InsertStmt
 
 INSERT MoreComplexTypes (StructOfArrayOfStruct)
 VALUES (struct(1 AS x,
-               struct(CAST(1 AS INT32) AS a, "b" AS b) AS y,
-               [(select as struct CAST(1 AS INT32) a, "a" b), NULL] AS z));
+               struct(CAST(1 AS INT32) AS a, 'b' AS b) AS y,
+               [(select as struct CAST(1 AS INT32) a, 'a' b), NULL] AS z));
 --
 InsertStmt
 +-table_scan=
@@ -1485,8 +1485,8 @@ InsertStmt
 # Same test as previous, but with different struct field names.
 INSERT MoreComplexTypes (StructOfArrayOfStruct)
 VALUES (struct(1 AS f1,
-               struct(CAST(1 AS INT32) AS g1, "b" AS h1) AS i1,
-               [(select as struct CAST(1 AS INT32) j1, "a" k1), NULL] AS l1));
+               struct(CAST(1 AS INT32) AS g1, 'b' AS h1) AS i1,
+               [(select as struct CAST(1 AS INT32) j1, 'a' k1), NULL] AS l1));
 --
 InsertStmt
 +-table_scan=
@@ -1677,9 +1677,9 @@ InsertStmt
 # Inserting protos from different DescriptorPools. A cast gets added.
 insert into TestTable (KitchenSink)
 values
-  ((select coalesce(CAST("""int64_key_1: 1 int64_key_2"""
+  ((select coalesce(CAST('''int64_key_1: 1 int64_key_2'''
                     as zetasql_test__.KitchenSinkPB)))),
-  ((select coalesce(CAST("""int64_key_1: 1 int64_key_2"""
+  ((select coalesce(CAST('''int64_key_1: 1 int64_key_2'''
                     as alt_descriptor_pool.zetasql_test__.KitchenSinkPB))))
 --
 InsertStmt

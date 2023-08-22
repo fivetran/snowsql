@@ -603,7 +603,7 @@ Rewrite ERROR: generic::unimplemented: Unimplemented aggregation: COUNT(*) while
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
 # Count(non-NULL literal) counting unique users.
 # We should use this count for group_selection_threshold_expr.
-select with differential_privacy count({{1|123.456e-67|"1"|true|DATE '2022-11-17'|NUMERIC '0'|[1, 2, 3]}}, contribution_bounds_per_group => (0, 1))
+select with differential_privacy count({{1|123.456e-67|'1'|true|DATE '2022-11-17'|NUMERIC '0'|[1, 2, 3]}}, contribution_bounds_per_group => (0, 1))
 from SimpleTypesWithAnonymizationUid;
 --
 ALTERNATION GROUP: 1
@@ -702,7 +702,7 @@ QueryStmt
         +-group_selection_threshold_expr=
           +-ColumnRef(type=INT64, column=$aggregate.$agg1#13)
 --
-ALTERNATION GROUP: "1"
+ALTERNATION GROUP: '1'
 --
 QueryStmt
 +-output_column_list=

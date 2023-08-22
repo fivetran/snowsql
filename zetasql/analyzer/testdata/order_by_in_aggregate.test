@@ -1362,7 +1362,7 @@ select array_agg(distinct T.a order by T.b)
 ==
 
 select array_agg(distinct s.a order by s.b)
-from (select struct<a string, b string>("1", "2") as s);
+from (select struct<a string, b string>('1', '2') as s);
 --
 ERROR: An aggregate function that has both DISTINCT and ORDER BY arguments can only ORDER BY expressions that are arguments to the function [at 1:40]
 select array_agg(distinct s.a order by s.b)

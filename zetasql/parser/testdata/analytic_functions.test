@@ -1463,7 +1463,7 @@ select f() over (partition by k collate latin1_german2_ci) from T
                                 ^
 ==
 
-select f() over (order by k collate "latin1_german2_ci") from T
+select f() over (order by k collate 'latin1_german2_ci') from T
 --
 QueryStatement [0-63]
   Query [0-63]
@@ -1488,7 +1488,7 @@ QueryStatement [0-63]
 --
 SELECT
   f() OVER (
-    ORDER BY k COLLATE "latin1_german2_ci")
+    ORDER BY k COLLATE 'latin1_german2_ci')
 FROM
   T
 

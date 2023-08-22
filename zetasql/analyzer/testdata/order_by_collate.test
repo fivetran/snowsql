@@ -92,7 +92,7 @@ select "date" col from SimpleTypes order by col COLLATE 'en_US'
                                             ^
 ==
 
-select value from KeyValue order by concat(value, "b") COLLATE 'en_US'
+select value from KeyValue order by concat(value, 'b') COLLATE 'en_US'
 --
 QueryStmt
 +-output_column_list=
@@ -120,12 +120,12 @@ QueryStmt
 ==
 
 select value from KeyValue
-order by {{(value="a")|length(value)}} COLLATE 'en_US'
+order by {{(value='a')|length(value)}} COLLATE 'en_US'
 --
-ALTERNATION GROUP: (value="a")
+ALTERNATION GROUP: (value='a')
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BOOL [at 2:10]
-order by (value="a") COLLATE 'en_US'
+order by (value='a') COLLATE 'en_US'
          ^
 --
 ALTERNATION GROUP: length(value)
@@ -136,8 +136,8 @@ order by length(value) COLLATE 'en_US'
 ==
 
 select "string" a, "string" b, "string" c, int32 from SimpleTypes
-order by a COLLATE "s1" ASC,
-         b COLLATE "s2" DESC,
+order by a COLLATE 's1' ASC,
+         b COLLATE 's2' DESC,
          3 COLLATE @test_param_string ASC,
          4 DESC
 --
@@ -179,9 +179,9 @@ QueryStmt
 # It is up to the engine to fail if the collation name is invalid or NULL.
 select "string" a
 from SimpleTypes
-order by a COLLATE "",
-         a COLLATE "NULL",
-         a COLLATE "some_random"
+order by a COLLATE '',
+         a COLLATE 'NULL',
+         a COLLATE 'some_random'
 --
 QueryStmt
 +-output_column_list=
@@ -298,7 +298,7 @@ select afn_agg() over (order by "date" COLLATE 'en_US')
 ==
 
 select afn_agg() over (partition by key
-                       order by concat(value, "b") COLLATE 'en_US')
+                       order by concat(value, 'b') COLLATE 'en_US')
 from KeyValue
 --
 QueryStmt
@@ -345,13 +345,13 @@ QueryStmt
                         +-WindowFrameExpr(boundary_type=CURRENT ROW)
 ==
 
-select afn_agg() over (order by {{(value="a")|length(value)}} COLLATE 'en_US')
+select afn_agg() over (order by {{(value='a')|length(value)}} COLLATE 'en_US')
 from KeyValue
 --
-ALTERNATION GROUP: (value="a")
+ALTERNATION GROUP: (value='a')
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to BOOL [at 1:33]
-select afn_agg() over (order by (value="a") COLLATE 'en_US')
+select afn_agg() over (order by (value='a') COLLATE 'en_US')
                                 ^
 --
 ALTERNATION GROUP: length(value)
@@ -362,8 +362,8 @@ select afn_agg() over (order by length(value) COLLATE 'en_US')
 ==
 
 select afn_agg() over(partition by key
-                      order by value COLLATE "a" ASC,
-                               value COLLATE "b" DESC,
+                      order by value COLLATE 'a' ASC,
+                               value COLLATE 'b' DESC,
                                value COLLATE @test_param_string ASC,
                                value)
 from KeyValue

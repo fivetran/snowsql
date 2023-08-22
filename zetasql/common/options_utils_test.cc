@@ -460,7 +460,7 @@ TEST_F(QueryParameterParsingTest, ProtoTypeParam) {
       << error;
   ASSERT_EQ(UnparseQueryParameterFlag(flag.map),
             "key=1;ks=CAST(b\"\\x08\\x01\\x10\\x02\" AS "
-            "`zetasql_test__.KitchenSinkPB`)");
+            "\"zetasql_test__.KitchenSinkPB\")");
 
   // Serialized proto bytes are not easy to read, so add a more human-friendly
   // assertion that the query parameter proto is as expected.
@@ -484,7 +484,7 @@ TEST_F(QueryParameterParsingTest, ParamTypeGuardedByLanguageFeature) {
                                       &flag.map, &error))
       << error;
   ASSERT_EQ(UnparseQueryParameterFlag(flag.map),
-            "p1=INTERVAL \"0-0 0 0:0:10\" YEAR TO SECOND");
+            "p1=INTERVAL '0-0 0 0:0:10' YEAR TO SECOND");
 }
 
 TEST_F(QueryParameterParsingTest, ParamWithNameOfNonreservedKeyword) {
@@ -499,10 +499,10 @@ TEST_F(QueryParameterParsingTest, ParamWithNameOfNonreservedKeyword) {
 TEST_F(QueryParameterParsingTest, ParamWithQuotedNameOfReservedKeyword) {
   ParameterFlag flag;
   std::string error;
-  ASSERT_TRUE(ParseQueryParameterFlag("`SELECT`=3.4", analyzer_options_,
+  ASSERT_TRUE(ParseQueryParameterFlag("\"SELECT\"=3.4", analyzer_options_,
                                       catalog_.get(), &flag.map, &error))
       << error;
-  ASSERT_EQ(UnparseQueryParameterFlag(flag.map), "`select`=3.4");
+  ASSERT_EQ(UnparseQueryParameterFlag(flag.map), "\"select\"=3.4");
 }
 
 TEST_F(QueryParameterParsingTest, SemiColonInsideParamValue) {
@@ -511,7 +511,7 @@ TEST_F(QueryParameterParsingTest, SemiColonInsideParamValue) {
   ASSERT_TRUE(ParseQueryParameterFlag("p1=';';p2='a;b'", analyzer_options_,
                                       catalog_.get(), &flag.map, &error))
       << error;
-  ASSERT_EQ(UnparseQueryParameterFlag(flag.map), "p1=\";\";p2=\"a;b\"");
+  ASSERT_EQ(UnparseQueryParameterFlag(flag.map), "p1=';';p2='a;b'");
 }
 
 TEST_F(QueryParameterParsingTest, MissingParamName) {
@@ -605,7 +605,7 @@ TEST(OptionsUtils, TestQueryParameterFlagSupport) {
 
   flag_value.map["p2"] = Value::String("abcd");
   absl::SetFlag(&FLAGS_test_parameters, flag_value);
-  EXPECT_EQ(flag->CurrentValue(), "p1=1234;p2=\"abcd\"");
+  EXPECT_EQ(flag->CurrentValue(), "p1=1234;p2='abcd'");
 
   std::string err;
   EXPECT_TRUE(flag->ParseFrom("p3=TRUE;p4=2.3", &err));
