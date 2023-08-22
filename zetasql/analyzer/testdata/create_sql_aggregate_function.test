@@ -766,19 +766,19 @@ create aggregate function fn(r ANY TYPE as T, s ANY TYPE as T2 NOT AGGREGATE)
 # case.
 create aggregate function f(x any type) as (count(*));
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="count(*)")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code="count(*)")
 ==
 
 # Multiple arguments of type ANY TYPE.
 create aggregate function f(x any type, y any type) as (count(*));
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, ANY TYPE y) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="count(*)")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, ANY TYPE y) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code="count(*)")
 ==
 
 # The SQL body can refer to the names of function arguments of type ANY TYPE.
 create aggregate function f(x any type, y int64) as (count(x + y));
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="count(x + y)")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code="count(x + y)")
 ==
 
 # ANY TYPE parameters are allowed with the RETURNS clause.
@@ -786,7 +786,7 @@ create aggregate function f(x any type, y int64)
   returns int64
   as (count(x + y));
 --
-CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=INT64, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> INT64, is_aggregate=TRUE, language="SQL", code="count(x + y)")
+CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=INT64, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> INT64, is_aggregate=TRUE, language='SQL', code="count(x + y)")
 ==
 
 # ANY TYPE parameters are allowed with the LANGUAGE clause.

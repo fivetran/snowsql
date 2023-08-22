@@ -869,26 +869,26 @@ create function fn(s ANY TYPE as T) returns string;
 # case.
 create function f(x any type) as (1);
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, language="SQL", code="1")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, language='SQL', code="1")
 ==
 
 # Since the body is not resolved, deprecation warnings aren't propagated until
 # the function is called.
 create function f(x any type) as (deprecation_warning())
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, language="SQL", code="deprecation_warning()")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, language='SQL', code="deprecation_warning()")
 ==
 
 # Multiple arguments of type ANY TYPE.
 create function f(x any type, y any type) as (1);
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, ANY TYPE y) -> ANY TYPE, language="SQL", code="1")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, ANY TYPE y) -> ANY TYPE, language='SQL', code="1")
 ==
 
 # The SQL body can refer to the names of function arguments of type ANY TYPE.
 create function f(x any type, y int64) as (x + y);
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> ANY TYPE, language="SQL", code="x + y")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> ANY TYPE, language='SQL', code="x + y")
 ==
 
 # ANY TYPE parameters are allowed with the RETURNS clause.
@@ -896,7 +896,7 @@ create function f(x any type, y int64)
   returns string
   as (cast(x + y as string));
 --
-CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> STRING, language="SQL", code="cast(x + y as string)")
+CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> STRING, language='SQL', code="cast(x + y as string)")
 ==
 
 # ANY TYPE parameters are not allowed with the LANGUAGE clause if no RETURNS

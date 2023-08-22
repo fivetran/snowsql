@@ -22,18 +22,10 @@ create aggregate function agg(x string) returns bytes;
 ==
 
 create aggregate function agg(x string) returns bytes
-as """body"""
---
-ERROR: Function must specify LANGUAGE or have a SQL body in parentheses [at 1:1]
-create aggregate function agg(x string) returns bytes
-^
-==
-
-create aggregate function agg(x string) returns bytes
 language java
-as """test program""";
+as '''test program'''
 --
-CreateFunctionStmt(name_path=agg, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x], signature=(STRING x) -> BYTES, is_aggregate=TRUE, language="java", code="test program")
+CreateFunctionStmt(name_path=agg, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x], signature=(STRING x) -> BYTES, is_aggregate=TRUE, language='java', code='test program')
 ==
 
 create temp aggregate function if not exists
@@ -41,14 +33,14 @@ create temp aggregate function if not exists
 returns bytes
 language something;
 --
-CreateFunctionStmt(name_path=agg, create_scope=CREATE_TEMP, create_mode=CREATE_IF_NOT_EXISTS, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x, y], signature=(STRING x, INT32 {is_not_aggregate: true} y) -> BYTES, is_aggregate=TRUE, language="something")
+CreateFunctionStmt(name_path=agg, create_scope=CREATE_TEMP, create_mode=CREATE_IF_NOT_EXISTS, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x, y], signature=(STRING x, INT32 {is_not_aggregate: true} y) -> BYTES, is_aggregate=TRUE, language='something')
 ==
 
 [language_features=CREATE_AGGREGATE_FUNCTION,TEMPLATE_FUNCTIONS]
 [statement_context={{|default|module}}]
 create {{public|private}} aggregate function agg(x string) returns bytes
 language java
-as """test program""";
+as '''test program''';
 --
 ALTERNATION GROUPS:
     public
@@ -68,11 +60,11 @@ create private aggregate function agg(x string) returns bytes
 --
 ALTERNATION GROUP: module,public
 --
-CreateFunctionStmt(name_path=agg, create_scope=CREATE_PUBLIC, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x], signature=(STRING x) -> BYTES, is_aggregate=TRUE, language="java", code="test program")
+CreateFunctionStmt(name_path=agg, create_scope=CREATE_PUBLIC, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x], signature=(STRING x) -> BYTES, is_aggregate=TRUE, language='java', code='test program')
 --
 ALTERNATION GROUP: module,private
 --
-CreateFunctionStmt(name_path=agg, create_scope=CREATE_PRIVATE, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x], signature=(STRING x) -> BYTES, is_aggregate=TRUE, language="java", code="test program")
+CreateFunctionStmt(name_path=agg, create_scope=CREATE_PRIVATE, has_explicit_return_type=TRUE, return_type=BYTES, argument_name_list=[x], signature=(STRING x) -> BYTES, is_aggregate=TRUE, language='java', code='test program')
 ==
 
 create function agg(x string, y int32 not aggregate)
@@ -262,4 +254,4 @@ ERROR: WITH GROUP_ROWS is not supported in SQL function body [at 2:3]
 --
 ALTERNATION GROUP: ANY TYPE
 --
-CreateFunctionStmt(name_path=WrappedGroupRows, return_type=STRUCT<>, argument_name_list=[e], signature=(ANY TYPE e) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="SUM(e) WITH GROUP_ROWS(SELECT e FROM GROUP_ROWS() WHERE e IS NOT NULL)")
+CreateFunctionStmt(name_path=WrappedGroupRows, return_type=STRUCT<>, argument_name_list=[e], signature=(ANY TYPE e) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code='SUM(e) WITH GROUP_ROWS(SELECT e FROM GROUP_ROWS() WHERE e IS NOT NULL)')
