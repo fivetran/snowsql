@@ -1793,12 +1793,12 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.$col1#4]
       | |   +-expr_list=
-      | |   | +-$col1#4 := Literal(type=STRUCT<INT32, STRING>, value={1, "abc"})
+      | |   | +-$col1#4 := Literal(type=STRUCT<INT32, STRING>, value={1, 'abc'})
       | |   +-input_scan=
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1.$col1#1]
       | |       +-expr_list=
-      | |       | +-$col1#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+      | |       | +-$col1#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
       | |       +-input_scan=
       | |         +-SingleRowScan
       | +-output_column_list=[$union_all1_cast.$col1#4]

@@ -25,7 +25,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+    | +-$col1#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
     +-input_scan=
       +-SingleRowScan
 ==
@@ -220,7 +220,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=ARRAY<STRUCT<INT64, STRING>>, value=[{1, "abc"}, {2, "def"}, {3, "ghi"}])
+    | +-$col1#1 := Literal(type=ARRAY<STRUCT<INT64, STRING>>, value=[{1, 'abc'}, {2, 'def'}, {3, 'ghi'}])
     +-input_scan=
       +-SingleRowScan
 ==
@@ -241,8 +241,8 @@ QueryStmt
     |     | +-field_list=
     |     |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     |     |   +-Literal(type=STRING, value='abc')
-    |     +-Literal(type=STRUCT<INT32, STRING>, value={2, "def"})
-    |     +-Literal(type=STRUCT<INT32, STRING>, value={3, "ghi"})
+    |     +-Literal(type=STRUCT<INT32, STRING>, value={2, 'def'})
+    |     +-Literal(type=STRUCT<INT32, STRING>, value={3, 'ghi'})
     +-input_scan=
       +-SingleRowScan
 ==
@@ -260,13 +260,13 @@ QueryStmt
     +-expr_list=
     | +-$col1#3 :=
     |   +-FunctionCall(ZetaSQL:$make_array(repeated(4) STRUCT<INT64, STRING>) -> ARRAY<STRUCT<INT64, STRING>>)
-    |     +-Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+    |     +-Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
     |     +-MakeStruct
     |     | +-type=STRUCT<INT64, STRING>
     |     | +-field_list=
     |     |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |     |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    |     +-Literal(type=STRUCT<INT64, STRING>, value={2, "def"})
+    |     +-Literal(type=STRUCT<INT64, STRING>, value={2, 'def'})
     |     +-MakeStruct
     |       +-type=STRUCT<INT64, STRING>
     |       +-field_list=
@@ -431,8 +431,8 @@ QueryStmt
             | +-field_list=
             |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
             |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-            +-Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
-            +-Literal(type=STRUCT<INT64, STRING>, value={2, "abc"})
+            +-Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
+            +-Literal(type=STRUCT<INT64, STRING>, value={2, 'abc'})
             +-MakeStruct
               +-type=STRUCT<INT64, STRING>
               +-field_list=
@@ -463,7 +463,7 @@ QueryStmt
             | +-field_list=
             |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
             |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-            +-Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+            +-Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
 ==
 
 select struct(), struct<>()
@@ -938,10 +938,10 @@ QueryStmt
           +-SingleRowScan
 ==
 
-select struct<f1 date>("bad date")
+select struct<f1 date>('bad date')
 --
-ERROR: Could not cast literal "bad date" to type DATE [at 1:24]
-select struct<f1 date>("bad date")
+ERROR: Could not cast literal 'bad date' to type DATE [at 1:24]
+select struct<f1 date>('bad date')
                        ^
 ==
 

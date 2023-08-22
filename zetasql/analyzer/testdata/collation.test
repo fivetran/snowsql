@@ -9198,12 +9198,12 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$union_all2_cast.$col1#4]
         |   +-expr_list=
-        |   | +-$col1#4 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, "abc"})
+        |   | +-$col1#4 := Literal(type=STRUCT<DOUBLE, STRING>, value={1, 'abc'})
         |   +-input_scan=
         |     +-ProjectScan
         |       +-column_list=[$union_all2.$col1#2]
         |       +-expr_list=
-        |       | +-$col1#2 := Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+        |       | +-$col1#2 := Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
         |       +-input_scan=
         |         +-SingleRowScan
         +-output_column_list=[$union_all2_cast.$col1#4]
@@ -9231,7 +9231,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[$union_all1.$col1#1]
       | |   +-expr_list=
-      | |   | +-$col1#1 := Literal(type=STRUCT<DOUBLE, STRING>, value={0.1, "abc"})
+      | |   | +-$col1#1 := Literal(type=STRUCT<DOUBLE, STRING>, value={0.1, 'abc'})
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=[$union_all1.$col1#1]
@@ -9378,7 +9378,7 @@ QueryStmt
     |       |   |     | | +-ProjectScan
     |       |   |     | |   +-column_list=$union_all1.[col_struct#1, n#2]
     |       |   |     | |   +-expr_list=
-    |       |   |     | |   | +-col_struct#1 := Literal(type=STRUCT<DOUBLE, STRING>, value={0.1, "abc"})
+    |       |   |     | |   | +-col_struct#1 := Literal(type=STRUCT<DOUBLE, STRING>, value={0.1, 'abc'})
     |       |   |     | |   | +-n#2 := Literal(type=INT64, value=1)
     |       |   |     | |   +-input_scan=
     |       |   |     | |     +-SingleRowScan
@@ -9488,7 +9488,7 @@ QueryStmt
     |       |   |     | | +-ProjectScan
     |       |   |     | |   +-column_list=$union_all1.[col_struct#1, n#2]
     |       |   |     | |   +-expr_list=
-    |       |   |     | |   | +-col_struct#1 := Literal(type=STRUCT<DOUBLE, STRING>, value={0.1, "abc"})
+    |       |   |     | |   | +-col_struct#1 := Literal(type=STRUCT<DOUBLE, STRING>, value={0.1, 'abc'})
     |       |   |     | |   | +-n#2 := Literal(type=INT64, value=1)
     |       |   |     | |   +-input_scan=
     |       |   |     | |     +-SingleRowScan

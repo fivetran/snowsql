@@ -27,10 +27,10 @@ ARRAY<STRUCT<row_id INT64,
              string_val STRING>>
 [
   {1, NULL, NULL, NULL, NULL, NULL},
-  {2, false, 2, 3, 1.5, "abc"},
-  {3, NULL, 1, 6, 1.5, "def"},
-  {4, true, NULL, 2, 2.5, "ghi"},
-  {5, false, 1, NULL, 3.5, "abc"},
+  {2, false, 2, 3, 1.5, 'abc'},
+  {3, NULL, 1, 6, 1.5, 'def'},
+  {4, true, NULL, 2, 2.5, 'ghi'},
+  {5, false, 1, NULL, 3.5, 'abc'},
   {6, true, 2, 2, NULL, "xyz"},
   {7, true, 1, 5, -0.5, "zyx"},
   {8, true, 4, 2, -1.5, "ijk"},
@@ -57,16 +57,16 @@ SELECT cast(1 as int64) as row_id,
 --
 
 ARRAY<STRUCT<row_id INT64, key INT64, int64_val INT64, string_val STRING>>[
-  {1, 1, 10, "abc"},
-  {2, 1, 10, "abc"},
-  {3, 1, 10, "abc"},
-  {4, 1, 10, "abc"},
-  {5, 1, 10, "abc"},
-  {6, 2, 10, "abc"},
-  {7, 2, 10, "abc"},
-  {8, 2, 10, "abc"},
-  {9, 2, 10, "abc"},
-  {10, 2, 10, "abc"}
+  {1, 1, 10, 'abc'},
+  {2, 1, 10, 'abc'},
+  {3, 1, 10, 'abc'},
+  {4, 1, 10, 'abc'},
+  {5, 1, 10, 'abc'},
+  {6, 2, 10, 'abc'},
+  {7, 2, 10, 'abc'},
+  {8, 2, 10, 'abc'},
+  {9, 2, 10, 'abc'},
+  {10, 2, 10, 'abc'}
 ]
 ==
 

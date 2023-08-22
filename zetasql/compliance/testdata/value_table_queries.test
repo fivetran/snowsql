@@ -159,7 +159,7 @@ ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{1, "hey"}, {2, "there"}]
 SELECT AS STRUCT foo, bar
 FROM TestTable
 --
-ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, "def"}, {1, "abc"}]
+ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, 'def'}, {1, 'abc'}]
 ==
 [name=value_table_distinct_proto_from]
 SELECT DISTINCT AS "zetasql_test__.KitchenSinkPB"
@@ -181,7 +181,7 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[unknown order:
 SELECT DISTINCT AS STRUCT foo, bar
 FROM TestTable
 --
-ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, "def"}, {1, "abc"}]
+ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, 'def'}, {1, 'abc'}]
 ==
 [name=value_table_proto_union_all_table]
 SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2

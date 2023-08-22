@@ -1199,7 +1199,7 @@ select lower(col_ci), col_binary from (
 --
 ARRAY<STRUCT<STRING, col_binary STRING>>[unknown order:
   {"ab", "DEf"},
-  {"abc", "def"},
+  {"abc", 'def'},
   {"ab", "DEF"},
   {"abc", "DEF"},
   {"abc", "xyz"}
@@ -1235,7 +1235,7 @@ select lower(col_ci), col_binary from (
 )
 --
 ARRAY<STRUCT<STRING, col_binary STRING>>[unknown order:
-  {"abc", "def"},
+  {"abc", 'def'},
   {"ab", "DEf"},
   {"abcd", "xyz"}
 ]
