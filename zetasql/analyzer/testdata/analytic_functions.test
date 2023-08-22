@@ -704,7 +704,7 @@ QueryStmt
 select 1 from keyvalue
 group by value
 order by afn_agg(countif(key > 100))
-    over (partition by countif(value = "") order by max(key)+1)
+    over (partition by countif(value = '') order by max(key)+1)
 --
 
 QueryStmt

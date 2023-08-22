@@ -529,7 +529,7 @@ CreateViewStmt
 |       | +-int32_val1#1 := Literal(type=INT64, value=55)
 |       +-input_scan=
 |         +-SingleRowScan
-+-sql='select as 'zetasql_test__.TestExtraPB" 55 int32_val1"
++-sql='select as "zetasql_test__.TestExtraPB" 55 int32_val1'
 +-is_value_table=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name='$proto', type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
@@ -556,7 +556,7 @@ CreateMaterializedViewStmt
 |       | +-int32_val1#1 := Literal(type=INT64, value=55)
 |       +-input_scan=
 |         +-SingleRowScan
-+-sql='select as 'zetasql_test__.TestExtraPB" 55 int32_val1"
++-sql='select as "zetasql_test__.TestExtraPB" 55 int32_val1'
 +-is_value_table=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name='$proto', type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)
@@ -583,7 +583,7 @@ CreateApproxViewStmt
 |       | +-int32_val1#1 := Literal(type=INT64, value=55)
 |       +-input_scan=
 |         +-SingleRowScan
-+-sql='select as 'zetasql_test__.TestExtraPB" 55 int32_val1"
++-sql='select as "zetasql_test__.TestExtraPB" 55 int32_val1'
 +-is_value_table=TRUE
 +-column_definition_list=
   +-ColumnDefinition(name='$proto', type=PROTO<zetasql_test__.TestExtraPB>, column=tt.$proto#3)

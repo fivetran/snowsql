@@ -312,7 +312,7 @@ SELECT
 ==
 
 # Nested WITH expressions resolve correctly.
-SELECT WITH(a AS "abc", b AS WITH(a AS "def", b AS "ghi", CONCAT(a, b)), CONCAT(a, b))
+SELECT WITH(a AS 'abc', b AS WITH(a AS 'def', b AS 'ghi', CONCAT(a, b)), CONCAT(a, b))
 --
 QueryStmt
 +-output_column_list=
@@ -345,7 +345,7 @@ QueryStmt
 
 [UNPARSED_SQL]
 SELECT
-  WITH(a_2 AS "abc", a_3 AS WITH(a_4 AS "def", a_5 AS "ghi", CONCAT(a_4, a_5)), CONCAT(a_2, a_3)) AS a_1;
+  WITH(a_2 AS 'abc', a_3 AS WITH(a_4 AS 'def', a_5 AS 'ghi', CONCAT(a_4, a_5)), CONCAT(a_2, a_3)) AS a_1;
 
 [REWRITTEN AST]
 QueryStmt
@@ -420,18 +420,18 @@ SELECT
               (
                 SELECT
                   projectscan_6.a_5 AS a_5,
-                  "ghi" AS a_7
+                  'ghi' AS a_7
                 FROM
                   (
                     SELECT
-                      "def" AS a_5
+                      'def' AS a_5
                   ) AS projectscan_6
               ) AS projectscan_8
           ) AS a_4
         FROM
           (
             SELECT
-              "abc" AS a_2
+              'abc' AS a_2
           ) AS projectscan_3
       ) AS projectscan_10
   ) AS a_1;
