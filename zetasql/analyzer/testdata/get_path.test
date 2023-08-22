@@ -11,7 +11,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
     |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
-    |     | +-Literal(type=STRING, value='{"a":"b"}')
+    |     | +-Literal(type=STRING, value='{\'a\':\'b\'}')
     |     +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
@@ -40,7 +40,7 @@ QueryStmt
     |     +-Cast(OBJECT -> VARIANT)
     |     | +-Cast(VARIANT -> OBJECT)
     |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
-    |     |     +-Literal(type=STRING, value='{"a":"b"}')
+    |     |     +-Literal(type=STRING, value='{\'a\':\'b\'}')
     |     +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
@@ -88,7 +88,7 @@ QueryStmt
     |     +-Cast(OBJECT -> VARIANT)
     |     | +-Cast(VARIANT -> OBJECT)
     |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
-    |     |     +-Literal(type=STRING, value='{"a":"b"}')
+    |     |     +-Literal(type=STRING, value='{\'a\':\'b\'}')
     |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan

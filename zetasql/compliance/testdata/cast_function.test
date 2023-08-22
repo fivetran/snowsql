@@ -288,12 +288,12 @@ ARRAY<STRUCT<TIMESTAMP>>[{2000-01-23 07:13:14+00}]
 [name=timestamp_to_string]
 SELECT CAST(timestamp '2000-01-23 12:13:14+05' AS string)
 --
-ARRAY<STRUCT<STRING>>[{"2000-01-22 23:13:14-08"}]
+ARRAY<STRUCT<STRING>>[{'2000-01-22 23:13:14-08'}]
 ==
 [name=timestamp_to_string_2]
 SELECT CAST(timestamp '2000-01-23 07:13:14+00' AS string)
 --
-ARRAY<STRUCT<STRING>>[{"2000-01-22 23:13:14-08"}]
+ARRAY<STRUCT<STRING>>[{'2000-01-22 23:13:14-08'}]
 ==
 [name=null_to_datetime]
 [required_features=V_1_2_CIVIL_TIME]

@@ -10,7 +10,7 @@ SELECT 5, 0, ARRAY<STRING> []          UNION ALL
 SELECT 6, NULL, [CAST(NULL AS STRING)]
 --
 ARRAY<STRUCT<primary_key INT64, key INT64, values ARRAY<>>>[
-  {1, 1, ARRAY<STRING>["one"]},
+  {1, 1, ARRAY<STRING>['one']},
   {
     2,
     2,
@@ -232,7 +232,7 @@ SELECT key, ARRAY(SELECT v FROM t.values v ORDER BY v LIMIT 1) FROM Table1 t ORD
 ARRAY<STRUCT<key INT64, ARRAY<>>>[known order:
   {NULL, ARRAY<STRING>[NULL]},
   {0, ARRAY<STRING>[]},
-  {1, ARRAY<STRING>["one"]},
+  {1, ARRAY<STRING>['one']},
   {2, ARRAY<STRING>["a"]},
   {3, ARRAY<STRING>["x"]},
   {4, ARRAY<STRING>["w"]}
@@ -244,7 +244,7 @@ SELECT key, ARRAY(SELECT v FROM t.values v ORDER BY v LIMIT 2) FROM Table1 t ORD
 ARRAY<STRUCT<key INT64, ARRAY<>>>[known order:
   {NULL, ARRAY<STRING>[NULL]},
   {0, ARRAY<STRING>[]},
-  {1, ARRAY<STRING>["one"]},
+  {1, ARRAY<STRING>['one']},
   {
     2,
     ARRAY<STRING>[known order:"a", "c"]
@@ -265,7 +265,7 @@ SELECT key, ARRAY(SELECT v FROM t.values v ORDER BY v LIMIT 100) FROM Table1 t O
 ARRAY<STRUCT<key INT64, ARRAY<>>>[known order:
   {NULL, ARRAY<STRING>[NULL]},
   {0, ARRAY<STRING>[]},
-  {1, ARRAY<STRING>["one"]},
+  {1, ARRAY<STRING>['one']},
   {
     2,
     ARRAY<STRING>[known order:"a", "c"]

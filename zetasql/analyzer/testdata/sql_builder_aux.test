@@ -122,28 +122,28 @@ FROM
   ) AS keyvalue_3;
 ==
 
-grant select on table foo to "bar@google.com"
+grant select on table foo to 'bar@google.com'
 --
 [UNPARSED_SQL]
-GRANT "select" ON table foo TO "bar@google.com";
+GRANT "select" ON table foo TO 'bar@google.com';
 ==
 
-grant update, insert (col1, "col2", "group", "et cetera") on foo to "bar@google.com"
+grant update, insert (col1, "col2", "group", "et cetera") on foo to 'bar@google.com'
 --
 [UNPARSED_SQL]
-GRANT "update", insert(col1, col2, "group", "et cetera") ON foo TO "bar@google.com";
+GRANT "update", insert(col1, col2, "group", "et cetera") ON foo TO 'bar@google.com';
 ==
 
-grant select, "et cetera" on "temporary table" "table name" to "bar@google.com"
+grant select, "et cetera" on "temporary table" "table name" to 'bar@google.com'
 --
 [UNPARSED_SQL]
-GRANT "select", "et cetera" ON "temporary table" "table name" TO "bar@google.com";
+GRANT "select", "et cetera" ON "temporary table" "table name" TO 'bar@google.com';
 ==
 
-grant delete on "temporary table" to "bar@google.com"
+grant delete on "temporary table" to 'bar@google.com'
 --
 [UNPARSED_SQL]
-GRANT delete ON "temporary table" TO "bar@google.com";
+GRANT delete ON "temporary table" TO 'bar@google.com';
 ==
 
 revoke all on table foo from "mdbuser/user", 'mdbgroup/group'
@@ -230,7 +230,7 @@ RENAME view namespace."if" TO "the new namespace".bar;
 create row policy on KeyValue to 'foo@google.com' using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY ON KeyValue GRANT TO ("foo@google.com") FILTER USING (key = 1);
+CREATE ROW ACCESS POLICY ON KeyValue GRANT TO ('foo@google.com') FILTER USING (key = 1);
 ==
 
 [language_features=ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX]
@@ -238,7 +238,7 @@ create row policy p1 on KeyValue to 'foo@google.com', 'mdbuser/bar'
 using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ("foo@google.com", "mdbuser/bar") FILTER USING (key =
+CREATE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com', "mdbuser/bar") FILTER USING (key =
 1);
 ==
 
@@ -254,7 +254,7 @@ create or replace row policy p1 on KeyValue to 'foo@google.com', 'mdbuser/bar'
 using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE OR REPLACE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ("foo@google.com", "mdbuser/bar") FILTER USING (key =
+CREATE OR REPLACE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com', "mdbuser/bar") FILTER USING (key =
 1);
 ==
 
@@ -264,21 +264,21 @@ create row policy if not exists p1 on KeyValue to 'foo@google.com',
 using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY IF NOT EXISTS p1 ON KeyValue GRANT TO ("foo@google.com", "mdbuser/bar") FILTER USING (key =
+CREATE ROW ACCESS POLICY IF NOT EXISTS p1 ON KeyValue GRANT TO ('foo@google.com', "mdbuser/bar") FILTER USING (key =
 1);
 ==
 
 create row access policy on KeyValue grant to ('foo@google.com') filter using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY ON KeyValue GRANT TO ("foo@google.com") FILTER USING (key = 1);
+CREATE ROW ACCESS POLICY ON KeyValue GRANT TO ('foo@google.com') FILTER USING (key = 1);
 ==
 
 create row access policy p1 on KeyValue grant to ('foo@google.com', 'mdbuser/bar')
 filter using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ("foo@google.com", "mdbuser/bar") FILTER USING (key =
+CREATE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com', "mdbuser/bar") FILTER USING (key =
 1);
 ==
 
@@ -292,7 +292,7 @@ create or replace row access policy p1 on KeyValue grant to ('foo@google.com', '
 filter using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE OR REPLACE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ("foo@google.com", "mdbuser/bar") FILTER USING (key =
+CREATE OR REPLACE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com', "mdbuser/bar") FILTER USING (key =
 1);
 ==
 
@@ -301,7 +301,7 @@ create row access policy if not exists p1 on KeyValue grant to ('foo@google.com'
 filter using (key = 1);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY IF NOT EXISTS p1 ON KeyValue GRANT TO ("foo@google.com", "mdbuser/bar") FILTER USING (key =
+CREATE ROW ACCESS POLICY IF NOT EXISTS p1 ON KeyValue GRANT TO ('foo@google.com', "mdbuser/bar") FILTER USING (key =
 1);
 ==
 
@@ -320,7 +320,7 @@ ALTER ROW ACCESS POLICY p1 ON KeyValue RENAME TO p2;
 alter row access policy p1 on KeyValue grant to ('foo@google.com');
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY p1 ON KeyValue GRANT TO ("foo@google.com");
+ALTER ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com');
 ==
 
 alter row access policy p1 on KeyValue filter using (key = 1);
@@ -332,7 +332,7 @@ ALTER ROW ACCESS POLICY p1 ON KeyValue FILTER USING (key = 1);
 alter row access policy p1 on KeyValue revoke from ('bar@google.com');
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY p1 ON KeyValue REVOKE FROM ("bar@google.com");
+ALTER ROW ACCESS POLICY p1 ON KeyValue REVOKE FROM ('bar@google.com');
 ==
 
 alter row access policy p1 on KeyValue revoke from all;
@@ -350,7 +350,7 @@ ALTER ROW ACCESS POLICY IF EXISTS p1 ON KeyValue REVOKE FROM ALL;
 alter row access policy p1 on KeyValue rename to p2, grant to ('foo@google.com');
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY p1 ON KeyValue RENAME TO p2, GRANT TO ("foo@google.com");
+ALTER ROW ACCESS POLICY p1 ON KeyValue RENAME TO p2, GRANT TO ('foo@google.com');
 ==
 
 alter row access policy p1 on KeyValue rename to p2, filter using (false);
@@ -363,14 +363,14 @@ alter row access policy p1 on KeyValue rename to p2, grant to ('foo@google.com')
 filter using(true);
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY p1 ON KeyValue RENAME TO p2, GRANT TO ("foo@google.com"), FILTER USING (true);
+ALTER ROW ACCESS POLICY p1 ON KeyValue RENAME TO p2, GRANT TO ('foo@google.com'), FILTER USING (true);
 ==
 
 alter row access policy "my policy" on KeyValue rename to p2,
 grant to ('foo@google.com', "mdbuser/bar");
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, GRANT TO ("foo@google.com", "mdbuser/bar");
+ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, GRANT TO ('foo@google.com', "mdbuser/bar");
 ==
 
 [no_test_extract_table_names]
@@ -379,7 +379,7 @@ rename to "my new policy",
 grant to ('foo@google.com', "mdbuser/bar");
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY "my policy" ON nested_catalog.KeyValue RENAME TO "my new policy", GRANT TO ("foo@google.com",
+ALTER ROW ACCESS POLICY "my policy" ON nested_catalog.KeyValue RENAME TO "my new policy", GRANT TO ('foo@google.com',
   "mdbuser/bar");
 ==
 
@@ -388,7 +388,7 @@ rename to p2, revoke from all, grant to ('foo@google.com', "mdbuser/bar"),
 filter using(Key = 123);
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ALL, GRANT TO ("foo@google.com",
+ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ALL, GRANT TO ('foo@google.com',
   "mdbuser/bar"), FILTER USING (Key = 123);
 ==
 
@@ -399,7 +399,7 @@ filter using(Key = 123);
 --
 [UNPARSED_SQL]
 ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ("allAuthenticatedUsers", "domain:google.com"),
-  GRANT TO ("foo@google.com", "mdbuser/bar"), FILTER USING (Key = 123);
+  GRANT TO ('foo@google.com', "mdbuser/bar"), FILTER USING (Key = 123);
 ==
 
 # Create external language function.

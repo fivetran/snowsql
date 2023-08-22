@@ -53,12 +53,12 @@ ASSERT_ROWS_MODIFIED 1;
 ==
 
 INSERT KeyValue (key, value)
-VALUES (1, "one"), (2, DEFAULT), (3, NULL)
+VALUES (1, 'one'), (2, DEFAULT), (3, NULL)
 --
 [UNPARSED_SQL]
 INSERT INTO KeyValue(Key, Value)
 VALUES
-  (1, "one"),
+  (1, 'one'),
   (2, DEFAULT),
   (3, CAST(NULL AS STRING));
 ==
@@ -310,13 +310,13 @@ WHERE
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
 [language_features=V_1_3_DML_RETURNING]
-INSERT INTO nested_catalog.KeyValueNested (key, value) VALUES (1, "one")
+INSERT INTO nested_catalog.KeyValueNested (key, value) VALUES (1, 'one')
 THEN RETURN key+1
 --
 [UNPARSED_SQL]
 INSERT INTO nested_catalog.KeyValueNested(Key, Value)
 VALUES
-  (1, "one")
+  (1, 'one')
 THEN RETURN
   (KeyValueNested.Key) + 1 AS "$col1";
 ==

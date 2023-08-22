@@ -260,15 +260,15 @@ CREATE ROW ACCESS POLICY p1 ON t1 FILTER USING (true)
 ==
 
 # Test that new keywords are all optional.
-create row {{access|}} policy p1 on t1 {{grant|}} to ("bar@google.com") {{filter|}} using (region = "us");
+create row {{access|}} policy p1 on t1 {{grant|}} to ('bar@google.com') {{filter|}} using (region = "us");
 --
 ALTERNATION GROUP: access,grant,filter
 --
 CreateRowAccessPolicyStatement [0-90] [create row...region = "us")]
   PathExpression [31-33] [t1]
     Identifier(t1) [31-33] [t1]
-  GrantToClause [34-61] [grant to ("bar@google.com")]
-    GranteeList [44-60] ["bar@google.com"]
+  GrantToClause [34-61] [grant to ('bar@google.com')]
+    GranteeList [44-60] ['bar@google.com']
       StringLiteral('bar@google.com') [44-60] ['bar@google.com']
   FilterUsingClause [62-90] [filter using (region = "us")]
     BinaryExpression(=) [76-89] [region = "us"]
@@ -278,15 +278,15 @@ CreateRowAccessPolicyStatement [0-90] [create row...region = "us")]
   PathExpression [25-27] [p1]
     Identifier(p1) [25-27] [p1]
 --
-CREATE ROW ACCESS POLICY p1 ON t1 GRANT TO ("bar@google.com") FILTER USING (region = "us")
+CREATE ROW ACCESS POLICY p1 ON t1 GRANT TO ('bar@google.com') FILTER USING (region = "us")
 --
 ALTERNATION GROUP: access,grant,
 --
 CreateRowAccessPolicyStatement [0-84] [create row...region = "us")]
   PathExpression [31-33] [t1]
     Identifier(t1) [31-33] [t1]
-  GrantToClause [34-61] [grant to ("bar@google.com")]
-    GranteeList [44-60] ["bar@google.com"]
+  GrantToClause [34-61] [grant to ('bar@google.com')]
+    GranteeList [44-60] ['bar@google.com']
       StringLiteral('bar@google.com') [44-60] ['bar@google.com']
   FilterUsingClause [61-84] [using (region = "us")]
     BinaryExpression(=) [70-83] [region = "us"]
@@ -296,18 +296,18 @@ CreateRowAccessPolicyStatement [0-84] [create row...region = "us")]
   PathExpression [25-27] [p1]
     Identifier(p1) [25-27] [p1]
 --
-CREATE ROW ACCESS POLICY p1 ON t1 GRANT TO ("bar@google.com") USING (region = "us")
+CREATE ROW ACCESS POLICY p1 ON t1 GRANT TO ('bar@google.com') USING (region = "us")
 --
 ALTERNATION GROUP: access,,filter
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got "(" [at 1:39]
-create row access policy p1 on t1  to ("bar@google.com") filter using (region...
+create row access policy p1 on t1  to ('bar@google.com') filter using (region...
                                       ^
 --
 ALTERNATION GROUP: access,,
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got "(" [at 1:39]
-create row access policy p1 on t1  to ("bar@google.com")  using (region = "us");
+create row access policy p1 on t1  to ('bar@google.com')  using (region = "us");
                                       ^
 --
 ALTERNATION GROUP: grant,filter
@@ -315,8 +315,8 @@ ALTERNATION GROUP: grant,filter
 CreateRowAccessPolicyStatement [0-84] [create row...region = "us")]
   PathExpression [25-27] [t1]
     Identifier(t1) [25-27] [t1]
-  GrantToClause [28-55] [grant to ("bar@google.com")]
-    GranteeList [38-54] ["bar@google.com"]
+  GrantToClause [28-55] [grant to ('bar@google.com')]
+    GranteeList [38-54] ['bar@google.com']
       StringLiteral('bar@google.com') [38-54] ['bar@google.com']
   FilterUsingClause [56-84] [filter using (region = "us")]
     BinaryExpression(=) [70-83] [region = "us"]
@@ -326,15 +326,15 @@ CreateRowAccessPolicyStatement [0-84] [create row...region = "us")]
   PathExpression [19-21] [p1]
     Identifier(p1) [19-21] [p1]
 --
-CREATE ROW POLICY p1 ON t1 GRANT TO ("bar@google.com") FILTER USING (region = "us")
+CREATE ROW POLICY p1 ON t1 GRANT TO ('bar@google.com') FILTER USING (region = "us")
 --
 ALTERNATION GROUP: grant,
 --
 CreateRowAccessPolicyStatement [0-78] [create row...region = "us")]
   PathExpression [25-27] [t1]
     Identifier(t1) [25-27] [t1]
-  GrantToClause [28-55] [grant to ("bar@google.com")]
-    GranteeList [38-54] ["bar@google.com"]
+  GrantToClause [28-55] [grant to ('bar@google.com')]
+    GranteeList [38-54] ['bar@google.com']
       StringLiteral('bar@google.com') [38-54] ['bar@google.com']
   FilterUsingClause [55-78] [using (region = "us")]
     BinaryExpression(=) [64-77] [region = "us"]
@@ -344,16 +344,16 @@ CreateRowAccessPolicyStatement [0-78] [create row...region = "us")]
   PathExpression [19-21] [p1]
     Identifier(p1) [19-21] [p1]
 --
-CREATE ROW POLICY p1 ON t1 GRANT TO ("bar@google.com") USING (region = "us")
+CREATE ROW POLICY p1 ON t1 GRANT TO ('bar@google.com') USING (region = "us")
 --
 ALTERNATION GROUP: filter
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got "(" [at 1:33]
-create row  policy p1 on t1  to ("bar@google.com") filter using (region = "us");
+create row  policy p1 on t1  to ('bar@google.com') filter using (region = "us");
                                 ^
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got "(" [at 1:33]
-create row  policy p1 on t1  to ("bar@google.com")  using (region = "us");
+create row  policy p1 on t1  to ('bar@google.com')  using (region = "us");
                                 ^

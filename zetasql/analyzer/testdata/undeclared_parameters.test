@@ -661,7 +661,7 @@ p: INT32
 ==
 
 INSERT INTO KeyValue (key, value)
-VALUES (1, @one), (@two, "two");
+VALUES (1, @one), (@two, 'two');
 --
 InsertStmt
 +-table_scan=
@@ -675,12 +675,12 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Parameter(parse_location=45-49, type=STRING, name="one")
+| |       +-Parameter(parse_location=45-49, type=STRING, name='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
 |     | +-value=
-|     |   +-Parameter(parse_location=53-57, type=INT64, name="two", is_untyped=TRUE)
+|     |   +-Parameter(parse_location=53-57, type=INT64, name='two', is_untyped=TRUE)
 |     +-DMLValue
 |       +-value=
 |         +-Literal(type=STRING, value='two')

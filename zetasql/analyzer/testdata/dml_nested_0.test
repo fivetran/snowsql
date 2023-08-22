@@ -1731,11 +1731,11 @@ ERROR: Inserted row has wrong column count; Has 2, expected 1 [at 2:49]
 ==
 
 UPDATE TestTable SET
-  (INSERT KitchenSink.repeated_int64_val VALUES ("one"))
+  (INSERT KitchenSink.repeated_int64_val VALUES ('one'))
 WHERE true
 --
-ERROR: Could not cast literal "one" to type INT64 [at 2:50]
-  (INSERT KitchenSink.repeated_int64_val VALUES ("one"))
+ERROR: Could not cast literal 'one' to type INT64 [at 2:50]
+  (INSERT KitchenSink.repeated_int64_val VALUES ('one'))
                                                  ^
 ==
 

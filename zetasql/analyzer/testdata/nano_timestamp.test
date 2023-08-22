@@ -66,11 +66,11 @@ select case key when 0 then '2000-09-03'
                 when 5 then "2000-09-03 00:00:01.999999999"
                 when 6 then "2000-09-03 00:00:02"
                 when 7 then "2000-09-03 -01"
-                when 8 then "2000-09-03 00:00:01-01"
+                when 8 then '2000-09-03 00:00:01-01'
                 when 9 then "2000-09-03 00:00:01.001-01"
                 when 10 then "2000-09-03 00:00:01.001001001-01"
                 when 12 then "2000-09-03 00:00:01.999999999-01"
-                when 13 then "2000-09-03 00:00:02-01"
+                when 13 then '2000-09-03 00:00:02-01'
                 when 14 then timestamp('2000-01-01')
                 else null end
 from KeyValue

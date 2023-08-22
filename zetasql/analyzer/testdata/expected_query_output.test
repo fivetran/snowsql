@@ -439,7 +439,7 @@ SELECT '2017-13-13';
 
 [coerced_query_output_types=struct<int64>]
 INSERT INTO KeyValue (key, value)
-VALUES (1, "one"), (2, "two")
+VALUES (1, 'one'), (2, 'two')
 --
 ERROR: Unexpected statement type, expected query statement because output columns are required [at 1:1]
 INSERT INTO KeyValue (key, value)

@@ -1182,7 +1182,7 @@ Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are 
 [no_run_unparser]
 SELECT {{*|a|b}}
 FROM UnaryAbTableArg{{|SelfJoin|ScannedInCTE}}(
-    {{TABLE abTable|(SELECT 1 AS a, "two" AS b)}});
+    {{TABLE abTable|(SELECT 1 AS a, 'two' AS b)}});
 
 --
 ALTERNATION GROUP: *,,TABLE abTable
@@ -1229,7 +1229,7 @@ QueryStmt
             +-input_scan=
               +-WithRefScan(column_list=UnaryAbTableArg.[a#3, b#4], with_query_name='arg0')
 --
-ALTERNATION GROUP: *,,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: *,,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1338,7 +1338,7 @@ QueryStmt
                 +-right_scan=
                   +-WithRefScan(column_list=UnaryAbTableArgSelfJoin.[a#5, b#6], with_query_name='arg0')
 --
-ALTERNATION GROUP: *,SelfJoin,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: *,SelfJoin,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1458,7 +1458,7 @@ QueryStmt
                 +-input_scan=
                   +-WithRefScan(column_list=UnaryAbTableArgScannedInCTE.[a#3, b#4], with_query_name='t')
 --
-ALTERNATION GROUP: *,ScannedInCTE,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: *,ScannedInCTE,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1567,7 +1567,7 @@ QueryStmt
             +-input_scan=
               +-WithRefScan(column_list=[UnaryAbTableArg.a#3, arg0.b#5], with_query_name='arg0')
 --
-ALTERNATION GROUP: a,,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: a,,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1623,7 +1623,7 @@ QueryStmt
 --
 ALTERNATION GROUPS:
     a,SelfJoin,TABLE abTable
-    a,SelfJoin,(SELECT 1 AS a, "two" AS b)
+    a,SelfJoin,(SELECT 1 AS a, 'two' AS b)
 --
 ERROR: Column name a is ambiguous [at 1:8]
 SELECT a
@@ -1682,7 +1682,7 @@ QueryStmt
                 +-input_scan=
                   +-WithRefScan(column_list=[UnaryAbTableArgScannedInCTE.a#3, t.b#7], with_query_name='t')
 --
-ALTERNATION GROUP: a,ScannedInCTE,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: a,ScannedInCTE,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1789,7 +1789,7 @@ QueryStmt
             +-input_scan=
               +-WithRefScan(column_list=[arg0.a#5, UnaryAbTableArg.b#4], with_query_name='arg0')
 --
-ALTERNATION GROUP: b,,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: b,,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1845,7 +1845,7 @@ QueryStmt
 --
 ALTERNATION GROUPS:
     b,SelfJoin,TABLE abTable
-    b,SelfJoin,(SELECT 1 AS a, "two" AS b)
+    b,SelfJoin,(SELECT 1 AS a, 'two' AS b)
 --
 ERROR: Column name b is ambiguous [at 1:8]
 SELECT b
@@ -1904,7 +1904,7 @@ QueryStmt
                 +-input_scan=
                   +-WithRefScan(column_list=[t.a#7, UnaryAbTableArgScannedInCTE.b#4], with_query_name='t')
 --
-ALTERNATION GROUP: b,ScannedInCTE,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: b,ScannedInCTE,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -1971,8 +1971,8 @@ QueryStmt
 ==
 
 SELECT *
-FROM BinaryTableArg({{TABLE abTable|(SELECT 1 AS a, "two" AS b)}},
-                    (SELECT 1 AS c, "two" AS d));
+FROM BinaryTableArg({{TABLE abTable|(SELECT 1 AS a, 'two' AS b)}},
+                    (SELECT 1 AS c, 'two' AS d));
 --
 ALTERNATION GROUP: TABLE abTable
 --
@@ -2046,7 +2046,7 @@ QueryStmt
                 +-right_scan=
                   +-WithRefScan(column_list=BinaryTableArg.[c#7, d#8], with_query_name='arg1')
 --
-ALTERNATION GROUP: (SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: (SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -2134,8 +2134,8 @@ QueryStmt
 # Skip unparser because of b/224585752
 [no_run_unparser]
 SELECT *
-FROM BinaryAbTableArg({{TABLE abTable|(SELECT 1 AS a, "two" AS b)}},
-                      {{TABLE abTable|(SELECT 1 AS a, "two" AS b)}});
+FROM BinaryAbTableArg({{TABLE abTable|(SELECT 1 AS a, 'two' AS b)}},
+                      {{TABLE abTable|(SELECT 1 AS a, 'two' AS b)}});
 --
 ALTERNATION GROUP: TABLE abTable,TABLE abTable
 --
@@ -2198,7 +2198,7 @@ QueryStmt
                 +-right_scan=
                   +-WithRefScan(column_list=BinaryAbTableArg.[a#7, b#8], with_query_name='arg1')
 --
-ALTERNATION GROUP: TABLE abTable,(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: TABLE abTable,(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -2271,7 +2271,7 @@ QueryStmt
                 +-right_scan=
                   +-WithRefScan(column_list=BinaryAbTableArg.[a#7, b#8], with_query_name='arg1')
 --
-ALTERNATION GROUP: (SELECT 1 AS a, "two" AS b),TABLE abTable
+ALTERNATION GROUP: (SELECT 1 AS a, 'two' AS b),TABLE abTable
 --
 QueryStmt
 +-output_column_list=
@@ -2344,7 +2344,7 @@ QueryStmt
                 +-right_scan=
                   +-WithRefScan(column_list=BinaryAbTableArg.[a#7, b#8], with_query_name='arg1')
 --
-ALTERNATION GROUP: (SELECT 1 AS a, "two" AS b),(SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: (SELECT 1 AS a, 'two' AS b),(SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -2432,7 +2432,7 @@ QueryStmt
 
 SELECT *
 FROM UnaryAbTableArgWithScalarArgs(5,
-                                   {{TABLE abTable|(SELECT 1 AS a, "two" AS b)}},
+                                   {{TABLE abTable|(SELECT 1 AS a, 'two' AS b)}},
                                    "six");
 --
 ALTERNATION GROUP: TABLE abTable
@@ -2519,7 +2519,7 @@ QueryStmt
                             +-input_scan=
                               +-WithRefScan(column_list=$inlined_UnaryAbTableArgWithScalarArgs.[x#9, y#10], with_query_name='$inlined_UnaryAbTableArgWithScalarArgs_scalar_args')
 --
-ALTERNATION GROUP: (SELECT 1 AS a, "two" AS b)
+ALTERNATION GROUP: (SELECT 1 AS a, 'two' AS b)
 --
 QueryStmt
 +-output_column_list=
@@ -2623,13 +2623,13 @@ QueryStmt
 SELECT (SELECT AS STRUCT *
         FROM UnaryAbTableArgWithScalarArgs(
             {{1|t.a}},
-            {{TABLE abTable|(SELECT 1 AS a, "two" AS b)|(SELECT t.a, "two" AS b)}},
-            {{"two"|t.b}}
+            {{TABLE abTable|(SELECT 1 AS a, 'two' AS b)|(SELECT t.a, 'two' AS b)}},
+            {{'two'|t.b}}
             )
         )
 FROM UnaryAbTableArg(TABLE abTable) AS t;
 --
-ALTERNATION GROUP: 1,TABLE abTable,"two"
+ALTERNATION GROUP: 1,TABLE abTable,'two'
 --
 QueryStmt
 +-output_column_list=
@@ -2833,7 +2833,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #3 ('y') references column 'b'.
 --
-ALTERNATION GROUP: 1,(SELECT 1 AS a, "two" AS b),"two"
+ALTERNATION GROUP: 1,(SELECT 1 AS a, 'two' AS b),'two'
 --
 QueryStmt
 +-output_column_list=
@@ -2987,7 +2987,7 @@ QueryStmt
             +-input_scan=
               +-WithRefScan(column_list=arg0.[a#17, b#18], with_query_name='arg0')
 --
-ALTERNATION GROUP: 1,(SELECT 1 AS a, "two" AS b),t.b
+ALTERNATION GROUP: 1,(SELECT 1 AS a, 'two' AS b),t.b
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3055,7 +3055,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #3 ('y') references column 'b'.
 --
-ALTERNATION GROUP: 1,(SELECT t.a, "two" AS b),"two"
+ALTERNATION GROUP: 1,(SELECT t.a, 'two' AS b),'two'
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3123,7 +3123,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #2 ('arg0') references column 'a'.
 --
-ALTERNATION GROUP: 1,(SELECT t.a, "two" AS b),t.b
+ALTERNATION GROUP: 1,(SELECT t.a, 'two' AS b),t.b
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3192,7 +3192,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #2 ('arg0') references column 'a'.
 --
-ALTERNATION GROUP: t.a,TABLE abTable,"two"
+ALTERNATION GROUP: t.a,TABLE abTable,'two'
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3317,7 +3317,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #1 ('x') references column 'a'.
 --
-ALTERNATION GROUP: t.a,(SELECT 1 AS a, "two" AS b),"two"
+ALTERNATION GROUP: t.a,(SELECT 1 AS a, 'two' AS b),'two'
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3385,7 +3385,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #1 ('x') references column 'a'.
 --
-ALTERNATION GROUP: t.a,(SELECT 1 AS a, "two" AS b),t.b
+ALTERNATION GROUP: t.a,(SELECT 1 AS a, 'two' AS b),t.b
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3454,7 +3454,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #1 ('x') references column 'a'.
 --
-ALTERNATION GROUP: t.a,(SELECT t.a, "two" AS b),"two"
+ALTERNATION GROUP: t.a,(SELECT t.a, 'two' AS b),'two'
 --
 [PRE-REWRITE AST]
 QueryStmt
@@ -3522,7 +3522,7 @@ QueryStmt
 
 Rewrite ERROR: generic::unimplemented: TVF arguments that reference columns are not supported. Arg #1 ('x') references column 'a'.
 --
-ALTERNATION GROUP: t.a,(SELECT t.a, "two" AS b),t.b
+ALTERNATION GROUP: t.a,(SELECT t.a, 'two' AS b),t.b
 --
 [PRE-REWRITE AST]
 QueryStmt

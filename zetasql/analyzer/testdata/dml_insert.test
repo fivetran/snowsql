@@ -1,5 +1,5 @@
 INSERT {{| IGNORE| REPLACE| UPDATE}} INTO KeyValue (key, value)
-VALUES (1, "one"), (2, "two")
+VALUES (1, 'one'), (2, 'two')
 --
 ALTERNATION GROUP: <empty>
 --
@@ -160,7 +160,7 @@ InsertStmt
 ==
 
 INSERT KeyValue (key, value)
-VALUES (1, "one")
+VALUES (1, 'one')
 --
 InsertStmt
 +-table_scan=
@@ -179,7 +179,7 @@ InsertStmt
 ==
 
 INSERT KeyValue (value, key)
-VALUES ("one", 1)
+VALUES ('one', 1)
 --
 InsertStmt
 +-table_scan=
@@ -320,7 +320,7 @@ INSERT KeyValue (key, key)
 ==
 
 INSERT KeyValue (key, value, key)
-VALUES (1, "one", 2)
+VALUES (1, 'one', 2)
 --
 ERROR: INSERT has columns with duplicate name: key [at 1:30]
 INSERT KeyValue (key, value, key)
@@ -328,18 +328,18 @@ INSERT KeyValue (key, value, key)
 ==
 
 INSERT KeyValue (key, value)
-VALUES (1, "one"), (2)
+VALUES (1, 'one'), (2)
 --
 ERROR: Inserted row has wrong column count; Has 1, expected 2 [at 2:20]
-VALUES (1, "one"), (2)
+VALUES (1, 'one'), (2)
                    ^
 ==
 
 INSERT KeyValue (key, value)
-VALUES ("one"), (2, "two")
+VALUES ('one'), (2, 'two')
 --
 ERROR: Inserted row has wrong column count; Has 1, expected 2 [at 2:8]
-VALUES ("one"), (2, "two")
+VALUES ('one'), (2, 'two')
        ^
 ==
 
@@ -352,7 +352,7 @@ VALUES (1, 2)
 ==
 
 INSERT KeyValue (key, value, k1)
-VALUES (1, "one", 1)
+VALUES (1, 'one', 1)
 --
 ERROR: Column k1 is not present in table KeyValue [at 1:30]
 INSERT KeyValue (key, value, k1)
@@ -2081,7 +2081,7 @@ INSERT UpdateToDefaultTable (readonly_settable_to_default) VALUES (DEFAULT);
                              ^
 ==
 
-INSERT INTO KeyValue@{hint_name=hint_value} (key, value) VALUES (1, "one");
+INSERT INTO KeyValue@{hint_name=hint_value} (key, value) VALUES (1, 'one');
 --
 InsertStmt
 +-table_scan=

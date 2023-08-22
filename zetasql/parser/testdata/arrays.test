@@ -100,7 +100,7 @@ SELECT
   ARRAY< int32 >[1, 2, 3]
 ==
 
-select "a", 3, ["a", 3], ARRAY<string> [3, "a"]
+select 'a', 3, ['a', 3], ARRAY<string> [3, 'a']
 --
 QueryStatement [0-47]
   Query [0-47]
@@ -124,10 +124,10 @@ QueryStatement [0-47]
             StringLiteral('a') [43-46]
 --
 SELECT
-  "a",
+  'a',
   3,
-  ARRAY["a", 3],
-  ARRAY< string >[3, "a"]
+  ARRAY['a', 3],
+  ARRAY< string >[3, 'a']
 ==
 
 select [], ARRAY[], ARRAY<int32>[]
