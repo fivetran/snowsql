@@ -1719,7 +1719,7 @@ ERROR: Correlated aliases referenced in the from clause must refer to arrays tha
 # grouped versions of correlated range variable references should not
 # get added to the correlated subquery parameter list.
 select count(*)
-from UNNEST(["a", "b", "c"]) ex
+from UNNEST(['a', 'b', 'c']) ex
 where (select ex from KeyValue GROUP BY ex order by ex) = 'a'
 --
 QueryStmt
@@ -2290,7 +2290,7 @@ SELECT (
   FROM t.y
 )
 FROM (
-  SELECT struct<z1 int32, z2 string>(1, "a") as x, [2] AS y
+  SELECT struct<z1 int32, z2 string>(1, 'a') as x, [2] AS y
 ) t
 --
 QueryStmt
@@ -2337,7 +2337,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=t.[x#1, y#2]
         +-expr_list=
-        | +-x#1 := Literal(type=STRUCT<z1 INT32, z2 STRING>, value={z1:1, z2:"a"}, has_explicit_type=TRUE)
+        | +-x#1 := Literal(type=STRUCT<z1 INT32, z2 STRING>, value={z1:1, z2:'a'}, has_explicit_type=TRUE)
         | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
         +-input_scan=
           +-SingleRowScan

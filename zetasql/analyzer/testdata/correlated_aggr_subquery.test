@@ -546,7 +546,7 @@ FROM (
   SELECT
     struct<f1a int32,
            f1b struct<f2a bool,
-                      f2b struct<f3a string>>>(1, (true, struct("a"))) as x,
+                      f2b struct<f3a string>>>(1, (true, struct('a'))) as x,
     [2] AS y
 ) t
 --
@@ -631,7 +631,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=t.[x#1, y#2]
         +-expr_list=
-        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
         | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
         +-input_scan=
           +-SingleRowScan
@@ -729,7 +729,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=t.[x#1, y#2]
         +-expr_list=
-        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
         | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
         +-input_scan=
           +-SingleRowScan
@@ -846,7 +846,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=t.[x#1, y#2]
         +-expr_list=
-        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
         | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
         +-input_scan=
           +-SingleRowScan
@@ -981,7 +981,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=t.[x#1, y#2]
         +-expr_list=
-        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+        | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
         | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
         +-input_scan=
           +-SingleRowScan
@@ -1618,7 +1618,7 @@ FROM (
   SELECT AS STRUCT
     struct<f1a int32,
            f1b struct<f2a bool,
-                      f2b struct<f3a string>>>(1, (true, struct("a"))) as x,
+                      f2b struct<f3a string>>>(1, (true, struct('a'))) as x,
     [2] AS y
 ) t
 --
@@ -1733,7 +1733,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=t.[x#1, y#2]
             +-expr_list=
-            | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+            | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
             | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
             +-input_scan=
               +-SingleRowScan
@@ -1855,7 +1855,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=t.[x#1, y#2]
             +-expr_list=
-            | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+            | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
             | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
             +-input_scan=
               +-SingleRowScan
@@ -2014,7 +2014,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=t.[x#1, y#2]
             +-expr_list=
-            | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:"a"}}}, has_explicit_type=TRUE)
+            | +-x#1 := Literal(type=STRUCT<f1a INT32, f1b STRUCT<f2a BOOL, f2b STRUCT<f3a STRING>>>, value={f1a:1, f1b:{f2a:true, f2b:{f3a:'a'}}}, has_explicit_type=TRUE)
             | +-y#2 := Literal(type=ARRAY<INT64>, value=[2])
             +-input_scan=
               +-SingleRowScan

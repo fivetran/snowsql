@@ -1,5 +1,5 @@
 [language_features={{|V_1_3_CONCAT_MIXED_TYPES}}]
-select concat("a", "b");
+select concat('a', 'b');
 --
 QueryStmt
 +-output_column_list=
@@ -17,7 +17,7 @@ QueryStmt
 ==
 
 [language_features={{|V_1_3_CONCAT_MIXED_TYPES}}]
-select concat(b"a", b"b");
+select concat(b'a', b'b');
 --
 QueryStmt
 +-output_column_list=
@@ -35,23 +35,23 @@ QueryStmt
 ==
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
-select concat("a", b"b");
+select concat('a', b'b');
 --
 ERROR: No matching signature for function CONCAT for argument types: STRING, BYTES. Supported signatures: CONCAT(STRING, [STRING, ...]); CONCAT(BYTES, [BYTES, ...]) [at 1:8]
-select concat("a", b"b");
+select concat('a', b'b');
        ^
 ==
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
-select concat(1, b"b");
+select concat(1, b'b');
 --
 ERROR: No matching signature for function CONCAT for argument types: INT64, BYTES. Supported signatures: CONCAT(STRING, [STRING, ...]); CONCAT(BYTES, [BYTES, ...]) [at 1:8]
-select concat(1, b"b");
+select concat(1, b'b');
        ^
 ==
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
-select concat("a", 1)
+select concat('a', 1)
 --
 QueryStmt
 +-output_column_list=
@@ -69,7 +69,7 @@ QueryStmt
 ==
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
-select concat(n, "a") from unnest([1,2,3]) n
+select concat(n, 'a') from unnest([1,2,3]) n
 --
 QueryStmt
 +-output_column_list=
@@ -162,7 +162,7 @@ STRING
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
 [allow_undeclared_parameters]
-select concat(@param, b"b")
+select concat(@param, b'b')
 --
 QueryStmt
 +-output_column_list=
@@ -184,7 +184,7 @@ param: BYTES
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
 [parameter_mode=positional]
 [allow_undeclared_parameters]
-select concat(?, b"b")
+select concat(?, b'b')
 --
 QueryStmt
 +-output_column_list=
@@ -257,7 +257,7 @@ QueryStmt
 ==
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES,INTERVAL_TYPE]
-select concat("a", current_date - '2000-01-01');
+select concat('a', current_date - '2000-01-01');
 --
 QueryStmt
 +-output_column_list=
@@ -311,10 +311,10 @@ select concat([1,2,3])
 ==
 
 [language_features=V_1_3_CONCAT_MIXED_TYPES]
-select concat((1,"foo"))
+select concat((1,'foo'))
 --
 ERROR: No matching signature for function CONCAT for argument types: STRUCT<INT64, STRING>. Supported signatures: CONCAT(STRING, [STRING, ...]); CONCAT(BYTES, [BYTES, ...]) [at 1:8]
-select concat((1,"foo"))
+select concat((1,'foo'))
        ^
 ==
 
@@ -378,7 +378,7 @@ QueryStmt
 [language_features={{V_1_3_CONCAT_MIXED_TYPES,|}}TEMPLATE_FUNCTIONS]
 CREATE FUNCTION MY_CONCAT(a ANY TYPE) AS (CONCAT(a, a));
 --
-CreateFunctionStmt(name_path=MY_CONCAT, return_type=STRUCT<>, argument_name_list=[a], signature=(ANY TYPE a) -> ANY TYPE, language='SQL', code="CONCAT(a, a)")
+CreateFunctionStmt(name_path=MY_CONCAT, return_type=STRUCT<>, argument_name_list=[a], signature=(ANY TYPE a) -> ANY TYPE, language='SQL', code='CONCAT(a, a)')
 ==
 
 [language_features={{|V_1_3_CONCAT_MIXED_TYPES}}]
@@ -416,8 +416,8 @@ SELECT ARRAY<INT32>[1] || 2
 ==
 
 [language_features={{|V_1_3_CONCAT_MIXED_TYPES}}]
-SELECT ["abc"] || [2]
+SELECT ['abc'] || [2]
 --
 ERROR: No matching signature for operator || for argument types: ARRAY<STRING>, ARRAY<INT64>. Supported signatures: STRING || STRING; BYTES || BYTES; ARRAY || ARRAY [at 1:8]
-SELECT ["abc"] || [2]
+SELECT ['abc'] || [2]
        ^

@@ -178,7 +178,7 @@ UpdateStmt
 UPDATE TestTable SET
   (DELETE
    KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension) elt
-   WHERE elt.value = "foo")
+   WHERE elt.value = 'foo')
 WHERE true
 --
 UpdateStmt
@@ -607,7 +607,7 @@ UpdateStmt
 UPDATE TestTable SET
   (UPDATE
    KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension)
-   SET value = "foo"
+   SET value = 'foo'
    WHERE true)
 WHERE true
 --
@@ -661,7 +661,7 @@ UPDATE TestTable SET
   (UPDATE KitchenSink
           .(zetasql_test__.KitchenSinkExtension.optional_extension)
           .repeated_value
-   SET repeated_value = "foo"
+   SET repeated_value = 'foo'
    WHERE true)
 WHERE true
 --
@@ -706,7 +706,7 @@ UpdateStmt
 UPDATE TestTable SET
   (UPDATE
    KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension) elt
-   SET elt = ""
+   SET elt = ''
    WHERE true)
 WHERE true
 --
@@ -1273,7 +1273,7 @@ ERROR: Syntax error: INSERT target cannot have an alias [at 2:42]
 [language_features={{|V_1_2_PROTO_EXTENSIONS_WITH_SET}}]
 UPDATE TestTable SET
   (INSERT KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension)
-   VALUES (""))
+   VALUES (''))
 WHERE true
 --
 ALTERNATION GROUP: <empty>
@@ -1317,7 +1317,7 @@ UPDATE TestTable SET
   (INSERT KitchenSink
           .(zetasql_test__.KitchenSinkExtension.optional_extension)
           .repeated_value
-   VALUES ("foo"))
+   VALUES ('foo'))
 WHERE true
 --
 UpdateStmt
@@ -1986,7 +1986,7 @@ ERROR: Update item KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_ext
 ==
 
 UPDATE TestTable SET
-  KitchenSink = "int64_key_1: 1 int64_key_2: 2",
+  KitchenSink = 'int64_key_1: 1 int64_key_2: 2',
   (DELETE KitchenSink.repeated_int64_val WHERE true)
 WHERE true
 --

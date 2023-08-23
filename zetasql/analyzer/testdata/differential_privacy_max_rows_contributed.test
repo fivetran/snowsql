@@ -113,7 +113,7 @@ QueryStmt
 [no_enable_literal_replacement]
 # COUNT and COUNT(*) aggregations with reports and max_rows_contributed
 SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(max_rows_contributed = 3)
-  COUNT({{*|int64}}, report_format => "{{JSON|PROTO}}")
+  COUNT({{*|int64}}, report_format => '{{JSON|PROTO}}')
 FROM SimpleTypesWithAnonymizationUid
 --
 

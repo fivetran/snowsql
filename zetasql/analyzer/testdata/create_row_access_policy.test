@@ -4,7 +4,7 @@ create row access policy on KeyValue grant to ('foo@google.com') filter using(ke
 --
 CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -21,7 +21,7 @@ create row access policy p1 on KeyValue grant to ('foo@google.com') filter using
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -42,7 +42,7 @@ ALTERNATION GROUP: <empty>
 --
 CreateRowAccessPolicyStmt
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com', 'mdbuser/bar']
++-grantee_list=["foo@google.com", "mdbuser/bar"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -97,7 +97,7 @@ filter using(key = +321);
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['mdbgroup/foo', 'bar@google.com']
++-grantee_list=["mdbgroup/foo", "bar@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -139,7 +139,7 @@ create row access policy p1 on KeyValue grant to ('foo@google.com') filter using
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -158,7 +158,7 @@ filter using(value = @test_param_string);
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 +-predicate=
@@ -176,7 +176,7 @@ filter using(abs(key) in (select 123));
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -207,7 +207,7 @@ filter using(abs(key) in (select key from KeyValue2));
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -236,7 +236,7 @@ filter using(KeyValue.key = 321);
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=nested_catalog.KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -253,7 +253,7 @@ filter using(a = 321 and TestStructValueTable.b = 'abc');
 --
 CreateRowAccessPolicyStmt
 +-target_name_path=TestStructValueTable
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0])
 +-predicate=
@@ -272,7 +272,7 @@ CreateRowAccessPolicyStmt
 |     | | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 |     | +-field_idx=1
 |     +-Literal(type=STRING, value='abc')
-+-predicate_str='a = 321 AND TestStructValueTable.b = 'abc''
++-predicate_str='a = 321 AND TestStructValueTable.b = \'abc\''
 ==
 
 # Create policy on int32 value table.
@@ -282,7 +282,7 @@ filter using(Int32ValueTable = 321);
 --
 CreateRowAccessPolicyStmt
 +-target_name_path=Int32ValueTable
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0])
 +-predicate=
@@ -300,7 +300,7 @@ filter using(key in (SELECT Int32ValueTable FROM Int32ValueTable));
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -333,7 +333,7 @@ CreateRowAccessPolicyStmt
 +-create_mode=CREATE_OR_REPLACE
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -352,7 +352,7 @@ CreateRowAccessPolicyStmt
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
@@ -367,7 +367,7 @@ create row access policy p1 on KeyValue grant to ('foo@google.com') filter using
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(table=KeyValue)
 +-predicate=
@@ -381,7 +381,7 @@ create or replace row access policy if not exists p1 on KeyValue grant to ('foo@
 filter using(key = 321);
 --
 ERROR: CREATE ROW ACCESS POLICY cannot have both OR REPLACE and IF NOT EXISTS [at 1:1]
-create or replace row access policy if not exists p1 on KeyValue grant to ("f...
+create or replace row access policy if not exists p1 on KeyValue grant to ('f...
 ^
 ==
 
@@ -467,7 +467,7 @@ ALTERNATION GROUP: access,grant to ('foo@google.com'),filter
 CreateRowAccessPolicyStmt
 +-name='p1'
 +-target_name_path=KeyValue
-+-grantee_list=['foo@google.com']
++-grantee_list=["foo@google.com"]
 +-table_scan=
 | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 +-predicate=
