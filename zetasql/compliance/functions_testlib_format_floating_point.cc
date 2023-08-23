@@ -227,10 +227,10 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatFloatingPoint() {
       {"format", {"%t", kNegNan}, "nan"},
       {"format", {"%t", kPosInf}, "inf"},
       {"format", {"%t", kNegInf}, "-inf"},
-      {"format", {"%T", kFloatNan}, "CAST(\"nan\" AS FLOAT)"},
-      {"format", {"%T", kFloatNegNan}, "CAST(\"nan\" AS FLOAT)"},
+      {"format", {"%T", kFloatNan}, "CAST('nan' AS FLOAT)"},
+      {"format", {"%T", kFloatNegNan}, "CAST('nan' AS FLOAT)"},
       {"format", {"%T", kFloatPosInf}, "CAST('inf' AS FLOAT)"},
-      {"format", {"%T", kFloatNegInf}, "CAST(\"-inf\" AS FLOAT)"},
+      {"format", {"%T", kFloatNegInf}, "CAST('-inf' AS FLOAT)"},
       // Note that these always produce a cast to FLOAT64, in both INTERNAL
       // and EXTERNAL ProductMode.  We could have made the cast to DOUBLE
       // in the INTERNAL mode case, but then the same query could get different

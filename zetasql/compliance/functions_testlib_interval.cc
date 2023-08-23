@@ -828,10 +828,10 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatInterval() {
       {"format", {"%t", YMDHMS(-1, -2, -3, -4, -5, -6)}, "-1-2 -3 -4:5:6"},
 
       {"format", {String("%T"), NullInterval()}, "NULL"},
-      {"format", {"%T", Years(10)}, "INTERVAL \"10-0 0 0:0:0\" YEAR TO SECOND"},
+      {"format", {"%T", Years(10)}, "INTERVAL '10-0 0 0:0:0' YEAR TO SECOND"},
       {"format",
        {"%T", YMDHMS(1, 2, 3, 4, 5, 6)},
-       "INTERVAL \"1-2 3 4:5:6\" YEAR TO SECOND"},
+       "INTERVAL '1-2 3 4:5:6' YEAR TO SECOND"},
   };
 
   return WrapFeatureIntervalType(tests);

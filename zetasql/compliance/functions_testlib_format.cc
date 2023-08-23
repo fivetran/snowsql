@@ -512,7 +512,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       {"format", {"%t", proto_civil_time_value}, civil_time_proto_str},
       {"format",
        {"%T", proto_civil_time_value},
-       absl::StrCat("\"", civil_time_proto_str, "\"")},
+       absl::StrCat("'", civil_time_proto_str, "'")},
       {"format", {"%p", proto_civil_time_value}, civil_time_proto_str},
       {"format",
        {"%P", proto_civil_time_value},

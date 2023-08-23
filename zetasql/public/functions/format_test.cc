@@ -500,25 +500,25 @@ TEST_P(FormatFunctionTests, Test) {
   const double kNegativeDoubleNan =
       absl::bit_cast<double>(0xfff8000000000000ul);
   EXPECT_EQ(
-      "CAST(\"nan\" AS FLOAT)",
+      "CAST('nan' AS FLOAT)",
       TestFormat("%T",
                  {values::Float(std::numeric_limits<float>::quiet_NaN())}));
   EXPECT_EQ(
       "nan",
       TestFormat("%t",
                  {values::Float(std::numeric_limits<float>::quiet_NaN())}));
-  EXPECT_EQ("CAST(\"nan\" AS FLOAT)",
+  EXPECT_EQ("CAST('nan' AS FLOAT)",
             TestFormat("%T", {values::Float(kNegativeFloatNan)}));
   EXPECT_EQ("nan", TestFormat("%t", {values::Float(kNegativeFloatNan)}));
   EXPECT_EQ(
-      "CAST(\"nan\" AS FLOAT64)",
+      "CAST('nan' AS FLOAT64)",
       TestFormat("%T",
                  {values::Double(std::numeric_limits<double>::quiet_NaN())}));
   EXPECT_EQ(
       "nan",
       TestFormat("%t",
                  {values::Double(std::numeric_limits<double>::quiet_NaN())}));
-  EXPECT_EQ("CAST(\"nan\" AS FLOAT64)",
+  EXPECT_EQ("CAST('nan' AS FLOAT64)",
             TestFormat("%T", {values::Double(kNegativeDoubleNan)}));
   EXPECT_EQ("nan", TestFormat("%t", {values::Double(kNegativeDoubleNan)}));
 
