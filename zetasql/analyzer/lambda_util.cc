@@ -71,8 +71,8 @@ static absl::Status ExtractLambdaArgumentNames(const ASTLambda* ast_lambda,
       const auto itr = std::find(names->begin(), names->end(), name);
       if (itr != names->end()) {
         return MakeSqlErrorAt(field)
-               << "Lambda argument name `" << name.ToStringView()
-               << "` is already defined";
+               << "Lambda argument name \"" << name.ToStringView()
+               << "\" is already defined";
       }
       names->push_back(name);
     }

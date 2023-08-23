@@ -35,7 +35,7 @@ QueryStmt
 
 # Ensure subqueries don't have output validation performed on them
 [coerced_query_output_types=struct<int32, string>]
-SELECT (SELECT 1), (SELECT "foo");
+SELECT (SELECT 1), (SELECT 'foo');
 --
 QueryStmt
 +-output_column_list=
@@ -81,7 +81,7 @@ QueryStmt
 # Note  the field names in the output type are irrelevant as the struct type
 # is only used to represent a vector of types for coercion.
 [coerced_query_output_types=struct<a int32, b string>]
-SELECT (SELECT 1), (SELECT "foo");
+SELECT (SELECT 1), (SELECT 'foo');
 --
 QueryStmt
 +-output_column_list=
@@ -447,7 +447,7 @@ INSERT INTO KeyValue (key, value)
 ==
 
 [coerced_query_output_types={{struct<int64, string, int64>|}}]
-WITH orders AS (SELECT 5 as order_id, "sprocket" as item_name, 200 as quantity)
+WITH orders AS (SELECT 5 as order_id, 'sprocket' as item_name, 200 as quantity)
 SELECT * FROM orders;
 --
 QueryStmt
@@ -478,7 +478,7 @@ QueryStmt
 ==
 
 [coerced_query_output_types=struct<int64, string, int32>]
-WITH orders AS (SELECT 5 as order_id, "sprocket" as item_name, 200 as quantity)
+WITH orders AS (SELECT 5 as order_id, 'sprocket' as item_name, 200 as quantity)
 SELECT * FROM orders;
 --
 QueryStmt

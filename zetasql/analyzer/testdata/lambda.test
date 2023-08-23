@@ -790,18 +790,18 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT fn_fp_T_LAMBDA_RET_T(1, e->"abc");
+SELECT fn_fp_T_LAMBDA_RET_T(1, e->'abc');
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_FP_T_LAMBDA_RET_T for argument types: INT64, LAMBDA. Supported signature: FN_FP_T_LAMBDA_RET_T(ANY, FUNCTION<ANY->ANY>) [at 1:8]
-SELECT fn_fp_T_LAMBDA_RET_T(1, e->"abc");
+SELECT fn_fp_T_LAMBDA_RET_T(1, e->'abc');
        ^
 --
 Signature Mismatch Details:
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_FP_T_LAMBDA_RET_T
   Argument types: INT64, LAMBDA
   Signature: FN_FP_T_LAMBDA_RET_T(T1, FUNCTION<T1->T1>)
-    Argument 2: failed to resolve lambda body, error: Could not cast literal "abc" to type INT64 [at 1:8]
-SELECT fn_fp_T_LAMBDA_RET_T(1, e->"abc");
+    Argument 2: failed to resolve lambda body, error: Could not cast literal 'abc' to type INT64 [at 1:8]
+SELECT fn_fp_T_LAMBDA_RET_T(1, e->'abc');
        ^
 ==
 
@@ -862,7 +862,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT fn_fp_named_then_lambda("123", (e) -> e);
+SELECT fn_fp_named_then_lambda('123', (e) -> e);
 --
 QueryStmt
 +-output_column_list=
@@ -908,7 +908,7 @@ SELECT fn_fp_named_then_lambda((e) -> e, format_string => '123');
        ^
 ==
 
-SELECT fn_fp_lambda_then_named((e) -> e, "123");
+SELECT fn_fp_lambda_then_named((e) -> e, '123');
 --
 QueryStmt
 +-output_column_list=
@@ -1039,7 +1039,7 @@ QueryStmt
 ==
 
 # test that the signatures are properly printed.
-SELECT fn_fp_repeated_arg_then_lambda_string("1", "2", (e) -> e);
+SELECT fn_fp_repeated_arg_then_lambda_string('1', '2', (e) -> e);
 --
 QueryStmt
 +-output_column_list=
@@ -1590,10 +1590,10 @@ SELECT fn_array_filter([1], e -> f);
 ==
 
 # No matching signature error for nested lambda with signature mismatch in body.
-SELECT fn_array_filter([1], e -> LENGTH(fn_array_filter([e], e->e > "")) > 0);
+SELECT fn_array_filter([1], e -> LENGTH(fn_array_filter([e], e->e > '')) > 0);
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ARRAY_FILTER for argument types: ARRAY<INT64>, LAMBDA. Supported signatures: FN_ARRAY_FILTER(ARRAY, FUNCTION<ANY->BOOL>); FN_ARRAY_FILTER(ARRAY, FUNCTION<(ANY, INT64)->BOOL>) [at 1:8]
-SELECT fn_array_filter([1], e -> LENGTH(fn_array_filter([e], e->e > "")) > 0);
+SELECT fn_array_filter([1], e -> LENGTH(fn_array_filter([e], e->e > '')) > 0);
        ^
 --
 Signature Mismatch Details:
@@ -1603,10 +1603,10 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_ARRAY_FILTER
     Argument 2: failed to resolve lambda body, error: No matching signature for function SAMPLE_FUNCTIONS:FN_ARRAY_FILTER
       Argument types: ARRAY<INT64>, LAMBDA
       Signature: FN_ARRAY_FILTER(ARRAY<T1>, FUNCTION<T1->BOOL>)
-        Argument 2: failed to resolve lambda body, error: Could not cast literal "" to type INT64
+        Argument 2: failed to resolve lambda body, error: Could not cast literal '' to type INT64
       Signature: FN_ARRAY_FILTER(ARRAY<T1>, FUNCTION<(T1, INT64)->BOOL>)
         Argument 2: lambda requires 2 arguments but 1 is provided
   Signature: FN_ARRAY_FILTER(ARRAY<T1>, FUNCTION<(T1, INT64)->BOOL>)
     Argument 2: lambda requires 2 arguments but 1 is provided [at 1:8]
-SELECT fn_array_filter([1], e -> LENGTH(fn_array_filter([e], e->e > "")) > 0);
+SELECT fn_array_filter([1], e -> LENGTH(fn_array_filter([e], e->e > '')) > 0);
        ^

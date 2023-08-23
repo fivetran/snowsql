@@ -695,7 +695,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select (select AS STRUCT "abc" c1, "def" c2).c2
+select (select AS STRUCT 'abc' c1, 'def' c2).c2
 --
 QueryStmt
 +-output_column_list=
@@ -734,7 +734,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select ARRAY(select AS STRUCT "abc" c1, "def" c2 from KeyValue)[DEFAULT_OFFSET(3)].c1
+select ARRAY(select AS STRUCT 'abc' c1, 'def' c2 from KeyValue)[DEFAULT_OFFSET(3)].c1
 --
 QueryStmt
 +-output_column_list=
