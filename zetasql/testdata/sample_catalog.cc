@@ -3445,7 +3445,7 @@ void SampleCatalog::LoadTemplatedSQLUDFs() {
       ParseResumeLocation::FromString(R"(
         IF(COUNT(1) = COUNT(DISTINCT cval) + delta OR
            (allow_nulls AND COUNTIF(cval IS NOT NULL) = COUNT(DISTINCT cval)),
-           NULL, "NOT NULL"))"),
+           NULL, 'NOT NULL'))"),
       Function::AGGREGATE));
 
   // Add a templated (scalar) SQL function with definer rights
