@@ -97,7 +97,7 @@ EXECUTE IMMEDIATE x INTO @@d;
                          ^
 ==
 
-EXECUTE IMMEDIATE {{'?' USING 0|"? ?" USING 0, 1}};
+EXECUTE IMMEDIATE {{'?' USING 0|'? ?' USING 0, 1}};
 --
 ALTERNATION GROUP: '?' USING 0
 --
@@ -110,7 +110,7 @@ ExecuteImmediateStatement [0-29] [EXECUTE IMMEDIATE '?' USING 0]
 --
 EXECUTE IMMEDIATE '?' USING 0
 --
-ALTERNATION GROUP: "? ?" USING 0, 1
+ALTERNATION GROUP: '? ?' USING 0, 1
 --
 ExecuteImmediateStatement [0-34] [EXECUTE IMMEDIATE...USING 0, 1]
   StringLiteral('? ?') [18-23] ['? ?']
@@ -120,7 +120,7 @@ ExecuteImmediateStatement [0-34] [EXECUTE IMMEDIATE...USING 0, 1]
     ExecuteUsingArgument [33-34] [1]
       IntLiteral(1) [33-34] [1]
 --
-EXECUTE IMMEDIATE "? ?" USING 0, 1
+EXECUTE IMMEDIATE '? ?' USING 0, 1
 ==
 
 EXECUTE IMMEDIATE x USING {{4 AS y|4 AS y, 5 AS z|@t AS y|@@t AS y}};
