@@ -63,101 +63,101 @@ rb'sdfds'
 ==
 
 [no_test_get_parse_tokens]
-{{r|b|rb}}"sdfd{{'|}}s"
+{{r|b|rb}}'sdfd{{"|}}s'
 --
-ALTERNATION GROUP: r,'
+ALTERNATION GROUP: r,"
 --
-ERROR: Syntax error: Unexpected string literal r"sdfd's" [at 1:1]
-r"sdfd's"
+ERROR: Syntax error: Unexpected string literal r'sdfd"s' [at 1:1]
+r'sdfd"s'
 ^
 --
 ALTERNATION GROUP: r,
 --
-ERROR: Syntax error: Unexpected string literal r"sdfds" [at 1:1]
-r"sdfds"
+ERROR: Syntax error: Unexpected string literal r'sdfds' [at 1:1]
+r'sdfds'
 ^
 --
-ALTERNATION GROUP: b,'
+ALTERNATION GROUP: b,"
 --
-ERROR: Syntax error: Unexpected bytes literal b"sdfd's" [at 1:1]
-b"sdfd's"
+ERROR: Syntax error: Unexpected bytes literal b'sdfd"s' [at 1:1]
+b'sdfd"s'
 ^
 --
 ALTERNATION GROUP: b,
 --
-ERROR: Syntax error: Unexpected bytes literal b"sdfds" [at 1:1]
-b"sdfds"
+ERROR: Syntax error: Unexpected bytes literal b'sdfds' [at 1:1]
+b'sdfds'
 ^
 --
-ALTERNATION GROUP: rb,'
+ALTERNATION GROUP: rb,"
 --
-ERROR: Syntax error: Unexpected bytes literal rb"sdfd's" [at 1:1]
-rb"sdfd's"
+ERROR: Syntax error: Unexpected bytes literal rb'sdfd"s' [at 1:1]
+rb'sdfd"s'
 ^
 --
 ALTERNATION GROUP: rb,
 --
-ERROR: Syntax error: Unexpected bytes literal rb"sdfds" [at 1:1]
-rb"sdfds"
+ERROR: Syntax error: Unexpected bytes literal rb'sdfds' [at 1:1]
+rb'sdfds'
 ^
 ==
 
 [no_test_get_parse_tokens]
-{{r|b|rb}}"""sdfds
+{{r|b|rb}}'''sdfds
 
 foo
 
-bar"""
+bar'''
 --
 ALTERNATION GROUP: r
 --
 [NEWLINE \n]
-ERROR: Syntax error: Unexpected string literal r"""sdfds\n\nfoo\n\nbar""" [at 1:1]
-r"""sdfds
+ERROR: Syntax error: Unexpected string literal r'''sdfds\n\nfoo\n\nbar''' [at 1:1]
+r'''sdfds
 ^
 --
 [NEWLINE \r]
-ERROR: Syntax error: Unexpected string literal r"""sdfds\r\rfoo\r\rbar""" [at 1:1]
-r"""sdfds
+ERROR: Syntax error: Unexpected string literal r'''sdfds\r\rfoo\r\rbar''' [at 1:1]
+r'''sdfds
 ^
 --
 [NEWLINE \r\n]
-ERROR: Syntax error: Unexpected string literal r"""sdfds\r\n\r\nfoo\r\n\r\nbar""" [at 1:1]
-r"""sdfds
+ERROR: Syntax error: Unexpected string literal r'''sdfds\r\n\r\nfoo\r\n\r\nbar''' [at 1:1]
+r'''sdfds
 ^
 --
 ALTERNATION GROUP: b
 --
 [NEWLINE \n]
-ERROR: Syntax error: Unexpected bytes literal b"""sdfds\n\nfoo\n\nbar""" [at 1:1]
-b"""sdfds
+ERROR: Syntax error: Unexpected bytes literal b'''sdfds\n\nfoo\n\nbar''' [at 1:1]
+b'''sdfds
 ^
 --
 [NEWLINE \r]
-ERROR: Syntax error: Unexpected bytes literal b"""sdfds\r\rfoo\r\rbar""" [at 1:1]
-b"""sdfds
+ERROR: Syntax error: Unexpected bytes literal b'''sdfds\r\rfoo\r\rbar''' [at 1:1]
+b'''sdfds
 ^
 --
 [NEWLINE \r\n]
-ERROR: Syntax error: Unexpected bytes literal b"""sdfds\r\n\r\nfoo\r\n\r\nbar""" [at 1:1]
-b"""sdfds
+ERROR: Syntax error: Unexpected bytes literal b'''sdfds\r\n\r\nfoo\r\n\r\nbar''' [at 1:1]
+b'''sdfds
 ^
 --
 ALTERNATION GROUP: rb
 --
 [NEWLINE \n]
-ERROR: Syntax error: Unexpected bytes literal rb"""sdfds\n\nfoo\n\nbar""" [at 1:1]
-rb"""sdfds
+ERROR: Syntax error: Unexpected bytes literal rb'''sdfds\n\nfoo\n\nbar''' [at 1:1]
+rb'''sdfds
 ^
 --
 [NEWLINE \r]
-ERROR: Syntax error: Unexpected bytes literal rb"""sdfds\r\rfoo\r\rbar""" [at 1:1]
-rb"""sdfds
+ERROR: Syntax error: Unexpected bytes literal rb'''sdfds\r\rfoo\r\rbar''' [at 1:1]
+rb'''sdfds
 ^
 --
 [NEWLINE \r\n]
-ERROR: Syntax error: Unexpected bytes literal rb"""sdfds\r\n\r\nfoo\r\n\r\nbar""" [at 1:1]
-rb"""sdfds
+ERROR: Syntax error: Unexpected bytes literal rb'''sdfds\r\n\r\nfoo\r\n\r\nbar''' [at 1:1]
+rb'''sdfds
 ^
 ==
 
@@ -235,7 +235,7 @@ DATE '2016-12-18'
 # ghijkl
 /* xyz */ xxx yyy;
 --
-ERROR: Syntax error: Unexpected identifier 'xxx' [at 3:11]
+ERROR: Syntax error: Unexpected identifier "xxx" [at 3:11]
 /* xyz */ xxx yyy;
           ^
 ==
@@ -433,10 +433,10 @@ select  1e
          ^
 ==
 
-select  x from "a\\nb"
+select  x from 'a\\nb'
 --
-ERROR: Syntax error: Unexpected string literal "a\\nb" [at 1:16]
-select  x from "a\\nb"
+ERROR: Syntax error: Unexpected string literal 'a\\nb' [at 1:16]
+select  x from 'a\\nb'
                ^
 ==
 
