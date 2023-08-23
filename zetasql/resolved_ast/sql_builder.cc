@@ -98,7 +98,7 @@ namespace zetasql {
 static const char kFrom[] = " FROM ";
 
 // Used as a "magic alias" in some places.
-static const char kEmptyAlias[] = "``";
+static const char kEmptyAlias[] = "\"\"";
 
 std::string SQLBuilder::GetColumnPath(const ResolvedColumn& column) {
   if (zetasql_base::ContainsKey(column_paths_, column.column_id())) {
