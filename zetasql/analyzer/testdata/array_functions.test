@@ -1276,7 +1276,7 @@ SELECT ARRAY_REMOVE_LAST_N([1, 2, 3], 1);
 [language_features=V_1_3_INLINE_LAMBDA_ARGUMENT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [enabled_ast_rewrites=DEFAULTS]
 # Substitution template invokes lambda more than once and there is a ResolvedColumn internal to the lambda body
-SELECT ARRAY_FIND(["A"], e -> exists (select 1))
+SELECT ARRAY_FIND(['A'], e -> exists (select 1))
 --
 QueryStmt
 +-output_column_list=
@@ -1442,7 +1442,7 @@ QueryStmt
 [language_features=V_1_3_INLINE_LAMBDA_ARGUMENT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [enabled_ast_rewrites=DEFAULTS]
 # Substitution template invokes lambda more than once there is Correlated column ref in lambda body
-SELECT (ARRAY_FIND(["A"], e -> exists (select Key))) FROM KeyValue as kv;
+SELECT (ARRAY_FIND(['A'], e -> exists (select Key))) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
