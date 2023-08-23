@@ -378,7 +378,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatNumeric() {
       {{"%g", NullBigNumeric()}, NullString()},
       {{"%10.20g", NullBigNumeric()}, NullString()},
 
-      {{"%T", BigNumericFromString("3.14")}, "BIGNUMERIC \"3.14\""},
+      {{"%T", BigNumericFromString("3.14")}, "BIGNUMERIC '3.14'"},
       {{"%T", BigNumericFromString("-3.14")}, "BIGNUMERIC \"-3.14\""},
       {{"%T", BigNumeric(BigNumericValue::MaxValue())},
        "BIGNUMERIC '578960446186580977117854925043439539266."

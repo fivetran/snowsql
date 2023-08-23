@@ -460,7 +460,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       // Dates
       {"format", {"%t", date}, "2001-05-21"},
       {"format", {"%t", date_null}, "NULL"},
-      {"format", {"%T", date}, "DATE \"2001-05-21\""},
+      {"format", {"%T", date}, "DATE '2001-05-21'"},
       {"format", {"%T", date_null}, "NULL"},
 
       // Timestamps

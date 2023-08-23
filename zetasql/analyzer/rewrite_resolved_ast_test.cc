@@ -46,7 +46,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
   // options.
   AnalyzerOptions options;
   options.mutable_language()->EnableMaximumLanguageFeatures();
-  ZETASQL_CHECK_OK(options.AddExpressionColumn("k", types::Int64Type()));
+ZETASQL_CHECK_OK(options.AddExpressionColumn("k", types::Int64Type()));
 
   TypeFactory types;
   const Type* map_type;
@@ -147,12 +147,12 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |           |   +-GetProtoField
 |           |     +-type=ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>
 |           |     +-expr=
-|           |     | +-ExpressionColumn(type=PROTO<zetasql_test__.MessageWithMapField>, name="mapproto")
+|           |     | +-ExpressionColumn(type=PROTO<zetasql_test__.MessageWithMapField>, name='mapproto')
 |           |     +-field_descriptor=string_int32_map
 |           |     +-default_value=[]
 |           +-input_scan=
 |             +-SingleRowScan
-+-ExpressionColumn(type=INT64, name="k")
++-ExpressionColumn(type=INT64, name='k')
 )sql");
 }
 

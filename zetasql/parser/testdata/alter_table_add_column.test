@@ -461,7 +461,7 @@ ALTER TABLE foo ADD COLUMN column STRING COLLATE CONCAT('unicode', ':', 'ci');
 ==
 
 # ALTER TABLE add column with default static value
-ALTER TABLE foo ADD COLUMN bar STRING DEFAULT "default string";
+ALTER TABLE foo ADD COLUMN bar STRING DEFAULT 'default string';
 --
 AlterTableStatement [0-62]
   PathExpression [12-15]
@@ -475,7 +475,7 @@ AlterTableStatement [0-62]
             Identifier(STRING) [31-37]
           StringLiteral('default string') [46-62]
 --
-ALTER TABLE foo ADD COLUMN bar STRING DEFAULT "default string"
+ALTER TABLE foo ADD COLUMN bar STRING DEFAULT 'default string'
 ==
 
 # ALTER TABLE add column with default function
