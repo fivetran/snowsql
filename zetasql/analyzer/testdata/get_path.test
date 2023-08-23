@@ -1,5 +1,5 @@
 [no_enable_literal_replacement]
-select parse_json('{\'a\':\'b\'}'):"a"
+select parse_json('{"a":"b"}'):"a"
 --
 QueryStmt
 +-output_column_list=
@@ -12,7 +12,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
     |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
     |     | +-Literal(type=STRING, value='{"a":"b"}')
-    |     +-Literal(type=STRING, value='a')
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -41,7 +41,7 @@ QueryStmt
     |     | +-Cast(VARIANT -> OBJECT)
     |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
     |     |     +-Literal(type=STRING, value='{"a":"b"}')
-    |     +-Literal(type=STRING, value='a')
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
