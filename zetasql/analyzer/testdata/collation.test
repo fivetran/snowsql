@@ -159,7 +159,7 @@ QueryStmt
 select fn_reject_collation(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 1:8]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 1:8]
 select fn_reject_collation(string_ci, 'abc')
        ^
 ==
@@ -168,7 +168,7 @@ select fn_reject_collation(string_ci, 'abc')
 select fn_reject_collation('abc', second_arg => array_with_string_ci)
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument second_arg (['und:ci']) [at 1:8]
+ERROR: Collation is not allowed on argument second_arg (["und:ci"]) [at 1:8]
 select fn_reject_collation('abc', second_arg => array_with_string_ci)
        ^
 ==
@@ -177,7 +177,7 @@ select fn_reject_collation('abc', second_arg => array_with_string_ci)
 select fn_reject_collation('abc', second_arg => struct_with_string_ci)
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument second_arg (<_,'und:ci'>) [at 1:8]
+ERROR: Collation is not allowed on argument second_arg (<_,"und:ci">) [at 1:8]
 select fn_reject_collation('abc', second_arg => struct_with_string_ci)
        ^
 ==
@@ -1082,7 +1082,7 @@ with recursive
   (select ind + 1 as ind, collate(string_ci, 'binary') from t where ind < 3))
 select ind, string_ci from t
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'; in column 2, item 2 of recursive scan [at 2:9]
+ERROR: Collation conflict: "binary" vs. "und:ci"; in column 2, item 2 of recursive scan [at 2:9]
   t as (select 1 as ind, string_ci from CollatedTable union all
         ^
 ==
@@ -1260,7 +1260,7 @@ QueryStmt
 # Collation mismatch between input expr and subquery column is rejected.
 select collate('abc', 'binary') in (select string_ci from CollatedTable)
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation for IN operator is different on input expr ("binary") and subquery column ('und:ci') [at 1:37]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation for IN operator is different on input expr ("binary") and subquery column ("und:ci") [at 1:37]
 select collate('abc', 'binary') in (select string_ci from CollatedTable)
                                     ^
 ==
@@ -1378,7 +1378,7 @@ QueryStmt
 select struct_with_string_ci = (1, string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 (<_,"binary">) in function = is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 (<_,"binary">) in function = is not compatible with other arguments [at 1:8]
 select struct_with_string_ci = (1, string_binary)
        ^
 ==
@@ -1423,7 +1423,7 @@ QueryStmt
     | +-$col1#5 :=
     |   +-FunctionCall(ZetaSQL:$equal(STRUCT<a INT32, b STRING>, STRUCT<a INT32, b STRING>) -> BOOL)
     |     +-ColumnRef(type=STRUCT<a INT32, b STRING>, type_annotation_map=<_,{Collation:"und:ci"}>, column=CollatedTable.struct_with_string_ci#3<_,{Collation:"und:ci"}>)
-    |     +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:"plain_string_without_collation"})
+    |     +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:'plain_string_without_collation'})
     |     +-collation_list=[[_,und:ci]]
     +-input_scan=
       +-TableScan(column_list=[CollatedTable.struct_with_string_ci#3<_,{Collation:"und:ci"}>], table=CollatedTable, column_index_list=[2])
@@ -1597,7 +1597,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=$query.[$col1#5, $col2#6, $col3#7, $col4#8]
     +-expr_list=
-    | +-$col1#5 := Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:"a"}, has_explicit_type=TRUE)
+    | +-$col1#5 := Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:'a'}, has_explicit_type=TRUE)
     | +-$col2#6 :=
     | | +-MakeStruct
     | |   +-type=STRUCT<a INT32, b STRING>
@@ -1805,7 +1805,7 @@ QueryStmt
     | |   +-type_annotation_map=<_,{Collation:"und:ci"}>
     | |   +-Literal(type=BOOL, value=true)
     | |   +-ColumnRef(type=STRUCT<a INT32, b STRING>, type_annotation_map=<_,{Collation:"und:ci"}>, column=CollatedTable.struct_with_string_ci#3<_,{Collation:"und:ci"}>)
-    | |   +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:"abc"}, has_explicit_type=TRUE)
+    | |   +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:'abc'}, has_explicit_type=TRUE)
     | +-$col3#7 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
     |     +-type_annotation_map=[{Collation:"und:ci"}]
@@ -2015,7 +2015,7 @@ select
   json_extract_array(string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
   json_extract_array(string_ci),
   ^
 ==
@@ -2037,7 +2037,7 @@ select
   json_extract_string_array(string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
   json_extract_string_array(string_ci),
   ^
 ==
@@ -2048,7 +2048,7 @@ select
   json_extract_scalar(string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
   json_extract_scalar(string_ci),
   ^
 ==
@@ -2059,7 +2059,7 @@ select
   json_query_array(string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
   json_query_array(string_ci),
   ^
 ==
@@ -2081,7 +2081,7 @@ select
   json_value(string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
   json_value(string_ci),
   ^
 ==
@@ -2092,7 +2092,7 @@ select
   json_value_array(string_ci),
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
   json_value_array(string_ci),
   ^
 ==
@@ -2125,7 +2125,7 @@ select
   string_ci LIKE COLLATE('abc', 'binary'),
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function LIKE is not compatible with other arguments [at 3:3]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function LIKE is not compatible with other arguments [at 3:3]
   string_ci LIKE COLLATE('abc', 'binary'),
   ^
 ==
@@ -2133,72 +2133,72 @@ ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("bina
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_3_ADDITIONAL_STRING_FUNCTIONS]
 # Collation is disallowed on the function arguments
 select
-  translate(string_ci, "a", "b")
+  translate(string_ci, 'a', 'b')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
-  translate(string_ci, "a", "b")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
+  translate(string_ci, 'a', 'b')
   ^
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_3_ADDITIONAL_STRING_FUNCTIONS]
 # Collation is disallowed on the function arguments
 select
-  initcap(string_ci, "abc")
+  initcap(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 3:3]
-  initcap(string_ci, "abc")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 3:3]
+  initcap(string_ci, 'abc')
   ^
 ==
 
 # Collation is disallowed on the function arguments
 select
-  regexp_match(string_ci, "abc")
+  regexp_match(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
-  regexp_match(string_ci, "abc")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
+  regexp_match(string_ci, 'abc')
   ^
 ==
 
 # Collation is disallowed on the function arguments
 select
-  regexp_contains(string_ci, "abc")
+  regexp_contains(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
-  regexp_contains(string_ci, "abc")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
+  regexp_contains(string_ci, 'abc')
   ^
 ==
 
 # Collation is disallowed on the function arguments
 select
-  regexp_extract(string_ci, "abc")
+  regexp_extract(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
-  regexp_extract(string_ci, "abc")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
+  regexp_extract(string_ci, 'abc')
   ^
 ==
 
 # Collation is disallowed on the function arguments
 select
-  regexp_instr(string_ci, "abc")
+  regexp_instr(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
-  regexp_instr(string_ci, "abc")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
+  regexp_instr(string_ci, 'abc')
   ^
 ==
 
 # Collation is disallowed on the function arguments
 select
-  regexp_replace(string_ci, "abc", 'def')
+  regexp_replace(string_ci, 'abc', 'def')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
-  regexp_replace(string_ci, "abc", 'def')
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
+  regexp_replace(string_ci, 'abc', 'def')
   ^
 ==
 
@@ -2207,7 +2207,7 @@ select
   approx_quantiles(string_ci, 2)
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
   approx_quantiles(string_ci, 2)
   ^
 ==
@@ -2217,7 +2217,7 @@ select
   approx_top_count(string_ci, 100)
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
   approx_top_count(string_ci, 100)
   ^
 ==
@@ -2227,18 +2227,18 @@ select
   approx_top_sum(string_ci, 1, 100)
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
   approx_top_sum(string_ci, 1, 100)
   ^
 ==
 
 # Collation is disallowed on the function arguments
 select
-  regexp_extract_all(string_ci, "abc")
+  regexp_extract_all(string_ci, 'abc')
 from CollatedTable
 --
-ERROR: Collation is not allowed on argument 1 ('und:ci'). Use COLLATE(arg, '') to remove collation [at 2:3]
-  regexp_extract_all(string_ci, "abc")
+ERROR: Collation is not allowed on argument 1 ("und:ci"). Use COLLATE(arg, '') to remove collation [at 2:3]
+  regexp_extract_all(string_ci, 'abc')
   ^
 ==
 
@@ -2287,7 +2287,7 @@ QueryStmt
 select concat(string_ci, string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function CONCAT is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function CONCAT is not compatible with other arguments [at 1:8]
 select concat(string_ci, string_binary)
        ^
 ==
@@ -2297,7 +2297,7 @@ select concat(string_ci, string_binary)
 select array_with_string_ci = array_agg(distinct string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 (["binary"]) in function = is not compatible with other arguments [at 2:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 (["binary"]) in function = is not compatible with other arguments [at 2:8]
 select array_with_string_ci = array_agg(distinct string_binary)
        ^
 ==
@@ -2306,19 +2306,19 @@ select array_with_string_ci = array_agg(distinct string_binary)
 select ('a', string_ci) = ('b', string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 (<_,"binary">) in function = is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 (<_,"binary">) in function = is not compatible with other arguments [at 1:8]
 select ('a', string_ci) = ('b', string_binary)
        ^
 ==
 
 # Throw an error if named arguments have different collation
-select fn_named_arguments_returns_string("abc",
+select fn_named_arguments_returns_string('abc',
                                          date_string => string_ci,
                                          format_string => string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: 'und:ci' vs. "binary". Collation on argument date_string ('und:ci') in function SAMPLE_FUNCTIONS:FN_NAMED_ARGUMENTS_RETURNS_STRING is not compatible with other arguments [at 1:8]
-select fn_named_arguments_returns_string("abc",
+ERROR: Collation conflict: "und:ci" vs. "binary". Collation on argument date_string ("und:ci") in function SAMPLE_FUNCTIONS:FN_NAMED_ARGUMENTS_RETURNS_STRING is not compatible with other arguments [at 1:8]
+select fn_named_arguments_returns_string('abc',
        ^
 ==
 
@@ -2329,7 +2329,7 @@ select fn_named_arguments_returns_string(string_binary,
                                          format_string => string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: 'und:ci' vs. "binary". Collation on argument date_string ('und:ci') in function SAMPLE_FUNCTIONS:FN_NAMED_ARGUMENTS_RETURNS_STRING is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "und:ci" vs. "binary". Collation on argument date_string ("und:ci") in function SAMPLE_FUNCTIONS:FN_NAMED_ARGUMENTS_RETURNS_STRING is not compatible with other arguments [at 1:8]
 select fn_named_arguments_returns_string(string_binary,
        ^
 ==
@@ -2338,7 +2338,7 @@ select fn_named_arguments_returns_string(string_binary,
 select fn_agg_string_string_collation(string_ci, string_binary)
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function SAMPLE_FUNCTIONS:FN_AGG_STRING_STRING_COLLATION is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function SAMPLE_FUNCTIONS:FN_AGG_STRING_STRING_COLLATION is not compatible with other arguments [at 1:8]
 select fn_agg_string_string_collation(string_ci, string_binary)
        ^
 ==
@@ -2347,7 +2347,7 @@ select fn_agg_string_string_collation(string_ci, string_binary)
 select fn_agg_string_string_collation(string_ci, string_binary) OVER ()
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function SAMPLE_FUNCTIONS:FN_AGG_STRING_STRING_COLLATION is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function SAMPLE_FUNCTIONS:FN_AGG_STRING_STRING_COLLATION is not compatible with other arguments [at 1:8]
 select fn_agg_string_string_collation(string_ci, string_binary) OVER ()
        ^
 ==
@@ -2389,7 +2389,7 @@ select
   -- PERCENTILE_DISC(<T1>, FLOAT64 /*must_be_non_null*/ NOT AGGREGATE)
   percentile_disc(string_ci, 0.1) OVER(),
   -- PERCENTILE_DISC(<T1>, NUMERIC /*must_be_non_null*/ NOT AGGREGATE)
-  percentile_disc(string_ci, NUMERIC "0.1") OVER(),
+  percentile_disc(string_ci, NUMERIC '0.1') OVER(),
 from CollatedTable
 --
 QueryStmt
@@ -2777,9 +2777,9 @@ QueryStmt
 
 # Struct comparison, IN (), IN UNNEST, IN subquery, different but not conflicting collation in the multiple string fields.
 select
-  (1, "abc", string_binary) in ((2, string_ci, "def"), (3, "hi", "hello")),
-  (1, "abc", string_binary) in unnest ([(2, string_ci, "def"), (3, "hi", "hello")]),
-  (1, "abc", string_binary) in (select (2, collate(Value, 'und:ci'), "def") from KeyValue)
+  (1, 'abc', string_binary) in ((2, string_ci, 'def'), (3, 'hi', 'hello')),
+  (1, 'abc', string_binary) in unnest ([(2, string_ci, 'def'), (3, 'hi', 'hello')]),
+  (1, 'abc', string_binary) in (select (2, collate(Value, 'und:ci'), 'def') from KeyValue)
 from CollatedTable
 --
 QueryStmt
@@ -2807,7 +2807,7 @@ QueryStmt
     | |   |   +-Literal(type=INT64, value=2)
     | |   |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
     | |   |   +-Literal(type=STRING, value='def')
-    | |   +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, "hi", "hello"})
+    | |   +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, 'hi', 'hello'})
     | |   +-collation_list=[[_,und:ci,binary]]
     | +-$col2#9 :=
     | | +-FunctionCall(ZetaSQL:$in_array(STRUCT<INT64, STRING, STRING>, ARRAY<STRUCT<INT64, STRING, STRING>>) -> BOOL)
@@ -2827,7 +2827,7 @@ QueryStmt
     | |     |   +-Literal(type=INT64, value=2)
     | |     |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
     | |     |   +-Literal(type=STRING, value='def')
-    | |     +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, "hi", "hello"})
+    | |     +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, 'hi', 'hello'})
     | |   +-collation_list=[[_,und:ci,binary]]
     | +-$col3#10 :=
     |   +-SubqueryExpr
@@ -2921,9 +2921,9 @@ QueryStmt
 
 # Struct comparison, $case_with_value, different but not conflicting collation in the multiple string fields.
 select
-  case (1, "abc", string_binary)
-    when (2, string_ci, "def") then 1
-    when (3, "hi", "hello") then 2
+  case (1, 'abc', string_binary)
+    when (2, string_ci, 'def') then 1
+    when (3, 'hi', 'hello') then 2
     else 3 end
 from CollatedTable
 --
@@ -2951,7 +2951,7 @@ QueryStmt
     |     |   +-ColumnRef(type=STRING, type_annotation_map={Collation:"und:ci"}, column=CollatedTable.string_ci#1{Collation:"und:ci"})
     |     |   +-Literal(type=STRING, value='def')
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, "hi", "hello"})
+    |     +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, 'hi', 'hello'})
     |     +-Literal(type=INT64, value=2)
     |     +-Literal(type=INT64, value=3)
     |     +-collation_list=[[_,und:ci,binary]]
@@ -2965,9 +2965,9 @@ QueryStmt
 # Result collation of $case_with_value, different but not conflicting collation in the multiple string fields.
 select
   case Key
-    when 1 then (1, "abc", COLLATE(Value, "binary"))
-    when 2 then (2, COLLATE(Value, 'und:ci'), "def")
-    else (3, "hi", "hello") end
+    when 1 then (1, 'abc', COLLATE(Value, 'binary'))
+    when 2 then (2, COLLATE(Value, 'und:ci'), 'def')
+    else (3, 'hi', 'hello') end
 from KeyValue
 --
 QueryStmt
@@ -3003,7 +3003,7 @@ QueryStmt
     |     |   | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     |     |   | +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
     |     |   +-Literal(type=STRING, value='def')
-    |     +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, "hi", "hello"})
+    |     +-Literal(type=STRUCT<INT64, STRING, STRING>, value={3, 'hi', 'hello'})
     +-input_scan=
       +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
@@ -3163,7 +3163,7 @@ QueryStmt
 select string_ci != string_binary
 from CollatedTable
 --
-ERROR: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function != is not compatible with other arguments [at 1:8]
+ERROR: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function != is not compatible with other arguments [at 1:8]
 select string_ci != string_binary
        ^
 ==
@@ -4731,7 +4731,7 @@ QueryStmt
           +-PivotColumn(column=$pivot.v1#10{Collation:"und:ci"}, pivot_expr_index=0, pivot_value_index=0)
           +-PivotColumn(column=$pivot.v2#11{Collation:"und:ci"}, pivot_expr_index=0, pivot_value_index=1)
 
-Rewrite ERROR: generic::unimplemented: Collation 'und:ci' is not supported on argument 1 of aggregate function in a PIVOT clause [at 2:7]
+Rewrite ERROR: generic::unimplemented: Collation "und:ci" is not supported on argument 1 of aggregate function in a PIVOT clause [at 2:7]
 PIVOT(string_agg(string_ci) FOR value IN ('Value_1' AS v1, 'Value_2' AS v2));
       ^
 ==
@@ -5274,19 +5274,19 @@ select 'abc', COLLATE('abc', 'und:ci')
 --
 ALTERNATION GROUP: union
 --
-ERROR: Collation conflict: 'und:ci' vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
+ERROR: Collation conflict: "und:ci" vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
 select string_ci, string_binary from CollatedTable union all
 ^
 --
 ALTERNATION GROUP: except
 --
-ERROR: Collation conflict: 'und:ci' vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
+ERROR: Collation conflict: "und:ci" vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
 select string_ci, string_binary from CollatedTable except all
 ^
 --
 ALTERNATION GROUP: intersect
 --
-ERROR: Collation conflict: 'und:ci' vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
+ERROR: Collation conflict: "und:ci" vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
 select string_ci, string_binary from CollatedTable intersect all
 ^
 ==
@@ -5295,7 +5295,7 @@ select string_binary, [STRUCT(true as a, collate('a', 'binary') as b)] from Coll
 union all
 select 'abc', array_of_struct_ci from ComplexCollatedTable
 --
-ERROR: Collation conflict: 'und:ci' vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
+ERROR: Collation conflict: "und:ci" vs. "binary"; in column 2, item 2 of set operation scan [at 1:1]
 select string_binary, [STRUCT(true as a, collate('a', 'binary') as b)] from C...
 ^
 ==
@@ -5625,7 +5625,7 @@ CreateViewStmt
 |   |       +-Literal(type=STRING, value='ghi')
 |   +-input_scan=
 |     +-SingleRowScan
-+-sql='select 1 a,\n   collate('abc', 'und:ci') b,\n   [collate('abc', 'und:ci')] c,\n   (collate('abc', 'und:ci'), collate('def', 'binary'), 'ghi') d'
++-sql='select 1 a,\n   collate(\'abc\', \'und:ci\') b,\n   [collate(\'abc\', \'und:ci\')] c,\n   (collate(\'abc\', \'und:ci\'), collate(\'def\', \'binary\'), \'ghi\') d'
 +-column_definition_list=
   +-ColumnDefinition(name='a', type=INT64, column=t.a#5)
   +-ColumnDefinition
@@ -5893,7 +5893,7 @@ CreateMaterializedViewStmt
 |   |       +-Literal(type=INT64, value=1)
 |   +-input_scan=
 |     +-SingleRowScan
-+-sql='SELECT COLLATE('foo', 'und:ci') AS col1, STRUCT(COLLATE('bar', 'binary') AS col2_1, 1 AS col2_2) AS col2'
++-sql='SELECT COLLATE(\'foo\', \'und:ci\') AS col1, STRUCT(COLLATE(\'bar\', \'binary\') AS col2_1, 1 AS col2_2) AS col2'
 +-column_definition_list=
   +-ColumnDefinition
   | +-name='col1'
@@ -6115,7 +6115,7 @@ CreateSchemaStmt
   +-Literal(type=STRING, value='und:ci')
 ==
 
-CREATE SCHEMA myProject.mySchema DEFAULT COLLATE 'und:ci' OPTIONS(a="b", c="d");
+CREATE SCHEMA myProject.mySchema DEFAULT COLLATE 'und:ci' OPTIONS(a='b', c='d');
 --
 CreateSchemaStmt
 +-name_path=myProject.mySchema
@@ -6349,7 +6349,7 @@ InsertStmt
 |       +-value=
 |         +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<a INT32, b STRING>)
 |           +-type_annotation_map=<_,{Collation:"und:ci"}>
-|           +-Literal(type=STRUCT<a INT32, b STRING>, value={a:3, b:"c"})
+|           +-Literal(type=STRUCT<a INT32, b STRING>, value={a:3, b:'c'})
 |           +-type_modifiers=collation:[_,und:ci]
 +-column_access_list=WRITE
 ==
@@ -6422,7 +6422,7 @@ InsertStmt
 | |     +-value=
 | |       +-Cast(STRUCT<c INT32, d STRUCT<a INT32, b STRING>> -> STRUCT<c INT32, d STRUCT<a INT32, b STRING>>)
 | |         +-type_annotation_map=<_,<_,{Collation:"und:ci"}>>
-| |         +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:1, d:{a:1, b:"a"}})
+| |         +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:1, d:{a:1, b:'a'}})
 | |         +-type_modifiers=collation:[_,[_,und:ci]]
 | +-InsertRow
 |   +-value_list=
@@ -6530,7 +6530,7 @@ InsertStmt
 |       +-value=
 |         +-Cast(STRUCT<a INT32, b ARRAY<STRUCT<a BOOL, b STRING>>> -> STRUCT<a INT32, b ARRAY<STRUCT<a BOOL, b STRING>>>)
 |           +-type_annotation_map=<_,[<_,{Collation:"und:ci"}>]>
-|           +-Literal(type=STRUCT<a INT32, b ARRAY<STRUCT<a BOOL, b STRING>>>, value={a:2, b:[{a:false, b:"b"}]})
+|           +-Literal(type=STRUCT<a INT32, b ARRAY<STRUCT<a BOOL, b STRING>>>, value={a:2, b:[{a:false, b:'b'}]})
 |           +-type_modifiers=collation:[_,[[_,und:ci]]]
 +-column_access_list=WRITE
 ==
@@ -6667,7 +6667,7 @@ CreateFunctionStmt
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_3_UNNEST_AND_FLATTEN_ARRAYS]
 SELECT FLATTEN([STRUCT(COLLATE('a', 'und:ci') as x, 1 as y)].x);
 --
-ERROR: Collation is not allowed on input array to FLATTEN ([<'und:ci',_>]) [at 1:8]
+ERROR: Collation is not allowed on input array to FLATTEN ([<"und:ci",_>]) [at 1:8]
 SELECT FLATTEN([STRUCT(COLLATE('a', 'und:ci') as x, 1 as y)].x);
        ^
 ==
@@ -6676,7 +6676,7 @@ SELECT FLATTEN([STRUCT(COLLATE('a', 'und:ci') as x, 1 as y)].x);
 # The path expression is effectively a single array.
 SELECT FLATTEN([COLLATE('a', 'und:ci'), COLLATE('b', 'und:ci')]);
 --
-ERROR: Collation is not allowed on input array to FLATTEN (['und:ci']) [at 2:8]
+ERROR: Collation is not allowed on input array to FLATTEN (["und:ci"]) [at 2:8]
 SELECT FLATTEN([COLLATE('a', 'und:ci'), COLLATE('b', 'und:ci')]);
        ^
 ==
@@ -6685,7 +6685,7 @@ SELECT FLATTEN([COLLATE('a', 'und:ci'), COLLATE('b', 'und:ci')]);
 # The path expression is effectively a single array.
 SELECT FLATTEN(STRUCT([COLLATE('a', 'und:ci'), COLLATE('b', 'und:ci')] as x, 1 as y).x);
 --
-ERROR: Collation is not allowed on input array to FLATTEN (['und:ci']) [at 2:8]
+ERROR: Collation is not allowed on input array to FLATTEN (["und:ci"]) [at 2:8]
 SELECT FLATTEN(STRUCT([COLLATE('a', 'und:ci'), COLLATE('b', 'und:ci')] as x, ...
        ^
 ==
@@ -6811,7 +6811,7 @@ QueryStmt
     | +-$col1#5 :=
     | | +-Cast(STRUCT<STRING, INT32> -> STRUCT<STRING, INT32>)
     | |   +-type_annotation_map=<{Collation:"und:ci"},_>
-    | |   +-Literal(type=STRUCT<STRING, INT32>, value={"a", 1}, has_explicit_type=TRUE)
+    | |   +-Literal(type=STRUCT<STRING, INT32>, value={'a', 1}, has_explicit_type=TRUE)
     | |   +-type_modifiers=collation:[und:ci,_]
     | +-$col2#6 :=
     | | +-MakeStruct
@@ -7149,7 +7149,7 @@ QueryStmt
     | +-$col2#6 :=
     | | +-Cast(STRUCT<a STRING, b STRING> -> STRUCT<a NUMERIC, b STRING>)
     | |   +-type_annotation_map=<_,{Collation:"und:ci"}>
-    | |   +-Literal(type=STRUCT<a STRING, b STRING>, value={a:"c", b:"d"}, has_explicit_type=TRUE)
+    | |   +-Literal(type=STRUCT<a STRING, b STRING>, value={a:'c', b:'d'}, has_explicit_type=TRUE)
     | |   +-type_modifiers=type_parameters:[(precision=5,scale=0),null], collation:[_,und:ci]
     | +-$col3#7 :=
     |   +-MakeStruct
@@ -7175,7 +7175,7 @@ QueryStmt
 SELECT FLATTEN(ARRAY(
   SELECT y
   FROM CollatedTable as x, TestStructValueTable as y
-  WHERE x.string_ci = "abcd"
+  WHERE x.string_ci = 'abcd'
 ).a)
 --
 QueryStmt
@@ -7309,7 +7309,7 @@ QueryStmt
 SELECT FLATTEN(ARRAY(
   SELECT y
   FROM TestStructValueTable y
-  WHERE x.string_ci = "abcd"
+  WHERE x.string_ci = 'abcd'
 ).a)
 FROM CollatedTable as x
 --
@@ -7471,7 +7471,7 @@ QueryStmt
 
 # TODO: Add more ARRAY built-in functions
 [enabled_ast_rewrites=DEFAULTS]
-SELECT ARRAY_FIRST([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')])
+SELECT ARRAY_FIRST([collate('hello', 'und:ci'), collate('zetasql', 'und:ci')])
 --
 QueryStmt
 +-output_column_list=
@@ -7552,7 +7552,7 @@ QueryStmt
 ==
 
 [enabled_ast_rewrites=DEFAULTS]
-SELECT ARRAY_SLICE([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')], 0, 0)
+SELECT ARRAY_SLICE([collate('hello', 'und:ci'), collate('zetasql', 'und:ci')], 0, 0)
 --
 QueryStmt
 +-output_column_list=
@@ -7717,7 +7717,7 @@ SELECT
       ARRAY_SLICE(
         ARRAY_CONCAT(
           ARRAY<STRUCT<int32_val INT32, string_val STRING>>[
-            STRUCT<int32_val INT32, string_val STRING> (CAST(123 AS INT32), "67MXcza829l0r4Vhravi4Mg5S7uc2P9SJ58ShEg0b35h4lC")
+            STRUCT<int32_val INT32, string_val STRING> (CAST(123 AS INT32), '67MXcza829l0r4Vhravi4Mg5S7uc2P9SJ58ShEg0b35h4lC')
           ],
           ARRAY(
             SELECT
@@ -7734,7 +7734,7 @@ SELECT
           )
         ), 0, 2
       ),
-      [STRUCT<int32_val INT32, string_val STRING>(1, "foo")]
+      [STRUCT<int32_val INT32, string_val STRING>(1, 'foo')]
     )
 --
 QueryStmt
@@ -7751,7 +7751,7 @@ QueryStmt
     |     | +-type_annotation_map=[<_,{Collation:"und:ci"}>]
     |     | +-FunctionCall(ZetaSQL:array_concat(ARRAY<STRUCT<int32_val INT32, string_val STRING>>, repeated(1) ARRAY<STRUCT<int32_val INT32, string_val STRING>>) -> ARRAY<STRUCT<int32_val INT32, string_val STRING>>)
     |     | | +-type_annotation_map=[<_,{Collation:"und:ci"}>]
-    |     | | +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:123, string_val:"67MXcza829l0r4Vhravi4Mg5S7uc2P9SJ58ShEg0b35h4lC"}], has_explicit_type=TRUE)
+    |     | | +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:123, string_val:'67MXcza829l0r4Vhravi4Mg5S7uc2P9SJ58ShEg0b35h4lC'}], has_explicit_type=TRUE)
     |     | | +-Cast(ARRAY<STRUCT<a INT32, b STRING>> -> ARRAY<STRUCT<int32_val INT32, string_val STRING>>)
     |     | |   +-type_annotation_map=[<_,{Collation:"und:ci"}>]
     |     | |   +-SubqueryExpr
@@ -7769,7 +7769,7 @@ QueryStmt
     |     | |   +-type_modifiers=collation:[[_,und:ci]]
     |     | +-Literal(type=INT64, value=0)
     |     | +-Literal(type=INT64, value=2)
-    |     +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:1, string_val:"foo"}], has_explicit_type=TRUE)
+    |     +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:1, string_val:'foo'}], has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 
@@ -7888,7 +7888,7 @@ QueryStmt
     |     |         | +-array_to_slice#6 :=
     |     |         | | +-FunctionCall(ZetaSQL:array_concat(ARRAY<STRUCT<int32_val INT32, string_val STRING>>, repeated(1) ARRAY<STRUCT<int32_val INT32, string_val STRING>>) -> ARRAY<STRUCT<int32_val INT32, string_val STRING>>)
     |     |         | |   +-type_annotation_map=[<_,{Collation:"und:ci"}>]
-    |     |         | |   +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:123, string_val:"67MXcza829l0r4Vhravi4Mg5S7uc2P9SJ58ShEg0b35h4lC"}], has_explicit_type=TRUE)
+    |     |         | |   +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:123, string_val:'67MXcza829l0r4Vhravi4Mg5S7uc2P9SJ58ShEg0b35h4lC'}], has_explicit_type=TRUE)
     |     |         | |   +-Cast(ARRAY<STRUCT<a INT32, b STRING>> -> ARRAY<STRUCT<int32_val INT32, string_val STRING>>)
     |     |         | |     +-type_annotation_map=[<_,{Collation:"und:ci"}>]
     |     |         | |     +-SubqueryExpr
@@ -7908,7 +7908,7 @@ QueryStmt
     |     |         | +-start_offset#8 := Literal(type=INT64, value=0)
     |     |         +-input_scan=
     |     |           +-SingleRowScan
-    |     +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:1, string_val:"foo"}], has_explicit_type=TRUE)
+    |     +-Literal(type=ARRAY<STRUCT<int32_val INT32, string_val STRING>>, value=[{int32_val:1, string_val:'foo'}], has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -7917,9 +7917,9 @@ QueryStmt
 # verify that the element collation of the first argument and the collation on
 # the second argument are the same, then mark that in collation_list.
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
-SELECT ARRAY_OFFSET([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')], {{"HELLO"|collate("HELLO", 'und:ci')}})
+SELECT ARRAY_OFFSET([collate('hello', 'und:ci'), collate('zetasql', 'und:ci')], {{'hello'|collate('hello', 'und:ci')}})
 --
-ALTERNATION GROUP: "HELLO"
+ALTERNATION GROUP: 'hello'
 --
 QueryStmt
 +-output_column_list=
@@ -7940,13 +7940,13 @@ QueryStmt
     |     |   +-type_annotation_map={Collation:"und:ci"}
     |     |   +-Literal(type=STRING, value='zetasql')
     |     |   +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
-    |     +-Literal(type=STRING, value='HELLO')
+    |     +-Literal(type=STRING, value='hello')
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |     +-collation_list=[und:ci]
     +-input_scan=
       +-SingleRowScan
 --
-ALTERNATION GROUP: collate("HELLO", 'und:ci')
+ALTERNATION GROUP: collate('hello', 'und:ci')
 --
 QueryStmt
 +-output_column_list=
@@ -7969,7 +7969,7 @@ QueryStmt
     |     |   +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
     |     +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
     |     | +-type_annotation_map={Collation:"und:ci"}
-    |     | +-Literal(type=STRING, value='HELLO')
+    |     | +-Literal(type=STRING, value='hello')
     |     | +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |     +-collation_list=[und:ci]
@@ -7978,7 +7978,7 @@ QueryStmt
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
-SELECT ARRAY_OFFSETS([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')], "HELLO")
+SELECT ARRAY_OFFSETS([collate('hello', 'und:ci'), collate('zetasql', 'und:ci')], 'hello')
 --
 QueryStmt
 +-output_column_list=
@@ -7999,14 +7999,14 @@ QueryStmt
     |     |   +-type_annotation_map={Collation:"und:ci"}
     |     |   +-Literal(type=STRING, value='zetasql')
     |     |   +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
-    |     +-Literal(type=STRING, value='HELLO')
+    |     +-Literal(type=STRING, value='hello')
     |     +-collation_list=[und:ci]
     +-input_scan=
       +-SingleRowScan
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
-SELECT ARRAY_FIND([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')], "HELLO")
+SELECT ARRAY_FIND([collate('hello', 'und:ci'), collate('zetasql', 'und:ci')], 'hello')
 --
 QueryStmt
 +-output_column_list=
@@ -8028,7 +8028,7 @@ QueryStmt
     |     |   +-type_annotation_map={Collation:"und:ci"}
     |     |   +-Literal(type=STRING, value='zetasql')
     |     |   +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
-    |     +-Literal(type=STRING, value='HELLO')
+    |     +-Literal(type=STRING, value='hello')
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |     +-collation_list=[und:ci]
     +-input_scan=
@@ -8036,7 +8036,7 @@ QueryStmt
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
-SELECT ARRAY_FIND_ALL([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')], "HELLO")
+SELECT ARRAY_FIND_ALL([collate('hello', 'und:ci'), collate('zetasql', 'und:ci')], 'hello')
 --
 QueryStmt
 +-output_column_list=
@@ -8058,14 +8058,14 @@ QueryStmt
     |     |   +-type_annotation_map={Collation:"und:ci"}
     |     |   +-Literal(type=STRING, value='zetasql')
     |     |   +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
-    |     +-Literal(type=STRING, value='HELLO')
+    |     +-Literal(type=STRING, value='hello')
     |     +-collation_list=[und:ci]
     +-input_scan=
       +-SingleRowScan
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_AGGREGATION_FUNCTIONS]
-SELECT ARRAY_MIN([collate("hello", 'und:ci')])
+SELECT ARRAY_MIN([collate('hello', 'und:ci')])
 --
 QueryStmt
 +-output_column_list=
@@ -8089,7 +8089,7 @@ QueryStmt
 ==
 
 [language_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_AGGREGATION_FUNCTIONS]
-SELECT ARRAY_MAX([collate("hello", 'und:ci')])
+SELECT ARRAY_MAX([collate('hello', 'und:ci')])
 --
 QueryStmt
 +-output_column_list=
@@ -8340,7 +8340,7 @@ select * from tvf_templated_select_collated_output_column_returns_int64_strin...
 Analysis of table-valued function tvf_templated_select_collated_output_column_returns_int64_string_col failed [at 1:1]
 select x as key, COLLATE(y, 'und:ci') as value
 ^
-Collation 'und:ci' on output column value is not allowed when an explicit result schema is present
+Collation "und:ci" on output column value is not allowed when an explicit result schema is present
 ==
 
 # TVF query with collated output column is not allowed when an explicit value table result schema is present.
@@ -8352,7 +8352,7 @@ select * from tvf_templated_select_collated_output_column_returns_value_table...
 Analysis of table-valued function tvf_templated_select_collated_output_column_returns_value_table_string_col failed [at 1:1]
 select as value COLLATE(x, 'und:ci')
 ^
-Collation 'und:ci' on value-table column is not allowed when an explicit result schema is present
+Collation "und:ci" on value-table column is not allowed when an explicit result schema is present
 ==
 
 # Create a TVF which returns columns of collated types with COLLATE function inside TVF body.
@@ -8585,7 +8585,7 @@ create table function tvf(x STRING)
 returns TABLE<output_str STRING>
 as (select COLLATE(x, 'und:ci') as output_str)
 --
-ERROR: Collation 'und:ci' on output column output_str is not allowed when an explicit result schema is present [at 1:1]
+ERROR: Collation "und:ci" on output column output_str is not allowed when an explicit result schema is present [at 1:1]
 create table function tvf(x STRING)
 ^
 ==
@@ -8595,7 +8595,7 @@ create table function tvf(x STRING)
 returns TABLE<STRING>
 as (select as value COLLATE(x, 'und:ci'))
 --
-ERROR: Collation 'und:ci' on value-table column is not allowed when an explicit result schema is present [at 1:1]
+ERROR: Collation "und:ci" on value-table column is not allowed when an explicit result schema is present [at 1:1]
 create table function tvf(x STRING)
 ^
 ==
@@ -8709,7 +8709,7 @@ QueryStmt
 
 select * from tvf_templated_select_any_scalar_arg(COLLATE('abc', 'und:ci'))
 --
-ERROR: Collation 'und:ci' on argument of TVF call is not allowed [at 1:51]
+ERROR: Collation "und:ci" on argument of TVF call is not allowed [at 1:51]
 select * from tvf_templated_select_any_scalar_arg(COLLATE('abc', 'und:ci'))
                                                   ^
 ==
@@ -8756,63 +8756,63 @@ QueryStmt
 
 select * from tvf_templated_select_any_scalar_arg([COLLATE('abc', 'und:ci')])
 --
-ERROR: Collation ['und:ci'] on argument of TVF call is not allowed [at 1:51]
+ERROR: Collation ["und:ci"] on argument of TVF call is not allowed [at 1:51]
 select * from tvf_templated_select_any_scalar_arg([COLLATE('abc', 'und:ci')])
                                                   ^
 ==
 
 select * from tvf_templated_select_any_scalar_arg(STRUCT(COLLATE('abc', 'und:ci') as x, 1 as y))
 --
-ERROR: Collation <'und:ci',_> on argument of TVF call is not allowed [at 1:51]
+ERROR: Collation <"und:ci",_> on argument of TVF call is not allowed [at 1:51]
 select * from tvf_templated_select_any_scalar_arg(STRUCT(COLLATE('abc', 'und:...
                                                   ^
 ==
 
 select * from tvf_templated_select_relation_arg_using_select_star((select [COLLATE('abc', 'und:ci')] as col_array_ci))
 --
-ERROR: Collation ['und:ci'] on column col_array_ci of argument of TVF call is not allowed [at 1:67]
+ERROR: Collation ["und:ci"] on column col_array_ci of argument of TVF call is not allowed [at 1:67]
 ...tvf_templated_select_relation_arg_using_select_star((select [COLLATE('abc'...
                                                        ^
 ==
 
 select * from tvf_templated_select_relation_arg_using_select_star((select as struct COLLATE('abc', 'und:ci') x, 123 y))
 --
-ERROR: Collation <'und:ci',_> on value-table column of argument of TVF call is not allowed [at 1:67]
+ERROR: Collation <"und:ci",_> on value-table column of argument of TVF call is not allowed [at 1:67]
 ...tvf_templated_select_relation_arg_using_select_star((select as struct COLL...
                                                        ^
 ==
 
 select * from ScalarArgsOfCollatableTypes(COLLATE('abc', 'und:ci'), ['abc'], ('abc', 1))
 --
-ERROR: Collation 'und:ci' on argument of TVF call is not allowed [at 1:43]
+ERROR: Collation "und:ci" on argument of TVF call is not allowed [at 1:43]
 select * from ScalarArgsOfCollatableTypes(COLLATE('abc', 'und:ci'), ['abc'], ...
                                           ^
 ==
 
 select * from ScalarArgsOfCollatableTypes(arg1=>[COLLATE('abc', 'und:ci')], arg0=>'abc', arg2=>('abc', 1))
 --
-ERROR: Collation ['und:ci'] on argument of TVF call is not allowed [at 1:43]
+ERROR: Collation ["und:ci"] on argument of TVF call is not allowed [at 1:43]
 select * from ScalarArgsOfCollatableTypes(arg1=>[COLLATE('abc', 'und:ci')], a...
                                           ^
 ==
 
 select * from ScalarArgsOfCollatableTypes('abc', ['abc'], (COLLATE('abc', 'und:ci'), 1))
 --
-ERROR: Collation <'und:ci',_> on argument of TVF call is not allowed [at 1:59]
+ERROR: Collation <"und:ci",_> on argument of TVF call is not allowed [at 1:59]
 ...from ScalarArgsOfCollatableTypes('abc', ['abc'], (COLLATE('abc', 'und:ci')...
                                                     ^
 ==
 
 select * from TableArgWithCollatedOutputCols((select COLLATE('abc', 'und:ci') as a))
 --
-ERROR: Collation 'und:ci' on column a of argument of TVF call is not allowed [at 1:46]
+ERROR: Collation "und:ci" on column a of argument of TVF call is not allowed [at 1:46]
 select * from TableArgWithCollatedOutputCols((select COLLATE('abc', 'und:ci')...
                                              ^
 ==
 
 select * from ValueTableArgWithCollatedOutputCols((select as struct COLLATE('abc', 'und:ci') str_field))
 --
-ERROR: Collation <'und:ci'> on value-table column of argument of TVF call is not allowed [at 1:51]
+ERROR: Collation <"und:ci"> on value-table column of argument of TVF call is not allowed [at 1:51]
 select * from ValueTableArgWithCollatedOutputCols((select as struct COLLATE('...
                                                   ^
 ==
@@ -8820,7 +8820,7 @@ select * from ValueTableArgWithCollatedOutputCols((select as struct COLLATE('...
 # Collation in return type of SQL function body is not allowed.
 create function myfunc(x STRING) as (COLLATE(x, 'und:ci'));
 --
-ERROR: Collation 'und:ci' in return type of user-defined function body is not allowed [at 1:37]
+ERROR: Collation "und:ci" in return type of user-defined function body is not allowed [at 1:37]
 create function myfunc(x STRING) as (COLLATE(x, 'und:ci'));
                                     ^
 ==
@@ -8828,7 +8828,7 @@ create function myfunc(x STRING) as (COLLATE(x, 'und:ci'));
 # Collation in return type of SQL function body is not allowed.
 create function myfunc(x STRING) as ([COLLATE(x, 'und:ci')]);
 --
-ERROR: Collation ['und:ci'] in return type of user-defined function body is not allowed [at 1:37]
+ERROR: Collation ["und:ci"] in return type of user-defined function body is not allowed [at 1:37]
 create function myfunc(x STRING) as ([COLLATE(x, 'und:ci')]);
                                     ^
 ==
@@ -8836,7 +8836,7 @@ create function myfunc(x STRING) as ([COLLATE(x, 'und:ci')]);
 # Collation in return type of SQL function body is not allowed.
 create function myfunc(x STRING) as ((COLLATE(x, 'und:ci'), 1));
 --
-ERROR: Collation <'und:ci',_> in return type of user-defined function body is not allowed [at 1:37]
+ERROR: Collation <"und:ci",_> in return type of user-defined function body is not allowed [at 1:37]
 create function myfunc(x STRING) as ((COLLATE(x, 'und:ci'), 1));
                                     ^
 ==
@@ -8872,7 +8872,7 @@ CreateFunctionStmt
 create function myfunc(x STRING) returns string
 as (COLLATE(x, 'und:ci'));
 --
-ERROR: Collation 'und:ci' in return type of user-defined function body is not allowed [at 2:4]
+ERROR: Collation "und:ci" in return type of user-defined function body is not allowed [at 2:4]
 as (COLLATE(x, 'und:ci'));
    ^
 ==
@@ -8883,7 +8883,7 @@ as (COLLATE(x, 'und:ci'));
 create aggregate function myfunc(x STRING)
 as (MIN(COLLATE(x, 'und:ci')));
 --
-ERROR: Collation 'und:ci' in return type of user-defined function body is not allowed [at 4:4]
+ERROR: Collation "und:ci" in return type of user-defined function body is not allowed [at 4:4]
 as (MIN(COLLATE(x, 'und:ci')));
    ^
 ==
@@ -8894,7 +8894,7 @@ select udf_templated_collate_function('abc');
 ERROR: Invalid function udf_templated_collate_function [at 1:8]
 select udf_templated_collate_function('abc');
        ^
-Collation 'und:ci' in return type of user-defined function body is not allowed
+Collation "und:ci" in return type of user-defined function body is not allowed
 ==
 
 # Collation in return type of templated SQL function body is not allowed.
@@ -8903,7 +8903,7 @@ select udf_templated_collate_function_in_array('abc');
 ERROR: Invalid function udf_templated_collate_function_in_array [at 1:8]
 select udf_templated_collate_function_in_array('abc');
        ^
-Collation ['und:ci'] in return type of user-defined function body is not allowed
+Collation ["und:ci"] in return type of user-defined function body is not allowed
 ==
 
 # Collation in return type of templated SQL function body is not allowed.
@@ -8912,7 +8912,7 @@ select udf_templated_collate_function_in_struct('abc');
 ERROR: Invalid function udf_templated_collate_function_in_struct [at 1:8]
 select udf_templated_collate_function_in_struct('abc');
        ^
-Collation <'und:ci',_> in return type of user-defined function body is not allowed
+Collation <"und:ci",_> in return type of user-defined function body is not allowed
 ==
 
 # Collation in return type of templated SQL function body is not allowed, even
@@ -8922,7 +8922,7 @@ select udf_templated_collate_function_return_string('abc');
 ERROR: Invalid function udf_templated_collate_function_return_string [at 1:8]
 select udf_templated_collate_function_return_string('abc');
        ^
-Collation 'und:ci' in return type of user-defined function body is not allowed
+Collation "und:ci" in return type of user-defined function body is not allowed
 ==
 
 # Collation in return type of templated SQL function body is not allowed. The
@@ -8933,7 +8933,7 @@ from unnest(['a', 'b', 'c']) x;
 ERROR: Invalid function uda_templated_aggregate_with_min_collate_function [at 1:8]
 select uda_templated_aggregate_with_min_collate_function(x)
        ^
-Collation 'und:ci' in return type of user-defined function body is not allowed
+Collation "und:ci" in return type of user-defined function body is not allowed
 ==
 
 # Coercing struct in scan through internal CAST - IN subquery.
@@ -8998,7 +8998,7 @@ QueryStmt
     |     +-type=BOOL
     |     +-subquery_type=IN
     |     +-in_expr=
-    |     | +-Literal(type=STRUCT<x INT32, y STRING>, value={x:1, y:"a"}, has_explicit_type=TRUE)
+    |     | +-Literal(type=STRUCT<x INT32, y STRING>, value={x:1, y:'a'}, has_explicit_type=TRUE)
     |     +-subquery=
     |       +-ProjectScan
     |         +-column_list=[$in_subquery_cast.struct_with_string_ci#6]
@@ -9031,7 +9031,7 @@ QueryStmt
     |     +-type=BOOL
     |     +-subquery_type=IN
     |     +-in_expr=
-    |     | +-Literal(type=STRUCT<x INT32, y STRING>, value={x:1, y:"a"}, has_explicit_type=TRUE)
+    |     | +-Literal(type=STRUCT<x INT32, y STRING>, value={x:1, y:'a'}, has_explicit_type=TRUE)
     |     +-in_collation=[_,und:ci]
     |     +-subquery=
     |       +-ProjectScan
@@ -9163,9 +9163,9 @@ QueryStmt
 # is supported.
 # Coercing struct in scan through internal CAST - set operation.
 # The column that is NOT casted has collation.
-(SELECT (0.1, COLLATE("abc", "binary")))
+(SELECT (0.1, COLLATE('abc', 'binary')))
 UNION ALL
-(SELECT (1, "abc"))
+(SELECT (1, 'abc'))
 --
 QueryStmt
 +-output_column_list=
@@ -9214,9 +9214,9 @@ QueryStmt
 # is supported.
 # Coercing struct in scan through internal CAST - set operation.
 # The column that is casted has collation.
-(SELECT (0.1, "abc"))
+(SELECT (0.1, 'abc'))
 UNION ALL
-(SELECT (1, COLLATE("abc", 'und:ci')))
+(SELECT (1, COLLATE('abc', 'und:ci')))
 --
 QueryStmt
 +-output_column_list=
@@ -9270,9 +9270,9 @@ QueryStmt
 # Coercing struct in scan through internal CAST - set operation.
 # Columns from different queries are casted and they have collation in different
 # fields.
-(SELECT STRUCT(1 as x, "abc" AS y, COLLATE("abc", "binary") AS z))
+(SELECT STRUCT(1 as x, 'abc' AS y, COLLATE('abc', 'binary') AS z))
 UNION ALL
-(SELECT (0.1, COLLATE("def", 'und:ci'), "def"))
+(SELECT (0.1, COLLATE('def', 'und:ci'), 'def'))
 --
 QueryStmt
 +-output_column_list=
@@ -9347,9 +9347,9 @@ QueryStmt
 # Coercing struct in scan through internal CAST - with recursive.
 # Column in non-recursive term is casted and has collation.
 WITH RECURSIVE t AS (
-  SELECT (0.1, "abc") AS col_struct, 1 AS n UNION ALL
-  SELECT (1, COLLATE("def", 'und:ci')), 1 UNION ALL
-  SELECT (0.1, COLLATE("hi", 'und:ci')), n + 1 FROM t WHERE n < 2
+  SELECT (0.1, 'abc') AS col_struct, 1 AS n UNION ALL
+  SELECT (1, COLLATE('def', 'und:ci')), 1 UNION ALL
+  SELECT (0.1, COLLATE('hi', 'und:ci')), n + 1 FROM t WHERE n < 2
 ) SELECT * FROM t
 --
 QueryStmt
@@ -9457,9 +9457,9 @@ QueryStmt
 # Coercing struct in scan through internal CAST - with recursive.
 # Column in recursive term is casted and has collation.
 WITH RECURSIVE t AS (
-  SELECT (0.1, "abc") AS col_struct, 1 AS n UNION ALL
-  SELECT (0.1, COLLATE("def", 'und:ci')), 1 UNION ALL
-  SELECT (1, COLLATE("hi", 'und:ci')), n + 1 FROM t WHERE n < 2
+  SELECT (0.1, 'abc') AS col_struct, 1 AS n UNION ALL
+  SELECT (0.1, COLLATE('def', 'und:ci')), 1 UNION ALL
+  SELECT (1, COLLATE('hi', 'und:ci')), n + 1 FROM t WHERE n < 2
 ) SELECT * FROM t
 --
 QueryStmt
@@ -9569,7 +9569,7 @@ QueryStmt
 CREATE TABLE t(
   col_struct STRUCT<DOUBLE, STRING COLLATE 'binary', ARRAY<STRING COLLATE 'binary'>>
 ) AS
-SELECT (1, COLLATE('abc', 'und:ci'), [COLLATE("def", 'und:ci')])
+SELECT (1, COLLATE('abc', 'und:ci'), [COLLATE('def', 'und:ci')])
 --
 CreateTableAsSelectStmt
 +-name_path=t
@@ -9632,7 +9632,7 @@ CreateTableAsSelectStmt
 # The struct in the query output will be casted and has collation different
 # from the target table column.
 INSERT ComplexCollatedTable (struct_of_double_and_string_ci_and_array_ci)
-SELECT (2, COLLATE("def", "binary"), [COLLATE("def", "binary")])
+SELECT (2, COLLATE('def', 'binary'), [COLLATE('def', 'binary')])
 --
 InsertStmt
 +-table_scan=

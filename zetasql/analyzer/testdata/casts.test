@@ -64,7 +64,7 @@ QueryStmt
 
 select cast("bool" as string), cast("bool" as int32), cast("bool" as int64),
        cast("bool" as uint32), cast("bool" as uint64),
-       "-------------------------------------------" as separator,
+       '-------------------------------------------' as separator,
        cast("string" as bool), cast("int32" as bool), cast("int64" as bool),
        cast("uint32" as bool), cast("uint64" as bool)
 from SimpleTypes;
@@ -124,7 +124,7 @@ QueryStmt
 select cast("int32" as string), cast("int64" as string),
        cast("uint32" as string), cast("uint64" as string),
        cast("float" as string), cast("double" as string),
-       "-------------------------------------------" as separator,
+       '-------------------------------------------' as separator,
        cast("string" as int32), cast("string" as int64),
        cast("string" as uint32), cast("string" as uint64),
        cast("string" as float), cast("string" as double)
@@ -1095,13 +1095,13 @@ select  try_cast("date" as int64)
 
 select cast("date" as string),
        cast(timestamp as string),
-       "-------------------------------------------" as separator,
+       '-------------------------------------------' as separator,
        cast("string" as date),
        cast(string as timestamp),
-       "-------------------------------------------" as separator2,
+       '-------------------------------------------' as separator2,
        cast(TIMESTAMP '2012-02-29 01:23:45' AS STRING),
        cast(DATE '2012-02-29' AS STRING),
-       "-------------------------------------------" as separator3,
+       '-------------------------------------------' as separator3,
        cast('2012-02-29' as DATE),
        cast('2012-02-29 01:23:45' AS TIMESTAMP)
 from SimpleTypes;
@@ -1148,13 +1148,13 @@ QueryStmt
 
 select  try_cast("date" as string),
         try_cast(timestamp as string),
-       "-------------------------------------------" as separator,
+       '-------------------------------------------' as separator,
         try_cast("string" as date),
         try_cast(string as timestamp),
-       "-------------------------------------------" as separator2,
+       '-------------------------------------------' as separator2,
         try_cast(TIMESTAMP '2012-02-29 01:23:45' AS STRING),
         try_cast(DATE '2012-02-29' AS STRING),
-       "-------------------------------------------" as separator3,
+       '-------------------------------------------' as separator3,
         try_cast('2012-02-29' as DATE),
         try_cast('2012-02-29 01:23:45' AS TIMESTAMP)
 from SimpleTypes;
@@ -2146,10 +2146,10 @@ select cast(Int32Array as ARRAY<UINT64>)
 # Cast is allowed between structs with equivalent field types.
 select cast(coalesce(array<zetasql_test__.TestEnum>[1]) AS
             array<alt_descriptor_pool.zetasql_test__.TestEnum>),
-       cast(coalesce(array<zetasql_test__.TestExtraPB>[""]) AS
+       cast(coalesce(array<zetasql_test__.TestExtraPB>['']) AS
             array<alt_descriptor_pool.zetasql_test__.TestExtraPB>),
        cast(coalesce(struct(false,
-                            array<zetasql_test__.TestExtraPB>[""],
+                            array<zetasql_test__.TestExtraPB>[''],
                             CAST(1 AS zetasql_test__.TestEnum))) AS
             STRUCT<BOOL, ARRAY<alt_descriptor_pool.zetasql_test__.TestExtraPB>,
                    alt_descriptor_pool.zetasql_test__.TestEnum>)
@@ -2186,10 +2186,10 @@ QueryStmt
 
 select  try_cast(coalesce(array<zetasql_test__.TestEnum>[1]) AS
                  array<alt_descriptor_pool.zetasql_test__.TestEnum>),
-        try_cast(coalesce(array<zetasql_test__.TestExtraPB>[""]) AS
+        try_cast(coalesce(array<zetasql_test__.TestExtraPB>['']) AS
                  array<alt_descriptor_pool.zetasql_test__.TestExtraPB>),
         try_cast(coalesce(struct(false,
-                                 array<zetasql_test__.TestExtraPB>[""],
+                                 array<zetasql_test__.TestExtraPB>[''],
                                  CAST(1 AS zetasql_test__.TestEnum))) AS
            STRUCT<BOOL, ARRAY<alt_descriptor_pool.zetasql_test__.TestExtraPB>,
                   alt_descriptor_pool.zetasql_test__.TestEnum>)
@@ -2517,7 +2517,7 @@ select cast(KitchenSink.int32_val AS "zetasql_test__.TestEnum"),
        cast(KitchenSink.int64_val AS "zetasql_test__.TestEnum"),
        cast(KitchenSink.uint32_val AS "zetasql_test__.TestEnum"),
        cast(KitchenSink.uint64_val AS "zetasql_test__.TestEnum"),
-       "-------------------------------------------" as separator,
+       '-------------------------------------------' as separator,
        cast(KitchenSink.test_enum AS INT32),
        cast(KitchenSink.test_enum AS INT64),
        cast(KitchenSink.test_enum AS UINT32),
@@ -2612,7 +2612,7 @@ select  try_cast(KitchenSink.int32_val AS "zetasql_test__.TestEnum"),
         try_cast(KitchenSink.int64_val AS "zetasql_test__.TestEnum"),
         try_cast(KitchenSink.uint32_val AS "zetasql_test__.TestEnum"),
         try_cast(KitchenSink.uint64_val AS "zetasql_test__.TestEnum"),
-       "-------------------------------------------" as separator,
+       '-------------------------------------------' as separator,
         try_cast(KitchenSink.test_enum AS INT32),
         try_cast(KitchenSink.test_enum AS INT64),
         try_cast(KitchenSink.test_enum AS UINT32),
@@ -3094,7 +3094,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select  try_cast("abc" as int32) +  try_cast(2 as int32)
+select  try_cast('abc' as int32) +  try_cast(2 as int32)
 --
 
 QueryStmt
@@ -3112,7 +3112,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select  try_cast("abc" as int32) +  try_cast("def" as int32)
+select  try_cast('abc' as int32) +  try_cast('def' as int32)
 --
 
 QueryStmt
@@ -3130,7 +3130,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("abc" as int32) + cast("def" as int32)
+select cast('abc' as int32) + cast('def' as int32)
 --
 
 QueryStmt
@@ -3349,10 +3349,10 @@ select int32(1)
 ==
 
 # TODO: Provide a better error message here.
-select string("zzz")
+select string('zzz')
 --
-ERROR: Could not cast literal "zzz" to type TIMESTAMP [at 1:15]
-select string("zzz")
+ERROR: Could not cast literal 'zzz' to type TIMESTAMP [at 1:15]
+select string('zzz')
               ^
 ==
 
@@ -4226,7 +4226,7 @@ select  try_cast(ARRAY<INT64>[21474836470] as ARRAY<INT32>)
                  ^
 ==
 
-select {{cast| try_cast}}("abc" as INT64)
+select {{cast| try_cast}}('abc' as INT64)
 --
 ALTERNATION GROUP: cast
 --
@@ -4258,7 +4258,7 @@ QueryStmt
 ==
 
 [language_features={{V_1_1_CAST_DIFFERENT_ARRAY_TYPES|}}]
-select {{cast| try_cast}}(["100", "abc"] as ARRAY<INT64>);
+select {{cast| try_cast}}(['100', 'abc'] as ARRAY<INT64>);
 --
 ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,cast
 --
@@ -4291,13 +4291,13 @@ QueryStmt
 ALTERNATION GROUP: cast
 --
 ERROR: Casting between arrays with incompatible element types is not supported: Invalid cast from ARRAY<STRING> to ARRAY<INT64> [at 1:13]
-select cast(["100", "abc"] as ARRAY<INT64>);
+select cast(['100', 'abc'] as ARRAY<INT64>);
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Casting between arrays with incompatible element types is not supported: Invalid cast from ARRAY<STRING> to ARRAY<INT64> [at 1:18]
-select  try_cast(["100", "abc"] as ARRAY<INT64>);
+select  try_cast(['100', 'abc'] as ARRAY<INT64>);
                  ^
 ==
 
@@ -4500,7 +4500,7 @@ select cast(cast(1 as int32) as NUMERIC),
        cast(cast(5 as NUMERIC) as NUMERIC),
        cast(cast(1.5 as float) as NUMERIC),
        cast(2.5 as NUMERIC),
-       cast("123.4" as NUMERIC)
+       cast('123.4' as NUMERIC)
 --
 QueryStmt
 +-output_column_list=
@@ -4529,7 +4529,7 @@ QueryStmt
 ==
 
 [language_features=NUMERIC_TYPE]
-select cast("abc" as NUMERIC)
+select cast('abc' as NUMERIC)
 --
 QueryStmt
 +-output_column_list=
@@ -4546,7 +4546,7 @@ QueryStmt
 ==
 
 [language_features=NUMERIC_TYPE,PARAMETERIZED_TYPES]
-select cast("abc" as NUMERIC(2))
+select cast('abc' as NUMERIC(2))
 --
 QueryStmt
 +-output_column_list=
@@ -4564,8 +4564,8 @@ QueryStmt
 ==
 
 [language_features=NUMERIC_TYPE]
-select cast("99999999999999999999999999999.999999999" as NUMERIC),
-       cast("-99999999999999999999999999999.999999999" as NUMERIC)
+select cast('99999999999999999999999999999.999999999' as NUMERIC),
+       cast('-99999999999999999999999999999.999999999' as NUMERIC)
 --
 QueryStmt
 +-output_column_list=
@@ -4582,8 +4582,8 @@ QueryStmt
 ==
 
 [language_features={{NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
-select cast("99999999999999999999999999999.999999999" as DECIMAL),
-       cast("-99999999999999999999999999999.999999999" as DECIMAL)
+select cast('99999999999999999999999999999.999999999' as DECIMAL),
+       cast('-99999999999999999999999999999.999999999' as DECIMAL)
 --
 ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
@@ -4606,11 +4606,11 @@ ALTERNATION GROUPS:
     <empty>
 --
 ERROR: Type not found: DECIMAL [at 1:58]
-select cast("99999999999999999999999999999.999999999" as DECIMAL),
+select cast('99999999999999999999999999999.999999999' as DECIMAL),
                                                          ^
 ==
 
-select cast("123" as SMALLINT)
+select cast('123' as SMALLINT)
 --
 QueryStmt
 +-output_column_list=
@@ -4624,7 +4624,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as BIGINT)
+select cast('123' as BIGINT)
 --
 QueryStmt
 +-output_column_list=
@@ -4638,7 +4638,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as INT)
+select cast('123' as INT)
 --
 QueryStmt
 +-output_column_list=
@@ -4652,7 +4652,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as INTEGER)
+select cast('123' as INTEGER)
 --
 QueryStmt
 +-output_column_list=
@@ -4666,7 +4666,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as INT64AliasType)
+select cast('123' as INT64AliasType)
 --
 QueryStmt
 +-output_column_list=
@@ -4681,8 +4681,8 @@ QueryStmt
 ==
 
 [language_features={{BIGNUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|BIGNUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
-select cast("1e-38" as BIGDECIMAL),
-       cast("-1e-38" as BIGDECIMAL)
+select cast('1e-38' as BIGDECIMAL),
+       cast('-1e-38' as BIGDECIMAL)
 --
 ALTERNATION GROUP: BIGNUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
@@ -4705,7 +4705,7 @@ ALTERNATION GROUPS:
     <empty>
 --
 ERROR: Type not found: BIGDECIMAL [at 1:24]
-select cast("1e-38" as BIGDECIMAL),
+select cast('1e-38' as BIGDECIMAL),
                        ^
 ==
 
@@ -4853,7 +4853,7 @@ select cast(cast(1 as int32) as BIGNUMERIC),
        cast(cast(6 as BIGNUMERIC) as BIGNUMERIC),
        cast(cast(1.5 as float) as BIGNUMERIC),
        cast(2.5 as BIGNUMERIC),
-       cast("123.4" as BIGNUMERIC)
+       cast('123.4' as BIGNUMERIC)
 --
 ALTERNATION GROUP: BIGNUMERIC_TYPE,NUMERIC_TYPE
 --
@@ -4892,7 +4892,7 @@ select cast(cast(1 as int32) as BIGNUMERIC),
 ==
 
 [language_features=BIGNUMERIC_TYPE]
-select cast("abc" as BIGNUMERIC)
+select cast('abc' as BIGNUMERIC)
 --
 QueryStmt
 +-output_column_list=
@@ -4909,8 +4909,8 @@ QueryStmt
 ==
 
 [language_features=BIGNUMERIC_TYPE]
-select cast("578960446186580977117854925043439539266.34992332820282019728792003956564819967" as BIGNUMERIC),
-       cast("-578960446186580977117854925043439539266.34992332820282019728792003956564819968" as BIGNUMERIC)
+select cast('578960446186580977117854925043439539266.34992332820282019728792003956564819967' as BIGNUMERIC),
+       cast('-578960446186580977117854925043439539266.34992332820282019728792003956564819968' as BIGNUMERIC)
 --
 QueryStmt
 +-output_column_list=
@@ -5088,10 +5088,10 @@ select cast(JSON '1' as STRING)
 ==
 
 [language_features=JSON_TYPE]
-select cast("str" as JSON)
+select cast('str' as JSON)
 --
 ERROR: Invalid cast from STRING to JSON [at 1:13]
-select cast("str" as JSON)
+select cast('str' as JSON)
             ^
 ==
 
@@ -5363,19 +5363,19 @@ select cast(cast(null as struct<a int64>) as array<int64>);
             ^
 ==
 
-select {{ try_|}}cast(struct<a string, b bool>("a", NULL) AS
+select {{ try_|}}cast(struct<a string, b bool>('a', NULL) AS
                      struct<a string, b zetasql_test__.TestEnum>);
 --
 ALTERNATION GROUP:  try_
 --
 ERROR: Invalid cast from STRUCT<a STRING, b BOOL> to STRUCT<a STRING, b zetasql_test__.TestEnum> [at 1:18]
-select  try_cast(struct<a string, b bool>("a", NULL) AS
+select  try_cast(struct<a string, b bool>('a', NULL) AS
                  ^
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Invalid cast from STRUCT<a STRING, b BOOL> to STRUCT<a STRING, b zetasql_test__.TestEnum> [at 1:13]
-select cast(struct<a string, b bool>("a", NULL) AS
+select cast(struct<a string, b bool>('a', NULL) AS
             ^
 ==
 
@@ -5622,7 +5622,7 @@ QueryStmt
 ==
 
 # NOOP Cast makes the type explicit
-SELECT 'a', CAST("b" AS STRING);
+SELECT 'a', CAST('b' AS STRING);
 --
 QueryStmt
 +-output_column_list=

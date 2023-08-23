@@ -18,7 +18,7 @@ select count(*) over w,
        any_value(value) over w,
        array_agg(key) over w,
        array_concat_agg([key, key]) over w,
-       string_agg(value, "; ") over w
+       string_agg(value, '; ') over w
 from keyvalue
 window w as (partition by key order by value rows 2 preceding)
 --
@@ -292,7 +292,7 @@ select count(*) over (),
        any_value(value) over (),
        array_agg(key) over (),
        array_concat_agg([key]) over (),
-       string_agg(value, "; ") over ()
+       string_agg(value, '; ') over ()
 from keyvalue
 --
 QueryStmt
@@ -529,7 +529,7 @@ select count(distinct value) over w,
        max(distinct key) over w,
        any_value(distinct key) over w,
        array_agg(distinct key) over w,
-       string_agg(distinct value, "; ") over w
+       string_agg(distinct value, '; ') over w
 from keyvalue
 window w as (partition by key)
 --

@@ -294,7 +294,7 @@ select ntile(null) over (order by value) from keyvalue;
              ^
 ==
 
-select ntile("1") over (order by value) from keyvalue;
+select ntile('1') over (order by value) from keyvalue;
 --
 QueryStmt
 +-output_column_list=
@@ -413,7 +413,7 @@ select lead(value) over window1,
        lead(value, 1) over window1,
        lag(value, @test_param_int32) over window1,
        lead(value, -1, NULL) over window1,
-       lag(value, 0, "string_constant") over window1,
+       lag(value, 0, 'string_constant') over window1,
        lag(key, 5000, key+1) over window1
 from keyvalue
 window window1 as (partition by key+1 order by value)
@@ -1019,12 +1019,12 @@ QueryStmt
 
 # Both arguments are NUMERIC.
 [language_features=ANALYTIC_FUNCTIONS{{|,NUMERIC_TYPE}}]
-select percentile_cont(cast(key as numeric), numeric "0.5") over () from keyvalue;
+select percentile_cont(cast(key as numeric), numeric '0.5') over () from keyvalue;
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Type not found: numeric [at 1:36]
-select percentile_cont(cast(key as numeric), numeric "0.5") over () from keyv...
+select percentile_cont(cast(key as numeric), numeric '0.5') over () from keyv...
                                    ^
 --
 ALTERNATION GROUP: ,NUMERIC_TYPE
@@ -1056,7 +1056,7 @@ QueryStmt
 select
   percentile_cont(cast(key as numeric), 0.5) over (),
   percentile_cont(cast(key as numeric), 1) over (),
-  percentile_cont(key, numeric "0.5") over()
+  percentile_cont(key, numeric '0.5') over()
 from keyvalue;
 --
 ALTERNATION GROUP: <empty>
@@ -1104,12 +1104,12 @@ QueryStmt
 
 # Both arguments are BIGNUMERIC.
 [language_features=ANALYTIC_FUNCTIONS{{|,BIGNUMERIC_TYPE}}]
-select percentile_cont(cast(key as bignumeric), bignumeric "0.5") over () from keyvalue;
+select percentile_cont(cast(key as bignumeric), bignumeric '0.5') over () from keyvalue;
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Type not found: bignumeric [at 1:36]
-select percentile_cont(cast(key as bignumeric), bignumeric "0.5") over () fro...
+select percentile_cont(cast(key as bignumeric), bignumeric '0.5') over () fro...
                                    ^
 --
 ALTERNATION GROUP: ,BIGNUMERIC_TYPE
@@ -1141,7 +1141,7 @@ QueryStmt
 select
   percentile_cont(cast(key as bignumeric), 0.5) over (),
   percentile_cont(cast(key as bignumeric), 1) over (),
-  percentile_cont(key, bignumeric "0.5") over()
+  percentile_cont(key, bignumeric '0.5') over()
 from keyvalue;
 --
 ALTERNATION GROUP: <empty>
@@ -1191,8 +1191,8 @@ QueryStmt
 # should use the BIGNUMERIC signature.
 [language_features=ANALYTIC_FUNCTIONS,NUMERIC_TYPE,BIGNUMERIC_TYPE]
 select
-  percentile_cont(cast(key as bignumeric), numeric "0.5") over (),
-  percentile_cont(cast(key as numeric), bignumeric "0.5") over ()
+  percentile_cont(cast(key as bignumeric), numeric '0.5') over (),
+  percentile_cont(cast(key as numeric), bignumeric '0.5') over ()
 from keyvalue;
 --
 QueryStmt
@@ -1326,14 +1326,14 @@ QueryStmt
 # Only second argument is NUMERIC.
 [language_features=ANALYTIC_FUNCTIONS{{|,NUMERIC_TYPE}}]
 select
-  percentile_disc(key, NUMERIC "0.5") over (),
-  percentile_disc(value, NUMERIC "0.5") over ()
+  percentile_disc(key, NUMERIC '0.5') over (),
+  percentile_disc(value, NUMERIC '0.5') over ()
 from keyvalue;
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: NUMERIC literals are not supported [at 2:24]
-  percentile_disc(key, NUMERIC "0.5") over (),
+  percentile_disc(key, NUMERIC '0.5') over (),
                        ^
 --
 ALTERNATION GROUP: ,NUMERIC_TYPE
@@ -1408,14 +1408,14 @@ QueryStmt
 # Only second argument is BIGNUMERIC.
 [language_features=ANALYTIC_FUNCTIONS{{|,BIGNUMERIC_TYPE}}]
 select
-  percentile_disc(key, BIGNUMERIC "0.5") over (),
-  percentile_disc(value, BIGNUMERIC "0.5") over ()
+  percentile_disc(key, BIGNUMERIC '0.5') over (),
+  percentile_disc(value, BIGNUMERIC '0.5') over ()
 from keyvalue;
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: BIGNUMERIC literals are not supported [at 2:24]
-  percentile_disc(key, BIGNUMERIC "0.5") over (),
+  percentile_disc(key, BIGNUMERIC '0.5') over (),
                        ^
 --
 ALTERNATION GROUP: ,BIGNUMERIC_TYPE
@@ -1448,8 +1448,8 @@ QueryStmt
 # Mix of NUMERIC and BIGNUMERIC.
 [language_features=ANALYTIC_FUNCTIONS,NUMERIC_TYPE,BIGNUMERIC_TYPE]
 select
-  percentile_disc(CAST(key AS NUMERIC), BIGNUMERIC "0.5") over (),
-  percentile_disc(CAST(key AS BIGNUMERIC), NUMERIC "0.5") over ()
+  percentile_disc(CAST(key AS NUMERIC), BIGNUMERIC '0.5') over (),
+  percentile_disc(CAST(key AS BIGNUMERIC), NUMERIC '0.5') over ()
 from keyvalue;
 --
 QueryStmt
@@ -1710,69 +1710,69 @@ select percentile_disc(key, -0.1) over () from keyvalue;
 ==
 
 # Second argument cannot be NaN.
-select percentile_{{cont|disc}}(key, cast("nan" as double)) over () from keyvalue;
+select percentile_{{cont|disc}}(key, cast('nan' as double)) over () from keyvalue;
 --
 ALTERNATION GROUP: cont
 --
 ERROR: Argument 2 to PERCENTILE_CONT must be between 0 and 1 [at 1:29]
-select percentile_cont(key, cast("nan" as double)) over () from keyvalue;
+select percentile_cont(key, cast('nan' as double)) over () from keyvalue;
                             ^
 --
 ALTERNATION GROUP: disc
 --
 ERROR: Argument 2 to PERCENTILE_DISC must be between 0 and 1 [at 1:29]
-select percentile_disc(key, cast("nan" as double)) over () from keyvalue;
+select percentile_disc(key, cast('nan' as double)) over () from keyvalue;
                             ^
 ==
 
 # Second argument cannot be infinity.
-select percentile_{{cont|disc}}(key, cast("inf" as double)) over () from keyvalue;
+select percentile_{{cont|disc}}(key, cast('inf' as double)) over () from keyvalue;
 --
 ALTERNATION GROUP: cont
 --
 ERROR: Argument 2 to PERCENTILE_CONT must be between 0 and 1 [at 1:29]
-select percentile_cont(key, cast("inf" as double)) over () from keyvalue;
+select percentile_cont(key, cast('inf' as double)) over () from keyvalue;
                             ^
 --
 ALTERNATION GROUP: disc
 --
 ERROR: Argument 2 to PERCENTILE_DISC must be between 0 and 1 [at 1:29]
-select percentile_disc(key, cast("inf" as double)) over () from keyvalue;
+select percentile_disc(key, cast('inf' as double)) over () from keyvalue;
                             ^
 ==
 
 # Second argument cannot be > 1 (NUMERIC type).
 [language_features=ANALYTIC_FUNCTIONS,NUMERIC_TYPE]
-select percentile_{{cont|disc}}(cast(key as numeric), numeric "1.000000001") over () from keyvalue;
+select percentile_{{cont|disc}}(cast(key as numeric), numeric '1.000000001') over () from keyvalue;
 --
 ALTERNATION GROUP: cont
 --
 ERROR: Argument 2 to PERCENTILE_CONT must be between 0 and 1 [at 1:46]
-select percentile_cont(cast(key as numeric), numeric "1.000000001") over () f...
+select percentile_cont(cast(key as numeric), numeric '1.000000001') over () f...
                                              ^
 --
 ALTERNATION GROUP: disc
 --
 ERROR: Argument 2 to PERCENTILE_DISC must be between 0 and 1 [at 1:46]
-select percentile_disc(cast(key as numeric), numeric "1.000000001") over () f...
+select percentile_disc(cast(key as numeric), numeric '1.000000001') over () f...
                                              ^
 
 ==
 
 # Second argument cannot be negative NUMERIC.
 [language_features=ANALYTIC_FUNCTIONS,NUMERIC_TYPE]
-select percentile_{{cont|disc}}(cast(key as numeric), numeric "-1e-9") over () from keyvalue;
+select percentile_{{cont|disc}}(cast(key as numeric), numeric '-1e-9') over () from keyvalue;
 --
 ALTERNATION GROUP: cont
 --
 ERROR: Argument 2 to PERCENTILE_CONT must be between 0 and 1 [at 1:46]
-select percentile_cont(cast(key as numeric), numeric "-1e-9") over () from ke...
+select percentile_cont(cast(key as numeric), numeric '-1e-9') over () from ke...
                                              ^
 --
 ALTERNATION GROUP: disc
 --
 ERROR: Argument 2 to PERCENTILE_DISC must be between 0 and 1 [at 1:46]
-select percentile_disc(cast(key as numeric), numeric "-1e-9") over () from ke...
+select percentile_disc(cast(key as numeric), numeric '-1e-9') over () from ke...
                                              ^
 ==
 
@@ -1780,36 +1780,36 @@ select percentile_disc(cast(key as numeric), numeric "-1e-9") over () from ke...
 [language_features=ANALYTIC_FUNCTIONS,BIGNUMERIC_TYPE]
 select
   percentile_{{cont|disc}}(cast(key as bignumeric),
-                           bignumeric "1.00000000000000000000000000000000000001")
+                           bignumeric '1.00000000000000000000000000000000000001')
   over ()
 from keyvalue;
 --
 ALTERNATION GROUP: cont
 --
 ERROR: Argument 2 to PERCENTILE_CONT must be between 0 and 1 [at 3:28]
-                           bignumeric "1.000000000000000000000000000000000000...
+                           bignumeric '1.000000000000000000000000000000000000...
                            ^
 --
 ALTERNATION GROUP: disc
 --
 ERROR: Argument 2 to PERCENTILE_DISC must be between 0 and 1 [at 3:28]
-                           bignumeric "1.000000000000000000000000000000000000...
+                           bignumeric '1.000000000000000000000000000000000000...
                            ^
 
 ==
 
 # Second argument cannot be negative BIGNUMERIC.
 [language_features=ANALYTIC_FUNCTIONS,BIGNUMERIC_TYPE]
-select percentile_{{cont|disc}}(cast(key as bignumeric), bignumeric "-1e-38") over () from keyvalue;
+select percentile_{{cont|disc}}(cast(key as bignumeric), bignumeric '-1e-38') over () from keyvalue;
 --
 ALTERNATION GROUP: cont
 --
 ERROR: Argument 2 to PERCENTILE_CONT must be between 0 and 1 [at 1:49]
-select percentile_cont(cast(key as bignumeric), bignumeric "-1e-38") over () ...
+select percentile_cont(cast(key as bignumeric), bignumeric '-1e-38') over () ...
                                                 ^
 --
 ALTERNATION GROUP: disc
 --
 ERROR: Argument 2 to PERCENTILE_DISC must be between 0 and 1 [at 1:49]
-select percentile_disc(cast(key as bignumeric), bignumeric "-1e-38") over () ...
+select percentile_disc(cast(key as bignumeric), bignumeric '-1e-38') over () ...
                                                 ^

@@ -91,7 +91,7 @@ QueryStmt
 
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
 --
-ERROR: Could not cast literal "Z" to type INT64 [at 1:67]
+ERROR: Could not cast literal 'Z' to type INT64 [at 1:67]
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
                                                                   ^
 ==
