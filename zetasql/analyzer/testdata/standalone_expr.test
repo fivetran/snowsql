@@ -926,13 +926,13 @@ MakeStruct
   | +-parse_location=1-12
   | +-type=INT64
   | +-expr=
-  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='')
+  | | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="")
   | +-field_descriptor=int64_key_1
   +-GetProtoField
     +-parse_location=14-22
     +-type=BOOL
     +-expr=
-    | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name='')
+    | +-ExpressionColumn(type=PROTO<zetasql_test__.KitchenSinkPB>, name="")
     +-field_descriptor=date
     +-get_has_bit=TRUE
 ==

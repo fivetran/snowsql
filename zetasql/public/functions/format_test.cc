@@ -523,15 +523,15 @@ TEST_P(FormatFunctionTests, Test) {
   EXPECT_EQ("nan", TestFormat("%t", {values::Double(kNegativeDoubleNan)}));
 
   EXPECT_EQ("true", TestFormat("%T", {values::Bool(true)}));
-  EXPECT_EQ("\"abc\"", TestFormat("%T", {values::String("abc")}));
+  EXPECT_EQ("'abc'", TestFormat("%T", {values::String("abc")}));
   EXPECT_EQ("b\"abc\"", TestFormat("%T", {values::Bytes("abc")}));
-  EXPECT_EQ("DATE \"2003-10-20\"", TestFormat("%T", {date}));
-  EXPECT_EQ("DATETIME \"2016-04-26 14:53:38.123456\"",
+  EXPECT_EQ("DATE '2003-10-20'", TestFormat("%T", {date}));
+  EXPECT_EQ("DATETIME '2016-04-26 14:53:38.123456'",
             TestFormat("%T", {datetime}));
-  EXPECT_EQ("TIME \"15:12:47.987654123\"", TestFormat("%T", {time}));
-  EXPECT_EQ("TIMESTAMP \"2015-04-18 01:55:58.123456+00\"",
+  EXPECT_EQ("TIME '15:12:47.987654123'", TestFormat("%T", {time}));
+  EXPECT_EQ("TIMESTAMP '2015-04-18 01:55:58.123456+00'",
             TestFormat("%T", {timestamp}));
-  EXPECT_EQ("\"TESTENUM2\"", TestFormat("%T", {enum_value}));
+  EXPECT_EQ("'TESTENUM2'", TestFormat("%T", {enum_value}));
 
   // Width and precision and modifiers for %t and %T act like %s.
   EXPECT_EQ("2003-10-20", TestFormat("%4t", {date}));
@@ -543,8 +543,8 @@ TEST_P(FormatFunctionTests, Test) {
   EXPECT_EQ("2003-10-20  ", TestFormat("%*t", {Int64(-12), date}));
   EXPECT_EQ("2003-10-20  ", TestFormat("%-*t", {Int64(12), date}));
   EXPECT_EQ("2003-10-20  ", TestFormat("%-*t", {Int64(-12), date}));
-  EXPECT_EQ("   \"abc\"", TestFormat("%8T", {values::String("abc")}));
-  EXPECT_EQ("\"abc\"   ", TestFormat("%-8T", {values::String("abc")}));
+  EXPECT_EQ("   'abc'", TestFormat("%8T", {values::String("abc")}));
+  EXPECT_EQ("'abc'   ", TestFormat("%-8T", {values::String("abc")}));
   EXPECT_EQ("  NULL", TestFormat("%6T", {values::NullString()}));
   EXPECT_EQ("    NU", TestFormat("%6.2t", {values::NullString()}));
   EXPECT_EQ("NULL", TestFormat("%3t", {values::NullString()}));
@@ -578,7 +578,7 @@ TEST_P(FormatFunctionTests, Test) {
 
   EXPECT_EQ("(abc, 123)", TestFormat("%t", {struct_value}));
   EXPECT_EQ("[1, 2, 3]", TestFormat("%t", {array_value}));
-  EXPECT_EQ("(\"abc\", 123)", TestFormat("%T", {struct_value}));
+  EXPECT_EQ("('abc', 123)", TestFormat("%T", {struct_value}));
   EXPECT_EQ("[1, 2, 3]", TestFormat("%T", {array_value}));
   EXPECT_EQ(R"(int32_val1: 123 str_value: "foo" str_value: "bar")",
             TestFormat("%t", {proto_value}));
@@ -670,7 +670,7 @@ str_value: "bar"
       values::Struct(struct_of_struct_type, {struct_value, struct_value});
   EXPECT_EQ("((abc, 123), (abc, 123))",
             TestFormat("%t", {struct_of_struct_value}));
-  EXPECT_EQ("((\"abc\", 123), (\"abc\", 123))",
+  EXPECT_EQ("(('abc', 123), ('abc', 123))",
             TestFormat("%T", {struct_of_struct_value}));
 
   const StructType* struct_of_enum_type;
@@ -679,7 +679,7 @@ str_value: "bar"
   Value struct_of_enum_value =
       values::Struct(struct_of_enum_type, {enum_value, enum_value});
   EXPECT_EQ("(TESTENUM2, TESTENUM2)", TestFormat("%t", {struct_of_enum_value}));
-  EXPECT_EQ("(\"TESTENUM2\", \"TESTENUM2\")",
+  EXPECT_EQ("('TESTENUM2', 'TESTENUM2')",
             TestFormat("%T", {struct_of_enum_value}));
 
   const ArrayType* array_of_proto_type;
@@ -712,7 +712,7 @@ str_value: "bar"
       values::Array(array_of_struct_type, {struct_value, struct_value});
   EXPECT_EQ("[(abc, 123), (abc, 123)]",
             TestFormat("%t", {array_of_struct_value}));
-  EXPECT_EQ("[(\"abc\", 123), (\"abc\", 123)]",
+  EXPECT_EQ("[('abc', 123), ('abc', 123)]",
             TestFormat("%T", {array_of_struct_value}));
 
   const ArrayType* array_of_enum_type;
@@ -720,7 +720,7 @@ str_value: "bar"
   Value array_of_enum_value =
       values::Array(array_of_enum_type, {enum_value, enum_value});
   EXPECT_EQ("[TESTENUM2, TESTENUM2]", TestFormat("%t", {array_of_enum_value}));
-  EXPECT_EQ("[\"TESTENUM2\", \"TESTENUM2\"]",
+  EXPECT_EQ("['TESTENUM2', 'TESTENUM2']",
             TestFormat("%T", {array_of_enum_value}));
 
   // Size errors.  Default limit in the flag is 1MB = 1048576.
@@ -796,7 +796,7 @@ str_value: "bar"
       "好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你"
       "好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你"
       "好你好你好你好你好你好你好全部结束";
-  EXPECT_EQ("\"" + long_string_1 + "\"",
+  EXPECT_EQ("'" + long_string_1 + "'",
             TestFormat("%T", {values::String(long_string_1)}));
 
   std::string long_string_2 =
@@ -810,14 +810,14 @@ str_value: "bar"
       "好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你"
       "好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你"
       "好你好你好你好你好你好你好全部结束";
-  EXPECT_EQ("\"" + long_string_2 + "\"",
+  EXPECT_EQ("'" + long_string_2 + "'",
             TestFormat("%T", {values::String(long_string_2)}));
 
   std::string long_string_3 =
       "好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你"
       "好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你"
       "好你好你好你好你好你好你好全部结束";
-  EXPECT_EQ("\"" + long_string_3 + "\"",
+  EXPECT_EQ("'" + long_string_3 + "'",
             TestFormat("%T", {values::String(long_string_3)}));
 
   TestFormatF TestFormatLegacy =

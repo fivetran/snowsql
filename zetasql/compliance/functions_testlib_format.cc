@@ -222,13 +222,13 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       R"(repeated_string_val: "foo\\bar")"
       "\n";
   const std::string escape_chars_proto_sql_literal =
-      R"("int64_key_1: 1 int64_key_2: 2 )"
-      R"(repeated_string_val: \"foo\\'bar\" )"
-      R"(repeated_string_val: \"foo\\'\\'bar\" )"
-      R"(repeated_string_val: \"foo`bar\" )"
-      R"(repeated_string_val: \"foo``bar\" )"
-      R"(repeated_string_val: \"foo\\\"bar\" )"
-      R"(repeated_string_val: \"foo\\\\bar\"")";
+      R"('int64_key_1: 1 int64_key_2: 2 )"
+      R"(repeated_string_val: "foo\\\'bar" )"
+      R"(repeated_string_val: "foo\\\'\\\'bar" )"
+      R"(repeated_string_val: "foo`bar" )"
+      R"(repeated_string_val: "foo``bar" )"
+      R"(repeated_string_val: "foo\\"bar" )"
+      R"(repeated_string_val: "foo\\\\bar"')";
 
   const Value date = DateFromStr("2001-05-21");
   const Value date_null = Value::Null(types::DateType());
@@ -560,7 +560,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       {"format", {"%-6.3t", enum_value}, "TES   "},
       {"format", {"%+#06.3t", enum_value}, "   TES"},
       {"format", {"%*.*t", 6, 3, enum_value}, "   TES"},
-      {"format", {"%*.*T", 6, 3, enum_value}, "   \"TE"},
+      {"format", {"%*.*T", 6, 3, enum_value}, "   'TE"},
       // Same applies even for integers formatted with %t.
       {"format", {"%6.3t", 10000}, "   100"},
       {"format", {"%6.3d", 10000}, " 10000"},

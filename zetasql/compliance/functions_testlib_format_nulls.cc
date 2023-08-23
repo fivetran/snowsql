@@ -142,7 +142,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatNulls() {
       {"format", {"%t", enum_array_value}, "[TESTENUM1, NULL, TESTENUM1]"},
       {"format",
        {"%T", enum_array_value},
-       R"(["TESTENUM1", NULL, "TESTENUM1"])"},
+       R"(['TESTENUM1', NULL, 'TESTENUM1'])"},
       {"format",
        {"%t", proto_array_value},
        absl::Substitute("[$0, NULL, $0]", proto_value_str)},
