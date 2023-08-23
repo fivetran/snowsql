@@ -1,26 +1,26 @@
 DROP ROW ACCESS POLICY foo ON bar;
 --
-DropRowAccessPolicyStmt(name="foo", target_name_path=bar)
+DropRowAccessPolicyStmt(name='foo', target_name_path=bar)
 ==
 
 DROP ROW ACCESS POLICY foo ON namespace."all";
 --
-DropRowAccessPolicyStmt(name="foo", target_name_path=namespace."all")
+DropRowAccessPolicyStmt(name='foo', target_name_path=namespace."all")
 ==
 
 DROP ROW ACCESS POLICY IF EXISTS foo ON bar;
 --
-DropRowAccessPolicyStmt(is_if_exists=TRUE, name="foo", target_name_path=bar)
+DropRowAccessPolicyStmt(is_if_exists=TRUE, name='foo', target_name_path=bar)
 ==
 
 DROP ROW ACCESS POLICY "IF EXISTS foo" ON bar;
 --
-DropRowAccessPolicyStmt(name="IF EXISTS foo", target_name_path=bar)
+DropRowAccessPolicyStmt(name='IF EXISTS foo', target_name_path=bar)
 ==
 
 DROP ROW ACCESS POLICY IF EXISTS "all" ON bar;
 --
-DropRowAccessPolicyStmt(is_if_exists=TRUE, name="all", target_name_path=bar)
+DropRowAccessPolicyStmt(is_if_exists=TRUE, name='all', target_name_path=bar)
 ==
 
 DROP ALL ROW POLICIES ON bar;

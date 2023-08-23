@@ -30,7 +30,7 @@ AssertStmt
 ==
 
 # ASSERT with a description.
-ASSERT "123" IN ("123", "456") AS "test description";
+ASSERT '123' IN ('123', '456') AS 'test description';
 --
 AssertStmt
 +-expression=
@@ -38,7 +38,7 @@ AssertStmt
 |   +-Literal(type=STRING, value='123')
 |   +-Literal(type=STRING, value='123')
 |   +-Literal(type=STRING, value='456')
-+-description="test description"
++-description='test description'
 ==
 
 ASSERT (SELECT max(int32) > 1 FROM SimpleTypes);

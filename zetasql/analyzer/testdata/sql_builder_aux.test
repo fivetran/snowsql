@@ -9,7 +9,7 @@ as
 select key, key k1, key k2, key+1 k3 from keYvalue limit 5
 --
 [UNPARSED_SQL]
-CREATE TEMP TABLE X OPTIONS(x = 5, y = "abc", z = @test_param_array, z = "abc") AS
+CREATE TEMP TABLE X OPTIONS(x = 5, y = 'abc', z = @test_param_array, z = 'abc') AS
 SELECT
   keyvalue_2.a_1 AS key,
   keyvalue_2.a_1 AS k1,
@@ -36,7 +36,7 @@ SELECT
 create table if not exists x.y options (x=y) as (select 1 a)
 --
 [UNPARSED_SQL]
-CREATE TABLE IF NOT EXISTS x.y OPTIONS(x = "y") AS
+CREATE TABLE IF NOT EXISTS x.y OPTIONS(x = 'y') AS
 SELECT
   1 AS a;
 ==
@@ -45,7 +45,7 @@ define table a."b"."c 2" (x='''
 foo''',y='2011-10-22',z=@test_param_int64)
 --
 [UNPARSED_SQL]
-DEFINE TABLE a.b."c 2"(x = "\nfoo", y = '2011-10-22', z = @test_param_int64);
+DEFINE TABLE a.b."c 2"(x = '\nfoo', y = '2011-10-22', z = @test_param_int64);
 ==
 
 define table t1 ()
@@ -246,7 +246,7 @@ CREATE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com', 'mdbuser/bar
 create row policy "all" on KeyValue to 'everyone@google.com' using (false);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY "all" ON KeyValue GRANT TO ("everyone@google.com") FILTER USING (false);
+CREATE ROW ACCESS POLICY "all" ON KeyValue GRANT TO ('everyone@google.com') FILTER USING (false);
 ==
 
 [language_features=ALLOW_LEGACY_ROW_ACCESS_POLICY_SYNTAX]
@@ -285,7 +285,7 @@ CREATE ROW ACCESS POLICY p1 ON KeyValue GRANT TO ('foo@google.com', 'mdbuser/bar
 create row access policy "all" on KeyValue grant to ('everyone@google.com') filter using (false);
 --
 [UNPARSED_SQL]
-CREATE ROW ACCESS POLICY "all" ON KeyValue GRANT TO ("everyone@google.com") FILTER USING (false);
+CREATE ROW ACCESS POLICY "all" ON KeyValue GRANT TO ('everyone@google.com') FILTER USING (false);
 ==
 
 create or replace row access policy p1 on KeyValue grant to ('foo@google.com', 'mdbuser/bar')
@@ -393,12 +393,12 @@ ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ALL, G
 ==
 
 alter row access policy "my policy" on KeyValue
-rename to p2, revoke from ('allAuthenticatedUsers', "domain:google.com"),
+rename to p2, revoke from ('allAuthenticatedUsers', 'domain:google.com'),
 grant to ('foo@google.com', 'mdbuser/bar'),
 filter using(Key = 123);
 --
 [UNPARSED_SQL]
-ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ("allAuthenticatedUsers", "domain:google.com"),
+ALTER ROW ACCESS POLICY "my policy" ON KeyValue RENAME TO p2, REVOKE FROM ('allAuthenticatedUsers', 'domain:google.com'),
   GRANT TO ('foo@google.com', 'mdbuser/bar'), FILTER USING (Key = 123);
 ==
 
@@ -409,7 +409,7 @@ as 'return \'hi\';'
 --
 [UNPARSED_SQL]
 CREATE FUNCTION foo.fn(x STRUCT< a STRING, b INT32 >, y BOOL)
-RETURNS STRING LANGUAGE testlang as 'return \'hi\';';
+RETURNS STRING LANGUAGE testlang AS 'return \'hi\';';
 ==
 
 # Create multi-line external language function, with modifiers (if not exists).
@@ -418,11 +418,11 @@ fn( x struct<a string, b int32>, y boolean )
 returns string language testlang
 as ''' return
   "presto!" + s + '\n';
-"""
+'''
 --
 [UNPARSED_SQL]
 CREATE TEMP FUNCTION IF NOT EXISTS fn(x STRUCT< a STRING, b INT32 >, y BOOL)
-RETURNS STRING LANGUAGE testlang AS " return\n  \"presto!\" + s + '\n';\n";
+RETURNS STRING LANGUAGE testlang AS ' return\n  "presto!" + s + \'\n\';\n';
 ==
 
 # Create multi-line external language function, with modifiers (or replace).
@@ -431,11 +431,11 @@ fn( x struct<a string, b int32>, y boolean )
 returns string language testlang
 as ''' return
   "presto!" + s + '\n';
-"""
+'''
 --
 [UNPARSED_SQL]
 CREATE OR REPLACE TEMP FUNCTION fn(x STRUCT< a STRING, b INT32 >, y BOOL)
-RETURNS STRING LANGUAGE testlang AS " return\n  \"presto!\" + s + '\n';\n";
+RETURNS STRING LANGUAGE testlang AS ' return\n  "presto!" + s + \'\n\';\n';
 ==
 
 # Create SQL function with quoted name.
@@ -687,55 +687,55 @@ ALTERNATION GROUPS:
 IMPORT MODULE a.b.c AS c OPTIONS(e = 1);
 ==
 
-IMPORT PROTO "a/b/c" {{|INTO d}} {{|OPTIONS(e=2)}};
+IMPORT PROTO 'a/b/c' {{|INTO d}} {{|OPTIONS(e=2)}};
 --
 ALTERNATION GROUP: <empty>
 --
 [UNPARSED_SQL]
-IMPORT PROTO "a/b/c";
+IMPORT PROTO 'a/b/c';
 --
 ALTERNATION GROUP: OPTIONS(e=2)
 --
 [UNPARSED_SQL]
-IMPORT PROTO "a/b/c" OPTIONS(e = 2);
+IMPORT PROTO 'a/b/c' OPTIONS(e = 2);
 --
 ALTERNATION GROUP: INTO d,
 --
 [UNPARSED_SQL]
-IMPORT PROTO "a/b/c" INTO d;
+IMPORT PROTO 'a/b/c' INTO d;
 --
 ALTERNATION GROUP: INTO d,OPTIONS(e=2)
 --
 [UNPARSED_SQL]
-IMPORT PROTO "a/b/c" INTO d OPTIONS(e = 2);
+IMPORT PROTO 'a/b/c' INTO d OPTIONS(e = 2);
 ==
 
 # ALTER TABLE SET OPTIONS
-ALTER TABLE foo.bar SET OPTIONS(description="foo") ;
+ALTER TABLE foo.bar SET OPTIONS(description='foo') ;
 --
 [UNPARSED_SQL]
-ALTER TABLE foo.bar SET OPTIONS(description = "foo");
+ALTER TABLE foo.bar SET OPTIONS(description = 'foo');
 ==
 
 # ALTER TABLE SET OPTIONS
-ALTER TABLE IF EXISTS foo.bar SET OPTIONS(description="foo") ;
+ALTER TABLE IF EXISTS foo.bar SET OPTIONS(description='foo') ;
 --
 [UNPARSED_SQL]
-ALTER TABLE IF EXISTS foo.bar SET OPTIONS(description = "foo");
+ALTER TABLE IF EXISTS foo.bar SET OPTIONS(description = 'foo');
 ==
 
 # ALTER DATABASE SET OPTIONS
-ALTER DATABASE db1 SET OPTIONS(description="foo") ;
+ALTER DATABASE db1 SET OPTIONS(description='foo') ;
 --
 [UNPARSED_SQL]
-ALTER DATABASE db1 SET OPTIONS(description = "foo");
+ALTER DATABASE db1 SET OPTIONS(description = 'foo');
 ==
 
 # ALTER DATABASE SET OPTIONS
-ALTER DATABASE IF EXISTS db1 SET OPTIONS(description="foo") ;
+ALTER DATABASE IF EXISTS db1 SET OPTIONS(description='foo') ;
 --
 [UNPARSED_SQL]
-ALTER DATABASE IF EXISTS db1 SET OPTIONS(description = "foo");
+ALTER DATABASE IF EXISTS db1 SET OPTIONS(description = 'foo');
 ==
 
 EXECUTE IMMEDIATE 'select 1' INTO x,y USING 4,5;
@@ -744,36 +744,36 @@ EXECUTE IMMEDIATE 'select 1' INTO x,y USING 4,5;
 EXECUTE IMMEDIATE 'select 1' INTO x, y USING 4, 5;
 ==
 
-EXECUTE IMMEDIATE CONCAT("select", " 1") INTO x,y USING 4 as x,5 as y;
+EXECUTE IMMEDIATE CONCAT('select', ' 1') INTO x,y USING 4 as x,5 as y;
 --
 [UNPARSED_SQL]
-EXECUTE IMMEDIATE CONCAT("select", " 1") INTO x, y USING 4 AS x, 5 AS y;
+EXECUTE IMMEDIATE CONCAT('select', ' 1') INTO x, y USING 4 AS x, 5 AS y;
 
 ==
 
 analyze OPTIONS(p1=a1,p2=a2) SimpleTypes(int32,int64,double)
 --
 [UNPARSED_SQL]
-ANALYZE OPTIONS(p1 = "a1", p2 = "a2") SimpleTypes(int32, int64, double);
+ANALYZE OPTIONS(p1 = 'a1', p2 = 'a2') SimpleTypes(int32, int64, double);
 ==
 
 analyze OPTIONS(p1=a1,p2=a2) AllPseudoColumns(Key, Value)
 --
 [UNPARSED_SQL]
-ANALYZE OPTIONS(p1 = "a1", p2 = "a2") AllPseudoColumns(Key, Value);
+ANALYZE OPTIONS(p1 = 'a1', p2 = 'a2') AllPseudoColumns(Key, Value);
 ==
 
 analyze OPTIONS(p1=a1,p2=a2) SimpleTypes(int32,int64,double), SimpleTypesWithAnonymizationUid(string,double)
 --
 [UNPARSED_SQL]
-ANALYZE OPTIONS(p1 = "a1", p2 = "a2") SimpleTypes(int32, int64, double), SimpleTypesWithAnonymizationUid(string,
+ANALYZE OPTIONS(p1 = 'a1', p2 = 'a2') SimpleTypes(int32, int64, double), SimpleTypesWithAnonymizationUid(string,
     double);
 ==
 
 analyze OPTIONS(p1=a1,p2=a2) SimpleTypes, SimpleTypesWithAnonymizationUid(string,double)
 --
 [UNPARSED_SQL]
-ANALYZE OPTIONS(p1 = "a1", p2 = "a2") SimpleTypes, SimpleTypesWithAnonymizationUid(string, double);
+ANALYZE OPTIONS(p1 = 'a1', p2 = 'a2') SimpleTypes, SimpleTypesWithAnonymizationUid(string, double);
 ==
 
 # Note that the order of the columns being analyzed is canonicalized in the
@@ -805,7 +805,7 @@ ANALYZE;
 analyze OPTIONS(p1=a1,p2=a2)
 --
 [UNPARSED_SQL]
-ANALYZE OPTIONS(p1 = "a1", p2 = "a2");
+ANALYZE OPTIONS(p1 = 'a1', p2 = 'a2');
 ==
 
 analyze
