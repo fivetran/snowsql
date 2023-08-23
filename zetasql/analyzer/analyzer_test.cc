@@ -905,7 +905,7 @@ TEST_F(AnalyzerOptionsTest, BuiltInHiddenByNonBuiltIn) {
 
   // TYPEOF internally uses IF.
   std::string expr = R"sql(
-    TYPEOF("hello")
+    TYPEOF('hello')
   )sql";
   std::unique_ptr<const AnalyzerOutput> output;
   absl::Status status =
@@ -2199,8 +2199,8 @@ FROM source
   EXPECT_EQ(R"sql(WITH
   source AS (
     SELECT
-      NEW abc.def.`zetasql_test__.KitchenSinkPB`(a_1 AS int64_key_1, a_1 + 1 AS int64_key_2, CAST(MOD(a_1,
-          3) AS abc.def.`zetasql_test__.TestEnum`) AS test_enum) AS a_2
+      NEW abc.def."zetasql_test__.KitchenSinkPB"(a_1 AS int64_key_1, a_1 + 1 AS int64_key_2, CAST(MOD(a_1,
+          3) AS abc.def."zetasql_test__.TestEnum") AS test_enum) AS a_2
     FROM
       UNNEST(GENERATE_ARRAY(1, 10)) AS a_1
   )

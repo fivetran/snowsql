@@ -81,7 +81,7 @@ FROM
 
 UPDATE KeyValue SET
   key=1,
-  value="a"
+  value='a'
 WHERE key > 10
 ASSERT_ROWS_MODIFIED @test_param_int64
 --
@@ -89,7 +89,7 @@ ASSERT_ROWS_MODIFIED @test_param_int64
 UPDATE KeyValue AS keyvalue_1
 SET
   keyvalue_1.Key = 1,
-  keyvalue_1.Value = "a"
+  keyvalue_1.Value = 'a'
 WHERE
   (keyvalue_1.Key) > 10
 ASSERT_ROWS_MODIFIED @test_param_int64;
@@ -235,22 +235,22 @@ WHERE
 ==
 
 DELETE " Value"
-WHERE " Value"." Value" = "true"
+WHERE " Value"." Value" = 'true'
 --
 [UNPARSED_SQL]
 DELETE " Value" AS " value_1"
 WHERE
-  (" value_1"." Value") = "true";
+  (" value_1"." Value") = 'true';
 ==
 
 UPDATE " Value" SET
-  " Value"." Value" = "true"
+  " Value"." Value" = 'true'
 WHERE " Key" > 1
 --
 [UNPARSED_SQL]
 UPDATE " Value" AS " value_1"
 SET
-  " value_1"." Value" = "true"
+  " value_1"." Value" = 'true'
 WHERE
   (" value_1"." Key") > 1;
 ==
@@ -275,23 +275,23 @@ FROM
 
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
-INSERT INTO nested_catalog.KeyValueNested(key, value) VALUES (1, "2")
+INSERT INTO nested_catalog.KeyValueNested(key, value) VALUES (1, '2')
 --
 [UNPARSED_SQL]
 INSERT INTO nested_catalog.KeyValueNested(Key, Value)
 VALUES
-  (1, "2");
+  (1, '2');
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
 UPDATE nested_catalog.KeyValueNested
-SET value = "3" WHERE key = 1
+SET value = '3' WHERE key = 1
 --
 [UNPARSED_SQL]
 UPDATE nested_catalog.KeyValueNested AS keyvaluenested_1
 SET
-  keyvaluenested_1.Value = "3"
+  keyvaluenested_1.Value = '3'
 WHERE
   (keyvaluenested_1.Key) = 1;
 ==
@@ -325,13 +325,13 @@ THEN RETURN
 # SQLBuilder is overriden to do so, but we should have a more general solution.
 [language_features=V_1_3_DML_RETURNING]
 UPDATE nested_catalog.KeyValueNested
-SET value = "3" WHERE key = 1
+SET value = '3' WHERE key = 1
 THEN RETURN key+1
 --
 [UNPARSED_SQL]
 UPDATE nested_catalog.KeyValueNested AS keyvaluenested_1
 SET
-  keyvaluenested_1.Value = "3"
+  keyvaluenested_1.Value = '3'
 WHERE
   (keyvaluenested_1.Key) = 1
 THEN RETURN

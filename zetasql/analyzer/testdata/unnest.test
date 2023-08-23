@@ -1010,21 +1010,21 @@ QueryStmt
 
 # Array zip mode is not implemented.
 SELECT *
-FROM UNNEST([1,2], mode => {{"STRICT"|"TRUNCATE"|"PAD"}});
+FROM UNNEST([1,2], mode => {{'STRICT'|'TRUNCATE'|'PAD'}});
 --
-ALTERNATION GROUP: "STRICT"
+ALTERNATION GROUP: 'STRICT'
 --
 ERROR: The named argument "mode" used in UNNEST is not implemented [at 2:20]
 FROM UNNEST([1,2], mode => 'STRICT');
                    ^
 --
-ALTERNATION GROUP: "TRUNCATE"
+ALTERNATION GROUP: 'TRUNCATE'
 --
 ERROR: The named argument "mode" used in UNNEST is not implemented [at 2:20]
 FROM UNNEST([1,2], mode => 'TRUNCATE');
                    ^
 --
-ALTERNATION GROUP: "PAD"
+ALTERNATION GROUP: 'PAD'
 --
 ERROR: The named argument "mode" used in UNNEST is not implemented [at 2:20]
 FROM UNNEST([1,2], mode => 'PAD');
