@@ -272,7 +272,7 @@ select 1
 union all
 select 'abc'
 --
-ERROR: Could not cast literal "abc" to type INT64 [at 3:8]
+ERROR: Could not cast literal 'abc' to type INT64 [at 3:8]
 select 'abc'
        ^
 ==
@@ -433,10 +433,10 @@ QueryStmt
 # Union of proto and string literal.
 select KitchenSink from TestTable
 union all
-select "aaa"
+select 'aaa'
 --
-ERROR: Could not cast literal "aaa" to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "aaa". [1:4]) [at 3:8]
-select "aaa"
+ERROR: Could not cast literal 'aaa' to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "aaa". [1:4]) [at 3:8]
+select 'aaa'
        ^
 ==
 
@@ -1776,7 +1776,7 @@ QueryStmt
         +-output_column_list=[$union_all2_cast.$col1#7]
 ==
 
-(select struct(1, "abc"))
+(select struct(1, 'abc'))
 union all
 (select @test_param_struct limit 1)
 --
@@ -3381,7 +3381,7 @@ QueryStmt
 select 'abc' c1, cast(1 as int64) c2
 union all
 select * from (
-  select "def" c1, cast(1 as int32) c2
+  select 'def' c1, cast(1 as int32) c2
 )
 --
 QueryStmt
@@ -3430,10 +3430,10 @@ QueryStmt
 # so the error just points at the select.
 select key, key, key, KitchenSink from TestTable
 union all
-select *, "abc" from (select 1, 2, 3)
+select *, 'abc' from (select 1, 2, 3)
 --
-ERROR: Could not cast literal "abc" to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "abc". [1:4]) [at 3:1]
-select *, "abc" from (select 1, 2, 3)
+ERROR: Could not cast literal 'abc' to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "abc". [1:4]) [at 3:1]
+select *, 'abc' from (select 1, 2, 3)
 ^
 ==
 
@@ -3442,10 +3442,10 @@ select *, "abc" from (select 1, 2, 3)
 # attach the error to.
 select key, KitchenSink from TestTable
 union all
-select *, "abc" from (select 1)
+select *, 'abc' from (select 1)
 --
-ERROR: Could not cast literal "abc" to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "abc". [1:4]) [at 3:11]
-select *, "abc" from (select 1)
+ERROR: Could not cast literal 'abc' to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "abc". [1:4]) [at 3:11]
+select *, 'abc' from (select 1)
           ^
 ==
 
