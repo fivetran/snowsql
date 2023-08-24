@@ -100,19 +100,19 @@ SELECT
   ARRAY< int32 >[1, 2, 3]
 ==
 
-select "a", 3, ["a", 3], ARRAY<string> [3, "a"]
+select 'a', 3, ['a', 3], ARRAY<string> [3, 'a']
 --
 QueryStatement [0-47]
   Query [0-47]
     Select [0-47]
       SelectList [7-47]
         SelectColumn [7-10]
-          StringLiteral("a") [7-10]
+          StringLiteral('a') [7-10]
         SelectColumn [12-13]
           IntLiteral(3) [12-13]
         SelectColumn [15-23]
           ArrayConstructor [15-23]
-            StringLiteral("a") [16-19]
+            StringLiteral('a') [16-19]
             IntLiteral(3) [21-22]
         SelectColumn [25-47]
           ArrayConstructor [25-47]
@@ -121,13 +121,13 @@ QueryStatement [0-47]
                 PathExpression [31-37]
                   Identifier(string) [31-37]
             IntLiteral(3) [40-41]
-            StringLiteral("a") [43-46]
+            StringLiteral('a') [43-46]
 --
 SELECT
-  "a",
+  'a',
   3,
-  ARRAY["a", 3],
-  ARRAY< string >[3, "a"]
+  ARRAY['a', 3],
+  ARRAY< string >[3, 'a']
 ==
 
 select [], ARRAY[], ARRAY<int32>[]
@@ -322,10 +322,10 @@ QueryStatement [0-12]
           DotIdentifier [7-12]
             ArrayConstructor [7-10]
               IntLiteral(1) [8-9]
-            Identifier(`1`) [11-12]
+            Identifier("1") [11-12]
 --
 SELECT
-  ARRAY[1].`1`
+  ARRAY[1]."1"
 ==
 
 select [1].a[1]
@@ -430,7 +430,7 @@ SELECT
 ==
 
 # There is nothing special about OFFSET or ORDINAL as identifiers here.
-select a[default_offset], a[ordinal], a[`default_offset`], a[ordinal(ordinal)]
+select a[default_offset], a[ordinal], a["default_offset"], a[ordinal(ordinal)]
 --
 QueryStatement [0-78]
   Query [0-78]
@@ -836,12 +836,12 @@ QueryStatement [0-20]
           ArrayElement [7-20]
             FunctionCall [7-17]
               PathExpression [7-15]
-                Identifier(`function`) [7-15]
+                Identifier("function") [7-15]
             Location [17-18]
             IntLiteral(5) [18-19]
 --
 SELECT
-  `function`()[5]
+  "function"()[5]
 ==
 
 select 5[6];

@@ -43,8 +43,8 @@ ARRAY<STRUCT<
       >>
 [{
    1970-01-01 00:00:00+00,
-   "1970-01-01 00:00:00+00",
-   "1970-01-01 00:00:00"
+   '1970-01-01 00:00:00+00',
+   '1970-01-01 00:00:00'
  }]
 ==
 
@@ -100,48 +100,48 @@ ARRAY<STRUCT<INT64>>[{0}]
 ==
 
 [name=timestamp_diff_2]
-SELECT timestamp_diff(timestamp "2014-12-26", timestamp1, HOUR)
+SELECT timestamp_diff(timestamp '2014-12-26', timestamp1, HOUR)
 from (select timestamp '2014-12-25' as timestamp1)
 --
 ARRAY<STRUCT<INT64>>[{24}]
 ==
 
 [name=timestamp_to_string_1]
-select [cast(timestamp "2015-01-28" as string),
-        cast(timestamp "2015-01-28 00:00:00" as string),
-        cast(timestamp "2015-01-28 00:00:00.0" as string),
-        cast(timestamp "2015-01-28 00:00:00.00" as string),
-        cast(timestamp "2015-01-28 00:00:00.000" as string),
-        cast(timestamp "2015-01-28 00:00:00.0000" as string),
-        cast(timestamp "2015-01-28 00:00:00.00000" as string),
-        cast(timestamp "2015-01-28 00:00:00.000000" as string)]
+select [cast(timestamp '2015-01-28' as string),
+        cast(timestamp '2015-01-28 00:00:00' as string),
+        cast(timestamp '2015-01-28 00:00:00.0' as string),
+        cast(timestamp '2015-01-28 00:00:00.00' as string),
+        cast(timestamp '2015-01-28 00:00:00.000' as string),
+        cast(timestamp '2015-01-28 00:00:00.0000' as string),
+        cast(timestamp '2015-01-28 00:00:00.00000' as string),
+        cast(timestamp '2015-01-28 00:00:00.000000' as string)]
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<STRING>[known order:
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00",
-     "2015-01-28 00:00:00+00"
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00',
+     '2015-01-28 00:00:00+00'
    ]}
 ]
 ==
 
 [name=timestamp_to_string_2]
-select [cast(timestamp "2015-01-28 00:00:00" as string),
-        cast(timestamp "2015-01-28 00:00:00.1" as string),
-        cast(timestamp "2015-01-28 00:00:00.01" as string),
-        cast(timestamp "2015-01-28 00:00:00.001" as string),
-        cast(timestamp "2015-01-28 00:00:00.0001" as string),
-        cast(timestamp "2015-01-28 00:00:00.00001" as string),
-        cast(timestamp "2015-01-28 00:00:00.000001" as string)]
+select [cast(timestamp '2015-01-28 00:00:00' as string),
+        cast(timestamp '2015-01-28 00:00:00.1' as string),
+        cast(timestamp '2015-01-28 00:00:00.01' as string),
+        cast(timestamp '2015-01-28 00:00:00.001' as string),
+        cast(timestamp '2015-01-28 00:00:00.0001' as string),
+        cast(timestamp '2015-01-28 00:00:00.00001' as string),
+        cast(timestamp '2015-01-28 00:00:00.000001' as string)]
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<STRING>[known order:
-     "2015-01-28 00:00:00+00",
+     '2015-01-28 00:00:00+00',
      "2015-01-28 00:00:00.100+00",
      "2015-01-28 00:00:00.010+00",
      "2015-01-28 00:00:00.001+00",
@@ -160,8 +160,8 @@ ARRAY<STRUCT<STRING>>[unknown order:
   {"1970-01-01 00:00:00.000001+00"},
   {"1970-01-01 00:00:00.000100+00"},
   {"1970-01-01 00:00:00.010+00"},
-  {"1970-01-01 00:00:01+00"},
-  {"1970-01-01 00:00:00+00"},
+  {'1970-01-01 00:00:01+00'},
+  {'1970-01-01 00:00:00+00'},
   {"1970-01-01 00:00:00.000010+00"},
   {"1970-01-01 00:00:00.001+00"},
   {"1970-01-01 00:00:00.100+00"}
@@ -169,13 +169,13 @@ ARRAY<STRUCT<STRING>>[unknown order:
 ==
 
 [name=literal_string_without_timezone_to_timestamp_1]
-select cast("2014-12-01 12:34:56" as timestamp)
+select cast('2014-12-01 12:34:56' as timestamp)
 --
 ARRAY<STRUCT<TIMESTAMP>>[{2014-12-01 12:34:56+00}]
 ==
 
 [name=literal_string_with_timezone_to_timestamp_1]
-select cast("2014-12-01 12:34:56+07:30" as timestamp)
+select cast('2014-12-01 12:34:56+07:30' as timestamp)
 --
 ARRAY<STRUCT<TIMESTAMP>>[{2014-12-01 05:04:56+00}]
 ==
@@ -198,10 +198,10 @@ ARRAY<STRUCT<
       >>
 [{
    1970-01-01 00:00:00+00,
-   "1970-01-01 00:00:00+00",
-   "1970-01-01 00:00:00+00",
+   '1970-01-01 00:00:00+00',
+   '1970-01-01 00:00:00+00',
    1970-01-01 00:00:00+00,
-   "1970-01-01 00:00:00",
+   '1970-01-01 00:00:00',
    1970-01-01 00:00:00+00
  }]
 

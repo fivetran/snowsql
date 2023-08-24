@@ -2,19 +2,19 @@
 [default no_java]
 
 [language_features={{|INTERVAL_TYPE}}]
-SELECT INTERVAL "1" YEAR
+SELECT INTERVAL '1' YEAR
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Unexpected INTERVAL expression [at 1:8]
-SELECT INTERVAL "1" YEAR
+SELECT INTERVAL '1' YEAR
        ^
 --
 ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -37,7 +37,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -48,18 +48,18 @@ QueryStmt
 ==
 
 [language_features={{|INTERVAL_TYPE}}]
-select interval concat("1", "2") month
+select interval concat('1', '2') month
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Unexpected INTERVAL expression [at 1:8]
-select interval concat("1", "2") month
+select interval concat('1', '2') month
        ^
 --
 ALTERNATION GROUP: INTERVAL_TYPE
 --
 ERROR: Invalid interval literal. Expected INTERVAL keyword to be followed by an INT64 expression or STRING literal [at 1:17]
-select interval concat("1", "2") month
+select interval concat('1', '2') month
                 ^
 ==
 
@@ -76,7 +76,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -99,7 +99,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -124,7 +124,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -147,7 +147,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -170,7 +170,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -193,7 +193,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -216,7 +216,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -234,7 +234,7 @@ select interval -20 month
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -252,14 +252,14 @@ select interval @test_param_int64 day
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$interval(INT64, ENUM<zetasql.functions.DateTimestampPart>) -> INTERVAL)
-    |     +-Parameter(type=INT64, name="test_param_int64")
+    |     +-Parameter(type=INT64, name='test_param_int64')
     |     +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY)
     +-input_scan=
       +-SingleRowScan
@@ -278,7 +278,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -370,7 +370,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -388,7 +388,7 @@ SELECT CURRENT_TIMESTAMP - '2000-01-01'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -406,7 +406,7 @@ SELECT CURRENT_DATETIME - '2000-01-01'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -424,7 +424,7 @@ SELECT CURRENT_DATE - DATETIME '2000-01-01 10:20:30'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -443,7 +443,7 @@ SELECT CURRENT_TIME - '00:00:00.999'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -461,7 +461,7 @@ SELECT CURRENT_TIMESTAMP - CURRENT_DATE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -482,9 +482,9 @@ SELECT CURRENT_TIMESTAMP + INTERVAL '10:20:30' HOUR TO SECOND,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
-| +-$query.$col2#2 AS `$col2` [TIMESTAMP]
-| +-$query.$col3#3 AS `$col3` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
+| +-$query.$col2#2 AS "$col2" [TIMESTAMP]
+| +-$query.$col3#3 AS "$col3" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -522,9 +522,9 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
-| +-$query.$col2#2 AS `$col2` [TIMESTAMP]
-| +-$query.$col3#3 AS `$col3` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
+| +-$query.$col2#2 AS "$col2" [TIMESTAMP]
+| +-$query.$col3#3 AS "$col3" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -550,9 +550,9 @@ ALTERNATION GROUP: ,V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
-| +-$query.$col2#2 AS `$col2` [DATETIME]
-| +-$query.$col3#3 AS `$col3` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
+| +-$query.$col2#2 AS "$col2" [DATETIME]
+| +-$query.$col3#3 AS "$col3" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -588,9 +588,9 @@ SELECT CURRENT_DATETIME + INTERVAL '1-2 3 4:5:6.789' YEAR TO SECOND,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
-| +-$query.$col2#2 AS `$col2` [DATETIME]
-| +-$query.$col3#3 AS `$col3` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
+| +-$query.$col2#2 AS "$col2" [DATETIME]
+| +-$query.$col3#3 AS "$col3" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -625,8 +625,8 @@ SELECT INTERVAL 1 YEAR + INTERVAL '0.001' SECOND,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
-| +-$query.$col2#2 AS `$col2` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
+| +-$query.$col2#2 AS "$col2" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -652,9 +652,9 @@ select i * 10, 2 * i, i / 10 from (select interval 1 day as i)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INTERVAL]
-| +-$query.$col2#3 AS `$col2` [INTERVAL]
-| +-$query.$col3#4 AS `$col3` [INTERVAL]
+| +-$query.$col1#2 AS "$col1" [INTERVAL]
+| +-$query.$col2#3 AS "$col2" [INTERVAL]
+| +-$query.$col3#4 AS "$col3" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#2, $col2#3, $col3#4]
@@ -705,15 +705,15 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
-| +-$query.$col2#2 AS `$col2` [INTERVAL]
-| +-$query.$col3#3 AS `$col3` [INTERVAL]
-| +-$query.$col4#4 AS `$col4` [INTERVAL]
-| +-$query.$col5#5 AS `$col5` [INTERVAL]
-| +-$query.$col6#6 AS `$col6` [INTERVAL]
-| +-$query.$col7#7 AS `$col7` [INTERVAL]
-| +-$query.$col8#8 AS `$col8` [INTERVAL]
-| +-$query.$col9#9 AS `$col9` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
+| +-$query.$col2#2 AS "$col2" [INTERVAL]
+| +-$query.$col3#3 AS "$col3" [INTERVAL]
+| +-$query.$col4#4 AS "$col4" [INTERVAL]
+| +-$query.$col5#5 AS "$col5" [INTERVAL]
+| +-$query.$col6#6 AS "$col6" [INTERVAL]
+| +-$query.$col7#7 AS "$col7" [INTERVAL]
+| +-$query.$col8#8 AS "$col8" [INTERVAL]
+| +-$query.$col9#9 AS "$col9" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -807,15 +807,15 @@ select extract(year from interval '1-2 3 4:5:6.789' year to second),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
-| +-$query.$col8#8 AS `$col8` [INT64]
-| +-$query.$col9#9 AS `$col9` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
+| +-$query.$col8#8 AS "$col8" [INT64]
+| +-$query.$col9#9 AS "$col9" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -865,9 +865,9 @@ select justify_hours(interval '1' hour), justify_days(interval '1' day), justify
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
-| +-$query.$col2#2 AS `$col2` [INTERVAL]
-| +-$query.$col3#3 AS `$col3` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
+| +-$query.$col2#2 AS "$col2" [INTERVAL]
+| +-$query.$col3#3 AS "$col3" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -899,7 +899,7 @@ ALTERNATION GROUP: QUARTER
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

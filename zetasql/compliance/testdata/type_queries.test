@@ -44,12 +44,12 @@ SELECT cast(b"9" as BYTES) bytes_val
 ARRAY<STRUCT<bytes_val BYTES>>[{b"9"}]
 ==
 [name=type_10]
-SELECT DATE "2014-07-18" date_val
+SELECT DATE '2014-07-18' date_val
 --
 ARRAY<STRUCT<date_val DATE>>[{2014-07-18}]
 ==
 [name=type_13]
-SELECT TIMESTAMP "2014-07-18 00:00:00.000013 UTC" ts_micros_val
+SELECT TIMESTAMP '2014-07-18 00:00:00.000013 UTC' ts_micros_val
 --
 ARRAY<STRUCT<ts_micros_val TIMESTAMP>>[{2014-07-18 00:00:00.000013+00}]
 ==
@@ -113,12 +113,12 @@ SELECT IF(FALSE, CAST(b"9" AS BYTES), NULL) bytes_val
 ARRAY<STRUCT<bytes_val BYTES>>[{NULL}]
 ==
 [name=type_26]
-SELECT IF(FALSE, DATE "2014-07-18", NULL) date_val
+SELECT IF(FALSE, DATE '2014-07-18', NULL) date_val
 --
 ARRAY<STRUCT<date_val DATE>>[{NULL}]
 ==
 [name=type_29]
-SELECT IF(FALSE, TIMESTAMP "2014-07-18 00:00:00.000013 UTC", NULL)
+SELECT IF(FALSE, TIMESTAMP '2014-07-18 00:00:00.000013 UTC', NULL)
   ts_micros_val
 --
 ARRAY<STRUCT<ts_micros_val TIMESTAMP>>[{NULL}]
@@ -191,14 +191,14 @@ SELECT [NULL, CAST(b"9" AS BYTES)] bytes_val
 ARRAY<STRUCT<bytes_val ARRAY<>>>[{ARRAY<BYTES>[known order:NULL, b"9"]}]
 ==
 [name=type_43]
-SELECT [DATE "2014-07-23", NULL, DATE "2014-07-18", NULL] date_val
+SELECT [DATE '2014-07-23', NULL, DATE '2014-07-18', NULL] date_val
 --
 ARRAY<STRUCT<date_val ARRAY<>>>[
   {ARRAY<DATE>[known order:2014-07-23, NULL, 2014-07-18, NULL]}
 ]
 ==
 [name=type_46]
-SELECT [NULL, TIMESTAMP "2014-07-18 00:00:00.000013 UTC"] ts_micros_val
+SELECT [NULL, TIMESTAMP '2014-07-18 00:00:00.000013 UTC'] ts_micros_val
 --
 ARRAY<STRUCT<ts_micros_val ARRAY<>>>[
   {ARRAY<TIMESTAMP>[known order:
@@ -252,8 +252,8 @@ ARRAY<STRUCT<struct_val STRUCT<int32_val INT32,
 [name=type_51]
 SELECT (
   SELECT AS STRUCT
-  DATE "2014-07-18" date_val,
-  TIMESTAMP "2014-07-18 00:00:00.000013 UTC" ts_micros_val)
+  DATE '2014-07-18' date_val,
+  TIMESTAMP '2014-07-18 00:00:00.000013 UTC' ts_micros_val)
     struct_val
 --
 ARRAY<STRUCT<struct_val STRUCT<

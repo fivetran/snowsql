@@ -33,19 +33,19 @@ ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET DATA TYPE STRING
 ==
 
 # ALTER TABLE to set column type.
-ALTER TABLE foo ALTER COLUMN `CAST` SET DATA TYPE STRING;
+ALTER TABLE foo ALTER COLUMN "CAST" SET DATA TYPE STRING;
 --
 AlterTableStatement [0-56] [ALTER TABLE...TYPE STRING]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
   AlterActionList [16-56] [ALTER COLUMN...TYPE STRING]
     AlterColumnTypeAction [16-56] [ALTER COLUMN...TYPE STRING]
-      Identifier(`CAST`) [29-35] [`CAST`]
+      Identifier("CAST") [29-35] ["CAST"]
       SimpleColumnSchema [50-56] [STRING]
         PathExpression [50-56] [STRING]
           Identifier(STRING) [50-56] [STRING]
 --
-ALTER TABLE foo ALTER COLUMN `CAST` SET DATA TYPE STRING
+ALTER TABLE foo ALTER COLUMN "CAST" SET DATA TYPE STRING
 
 ==
 
@@ -147,40 +147,40 @@ ALTER TABLE foo ALTER COLUMN bar SET OPTIONS()
 ==
 
 # ALTER TABLE to add options.
-ALTER TABLE foo ALTER COLUMN bar SET OPTIONS (foo="bar");
+ALTER TABLE foo ALTER COLUMN bar SET OPTIONS (foo='bar');
 --
-AlterTableStatement [0-56] [ALTER TABLE...foo="bar")]
+AlterTableStatement [0-56] [ALTER TABLE...foo='bar')]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
-  AlterActionList [16-56] [ALTER COLUMN...foo="bar")]
-    AlterColumnOptionsAction [16-56] [ALTER COLUMN...foo="bar")]
+  AlterActionList [16-56] [ALTER COLUMN...foo='bar')]
+    AlterColumnOptionsAction [16-56] [ALTER COLUMN...foo='bar')]
       Identifier(bar) [29-32] [bar]
-      OptionsList [45-56] [(foo="bar")]
-        OptionsEntry [46-55] [foo="bar"]
+      OptionsList [45-56] [(foo='bar')]
+        OptionsEntry [46-55] [foo='bar']
           Identifier(foo) [46-49] [foo]
-          StringLiteral("bar") [50-55] ["bar"]
+          StringLiteral('bar') [50-55] ['bar']
 
 --
-ALTER TABLE foo ALTER COLUMN bar SET OPTIONS(foo = "bar")
+ALTER TABLE foo ALTER COLUMN bar SET OPTIONS(foo = 'bar')
 
 ==
 
 # ALTER TABLE to add options with IF EXISTS.
-ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET OPTIONS (foo="bar");
+ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET OPTIONS (foo='bar');
 --
-AlterTableStatement [0-66] [ALTER TABLE...foo="bar")]
+AlterTableStatement [0-66] [ALTER TABLE...foo='bar')]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
-  AlterActionList [16-66] [ALTER COLUMN...foo="bar")]
-    AlterColumnOptionsAction(is_if_exists) [16-66] [ALTER COLUMN...foo="bar")]
+  AlterActionList [16-66] [ALTER COLUMN...foo='bar')]
+    AlterColumnOptionsAction(is_if_exists) [16-66] [ALTER COLUMN...foo='bar')]
       Identifier(bar) [39-42] [bar]
-      OptionsList [55-66] [(foo="bar")]
-        OptionsEntry [56-65] [foo="bar"]
+      OptionsList [55-66] [(foo='bar')]
+        OptionsEntry [56-65] [foo='bar']
           Identifier(foo) [56-59] [foo]
-          StringLiteral("bar") [60-65] ["bar"]
+          StringLiteral('bar') [60-65] ['bar']
 
 --
-ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET OPTIONS(foo = "bar")
+ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET OPTIONS(foo = 'bar')
 
 ==
 
@@ -239,47 +239,47 @@ ALTER TABLE foo ALTER COLUMN IF EXISTS bar DROP NOT NULL
 ==
 
 # ALTER TABLE to set column type with NOT NULL and OPTIONS ().
-ALTER TABLE foo ALTER COLUMN {{|IF EXISTS}} bar SET DATA TYPE STRING NOT NULL OPTIONS (description="new description");
+ALTER TABLE foo ALTER COLUMN {{|IF EXISTS}} bar SET DATA TYPE STRING NOT NULL OPTIONS (description='new description');
 --
 ALTERNATION GROUP: <empty>
 --
-AlterTableStatement [0-103] [ALTER TABLE...description")]
+AlterTableStatement [0-103] [ALTER TABLE...description')]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
-  AlterActionList [16-103] [ALTER COLUMN...description")]
-    AlterColumnTypeAction [16-103] [ALTER COLUMN...description")]
+  AlterActionList [16-103] [ALTER COLUMN...description')]
+    AlterColumnTypeAction [16-103] [ALTER COLUMN...description')]
       Identifier(bar) [30-33] [bar]
-      SimpleColumnSchema [48-103] [STRING NOT...description")]
+      SimpleColumnSchema [48-103] [STRING NOT...description')]
         PathExpression [48-54] [STRING]
           Identifier(STRING) [48-54] [STRING]
         ColumnAttributeList [55-63] [NOT NULL]
           NotNullColumnAttribute [55-63] [NOT NULL]
-        OptionsList [72-103] [(description...description")]
-          OptionsEntry [73-102] [description="new description"]
+        OptionsList [72-103] [(description...description')]
+          OptionsEntry [73-102] [description='new description']
             Identifier(description) [73-84] [description]
-            StringLiteral("new description") [85-102] ["new description"]
+            StringLiteral('new description') [85-102] ['new description']
 --
-ALTER TABLE foo ALTER COLUMN bar SET DATA TYPE STRING NOT NULL OPTIONS(description = "new description")
+ALTER TABLE foo ALTER COLUMN bar SET DATA TYPE STRING NOT NULL OPTIONS(description = 'new description')
 --
 ALTERNATION GROUP: IF EXISTS
 --
-AlterTableStatement [0-112] [ALTER TABLE...description")]
+AlterTableStatement [0-112] [ALTER TABLE...description')]
   PathExpression [12-15] [foo]
     Identifier(foo) [12-15] [foo]
-  AlterActionList [16-112] [ALTER COLUMN...description")]
-    AlterColumnTypeAction(is_if_exists) [16-112] [ALTER COLUMN...description")]
+  AlterActionList [16-112] [ALTER COLUMN...description')]
+    AlterColumnTypeAction(is_if_exists) [16-112] [ALTER COLUMN...description')]
       Identifier(bar) [39-42] [bar]
-      SimpleColumnSchema [57-112] [STRING NOT...description")]
+      SimpleColumnSchema [57-112] [STRING NOT...description')]
         PathExpression [57-63] [STRING]
           Identifier(STRING) [57-63] [STRING]
         ColumnAttributeList [64-72] [NOT NULL]
           NotNullColumnAttribute [64-72] [NOT NULL]
-        OptionsList [81-112] [(description...description")]
-          OptionsEntry [82-111] [description="new description"]
+        OptionsList [81-112] [(description...description')]
+          OptionsEntry [82-111] [description='new description']
             Identifier(description) [82-93] [description]
-            StringLiteral("new description") [94-111] ["new description"]
+            StringLiteral('new description') [94-111] ['new description']
 --
-ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET DATA TYPE STRING NOT NULL OPTIONS(description = "new description")
+ALTER TABLE foo ALTER COLUMN IF EXISTS bar SET DATA TYPE STRING NOT NULL OPTIONS(description = 'new description')
 ==
 
 # ALTER TABLE to set column type with COLLATE.

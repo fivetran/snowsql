@@ -330,8 +330,8 @@ TEST_F(FunctionCallBuilderTest, LikeTest) {
                        fn_builder_.Like(std::move(input), std::move(pattern)));
   EXPECT_EQ(like_fn->DebugString(), absl::StripLeadingAsciiWhitespace(R"(
 FunctionCall(ZetaSQL:$like(STRING, STRING) -> BOOL)
-+-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-+-Literal(type=STRING, value="%r", has_explicit_type=TRUE)
++-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
++-Literal(type=STRING, value='%r', has_explicit_type=TRUE)
 )"));
 }
 
@@ -348,8 +348,8 @@ TEST_F(FunctionCallBuilderTest, MakeArray) {
 
   EXPECT_EQ(make_arr_fn->DebugString(), absl::StripLeadingAsciiWhitespace(R"(
 FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
-+-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-+-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
++-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
++-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
 )"));
 }
 
@@ -366,12 +366,12 @@ FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
 +-type_annotation_map=[{Collation:"und:ci"}]
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
   +-type_annotation_map={Collation:"und:ci"}
-  +-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-  +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+  +-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
+  +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 )"));
 }
 
@@ -388,12 +388,12 @@ TEST_F(FunctionCallBuilderTest, MakeArrayWithMixedAnnotation) {
 FunctionCall(ZetaSQL:$make_array(repeated(2) STRING) -> ARRAY<STRING>)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
   +-type_annotation_map={Collation:"binary"}
-  +-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-  +-Literal(type=STRING, value="binary", preserve_in_literal_remover=TRUE)
+  +-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
+  +-Literal(type=STRING, value='binary', preserve_in_literal_remover=TRUE)
 )"));
 }
 
@@ -420,10 +420,10 @@ TEST_F(FunctionCallBuilderTest, CaseNoValueElseTest) {
   EXPECT_EQ(case_fn->DebugString(), absl::StripLeadingAsciiWhitespace(R"(
 FunctionCall(ZetaSQL:$case_no_value(repeated(2) BOOL, repeated(2) STRING, STRING) -> STRING)
 +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-+-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
++-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
 +-Literal(type=BOOL, value=false, has_explicit_type=TRUE)
-+-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-+-Literal(type=STRING, value="baz", has_explicit_type=TRUE)
++-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
++-Literal(type=STRING, value='baz', has_explicit_type=TRUE)
 )"));
 }
 
@@ -447,9 +447,9 @@ TEST_F(FunctionCallBuilderTest, CaseNoValueNoElseTest) {
   EXPECT_EQ(case_fn->DebugString(), absl::StripLeadingAsciiWhitespace(R"(
 FunctionCall(ZetaSQL:$case_no_value(repeated(2) BOOL, repeated(2) STRING) -> STRING)
 +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-+-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
++-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
 +-Literal(type=BOOL, value=false, has_explicit_type=TRUE)
-+-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
++-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
 )"));
 }
 
@@ -478,8 +478,8 @@ TEST_F(FunctionCallBuilderTest, EqualTest) {
                        fn_builder_.Equal(std::move(input), std::move(input2)));
   EXPECT_EQ(equal_fn->DebugString(), absl::StripLeadingAsciiWhitespace(R"(
 FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
-+-Literal(type=STRING, value="true", has_explicit_type=TRUE)
-+-Literal(type=STRING, value="false", has_explicit_type=TRUE)
++-Literal(type=STRING, value='true', has_explicit_type=TRUE)
++-Literal(type=STRING, value='false', has_explicit_type=TRUE)
 )"));
 }
 
@@ -637,7 +637,7 @@ AggregateScan
 | +-ProjectScan
 |   +-column_list=[$expr_subquery.$col1#11]
 |   +-expr_list=
-|   | +-$col1#11 := Literal(type=STRING, value="b")
+|   | +-$col1#11 := Literal(type=STRING, value='b')
 |   +-input_scan=
 |     +-SingleRowScan
 +-aggregate_list=

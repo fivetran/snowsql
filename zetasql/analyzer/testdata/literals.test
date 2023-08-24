@@ -1,15 +1,15 @@
-select 0,1,1.5,'abc',"def",null,trUE,FALse;
+select 0,1,1.5,'abc','def',null,trUE,FALse;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [BOOL]
-| +-$query.$col8#8 AS `$col8` [BOOL]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [BOOL]
+| +-$query.$col8#8 AS "$col8" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8]
@@ -17,8 +17,8 @@ QueryStmt
     | +-$col1#1 := Literal(type=INT64, value=0)
     | +-$col2#2 := Literal(type=INT64, value=1)
     | +-$col3#3 := Literal(type=DOUBLE, value=1.5)
-    | +-$col4#4 := Literal(type=STRING, value="abc")
-    | +-$col5#5 := Literal(type=STRING, value="def")
+    | +-$col4#4 := Literal(type=STRING, value='abc')
+    | +-$col5#5 := Literal(type=STRING, value='def')
     | +-$col6#6 := Literal(type=INT64, value=NULL)
     | +-$col7#7 := Literal(type=BOOL, value=true)
     | +-$col8#8 := Literal(type=BOOL, value=false)
@@ -30,11 +30,11 @@ select 1e10,.1e10,1.e10,1e-10,.1e-10;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
-| +-$query.$col2#2 AS `$col2` [DOUBLE]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [DOUBLE]
-| +-$query.$col5#5 AS `$col5` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
+| +-$query.$col2#2 AS "$col2" [DOUBLE]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [DOUBLE]
+| +-$query.$col5#5 AS "$col5" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
@@ -50,28 +50,28 @@ QueryStmt
 
 # Some escaped strings.
 # The escaped unicode character in the input is showing as UTF8 in the output.
-select 'ab"`c', "ab'`d", "ab\`\"\'cd",
-       "ab \x01 \n\r\t \U000022FD \u22FD", 'ab\x41g',
+select 'ab""c', 'ab\'"d', 'ab""\'cd',
+       'ab \x01 \n\r\t \U000022FD \u22FD', 'ab\x41g',
        'ab_\110\101\120\120\131_cd'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value='ab"`c')
-    | +-$col2#2 := Literal(type=STRING, value="ab'`d")
-    | +-$col3#3 := Literal(type=STRING, value="ab`\"'cd")
-    | +-$col4#4 := Literal(type=STRING, value="ab \x01 \n\r\t ⋽ ⋽")
-    | +-$col5#5 := Literal(type=STRING, value="abAg")
-    | +-$col6#6 := Literal(type=STRING, value="ab_HAPPY_cd")
+    | +-$col1#1 := Literal(type=STRING, value='ab""c')
+    | +-$col2#2 := Literal(type=STRING, value='ab\'"d')
+    | +-$col3#3 := Literal(type=STRING, value='ab""\'cd')
+    | +-$col4#4 := Literal(type=STRING, value='ab \x01 \n\r\t ⋽ ⋽')
+    | +-$col5#5 := Literal(type=STRING, value='abAg')
+    | +-$col6#6 := Literal(type=STRING, value='ab_HAPPY_cd')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -91,10 +91,10 @@ select '\x53'        as OneHexByte
       ,'\?...'       as question
       ,'\"...'       as single_double_quote
       ,'\'...'       as single_single_quote
-      ,'\`...'       as single_back_tick
-      ,"\"..."       as double_double_quote
-      ,"\'..."       as double_single_quote
-      ,"\`..."       as double_back_tick
+      ,'\"...'       as single_back_tick
+      ,'\"...'       as double_double_quote
+      ,'\'...'       as double_single_quote
+      ,'\"...'       as double_back_tick
       ,'\u0042'      as short_UTF8_char
       ,'\U00000041'  as long_UTF8_char
 --
@@ -124,26 +124,26 @@ QueryStmt
   +-ProjectScan
     +-column_list=$query.[OneHexByte#1, AnotherHexByte#2, OneOctalByte#3, bell_ding_dong#4, backspace#5, new_page#6, new_line#7, carriage_return#8, tab#9, vertical_tab#10, backslash#11, question#12, single_double_quote#13, single_single_quote#14, single_back_tick#15, double_double_quote#16, double_single_quote#17, double_back_tick#18, short_UTF8_char#19, long_UTF8_char#20]
     +-expr_list=
-    | +-OneHexByte#1 := Literal(type=STRING, value="S")
-    | +-AnotherHexByte#2 := Literal(type=STRING, value="A")
-    | +-OneOctalByte#3 := Literal(type=STRING, value="A")
-    | +-bell_ding_dong#4 := Literal(type=STRING, value="\x07...")
-    | +-backspace#5 := Literal(type=STRING, value="\x08...")
-    | +-new_page#6 := Literal(type=STRING, value="\x0c...")
-    | +-new_line#7 := Literal(type=STRING, value="\n...")
-    | +-carriage_return#8 := Literal(type=STRING, value="\r...")
-    | +-tab#9 := Literal(type=STRING, value="\t...")
-    | +-vertical_tab#10 := Literal(type=STRING, value="\x0b...")
-    | +-backslash#11 := Literal(type=STRING, value="\\...")
-    | +-question#12 := Literal(type=STRING, value="?...")
+    | +-OneHexByte#1 := Literal(type=STRING, value='S')
+    | +-AnotherHexByte#2 := Literal(type=STRING, value='A')
+    | +-OneOctalByte#3 := Literal(type=STRING, value='A')
+    | +-bell_ding_dong#4 := Literal(type=STRING, value='\x07...')
+    | +-backspace#5 := Literal(type=STRING, value='\x08...')
+    | +-new_page#6 := Literal(type=STRING, value='\x0c...')
+    | +-new_line#7 := Literal(type=STRING, value='\n...')
+    | +-carriage_return#8 := Literal(type=STRING, value='\r...')
+    | +-tab#9 := Literal(type=STRING, value='\t...')
+    | +-vertical_tab#10 := Literal(type=STRING, value='\x0b...')
+    | +-backslash#11 := Literal(type=STRING, value='\\...')
+    | +-question#12 := Literal(type=STRING, value='?...')
     | +-single_double_quote#13 := Literal(type=STRING, value='"...')
-    | +-single_single_quote#14 := Literal(type=STRING, value="'...")
-    | +-single_back_tick#15 := Literal(type=STRING, value="`...")
+    | +-single_single_quote#14 := Literal(type=STRING, value='\'...')
+    | +-single_back_tick#15 := Literal(type=STRING, value='"...')
     | +-double_double_quote#16 := Literal(type=STRING, value='"...')
-    | +-double_single_quote#17 := Literal(type=STRING, value="'...")
-    | +-double_back_tick#18 := Literal(type=STRING, value="`...")
-    | +-short_UTF8_char#19 := Literal(type=STRING, value="B")
-    | +-long_UTF8_char#20 := Literal(type=STRING, value="A")
+    | +-double_single_quote#17 := Literal(type=STRING, value='\'...')
+    | +-double_back_tick#18 := Literal(type=STRING, value='"...')
+    | +-short_UTF8_char#19 := Literal(type=STRING, value='B')
+    | +-long_UTF8_char#20 := Literal(type=STRING, value='A')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -159,10 +159,10 @@ SELECT 1, -1, 9223372036854775807, -9223372036854775808
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -186,15 +186,15 @@ SELECT 1.1, 0.1, .1, 2., -.1, -1.1, 2.e3, 3.e-2, 2.e+3
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
-| +-$query.$col2#2 AS `$col2` [DOUBLE]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [DOUBLE]
-| +-$query.$col5#5 AS `$col5` [DOUBLE]
-| +-$query.$col6#6 AS `$col6` [DOUBLE]
-| +-$query.$col7#7 AS `$col7` [DOUBLE]
-| +-$query.$col8#8 AS `$col8` [DOUBLE]
-| +-$query.$col9#9 AS `$col9` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
+| +-$query.$col2#2 AS "$col2" [DOUBLE]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [DOUBLE]
+| +-$query.$col5#5 AS "$col5" [DOUBLE]
+| +-$query.$col6#6 AS "$col6" [DOUBLE]
+| +-$query.$col7#7 AS "$col7" [DOUBLE]
+| +-$query.$col8#8 AS "$col8" [DOUBLE]
+| +-$query.$col9#9 AS "$col9" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -224,7 +224,7 @@ SELECT 18446744073709551615
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT64]
+| +-$query.$col1#1 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -246,7 +246,7 @@ SELECT - -9223372036854775808
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -270,17 +270,17 @@ select 1, -1, -(1), - -1, - -(1), -(-(1)), -(-1), - - -1, - - - -1,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
-| +-$query.$col8#8 AS `$col8` [INT64]
-| +-$query.$col9#9 AS `$col9` [INT64]
-| +-$query.$col10#10 AS `$col10` [INT64]
-| +-$query.$col11#11 AS `$col11` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
+| +-$query.$col8#8 AS "$col8" [INT64]
+| +-$query.$col9#9 AS "$col9" [INT64]
+| +-$query.$col10#10 AS "$col10" [INT64]
+| +-$query.$col11#11 AS "$col11" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11]
@@ -324,17 +324,17 @@ select 1.0, -1.0, -(1.0), - -1.0, - -(1.0), -(-(1.0)), -(-1.0), - - -1.0,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
-| +-$query.$col2#2 AS `$col2` [DOUBLE]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [DOUBLE]
-| +-$query.$col5#5 AS `$col5` [DOUBLE]
-| +-$query.$col6#6 AS `$col6` [DOUBLE]
-| +-$query.$col7#7 AS `$col7` [DOUBLE]
-| +-$query.$col8#8 AS `$col8` [DOUBLE]
-| +-$query.$col9#9 AS `$col9` [DOUBLE]
-| +-$query.$col10#10 AS `$col10` [DOUBLE]
-| +-$query.$col11#11 AS `$col11` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
+| +-$query.$col2#2 AS "$col2" [DOUBLE]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [DOUBLE]
+| +-$query.$col5#5 AS "$col5" [DOUBLE]
+| +-$query.$col6#6 AS "$col6" [DOUBLE]
+| +-$query.$col7#7 AS "$col7" [DOUBLE]
+| +-$query.$col8#8 AS "$col8" [DOUBLE]
+| +-$query.$col9#9 AS "$col9" [DOUBLE]
+| +-$query.$col10#10 AS "$col10" [DOUBLE]
+| +-$query.$col11#11 AS "$col11" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11]
@@ -377,8 +377,8 @@ select 0x8000000000000000, -0x8000000000000000
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
+| +-$query.$col1#1 AS "$col1" [UINT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -393,7 +393,7 @@ select b'aaa'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -407,17 +407,17 @@ select 1, +1, ++1, +(1), '--', 1.0, +1.0, ++1.0, +(1.0), + 1, +/*xx*/1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [DOUBLE]
-| +-$query.$col7#7 AS `$col7` [DOUBLE]
-| +-$query.$col8#8 AS `$col8` [DOUBLE]
-| +-$query.$col9#9 AS `$col9` [DOUBLE]
-| +-$query.$col10#10 AS `$col10` [INT64]
-| +-$query.$col11#11 AS `$col11` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [DOUBLE]
+| +-$query.$col7#7 AS "$col7" [DOUBLE]
+| +-$query.$col8#8 AS "$col8" [DOUBLE]
+| +-$query.$col9#9 AS "$col9" [DOUBLE]
+| +-$query.$col10#10 AS "$col10" [INT64]
+| +-$query.$col11#11 AS "$col11" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11]
@@ -426,7 +426,7 @@ QueryStmt
     | +-$col2#2 := Literal(type=INT64, value=1)
     | +-$col3#3 := Literal(type=INT64, value=1)
     | +-$col4#4 := Literal(type=INT64, value=1)
-    | +-$col5#5 := Literal(type=STRING, value="--")
+    | +-$col5#5 := Literal(type=STRING, value='--')
     | +-$col6#6 := Literal(type=DOUBLE, value=1)
     | +-$col7#7 := Literal(type=DOUBLE, value=1)
     | +-$col8#8 := Literal(type=DOUBLE, value=1)
@@ -441,10 +441,10 @@ select -+1, +-1, -+1.0, +-1.0
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -465,7 +465,7 @@ select +null
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -479,7 +479,7 @@ select +(null)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -493,7 +493,7 @@ select + null
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -503,9 +503,9 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select `bytes`
+select "bytes"
 from SimpleTypes
-where `bytes` = b'aaa';
+where "bytes" = b'aaa';
 --
 QueryStmt
 +-output_column_list=
@@ -539,10 +539,10 @@ select b'\x53'        as OneHexByte
       ,b'\?...'       as question
       ,b'\"...'       as single_double_quote
       ,b'\'...'       as single_single_quote
-      ,b'\`...'       as single_back_tick
+      ,b'\"...'       as single_back_tick
       ,b"\"..."       as double_double_quote
       ,b"\'..."       as double_single_quote
-      ,b"\`..."       as double_back_tick
+      ,b"\"..."       as double_back_tick
 --
 QueryStmt
 +-output_column_list=
@@ -582,10 +582,10 @@ QueryStmt
     | +-question#12 := Literal(type=BYTES, value=b"?...")
     | +-single_double_quote#13 := Literal(type=BYTES, value=b'"...')
     | +-single_single_quote#14 := Literal(type=BYTES, value=b"'...")
-    | +-single_back_tick#15 := Literal(type=BYTES, value=b"`...")
+    | +-single_back_tick#15 := Literal(type=BYTES, value=b'"...')
     | +-double_double_quote#16 := Literal(type=BYTES, value=b'"...')
     | +-double_single_quote#17 := Literal(type=BYTES, value=b"'...")
-    | +-double_back_tick#18 := Literal(type=BYTES, value=b"`...")
+    | +-double_back_tick#18 := Literal(type=BYTES, value=b'"...')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -594,7 +594,7 @@ select b'*\x00...\xFF*'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -608,7 +608,7 @@ select b'*\000...\377*'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -619,32 +619,18 @@ QueryStmt
 
 ==
 
-select """line1""", '''line1'''
+select '''line1''', '''line1'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="line1")
-    | +-$col2#2 := Literal(type=STRING, value="line1")
-    +-input_scan=
-      +-SingleRowScan
-==
-
-select """line1 'single_quote' "double_quote" \x41g \u22FD \U000022FD"""
---
-QueryStmt
-+-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-+-query=
-  +-ProjectScan
-    +-column_list=[$query.$col1#1]
-    +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="line1 'single_quote' \"double_quote\" Ag ⋽ ⋽")
+    | +-$col1#1 := Literal(type=STRING, value='line1')
+    | +-$col2#2 := Literal(type=STRING, value='line1')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -653,57 +639,57 @@ select '''line1 'single_quote' "double_quote" \x41g \u22FD \U000022FD'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="line1 'single_quote' \"double_quote\" Ag ⋽ ⋽")
+    | +-$col1#1 := Literal(type=STRING, value='line1 \'single_quote\' "double_quote" Ag ⋽ ⋽')
     +-input_scan=
       +-SingleRowScan
 ==
 
-select """line1
+select '''line1 'single_quote' "double_quote" \x41g \u22FD \U000022FD'''
+--
+QueryStmt
++-output_column_list=
+| +-$query.$col1#1 AS "$col1" [STRING]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#1]
+    +-expr_list=
+    | +-$col1#1 := Literal(type=STRING, value='line1 \'single_quote\' "double_quote" Ag ⋽ ⋽')
+    +-input_scan=
+      +-SingleRowScan
+==
+
+select '''line1
 line2
-line3"""
+line3'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="line1\nline2\nline3")
+    | +-$col1#1 := Literal(type=STRING, value='line1\nline2\nline3')
     +-input_scan=
       +-SingleRowScan
 ==
 
-select """line1\\
-line2"""
+select '''line1\\
+line2'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="line1\\\nline2")
-    +-input_scan=
-      +-SingleRowScan
-==
-
-select """a'''a'''a"""
---
-QueryStmt
-+-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-+-query=
-  +-ProjectScan
-    +-column_list=[$query.$col1#1]
-    +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="a'''a'''a")
+    | +-$col1#1 := Literal(type=STRING, value='line1\\\nline2')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -712,7 +698,7 @@ select '''a"""a"""a'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -722,46 +708,18 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select """""", ''''''
+select '''''', ''''''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="")
-    | +-$col2#2 := Literal(type=STRING, value="")
-    +-input_scan=
-      +-SingleRowScan
-==
-
-select """a /* comment */"""
---
-QueryStmt
-+-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-+-query=
-  +-ProjectScan
-    +-column_list=[$query.$col1#1]
-    +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="a /* comment */")
-    +-input_scan=
-      +-SingleRowScan
-==
-
-select """"a" """
---
-QueryStmt
-+-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-+-query=
-  +-ProjectScan
-    +-column_list=[$query.$col1#1]
-    +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value='"a" ')
+    | +-$col1#1 := Literal(type=STRING, value='')
+    | +-$col2#2 := Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -770,55 +728,55 @@ select '''abc\'''', '''abc\\'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="abc'")
-    | +-$col2#2 := Literal(type=STRING, value="abc\\")
+    | +-$col1#1 := Literal(type=STRING, value='abc\'')
+    | +-$col2#2 := Literal(type=STRING, value='abc\\')
     +-input_scan=
       +-SingleRowScan
 ==
 
-select r"1",
-       r"\x53", r"\x123", r'\001', r'a\444A',
+select r'1',
+       r'\x53', r'\x123', r'\001', r'a\444A',
        r'a\e', r'\ea',
-       r"\U1234", R"\u",
+       r'\U1234', R'\u',
        r'\xc2\\', r'|\xc2|\\',
        r'f\(abc,(.*),def\?'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
-| +-$query.$col9#9 AS `$col9` [STRING]
-| +-$query.$col10#10 AS `$col10` [STRING]
-| +-$query.$col11#11 AS `$col11` [STRING]
-| +-$query.$col12#12 AS `$col12` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
+| +-$query.$col9#9 AS "$col9" [STRING]
+| +-$query.$col10#10 AS "$col10" [STRING]
+| +-$query.$col11#11 AS "$col11" [STRING]
+| +-$query.$col12#12 AS "$col12" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="1")
-    | +-$col2#2 := Literal(type=STRING, value="\\x53")
-    | +-$col3#3 := Literal(type=STRING, value="\\x123")
-    | +-$col4#4 := Literal(type=STRING, value="\\001")
-    | +-$col5#5 := Literal(type=STRING, value="a\\444A")
-    | +-$col6#6 := Literal(type=STRING, value="a\\e")
-    | +-$col7#7 := Literal(type=STRING, value="\\ea")
-    | +-$col8#8 := Literal(type=STRING, value="\\U1234")
-    | +-$col9#9 := Literal(type=STRING, value="\\u")
-    | +-$col10#10 := Literal(type=STRING, value="\\xc2\\\\")
-    | +-$col11#11 := Literal(type=STRING, value="|\\xc2|\\\\")
-    | +-$col12#12 := Literal(type=STRING, value="f\\(abc,(.*),def\\?")
+    | +-$col1#1 := Literal(type=STRING, value='1')
+    | +-$col2#2 := Literal(type=STRING, value='\\x53')
+    | +-$col3#3 := Literal(type=STRING, value='\\x123')
+    | +-$col4#4 := Literal(type=STRING, value='\\001')
+    | +-$col5#5 := Literal(type=STRING, value='a\\444A')
+    | +-$col6#6 := Literal(type=STRING, value='a\\e')
+    | +-$col7#7 := Literal(type=STRING, value='\\ea')
+    | +-$col8#8 := Literal(type=STRING, value='\\U1234')
+    | +-$col9#9 := Literal(type=STRING, value='\\u')
+    | +-$col10#10 := Literal(type=STRING, value='\\xc2\\\\')
+    | +-$col11#11 := Literal(type=STRING, value='|\\xc2|\\\\')
+    | +-$col12#12 := Literal(type=STRING, value='f\\(abc,(.*),def\\?')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -832,18 +790,18 @@ select rb"1",
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BYTES]
-| +-$query.$col5#5 AS `$col5` [BYTES]
-| +-$query.$col6#6 AS `$col6` [BYTES]
-| +-$query.$col7#7 AS `$col7` [BYTES]
-| +-$query.$col8#8 AS `$col8` [BYTES]
-| +-$query.$col9#9 AS `$col9` [BYTES]
-| +-$query.$col10#10 AS `$col10` [BYTES]
-| +-$query.$col11#11 AS `$col11` [BYTES]
-| +-$query.$col12#12 AS `$col12` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BYTES]
+| +-$query.$col5#5 AS "$col5" [BYTES]
+| +-$query.$col6#6 AS "$col6" [BYTES]
+| +-$query.$col7#7 AS "$col7" [BYTES]
+| +-$query.$col8#8 AS "$col8" [BYTES]
+| +-$query.$col9#9 AS "$col9" [BYTES]
+| +-$query.$col10#10 AS "$col10" [BYTES]
+| +-$query.$col11#11 AS "$col11" [BYTES]
+| +-$query.$col12#12 AS "$col12" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
@@ -873,18 +831,18 @@ select rb"""1""",
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BYTES]
-| +-$query.$col5#5 AS `$col5` [BYTES]
-| +-$query.$col6#6 AS `$col6` [BYTES]
-| +-$query.$col7#7 AS `$col7` [BYTES]
-| +-$query.$col8#8 AS `$col8` [BYTES]
-| +-$query.$col9#9 AS `$col9` [BYTES]
-| +-$query.$col10#10 AS `$col10` [BYTES]
-| +-$query.$col11#11 AS `$col11` [BYTES]
-| +-$query.$col12#12 AS `$col12` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BYTES]
+| +-$query.$col5#5 AS "$col5" [BYTES]
+| +-$query.$col6#6 AS "$col6" [BYTES]
+| +-$query.$col7#7 AS "$col7" [BYTES]
+| +-$query.$col8#8 AS "$col8" [BYTES]
+| +-$query.$col9#9 AS "$col9" [BYTES]
+| +-$query.$col10#10 AS "$col10" [BYTES]
+| +-$query.$col11#11 AS "$col11" [BYTES]
+| +-$query.$col12#12 AS "$col12" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
@@ -914,18 +872,18 @@ select br"1",
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BYTES]
-| +-$query.$col5#5 AS `$col5` [BYTES]
-| +-$query.$col6#6 AS `$col6` [BYTES]
-| +-$query.$col7#7 AS `$col7` [BYTES]
-| +-$query.$col8#8 AS `$col8` [BYTES]
-| +-$query.$col9#9 AS `$col9` [BYTES]
-| +-$query.$col10#10 AS `$col10` [BYTES]
-| +-$query.$col11#11 AS `$col11` [BYTES]
-| +-$query.$col12#12 AS `$col12` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BYTES]
+| +-$query.$col5#5 AS "$col5" [BYTES]
+| +-$query.$col6#6 AS "$col6" [BYTES]
+| +-$query.$col7#7 AS "$col7" [BYTES]
+| +-$query.$col8#8 AS "$col8" [BYTES]
+| +-$query.$col9#9 AS "$col9" [BYTES]
+| +-$query.$col10#10 AS "$col10" [BYTES]
+| +-$query.$col11#11 AS "$col11" [BYTES]
+| +-$query.$col12#12 AS "$col12" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
@@ -955,18 +913,18 @@ select br"""1""",
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BYTES]
-| +-$query.$col5#5 AS `$col5` [BYTES]
-| +-$query.$col6#6 AS `$col6` [BYTES]
-| +-$query.$col7#7 AS `$col7` [BYTES]
-| +-$query.$col8#8 AS `$col8` [BYTES]
-| +-$query.$col9#9 AS `$col9` [BYTES]
-| +-$query.$col10#10 AS `$col10` [BYTES]
-| +-$query.$col11#11 AS `$col11` [BYTES]
-| +-$query.$col12#12 AS `$col12` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BYTES]
+| +-$query.$col5#5 AS "$col5" [BYTES]
+| +-$query.$col6#6 AS "$col6" [BYTES]
+| +-$query.$col7#7 AS "$col7" [BYTES]
+| +-$query.$col8#8 AS "$col8" [BYTES]
+| +-$query.$col9#9 AS "$col9" [BYTES]
+| +-$query.$col10#10 AS "$col10" [BYTES]
+| +-$query.$col11#11 AS "$col11" [BYTES]
+| +-$query.$col12#12 AS "$col12" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12]
@@ -991,42 +949,42 @@ select r'\\', r'\\\\'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="\\\\")
-    | +-$col2#2 := Literal(type=STRING, value="\\\\\\\\")
+    | +-$col1#1 := Literal(type=STRING, value='\\\\')
+    | +-$col2#2 := Literal(type=STRING, value='\\\\\\\\')
     +-input_scan=
       +-SingleRowScan
 ==
 
-select r'a\'b', r"a\"b",
+select r'a\'b', r'a\"b',
        r'''a\'''b''', r'''a'\''b''', r'''a''\'b''',
-       r"""a\"""b""", r"""a"\""b""", r"""a""\"b"""
+       r'''a\'''b''', r'''a"\""b''', r'''a""\"b'''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="a\\'b")
+    | +-$col1#1 := Literal(type=STRING, value='a\\\'b')
     | +-$col2#2 := Literal(type=STRING, value='a\\"b')
-    | +-$col3#3 := Literal(type=STRING, value="a\\'''b")
-    | +-$col4#4 := Literal(type=STRING, value="a'\\''b")
-    | +-$col5#5 := Literal(type=STRING, value="a''\\'b")
-    | +-$col6#6 := Literal(type=STRING, value='a\\"""b')
+    | +-$col3#3 := Literal(type=STRING, value='a\\\'\'\'b')
+    | +-$col4#4 := Literal(type=STRING, value='a\'\\\'\'b')
+    | +-$col5#5 := Literal(type=STRING, value='a\'\'\\\'b')
+    | +-$col6#6 := Literal(type=STRING, value='a\\\'\'\'b')
     | +-$col7#7 := Literal(type=STRING, value='a"\\""b')
     | +-$col8#8 := Literal(type=STRING, value='a""\\"b')
     +-input_scan=
@@ -1048,18 +1006,18 @@ select r'''...
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BYTES]
-| +-$query.$col5#5 AS `$col5` [BYTES]
-| +-$query.$col6#6 AS `$col6` [BYTES]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BYTES]
+| +-$query.$col5#5 AS "$col5" [BYTES]
+| +-$query.$col6#6 AS "$col6" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="...\n           ...")
-    | +-$col2#2 := Literal(type=STRING, value="...\\\n           ...")
+    | +-$col1#1 := Literal(type=STRING, value='...\n           ...')
+    | +-$col2#2 := Literal(type=STRING, value='...\\\n           ...')
     | +-$col3#3 := Literal(type=BYTES, value=b"...\x0a            ...")
     | +-$col4#4 := Literal(type=BYTES, value=b"...\\\x0a            ...")
     | +-$col5#5 := Literal(type=BYTES, value=b"...\x0a            ...")
@@ -1069,22 +1027,22 @@ QueryStmt
 ==
 
 # Empty raw strings.
-select r'', r"", r'''''', r""""""
+select r'', r'', r'''''', r''''''
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="")
-    | +-$col2#2 := Literal(type=STRING, value="")
-    | +-$col3#3 := Literal(type=STRING, value="")
-    | +-$col4#4 := Literal(type=STRING, value="")
+    | +-$col1#1 := Literal(type=STRING, value='')
+    | +-$col2#2 := Literal(type=STRING, value='')
+    | +-$col3#3 := Literal(type=STRING, value='')
+    | +-$col4#4 := Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1094,14 +1052,14 @@ select rb'', br'', rb"", br"", rb'''''', br'''''', rb"""""", br""""""
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BYTES]
-| +-$query.$col5#5 AS `$col5` [BYTES]
-| +-$query.$col6#6 AS `$col6` [BYTES]
-| +-$query.$col7#7 AS `$col7` [BYTES]
-| +-$query.$col8#8 AS `$col8` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BYTES]
+| +-$query.$col5#5 AS "$col5" [BYTES]
+| +-$query.$col6#6 AS "$col6" [BYTES]
+| +-$query.$col7#7 AS "$col7" [BYTES]
+| +-$query.$col8#8 AS "$col8" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8]
@@ -1123,15 +1081,15 @@ SELECT 0x0, -0x1, 0xf, 0x1f, 0xabcdef, -0xAbCdEf, 0X1f, 0Xf1, 0x1234567890aBcDeF
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
-| +-$query.$col8#8 AS `$col8` [INT64]
-| +-$query.$col9#9 AS `$col9` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
+| +-$query.$col8#8 AS "$col8" [INT64]
+| +-$query.$col9#9 AS "$col9" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -1153,7 +1111,7 @@ select 0x0 + 0x1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1201,7 +1159,7 @@ select 0x000000000000000000000000000000000000000000000000000001
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1217,8 +1175,8 @@ select int32, sum(int64), count(*) from SimpleTypes group by 0x1 order by 0x2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#21 AS int32 [INT32]
-| +-$aggregate.$agg1#19 AS `$col2` [INT64]
-| +-$aggregate.$agg2#20 AS `$col3` [INT64]
+| +-$aggregate.$agg1#19 AS "$col2" [INT64]
+| +-$aggregate.$agg2#20 AS "$col3" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.int32#21, $aggregate.$agg1#19, $aggregate.$agg2#20]
@@ -1246,8 +1204,8 @@ select 010, -010
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -1263,7 +1221,7 @@ SELECT 1 FROM (SELECT 1) WHERE 'foo' = 'foo'AND'bar' = 'bar'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -1282,11 +1240,11 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
-            | +-Literal(type=STRING, value="foo")
-            | +-Literal(type=STRING, value="foo")
+            | +-Literal(type=STRING, value='foo')
+            | +-Literal(type=STRING, value='foo')
             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
-              +-Literal(type=STRING, value="bar")
-              +-Literal(type=STRING, value="bar")
+              +-Literal(type=STRING, value='bar')
+              +-Literal(type=STRING, value='bar')
 ==
 
 [language_features={{NUMERIC_TYPE|}}]
@@ -1295,13 +1253,13 @@ SELECT
   NUMERIC '0.123',
   NUMERIC '456.0',
   NUMERIC '123',
-  NUMERIC "123",
+  NUMERIC '123',
   NUMERIC '0',
   NUMERIC '-1.1',
   NUMERIC '-0.123',
   NUMERIC '-456.0',
   NUMERIC '-123',
-  NUMERIC "-123",
+  NUMERIC '-123',
   NUMERIC '0.999999999',
   NUMERIC '99999999999999999999999999999.999999999',
   NUMERIC '-0.999999999',
@@ -1311,21 +1269,21 @@ ALTERNATION GROUP: NUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
-| +-$query.$col3#3 AS `$col3` [NUMERIC]
-| +-$query.$col4#4 AS `$col4` [NUMERIC]
-| +-$query.$col5#5 AS `$col5` [NUMERIC]
-| +-$query.$col6#6 AS `$col6` [NUMERIC]
-| +-$query.$col7#7 AS `$col7` [NUMERIC]
-| +-$query.$col8#8 AS `$col8` [NUMERIC]
-| +-$query.$col9#9 AS `$col9` [NUMERIC]
-| +-$query.$col10#10 AS `$col10` [NUMERIC]
-| +-$query.$col11#11 AS `$col11` [NUMERIC]
-| +-$query.$col12#12 AS `$col12` [NUMERIC]
-| +-$query.$col13#13 AS `$col13` [NUMERIC]
-| +-$query.$col14#14 AS `$col14` [NUMERIC]
-| +-$query.$col15#15 AS `$col15` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
+| +-$query.$col3#3 AS "$col3" [NUMERIC]
+| +-$query.$col4#4 AS "$col4" [NUMERIC]
+| +-$query.$col5#5 AS "$col5" [NUMERIC]
+| +-$query.$col6#6 AS "$col6" [NUMERIC]
+| +-$query.$col7#7 AS "$col7" [NUMERIC]
+| +-$query.$col8#8 AS "$col8" [NUMERIC]
+| +-$query.$col9#9 AS "$col9" [NUMERIC]
+| +-$query.$col10#10 AS "$col10" [NUMERIC]
+| +-$query.$col11#11 AS "$col11" [NUMERIC]
+| +-$query.$col12#12 AS "$col12" [NUMERIC]
+| +-$query.$col13#13 AS "$col13" [NUMERIC]
+| +-$query.$col14#14 AS "$col14" [NUMERIC]
+| +-$query.$col15#15 AS "$col15" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14, $col15#15]
@@ -1360,10 +1318,10 @@ SELECT NUMERIC '.1', NUMERIC '1.', NUMERIC '1e12', NUMERIC '1.1e12'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
-| +-$query.$col3#3 AS `$col3` [NUMERIC]
-| +-$query.$col4#4 AS `$col4` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
+| +-$query.$col3#3 AS "$col3" [NUMERIC]
+| +-$query.$col4#4 AS "$col4" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -1389,15 +1347,15 @@ SELECT NUMERIC ' -100',
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
-| +-$query.$col3#3 AS `$col3` [NUMERIC]
-| +-$query.$col4#4 AS `$col4` [NUMERIC]
-| +-$query.$col5#5 AS `$col5` [NUMERIC]
-| +-$query.$col6#6 AS `$col6` [NUMERIC]
-| +-$query.$col7#7 AS `$col7` [NUMERIC]
-| +-$query.$col8#8 AS `$col8` [NUMERIC]
-| +-$query.$col9#9 AS `$col9` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
+| +-$query.$col3#3 AS "$col3" [NUMERIC]
+| +-$query.$col4#4 AS "$col4" [NUMERIC]
+| +-$query.$col5#5 AS "$col5" [NUMERIC]
+| +-$query.$col6#6 AS "$col6" [NUMERIC]
+| +-$query.$col7#7 AS "$col7" [NUMERIC]
+| +-$query.$col8#8 AS "$col8" [NUMERIC]
+| +-$query.$col9#9 AS "$col9" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -1420,7 +1378,7 @@ SELECT -NUMERIC '123'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1437,7 +1395,7 @@ SELECT NUMERIC 'abc'
 --
 ALTERNATION GROUP: NUMERIC_TYPE
 --
-ERROR: Invalid NUMERIC literal: "abc" [at 1:8]
+ERROR: Invalid NUMERIC literal: 'abc' [at 1:8]
 SELECT NUMERIC 'abc'
        ^
 --
@@ -1453,7 +1411,7 @@ SELECT NUMERIC 'abc'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC '1.5555555555'
 --
-ERROR: Invalid NUMERIC literal: "1.5555555555" [at 1:8]
+ERROR: Invalid NUMERIC literal: '1.5555555555' [at 1:8]
 SELECT NUMERIC '1.5555555555'
        ^
 ==
@@ -1463,7 +1421,7 @@ SELECT NUMERIC '1.5555555555'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC '100000000000000000000000000000'
 --
-ERROR: Invalid NUMERIC literal: "100000000000000000000000000000" [at 1:8]
+ERROR: Invalid NUMERIC literal: '100000000000000000000000000000' [at 1:8]
 SELECT NUMERIC '100000000000000000000000000000'
        ^
 ==
@@ -1471,7 +1429,7 @@ SELECT NUMERIC '100000000000000000000000000000'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC '- 100'
 --
-ERROR: Invalid NUMERIC literal: "- 100" [at 1:8]
+ERROR: Invalid NUMERIC literal: '- 100' [at 1:8]
 SELECT NUMERIC '- 100'
        ^
 ==
@@ -1479,7 +1437,7 @@ SELECT NUMERIC '- 100'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC ''
 --
-ERROR: Invalid NUMERIC literal: "" [at 1:8]
+ERROR: Invalid NUMERIC literal: '' [at 1:8]
 SELECT NUMERIC ''
        ^
 ==
@@ -1487,7 +1445,7 @@ SELECT NUMERIC ''
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC '123abc'
 --
-ERROR: Invalid NUMERIC literal: "123abc" [at 1:8]
+ERROR: Invalid NUMERIC literal: '123abc' [at 1:8]
 SELECT NUMERIC '123abc'
        ^
 ==
@@ -1495,7 +1453,7 @@ SELECT NUMERIC '123abc'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC '0x123abc'
 --
-ERROR: Invalid NUMERIC literal: "0x123abc" [at 1:8]
+ERROR: Invalid NUMERIC literal: '0x123abc' [at 1:8]
 SELECT NUMERIC '0x123abc'
        ^
 ==
@@ -1503,7 +1461,7 @@ SELECT NUMERIC '0x123abc'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC '.'
 --
-ERROR: Invalid NUMERIC literal: "." [at 1:8]
+ERROR: Invalid NUMERIC literal: '.' [at 1:8]
 SELECT NUMERIC '.'
        ^
 ==
@@ -1513,7 +1471,7 @@ SELECT NUMERIC '.'
 [language_features=NUMERIC_TYPE]
 SELECT NUMERIC ''
 --
-ERROR: Invalid NUMERIC literal: "\x07" [at 1:8]
+ERROR: Invalid NUMERIC literal: '\x07' [at 1:8]
 SELECT NUMERIC ''
        ^
 ==
@@ -1531,7 +1489,7 @@ SELECT ARRAY<STRUCT<base NUMERIC, mul NUMERIC>>[
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRUCT<base NUMERIC, mul NUMERIC>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRUCT<base NUMERIC, mul NUMERIC>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1547,13 +1505,13 @@ SELECT
   BIGNUMERIC '0.123',
   BIGNUMERIC '456.0',
   BIGNUMERIC '123',
-  BIGNUMERIC "123",
+  BIGNUMERIC '123',
   BIGNUMERIC '0',
   BIGNUMERIC '-1.1',
   BIGNUMERIC '-0.123',
   BIGNUMERIC '-456.0',
   BIGNUMERIC '-123',
-  BIGNUMERIC "-123",
+  BIGNUMERIC '-123',
   BIGNUMERIC '0.99999999999999999999999999999999999999',
   BIGNUMERIC '578960446186580977117854925043439539266.34992332820282019728792003956564819967',
   BIGNUMERIC '-0.99999999999999999999999999999999999999',
@@ -1563,21 +1521,21 @@ ALTERNATION GROUP: BIGNUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
-| +-$query.$col2#2 AS `$col2` [BIGNUMERIC]
-| +-$query.$col3#3 AS `$col3` [BIGNUMERIC]
-| +-$query.$col4#4 AS `$col4` [BIGNUMERIC]
-| +-$query.$col5#5 AS `$col5` [BIGNUMERIC]
-| +-$query.$col6#6 AS `$col6` [BIGNUMERIC]
-| +-$query.$col7#7 AS `$col7` [BIGNUMERIC]
-| +-$query.$col8#8 AS `$col8` [BIGNUMERIC]
-| +-$query.$col9#9 AS `$col9` [BIGNUMERIC]
-| +-$query.$col10#10 AS `$col10` [BIGNUMERIC]
-| +-$query.$col11#11 AS `$col11` [BIGNUMERIC]
-| +-$query.$col12#12 AS `$col12` [BIGNUMERIC]
-| +-$query.$col13#13 AS `$col13` [BIGNUMERIC]
-| +-$query.$col14#14 AS `$col14` [BIGNUMERIC]
-| +-$query.$col15#15 AS `$col15` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
+| +-$query.$col2#2 AS "$col2" [BIGNUMERIC]
+| +-$query.$col3#3 AS "$col3" [BIGNUMERIC]
+| +-$query.$col4#4 AS "$col4" [BIGNUMERIC]
+| +-$query.$col5#5 AS "$col5" [BIGNUMERIC]
+| +-$query.$col6#6 AS "$col6" [BIGNUMERIC]
+| +-$query.$col7#7 AS "$col7" [BIGNUMERIC]
+| +-$query.$col8#8 AS "$col8" [BIGNUMERIC]
+| +-$query.$col9#9 AS "$col9" [BIGNUMERIC]
+| +-$query.$col10#10 AS "$col10" [BIGNUMERIC]
+| +-$query.$col11#11 AS "$col11" [BIGNUMERIC]
+| +-$query.$col12#12 AS "$col12" [BIGNUMERIC]
+| +-$query.$col13#13 AS "$col13" [BIGNUMERIC]
+| +-$query.$col14#14 AS "$col14" [BIGNUMERIC]
+| +-$query.$col15#15 AS "$col15" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14, $col15#15]
@@ -1612,10 +1570,10 @@ SELECT BIGNUMERIC '.1', BIGNUMERIC '1.', BIGNUMERIC '1e12', BIGNUMERIC '1.1e12'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
-| +-$query.$col2#2 AS `$col2` [BIGNUMERIC]
-| +-$query.$col3#3 AS `$col3` [BIGNUMERIC]
-| +-$query.$col4#4 AS `$col4` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
+| +-$query.$col2#2 AS "$col2" [BIGNUMERIC]
+| +-$query.$col3#3 AS "$col3" [BIGNUMERIC]
+| +-$query.$col4#4 AS "$col4" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -1641,15 +1599,15 @@ SELECT BIGNUMERIC ' -100',
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
-| +-$query.$col2#2 AS `$col2` [BIGNUMERIC]
-| +-$query.$col3#3 AS `$col3` [BIGNUMERIC]
-| +-$query.$col4#4 AS `$col4` [BIGNUMERIC]
-| +-$query.$col5#5 AS `$col5` [BIGNUMERIC]
-| +-$query.$col6#6 AS `$col6` [BIGNUMERIC]
-| +-$query.$col7#7 AS `$col7` [BIGNUMERIC]
-| +-$query.$col8#8 AS `$col8` [BIGNUMERIC]
-| +-$query.$col9#9 AS `$col9` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
+| +-$query.$col2#2 AS "$col2" [BIGNUMERIC]
+| +-$query.$col3#3 AS "$col3" [BIGNUMERIC]
+| +-$query.$col4#4 AS "$col4" [BIGNUMERIC]
+| +-$query.$col5#5 AS "$col5" [BIGNUMERIC]
+| +-$query.$col6#6 AS "$col6" [BIGNUMERIC]
+| +-$query.$col7#7 AS "$col7" [BIGNUMERIC]
+| +-$query.$col8#8 AS "$col8" [BIGNUMERIC]
+| +-$query.$col9#9 AS "$col9" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -1672,7 +1630,7 @@ SELECT BIGNUMERIC 'abc'
 --
 ALTERNATION GROUP: BIGNUMERIC_TYPE
 --
-ERROR: Invalid BIGNUMERIC literal: "abc" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: 'abc' [at 1:8]
 SELECT BIGNUMERIC 'abc'
        ^
 --
@@ -1688,7 +1646,7 @@ SELECT BIGNUMERIC 'abc'
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '1.012345678901234567890123456789012345678'
 --
-ERROR: Invalid BIGNUMERIC literal: "1.012345678901234567890123456789012345678" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '1.012345678901234567890123456789012345678' [at 1:8]
 SELECT BIGNUMERIC '1.012345678901234567890123456789012345678'
        ^
 ==
@@ -1697,7 +1655,7 @@ SELECT BIGNUMERIC '1.012345678901234567890123456789012345678'
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '578960446186580977117854925043439539266.34992332820282019728792003956564819968'
 --
-ERROR: Invalid BIGNUMERIC literal: "578960446186580977117854925043439539266.34992332820282019728792003956564819968" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '578960446186580977117854925043439539266.34992332820282019728792003956564819968' [at 1:8]
 SELECT BIGNUMERIC '578960446186580977117854925043439539266.349923328202820197...
        ^
 ==
@@ -1706,7 +1664,7 @@ SELECT BIGNUMERIC '578960446186580977117854925043439539266.349923328202820197...
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '-578960446186580977117854925043439539266.34992332820282019728792003956564819969'
 --
-ERROR: Invalid BIGNUMERIC literal: "-578960446186580977117854925043439539266.34992332820282019728792003956564819969" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '-578960446186580977117854925043439539266.34992332820282019728792003956564819969' [at 1:8]
 SELECT BIGNUMERIC '-578960446186580977117854925043439539266.34992332820282019...
        ^
 ==
@@ -1714,7 +1672,7 @@ SELECT BIGNUMERIC '-578960446186580977117854925043439539266.34992332820282019...
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '- 100'
 --
-ERROR: Invalid BIGNUMERIC literal: "- 100" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '- 100' [at 1:8]
 SELECT BIGNUMERIC '- 100'
        ^
 ==
@@ -1722,7 +1680,7 @@ SELECT BIGNUMERIC '- 100'
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC ''
 --
-ERROR: Invalid BIGNUMERIC literal: "" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '' [at 1:8]
 SELECT BIGNUMERIC ''
        ^
 ==
@@ -1730,7 +1688,7 @@ SELECT BIGNUMERIC ''
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '123abc'
 --
-ERROR: Invalid BIGNUMERIC literal: "123abc" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '123abc' [at 1:8]
 SELECT BIGNUMERIC '123abc'
        ^
 ==
@@ -1738,7 +1696,7 @@ SELECT BIGNUMERIC '123abc'
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '0x123abc'
 --
-ERROR: Invalid BIGNUMERIC literal: "0x123abc" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '0x123abc' [at 1:8]
 SELECT BIGNUMERIC '0x123abc'
        ^
 ==
@@ -1746,7 +1704,7 @@ SELECT BIGNUMERIC '0x123abc'
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC '.'
 --
-ERROR: Invalid BIGNUMERIC literal: "." [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '.' [at 1:8]
 SELECT BIGNUMERIC '.'
        ^
 ==
@@ -1756,24 +1714,24 @@ SELECT BIGNUMERIC '.'
 [language_features=BIGNUMERIC_TYPE]
 SELECT BIGNUMERIC ''
 --
-ERROR: Invalid BIGNUMERIC literal: "\x07" [at 1:8]
+ERROR: Invalid BIGNUMERIC literal: '\x07' [at 1:8]
 SELECT BIGNUMERIC ''
        ^
 ==
 
 SELECT
-  JSON "true"
+  JSON 'true'
 --
 ERROR: JSON literals are not supported [at 2:3]
-  JSON "true"
+  JSON 'true'
   ^
 ==
 
 [language_features=JSON_TYPE]
 SELECT
-  JSON "true",
+  JSON 'true',
   JSON '\'value\'',
-  JSON "t",
+  JSON 't',
   JSON 'true',
   JSON '"v"',
   JSON 'null',
@@ -1785,10 +1743,10 @@ SELECT
   JSON '0.123',
   JSON '456.0',
   JSON '123',
-  JSON "123",
+  JSON '123',
   JSON '-1.1',
   JSON '-123',
-  JSON ""
+  JSON ''
 --
 ERROR: Invalid JSON literal: syntax error while parsing value - invalid literal; last read: ''' [at 3:3]
   JSON '\'value\'',
@@ -1797,28 +1755,28 @@ ERROR: Invalid JSON literal: syntax error while parsing value - invalid literal;
 
 [language_features=JSON_TYPE]
 SELECT
-  JSON "t"
+  JSON 't'
 --
 ERROR: Invalid JSON literal: syntax error while parsing value - invalid literal; last read: 't' [at 2:3]
-  JSON "t"
+  JSON 't'
   ^
 ==
 
 [language_features=JSON_TYPE]
 SELECT
-  JSON "+"
+  JSON '+'
 --
 ERROR: Invalid JSON literal: syntax error while parsing value - invalid literal; last read: '+' [at 2:3]
-  JSON "+"
+  JSON '+'
   ^
 ==
 
 [language_features=JSON_TYPE]
 SELECT
-  JSON "{"
+  JSON '{'
 --
 ERROR: Invalid JSON literal: syntax error while parsing object key - unexpected end of input; expected string literal [at 2:3]
-  JSON "{"
+  JSON '{'
   ^
 ==
 
@@ -1842,7 +1800,7 @@ ERROR: Invalid JSON literal: syntax error while parsing value - invalid literal;
 
 [language_features=JSON_TYPE]
 SELECT
-  JSON "true",
+  JSON 'true',
   JSON 'true',
   JSON '"v"',
   JSON 'null',
@@ -1853,26 +1811,26 @@ SELECT
   JSON '0.123',
   JSON '456.0',
   JSON '123',
-  JSON "123",
+  JSON '123',
   JSON '-1.1',
   JSON '-123'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [JSON]
-| +-$query.$col2#2 AS `$col2` [JSON]
-| +-$query.$col3#3 AS `$col3` [JSON]
-| +-$query.$col4#4 AS `$col4` [JSON]
-| +-$query.$col5#5 AS `$col5` [JSON]
-| +-$query.$col6#6 AS `$col6` [JSON]
-| +-$query.$col7#7 AS `$col7` [JSON]
-| +-$query.$col8#8 AS `$col8` [JSON]
-| +-$query.$col9#9 AS `$col9` [JSON]
-| +-$query.$col10#10 AS `$col10` [JSON]
-| +-$query.$col11#11 AS `$col11` [JSON]
-| +-$query.$col12#12 AS `$col12` [JSON]
-| +-$query.$col13#13 AS `$col13` [JSON]
-| +-$query.$col14#14 AS `$col14` [JSON]
+| +-$query.$col1#1 AS "$col1" [JSON]
+| +-$query.$col2#2 AS "$col2" [JSON]
+| +-$query.$col3#3 AS "$col3" [JSON]
+| +-$query.$col4#4 AS "$col4" [JSON]
+| +-$query.$col5#5 AS "$col5" [JSON]
+| +-$query.$col6#6 AS "$col6" [JSON]
+| +-$query.$col7#7 AS "$col7" [JSON]
+| +-$query.$col8#8 AS "$col8" [JSON]
+| +-$query.$col9#9 AS "$col9" [JSON]
+| +-$query.$col10#10 AS "$col10" [JSON]
+| +-$query.$col11#11 AS "$col11" [JSON]
+| +-$query.$col12#12 AS "$col12" [JSON]
+| +-$query.$col13#13 AS "$col13" [JSON]
+| +-$query.$col14#14 AS "$col14" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14]
@@ -1903,10 +1861,10 @@ SELECT
   JSON '0.123',
   JSON '456.0',
   JSON '123',
-  JSON "123",
-  JSON "1e0",
-  JSON "1e1",
-  JSON "1e-3",
+  JSON '123',
+  JSON '1e0',
+  JSON '1e1',
+  JSON '1e-3',
   JSON '-1.1',
   JSON '-123',
   JSON '18446744073709551615',
@@ -1916,19 +1874,19 @@ SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [JSON]
-| +-$query.$col2#2 AS `$col2` [JSON]
-| +-$query.$col3#3 AS `$col3` [JSON]
-| +-$query.$col4#4 AS `$col4` [JSON]
-| +-$query.$col5#5 AS `$col5` [JSON]
-| +-$query.$col6#6 AS `$col6` [JSON]
-| +-$query.$col7#7 AS `$col7` [JSON]
-| +-$query.$col8#8 AS `$col8` [JSON]
-| +-$query.$col9#9 AS `$col9` [JSON]
-| +-$query.$col10#10 AS `$col10` [JSON]
-| +-$query.$col11#11 AS `$col11` [JSON]
-| +-$query.$col12#12 AS `$col12` [JSON]
-| +-$query.$col13#13 AS `$col13` [JSON]
+| +-$query.$col1#1 AS "$col1" [JSON]
+| +-$query.$col2#2 AS "$col2" [JSON]
+| +-$query.$col3#3 AS "$col3" [JSON]
+| +-$query.$col4#4 AS "$col4" [JSON]
+| +-$query.$col5#5 AS "$col5" [JSON]
+| +-$query.$col6#6 AS "$col6" [JSON]
+| +-$query.$col7#7 AS "$col7" [JSON]
+| +-$query.$col8#8 AS "$col8" [JSON]
+| +-$query.$col9#9 AS "$col9" [JSON]
+| +-$query.$col10#10 AS "$col10" [JSON]
+| +-$query.$col11#11 AS "$col11" [JSON]
+| +-$query.$col12#12 AS "$col12" [JSON]
+| +-$query.$col13#13 AS "$col13" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13]
@@ -1969,7 +1927,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1996,7 +1954,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2021,7 +1979,7 @@ ALTERNATION GROUPS:
     NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
     NUMERIC_TYPE
 --
-ERROR: Invalid DECIMAL literal: "" [at 1:8]
+ERROR: Invalid DECIMAL literal: '' [at 1:8]
 SELECT DECIMAL ''
        ^
 --
@@ -2041,7 +1999,7 @@ ALTERNATION GROUPS:
     BIGNUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
     BIGNUMERIC_TYPE
 --
-ERROR: Invalid BIGDECIMAL literal: "" [at 1:8]
+ERROR: Invalid BIGDECIMAL literal: '' [at 1:8]
 SELECT BIGDECIMAL ''
        ^
 --
@@ -2068,7 +2026,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2092,7 +2050,7 @@ ALTERNATION GROUP: INTERVAL_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INTERVAL]
+| +-$query.$col1#1 AS "$col1" [INTERVAL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

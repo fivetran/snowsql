@@ -4,7 +4,7 @@ SELECT udf_templated_return_one();
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -21,7 +21,7 @@ Literal(type=INT64, value=1)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -31,13 +31,13 @@ QueryStmt
       +-SingleRowScan
 ==
 
-SELECT REVERSE_ARRAY({{[1, 2, 3]|["a", "b", "c"]|[]|CAST(NULL AS ARRAY<INT64>)}});
+SELECT REVERSE_ARRAY({{[1, 2, 3]|['a', 'b', 'c']|[]|CAST(NULL AS ARRAY<INT64>)}});
 --
 ALTERNATION GROUP: [1, 2, 3]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -53,7 +53,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 +-FunctionCall(ZetaSQL:$is_null(ARRAY<INT64>) -> BOOL)
-| +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+| +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
 +-Literal(type=ARRAY<INT64>, value=NULL)
 +-SubqueryExpr
   +-type=ARRAY<INT64>
@@ -66,7 +66,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
       | +-ArrayScan
       |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
-      |   | +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+      |   | +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
       |     +-ColumnHolder(column=$array_offset.offset_idx#2)
@@ -79,7 +79,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -119,18 +119,18 @@ QueryStmt
     +-input_scan=
       +-SingleRowScan
 --
-ALTERNATION GROUP: ["a", "b", "c"]
+ALTERNATION GROUP: ['a', 'b', 'c']
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:REVERSE_ARRAY(ARRAY<STRING> input_arr) -> ARRAY<STRING>)
-    |     +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+    |     +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
     +-input_scan=
       +-SingleRowScan
 
@@ -139,7 +139,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
 +-FunctionCall(ZetaSQL:$is_null(ARRAY<STRING>) -> BOOL)
-| +-ArgumentRef(type=ARRAY<STRING>, name="input_arr")
+| +-ArgumentRef(type=ARRAY<STRING>, name='input_arr')
 +-Literal(type=ARRAY<STRING>, value=NULL)
 +-SubqueryExpr
   +-type=ARRAY<STRING>
@@ -152,7 +152,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
       | +-ArrayScan
       |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
-      |   | +-ArgumentRef(type=ARRAY<STRING>, name="input_arr")
+      |   | +-ArgumentRef(type=ARRAY<STRING>, name='input_arr')
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
       |     +-ColumnHolder(column=$array_offset.offset_idx#2)
@@ -165,7 +165,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -174,7 +174,7 @@ QueryStmt
     |   +-WithExpr
     |     +-type=ARRAY<STRING>
     |     +-assignment_list=
-    |     | +-input_arr#4 := Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+    |     | +-input_arr#4 := Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
     |     +-expr=
     |       +-FunctionCall(ZetaSQL:if(BOOL, ARRAY<STRING>, ARRAY<STRING>) -> ARRAY<STRING>)
     |         +-FunctionCall(ZetaSQL:$is_null(ARRAY<STRING>) -> BOOL)
@@ -209,7 +209,7 @@ ALTERNATION GROUP: []
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -225,7 +225,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 +-FunctionCall(ZetaSQL:$is_null(ARRAY<INT64>) -> BOOL)
-| +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+| +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
 +-Literal(type=ARRAY<INT64>, value=NULL)
 +-SubqueryExpr
   +-type=ARRAY<INT64>
@@ -238,7 +238,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
       | +-ArrayScan
       |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
-      |   | +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+      |   | +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
       |     +-ColumnHolder(column=$array_offset.offset_idx#2)
@@ -251,7 +251,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -295,7 +295,7 @@ ALTERNATION GROUP: CAST(NULL AS ARRAY<INT64>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -311,7 +311,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 +-FunctionCall(ZetaSQL:$is_null(ARRAY<INT64>) -> BOOL)
-| +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+| +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
 +-Literal(type=ARRAY<INT64>, value=NULL)
 +-SubqueryExpr
   +-type=ARRAY<INT64>
@@ -324,7 +324,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
       | +-ArrayScan
       |   +-column_list=[$array.e#1, $array_offset.offset_idx#2]
       |   +-array_expr=
-      |   | +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+      |   | +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
       |   +-element_column=$array.e#1
       |   +-array_offset_column=
       |     +-ColumnHolder(column=$array_offset.offset_idx#2)
@@ -337,7 +337,7 @@ FunctionCall(ZetaSQL:if(BOOL, ARRAY<INT64>, ARRAY<INT64>) -> ARRAY<INT64>)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -382,7 +382,7 @@ SELECT TimesTwo(rand());
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -397,13 +397,13 @@ With Templated SQL function call:
   Templated_SQL_Function:TimesTwo(DOUBLE arg) -> DOUBLE
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
-+-ArgumentRef(type=DOUBLE, name="arg")
-+-ArgumentRef(type=DOUBLE, name="arg")
++-ArgumentRef(type=DOUBLE, name='arg')
++-ArgumentRef(type=DOUBLE, name='arg')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -426,7 +426,7 @@ SELECT SUM_DOUBLE_ARRAY(GENERATE_ARRAY(1, 2, 3));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -459,7 +459,7 @@ SubqueryExpr
         |   | +-FunctionCall(ZetaSQL:array_transform(ARRAY<INT64> array_to_transform, FUNCTION<INT64->INT64> transformation) -> ARRAY<INT64>)
         |   |   +-FunctionArgument
         |   |   | +-expr=
-        |   |   |   +-ArgumentRef(type=ARRAY<INT64>, name="input_arr")
+        |   |   |   +-ArgumentRef(type=ARRAY<INT64>, name='input_arr')
         |   |   +-FunctionArgument
         |   |     +-inline_lambda=
         |   |       +-InlineLambda
@@ -477,13 +477,13 @@ With Templated SQL function call:
   Templated_SQL_Function:TimesTwo(INT64 arg) -> INT64
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-+-ArgumentRef(type=INT64, name="arg")
-+-ArgumentRef(type=INT64, name="arg")
++-ArgumentRef(type=INT64, name='arg')
++-ArgumentRef(type=INT64, name='arg')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -581,7 +581,7 @@ select templated_scalar_definer_rights(6)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -596,7 +596,7 @@ With Templated SQL function call:
   Templated_SQL_Function:templated_scalar_definer_rights(INT64) -> INT64
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-+-ArgumentRef(type=INT64, name="x")
++-ArgumentRef(type=INT64, name='x')
 +-SubqueryExpr
   +-type=INT64
   +-subquery_type=SCALAR
@@ -614,7 +614,7 @@ FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

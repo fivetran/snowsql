@@ -103,16 +103,16 @@ AlterTableStatement [0-37]
 ALTER TABLE column DROP COLUMN column
 ==
 
-alter table column drop column `union`;
+alter table column drop column "union";
 --
 AlterTableStatement [0-38]
   PathExpression [12-18]
     Identifier(column) [12-18]
   AlterActionList [19-38]
     DropColumnAction [19-38]
-      Identifier(`union`) [31-38]
+      Identifier("union") [31-38]
 --
-ALTER TABLE column DROP COLUMN `union`
+ALTER TABLE column DROP COLUMN "union"
 ==
 
 [no_test_get_parse_tokens]
@@ -121,7 +121,7 @@ ALTER TABLE foo-bar.baz DROP COLUMN a
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-bar.baz` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-bar.baz" [at 1:13]
 ALTER TABLE foo-bar.baz DROP COLUMN a
             ^
 --
@@ -129,10 +129,10 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 AlterTableStatement [0-37]
   PathExpression [12-23]
-    Identifier(`foo-bar`) [12-19]
+    Identifier("foo-bar") [12-19]
     Identifier(baz) [20-23]
   AlterActionList [24-37]
     DropColumnAction [24-37]
       Identifier(a) [36-37]
 --
-ALTER TABLE `foo-bar`.baz DROP COLUMN a
+ALTER TABLE "foo-bar".baz DROP COLUMN a

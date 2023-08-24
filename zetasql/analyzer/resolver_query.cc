@@ -9270,12 +9270,12 @@ absl::Status Resolver::ValidateArrayZipMode(
   if (!zetasql_base::CaseEqual(array_zip_mode->name()->GetAsStringView(),
                               kArrayZipModeArgName)) {
     return MakeSqlErrorAt(array_zip_mode)
-           << "Unsupported named argument `"
-           << array_zip_mode->name()->GetAsStringView() << "` in UNNEST";
+           << "Unsupported named argument \""
+           << array_zip_mode->name()->GetAsStringView() << "\" in UNNEST";
   }
   return MakeSqlErrorAt(array_zip_mode)
-         << "The named argument `" << kArrayZipModeArgName
-         << "` used in UNNEST is not implemented";
+         << "The named argument \"" << kArrayZipModeArgName
+         << "\" used in UNNEST is not implemented";
 }
 
 absl::Status Resolver::ResolveArrayScan(

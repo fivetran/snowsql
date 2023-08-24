@@ -3,7 +3,7 @@ SELECT TOP 1 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -51,7 +51,7 @@ SELECT TOP @test_param_int32 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -64,14 +64,14 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 SELECT TOP @test_param_int64 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -83,14 +83,14 @@ QueryStmt
     |   +-input_scan=
     |     +-SingleRowScan
     +-top=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 SELECT TOP @test_param_uint32 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -103,14 +103,14 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(UINT32 -> INT64)
-        +-Parameter(type=UINT32, name="test_param_uint32")
+        +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 SELECT TOP @test_param_uint64 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -123,7 +123,7 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(UINT64 -> INT64)
-        +-Parameter(type=UINT64, name="test_param_uint64")
+        +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 # Casting of literals to integer and parameters to int64 works.
@@ -131,7 +131,7 @@ select top cast(1 as int32) 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -150,7 +150,7 @@ select top cast(@test_param_int32 as int32) 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-TopScan
     +-column_list=[$query.$col1#1]
@@ -163,7 +163,7 @@ QueryStmt
     |     +-SingleRowScan
     +-top=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select top cast(@test_param_int64 as int32) 1
@@ -174,11 +174,11 @@ select top cast(@test_param_int64 as int32) 1
 ==
 
 # Casting of other expressions does not work.
-select top cast(`key` as int64) 1
+select top cast("key" as int64) 1
 from KeyValue
 --
-ERROR: Syntax error: Expected "@" or "@@" or integer literal but got identifier `key` [at 1:17]
-select top cast(`key` as int64) 1
+ERROR: Syntax error: Expected "@" or "@@" or integer literal but got identifier "key" [at 1:17]
+select top cast("key" as int64) 1
                 ^
 ==
 
@@ -232,7 +232,7 @@ QueryStmt
       | |   | +-ProjectScan
       | |   |   +-column_list=KeyValue.[Key#1, Value#2]
       | |   |   +-input_scan=
-      | |   |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+      | |   |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
       | |   +-top=
       | |     +-Literal(type=INT64, value=5)
       | +-output_column_list=KeyValue.[Key#1, Value#2]
@@ -244,7 +244,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=KeyValue.[Key#3, Value#4]
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |   |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         |   +-top=
         |     +-Literal(type=INT64, value=5)
         +-output_column_list=KeyValue.[Key#3, Value#4]

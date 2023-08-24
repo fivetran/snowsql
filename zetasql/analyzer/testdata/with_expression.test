@@ -5,7 +5,7 @@ select WITH(a AS 2, b AS 3 * 4, a + b)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -33,7 +33,7 @@ SELECT
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -93,7 +93,7 @@ select WITH(value AS 2, key + value + LENGTH(KeyValue.value)) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -128,7 +128,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -187,7 +187,7 @@ SELECT WITH(a AS 1, b AS a + 2, c AS b + 3, d AS a * 2, a + c + d)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -225,7 +225,7 @@ SELECT
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -312,11 +312,11 @@ SELECT
 ==
 
 # Nested WITH expressions resolve correctly.
-SELECT WITH(a AS "abc", b AS WITH(a AS "def", b AS "ghi", CONCAT(a, b)), CONCAT(a, b))
+SELECT WITH(a AS 'abc', b AS WITH(a AS 'def', b AS 'ghi', CONCAT(a, b)), CONCAT(a, b))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -325,13 +325,13 @@ QueryStmt
     |   +-WithExpr
     |     +-type=STRING
     |     +-assignment_list=
-    |     | +-a#1 := Literal(type=STRING, value="abc")
+    |     | +-a#1 := Literal(type=STRING, value='abc')
     |     | +-b#4 :=
     |     |   +-WithExpr
     |     |     +-type=STRING
     |     |     +-assignment_list=
-    |     |     | +-a#2 := Literal(type=STRING, value="def")
-    |     |     | +-b#3 := Literal(type=STRING, value="ghi")
+    |     |     | +-a#2 := Literal(type=STRING, value='def')
+    |     |     | +-b#3 := Literal(type=STRING, value='ghi')
     |     |     +-expr=
     |     |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |     |         +-ColumnRef(type=STRING, column=$with_expr.a#2)
@@ -345,12 +345,12 @@ QueryStmt
 
 [UNPARSED_SQL]
 SELECT
-  WITH(a_2 AS "abc", a_3 AS WITH(a_4 AS "def", a_5 AS "ghi", CONCAT(a_4, a_5)), CONCAT(a_2, a_3)) AS a_1;
+  WITH(a_2 AS 'abc', a_3 AS WITH(a_4 AS 'def', a_5 AS 'ghi', CONCAT(a_4, a_5)), CONCAT(a_2, a_3)) AS a_1;
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -387,19 +387,19 @@ QueryStmt
     |             |           +-ProjectScan
     |             |             +-column_list=$with_expr.[a#2, b#3]
     |             |             +-expr_list=
-    |             |             | +-b#3 := Literal(type=STRING, value="ghi")
+    |             |             | +-b#3 := Literal(type=STRING, value='ghi')
     |             |             +-input_scan=
     |             |               +-ProjectScan
     |             |                 +-column_list=[$with_expr.a#2]
     |             |                 +-expr_list=
-    |             |                 | +-a#2 := Literal(type=STRING, value="def")
+    |             |                 | +-a#2 := Literal(type=STRING, value='def')
     |             |                 +-input_scan=
     |             |                   +-SingleRowScan
     |             +-input_scan=
     |               +-ProjectScan
     |                 +-column_list=[$with_expr.a#1]
     |                 +-expr_list=
-    |                 | +-a#1 := Literal(type=STRING, value="abc")
+    |                 | +-a#1 := Literal(type=STRING, value='abc')
     |                 +-input_scan=
     |                   +-SingleRowScan
     +-input_scan=
@@ -420,18 +420,18 @@ SELECT
               (
                 SELECT
                   projectscan_6.a_5 AS a_5,
-                  "ghi" AS a_7
+                  'ghi' AS a_7
                 FROM
                   (
                     SELECT
-                      "def" AS a_5
+                      'def' AS a_5
                   ) AS projectscan_6
               ) AS projectscan_8
           ) AS a_4
         FROM
           (
             SELECT
-              "abc" AS a_2
+              'abc' AS a_2
           ) AS projectscan_3
       ) AS projectscan_10
   ) AS a_1;
@@ -453,7 +453,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -504,7 +504,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [INT64]
+| +-$query.$col1#9 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -617,7 +617,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [DOUBLE]
+| +-$query.$col1#10 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -671,7 +671,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [DOUBLE]
+| +-$query.$col1#10 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -769,7 +769,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -819,7 +819,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -914,7 +914,7 @@ FROM KeyValue GROUP BY value;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [DOUBLE]
+| +-$query.$col1#8 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -967,7 +967,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [DOUBLE]
+| +-$query.$col1#8 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]

@@ -21,37 +21,37 @@ CreateTableStmt
 +-name_path=t
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="col_string"
+  | +-name='col_string'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations(type_parameters=(max_length=10))
   | +-column=t.col_string#1
   +-ColumnDefinition
-  | +-name="col_string_max"
+  | +-name='col_string_max'
   | +-type=STRING
   | +-annotations=
   | | +-ColumnAnnotations(not_null=TRUE, type_parameters=(max_length=MAX))
   | +-column=t.col_string_max#2
   +-ColumnDefinition
-  | +-name="col_bytes"
+  | +-name='col_bytes'
   | +-type=BYTES
   | +-annotations=
   | | +-ColumnAnnotations(type_parameters=(max_length=100))
   | +-column=t.col_bytes#3
   +-ColumnDefinition
-  | +-name="col_bytes_max"
+  | +-name='col_bytes_max'
   | +-type=BYTES
   | +-annotations=
   | | +-ColumnAnnotations(type_parameters=(max_length=MAX))
   | +-column=t.col_bytes_max#4
   +-ColumnDefinition
-  | +-name="col_numeric1"
+  | +-name='col_numeric1'
   | +-type=NUMERIC
   | +-annotations=
   | | +-ColumnAnnotations(not_null=TRUE, type_parameters=(precision=20,scale=0))
   | +-column=t.col_numeric1#5
   +-ColumnDefinition
-  | +-name="col_numeric2"
+  | +-name='col_numeric2'
   | +-type=NUMERIC
   | +-annotations=
   | | +-ColumnAnnotations
@@ -60,61 +60,61 @@ CreateTableStmt
   | |   +-type_parameters=(precision=30,scale=5)
   | +-column=t.col_numeric2#6
   +-ColumnDefinition
-  | +-name="col_numeric3"
+  | +-name='col_numeric3'
   | +-type=NUMERIC
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |   | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_even")
+  | |   | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_even')
   | |   +-type_parameters=(precision=30,scale=5)
   | +-column=t.col_numeric3#7
   +-ColumnDefinition
-  | +-name="col_numeric4"
+  | +-name='col_numeric4'
   | +-type=NUMERIC
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |   | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_away_from_zero")
+  | |   | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_away_from_zero')
   | |   +-type_parameters=(precision=31,scale=5)
   | +-column=t.col_numeric4#8
   +-ColumnDefinition
-  | +-name="col_bignumeric1"
+  | +-name='col_bignumeric1'
   | +-type=BIGNUMERIC
   | +-annotations=
   | | +-ColumnAnnotations(type_parameters=(precision=36,scale=0))
   | +-column=t.col_bignumeric1#9
   +-ColumnDefinition
-  | +-name="col_bignumeric2"
+  | +-name='col_bignumeric2'
   | +-type=BIGNUMERIC
   | +-annotations=
   | | +-ColumnAnnotations(type_parameters=(precision=75,scale=38))
   | +-column=t.col_bignumeric2#10
   +-ColumnDefinition
-  | +-name="col_bignumeric3"
+  | +-name='col_bignumeric3'
   | +-type=BIGNUMERIC
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |   | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_even")
+  | |   | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_even')
   | |   +-type_parameters=(precision=70,scale=35)
   | +-column=t.col_bignumeric3#11
   +-ColumnDefinition
-  | +-name="col_bignumeric4"
+  | +-name='col_bignumeric4'
   | +-type=BIGNUMERIC
   | +-annotations=
   | | +-ColumnAnnotations
   | |   +-option_list=
-  | |   | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_away_from_zero")
+  | |   | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_away_from_zero')
   | |   +-type_parameters=(precision=71,scale=35)
   | +-column=t.col_bignumeric4#12
   +-ColumnDefinition
-  | +-name="col_bignumeric_max"
+  | +-name='col_bignumeric_max'
   | +-type=BIGNUMERIC
   | +-annotations=
   | | +-ColumnAnnotations(type_parameters=(precision=MAX,scale=0))
   | +-column=t.col_bignumeric_max#13
   +-ColumnDefinition
-    +-name="col_bignumeric_max2"
+    +-name='col_bignumeric_max2'
     +-type=BIGNUMERIC
     +-annotations=
     | +-ColumnAnnotations(type_parameters=(precision=MAX,scale=30))
@@ -131,7 +131,7 @@ CreateTableStmt
 +-name_path=t
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="c1"
+  | +-name='c1'
   | +-type=STRUCT<a1 NUMERIC, a2 STRUCT<BYTES>, a3 NUMERIC>
   | +-annotations=
   | | +-ColumnAnnotations
@@ -142,11 +142,11 @@ CreateTableStmt
   | |     |   +-ColumnAnnotations(type_parameters=(max_length=10))
   | |     +-ColumnAnnotations
   | |       +-option_list=
-  | |       | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_even")
+  | |       | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_even')
   | |       +-type_parameters=(precision=10,scale=5)
   | +-column=t.c1#1
   +-ColumnDefinition
-    +-name="c2"
+    +-name='c2'
     +-type=ARRAY<STRUCT<BYTES>>
     +-annotations=
     | +-ColumnAnnotations
@@ -176,7 +176,7 @@ CreateTableStmt
 +-name_path=t
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="c1"
+  | +-name='c1'
   | +-type=STRUCT<f1 ARRAY<STRUCT<a1 NUMERIC, b1 STRING>>, f2 STRUCT<s1 STRUCT<a1 BYTES, a2 DATE, a3 BIGNUMERIC, a4 NUMERIC, a5 ARRAY<NUMERIC>>>>
   | +-annotations=
   | | +-ColumnAnnotations
@@ -194,21 +194,21 @@ CreateTableStmt
   | |             +-ColumnAnnotations
   | |             +-ColumnAnnotations
   | |             | +-option_list=
-  | |             | | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_even")
+  | |             | | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_even')
   | |             | +-type_parameters=(precision=60,scale=30)
   | |             +-ColumnAnnotations
   | |             | +-option_list=
-  | |             | | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_away_from_zero")
+  | |             | | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_away_from_zero')
   | |             | +-type_parameters=(precision=10,scale=3)
   | |             +-ColumnAnnotations
   | |               +-child_list=
   | |                 +-ColumnAnnotations
   | |                   +-option_list=
-  | |                   | +-ROUNDING_MODE := Literal(type=STRING, value="round_half_even")
+  | |                   | +-ROUNDING_MODE := Literal(type=STRING, value='round_half_even')
   | |                   +-type_parameters=(precision=10,scale=3)
   | +-column=t.c1#1
   +-ColumnDefinition
-    +-name="c2"
+    +-name='c2'
     +-type=ARRAY<STRUCT<a1 ARRAY<STRING>>>
     +-annotations=
     | +-ColumnAnnotations
@@ -232,7 +232,7 @@ CreateTableStmt
 +-name_path=t
 +-column_definition_list=
   +-ColumnDefinition
-  | +-name="c1"
+  | +-name='c1'
   | +-type=STRUCT<f1 ARRAY<STRUCT<a1 NUMERIC, b1 STRING>>, f2 STRUCT<s1 STRUCT<a1 BYTES, a2 DATE, a3 BIGNUMERIC>>>
   | +-annotations=
   | | +-ColumnAnnotations
@@ -251,7 +251,7 @@ CreateTableStmt
   | |             +-ColumnAnnotations(type_parameters=(precision=60,scale=30))
   | +-column=t.c1#1
   +-ColumnDefinition
-    +-name="c2"
+    +-name='c2'
     +-type=ARRAY<STRUCT<a1 ARRAY<STRING>>>
     +-annotations=
     | +-ColumnAnnotations
@@ -279,7 +279,7 @@ CreateTableStmt
 +-name_path=t
 +-column_definition_list=
   +-ColumnDefinition
-    +-name="col_string"
+    +-name='col_string'
     +-type=STRING
     +-annotations=
     | +-ColumnAnnotations(type_parameters=(max_length=10))
@@ -295,7 +295,7 @@ CreateTableStmt
 +-name_path=t
 +-column_definition_list=
   +-ColumnDefinition
-    +-name="col_numeric"
+    +-name='col_numeric'
     +-type=NUMERIC
     +-annotations=
     | +-ColumnAnnotations(type_parameters=(precision=10,scale=5))
@@ -325,10 +325,10 @@ create table t (s1 struct<f1 string>(200, 200));
                                     ^
 ==
 
-create table t (s1 string("abc"));
+create table t (s1 string('abc'));
 --
 ERROR: STRING length parameter must be an integer or MAX keyword [at 1:26]
-create table t (s1 string("abc"));
+create table t (s1 string('abc'));
                          ^
 ==
 
@@ -395,10 +395,10 @@ create table t (n1 bignumeric(70, 30));
                              ^
 ==
 
-create table t (n1 numeric("random"));
+create table t (n1 numeric('random'));
 --
 ERROR: NUMERIC precision must be an integer [at 1:27]
-create table t (n1 numeric("random"));
+create table t (n1 numeric('random'));
                           ^
 ==
 
@@ -416,7 +416,7 @@ ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE, try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -433,7 +433,7 @@ ALTERNATION GROUP: PARAMETERIZED_TYPES,NUMERIC_TYPE,cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -459,18 +459,18 @@ select cast(1.2 as NUMERIC(8,2));
 ==
 
 # Test cast with a string Array with type parameters.
-select cast(["hi", "hello", "hola"] as ARRAY<STRING(12)>);
+select cast(['hi', 'hello', 'hola'] as ARRAY<STRING(12)>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
-    |     +-Literal(type=ARRAY<STRING>, value=["hi", "hello", "hola"], has_explicit_type=TRUE)
+    |     +-Literal(type=ARRAY<STRING>, value=['hi', 'hello', 'hola'], has_explicit_type=TRUE)
     |     +-type_modifiers=type_parameters:[(max_length=12)]
     +-input_scan=
       +-SingleRowScan
@@ -490,14 +490,14 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,PARAMETERIZED_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<STRING>)
-    |     +-Literal(type=ARRAY<STRING>, value=["0", "1", "2"], has_explicit_type=TRUE)
+    |     +-Literal(type=ARRAY<STRING>, value=['0', '1', '2'], has_explicit_type=TRUE)
     |     +-type_modifiers=type_parameters:[(max_length=12)]
     +-input_scan=
       +-SingleRowScan
@@ -505,7 +505,7 @@ QueryStmt
 
 # Test cast with a nested struct with subfields having type parameters.
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES,PARAMETERIZED_TYPES,NUMERIC_TYPE,BIGNUMERIC_TYPE}}]
-select cast(struct(false, 2, struct(123, [5], struct(true, 1000)), "hello", ["123", "123456", "1"]) as
+select cast(struct(false, 2, struct(123, [5], struct(true, 1000)), 'hello', ['123', '123456', '1']) as
             STRUCT<BOOL, NUMERIC(8), STRUCT<BIGNUMERIC(MAX, 2), ARRAY<STRING(2)>, STRUCT<BOOL, NUMERIC(6, 1)>>, BYTES(10), ARRAY<STRING(5)>>);
 --
 ALTERNATION GROUP: <empty>
@@ -518,28 +518,28 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,PARAMETERIZED_TYPES,NUMERIC_
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>> -> STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>)
-    |     +-Literal(type=STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>, value={false, 2, {123, ["5"], {true, 1000}}, b"hello", ["123", "123456", "1"]}, has_explicit_type=TRUE)
+    |     +-Literal(type=STRUCT<BOOL, NUMERIC, STRUCT<BIGNUMERIC, ARRAY<STRING>, STRUCT<BOOL, NUMERIC>>, BYTES, ARRAY<STRING>>, value={false, 2, {123, ['5'], {true, 1000}}, b"hello", ['123', '123456', '1']}, has_explicit_type=TRUE)
     |     +-type_modifiers=type_parameters:[null,(precision=8,scale=0),[(precision=MAX,scale=2),[(max_length=2)],[null,(precision=6,scale=1)]],(max_length=10),[(max_length=5)]]
     +-input_scan=
       +-SingleRowScan
 ==
 
 select cast(coalesce(struct(false, 1.23,
-                            array<zetasql_test__.TestExtraPB>[""],
+                            array<zetasql_test__.TestExtraPB>[''],
                             CAST(1 AS zetasql_test__.TestEnum))) AS
             STRUCT<BOOL, STRING(MAX), ARRAY<alt_descriptor_pool.zetasql_test__.TestExtraPB>,
                    alt_descriptor_pool.zetasql_test__.TestEnum>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<BOOL, STRING, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<BOOL, STRING, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -559,12 +559,12 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast((2, [("hello", 3, (Numeric "121", Numeric "4"))]) as
+select cast((2, [('hello', 3, (Numeric '121', Numeric '4'))]) as
 STRUCT<a NUMERIC(5), b ARRAY<STRUCT<STRING(5), INT64, STRUCT<NUMERIC(5), NUMERIC>>>>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a NUMERIC, b ARRAY<STRUCT<STRING, INT64, STRUCT<NUMERIC, NUMERIC>>>>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a NUMERIC, b ARRAY<STRUCT<STRING, INT64, STRUCT<NUMERIC, NUMERIC>>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -581,7 +581,7 @@ QueryStmt
     |           +-MakeStruct
     |             +-type=STRUCT<STRING, INT64, STRUCT<NUMERIC, NUMERIC>>
     |             +-field_list=
-    |               +-Literal(type=STRING, value="hello")
+    |               +-Literal(type=STRING, value='hello')
     |               +-Literal(type=INT64, value=3)
     |               +-Literal(type=STRUCT<NUMERIC, NUMERIC>, value={121, 4}, has_explicit_type=TRUE)
     |         +-type_modifiers=type_parameters:[[(max_length=5),null,[(precision=5,scale=0),null]]]
@@ -589,11 +589,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast((2, cast("hello" as STRING(5))) as STRUCT<a INT32, b STRING(2)>);
+select cast((2, cast('hello' as STRING(5))) as STRUCT<a INT32, b STRING(2)>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<a INT32, b STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<a INT32, b STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -605,7 +605,7 @@ QueryStmt
     |       +-Literal(type=INT32, value=2, has_explicit_type=TRUE)
     |       +-Cast(STRING -> STRING)
     |         +-Cast(STRING -> STRING)
-    |           +-Literal(type=STRING, value="hello", has_explicit_type=TRUE)
+    |           +-Literal(type=STRING, value='hello', has_explicit_type=TRUE)
     |           +-type_modifiers=type_parameters:(max_length=5)
     |         +-type_modifiers=type_parameters:(max_length=2)
     +-input_scan=
@@ -658,7 +658,7 @@ select CAST(9999999999999999999999999999.999999999 as numeric(29, 1));
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -679,7 +679,7 @@ select cast((99999999999999999999999999.999999999, 99999999999999999999999999.99
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<NUMERIC, BIGNUMERIC>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<NUMERIC, BIGNUMERIC>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -696,7 +696,7 @@ select cast([numeric '99999999999999999999999999.999999999'] as array<numeric(29
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<NUMERIC>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<NUMERIC>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

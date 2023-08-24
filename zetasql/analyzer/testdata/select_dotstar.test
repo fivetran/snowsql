@@ -122,7 +122,7 @@ QueryStmt
     |       +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#2)
     |       +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     +-input_scan=
-      +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="T")
+      +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='T')
 ==
 
 select kv.key.* from KeyValue kv
@@ -200,11 +200,11 @@ QueryStmt
 +-output_column_list=
 | +-t.c1#7 AS c1 [STRUCT<INT64, INT64>]
 | +-t.c2#8 AS c2 [STRUCT<a INT64, b INT64>]
-| +-$query.$col2#9 AS `$col2` [STRING]
+| +-$query.$col2#9 AS "$col2" [STRING]
 | +-t.c1#7 AS c1 [STRUCT<INT64, INT64>]
-| +-$query.$field1#10 AS `$field1` [INT64]
-| +-$query.$field2#11 AS `$field2` [INT64]
-| +-$query.$col5#12 AS `$col5` [STRING]
+| +-$query.$field1#10 AS "$field1" [INT64]
+| +-$query.$field2#11 AS "$field2" [INT64]
+| +-$query.$col5#12 AS "$col5" [STRING]
 | +-t.c2#8 AS c2 [STRUCT<a INT64, b INT64>]
 | +-$query.a#13 AS a [INT64]
 | +-$query.b#14 AS b [INT64]
@@ -212,7 +212,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[t.c1#7, t.c2#8, $query.$col2#9, t.c1#7, $query.$field1#10, $query.$field2#11, $query.$col5#12, t.c2#8, $query.a#13, $query.b#14]
     +-expr_list=
-    | +-$col2#9 := Literal(type=STRING, value="---")
+    | +-$col2#9 := Literal(type=STRING, value='---')
     | +-$field1#10 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -225,7 +225,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<INT64, INT64>, column=t.c1#7)
     | |   +-field_idx=1
-    | +-$col5#12 := Literal(type=STRING, value="---")
+    | +-$col5#12 := Literal(type=STRING, value='---')
     | +-a#13 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -299,9 +299,9 @@ QueryStmt
 | +-$query.a#11 AS a [INT64]
 | +-$query.b#12 AS b [INT64]
 | +-$query.c#13 AS c [INT64]
-| +-$query.$field1#14 AS `$field1` [INT64]
-| +-$query.$field2#15 AS `$field2` [INT64]
-| +-$query.$field3#16 AS `$field3` [INT64]
+| +-$query.$field1#14 AS "$field1" [INT64]
+| +-$query.$field2#15 AS "$field2" [INT64]
+| +-$query.$field3#16 AS "$field3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#11, b#12, c#13, $field1#14, $field2#15, $field3#16]
@@ -400,13 +400,13 @@ QueryStmt
 
 select (select AS STRUCT 1 a, 2 b).*,
        '---',
-       (select as `zetasql_test__.TestExtraPB` 55 int32_val1).*;
+       (select as "zetasql_test__.TestExtraPB" 55 int32_val1).*;
 --
 QueryStmt
 +-output_column_list=
 | +-$query.a#8 AS a [INT64]
 | +-$query.b#9 AS b [INT64]
-| +-$query.$col2#10 AS `$col2` [STRING]
+| +-$query.$col2#10 AS "$col2" [STRING]
 | +-$query.int32_val1#11 AS int32_val1 [INT32]
 | +-$query.int32_val2#12 AS int32_val2 [INT32]
 | +-$query.str_value#13 AS str_value [ARRAY<STRING>]
@@ -426,7 +426,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64>, column=$preproject.$struct#4)
     | |   +-field_idx=1
-    | +-$col2#10 := Literal(type=STRING, value="---")
+    | +-$col2#10 := Literal(type=STRING, value='---')
     | +-int32_val1#11 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -504,7 +504,7 @@ QueryStmt
 +-output_column_list=
 | +-t.a#1 AS a [INT64]
 | +-t.b#2 AS b [INT64]
-| +-$query.$col2#6 AS `$col2` [STRUCT<a INT64, b INT64>]
+| +-$query.$col2#6 AS "$col2" [STRUCT<a INT64, b INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[t.a#1, t.b#2, $query.$col2#6]
@@ -652,7 +652,7 @@ select (select AS STRUCT t.*, 1) from KeyValue t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<Key INT64, Value STRING, INT64>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<Key INT64, Value STRING, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -685,7 +685,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="t")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
 ==
 
 # Shows extracting fields from a CorrelatedColumnRef without first projecting
@@ -696,7 +696,7 @@ select (select AS STRUCT t.TestProto.*) from ComplexTypes t;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#12 AS `$col1` [STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<STRING>>]
+| +-$query.$col1#12 AS "$col1" [STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#12]
@@ -751,16 +751,16 @@ QueryStmt
     |                 +-input_scan=
     |                   +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[ComplexTypes.TestProto#6], table=ComplexTypes, column_index_list=[5], alias="t")
+      +-TableScan(column_list=[ComplexTypes.TestProto#6], table=ComplexTypes, column_index_list=[5], alias='t')
 ==
 
 # Creates a proto from proto field members expanded as columns through
 # dot star.
-select (select as `zetasql_test__.TestExtraPB` TestProto.* from ComplexTypes);
+select (select as "zetasql_test__.TestExtraPB" TestProto.* from ComplexTypes);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$query.$col1#11 AS "$col1" [PROTO<zetasql_test__.TestExtraPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -813,12 +813,12 @@ QueryStmt
 
 # Converts proto field members into a struct and then again creates a proto out
 # of struct field members expanded through dot star.
-select as `zetasql_test__.TestExtraPB`
+select as "zetasql_test__.TestExtraPB"
           (select as struct TestProto.* from ComplexTypes).*;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#15 AS `$proto` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$make_proto.$proto#15 AS "$proto" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -1225,7 +1225,7 @@ select CivilTimeTypesSink.nested_civil_time_repeated_fields.* from CivilTimeT...
 # Test case from b/32810432.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE]
 WITH my_table AS (
-  SELECT 1 AS primary_key, "foo" AS value, DATE('2016-11-09') AS modified_date
+  SELECT 1 AS primary_key, 'foo' AS value, DATE('2016-11-09') AS modified_date
 )
 SELECT
   ARRAY_AGG(t ORDER BY modified_date DESC LIMIT 1)[DEFAULT_OFFSET(0)].*
@@ -1242,13 +1242,13 @@ QueryStmt
     +-column_list=$query.[primary_key#11, value#12, modified_date#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2, modified_date#3]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-modified_date#3 :=
     |       |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |       |     +-Literal(type=TIMESTAMP, value=2016-11-09 08:00:00+00)
@@ -1288,7 +1288,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$aggregate.$agg1#8]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-primary_key#10 := ColumnRef(type=INT64, column=my_table.primary_key#4)
                 +-aggregate_list=
@@ -1312,7 +1312,7 @@ QueryStmt
 # Similar to the previous, but with an array constructor around an aggregate
 # function.
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key) as k)][DEFAULT_OFFSET(0)].*
@@ -1326,13 +1326,13 @@ QueryStmt
     +-column_list=[$query.k#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1362,7 +1362,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-aggregate_list=
                   +-$agg1#7 :=
                     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -1371,7 +1371,7 @@ QueryStmt
 
 # Similar to the previous, but additionally with GROUP BY.
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key) as k)][DEFAULT_OFFSET(0)].*
@@ -1386,13 +1386,13 @@ QueryStmt
     +-column_list=[$query.k#10]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1422,7 +1422,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
                 +-aggregate_list=
@@ -1438,7 +1438,7 @@ QueryStmt
 # groups by the SELECT list alias which is derived from the dot-star expansion
 # that includes aggregation.  Ugly.
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key) as k, value)][DEFAULT_OFFSET(0)].*
@@ -1454,7 +1454,7 @@ GROUP BY value
 # instead of just 'value', so it resolves to the table column not the
 # SELECT alias.
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key) as k, value)][DEFAULT_OFFSET(0)].*
@@ -1470,13 +1470,13 @@ QueryStmt
     +-column_list=$query.[k#10, value#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1513,7 +1513,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
                 +-aggregate_list=
@@ -1525,7 +1525,7 @@ QueryStmt
 # Similar to the previous, but where the aggregate function is part of
 # another expression (addition).
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
@@ -1541,13 +1541,13 @@ QueryStmt
     +-column_list=$query.[k#10, value#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1586,7 +1586,7 @@ QueryStmt
               +-AggregateScan
                 +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
                 +-group_by_list=
                 | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
                 +-aggregate_list=
@@ -1597,7 +1597,7 @@ QueryStmt
 
 # The same as the previous, but with SELECT DISTINCT
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT DISTINCT
   [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
@@ -1613,13 +1613,13 @@ QueryStmt
     +-column_list=$distinct.[k#12, value#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1661,7 +1661,7 @@ QueryStmt
         |         +-AggregateScan
         |           +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
         |           +-input_scan=
-        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
         |           +-group_by_list=
         |           | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
         |           +-aggregate_list=
@@ -1675,7 +1675,7 @@ QueryStmt
 
 # The same as the previous, but with ORDER BY but not DISTINCT
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
@@ -1693,13 +1693,13 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1742,7 +1742,7 @@ QueryStmt
         |         +-AggregateScan
         |           +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
         |           +-input_scan=
-        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+        |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
         |           +-group_by_list=
         |           | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
         |           +-aggregate_list=
@@ -1760,7 +1760,7 @@ QueryStmt
 
 # The same as the previous, but with ORDER BY and DISTINCT
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT DISTINCT
   [struct(sum(key)+1 as k, value)][DEFAULT_OFFSET(0)].*
@@ -1778,13 +1778,13 @@ QueryStmt
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2, bool_value#3]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_value#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -1830,7 +1830,7 @@ QueryStmt
         |   |         +-AggregateScan
         |   |           +-column_list=[$groupby.value#9, $aggregate.$agg1#7]
         |   |           +-input_scan=
-        |   |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name="my_table")
+        |   |           | +-WithRefScan(column_list=my_table.[key#4, value#5, bool_value#6], with_query_name='my_table')
         |   |           +-group_by_list=
         |   |           | +-value#9 := ColumnRef(type=STRING, column=my_table.value#5)
         |   |           +-aggregate_list=
@@ -1852,7 +1852,7 @@ QueryStmt
 # Similar to the previous test cases, but with a non-grouped column in the
 # struct so this is an error.
 WITH my_table AS (
-  SELECT 1 AS key, "foo" AS value, true as bool_value
+  SELECT 1 AS key, 'foo' AS value, true as bool_value
 )
 SELECT
   [struct(sum(key) as k, {{|t.}}key)][DEFAULT_OFFSET(0)].*
@@ -1876,7 +1876,7 @@ ERROR: SELECT list expression references t.key which is neither grouped nor aggr
 # an analytic function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 WITH my_table AS (
-  SELECT 1 AS key, "a" AS value
+  SELECT 1 AS key, 'a' AS value
 )
 SELECT
   ANY_VALUE([t]) OVER () [DEFAULT_OFFSET(0)].*
@@ -1891,13 +1891,13 @@ QueryStmt
     +-column_list=$query.[key#8, value#9]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="a")
+    |       | +-value#2 := Literal(type=STRING, value='a')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -1928,7 +1928,7 @@ QueryStmt
               +-AnalyticScan
                 +-column_list=[my_table.key#3, my_table.value#4, $analytic.$analytic1#11]
                 +-input_scan=
-                | +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name="my_table")
+                | +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name='my_table')
                 +-function_group_list=
                   +-AnalyticFunctionGroup
                     +-analytic_function_list=
@@ -1952,7 +1952,7 @@ QueryStmt
 # additional analytic function in the SELECT.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 WITH my_table AS (
-  SELECT 1 AS key, "a" AS value
+  SELECT 1 AS key, 'a' AS value
 )
 SELECT
   t,
@@ -1963,7 +1963,7 @@ FROM my_table AS t
 QueryStmt
 +-output_column_list=
 | +-$query.t#11 AS t [STRUCT<key INT64, value STRING>]
-| +-$analytic.$analytic1#12 AS `$col2` [INT64]
+| +-$analytic.$analytic1#12 AS "$col2" [INT64]
 | +-$query.key#13 AS key [INT64]
 | +-$query.value#14 AS value [STRING]
 +-query=
@@ -1971,13 +1971,13 @@ QueryStmt
     +-column_list=[$query.t#11, $analytic.$analytic1#12, $query.key#13, $query.value#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[key#1, value#2]
     |       +-expr_list=
     |       | +-key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="a")
+    |       | +-value#2 := Literal(type=STRING, value='a')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -2018,7 +2018,7 @@ QueryStmt
                 |   |       +-ColumnRef(type=INT64, column=my_table.key#3)
                 |   |       +-ColumnRef(type=STRING, column=my_table.value#4)
                 |   +-input_scan=
-                |     +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name="my_table")
+                |     +-WithRefScan(column_list=my_table.[key#3, value#4], with_query_name='my_table')
                 +-function_group_list=
                   +-AnalyticFunctionGroup
                     +-analytic_function_list=
@@ -2050,7 +2050,7 @@ QueryStmt
 # This test dot-stars into the result of analytic function, after group by.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 WITH my_table AS (
-  SELECT 1 AS primary_key, "foo" AS value
+  SELECT 1 AS primary_key, 'foo' AS value
 )
 SELECT
   ANY_VALUE([struct(t.primary_key)]) OVER () [DEFAULT_OFFSET(0)].*
@@ -2065,13 +2065,13 @@ QueryStmt
     +-column_list=[$query.primary_key#8]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -2099,7 +2099,7 @@ QueryStmt
                 | +-AggregateScan
                 |   +-column_list=[$groupby.primary_key#7]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=my_table.[primary_key#3, value#4], with_query_name="my_table")
+                |   | +-WithRefScan(column_list=my_table.[primary_key#3, value#4], with_query_name='my_table')
                 |   +-group_by_list=
                 |     +-primary_key#7 := ColumnRef(type=INT64, column=my_table.primary_key#3)
                 +-function_group_list=
@@ -2123,7 +2123,7 @@ QueryStmt
 # This test dot-stars into both an aggregate function and an analytic function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 WITH my_table AS (
-  SELECT 1 AS primary_key, "foo" AS value, true as bool_val
+  SELECT 1 AS primary_key, 'foo' AS value, true as bool_val
 )
 SELECT
   ARRAY_AGG(t)[DEFAULT_OFFSET(0)].*,
@@ -2144,13 +2144,13 @@ QueryStmt
     +-column_list=$query.[primary_key#13, value#14, bool_val#15, pk1#16, pk2#17]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2, bool_val#3]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-bool_val#3 := Literal(type=BOOL, value=true)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -2215,7 +2215,7 @@ QueryStmt
                 |         +-AggregateScan
                 |           +-column_list=[$groupby.primary_key#12, $aggregate.$agg1#8]
                 |           +-input_scan=
-                |           | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, bool_val#6], with_query_name="my_table")
+                |           | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, bool_val#6], with_query_name='my_table')
                 |           +-group_by_list=
                 |           | +-primary_key#12 := ColumnRef(type=INT64, column=my_table.primary_key#4)
                 |           +-aggregate_list=
@@ -2252,7 +2252,7 @@ QueryStmt
 # function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 WITH my_table AS (
-  SELECT 1 AS primary_key, "foo" AS value,
+  SELECT 1 AS primary_key, 'foo' AS value,
          DATE('2016-11-09') AS modified_date
 )
 SELECT
@@ -2270,13 +2270,13 @@ QueryStmt
     +-column_list=$query.[primary_key#12, value#13, modified_date#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=my_table.[primary_key#1, value#2, modified_date#3]
     |       +-expr_list=
     |       | +-primary_key#1 := Literal(type=INT64, value=1)
-    |       | +-value#2 := Literal(type=STRING, value="foo")
+    |       | +-value#2 := Literal(type=STRING, value='foo')
     |       | +-modified_date#3 :=
     |       |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |       |     +-Literal(type=TIMESTAMP, value=2016-11-09 08:00:00+00)
@@ -2319,7 +2319,7 @@ QueryStmt
                 | +-AggregateScan
                 |   +-column_list=[$aggregate.$agg1#8]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name="my_table")
+                |   | +-WithRefScan(column_list=my_table.[primary_key#4, value#5, modified_date#6], with_query_name='my_table')
                 |   +-group_by_list=
                 |   | +-primary_key#11 := ColumnRef(type=INT64, column=my_table.primary_key#4)
                 |   +-aggregate_list=
@@ -2349,10 +2349,10 @@ QueryStmt
 # the nested expressions.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 WITH my_table AS (
-  SELECT 1 AS primary_key, "foo" AS value,
+  SELECT 1 AS primary_key, 'foo' AS value,
          DATE('2016-11-09') AS modified_date UNION ALL
-  SELECT 1, "bar", DATE('2016-11-10') UNION ALL
-  SELECT 2, "baz", DATE('2016-01-01')
+  SELECT 1, 'bar', DATE('2016-11-10') UNION ALL
+  SELECT 2, 'baz', DATE('2016-01-01')
 )
 SELECT
   [STRUCT(ANY_VALUE(STRUCT(t.primary_key, ARRAY_AGG(t))) OVER () as any_val,
@@ -2370,7 +2370,7 @@ QueryStmt
     +-column_list=$query.[any_val#21, primary_key#22]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="my_table"
+    |   +-with_query_name='my_table'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=$union_all.[primary_key#10, value#11, modified_date#12]
@@ -2382,7 +2382,7 @@ QueryStmt
     |         | |   +-column_list=$union_all1.[primary_key#1, value#2, modified_date#3]
     |         | |   +-expr_list=
     |         | |   | +-primary_key#1 := Literal(type=INT64, value=1)
-    |         | |   | +-value#2 := Literal(type=STRING, value="foo")
+    |         | |   | +-value#2 := Literal(type=STRING, value='foo')
     |         | |   | +-modified_date#3 :=
     |         | |   |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |         | |   |     +-Literal(type=TIMESTAMP, value=2016-11-09 08:00:00+00)
@@ -2395,7 +2395,7 @@ QueryStmt
     |         | |   +-column_list=$union_all2.[$col1#4, $col2#5, $col3#6]
     |         | |   +-expr_list=
     |         | |   | +-$col1#4 := Literal(type=INT64, value=1)
-    |         | |   | +-$col2#5 := Literal(type=STRING, value="bar")
+    |         | |   | +-$col2#5 := Literal(type=STRING, value='bar')
     |         | |   | +-$col3#6 :=
     |         | |   |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |         | |   |     +-Literal(type=TIMESTAMP, value=2016-11-10 08:00:00+00)
@@ -2408,7 +2408,7 @@ QueryStmt
     |           |   +-column_list=$union_all3.[$col1#7, $col2#8, $col3#9]
     |           |   +-expr_list=
     |           |   | +-$col1#7 := Literal(type=INT64, value=2)
-    |           |   | +-$col2#8 := Literal(type=STRING, value="baz")
+    |           |   | +-$col2#8 := Literal(type=STRING, value='baz')
     |           |   | +-$col3#9 :=
     |           |   |   +-FunctionCall(ZetaSQL:date(TIMESTAMP, optional(0) STRING) -> DATE)
     |           |   |     +-Literal(type=TIMESTAMP, value=2016-01-01 08:00:00+00)
@@ -2451,7 +2451,7 @@ QueryStmt
                 | +-AggregateScan
                 |   +-column_list=[$groupby.primary_key#20, $aggregate.$agg1#17]
                 |   +-input_scan=
-                |   | +-WithRefScan(column_list=my_table.[primary_key#13, value#14, modified_date#15], with_query_name="my_table")
+                |   | +-WithRefScan(column_list=my_table.[primary_key#13, value#14, modified_date#15], with_query_name='my_table')
                 |   +-group_by_list=
                 |   | +-primary_key#20 := ColumnRef(type=INT64, column=my_table.primary_key#13)
                 |   +-aggregate_list=
@@ -2486,7 +2486,7 @@ QueryStmt
 # an analytic function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 SELECT t.*
-FROM (SELECT 1 AS key, "a" AS value) AS t
+FROM (SELECT 1 AS key, 'a' AS value) AS t
 GROUP BY key, value
 HAVING count(value) > 0
 --
@@ -2508,7 +2508,7 @@ QueryStmt
         |   |   +-column_list=t.[key#1, value#2]
         |   |   +-expr_list=
         |   |   | +-key#1 := Literal(type=INT64, value=1)
-        |   |   | +-value#2 := Literal(type=STRING, value="a")
+        |   |   | +-value#2 := Literal(type=STRING, value='a')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-group_by_list=
@@ -2529,7 +2529,7 @@ QueryStmt
 # an analytic function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 SELECT t.*
-FROM (SELECT 1 AS key, "a" AS value) AS t
+FROM (SELECT 1 AS key, 'a' AS value) AS t
 ORDER BY sum(key) over ();
 --
 QueryStmt
@@ -2548,7 +2548,7 @@ QueryStmt
     |   |   +-column_list=t.[key#1, value#2]
     |   |   +-expr_list=
     |   |   | +-key#1 := Literal(type=INT64, value=1)
-    |   |   | +-value#2 := Literal(type=STRING, value="a")
+    |   |   | +-value#2 := Literal(type=STRING, value='a')
     |   |   +-input_scan=
     |   |     +-SingleRowScan
     |   +-function_group_list=
@@ -2574,7 +2574,7 @@ QueryStmt
 # an analytic function.
 [language_features=V_1_1_LIMIT_IN_AGGREGATE,V_1_1_ORDER_BY_IN_AGGREGATE,ANALYTIC_FUNCTIONS]
 SELECT [struct(t.value, sum(t.key) as k)][DEFAULT_OFFSET(0)].*
-FROM (SELECT 1 AS key, "a" AS value) AS t
+FROM (SELECT 1 AS key, 'a' AS value) AS t
 GROUP BY t.value
 ORDER BY sum(k) over ();
 --
@@ -2626,7 +2626,7 @@ QueryStmt
     |   |           |   +-column_list=t.[key#1, value#2]
     |   |           |   +-expr_list=
     |   |           |   | +-key#1 := Literal(type=INT64, value=1)
-    |   |           |   | +-value#2 := Literal(type=STRING, value="a")
+    |   |           |   | +-value#2 := Literal(type=STRING, value='a')
     |   |           |   +-input_scan=
     |   |           |     +-SingleRowScan
     |   |           +-group_by_list=
@@ -2685,7 +2685,7 @@ QueryStmt
     +-column_list=[$groupby.CustomerId#19, $subquery1.service_channel#20, $subquery1.division_id#21, $subquery1.sub_pod_id#22, $subquery1.division_name#23, $subquery1.sub_pod_name#24, $subquery1.region#25]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Perf_Accounts_D"
+    |   +-with_query_name='Perf_Accounts_D'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=Perf_Accounts_D.[customer_id#1, service_channel#2, division_id#3, sub_pod_id#4, division_name#5, sub_pod_name#6, region#7, ratio#8]
@@ -2758,7 +2758,7 @@ QueryStmt
         |             +-AggregateScan
         |               +-column_list=[$groupby.CustomerId#19, $aggregate.$agg1#17]
         |               +-input_scan=
-        |               | +-WithRefScan(column_list=Perf_Accounts_D.[customer_id#9, service_channel#10, division_id#11, sub_pod_id#12, division_name#13, sub_pod_name#14, region#15, ratio#16], with_query_name="Perf_Accounts_D")
+        |               | +-WithRefScan(column_list=Perf_Accounts_D.[customer_id#9, service_channel#10, division_id#11, sub_pod_id#12, division_name#13, sub_pod_name#14, region#15, ratio#16], with_query_name='Perf_Accounts_D')
         |               +-group_by_list=
         |               | +-CustomerId#19 := ColumnRef(type=INT64, column=Perf_Accounts_D.customer_id#9)
         |               +-aggregate_list=
@@ -2811,13 +2811,13 @@ QueryStmt
     +-column_list=$query.[time_micros#11, time_micros_default#12, datetime_micros#13, datetime_micros_default#14, repeated_time_micros#15, repeated_datetime_micros#16, nested_civil_time_fields#17, nested_civil_time_repeated_fields#18, int64_key_1#19, int64_key_2#20]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="Candidate_RowPartitions"
+    |   +-with_query_name='Candidate_RowPartitions'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=Candidate_RowPartitions.[CompressedRowPartition#1, ResourcePath#2, ResourceModifiedTimestamp#3]
     |       +-expr_list=
     |       | +-CompressedRowPartition#1 := Literal(type=BYTES, value=b"x")
-    |       | +-ResourcePath#2 := Literal(type=STRING, value="a")
+    |       | +-ResourcePath#2 := Literal(type=STRING, value='a')
     |       | +-ResourceModifiedTimestamp#3 := Literal(type=TIMESTAMP, value=2017-01-01 08:00:00+00, has_explicit_type=TRUE)
     |       +-input_scan=
     |         +-SingleRowScan
@@ -2933,12 +2933,12 @@ QueryStmt
                 |   |       |           +-FilterScan
                 |   |       |             +-column_list=Candidate_RowPartitions.[CompressedRowPartition#4, ResourcePath#5, ResourceModifiedTimestamp#6]
                 |   |       |             +-input_scan=
-                |   |       |             | +-WithRefScan(column_list=Candidate_RowPartitions.[CompressedRowPartition#4, ResourcePath#5, ResourceModifiedTimestamp#6], with_query_name="Candidate_RowPartitions")
+                |   |       |             | +-WithRefScan(column_list=Candidate_RowPartitions.[CompressedRowPartition#4, ResourcePath#5, ResourceModifiedTimestamp#6], with_query_name='Candidate_RowPartitions')
                 |   |       |             +-filter_expr=
                 |   |       |               +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
                 |   |       |                 +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 |   |       |                 | +-ColumnRef(type=STRING, column=Candidate_RowPartitions.ResourcePath#5)
-                |   |       |                 | +-Literal(type=STRING, value="Candidate/qa.google.com-4008600339")
+                |   |       |                 | +-Literal(type=STRING, value='Candidate/qa.google.com-4008600339')
                 |   |       |                 +-FunctionCall(ZetaSQL:$equal(TIMESTAMP, TIMESTAMP) -> BOOL)
                 |   |       |                   +-ColumnRef(type=TIMESTAMP, column=Candidate_RowPartitions.ResourceModifiedTimestamp#6)
                 |   |       |                   +-Literal(type=TIMESTAMP, value=2017-11-13 20:35:19.260426+00)

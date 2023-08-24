@@ -698,7 +698,7 @@ TEST(FunctionSignatureTests, FunctionSignatureTestsInternalProductMode) {
             void_func.GetSQLDeclaration({} /* arg_names */,
                                         ProductMode::PRODUCT_INTERNAL));
   // With argument names, including one that will require quoting.
-  EXPECT_EQ("(a BOOL, b INT64 NOT AGGREGATE, `c d` <T1> /*must_be_non_null*/)",
+  EXPECT_EQ("(a BOOL, b INT64 NOT AGGREGATE, \"c d\" <T1> /*must_be_non_null*/)",
             void_func.GetSQLDeclaration({"a", "b", "c d"},
                                         ProductMode::PRODUCT_INTERNAL));
 
@@ -777,7 +777,7 @@ TEST(FunctionSignatureTests, FunctionSignatureTestsExternalProductMode) {
             void_func.GetSQLDeclaration({} /* arg_names */,
                                         ProductMode::PRODUCT_EXTERNAL));
   // With argument names, including one that will require quoting.
-  EXPECT_EQ("(a BOOL, b INT64 NOT AGGREGATE, `c d` <T1> /*must_be_non_null*/)",
+  EXPECT_EQ("(a BOOL, b INT64 NOT AGGREGATE, \"c d\" <T1> /*must_be_non_null*/)",
             void_func.GetSQLDeclaration({"a", "b", "c d"},
                                         ProductMode::PRODUCT_EXTERNAL));
 

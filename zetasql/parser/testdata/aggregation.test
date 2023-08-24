@@ -206,22 +206,22 @@ select sum(sequence clamped);
                            ^
 ==
 
-select sum(sequence `clamped`);
+select sum(sequence "clamped");
 --
-QueryStatement [0-30] [select sum(sequence `clamped`)]
-  Query [0-30] [select sum(sequence `clamped`)]
-    Select [0-30] [select sum(sequence `clamped`)]
-      SelectList [7-30] [sum(sequence `clamped`)]
-        SelectColumn [7-30] [sum(sequence `clamped`)]
-          FunctionCall [7-30] [sum(sequence `clamped`)]
+QueryStatement [0-30] [select sum(sequence "clamped")]
+  Query [0-30] [select sum(sequence "clamped")]
+    Select [0-30] [select sum(sequence "clamped")]
+      SelectList [7-30] [sum(sequence "clamped")]
+        SelectColumn [7-30] [sum(sequence "clamped")]
+          FunctionCall [7-30] [sum(sequence "clamped")]
             PathExpression [7-10] [sum]
               Identifier(sum) [7-10] [sum]
-            SequenceArg [11-29] [sequence `clamped`]
-              PathExpression [20-29] [`clamped`]
-                Identifier(`clamped`) [20-29] [`clamped`]
+            SequenceArg [11-29] [sequence "clamped"]
+              PathExpression [20-29] ["clamped"]
+                Identifier("clamped") [20-29] ["clamped"]
 --
 SELECT
-  sum(SEQUENCE `clamped`)
+  sum(SEQUENCE "clamped")
 ==
 
 select sum(sequence clampedx);
@@ -585,27 +585,27 @@ FROM
 GROUP BY x
 ==
 
-select x, string_agg(y order by y collate "en_US" desc) from T group by x
+select x, string_agg(y order by y collate 'en_US' desc) from T group by x
 --
 QueryStatement [0-73] [select x,...group by x]
   Query [0-73] [select x,...group by x]
     Select [0-73] [select x,...group by x]
-      SelectList [7-55] [x, string_agg...en_US" desc)]
+      SelectList [7-55] [x, string_agg...en_US' desc)]
         SelectColumn [7-8] [x]
           PathExpression [7-8] [x]
             Identifier(x) [7-8] [x]
-        SelectColumn [10-55] [string_agg...en_US" desc)]
-          FunctionCall [10-55] [string_agg...en_US" desc)]
+        SelectColumn [10-55] [string_agg...en_US' desc)]
+          FunctionCall [10-55] [string_agg...en_US' desc)]
             PathExpression [10-20] [string_agg]
               Identifier(string_agg) [10-20] [string_agg]
             PathExpression [21-22] [y]
               Identifier(y) [21-22] [y]
-            OrderBy [23-54] [order by y...en_US" desc]
-              OrderingExpression(DESC) [32-54] [y collate "en_US" desc]
+            OrderBy [23-54] [order by y...en_US' desc]
+              OrderingExpression(DESC) [32-54] [y collate 'en_US' desc]
                 PathExpression [32-33] [y]
                   Identifier(y) [32-33] [y]
-                Collate [34-49] [collate "en_US"]
-                  StringLiteral("en_US") [42-49] ["en_US"]
+                Collate [34-49] [collate 'en_US']
+                  StringLiteral('en_US') [42-49] ['en_US']
       FromClause [56-62] [from T]
         TablePathExpression [61-62] [T]
           PathExpression [61-62] [T]
@@ -618,7 +618,7 @@ QueryStatement [0-73] [select x,...group by x]
 SELECT
   x,
   string_agg(y
-    ORDER BY y COLLATE "en_US" DESC)
+    ORDER BY y COLLATE 'en_US' DESC)
 FROM
   T
 GROUP BY x
@@ -1474,7 +1474,7 @@ QueryStatement [0-62] [select anon_count...s a from T]
                 OptionsEntry [33-47] [format = proto]
                   Identifier(format) [33-39] [format]
                   PathExpression [42-47] [proto]
-                    Identifier(`PROTO`) [42-47] [proto]
+                    Identifier("PROTO") [42-47] [proto]
           Alias [51-55] [as a]
             Identifier(a) [54-55] [a]
       FromClause [56-62] [from T]
@@ -1484,7 +1484,7 @@ QueryStatement [0-62] [select anon_count...s a from T]
 --
 SELECT
   anon_count(*
-    WITH REPORT(format = `PROTO`)) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -1504,7 +1504,7 @@ QueryStatement [0-72] [select anon_count...s a from T]
                 OptionsEntry [33-47] [format = proto]
                   Identifier(format) [33-39] [format]
                   PathExpression [42-47] [proto]
-                    Identifier(`PROTO`) [42-47] [proto]
+                    Identifier("PROTO") [42-47] [proto]
             OrderBy [49-59] [order by 5]
               OrderingExpression(ASC) [58-59] [5]
                 IntLiteral(5) [58-59] [5]
@@ -1517,7 +1517,7 @@ QueryStatement [0-72] [select anon_count...s a from T]
 --
 SELECT
   anon_count(*
-    WITH REPORT(format = `PROTO`)
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T
@@ -1675,7 +1675,7 @@ QueryStatement [0-85] [select anon_count...s a from T]
                 OptionsEntry [56-70] [format = proto]
                   Identifier(format) [56-62] [format]
                   PathExpression [65-70] [proto]
-                    Identifier(`PROTO`) [65-70] [proto]
+                    Identifier("PROTO") [65-70] [proto]
           Alias [74-78] [as a]
             Identifier(a) [77-78] [a]
       FromClause [79-85] [from T]
@@ -1686,7 +1686,7 @@ QueryStatement [0-85] [select anon_count...s a from T]
 SELECT
   anon_count(*
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = `PROTO`)) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -1709,7 +1709,7 @@ QueryStatement [0-95] [select anon_count...s a from T]
                 OptionsEntry [56-70] [format = proto]
                   Identifier(format) [56-62] [format]
                   PathExpression [65-70] [proto]
-                    Identifier(`PROTO`) [65-70] [proto]
+                    Identifier("PROTO") [65-70] [proto]
             OrderBy [72-82] [order by 5]
               OrderingExpression(ASC) [81-82] [5]
                 IntLiteral(5) [81-82] [5]
@@ -1723,7 +1723,7 @@ QueryStatement [0-95] [select anon_count...s a from T]
 SELECT
   anon_count(*
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = `PROTO`)
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T
@@ -1867,7 +1867,7 @@ QueryStatement [0-65] [select anon_count...s a from T]
                 OptionsEntry [36-50] [format = proto]
                   Identifier(format) [36-42] [format]
                   PathExpression [45-50] [proto]
-                    Identifier(`PROTO`) [45-50] [proto]
+                    Identifier("PROTO") [45-50] [proto]
           Alias [54-58] [as a]
             Identifier(a) [57-58] [a]
       FromClause [59-65] [from T]
@@ -1877,7 +1877,7 @@ QueryStatement [0-65] [select anon_count...s a from T]
 --
 SELECT
   anon_count(expr
-    WITH REPORT(format = `PROTO`)) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -1898,7 +1898,7 @@ QueryStatement [0-75] [select anon_count...s a from T]
                 OptionsEntry [36-50] [format = proto]
                   Identifier(format) [36-42] [format]
                   PathExpression [45-50] [proto]
-                    Identifier(`PROTO`) [45-50] [proto]
+                    Identifier("PROTO") [45-50] [proto]
             OrderBy [52-62] [order by 5]
               OrderingExpression(ASC) [61-62] [5]
                 IntLiteral(5) [61-62] [5]
@@ -1911,7 +1911,7 @@ QueryStatement [0-75] [select anon_count...s a from T]
 --
 SELECT
   anon_count(expr
-    WITH REPORT(format = `PROTO`)
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T
@@ -2074,7 +2074,7 @@ QueryStatement [0-88] [select anon_count...s a from T]
                 OptionsEntry [59-73] [format = proto]
                   Identifier(format) [59-65] [format]
                   PathExpression [68-73] [proto]
-                    Identifier(`PROTO`) [68-73] [proto]
+                    Identifier("PROTO") [68-73] [proto]
           Alias [77-81] [as a]
             Identifier(a) [80-81] [a]
       FromClause [82-88] [from T]
@@ -2085,7 +2085,7 @@ QueryStatement [0-88] [select anon_count...s a from T]
 SELECT
   anon_count(expr
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = `PROTO`)) AS a
+    WITH REPORT(format = "PROTO")) AS a
 FROM
   T
 --
@@ -2109,7 +2109,7 @@ QueryStatement [0-98] [select anon_count...s a from T]
                 OptionsEntry [59-73] [format = proto]
                   Identifier(format) [59-65] [format]
                   PathExpression [68-73] [proto]
-                    Identifier(`PROTO`) [68-73] [proto]
+                    Identifier("PROTO") [68-73] [proto]
             OrderBy [75-85] [order by 5]
               OrderingExpression(ASC) [84-85] [5]
                 IntLiteral(5) [84-85] [5]
@@ -2123,7 +2123,7 @@ QueryStatement [0-98] [select anon_count...s a from T]
 SELECT
   anon_count(expr
     CLAMPED BETWEEN 1 AND 2
-    WITH REPORT(format = `PROTO`)
+    WITH REPORT(format = "PROTO")
     ORDER BY 5) AS a
 FROM
   T

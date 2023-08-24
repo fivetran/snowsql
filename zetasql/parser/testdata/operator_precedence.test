@@ -1142,7 +1142,7 @@ ERROR: Syntax error: Expression to the left of IS must be parenthesized [at 4:5]
 # precedence-less expression construct is allowed by the parser (even if it
 # doesn't make sense semantically).
 # TODO: Disallow the confusing ones.
-SELECT {{CASE WHEN 1 THEN 3 END|CAST(1 AS bar)|"bar"|b"bar"|(1, 2)|STRUCT(1,2)|NEW myproto(1 AS bar)|CAST(x AS myproto)|EXTRACT(foo FROM bar)|foo(bar)|foo(bar) OVER baz|DATE "2016-01-01"|TIMESTAMP "2016-01-01 00:00:01"|(SELECT bar)}}.foo
+SELECT {{CASE WHEN 1 THEN 3 END|CAST(1 AS bar)|'bar'|b'bar'|(1, 2)|STRUCT(1,2)|NEW myproto(1 AS bar)|CAST(x AS myproto)|EXTRACT(foo FROM bar)|foo(bar)|foo(bar) OVER baz|DATE '2016-01-01'|TIMESTAMP '2016-01-01 00:00:01'|(SELECT bar)}}.foo
 --
 ALTERNATION GROUP: CASE WHEN 1 THEN 3 END
 --
@@ -1180,33 +1180,33 @@ QueryStatement [0-25] [SELECT CAST(1 AS bar).foo]
 SELECT
   CAST(1 AS bar).foo
 --
-ALTERNATION GROUP: "bar"
+ALTERNATION GROUP: 'bar'
 --
-QueryStatement [0-16] [SELECT "bar".foo]
-  Query [0-16] [SELECT "bar".foo]
-    Select [0-16] [SELECT "bar".foo]
-      SelectList [7-16] ["bar".foo]
-        SelectColumn [7-16] ["bar".foo]
-          DotIdentifier [7-16] ["bar".foo]
-            StringLiteral("bar") [7-12] ["bar"]
+QueryStatement [0-16] [SELECT 'bar'.foo]
+  Query [0-16] [SELECT 'bar'.foo]
+    Select [0-16] [SELECT 'bar'.foo]
+      SelectList [7-16] ['bar'.foo]
+        SelectColumn [7-16] ['bar'.foo]
+          DotIdentifier [7-16] ['bar'.foo]
+            StringLiteral('bar') [7-12] ['bar']
             Identifier(foo) [13-16] [foo]
 --
 SELECT
-  "bar".foo
+  'bar'.foo
 --
-ALTERNATION GROUP: b"bar"
+ALTERNATION GROUP: b'bar'
 --
-QueryStatement [0-17] [SELECT b"bar".foo]
-  Query [0-17] [SELECT b"bar".foo]
-    Select [0-17] [SELECT b"bar".foo]
-      SelectList [7-17] [b"bar".foo]
-        SelectColumn [7-17] [b"bar".foo]
-          DotIdentifier [7-17] [b"bar".foo]
-            BytesLiteral(b"bar") [7-13] [b"bar"]
+QueryStatement [0-17] [SELECT b'bar'.foo]
+  Query [0-17] [SELECT b'bar'.foo]
+    Select [0-17] [SELECT b'bar'.foo]
+      SelectList [7-17] [b'bar'.foo]
+        SelectColumn [7-17] [b'bar'.foo]
+          DotIdentifier [7-17] [b'bar'.foo]
+            BytesLiteral(b'bar') [7-13] [b'bar']
             Identifier(foo) [14-17] [foo]
 --
 SELECT
-  b"bar".foo
+  b'bar'.foo
 --
 ALTERNATION GROUP: (1, 2)
 --
@@ -1338,35 +1338,35 @@ QueryStatement [0-28] [SELECT foo(bar) OVER baz.foo]
 SELECT
   foo(bar) OVER (baz).foo
 --
-ALTERNATION GROUP: DATE "2016-01-01"
+ALTERNATION GROUP: DATE '2016-01-01'
 --
-QueryStatement [0-28] [SELECT DATE "2016-01-01".foo]
-  Query [0-28] [SELECT DATE "2016-01-01".foo]
-    Select [0-28] [SELECT DATE "2016-01-01".foo]
-      SelectList [7-28] [DATE "2016-01-01".foo]
-        SelectColumn [7-28] [DATE "2016-01-01".foo]
-          DotIdentifier [7-28] [DATE "2016-01-01".foo]
-            DateOrTimeLiteral(TYPE_DATE) [7-24] [DATE "2016-01-01"]
-              StringLiteral("2016-01-01") [12-24] ["2016-01-01"]
+QueryStatement [0-28] [SELECT DATE '2016-01-01'.foo]
+  Query [0-28] [SELECT DATE '2016-01-01'.foo]
+    Select [0-28] [SELECT DATE '2016-01-01'.foo]
+      SelectList [7-28] [DATE '2016-01-01'.foo]
+        SelectColumn [7-28] [DATE '2016-01-01'.foo]
+          DotIdentifier [7-28] [DATE '2016-01-01'.foo]
+            DateOrTimeLiteral(TYPE_DATE) [7-24] [DATE '2016-01-01']
+              StringLiteral('2016-01-01') [12-24] ['2016-01-01']
             Identifier(foo) [25-28] [foo]
 --
 SELECT
-  DATE "2016-01-01".foo
+  DATE '2016-01-01'.foo
 --
-ALTERNATION GROUP: TIMESTAMP "2016-01-01 00:00:01"
+ALTERNATION GROUP: TIMESTAMP '2016-01-01 00:00:01'
 --
-QueryStatement [0-42] [SELECT TIMESTAMP...00:01".foo]
-  Query [0-42] [SELECT TIMESTAMP...00:01".foo]
-    Select [0-42] [SELECT TIMESTAMP...00:01".foo]
-      SelectList [7-42] [TIMESTAMP...00:01".foo]
-        SelectColumn [7-42] [TIMESTAMP...00:01".foo]
-          DotIdentifier [7-42] [TIMESTAMP...00:01".foo]
-            DateOrTimeLiteral(TYPE_TIMESTAMP) [7-38] [TIMESTAMP...00:00:01"]
-              StringLiteral("2016-01-01 00:00:01") [17-38] ["2016-01-01 00:00:01"]
+QueryStatement [0-42] [SELECT TIMESTAMP...00:01'.foo]
+  Query [0-42] [SELECT TIMESTAMP...00:01'.foo]
+    Select [0-42] [SELECT TIMESTAMP...00:01'.foo]
+      SelectList [7-42] [TIMESTAMP...00:01'.foo]
+        SelectColumn [7-42] [TIMESTAMP...00:01'.foo]
+          DotIdentifier [7-42] [TIMESTAMP...00:01'.foo]
+            DateOrTimeLiteral(TYPE_TIMESTAMP) [7-38] [TIMESTAMP...00:00:01']
+              StringLiteral('2016-01-01 00:00:01') [17-38] ['2016-01-01 00:00:01']
             Identifier(foo) [39-42] [foo]
 --
 SELECT
-  TIMESTAMP "2016-01-01 00:00:01".foo
+  TIMESTAMP '2016-01-01 00:00:01'.foo
 --
 ALTERNATION GROUP: (SELECT bar)
 --

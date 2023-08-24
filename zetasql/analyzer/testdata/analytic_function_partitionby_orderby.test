@@ -8,20 +8,20 @@
 [default language_features=ANALYTIC_FUNCTIONS]
 Select 1
 FROM SimpleTypes cross join ComplexTypes
-order by afn_agg() over (partition by `bool`,
-                                      `int32`,
-                                      `int64`,
-                                      `uint32`,
-                                      `uint64`,
-                                      `string`,
-                                      `bytes`,
-                                      `date`,
+order by afn_agg() over (partition by "bool",
+                                      "int32",
+                                      "int64",
+                                      "uint32",
+                                      "uint64",
+                                      "string",
+                                      "bytes",
+                                      "date",
                                       timestamp,
                                       TestEnum);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#25 AS `$col1` [INT64]
+| +-$query.$col1#25 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#25]
@@ -137,7 +137,7 @@ ALTERNATION GROUP: ANALYTIC_FUNCTIONS,V_1_2_GROUP_BY_STRUCT
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#8 AS `$col1` [INT64]
+| +-$analytic.$analytic1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#8]
@@ -167,22 +167,22 @@ QueryStmt
 # window ORDER BY if DISALLOW_GROUP_BY_FLOAT is not enabled.
 Select 1
 FROM SimpleTypes cross join ComplexTypes
-order by afn_agg() over (order by `bool`,
-                                  `int32`,
-                                  `int64`,
-                                  `uint32`,
-                                  `uint64`,
-                                  `float`,
-                                  `double`,
-                                  `string`,
-                                  `bytes`,
-                                  `date`,
+order by afn_agg() over (order by "bool",
+                                  "int32",
+                                  "int64",
+                                  "uint32",
+                                  "uint64",
+                                  "float",
+                                  "double",
+                                  "string",
+                                  "bytes",
+                                  "date",
                                   timestamp,
                                   TestEnum);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#25 AS `$col1` [INT64]
+| +-$query.$col1#25 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#25]
@@ -272,7 +272,7 @@ ALTERNATION GROUP: ,V_1_3_ARRAY_ORDERING
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#8 AS `$col1` [INT64]
+| +-$analytic.$analytic1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#8]

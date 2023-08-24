@@ -300,7 +300,7 @@ static absl::StatusOr<std::string> GenerateImprovedBisonSyntaxError(
             absl::StrCat("floating point literal \"", token_text, "\"");
       } else if (token ==
                  zetasql_bison_parser::BisonParserImpl::token::IDENTIFIER) {
-        if (token_text[0] == '`') {
+        if (token_text[0] == '"') {
           // Don't put extra quotes around an already-backquoted identifier.
           actual_token_description = absl::StrCat("identifier ", token_text);
         } else {

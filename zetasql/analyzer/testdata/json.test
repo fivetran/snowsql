@@ -3,7 +3,7 @@ SELECT JSON '1'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [JSON]
+| +-$query.$col1#1 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -39,7 +39,7 @@ QueryStmt
     |     +-type=JSON
     |     +-expr=
     |     | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     +-field_name="field"
+    |     +-field_name='field'
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
@@ -61,27 +61,27 @@ QueryStmt
     |     |   +-type=JSON
     |     |   +-expr=
     |     |   | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     |   +-field_name="field"
-    |     +-field_name="field2"
+    |     |   +-field_name='field'
+    |     +-field_name='field2'
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
 
-SELECT json_col.`"foo\'bar[ \?@#\\123_baz` FROM JsonTable
+SELECT json_col."'foo\'bar[ \?@#\\123_baz" FROM JsonTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query."foo'bar[ ?@#\123_baz#2 AS `"foo'bar[ ?@#\\123_baz` [JSON]
+| +-$query.'foo'bar[ ?@#\123_baz#2 AS "'foo'bar[ ?@#\\123_baz" [JSON]
 +-query=
   +-ProjectScan
-    +-column_list=[$query."foo'bar[ ?@#\123_baz#2]
+    +-column_list=[$query.'foo'bar[ ?@#\123_baz#2]
     +-expr_list=
-    | +-"foo'bar[ ?@#\123_baz#2 :=
+    | +-'foo'bar[ ?@#\123_baz#2 :=
     |   +-GetJsonField
     |     +-type=JSON
     |     +-expr=
     |     | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     +-field_name="\"foo'bar[ ?@#\\123_baz"
+    |     +-field_name='\'foo\'bar[ ?@#\\123_baz'
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
@@ -100,7 +100,7 @@ QueryStmt
     |     +-type=JSON
     |     +-expr=
     |     | +-ColumnRef(type=JSON, column=$array.json_val#18)
-    |     +-field_name="field"
+    |     +-field_name='field'
     +-input_scan=
       +-ArrayScan
         +-column_list=[ArrayTypes.JsonArray#17, $array.json_val#18]
@@ -115,7 +115,7 @@ SELECT json_col['field'] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -123,16 +123,16 @@ QueryStmt
     | +-$col1#2 :=
     |   +-FunctionCall(ZetaSQL:$subscript(JSON, STRING) -> JSON)
     |     +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-    |     +-Literal(type=STRING, value="field")
+    |     +-Literal(type=STRING, value='field')
     +-input_scan=
       +-TableScan(column_list=[JSONTable.json_col#1], table=JSONTable, column_index_list=[0])
 ==
 
-SELECT json_col[SUBSTR("bar", 0, 2)] FROM JsonTable;
+SELECT json_col[SUBSTR('bar', 0, 2)] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -141,7 +141,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$subscript(JSON, STRING) -> JSON)
     |     +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
     |     +-FunctionCall(ZetaSQL:substr(STRING, INT64, optional(1) INT64) -> STRING)
-    |       +-Literal(type=STRING, value="bar")
+    |       +-Literal(type=STRING, value='bar')
     |       +-Literal(type=INT64, value=0)
     |       +-Literal(type=INT64, value=2)
     +-input_scan=
@@ -152,7 +152,7 @@ select json_col[CAST(0 AS INT32)] from JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -169,7 +169,7 @@ SELECT json_col[1+2] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -214,11 +214,11 @@ SELECT 0[DEFAULT_OFFSET(0)];
 ==
 
 [language_features=V_1_2_SAFE_FUNCTION_CALL,JSON_TYPE]
-SELECT json_col[SAFE.SUBSTR("bar", 0, 2)] FROM JsonTable;
+SELECT json_col[SAFE.SUBSTR('bar', 0, 2)] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -227,7 +227,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$subscript(JSON, STRING) -> JSON)
     |     +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
     |     +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:substr(STRING, INT64, optional(1) INT64) -> STRING)
-    |       +-Literal(type=STRING, value="bar")
+    |       +-Literal(type=STRING, value='bar')
     |       +-Literal(type=INT64, value=0)
     |       +-Literal(type=INT64, value=2)
     +-input_scan=
@@ -238,7 +238,7 @@ SELECT json_col[CAST(NULL AS STRING)] FROM JsonTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [JSON]
+| +-$query.$col1#2 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]

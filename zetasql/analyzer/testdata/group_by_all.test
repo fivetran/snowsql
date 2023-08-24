@@ -1,5 +1,5 @@
 # GROUP BY ALL is only supported in parser.
-select `int64`{{| AS a}}, sum(`int32`)
+select "int64"{{| AS a}}, sum("int32")
 from SimpleTypes
 group by all
 --

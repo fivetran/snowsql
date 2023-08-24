@@ -34,13 +34,13 @@ GROUP BY GROUPING SETS(x)
 ==
 
 [language_features=V_1_4_GROUPING_SETS]
-SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, "foo", "bar")
+SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, 'foo', 'bar')
 FROM T GROUP BY GROUPING SETS(x, y);
 --
 QueryStatement [0-99] [SELECT x,...SETS(x, y)]
   Query [0-99] [SELECT x,...SETS(x, y)]
     Select [0-99] [SELECT x,...SETS(x, y)]
-      SelectList [7-63] [x, y, GROUPING...foo", "bar")]
+      SelectList [7-63] [x, y, GROUPING...foo', 'bar')]
         SelectColumn [7-8] [x]
           PathExpression [7-8] [x]
             Identifier(x) [7-8] [x]
@@ -51,23 +51,23 @@ QueryStatement [0-99] [SELECT x,...SETS(x, y)]
           BinaryExpression(=) [13-28] [GROUPING(x) = 1]
             FunctionCall [13-24] [GROUPING(x)]
               PathExpression [13-21] [GROUPING]
-                Identifier(`GROUPING`) [13-21] [GROUPING]
+                Identifier("GROUPING") [13-21] [GROUPING]
               PathExpression [22-23] [x]
                 Identifier(x) [22-23] [x]
             IntLiteral(1) [27-28] [1]
-        SelectColumn [30-63] [IF(GROUPING...foo", "bar")]
-          FunctionCall [30-63] [IF(GROUPING...foo", "bar")]
+        SelectColumn [30-63] [IF(GROUPING...foo', 'bar')]
+          FunctionCall [30-63] [IF(GROUPING...foo', 'bar')]
             PathExpression [30-32] [IF]
-              Identifier(`IF`) [30-32] [IF]
+              Identifier("IF") [30-32] [IF]
             BinaryExpression(=) [33-48] [GROUPING(y) = 0]
               FunctionCall [33-44] [GROUPING(y)]
                 PathExpression [33-41] [GROUPING]
-                  Identifier(`GROUPING`) [33-41] [GROUPING]
+                  Identifier("GROUPING") [33-41] [GROUPING]
                 PathExpression [42-43] [y]
                   Identifier(y) [42-43] [y]
               IntLiteral(0) [47-48] [0]
-            StringLiteral("foo") [50-55] ["foo"]
-            StringLiteral("bar") [57-62] ["bar"]
+            StringLiteral('foo') [50-55] ['foo']
+            StringLiteral('bar') [57-62] ['bar']
       FromClause [64-70] [FROM T]
         TablePathExpression [69-70] [T]
           PathExpression [69-70] [T]
@@ -85,8 +85,8 @@ QueryStatement [0-99] [SELECT x,...SETS(x, y)]
 SELECT
   x,
   y,
-  `GROUPING`(x) = 1,
-  `IF`(`GROUPING`(y) = 0, "foo", "bar")
+  "GROUPING"(x) = 1,
+  "IF"("GROUPING"(y) = 0, 'foo', 'bar')
 FROM
   T
 GROUP BY GROUPING SETS(x, y)
@@ -157,7 +157,7 @@ QueryStatement [0-116] [select x,...SETS(y, x )]
         SelectColumn [16-29] [GROUPING ( x)]
           FunctionCall [16-29] [GROUPING ( x)]
             PathExpression [16-24] [GROUPING]
-              Identifier(`GROUPING`) [16-24] [GROUPING]
+              Identifier("GROUPING") [16-24] [GROUPING]
             PathExpression [27-28] [x]
               Identifier(x) [27-28] [x]
       FromClause [30-36] [FROM T]
@@ -203,7 +203,7 @@ SELECT
   x,
   y,
   z,
-  `GROUPING`(x)
+  "GROUPING"(x)
 FROM
   T
 GROUP BY 1, 2, GROUPING SETS(x + 2, y = 'foo', z), z, x, GROUPING SETS(y, x)
@@ -253,26 +253,26 @@ select x FROM T GROUP BY x, y WITH GROUPING SETS;
 ==
 
 [language_features=V_1_4_GROUPING_SETS]
-select `grouping sets` FROM T GROUP BY `grouping sets`;
+select "grouping sets" FROM T GROUP BY "grouping sets";
 --
-QueryStatement [0-54] [select `grouping...uping sets`]
-  Query [0-54] [select `grouping...uping sets`]
-    Select [0-54] [select `grouping...uping sets`]
-      SelectList [7-22] [`grouping sets`]
-        SelectColumn [7-22] [`grouping sets`]
-          PathExpression [7-22] [`grouping sets`]
-            Identifier(`grouping sets`) [7-22] [`grouping sets`]
+QueryStatement [0-54] [select "grouping...uping sets"]
+  Query [0-54] [select "grouping...uping sets"]
+    Select [0-54] [select "grouping...uping sets"]
+      SelectList [7-22] ["grouping sets"]
+        SelectColumn [7-22] ["grouping sets"]
+          PathExpression [7-22] ["grouping sets"]
+            Identifier("grouping sets") [7-22] ["grouping sets"]
       FromClause [23-29] [FROM T]
         TablePathExpression [28-29] [T]
           PathExpression [28-29] [T]
             Identifier(T) [28-29] [T]
-      GroupBy [30-54] [GROUP BY `grouping sets`]
-        GroupingItem [39-54] [`grouping sets`]
-          PathExpression [39-54] [`grouping sets`]
-            Identifier(`grouping sets`) [39-54] [`grouping sets`]
+      GroupBy [30-54] [GROUP BY "grouping sets"]
+        GroupingItem [39-54] ["grouping sets"]
+          PathExpression [39-54] ["grouping sets"]
+            Identifier("grouping sets") [39-54] ["grouping sets"]
 --
 SELECT
-  `grouping sets`
+  "grouping sets"
 FROM
   T
-GROUP BY `grouping sets`
+GROUP BY "grouping sets"

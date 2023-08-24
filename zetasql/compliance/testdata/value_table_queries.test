@@ -33,9 +33,9 @@ ARRAY<STRUCT<
 ==
 [prepare_database]
 CREATE TABLE KitchenSinkValueTable AS
-SELECT AS `zetasql_test__.KitchenSinkPB` 55 int64_key_1, 66 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 55 int64_key_1, 66 int64_key_2
 UNION ALL
-SELECT AS `zetasql_test__.KitchenSinkPB` 77 int64_key_1, 88 int64_key_2,
+SELECT AS "zetasql_test__.KitchenSinkPB" 77 int64_key_1, 88 int64_key_2,
   true bool_val
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
@@ -55,9 +55,9 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
 # is_wrapper and is_struct annotations, so we can apply SELECT * on those.
 [prepare_database]
 CREATE TABLE TestExtraPBValueTable AS
-SELECT AS `zetasql_test__.TestExtraPB` 55 int32_val1
+SELECT AS "zetasql_test__.TestExtraPB" 55 int32_val1
 UNION ALL
-SELECT AS `zetasql_test__.TestExtraPB` 77 int32_val1,
+SELECT AS "zetasql_test__.TestExtraPB" 77 int32_val1,
   ["77one", "77two"] str_value
 --
 ARRAY<PROTO<zetasql_test__.TestExtraPB>>[
@@ -84,7 +84,7 @@ ARRAY<STRUCT<foo INT64, bar STRING>>[
 # Queries returning value tables.
 ==
 [name=value_table_proto_single]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2;
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2;
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
   {
@@ -94,9 +94,9 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[
 ]
 ==
 [name=value_table_proto_union_all]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2
 UNION ALL
-SELECT AS `zetasql_test__.KitchenSinkPB` 7 int64_key_1, 8 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 7 int64_key_1, 8 int64_key_2
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[unknown order:
   {
@@ -110,7 +110,7 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[unknown order:
 ]
 ==
 [name=value_table_proto_from]
-SELECT AS `zetasql_test__.KitchenSinkPB`
+SELECT AS "zetasql_test__.KitchenSinkPB"
   foo int64_key_1, foo int64_key_2
 FROM TestTable
 --
@@ -159,10 +159,10 @@ ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{1, "hey"}, {2, "there"}]
 SELECT AS STRUCT foo, bar
 FROM TestTable
 --
-ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, "def"}, {1, "abc"}]
+ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, 'def'}, {1, 'abc'}]
 ==
 [name=value_table_distinct_proto_from]
-SELECT DISTINCT AS `zetasql_test__.KitchenSinkPB`
+SELECT DISTINCT AS "zetasql_test__.KitchenSinkPB"
   foo int64_key_1, foo int64_key_2
 FROM TestTable
 --
@@ -181,10 +181,10 @@ ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[unknown order:
 SELECT DISTINCT AS STRUCT foo, bar
 FROM TestTable
 --
-ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, "def"}, {1, "abc"}]
+ARRAY<STRUCT<foo INT64, bar STRING>>[unknown order:{2, 'def'}, {1, 'abc'}]
 ==
 [name=value_table_proto_union_all_table]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2
 UNION ALL
 SELECT pb FROM TestTable
 --
@@ -297,9 +297,9 @@ ARRAY<STRUCT<foo INT64, bar STRING>>[{77, "seventy seven"}]
 [name=value_table_with_proto_star]
 WITH
   WithProtoValueTable AS
-    (SELECT AS `zetasql_test__.TestExtraPB` 55 int32_val1
+    (SELECT AS "zetasql_test__.TestExtraPB" 55 int32_val1
      UNION ALL
-     SELECT AS `zetasql_test__.TestExtraPB` 77 int32_val1)
+     SELECT AS "zetasql_test__.TestExtraPB" 77 int32_val1)
 SELECT * FROM WithProtoValueTable
 --
 ARRAY<STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<>>>[unknown order:
@@ -310,9 +310,9 @@ ARRAY<STRUCT<int32_val1 INT32, int32_val2 INT32, str_value ARRAY<>>>[unknown ord
 [name=value_table_with_proto_filter]
 WITH
   WithProtoValueTable AS
-    (SELECT AS `zetasql_test__.TestExtraPB` 55 int32_val1
+    (SELECT AS "zetasql_test__.TestExtraPB" 55 int32_val1
      UNION ALL
-     SELECT AS `zetasql_test__.TestExtraPB` 77 int32_val1)
+     SELECT AS "zetasql_test__.TestExtraPB" 77 int32_val1)
 SELECT AS zetasql_test__.TestExtraPB p.* FROM WithProtoValueTable p
 --
 ARRAY<PROTO<zetasql_test__.TestExtraPB>>[unknown order:

@@ -5,7 +5,7 @@ FROM (SELECT 1 as expr1 UNION ALL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.SimpleProto3Message>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.SimpleProto3Message>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -49,7 +49,7 @@ FROM (SELECT 1 as expr1 UNION ALL
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#4 AS `$proto` [PROTO<zetasql_test__.SimpleProto3Message>]
+| +-$make_proto.$proto#4 AS "$proto" [PROTO<zetasql_test__.SimpleProto3Message>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -254,7 +254,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink>, column=Proto3Table.Proto3KitchenSink#2)
     | |   +-field_descriptor=string_val
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-float_val#8 :=
     | | +-GetProtoField
     | |   +-type=FLOAT
@@ -441,7 +441,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[Proto3Table.Proto3KitchenSink#2, $array.m#3]
         +-input_scan=
-        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias="t")
+        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias='t')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>>
@@ -469,7 +469,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>, column=$array.m#3)
     | |   +-field_descriptor=key
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-value#5 :=
     |   +-GetProtoField
     |     +-type=INT32
@@ -481,7 +481,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[Proto3Table.Proto3KitchenSink#2, $array.m#3]
         +-input_scan=
-        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias="t")
+        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias='t')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>>
@@ -509,7 +509,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>, column=$array.m#3)
     | |   +-field_descriptor=key
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-value#5 :=
     |   +-GetProtoField
     |     +-type=INT32
@@ -521,7 +521,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[Proto3Table.Proto3KitchenSink#2, $array.m#3]
         +-input_scan=
-        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias="t")
+        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias='t')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>>
@@ -537,7 +537,7 @@ FROM Proto3Table t
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -551,7 +551,7 @@ QueryStmt
     |       +-field_descriptor=test_map
     |       +-default_value=[]
     +-input_scan=
-      +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias="t")
+      +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias='t')
 ==
 
 SELECT CAST(m as string),
@@ -560,8 +560,8 @@ FROM Proto3Table t, t.Proto3KitchenSink.test_map m
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRING]
-| +-$query.$col2#5 AS `$col2` [BYTES]
+| +-$query.$col1#4 AS "$col1" [STRING]
+| +-$query.$col2#5 AS "$col2" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -576,7 +576,7 @@ QueryStmt
       +-ArrayScan
         +-column_list=[Proto3Table.Proto3KitchenSink#2, $array.m#3]
         +-input_scan=
-        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias="t")
+        | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias='t')
         +-array_expr=
         | +-GetProtoField
         |   +-type=ARRAY<PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>>
@@ -587,20 +587,20 @@ QueryStmt
         +-element_column=$array.m#3
 ==
 
-SELECT CAST('key: "hello", value: 123'
+SELECT CAST('key: \'hello\', value: 123'
             as zetasql_test__.Proto3KitchenSink.TestMapEntry)
 FROM Proto3Table
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
+| +-$query.$col1#3 AS "$col1" [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
     +-expr_list=
     | +-$col1#3 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>)
-    |     +-Literal(type=STRING, value='key: "hello", value: 123')
+    |     +-Literal(type=STRING, value='key: \'hello\', value: 123')
     +-input_scan=
       +-TableScan(table=Proto3Table)
 ==
@@ -611,7 +611,7 @@ FROM (SELECT CAST(m as bytes) bytes_proto
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
+| +-$query.$col1#5 AS "$col1" [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -630,7 +630,7 @@ QueryStmt
           +-ArrayScan
             +-column_list=[Proto3Table.Proto3KitchenSink#2, $array.m#3]
             +-input_scan=
-            | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias="t")
+            | +-TableScan(column_list=[Proto3Table.Proto3KitchenSink#2], table=Proto3Table, column_index_list=[1], alias='t')
             +-array_expr=
             | +-GetProtoField
             |   +-type=ARRAY<PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>>
@@ -643,11 +643,11 @@ QueryStmt
 
 SELECT NEW zetasql_test__.Proto3KitchenSink.TestMapEntry(expr1 as key,
                                                          expr2 as value)
-FROM (SELECT "hello" as expr1, 123 as expr2)
+FROM (SELECT 'hello' as expr1, 123 as expr2)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
+| +-$query.$col1#3 AS "$col1" [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -664,18 +664,18 @@ QueryStmt
       +-ProjectScan
         +-column_list=$subquery1.[expr1#1, expr2#2]
         +-expr_list=
-        | +-expr1#1 := Literal(type=STRING, value="hello")
+        | +-expr1#1 := Literal(type=STRING, value='hello')
         | +-expr2#2 := Literal(type=INT64, value=123)
         +-input_scan=
           +-SingleRowScan
 ==
 
 SELECT AS zetasql_test__.Proto3KitchenSink.TestMapEntry expr1 key, expr2 value
-FROM (SELECT "hello" as expr1, 123 as expr2)
+FROM (SELECT 'hello' as expr1, 123 as expr2)
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#3 AS `$proto` [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
+| +-$make_proto.$proto#3 AS "$proto" [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -696,7 +696,7 @@ QueryStmt
           +-ProjectScan
             +-column_list=$subquery1.[expr1#1, expr2#2]
             +-expr_list=
-            | +-expr1#1 := Literal(type=STRING, value="hello")
+            | +-expr1#1 := Literal(type=STRING, value='hello')
             | +-expr2#2 := Literal(type=INT64, value=123)
             +-input_scan=
               +-SingleRowScan
@@ -708,7 +708,7 @@ FROM (SELECT 123 as expr2)
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#2 AS `$proto` [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
+| +-$make_proto.$proto#2 AS "$proto" [PROTO<zetasql_test__.Proto3KitchenSink.TestMapEntry>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -735,7 +735,7 @@ QueryStmt
 
 SELECT NEW zetasql_test__.Proto3KitchenSink.TestMapEntry(expr1 as key,
                                                          expr2 as value)
-FROM (SELECT "hello" as expr1, b"123" as expr2)
+FROM (SELECT 'hello' as expr1, b"123" as expr2)
 --
 ERROR: Could not store value with type BYTES into proto field zetasql_test__.Proto3KitchenSink.TestMapEntry.value which has SQL type INT32 [at 2:58]
                                                          expr2 as value)
@@ -905,7 +905,7 @@ QueryStmt
 | +-$query.any_wkt#3 AS any_wkt [PROTO<google.protobuf.Any>]
 | +-$query.type_url#4 AS type_url [STRING]
 | +-$query.value#5 AS value [BYTES]
-| +-$query.$col4#6 AS `$col4` [BOOL]
+| +-$query.$col4#6 AS "$col4" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[any_wkt#3, type_url#4, value#5, $col4#6]
@@ -928,7 +928,7 @@ QueryStmt
     | |   |   +-field_descriptor=any_wkt
     | |   |   +-default_value=NULL
     | |   +-field_descriptor=type_url
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-value#5 :=
     | | +-GetProtoField
     | |   +-type=BYTES
@@ -1017,14 +1017,14 @@ SELECT CAST('int32_val:12345' AS zetasql_test__.Proto3KitchenSink)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.Proto3KitchenSink>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.Proto3KitchenSink>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.Proto3KitchenSink>)
-    |     +-Literal(type=STRING, value="int32_val:12345")
+    |     +-Literal(type=STRING, value='int32_val:12345')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1118,7 +1118,7 @@ FROM Proto3Table
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [BOOL]
+| +-$query.$col1#3 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1237,7 +1237,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.Proto3KitchenSink>, column=Proto3Table.Proto3KitchenSink#2)
     | |   +-field_descriptor=nullable_string
-    | |   +-default_value=""
+    | |   +-default_value=''
     | +-nullable_date#4 :=
     |   +-GetProtoField
     |     +-type=DATE
@@ -1500,7 +1500,7 @@ QueryStmt
     |     +-expr=
     |     | +-ColumnRef(type=PROTO<zetasql_test__.Proto3SmallMessageWithNoUseDefaults>, column=$preproject.$proto#3)
     |     +-field_descriptor=s1
-    |     +-default_value=""
+    |     +-default_value=''
     +-input_scan=
       +-ProjectScan
         +-column_list=[Proto3Table.Proto3KitchenSink#2, $preproject.$proto#3]

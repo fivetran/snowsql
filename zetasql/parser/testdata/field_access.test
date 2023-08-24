@@ -43,11 +43,11 @@ QueryStatement [0-13] [select x.1e+5]
           BinaryExpression(+) [7-13] [x.1e+5]
             PathExpression [7-11] [x.1e]
               Identifier(x) [7-8] [x]
-              Identifier(`1e`) [9-11] [1e]
+              Identifier("1e") [9-11] [1e]
             IntLiteral(5) [12-13] [5]
 --
 SELECT
-  x.`1e` + 5
+  x."1e" + 5
 ==
 
 select x. 1e;
@@ -59,10 +59,10 @@ QueryStatement [0-12] [select x. 1e]
         SelectColumn [7-12] [x. 1e]
           PathExpression [7-12] [x. 1e]
             Identifier(x) [7-8] [x]
-            Identifier(`1e`) [10-12] [1e]
+            Identifier("1e") [10-12] [1e]
 --
 SELECT
-  x.`1e`
+  x."1e"
 ==
 
 # The bison parser is correct here. The JavaCC parser implements generalized
@@ -81,11 +81,11 @@ QueryStatement [0-14] [select x. 1e+5]
           BinaryExpression(+) [7-14] [x. 1e+5]
             PathExpression [7-12] [x. 1e]
               Identifier(x) [7-8] [x]
-              Identifier(`1e`) [10-12] [1e]
+              Identifier("1e") [10-12] [1e]
             IntLiteral(5) [13-14] [5]
 --
 SELECT
-  x.`1e` + 5
+  x."1e" + 5
 ==
 
 select NULL, x from a.b.c.123;
@@ -105,13 +105,13 @@ QueryStatement [0-29] [select NULL, x from a.b.c.123]
             Identifier(a) [20-21] [a]
             Identifier(b) [22-23] [b]
             Identifier(c) [24-25] [c]
-            Identifier(`123`) [26-29] [123]
+            Identifier("123") [26-29] [123]
 --
 SELECT
   NULL,
   x
 FROM
-  a.b.c.`123`
+  a.b.c."123"
 ==
 
 select NULL, x from a.b.2daysago.      456;
@@ -130,14 +130,14 @@ QueryStatement [0-42] [select NULL....      456]
           PathExpression [20-42] [a.b.2daysago.      456]
             Identifier(a) [20-21] [a]
             Identifier(b) [22-23] [b]
-            Identifier(`2daysago`) [24-32] [2daysago]
-            Identifier(`456`) [39-42] [456]
+            Identifier("2daysago") [24-32] [2daysago]
+            Identifier("456") [39-42] [456]
 --
 SELECT
   NULL,
   x
 FROM
-  a.b.`2daysago`.`456`
+  a.b."2daysago"."456"
 ==
 
 select x from a.b.456.   2daysago;
@@ -154,13 +154,13 @@ QueryStatement [0-33] [select x from...2daysago]
           PathExpression [14-33] [a.b.456.   2daysago]
             Identifier(a) [14-15] [a]
             Identifier(b) [16-17] [b]
-            Identifier(`456`) [18-21] [456]
-            Identifier(`2daysago`) [25-33] [2daysago]
+            Identifier("456") [18-21] [456]
+            Identifier("2daysago") [25-33] [2daysago]
 --
 SELECT
   x
 FROM
-  a.b.`456`.`2daysago`
+  a.b."456"."2daysago"
 ==
 
 select x from abc.111111111111111111111111111111111111111111111111111111111111111111.2days;
@@ -176,13 +176,13 @@ QueryStatement [0-90] [select x from...11111111.2days]
         TablePathExpression [14-90] [abc.1111111111111...1111.2days]
           PathExpression [14-90] [abc.1111111111111...1111.2days]
             Identifier(abc) [14-17] [abc]
-            Identifier(`111111111111111111111111111111111111111111111111111111111111111111`) [18-84] [11111111111111111...1111111111]
-            Identifier(`2days`) [85-90] [2days]
+            Identifier("111111111111111111111111111111111111111111111111111111111111111111") [18-84] [11111111111111111...1111111111]
+            Identifier("2days") [85-90] [2days]
 --
 SELECT
   x
 FROM
-  abc.`111111111111111111111111111111111111111111111111111111111111111111`.`2days`
+  abc."111111111111111111111111111111111111111111111111111111111111111111"."2days"
 ==
 
 select x from abc.111111111111111111111111111111111111111111111111111111111111111111daysago;
@@ -198,12 +198,12 @@ QueryStatement [0-91] [select x from...1111111daysago]
         TablePathExpression [14-91] [abc.1111111111111...111daysago]
           PathExpression [14-91] [abc.1111111111111...111daysago]
             Identifier(abc) [14-17] [abc]
-            Identifier(`111111111111111111111111111111111111111111111111111111111111111111daysago`) [18-91] [11111111111111111...111daysago]
+            Identifier("111111111111111111111111111111111111111111111111111111111111111111daysago") [18-91] [11111111111111111...111daysago]
 --
 SELECT
   x
 FROM
-  abc.`111111111111111111111111111111111111111111111111111111111111111111daysago`
+  abc."111111111111111111111111111111111111111111111111111111111111111111daysago"
 ==
 
 select NULL, x from a.b.c.31daysago;
@@ -223,13 +223,13 @@ QueryStatement [0-35] [select NULL....31daysago]
             Identifier(a) [20-21] [a]
             Identifier(b) [22-23] [b]
             Identifier(c) [24-25] [c]
-            Identifier(`31daysago`) [26-35] [31daysago]
+            Identifier("31daysago") [26-35] [31daysago]
 --
 SELECT
   NULL,
   x
 FROM
-  a.b.c.`31daysago`
+  a.b.c."31daysago"
 ==
 
 select NULL, x from a.b.c.123 table;
@@ -249,7 +249,7 @@ QueryStatement [0-35] [select NULL....123 table]
             Identifier(a) [20-21] [a]
             Identifier(b) [22-23] [b]
             Identifier(c) [24-25] [c]
-            Identifier(`123`) [26-29] [123]
+            Identifier("123") [26-29] [123]
           Alias [30-35] [table]
             Identifier(table) [30-35] [table]
 --
@@ -257,7 +257,7 @@ SELECT
   NULL,
   x
 FROM
-  a.b.c.`123` AS table
+  a.b.c."123" AS table
 ==
 
 select x.123.y.2daysago.z;
@@ -269,13 +269,13 @@ QueryStatement [0-25] [select x.123.y.2daysago.z]
         SelectColumn [7-25] [x.123.y.2daysago.z]
           PathExpression [7-25] [x.123.y.2daysago.z]
             Identifier(x) [7-8] [x]
-            Identifier(`123`) [9-12] [123]
+            Identifier("123") [9-12] [123]
             Identifier(y) [13-14] [y]
-            Identifier(`2daysago`) [15-23] [2daysago]
+            Identifier("2daysago") [15-23] [2daysago]
             Identifier(z) [24-25] [z]
 --
 SELECT
-  x.`123`.y.`2daysago`.z
+  x."123".y."2daysago".z
 ==
 
 select x.2_3.2abc3.1234xxx.555_;
@@ -287,13 +287,13 @@ QueryStatement [0-31] [select x.2_3...1234xxx.555_]
         SelectColumn [7-31] [x.2_3.2abc3.1234xxx.555_]
           PathExpression [7-31] [x.2_3.2abc3.1234xxx.555_]
             Identifier(x) [7-8] [x]
-            Identifier(`2_3`) [9-12] [2_3]
-            Identifier(`2abc3`) [13-18] [2abc3]
-            Identifier(`1234xxx`) [19-26] [1234xxx]
-            Identifier(`555_`) [27-31] [555_]
+            Identifier("2_3") [9-12] [2_3]
+            Identifier("2abc3") [13-18] [2abc3]
+            Identifier("1234xxx") [19-26] [1234xxx]
+            Identifier("555_") [27-31] [555_]
 --
 SELECT
-  x.`2_3`.`2abc3`.`1234xxx`.`555_`
+  x."2_3"."2abc3"."1234xxx"."555_"
 ==
 
 # Generalized identifiers are enabled after ")".
@@ -310,10 +310,10 @@ QueryStatement [0-16] [select (x+y).123]
                 Identifier(x) [8-9] [x]
               PathExpression [10-11] [y]
                 Identifier(y) [10-11] [y]
-            Identifier(`123`) [13-16] [123]
+            Identifier("123") [13-16] [123]
 --
 SELECT
-  (x + y).`123`
+  (x + y)."123"
 ==
 
 # Generalized identifiers are enabled after ")".
@@ -330,10 +330,10 @@ QueryStatement [0-20] [select (x+y).1dayago]
                 Identifier(x) [8-9] [x]
               PathExpression [10-11] [y]
                 Identifier(y) [10-11] [y]
-            Identifier(`1dayago`) [13-20] [1dayago]
+            Identifier("1dayago") [13-20] [1dayago]
 --
 SELECT
-  (x + y).`1dayago`
+  (x + y)."1dayago"
 ==
 
 # Generalized identifiers are enabled after "]". This doesn't make sense
@@ -349,10 +349,10 @@ QueryStatement [0-17] [select [1, 2].123]
             ArrayConstructor [7-13] [[1, 2]]
               IntLiteral(1) [8-9] [1]
               IntLiteral(2) [11-12] [2]
-            Identifier(`123`) [14-17] [123]
+            Identifier("123") [14-17] [123]
 --
 SELECT
-  ARRAY[1, 2].`123`
+  ARRAY[1, 2]."123"
 ==
 
 # Generalized identifiers are enabled after "]". This doesn't make sense
@@ -368,10 +368,10 @@ QueryStatement [0-21] [select [1, 2].1dayago]
             ArrayConstructor [7-13] [[1, 2]]
               IntLiteral(1) [8-9] [1]
               IntLiteral(2) [11-12] [2]
-            Identifier(`1dayago`) [14-21] [1dayago]
+            Identifier("1dayago") [14-21] [1dayago]
 --
 SELECT
-  ARRAY[1, 2].`1dayago`
+  ARRAY[1, 2]."1dayago"
 ==
 
 # The bison parser detects missing whitespace between a literal and an alias at
@@ -396,13 +396,13 @@ QueryStatement [0-26] [select null from x.y. 2. z]
           PathExpression [17-26] [x.y. 2. z]
             Identifier(x) [17-18] [x]
             Identifier(y) [19-20] [y]
-            Identifier(`2`) [22-23] [2]
+            Identifier("2") [22-23] [2]
             Identifier(z) [25-26] [z]
 --
 SELECT
   null
 FROM
-  x.y.`2`.z
+  x.y."2".z
 ==
 
 select null from x.y. 2.0. z;
@@ -418,14 +418,14 @@ QueryStatement [0-28] [select null from x.y. 2.0. z]
           PathExpression [17-28] [x.y. 2.0. z]
             Identifier(x) [17-18] [x]
             Identifier(y) [19-20] [y]
-            Identifier(`2`) [22-23] [2]
-            Identifier(`0`) [24-25] [0]
+            Identifier("2") [22-23] [2]
+            Identifier("0") [24-25] [0]
             Identifier(z) [27-28] [z]
 --
 SELECT
   null
 FROM
-  x.y.`2`.`0`.z
+  x.y."2"."0".z
 ==
 
 select x{{.| .|. | . }}1{{.| .|. | . }}2{{.| .|. | . }}3
@@ -439,12 +439,12 @@ QueryStatement [0-14] [select x.1.2.3]
         SelectColumn [7-14] [x.1.2.3]
           PathExpression [7-14] [x.1.2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [11-12] [2]
-            Identifier(`3`) [13-14] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [11-12] [2]
+            Identifier("3") [13-14] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,., .
 --
@@ -455,12 +455,12 @@ QueryStatement [0-15] [select x.1.2 .3]
         SelectColumn [7-15] [x.1.2 .3]
           PathExpression [7-15] [x.1.2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [11-12] [2]
-            Identifier(`3`) [14-15] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [11-12] [2]
+            Identifier("3") [14-15] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,.,. 
 --
@@ -471,12 +471,12 @@ QueryStatement [0-15] [select x.1.2. 3]
         SelectColumn [7-15] [x.1.2. 3]
           PathExpression [7-15] [x.1.2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [11-12] [2]
-            Identifier(`3`) [14-15] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [11-12] [2]
+            Identifier("3") [14-15] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,., . 
 --
@@ -487,12 +487,12 @@ QueryStatement [0-16] [select x.1.2 . 3]
         SelectColumn [7-16] [x.1.2 . 3]
           PathExpression [7-16] [x.1.2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [11-12] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [11-12] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., .,.
 --
@@ -503,12 +503,12 @@ QueryStatement [0-15] [select x.1 .2.3]
         SelectColumn [7-15] [x.1 .2.3]
           PathExpression [7-15] [x.1 .2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [14-15] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [14-15] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., ., .
 --
@@ -519,12 +519,12 @@ QueryStatement [0-16] [select x.1 .2 .3]
         SelectColumn [7-16] [x.1 .2 .3]
           PathExpression [7-16] [x.1 .2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., .,. 
 --
@@ -535,12 +535,12 @@ QueryStatement [0-16] [select x.1 .2. 3]
         SelectColumn [7-16] [x.1 .2. 3]
           PathExpression [7-16] [x.1 .2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., ., . 
 --
@@ -551,12 +551,12 @@ QueryStatement [0-17] [select x.1 .2 . 3]
         SelectColumn [7-17] [x.1 .2 . 3]
           PathExpression [7-17] [x.1 .2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,. ,.
 --
@@ -567,12 +567,12 @@ QueryStatement [0-15] [select x.1. 2.3]
         SelectColumn [7-15] [x.1. 2.3]
           PathExpression [7-15] [x.1. 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [14-15] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [14-15] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,. , .
 --
@@ -583,12 +583,12 @@ QueryStatement [0-16] [select x.1. 2 .3]
         SelectColumn [7-16] [x.1. 2 .3]
           PathExpression [7-16] [x.1. 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,. ,. 
 --
@@ -599,12 +599,12 @@ QueryStatement [0-16] [select x.1. 2. 3]
         SelectColumn [7-16] [x.1. 2. 3]
           PathExpression [7-16] [x.1. 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: .,. , . 
 --
@@ -615,12 +615,12 @@ QueryStatement [0-17] [select x.1. 2 . 3]
         SelectColumn [7-17] [x.1. 2 . 3]
           PathExpression [7-17] [x.1. 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., . ,.
 --
@@ -631,12 +631,12 @@ QueryStatement [0-16] [select x.1 . 2.3]
         SelectColumn [7-16] [x.1 . 2.3]
           PathExpression [7-16] [x.1 . 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., . , .
 --
@@ -647,12 +647,12 @@ QueryStatement [0-17] [select x.1 . 2 .3]
         SelectColumn [7-17] [x.1 . 2 .3]
           PathExpression [7-17] [x.1 . 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., . ,. 
 --
@@ -663,12 +663,12 @@ QueryStatement [0-17] [select x.1 . 2. 3]
         SelectColumn [7-17] [x.1 . 2. 3]
           PathExpression [7-17] [x.1 . 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: ., . , . 
 --
@@ -679,12 +679,12 @@ QueryStatement [0-18] [select x.1 . 2 . 3]
         SelectColumn [7-18] [x.1 . 2 . 3]
           PathExpression [7-18] [x.1 . 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [9-10] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,.,.
 --
@@ -695,12 +695,12 @@ QueryStatement [0-15] [select x .1.2.3]
         SelectColumn [7-15] [x .1.2.3]
           PathExpression [7-15] [x .1.2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [14-15] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [14-15] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,., .
 --
@@ -711,12 +711,12 @@ QueryStatement [0-16] [select x .1.2 .3]
         SelectColumn [7-16] [x .1.2 .3]
           PathExpression [7-16] [x .1.2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,.,. 
 --
@@ -727,12 +727,12 @@ QueryStatement [0-16] [select x .1.2. 3]
         SelectColumn [7-16] [x .1.2. 3]
           PathExpression [7-16] [x .1.2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,., . 
 --
@@ -743,12 +743,12 @@ QueryStatement [0-17] [select x .1.2 . 3]
         SelectColumn [7-17] [x .1.2 . 3]
           PathExpression [7-17] [x .1.2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., .,.
 --
@@ -759,12 +759,12 @@ QueryStatement [0-16] [select x .1 .2.3]
         SelectColumn [7-16] [x .1 .2.3]
           PathExpression [7-16] [x .1 .2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., ., .
 --
@@ -775,12 +775,12 @@ QueryStatement [0-17] [select x .1 .2 .3]
         SelectColumn [7-17] [x .1 .2 .3]
           PathExpression [7-17] [x .1 .2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., .,. 
 --
@@ -791,12 +791,12 @@ QueryStatement [0-17] [select x .1 .2. 3]
         SelectColumn [7-17] [x .1 .2. 3]
           PathExpression [7-17] [x .1 .2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., ., . 
 --
@@ -807,12 +807,12 @@ QueryStatement [0-18] [select x .1 .2 . 3]
         SelectColumn [7-18] [x .1 .2 . 3]
           PathExpression [7-18] [x .1 .2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,. ,.
 --
@@ -823,12 +823,12 @@ QueryStatement [0-16] [select x .1. 2.3]
         SelectColumn [7-16] [x .1. 2.3]
           PathExpression [7-16] [x .1. 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,. , .
 --
@@ -839,12 +839,12 @@ QueryStatement [0-17] [select x .1. 2 .3]
         SelectColumn [7-17] [x .1. 2 .3]
           PathExpression [7-17] [x .1. 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,. ,. 
 --
@@ -855,12 +855,12 @@ QueryStatement [0-17] [select x .1. 2. 3]
         SelectColumn [7-17] [x .1. 2. 3]
           PathExpression [7-17] [x .1. 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  .,. , . 
 --
@@ -871,12 +871,12 @@ QueryStatement [0-18] [select x .1. 2 . 3]
         SelectColumn [7-18] [x .1. 2 . 3]
           PathExpression [7-18] [x .1. 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., . ,.
 --
@@ -887,12 +887,12 @@ QueryStatement [0-17] [select x .1 . 2.3]
         SelectColumn [7-17] [x .1 . 2.3]
           PathExpression [7-17] [x .1 . 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., . , .
 --
@@ -903,12 +903,12 @@ QueryStatement [0-18] [select x .1 . 2 .3]
         SelectColumn [7-18] [x .1 . 2 .3]
           PathExpression [7-18] [x .1 . 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., . ,. 
 --
@@ -919,12 +919,12 @@ QueryStatement [0-18] [select x .1 . 2. 3]
         SelectColumn [7-18] [x .1 . 2. 3]
           PathExpression [7-18] [x .1 . 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  ., . , . 
 --
@@ -935,12 +935,12 @@ QueryStatement [0-19] [select x .1 . 2 . 3]
         SelectColumn [7-19] [x .1 . 2 . 3]
           PathExpression [7-19] [x .1 . 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [18-19] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [18-19] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,.,.
 --
@@ -951,12 +951,12 @@ QueryStatement [0-15] [select x. 1.2.3]
         SelectColumn [7-15] [x. 1.2.3]
           PathExpression [7-15] [x. 1.2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [14-15] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [14-15] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,., .
 --
@@ -967,12 +967,12 @@ QueryStatement [0-16] [select x. 1.2 .3]
         SelectColumn [7-16] [x. 1.2 .3]
           PathExpression [7-16] [x. 1.2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,.,. 
 --
@@ -983,12 +983,12 @@ QueryStatement [0-16] [select x. 1.2. 3]
         SelectColumn [7-16] [x. 1.2. 3]
           PathExpression [7-16] [x. 1.2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,., . 
 --
@@ -999,12 +999,12 @@ QueryStatement [0-17] [select x. 1.2 . 3]
         SelectColumn [7-17] [x. 1.2 . 3]
           PathExpression [7-17] [x. 1.2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [12-13] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [12-13] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , .,.
 --
@@ -1015,12 +1015,12 @@ QueryStatement [0-16] [select x. 1 .2.3]
         SelectColumn [7-16] [x. 1 .2.3]
           PathExpression [7-16] [x. 1 .2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , ., .
 --
@@ -1031,12 +1031,12 @@ QueryStatement [0-17] [select x. 1 .2 .3]
         SelectColumn [7-17] [x. 1 .2 .3]
           PathExpression [7-17] [x. 1 .2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , .,. 
 --
@@ -1047,12 +1047,12 @@ QueryStatement [0-17] [select x. 1 .2. 3]
         SelectColumn [7-17] [x. 1 .2. 3]
           PathExpression [7-17] [x. 1 .2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , ., . 
 --
@@ -1063,12 +1063,12 @@ QueryStatement [0-18] [select x. 1 .2 . 3]
         SelectColumn [7-18] [x. 1 .2 . 3]
           PathExpression [7-18] [x. 1 .2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,. ,.
 --
@@ -1079,12 +1079,12 @@ QueryStatement [0-16] [select x. 1. 2.3]
         SelectColumn [7-16] [x. 1. 2.3]
           PathExpression [7-16] [x. 1. 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,. , .
 --
@@ -1095,12 +1095,12 @@ QueryStatement [0-17] [select x. 1. 2 .3]
         SelectColumn [7-17] [x. 1. 2 .3]
           PathExpression [7-17] [x. 1. 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,. ,. 
 --
@@ -1111,12 +1111,12 @@ QueryStatement [0-17] [select x. 1. 2. 3]
         SelectColumn [7-17] [x. 1. 2. 3]
           PathExpression [7-17] [x. 1. 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . ,. , . 
 --
@@ -1127,12 +1127,12 @@ QueryStatement [0-18] [select x. 1. 2 . 3]
         SelectColumn [7-18] [x. 1. 2 . 3]
           PathExpression [7-18] [x. 1. 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , . ,.
 --
@@ -1143,12 +1143,12 @@ QueryStatement [0-17] [select x. 1 . 2.3]
         SelectColumn [7-17] [x. 1 . 2.3]
           PathExpression [7-17] [x. 1 . 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , . , .
 --
@@ -1159,12 +1159,12 @@ QueryStatement [0-18] [select x. 1 . 2 .3]
         SelectColumn [7-18] [x. 1 . 2 .3]
           PathExpression [7-18] [x. 1 . 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , . ,. 
 --
@@ -1175,12 +1175,12 @@ QueryStatement [0-18] [select x. 1 . 2. 3]
         SelectColumn [7-18] [x. 1 . 2. 3]
           PathExpression [7-18] [x. 1 . 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP: . , . , . 
 --
@@ -1191,12 +1191,12 @@ QueryStatement [0-19] [select x. 1 . 2 . 3]
         SelectColumn [7-19] [x. 1 . 2 . 3]
           PathExpression [7-19] [x. 1 . 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [18-19] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [18-19] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,.,.
 --
@@ -1207,12 +1207,12 @@ QueryStatement [0-16] [select x . 1.2.3]
         SelectColumn [7-16] [x . 1.2.3]
           PathExpression [7-16] [x . 1.2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [15-16] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [15-16] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,., .
 --
@@ -1223,12 +1223,12 @@ QueryStatement [0-17] [select x . 1.2 .3]
         SelectColumn [7-17] [x . 1.2 .3]
           PathExpression [7-17] [x . 1.2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,.,. 
 --
@@ -1239,12 +1239,12 @@ QueryStatement [0-17] [select x . 1.2. 3]
         SelectColumn [7-17] [x . 1.2. 3]
           PathExpression [7-17] [x . 1.2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,., . 
 --
@@ -1255,12 +1255,12 @@ QueryStatement [0-18] [select x . 1.2 . 3]
         SelectColumn [7-18] [x . 1.2 . 3]
           PathExpression [7-18] [x . 1.2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , .,.
 --
@@ -1271,12 +1271,12 @@ QueryStatement [0-17] [select x . 1 .2.3]
         SelectColumn [7-17] [x . 1 .2.3]
           PathExpression [7-17] [x . 1 .2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , ., .
 --
@@ -1287,12 +1287,12 @@ QueryStatement [0-18] [select x . 1 .2 .3]
         SelectColumn [7-18] [x . 1 .2 .3]
           PathExpression [7-18] [x . 1 .2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , .,. 
 --
@@ -1303,12 +1303,12 @@ QueryStatement [0-18] [select x . 1 .2. 3]
         SelectColumn [7-18] [x . 1 .2. 3]
           PathExpression [7-18] [x . 1 .2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , ., . 
 --
@@ -1319,12 +1319,12 @@ QueryStatement [0-19] [select x . 1 .2 . 3]
         SelectColumn [7-19] [x . 1 .2 . 3]
           PathExpression [7-19] [x . 1 .2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [18-19] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [18-19] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,. ,.
 --
@@ -1335,12 +1335,12 @@ QueryStatement [0-17] [select x . 1. 2.3]
         SelectColumn [7-17] [x . 1. 2.3]
           PathExpression [7-17] [x . 1. 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [16-17] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,. , .
 --
@@ -1351,12 +1351,12 @@ QueryStatement [0-18] [select x . 1. 2 .3]
         SelectColumn [7-18] [x . 1. 2 .3]
           PathExpression [7-18] [x . 1. 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,. ,. 
 --
@@ -1367,12 +1367,12 @@ QueryStatement [0-18] [select x . 1. 2. 3]
         SelectColumn [7-18] [x . 1. 2. 3]
           PathExpression [7-18] [x . 1. 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . ,. , . 
 --
@@ -1383,12 +1383,12 @@ QueryStatement [0-19] [select x . 1. 2 . 3]
         SelectColumn [7-19] [x . 1. 2 . 3]
           PathExpression [7-19] [x . 1. 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [14-15] [2]
-            Identifier(`3`) [18-19] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [14-15] [2]
+            Identifier("3") [18-19] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , . ,.
 --
@@ -1399,12 +1399,12 @@ QueryStatement [0-18] [select x . 1 . 2.3]
         SelectColumn [7-18] [x . 1 . 2.3]
           PathExpression [7-18] [x . 1 . 2.3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [15-16] [2]
-            Identifier(`3`) [17-18] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [15-16] [2]
+            Identifier("3") [17-18] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , . , .
 --
@@ -1415,12 +1415,12 @@ QueryStatement [0-19] [select x . 1 . 2 .3]
         SelectColumn [7-19] [x . 1 . 2 .3]
           PathExpression [7-19] [x . 1 . 2 .3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [15-16] [2]
-            Identifier(`3`) [18-19] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [15-16] [2]
+            Identifier("3") [18-19] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , . ,. 
 --
@@ -1431,12 +1431,12 @@ QueryStatement [0-19] [select x . 1 . 2. 3]
         SelectColumn [7-19] [x . 1 . 2. 3]
           PathExpression [7-19] [x . 1 . 2. 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [15-16] [2]
-            Identifier(`3`) [18-19] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [15-16] [2]
+            Identifier("3") [18-19] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 --
 ALTERNATION GROUP:  . , . , . 
 --
@@ -1447,12 +1447,12 @@ QueryStatement [0-20] [select x . 1 . 2 . 3]
         SelectColumn [7-20] [x . 1 . 2 . 3]
           PathExpression [7-20] [x . 1 . 2 . 3]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`2`) [15-16] [2]
-            Identifier(`3`) [19-20] [3]
+            Identifier("1") [11-12] [1]
+            Identifier("2") [15-16] [2]
+            Identifier("3") [19-20] [3]
 --
 SELECT
-  x.`1`.`2`.`3`
+  x."1"."2"."3"
 ==
 
 # Test combinations of interesting generalized identifiers that may tickle bugs
@@ -1471,11 +1471,11 @@ QueryStatement [0-12] [select x.1.6]
         SelectColumn [7-12] [x.1.6]
           PathExpression [7-12] [x.1.6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`6`) [11-12] [6]
+            Identifier("1") [9-10] [1]
+            Identifier("6") [11-12] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: .,1,.,e7
 --
@@ -1486,11 +1486,11 @@ QueryStatement [0-13] [select x.1.e7]
         SelectColumn [7-13] [x.1.e7]
           PathExpression [7-13] [x.1.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
+            Identifier("1") [9-10] [1]
             Identifier(e7) [11-13] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: .,1, .,6
 --
@@ -1501,11 +1501,11 @@ QueryStatement [0-13] [select x.1 .6]
         SelectColumn [7-13] [x.1 .6]
           PathExpression [7-13] [x.1 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`6`) [12-13] [6]
+            Identifier("1") [9-10] [1]
+            Identifier("6") [12-13] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: .,1, .,e7
 --
@@ -1516,11 +1516,11 @@ QueryStatement [0-14] [select x.1 .e7]
         SelectColumn [7-14] [x.1 .e7]
           PathExpression [7-14] [x.1 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
+            Identifier("1") [9-10] [1]
             Identifier(e7) [12-14] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: .,1,. ,6
 --
@@ -1531,11 +1531,11 @@ QueryStatement [0-13] [select x.1. 6]
         SelectColumn [7-13] [x.1. 6]
           PathExpression [7-13] [x.1. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`6`) [12-13] [6]
+            Identifier("1") [9-10] [1]
+            Identifier("6") [12-13] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: .,1,. ,e7
 --
@@ -1546,11 +1546,11 @@ QueryStatement [0-14] [select x.1. e7]
         SelectColumn [7-14] [x.1. e7]
           PathExpression [7-14] [x.1. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
+            Identifier("1") [9-10] [1]
             Identifier(e7) [12-14] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: .,1, . ,6
 --
@@ -1561,11 +1561,11 @@ QueryStatement [0-14] [select x.1 . 6]
         SelectColumn [7-14] [x.1 . 6]
           PathExpression [7-14] [x.1 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
-            Identifier(`6`) [13-14] [6]
+            Identifier("1") [9-10] [1]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: .,1, . ,e7
 --
@@ -1576,11 +1576,11 @@ QueryStatement [0-15] [select x.1 . e7]
         SelectColumn [7-15] [x.1 . e7]
           PathExpression [7-15] [x.1 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [9-10] [1]
+            Identifier("1") [9-10] [1]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: .,e2,.,6
 --
@@ -1592,10 +1592,10 @@ QueryStatement [0-13] [select x.e2.6]
           PathExpression [7-13] [x.e2.6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [9-11] [e2]
-            Identifier(`6`) [12-13] [6]
+            Identifier("6") [12-13] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: .,e2,.,e7
 --
@@ -1622,10 +1622,10 @@ QueryStatement [0-14] [select x.e2 .6]
           PathExpression [7-14] [x.e2 .6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [9-11] [e2]
-            Identifier(`6`) [13-14] [6]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: .,e2, .,e7
 --
@@ -1652,10 +1652,10 @@ QueryStatement [0-14] [select x.e2. 6]
           PathExpression [7-14] [x.e2. 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [9-11] [e2]
-            Identifier(`6`) [13-14] [6]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: .,e2,. ,e7
 --
@@ -1682,10 +1682,10 @@ QueryStatement [0-15] [select x.e2 . 6]
           PathExpression [7-15] [x.e2 . 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [9-11] [e2]
-            Identifier(`6`) [14-15] [6]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: .,e2, . ,e7
 --
@@ -1711,11 +1711,11 @@ QueryStatement [0-13] [select x.3e.6]
         SelectColumn [7-13] [x.3e.6]
           PathExpression [7-13] [x.3e.6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
-            Identifier(`6`) [12-13] [6]
+            Identifier("3e") [9-11] [3e]
+            Identifier("6") [12-13] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: .,3e,.,e7
 --
@@ -1726,11 +1726,11 @@ QueryStatement [0-14] [select x.3e.e7]
         SelectColumn [7-14] [x.3e.e7]
           PathExpression [7-14] [x.3e.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
+            Identifier("3e") [9-11] [3e]
             Identifier(e7) [12-14] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: .,3e, .,6
 --
@@ -1741,11 +1741,11 @@ QueryStatement [0-14] [select x.3e .6]
         SelectColumn [7-14] [x.3e .6]
           PathExpression [7-14] [x.3e .6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
-            Identifier(`6`) [13-14] [6]
+            Identifier("3e") [9-11] [3e]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: .,3e, .,e7
 --
@@ -1756,11 +1756,11 @@ QueryStatement [0-15] [select x.3e .e7]
         SelectColumn [7-15] [x.3e .e7]
           PathExpression [7-15] [x.3e .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
+            Identifier("3e") [9-11] [3e]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: .,3e,. ,6
 --
@@ -1771,11 +1771,11 @@ QueryStatement [0-14] [select x.3e. 6]
         SelectColumn [7-14] [x.3e. 6]
           PathExpression [7-14] [x.3e. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
-            Identifier(`6`) [13-14] [6]
+            Identifier("3e") [9-11] [3e]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: .,3e,. ,e7
 --
@@ -1786,11 +1786,11 @@ QueryStatement [0-15] [select x.3e. e7]
         SelectColumn [7-15] [x.3e. e7]
           PathExpression [7-15] [x.3e. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
+            Identifier("3e") [9-11] [3e]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: .,3e, . ,6
 --
@@ -1801,11 +1801,11 @@ QueryStatement [0-15] [select x.3e . 6]
         SelectColumn [7-15] [x.3e . 6]
           PathExpression [7-15] [x.3e . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
-            Identifier(`6`) [14-15] [6]
+            Identifier("3e") [9-11] [3e]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: .,3e, . ,e7
 --
@@ -1816,11 +1816,11 @@ QueryStatement [0-16] [select x.3e . e7]
         SelectColumn [7-16] [x.3e . e7]
           PathExpression [7-16] [x.3e . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [9-11] [3e]
+            Identifier("3e") [9-11] [3e]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: .,4e5,.,6
 --
@@ -1831,11 +1831,11 @@ QueryStatement [0-14] [select x.4e5.6]
         SelectColumn [7-14] [x.4e5.6]
           PathExpression [7-14] [x.4e5.6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
-            Identifier(`6`) [13-14] [6]
+            Identifier("4e5") [9-12] [4e5]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: .,4e5,.,e7
 --
@@ -1846,11 +1846,11 @@ QueryStatement [0-15] [select x.4e5.e7]
         SelectColumn [7-15] [x.4e5.e7]
           PathExpression [7-15] [x.4e5.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
+            Identifier("4e5") [9-12] [4e5]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: .,4e5, .,6
 --
@@ -1861,11 +1861,11 @@ QueryStatement [0-15] [select x.4e5 .6]
         SelectColumn [7-15] [x.4e5 .6]
           PathExpression [7-15] [x.4e5 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
-            Identifier(`6`) [14-15] [6]
+            Identifier("4e5") [9-12] [4e5]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: .,4e5, .,e7
 --
@@ -1876,11 +1876,11 @@ QueryStatement [0-16] [select x.4e5 .e7]
         SelectColumn [7-16] [x.4e5 .e7]
           PathExpression [7-16] [x.4e5 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
+            Identifier("4e5") [9-12] [4e5]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: .,4e5,. ,6
 --
@@ -1891,11 +1891,11 @@ QueryStatement [0-15] [select x.4e5. 6]
         SelectColumn [7-15] [x.4e5. 6]
           PathExpression [7-15] [x.4e5. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
-            Identifier(`6`) [14-15] [6]
+            Identifier("4e5") [9-12] [4e5]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: .,4e5,. ,e7
 --
@@ -1906,11 +1906,11 @@ QueryStatement [0-16] [select x.4e5. e7]
         SelectColumn [7-16] [x.4e5. e7]
           PathExpression [7-16] [x.4e5. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
+            Identifier("4e5") [9-12] [4e5]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: .,4e5, . ,6
 --
@@ -1921,11 +1921,11 @@ QueryStatement [0-16] [select x.4e5 . 6]
         SelectColumn [7-16] [x.4e5 . 6]
           PathExpression [7-16] [x.4e5 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
-            Identifier(`6`) [15-16] [6]
+            Identifier("4e5") [9-12] [4e5]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: .,4e5, . ,e7
 --
@@ -1936,11 +1936,11 @@ QueryStatement [0-17] [select x.4e5 . e7]
         SelectColumn [7-17] [x.4e5 . e7]
           PathExpression [7-17] [x.4e5 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [9-12] [4e5]
+            Identifier("4e5") [9-12] [4e5]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  .,1,.,6
 --
@@ -1951,11 +1951,11 @@ QueryStatement [0-13] [select x .1.6]
         SelectColumn [7-13] [x .1.6]
           PathExpression [7-13] [x .1.6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [12-13] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [12-13] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  .,1,.,e7
 --
@@ -1966,11 +1966,11 @@ QueryStatement [0-14] [select x .1.e7]
         SelectColumn [7-14] [x .1.e7]
           PathExpression [7-14] [x .1.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [12-14] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  .,1, .,6
 --
@@ -1981,11 +1981,11 @@ QueryStatement [0-14] [select x .1 .6]
         SelectColumn [7-14] [x .1 .6]
           PathExpression [7-14] [x .1 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [13-14] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  .,1, .,e7
 --
@@ -1996,11 +1996,11 @@ QueryStatement [0-15] [select x .1 .e7]
         SelectColumn [7-15] [x .1 .e7]
           PathExpression [7-15] [x .1 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  .,1,. ,6
 --
@@ -2011,11 +2011,11 @@ QueryStatement [0-14] [select x .1. 6]
         SelectColumn [7-14] [x .1. 6]
           PathExpression [7-14] [x .1. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [13-14] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  .,1,. ,e7
 --
@@ -2026,11 +2026,11 @@ QueryStatement [0-15] [select x .1. e7]
         SelectColumn [7-15] [x .1. e7]
           PathExpression [7-15] [x .1. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  .,1, . ,6
 --
@@ -2041,11 +2041,11 @@ QueryStatement [0-15] [select x .1 . 6]
         SelectColumn [7-15] [x .1 . 6]
           PathExpression [7-15] [x .1 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [14-15] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  .,1, . ,e7
 --
@@ -2056,11 +2056,11 @@ QueryStatement [0-16] [select x .1 . e7]
         SelectColumn [7-16] [x .1 . e7]
           PathExpression [7-16] [x .1 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  .,e2,.,6
 --
@@ -2072,10 +2072,10 @@ QueryStatement [0-14] [select x .e2.6]
           PathExpression [7-14] [x .e2.6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [13-14] [6]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  .,e2,.,e7
 --
@@ -2102,10 +2102,10 @@ QueryStatement [0-15] [select x .e2 .6]
           PathExpression [7-15] [x .e2 .6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [14-15] [6]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  .,e2, .,e7
 --
@@ -2132,10 +2132,10 @@ QueryStatement [0-15] [select x .e2. 6]
           PathExpression [7-15] [x .e2. 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [14-15] [6]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  .,e2,. ,e7
 --
@@ -2162,10 +2162,10 @@ QueryStatement [0-16] [select x .e2 . 6]
           PathExpression [7-16] [x .e2 . 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [15-16] [6]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  .,e2, . ,e7
 --
@@ -2191,11 +2191,11 @@ QueryStatement [0-14] [select x .3e.6]
         SelectColumn [7-14] [x .3e.6]
           PathExpression [7-14] [x .3e.6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [13-14] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  .,3e,.,e7
 --
@@ -2206,11 +2206,11 @@ QueryStatement [0-15] [select x .3e.e7]
         SelectColumn [7-15] [x .3e.e7]
           PathExpression [7-15] [x .3e.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  .,3e, .,6
 --
@@ -2221,11 +2221,11 @@ QueryStatement [0-15] [select x .3e .6]
         SelectColumn [7-15] [x .3e .6]
           PathExpression [7-15] [x .3e .6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [14-15] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  .,3e, .,e7
 --
@@ -2236,11 +2236,11 @@ QueryStatement [0-16] [select x .3e .e7]
         SelectColumn [7-16] [x .3e .e7]
           PathExpression [7-16] [x .3e .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  .,3e,. ,6
 --
@@ -2251,11 +2251,11 @@ QueryStatement [0-15] [select x .3e. 6]
         SelectColumn [7-15] [x .3e. 6]
           PathExpression [7-15] [x .3e. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [14-15] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  .,3e,. ,e7
 --
@@ -2266,11 +2266,11 @@ QueryStatement [0-16] [select x .3e. e7]
         SelectColumn [7-16] [x .3e. e7]
           PathExpression [7-16] [x .3e. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  .,3e, . ,6
 --
@@ -2281,11 +2281,11 @@ QueryStatement [0-16] [select x .3e . 6]
         SelectColumn [7-16] [x .3e . 6]
           PathExpression [7-16] [x .3e . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [15-16] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  .,3e, . ,e7
 --
@@ -2296,11 +2296,11 @@ QueryStatement [0-17] [select x .3e . e7]
         SelectColumn [7-17] [x .3e . e7]
           PathExpression [7-17] [x .3e . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  .,4e5,.,6
 --
@@ -2311,11 +2311,11 @@ QueryStatement [0-15] [select x .4e5.6]
         SelectColumn [7-15] [x .4e5.6]
           PathExpression [7-15] [x .4e5.6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [14-15] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  .,4e5,.,e7
 --
@@ -2326,11 +2326,11 @@ QueryStatement [0-16] [select x .4e5.e7]
         SelectColumn [7-16] [x .4e5.e7]
           PathExpression [7-16] [x .4e5.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  .,4e5, .,6
 --
@@ -2341,11 +2341,11 @@ QueryStatement [0-16] [select x .4e5 .6]
         SelectColumn [7-16] [x .4e5 .6]
           PathExpression [7-16] [x .4e5 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [15-16] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  .,4e5, .,e7
 --
@@ -2356,11 +2356,11 @@ QueryStatement [0-17] [select x .4e5 .e7]
         SelectColumn [7-17] [x .4e5 .e7]
           PathExpression [7-17] [x .4e5 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  .,4e5,. ,6
 --
@@ -2371,11 +2371,11 @@ QueryStatement [0-16] [select x .4e5. 6]
         SelectColumn [7-16] [x .4e5. 6]
           PathExpression [7-16] [x .4e5. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [15-16] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  .,4e5,. ,e7
 --
@@ -2386,11 +2386,11 @@ QueryStatement [0-17] [select x .4e5. e7]
         SelectColumn [7-17] [x .4e5. e7]
           PathExpression [7-17] [x .4e5. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  .,4e5, . ,6
 --
@@ -2401,11 +2401,11 @@ QueryStatement [0-17] [select x .4e5 . 6]
         SelectColumn [7-17] [x .4e5 . 6]
           PathExpression [7-17] [x .4e5 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [16-17] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [16-17] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  .,4e5, . ,e7
 --
@@ -2416,11 +2416,11 @@ QueryStatement [0-18] [select x .4e5 . e7]
         SelectColumn [7-18] [x .4e5 . e7]
           PathExpression [7-18] [x .4e5 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [16-18] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: . ,1,.,6
 --
@@ -2431,11 +2431,11 @@ QueryStatement [0-13] [select x. 1.6]
         SelectColumn [7-13] [x. 1.6]
           PathExpression [7-13] [x. 1.6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [12-13] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [12-13] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: . ,1,.,e7
 --
@@ -2446,11 +2446,11 @@ QueryStatement [0-14] [select x. 1.e7]
         SelectColumn [7-14] [x. 1.e7]
           PathExpression [7-14] [x. 1.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [12-14] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: . ,1, .,6
 --
@@ -2461,11 +2461,11 @@ QueryStatement [0-14] [select x. 1 .6]
         SelectColumn [7-14] [x. 1 .6]
           PathExpression [7-14] [x. 1 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [13-14] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: . ,1, .,e7
 --
@@ -2476,11 +2476,11 @@ QueryStatement [0-15] [select x. 1 .e7]
         SelectColumn [7-15] [x. 1 .e7]
           PathExpression [7-15] [x. 1 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: . ,1,. ,6
 --
@@ -2491,11 +2491,11 @@ QueryStatement [0-14] [select x. 1. 6]
         SelectColumn [7-14] [x. 1. 6]
           PathExpression [7-14] [x. 1. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [13-14] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: . ,1,. ,e7
 --
@@ -2506,11 +2506,11 @@ QueryStatement [0-15] [select x. 1. e7]
         SelectColumn [7-15] [x. 1. e7]
           PathExpression [7-15] [x. 1. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: . ,1, . ,6
 --
@@ -2521,11 +2521,11 @@ QueryStatement [0-15] [select x. 1 . 6]
         SelectColumn [7-15] [x. 1 . 6]
           PathExpression [7-15] [x. 1 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`6`) [14-15] [6]
+            Identifier("1") [10-11] [1]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP: . ,1, . ,e7
 --
@@ -2536,11 +2536,11 @@ QueryStatement [0-16] [select x. 1 . e7]
         SelectColumn [7-16] [x. 1 . e7]
           PathExpression [7-16] [x. 1 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [10-11] [1]
+            Identifier("1") [10-11] [1]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP: . ,e2,.,6
 --
@@ -2552,10 +2552,10 @@ QueryStatement [0-14] [select x. e2.6]
           PathExpression [7-14] [x. e2.6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [13-14] [6]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: . ,e2,.,e7
 --
@@ -2582,10 +2582,10 @@ QueryStatement [0-15] [select x. e2 .6]
           PathExpression [7-15] [x. e2 .6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [14-15] [6]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: . ,e2, .,e7
 --
@@ -2612,10 +2612,10 @@ QueryStatement [0-15] [select x. e2. 6]
           PathExpression [7-15] [x. e2. 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [14-15] [6]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: . ,e2,. ,e7
 --
@@ -2642,10 +2642,10 @@ QueryStatement [0-16] [select x. e2 . 6]
           PathExpression [7-16] [x. e2 . 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [10-12] [e2]
-            Identifier(`6`) [15-16] [6]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP: . ,e2, . ,e7
 --
@@ -2671,11 +2671,11 @@ QueryStatement [0-14] [select x. 3e.6]
         SelectColumn [7-14] [x. 3e.6]
           PathExpression [7-14] [x. 3e.6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [13-14] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: . ,3e,.,e7
 --
@@ -2686,11 +2686,11 @@ QueryStatement [0-15] [select x. 3e.e7]
         SelectColumn [7-15] [x. 3e.e7]
           PathExpression [7-15] [x. 3e.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: . ,3e, .,6
 --
@@ -2701,11 +2701,11 @@ QueryStatement [0-15] [select x. 3e .6]
         SelectColumn [7-15] [x. 3e .6]
           PathExpression [7-15] [x. 3e .6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [14-15] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: . ,3e, .,e7
 --
@@ -2716,11 +2716,11 @@ QueryStatement [0-16] [select x. 3e .e7]
         SelectColumn [7-16] [x. 3e .e7]
           PathExpression [7-16] [x. 3e .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: . ,3e,. ,6
 --
@@ -2731,11 +2731,11 @@ QueryStatement [0-15] [select x. 3e. 6]
         SelectColumn [7-15] [x. 3e. 6]
           PathExpression [7-15] [x. 3e. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [14-15] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: . ,3e,. ,e7
 --
@@ -2746,11 +2746,11 @@ QueryStatement [0-16] [select x. 3e. e7]
         SelectColumn [7-16] [x. 3e. e7]
           PathExpression [7-16] [x. 3e. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: . ,3e, . ,6
 --
@@ -2761,11 +2761,11 @@ QueryStatement [0-16] [select x. 3e . 6]
         SelectColumn [7-16] [x. 3e . 6]
           PathExpression [7-16] [x. 3e . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
-            Identifier(`6`) [15-16] [6]
+            Identifier("3e") [10-12] [3e]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP: . ,3e, . ,e7
 --
@@ -2776,11 +2776,11 @@ QueryStatement [0-17] [select x. 3e . e7]
         SelectColumn [7-17] [x. 3e . e7]
           PathExpression [7-17] [x. 3e . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [10-12] [3e]
+            Identifier("3e") [10-12] [3e]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP: . ,4e5,.,6
 --
@@ -2791,11 +2791,11 @@ QueryStatement [0-15] [select x. 4e5.6]
         SelectColumn [7-15] [x. 4e5.6]
           PathExpression [7-15] [x. 4e5.6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [14-15] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: . ,4e5,.,e7
 --
@@ -2806,11 +2806,11 @@ QueryStatement [0-16] [select x. 4e5.e7]
         SelectColumn [7-16] [x. 4e5.e7]
           PathExpression [7-16] [x. 4e5.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: . ,4e5, .,6
 --
@@ -2821,11 +2821,11 @@ QueryStatement [0-16] [select x. 4e5 .6]
         SelectColumn [7-16] [x. 4e5 .6]
           PathExpression [7-16] [x. 4e5 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [15-16] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: . ,4e5, .,e7
 --
@@ -2836,11 +2836,11 @@ QueryStatement [0-17] [select x. 4e5 .e7]
         SelectColumn [7-17] [x. 4e5 .e7]
           PathExpression [7-17] [x. 4e5 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: . ,4e5,. ,6
 --
@@ -2851,11 +2851,11 @@ QueryStatement [0-16] [select x. 4e5. 6]
         SelectColumn [7-16] [x. 4e5. 6]
           PathExpression [7-16] [x. 4e5. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [15-16] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: . ,4e5,. ,e7
 --
@@ -2866,11 +2866,11 @@ QueryStatement [0-17] [select x. 4e5. e7]
         SelectColumn [7-17] [x. 4e5. e7]
           PathExpression [7-17] [x. 4e5. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP: . ,4e5, . ,6
 --
@@ -2881,11 +2881,11 @@ QueryStatement [0-17] [select x. 4e5 . 6]
         SelectColumn [7-17] [x. 4e5 . 6]
           PathExpression [7-17] [x. 4e5 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
-            Identifier(`6`) [16-17] [6]
+            Identifier("4e5") [10-13] [4e5]
+            Identifier("6") [16-17] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP: . ,4e5, . ,e7
 --
@@ -2896,11 +2896,11 @@ QueryStatement [0-18] [select x. 4e5 . e7]
         SelectColumn [7-18] [x. 4e5 . e7]
           PathExpression [7-18] [x. 4e5 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [10-13] [4e5]
+            Identifier("4e5") [10-13] [4e5]
             Identifier(e7) [16-18] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  . ,1,.,6
 --
@@ -2911,11 +2911,11 @@ QueryStatement [0-14] [select x . 1.6]
         SelectColumn [7-14] [x . 1.6]
           PathExpression [7-14] [x . 1.6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`6`) [13-14] [6]
+            Identifier("1") [11-12] [1]
+            Identifier("6") [13-14] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  . ,1,.,e7
 --
@@ -2926,11 +2926,11 @@ QueryStatement [0-15] [select x . 1.e7]
         SelectColumn [7-15] [x . 1.e7]
           PathExpression [7-15] [x . 1.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
+            Identifier("1") [11-12] [1]
             Identifier(e7) [13-15] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  . ,1, .,6
 --
@@ -2941,11 +2941,11 @@ QueryStatement [0-15] [select x . 1 .6]
         SelectColumn [7-15] [x . 1 .6]
           PathExpression [7-15] [x . 1 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`6`) [14-15] [6]
+            Identifier("1") [11-12] [1]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  . ,1, .,e7
 --
@@ -2956,11 +2956,11 @@ QueryStatement [0-16] [select x . 1 .e7]
         SelectColumn [7-16] [x . 1 .e7]
           PathExpression [7-16] [x . 1 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
+            Identifier("1") [11-12] [1]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  . ,1,. ,6
 --
@@ -2971,11 +2971,11 @@ QueryStatement [0-15] [select x . 1. 6]
         SelectColumn [7-15] [x . 1. 6]
           PathExpression [7-15] [x . 1. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`6`) [14-15] [6]
+            Identifier("1") [11-12] [1]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  . ,1,. ,e7
 --
@@ -2986,11 +2986,11 @@ QueryStatement [0-16] [select x . 1. e7]
         SelectColumn [7-16] [x . 1. e7]
           PathExpression [7-16] [x . 1. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
+            Identifier("1") [11-12] [1]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  . ,1, . ,6
 --
@@ -3001,11 +3001,11 @@ QueryStatement [0-16] [select x . 1 . 6]
         SelectColumn [7-16] [x . 1 . 6]
           PathExpression [7-16] [x . 1 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
-            Identifier(`6`) [15-16] [6]
+            Identifier("1") [11-12] [1]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`1`.`6`
+  x."1"."6"
 --
 ALTERNATION GROUP:  . ,1, . ,e7
 --
@@ -3016,11 +3016,11 @@ QueryStatement [0-17] [select x . 1 . e7]
         SelectColumn [7-17] [x . 1 . e7]
           PathExpression [7-17] [x . 1 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`1`) [11-12] [1]
+            Identifier("1") [11-12] [1]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`1`.e7
+  x."1".e7
 --
 ALTERNATION GROUP:  . ,e2,.,6
 --
@@ -3032,10 +3032,10 @@ QueryStatement [0-15] [select x . e2.6]
           PathExpression [7-15] [x . e2.6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [11-13] [e2]
-            Identifier(`6`) [14-15] [6]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  . ,e2,.,e7
 --
@@ -3062,10 +3062,10 @@ QueryStatement [0-16] [select x . e2 .6]
           PathExpression [7-16] [x . e2 .6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [11-13] [e2]
-            Identifier(`6`) [15-16] [6]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  . ,e2, .,e7
 --
@@ -3092,10 +3092,10 @@ QueryStatement [0-16] [select x . e2. 6]
           PathExpression [7-16] [x . e2. 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [11-13] [e2]
-            Identifier(`6`) [15-16] [6]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  . ,e2,. ,e7
 --
@@ -3122,10 +3122,10 @@ QueryStatement [0-17] [select x . e2 . 6]
           PathExpression [7-17] [x . e2 . 6]
             Identifier(x) [7-8] [x]
             Identifier(e2) [11-13] [e2]
-            Identifier(`6`) [16-17] [6]
+            Identifier("6") [16-17] [6]
 --
 SELECT
-  x.e2.`6`
+  x.e2."6"
 --
 ALTERNATION GROUP:  . ,e2, . ,e7
 --
@@ -3151,11 +3151,11 @@ QueryStatement [0-15] [select x . 3e.6]
         SelectColumn [7-15] [x . 3e.6]
           PathExpression [7-15] [x . 3e.6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
-            Identifier(`6`) [14-15] [6]
+            Identifier("3e") [11-13] [3e]
+            Identifier("6") [14-15] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  . ,3e,.,e7
 --
@@ -3166,11 +3166,11 @@ QueryStatement [0-16] [select x . 3e.e7]
         SelectColumn [7-16] [x . 3e.e7]
           PathExpression [7-16] [x . 3e.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
+            Identifier("3e") [11-13] [3e]
             Identifier(e7) [14-16] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  . ,3e, .,6
 --
@@ -3181,11 +3181,11 @@ QueryStatement [0-16] [select x . 3e .6]
         SelectColumn [7-16] [x . 3e .6]
           PathExpression [7-16] [x . 3e .6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
-            Identifier(`6`) [15-16] [6]
+            Identifier("3e") [11-13] [3e]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  . ,3e, .,e7
 --
@@ -3196,11 +3196,11 @@ QueryStatement [0-17] [select x . 3e .e7]
         SelectColumn [7-17] [x . 3e .e7]
           PathExpression [7-17] [x . 3e .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
+            Identifier("3e") [11-13] [3e]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  . ,3e,. ,6
 --
@@ -3211,11 +3211,11 @@ QueryStatement [0-16] [select x . 3e. 6]
         SelectColumn [7-16] [x . 3e. 6]
           PathExpression [7-16] [x . 3e. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
-            Identifier(`6`) [15-16] [6]
+            Identifier("3e") [11-13] [3e]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  . ,3e,. ,e7
 --
@@ -3226,11 +3226,11 @@ QueryStatement [0-17] [select x . 3e. e7]
         SelectColumn [7-17] [x . 3e. e7]
           PathExpression [7-17] [x . 3e. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
+            Identifier("3e") [11-13] [3e]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  . ,3e, . ,6
 --
@@ -3241,11 +3241,11 @@ QueryStatement [0-17] [select x . 3e . 6]
         SelectColumn [7-17] [x . 3e . 6]
           PathExpression [7-17] [x . 3e . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
-            Identifier(`6`) [16-17] [6]
+            Identifier("3e") [11-13] [3e]
+            Identifier("6") [16-17] [6]
 --
 SELECT
-  x.`3e`.`6`
+  x."3e"."6"
 --
 ALTERNATION GROUP:  . ,3e, . ,e7
 --
@@ -3256,11 +3256,11 @@ QueryStatement [0-18] [select x . 3e . e7]
         SelectColumn [7-18] [x . 3e . e7]
           PathExpression [7-18] [x . 3e . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`3e`) [11-13] [3e]
+            Identifier("3e") [11-13] [3e]
             Identifier(e7) [16-18] [e7]
 --
 SELECT
-  x.`3e`.e7
+  x."3e".e7
 --
 ALTERNATION GROUP:  . ,4e5,.,6
 --
@@ -3271,11 +3271,11 @@ QueryStatement [0-16] [select x . 4e5.6]
         SelectColumn [7-16] [x . 4e5.6]
           PathExpression [7-16] [x . 4e5.6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
-            Identifier(`6`) [15-16] [6]
+            Identifier("4e5") [11-14] [4e5]
+            Identifier("6") [15-16] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  . ,4e5,.,e7
 --
@@ -3286,11 +3286,11 @@ QueryStatement [0-17] [select x . 4e5.e7]
         SelectColumn [7-17] [x . 4e5.e7]
           PathExpression [7-17] [x . 4e5.e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
+            Identifier("4e5") [11-14] [4e5]
             Identifier(e7) [15-17] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  . ,4e5, .,6
 --
@@ -3301,11 +3301,11 @@ QueryStatement [0-17] [select x . 4e5 .6]
         SelectColumn [7-17] [x . 4e5 .6]
           PathExpression [7-17] [x . 4e5 .6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
-            Identifier(`6`) [16-17] [6]
+            Identifier("4e5") [11-14] [4e5]
+            Identifier("6") [16-17] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  . ,4e5, .,e7
 --
@@ -3316,11 +3316,11 @@ QueryStatement [0-18] [select x . 4e5 .e7]
         SelectColumn [7-18] [x . 4e5 .e7]
           PathExpression [7-18] [x . 4e5 .e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
+            Identifier("4e5") [11-14] [4e5]
             Identifier(e7) [16-18] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  . ,4e5,. ,6
 --
@@ -3331,11 +3331,11 @@ QueryStatement [0-17] [select x . 4e5. 6]
         SelectColumn [7-17] [x . 4e5. 6]
           PathExpression [7-17] [x . 4e5. 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
-            Identifier(`6`) [16-17] [6]
+            Identifier("4e5") [11-14] [4e5]
+            Identifier("6") [16-17] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  . ,4e5,. ,e7
 --
@@ -3346,11 +3346,11 @@ QueryStatement [0-18] [select x . 4e5. e7]
         SelectColumn [7-18] [x . 4e5. e7]
           PathExpression [7-18] [x . 4e5. e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
+            Identifier("4e5") [11-14] [4e5]
             Identifier(e7) [16-18] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 --
 ALTERNATION GROUP:  . ,4e5, . ,6
 --
@@ -3361,11 +3361,11 @@ QueryStatement [0-18] [select x . 4e5 . 6]
         SelectColumn [7-18] [x . 4e5 . 6]
           PathExpression [7-18] [x . 4e5 . 6]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
-            Identifier(`6`) [17-18] [6]
+            Identifier("4e5") [11-14] [4e5]
+            Identifier("6") [17-18] [6]
 --
 SELECT
-  x.`4e5`.`6`
+  x."4e5"."6"
 --
 ALTERNATION GROUP:  . ,4e5, . ,e7
 --
@@ -3376,11 +3376,11 @@ QueryStatement [0-19] [select x . 4e5 . e7]
         SelectColumn [7-19] [x . 4e5 . e7]
           PathExpression [7-19] [x . 4e5 . e7]
             Identifier(x) [7-8] [x]
-            Identifier(`4e5`) [11-14] [4e5]
+            Identifier("4e5") [11-14] [4e5]
             Identifier(e7) [17-19] [e7]
 --
 SELECT
-  x.`4e5`.e7
+  x."4e5".e7
 ==
 
 select a. 1. 2. 3. b . 4. 5. c. 6. 7. 8. 9. d;
@@ -3392,21 +3392,21 @@ QueryStatement [0-45] [select a....7. 8. 9. d]
         SelectColumn [7-45] [a. 1. 2. 3...7. 8. 9. d]
           PathExpression [7-45] [a. 1. 2. 3...7. 8. 9. d]
             Identifier(a) [7-8] [a]
-            Identifier(`1`) [10-11] [1]
-            Identifier(`2`) [13-14] [2]
-            Identifier(`3`) [16-17] [3]
+            Identifier("1") [10-11] [1]
+            Identifier("2") [13-14] [2]
+            Identifier("3") [16-17] [3]
             Identifier(b) [19-20] [b]
-            Identifier(`4`) [23-24] [4]
-            Identifier(`5`) [26-27] [5]
+            Identifier("4") [23-24] [4]
+            Identifier("5") [26-27] [5]
             Identifier(c) [29-30] [c]
-            Identifier(`6`) [32-33] [6]
-            Identifier(`7`) [35-36] [7]
-            Identifier(`8`) [38-39] [8]
-            Identifier(`9`) [41-42] [9]
+            Identifier("6") [32-33] [6]
+            Identifier("7") [35-36] [7]
+            Identifier("8") [38-39] [8]
+            Identifier("9") [41-42] [9]
             Identifier(d) [44-45] [d]
 --
 SELECT
-  a.`1`.`2`.`3`.b.`4`.`5`.c.`6`.`7`.`8`.`9`.d
+  a."1"."2"."3".b."4"."5".c."6"."7"."8"."9".d
 ==
 
 # The bison parser detects the "." and then sees a floating point literal.
@@ -3427,20 +3427,20 @@ select abc..1e5;
            ^
 ==
 
-select 1,2,'abc',"def" from Customer where 5;
+select 1,2,'abc','def' from Customer where 5;
 --
 QueryStatement [0-44] [select 1,2...Customer where 5]
   Query [0-44] [select 1,2...Customer where 5]
     Select [0-44] [select 1,2...Customer where 5]
-      SelectList [7-22] [1,2,'abc',"def"]
+      SelectList [7-22] [1,2,'abc','def']
         SelectColumn [7-8] [1]
           IntLiteral(1) [7-8] [1]
         SelectColumn [9-10] [2]
           IntLiteral(2) [9-10] [2]
         SelectColumn [11-16] ['abc']
           StringLiteral('abc') [11-16] ['abc']
-        SelectColumn [17-22] ["def"]
-          StringLiteral("def") [17-22] ["def"]
+        SelectColumn [17-22] ['def']
+          StringLiteral('def') [17-22] ['def']
       FromClause [23-36] [from Customer]
         TablePathExpression [28-36] [Customer]
           PathExpression [28-36] [Customer]
@@ -3452,7 +3452,7 @@ SELECT
   1,
   2,
   'abc',
-  "def"
+  'def'
 FROM
   Customer
 WHERE

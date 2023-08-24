@@ -58,7 +58,7 @@ DeleteStmt
 ==
 
 DELETE SimpleTypes
-WHERE `int64` IN (select key from KeyValue)
+WHERE "int64" IN (select key from KeyValue)
 --
 DeleteStmt
 +-table_scan=
@@ -268,12 +268,12 @@ DeleteStmt
         +-default_value=77
 ==
 
-DELETE `zetasql_test__.KeyValueStruct`
+DELETE "zetasql_test__.KeyValueStruct"
 WHERE key > 1
 ASSERT_ROWS_MODIFIED 0
 --
-ERROR: Table not found: `zetasql_test__.KeyValueStruct` [at 1:8]
-DELETE `zetasql_test__.KeyValueStruct`
+ERROR: Table not found: "zetasql_test__.KeyValueStruct" [at 1:8]
+DELETE "zetasql_test__.KeyValueStruct"
        ^
 ==
 
@@ -289,7 +289,7 @@ DeleteStmt
 | +-AssertRowsModified
 |   +-rows=
 |     +-Cast(INT32 -> INT64)
-|       +-Parameter(type=INT32, name="test_param_int32")
+|       +-Parameter(type=INT32, name='test_param_int32')
 +-where_expr=
   +-Literal(type=BOOL, value=true)
 --
@@ -301,7 +301,7 @@ DeleteStmt
 +-assert_rows_modified=
 | +-AssertRowsModified
 |   +-rows=
-|     +-Parameter(type=INT64, name="test_param_int64")
+|     +-Parameter(type=INT64, name='test_param_int64')
 +-where_expr=
   +-Literal(type=BOOL, value=true)
 --
@@ -314,7 +314,7 @@ DeleteStmt
 | +-AssertRowsModified
 |   +-rows=
 |     +-Cast(UINT32 -> INT64)
-|       +-Parameter(type=UINT32, name="test_param_uint32")
+|       +-Parameter(type=UINT32, name='test_param_uint32')
 +-where_expr=
   +-Literal(type=BOOL, value=true)
 --
@@ -327,7 +327,7 @@ DeleteStmt
 | +-AssertRowsModified
 |   +-rows=
 |     +-Cast(UINT64 -> INT64)
-|       +-Parameter(type=UINT64, name="test_param_uint64")
+|       +-Parameter(type=UINT64, name='test_param_uint64')
 +-where_expr=
   +-Literal(type=BOOL, value=true)
 ==
@@ -359,7 +359,7 @@ DeleteStmt
 | +-AssertRowsModified
 |   +-rows=
 |     +-Cast(INT32 -> INT64)
-|       +-Parameter(type=INT32, name="test_param_int32")
+|       +-Parameter(type=INT32, name='test_param_int32')
 +-where_expr=
   +-Literal(type=BOOL, value=true)
 ==
@@ -379,7 +379,7 @@ DELETE TestTable {{AS|}} T WHERE T.key > 1
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.key#1], table=TestTable, column_index_list=[0], alias="T")
+| +-TableScan(column_list=[TestTable.key#1], table=TestTable, column_index_list=[0], alias='T')
 +-column_access_list=READ
 +-where_expr=
   +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
@@ -409,7 +409,7 @@ WHERE T.float_val > int32_val
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="T")
+| +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='T')
 +-column_access_list=READ
 +-where_expr=
   +-FunctionCall(ZetaSQL:$greater(DOUBLE, DOUBLE) -> BOOL)
@@ -442,7 +442,7 @@ WHERE S.int64 IN (select key from KeyValue)
 --
 DeleteStmt
 +-table_scan=
-| +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="S")
+| +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='S')
 +-column_access_list=READ
 +-where_expr=
   +-SubqueryExpr
@@ -554,7 +554,7 @@ DeleteStmt
 | +-TableScan
 |   +-column_list=[KeyValue.Key#1]
 |   +-hint_list=
-|   | +-force_index := Literal(type=STRING, value="index_name")
+|   | +-force_index := Literal(type=STRING, value='index_name')
 |   +-table=KeyValue
 |   +-column_index_list=[0]
 +-column_access_list=READ

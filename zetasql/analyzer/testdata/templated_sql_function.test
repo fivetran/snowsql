@@ -15,7 +15,7 @@ select udf_templated_return_one();
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -36,7 +36,7 @@ select udf_calls_deprecation_warning()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -70,8 +70,8 @@ select udf_calls_deprecation_warning(), udf_calls_deprecation_warning()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -102,44 +102,44 @@ select udf_templated_return_bool_arg(@test_param_bool)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_return_bool_arg(BOOL) -> BOOL)
-    |     +-Parameter(type=BOOL, name="test_param_bool")
+    |     +-Parameter(type=BOOL, name='test_param_bool')
     +-input_scan=
       +-SingleRowScan
 
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_bool_arg(BOOL) -> BOOL
 containing resolved templated expression:
-ArgumentRef(type=BOOL, name="x")
+ArgumentRef(type=BOOL, name='x')
 ==
 
 # Show a case where the same template resolves to two different signatures:
 # part one.
-select udf_templated_return_any_scalar_arg("abc");
+select udf_templated_return_any_scalar_arg('abc');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_return_any_scalar_arg(STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_any_scalar_arg(STRING) -> STRING
 containing resolved templated expression:
-ArgumentRef(type=STRING, name="x")
+ArgumentRef(type=STRING, name='x')
 ==
 
 # Show a case where the same template resolves to two different signatures:
@@ -148,7 +148,7 @@ select udf_templated_return_any_scalar_arg(true);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -162,7 +162,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_any_scalar_arg(BOOL) -> BOOL
 containing resolved templated expression:
-ArgumentRef(type=BOOL, name="x")
+ArgumentRef(type=BOOL, name='x')
 ==
 
 # Call a UDF with a valid templated SQL body that refers to a scalar argument.
@@ -170,7 +170,7 @@ select udf_templated_return_int64_arg(42);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -184,17 +184,17 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_return_int64_arg(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="x")
+ArgumentRef(type=INT64, name='x')
 ==
 
 # The function performs a projection.
 select udf_templated_arg_plus_integer(42),
-       udf_templated_arg_concat_string("abc");
+       udf_templated_arg_concat_string('abc');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [STRING]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -204,7 +204,7 @@ QueryStmt
     | |   +-Literal(type=INT64, value=42)
     | +-$col2#2 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_concat_string(STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -212,31 +212,31 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_plus_integer(INT64) -> INT64
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-+-ArgumentRef(type=INT64, name="x")
++-ArgumentRef(type=INT64, name='x')
 +-Literal(type=INT64, value=42)
 
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_concat_string(STRING) -> STRING
 containing resolved templated expression:
 FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-+-ArgumentRef(type=STRING, name="x")
-+-Literal(type=STRING, value="abc")
++-ArgumentRef(type=STRING, name='x')
++-Literal(type=STRING, value='abc')
 ==
 
 # The function takes two arguments.
-select udf_templated_arg_concat_two_strings("abc", "def");
+select udf_templated_arg_concat_two_strings('abc', 'def');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_concat_two_strings(STRING, STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
-    |     +-Literal(type=STRING, value="def")
+    |     +-Literal(type=STRING, value='abc')
+    |     +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 
@@ -244,8 +244,8 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_concat_two_strings(STRING, STRING) -> STRING
 containing resolved templated expression:
 FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-+-ArgumentRef(type=STRING, name="x")
-+-ArgumentRef(type=STRING, name="y")
++-ArgumentRef(type=STRING, name='x')
++-ArgumentRef(type=STRING, name='y')
 ==
 
 # The function has a $ in its internal argument name.
@@ -253,7 +253,7 @@ select udf_templated_arg_plus_integer_accept_dollars_col_name(52)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -267,7 +267,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_templated_arg_plus_integer_accept_dollars_col_name(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="$col1")
+ArgumentRef(type=INT64, name='$col1')
 ==
 
 # Call a templated SQL UDF that calls another templated SQL UDF.
@@ -275,7 +275,7 @@ select udf_call_udf_templated_return_one();
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -300,7 +300,7 @@ select udf_call_udf_templated_return_one_twice();
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -333,7 +333,7 @@ select udf_one_templated_arg_return_int64(cast(1 as int64))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -347,7 +347,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="x")
+ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a templated SQL UDF with a literal NULL argument value, and an expected
@@ -356,7 +356,7 @@ select udf_one_templated_arg_return_int64(null)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -370,7 +370,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(INT64) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="x")
+ArgumentRef(type=INT64, name='x')
 ==
 
 # Call a templated SQL UDF with literal NULL explicitly casted to DATE, and an
@@ -379,7 +379,7 @@ select udf_one_templated_arg_return_date(cast(null as date))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
+| +-$query.$col1#1 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -393,7 +393,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_date(DATE) -> DATE
 containing resolved templated expression:
-ArgumentRef(type=DATE, name="x")
+ArgumentRef(type=DATE, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type that does not exactly match its
@@ -403,7 +403,7 @@ select udf_one_templated_arg_return_int64(cast(1 as int32))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -418,17 +418,17 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(INT32) -> INT64
 containing resolved templated expression:
 Cast(INT32 -> INT64)
-+-ArgumentRef(type=INT32, name="x")
++-ArgumentRef(type=INT32, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type that exactly matches its
 # expected return type. The function call finishes successfully.
 select udf_one_templated_arg_return_struct_int64_string(
-    (select as struct cast(1 as int64) as int_field, "abc" as string_field))
+    (select as struct cast(1 as int64) as int_field, 'abc' as string_field))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRUCT<int_field INT64, string_field STRING>]
+| +-$query.$col1#4 AS "$col1" [STRUCT<int_field INT64, string_field STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -453,7 +453,7 @@ QueryStmt
     |               +-column_list=$expr_subquery.[int_field#1, string_field#2]
     |               +-expr_list=
     |               | +-int_field#1 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
-    |               | +-string_field#2 := Literal(type=STRING, value="abc")
+    |               | +-string_field#2 := Literal(type=STRING, value='abc')
     |               +-input_scan=
     |                 +-SingleRowScan
     +-input_scan=
@@ -462,7 +462,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_struct_int64_string(STRUCT<int_field INT64, string_field STRING>) -> STRUCT<int_field INT64, string_field STRING>
 containing resolved templated expression:
-ArgumentRef(type=STRUCT<int_field INT64, string_field STRING>, name="x")
+ArgumentRef(type=STRUCT<int_field INT64, string_field STRING>, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type comprising a struct with
@@ -470,11 +470,11 @@ ArgumentRef(type=STRUCT<int_field INT64, string_field STRING>, name="x")
 # coercible. The resolver adds a coercion and the function call finishes
 # successfully.
 select udf_one_templated_arg_return_struct_int64_string(
-    (select as struct cast(1 as int32) as int_field, "abc" as string_field))
+    (select as struct cast(1 as int32) as int_field, 'abc' as string_field))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRUCT<int_field INT64, string_field STRING>]
+| +-$query.$col1#4 AS "$col1" [STRUCT<int_field INT64, string_field STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -499,7 +499,7 @@ QueryStmt
     |               +-column_list=$expr_subquery.[int_field#1, string_field#2]
     |               +-expr_list=
     |               | +-int_field#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    |               | +-string_field#2 := Literal(type=STRING, value="abc")
+    |               | +-string_field#2 := Literal(type=STRING, value='abc')
     |               +-input_scan=
     |                 +-SingleRowScan
     +-input_scan=
@@ -509,7 +509,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_struct_int64_string(STRUCT<int_field INT32, string_field STRING>) -> STRUCT<int_field INT64, string_field STRING>
 containing resolved templated expression:
 Cast(STRUCT<int_field INT32, string_field STRING> -> STRUCT<int_field INT64, string_field STRING>)
-+-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name="x")
++-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name='x')
 ==
 
 # Call a templated SQL UDF with an argument type comprising a struct with
@@ -523,7 +523,7 @@ select udf_one_templated_arg_return_struct_int64_string(
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [STRUCT<int_field INT64, string_field STRING>]
+| +-$query.$col1#6 AS "$col1" [STRUCT<int_field INT64, string_field STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -562,23 +562,23 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_struct_int64_string(STRUCT<int_field INT32, string_field STRING>) -> STRUCT<int_field INT64, string_field STRING>
 containing resolved templated expression:
 Cast(STRUCT<int_field INT32, string_field STRING> -> STRUCT<int_field INT64, string_field STRING>)
-+-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name="x")
++-ArgumentRef(type=STRUCT<int_field INT32, string_field STRING>, name='x')
 ==
 
 # Call a templated SQL function with a 32-bit integer return type that returns
 # the literal value 42.
-select udf_templated_return_42_return_type_int32("abc")
+select udf_templated_return_42_return_type_int32('abc')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_return_42_return_type_int32(STRING) -> INT32)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -594,7 +594,7 @@ select uda_valid_templated_return_sum_int64_arg(key) from keyvalue;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -615,7 +615,7 @@ ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-      +-ArgumentRef(parse_location=4-5, type=INT64, name="x", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=4-5, type=INT64, name='x', argument_kind=AGGREGATE)
 ==
 
 # Call a SQL UDA with a valid templated SQL body that refers to a NOT
@@ -624,7 +624,7 @@ select uda_valid_templated_return_int64_not_aggregate_arg(42) from keyvalue;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -641,7 +641,7 @@ QueryStmt
 With Templated SQL function call:
   Templated_SQL_Function:uda_valid_templated_return_int64_not_aggregate_arg(INT64 {is_not_aggregate: true}) -> INT64
 containing resolved templated expression:
-ArgumentRef(type=INT64, name="y", argument_kind=NOT_AGGREGATE)
+ArgumentRef(type=INT64, name='y', argument_kind=NOT_AGGREGATE)
 ==
 
 # Call a SQL UDA with a valid templated SQL body that refers to an AGGREGATE
@@ -651,7 +651,7 @@ from keyvalue;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -671,11 +671,11 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
-+-ArgumentRef(type=INT64, name="y", argument_kind=NOT_AGGREGATE)
++-ArgumentRef(type=INT64, name='y', argument_kind=NOT_AGGREGATE)
 
   $agg1#1 :=
     +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-      +-ArgumentRef(parse_location=4-5, type=INT64, name="x", argument_kind=AGGREGATE)
+      +-ArgumentRef(parse_location=4-5, type=INT64, name='x', argument_kind=AGGREGATE)
 ==
 
 ################################################################################
@@ -738,18 +738,18 @@ Recursive dependencies detected when resolving function Templated_SQL_Function:u
 ==
 
 # The function performs an invalid projection.
-select udf_templated_arg_plus_integer("abc");
+select udf_templated_arg_plus_integer('abc');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_arg_plus_integer(STRING) -> INT64)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 
@@ -758,7 +758,7 @@ With Templated SQL function call:
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 +-Cast(STRING -> INT64)
-| +-ArgumentRef(type=STRING, name="x")
+| +-ArgumentRef(type=STRING, name='x')
 +-Literal(type=INT64, value=42)
 ==
 
@@ -798,14 +798,14 @@ select udf_templated_like_any('y');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_templated_like_any(STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="y")
+    |     +-Literal(type=STRING, value='y')
     +-input_scan=
       +-SingleRowScan
 
@@ -813,8 +813,8 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_templated_like_any(STRING) -> BOOL
 containing resolved templated expression:
 FunctionCall(ZetaSQL:$like_any(STRING, repeated(1) STRING) -> BOOL)
-+-ArgumentRef(type=STRING, name="x")
-+-Literal(type=STRING, value="z")
++-ArgumentRef(type=STRING, name='x')
++-Literal(type=STRING, value='z')
 ==
 
 # Call a UDF that refers to 'udf_templated_analysis_error' to show two levels
@@ -834,7 +834,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-Could not cast literal "abc" to type INT64 [at 1:1]
+Could not cast literal 'abc' to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -862,7 +862,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-Could not cast literal "abc" to type INT64 [at 1:1]
+Could not cast literal 'abc' to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -896,7 +896,7 @@ udf_templated_analysis_error() + 1
 Analysis of function Templated_SQL_Function:udf_templated_analysis_error failed [at 1:1]
 'abc' + 42
 ^
-Could not cast literal "abc" to type INT64 [at 1:1]
+Could not cast literal 'abc' to type INT64 [at 1:1]
 'abc' + 42
 ^
 ==
@@ -931,10 +931,10 @@ x.int32_field
 
 # Call a templated SQL UDF with duplicate argument names, to show the error
 # messages.
-select udf_templated_duplicate_arg_names("abc", "def");
+select udf_templated_duplicate_arg_names('abc', 'def');
 --
 ERROR: Invalid function udf_templated_duplicate_arg_names [at 1:8]
-select udf_templated_duplicate_arg_names("abc", "def");
+select udf_templated_duplicate_arg_names('abc', 'def');
        ^
 Analysis of function Templated_SQL_Function:udf_templated_duplicate_arg_names failed:
 Duplicate argument name x
@@ -1023,10 +1023,10 @@ Function declared to return STRING but the function body produces incompatible t
 
 # Call a templated SQL function with a 32-bit integer return type that returns
 # an integer too large to fit into 32 bits..
-select udf_templated_return_999999999999999_return_type_int32("abc")
+select udf_templated_return_999999999999999_return_type_int32('abc')
 --
 ERROR: Invalid function udf_templated_return_999999999999999_return_type_int32 [at 1:8]
-select udf_templated_return_999999999999999_return_type_int32("abc")
+select udf_templated_return_999999999999999_return_type_int32('abc')
        ^
 Analysis of function Templated_SQL_Function:udf_templated_return_999999999999999_return_type_int32 failed:
 Could not cast literal 999999999999999 to type INT32
@@ -1037,14 +1037,14 @@ select udf_one_templated_arg_return_date('2018-07-01')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
+| +-$query.$col1#1 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_one_templated_arg_return_date(STRING) -> DATE)
-    |     +-Literal(type=STRING, value="2018-07-01")
+    |     +-Literal(type=STRING, value='2018-07-01')
     +-input_scan=
       +-SingleRowScan
 
@@ -1052,7 +1052,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_date(STRING) -> DATE
 containing resolved templated expression:
 Cast(STRING -> DATE)
-+-ArgumentRef(type=STRING, name="x")
++-ArgumentRef(type=STRING, name='x')
 ==
 
 # Call a templated SQL UDF with a 64-bit integer argument type that fits under
@@ -1083,14 +1083,14 @@ select udf_one_templated_arg_return_int64(cast(1 as string))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(Templated_SQL_Function:udf_one_templated_arg_return_int64(STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='1', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 
@@ -1098,7 +1098,7 @@ With Templated SQL function call:
   Templated_SQL_Function:udf_one_templated_arg_return_int64(STRING) -> INT64
 containing resolved templated expression:
 Cast(STRING -> INT64)
-+-ArgumentRef(type=STRING, name="x")
++-ArgumentRef(type=STRING, name='x')
 ==
 
 # Call a SQL UDA with an invalid templated SQL body that refers to an AGGREGATE

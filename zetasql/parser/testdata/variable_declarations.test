@@ -259,7 +259,7 @@ Script [0-35] [DECLARE x...IF(a,b,c);]
           Identifier(INT64) [10-15] [INT64]
       FunctionCall [24-33] [IF(a,b,c)]
         PathExpression [24-26] [IF]
-          Identifier(`IF`) [24-26] [IF]
+          Identifier("IF") [24-26] [IF]
         PathExpression [27-28] [a]
           Identifier(a) [27-28] [a]
         PathExpression [29-30] [b]
@@ -267,7 +267,7 @@ Script [0-35] [DECLARE x...IF(a,b,c);]
         PathExpression [31-32] [c]
           Identifier(c) [31-32] [c]
 --
-DECLARE x INT64 DEFAULT `IF`(a, b, c) ;
+DECLARE x INT64 DEFAULT "IF"(a, b, c) ;
 ==
 
 DECLARE x INT64 DEFAULT (SELECT MIN(a) FROM t);

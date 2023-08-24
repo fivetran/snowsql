@@ -3,7 +3,7 @@
 # invalid duplicate column names for these resolved ASTs.
 
 WITH w1 AS (
-  SELECT "a" as item, "b" as event
+  SELECT 'a' as item, 'b' as event
 ),
 w2 AS (
   SELECT m1.item as c1, m2.item as c2
@@ -20,17 +20,17 @@ QueryStmt
     +-column_list=w2.[c1#7, c2#8]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="w1"
+    | | +-with_query_name='w1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=w1.[item#1, event#2]
     | |     +-expr_list=
-    | |     | +-item#1 := Literal(type=STRING, value="a")
-    | |     | +-event#2 := Literal(type=STRING, value="b")
+    | |     | +-item#1 := Literal(type=STRING, value='a')
+    | |     | +-event#2 := Literal(type=STRING, value='b')
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="w2"
+    |   +-with_query_name='w2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=w1.[item#3, item#5]
@@ -38,9 +38,9 @@ QueryStmt
     |         +-JoinScan
     |           +-column_list=w1.[item#3, event#4, item#5, event#6]
     |           +-left_scan=
-    |           | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name="w1")
+    |           | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name='w1')
     |           +-right_scan=
-    |           | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name="w1")
+    |           | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name='w1')
     |           +-join_expr=
     |             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |               +-ColumnRef(type=STRING, column=w1.event#4)
@@ -49,11 +49,11 @@ QueryStmt
       +-ProjectScan
         +-column_list=w2.[c1#7, c2#8]
         +-input_scan=
-          +-WithRefScan(column_list=w2.[c1#7, c2#8], with_query_name="w2")
+          +-WithRefScan(column_list=w2.[c1#7, c2#8], with_query_name='w2')
 ==
 
 WITH w1 AS (
-  SELECT "a" as item, "b" as event
+  SELECT 'a' as item, 'b' as event
 )
   SELECT m1.item as c1, m2.item as c2
   FROM w1 as m1 join w1 as m2 USING (event)
@@ -67,13 +67,13 @@ QueryStmt
     +-column_list=w1.[item#3, item#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w1"
+    |   +-with_query_name='w1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=w1.[item#1, event#2]
     |       +-expr_list=
-    |       | +-item#1 := Literal(type=STRING, value="a")
-    |       | +-event#2 := Literal(type=STRING, value="b")
+    |       | +-item#1 := Literal(type=STRING, value='a')
+    |       | +-event#2 := Literal(type=STRING, value='b')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -83,9 +83,9 @@ QueryStmt
           +-JoinScan
             +-column_list=w1.[item#3, event#4, item#5, event#6]
             +-left_scan=
-            | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name="w1")
+            | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name='w1')
             +-right_scan=
-            | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name="w1")
+            | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name='w1')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, column=w1.event#4)
@@ -93,7 +93,7 @@ QueryStmt
 ==
 
 WITH w1 AS (
-  SELECT "a" as item, "b" as event
+  SELECT 'a' as item, 'b' as event
 )
 select * from (
   SELECT m1.item as c1, m2.item as c2
@@ -109,13 +109,13 @@ QueryStmt
     +-column_list=w1.[item#3, item#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="w1"
+    |   +-with_query_name='w1'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=w1.[item#1, event#2]
     |       +-expr_list=
-    |       | +-item#1 := Literal(type=STRING, value="a")
-    |       | +-event#2 := Literal(type=STRING, value="b")
+    |       | +-item#1 := Literal(type=STRING, value='a')
+    |       | +-event#2 := Literal(type=STRING, value='b')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -128,9 +128,9 @@ QueryStmt
               +-JoinScan
                 +-column_list=w1.[item#3, event#4, item#5, event#6]
                 +-left_scan=
-                | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name="w1")
+                | +-WithRefScan(column_list=w1.[item#3, event#4], with_query_name='w1')
                 +-right_scan=
-                | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name="w1")
+                | +-WithRefScan(column_list=w1.[item#5, event#6], with_query_name='w1')
                 +-join_expr=
                   +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                     +-ColumnRef(type=STRING, column=w1.event#4)
@@ -188,9 +188,9 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="m1")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='m1')
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="m2")
+        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='m2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -216,9 +216,9 @@ QueryStmt
           +-JoinScan
             +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
             +-left_scan=
-            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="m1")
+            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='m1')
             +-right_scan=
-            | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="m2")
+            | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='m2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, column=KeyValue.Value#2)

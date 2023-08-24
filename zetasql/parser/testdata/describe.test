@@ -93,22 +93,22 @@ DESCRIBE INDEX mynamespace.myindex
 describe FUNCTION myfunction;
 --
 DescribeStatement [0-28] [describe FUNCTION myfunction]
-  Identifier(`FUNCTION`) [9-17] [FUNCTION]
+  Identifier("FUNCTION") [9-17] [FUNCTION]
   PathExpression [18-28] [myfunction]
     Identifier(myfunction) [18-28] [myfunction]
 --
-DESCRIBE `FUNCTION` myfunction
+DESCRIBE "FUNCTION" myfunction
 ==
 
 describe FUNCTION mynamespace.myfunction;
 --
 DescribeStatement [0-40] [describe FUNCTION...myfunction]
-  Identifier(`FUNCTION`) [9-17] [FUNCTION]
+  Identifier("FUNCTION") [9-17] [FUNCTION]
   PathExpression [18-40] [mynamespace.myfunction]
     Identifier(mynamespace) [18-29] [mynamespace]
     Identifier(myfunction) [30-40] [myfunction]
 --
-DESCRIBE `FUNCTION` mynamespace.myfunction
+DESCRIBE "FUNCTION" mynamespace.myfunction
 ==
 
 describe TVF mytvf;
@@ -219,35 +219,35 @@ DescribeStatement [0-29] [desc COLUMN foo FROM T.suffix]
 DESCRIBE COLUMN foo FROM T.suffix
 ==
 
-{{describe|desc}} TYPE prefixed.name FROM Catalog.`With`.Dots;
+{{describe|desc}} TYPE prefixed.name FROM Catalog."With".Dots;
 --
 ALTERNATION GROUP: describe
 --
-DescribeStatement [0-52] [describe TYPE...With`.Dots]
+DescribeStatement [0-52] [describe TYPE...With".Dots]
   Identifier(TYPE) [9-13] [TYPE]
   PathExpression [14-27] [prefixed.name]
     Identifier(prefixed) [14-22] [prefixed]
     Identifier(name) [23-27] [name]
-  PathExpression [33-52] [Catalog.`With`.Dots]
+  PathExpression [33-52] [Catalog."With".Dots]
     Identifier(Catalog) [33-40] [Catalog]
-    Identifier(`With`) [41-47] [`With`]
+    Identifier("With") [41-47] ["With"]
     Identifier(Dots) [48-52] [Dots]
 --
-DESCRIBE TYPE prefixed.name FROM Catalog.`With`.Dots
+DESCRIBE TYPE prefixed.name FROM Catalog."With".Dots
 --
 ALTERNATION GROUP: desc
 --
-DescribeStatement [0-48] [desc TYPE...With`.Dots]
+DescribeStatement [0-48] [desc TYPE...With".Dots]
   Identifier(TYPE) [5-9] [TYPE]
   PathExpression [10-23] [prefixed.name]
     Identifier(prefixed) [10-18] [prefixed]
     Identifier(name) [19-23] [name]
-  PathExpression [29-48] [Catalog.`With`.Dots]
+  PathExpression [29-48] [Catalog."With".Dots]
     Identifier(Catalog) [29-36] [Catalog]
-    Identifier(`With`) [37-43] [`With`]
+    Identifier("With") [37-43] ["With"]
     Identifier(Dots) [44-48] [Dots]
 --
-DESCRIBE TYPE prefixed.name FROM Catalog.`With`.Dots
+DESCRIBE TYPE prefixed.name FROM Catalog."With".Dots
 ==
 
 describe foo.bar FROM ;
@@ -263,7 +263,7 @@ DESCRIBE my-project.dataset.table;
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `my-project.dataset.table` [at 1:10]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "my-project.dataset.table" [at 1:10]
 DESCRIBE my-project.dataset.table;
          ^
 --
@@ -271,9 +271,9 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 DescribeStatement [0-33] [DESCRIBE my...dataset.table]
   PathExpression [9-33] [my-project.dataset.table]
-    Identifier(`my-project`) [9-19] [my-project]
+    Identifier("my-project") [9-19] [my-project]
     Identifier(dataset) [20-27] [dataset]
     Identifier(table) [28-33] [table]
 --
-DESCRIBE `my-project`.dataset.table
+DESCRIBE "my-project".dataset.table
 ==

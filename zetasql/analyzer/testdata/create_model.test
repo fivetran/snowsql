@@ -31,10 +31,10 @@ ALTERNATION GROUP: V_1_4_REMOTE_MODEL,
 CreateModelStmt
 +-name_path=t1
 +-input_column_definition_list=
-| +-ColumnDefinition(name="i1", type=INT64, column=t1.i1#1)
-| +-ColumnDefinition(name="i2", type=DOUBLE, column=t1.i2#2)
+| +-ColumnDefinition(name='i1', type=INT64, column=t1.i1#1)
+| +-ColumnDefinition(name='i2', type=DOUBLE, column=t1.i2#2)
 +-output_column_definition_list=
-  +-ColumnDefinition(name="o1", type=BOOL, column=t1.o1#3)
+  +-ColumnDefinition(name='o1', type=BOOL, column=t1.o1#3)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -155,7 +155,7 @@ ALTERNATION GROUP: V_1_4_REMOTE_MODEL,
 CreateModelStmt
 +-name_path=t1
 +-option_list=
-  +-abc := Literal(type=STRING, value="def")
+  +-abc := Literal(type=STRING, value='def')
 --
 ALTERNATION GROUP: <empty>
 --
@@ -311,17 +311,17 @@ CreateModelStmt
 +-create_scope=CREATE_TEMP
 +-option_list=
 | +-x := Literal(type=INT64, value=5)
-| +-y := Literal(type=STRING, value="abc")
-| +-z := Parameter(type=ARRAY<INT32>, name="test_param_array")
-| +-z := Literal(type=STRING, value="abc")
+| +-y := Literal(type=STRING, value='abc')
+| +-z := Parameter(type=ARRAY<INT32>, name='test_param_array')
+| +-z := Literal(type=STRING, value='abc')
 | +-sum :=
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
 | |   +-Literal(type=INT64, value=1)
 | |   +-Literal(type=INT64, value=2)
 | +-func :=
 |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-|     +-Literal(type=STRING, value="abc")
-|     +-Parameter(type=STRING, name="test_param_string")
+|     +-Literal(type=STRING, value='abc')
+|     +-Parameter(type=STRING, name='test_param_string')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS k1 [INT64]
@@ -363,8 +363,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="c", type=INT64, column=Z.c#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='c', type=INT64, column=Z.c#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-A#6 := ColumnRef(type=INT64, column=Z.c#3)
 | +-d#5 :=
@@ -410,8 +410,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="c", type=INT64, column=Z.c#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='c', type=INT64, column=Z.c#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-A#10 := ColumnRef(type=INT64, column=$analytic.A#5)
 | +-d#11 := ColumnRef(type=INT64, column=$analytic.d#6)
@@ -502,8 +502,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="c", type=INT64, column=Z.c#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='c', type=INT64, column=Z.c#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-c#6 := ColumnRef(type=INT64, column=Z.c#3)
 | +-d#5 := Literal(type=INT64, value=1)
@@ -531,8 +531,8 @@ CreateModelStmt
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
-| +-ColumnDefinition(name="a", type=INT64, column=Z.a#3)
-| +-ColumnDefinition(name="b", type=INT64, column=Z.b#4)
+| +-ColumnDefinition(name='a', type=INT64, column=Z.a#3)
+| +-ColumnDefinition(name='b', type=INT64, column=Z.b#4)
 +-transform_list=
 | +-a#5 :=
 | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -659,11 +659,11 @@ options (abc=def, xyz=@bad_param)
                       ^
 ==
 
-create model a.b.`c.d`.`e f g`.kk
+create model a.b."c.d"."e f g".kk
 as select 1 c
 --
 CreateModelStmt
-+-name_path=a.b.`c.d`.`e f g`.kk
++-name_path=a.b."c.d"."e f g".kk
 +-output_column_list=
 | +-$create_as.c#1 AS c [INT64]
 +-query=
@@ -722,7 +722,7 @@ CreateModelStmt
 +-name_path=X
 +-create_scope=CREATE_TEMP
 +-option_list=
-| +-k := Literal(type=STRING, value="key")
+| +-k := Literal(type=STRING, value='key')
 +-output_column_list=
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Value#2 AS value [STRING]
@@ -805,7 +805,7 @@ CreateModelStmt
 +-name_path=x.y
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-option_list=
-| +-x := Literal(type=STRING, value="y")
+| +-x := Literal(type=STRING, value='y')
 +-output_column_list=
 | +-$create_as.a#1 AS a [INT64]
 | +-$create_as.b#2 AS b [INT64]
@@ -844,24 +844,24 @@ CreateModelStmt
     +-column_list=t3.[label#11, value#12]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[label#1, value#2]
     | |     +-expr_list=
     | |     | +-label#1 := Literal(type=INT64, value=1)
-    | |     | +-value#2 := Literal(type=STRING, value="2")
+    | |     | +-value#2 := Literal(type=STRING, value='2')
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    | | +-with_query_name="t2"
+    | | +-with_query_name='t2'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=KeyValue.[Key#3, Value#4]
     | |     +-input_scan=
     | |       +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1])
     | +-WithEntry
-    |   +-with_query_name="t3"
+    |   +-with_query_name='t3'
     |   +-with_subquery=
     |     +-SetOperationScan
     |       +-column_list=$union_all.[label#9, value#10]
@@ -872,14 +872,14 @@ CreateModelStmt
     |         | | +-ProjectScan
     |         | |   +-column_list=t1.[label#5, value#6]
     |         | |   +-input_scan=
-    |         | |     +-WithRefScan(column_list=t1.[label#5, value#6], with_query_name="t1")
+    |         | |     +-WithRefScan(column_list=t1.[label#5, value#6], with_query_name='t1')
     |         | +-output_column_list=t1.[label#5, value#6]
     |         +-SetOperationItem
     |           +-scan=
     |           | +-ProjectScan
     |           |   +-column_list=t2.[label#7, value#8]
     |           |   +-input_scan=
-    |           |     +-WithRefScan(column_list=t2.[label#7, value#8], with_query_name="t2")
+    |           |     +-WithRefScan(column_list=t2.[label#7, value#8], with_query_name='t2')
     |           +-output_column_list=t2.[label#7, value#8]
     +-query=
       +-ProjectScan
@@ -888,7 +888,7 @@ CreateModelStmt
           +-FilterScan
             +-column_list=t3.[label#11, value#12]
             +-input_scan=
-            | +-WithRefScan(column_list=t3.[label#11, value#12], with_query_name="t3")
+            | +-WithRefScan(column_list=t3.[label#11, value#12], with_query_name='t3')
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
                 +-ColumnRef(type=INT64, column=t3.label#11)
@@ -953,12 +953,12 @@ options (abc = def)
 CreateModelStmt
 +-name_path=t1
 +-option_list=
-| +-abc := Literal(type=STRING, value="def")
+| +-abc := Literal(type=STRING, value='def')
 +-input_column_definition_list=
-| +-ColumnDefinition(name="i1", type=INT64, column=t1.i1#1)
-| +-ColumnDefinition(name="i2", type=DOUBLE, column=t1.i2#2)
+| +-ColumnDefinition(name='i1', type=INT64, column=t1.i1#1)
+| +-ColumnDefinition(name='i2', type=DOUBLE, column=t1.i2#2)
 +-output_column_definition_list=
-| +-ColumnDefinition(name="o1", type=BOOL, column=t1.o1#3)
+| +-ColumnDefinition(name='o1', type=BOOL, column=t1.o1#3)
 +-is_remote=TRUE
 +-connection=
   +-Connection(connection=connection1)
@@ -991,7 +991,7 @@ AS SELECT COLLATE('5', 'und:ci') e;
 CreateModelStmt
 +-name_path=m
 +-option_list=
-| +-model_type := Literal(type=STRING, value="logistic_reg")
+| +-model_type := Literal(type=STRING, value='logistic_reg')
 +-output_column_list=
 | +-$create_as.e#1{Collation:"und:ci"} AS e [STRING]
 +-query=
@@ -1001,18 +1001,18 @@ CreateModelStmt
 |   | +-e#1 :=
 |   |   +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 |   |     +-type_annotation_map={Collation:"und:ci"}
-|   |     +-Literal(type=STRING, value="5")
-|   |     +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+|   |     +-Literal(type=STRING, value='5')
+|   |     +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 |   +-input_scan=
 |     +-SingleRowScan
 +-transform_input_column_list=
 | +-ColumnDefinition
-|   +-name="e"
+|   +-name='e'
 |   +-type=STRING
 |   +-annotations=
 |   | +-ColumnAnnotations
 |   |   +-collation_name=
-|   |     +-Literal(type=STRING, value="und:ci")
+|   |     +-Literal(type=STRING, value='und:ci')
 |   +-column=m.e#2{Collation:"und:ci"}
 +-transform_list=
 | +-k#3 :=
@@ -1075,7 +1075,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-    +-alias="training_data"
+    +-alias='training_data'
     +-query=
     | +-ProjectScan
     |   +-column_list=[training_data.a#1]
@@ -1100,7 +1100,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-  | +-alias="training_data"
+  | +-alias='training_data'
   | +-query=
   | | +-ProjectScan
   | |   +-column_list=[training_data.a#1]
@@ -1111,7 +1111,7 @@ CreateModelStmt
   | +-output_column_list=
   |   +-training_data.a#1 AS a [INT64]
   +-CreateModelAliasedQuery
-    +-alias="custom_holiday"
+    +-alias='custom_holiday'
     +-query=
     | +-ProjectScan
     |   +-column_list=[custom_holiday.b#2]
@@ -1139,13 +1139,13 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-    +-alias="training_data"
+    +-alias='training_data'
     +-query=
     | +-WithScan
     |   +-column_list=[a1.t1#2]
     |   +-with_entry_list=
     |   | +-WithEntry
-    |   |   +-with_query_name="a1"
+    |   |   +-with_query_name='a1'
     |   |   +-with_subquery=
     |   |     +-ProjectScan
     |   |       +-column_list=[a1.t1#1]
@@ -1157,7 +1157,7 @@ CreateModelStmt
     |     +-ProjectScan
     |       +-column_list=[a1.t1#2]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[a1.t1#2], with_query_name="a1")
+    |         +-WithRefScan(column_list=[a1.t1#2], with_query_name='a1')
     +-output_column_list=
       +-a1.t1#2 AS t1 [INT64]
 
@@ -1180,13 +1180,13 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-    +-alias="training_data"
+    +-alias='training_data'
     +-query=
     | +-WithScan
     |   +-column_list=[training_data.t1#2]
     |   +-with_entry_list=
     |   | +-WithEntry
-    |   |   +-with_query_name="training_data"
+    |   |   +-with_query_name='training_data'
     |   |   +-with_subquery=
     |   |     +-ProjectScan
     |   |       +-column_list=[training_data.t1#1]
@@ -1198,7 +1198,7 @@ CreateModelStmt
     |     +-ProjectScan
     |       +-column_list=[training_data.t1#2]
     |       +-input_scan=
-    |         +-WithRefScan(column_list=[training_data.t1#2], with_query_name="training_data")
+    |         +-WithRefScan(column_list=[training_data.t1#2], with_query_name='training_data')
     +-output_column_list=
       +-training_data.t1#2 AS c1 [INT64]
 
@@ -1243,7 +1243,7 @@ CreateModelStmt
 +-name_path=tt
 +-aliased_query_list=
   +-CreateModelAliasedQuery
-  | +-alias="training_data"
+  | +-alias='training_data'
   | +-query=
   | | +-ProjectScan
   | |   +-column_list=[user_training_data.data#1]
@@ -1252,7 +1252,7 @@ CreateModelStmt
   | +-output_column_list=
   |   +-user_training_data.data#1 AS data [INT32]
   +-CreateModelAliasedQuery
-    +-alias="custom_holiday"
+    +-alias='custom_holiday'
     +-query=
     | +-ProjectScan
     |   +-column_list=user_custom_holiday.[region#2, holiday_name#3, primary_date#4]

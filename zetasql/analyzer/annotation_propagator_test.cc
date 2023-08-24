@@ -117,15 +117,15 @@ TEST_F(CollationAnnotationPropagatorTest,
 FunctionCall(ZetaSQL:$make_array(repeated(3) STRING) -> ARRAY<STRING>)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
-  +-Literal(type=STRING, value="baz", has_explicit_type=TRUE)
-  +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+  +-Literal(type=STRING, value='baz', has_explicit_type=TRUE)
+  +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
 )"));
 
   ZETASQL_CHECK_OK(annotation_propagator.CheckAndPropagateAnnotations(
@@ -136,15 +136,15 @@ FunctionCall(ZetaSQL:$make_array(repeated(3) STRING) -> ARRAY<STRING>)
 +-type_annotation_map=[{Collation:"und:ci"}]
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
-  +-Literal(type=STRING, value="baz", has_explicit_type=TRUE)
-  +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+  +-Literal(type=STRING, value='baz', has_explicit_type=TRUE)
+  +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
 )"));
 }
 
@@ -165,11 +165,11 @@ TEST_F(CollationAnnotationPropagatorTest,
 FunctionCall(ZetaSQL:concat(STRING, repeated STRING) -> STRING)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
-  +-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-  +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+  +-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
+  +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
 )"));
 
   ZETASQL_CHECK_OK(annotation_propagator.CheckAndPropagateAnnotations(
@@ -180,11 +180,11 @@ FunctionCall(ZetaSQL:concat(STRING, repeated STRING) -> STRING)
 FunctionCall(ZetaSQL:concat(STRING, repeated STRING) -> STRING)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
 | +-type_annotation_map={Collation:"und:ci"}
-| +-Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-| +-Literal(type=STRING, value="und:ci", preserve_in_literal_remover=TRUE)
+| +-Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+| +-Literal(type=STRING, value='und:ci', preserve_in_literal_remover=TRUE)
 +-FunctionCall(ZetaSQL:collate(STRING, STRING) -> STRING)
-  +-Literal(type=STRING, value="bar", has_explicit_type=TRUE)
-  +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+  +-Literal(type=STRING, value='bar', has_explicit_type=TRUE)
+  +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
 )"));
 }
 

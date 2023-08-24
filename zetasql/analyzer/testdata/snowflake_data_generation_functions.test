@@ -5,7 +5,7 @@ select random();
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -22,7 +22,7 @@ ALTERNATION GROUP:  1 AS INT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -37,7 +37,7 @@ ALTERNATION GROUP:  1 AS INT64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -52,7 +52,7 @@ ALTERNATION GROUP:  1 AS UINT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -67,7 +67,7 @@ ALTERNATION GROUP:  1 AS UINT64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -84,7 +84,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -101,7 +101,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -116,7 +116,7 @@ ALTERNATION GROUP:  1.23 as numeric
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -131,7 +131,7 @@ ALTERNATION GROUP:  1.23 as bignumeric
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -146,14 +146,14 @@ ALTERNATION GROUP:  '1.23' as string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:random(optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='1.23', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -173,7 +173,7 @@ ALTERNATION GROUP: 1 AS INT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -189,14 +189,14 @@ ALTERNATION GROUP: '1.23' as string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:randstr(STRING, INT32) -> STRING)
-    |     +-Literal(type=STRING, value="1.23", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='1.23', has_explicit_type=TRUE)
     |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
@@ -211,7 +211,7 @@ ALTERNATION GROUP: 1,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -224,7 +224,7 @@ ALTERNATION GROUP: 1,0
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -239,7 +239,7 @@ ALTERNATION GROUP: 1,1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -254,14 +254,14 @@ ALTERNATION GROUP: 1,'1.2'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:seq1(optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1.2")
+    |     +-Literal(type=STRING, value='1.2')
     +-input_scan=
       +-SingleRowScan
 --
@@ -269,7 +269,7 @@ ALTERNATION GROUP: 2,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -282,7 +282,7 @@ ALTERNATION GROUP: 2,0
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -297,7 +297,7 @@ ALTERNATION GROUP: 2,1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -312,14 +312,14 @@ ALTERNATION GROUP: 2,'1.2'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:seq2(optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1.2")
+    |     +-Literal(type=STRING, value='1.2')
     +-input_scan=
       +-SingleRowScan
 --
@@ -327,7 +327,7 @@ ALTERNATION GROUP: 4,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -340,7 +340,7 @@ ALTERNATION GROUP: 4,0
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -355,7 +355,7 @@ ALTERNATION GROUP: 4,1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -370,14 +370,14 @@ ALTERNATION GROUP: 4,'1.2'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:seq4(optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1.2")
+    |     +-Literal(type=STRING, value='1.2')
     +-input_scan=
       +-SingleRowScan
 --
@@ -385,7 +385,7 @@ ALTERNATION GROUP: 8,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -398,7 +398,7 @@ ALTERNATION GROUP: 8,0
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -413,7 +413,7 @@ ALTERNATION GROUP: 8,1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -428,14 +428,14 @@ ALTERNATION GROUP: 8,'1.2'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:seq8(optional(1) STRING) -> INT64)
-    |     +-Literal(type=STRING, value="1.2")
+    |     +-Literal(type=STRING, value='1.2')
     +-input_scan=
       +-SingleRowScan
 ==

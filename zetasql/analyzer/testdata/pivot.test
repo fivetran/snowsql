@@ -186,7 +186,7 @@ ALTERNATION GROUP: TABLE_VALUED_FUNCTIONS,V_1_3_PIVOT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -302,8 +302,8 @@ QueryStmt
             +-for_expr=
             | +-ColumnRef(parse_location=54-59, type=STRING, column=KeyValue.Value#4)
             +-pivot_value_list=
-            | +-Literal(type=STRING, value="Value_1")
-            | +-Literal(type=STRING, value="Value_2")
+            | +-Literal(type=STRING, value='Value_1')
+            | +-Literal(type=STRING, value='Value_2')
             +-pivot_column_list=
               +-PivotColumn(column=$pivot.v1#6, pivot_expr_index=0, pivot_value_index=0)
               +-PivotColumn(column=$pivot.v2#7, pivot_expr_index=0, pivot_value_index=1)
@@ -358,7 +358,7 @@ QueryStmt
         |   +-pivot_column_list=
         |     +-PivotColumn(column=$pivot.zero#4, pivot_expr_index=0, pivot_value_index=0)
         |     +-PivotColumn(column=$pivot.one#5, pivot_expr_index=0, pivot_value_index=1)
-        +-method="system"
+        +-method='system'
         +-size=
         | +-Literal(type=INT64, value=1)
         +-unit=ROWS
@@ -710,7 +710,7 @@ PIVOT(SUM(Key) FOR Key IN (1, volatile_function(1)));
 SELECT * FROM KeyValue
 PIVOT(SUM(Key) FOR Key IN (1, 'test'));
 --
-ERROR: Could not cast literal "test" to type INT64 [at 2:31]
+ERROR: Could not cast literal 'test' to type INT64 [at 2:31]
 PIVOT(SUM(Key) FOR Key IN (1, 'test'));
                               ^
 ==
@@ -778,7 +778,7 @@ QueryStmt
       +-PivotScan
         +-column_list=[$groupby.Value#4, $pivot.one#5, $pivot.two#6]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-Value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)
         +-pivot_expr_list=
@@ -846,7 +846,7 @@ QueryStmt
       +-PivotScan
         +-column_list=[$groupby.Value#4, $pivot.one#5, $pivot.two#6]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
         | +-Value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)
         +-pivot_expr_list=
@@ -1385,7 +1385,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [INT64]
 | +-$pivot._1#4 AS _1 [INT64]
 | +-$pivot.minus_2#5 AS minus_2 [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1462,7 +1462,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [INT64]
 | +-$pivot._1#4 AS _1 [INT64]
 | +-$pivot.minus_2#5 AS minus_2 [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1546,7 +1546,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [NUMERIC]
 | +-$pivot._1#4 AS _1 [NUMERIC]
 | +-$pivot.minus_2#5 AS minus_2 [NUMERIC]
-| +-$pivot.NULL#6 AS `NULL` [NUMERIC]
+| +-$pivot.NULL#6 AS "NULL" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1622,7 +1622,7 @@ QueryStmt
 | +-$pivot._0#3 AS _0 [BIGNUMERIC]
 | +-$pivot._1#4 AS _1 [BIGNUMERIC]
 | +-$pivot.minus_2#5 AS minus_2 [BIGNUMERIC]
-| +-$pivot.NULL#6 AS `NULL` [BIGNUMERIC]
+| +-$pivot.NULL#6 AS "NULL" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_0#3, _1#4, minus_2#5, NULL#6]
@@ -1711,7 +1711,7 @@ QueryStmt
         |   +-column_list=t.[x#1, y#2]
         |   +-expr_list=
         |   | +-x#1 := Literal(type=INT64, value=1)
-        |   | +-y#2 := Literal(type=STRING, value="test")
+        |   | +-y#2 := Literal(type=STRING, value='test')
         |   +-input_scan=
         |     +-SingleRowScan
         +-pivot_expr_list=
@@ -1721,8 +1721,8 @@ QueryStmt
         +-for_expr=
         | +-ColumnRef(parse_location=67-68, type=STRING, column=t.y#2)
         +-pivot_value_list=
-        | +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
-        | +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
         | +-Literal(type=STRING, value=NULL, preserve_in_literal_remover=TRUE)
         +-pivot_column_list=
           +-PivotColumn(column=$pivot.sum_x_test#4, pivot_expr_index=0, pivot_value_index=0)
@@ -1735,7 +1735,7 @@ QueryStmt
 +-output_column_list=
 | +-$pivot.test#4 AS test [INT64]
 | +-$pivot.empty_string_value#5 AS empty_string_value [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[test#4, empty_string_value#5, NULL#6]
@@ -1747,7 +1747,7 @@ QueryStmt
         |   +-column_list=t.[x#1, y#2]
         |   +-expr_list=
         |   | +-x#1 := Literal(type=INT64, value=1)
-        |   | +-y#2 := Literal(type=STRING, value="test")
+        |   | +-y#2 := Literal(type=STRING, value='test')
         |   +-input_scan=
         |     +-SingleRowScan
         +-pivot_expr_list=
@@ -1757,8 +1757,8 @@ QueryStmt
         +-for_expr=
         | +-ColumnRef(parse_location=62-63, type=STRING, column=t.y#2)
         +-pivot_value_list=
-        | +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
-        | +-Literal(type=STRING, value="", preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
+        | +-Literal(type=STRING, value='', preserve_in_literal_remover=TRUE)
         | +-Literal(type=STRING, value=NULL, preserve_in_literal_remover=TRUE)
         +-pivot_column_list=
           +-PivotColumn(column=$pivot.test#4, pivot_expr_index=0, pivot_value_index=0)
@@ -1816,7 +1816,7 @@ QueryStmt
 +-output_column_list=
 | +-$pivot._2018_01_01#4 AS _2018_01_01 [INT64]
 | +-$pivot._2019_01_01#5 AS _2019_01_01 [INT64]
-| +-$pivot.NULL#6 AS `NULL` [INT64]
+| +-$pivot.NULL#6 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[_2018_01_01#4, _2019_01_01#5, NULL#6]
@@ -1859,7 +1859,7 @@ ALTERNATION GROUP:  AS mytime
 QueryStmt
 +-output_column_list=
 | +-$pivot.mytime#4 AS mytime [INT64]
-| +-$pivot.NULL#5 AS `NULL` [INT64]
+| +-$pivot.NULL#5 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[mytime#4, NULL#5]
@@ -1912,7 +1912,7 @@ ALTERNATION GROUP: TIMESTAMP,AS mytime
 QueryStmt
 +-output_column_list=
 | +-$pivot.mytime#4 AS mytime [INT64]
-| +-$pivot.NULL#5 AS `NULL` [INT64]
+| +-$pivot.NULL#5 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[mytime#4, NULL#5]
@@ -1951,7 +1951,7 @@ ALTERNATION GROUP: DATETIME,AS mytime
 QueryStmt
 +-output_column_list=
 | +-$pivot.mytime#4 AS mytime [INT64]
-| +-$pivot.NULL#5 AS `NULL` [INT64]
+| +-$pivot.NULL#5 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[mytime#4, NULL#5]
@@ -1987,7 +1987,7 @@ PIVOT(
   FOR y IN ('Not a valid date')
 );
 --
-ERROR: Could not cast literal "Not a valid date" to type DATE [at 4:13]
+ERROR: Could not cast literal 'Not a valid date' to type DATE [at 4:13]
   FOR y IN ('Not a valid date')
             ^
 ==
@@ -2051,7 +2051,7 @@ HAVING _2 > z;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby._2#9 AS _2 [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2125,7 +2125,7 @@ HAVING two > z;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby.two#9 AS two [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2199,7 +2199,7 @@ HAVING two > z;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby.two#9 AS two [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2278,7 +2278,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby._2#9 AS _2 [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2343,7 +2343,7 @@ ALTERNATION GROUP: AS _1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$groupby._2#9 AS _2 [INT64]
 | +-$groupby.z#10 AS z [INT64]
 +-query=
@@ -2444,8 +2444,8 @@ SELECT * FROM (SELECT TRUE AS x) PIVOT(ANY_VALUE(x) FOR x IN (TRUE, FALSE));
 --
 QueryStmt
 +-output_column_list=
-| +-$pivot.true#3 AS `true` [BOOL]
-| +-$pivot.false#4 AS `false` [BOOL]
+| +-$pivot.true#3 AS "true" [BOOL]
+| +-$pivot.false#4 AS "false" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[true#3, false#4]
@@ -2542,7 +2542,7 @@ QueryStmt
     +-column_list=$pivot.[test1#4, test2#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
@@ -2552,7 +2552,7 @@ QueryStmt
     |       |     +-type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>
     |       |     +-field_list=
     |       |       +-Literal(type=INT64, value=1)
-    |       |       +-Literal(type=STRING, value="test")
+    |       |       +-Literal(type=STRING, value='test')
     |       |       +-Literal(type=BOOL, value=true)
     |       |       +-Literal(type=BIGNUMERIC, value=3.14159265358979, has_explicit_type=TRUE)
     |       +-input_scan=
@@ -2564,7 +2564,7 @@ QueryStmt
           +-PivotScan
             +-column_list=$pivot.[test1#4, test2#5]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.s#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.s#2], with_query_name='t')
             +-pivot_expr_list=
             | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
             |   +-parse_location=160-168
@@ -2581,8 +2581,8 @@ QueryStmt
             |   | +-ColumnRef(type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>, column=t.s#2)
             |   +-field_idx=1
             +-pivot_value_list=
-            | +-Literal(type=STRING, value="test1", preserve_in_literal_remover=TRUE)
-            | +-Literal(type=STRING, value="test2", preserve_in_literal_remover=TRUE)
+            | +-Literal(type=STRING, value='test1', preserve_in_literal_remover=TRUE)
+            | +-Literal(type=STRING, value='test2', preserve_in_literal_remover=TRUE)
             +-pivot_column_list=
               +-PivotColumn(column=$pivot.test1#4, pivot_expr_index=0, pivot_value_index=0)
               +-PivotColumn(column=$pivot.test2#5, pivot_expr_index=0, pivot_value_index=1)
@@ -2615,7 +2615,7 @@ QueryStmt
     +-column_list=$pivot.[x_1_y_test_true_pi_3_point_14159265358979#4, x_2_y_test_true_pi_3_point_14159265358979#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
@@ -2625,7 +2625,7 @@ QueryStmt
     |       |     +-type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>
     |       |     +-field_list=
     |       |       +-Literal(type=INT64, value=1)
-    |       |       +-Literal(type=STRING, value="test")
+    |       |       +-Literal(type=STRING, value='test')
     |       |       +-Literal(type=BOOL, value=true)
     |       |       +-Literal(type=BIGNUMERIC, value=3.14159265358979, has_explicit_type=TRUE)
     |       +-input_scan=
@@ -2637,7 +2637,7 @@ QueryStmt
           +-PivotScan
             +-column_list=$pivot.[x_1_y_test_true_pi_3_point_14159265358979#4, x_2_y_test_true_pi_3_point_14159265358979#5]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.s#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.s#2], with_query_name='t')
             +-pivot_expr_list=
             | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
             |   +-parse_location=253-261
@@ -2653,14 +2653,14 @@ QueryStmt
             | | +-type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>
             | | +-field_list=
             | |   +-Literal(type=INT64, value=1, preserve_in_literal_remover=TRUE)
-            | |   +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
+            | |   +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BOOL, value=true, preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BIGNUMERIC, value=3.14159265358979, has_explicit_type=TRUE, preserve_in_literal_remover=TRUE)
             | +-MakeStruct
             | | +-type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>
             | | +-field_list=
             | |   +-Literal(type=INT64, value=2, preserve_in_literal_remover=TRUE)
-            | |   +-Literal(type=STRING, value="test", preserve_in_literal_remover=TRUE)
+            | |   +-Literal(type=STRING, value='test', preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BOOL, value=true, preserve_in_literal_remover=TRUE)
             | |   +-Literal(type=BIGNUMERIC, value=3.14159265358979, has_explicit_type=TRUE, preserve_in_literal_remover=TRUE)
             | +-Literal(type=STRUCT<x INT64, y STRING, BOOL, pi BIGNUMERIC>, value=NULL, preserve_in_literal_remover=TRUE)
@@ -2674,7 +2674,7 @@ SELECT
   TESTENUM0,
   TESTENUM1,
   TESTENUMNEGATIVE,
-  `NULL`
+  "NULL"
   FROM (
   SELECT int64_key_1, test_enum FROM KitchenSinkValueTable)
   PIVOT(SUM(int64_key_1)
@@ -2689,7 +2689,7 @@ QueryStmt
 | +-$pivot.TESTENUM0#5 AS TESTENUM0 [INT64]
 | +-$pivot.TESTENUM1#6 AS TESTENUM1 [INT64]
 | +-$pivot.TESTENUMNEGATIVE#7 AS TESTENUMNEGATIVE [INT64]
-| +-$pivot.NULL#8 AS `NULL` [INT64]
+| +-$pivot.NULL#8 AS "NULL" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$pivot.[TESTENUM0#5, TESTENUM1#6, TESTENUMNEGATIVE#7, NULL#8]
@@ -2759,7 +2759,7 @@ WITH t AS (
     xy_x_1_y_2_ab_a_test_a_b_false,
     xy_x_minus_1_y_minus_2_ab_a_NULL_b_false,
     xy_x_minus_1_y_NULL_ab_NULL,
-    `NULL`
+    "NULL"
 FROM t
   PIVOT(ANY_VALUE(s) FOR s IN (
     STRUCT(STRUCT(1, 2), STRUCT('test_a', FALSE)),
@@ -2773,18 +2773,18 @@ QueryStmt
 | +-$pivot.xy_x_1_y_2_ab_a_test_a_b_false#4 AS xy_x_1_y_2_ab_a_test_a_b_false [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
 | +-$pivot.xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5 AS xy_x_minus_1_y_minus_2_ab_a_NULL_b_false [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
 | +-$pivot.xy_x_minus_1_y_NULL_ab_NULL#6 AS xy_x_minus_1_y_NULL_ab_NULL [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
-| +-$pivot.NULL#7 AS `NULL` [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
+| +-$pivot.NULL#7 AS "NULL" [STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>]
 +-query=
   +-WithScan
     +-column_list=$pivot.[xy_x_1_y_2_ab_a_test_a_b_false#4, xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5, xy_x_minus_1_y_NULL_ab_NULL#6, NULL#7]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.s#1]
     |       +-expr_list=
-    |       | +-s#1 := Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:"test_a", b:true}})
+    |       | +-s#1 := Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:'test_a', b:true}})
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -2794,7 +2794,7 @@ QueryStmt
           +-PivotScan
             +-column_list=$pivot.[xy_x_1_y_2_ab_a_test_a_b_false#4, xy_x_minus_1_y_minus_2_ab_a_NULL_b_false#5, xy_x_minus_1_y_NULL_ab_NULL#6, NULL#7]
             +-input_scan=
-            | +-WithRefScan(column_list=[t.s#2], with_query_name="t")
+            | +-WithRefScan(column_list=[t.s#2], with_query_name='t')
             +-pivot_expr_list=
             | +-AggregateFunctionCall(ZetaSQL:any_value(STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>) -> STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>)
             |   +-parse_location=265-277
@@ -2802,7 +2802,7 @@ QueryStmt
             +-for_expr=
             | +-ColumnRef(parse_location=282-283, type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, column=t.s#2)
             +-pivot_value_list=
-            | +-Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:"test_a", b:false}}, preserve_in_literal_remover=TRUE)
+            | +-Literal(type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>, value={xy:{x:1, y:2}, ab:{a:'test_a', b:false}}, preserve_in_literal_remover=TRUE)
             | +-MakeStruct
             | | +-type=STRUCT<xy STRUCT<x INT64, y INT64>, ab STRUCT<a STRING, b BOOL>>
             | | +-field_list=
@@ -2842,13 +2842,13 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#20 AS `$col1` [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
+| +-$query.$col1#20 AS "$col1" [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#20]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -2858,7 +2858,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -2901,7 +2901,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_one#11, sum_one#12, count_two#13, sum_two#14, count_three#15, sum_three#16, count_four#17, sum_four#18]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-160
@@ -2941,7 +2941,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_four#17, pivot_expr_index=0, pivot_value_index=3)
         |                   +-PivotColumn(column=$pivot.sum_four#18, pivot_expr_index=1, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references from PIVOT expressions (qualified)
@@ -2957,13 +2957,13 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#20 AS `$col1` [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
+| +-$query.$col1#20 AS "$col1" [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#20]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -2973,7 +2973,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3016,7 +3016,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_one#11, sum_one#12, count_two#13, sum_two#14, count_three#15, sum_three#16, count_four#17, sum_four#18]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-172
@@ -3056,7 +3056,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_four#17, pivot_expr_index=0, pivot_value_index=3)
         |                   +-PivotColumn(column=$pivot.sum_four#18, pivot_expr_index=1, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references from PIVOT expressions (name collision)
@@ -3073,13 +3073,13 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#18 AS `$col1` [STRUCT<count_t INT64, sum_t BOOL, count_f INT64, sum_f BOOL, count_n INT64, sum_n BOOL>]
+| +-$query.$col1#18 AS "$col1" [STRUCT<count_t INT64, sum_t BOOL, count_f INT64, sum_f BOOL, count_n INT64, sum_n BOOL>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#18]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3089,7 +3089,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[a#3, b#4]
@@ -3130,7 +3130,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_t#11, sum_t#12, count_f#13, sum_f#14, count_n#15, sum_n#16]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-180
@@ -3183,7 +3183,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_n#15, pivot_expr_index=0, pivot_value_index=2)
         |                   +-PivotColumn(column=$pivot.sum_n#16, pivot_expr_index=1, pivot_value_index=2)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[a#5, b#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[a#5, b#6], with_query_name='t2')
 ==
 
 
@@ -3200,13 +3200,13 @@ FROM t2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#20 AS `$col1` [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
+| +-$query.$col1#20 AS "$col1" [STRUCT<count_one INT64, sum_one INT64, count_two INT64, sum_two INT64, count_three INT64, sum_three INT64, count_four INT64, sum_four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#20]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3216,7 +3216,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3259,7 +3259,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=$pivot.[count_one#11, sum_one#12, count_two#13, sum_two#14, count_three#15, sum_three#16, count_four#17, sum_four#18]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-pivot_expr_list=
         |                 | +-AggregateFunctionCall(ZetaSQL:countif(BOOL) -> INT64)
         |                 | | +-parse_location=132-172
@@ -3299,7 +3299,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.count_four#17, pivot_expr_index=0, pivot_value_index=3)
         |                   +-PivotColumn(column=$pivot.sum_four#18, pivot_expr_index=1, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references for FOR expression (qualified and unqualified)
@@ -3315,13 +3315,13 @@ ALTERNATION GROUP: c
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#16]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3331,7 +3331,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3370,7 +3370,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=[$groupby.b#10, $pivot.one#11, $pivot.two#12, $pivot.three#13, $pivot.four#14]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-group_by_list=
         |                 | +-b#10 := ColumnRef(type=INT64, column=t1.b#8)
         |                 +-pivot_expr_list=
@@ -3393,19 +3393,19 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.three#13, pivot_expr_index=0, pivot_value_index=2)
         |                   +-PivotColumn(column=$pivot.four#14, pivot_expr_index=0, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 --
 ALTERNATION GROUP: t2.c
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<b INT64, one INT64, two INT64, three INT64, four INT64>]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#16]
     +-with_entry_list=
     | +-WithEntry
-    | | +-with_query_name="t1"
+    | | +-with_query_name='t1'
     | | +-with_subquery=
     | |   +-ProjectScan
     | |     +-column_list=t1.[a#1, b#2]
@@ -3415,7 +3415,7 @@ QueryStmt
     | |     +-input_scan=
     | |       +-SingleRowScan
     | +-WithEntry
-    |   +-with_query_name="t2"
+    |   +-with_query_name='t2'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t2.[c#3, d#4]
@@ -3454,7 +3454,7 @@ QueryStmt
         |               +-PivotScan
         |                 +-column_list=[$groupby.b#10, $pivot.one#11, $pivot.two#12, $pivot.three#13, $pivot.four#14]
         |                 +-input_scan=
-        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name="t1")
+        |                 | +-WithRefScan(column_list=t1.[a#7, b#8], with_query_name='t1')
         |                 +-group_by_list=
         |                 | +-b#10 := ColumnRef(type=INT64, column=t1.b#8)
         |                 +-pivot_expr_list=
@@ -3477,7 +3477,7 @@ QueryStmt
         |                   +-PivotColumn(column=$pivot.three#13, pivot_expr_index=0, pivot_value_index=2)
         |                   +-PivotColumn(column=$pivot.four#14, pivot_expr_index=0, pivot_value_index=3)
         +-input_scan=
-          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name="t2")
+          +-WithRefScan(column_list=t2.[c#5, d#6], with_query_name='t2')
 ==
 
 # Correlated column references in PIVOT value expressions.
@@ -3596,7 +3596,7 @@ QueryStmt
     +-column_list=[$groupby.w#10, $groupby.z#11, $pivot.one#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[w#1, x#2, y#3, z#4]
@@ -3614,7 +3614,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.w#10, $groupby.z#11, $pivot.one#13]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-w#10 := ColumnRef(type=INT64, column=t.w#5)
             | +-z#11 := ColumnRef(type=INT64, column=t.z#8)
@@ -3649,7 +3649,7 @@ QueryStmt
     +-column_list=[$groupby.w#11, $pivot.s1_one#15, $pivot.s2_one#16, $pivot.s1_zero#13, $pivot.s2_zero#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[w#1, x#2, y#3, z#4]
@@ -3667,7 +3667,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.w#11, $pivot.s1_zero#13, $pivot.s2_zero#14, $pivot.s1_one#15, $pivot.s2_one#16]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-w#11 := ColumnRef(type=INT64, column=t.w#5)
             | +-z#12 := ColumnRef(type=INT64, column=t.z#8)
@@ -3698,13 +3698,13 @@ WITH t AS (
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#17 AS `$col1` [INT64]
+| +-$query.$col1#17 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.$col1#17]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[w#1, x#2, y#3, z#4]
@@ -3723,7 +3723,7 @@ QueryStmt
         +-input_scan=
           +-PivotScan
             +-input_scan=
-            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[w#5, x#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-w#11 := ColumnRef(type=INT64, column=t.w#5)
             | +-z#12 := ColumnRef(type=INT64, column=t.z#8)
@@ -3749,8 +3749,8 @@ WITH t AS (
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$col1#10 AS `$col1` [INT64]
-| +-$groupby.$col2#11 AS `$col2` [INT64]
+| +-$groupby.$col1#10 AS "$col1" [INT64]
+| +-$groupby.$col2#11 AS "$col2" [INT64]
 | +-$pivot.s_zero#12 AS s_zero [INT64]
 | +-$pivot.s_one#13 AS s_one [INT64]
 +-query=
@@ -3758,7 +3758,7 @@ QueryStmt
     +-column_list=[$groupby.$col1#10, $groupby.$col2#11, $pivot.s_zero#12, $pivot.s_one#13]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[$col1#1, $col2#2, y#3, z#4]
@@ -3776,7 +3776,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.$col1#10, $groupby.$col2#11, $pivot.s_zero#12, $pivot.s_one#13]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[$col1#5, $col2#6, y#7, z#8], with_query_name="t")
+            | +-WithRefScan(column_list=t.[$col1#5, $col2#6, y#7, z#8], with_query_name='t')
             +-group_by_list=
             | +-$col1#10 := ColumnRef(type=INT64, column=t.$col1#5)
             | +-$col2#11 := ColumnRef(type=INT64, column=t.$col2#6)
@@ -5222,7 +5222,7 @@ QueryStmt
         |       +-having_expr=
         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
         |           +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-        |           +-Literal(type=STRING, value="_a")
+        |           +-Literal(type=STRING, value='_a')
         +-for_expr=
         | +-ColumnRef(parse_location=114-117, type=INT64, column=KeyValue.Key#1)
         +-pivot_value_list=
@@ -5305,7 +5305,7 @@ QueryStmt
     +-column_list=[$groupby.v#14, $pivot.sum_x_0#15, $pivot.avg_y_0#16, $pivot.max_z_0#17, $pivot.sum_x_1#18, $pivot.avg_y_1#19, $pivot.max_z_1#20]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[v#1, w#2, x#3, y#4, z#5]
@@ -5324,7 +5324,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.v#14, $pivot.sum_x_0#15, $pivot.avg_y_0#16, $pivot.max_z_0#17, $pivot.sum_x_1#18, $pivot.avg_y_1#19, $pivot.max_z_1#20]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[v#6, w#7, x#8, y#9, z#10], with_query_name="t")
+            | +-WithRefScan(column_list=t.[v#6, w#7, x#8, y#9, z#10], with_query_name='t')
             +-group_by_list=
             | +-v#14 := ColumnRef(type=INT64, column=t.v#6)
             +-pivot_expr_list=
@@ -5772,7 +5772,7 @@ QueryStmt
     +-column_list=[$groupby.c#9, $groupby.d#10, $pivot._2#11]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$subquery1.c#1, t.a#2, t.b#3, $subquery1.c#1]
@@ -5793,7 +5793,7 @@ QueryStmt
           +-PivotScan
             +-column_list=[$groupby.c#9, $groupby.d#10, $pivot._2#11]
             +-input_scan=
-            | +-WithRefScan(column_list=t.[c#4, a#5, b#6, c#7], with_query_name="t")
+            | +-WithRefScan(column_list=t.[c#4, a#5, b#6, c#7], with_query_name='t')
             +-group_by_list=
             | +-c#9 := ColumnRef(type=INT64, column=t.c#7)
             | +-d#10 := ColumnRef(type=INT64, column=t.c#7)

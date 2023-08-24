@@ -330,7 +330,7 @@ delete db-1-2.T where true
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `db-1-2.T` [at 1:8]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "db-1-2.T" [at 1:8]
 delete db-1-2.T where true
        ^
 --
@@ -338,11 +338,11 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 DeleteStatement [0-26] [delete db-1-2.T where true]
   PathExpression [7-15] [db-1-2.T]
-    Identifier(`db-1-2`) [7-15] [db-1-2.T]
+    Identifier("db-1-2") [7-15] [db-1-2.T]
     Identifier(T) [7-15] [db-1-2.T]
   BooleanLiteral(true) [22-26] [true]
 --
-DELETE `db-1-2`.T
+DELETE "db-1-2".T
 WHERE
   true
 ==

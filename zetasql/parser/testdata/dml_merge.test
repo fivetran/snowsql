@@ -1184,7 +1184,7 @@ WHEN NOT MATCHED BY SOURCE THEN INSERT ROW
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `my-project-123.a.t` [at 1:12]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "my-project-123.a.t" [at 1:12]
 MERGE INTO my-project-123.a.t
            ^
 --
@@ -1192,12 +1192,12 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 MergeStatement [0-109] [MERGE INTO...INSERT ROW]
   PathExpression [11-29] [my-project-123.a.t]
-    Identifier(`my-project-123`) [11-27] [my-project-123.a]
+    Identifier("my-project-123") [11-27] [my-project-123.a]
     Identifier(a) [11-27] [my-project-123.a]
     Identifier(t) [28-29] [t]
   TablePathExpression [36-55] [project-789-abc.b.s]
     PathExpression [36-55] [project-789-abc.b.s]
-      Identifier(`project-789-abc`) [36-51] [project-789-abc]
+      Identifier("project-789-abc") [36-51] [project-789-abc]
       Identifier(b) [52-53] [b]
       Identifier(s) [54-55] [s]
   BinaryExpression(=) [59-66] [t1 = s1]
@@ -1210,8 +1210,8 @@ MergeStatement [0-109] [MERGE INTO...INSERT ROW]
       MergeAction(INSERT) [99-109] [INSERT ROW]
         InsertValuesRow [106-109] [ROW]
 --
-MERGE INTO `my-project-123`.a.t
-USING `project-789-abc`.b.s
+MERGE INTO "my-project-123".a.t
+USING "project-789-abc".b.s
 ON t1 = s1
 WHEN NOT MATCHED BY SOURCE THEN
   INSERT

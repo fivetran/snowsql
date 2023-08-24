@@ -3,7 +3,7 @@ select parse_json('{"a":"b"}'):"a"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -12,7 +12,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
     |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
     |     | +-Literal(type=STRING, value='{"a":"b"}')
-    |     +-Literal(type=STRING, value="a")
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -30,7 +30,7 @@ select cast(parse_json('{"a":"b"}') as object):"a"
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -41,7 +41,7 @@ QueryStmt
     |     | +-Cast(VARIANT -> OBJECT)
     |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
     |     |     +-Literal(type=STRING, value='{"a":"b"}')
-    |     +-Literal(type=STRING, value="a")
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -51,7 +51,7 @@ select parse_json(''):a
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -59,8 +59,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:get_path(VARIANT, STRING) -> VARIANT)
     |     +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
-    |     | +-Literal(type=STRING, value="")
-    |     +-Literal(type=STRING, value="")
+    |     | +-Literal(type=STRING, value='')
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -78,7 +78,7 @@ select cast(parse_json('{"a":"b"}') as object):a
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [VARIANT]
+| +-$query.$col1#1 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -89,7 +89,7 @@ QueryStmt
     |     | +-Cast(VARIANT -> OBJECT)
     |     |   +-FunctionCall(ZetaSQL:parse_json(STRING) -> VARIANT)
     |     |     +-Literal(type=STRING, value='{"a":"b"}')
-    |     +-Literal(type=STRING, value="")
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==

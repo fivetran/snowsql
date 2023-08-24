@@ -5,7 +5,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -41,7 +41,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#6 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#6 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#6]
@@ -83,7 +83,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -118,7 +118,7 @@ order by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#5 AS Key [INT32]
-| +-$aggregate.$agg1#4 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#4 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.Key#5, $aggregate.$agg1#4]
@@ -155,7 +155,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [STRING]
+| +-$aggregate.$agg1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -181,7 +181,7 @@ QueryStmt
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
               +-order_by_item_list=
                 +-OrderByItem
                   +-column_ref=
@@ -225,7 +225,7 @@ QueryStmt
     |     +-s2#4 :=
     |     | +-AggregateFunctionCall(ZetaSQL:string_agg(STRING, STRING) -> STRING)
     |     |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-    |     |   +-Literal(type=STRING, value=",")
+    |     |   +-Literal(type=STRING, value=',')
     |     |   +-order_by_item_list=
     |     |     +-OrderByItem
     |     |       +-column_ref=
@@ -273,8 +273,8 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#8 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
-| +-$aggregate.$agg2#7 AS `$col3` [STRING]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
+| +-$aggregate.$agg2#7 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#8, $aggregate.$agg1#5, $aggregate.$agg2#7]
@@ -298,7 +298,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -377,7 +377,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#9 AS Key [INT32]
-| +-$aggregate.$agg1#8 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#8 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#9, $aggregate.$agg1#8]
@@ -430,7 +430,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#5]
@@ -534,7 +534,7 @@ QueryStmt
 
 select Key,
        string_agg(KitchenSink.string_val
-           order by KitchenSink.string_val COLLATE "en_US" DESC) as s
+           order by KitchenSink.string_val COLLATE 'en_US' DESC) as s
 from TestTable
 group by Key
 --
@@ -558,7 +558,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -572,19 +572,19 @@ QueryStmt
                   +-column_ref=
                   | +-ColumnRef(type=STRING, column=$orderby.$orderbycol1#4)
                   +-collation_name=
-                  | +-Literal(type=STRING, value="en_US")
+                  | +-Literal(type=STRING, value='en_US')
                   +-is_descending=TRUE
 
 ==
 
 select Key,
        array_agg(KitchenSink.int64_val
-           order by KitchenSink.int64_val COLLATE "en_US" DESC) as a
+           order by KitchenSink.int64_val COLLATE 'en_US' DESC) as a
 from TestTable
 group by Key
 --
 ERROR: COLLATE can only be applied to expressions of type STRING, but was applied to INT64 [at 3:21]
-           order by KitchenSink.int64_val COLLATE "en_US" DESC) as a
+           order by KitchenSink.int64_val COLLATE 'en_US' DESC) as a
                     ^
 
 ==
@@ -610,7 +610,7 @@ select Key,
        string_agg(KitchenSink.string_val
            order by KitchenSink.int32_val,
                     KitchenSink.int64_val DESC,
-                    KitchenSink.string_val COLLATE "en_US" DESC) as c
+                    KitchenSink.string_val COLLATE 'en_US' DESC) as c
 from TestTable
 group by Key
 --
@@ -653,7 +653,7 @@ QueryStmt
         |   | |   +-expr=
         |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   | |   +-field_descriptor=string_val
-        |   | |   +-default_value="default_name"
+        |   | |   +-default_value='default_name'
         |   | +-$orderbycol3#8 :=
         |   | | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |   | |   +-Cast(INT32 -> INT64)
@@ -724,7 +724,7 @@ QueryStmt
                   +-column_ref=
                   | +-ColumnRef(type=STRING, column=$orderby.$orderbycol3#6)
                   +-collation_name=
-                  | +-Literal(type=STRING, value="en_US")
+                  | +-Literal(type=STRING, value='en_US')
                   +-is_descending=TRUE
 
 ==
@@ -853,7 +853,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -879,7 +879,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -906,7 +906,7 @@ from KitchenSinkValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -942,7 +942,7 @@ from KitchenSinkValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -979,7 +979,7 @@ from TestStructValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1015,7 +1015,7 @@ from TestStructValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1056,7 +1056,7 @@ from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#7 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#7]
@@ -1087,7 +1087,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-aggregate_list=
@@ -1153,7 +1153,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1248,7 +1248,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1320,7 +1320,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1362,7 +1362,7 @@ select array_agg(distinct T.a order by T.b)
 ==
 
 select array_agg(distinct s.a order by s.b)
-from (select struct<a string, b string>("1", "2") as s);
+from (select struct<a string, b string>('1', '2') as s);
 --
 ERROR: An aggregate function that has both DISTINCT and ORDER BY arguments can only ORDER BY expressions that are arguments to the function [at 1:40]
 select array_agg(distinct s.a order by s.b)
@@ -1410,7 +1410,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1443,7 +1443,7 @@ from (select 1 as w, [1, 2] as x union all select 2 as w, [5, 2] as x
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#9 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#9 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#9]
@@ -1501,7 +1501,7 @@ from (select 1 as w, [1, 2] as x union all select 2 as w, [5, 2] as x
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#9 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#9 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#9]
@@ -1563,8 +1563,8 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#8 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
-| +-$aggregate.$agg2#7 AS `$col3` [STRING]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
+| +-$aggregate.$agg2#7 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#8, $aggregate.$agg1#5, $aggregate.$agg2#7]
@@ -1588,7 +1588,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=TestTable.[key#1, KitchenSink#3], table=TestTable, column_index_list=[0, 2])
         +-group_by_list=
@@ -1623,8 +1623,8 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#4 AS `$col2` [ARRAY<INT64>]
-| +-$aggregate.$agg2#5 AS `$col3` [STRING]
+| +-$aggregate.$agg1#4 AS "$col2" [ARRAY<INT64>]
+| +-$aggregate.$agg2#5 AS "$col3" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#4, $aggregate.$agg2#5]
@@ -1653,7 +1653,7 @@ QueryStmt
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
               +-limit=
                 +-Literal(type=INT64, value=5)
 ==
@@ -1663,7 +1663,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1752,7 +1752,7 @@ ALTERNATION GROUP: ,V_1_3_ARRAY_ORDERING
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1805,7 +1805,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1859,7 +1859,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1897,7 +1897,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#5]
@@ -1942,7 +1942,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#6 AS Key [INT32]
-| +-$aggregate.$agg1#5 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#5 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#6, $aggregate.$agg1#5]
@@ -1963,7 +1963,7 @@ QueryStmt
         |   |     | | |   +-expr=
         |   |     | | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     | | |   +-field_descriptor=string_val
-        |   |     | | |   +-default_value="default_name"
+        |   |     | | |   +-default_value='default_name'
         |   |     | | | +-return_null_on_error=TRUE
         |   |     | | +-Cast(INT32 -> INT64)
         |   |     | |   +-ColumnRef(type=INT32, column=TestTable.key#1)
@@ -1993,7 +1993,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<STRING>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2010,7 +2010,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
         +-aggregate_list=
@@ -2039,7 +2039,7 @@ ALTERNATION GROUP: has_,has_
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2098,7 +2098,7 @@ ALTERNATION GROUP: ,V_1_3_NULLS_FIRST_LAST_IN_ORDER_BY,first
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -2121,7 +2121,7 @@ ALTERNATION GROUP: ,V_1_3_NULLS_FIRST_LAST_IN_ORDER_BY,last
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]

@@ -222,7 +222,7 @@ QueryStatement [0-119] [select case...'bbb') end]
             StringLiteral('ddd') [73-78] ['ddd']
             FunctionCall [91-115] [if(a4 = 6, 'aaa', 'bbb')]
               PathExpression [91-93] [if]
-                Identifier(`if`) [91-93] [if]
+                Identifier("if") [91-93] [if]
               BinaryExpression(=) [94-100] [a4 = 6]
                 PathExpression [94-96] [a4]
                   Identifier(a4) [94-96] [a4]
@@ -234,7 +234,7 @@ SELECT
   CASE a1 + 57
     WHEN sqrt(a2 / 5) THEN concat(c, d)
     WHEN a3 * 4 THEN 'ddd'
-    ELSE `if`(a4 = 6, 'aaa', 'bbb')
+    ELSE "if"(a4 = 6, 'aaa', 'bbb')
   END
 ==
 

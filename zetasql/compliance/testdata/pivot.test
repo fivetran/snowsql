@@ -543,7 +543,7 @@ SELECT
   any_x_500 IS NULL,
   any_x_null = 2
 FROM (SELECT x, y FROM t1)
-  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS `null`));
+  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{true, true, true}]
 
@@ -558,7 +558,7 @@ SELECT
   any_x_500 IS NULL,
   any_x_null = 2
 FROM (SELECT x, y, z FROM t1)
-  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS `null`));
+  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<z INT64, BOOL, BOOL, BOOL>>[unknown order:
   {1000, true, true, NULL},
@@ -579,7 +579,7 @@ SELECT
   any_x_500 IS NULL,
   any_x_null[OFFSET(0)] = 2
 FROM (SELECT [x] AS x, y FROM t1)
-  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS `null`));
+  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{true, true, true}]
 
@@ -593,7 +593,7 @@ SELECT
   any_x_500 IS NULL,
   any_x_null[OFFSET(0)] = 2
 FROM (SELECT [x] AS x, y, z FROM t1)
-  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS `null`));
+  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<z INT64, BOOL, BOOL, BOOL>>[unknown order:
   {1000, true, true, NULL},
@@ -614,7 +614,7 @@ SELECT
   any_x_500 IS NULL,
   any_x_null = 2
 FROM (SELECT x, y FROM t1 WHERE FALSE)
-  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS `null`));
+  PIVOT(ANY_VALUE(x) AS any_x FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{NULL, true, NULL}]
 ==
@@ -626,7 +626,7 @@ SELECT
   any_x_500[OFFSET(0)] IS NULL,
   any_x_null[OFFSET(0)] = 2
 FROM (SELECT x, y FROM t1 WHERE FALSE)
-  PIVOT(ANY_VALUE([x]) AS any_x FOR y IN (100, 500, NULL AS `null`));
+  PIVOT(ANY_VALUE([x]) AS any_x FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<BOOL, BOOL, BOOL>>[{NULL, true, NULL}]
 ==
@@ -652,7 +652,7 @@ FROM (SELECT x, y FROM t1)
     ANY_VALUE(STRUCT(x AS struct_x)) AS any_struct_x,
     SUM(x) AS sum_x,
     AVG(x) AS avg_x
-  FOR y IN (100, 500, NULL AS `null`));
+  FOR y IN (100, 500, NULL AS "null"));
 --
 ARRAY<STRUCT<BOOL,
              BOOL,

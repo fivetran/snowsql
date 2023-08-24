@@ -7,7 +7,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [ARRAY<STRUCT<value INT64, count INT64>>]
+| +-$analytic.$analytic1#4 AS "$col1" [ARRAY<STRUCT<value INT64, count INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -38,7 +38,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS `$col1` [STRUCT<counters INT64, datatype STRING, precision INT64, scale INT64, state ARRAY<STRUCT<value INT64, count INT64>>, type STRING>]
+| +-$analytic.$analytic1#4 AS "$col1" [STRUCT<counters INT64, datatype STRING, precision INT64, scale INT64, state ARRAY<STRUCT<value INT64, count INT64>>, type STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -68,7 +68,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT32]
+| +-$aggregate.$agg1#4 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -91,7 +91,7 @@ QueryStmt
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
 ==
 
 select regr_avgx(KitchenSink.string_val, KitchenSink.string_val)
@@ -99,7 +99,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [STRING]
+| +-$aggregate.$agg1#4 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -116,13 +116,13 @@ QueryStmt
               | +-expr=
               | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
               | +-field_descriptor=string_val
-              | +-default_value="default_name"
+              | +-default_value='default_name'
               +-GetProtoField
                 +-type=STRING
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
 ==
 
 select regr_avgx(KitchenSink.int64_val, KitchenSink.uint64_val)
@@ -130,7 +130,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -162,7 +162,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -194,7 +194,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]

@@ -252,7 +252,7 @@ alter table foo-bar-123.baz set options(opt_t = 1), add constraint a_is_positive
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-bar-123.baz` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-bar-123.baz" [at 1:13]
 alter table foo-bar-123.baz set options(opt_t = 1), add constraint a_is_posit...
             ^
 --
@@ -260,7 +260,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 AlterTableStatement [0-172]
   PathExpression [12-27]
-    Identifier(`foo-bar-123`) [12-27]
+    Identifier("foo-bar-123") [12-27]
     Identifier(baz) [12-27]
   AlterActionList [28-172]
     SetOptionsAction [28-50]
@@ -284,5 +284,5 @@ AlterTableStatement [0-172]
           Identifier(opt_a) [159-164]
           BooleanLiteral(true) [167-171]
 --
-ALTER TABLE `foo-bar-123`.baz SET OPTIONS(opt_t = 1), ADD CONSTRAINT a_is_positive CHECK(a > 0) ENFORCED,
+ALTER TABLE "foo-bar-123".baz SET OPTIONS(opt_t = 1), ADD CONSTRAINT a_is_positive CHECK(a > 0) ENFORCED,
   ALTER CONSTRAINT bar ENFORCED, ALTER CONSTRAINT baz SET OPTIONS(opt_a = true)

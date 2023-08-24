@@ -221,7 +221,7 @@ CREATE TABLE Table8 AS
 SELECT cast(1 as int64) as primary_key,
        STRUCT (cast(10 as int64) as int64_field,
                cast("int64_key_1: 11 int64_key_2: 12"
-                    as `zetasql_test__.KitchenSinkPB`) as proto_field)
+                    as "zetasql_test__.KitchenSinkPB") as proto_field)
        struct_value
 UNION ALL
 SELECT 2, (20, "int64_key_1: 21 int64_key_2: 22")
@@ -264,7 +264,7 @@ SELECT cast(1 as int64) primary_key,
                         nested_repeated_value {
                           nested_int64: 203
                         }'''
-                     as `zetasql_test__.KitchenSinkPB`) as proto_field),
+                     as "zetasql_test__.KitchenSinkPB") as proto_field),
          NULL
        ] as array_value
 --

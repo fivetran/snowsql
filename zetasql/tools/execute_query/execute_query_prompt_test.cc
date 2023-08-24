@@ -176,7 +176,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
 
           // Unclosed string literal followed by legal statement (the latter is
           // dropped due to the error)
-          {.ret = "\";\nSELECT 123; "},
+          {.ret = "';\nSELECT 123; "},
 
           {.ret = "SELECT\nsomething;"},
 
@@ -193,7 +193,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
           // Missing whitespace between literal and alias
           {.ret = "SELECT"},
           {.ret = " (", .want_continuation = true},
-          {.ret = "\"\"), 1", .want_continuation = true},
+          {.ret = "''), 1", .want_continuation = true},
           {.ret = "x);\n", .want_continuation = true},
 
           {.ret = std::nullopt},
@@ -203,7 +203,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
                          HasSubstr(": Unclosed string literal")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "\";\nSELECT 123;"
+                  text: "';\nSELECT 123;"
                 )pb"))),
           IsOkAndHolds("SELECT\nsomething;"),
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
@@ -217,7 +217,7 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
                          HasSubstr(
                              ": Missing whitespace between literal and alias")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "SELECT (\"\"), 1x);"
+                  text: "SELECT (''), 1x);"
                 )pb"))),
           IsOkAndHolds(std::nullopt),
       });
@@ -226,16 +226,16 @@ TEST(ExecuteQueryStatementPrompt, FaultyMixedWithValid) {
 TEST(ExecuteQueryStatementPrompt, TripleQuoted) {
   TestStmtPrompt(
       {
-          {.ret = "SELECT 99, \"\"\"hello\n"},
+          {.ret = "SELECT 99, '''hello\n"},
           {.ret = "\n", .want_continuation = true},
           {.ret = "line\n", .want_continuation = true},
           {.ret = "", .want_continuation = true},
           {.ret = "\n", .want_continuation = true},
-          {.ret = "world\"\"\", 101;", .want_continuation = true},
+          {.ret = "world''', 101;", .want_continuation = true},
           {.ret = std::nullopt},
       },
       {
-          IsOkAndHolds("SELECT 99, \"\"\"hello\n\nline\n\nworld\"\"\", 101;"),
+          IsOkAndHolds("SELECT 99, '''hello\n\nline\n\nworld''', 101;"),
           IsOkAndHolds(std::nullopt),
       });
 }
@@ -337,21 +337,21 @@ TEST(ExecuteQueryStatementPrompt, SplitKeyword) {
 TEST(ExecuteQueryStatementPrompt, SplitString) {
   TestStmtPrompt(
       {
-          {.ret = "\tSELECT \"val"},
+          {.ret = "\tSELECT 'val"},
           {.ret = "ue"},
-          {.ret = "\" ;", .want_continuation = true},
+          {.ret = "' ;", .want_continuation = true},
           {.ret = std::nullopt},
       },
       {
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
                          HasSubstr(": Unclosed string literal")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "SELECT \"val"
+                  text: "SELECT 'val"
                 )pb"))),
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
                          HasSubstr(": Unclosed string literal")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "ue\" ;"
+                  text: "ue' ;"
                 )pb"))),
           IsOkAndHolds(std::nullopt),
       });
@@ -426,7 +426,7 @@ TEST(ExecuteQueryStatementPrompt, SemicolonInParenthesis) {
 TEST(ExecuteQueryStatementPrompt, RecoverAfterUnclosedString) {
   TestStmtPrompt(
       {
-          {.ret = "\";"},
+          {.ret = "';"},
           {.ret = "SELECT 123;"},
           {.ret = std::nullopt},
       },
@@ -434,7 +434,7 @@ TEST(ExecuteQueryStatementPrompt, RecoverAfterUnclosedString) {
           AllOf(StatusIs(absl::StatusCode::kInvalidArgument,
                          HasSubstr(": Unclosed string literal")),
                 StatusHasPayload<ParserErrorContext>(EqualsProto(R"pb(
-                  text: "\";"
+                  text: "';"
                 )pb"))),
           IsOkAndHolds("SELECT 123;"),
           IsOkAndHolds(std::nullopt),

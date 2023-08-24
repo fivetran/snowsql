@@ -46,9 +46,9 @@ START TRANSACTION READ ONLY, READ ONLY
                              ^
 ==
 
-begin isolation level `a b` `c d`
+begin isolation level "a b" "c d"
 --
-BeginStmt(isolation_level_list=`a b`.`c d`)
+BeginStmt(isolation_level_list="a b"."c d")
 ==
 
 # Multiple spaces between isolation level identifiers are collapsed into

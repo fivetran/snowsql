@@ -4,8 +4,8 @@ select ANON_COUNT(string clamped between 0 and 1), ANON_COUNT(* clamped between 
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -95,7 +95,7 @@ select ANON_COUNT(*) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -116,7 +116,7 @@ ALTERNATION GROUP: 0,1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -159,7 +159,7 @@ ALTERNATION GROUP: 0,1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -210,7 +210,7 @@ ALTERNATION GROUP: *
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -222,14 +222,14 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
-              +-Parameter(type=INT64, name="test_param_int64")
+              +-Parameter(type=INT64, name='test_param_int64')
               +-Literal(type=INT64, value=6)
 --
 ALTERNATION GROUP: string
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -242,7 +242,7 @@ QueryStmt
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(STRING, optional(1) INT64, optional(1) INT64) -> INT64)
               +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-              +-Parameter(type=INT64, name="test_param_int64")
+              +-Parameter(type=INT64, name='test_param_int64')
               +-Literal(type=INT64, value=6)
 ==
 
@@ -253,8 +253,8 @@ group by int64
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -284,10 +284,10 @@ ANON_SUM(numeric clamped between 0 and 1) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [UINT64]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#22 AS `$col4` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [UINT64]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#22 AS "$col4" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21, $agg4#22]
@@ -327,10 +327,10 @@ ANON_AVG(numeric clamped between 0 and 1) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#20 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#22 AS `$col4` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#20 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#22 AS "$col4" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21, $agg4#22]
@@ -412,7 +412,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -445,7 +445,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -469,7 +469,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -493,7 +493,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -527,7 +527,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -551,7 +551,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -811,7 +811,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [ARRAY<DOUBLE>]
+| +-$aggregate.$agg1#13 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -825,9 +825,9 @@ QueryStmt
             +-AggregateFunctionCall(ZetaSQL:anon_quantiles(DOUBLE, INT64, DOUBLE, DOUBLE) -> ARRAY<DOUBLE>)
               +-Cast(INT64 -> DOUBLE)
               | +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
-              +-Parameter(type=INT64, name="test_param_int64")
-              +-Parameter(type=DOUBLE, name="test_param_double")
-              +-Parameter(type=DOUBLE, name="test_param_double")
+              +-Parameter(type=INT64, name='test_param_int64')
+              +-Parameter(type=DOUBLE, name='test_param_double')
+              +-Parameter(type=DOUBLE, name='test_param_double')
 ==
 
 [language_features=ANONYMIZATION]

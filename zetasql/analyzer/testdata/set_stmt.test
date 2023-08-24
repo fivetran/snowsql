@@ -51,7 +51,7 @@ SET @foo = 3;
 # Assignment to system variable (wrong type)
 SET @@int64_system_variable = 'string';
 --
-ERROR: Could not cast literal "string" to type INT64 [at 1:31]
+ERROR: Could not cast literal 'string' to type INT64 [at 1:31]
 SET @@int64_system_variable = 'string';
                               ^
 ==
@@ -143,7 +143,7 @@ AssignmentStmt
 +-target=
 | +-SystemVariable(struct_system_variable, type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>)
 +-expr=
-  +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:21, d:{a:25, b:"test"}})
+  +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:21, d:{a:25, b:'test'}})
 ==
 
 # Assignment to field of struct-type system variable
@@ -203,7 +203,7 @@ AssignmentStmt
 # Assignment to nested field of struct-type system variable (wrong type)
 SET @@struct_system_variable.d.a = 'this is a string';
 --
-ERROR: Could not cast literal "this is a string" to type INT32 [at 1:36]
+ERROR: Could not cast literal 'this is a string' to type INT32 [at 1:36]
 SET @@struct_system_variable.d.a = 'this is a string';
                                    ^
 ==
@@ -228,7 +228,7 @@ AssignmentStmt
 
 # Assignment to system variable of proto type (proto value)
 SET @@proto_system_variable = (
-  SELECT AS `zetasql_test__.KitchenSinkPB`
+  SELECT AS "zetasql_test__.KitchenSinkPB"
     3 int64_key_1,
     4 int64_key_2,
     [5,6] repeated_int64_val
@@ -280,7 +280,7 @@ AssignmentStmt
 # Assignment to scalar field of system variable of proto type (value wrong type)
 SET @@proto_system_variable.int64_key_1 = 'test';
 --
-ERROR: Could not cast literal "test" to type INT64 [at 1:43]
+ERROR: Could not cast literal 'test' to type INT64 [at 1:43]
 SET @@proto_system_variable.int64_key_1 = 'test';
                                           ^
 ==
@@ -304,7 +304,7 @@ AssignmentStmt
 # Assign to repeated proto field (one element has wrong type)
 SET @@proto_system_variable.repeated_int64_val = [20, 'abcd'];
 --
-ERROR: Could not cast literal "abcd" to type INT64 [at 1:55]
+ERROR: Could not cast literal 'abcd' to type INT64 [at 1:55]
 SET @@proto_system_variable.repeated_int64_val = [20, 'abcd'];
                                                       ^
 ==
@@ -362,7 +362,7 @@ AssignmentStmt
 
 # Assignment to nested proto
 SET @@proto_system_variable.nested_value = (
-  SELECT AS `zetasql_test__.KitchenSinkPB.Nested`
+  SELECT AS "zetasql_test__.KitchenSinkPB.Nested"
     15 nested_int64,
     [5,6] nested_repeated_int64
 );
@@ -508,7 +508,7 @@ AssignmentStmt
 ==
 
 [language_features=V_1_3_PROTO_MAPS]
-SET @@map_system_variable = MODIFY_MAP(@@map_system_variable, "hello", 3)
+SET @@map_system_variable = MODIFY_MAP(@@map_system_variable, 'hello', 3)
 --
 AssignmentStmt
 +-target=
@@ -516,5 +516,5 @@ AssignmentStmt
 +-expr=
   +-FunctionCall(ZetaSQL:modify_map(ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>, repeated(1) STRING, repeated(1) INT32) -> ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>)
     +-SystemVariable(map_system_variable, type=ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>)
-    +-Literal(type=STRING, value="hello")
+    +-Literal(type=STRING, value='hello')
     +-Literal(type=INT32, value=3)

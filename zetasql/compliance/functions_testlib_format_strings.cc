@@ -140,7 +140,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatStrings() {
       // UTF-8 strings in the pattern and in substituted values.
       {"format", {"ъ %s xy", Value::String("ьь")}, "ъ ьь xy"},
       {"format", {"%t", Value::String("ьь")}, "ьь"},
-      {"format", {"%T", Value::String("ьь")}, "\"ьь\""},
+      {"format", {"%T", Value::String("ьь")}, "'ьь'"},
       {"format", {"%t", Value::Bytes("ьь")}, "\\xd1\\x8c\\xd1\\x8c"},
       {"format", {"%T", Value::Bytes("ьь")}, "b\"\\xd1\\x8c\\xd1\\x8c\""},
 

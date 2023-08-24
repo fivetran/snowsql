@@ -4,8 +4,8 @@ select with differential_privacy COUNT(string, contribution_bounds_per_group => 
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -81,7 +81,7 @@ select with differential_privacy COUNT(*) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -104,7 +104,7 @@ ALTERNATION GROUP: 0,1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -152,7 +152,7 @@ select with differential_privacy COUNT(*, contribution_bounds_per_group => @test
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -164,7 +164,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#19 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
-              +-Parameter(type=STRUCT<INT64, INT64>, name="test_param_struct_two_int64")
+              +-Parameter(type=STRUCT<INT64, INT64>, name='test_param_struct_two_int64')
 ==
 
 # Support GROUP BY
@@ -174,8 +174,8 @@ group by int64
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -203,10 +203,10 @@ SUM(numeric, contribution_bounds_per_group => (0, 1)) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [UINT64]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#22 AS `$col4` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [UINT64]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#22 AS "$col4" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21, $agg4#22]
@@ -242,10 +242,10 @@ AVG(numeric, contribution_bounds_per_group => (0, 1)) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#20 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#22 AS `$col4` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#20 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#22 AS "$col4" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21, $agg4#22]
@@ -307,7 +307,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -339,7 +339,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -362,7 +362,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -385,7 +385,7 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -418,7 +418,7 @@ FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#19 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -697,7 +697,7 @@ ERROR: No matching signature for aggregate operator APPROX_QUANTILES in SELECT W
 [language_features=DIFFERENTIAL_PRIVACY,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NAMED_ARGUMENTS,JSON_TYPE]
 [no_enable_literal_replacement]
 select with differential_privacy
-    SUM(int64, report_format => "JSON") as s
+    SUM(int64, report_format => 'JSON') as s
 from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
@@ -721,12 +721,12 @@ QueryStmt
 
 [language_features=DIFFERENTIAL_PRIVACY,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NAMED_ARGUMENTS,JSON_TYPE]
 select with differential_privacy
-    SUM(int64, report_format => "Invalid") as s
+    SUM(int64, report_format => 'Invalid') as s
 from SimpleTypesWithAnonymizationUid;
 --
 
 ERROR: No matching signature for aggregate operator SUM in SELECT WITH DIFFERENTIAL_PRIVACY context for argument types: INT64, STRING. Supported signatures: SUM(INT64, [contribution_bounds_per_group => STRUCT<INT64, INT64>]); SUM(UINT64, [contribution_bounds_per_group => STRUCT<UINT64, UINT64>]); SUM(DOUBLE, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]); SUM(INT64, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="JSON"*/, [contribution_bounds_per_group => STRUCT<INT64, INT64>]); SUM(DOUBLE, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="JSON"*/, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]); SUM(UINT64, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="JSON"*/, [contribution_bounds_per_group => STRUCT<UINT64, UINT64>]); SUM(INT64, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<INT64, INT64>]); SUM(DOUBLE, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]); SUM(UINT64, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<UINT64, UINT64>]) [at 2:5]
-    SUM(int64, report_format => "Invalid") as s
+    SUM(int64, report_format => 'Invalid') as s
     ^
 ==
 
@@ -743,33 +743,33 @@ ERROR: No matching signature for aggregate operator SUM in SELECT WITH DIFFERENT
 
 [language_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,JSON_TYPE]
 select with differential_privacy
-    SUM(int64, report_format => "JSON") as s
+    SUM(int64, report_format => 'JSON') as s
 from SimpleTypesWithAnonymizationUid;
 --
 ERROR: No matching signature for aggregate operator SUM in SELECT WITH DIFFERENTIAL_PRIVACY context for argument types: INT64, STRING. Supported signatures: SUM(INT64, [contribution_bounds_per_group => STRUCT<INT64, INT64>]); SUM(UINT64, [contribution_bounds_per_group => STRUCT<UINT64, UINT64>]); SUM(DOUBLE, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]) [at 2:5]
-    SUM(int64, report_format => "JSON") as s
+    SUM(int64, report_format => 'JSON') as s
     ^
 ==
 
 # Numeric sum with report is not implemented.
 [language_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NUMERIC_TYPE,V_1_2_SAFE_FUNCTION_CALL]
 select WITH DIFFERENTIAL_PRIVACY
-SUM(numeric,  report_format => "JSON")
+SUM(numeric,  report_format => 'JSON')
 FROM SimpleTypes
 --
 
 ERROR: No matching signature for aggregate operator SUM in SELECT WITH DIFFERENTIAL_PRIVACY context for argument types: NUMERIC, STRING. Supported signatures: SUM(INT64, [contribution_bounds_per_group => STRUCT<INT64, INT64>]); SUM(UINT64, [contribution_bounds_per_group => STRUCT<UINT64, UINT64>]); SUM(DOUBLE, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]); SUM(NUMERIC, [contribution_bounds_per_group => STRUCT<NUMERIC, NUMERIC>]); SUM(INT64, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<INT64, INT64>]); SUM(DOUBLE, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]); SUM(UINT64, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<UINT64, UINT64>]) [at 2:1]
-SUM(numeric,  report_format => "JSON")
+SUM(numeric,  report_format => 'JSON')
 ^
 ==
 
 # Numeric avg with report is not implemented.
 [language_features=DIFFERENTIAL_PRIVACY,NAMED_ARGUMENTS,DIFFERENTIAL_PRIVACY_REPORT_FUNCTIONS,NUMERIC_TYPE,V_1_2_SAFE_FUNCTION_CALL]
 select WITH DIFFERENTIAL_PRIVACY
-AVG(numeric,  report_format => "JSON")
+AVG(numeric,  report_format => 'JSON')
 FROM SimpleTypes
 --
 
 ERROR: No matching signature for aggregate operator AVG in SELECT WITH DIFFERENTIAL_PRIVACY context for argument types: NUMERIC, STRING. Supported signatures: AVG(DOUBLE, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]); AVG(NUMERIC, [contribution_bounds_per_group => STRUCT<NUMERIC, NUMERIC>]); AVG(DOUBLE, report_format => DIFFERENTIAL_PRIVACY_REPORT_FORMAT/*required_value="PROTO"*/, [contribution_bounds_per_group => STRUCT<DOUBLE, DOUBLE>]) [at 2:1]
-AVG(numeric,  report_format => "JSON")
+AVG(numeric,  report_format => 'JSON')
 ^

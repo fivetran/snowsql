@@ -77,7 +77,7 @@ select 1 from (select KEy, kEY from KeyValue);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -120,7 +120,7 @@ QueryStmt
 # TODO: Tricky case *for unparsing*. May need an extra project on
 # the named struct so as to extract the fields with unambiguous aliases.
 [no_run_unparser]
-select * from (select as struct 1 key, "abc" key)
+select * from (select as struct 1 key, 'abc' key)
 --
 QueryStmt
 +-output_column_list=
@@ -157,7 +157,7 @@ QueryStmt
             +-column_list=$subquery1.[key#1, key#2]
             +-expr_list=
             | +-key#1 := Literal(type=INT64, value=1)
-            | +-key#2 := Literal(type=STRING, value="abc")
+            | +-key#2 := Literal(type=STRING, value='abc')
             +-input_scan=
               +-SingleRowScan
 ==
@@ -203,7 +203,7 @@ select k1 from (select k1 as k2 from (select key as k1 from KeyValue));
 ==
 
 
-select A,b,d from (select 1 a, key B, 1.5 c, "abc" d, value e from KeyValue);
+select A,b,d from (select 1 a, key B, 1.5 c, 'abc' d, value e from KeyValue);
 --
 
 QueryStmt
@@ -220,16 +220,16 @@ QueryStmt
         +-expr_list=
         | +-a#3 := Literal(type=INT64, value=1)
         | +-c#4 := Literal(type=DOUBLE, value=1.5)
-        | +-d#5 := Literal(type=STRING, value="abc")
+        | +-d#5 := Literal(type=STRING, value='abc')
         +-input_scan=
           +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1])
 ==
 
-# The subquery produces a column internally called `col0` but it isn't selectable.
-select `$col0` from (select 1 from KeyValue);
+# The subquery produces a column internally called "col0" but it isn't selectable.
+select "$col0" from (select 1 from KeyValue);
 --
-ERROR: Unrecognized name: `$col0` [at 1:8]
-select `$col0` from (select 1 from KeyValue);
+ERROR: Unrecognized name: "$col0" [at 1:8]
+select "$col0" from (select 1 from KeyValue);
        ^
 ==
 
@@ -256,7 +256,7 @@ QueryStmt
         +-expr_list=
         | +-a#1 := Literal(type=INT64, value=1)
         | +-b#2 := Literal(type=INT64, value=2)
-        | +-c#3 := Literal(type=STRING, value="abc")
+        | +-c#3 := Literal(type=STRING, value='abc')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -309,7 +309,7 @@ from KeyValue,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]

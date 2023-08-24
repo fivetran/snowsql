@@ -1753,8 +1753,8 @@ NOTE: Reference implementation reports non-determinism.
 SELECT string_agg(x) IN ("a,c,d", "a,d,c", "c,a,d", "c,d,a", "d,a,c", "d,c,a"),
        string_agg(x, "|") IN ("a|c|d", "a|d|c", "c|a|d", "c|d|a", "d|a|c",
                               "d|c|a")
-FROM (SELECT "a" x UNION ALL SELECT NULL UNION ALL
-      SELECT "c" UNION ALL SELECT "d")
+FROM (SELECT 'a' x UNION ALL SELECT NULL UNION ALL
+      SELECT 'c' UNION ALL SELECT 'd')
 --
 ARRAY<STRUCT<BOOL, BOOL>>[{true, true}]
 
@@ -1766,8 +1766,8 @@ SELECT string_agg(CAST(x as bytes)) IN (b"a,c,d", b"a,d,c", b"c,a,d", b"c,d,a",
                                         b"d,a,c", b"d,c,a"),
        string_agg(CAST(x as bytes), b"|") IN (b"a|c|d", b"a|d|c", b"c|a|d",
                                               b"c|d|a", b"d|a|c", b"d|c|a")
-FROM (SELECT "a" x UNION ALL SELECT NULL UNION ALL
-      SELECT "c" UNION ALL SELECT "d")
+FROM (SELECT 'a' x UNION ALL SELECT NULL UNION ALL
+      SELECT 'c' UNION ALL SELECT 'd')
 --
 ARRAY<STRUCT<BOOL, BOOL>>[{true, true}]
 
@@ -1776,14 +1776,14 @@ NOTE: Reference implementation reports non-determinism.
 # string_agg on string with a single value
 [name=aggregation_string_agg_5]
 SELECT string_agg(x), string_agg(x, ", ")
-FROM (SELECT NULL x UNION ALL SELECT "a" UNION ALL SELECT NULL)
+FROM (SELECT NULL x UNION ALL SELECT 'a' UNION ALL SELECT NULL)
 --
 ARRAY<STRUCT<STRING, STRING>>[{"a", "a"}]
 ==
 # string_agg on bytes with a single value
 [name=aggregation_string_agg_6]
 SELECT string_agg(CAST(x as bytes)), string_agg(CAST(x as bytes), b", ")
-FROM (SELECT NULL x UNION ALL SELECT "a" UNION ALL SELECT NULL)
+FROM (SELECT NULL x UNION ALL SELECT 'a' UNION ALL SELECT NULL)
 --
 ARRAY<STRUCT<BYTES, BYTES>>[{b"a", b"a"}]
 ==
@@ -1929,7 +1929,7 @@ ARRAY<STRUCT<UINT64>>[{4}]
 # BIT_AND should work with GROUP BY.
 [name=aggregation_39]
 SELECT id, bit_and_bq(x) FROM
-(SELECT "a" id, 3 x UNION ALL SELECT "a", 5 UNION ALL
+(SELECT 'a' id, 3 x UNION ALL SELECT 'a', 5 UNION ALL
  SELECT "b" id, 5 x UNION ALL SELECT "b", 6)
 GROUP BY id
 --
@@ -2026,7 +2026,7 @@ ARRAY<STRUCT<UINT64>>[{7}]
 # BIT_OR_BQ should work with GROUP BY.
 [name=aggregation_56]
 SELECT id, bit_or_bq(x) FROM
-(SELECT "a" id, 3 x UNION ALL SELECT "a", 5 UNION ALL
+(SELECT 'a' id, 3 x UNION ALL SELECT 'a', 5 UNION ALL
  SELECT "b" id, 5 x UNION ALL SELECT "b", 6)
 GROUP BY id
 --
@@ -2123,7 +2123,7 @@ ARRAY<STRUCT<UINT64>>[{3}]
 # BIT_XOR_BQ should work with GROUP BY.
 [name=aggregation_73]
 SELECT id, bit_xor_bq(x) FROM
-(SELECT "a" id, 3 x UNION ALL SELECT "a", 5 UNION ALL
+(SELECT 'a' id, 3 x UNION ALL SELECT 'a', 5 UNION ALL
  SELECT "b" id, 5 x UNION ALL SELECT "b", 6)
 GROUP BY id
 --
@@ -2184,15 +2184,15 @@ ARRAY<STRUCT<BOOL>>[{false}]
 # LOGICAL_AND should work with GROUP BY.
 [name=aggregation_83]
 SELECT id, logical_and(x) FROM
-(SELECT "a" id, true x UNION ALL SELECT "a", false UNION ALL
+(SELECT 'a' id, true x UNION ALL SELECT 'a', false UNION ALL
  SELECT "b" id, true x UNION ALL SELECT "b", true UNION ALL
- SELECT "c" id, false x UNION ALL SELECT "c", false)
+ SELECT 'c' id, false x UNION ALL SELECT 'c', false)
 GROUP BY id
 --
 ARRAY<STRUCT<id STRING, BOOL>>[unknown order:
   {"a", false},
   {"b", true},
-  {"c", false}
+  {'c', false}
 ]
 ==
 
@@ -2250,15 +2250,15 @@ ARRAY<STRUCT<BOOL>>[{false}]
 # LOGICAL_OR should work with GROUP BY.
 [name=aggregation_93]
 SELECT id, logical_or(x) FROM
-(SELECT "a" id, true x UNION ALL SELECT "a", false UNION ALL
+(SELECT 'a' id, true x UNION ALL SELECT 'a', false UNION ALL
  SELECT "b" id, true x UNION ALL SELECT "b", true UNION ALL
- SELECT "c" id, false x UNION ALL SELECT "c", false)
+ SELECT 'c' id, false x UNION ALL SELECT 'c', false)
 GROUP BY id
 --
 ARRAY<STRUCT<id STRING, BOOL>>[unknown order:
   {"a", true},
   {"b", true},
-  {"c", false}
+  {'c', false}
 ]
 ==
 

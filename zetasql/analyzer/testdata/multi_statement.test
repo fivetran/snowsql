@@ -20,7 +20,7 @@ select key from KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -31,7 +31,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -66,13 +66,13 @@ select 5;
 --
 QueryStmt
 +-output_column_list=
-| +-t.$col1#2 AS `$col1` [INT64]
+| +-t.$col1#2 AS "$col1" [INT64]
 +-query=
   +-WithScan
     +-column_list=[t.$col1#2]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[t.$col1#1]
@@ -84,7 +84,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t.$col1#2]
         +-input_scan=
-          +-WithRefScan(column_list=[t.$col1#2], with_query_name="t")
+          +-WithRefScan(column_list=[t.$col1#2], with_query_name='t')
 --
 ERROR: Table not found: t [at 2:15]
 select * from t;
@@ -100,7 +100,7 @@ create table t as select 3 c
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -113,7 +113,7 @@ ExplainStmt
 +-statement=
   +-QueryStmt
     +-output_column_list=
-    | +-$query.$col1#2 AS `$col1` [INT64]
+    | +-$query.$col1#2 AS "$col1" [INT64]
     +-query=
       +-ProjectScan
         +-column_list=[$query.$col1#2]
@@ -125,7 +125,7 @@ ExplainStmt
 CreateTableAsSelectStmt
 +-name_path=t
 +-column_definition_list=
-| +-ColumnDefinition(name="c", type=INT64, column=t.c#4)
+| +-ColumnDefinition(name='c', type=INT64, column=t.c#4)
 +-output_column_list=
 | +-$create_as.c#3 AS c [INT64]
 +-query=
@@ -146,7 +146,7 @@ select 2; /* comment */
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -157,7 +157,7 @@ QueryStmt
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -182,7 +182,7 @@ select
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

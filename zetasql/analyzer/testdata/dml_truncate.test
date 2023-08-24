@@ -42,7 +42,7 @@ TruncateStmt
 ==
 
 TRUNCATE TABLE SimpleTypes
-WHERE `int64` IN (select key from KeyValue)
+WHERE "int64" IN (select key from KeyValue)
 --
 TruncateStmt
 +-table_scan=
@@ -118,7 +118,7 @@ TruncateStmt
     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | +-field_descriptor=bool_val
     | +-default_value=false
-    +-Parameter(type=BOOL, name="test_param_bool")
+    +-Parameter(type=BOOL, name='test_param_bool')
 ==
 
 TRUNCATE TABLE TestTable WHERE 1 + cast(@test_param_int32 as INT64) = 5;
@@ -131,7 +131,7 @@ TruncateStmt
     +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     | +-Literal(type=INT64, value=1)
     | +-Cast(INT32 -> INT64)
-    |   +-Parameter(type=INT32, name="test_param_int32")
+    |   +-Parameter(type=INT32, name='test_param_int32')
     +-Literal(type=INT64, value=5)
 ==
 

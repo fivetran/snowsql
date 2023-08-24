@@ -227,18 +227,18 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatFloatingPoint() {
       {"format", {"%t", kNegNan}, "nan"},
       {"format", {"%t", kPosInf}, "inf"},
       {"format", {"%t", kNegInf}, "-inf"},
-      {"format", {"%T", kFloatNan}, "CAST(\"nan\" AS FLOAT)"},
-      {"format", {"%T", kFloatNegNan}, "CAST(\"nan\" AS FLOAT)"},
-      {"format", {"%T", kFloatPosInf}, "CAST(\"inf\" AS FLOAT)"},
-      {"format", {"%T", kFloatNegInf}, "CAST(\"-inf\" AS FLOAT)"},
+      {"format", {"%T", kFloatNan}, "CAST('nan' AS FLOAT)"},
+      {"format", {"%T", kFloatNegNan}, "CAST('nan' AS FLOAT)"},
+      {"format", {"%T", kFloatPosInf}, "CAST('inf' AS FLOAT)"},
+      {"format", {"%T", kFloatNegInf}, "CAST('-inf' AS FLOAT)"},
       // Note that these always produce a cast to FLOAT64, in both INTERNAL
       // and EXTERNAL ProductMode.  We could have made the cast to DOUBLE
       // in the INTERNAL mode case, but then the same query could get different
       // results in INTERNAL vs. EXTERNAL mode and that seems bad.
-      {"format", {"%T", kNan}, "CAST(\"nan\" AS FLOAT64)"},
-      {"format", {"%T", kNegNan}, "CAST(\"nan\" AS FLOAT64)"},
-      {"format", {"%T", kPosInf}, "CAST(\"inf\" AS FLOAT64)"},
-      {"format", {"%T", kNegInf}, "CAST(\"-inf\" AS FLOAT64)"},
+      {"format", {"%T", kNan}, "CAST('nan' AS FLOAT64)"},
+      {"format", {"%T", kNegNan}, "CAST('nan' AS FLOAT64)"},
+      {"format", {"%T", kPosInf}, "CAST('inf' AS FLOAT64)"},
+      {"format", {"%T", kNegInf}, "CAST('-inf' AS FLOAT64)"},
 
       // Non-finite values inside arrays.
       {"format",
@@ -248,7 +248,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatFloatingPoint() {
       {"format",
        {"%T",
         values::FloatArray({4, -2.5, std::numeric_limits<float>::quiet_NaN()})},
-       "[4.0, -2.5, CAST(\"nan\" AS FLOAT)]"},
+       "[4.0, -2.5, CAST('nan' AS FLOAT)]"},
       {"format",
        {"%t",
         values::DoubleArray({-4, std::numeric_limits<double>::infinity()})},
@@ -256,7 +256,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatFloatingPoint() {
       {"format",
        {"%T",
         values::DoubleArray({-4, -std::numeric_limits<double>::infinity()})},
-       "[-4.0, CAST(\"-inf\" AS FLOAT64)]"},
+       "[-4.0, CAST('-inf' AS FLOAT64)]"},
   });
 }
 

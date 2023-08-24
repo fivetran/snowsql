@@ -3,73 +3,73 @@
 #
 # Valid function call with named arguments in the same order as they appear in
 # the function signature.
-select parse_date(format_string => "%x", date_string => "12/25/08")
+select parse_date(format_string => '%x', date_string => '12/25/08')
 --
-QueryStatement [0-67] [select parse_date...12/25/08")]
-  Query [0-67] [select parse_date...12/25/08")]
-    Select [0-67] [select parse_date...12/25/08")]
-      SelectList [7-67] [parse_date...12/25/08")]
-        SelectColumn [7-67] [parse_date...12/25/08")]
-          FunctionCall [7-67] [parse_date...12/25/08")]
+QueryStatement [0-67] [select parse_date...12/25/08')]
+  Query [0-67] [select parse_date...12/25/08')]
+    Select [0-67] [select parse_date...12/25/08')]
+      SelectList [7-67] [parse_date...12/25/08')]
+        SelectColumn [7-67] [parse_date...12/25/08')]
+          FunctionCall [7-67] [parse_date...12/25/08')]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            NamedArgument [18-39] [format_string => "%x"]
+            NamedArgument [18-39] [format_string => '%x']
               Identifier(format_string) [18-31] [format_string]
-              StringLiteral("%x") [35-39] ["%x"]
-            NamedArgument [41-66] [date_string => "12/25/08"]
+              StringLiteral('%x') [35-39] ['%x']
+            NamedArgument [41-66] [date_string => '12/25/08']
               Identifier(date_string) [41-52] [date_string]
-              StringLiteral("12/25/08") [56-66] ["12/25/08"]
+              StringLiteral('12/25/08') [56-66] ['12/25/08']
 --
 SELECT
-  parse_date(format_string  => "%x", date_string  => "12/25/08")
+  parse_date(format_string  => '%x', date_string  => '12/25/08')
 ==
 
 # Valid function call with named arguments in a different order that they appear
 # in the function signature.
-select parse_date(date_string => "12/25/08", format_string => "%x")
+select parse_date(date_string => '12/25/08', format_string => '%x')
 --
-QueryStatement [0-67] [select parse_date...g => "%x")]
-  Query [0-67] [select parse_date...g => "%x")]
-    Select [0-67] [select parse_date...g => "%x")]
-      SelectList [7-67] [parse_date...t_string => "%x")]
-        SelectColumn [7-67] [parse_date...t_string => "%x")]
-          FunctionCall [7-67] [parse_date...t_string => "%x")]
+QueryStatement [0-67] [select parse_date...g => '%x')]
+  Query [0-67] [select parse_date...g => '%x')]
+    Select [0-67] [select parse_date...g => '%x')]
+      SelectList [7-67] [parse_date...t_string => '%x')]
+        SelectColumn [7-67] [parse_date...t_string => '%x')]
+          FunctionCall [7-67] [parse_date...t_string => '%x')]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            NamedArgument [18-43] [date_string => "12/25/08"]
+            NamedArgument [18-43] [date_string => '12/25/08']
               Identifier(date_string) [18-29] [date_string]
-              StringLiteral("12/25/08") [33-43] ["12/25/08"]
-            NamedArgument [45-66] [format_string => "%x"]
+              StringLiteral('12/25/08') [33-43] ['12/25/08']
+            NamedArgument [45-66] [format_string => '%x']
               Identifier(format_string) [45-58] [format_string]
-              StringLiteral("%x") [62-66] ["%x"]
+              StringLiteral('%x') [62-66] ['%x']
 --
 SELECT
-  parse_date(date_string  => "12/25/08", format_string  => "%x")
+  parse_date(date_string  => '12/25/08', format_string  => '%x')
 ==
 
 # Valid function call with named arguments assigned to non-literal expressions.
 select parse_date(
-    format_string => concat("%", "x"),
-    date_string => concat(cast(10 + 2 as string), "/25/08"))
+    format_string => concat('%', 'x'),
+    date_string => concat(cast(10 + 2 as string), '/25/08'))
 --
-QueryStatement [0-118] [select parse_date..."/25/08"))]
-  Query [0-118] [select parse_date..."/25/08"))]
-    Select [0-118] [select parse_date..."/25/08"))]
-      SelectList [7-118] [parse_date..."/25/08"))]
-        SelectColumn [7-118] [parse_date..."/25/08"))]
-          FunctionCall [7-118] [parse_date..."/25/08"))]
+QueryStatement [0-118] [select parse_date...'/25/08'))]
+  Query [0-118] [select parse_date...'/25/08'))]
+    Select [0-118] [select parse_date...'/25/08'))]
+      SelectList [7-118] [parse_date...'/25/08'))]
+        SelectColumn [7-118] [parse_date...'/25/08'))]
+          FunctionCall [7-118] [parse_date...'/25/08'))]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            NamedArgument [23-56] [format_string...("%", "x")]
+            NamedArgument [23-56] [format_string...('%', 'x')]
               Identifier(format_string) [23-36] [format_string]
-              FunctionCall [40-56] [concat("%", "x")]
+              FunctionCall [40-56] [concat('%', 'x')]
                 PathExpression [40-46] [concat]
                   Identifier(concat) [40-46] [concat]
-                StringLiteral("%") [47-50] ["%"]
-                StringLiteral("x") [52-55] ["x"]
-            NamedArgument [62-117] [date_string..."/25/08")]
+                StringLiteral('%') [47-50] ['%']
+                StringLiteral('x') [52-55] ['x']
+            NamedArgument [62-117] [date_string...'/25/08')]
               Identifier(date_string) [62-73] [date_string]
-              FunctionCall [77-117] [concat(cast..."/25/08")]
+              FunctionCall [77-117] [concat(cast...'/25/08')]
                 PathExpression [77-83] [concat]
                   Identifier(concat) [77-83] [concat]
                 CastExpression [84-106] [cast(10 + 2 as string)]
@@ -79,58 +79,58 @@ QueryStatement [0-118] [select parse_date..."/25/08"))]
                   SimpleType [99-105] [string]
                     PathExpression [99-105] [string]
                       Identifier(string) [99-105] [string]
-                StringLiteral("/25/08") [108-116] ["/25/08"]
+                StringLiteral('/25/08') [108-116] ['/25/08']
 --
 SELECT
-  parse_date(format_string  => concat("%", "x"), date_string  => concat(CAST(10 + 2 AS string), "/25/08"))
+  parse_date(format_string  => concat('%', 'x'), date_string  => concat(CAST(10 + 2 AS string), '/25/08'))
 ==
 
 # Valid function call with a positional argument followed by a named argument.
-select parse_date("%x", date_string => "12/25/08")
+select parse_date('%x', date_string => '12/25/08')
 --
-QueryStatement [0-50] [select parse_date...12/25/08")]
-  Query [0-50] [select parse_date...12/25/08")]
-    Select [0-50] [select parse_date...12/25/08")]
-      SelectList [7-50] [parse_date...12/25/08")]
-        SelectColumn [7-50] [parse_date...12/25/08")]
-          FunctionCall [7-50] [parse_date...12/25/08")]
+QueryStatement [0-50] [select parse_date...12/25/08')]
+  Query [0-50] [select parse_date...12/25/08')]
+    Select [0-50] [select parse_date...12/25/08')]
+      SelectList [7-50] [parse_date...12/25/08')]
+        SelectColumn [7-50] [parse_date...12/25/08')]
+          FunctionCall [7-50] [parse_date...12/25/08')]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            StringLiteral("%x") [18-22] ["%x"]
-            NamedArgument [24-49] [date_string => "12/25/08"]
+            StringLiteral('%x') [18-22] ['%x']
+            NamedArgument [24-49] [date_string => '12/25/08']
               Identifier(date_string) [24-35] [date_string]
-              StringLiteral("12/25/08") [39-49] ["12/25/08"]
+              StringLiteral('12/25/08') [39-49] ['12/25/08']
 --
 SELECT
-  parse_date("%x", date_string  => "12/25/08")
+  parse_date('%x', date_string  => '12/25/08')
 ==
 
 # Valid TVF call with expression named arguments.
-select * from mytvf(date_string => "12/25/08", format_string => "%x")
+select * from mytvf(date_string => '12/25/08', format_string => '%x')
 --
-QueryStatement [0-69] [select * from...tring => "%x")]
-  Query [0-69] [select * from...tring => "%x")]
-    Select [0-69] [select * from...tring => "%x")]
+QueryStatement [0-69] [select * from...tring => '%x')]
+  Query [0-69] [select * from...tring => '%x')]
+    Select [0-69] [select * from...tring => '%x')]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-69] [from mytvf...t_string => "%x")]
-        TVF [14-69] [mytvf(date_string...g => "%x")]
+      FromClause [9-69] [from mytvf...t_string => '%x')]
+        TVF [14-69] [mytvf(date_string...g => '%x')]
           PathExpression [14-19] [mytvf]
             Identifier(mytvf) [14-19] [mytvf]
-          TVFArgument [20-45] [date_string => "12/25/08"]
-            NamedArgument [20-45] [date_string => "12/25/08"]
+          TVFArgument [20-45] [date_string => '12/25/08']
+            NamedArgument [20-45] [date_string => '12/25/08']
               Identifier(date_string) [20-31] [date_string]
-              StringLiteral("12/25/08") [35-45] ["12/25/08"]
-          TVFArgument [47-68] [format_string => "%x"]
-            NamedArgument [47-68] [format_string => "%x"]
+              StringLiteral('12/25/08') [35-45] ['12/25/08']
+          TVFArgument [47-68] [format_string => '%x']
+            NamedArgument [47-68] [format_string => '%x']
               Identifier(format_string) [47-60] [format_string]
-              StringLiteral("%x") [64-68] ["%x"]
+              StringLiteral('%x') [64-68] ['%x']
 --
 SELECT
   *
 FROM
-  mytvf(date_string  => "12/25/08", format_string  => "%x")
+  mytvf(date_string  => '12/25/08', format_string  => '%x')
 ==
 
 # Valid TVF call with a combination of expression and relation named arguments.
@@ -184,7 +184,7 @@ FROM
 ==
 
 # Valid TVF call with a positional argument followed by a named argument.
-select * from mytvf("%x", date_string => (select 'abc' as input))
+select * from mytvf('%x', date_string => (select 'abc' as input))
 --
 QueryStatement [0-65] [select * from...as input))]
   Query [0-65] [select * from...as input))]
@@ -193,11 +193,11 @@ QueryStatement [0-65] [select * from...as input))]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
       FromClause [9-65] [from mytvf...as input))]
-        TVF [14-65] [mytvf("%x"...as input))]
+        TVF [14-65] [mytvf('%x'...as input))]
           PathExpression [14-19] [mytvf]
             Identifier(mytvf) [14-19] [mytvf]
-          TVFArgument [20-24] ["%x"]
-            StringLiteral("%x") [20-24] ["%x"]
+          TVFArgument [20-24] ['%x']
+            StringLiteral('%x') [20-24] ['%x']
           TVFArgument [26-64] [date_string...as input)]
             NamedArgument [26-64] [date_string...as input)]
               Identifier(date_string) [26-37] [date_string]
@@ -213,7 +213,7 @@ QueryStatement [0-65] [select * from...as input))]
 SELECT
   *
 FROM
-  mytvf("%x", date_string  => (
+  mytvf('%x', date_string  => (
     SELECT
       'abc' AS input
   ))
@@ -252,85 +252,85 @@ FROM
 ==
 
 # Invalid function call with a positional argument preceding a named argument.
-select parse_date(format_string => "%x", "12/25/08")
+select parse_date(format_string => '%x', '12/25/08')
 --
-QueryStatement [0-52] [select parse_date...12/25/08")]
-  Query [0-52] [select parse_date...12/25/08")]
-    Select [0-52] [select parse_date...12/25/08")]
-      SelectList [7-52] [parse_date...12/25/08")]
-        SelectColumn [7-52] [parse_date...12/25/08")]
-          FunctionCall [7-52] [parse_date...12/25/08")]
+QueryStatement [0-52] [select parse_date...12/25/08')]
+  Query [0-52] [select parse_date...12/25/08')]
+    Select [0-52] [select parse_date...12/25/08')]
+      SelectList [7-52] [parse_date...12/25/08')]
+        SelectColumn [7-52] [parse_date...12/25/08')]
+          FunctionCall [7-52] [parse_date...12/25/08')]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            NamedArgument [18-39] [format_string => "%x"]
+            NamedArgument [18-39] [format_string => '%x']
               Identifier(format_string) [18-31] [format_string]
-              StringLiteral("%x") [35-39] ["%x"]
-            StringLiteral("12/25/08") [41-51] ["12/25/08"]
+              StringLiteral('%x') [35-39] ['%x']
+            StringLiteral('12/25/08') [41-51] ['12/25/08']
 --
 SELECT
-  parse_date(format_string  => "%x", "12/25/08")
+  parse_date(format_string  => '%x', '12/25/08')
 ==
 
 # Invalid function call missing a required argument.
-select parse_date(format_string => "%x")
+select parse_date(format_string => '%x')
 --
-QueryStatement [0-40] [select parse_date...g => "%x")]
-  Query [0-40] [select parse_date...g => "%x")]
-    Select [0-40] [select parse_date...g => "%x")]
-      SelectList [7-40] [parse_date...t_string => "%x")]
-        SelectColumn [7-40] [parse_date...t_string => "%x")]
-          FunctionCall [7-40] [parse_date...t_string => "%x")]
+QueryStatement [0-40] [select parse_date...g => '%x')]
+  Query [0-40] [select parse_date...g => '%x')]
+    Select [0-40] [select parse_date...g => '%x')]
+      SelectList [7-40] [parse_date...t_string => '%x')]
+        SelectColumn [7-40] [parse_date...t_string => '%x')]
+          FunctionCall [7-40] [parse_date...t_string => '%x')]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            NamedArgument [18-39] [format_string => "%x"]
+            NamedArgument [18-39] [format_string => '%x']
               Identifier(format_string) [18-31] [format_string]
-              StringLiteral("%x") [35-39] ["%x"]
+              StringLiteral('%x') [35-39] ['%x']
 --
 SELECT
-  parse_date(format_string  => "%x")
+  parse_date(format_string  => '%x')
 ==
 
 # Invalid function call missing the value of a required argument.
-select parse_date("%x", date_string => "12/25/08")
+select parse_date('%x', date_string => '12/25/08')
 --
-QueryStatement [0-50] [select parse_date...12/25/08")]
-  Query [0-50] [select parse_date...12/25/08")]
-    Select [0-50] [select parse_date...12/25/08")]
-      SelectList [7-50] [parse_date...12/25/08")]
-        SelectColumn [7-50] [parse_date...12/25/08")]
-          FunctionCall [7-50] [parse_date...12/25/08")]
+QueryStatement [0-50] [select parse_date...12/25/08')]
+  Query [0-50] [select parse_date...12/25/08')]
+    Select [0-50] [select parse_date...12/25/08')]
+      SelectList [7-50] [parse_date...12/25/08')]
+        SelectColumn [7-50] [parse_date...12/25/08')]
+          FunctionCall [7-50] [parse_date...12/25/08')]
             PathExpression [7-17] [parse_date]
               Identifier(parse_date) [7-17] [parse_date]
-            StringLiteral("%x") [18-22] ["%x"]
-            NamedArgument [24-49] [date_string => "12/25/08"]
+            StringLiteral('%x') [18-22] ['%x']
+            NamedArgument [24-49] [date_string => '12/25/08']
               Identifier(date_string) [24-35] [date_string]
-              StringLiteral("12/25/08") [39-49] ["12/25/08"]
+              StringLiteral('12/25/08') [39-49] ['12/25/08']
 --
 SELECT
-  parse_date("%x", date_string  => "12/25/08")
+  parse_date('%x', date_string  => '12/25/08')
 ==
 
 # Invalid function call missing the name of a required argument.
-select parse_date("%x", => "12/25/08")
+select parse_date('%x', => '12/25/08')
 --
 ERROR: Syntax error: Unexpected "=>" [at 1:25]
-select parse_date("%x", => "12/25/08")
+select parse_date('%x', => '12/25/08')
                         ^
 ==
 
 # Invalid function call missing the arrow symbol of a required argument.
-select parse_date("%x", date_string "12/25/08")
+select parse_date('%x', date_string '12/25/08')
 --
-ERROR: Syntax error: Expected ")" but got string literal "12/25/08" [at 1:37]
-select parse_date("%x", date_string "12/25/08")
+ERROR: Syntax error: Expected ")" but got string literal '12/25/08' [at 1:37]
+select parse_date('%x', date_string '12/25/08')
                                     ^
 ==
 
 # Invalid TVF call with parentheses around the named argument.
-select * from mytvf((date_string => "12/25/08"));
+select * from mytvf((date_string => '12/25/08'));
 --
 ERROR: Syntax error: Named arguments for table-valued function calls written as "name => value" must not be enclosed in parentheses. To fix this, replace (name => value) with name => value [at 1:21]
-select * from mytvf((date_string => "12/25/08"));
+select * from mytvf((date_string => '12/25/08'));
                     ^
 ==
 

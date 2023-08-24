@@ -2,14 +2,14 @@ select error('abc')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -18,7 +18,7 @@ select error(concat('abc', 'def'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -26,8 +26,8 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |       +-Literal(type=STRING, value="abc")
-    |       +-Literal(type=STRING, value="def")
+    |       +-Literal(type=STRING, value='abc')
+    |       +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -36,7 +36,7 @@ select if(true, error('e1'), error('e2'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -45,9 +45,9 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:if(BOOL, INT64, INT64) -> INT64)
     |     +-Literal(type=BOOL, value=true)
     |     +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |     | +-Literal(type=STRING, value="e1")
+    |     | +-Literal(type=STRING, value='e1')
     |     +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |       +-Literal(type=STRING, value="e2")
+    |       +-Literal(type=STRING, value='e2')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -57,8 +57,8 @@ select if(true, struct(), error('e2')),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<>]
-| +-$query.$col2#2 AS `$col2` [STRUCT<>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<>]
+| +-$query.$col2#2 AS "$col2" [STRUCT<>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -69,13 +69,13 @@ QueryStmt
     | |   +-Literal(type=STRUCT<>, value={})
     | |   +-Cast(STRUCT<> -> STRUCT<>)
     | |     +-FunctionCall(ZetaSQL:error(STRING) -> STRUCT<>)
-    | |       +-Literal(type=STRING, value="e2")
+    | |       +-Literal(type=STRING, value='e2')
     | +-$col2#2 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, STRUCT<>, STRUCT<>) -> STRUCT<>)
     |     +-Literal(type=BOOL, value=true)
     |     +-Cast(STRUCT<> -> STRUCT<>)
     |     | +-FunctionCall(ZetaSQL:error(STRING) -> STRUCT<>)
-    |     |   +-Literal(type=STRING, value="e1")
+    |     |   +-Literal(type=STRING, value='e1')
     |     +-Literal(type=STRUCT<>, value={})
     +-input_scan=
       +-SingleRowScan
@@ -91,7 +91,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -100,12 +100,12 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$case_with_value(INT64, repeated(2) INT64, repeated(2) STRING, STRING) -> STRING)
     |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |     +-Literal(type=INT64, value=0)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="def")
+    |     +-Literal(type=STRING, value='def')
     |     +-Cast(STRING -> STRING)
     |       +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
-    |         +-Literal(type=STRING, value="bad")
+    |         +-Literal(type=STRING, value='bad')
     +-input_scan=
       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -120,7 +120,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [UINT64]
+| +-$query.$col1#3 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -132,7 +132,7 @@ QueryStmt
     |     | +-Literal(type=INT64, value=0)
     |     +-Cast(UINT64 -> UINT64)
     |     | +-FunctionCall(ZetaSQL:error(STRING) -> UINT64)
-    |     |   +-Literal(type=STRING, value="e1")
+    |     |   +-Literal(type=STRING, value='e1')
     |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
     |     | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |     | +-Literal(type=INT64, value=1)
@@ -150,17 +150,17 @@ select concat('abc', error('def'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     |     +-Cast(STRING -> STRING)
     |       +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
-    |         +-Literal(type=STRING, value="def")
+    |         +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -176,17 +176,17 @@ select coalesce('abc', cast(error('def') as string))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:coalesce(repeated(2) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     |     +-Cast(STRING -> STRING)
     |       +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
-    |         +-Literal(type=STRING, value="def")
+    |         +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -196,7 +196,7 @@ select coalesce('int64_key_1: 0 int64_key_2: 1',
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -206,7 +206,7 @@ QueryStmt
     |     +-Literal(type=PROTO<zetasql_test__.KitchenSinkPB>, value={int64_key_1: 0 int64_key_2: 1})
     |     +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> PROTO<zetasql_test__.KitchenSinkPB>)
     |       +-FunctionCall(ZetaSQL:error(STRING) -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |         +-Literal(type=STRING, value="def")
+    |         +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -215,7 +215,7 @@ select error(cast(sqrt(error('abc')) as string))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -226,7 +226,7 @@ QueryStmt
     |       +-FunctionCall(ZetaSQL:sqrt(DOUBLE) -> DOUBLE)
     |         +-Cast(DOUBLE -> DOUBLE)
     |           +-FunctionCall(ZetaSQL:error(STRING) -> DOUBLE)
-    |             +-Literal(type=STRING, value="abc")
+    |             +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -237,7 +237,7 @@ select error(null)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -254,7 +254,7 @@ select cast(error(null) as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -273,7 +273,7 @@ select coalesce(error('xxx'), int32) from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [INT32]
+| +-$query.$col1#19 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -282,7 +282,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:coalesce(repeated(2) INT32) -> INT32)
     |     +-Cast(INT32 -> INT32)
     |     | +-FunctionCall(ZetaSQL:error(STRING) -> INT32)
-    |     |   +-Literal(type=STRING, value="xxx")
+    |     |   +-Literal(type=STRING, value='xxx')
     |     +-ColumnRef(type=INT32, column=SimpleTypes.int32#1)
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.int32#1], table=SimpleTypes, column_index_list=[0])
@@ -293,7 +293,7 @@ select concat(b'123', safe.error('abc'))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -303,7 +303,7 @@ QueryStmt
     |     +-Literal(type=BYTES, value=b"123")
     |     +-Cast(BYTES -> BYTES)
     |       +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:error(STRING) -> BYTES)
-    |         +-Literal(type=STRING, value="abc")
+    |         +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -313,19 +313,19 @@ select error('xxx'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [BYTES]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    | |   +-Literal(type=STRING, value="xxx")
+    | |   +-Literal(type=STRING, value='xxx')
     | +-$col2#2 :=
     |   +-Cast(BYTES -> BYTES)
     |     +-FunctionCall(ZetaSQL:error(STRING) -> BYTES)
-    |       +-Literal(type=STRING, value="xxx")
+    |       +-Literal(type=STRING, value='xxx')
     +-input_scan=
       +-SingleRowScan
 ==

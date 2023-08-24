@@ -1,5 +1,5 @@
 INSERT {{| IGNORE| REPLACE| UPDATE}} INTO KeyValue (key, value)
-VALUES (1, "one"), (2, "two")
+VALUES (1, 'one'), (2, 'two')
 --
 ALTERNATION GROUP: <empty>
 --
@@ -15,7 +15,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -23,7 +23,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 --
 ALTERNATION GROUP:  IGNORE
@@ -41,7 +41,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -49,7 +49,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 --
 ALTERNATION GROUP:  REPLACE
@@ -67,7 +67,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -75,7 +75,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 --
 ALTERNATION GROUP:  UPDATE
@@ -93,7 +93,7 @@ InsertStmt
 | |   |   +-Literal(type=INT64, value=1)
 | |   +-DMLValue
 | |     +-value=
-| |       +-Literal(type=STRING, value="one")
+| |       +-Literal(type=STRING, value='one')
 | +-InsertRow
 |   +-value_list=
 |     +-DMLValue
@@ -101,7 +101,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=2)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="two")
+|         +-Literal(type=STRING, value='two')
 +-column_access_list=WRITE,WRITE
 ==
 
@@ -137,14 +137,14 @@ InsertStmt
 +-assert_rows_modified=
 | +-AssertRowsModified
 |   +-rows=
-|     +-Parameter(type=INT64, name="test_param_int64")
+|     +-Parameter(type=INT64, name='test_param_int64')
 +-insert_column_list=KeyValue.[Key#1, Value#2]
 +-query=
 | +-WithScan
 |   +-column_list=subQ.[Key#5, Value#6]
 |   +-with_entry_list=
 |   | +-WithEntry
-|   |   +-with_query_name="subQ"
+|   |   +-with_query_name='subQ'
 |   |   +-with_subquery=
 |   |     +-ProjectScan
 |   |       +-column_list=KeyValue.[Key#3, Value#4]
@@ -154,13 +154,13 @@ InsertStmt
 |     +-ProjectScan
 |       +-column_list=subQ.[Key#5, Value#6]
 |       +-input_scan=
-|         +-WithRefScan(column_list=subQ.[Key#5, Value#6], with_query_name="subQ")
+|         +-WithRefScan(column_list=subQ.[Key#5, Value#6], with_query_name='subQ')
 +-query_output_column_list=subQ.[Key#5, Value#6]
 +-column_access_list=WRITE,WRITE
 ==
 
 INSERT KeyValue (key, value)
-VALUES (1, "one")
+VALUES (1, 'one')
 --
 InsertStmt
 +-table_scan=
@@ -174,12 +174,12 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,WRITE
 ==
 
 INSERT KeyValue (value, key)
-VALUES ("one", 1)
+VALUES ('one', 1)
 --
 InsertStmt
 +-table_scan=
@@ -190,7 +190,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |     | +-value=
-|     |   +-Literal(type=STRING, value="one")
+|     |   +-Literal(type=STRING, value='one')
 |     +-DMLValue
 |       +-value=
 |         +-Literal(type=INT64, value=1)
@@ -211,7 +211,7 @@ InsertStmt
 |     +-DMLValue
 |       +-value=
 |         +-Cast(INT32 -> INT64)
-|           +-Parameter(type=INT32, name="test_param_int32")
+|           +-Parameter(type=INT32, name='test_param_int32')
 +-column_access_list=WRITE
 ==
 
@@ -251,7 +251,7 @@ InsertStmt
 |     +-DMLValue
 |       +-value=
 |         +-Cast(UINT32 -> INT64)
-|           +-Parameter(type=UINT32, name="test_param_uint32")
+|           +-Parameter(type=UINT32, name='test_param_uint32')
 +-column_access_list=WRITE
 ==
 
@@ -291,7 +291,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |       +-value=
-|         +-Parameter(type=STRING, name="test_param_string")
+|         +-Parameter(type=STRING, name='test_param_string')
 +-column_access_list=WRITE
 ==
 
@@ -320,7 +320,7 @@ INSERT KeyValue (key, key)
 ==
 
 INSERT KeyValue (key, value, key)
-VALUES (1, "one", 2)
+VALUES (1, 'one', 2)
 --
 ERROR: INSERT has columns with duplicate name: key [at 1:30]
 INSERT KeyValue (key, value, key)
@@ -328,18 +328,18 @@ INSERT KeyValue (key, value, key)
 ==
 
 INSERT KeyValue (key, value)
-VALUES (1, "one"), (2)
+VALUES (1, 'one'), (2)
 --
 ERROR: Inserted row has wrong column count; Has 1, expected 2 [at 2:20]
-VALUES (1, "one"), (2)
+VALUES (1, 'one'), (2)
                    ^
 ==
 
 INSERT KeyValue (key, value)
-VALUES ("one"), (2, "two")
+VALUES ('one'), (2, 'two')
 --
 ERROR: Inserted row has wrong column count; Has 1, expected 2 [at 2:8]
-VALUES ("one"), (2, "two")
+VALUES ('one'), (2, 'two')
        ^
 ==
 
@@ -352,7 +352,7 @@ VALUES (1, 2)
 ==
 
 INSERT KeyValue (key, value, k1)
-VALUES (1, "one", 1)
+VALUES (1, 'one', 1)
 --
 ERROR: Column k1 is not present in table KeyValue [at 1:30]
 INSERT KeyValue (key, value, k1)
@@ -385,7 +385,7 @@ VALUES (1, 2)
 ==
 
 INSERT TestTable (TestEnum)
-VALUES (1), ("TESTENUM0")
+VALUES (1), ('TESTENUM0')
 --
 InsertStmt
 +-table_scan=
@@ -406,10 +406,10 @@ InsertStmt
 ==
 
 INSERT TestTable (TestEnum)
-VALUES ("INVALID_ENUM")
+VALUES ('INVALID_ENUM')
 --
-ERROR: Could not cast literal "INVALID_ENUM" to type zetasql_test__.TestEnum [at 2:9]
-VALUES ("INVALID_ENUM")
+ERROR: Could not cast literal 'INVALID_ENUM' to type zetasql_test__.TestEnum [at 2:9]
+VALUES ('INVALID_ENUM')
         ^
 ==
 
@@ -455,7 +455,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=0)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="abc")
+|         +-Literal(type=STRING, value='abc')
 +-column_access_list=WRITE,WRITE
 ==
 
@@ -584,7 +584,7 @@ InsertStmt
 ==
 
 INSERT KitchenSinkValueTable
-select as `zetasql_test__.KitchenSinkPB` 1 as int64_key_1, 2 as int64_key_2
+select as "zetasql_test__.KitchenSinkPB" 1 as int64_key_1, 2 as int64_key_2
 --
 InsertStmt
 +-table_scan=
@@ -614,10 +614,10 @@ InsertStmt
 
 INSERT KitchenSinkValueTable
 VALUES ((select KitchenSink from TestTable)),
-       (1, "a")
+       (1, 'a')
 --
 ERROR: Inserted row has wrong column count; Has 2, expected 1 [at 3:8]
-       (1, "a")
+       (1, 'a')
        ^
 ==
 
@@ -693,9 +693,9 @@ InsertStmt
 
 INSERT TestTable (key, KitchenSink)
 VALUES (CAST(1 as INT32),
-        (select as `zetasql_test__.KitchenSinkPB`
+        (select as "zetasql_test__.KitchenSinkPB"
            1 as int64_key_1, 2 as int64_key_2)),
-       (1, "int64_key_1: 1, int64_key_2: 2")
+       (1, 'int64_key_1: 1, int64_key_2: 2')
 --
 InsertStmt
 +-table_scan=
@@ -742,10 +742,10 @@ InsertStmt
 ==
 
 INSERT TestTable (KitchenSink)
-VALUES ("aaa")
+VALUES ('aaa')
 --
-ERROR: Could not cast literal "aaa" to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "aaa". [1:4]) [at 2:9]
-VALUES ("aaa")
+ERROR: Could not cast literal 'aaa' to type zetasql_test__.KitchenSinkPB (Error parsing proto: Message type "zetasql_test__.KitchenSinkPB" has no field named "aaa". [1:4]) [at 2:9]
+VALUES ('aaa')
         ^
 ==
 
@@ -843,14 +843,14 @@ InsertStmt
 |                 +-ArrayScan
 |                   +-column_list=[$array.$unnest1#19]
 |                   +-array_expr=
-|                   | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+|                   | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
 |                   +-element_column=$array.$unnest1#19
 +-column_access_list=WRITE,WRITE
 ==
 
 # Inserting values into a pseudo column.
 INSERT EnumTable (Filename)
-VALUES ("name")
+VALUES ('name')
 --
 InsertStmt
 +-table_scan=
@@ -861,7 +861,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="name")
+|         +-Literal(type=STRING, value='name')
 +-column_access_list=WRITE
 ==
 
@@ -1002,7 +1002,7 @@ select []
 INSERT KeyValue (value, key)
 VALUES (DEFAULT, DEFAULT),
        (DEFAULT, 5),
-       ("a", DEFAULT)
+       ('a', DEFAULT)
 --
 InsertStmt
 +-table_scan=
@@ -1029,7 +1029,7 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |     | +-value=
-|     |   +-Literal(type=STRING, value="a")
+|     |   +-Literal(type=STRING, value='a')
 |     +-DMLValue
 |       +-value=
 |         +-DMLDefault(type=INT64)
@@ -1081,16 +1081,16 @@ InsertStmt
 ==
 
 INSERT ComplexTypes (TestStruct)
-VALUES ((select as struct 1 c, (select as struct 1 a, "a" b) d))
+VALUES ((select as struct 1 c, (select as struct 1 a, 'a' b) d))
 --
 ERROR: Value has type STRUCT<c INT64, d STRUCT<a INT64, b STRING>> which cannot be inserted into column TestStruct, which has type STRUCT<c INT32, d STRUCT<a INT32, b STRING>> [at 2:9]
-VALUES ((select as struct 1 c, (select as struct 1 a, "a" b) d))
+VALUES ((select as struct 1 c, (select as struct 1 a, 'a' b) d))
         ^
 ==
 
 INSERT ComplexTypes (TestStruct)
 VALUES ((select as struct CAST(1 AS INT32) c,
-         (select as struct CAST(1 AS INT32) a, "a" b) d))
+         (select as struct CAST(1 AS INT32) a, 'a' b) d))
 --
 InsertStmt
 +-table_scan=
@@ -1138,7 +1138,7 @@ InsertStmt
 |                   |             +-column_list=$expr_subquery.[a#7, b#8]
 |                   |             +-expr_list=
 |                   |             | +-a#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|                   |             | +-b#8 := Literal(type=STRING, value="a")
+|                   |             | +-b#8 := Literal(type=STRING, value='a')
 |                   |             +-input_scan=
 |                   |               +-SingleRowScan
 |                   +-input_scan=
@@ -1149,7 +1149,7 @@ InsertStmt
 # Same test as previous, but with different field names.
 INSERT ComplexTypes (TestStruct)
 VALUES ((select as struct CAST(1 AS INT32) x,
-         (select as struct CAST(1 AS INT32) z1, "a" z2) y))
+         (select as struct CAST(1 AS INT32) z1, 'a' z2) y))
 --
 InsertStmt
 +-table_scan=
@@ -1198,7 +1198,7 @@ InsertStmt
 |                     |             +-column_list=$expr_subquery.[z1#7, z2#8]
 |                     |             +-expr_list=
 |                     |             | +-z1#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|                     |             | +-z2#8 := Literal(type=STRING, value="a")
+|                     |             | +-z2#8 := Literal(type=STRING, value='a')
 |                     |             +-input_scan=
 |                     |               +-SingleRowScan
 |                     +-input_scan=
@@ -1209,7 +1209,7 @@ InsertStmt
 # Similar test as previous (with different field names) but with
 # a struct constructor literal that is coerced to the target type.
 INSERT ComplexTypes (TestStruct)
-VALUES (STRUCT(1 AS x, STRUCT(1 as z1, "a" AS z2) AS y));
+VALUES (STRUCT(1 AS x, STRUCT(1 as z1, 'a' AS z2) AS y));
 --
 InsertStmt
 +-table_scan=
@@ -1220,14 +1220,14 @@ InsertStmt
 |   +-value_list=
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:1, d:{a:1, b:"a"}})
+|         +-Literal(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, value={c:1, d:{a:1, b:'a'}})
 +-column_access_list=WRITE
 ==
 
 # Similar test as previous (with different field names) but with
 # a non-literal struct constructor.
 INSERT ComplexTypes (TestStruct)
-VALUES (STRUCT(CAST(1 AS INT32) AS x, STRUCT(1 as z1, "a" AS z2) AS y));
+VALUES (STRUCT(CAST(1 AS INT32) AS x, STRUCT(1 as z1, 'a' AS z2) AS y));
 --
 InsertStmt
 +-table_scan=
@@ -1242,12 +1242,12 @@ InsertStmt
 |           +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
 |           +-field_list=
 |             +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:"a"})
+|             +-Literal(type=STRUCT<a INT32, b STRING>, value={a:1, b:'a'})
 +-column_access_list=WRITE
 ==
 
 INSERT ComplexTypes (TestStruct)
-select as struct CAST(1 AS INT32) c, (select as struct CAST(1 AS INT32) a, "2" b) d
+select as struct CAST(1 AS INT32) c, (select as struct CAST(1 AS INT32) a, '2' b) d
 --
 InsertStmt
 +-table_scan=
@@ -1287,7 +1287,7 @@ InsertStmt
 |       |             +-column_list=$expr_subquery.[a#7, b#8]
 |       |             +-expr_list=
 |       |             | +-a#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|       |             | +-b#8 := Literal(type=STRING, value="2")
+|       |             | +-b#8 := Literal(type=STRING, value='2')
 |       |             +-input_scan=
 |       |               +-SingleRowScan
 |       +-input_scan=
@@ -1299,7 +1299,7 @@ InsertStmt
 # Same test as previous, but with different field names.
 INSERT ComplexTypes (TestStruct)
 select as struct CAST(1 AS INT32) x,
-                 (select as struct CAST(1 AS INT32) z1, "2" z2) y
+                 (select as struct CAST(1 AS INT32) z1, '2' z2) y
 --
 InsertStmt
 +-table_scan=
@@ -1346,7 +1346,7 @@ InsertStmt
 |           |             +-column_list=$expr_subquery.[z1#7, z2#8]
 |           |             +-expr_list=
 |           |             | +-z1#7 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|           |             | +-z2#8 := Literal(type=STRING, value="2")
+|           |             | +-z2#8 := Literal(type=STRING, value='2')
 |           |             +-input_scan=
 |           |               +-SingleRowScan
 |           +-input_scan=
@@ -1356,7 +1356,7 @@ InsertStmt
 ==
 
 INSERT MoreComplexTypes (ArrayOfStruct)
-VALUES ([(select as struct CAST(1 AS INT32) a, "b" b), NULL]);
+VALUES ([(select as struct CAST(1 AS INT32) a, 'b' b), NULL]);
 --
 InsertStmt
 +-table_scan=
@@ -1386,7 +1386,7 @@ InsertStmt
 |           |         +-column_list=$expr_subquery.[a#4, b#5]
 |           |         +-expr_list=
 |           |         | +-a#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|           |         | +-b#5 := Literal(type=STRING, value="b")
+|           |         | +-b#5 := Literal(type=STRING, value='b')
 |           |         +-input_scan=
 |           |           +-SingleRowScan
 |           +-Literal(type=STRUCT<a INT32, b STRING>, value=NULL)
@@ -1395,7 +1395,7 @@ InsertStmt
 
 # Same test as previous, but with different struct field names.
 INSERT MoreComplexTypes (ArrayOfStruct)
-VALUES ([(select as struct CAST(1 AS INT32) x, "b" y), NULL]);
+VALUES ([(select as struct CAST(1 AS INT32) x, 'b' y), NULL]);
 --
 InsertStmt
 +-table_scan=
@@ -1426,7 +1426,7 @@ InsertStmt
 |             |         +-column_list=$expr_subquery.[x#4, y#5]
 |             |         +-expr_list=
 |             |         | +-x#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             |         | +-y#5 := Literal(type=STRING, value="b")
+|             |         | +-y#5 := Literal(type=STRING, value='b')
 |             |         +-input_scan=
 |             |           +-SingleRowScan
 |             +-Literal(type=STRUCT<x INT32, y STRING>, value=NULL)
@@ -1435,8 +1435,8 @@ InsertStmt
 
 INSERT MoreComplexTypes (StructOfArrayOfStruct)
 VALUES (struct(1 AS x,
-               struct(CAST(1 AS INT32) AS a, "b" AS b) AS y,
-               [(select as struct CAST(1 AS INT32) a, "a" b), NULL] AS z));
+               struct(CAST(1 AS INT32) AS a, 'b' AS b) AS y,
+               [(select as struct CAST(1 AS INT32) a, 'a' b), NULL] AS z));
 --
 InsertStmt
 +-table_scan=
@@ -1455,7 +1455,7 @@ InsertStmt
 |             | +-type=STRUCT<a INT32, b STRING>
 |             | +-field_list=
 |             |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             |   +-Literal(type=STRING, value="b")
+|             |   +-Literal(type=STRING, value='b')
 |             +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRUCT<a INT32, b STRING>) -> ARRAY<STRUCT<a INT32, b STRING>>)
 |               +-SubqueryExpr
 |               | +-type=STRUCT<a INT32, b STRING>
@@ -1475,7 +1475,7 @@ InsertStmt
 |               |         +-column_list=$expr_subquery.[a#4, b#5]
 |               |         +-expr_list=
 |               |         | +-a#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|               |         | +-b#5 := Literal(type=STRING, value="a")
+|               |         | +-b#5 := Literal(type=STRING, value='a')
 |               |         +-input_scan=
 |               |           +-SingleRowScan
 |               +-Literal(type=STRUCT<a INT32, b STRING>, value=NULL)
@@ -1485,8 +1485,8 @@ InsertStmt
 # Same test as previous, but with different struct field names.
 INSERT MoreComplexTypes (StructOfArrayOfStruct)
 VALUES (struct(1 AS f1,
-               struct(CAST(1 AS INT32) AS g1, "b" AS h1) AS i1,
-               [(select as struct CAST(1 AS INT32) j1, "a" k1), NULL] AS l1));
+               struct(CAST(1 AS INT32) AS g1, 'b' AS h1) AS i1,
+               [(select as struct CAST(1 AS INT32) j1, 'a' k1), NULL] AS l1));
 --
 InsertStmt
 +-table_scan=
@@ -1505,7 +1505,7 @@ InsertStmt
 |             | +-type=STRUCT<a INT32, b STRING>
 |             | +-field_list=
 |             |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|             |   +-Literal(type=STRING, value="b")
+|             |   +-Literal(type=STRING, value='b')
 |             +-Cast(ARRAY<STRUCT<j1 INT32, k1 STRING>> -> ARRAY<STRUCT<a INT32, b STRING>>)
 |               +-FunctionCall(ZetaSQL:$make_array(repeated(2) STRUCT<j1 INT32, k1 STRING>) -> ARRAY<STRUCT<j1 INT32, k1 STRING>>)
 |                 +-SubqueryExpr
@@ -1526,7 +1526,7 @@ InsertStmt
 |                 |         +-column_list=$expr_subquery.[j1#4, k1#5]
 |                 |         +-expr_list=
 |                 |         | +-j1#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-|                 |         | +-k1#5 := Literal(type=STRING, value="a")
+|                 |         | +-k1#5 := Literal(type=STRING, value='a')
 |                 |         +-input_scan=
 |                 |           +-SingleRowScan
 |                 +-Literal(type=STRUCT<j1 INT32, k1 STRING>, value=NULL)
@@ -1677,9 +1677,9 @@ InsertStmt
 # Inserting protos from different DescriptorPools. A cast gets added.
 insert into TestTable (KitchenSink)
 values
-  ((select coalesce(CAST("""int64_key_1: 1 int64_key_2"""
+  ((select coalesce(CAST('''int64_key_1: 1 int64_key_2'''
                     as zetasql_test__.KitchenSinkPB)))),
-  ((select coalesce(CAST("""int64_key_1: 1 int64_key_2"""
+  ((select coalesce(CAST('''int64_key_1: 1 int64_key_2'''
                     as alt_descriptor_pool.zetasql_test__.KitchenSinkPB))))
 --
 InsertStmt
@@ -1701,7 +1701,7 @@ InsertStmt
 | |             | +-$col1#4 :=
 | |             |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
 | |             |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-| |             |       +-Literal(type=STRING, value="int64_key_1: 1 int64_key_2")
+| |             |       +-Literal(type=STRING, value='int64_key_1: 1 int64_key_2')
 | |             +-input_scan=
 | |               +-SingleRowScan
 | +-InsertRow
@@ -1719,14 +1719,14 @@ InsertStmt
 |                 | +-$col1#5 :=
 |                 |   +-FunctionCall(ZetaSQL:coalesce(repeated(1) PROTO<zetasql_test__.KitchenSinkPB>) -> PROTO<zetasql_test__.KitchenSinkPB>)
 |                 |     +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-|                 |       +-Literal(type=STRING, value="int64_key_1: 1 int64_key_2")
+|                 |       +-Literal(type=STRING, value='int64_key_1: 1 int64_key_2')
 |                 +-input_scan=
 |                   +-SingleRowScan
 +-column_access_list=WRITE
 ==
 
 INSERT KitchenSinkValueTable
-select as `zetasql_test__.KitchenSinkPB`
+select as "zetasql_test__.KitchenSinkPB"
     1 as int64_key_1, 2 as int64_key_2,
     [] as repeated_int64_val, [] as repeated_int32_val,
     [] as repeated_string_val
@@ -1764,7 +1764,7 @@ InsertStmt
 ==
 
 INSERT KitchenSinkValueTable
-select as `zetasql_test__.KitchenSinkPB`
+select as "zetasql_test__.KitchenSinkPB"
     int64_key_1, int64_key_1 as int64_key_2
 from (select int64_key_1 from KitchenSinkValueTable)
 --
@@ -2081,14 +2081,14 @@ INSERT UpdateToDefaultTable (readonly_settable_to_default) VALUES (DEFAULT);
                              ^
 ==
 
-INSERT INTO KeyValue@{hint_name=hint_value} (key, value) VALUES (1, "one");
+INSERT INTO KeyValue@{hint_name=hint_value} (key, value) VALUES (1, 'one');
 --
 InsertStmt
 +-table_scan=
 | +-TableScan
 |   +-column_list=KeyValue.[Key#1, Value#2]
 |   +-hint_list=
-|   | +-hint_name := Literal(type=STRING, value="hint_value")
+|   | +-hint_name := Literal(type=STRING, value='hint_value')
 |   +-table=KeyValue
 |   +-column_index_list=[0, 1]
 +-insert_column_list=KeyValue.[Key#1, Value#2]
@@ -2100,7 +2100,7 @@ InsertStmt
 |     |   +-Literal(type=INT64, value=1)
 |     +-DMLValue
 |       +-value=
-|         +-Literal(type=STRING, value="one")
+|         +-Literal(type=STRING, value='one')
 +-column_access_list=WRITE,WRITE
 ==
 

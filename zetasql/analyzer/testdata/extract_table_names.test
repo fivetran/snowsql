@@ -149,7 +149,7 @@ TestTable => {
 FunctionCall(ZetaSQL:timestamp_sub(TIMESTAMP, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> TIMESTAMP)
 +-FunctionCall(ZetaSQL:current_timestamp() -> TIMESTAMP)
 +-Cast(INT32 -> INT64)
-| +-Parameter(type=INT32, name="test_param_int32")
+| +-Parameter(type=INT32, name='test_param_int32')
 +-Literal(type=ENUM<zetasql.functions.DateTimestampPart>, value=DAY);
 }
 

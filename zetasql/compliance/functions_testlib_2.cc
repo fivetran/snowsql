@@ -301,20 +301,20 @@ static std::vector<ComparisonTest> GetStructComparisonTests() {
 
   // These DCHECKs are only here to more clearly show the contents of
   // all the struct values.
-  ABSL_DCHECK_EQ("(\"foo\", 0)",    struct0.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"bar\", 1)",    struct1.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('foo', 0)",    struct0.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('bar', 1)",    struct1.GetSQLLiteral());
   ABSL_DCHECK_EQ("(NULL, 1)",       struct_with_null2.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"bar\", NULL)", struct_with_null3.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('bar', NULL)", struct_with_null3.GetSQLLiteral());
   ABSL_DCHECK_EQ("(NULL, NULL)",    struct_with_null4.GetSQLLiteral());
   ABSL_DCHECK_EQ("NULL",            null_struct.GetSQLLiteral());
 
   ABSL_DCHECK_EQ("NULL",                     null_nested_struct.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"x\", (\"bar\", 1))",    nested_struct1.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"x\", (\"bar\", 1))",    nested_struct1b.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(NULL, (\"bar\", 1))",     nested_struct_null1.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"x\", (NULL, 1))",       nested_struct_null2.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"x\", (\"bar\", NULL))", nested_struct_null3.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"x\", NULL)",            nested_struct_null4.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('x', ('bar', 1))",    nested_struct1.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('x', ('bar', 1))",    nested_struct1b.GetSQLLiteral());
+  ABSL_DCHECK_EQ("(NULL, ('bar', 1))",     nested_struct_null1.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('x', (NULL, 1))",       nested_struct_null2.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('x', ('bar', NULL))", nested_struct_null3.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('x', NULL)",            nested_struct_null4.GetSQLLiteral());
 
   std::vector<ComparisonTest> v = {
       // same non-null struct
@@ -1217,11 +1217,11 @@ std::vector<QueryParamsWithResult> GetFunctionTestsStructIn() {
   const Value null_struct = Value::Null(struct_type);
   // These DCHECKs are only here to more clearly show the contents of
   // all the struct values.
-  ABSL_DCHECK_EQ("(\"foo\", 0)",    struct0.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"bar\", 1)",    struct1.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"baz\", 2)",    struct2.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('foo', 0)",    struct0.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('bar', 1)",    struct1.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('baz', 2)",    struct2.GetSQLLiteral());
   ABSL_DCHECK_EQ("(NULL, 1)",       struct1_with_null1.GetSQLLiteral());
-  ABSL_DCHECK_EQ("(\"bar\", NULL)", struct1_with_null2.GetSQLLiteral());
+  ABSL_DCHECK_EQ("('bar', NULL)", struct1_with_null2.GetSQLLiteral());
   ABSL_DCHECK_EQ("(NULL, NULL)",    struct_with_all_nulls.GetSQLLiteral());
   ABSL_DCHECK_EQ("NULL",            null_struct.GetSQLLiteral());
 

@@ -5,7 +5,7 @@ SELECT ARRAY_FIRST([])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -19,7 +19,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -42,7 +42,7 @@ QueryStmt
     |         |     | | +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |         |     | +-Literal(type=STRING, value="ARRAY_FIRST cannot get the first element of an empty array")
+    |         |     | +-Literal(type=STRING, value='ARRAY_FIRST cannot get the first element of an empty array')
     |         |     +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<INT64>, INT64) -> INT64)
     |         |       +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |       +-Literal(type=INT64, value=0)
@@ -64,7 +64,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -78,7 +78,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -102,7 +102,7 @@ QueryStmt
     |         |     | | | +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |     | | +-Literal(type=INT64, value=0)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |         |     | | +-Literal(type=STRING, value="ARRAY_FIRST cannot get the first element of an empty array")
+    |         |     | | +-Literal(type=STRING, value='ARRAY_FIRST cannot get the first element of an empty array')
     |         |     | +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<INT64>, INT64) -> INT64)
     |         |     |   +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |     |   +-Literal(type=INT64, value=0)
@@ -124,7 +124,7 @@ ALTERNATION GROUPS:
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -158,7 +158,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -172,7 +172,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -195,7 +195,7 @@ QueryStmt
     |         |     | | +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |         |     | +-Literal(type=STRING, value="ARRAY_LAST cannot get the last element of an empty array")
+    |         |     | +-Literal(type=STRING, value='ARRAY_LAST cannot get the last element of an empty array')
     |         |     +-FunctionCall(ZetaSQL:$array_at_ordinal(ARRAY<INT64>, INT64) -> INT64)
     |         |       +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |       +-FunctionCall(ZetaSQL:array_length(ARRAY<INT64>) -> INT64)
@@ -214,7 +214,7 @@ ALTERNATION GROUP: SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -228,7 +228,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -252,7 +252,7 @@ QueryStmt
     |         |     | | | +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |     | | +-Literal(type=INT64, value=0)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
-    |         |     | | +-Literal(type=STRING, value="ARRAY_LAST cannot get the last element of an empty array")
+    |         |     | | +-Literal(type=STRING, value='ARRAY_LAST cannot get the last element of an empty array')
     |         |     | +-FunctionCall(ZetaSQL:$array_at_ordinal(ARRAY<INT64>, INT64) -> INT64)
     |         |     |   +-ColumnRef(type=ARRAY<INT64>, column=$subquery1.input_array#2)
     |         |     |   +-FunctionCall(ZetaSQL:array_length(ARRAY<INT64>) -> INT64)
@@ -276,7 +276,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -297,7 +297,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -321,7 +321,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(STRING -> STRING)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
-    |         |     |   +-Literal(type=STRING, value="ARRAY_FIRST cannot get the first element of an empty array")
+    |         |     |   +-Literal(type=STRING, value='ARRAY_FIRST cannot get the first element of an empty array')
     |         |     +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<STRING>, INT64) -> STRING)
     |         |       +-ColumnRef(type=ARRAY<STRING>, column=$subquery1.input_array#4)
     |         |       +-Literal(type=INT64, value=0)
@@ -347,7 +347,7 @@ ALTERNATION GROUP: ORDER BY Value
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -373,7 +373,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -397,7 +397,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(STRING -> STRING)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
-    |         |     |   +-Literal(type=STRING, value="ARRAY_FIRST cannot get the first element of an empty array")
+    |         |     |   +-Literal(type=STRING, value='ARRAY_FIRST cannot get the first element of an empty array')
     |         |     +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<STRING>, INT64) -> STRING)
     |         |       +-ColumnRef(type=ARRAY<STRING>, column=$subquery1.input_array#4)
     |         |       +-Literal(type=INT64, value=0)
@@ -446,7 +446,7 @@ ALTERNATION GROUP: ,V_1_4_ARRAY_AGGREGATION_FUNCTIONS,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -460,7 +460,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -514,7 +514,7 @@ ALTERNATION GROUP: ,V_1_4_ARRAY_AGGREGATION_FUNCTIONS,SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -528,7 +528,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -600,7 +600,7 @@ ALTERNATION GROUP: ,V_1_4_ARRAY_AGGREGATION_FUNCTIONS,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -614,7 +614,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -668,7 +668,7 @@ ALTERNATION GROUP: ,V_1_4_ARRAY_AGGREGATION_FUNCTIONS,SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -682,7 +682,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -736,27 +736,27 @@ QueryStmt
 ==
 
 [language_features=V_1_2_SAFE_FUNCTION_CALL,V_1_4_ARRAY_AGGREGATION_FUNCTIONS]
-SELECT {{|SAFE.}}ARRAY_MIN(["hello", "zetasql"])
+SELECT {{|SAFE.}}ARRAY_MIN(['hello', 'zetasql'])
 --
 ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_min(ARRAY<STRING> input_array) -> STRING)
-    |     +-Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |     +-Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     +-input_scan=
       +-SingleRowScan
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -814,7 +814,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[$subquery1.input_array#2]
     |             +-expr_list=
-    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -824,21 +824,21 @@ ALTERNATION GROUP: SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_min(ARRAY<STRING> input_array) -> STRING)
-    |     +-Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |     +-Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     +-input_scan=
       +-SingleRowScan
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -898,7 +898,7 @@ QueryStmt
     |           +-ProjectScan
     |             +-column_list=[$subquery1.input_array#2]
     |             +-expr_list=
-    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=["hello", "zetasql"])
+    |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=['hello', 'zetasql'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -910,7 +910,7 @@ SELECT ARRAY_MAX([])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -924,7 +924,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -995,7 +995,7 @@ SELECT ARRAY_MAX([4.5])
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1009,7 +1009,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

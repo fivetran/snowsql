@@ -46,7 +46,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
   // options.
   AnalyzerOptions options;
   options.mutable_language()->EnableMaximumLanguageFeatures();
-  ZETASQL_CHECK_OK(options.AddExpressionColumn("k", types::Int64Type()));
+ZETASQL_CHECK_OK(options.AddExpressionColumn("k", types::Int64Type()));
 
   TypeFactory types;
   const Type* map_type;
@@ -129,7 +129,7 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |       |           |   |           | +-expr=
 |       |           |   |           | | +-ColumnRef(type=PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>, column=$array.elem#3)
 |       |           |   |           | +-field_descriptor=key
-|       |           |   |           | +-default_value=""
+|       |           |   |           | +-default_value=''
 |       |           |   |           +-ColumnRef(type=STRING, column=$subquery1.k#1, is_correlated=TRUE)
 |       |           |   +-order_by_item_list=
 |       |           |     +-OrderByItem
@@ -142,17 +142,17 @@ TEST(RewriteResolvedAstTest, RewriterDoesNotConflictWithExpressionColumnNames) {
 |         +-ProjectScan
 |           +-column_list=$subquery1.[k#1, m#2]
 |           +-expr_list=
-|           | +-k#1 := Literal(type=STRING, value="foo")
+|           | +-k#1 := Literal(type=STRING, value='foo')
 |           | +-m#2 :=
 |           |   +-GetProtoField
 |           |     +-type=ARRAY<PROTO<zetasql_test__.MessageWithMapField.StringInt32MapEntry>>
 |           |     +-expr=
-|           |     | +-ExpressionColumn(type=PROTO<zetasql_test__.MessageWithMapField>, name="mapproto")
+|           |     | +-ExpressionColumn(type=PROTO<zetasql_test__.MessageWithMapField>, name='mapproto')
 |           |     +-field_descriptor=string_int32_map
 |           |     +-default_value=[]
 |           +-input_scan=
 |             +-SingleRowScan
-+-ExpressionColumn(type=INT64, name="k")
++-ExpressionColumn(type=INT64, name='k')
 )sql");
 }
 

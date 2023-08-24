@@ -1,13 +1,13 @@
 [language_features={{NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
-select cast("99999999999999999999999999999.999999999" as NUMBER),
-       cast("-99999999999999999999999999999.999999999" as NUMBER)
+select cast('99999999999999999999999999999.999999999' as NUMBER),
+       cast('-99999999999999999999999999999.999999999' as NUMBER)
 --
 ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -23,7 +23,7 @@ ALTERNATION GROUPS:
     <empty>
 --
 ERROR: Type not found: NUMBER [at 1:58]
-select cast("99999999999999999999999999999.999999999" as NUMBER),
+select cast('99999999999999999999999999999.999999999' as NUMBER),
                                                          ^
 ==
 
@@ -39,31 +39,31 @@ select true::boolean, 1::int, 1::integer,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [INT64]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [INT64]
-| +-$query.$col5#5 AS `$col5` [INT64]
-| +-$query.$col6#6 AS `$col6` [INT64]
-| +-$query.$col7#7 AS `$col7` [INT64]
-| +-$query.$col8#8 AS `$col8` [FLOAT]
-| +-$query.$col9#9 AS `$col9` [DOUBLE]
-| +-$query.$col10#10 AS `$col10` [DOUBLE]
-| +-$query.$col11#11 AS `$col11` [STRING]
-| +-$query.$col12#12 AS `$col12` [STRING]
-| +-$query.$col13#13 AS `$col13` [STRING]
-| +-$query.$col14#14 AS `$col14` [STRING]
-| +-$query.$col15#15 AS `$col15` [STRING]
-| +-$query.$col16#16 AS `$col16` [DOUBLE]
-| +-$query.$col17#17 AS `$col17` [DOUBLE]
-| +-$query.$col18#18 AS `$col18` [DOUBLE]
-| +-$query.$col19#19 AS `$col19` [BYTES]
-| +-$query.$col20#20 AS `$col20` [BYTES]
-| +-$query.$col21#21 AS `$col21` [DATE]
-| +-$query.$col22#22 AS `$col22` [TIME]
-| +-$query.$col23#23 AS `$col23` [TIMESTAMP]
-| +-$query.$col24#24 AS `$col24` [VARIANT]
-| +-$query.$col25#25 AS `$col25` [OBJECT]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [INT64]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
+| +-$query.$col5#5 AS "$col5" [INT64]
+| +-$query.$col6#6 AS "$col6" [INT64]
+| +-$query.$col7#7 AS "$col7" [INT64]
+| +-$query.$col8#8 AS "$col8" [FLOAT]
+| +-$query.$col9#9 AS "$col9" [DOUBLE]
+| +-$query.$col10#10 AS "$col10" [DOUBLE]
+| +-$query.$col11#11 AS "$col11" [STRING]
+| +-$query.$col12#12 AS "$col12" [STRING]
+| +-$query.$col13#13 AS "$col13" [STRING]
+| +-$query.$col14#14 AS "$col14" [STRING]
+| +-$query.$col15#15 AS "$col15" [STRING]
+| +-$query.$col16#16 AS "$col16" [DOUBLE]
+| +-$query.$col17#17 AS "$col17" [DOUBLE]
+| +-$query.$col18#18 AS "$col18" [DOUBLE]
+| +-$query.$col19#19 AS "$col19" [BYTES]
+| +-$query.$col20#20 AS "$col20" [BYTES]
+| +-$query.$col21#21 AS "$col21" [DATE]
+| +-$query.$col22#22 AS "$col22" [TIME]
+| +-$query.$col23#23 AS "$col23" [TIMESTAMP]
+| +-$query.$col24#24 AS "$col24" [VARIANT]
+| +-$query.$col25#25 AS "$col25" [OBJECT]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14, $col15#15, $col16#16, $col17#17, $col18#18, $col19#19, $col20#20, $col21#21, $col22#22, $col23#23, $col24#24, $col25#25]
@@ -78,11 +78,11 @@ QueryStmt
     | +-$col8#8 := Literal(type=FLOAT, value=1, has_explicit_type=TRUE)
     | +-$col9#9 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
     | +-$col10#10 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
-    | +-$col11#11 := Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-    | +-$col12#12 := Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-    | +-$col13#13 := Literal(type=STRING, value="foo", has_explicit_type=TRUE)
-    | +-$col14#14 := Literal(type=STRING, value="f", has_explicit_type=TRUE)
-    | +-$col15#15 := Literal(type=STRING, value="f", has_explicit_type=TRUE)
+    | +-$col11#11 := Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+    | +-$col12#12 := Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+    | +-$col13#13 := Literal(type=STRING, value='foo', has_explicit_type=TRUE)
+    | +-$col14#14 := Literal(type=STRING, value='f', has_explicit_type=TRUE)
+    | +-$col15#15 := Literal(type=STRING, value='f', has_explicit_type=TRUE)
     | +-$col16#16 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
     | +-$col17#17 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
     | +-$col18#18 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
@@ -91,7 +91,7 @@ QueryStmt
     | +-$col21#21 := Literal(type=DATE, value=2023-06-19, has_explicit_type=TRUE)
     | +-$col22#22 :=
     | | +-Cast(STRING -> TIME)
-    | |   +-Literal(type=STRING, value="20:57")
+    | |   +-Literal(type=STRING, value='20:57')
     | +-$col23#23 := Literal(type=TIMESTAMP, value=2023-06-19 19:34:56+00, has_explicit_type=TRUE)
     | +-$col24#24 :=
     | | +-Cast(INT64 -> VARIANT)
@@ -99,7 +99,7 @@ QueryStmt
     | +-$col25#25 :=
     |   +-Cast(VARIANT -> OBJECT)
     |     +-Cast(STRING -> VARIANT)
-    |       +-Literal(type=STRING, value="{}")
+    |       +-Literal(type=STRING, value='{}')
     +-input_scan=
       +-SingleRowScan
 ==

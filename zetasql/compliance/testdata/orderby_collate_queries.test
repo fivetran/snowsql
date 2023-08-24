@@ -114,7 +114,7 @@ ARRAY<STRUCT<primary_key INT64, col STRING>>[known order:
 [name=orderby_collate_english_US]
 select primary_key, col
 from StringTable
-ORDER BY col COLLATE "en_US" DESC, primary_key ASC
+ORDER BY col COLLATE 'en_US' DESC, primary_key ASC
 --
 ARRAY<STRUCT<primary_key INT64, col STRING>>[known order:
   {15, "Г"},
@@ -211,7 +211,7 @@ ARRAY<STRUCT<str STRING, int INT64>>[known order:
 ]
 ==
 
-# The default "en_US" in this test is the same as "en_US:cs" in the previous
+# The default 'en_US' in this test is the same as "en_US:cs" in the previous
 # tests.
 # Test ASC.
 [name=orderby_collate_english_US_default_is_case_sensitive_ascending]
@@ -231,7 +231,7 @@ UNNEST(ARRAY<STRUCT<str STRING, int INT64>>[
        ("aC", 7),
        ("aa", 13),
        ("AA", 10)]) AS s
-ORDER BY 1 COLLATE "en_US" ASC, 2 ASC
+ORDER BY 1 COLLATE 'en_US' ASC, 2 ASC
 --
 ARRAY<STRUCT<str STRING, int INT64>>[known order:
   {"a", 8},
@@ -268,7 +268,7 @@ UNNEST(ARRAY<STRUCT<str STRING, int INT64>>[
        ("aC", 7),
        ("aa", 13),
        ("AA", 10)]) AS s
-ORDER BY 1 COLLATE "en_US" DESC, 2 ASC
+ORDER BY 1 COLLATE 'en_US' DESC, 2 ASC
 --
 ARRAY<STRUCT<str STRING, int INT64>>[known order:
   {"AC", 2},
@@ -432,7 +432,7 @@ from (select 1 primary_key, "Ca" col UNION ALL
       select 2, "ca" UNION ALL
       select 3, "Cb" UNION ALL
       select 4, "cb")
-ORDER BY col COLLATE "und:ci"
+ORDER BY col COLLATE 'und:ci'
 --
 ARRAY<STRUCT<primary_key INT64, col STRING>>[unknown order:
   {2, "ca"},
@@ -443,7 +443,7 @@ ARRAY<STRUCT<primary_key INT64, col STRING>>[unknown order:
 ==
 
 [name=orderby_collate_und_ci_parameter]
-[parameters="und:ci" collation_name]
+[parameters='und:ci' collation_name]
 select primary_key, col
 from (select 1 primary_key, "Ca" col UNION ALL
       select 2, "ca" UNION ALL

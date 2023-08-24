@@ -14,7 +14,7 @@ group by int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -22,7 +22,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         +-group_by_list=
         | +-int64#14 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
         +-aggregate_list=
@@ -36,7 +36,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -50,13 +50,13 @@ QueryStmt
         |   | +-AggregateScan
         |   |   +-column_list=[$aggregate.$agg1_partial#17, $groupby.int64_partial#18, $group_by.$uid#19]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#15], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#15], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |   |   +-group_by_list=
         |   |   | +-int64_partial#18 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
         |   |   | +-$uid#19 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#15)
         |   |   +-aggregate_list=
         |   |     +-$agg1_partial#17 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=1)
         |   +-unit=ROWS
@@ -90,7 +90,7 @@ group by b.int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -101,9 +101,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypes.int64#14]
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         +-group_by_list=
         | +-int64#32 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         +-aggregate_list=
@@ -117,7 +117,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -134,15 +134,15 @@ QueryStmt
         |   |   | +-JoinScan
         |   |   |   +-column_list=[SimpleTypes.int64#14, SimpleTypesWithAnonymizationUid.uid#33]
         |   |   |   +-left_scan=
-        |   |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   |   +-right_scan=
-        |   |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   |   +-group_by_list=
         |   |   | +-int64_partial#36 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         |   |   | +-$uid#37 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#33)
         |   |   +-aggregate_list=
         |   |     +-$agg1_partial#35 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=3)
         |   +-unit=ROWS
@@ -166,7 +166,7 @@ QueryStmt
 ==
 
 # Similar to the previous one, but set the Max_groups_contributed to 3 by the
-# `default_anon_kappa_value` instead of the options.
+# "default_anon_kappa_value" instead of the options.
 # The rewritten ResolvedAST is the same as the previous test.
 [default_anon_kappa_value=3]
 [no_run_unparser]
@@ -177,7 +177,7 @@ group by b.int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -188,9 +188,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypes.int64#14]
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         +-group_by_list=
         | +-int64#32 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         +-aggregate_list=
@@ -202,7 +202,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -219,15 +219,15 @@ QueryStmt
         |   |   | +-JoinScan
         |   |   |   +-column_list=[SimpleTypes.int64#14, SimpleTypesWithAnonymizationUid.uid#33]
         |   |   |   +-left_scan=
-        |   |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   |   +-right_scan=
-        |   |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   |   +-group_by_list=
         |   |   | +-int64_partial#36 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         |   |   | +-$uid#37 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#33)
         |   |   +-aggregate_list=
         |   |     +-$agg1_partial#35 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=3)
         |   +-unit=ROWS
@@ -258,7 +258,7 @@ from SimpleTypesWithAnonymizationUid a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-116
@@ -267,7 +267,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(parse_location=83-114, table=SimpleTypesWithAnonymizationUid, alias="a")
+        | +-TableScan(parse_location=83-114, table=SimpleTypesWithAnonymizationUid, alias='a')
         +-aggregate_list=
         | +-$agg1#13 :=
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -293,7 +293,7 @@ from SimpleTypesWithAnonymizationUid a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-125
@@ -302,7 +302,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(parse_location=92-123, table=SimpleTypesWithAnonymizationUid, alias="a")
+        | +-TableScan(parse_location=92-123, table=SimpleTypesWithAnonymizationUid, alias='a')
         +-aggregate_list=
         | +-$agg1#13 :=
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -337,7 +337,7 @@ from SimpleTypesWithAnonymizationUid a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-118
@@ -346,7 +346,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(parse_location=85-116, table=SimpleTypesWithAnonymizationUid, alias="a")
+        | +-TableScan(parse_location=85-116, table=SimpleTypesWithAnonymizationUid, alias='a')
         +-aggregate_list=
         | +-$agg1#13 :=
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -375,7 +375,7 @@ from SimpleTypesWithAnonymizationUid a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-132
@@ -384,7 +384,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(parse_location=99-130, table=SimpleTypesWithAnonymizationUid, alias="a")
+        | +-TableScan(parse_location=99-130, table=SimpleTypesWithAnonymizationUid, alias='a')
         +-aggregate_list=
         | +-$agg1#13 :=
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -393,7 +393,7 @@ QueryStmt
         +-option_list=
           +-max_groups_contributed=
             +-parse_location=41-83
-            +-Parameter(parse_location=66-83, type=INT64, name="test_param_int64")
+            +-Parameter(parse_location=66-83, type=INT64, name='test_param_int64')
 [REPLACED_LITERALS]
 select with differential_privacy options(max_groups_contributed = @test_param_int64) count(*)
 from SimpleTypesWithAnonymizationUid a
@@ -427,7 +427,7 @@ ALTERNATION GROUP: max_groups_contributed = NULL
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -435,7 +435,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         +-aggregate_list=
         | +-$agg1#13 :=
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -447,7 +447,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -458,7 +458,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$aggregate.$agg1_partial#16, $group_by.$uid#17]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-group_by_list=
         |   | +-$uid#17 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#14)
         |   +-aggregate_list=
@@ -481,7 +481,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -489,7 +489,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -499,7 +499,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -513,12 +513,12 @@ QueryStmt
         |   | +-AggregateScan
         |   |   +-column_list=[$aggregate.$agg1_partial#16, $group_by.$uid#17]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-group_by_list=
         |   |   | +-$uid#17 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#14)
         |   |   +-aggregate_list=
         |   |     +-$agg1_partial#16 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=3)
         |   +-unit=ROWS
@@ -551,7 +551,7 @@ group by int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -559,7 +559,7 @@ QueryStmt
       +-DifferentialPrivacyAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         +-group_by_list=
         | +-int64#14 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
         +-aggregate_list=
@@ -573,7 +573,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -587,13 +587,13 @@ QueryStmt
         |   | +-AggregateScan
         |   |   +-column_list=[$aggregate.$agg1_partial#17, $groupby.int64_partial#18, $group_by.$uid#19]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#15], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#15], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |   |   +-group_by_list=
         |   |   | +-int64_partial#18 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
         |   |   | +-$uid#19 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#15)
         |   |   +-aggregate_list=
         |   |     +-$agg1_partial#17 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=1)
         |   +-unit=ROWS
@@ -621,7 +621,7 @@ group by int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -629,7 +629,7 @@ QueryStmt
       +-AnonymizedAggregateScan
         +-column_list=[$aggregate.$agg1#13]
         +-input_scan=
-        | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, double#9], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 8], alias="a")
+        | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, double#9], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 8], alias='a')
         +-group_by_list=
         | +-int64#14 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
         +-aggregate_list=
@@ -645,7 +645,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -664,7 +664,7 @@ QueryStmt
         |   |   |   +-expr_list=
         |   |   |   | +-$orderbycol1#17 := FunctionCall(ZetaSQL:rand() -> DOUBLE)
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, double#9, uid#15], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 8, 10], alias="a")
+        |   |   |     +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, double#9, uid#15], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 8, 10], alias='a')
         |   |   +-group_by_list=
         |   |   | +-int64_partial#19 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
         |   |   | +-$uid#20 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#15)
@@ -679,7 +679,7 @@ QueryStmt
         |   |         |     +-ColumnRef(type=DOUBLE, column=$orderby.$orderbycol1#17)
         |   |         +-limit=
         |   |           +-Literal(type=INT64, value=5)
-        |   +-method="RESERVOIR"
+        |   +-method='RESERVOIR'
         |   +-size=
         |   | +-Literal(type=INT64, value=1)
         |   +-unit=ROWS

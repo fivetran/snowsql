@@ -6,21 +6,21 @@ AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RenameToAction(new_path=p2)
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # Grant to: single grantee.
-alter row access policy p1 on KeyValue grant to ("foo@google.com");
+alter row access policy p1 on KeyValue grant to ('foo@google.com');
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -36,22 +36,22 @@ AlterRowAccessPolicyStmt
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
 
 # Revoke from: single revokee.
-alter row access policy p1 on KeyValue revoke from ("bar@google.com");
+alter row access policy p1 on KeyValue revoke from ('bar@google.com');
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="bar@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='bar@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -63,18 +63,18 @@ AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RevokeFromAction(is_revoke_from_all=TRUE)
-+-name="p1"
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # Filter using, with multiple actions.
 alter row access policy p1 on KeyValue {{rename to p2,|}}
-{{grant to ("foo@google.com"),|}}
-{{revoke from ("bar@google.com"),|revoke from all,|}}
+{{grant to ('foo@google.com'),|}}
+{{revoke from ('bar@google.com'),|revoke from all,|}}
 filter using (key = 321);
 --
-ALTERNATION GROUP: rename to p2,,grant to ("foo@google.com"),,revoke from ("bar@google.com"),
+ALTERNATION GROUP: rename to p2,,grant to ('foo@google.com'),,revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -82,29 +82,29 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
 ALTERNATION GROUPS:
-    rename to p2,,grant to ("foo@google.com"),,revoke from all,
-    grant to ("foo@google.com"),,revoke from all,
+    rename to p2,,grant to ('foo@google.com'),,revoke from all,
+    grant to ('foo@google.com'),,revoke from all,
 --
 ERROR: REVOKE FROM ALL action after GRANT TO action is not supported [at 3:1]
 revoke from all,
 ^
 --
-ALTERNATION GROUP: rename to p2,,grant to ("foo@google.com"),,
+ALTERNATION GROUP: rename to p2,,grant to ('foo@google.com'),,
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -112,18 +112,18 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: rename to p2,,,revoke from ("bar@google.com"),
+ALTERNATION GROUP: rename to p2,,,revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
@@ -131,14 +131,14 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -154,8 +154,8 @@ AlterRowAccessPolicyStmt
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -170,65 +170,65 @@ AlterRowAccessPolicyStmt
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: grant to ("foo@google.com"),,revoke from ("bar@google.com"),
+ALTERNATION GROUP: grant to ('foo@google.com'),,revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: grant to ("foo@google.com"),,
+ALTERNATION GROUP: grant to ('foo@google.com'),,
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),
+ALTERNATION GROUP: revoke from ('bar@google.com'),
 --
 AlterRowAccessPolicyStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -243,8 +243,8 @@ AlterRowAccessPolicyStmt
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -258,88 +258,88 @@ AlterRowAccessPolicyStmt
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="key = 321"
-+-name="p1"
+|   +-predicate_str='key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
 
 # Grant to, with multiple actions.
 alter row access policy p1 on Keyvalue
-{{revoke from ("bar@google.com"),|revoke from all,|}} {{rename to p2,|}}
-{{filter using (key = 321),|}} grant to ("foo@google.com");
+{{revoke from ('bar@google.com'),|revoke from all,|}} {{rename to p2,|}}
+{{filter using (key = 321),|}} grant to ('foo@google.com');
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,rename to p2,,filter using (key = 321),
+ALTERNATION GROUP: revoke from ('bar@google.com'),,rename to p2,,filter using (key = 321),
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-RenameToAction(new_path=p2)
 | +-FilterUsingAction
 | | +-predicate=
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 | | |   +-Literal(type=INT64, value=321)
-| | +-predicate_str="key = 321"
+| | +-predicate_str='key = 321'
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,rename to p2,,
+ALTERNATION GROUP: revoke from ('bar@google.com'),,rename to p2,,
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,,filter using (key = 321),
+ALTERNATION GROUP: revoke from ('bar@google.com'),,,filter using (key = 321),
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-FilterUsingAction
 | | +-predicate=
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 | | |   +-Literal(type=INT64, value=321)
-| | +-predicate_str="key = 321"
+| | +-predicate_str='key = 321'
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
-ALTERNATION GROUP: revoke from ("bar@google.com"),,,
+ALTERNATION GROUP: revoke from ('bar@google.com'),,,
 --
 AlterRowAccessPolicyStmt
 +-name_path=Keyvalue
 +-alter_action_list=
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
+| |   +-Literal(type=STRING, value='bar@google.com')
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -355,11 +355,11 @@ AlterRowAccessPolicyStmt
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 | | |   +-Literal(type=INT64, value=321)
-| | +-predicate_str="key = 321"
+| | +-predicate_str='key = 321'
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -372,8 +372,8 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -388,11 +388,11 @@ AlterRowAccessPolicyStmt
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 | | |   +-Literal(type=INT64, value=321)
-| | +-predicate_str="key = 321"
+| | +-predicate_str='key = 321'
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -404,8 +404,8 @@ AlterRowAccessPolicyStmt
 | +-RevokeFromAction(is_revoke_from_all=TRUE)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -420,11 +420,11 @@ AlterRowAccessPolicyStmt
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 | | |   +-Literal(type=INT64, value=321)
-| | +-predicate_str="key = 321"
+| | +-predicate_str='key = 321'
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -436,8 +436,8 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -451,11 +451,11 @@ AlterRowAccessPolicyStmt
 | | | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 | | |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 | | |   +-Literal(type=INT64, value=321)
-| | +-predicate_str="key = 321"
+| | +-predicate_str='key = 321'
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 --
@@ -466,15 +466,15 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # Grant to: multiple grantees.
 alter row access policy p1 on KeyValue
-grant to ("foo@google.com", {{@test_param_string,|}} "mdbuser/bar");
+grant to ('foo@google.com', {{@test_param_string,|}} 'mdbuser/bar');
 --
 ALTERNATION GROUP: @test_param_string,
 --
@@ -483,10 +483,10 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="mdbuser/bar")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Parameter(type=STRING, name='test_param_string')
+|     +-Literal(type=STRING, value='mdbuser/bar')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -497,16 +497,16 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 |   +-grantee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="mdbuser/bar")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='mdbuser/bar')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # Revoke from: multiple revokees.
 alter row access policy p1 on KeyValue
-revoke from ("foo@google.com", {{@test_param_string,|}} "mdbuser/bar");
+revoke from ('foo@google.com', {{@test_param_string,|}} 'mdbuser/bar');
 --
 ALTERNATION GROUP: @test_param_string,
 --
@@ -515,10 +515,10 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="mdbuser/bar")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Parameter(type=STRING, name='test_param_string')
+|     +-Literal(type=STRING, value='mdbuser/bar')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -529,9 +529,9 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="mdbuser/bar")
-+-name="p1"
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='mdbuser/bar')
++-name='p1'
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -548,8 +548,8 @@ AlterRowAccessPolicyStmt
 |   |   +-FunctionCall(ZetaSQL:abs(INT64) -> INT64)
 |   |   | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="abs(key) = 321"
-+-name="p1"
+|   +-predicate_str='abs(key) = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -564,9 +564,9 @@ AlterRowAccessPolicyStmt
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
-|   +-predicate_str="value = @test_param_string"
-+-name="p1"
+|   |   +-Parameter(type=STRING, name='test_param_string')
+|   +-predicate_str='value = @test_param_string'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 ==
@@ -593,8 +593,8 @@ AlterRowAccessPolicyStmt
 |   |       +-column_list=[KeyValue2.Key#3]
 |   |       +-input_scan=
 |   |         +-TableScan(column_list=[KeyValue2.Key#3], table=KeyValue2, column_index_list=[0])
-|   +-predicate_str="abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)"
-+-name="p1"
+|   +-predicate_str='abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -623,16 +623,16 @@ AlterRowAccessPolicyStmt
 |   |       +-column_list=[KeyValue2.Key#3]
 |   |       +-input_scan=
 |   |         +-TableScan(column_list=[KeyValue2.Key#3], table=KeyValue2, column_index_list=[0])
-|   +-predicate_str="abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)"
-+-name="p1"
+|   +-predicate_str='abs(key) IN (\n  SELECT\n    key\n  FROM\n    KeyValue2\n)'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
 
 # Grant to: multiple grantees, revoke from: multiple grantees, change predicate: with param.
 alter row access policy p1 on KeyValue
-grant to ("foo@google.com", "mdbgroup/bar"{{|, @test_param_string}}),
-revoke from ("bar@google.com", "mdbgroup/baz"{{|, @test_param_string}}),
+grant to ('foo@google.com', 'mdbgroup/bar'{{|, @test_param_string}}),
+revoke from ('bar@google.com', 'mdbgroup/baz'{{|, @test_param_string}}),
 filter using(value = @test_param_string);
 --
 ALTERNATION GROUP: <empty>
@@ -642,19 +642,19 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
-|   +-predicate_str="value = @test_param_string"
-+-name="p1"
+|   |   +-Parameter(type=STRING, name='test_param_string')
+|   +-predicate_str='value = @test_param_string'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 --
@@ -665,20 +665,20 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
-|   +-predicate_str="value = @test_param_string"
-+-name="p1"
+|   |   +-Parameter(type=STRING, name='test_param_string')
+|   +-predicate_str='value = @test_param_string'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 --
@@ -689,20 +689,20 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
-|   +-predicate_str="value = @test_param_string"
-+-name="p1"
+|   |   +-Parameter(type=STRING, name='test_param_string')
+|   +-predicate_str='value = @test_param_string'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 --
@@ -713,21 +713,21 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="bar@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/baz")
-| |   +-Parameter(type=STRING, name="test_param_string")
+| |   +-Literal(type=STRING, value='bar@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/baz')
+| |   +-Parameter(type=STRING, name='test_param_string')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
 |   |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-|   |   +-Parameter(type=STRING, name="test_param_string")
-|   +-predicate_str="value = @test_param_string"
-+-name="p1"
+|   |   +-Parameter(type=STRING, name='test_param_string')
+|   +-predicate_str='value = @test_param_string'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Value#2], table=KeyValue, column_index_list=[1])
 ==
@@ -735,8 +735,8 @@ AlterRowAccessPolicyStmt
 # Rename, revoke from: multiple, grant to: multiple, and change predicate: with function.
 alter row access policy p1 on KeyValue
 rename to p2,
-revoke from ("user:bar@google.com", "group:all-users@google.com"),
-grant to ("foo@google.com", "mdbgroup/bar"),
+revoke from ('user:bar@google.com', 'group:all-users@google.com'),
+grant to ('foo@google.com', 'mdbgroup/bar'),
 filter using(abs(key) = 321);
 --
 AlterRowAccessPolicyStmt
@@ -745,20 +745,20 @@ AlterRowAccessPolicyStmt
 | +-RenameToAction(new_path=p2)
 | +-RevokeFromAction
 | | +-revokee_expr_list=
-| |   +-Literal(type=STRING, value="user:bar@google.com")
-| |   +-Literal(type=STRING, value="group:all-users@google.com")
+| |   +-Literal(type=STRING, value='user:bar@google.com')
+| |   +-Literal(type=STRING, value='group:all-users@google.com')
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
-| |   +-Literal(type=STRING, value="mdbgroup/bar")
+| |   +-Literal(type=STRING, value='foo@google.com')
+| |   +-Literal(type=STRING, value='mdbgroup/bar')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-FunctionCall(ZetaSQL:abs(INT64) -> INT64)
 |   |   | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="abs(key) = 321"
-+-name="p1"
+|   +-predicate_str='abs(key) = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
@@ -767,7 +767,7 @@ AlterRowAccessPolicyStmt
 # The ExtractTableNames tests don't work because the extracted table name has
 # the catalog name prefix, while Table::FullName() doesn't have it.
 [no_test_extract_table_names]
-alter row access policy p1 on nested_catalog.KeyValue grant to ("foo@google.com"),
+alter row access policy p1 on nested_catalog.KeyValue grant to ('foo@google.com'),
 filter using(KeyValue.key = 321);
 --
 AlterRowAccessPolicyStmt
@@ -775,20 +775,20 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
 |   |   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
 |   |   +-Literal(type=INT64, value=321)
-|   +-predicate_str="KeyValue.key = 321"
-+-name="p1"
+|   +-predicate_str='KeyValue.key = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
 
 # Alter row access policy on struct value table.
-alter row access policy p1 on TestStructValueTable grant to ("foo@google.com"),
+alter row access policy p1 on TestStructValueTable grant to ('foo@google.com'),
 filter using(a = 321 and TestStructValueTable.b = 'abc');
 --
 AlterRowAccessPolicyStmt
@@ -796,7 +796,7 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
@@ -813,15 +813,15 @@ AlterRowAccessPolicyStmt
 |   |     | +-expr=
 |   |     | | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 |   |     | +-field_idx=1
-|   |     +-Literal(type=STRING, value="abc")
-|   +-predicate_str="a = 321 AND TestStructValueTable.b = 'abc'"
-+-name="p1"
+|   |     +-Literal(type=STRING, value='abc')
+|   +-predicate_str='a = 321 AND TestStructValueTable.b = \'abc\''
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0])
 ==
 
 # Alter row access policy on int32 value table.
-alter row access policy p1 on Int32ValueTable grant to ("foo@google.com"),
+alter row access policy p1 on Int32ValueTable grant to ('foo@google.com'),
 filter using(Int32ValueTable = 321);
 --
 AlterRowAccessPolicyStmt
@@ -829,14 +829,14 @@ AlterRowAccessPolicyStmt
 +-alter_action_list=
 | +-GrantToAction
 | | +-grantee_expr_list=
-| |   +-Literal(type=STRING, value="foo@google.com")
+| |   +-Literal(type=STRING, value='foo@google.com')
 | +-FilterUsingAction
 |   +-predicate=
 |   | +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
 |   |   +-ColumnRef(type=INT32, column=Int32ValueTable.value#1)
 |   |   +-Literal(type=INT32, value=321)
-|   +-predicate_str="Int32ValueTable = 321"
-+-name="p1"
+|   +-predicate_str='Int32ValueTable = 321'
++-name='p1'
 +-table_scan=
   +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0])
 ==
@@ -850,34 +850,34 @@ alter row access policy p1 on unknown rename to p2;
 ==
 
 # Predicate with unknown column.
-alter row access policy p1 on KeyValue grant to ("foo@google.com"), filter using(k = 100);
+alter row access policy p1 on KeyValue grant to ('foo@google.com'), filter using(k = 100);
 --
 ERROR: Unrecognized name: k [at 1:82]
-...KeyValue grant to ("foo@google.com"), filter using(k = 100);
+...KeyValue grant to ('foo@google.com'), filter using(k = 100);
                                                       ^
 ==
 
 # Predicate with wrong type.
-alter row access policy p1 on KeyValue grant to ("foo@google.com"), filter using(key);
+alter row access policy p1 on KeyValue grant to ('foo@google.com'), filter using(key);
 --
 ERROR: USING clause should return type BOOL, but returns INT64 [at 1:82]
-...KeyValue grant to ("foo@google.com"), filter using(key);
+...KeyValue grant to ('foo@google.com'), filter using(key);
                                                       ^
 ==
 
 # Predicate with wrong type (literal).
-alter row access policy p1 on KeyValue grant to ("foo@google.com"), filter using(100);
+alter row access policy p1 on KeyValue grant to ('foo@google.com'), filter using(100);
 --
 ERROR: USING clause should return type BOOL, but returns INT64 [at 1:82]
-...KeyValue grant to ("foo@google.com"), filter using(100);
+...KeyValue grant to ('foo@google.com'), filter using(100);
                                                       ^
 ==
 
 # Predicate with aggregate function.
-alter row access policy p1 on KeyValue grant to ("foo@google.com"), filter using(count(*) = 100);
+alter row access policy p1 on KeyValue grant to ('foo@google.com'), filter using(count(*) = 100);
 --
 ERROR: Aggregate function COUNT(*) not allowed in ALTER ROW ACCESS POLICY FILTER USING action [at 1:82]
-...KeyValue grant to ("foo@google.com"), filter using(count(*) = 100);
+...KeyValue grant to ('foo@google.com'), filter using(count(*) = 100);
                                                       ^
 ==
 
@@ -898,33 +898,33 @@ ERROR: Multiple FILTER USING actions are not supported [at 1:60]
 ==
 
 # Multiple GRANT TO actions.
-alter row access policy p1 on Keyvalue grant to ("foo@google.com"),
-grant to ("bar@google.com");
+alter row access policy p1 on Keyvalue grant to ('foo@google.com'),
+grant to ('bar@google.com');
 --
 ERROR: Multiple GRANT TO actions are not supported [at 2:1]
-grant to ("bar@google.com");
+grant to ('bar@google.com');
 ^
 ==
 
 # Multiple REVOKE FROM actions.
-alter row access policy p1 on Keyvalue revoke from {{("foo@google.com")|all}}, revoke from {{("bar@google.com")|all}};
+alter row access policy p1 on Keyvalue revoke from {{('foo@google.com')|all}}, revoke from {{('bar@google.com')|all}};
 --
-ALTERNATION GROUP: ("foo@google.com"),("bar@google.com")
---
-ERROR: Multiple REVOKE FROM actions are not supported [at 1:72]
-...p1 on Keyvalue revoke from ("foo@google.com"), revoke from ("bar@google.co...
-                                                  ^
---
-ALTERNATION GROUP: ("foo@google.com"),all
+ALTERNATION GROUP: ('foo@google.com'),('bar@google.com')
 --
 ERROR: Multiple REVOKE FROM actions are not supported [at 1:72]
-...p1 on Keyvalue revoke from ("foo@google.com"), revoke from all;
+...p1 on Keyvalue revoke from ('foo@google.com'), revoke from ('bar@google.co...
                                                   ^
 --
-ALTERNATION GROUP: all,("bar@google.com")
+ALTERNATION GROUP: ('foo@google.com'),all
+--
+ERROR: Multiple REVOKE FROM actions are not supported [at 1:72]
+...p1 on Keyvalue revoke from ('foo@google.com'), revoke from all;
+                                                  ^
+--
+ALTERNATION GROUP: all,('bar@google.com')
 --
 ERROR: Multiple REVOKE FROM actions are not supported [at 1:57]
-...row access policy p1 on Keyvalue revoke from all, revoke from ("bar@google...
+...row access policy p1 on Keyvalue revoke from all, revoke from ('bar@google...
                                                      ^
 --
 ALTERNATION GROUP: all,all
@@ -935,45 +935,45 @@ alter row access policy p1 on Keyvalue revoke from all, revoke from all;
 ==
 
 # REVOKE FROM ALL after GRANT TO.
-alter row access policy p1 on KeyValue grant to ("foo@google.com"), revoke from all;
+alter row access policy p1 on KeyValue grant to ('foo@google.com'), revoke from all;
 --
 ERROR: REVOKE FROM ALL action after GRANT TO action is not supported [at 1:69]
-...policy p1 on KeyValue grant to ("foo@google.com"), revoke from all;
+...policy p1 on KeyValue grant to ('foo@google.com'), revoke from all;
                                                       ^
 ==
 
 # ALTER ALL with multiple grantees.
 alter all row access policies on KeyValue
-revoke from ("foo@google.com", "bar@google.com");
+revoke from ('foo@google.com', 'bar@google.com');
 --
 AlterAllRowAccessPoliciesStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="bar@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='bar@google.com')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # ALTER ALL with table name as a path.
 alter all row access policies on nested_catalog.NestedKeyValue
-revoke from ("foo@google.com");
+revoke from ('foo@google.com');
 --
 AlterAllRowAccessPoliciesStmt
 +-name_path=nested_catalog.NestedKeyValue
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
+|     +-Literal(type=STRING, value='foo@google.com')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # ALTER ALL with parameterized grantee list
 alter all row access policies on KeyValue
-revoke from ("foo@google.com", {{@test_param_string,|}} "mdbuser/bar");
+revoke from ('foo@google.com', {{@test_param_string,|}} 'mdbuser/bar');
 --
 ALTERNATION GROUP: @test_param_string,
 --
@@ -982,9 +982,9 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Parameter(type=STRING, name="test_param_string")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Parameter(type=STRING, name='test_param_string')
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
   +-TableScan(table=KeyValue)
 --
@@ -995,8 +995,8 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="foo@google.com")
-|     +-Literal(type=STRING, value="mdbuser/bar")
+|     +-Literal(type=STRING, value='foo@google.com')
+|     +-Literal(type=STRING, value='mdbuser/bar')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
@@ -1028,14 +1028,14 @@ AlterAllRowAccessPoliciesStmt
 +-alter_action_list=
 | +-RevokeFromAction
 |   +-revokee_expr_list=
-|     +-Literal(type=STRING, value="all")
+|     +-Literal(type=STRING, value='all')
 +-table_scan=
   +-TableScan(table=KeyValue)
 ==
 
 # ALTER ALL with table path not found.
 alter all row access policies on name.path
-revoke from ("foo@google.com");
+revoke from ('foo@google.com');
 --
 ERROR: Table not found: name.path [at 1:34]
 alter all row access policies on name.path

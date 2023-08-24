@@ -9,11 +9,11 @@ from T1
 ==
 
 SELECT 
-TRY_CAST(COALESCE(ARRAY<gtype>[CAST("TESTENUM1" AS gtype)]) 
+TRY_CAST(COALESCE(ARRAY<gtype>[CAST('TESTENUM1' AS gtype)]) 
 AS ARRAY<gtype>) AS a_1, 
-TRY_CAST(COALESCE(ARRAY<gtype>[CAST("" AS gtype)]) AS ARRAY<gtype>) AS a_2, 
+TRY_CAST(COALESCE(ARRAY<gtype>[CAST('' AS gtype)]) AS ARRAY<gtype>) AS a_2, 
 TRY_CAST(COALESCE(STRUCT<BOOL, ARRAY<gtype>, gtype>(false, 
-ARRAY<gtype>[CAST("" AS gtype)], CAST("TESTENUM1" AS gtype))) AS STRUCT<BOOL, ARRAY<gtype>, gtype>) 
+ARRAY<gtype>[CAST('' AS gtype)], CAST('TESTENUM1' AS gtype))) AS STRUCT<BOOL, ARRAY<gtype>, gtype>) 
 --
 QueryStatement [0-331] [SELECT  TRY_CAST...>, gtype>)]
   Query [0-331] [SELECT  TRY_CAST...>, gtype>)]
@@ -29,8 +29,8 @@ QueryStatement [0-331] [SELECT  TRY_CAST...>, gtype>)]
                   SimpleType [32-37] [gtype]
                     PathExpression [32-37] [gtype]
                       Identifier(gtype) [32-37] [gtype]
-                CastExpression [39-65] [CAST("TESTENUM1" AS gtype)]
-                  StringLiteral("TESTENUM1") [44-55] ["TESTENUM1"]
+                CastExpression [39-65] [CAST('TESTENUM1' AS gtype)]
+                  StringLiteral('TESTENUM1') [44-55] ['TESTENUM1']
                   SimpleType [59-64] [gtype]
                     PathExpression [59-64] [gtype]
                       Identifier(gtype) [59-64] [gtype]
@@ -50,8 +50,8 @@ QueryStatement [0-331] [SELECT  TRY_CAST...>, gtype>)]
                   SimpleType [119-124] [gtype]
                     PathExpression [119-124] [gtype]
                       Identifier(gtype) [119-124] [gtype]
-                CastExpression [126-143] [CAST("" AS gtype)]
-                  StringLiteral("") [131-133] [""]
+                CastExpression [126-143] [CAST('' AS gtype)]
+                  StringLiteral('') [131-133] ['']
                   SimpleType [137-142] [gtype]
                     PathExpression [137-142] [gtype]
                       Identifier(gtype) [137-142] [gtype]
@@ -89,14 +89,14 @@ QueryStatement [0-331] [SELECT  TRY_CAST...>, gtype>)]
                       SimpleType [238-243] [gtype]
                         PathExpression [238-243] [gtype]
                           Identifier(gtype) [238-243] [gtype]
-                    CastExpression [245-262] [CAST("" AS gtype)]
-                      StringLiteral("") [250-252] [""]
+                    CastExpression [245-262] [CAST('' AS gtype)]
+                      StringLiteral('') [250-252] ['']
                       SimpleType [256-261] [gtype]
                         PathExpression [256-261] [gtype]
                           Identifier(gtype) [256-261] [gtype]
-                StructConstructorArg [265-291] [CAST("TESTENUM1" AS gtype)]
-                  CastExpression [265-291] [CAST("TESTENUM1" AS gtype)]
-                    StringLiteral("TESTENUM1") [270-281] ["TESTENUM1"]
+                StructConstructorArg [265-291] [CAST('TESTENUM1' AS gtype)]
+                  CastExpression [265-291] [CAST('TESTENUM1' AS gtype)]
+                    StringLiteral('TESTENUM1') [270-281] ['TESTENUM1']
                     SimpleType [285-290] [gtype]
                       PathExpression [285-290] [gtype]
                         Identifier(gtype) [285-290] [gtype]
@@ -116,9 +116,9 @@ QueryStatement [0-331] [SELECT  TRY_CAST...>, gtype>)]
                     Identifier(gtype) [324-329] [gtype]
 --
 SELECT
-  TRY_CAST(COALESCE(ARRAY< gtype >[CAST("TESTENUM1" AS gtype)]) AS ARRAY< gtype >) AS a_1,
-  TRY_CAST(COALESCE(ARRAY< gtype >[CAST("" AS gtype)]) AS ARRAY< gtype >) AS a_2,
-  TRY_CAST(COALESCE(STRUCT< BOOL, ARRAY< gtype >, gtype > (false, ARRAY< gtype >[CAST("" AS gtype)], CAST("TESTENUM1" AS gtype))) AS STRUCT<
+  TRY_CAST(COALESCE(ARRAY< gtype >[CAST('TESTENUM1' AS gtype)]) AS ARRAY< gtype >) AS a_1,
+  TRY_CAST(COALESCE(ARRAY< gtype >[CAST('' AS gtype)]) AS ARRAY< gtype >) AS a_2,
+  TRY_CAST(COALESCE(STRUCT< BOOL, ARRAY< gtype >, gtype > (false, ARRAY< gtype >[CAST('' AS gtype)], CAST('TESTENUM1' AS gtype))) AS STRUCT<
   BOOL, ARRAY< gtype >, gtype >)
 ==
 

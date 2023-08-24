@@ -39,11 +39,11 @@ select 1, key, *, 33, * from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col4#4 AS `$col4` [INT64]
+| +-$query.$col4#4 AS "$col4" [INT64]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
 +-query=
@@ -95,8 +95,8 @@ select * from (select 1, 2)
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.$col1#1 AS `$col1` [INT64]
-| +-$subquery1.$col2#2 AS `$col2` [INT64]
+| +-$subquery1.$col1#1 AS "$col1" [INT64]
+| +-$subquery1.$col2#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$subquery1.[$col1#1, $col2#2]
@@ -134,10 +134,10 @@ select 111, kv.*, 222 from KeyValue kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col3#4 AS `$col3` [INT64]
+| +-$query.$col3#4 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3, KeyValue.Key#1, KeyValue.Value#2, $query.$col3#4]
@@ -145,7 +145,7 @@ QueryStmt
     | +-$col1#3 := Literal(type=INT64, value=111)
     | +-$col3#4 := Literal(type=INT64, value=222)
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
 ==
 
 select
@@ -162,21 +162,21 @@ from KeyValue kv,
 --
 QueryStmt
 +-output_column_list=
-| +-subq.$col1#3 AS `$col1` [INT64]
-| +-subq.$col2#4 AS `$col2` [STRING]
+| +-subq.$col1#3 AS "$col1" [INT64]
+| +-subq.$col2#4 AS "$col2" [STRING]
 | +-subq.c3#5 AS c3 [STRING]
-| +-$query.$col2#9 AS `$col2` [STRING]
+| +-$query.$col2#9 AS "$col2" [STRING]
 | +-TestTable.key#6 AS key [INT32]
 | +-TestTable.TestEnum#7 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
 | +-TestTable.KitchenSink#8 AS KitchenSink [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$query.$col4#10 AS `$col4` [STRING]
+| +-$query.$col4#10 AS "$col4" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col6#11 AS `$col6` [STRING]
+| +-$query.$col6#11 AS "$col6" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-subq.$col1#3 AS `$col1` [INT64]
-| +-subq.$col2#4 AS `$col2` [STRING]
+| +-subq.$col1#3 AS "$col1" [INT64]
+| +-subq.$col2#4 AS "$col2" [STRING]
 | +-subq.c3#5 AS c3 [STRING]
 | +-TestTable.key#6 AS key [INT32]
 | +-TestTable.TestEnum#7 AS TestEnum [ENUM<zetasql_test__.TestEnum>]
@@ -185,9 +185,9 @@ QueryStmt
   +-ProjectScan
     +-column_list=[subq.$col1#3, subq.$col2#4, subq.c3#5, $query.$col2#9, TestTable.key#6, TestTable.TestEnum#7, TestTable.KitchenSink#8, $query.$col4#10, KeyValue.Key#1, KeyValue.Value#2, $query.$col6#11, KeyValue.Key#1, KeyValue.Value#2, subq.$col1#3, subq.$col2#4, subq.c3#5, TestTable.key#6, TestTable.TestEnum#7, TestTable.KitchenSink#8]
     +-expr_list=
-    | +-$col2#9 := Literal(type=STRING, value="---")
-    | +-$col4#10 := Literal(type=STRING, value="---")
-    | +-$col6#11 := Literal(type=STRING, value="---")
+    | +-$col2#9 := Literal(type=STRING, value='---')
+    | +-$col4#10 := Literal(type=STRING, value='---')
+    | +-$col6#11 := Literal(type=STRING, value='---')
     +-input_scan=
       +-JoinScan
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, subq.$col1#3, subq.$col2#4, subq.c3#5, TestTable.key#6, TestTable.TestEnum#7, TestTable.KitchenSink#8]
@@ -195,14 +195,14 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1, KeyValue.Value#2, subq.$col1#3, subq.$col2#4, subq.c3#5]
         |   +-left_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         |   +-right_scan=
         |     +-ProjectScan
         |       +-column_list=subq.[$col1#3, $col2#4, c3#5]
         |       +-expr_list=
         |       | +-$col1#3 := Literal(type=INT64, value=1)
-        |       | +-$col2#4 := Literal(type=STRING, value="abc")
-        |       | +-c3#5 := Literal(type=STRING, value="abc")
+        |       | +-$col2#4 := Literal(type=STRING, value='abc')
+        |       | +-c3#5 := Literal(type=STRING, value='abc')
         |       +-input_scan=
         |         +-SingleRowScan
         +-right_scan=
@@ -222,7 +222,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=KeyValue.[Key#1, Value#2]
         +-input_scan=
-          +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+          +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
 ==
 
 # kv1 is not visible outside the subquery.
@@ -249,8 +249,8 @@ from (select 1),
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.$col1#1 AS `$col1` [INT64]
-| +-subq2.$col1#2 AS `$col1` [INT64]
+| +-$subquery1.$col1#1 AS "$col1" [INT64]
+| +-subq2.$col1#2 AS "$col1" [INT64]
 | +-$subquery2.three#3 AS three [INT64]
 +-query=
   +-ProjectScan
@@ -297,14 +297,14 @@ QueryStmt
 | +-KeyValue.Value#4 AS Value [STRING]
 | +-KeyValue.Key#5 AS Key [INT64]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col2#7 AS `$col2` [STRING]
+| +-$query.$col2#7 AS "$col2" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue.Key#3, KeyValue.Value#4, KeyValue.Key#5, KeyValue.Value#6, $query.$col2#7, KeyValue.Key#3, KeyValue.Value#4]
     +-expr_list=
-    | +-$col2#7 := Literal(type=STRING, value="---")
+    | +-$col2#7 := Literal(type=STRING, value='---')
     +-input_scan=
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4, Key#5, Value#6]
@@ -313,13 +313,13 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         |   +-left_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |   | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         |   +-join_expr=
         |     +-Literal(type=BOOL, value=true)
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias="kv3")
+        | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias='kv3')
         +-join_expr=
           +-Literal(type=BOOL, value=true)
 ==
@@ -333,8 +333,8 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$subquery3.$col2#3 AS `$col2` [INT64]
-| +-$subquery1.$col2#4 AS `$col2` [INT64]
+| +-$subquery3.$col2#3 AS "$col2" [INT64]
+| +-$subquery1.$col2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $subquery3.$col2#3, $subquery1.$col2#4]
@@ -424,7 +424,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=$groupby.[Key#3, Value#4]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="t")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='t')
         +-group_by_list=
           +-Key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
           +-Value#4 := ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -438,7 +438,7 @@ SELECT (SELECT {{t.|}}* FROM (SELECT 1 AS a) AS t GROUP BY {{t.a|a|1}})
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -475,7 +475,7 @@ FROM KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [STRUCT<a INT64, Key INT64>]
+| +-$query.$col1#7 AS "$col1" [STRUCT<a INT64, Key INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -525,7 +525,7 @@ from KeyValue outer_kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [INT64]
+| +-$query.$col1#10 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -553,11 +553,11 @@ QueryStmt
     |             |     +-AggregateScan
     |             |       +-column_list=$groupby.[key#5, value#6]
     |             |       +-input_scan=
-    |             |       | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |             |       | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv')
     |             |       +-group_by_list=
     |             |         +-key#5 := ColumnRef(type=INT64, column=KeyValue.Key#3)
     |             |         +-value#6 := ColumnRef(type=STRING, column=KeyValue.Value#4)
     |             +-aggregate_list=
     |               +-$agg1#9 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
     +-input_scan=
-      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="outer_kv")
+      +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='outer_kv')

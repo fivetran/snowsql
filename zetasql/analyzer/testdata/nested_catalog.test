@@ -48,10 +48,10 @@ select key from recursive_catalog.nested_catalog;
 # Java does not support recursive catalog.
 [no_java]
 select key
-from recursive_catalog.recursive_catalog.`bad name`.NestedKeyValue;
+from recursive_catalog.recursive_catalog."bad name".NestedKeyValue;
 --
-ERROR: Table not found: recursive_catalog.recursive_catalog.`bad name`.NestedKeyValue [at 2:6]
-from recursive_catalog.recursive_catalog.`bad name`.NestedKeyValue;
+ERROR: Table not found: recursive_catalog.recursive_catalog."bad name".NestedKeyValue [at 2:6]
+from recursive_catalog.recursive_catalog."bad name".NestedKeyValue;
      ^
 ==
 
@@ -88,11 +88,11 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Key#3]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |     +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-right_scan=
-          +-TableScan(table=KeyValue, alias="kv3")
+          +-TableScan(table=KeyValue, alias='kv3')
 ==
 
 [language_features={{|V_1_4_SINGLE_TABLE_NAME_ARRAY_PATH}}]

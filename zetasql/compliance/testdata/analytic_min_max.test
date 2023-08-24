@@ -291,11 +291,11 @@ SELECT row_id, enum_val,
        MIN(enum_val) OVER (ORDER BY row_id DESC
                            ROWS BETWEEN 2 PRECEDING AND 1 FOLLOWING)
 FROM (SELECT 1 row_id,
-               CAST(null as `zetasql_test__.TestEnum`) enum_val UNION ALL
+               CAST(null as "zetasql_test__.TestEnum") enum_val UNION ALL
       SELECT 2, 1 UNION ALL
       SELECT 3, 0 UNION ALL
       SELECT 4, 1 UNION ALL
-      SELECT 5, CAST(null as `zetasql_test__.TestEnum`) UNION ALL
+      SELECT 5, CAST(null as "zetasql_test__.TestEnum") UNION ALL
       SELECT 6, 2 UNION ALL
       SELECT 7, 0)
 --
@@ -874,11 +874,11 @@ SELECT row_id, enum_val,
        MAX(enum_val) OVER (ORDER BY row_id DESC
                            ROWS BETWEEN 2 PRECEDING AND 1 FOLLOWING)
 FROM (SELECT 1 row_id,
-               CAST(null as `zetasql_test__.TestEnum`) enum_val UNION ALL
+               CAST(null as "zetasql_test__.TestEnum") enum_val UNION ALL
       SELECT 2, 1 UNION ALL
       SELECT 3, 0 UNION ALL
       SELECT 4, 1 UNION ALL
-      SELECT 5, CAST(null as `zetasql_test__.TestEnum`) UNION ALL
+      SELECT 5, CAST(null as "zetasql_test__.TestEnum") UNION ALL
       SELECT 6, 2 UNION ALL
       SELECT 7, 0)
 --

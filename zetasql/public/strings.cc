@@ -618,7 +618,7 @@ static bool MayBeTripleQuotedString(const absl::string_view str) {
 
 static bool MayBeStringLiteral(const absl::string_view str) {
   return (str.size() >= 2 && str[0] == str[str.size() - 1] &&
-          (str[0] == '\'' || str[0] == '"'));
+          (str[0] == '\''));
 }
 
 static bool MayBeBytesLiteral(const absl::string_view str) {
@@ -723,8 +723,7 @@ absl::Status ParseBytesLiteral(absl::string_view str, std::string* out,
 }
 
 std::string ToStringLiteral(absl::string_view str) {
-  absl::string_view quote =
-      (str.find('"') != str.npos && str.find('\'') == str.npos) ? "'" : "\"";
+  absl::string_view quote = "'";
   return absl::StrCat(
       quote, CEscapeInternal(str, true /* utf8_safe */, quote[0]), quote);
 }
@@ -782,10 +781,10 @@ static absl::Status ParseIdentifierImpl(absl::string_view str,
                                         bool allow_reserved_keywords) {
   if (error_offset) *error_offset = 0;
   // The closing quote is validated by CUnescapeInternal() below.
-  const bool is_quoted = !str.empty() && str[0] == '`';
+  const bool is_quoted = !str.empty() && str[0] == '"';
 
   if (is_quoted) {
-    const int quotes_length = 1;  // Starts after the opening quote '`'.
+    const int quotes_length = 1;  // Starts after the opening quote '"'.
     const absl::string_view quotes = str.substr(0, quotes_length);
     // Includes the closing quotes.
     absl::string_view copy_str = absl::ClippedSubstr(str, quotes_length);
@@ -838,8 +837,8 @@ absl::Status ParseGeneralizedIdentifier(absl::string_view str, std::string* out,
 }
 
 std::string ToAlwaysQuotedIdentifierLiteral(absl::string_view str) {
-  return absl::StrCat("`", CEscapeInternal(str, true /* utf8_safe */, '`'),
-                      "`");
+  return absl::StrCat("\"", CEscapeInternal(str, true /* utf8_safe */, '"'),
+                      "\"");
 }
 
 std::string ToIdentifierLiteral(absl::string_view str,
@@ -886,27 +885,27 @@ std::string IdentifierPathToString(absl::Span<const IdString> path,
   return result;
 }
 
-// Helper method for advancing a char pointer to the next unescaped backquote.
-// The pointer will point to the backquote if one is found; if no backquote is
-// found, this will return false and leave `p` unmodified. Both `p` and `end`
-// are expected to be pointers to the same underlying buffer, with `p` preceding
-// `end`.
+// Helper method for advancing a char pointer to the next unescaped double quote.
+// The pointer will point to the double quote if one is found; if no double quote is
+// found, this will return false and leave "p" unmodified. Both "p" and "end"
+// are expected to be pointers to the same underlying buffer, with "p" preceding
+// "end".
 static bool AdvanceToNextBackquote(absl::string_view::const_iterator end,
                                    absl::string_view::const_iterator* pos) {
   absl::string_view::const_iterator p = *pos;
-  while (p < end && *p != '`') {
-    // Skip escaped backquotes.
+  while (p < end && *p != '"') {
+    // Skip escaped double quotes.
     absl::string_view::const_iterator next_byte = p + 1;
     if (*p == '\\' && next_byte < end &&
         // Ensure escaped backslashes are also skipped.
-        (*next_byte == '`' || *next_byte == '\\')) {
+        (*next_byte == '"' || *next_byte == '\\')) {
       ++p;
     }
     // Advance to the next character.
     ++p;
   }
   // If the pointer is at the end, or if the provided pointer was already beyond
-  // `end`, no backquote was found.
+  // "end", no double quote was found.
   if (p >= end) {
     return false;
   }
@@ -918,18 +917,18 @@ static bool AdvanceToNextBackquote(absl::string_view::const_iterator end,
 // if valid. If the identifier is invalid, an error will be returned.  The
 // parsing also handles unquoted identifiers that are supported by the lexer's
 // DOT_IDENTIFIER mode. This means path components comprised of numbers/reserved
-// keywords are allowed without backquoting as long as they are not the first
+// keywords are allowed without doublequoting as long as they are not the first
 // component (e.g. "abc.123" and "abc.select" are both valid, "123.abc" and
 // "select.abc" are not).
 //
-// Note: If `segment` is not backquoted and is not the first element of `out`,
+// Note: If `segment` is not doublequoted and is not the first element of `out`,
 // it will be escaped/wrapped in backquotes before parsing.
 static absl::Status AddIdentifierPathSegment(
     absl::string_view segment, const LanguageOptions& language_options,
     std::vector<std::string>* out) {
   ZETASQL_RET_CHECK(!segment.empty());
   std::string out_string;
-  if (segment[0] == '`') {
+  if (segment[0] == '"') {
     ZETASQL_RETURN_IF_ERROR(ParseIdentifier(segment, language_options, &out_string));
   } else {
     // DOT_IDENTIFIER mode only applies to path components after the first. If
@@ -942,7 +941,7 @@ static absl::Status AddIdentifierPathSegment(
       // keywords or slash paths are valid but need to be quoted to ensure they
       // are correctly parsed.
       const std::string quoted_segment = absl::StrCat(
-          "`", CEscapeInternal(segment, true /* utf8_safe */, '`'), "`");
+          "\"", CEscapeInternal(segment, true /* utf8_safe */, '"'), "\"");
       ZETASQL_RETURN_IF_ERROR(
           ParseIdentifier(quoted_segment, language_options, &out_string));
     }
@@ -1012,26 +1011,26 @@ absl::Status ParseIdentifierPath(absl::string_view str,
                                 << " after character '" << *previous << "'";
         }
       } else {
-        // Path identifiers can only be alphanumeric or '_'. Backquotes indicate
+        // Path identifiers can only be alphanumeric or '_'. Double quote indicate
         // the beginning of an escape sequence and are therefore allowed.
-        if (!isalnum(*p) && *p != '_' && *p != '`') {
+        if (!isalnum(*p) && *p != '_' && *p != '"') {
           return MakeSqlError()
                  << "Path contains an invalid character '" << *p << "'";
         }
-        // Skip over dots within backquoted sections (e.g. 'table.`name.dot`).
-        if (*p == '`') {
-          // Fail if the unescaped backquote is not the first piece of the
-          // component (e.g. abc.`def` is allowed,  abc.d`ef` is not).
+        // Skip over dots within doublequoted sections (e.g. 'table."name.dot").
+        if (*p == '"') {
+          // Fail if the unescaped double quote is not the first piece of the
+          // component (e.g. abc."def" is allowed,  abc.d"ef" is not).
           if (p != segment_start) {
             return MakeSqlError()
                    << "Path contains an invalid character '`' "
                    << "not at the start of a dotted path segment";
           }
-          // Skip the opening backquote.
+          // Skip the opening double quote.
           ++p;
-          // Note that this will end on the closing backquote.
+          // Note that this will end on the closing double quote.
           if (!AdvanceToNextBackquote(end, &p)) {
-            return MakeSqlError() << "Path contains an unmatched `";
+            return MakeSqlError() << "Path contains an unmatched \"";
           }
         }
       }

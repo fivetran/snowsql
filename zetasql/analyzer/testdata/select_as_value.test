@@ -2,7 +2,7 @@ select as value 5
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [INT64]
+| +-$query.$col1#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -17,7 +17,7 @@ select as value KitchenSink from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-TestTable.KitchenSink#3 AS `$value_column` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-TestTable.KitchenSink#3 AS "$value_column" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -44,7 +44,7 @@ select as value 5 as abc
 --
 QueryStmt
 +-output_column_list=
-| +-$query.abc#1 AS `$value_column` [INT64]
+| +-$query.abc#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -89,8 +89,8 @@ select (select as value 123), array(select as value 123)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
-| +-$query.$col2#4 AS `$col2` [ARRAY<INT64>]
+| +-$query.$col1#3 AS "$col1" [INT64]
+| +-$query.$col2#4 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#3, $col2#4]
@@ -125,7 +125,7 @@ select as value struct()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [STRUCT<>]
+| +-$query.$col1#1 AS "$value_column" [STRUCT<>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -140,7 +140,7 @@ select as value new zetasql_test__.TestExtraPB()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [PROTO<zetasql_test__.TestExtraPB>]
+| +-$query.$col1#1 AS "$value_column" [PROTO<zetasql_test__.TestExtraPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -169,7 +169,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[KitchenSinkValueTable.value#1]
         +-input_scan=
-        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-GetProtoField
@@ -183,7 +183,7 @@ ALTERNATION GROUP: as value
 --
 QueryStmt
 +-output_column_list=
-| +-KitchenSinkValueTable.value#1 AS `$value_column` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-KitchenSinkValueTable.value#1 AS "$value_column" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -192,7 +192,7 @@ QueryStmt
       +-FilterScan
         +-column_list=[KitchenSinkValueTable.value#1]
         +-input_scan=
-        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+        | +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$less(INT64, INT64) -> BOOL)
             +-GetProtoField
@@ -216,7 +216,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[KitchenSinkValueTable.value#1]
         +-input_scan=
-          +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t")
+          +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t')
 ==
 
 with q as (select {{|as struct|as value}}
@@ -233,14 +233,14 @@ QueryStmt
     +-column_list=[$query.q#4]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q.$col1#1]
     |       +-expr_list=
     |       | +-$col1#1 :=
     |       |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |       |     +-Literal(type=STRING, value="int32_val1: 1")
+    |       |     +-Literal(type=STRING, value='int32_val1: 1')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
@@ -253,7 +253,7 @@ QueryStmt
         |     +-field_list=
         |       +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=q.$col1#2)
         +-input_scan=
-          +-WithRefScan(column_list=[q.$col1#2], with_query_name="q")
+          +-WithRefScan(column_list=[q.$col1#2], with_query_name='q')
 --
 ALTERNATION GROUP: as struct
 --
@@ -265,7 +265,7 @@ QueryStmt
     +-column_list=[q.$struct#3]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$make_struct.$struct#2]
@@ -281,14 +281,14 @@ QueryStmt
     |           +-expr_list=
     |           | +-$col1#1 :=
     |           |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |           |     +-Literal(type=STRING, value="int32_val1: 1")
+    |           |     +-Literal(type=STRING, value='int32_val1: 1')
     |           +-input_scan=
     |             +-SingleRowScan
     +-query=
       +-ProjectScan
         +-column_list=[q.$struct#3]
         +-input_scan=
-          +-WithRefScan(column_list=[q.$struct#3], with_query_name="q")
+          +-WithRefScan(column_list=[q.$struct#3], with_query_name='q')
 --
 ALTERNATION GROUP: as value
 --
@@ -300,21 +300,21 @@ QueryStmt
     +-column_list=[q.$value_column#2]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="q"
+    |   +-with_query_name='q'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[q.$col1#1]
     |       +-expr_list=
     |       | +-$col1#1 :=
     |       |   +-Cast(STRING -> PROTO<zetasql_test__.TestExtraPB>)
-    |       |     +-Literal(type=STRING, value="int32_val1: 1")
+    |       |     +-Literal(type=STRING, value='int32_val1: 1')
     |       +-input_scan=
     |         +-SingleRowScan
     +-query=
       +-ProjectScan
         +-column_list=[q.$value_column#2]
         +-input_scan=
-          +-WithRefScan(column_list=[q.$value_column#2], with_query_name="q")
+          +-WithRefScan(column_list=[q.$value_column#2], with_query_name='q')
 ==
 
 select as value value value
@@ -322,7 +322,7 @@ from (select 123 value)
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.value#1 AS `$value_column` [INT64]
+| +-$subquery1.value#1 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -340,7 +340,7 @@ select distinct as value key from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$distinct.key#4 AS `$value_column` [INT32]
+| +-$distinct.key#4 AS "$value_column" [INT32]
 +-is_value_table=TRUE
 +-query=
   +-AggregateScan
@@ -357,7 +357,7 @@ select 6
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$value_column#3 AS `$value_column` [INT64]
+| +-$union_all.$value_column#3 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan
@@ -390,7 +390,7 @@ select as value 6
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#3 AS `$col1` [INT64]
+| +-$union_all.$col1#3 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#3]
@@ -422,7 +422,7 @@ select as value 1.0
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$value_column#3 AS `$value_column` [DOUBLE]
+| +-$union_all.$value_column#3 AS "$value_column" [DOUBLE]
 +-is_value_table=TRUE
 +-query=
   +-SetOperationScan
@@ -459,7 +459,7 @@ select as value [1,2,3]
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$value_column` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$value_column" [ARRAY<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan

@@ -10,7 +10,7 @@ ALTERNATION GROUP: *
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -33,7 +33,7 @@ ALTERNATION GROUP: int64
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -60,7 +60,7 @@ from SimpleTypesWithAnonymizationUid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -79,7 +79,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -113,7 +113,7 @@ QueryStmt
 [no_enable_literal_replacement]
 # COUNT and COUNT(*) aggregations with reports and max_rows_contributed
 SELECT WITH DIFFERENTIAL_PRIVACY OPTIONS(max_rows_contributed = 3)
-  COUNT({{*|int64}}, report_format => "{{JSON|PROTO}}")
+  COUNT({{*|int64}}, report_format => '{{JSON|PROTO}}')
 FROM SimpleTypesWithAnonymizationUid
 --
 
@@ -122,7 +122,7 @@ ALTERNATION GROUP: *,JSON
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -146,7 +146,7 @@ ALTERNATION GROUP: *,PROTO
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -170,7 +170,7 @@ ALTERNATION GROUP: int64,JSON
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -195,7 +195,7 @@ ALTERNATION GROUP: int64,PROTO
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.functions.DifferentialPrivacyOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -295,7 +295,7 @@ from SimpleTypesWithAnonymizationUid
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -323,7 +323,7 @@ from SimpleTypesWithAnonymizationUid
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -359,7 +359,7 @@ from SimpleTypesWithAnonymizationUid
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -388,7 +388,7 @@ from SimpleTypesWithAnonymizationUid
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -402,7 +402,7 @@ QueryStmt
         |   +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
         |     +-Literal(type=STRUCT<INT64, INT64>, value=NULL)
         +-option_list=
-          +-max_rows_contributed := Parameter(type=INT64, name="test_param_int64")
+          +-max_rows_contributed := Parameter(type=INT64, name='test_param_int64')
 
 Rewrite ERROR: Option MAX_ROWS_CONTRIBUTED must be an INT64 literal between 1 and 2147483647
 ==

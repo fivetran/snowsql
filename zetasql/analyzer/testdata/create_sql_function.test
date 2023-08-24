@@ -11,8 +11,8 @@ CreateFunctionStmt
 +-name_path=myfunc
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -25,8 +25,8 @@ CreateFunctionStmt
 +-has_explicit_return_type=TRUE
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -47,8 +47,8 @@ CreateFunctionStmt
 +-has_explicit_return_type=TRUE
 +-return_type=INT32
 +-signature=() -> INT32
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT32, value=42)
 ==
@@ -70,11 +70,11 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[x]
 +-signature=(INT32 x) -> INT64
-+-language="SQL"
-+-code="x"
++-language='SQL'
++-code='x'
 +-function_expression=
   +-Cast(INT32 -> INT64)
-    +-ArgumentRef(type=INT32, name="x")
+    +-ArgumentRef(type=INT32, name='x')
 ==
 
 # Struct return type.
@@ -86,10 +86,10 @@ CreateFunctionStmt
 +-has_explicit_return_type=TRUE
 +-return_type=STRUCT<a STRING, b INT32>
 +-signature=() -> STRUCT<a STRING, b INT32>
-+-language="SQL"
-+-code="STRUCT<a string, b int32>('balloons', 99)"
++-language='SQL'
++-code='STRUCT<a string, b int32>(\'balloons\', 99)'
 +-function_expression=
-  +-Literal(type=STRUCT<a STRING, b INT32>, value={a:"balloons", b:99}, has_explicit_type=TRUE)
+  +-Literal(type=STRUCT<a STRING, b INT32>, value={a:'balloons', b:99}, has_explicit_type=TRUE)
 ==
 
 # Temporary function.
@@ -100,8 +100,8 @@ CreateFunctionStmt
 +-create_scope=CREATE_TEMP
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -128,8 +128,8 @@ CreateFunctionStmt
 +-create_scope=CREATE_PUBLIC
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 --
@@ -140,8 +140,8 @@ CreateFunctionStmt
 +-create_scope=CREATE_PRIVATE
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -157,8 +157,8 @@ CreateFunctionStmt
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 --
@@ -204,8 +204,8 @@ CreateFunctionStmt
 +-create_mode=CREATE_OR_REPLACE
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 --
@@ -249,8 +249,8 @@ CreateFunctionStmt
 +-create_mode=CREATE_IF_NOT_EXISTS
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -264,8 +264,8 @@ CreateFunctionStmt
 +-create_mode=CREATE_OR_REPLACE
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -285,8 +285,8 @@ CreateFunctionStmt
 +-name_path=mypackage.myfunc
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
   +-Literal(type=INT64, value=42)
 ==
@@ -298,13 +298,13 @@ CreateFunctionStmt
 +-name_path=mypackage.myfunc
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
 | +-Literal(type=INT64, value=42)
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-bruce := Literal(type=STRING, value="lee")
+  +-a := Literal(type=STRING, value='b')
+  +-bruce := Literal(type=STRING, value='lee')
 ==
 
 # Function with options that tries to reference a function parameter.
@@ -324,12 +324,12 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[a]
 +-signature=(INT64 a) -> INT64
-+-language="SQL"
-+-code="42"
++-language='SQL'
++-code='42'
 +-function_expression=
 | +-Literal(type=INT64, value=42)
 +-option_list=
-  +-a := Literal(type=STRING, value="a")
+  +-a := Literal(type=STRING, value='a')
 ==
 
 # SQL expression without enclosing parentheses.
@@ -348,12 +348,12 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
-+-language="SQL"
-+-code="x + y"
++-language='SQL'
++-code='x + y'
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-    +-ArgumentRef(type=INT64, name="x")
-    +-ArgumentRef(type=INT64, name="y")
+    +-ArgumentRef(type=INT64, name='x')
+    +-ArgumentRef(type=INT64, name='y')
 ==
 
 # Argument definition and references use different case mixes.
@@ -364,12 +364,12 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[nUmbEr]
 +-signature=(INT64 nUmbEr) -> INT64
-+-language="SQL"
-+-code="NumBEr * nuMBeR"
++-language='SQL'
++-code='NumBEr * nuMBeR'
 +-function_expression=
   +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
-    +-ArgumentRef(type=INT64, name="nUmbEr")
-    +-ArgumentRef(type=INT64, name="nUmbEr")
+    +-ArgumentRef(type=INT64, name='nUmbEr')
+    +-ArgumentRef(type=INT64, name='nUmbEr')
 ==
 
 # SELECT statement in function body.
@@ -387,8 +387,8 @@ CreateFunctionStmt
 +-name_path=AddFunc
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="(SELECT 1)"
++-language='SQL'
++-code='(SELECT 1)'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -409,8 +409,8 @@ CreateFunctionStmt
 +-name_path=AddFunc
 +-return_type=ARRAY<INT64>
 +-signature=() -> ARRAY<INT64>
-+-language="SQL"
-+-code="ARRAY(SELECT 1)"
++-language='SQL'
++-code='ARRAY(SELECT 1)'
 +-function_expression=
   +-SubqueryExpr
     +-type=ARRAY<INT64>
@@ -431,8 +431,8 @@ CreateFunctionStmt
 +-name_path=AddFunc
 +-return_type=BOOL
 +-signature=() -> BOOL
-+-language="SQL"
-+-code="EXISTS (SELECT 1)"
++-language='SQL'
++-code='EXISTS (SELECT 1)'
 +-function_expression=
   +-SubqueryExpr
     +-type=BOOL
@@ -454,8 +454,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
-+-language="SQL"
-+-code="(SELECT x + y)"
++-language='SQL'
++-code='(SELECT x + y)'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -466,8 +466,8 @@ CreateFunctionStmt
         +-expr_list=
         | +-$col1#1 :=
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-        |     +-ArgumentRef(type=INT64, name="x")
-        |     +-ArgumentRef(type=INT64, name="y")
+        |     +-ArgumentRef(type=INT64, name='x')
+        |     +-ArgumentRef(type=INT64, name='y')
         +-input_scan=
           +-SingleRowScan
 ==
@@ -481,8 +481,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
-+-language="SQL"
-+-code="(SELECT x + y from (SELECT 1 x))"
++-language='SQL'
++-code='(SELECT x + y from (SELECT 1 x))'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -494,7 +494,7 @@ CreateFunctionStmt
         | +-$col1#2 :=
         |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
         |     +-ColumnRef(type=INT64, column=$subquery1.x#1)
-        |     +-ArgumentRef(type=INT64, name="y")
+        |     +-ArgumentRef(type=INT64, name='y')
         +-input_scan=
           +-ProjectScan
             +-column_list=[$subquery1.x#1]
@@ -515,8 +515,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[x]
 +-signature=(STRUCT<y INT64> x) -> INT64
-+-language="SQL"
-+-code="(SELECT x.y from (SELECT 1 AS y) AS x)"
++-language='SQL'
++-code='(SELECT x.y from (SELECT 1 AS y) AS x)'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -559,17 +559,17 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
-+-language="SQL"
-+-code="x + y"
++-language='SQL'
++-code='x + y'
 +-function_expression=
 | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|   +-ArgumentRef(type=INT64, name="x")
-|   +-ArgumentRef(type=INT64, name="y")
+|   +-ArgumentRef(type=INT64, name='x')
+|   +-ArgumentRef(type=INT64, name='y')
 +-option_list=
   +-param1 :=
     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-      +-Parameter(type=STRING, name="test_param_string")
-      +-Literal(type=STRING, value="_param")
+      +-Parameter(type=STRING, name='test_param_string')
+      +-Literal(type=STRING, value='_param')
 ==
 
 # Using a parameter not in the argument list.
@@ -597,22 +597,22 @@ create function fn ( a int32, string ) as ( "s" );
 ==
 
 # Function with quoted argument names.
-create function fn(`a b` int32, `c d` int32)
-as (`a b` + `c d`)
+create function fn("a b" int32, "c d" int32)
+as ("a b" + "c d")
 --
 CreateFunctionStmt
 +-name_path=fn
 +-return_type=INT64
-+-argument_name_list=[`a b`, `c d`]
++-argument_name_list=["a b", "c d"]
 +-signature=(INT32 a b, INT32 c d) -> INT64
-+-language="SQL"
-+-code="`a b` + `c d`"
++-language='SQL'
++-code='"a b" + "c d"'
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     +-Cast(INT32 -> INT64)
-    | +-ArgumentRef(type=INT32, name="a b")
+    | +-ArgumentRef(type=INT32, name='a b')
     +-Cast(INT32 -> INT64)
-      +-ArgumentRef(type=INT32, name="c d")
+      +-ArgumentRef(type=INT32, name='c d')
 ==
 
 # An initial test with AS alias, showing that the statement fails resolution
@@ -654,8 +654,8 @@ CreateFunctionStmt
 +-name_path=fn
 +-return_type=INT64
 +-signature=() -> INT64
-+-language="SQL"
-+-code="(select 1 as foo from KeyValue)"
++-language='SQL'
++-code='(select 1 as foo from KeyValue)'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -672,42 +672,42 @@ CreateFunctionStmt
 # STRUCT constructor in options.
 create function AddFunc(x int64, y int64) as (x + y)
 options(
-  ui_hints=STRUCT("ui_hints.LegacySemanticType.CURRENCY" as semantic_type,
-                  ("impressions.clicks",
-                   "impressions.clicks.conversions") as paths));
+  ui_hints=STRUCT('ui_hints.LegacySemanticType.CURRENCY' as semantic_type,
+                  ('impressions.clicks',
+                   'impressions.clicks.conversions') as paths));
 --
 CreateFunctionStmt
 +-name_path=AddFunc
 +-return_type=INT64
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
-+-language="SQL"
-+-code="x + y"
++-language='SQL'
++-code='x + y'
 +-function_expression=
 | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|   +-ArgumentRef(type=INT64, name="x")
-|   +-ArgumentRef(type=INT64, name="y")
+|   +-ArgumentRef(type=INT64, name='x')
+|   +-ArgumentRef(type=INT64, name='y')
 +-option_list=
-  +-ui_hints := Literal(type=STRUCT<semantic_type STRING, paths STRUCT<STRING, STRING>>, value={semantic_type:"ui_hints.LegacySemanticType.CURRENCY", paths:{"impressions.clicks", "impressions.clicks.conversions"}})
+  +-ui_hints := Literal(type=STRUCT<semantic_type STRING, paths STRUCT<STRING, STRING>>, value={semantic_type:'ui_hints.LegacySemanticType.CURRENCY', paths:{'impressions.clicks', 'impressions.clicks.conversions'}})
 ==
 
 # STRUCT constructor with ARRAY constructor in options.
 create function AddFunc(x int64, y int64) as (x + y)
-options(ui_hints=STRUCT("CURRENCY" as semantic_type,
-                        [("impressions.clicks",
-                          "impressions.clicks.conversions"),
-                         ("clicks2", "clicks2.conversions")] as paths));
+options(ui_hints=STRUCT('CURRENCY' as semantic_type,
+                        [('impressions.clicks',
+                          'impressions.clicks.conversions'),
+                         ('clicks2', 'clicks2.conversions')] as paths));
 --
 CreateFunctionStmt
 +-name_path=AddFunc
 +-return_type=INT64
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, INT64 y) -> INT64
-+-language="SQL"
-+-code="x + y"
++-language='SQL'
++-code='x + y'
 +-function_expression=
 | +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-|   +-ArgumentRef(type=INT64, name="x")
-|   +-ArgumentRef(type=INT64, name="y")
+|   +-ArgumentRef(type=INT64, name='x')
+|   +-ArgumentRef(type=INT64, name='y')
 +-option_list=
-  +-ui_hints := Literal(type=STRUCT<semantic_type STRING, paths ARRAY<STRUCT<STRING, STRING>>>, value={semantic_type:"CURRENCY", paths:[{"impressions.clicks", "impressions.clicks.conversions"}, {"clicks2", "clicks2.conversions"}]})
+  +-ui_hints := Literal(type=STRUCT<semantic_type STRING, paths ARRAY<STRUCT<STRING, STRING>>>, value={semantic_type:'CURRENCY', paths:[{'impressions.clicks', 'impressions.clicks.conversions'}, {'clicks2', 'clicks2.conversions'}]})

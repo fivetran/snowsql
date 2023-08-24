@@ -377,12 +377,12 @@ SELECT ARRAY<BOOL>[true] || ARRAY<BOOL>[false]
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BOOL>[known order:true, false]}]
 ==
 [name=array_concat_string]
-SELECT ARRAY_CONCAT(ARRAY<STRING>["a"], ARRAY<STRING>["b"])
+SELECT ARRAY_CONCAT(ARRAY<STRING>['a'], ARRAY<STRING>['b'])
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"a", "b"]}]
 ==
 [name=array_concat_operator_string]
-SELECT ARRAY<STRING>["a"] || ARRAY<STRING>["b"]
+SELECT ARRAY<STRING>['a'] || ARRAY<STRING>['b']
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"a", "b"]}]
 ==
@@ -397,18 +397,18 @@ SELECT ARRAY<BYTES>[b"f1"] || ARRAY<BYTES>[b"f2"]
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<BYTES>[known order:b"f1", b"f2"]}]
 ==
 [name=array_concat_date]
-SELECT ARRAY_CONCAT(ARRAY<DATE>["2000-01-01"], ARRAY<DATE>["2015-12-30"])
+SELECT ARRAY_CONCAT(ARRAY<DATE>['2000-01-01'], ARRAY<DATE>['2015-12-30'])
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[known order:2000-01-01, 2015-12-30]}]
 ==
 [name=array_concat_operator_date]
-SELECT ARRAY<DATE>["2000-01-01"] || ARRAY<DATE>["2015-12-30"]
+SELECT ARRAY<DATE>['2000-01-01'] || ARRAY<DATE>['2015-12-30']
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<DATE>[known order:2000-01-01, 2015-12-30]}]
 ==
 [name=array_concat_timestamp]
-SELECT ARRAY_CONCAT(ARRAY<TIMESTAMP>["2013-02-01 12:34:56.789012"],
-                    ARRAY<TIMESTAMP>["2014-09-11 01:01:01.001001 UTC"])
+SELECT ARRAY_CONCAT(ARRAY<TIMESTAMP>['2013-02-01 12:34:56.789012'],
+                    ARRAY<TIMESTAMP>['2014-09-11 01:01:01.001001 UTC'])
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<TIMESTAMP>[known order:
@@ -418,8 +418,8 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=array_concat_operator_timestamp]
-SELECT ARRAY<TIMESTAMP>["2013-02-01 12:34:56.789012"] ||
-       ARRAY<TIMESTAMP>["2014-09-11 01:01:01.001001 UTC"]
+SELECT ARRAY<TIMESTAMP>['2013-02-01 12:34:56.789012'] ||
+       ARRAY<TIMESTAMP>['2014-09-11 01:01:01.001001 UTC']
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<TIMESTAMP>[known order:
@@ -429,16 +429,16 @@ ARRAY<STRUCT<ARRAY<>>>[
 ]
 ==
 [name=array_concat_enum]
-SELECT ARRAY_CONCAT(ARRAY<zetasql_test__.TestEnum>["TESTENUM0"],
-       ARRAY<zetasql_test__.TestEnum>["TESTENUM1"]);
+SELECT ARRAY_CONCAT(ARRAY<zetasql_test__.TestEnum>['TESTENUM0'],
+       ARRAY<zetasql_test__.TestEnum>['TESTENUM1']);
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:TESTENUM0, TESTENUM1]}
 ]
 ==
 [name=array_concat_operator_enum]
-SELECT ARRAY<zetasql_test__.TestEnum>["TESTENUM0"] ||
-       ARRAY<zetasql_test__.TestEnum>["TESTENUM1"];
+SELECT ARRAY<zetasql_test__.TestEnum>['TESTENUM0'] ||
+       ARRAY<zetasql_test__.TestEnum>['TESTENUM1'];
 --
 ARRAY<STRUCT<ARRAY<>>>[
   {ARRAY<ENUM<zetasql_test__.TestEnum>>[known order:TESTENUM0, TESTENUM1]}
@@ -455,11 +455,11 @@ SELECT ARRAY[STRUCT(1 as i)] || ARRAY[STRUCT(2 as i)]
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRUCT<i INT64>>[known order:{1}, {2}]}]
 ==
 [name=array_concat_proto]
-SELECT ARRAY_CONCAT(ARRAY<`zetasql_test__.KitchenSinkPB`>[
+SELECT ARRAY_CONCAT(ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
-  '''], ARRAY<`zetasql_test__.KitchenSinkPB`>[
+  '''], ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 21
     int64_key_2: 22
@@ -481,11 +481,11 @@ ARRAY<STRUCT<ARRAY<>>>[
 
 ==
 [name=array_concat_operator_proto]
-SELECT ARRAY<`zetasql_test__.KitchenSinkPB`>[
+SELECT ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 11
     int64_key_2: 12
-  '''] || ARRAY<`zetasql_test__.KitchenSinkPB`>[
+  '''] || ARRAY<"zetasql_test__.KitchenSinkPB">[
   '''
     int64_key_1: 21
     int64_key_2: 22
@@ -610,7 +610,7 @@ ARRAY<STRUCT<STRING>>[{"12"}]
 ==
 [name=concat_op_wrong_type_string_int]
 [required_features=V_1_3_CONCAT_MIXED_TYPES]
-SELECT "abc" || 2
+SELECT 'abc' || 2
 --
 ARRAY<STRUCT<STRING>>[{"abc2"}]
 ==

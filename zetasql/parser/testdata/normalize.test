@@ -166,58 +166,58 @@ FROM
 ==
 
 # There's no special syntax for NORMALIZE, so this is caught at analysis time.
-SELECT NORMALIZE("abc", "NFC", 3), `NORMALIZE`("abc", "NFC", 3)
+SELECT NORMALIZE('abc', 'NFC', 3), "NORMALIZE"('abc', 'NFC', 3)
 --
-QueryStatement [0-63] [SELECT NORMALIZE..."NFC", 3)]
-  Query [0-63] [SELECT NORMALIZE..."NFC", 3)]
-    Select [0-63] [SELECT NORMALIZE..."NFC", 3)]
-      SelectList [7-63] [NORMALIZE(..."NFC", 3)]
-        SelectColumn [7-33] [NORMALIZE("abc", "NFC", 3)]
-          FunctionCall [7-33] [NORMALIZE("abc", "NFC", 3)]
+QueryStatement [0-63] [SELECT NORMALIZE...'NFC', 3)]
+  Query [0-63] [SELECT NORMALIZE...'NFC', 3)]
+    Select [0-63] [SELECT NORMALIZE...'NFC', 3)]
+      SelectList [7-63] [NORMALIZE(...'NFC', 3)]
+        SelectColumn [7-33] [NORMALIZE('abc', 'NFC', 3)]
+          FunctionCall [7-33] [NORMALIZE('abc', 'NFC', 3)]
             PathExpression [7-16] [NORMALIZE]
               Identifier(NORMALIZE) [7-16] [NORMALIZE]
-            StringLiteral("abc") [17-22] ["abc"]
-            StringLiteral("NFC") [24-29] ["NFC"]
+            StringLiteral('abc') [17-22] ['abc']
+            StringLiteral('NFC') [24-29] ['NFC']
             IntLiteral(3) [31-32] [3]
-        SelectColumn [35-63] [`NORMALIZE`("abc", "NFC", 3)]
-          FunctionCall [35-63] [`NORMALIZE`("abc", "NFC", 3)]
-            PathExpression [35-46] [`NORMALIZE`]
-              Identifier(NORMALIZE) [35-46] [`NORMALIZE`]
-            StringLiteral("abc") [47-52] ["abc"]
-            StringLiteral("NFC") [54-59] ["NFC"]
+        SelectColumn [35-63] ["NORMALIZE"('abc', 'NFC', 3)]
+          FunctionCall [35-63] ["NORMALIZE"('abc', 'NFC', 3)]
+            PathExpression [35-46] ["NORMALIZE"]
+              Identifier(NORMALIZE) [35-46] ["NORMALIZE"]
+            StringLiteral('abc') [47-52] ['abc']
+            StringLiteral('NFC') [54-59] ['NFC']
             IntLiteral(3) [61-62] [3]
 --
 SELECT
-  NORMALIZE("abc", "NFC", 3),
-  NORMALIZE("abc", "NFC", 3)
+  NORMALIZE('abc', 'NFC', 3),
+  NORMALIZE('abc', 'NFC', 3)
 ==
 
 # There's no special syntax for NORMALIZE_AND_CASEFOLD, so this is caught at
 # analysis time.
-SELECT NORMALIZE_AND_CASEFOLD("abc", "NFC", def),
-       `NORMALIZE_AND_CASEFOLD`("abc", "NFC", def)
+SELECT NORMALIZE_AND_CASEFOLD('abc', 'NFC', def),
+       "NORMALIZE_AND_CASEFOLD"('abc', 'NFC', def)
 --
-QueryStatement [0-100] [SELECT NORMALIZE_...NFC", def)]
-  Query [0-100] [SELECT NORMALIZE_...NFC", def)]
-    Select [0-100] [SELECT NORMALIZE_...NFC", def)]
-      SelectList [7-100] [NORMALIZE_AND_CAS...NFC", def)]
-        SelectColumn [7-48] [NORMALIZE_AND_CAS...NFC", def)]
-          FunctionCall [7-48] [NORMALIZE_AND_CAS...NFC", def)]
+QueryStatement [0-100] [SELECT NORMALIZE_...NFC', def)]
+  Query [0-100] [SELECT NORMALIZE_...NFC', def)]
+    Select [0-100] [SELECT NORMALIZE_...NFC', def)]
+      SelectList [7-100] [NORMALIZE_AND_CAS...NFC', def)]
+        SelectColumn [7-48] [NORMALIZE_AND_CAS...NFC', def)]
+          FunctionCall [7-48] [NORMALIZE_AND_CAS...NFC', def)]
             PathExpression [7-29] [NORMALIZE_AND_CASEFOLD]
               Identifier(NORMALIZE_AND_CASEFOLD) [7-29] [NORMALIZE_AND_CASEFOLD]
-            StringLiteral("abc") [30-35] ["abc"]
-            StringLiteral("NFC") [37-42] ["NFC"]
+            StringLiteral('abc') [30-35] ['abc']
+            StringLiteral('NFC') [37-42] ['NFC']
             PathExpression [44-47] [def]
               Identifier(def) [44-47] [def]
-        SelectColumn [57-100] [`NORMALIZE_AND_CA...NFC", def)]
-          FunctionCall [57-100] [`NORMALIZE_AND_CA...NFC", def)]
-            PathExpression [57-81] [`NORMALIZE_AND_CASEFOLD`]
-              Identifier(NORMALIZE_AND_CASEFOLD) [57-81] [`NORMALIZE_AND_CASEFOLD`]
-            StringLiteral("abc") [82-87] ["abc"]
-            StringLiteral("NFC") [89-94] ["NFC"]
+        SelectColumn [57-100] ["NORMALIZE_AND_CA...NFC', def)]
+          FunctionCall [57-100] ["NORMALIZE_AND_CA...NFC', def)]
+            PathExpression [57-81] ["NORMALIZE_AND_CASEFOLD"]
+              Identifier(NORMALIZE_AND_CASEFOLD) [57-81] ["NORMALIZE_AND_CASEFOLD"]
+            StringLiteral('abc') [82-87] ['abc']
+            StringLiteral('NFC') [89-94] ['NFC']
             PathExpression [96-99] [def]
               Identifier(def) [96-99] [def]
 --
 SELECT
-  NORMALIZE_AND_CASEFOLD("abc", "NFC", def),
-  NORMALIZE_AND_CASEFOLD("abc", "NFC", def)
+  NORMALIZE_AND_CASEFOLD('abc', 'NFC', def),
+  NORMALIZE_AND_CASEFOLD('abc', 'NFC', def)

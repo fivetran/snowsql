@@ -1,4 +1,4 @@
-ALTER TABLE KeyValue RENAME TO {{foo.bar|`foo.bar`}}
+ALTER TABLE KeyValue RENAME TO {{foo.bar|"foo.bar"}}
 --
 ALTERNATION GROUP: foo.bar
 --
@@ -7,12 +7,12 @@ AlterTableStmt
 +-alter_action_list=
   +-RenameToAction(new_path=foo.bar)
 --
-ALTERNATION GROUP: `foo.bar`
+ALTERNATION GROUP: "foo.bar"
 --
 AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
-  +-RenameToAction(new_path=`foo.bar`)
+  +-RenameToAction(new_path="foo.bar")
 ==
 
 # Alter table IF EXISTS, existing table
@@ -54,7 +54,7 @@ AlterTableStmt
   +-AddColumnAction
   | +-is_if_not_exists=FALSE
   | +-column_definition=
-  |   +-ColumnDefinition(name="bar", type=STRING, column=KeyValue.bar#1)
+  |   +-ColumnDefinition(name='bar', type=STRING, column=KeyValue.bar#1)
   +-RenameToAction(new_path=foo)
 ==
 

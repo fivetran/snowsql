@@ -3117,7 +3117,7 @@ void SampleCatalog::LoadTemplatedSQLUDFs() {
                                               FunctionArgumentType::REQUIRED)},
                         context_id++),
       /*argument_names=*/{"$col1"},
-      ParseResumeLocation::FromString("`$col1`")));
+      ParseResumeLocation::FromString("\"$col1\"")));
 
   // Add a UDF with a valid templated SQL body that performs concatenation on an
   // argument. The function signature accepts a single argument of any type.
@@ -3445,7 +3445,7 @@ void SampleCatalog::LoadTemplatedSQLUDFs() {
       ParseResumeLocation::FromString(R"(
         IF(COUNT(1) = COUNT(DISTINCT cval) + delta OR
            (allow_nulls AND COUNTIF(cval IS NOT NULL) = COUNT(DISTINCT cval)),
-           NULL, "NOT NULL"))"),
+           NULL, 'NOT NULL'))"),
       Function::AGGREGATE));
 
   // Add a templated (scalar) SQL function with definer rights
@@ -5133,7 +5133,7 @@ void SampleCatalog::LoadNonTemplatedSqlTableValuedFunctions(
           CREATE TABLE FUNCTION CallsUnaryAbTableArgWithScalarArgsTempl(
             ignored_param ANY TYPE)
           AS SELECT * FROM UnaryAbTableArgWithScalarArgsTempl(
-              1, (SELECT 1 a, "2" b, DATE '2020-08-22' AS c), "b");
+              1, (SELECT 1 a, '2' b, DATE '2020-08-22' AS c), 'b');
       )sql",
       language_options);
   AddSqlDefinedTableFunctionFromCreate(
@@ -5271,7 +5271,7 @@ void SampleCatalog::LoadTemplatedSQLTableValuedFunctions() {
                                               FunctionArgumentType::REQUIRED)},
                         context_id++),
       /*arg_name_list=*/{"$col1"},
-      ParseResumeLocation::FromString("select `$col1` as x")));
+      ParseResumeLocation::FromString("select \"$col1\" as x")));
 
   // Add a TVF with a valid templated SQL body that returns an output column
   // where the name contains '$'. The function signature accepts a single
@@ -5283,7 +5283,7 @@ void SampleCatalog::LoadTemplatedSQLTableValuedFunctions() {
                                               FunctionArgumentType::REQUIRED)},
                         context_id++),
       /*arg_name_list=*/{"x"},
-      ParseResumeLocation::FromString("select x as `$col1`")));
+      ParseResumeLocation::FromString("select x as \"$col1\"")));
 
   // Add a TVF with a valid templated SQL body that performs concatenation on a
   // scalar argument. The function signature accepts a single argument of any
@@ -5422,7 +5422,7 @@ void SampleCatalog::LoadTemplatedSQLTableValuedFunctions() {
           context_id++),
       /*arg_name_list=*/{"d", "t"},
       ParseResumeLocation::FromString(
-          "select `date` from t where `date` < d")));
+          "select \"date\" from t where \"date\" < d")));
 
   // Add a TVF with a valid templated SQL body that refers to both a scalar
   // argument of any type and a relation argument of any table.

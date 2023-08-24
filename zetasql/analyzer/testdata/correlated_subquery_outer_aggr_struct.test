@@ -30,7 +30,7 @@ GROUP BY {{ct.|}}TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#11 AS TestStruct [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
-| +-$query.$col2#16 AS `$col2` [STRUCT<TestStruct STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, c INT32, d STRUCT<a INT32, b STRING>>]
+| +-$query.$col2#16 AS "$col2" [STRUCT<TestStruct STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, c INT32, d STRUCT<a INT32, b STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#11, $query.$col2#16]
@@ -75,7 +75,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#11]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#11 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
@@ -88,7 +88,7 @@ GROUP BY {{ct.|}}TestStruct.d
 QueryStmt
 +-output_column_list=
 | +-$query.a#9 AS a [INT32]
-| +-$query.$col2#11 AS `$col2` [INT32]
+| +-$query.$col2#11 AS "$col2" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#9, $col2#11]
@@ -121,7 +121,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.d#8]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-d#8 :=
             +-GetStructField
@@ -140,7 +140,7 @@ GROUP BY TestStruct.d
 QueryStmt
 +-output_column_list=
 | +-$groupby.d#8 AS d [STRUCT<a INT32, b STRING>]
-| +-$query.$col2#10 AS `$col2` [INT64]
+| +-$query.$col2#10 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.d#8, $query.$col2#10]
@@ -175,7 +175,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.d#8]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-d#8 :=
             +-GetStructField
@@ -217,7 +217,7 @@ GROUP BY TestStruct, ct.TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#8 AS TestStruct [STRUCT<a INT32, b STRING>]
-| +-$query.$col2#11 AS `$col2` [INT32]
+| +-$query.$col2#11 AS "$col2" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#8, $query.$col2#11]
@@ -244,7 +244,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=$groupby.[TestStruct#8, TestStruct#9]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#8 :=
           | +-GetStructField
@@ -273,8 +273,8 @@ GROUP BY 1
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$col1#9 AS `$col1` [STRUCT<a INT32, b STRING>]
-| +-$aggregate.$agg1#8 AS `$col2` [INT64]
+| +-$groupby.$col1#9 AS "$col1" [STRUCT<a INT32, b STRING>]
+| +-$aggregate.$agg1#8 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$col1#9, $aggregate.$agg1#8]
@@ -282,7 +282,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.$col1#9, $aggregate.$agg1#8]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
         | +-$col1#9 :=
         |   +-SubqueryExpr
@@ -344,7 +344,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[ComplexTypes.TestStruct#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
         |       +-SubqueryExpr
@@ -398,7 +398,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[ComplexTypes.TestStruct#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
         |       +-SubqueryExpr
@@ -439,16 +439,16 @@ GROUP BY (SELECT TestStruct)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRING]
+| +-$query.$col1#9 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
     +-expr_list=
-    | +-$col1#9 := Literal(type=STRING, value="foo")
+    | +-$col1#9 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-$groupbycol1#8 :=
             +-SubqueryExpr
@@ -494,7 +494,7 @@ GROUP BY (SELECT {{ct.|}}TestStruct.d)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#7]
@@ -502,7 +502,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
         | +-$groupbycol1#9 :=
         |   +-SubqueryExpr
@@ -572,7 +572,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
           +-$groupbycol2#9 :=
@@ -603,7 +603,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 :=
           | +-GetStructField
@@ -661,7 +661,7 @@ QueryStmt
         |   |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |   |   |     +-field_idx=1
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-group_by_list=
         |     +-d#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.d#7)
         +-filter_expr=
@@ -726,7 +726,7 @@ QueryStmt
         |   |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |   |   |     +-field_idx=1
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-group_by_list=
         |     +-TestStruct#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.TestStruct#7)
         +-filter_expr=
@@ -782,7 +782,7 @@ QueryStmt
         |   |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |   |   |     +-field_idx=1
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-group_by_list=
         |     +-TestStruct#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.TestStruct#7)
         |     +-TestStruct#9 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
@@ -843,7 +843,7 @@ QueryStmt
         |   |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |   |   |     +-field_idx=1
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-group_by_list=
         |     +-TestStruct#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.TestStruct#7)
         |     +-TestStruct#9 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
@@ -900,7 +900,7 @@ QueryStmt
         |   |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |   |   |     +-field_idx=1
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-group_by_list=
         |     +-TestStruct#8 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |     +-TestStruct#9 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.TestStruct#7)
@@ -988,7 +988,7 @@ QueryStmt
     |       |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     |       |   |     +-field_idx=1
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |       +-group_by_list=
     |         +-d#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.d#7)
     +-order_by_item_list=
@@ -1039,7 +1039,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.TestStruct#7]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |       | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |       +-group_by_list=
     |         +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     +-order_by_item_list=
@@ -1078,7 +1078,7 @@ GROUP BY TestStruct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<a INT32, STRUCT<a INT32, b STRING>>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<a INT32, STRUCT<a INT32, b STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#16]
@@ -1167,7 +1167,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#24 AS `$col1` [INT64]
+| +-$query.$col1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#24]
@@ -1229,7 +1229,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#15]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#15 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 --
@@ -1239,7 +1239,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#24 AS `$col1` [INT64]
+| +-$query.$col1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#24]
@@ -1299,7 +1299,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#15]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#15 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
@@ -1311,7 +1311,7 @@ GROUP BY TestStruct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#16 AS `$col1` [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
+| +-$query.$col1#16 AS "$col1" [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#16]
@@ -1792,7 +1792,7 @@ GROUP BY TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#17 AS TestStruct [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
-| +-$query.$col2#28 AS `$col2` [STRUCT<STRUCT<a INT32, b STRING>, INT32>]
+| +-$query.$col2#28 AS "$col2" [STRUCT<STRUCT<a INT32, b STRING>, INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#17, $query.$col2#28]
@@ -1852,13 +1852,13 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#17]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#17 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
 
-# 7.2 Error because the correlated "TestStruct.c" resolves to the middle query
-# and fails to resolve since "TestStruct.c" is not visible to post-GROUP BY
+# 7.2 Error because the correlated 'TestStruct.c' resolves to the middle query
+# and fails to resolve since 'TestStruct.c' is not visible to post-GROUP BY
 # in the middle query.
 SELECT TestStruct,
        (SELECT (TestStruct.d.a, (SELECT TestStruct.c))
@@ -1883,7 +1883,7 @@ GROUP BY TestStruct
 QueryStmt
 +-output_column_list=
 | +-$groupby.TestStruct#20 AS TestStruct [STRUCT<c INT32, d STRUCT<a INT32, b STRING>>]
-| +-$query.$col2#34 AS `$col2` [STRUCT<a INT32, STRUCT<c INT32, TestEnum ENUM<zetasql_test__.TestEnum>>>]
+| +-$query.$col2#34 AS "$col2" [STRUCT<a INT32, STRUCT<c INT32, TestEnum ENUM<zetasql_test__.TestEnum>>>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.TestStruct#20, $query.$col2#34]
@@ -1993,7 +1993,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[ComplexTypes.TestStruct#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
         |       +-SubqueryExpr
@@ -2077,7 +2077,7 @@ QueryStmt
         | +-AggregateScan
         |   +-column_list=[$groupby.TestStruct#7]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-group_by_list=
         |     +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         +-filter_expr=
@@ -2272,7 +2272,7 @@ QueryStmt
     |     +-AggregateScan
     |       +-column_list=[$groupby.TestStruct#7]
     |       +-input_scan=
-    |       | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |       | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |       +-group_by_list=
     |         +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     +-order_by_item_list=
@@ -2396,7 +2396,7 @@ QueryStmt
     |           |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     |           |   |     +-field_idx=1
     |           |   +-input_scan=
-    |           |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |           |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |           +-group_by_list=
     |             +-TestStruct#8 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     +-order_by_item_list=
@@ -2416,7 +2416,7 @@ GROUP BY TestStruct
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [BOOL]
+| +-$query.$col1#10 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2453,7 +2453,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#8]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#8 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
@@ -2475,7 +2475,7 @@ GROUP BY TestStruct.c, TestStruct.d
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [BOOL]
+| +-$query.$col1#11 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
@@ -2503,7 +2503,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=$groupby.[c#8, d#9]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-c#8 :=
           | +-GetStructField
@@ -2539,7 +2539,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=ComplexTypes.[key#1, TestStruct#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=ComplexTypes.[key#1, TestStruct#5], table=ComplexTypes, column_index_list=[0, 4], alias="ct")
+        |   | +-TableScan(column_list=ComplexTypes.[key#1, TestStruct#5], table=ComplexTypes, column_index_list=[0, 4], alias='ct')
         |   +-filter_expr=
         |     +-SubqueryExpr
         |       +-type=BOOL
@@ -2590,12 +2590,12 @@ GROUP BY TestStruct.d IN (SELECT as struct TestStruct.c a, TestStruct.d.b b)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#11 AS `$col1` [STRING]
+| +-$query.$col1#11 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#11]
     +-expr_list=
-    | +-$col1#11 := Literal(type=STRING, value="foo")
+    | +-$col1#11 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -2829,7 +2829,7 @@ GROUP BY TestStruct;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#22 AS `$col1` [INT32]
+| +-$query.$col1#22 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#22]
@@ -2864,7 +2864,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#14]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#14 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
@@ -2906,7 +2906,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=[ComplexTypes.TestStruct#5]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
         |       +-SubqueryExpr
@@ -2947,16 +2947,16 @@ GROUP BY (SELECT as struct ct.TestStruct, sum(ct.key) FROM ComplexTypes)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#17 AS `$col1` [STRING]
+| +-$query.$col1#17 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#17]
     +-expr_list=
-    | +-$col1#17 := Literal(type=STRING, value="foo")
+    | +-$col1#17 := Literal(type=STRING, value='foo')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
-        | +-TableScan(column_list=ComplexTypes.[key#1, TestStruct#5], table=ComplexTypes, column_index_list=[0, 4], alias="ct")
+        | +-TableScan(column_list=ComplexTypes.[key#1, TestStruct#5], table=ComplexTypes, column_index_list=[0, 4], alias='ct')
         +-group_by_list=
           +-$groupbycol1#16 :=
             +-SubqueryExpr
@@ -3031,7 +3031,7 @@ QueryStmt
         |       |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         |       |   |     +-field_idx=0
         |       |   +-input_scan=
-        |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         |       +-group_by_list=
         |         +-TestStruct#8 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
         +-filter_expr=
@@ -3144,7 +3144,7 @@ QueryStmt
     |           |   |     |   +-field_idx=1
     |           |   |     +-field_idx=0
     |           |   +-input_scan=
-    |           |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |           |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |           +-group_by_list=
     |             +-TestStruct#8 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     +-order_by_item_list=
@@ -3185,7 +3185,7 @@ ALTERNATION GROUPS:
 QueryStmt
 +-output_column_list=
 | +-$groupby.d#14 AS d [STRUCT<a INT32, b STRING>]
-| +-$query.$col2#16 AS `$col2` [BOOL]
+| +-$query.$col2#16 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.d#14, $query.$col2#16]
@@ -3217,9 +3217,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=ComplexTypes.[TestStruct#5, TestStruct#11]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct1")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#11], table=ComplexTypes, column_index_list=[4], alias="ct2")
+        |   | +-TableScan(column_list=[ComplexTypes.TestStruct#11], table=ComplexTypes, column_index_list=[4], alias='ct2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, STRUCT<c INT32, d STRUCT<a INT32, b STRING>>) -> BOOL)
         |       +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
@@ -3251,7 +3251,7 @@ GROUP BY TestStructValueTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<TestStructValueTable STRUCT<a INT32, b STRING>, a INT32>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<TestStructValueTable STRUCT<a INT32, b STRING>, a INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -3540,7 +3540,7 @@ QueryStmt
     |           |   |     | +-ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
     |           |   |     +-field_idx=0
     |           |   +-input_scan=
-    |           |     +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+    |           |     +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
     |           +-group_by_list=
     |             +-vt#3 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
     +-order_by_item_list=
@@ -3573,7 +3573,7 @@ GROUP BY st
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -3584,7 +3584,7 @@ QueryStmt
         | +-FilterScan
         |   +-column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3]
         |   +-input_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias="st")
+        |   | +-TableScan(column_list=SimpleTypesWithStruct.[key#1, TestEnum#2, TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[0, 1, 2], alias='st')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$greater(INT32, INT32) -> BOOL)
         |       +-SubqueryExpr
@@ -3622,7 +3622,7 @@ GROUP BY (SELECT st.TestStruct)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -3630,7 +3630,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$aggregate.$agg1#4]
         +-input_scan=
-        | +-TableScan(column_list=[SimpleTypesWithStruct.TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[2], alias="st")
+        | +-TableScan(column_list=[SimpleTypesWithStruct.TestStruct#3], table=SimpleTypesWithStruct, column_index_list=[2], alias='st')
         +-group_by_list=
         | +-$groupbycol1#6 :=
         |   +-SubqueryExpr

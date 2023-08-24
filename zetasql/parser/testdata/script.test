@@ -192,7 +192,7 @@ Script [0-93] [SELECT 1;...SELECT 1;]
               IntLiteral(1) [7-8] [1]
     InsertStatement(insert_mode=UPDATE) [10-45] [INSERT UPDATE...VALUES (1)]
       PathExpression [24-30] [UPDATE]
-        Identifier(`UPDATE`) [24-30] [UPDATE]
+        Identifier("UPDATE") [24-30] [UPDATE]
       ColumnList [31-34] [(a)]
         Identifier(a) [32-33] [a]
       InsertValuesRowList [35-45] [VALUES (1)]
@@ -216,7 +216,7 @@ Script [0-93] [SELECT 1;...SELECT 1;]
 SELECT
   1
 ;
-INSERT OR UPDATE INTO `UPDATE`(a)
+INSERT OR UPDATE INTO "UPDATE"(a)
 VALUES
   (1) ;
 INSERT OR UPDATE INTO VALUE(a)

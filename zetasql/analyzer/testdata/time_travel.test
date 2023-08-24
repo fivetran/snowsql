@@ -6,7 +6,7 @@ ALTERNATION GROUP: V_1_1_FOR_SYSTEM_TIME_AS_OF
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -36,7 +36,7 @@ ALTERNATION GROUP: V_1_1_FOR_SYSTEM_TIME_AS_OF
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -63,7 +63,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -84,7 +84,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF '2000-01-01 01:01:01'
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -105,7 +105,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF '2000-01-01'
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -126,7 +126,7 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF TIMESTAMP_SUB(CURRENT_TIM
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -150,7 +150,7 @@ SELECT COUNT(*) FROM ComplexTypes t FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP, t.I
 
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#8]
@@ -167,7 +167,7 @@ QueryStmt
         |   |   +-for_system_time_expr=
         |   |   | +-FunctionCall(ZetaSQL:current_timestamp() -> TIMESTAMP)
         |   |   +-column_index_list=[3]
-        |   |   +-alias="t"
+        |   |   +-alias='t'
         |   +-array_expr=
         |   | +-ColumnRef(type=ARRAY<INT32>, column=ComplexTypes.Int32Array#4)
         |   +-element_column=$array.Int32Array#7
@@ -186,7 +186,7 @@ QueryStmt
     +-column_list=[MyTable.int32#19]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="MyTable"
+    |   +-with_query_name='MyTable'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[SimpleTypes.int32#1]
@@ -201,14 +201,14 @@ QueryStmt
       +-ProjectScan
         +-column_list=[MyTable.int32#19]
         +-input_scan=
-          +-WithRefScan(column_list=[MyTable.int32#19], with_query_name="MyTable")
+          +-WithRefScan(column_list=[MyTable.int32#19], with_query_name='MyTable')
 ==
 
 SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF CAST(@test_param_string AS TIMESTAMP)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -220,7 +220,7 @@ QueryStmt
         |   +-table=SimpleTypes
         |   +-for_system_time_expr=
         |     +-Cast(STRING -> TIMESTAMP)
-        |       +-Parameter(type=STRING, name="test_param_string")
+        |       +-Parameter(type=STRING, name='test_param_string')
         +-aggregate_list=
           +-$agg1#19 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==
@@ -230,7 +230,7 @@ SELECT COUNT(*) FROM TestTable FOR SYSTEM_TIME AS OF CURRENT_TIMESTAMP TABLESAMP
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -244,7 +244,7 @@ QueryStmt
         |   |   +-table=TestTable
         |   |   +-for_system_time_expr=
         |   |     +-FunctionCall(ZetaSQL:current_timestamp() -> TIMESTAMP)
-        |   +-method="reservoir"
+        |   +-method='reservoir'
         |   +-size=
         |   | +-Literal(type=INT64, value=100)
         |   +-unit=ROWS
@@ -335,11 +335,11 @@ SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF DATE '2000-01-01'
                                                        ^
 ==
 
-SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF 1 + "foo"
+SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF 1 + 'foo'
 --
 
-ERROR: Could not cast literal "foo" to type INT64 [at 1:60]
-SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF 1 + "foo"
+ERROR: Could not cast literal 'foo' to type INT64 [at 1:60]
+SELECT COUNT(*) FROM SimpleTypes FOR SYSTEM_TIME AS OF 1 + 'foo'
                                                            ^
 ==
 

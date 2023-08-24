@@ -292,7 +292,7 @@ ALTER TABLE foo-bar-123.baz ADD FOREIGN KEY (A) REFERENCES T(B);
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-bar-123.baz` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-bar-123.baz" [at 1:13]
 ALTER TABLE foo-bar-123.baz ADD FOREIGN KEY (A) REFERENCES T(B);
             ^
 --
@@ -300,7 +300,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 AlterTableStatement [0-63]
   PathExpression [12-27]
-    Identifier(`foo-bar-123`) [12-27]
+    Identifier("foo-bar-123") [12-27]
     Identifier(baz) [12-27]
   AlterActionList [28-63]
     AddConstraintAction [28-63]
@@ -314,4 +314,4 @@ AlterTableStatement [0-63]
             Identifier(B) [61-62]
           ForeignKeyActions(ON UPDATE NO ACTION ON DELETE NO ACTION) [63-63]
 --
-ALTER TABLE `foo-bar-123`.baz ADD FOREIGN KEY(A) REFERENCES T(B) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION ENFORCED
+ALTER TABLE "foo-bar-123".baz ADD FOREIGN KEY(A) REFERENCES T(B) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION ENFORCED

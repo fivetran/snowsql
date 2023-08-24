@@ -1163,23 +1163,23 @@ FROM
 ==
 
 # select is a reserved keyword.
-select * from `select`
+select * from "select"
 --
-QueryStatement [0-22] [select * from `select`]
-  Query [0-22] [select * from `select`]
-    Select [0-22] [select * from `select`]
+QueryStatement [0-22] [select * from "select"]
+  Query [0-22] [select * from "select"]
+    Select [0-22] [select * from "select"]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-22] [from `select`]
-        TablePathExpression [14-22] [`select`]
-          PathExpression [14-22] [`select`]
-            Identifier(`select`) [14-22] [`select`]
+      FromClause [9-22] [from "select"]
+        TablePathExpression [14-22] ["select"]
+          PathExpression [14-22] ["select"]
+            Identifier("select") [14-22] ["select"]
 --
 SELECT
   *
 FROM
-  `select`
+  "select"
 ==
 
 select * from select
@@ -1189,18 +1189,18 @@ select * from select
               ^
 ==
 
-select * from `Table`
+select * from "Table"
 --
-QueryStatement [0-21] [select * from `Table`]
-  Query [0-21] [select * from `Table`]
-    Select [0-21] [select * from `Table`]
+QueryStatement [0-21] [select * from "Table"]
+  Query [0-21] [select * from "Table"]
+    Select [0-21] [select * from "Table"]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-21] [from `Table`]
-        TablePathExpression [14-21] [`Table`]
-          PathExpression [14-21] [`Table`]
-            Identifier(Table) [14-21] [`Table`]
+      FromClause [9-21] [from "Table"]
+        TablePathExpression [14-21] ["Table"]
+          PathExpression [14-21] ["Table"]
+            Identifier(Table) [14-21] ["Table"]
 --
 SELECT
   *
@@ -1222,23 +1222,23 @@ select * from haSh
               ^
 ==
 
-select * from `pRoTo`
+select * from "pRoTo"
 --
-QueryStatement [0-21] [select * from `pRoTo`]
-  Query [0-21] [select * from `pRoTo`]
-    Select [0-21] [select * from `pRoTo`]
+QueryStatement [0-21] [select * from "pRoTo"]
+  Query [0-21] [select * from "pRoTo"]
+    Select [0-21] [select * from "pRoTo"]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-21] [from `pRoTo`]
-        TablePathExpression [14-21] [`pRoTo`]
-          PathExpression [14-21] [`pRoTo`]
-            Identifier(`pRoTo`) [14-21] [`pRoTo`]
+      FromClause [9-21] [from "pRoTo"]
+        TablePathExpression [14-21] ["pRoTo"]
+          PathExpression [14-21] ["pRoTo"]
+            Identifier("pRoTo") [14-21] ["pRoTo"]
 --
 SELECT
   *
 FROM
-  `pRoTo`
+  "pRoTo"
 ==
 
 select a, from T1

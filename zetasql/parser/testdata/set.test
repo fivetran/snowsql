@@ -244,72 +244,72 @@ SET @@value = 1
 ==
 
 # Base case 2 - set a parameter to a string literal.
-SET {{@|@@}}value="something"
+SET {{@|@@}}value='something'
 --
 ALTERNATION GROUP: @
 --
-ParameterAssignment [0-22] [SET @value="something"]
+ParameterAssignment [0-22] [SET @value='something']
   ParameterExpr [4-10] [@value]
     Identifier(value) [5-10] [value]
-  StringLiteral("something") [11-22] ["something"]
+  StringLiteral('something') [11-22] ['something']
 --
-SET @value = "something"
+SET @value = 'something'
 --
 ALTERNATION GROUP: @@
 --
-SystemVariableAssignment [0-23] [SET @@value="something"]
+SystemVariableAssignment [0-23] [SET @@value='something']
   SystemVariableExpr [4-11] [@@value]
     PathExpression [6-11] [value]
       Identifier(value) [6-11] [value]
-  StringLiteral("something") [12-23] ["something"]
+  StringLiteral('something') [12-23] ['something']
 --
-SET @@value = "something"
+SET @@value = 'something'
 ==
 
 # Use a parameter name that is a reserved keyword.
-SET {{@|@@}}AND="something"
+SET {{@|@@}}AND='something'
 --
 ALTERNATION GROUP: @
 --
-ParameterAssignment [0-20] [SET @AND="something"]
+ParameterAssignment [0-20] [SET @AND='something']
   ParameterExpr [4-8] [@AND]
-    Identifier(`AND`) [5-8] [AND]
-  StringLiteral("something") [9-20] ["something"]
+    Identifier("AND") [5-8] [AND]
+  StringLiteral('something') [9-20] ['something']
 --
-SET @`AND` = "something"
+SET @"AND" = 'something'
 --
 ALTERNATION GROUP: @@
 --
-SystemVariableAssignment [0-21] [SET @@AND="something"]
+SystemVariableAssignment [0-21] [SET @@AND='something']
   SystemVariableExpr [4-9] [@@AND]
     PathExpression [6-9] [AND]
-      Identifier(`AND`) [6-9] [AND]
-  StringLiteral("something") [10-21] ["something"]
+      Identifier("AND") [6-9] [AND]
+  StringLiteral('something') [10-21] ['something']
 --
-SET @@`AND` = "something"
+SET @@"AND" = 'something'
 ==
 
 # Use a parameter name that is an non-reserved keyword.
-SET {{@|@@}}ABORT="something"
+SET {{@|@@}}ABORT='something'
 --
 ALTERNATION GROUP: @
 --
-ParameterAssignment [0-22] [SET @ABORT="something"]
+ParameterAssignment [0-22] [SET @ABORT='something']
   ParameterExpr [4-10] [@ABORT]
     Identifier(ABORT) [5-10] [ABORT]
-  StringLiteral("something") [11-22] ["something"]
+  StringLiteral('something') [11-22] ['something']
 --
-SET @ABORT = "something"
+SET @ABORT = 'something'
 --
 ALTERNATION GROUP: @@
 --
-SystemVariableAssignment [0-23] [SET @@ABORT="something"]
+SystemVariableAssignment [0-23] [SET @@ABORT='something']
   SystemVariableExpr [4-11] [@@ABORT]
     PathExpression [6-11] [ABORT]
       Identifier(ABORT) [6-11] [ABORT]
-  StringLiteral("something") [12-23] ["something"]
+  StringLiteral('something') [12-23] ['something']
 --
-SET @@ABORT = "something"
+SET @@ABORT = 'something'
 ==
 
 # Set a parameter to a simple expression
@@ -350,10 +350,10 @@ ParameterAssignment [0-36] [SET @VAL =...TIMESTAMP() + 100]
   BinaryExpression(+) [11-36] [CURRENT_TIMESTAMP() + 100]
     FunctionCall [11-30] [CURRENT_TIMESTAMP()]
       PathExpression [11-28] [CURRENT_TIMESTAMP]
-        Identifier(`CURRENT_TIMESTAMP`) [11-28] [CURRENT_TIMESTAMP]
+        Identifier("CURRENT_TIMESTAMP") [11-28] [CURRENT_TIMESTAMP]
     IntLiteral(100) [33-36] [100]
 --
-SET @VAL = `CURRENT_TIMESTAMP`() + 100
+SET @VAL = "CURRENT_TIMESTAMP"() + 100
 --
 ALTERNATION GROUP: @@
 --
@@ -364,10 +364,10 @@ SystemVariableAssignment [0-37] [SET @@VAL..._TIMESTAMP() + 100]
   BinaryExpression(+) [12-37] [CURRENT_TIMESTAMP() + 100]
     FunctionCall [12-31] [CURRENT_TIMESTAMP()]
       PathExpression [12-29] [CURRENT_TIMESTAMP]
-        Identifier(`CURRENT_TIMESTAMP`) [12-29] [CURRENT_TIMESTAMP]
+        Identifier("CURRENT_TIMESTAMP") [12-29] [CURRENT_TIMESTAMP]
     IntLiteral(100) [34-37] [100]
 --
-SET @@VAL = `CURRENT_TIMESTAMP`() + 100
+SET @@VAL = "CURRENT_TIMESTAMP"() + 100
 ==
 
 # Set a parameter to an expression with a SELECT statment

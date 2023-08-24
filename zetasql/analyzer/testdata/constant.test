@@ -40,16 +40,16 @@ QueryStmt
 
 # Fully qualified references to known constants in nested catalogs, using
 # backticks to refer to the constant name.
-SELECT nested_catalog.`Test Constant-String`;
+SELECT nested_catalog."Test Constant-String";
 --
 QueryStmt
 +-output_column_list=
-| +-$query.Test Constant-String#1 AS `Test Constant-String` [STRING]
+| +-$query.Test Constant-String#1 AS "Test Constant-String" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.Test Constant-String#1]
     +-expr_list=
-    | +-Test Constant-String#1 := Constant(nested_catalog.Test Constant-String, type=STRING, value="Test constant in nested catalog")
+    | +-Test Constant-String#1 := Constant(nested_catalog.Test Constant-String, type=STRING, value='Test constant in nested catalog')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -99,7 +99,7 @@ SELECT TestConstantProto.int64_key_1 - TestConstantProto.int64_key_2;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -143,7 +143,7 @@ QueryStmt
     | | +-GetStructField
     | |   +-type=INT32
     | |   +-expr=
-    | |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   +-field_idx=0
     | +-c#2 :=
     | | +-GetStructField
@@ -152,7 +152,7 @@ QueryStmt
     | |   | +-GetStructField
     | |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     | |   |   +-expr=
-    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   |   +-field_idx=1
     | |   +-field_idx=0
     | +-d#3 :=
@@ -162,7 +162,7 @@ QueryStmt
     | |   | +-GetStructField
     | |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     | |   |   +-expr=
-    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   |   +-field_idx=1
     | |   +-field_idx=1
     | +-a#4 :=
@@ -175,7 +175,7 @@ QueryStmt
     | |   |   | +-GetStructField
     | |   |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     | |   |   |   +-expr=
-    | |   |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    | |   |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     | |   |   |   +-field_idx=1
     | |   |   +-field_idx=1
     | |   +-field_idx=0
@@ -189,7 +189,7 @@ QueryStmt
     |     |   | +-GetStructField
     |     |   |   +-type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>
     |     |   |   +-expr=
-    |     |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:"foo"}}})
+    |     |   |   | +-Constant(nested_catalog.nested_nested_catalog.TestConstantStruct, type=STRUCT<eee INT32, fff STRUCT<c INT32, d STRUCT<a INT32, b STRING>>>, value={eee:-3456, fff:{c:3, d:{a:223, b:'foo'}}})
     |     |   |   +-field_idx=1
     |     |   +-field_idx=1
     |     +-field_idx=1
@@ -304,7 +304,7 @@ FROM (SELECT STRUCT<e INT64, f INT64>(1, 2) AS TestConstantString)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRUCT<TestConstantString STRUCT<e INT64, f INT64>, INT64>]
+| +-$query.$col1#5 AS "$col1" [STRUCT<TestConstantString STRUCT<e INT64, f INT64>, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -390,11 +390,11 @@ CreateFunctionStmt
 +-return_type=INT64
 +-argument_name_list=[TestConstantInt64]
 +-signature=(INT64 TestConstantInt64) -> INT64
-+-language="SQL"
-+-code="TestConstantInt64 + IF(nested_catalog.TestConstantBool, 1, 0)"
++-language='SQL'
++-code='TestConstantInt64 + IF(nested_catalog.TestConstantBool, 1, 0)'
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
-    +-ArgumentRef(type=INT64, name="TestConstantInt64")
+    +-ArgumentRef(type=INT64, name='TestConstantInt64')
     +-FunctionCall(ZetaSQL:if(BOOL, INT64, INT64) -> INT64)
       +-Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
       +-Literal(type=INT64, value=1)
@@ -544,11 +544,11 @@ QueryStmt
 # when a type reference is expected.
 #
 # Catalog contains constant NameConflictType and type NameConflictType.
-SELECT STRUCT<s NameConflictType, t INT64>((1, "foo"), TestConstantInt64)
+SELECT STRUCT<s NameConflictType, t INT64>((1, 'foo'), TestConstantInt64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<s STRUCT<Key INT64, Value STRING>, t INT64>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<s STRUCT<Key INT64, Value STRING>, t INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -557,7 +557,7 @@ QueryStmt
     |   +-MakeStruct
     |     +-type=STRUCT<s STRUCT<Key INT64, Value STRING>, t INT64>
     |     +-field_list=
-    |       +-Literal(type=STRUCT<Key INT64, Value STRING>, value={Key:1, Value:"foo"}, has_explicit_type=TRUE)
+    |       +-Literal(type=STRUCT<Key INT64, Value STRING>, value={Key:1, Value:'foo'}, has_explicit_type=TRUE)
     |       +-Constant(TestConstantInt64, type=INT64, value=1)
     +-input_scan=
       +-SingleRowScan
@@ -586,14 +586,14 @@ QueryStmt
 #
 # Catalog contains constants sort_count, concat, CURRENT_DATE and functions
 # sort_count, concat, CURRENT_DATE.
-SELECT {{sort_count()|concat("a", "b")|CURRENT_DATE()}}
+SELECT {{sort_count()|concat('a', 'b')|CURRENT_DATE()}}
 FROM TestTable
 --
 ALTERNATION GROUP: sort_count()
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -605,19 +605,19 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#4 := AggregateFunctionCall(sample_functions:sort_count() -> INT64)
 --
-ALTERNATION GROUP: concat("a", "b")
+ALTERNATION GROUP: concat('a', 'b')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRING]
+| +-$query.$col1#4 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
     +-expr_list=
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |     +-Literal(type=STRING, value="a")
-    |     +-Literal(type=STRING, value="b")
+    |     +-Literal(type=STRING, value='a')
+    |     +-Literal(type=STRING, value='b')
     +-input_scan=
       +-TableScan(table=TestTable)
 --
@@ -625,7 +625,7 @@ ALTERNATION GROUP: CURRENT_DATE()
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DATE]
+| +-$query.$col1#4 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -673,7 +673,7 @@ ALTERNATION GROUP: CURRENT_DATE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DATE]
+| +-$query.$col1#4 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -890,7 +890,7 @@ QueryStmt
     | +-TestConstantBool#1 := Constant(nested_catalog_with_catalog.TestConstantBool, type=BOOL, value=false)
     | +-c#2 := Constant(nested_catalog_with_catalog.c, type=DOUBLE, value=-9999.999)
     | +-a#3 := Constant(nested_catalog_with_catalog.nested_catalog_catalog.a, type=FLOAT, value=-1.4987)
-    | +-c#4 := Constant(nested_catalog_with_catalog.nested_catalog_catalog.c, type=STRING, value="foo")
+    | +-c#4 := Constant(nested_catalog_with_catalog.nested_catalog_catalog.c, type=STRING, value='foo')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1023,7 +1023,7 @@ SELECT TestConstantStrct
 --
 ALTERNATION GROUP: nested_catalog.TestConstantStrct
 --
-ERROR: Unrecognized name: nested_catalog.TestConstantStrct; Did you mean nested_catalog.`Test Constant-String`? [at 1:8]
+ERROR: Unrecognized name: nested_catalog.TestConstantStrct; Did you mean nested_catalog."Test Constant-String"? [at 1:8]
 SELECT nested_catalog.TestConstantStrct
        ^
 ==

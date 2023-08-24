@@ -29,7 +29,7 @@ CREATE CONSTANT foo = @test_param_int64;
 CreateConstantStmt
 +-name_path=foo
 +-expr=
-  +-Parameter(type=INT64, name="test_param_int64")
+  +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 # CREATE CONSTANT statements outside of a module requires TEMPORARY or DEFAULT
@@ -271,8 +271,8 @@ CreateConstantStmt
 [supported_statement_kinds=CREATE_CONSTANT]
 CREATE PRIVATE CONSTANT bundled_constants =
   IF(nested_catalog.TestConstantBool,
-     STRUCT<a INT64, b STRING, c BOOL>(1, "foo", false),
-     STRUCT<a INT64, b STRING, c BOOL>(-2, "bar", true));
+     STRUCT<a INT64, b STRING, c BOOL>(1, 'foo', false),
+     STRUCT<a INT64, b STRING, c BOOL>(-2, 'bar', true));
 --
 CreateConstantStmt
 +-name_path=bundled_constants
@@ -280,27 +280,27 @@ CreateConstantStmt
 +-expr=
   +-FunctionCall(ZetaSQL:if(BOOL, STRUCT<a INT64, b STRING, c BOOL>, STRUCT<a INT64, b STRING, c BOOL>) -> STRUCT<a INT64, b STRING, c BOOL>)
     +-Constant(nested_catalog.TestConstantBool, type=BOOL, value=false)
-    +-Literal(type=STRUCT<a INT64, b STRING, c BOOL>, value={a:1, b:"foo", c:false}, has_explicit_type=TRUE)
-    +-Literal(type=STRUCT<a INT64, b STRING, c BOOL>, value={a:-2, b:"bar", c:true}, has_explicit_type=TRUE)
+    +-Literal(type=STRUCT<a INT64, b STRING, c BOOL>, value={a:1, b:'foo', c:false}, has_explicit_type=TRUE)
+    +-Literal(type=STRUCT<a INT64, b STRING, c BOOL>, value={a:-2, b:'bar', c:true}, has_explicit_type=TRUE)
 ==
 
 # CREATE CONSTANT statements of type PROTO resolve correctly.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE PRIVATE CONSTANT a = CAST("" AS `zetasql_test__.EmptyMessage`);
+CREATE PRIVATE CONSTANT a = CAST('' AS "zetasql_test__.EmptyMessage");
 --
 CreateConstantStmt
 +-name_path=a
 +-create_scope=CREATE_PRIVATE
 +-expr=
   +-Cast(STRING -> PROTO<zetasql_test__.EmptyMessage>)
-    +-Literal(type=STRING, value="")
+    +-Literal(type=STRING, value='')
 ==
 
 # CREATE CONSTANT statements of type ENUM resolve correctly.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE PRIVATE CONSTANT a = CAST("TESTENUM0" AS `zetasql_test__.TestEnum`);
+CREATE PRIVATE CONSTANT a = CAST('TESTENUM0' AS "zetasql_test__.TestEnum");
 --
 CreateConstantStmt
 +-name_path=a
@@ -312,7 +312,7 @@ CreateConstantStmt
 # CREATE CONSTANT statements of type ARRAY resolve correctly.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE PRIVATE CONSTANT a = ARRAY<`zetasql_test__.KitchenSinkPB`>[]
+CREATE PRIVATE CONSTANT a = ARRAY<"zetasql_test__.KitchenSinkPB">[]
 --
 CreateConstantStmt
 +-name_path=a
@@ -339,7 +339,7 @@ CreateConstantStmt
 # already contains a named constant TestConstantInt64.
 [statement_context=module]
 [supported_statement_kinds=CREATE_CONSTANT]
-CREATE {{PRIVATE|PUBLIC}} CONSTANT TestConstantInt64 = {{1|0|"foo"}}
+CREATE {{PRIVATE|PUBLIC}} CONSTANT TestConstantInt64 = {{1|0|'foo'}}
 --
 ALTERNATION GROUP: PRIVATE,1
 --
@@ -357,13 +357,13 @@ CreateConstantStmt
 +-expr=
   +-Literal(type=INT64, value=0)
 --
-ALTERNATION GROUP: PRIVATE,"foo"
+ALTERNATION GROUP: PRIVATE,'foo'
 --
 CreateConstantStmt
 +-name_path=TestConstantInt64
 +-create_scope=CREATE_PRIVATE
 +-expr=
-  +-Literal(type=STRING, value="foo")
+  +-Literal(type=STRING, value='foo')
 --
 ALTERNATION GROUP: PUBLIC,1
 --
@@ -381,10 +381,10 @@ CreateConstantStmt
 +-expr=
   +-Literal(type=INT64, value=0)
 --
-ALTERNATION GROUP: PUBLIC,"foo"
+ALTERNATION GROUP: PUBLIC,'foo'
 --
 CreateConstantStmt
 +-name_path=TestConstantInt64
 +-create_scope=CREATE_PUBLIC
 +-expr=
-  +-Literal(type=STRING, value="foo")
+  +-Literal(type=STRING, value='foo')

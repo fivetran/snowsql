@@ -67,16 +67,16 @@ FROM
   t2
 ==
 
-create {{temp|public|private}} view pkg1.`pkg2`.`t 2` as
+create {{temp|public|private}} view pkg1."pkg2"."t 2" as
 select 1 as a;
 --
 ALTERNATION GROUP: temp
 --
 CreateViewStatement(is_temp) [0-51] [create temp...select 1 as a]
-  PathExpression [17-34] [pkg1.`pkg2`.`t 2`]
+  PathExpression [17-34] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [17-21] [pkg1]
-    Identifier(pkg2) [22-28] [`pkg2`]
-    Identifier(`t 2`) [29-34] [`t 2`]
+    Identifier(pkg2) [22-28] ["pkg2"]
+    Identifier("t 2") [29-34] ["t 2"]
   Query [38-51] [select 1 as a]
     Select [38-51] [select 1 as a]
       SelectList [45-51] [1 as a]
@@ -85,17 +85,17 @@ CreateViewStatement(is_temp) [0-51] [create temp...select 1 as a]
           Alias [47-51] [as a]
             Identifier(a) [50-51] [a]
 --
-CREATE TEMP VIEW pkg1.pkg2.`t 2` AS
+CREATE TEMP VIEW pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 --
 ALTERNATION GROUP: public
 --
 CreateViewStatement(is_public) [0-53] [create public...select 1 as a]
-  PathExpression [19-36] [pkg1.`pkg2`.`t 2`]
+  PathExpression [19-36] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [19-23] [pkg1]
-    Identifier(pkg2) [24-30] [`pkg2`]
-    Identifier(`t 2`) [31-36] [`t 2`]
+    Identifier(pkg2) [24-30] ["pkg2"]
+    Identifier("t 2") [31-36] ["t 2"]
   Query [40-53] [select 1 as a]
     Select [40-53] [select 1 as a]
       SelectList [47-53] [1 as a]
@@ -104,17 +104,17 @@ CreateViewStatement(is_public) [0-53] [create public...select 1 as a]
           Alias [49-53] [as a]
             Identifier(a) [52-53] [a]
 --
-CREATE PUBLIC VIEW pkg1.pkg2.`t 2` AS
+CREATE PUBLIC VIEW pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 --
 ALTERNATION GROUP: private
 --
 CreateViewStatement(is_private) [0-54] [create private...select 1 as a]
-  PathExpression [20-37] [pkg1.`pkg2`.`t 2`]
+  PathExpression [20-37] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [20-24] [pkg1]
-    Identifier(pkg2) [25-31] [`pkg2`]
-    Identifier(`t 2`) [32-37] [`t 2`]
+    Identifier(pkg2) [25-31] ["pkg2"]
+    Identifier("t 2") [32-37] ["t 2"]
   Query [41-54] [select 1 as a]
     Select [41-54] [select 1 as a]
       SelectList [48-54] [1 as a]
@@ -123,7 +123,7 @@ CreateViewStatement(is_private) [0-54] [create private...select 1 as a]
           Alias [50-54] [as a]
             Identifier(a) [53-54] [a]
 --
-CREATE PRIVATE VIEW pkg1.pkg2.`t 2` AS
+CREATE PRIVATE VIEW pkg1.pkg2."t 2" AS
 SELECT
   1 AS a
 ==
@@ -135,14 +135,14 @@ CREATE TEMP MATERIALIZED VIEW v AS (SELECT 1 AS a);
             ^
 ==
 
-create temp view pkg1.`pkg2`.`t 2` as
+create temp view pkg1."pkg2"."t 2" as
 select 1 from t2 union all select 2 from t3 cross join t4
 --
 CreateViewStatement(is_temp) [0-95] [create temp...cross join t4]
-  PathExpression [17-34] [pkg1.`pkg2`.`t 2`]
+  PathExpression [17-34] [pkg1."pkg2"."t 2"]
     Identifier(pkg1) [17-21] [pkg1]
-    Identifier(pkg2) [22-28] [`pkg2`]
-    Identifier(`t 2`) [29-34] [`t 2`]
+    Identifier(pkg2) [22-28] ["pkg2"]
+    Identifier("t 2") [29-34] ["t 2"]
   Query [38-95] [select 1 from...cross join t4]
     SetOperation(UNION ALL) [38-95] [select 1 from...cross join t4]
       SetOperationMetadataList [54-64] [union all]
@@ -171,7 +171,7 @@ CreateViewStatement(is_temp) [0-95] [create temp...cross join t4]
               PathExpression [93-95] [t4]
                 Identifier(t4) [93-95] [t4]
 --
-CREATE TEMP VIEW pkg1.pkg2.`t 2` AS
+CREATE TEMP VIEW pkg1.pkg2."t 2" AS
 SELECT
   1
 FROM
@@ -438,27 +438,27 @@ SELECT
 ==
 
 create view tt
-options (y='b.c', z=`b.c`)
+options (y='b.c', z="b.c")
 as select 2
 --
 CreateViewStatement [0-53] [create view...as select 2]
   PathExpression [12-14] [tt]
     Identifier(tt) [12-14] [tt]
-  OptionsList [23-41] [(y='b.c', z=`b.c`)]
+  OptionsList [23-41] [(y='b.c', z="b.c")]
     OptionsEntry [24-31] [y='b.c']
       Identifier(y) [24-25] [y]
       StringLiteral('b.c') [26-31] ['b.c']
-    OptionsEntry [33-40] [z=`b.c`]
+    OptionsEntry [33-40] [z="b.c"]
       Identifier(z) [33-34] [z]
-      PathExpression [35-40] [`b.c`]
-        Identifier(`b.c`) [35-40] [`b.c`]
+      PathExpression [35-40] ["b.c"]
+        Identifier("b.c") [35-40] ["b.c"]
   Query [45-53] [select 2]
     Select [45-53] [select 2]
       SelectList [52-53] [2]
         SelectColumn [52-53] [2]
           IntLiteral(2) [52-53] [2]
 --
-CREATE VIEW tt OPTIONS(y = 'b.c', z = `b.c`) AS
+CREATE VIEW tt OPTIONS(y = 'b.c', z = "b.c") AS
 SELECT
   2
 ==
@@ -545,7 +545,7 @@ SELECT
   1 AS x
 ==
 
-# The parser thinks `options` is a view name.
+# The parser thinks "options" is a view name.
 create view options(x=y) as select 1 x;
 --
 ERROR: Syntax error: Expected ")" or "," but got "=" [at 1:22]
@@ -887,20 +887,20 @@ SELECT
 ==
 
 # Create view with explicit column name list with column options
-create {{|materialized|approx}} view v (a1 OPTIONS(description="test view"), b2) as select 1 a, 2 b;
+create {{|materialized|approx}} view v (a1 OPTIONS(description='test view'), b2) as select 1 a, 2 b;
 --
 ALTERNATION GROUP: <empty>
 --
 CreateViewStatement [0-75] [create  view...select 1 a, 2 b]
   PathExpression [13-14] [v]
     Identifier(v) [13-14] [v]
-  ColumnWithOptionsList [15-56] [(a1 OPTIONS...view"), b2)]
-    ColumnWithOptions [16-51] [a1 OPTIONS...test view")]
+  ColumnWithOptionsList [15-56] [(a1 OPTIONS...view'), b2)]
+    ColumnWithOptions [16-51] [a1 OPTIONS...test view')]
       Identifier(a1) [16-18] [a1]
-      OptionsList [26-51] [(description="test view")]
-        OptionsEntry [27-50] [description="test view"]
+      OptionsList [26-51] [(description='test view')]
+        OptionsEntry [27-50] [description='test view']
           Identifier(description) [27-38] [description]
-          StringLiteral("test view") [39-50] ["test view"]
+          StringLiteral('test view') [39-50] ['test view']
     ColumnWithOptions [53-55] [b2]
       Identifier(b2) [53-55] [b2]
   Query [60-75] [select 1 a, 2 b]
@@ -915,7 +915,7 @@ CreateViewStatement [0-75] [create  view...select 1 a, 2 b]
           Alias [74-75] [b]
             Identifier(b) [74-75] [b]
 --
-CREATE VIEW v(a1 OPTIONS(description = "test view"), b2) AS
+CREATE VIEW v(a1 OPTIONS(description = 'test view'), b2) AS
 SELECT
   1 AS a,
   2 AS b
@@ -925,13 +925,13 @@ ALTERNATION GROUP: materialized
 CreateMaterializedViewStatement [0-87] [create materializ...t 1 a, 2 b]
   PathExpression [25-26] [v]
     Identifier(v) [25-26] [v]
-  ColumnWithOptionsList [27-68] [(a1 OPTIONS...view"), b2)]
-    ColumnWithOptions [28-63] [a1 OPTIONS...test view")]
+  ColumnWithOptionsList [27-68] [(a1 OPTIONS...view'), b2)]
+    ColumnWithOptions [28-63] [a1 OPTIONS...test view')]
       Identifier(a1) [28-30] [a1]
-      OptionsList [38-63] [(description="test view")]
-        OptionsEntry [39-62] [description="test view"]
+      OptionsList [38-63] [(description='test view')]
+        OptionsEntry [39-62] [description='test view']
           Identifier(description) [39-50] [description]
-          StringLiteral("test view") [51-62] ["test view"]
+          StringLiteral('test view') [51-62] ['test view']
     ColumnWithOptions [65-67] [b2]
       Identifier(b2) [65-67] [b2]
   Query [72-87] [select 1 a, 2 b]
@@ -946,7 +946,7 @@ CreateMaterializedViewStatement [0-87] [create materializ...t 1 a, 2 b]
           Alias [86-87] [b]
             Identifier(b) [86-87] [b]
 --
-CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = "test view"), b2) AS
+CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = 'test view'), b2) AS
 SELECT
   1 AS a,
   2 AS b
@@ -956,13 +956,13 @@ ALTERNATION GROUP: approx
 CreateApproxViewStatement [0-81] [create approx...elect 1 a, 2 b]
   PathExpression [19-20] [v]
     Identifier(v) [19-20] [v]
-  ColumnWithOptionsList [21-62] [(a1 OPTIONS...view"), b2)]
-    ColumnWithOptions [22-57] [a1 OPTIONS...test view")]
+  ColumnWithOptionsList [21-62] [(a1 OPTIONS...view'), b2)]
+    ColumnWithOptions [22-57] [a1 OPTIONS...test view')]
       Identifier(a1) [22-24] [a1]
-      OptionsList [32-57] [(description="test view")]
-        OptionsEntry [33-56] [description="test view"]
+      OptionsList [32-57] [(description='test view')]
+        OptionsEntry [33-56] [description='test view']
           Identifier(description) [33-44] [description]
-          StringLiteral("test view") [45-56] ["test view"]
+          StringLiteral('test view') [45-56] ['test view']
     ColumnWithOptions [59-61] [b2]
       Identifier(b2) [59-61] [b2]
   Query [66-81] [select 1 a, 2 b]
@@ -977,7 +977,7 @@ CreateApproxViewStatement [0-81] [create approx...elect 1 a, 2 b]
           Alias [80-81] [b]
             Identifier(b) [80-81] [b]
 --
-CREATE APPROX VIEW v(a1 OPTIONS(description = "test view"), b2) AS
+CREATE APPROX VIEW v(a1 OPTIONS(description = 'test view'), b2) AS
 SELECT
   1 AS a,
   2 AS b
@@ -985,7 +985,7 @@ SELECT
 
 # Create view with explicit column name list with all columns having column
 # options
-create {{|materialized|approx}} view v (a1 OPTIONS(description="test view"), b2 OPTIONS()) as select 1 a, 2 b;
+create {{|materialized|approx}} view v (a1 OPTIONS(description='test view'), b2 OPTIONS()) as select 1 a, 2 b;
 --
 ALTERNATION GROUP: <empty>
 --
@@ -993,12 +993,12 @@ CreateViewStatement [0-85] [create  view...select 1 a, 2 b]
   PathExpression [13-14] [v]
     Identifier(v) [13-14] [v]
   ColumnWithOptionsList [15-66] [(a1 OPTIONS...OPTIONS())]
-    ColumnWithOptions [16-51] [a1 OPTIONS...test view")]
+    ColumnWithOptions [16-51] [a1 OPTIONS...test view')]
       Identifier(a1) [16-18] [a1]
-      OptionsList [26-51] [(description="test view")]
-        OptionsEntry [27-50] [description="test view"]
+      OptionsList [26-51] [(description='test view')]
+        OptionsEntry [27-50] [description='test view']
           Identifier(description) [27-38] [description]
-          StringLiteral("test view") [39-50] ["test view"]
+          StringLiteral('test view') [39-50] ['test view']
     ColumnWithOptions [53-65] [b2 OPTIONS()]
       Identifier(b2) [53-55] [b2]
       OptionsList [63-65] [()]
@@ -1014,7 +1014,7 @@ CreateViewStatement [0-85] [create  view...select 1 a, 2 b]
           Alias [84-85] [b]
             Identifier(b) [84-85] [b]
 --
-CREATE VIEW v(a1 OPTIONS(description = "test view"), b2 OPTIONS()) AS
+CREATE VIEW v(a1 OPTIONS(description = 'test view'), b2 OPTIONS()) AS
 SELECT
   1 AS a,
   2 AS b
@@ -1025,12 +1025,12 @@ CreateMaterializedViewStatement [0-97] [create materializ...t 1 a, 2 b]
   PathExpression [25-26] [v]
     Identifier(v) [25-26] [v]
   ColumnWithOptionsList [27-78] [(a1 OPTIONS...OPTIONS())]
-    ColumnWithOptions [28-63] [a1 OPTIONS...test view")]
+    ColumnWithOptions [28-63] [a1 OPTIONS...test view')]
       Identifier(a1) [28-30] [a1]
-      OptionsList [38-63] [(description="test view")]
-        OptionsEntry [39-62] [description="test view"]
+      OptionsList [38-63] [(description='test view')]
+        OptionsEntry [39-62] [description='test view']
           Identifier(description) [39-50] [description]
-          StringLiteral("test view") [51-62] ["test view"]
+          StringLiteral('test view') [51-62] ['test view']
     ColumnWithOptions [65-77] [b2 OPTIONS()]
       Identifier(b2) [65-67] [b2]
       OptionsList [75-77] [()]
@@ -1046,7 +1046,7 @@ CreateMaterializedViewStatement [0-97] [create materializ...t 1 a, 2 b]
           Alias [96-97] [b]
             Identifier(b) [96-97] [b]
 --
-CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = "test view"), b2 OPTIONS()) AS
+CREATE MATERIALIZED VIEW v(a1 OPTIONS(description = 'test view'), b2 OPTIONS()) AS
 SELECT
   1 AS a,
   2 AS b
@@ -1057,12 +1057,12 @@ CreateApproxViewStatement [0-91] [create approx...elect 1 a, 2 b]
   PathExpression [19-20] [v]
     Identifier(v) [19-20] [v]
   ColumnWithOptionsList [21-72] [(a1 OPTIONS...OPTIONS())]
-    ColumnWithOptions [22-57] [a1 OPTIONS...test view")]
+    ColumnWithOptions [22-57] [a1 OPTIONS...test view')]
       Identifier(a1) [22-24] [a1]
-      OptionsList [32-57] [(description="test view")]
-        OptionsEntry [33-56] [description="test view"]
+      OptionsList [32-57] [(description='test view')]
+        OptionsEntry [33-56] [description='test view']
           Identifier(description) [33-44] [description]
-          StringLiteral("test view") [45-56] ["test view"]
+          StringLiteral('test view') [45-56] ['test view']
     ColumnWithOptions [59-71] [b2 OPTIONS()]
       Identifier(b2) [59-61] [b2]
       OptionsList [69-71] [()]
@@ -1078,7 +1078,7 @@ CreateApproxViewStatement [0-91] [create approx...elect 1 a, 2 b]
           Alias [90-91] [b]
             Identifier(b) [90-91] [b]
 --
-CREATE APPROX VIEW v(a1 OPTIONS(description = "test view"), b2 OPTIONS()) AS
+CREATE APPROX VIEW v(a1 OPTIONS(description = 'test view'), b2 OPTIONS()) AS
 SELECT
   1 AS a,
   2 AS b
@@ -1232,7 +1232,7 @@ create view p-g-123.d456.v1 as select * from t2;
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `p-g-123.d456.v1` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "p-g-123.d456.v1" [at 1:13]
 create view p-g-123.d456.v1 as select * from t2;
             ^
 --
@@ -1240,7 +1240,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 CreateViewStatement [0-47] [create view...* from t2]
   PathExpression [12-27] [p-g-123.d456.v1]
-    Identifier(`p-g-123`) [12-24] [p-g-123.d456]
+    Identifier("p-g-123") [12-24] [p-g-123.d456]
     Identifier(d456) [12-24] [p-g-123.d456]
     Identifier(v1) [25-27] [v1]
   Query [31-47] [select * from t2]
@@ -1253,7 +1253,7 @@ CreateViewStatement [0-47] [create view...* from t2]
           PathExpression [45-47] [t2]
             Identifier(t2) [45-47] [t2]
 --
-CREATE VIEW `p-g-123`.d456.v1 AS
+CREATE VIEW "p-g-123".d456.v1 AS
 SELECT
   *
 FROM
@@ -1266,7 +1266,7 @@ create materialized view p-b-c.d_123.mv1 as select sum(m1) from t2 group by d1, 
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `p-b-c.d_123.mv1` [at 1:26]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "p-b-c.d_123.mv1" [at 1:26]
 create materialized view p-b-c.d_123.mv1 as select sum(m1) from t2 group by d...
                          ^
 --
@@ -1274,7 +1274,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 CreateMaterializedViewStatement [0-82] [create materializ...by d1, d2]
   PathExpression [25-40] [p-b-c.d_123.mv1]
-    Identifier(`p-b-c`) [25-30] [p-b-c]
+    Identifier("p-b-c") [25-30] [p-b-c]
     Identifier(d_123) [31-36] [d_123]
     Identifier(mv1) [37-40] [mv1]
   Query [44-82] [select sum...by d1, d2]
@@ -1298,7 +1298,7 @@ CreateMaterializedViewStatement [0-82] [create materializ...by d1, d2]
           PathExpression [80-82] [d2]
             Identifier(d2) [80-82] [d2]
 --
-CREATE MATERIALIZED VIEW `p-b-c`.d_123.mv1 AS
+CREATE MATERIALIZED VIEW "p-b-c".d_123.mv1 AS
 SELECT
   sum(m1)
 FROM
@@ -1306,22 +1306,22 @@ FROM
 GROUP BY d1, d2
 ==
 
-create {{|materialized|approx}} view t1 with connection `myproject.us-west-2.myconnection` as select * from t2;
+create {{|materialized|approx}} view t1 with connection "myproject.us-west-2.myconnection" as select * from t2;
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Syntax error: Expected keyword AS but got keyword WITH [at 1:17]
-create  view t1 with connection `myproject.us-west-2.myconnection` as select ...
+create  view t1 with connection "myproject.us-west-2.myconnection" as select ...
                 ^
 --
 ALTERNATION GROUP: materialized
 --
 ERROR: Syntax error: Expected keyword AS but got keyword WITH [at 1:29]
-create materialized view t1 with connection `myproject.us-west-2.myconnection...
+create materialized view t1 with connection "myproject.us-west-2.myconnection...
                             ^
 --
 ALTERNATION GROUP: approx
 --
 ERROR: Syntax error: Expected keyword AS but got keyword WITH [at 1:23]
-create approx view t1 with connection `myproject.us-west-2.myconnection` as s...
+create approx view t1 with connection "myproject.us-west-2.myconnection" as s...
                       ^

@@ -16,7 +16,7 @@ from SimpleTypesWithAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-73
@@ -47,8 +47,8 @@ from SimpleTypesWithAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
-| +-$aggregate.$agg2#14 AS `$col2` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
+| +-$aggregate.$agg2#14 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -74,7 +74,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -89,7 +89,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -124,7 +124,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -141,7 +141,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -178,7 +178,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -195,7 +195,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -233,7 +233,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -251,7 +251,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -290,7 +290,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#13 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -307,7 +307,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [NUMERIC]
+| +-$aggregate.$agg1#13 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -349,9 +349,9 @@ group by int32;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
-| +-$aggregate.$agg3#15 AS `$col4` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
+| +-$aggregate.$agg3#15 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#16, $aggregate.$agg1#13, $aggregate.$agg2#14, $aggregate.$agg3#15]
@@ -382,9 +382,9 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
-| +-$aggregate.$agg3#15 AS `$col4` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
+| +-$aggregate.$agg3#15 AS "$col4" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#16, $aggregate.$agg1#13, $aggregate.$agg2#14, $aggregate.$agg3#15]
@@ -452,7 +452,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -474,7 +474,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -553,7 +553,7 @@ ALTERNATION GROUP: delta
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -570,13 +570,13 @@ QueryStmt
         +-anonymization_option_list=
           +-delta :=
             +-Cast(INT64 -> DOUBLE)
-              +-Parameter(type=INT64, name="test_param_int64")
+              +-Parameter(type=INT64, name='test_param_int64')
 --
 ALTERNATION GROUP: epsilon
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -593,13 +593,13 @@ QueryStmt
         +-anonymization_option_list=
           +-epsilon :=
             +-Cast(INT64 -> DOUBLE)
-              +-Parameter(type=INT64, name="test_param_int64")
+              +-Parameter(type=INT64, name='test_param_int64')
 --
 ALTERNATION GROUP: kappa
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -614,7 +614,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-kappa := Parameter(type=INT64, name="test_param_int64")
+          +-kappa := Parameter(type=INT64, name='test_param_int64')
 
 
 DEPRECATION WARNING:
@@ -627,7 +627,7 @@ ALTERNATION GROUP: k_threshold
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -642,7 +642,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-k_threshold := Parameter(type=INT64, name="test_param_int64")
+          +-k_threshold := Parameter(type=INT64, name='test_param_int64')
 ==
 
 select with anonymization options(
@@ -654,7 +654,7 @@ ALTERNATION GROUP: delta
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -669,13 +669,13 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-delta := Parameter(type=DOUBLE, name="test_param_double")
+          +-delta := Parameter(type=DOUBLE, name='test_param_double')
 --
 ALTERNATION GROUP: epsilon
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -690,7 +690,7 @@ QueryStmt
         |     +-Literal(type=INT64, value=0)
         |     +-Literal(type=INT64, value=100)
         +-anonymization_option_list=
-          +-epsilon := Parameter(type=DOUBLE, name="test_param_double")
+          +-epsilon := Parameter(type=DOUBLE, name='test_param_double')
 --
 ALTERNATION GROUP: kappa
 --
@@ -713,7 +713,7 @@ ALTERNATION GROUP: delta
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -738,7 +738,7 @@ ALTERNATION GROUP: epsilon
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -763,7 +763,7 @@ ALTERNATION GROUP: kappa
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -794,7 +794,7 @@ ALTERNATION GROUP: k_threshold
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -837,7 +837,7 @@ from SimpleTypes;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-82
@@ -871,7 +871,7 @@ from ProtoAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-92
@@ -903,7 +903,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -922,7 +922,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1022,7 +1022,7 @@ group by string;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.string#14 AS string [STRING]
 +-query=
   +-ProjectScan
@@ -1044,7 +1044,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.string#14 AS string [STRING]
 +-query=
   +-ProjectScan
@@ -1143,7 +1143,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#14 AS `$col1` [INT64]
+| +-$query.$col1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#14]
@@ -1167,7 +1167,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#14 AS `$col1` [INT64]
+| +-$query.$col1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#14]
@@ -1213,7 +1213,7 @@ group by int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -1240,7 +1240,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -1292,7 +1292,7 @@ ALTERNATION GROUP: a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1303,7 +1303,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int64#2]
         |   +-input_scan=
-        |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1318,7 +1318,7 @@ ALTERNATION GROUP: <empty>
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1349,7 +1349,7 @@ from (select int64 from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1363,7 +1363,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11]
         |       +-input_scan=
-        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1384,7 +1384,7 @@ from (select b.int64 from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1398,7 +1398,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11]
         |       +-input_scan=
-        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |         +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:anon_count(INT64, optional(1) INT64, optional(1) INT64) -> INT64)
@@ -1416,7 +1416,7 @@ from (select int64, uid from SimpleTypesWithAnonymizationUid);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1438,7 +1438,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -1493,7 +1493,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#15]
@@ -1521,7 +1521,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#15]
@@ -1571,7 +1571,7 @@ from (select count(*) from SimpleTypesWithAnonymizationUid a);
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-127
@@ -1587,7 +1587,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#13]
         |       +-input_scan=
-        |       | +-TableScan(parse_location=93-124, table=SimpleTypesWithAnonymizationUid, alias="a")
+        |       | +-TableScan(parse_location=93-124, table=SimpleTypesWithAnonymizationUid, alias='a')
         |       +-aggregate_list=
         |         +-$agg1#13 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)(parse_location=79-84)
         +-aggregate_list=
@@ -1619,7 +1619,7 @@ ALTERNATION GROUP:  a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-147
@@ -1635,7 +1635,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#13]
         |       +-input_scan=
-        |       | +-TableScan(parse_location=98-129, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=98-129, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-group_by_list=
         |       | +-uid#14 := ColumnRef(parse_location=143-146, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
         |       +-aggregate_list=
@@ -1662,7 +1662,7 @@ ALTERNATION GROUP: <empty>
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-145
@@ -1717,7 +1717,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#16 AS `$col1` [INT64]
+| +-$aggregate.$agg1#16 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#16]
@@ -1756,7 +1756,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#16 AS `$col1` [INT64]
+| +-$aggregate.$agg1#16 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#16]
@@ -1822,7 +1822,7 @@ ALTERNATION GROUP:  a
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-159
@@ -1838,7 +1838,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$groupby.x#14, $aggregate.$agg1#13]
         |       +-input_scan=
-        |       | +-TableScan(parse_location=111-142, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=111-142, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-group_by_list=
         |       | +-x#14 :=
         |       |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -1868,7 +1868,7 @@ ALTERNATION GROUP: <empty>
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-157
@@ -1924,7 +1924,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#35 AS `$col1` [INT64]
+| +-$aggregate.$agg1#35 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#35]
@@ -1972,7 +1972,7 @@ QueryStmt
         |   |   |       |   |       +-aggregate_list=
         |   |   |       |   |         +-int64#13 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         |   |   |       |   +-right_scan=
-        |   |   |       |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |       |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   |       +-filter_expr=
         |   |   |         +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
         |   |   |           +-ColumnRef(type=INT64, column=$aggregate.int64#13)
@@ -1992,7 +1992,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#35 AS `$col1` [INT64]
+| +-$aggregate.$agg1#35 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#35]
@@ -2043,7 +2043,7 @@ QueryStmt
         |   |   |   |       |   |       +-aggregate_list=
         |   |   |   |       |   |         +-int64#13 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         |   |   |   |       |   +-right_scan=
-        |   |   |   |       |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |   |       |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   |   |       +-filter_expr=
         |   |   |   |         +-FunctionCall(ZetaSQL:$greater(INT64, INT64) -> BOOL)
         |   |   |   |           +-ColumnRef(type=INT64, column=$aggregate.int64#13)
@@ -2082,7 +2082,7 @@ cross join SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#32 AS `$col1` [INT64]
+| +-$aggregate.$agg1#32 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#32]
@@ -2114,7 +2114,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#32 AS `$col1` [INT64]
+| +-$aggregate.$agg1#32 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#32]
@@ -2179,8 +2179,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
-| +-$aggregate.$agg2#14 AS `$col2` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
+| +-$aggregate.$agg2#14 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -2203,8 +2203,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
-| +-$aggregate.$agg2#14 AS `$col2` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
+| +-$aggregate.$agg2#14 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -2259,7 +2259,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#14 AS `$struct` [STRUCT<INT64>]
+| +-$make_struct.$struct#14 AS "$struct" [STRUCT<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2288,7 +2288,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#14 AS `$struct` [STRUCT<INT64>]
+| +-$make_struct.$struct#14 AS "$struct" [STRUCT<INT64>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2402,7 +2402,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -2424,7 +2424,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -2468,7 +2468,7 @@ group by int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -2493,7 +2493,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#15 AS `$col1` [INT64]
+| +-$query.$col1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#15]
@@ -2540,7 +2540,7 @@ group by a;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2551,7 +2551,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[ArrayWithAnonymizationUid.int64_array#1, $array.a#4]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias="t")
+        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias='t')
         |   +-array_expr=
         |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   +-element_column=$array.a#4
@@ -2563,7 +2563,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2577,7 +2577,7 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=[ArrayWithAnonymizationUid.int64_array#1, $array.a#4, ArrayWithAnonymizationUid.uid#7]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#7], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias="t")
+        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#7], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias='t')
         |   |   +-array_expr=
         |   |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   |   +-element_column=$array.a#4
@@ -2608,7 +2608,7 @@ from ArrayWithAnonymizationUid t inner join unnest(t.int64_array) a on true;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2619,7 +2619,7 @@ QueryStmt
         | +-ArrayScan
         |   +-column_list=[ArrayWithAnonymizationUid.int64_array#1]
         |   +-input_scan=
-        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias="t")
+        |   | +-TableScan(column_list=[ArrayWithAnonymizationUid.int64_array#1], table=ArrayWithAnonymizationUid, column_index_list=[0], alias='t')
         |   +-array_expr=
         |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   +-element_column=$array.a#4
@@ -2631,7 +2631,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -2645,7 +2645,7 @@ QueryStmt
         |   | +-ArrayScan
         |   |   +-column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#6]
         |   |   +-input_scan=
-        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#6], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias="t")
+        |   |   | +-TableScan(column_list=ArrayWithAnonymizationUid.[int64_array#1, uid#6], table=ArrayWithAnonymizationUid, column_index_list=[0, 2], alias='t')
         |   |   +-array_expr=
         |   |   | +-ColumnRef(type=ARRAY<INT64>, column=ArrayWithAnonymizationUid.int64_array#1)
         |   |   +-element_column=$array.a#4
@@ -2679,7 +2679,7 @@ from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-148
@@ -2732,7 +2732,7 @@ tablesample reservoir (1 rows);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-133
@@ -2744,7 +2744,7 @@ QueryStmt
         | +-SampleScan
         |   +-input_scan=
         |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="reservoir"
+        |   +-method='reservoir'
         |   +-size=
         |   | +-Literal(parse_location=126-127, type=INT64, value=1)
         |   +-unit=ROWS
@@ -2762,7 +2762,7 @@ tablesample reservoir (@_p2_INT64 rows);
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-133
@@ -2778,7 +2778,7 @@ QueryStmt
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="reservoir"
+        |   |   +-method='reservoir'
         |   |   +-size=
         |   |   | +-Literal(parse_location=126-127, type=INT64, value=1)
         |   |   +-unit=ROWS
@@ -2811,7 +2811,7 @@ tablesample system (cast(@test_param_uint64 as int64) rows) repeatable(10);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-177
@@ -2823,11 +2823,11 @@ QueryStmt
         | +-SampleScan
         |   +-input_scan=
         |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="system"
+        |   +-method='system'
         |   +-size=
         |   | +-Cast(UINT64 -> INT64)
         |   |   +-parse_location=150-155
-        |   |   +-Parameter(parse_location=128-146, type=UINT64, name="test_param_uint64")
+        |   |   +-Parameter(parse_location=128-146, type=UINT64, name='test_param_uint64')
         |   +-unit=ROWS
         |   +-repeatable_argument=
         |     +-Literal(parse_location=174-176, type=INT64, value=10)
@@ -2845,7 +2845,7 @@ tablesample system (cast(@test_param_uint64 as int64) rows) repeatable(@_p2_INT6
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-177
@@ -2861,11 +2861,11 @@ QueryStmt
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="system"
+        |   |   +-method='system'
         |   |   +-size=
         |   |   | +-Cast(UINT64 -> INT64)
         |   |   |   +-parse_location=150-155
-        |   |   |   +-Parameter(parse_location=128-146, type=UINT64, name="test_param_uint64")
+        |   |   |   +-Parameter(parse_location=128-146, type=UINT64, name='test_param_uint64')
         |   |   +-unit=ROWS
         |   |   +-repeatable_argument=
         |   |     +-Literal(parse_location=174-176, type=INT64, value=10)
@@ -2898,7 +2898,7 @@ tablesample some_random (1 percent) repeatable(@test_param_int32);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-168
@@ -2910,13 +2910,13 @@ QueryStmt
         | +-SampleScan
         |   +-input_scan=
         |   | +-TableScan(parse_location=71-102, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="some_random"
+        |   +-method='some_random'
         |   +-size=
         |   | +-Literal(parse_location=128-129, type=INT64, value=1)
         |   +-unit=PERCENT
         |   +-repeatable_argument=
         |     +-Cast(INT32 -> INT64)
-        |       +-Parameter(parse_location=150-167, type=INT32, name="test_param_int32")
+        |       +-Parameter(parse_location=150-167, type=INT32, name='test_param_int32')
         +-aggregate_list=
           +-$agg1#13 :=
             +-AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(1) INT64, optional(1) INT64) -> INT64)
@@ -2931,7 +2931,7 @@ tablesample some_random (@_p2_INT64 percent) repeatable(@test_param_int32);
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-168
@@ -2947,13 +2947,13 @@ QueryStmt
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#14]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=71-102, column_list=[SimpleTypesWithAnonymizationUid.uid#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="some_random"
+        |   |   +-method='some_random'
         |   |   +-size=
         |   |   | +-Literal(parse_location=128-129, type=INT64, value=1)
         |   |   +-unit=PERCENT
         |   |   +-repeatable_argument=
         |   |     +-Cast(INT32 -> INT64)
-        |   |       +-Parameter(parse_location=150-167, type=INT32, name="test_param_int32")
+        |   |       +-Parameter(parse_location=150-167, type=INT32, name='test_param_int32')
         |   +-group_by_list=
         |   | +-$uid#17 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#14)
         |   +-aggregate_list=
@@ -2983,7 +2983,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-206
@@ -3003,13 +3003,13 @@ QueryStmt
         |   |       +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12]
         |   |       +-input_scan=
         |   |       | +-TableScan(parse_location=86-117, column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-        |   |       +-method="reservoir"
+        |   |       +-method='reservoir'
         |   |       +-size=
         |   |       | +-Literal(parse_location=147-149, type=INT64, value=10)
         |   |       +-unit=ROWS
         |   |       +-partition_by_list=
         |   |         +-ColumnRef(parse_location=168-173, type=INT32, column=SimpleTypesWithAnonymizationUid.int32#1)
-        |   +-method="system"
+        |   +-method='system'
         |   +-size=
         |   | +-Literal(parse_location=196-197, type=INT64, value=1)
         |   +-unit=PERCENT
@@ -3027,7 +3027,7 @@ from (select * from SimpleTypesWithAnonymizationUid
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-206
@@ -3050,13 +3050,13 @@ QueryStmt
         |   |   |       +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12]
         |   |   |       +-input_scan=
         |   |   |       | +-TableScan(parse_location=86-117, column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-        |   |   |       +-method="reservoir"
+        |   |   |       +-method='reservoir'
         |   |   |       +-size=
         |   |   |       | +-Literal(parse_location=147-149, type=INT64, value=10)
         |   |   |       +-unit=ROWS
         |   |   |       +-partition_by_list=
         |   |   |         +-ColumnRef(parse_location=168-173, type=INT32, column=SimpleTypesWithAnonymizationUid.int32#1)
-        |   |   +-method="system"
+        |   |   +-method='system'
         |   |   +-size=
         |   |   | +-Literal(parse_location=196-197, type=INT64, value=1)
         |   |   +-unit=PERCENT
@@ -3090,7 +3090,7 @@ group by weight;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 | +-$groupby.weight#15 AS weight [DOUBLE]
 +-query=
   +-ProjectScan
@@ -3104,7 +3104,7 @@ QueryStmt
         |   +-column_list=[$sample_weight.weight#13]
         |   +-input_scan=
         |   | +-TableScan(parse_location=79-110, table=SimpleTypesWithAnonymizationUid)
-        |   +-method="reservoir"
+        |   +-method='reservoir'
         |   +-size=
         |   | +-Literal(parse_location=134-137, type=INT64, value=100)
         |   +-unit=ROWS
@@ -3127,7 +3127,7 @@ group by weight;
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 | +-$groupby.weight#15 AS weight [DOUBLE]
 +-query=
   +-ProjectScan
@@ -3144,7 +3144,7 @@ QueryStmt
         |   |   +-column_list=[$sample_weight.weight#13, SimpleTypesWithAnonymizationUid.uid#16]
         |   |   +-input_scan=
         |   |   | +-TableScan(parse_location=79-110, column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
-        |   |   +-method="reservoir"
+        |   |   +-method='reservoir'
         |   |   +-size=
         |   |   | +-Literal(parse_location=134-137, type=INT64, value=100)
         |   |   +-unit=ROWS
@@ -3182,7 +3182,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -3201,7 +3201,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -3242,8 +3242,8 @@ group by int64;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64#15 AS int64 [INT64]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64#15, $aggregate.$agg1#13, $aggregate.$agg2#14]
@@ -3266,8 +3266,8 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64#15 AS int64 [INT64]
-| +-$aggregate.$agg1#13 AS `$col2` [INT64]
-| +-$aggregate.$agg2#14 AS `$col3` [INT64]
+| +-$aggregate.$agg1#13 AS "$col2" [INT64]
+| +-$aggregate.$agg2#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64#15, $aggregate.$agg1#13, $aggregate.$agg2#14]
@@ -3951,7 +3951,7 @@ QueryStmt
     +-column_list=[t.anon_count#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$aggregate.anon_count#13]
@@ -3966,7 +3966,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t.anon_count#14]
         +-input_scan=
-          +-WithRefScan(column_list=[t.anon_count#14], with_query_name="t")
+          +-WithRefScan(column_list=[t.anon_count#14], with_query_name='t')
 
 [REWRITTEN AST]
 QueryStmt
@@ -3977,7 +3977,7 @@ QueryStmt
     +-column_list=[t.anon_count#14]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=[$aggregate.anon_count#13]
@@ -4008,7 +4008,7 @@ QueryStmt
       +-ProjectScan
         +-column_list=[t.anon_count#14]
         +-input_scan=
-          +-WithRefScan(column_list=[t.anon_count#14], with_query_name="t")
+          +-WithRefScan(column_list=[t.anon_count#14], with_query_name='t')
 ==
 
 [enabled_ast_rewrites=DEFAULTS,+ANONYMIZATION]
@@ -4018,7 +4018,7 @@ FROM UNNEST(ARRAY(select anon_count(*) as anon_count
 --
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#14 AS `$unnest1` [INT64]
+| +-$array.$unnest1#14 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#14]
@@ -4044,7 +4044,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$array.$unnest1#14 AS `$unnest1` [INT64]
+| +-$array.$unnest1#14 AS "$unnest1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$array.$unnest1#14]
@@ -4264,7 +4264,7 @@ FROM KitchenSinkWithUidValueTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4279,7 +4279,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4299,7 +4299,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=$table_scan.$value#3)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(column_list=[$table_scan.$value#3], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-group_by_list=
@@ -4329,7 +4329,7 @@ GROUP BY int32_val;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32_val#3 AS int32_val [INT32]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32_val#3, $aggregate.$agg1#2]
@@ -4360,7 +4360,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32_val#3 AS int32_val [INT32]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32_val#3, $aggregate.$agg1#2]
@@ -4380,7 +4380,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-group_by_list=
@@ -4426,7 +4426,7 @@ GROUP BY int64_val;
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64_val#3 AS int64_val [INT64]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64_val#3, $aggregate.$agg1#2]
@@ -4451,13 +4451,13 @@ QueryStmt
                 +-expr=
                 | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
                 +-field_descriptor=string_val
-                +-default_value="default_name"
+                +-default_value='default_name'
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64_val#3 AS int64_val [INT64]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64_val#3, $aggregate.$agg1#2]
@@ -4477,7 +4477,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-group_by_list=
@@ -4497,7 +4497,7 @@ QueryStmt
         |           +-expr=
         |           | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |           +-field_descriptor=string_val
-        |           +-default_value="default_name"
+        |           +-default_value='default_name'
         +-group_by_list=
         | +-int64_val#3 := ColumnRef(type=INT64, column=$groupby.int64_val_partial#7)
         +-aggregate_list=
@@ -4522,7 +4522,7 @@ FROM (SELECT string_val
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4539,7 +4539,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-TableScan(column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         +-aggregate_list=
@@ -4548,7 +4548,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4573,7 +4573,7 @@ QueryStmt
         |   |       |     +-expr=
         |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       |     +-field_descriptor=string_val
-        |   |       |     +-default_value="default_name"
+        |   |       |     +-default_value='default_name'
         |   |       +-input_scan=
         |   |         +-TableScan(column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-group_by_list=
@@ -4603,7 +4603,7 @@ FROM (SELECT COUNT(*), string_val
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -4625,7 +4625,7 @@ QueryStmt
         |       |     +-expr=
         |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       |     +-field_descriptor=string_val
-        |       |     +-default_value="default_name"
+        |       |     +-default_value='default_name'
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -4634,7 +4634,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -4660,7 +4660,7 @@ QueryStmt
         |   |       |   |     +-expr=
         |   |       |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       |   |     +-field_descriptor=string_val
-        |   |       |   |     +-default_value="default_name"
+        |   |       |   |     +-default_value='default_name'
         |   |       |   +-input_scan=
         |   |       |     +-TableScan(column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   |       +-group_by_list=
@@ -4693,7 +4693,7 @@ FROM (SELECT COUNT(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4707,7 +4707,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#2]
         |       +-input_scan=
-        |       | +-TableScan(table=KitchenSinkWithUidValueTable, alias="t")
+        |       | +-TableScan(table=KitchenSinkWithUidValueTable, alias='t')
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -4724,7 +4724,7 @@ FROM TestStructWithUidValueTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4739,7 +4739,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -4788,7 +4788,7 @@ GROUP BY b;
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4811,7 +4811,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4868,7 +4868,7 @@ GROUP BY b;
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4898,7 +4898,7 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.b#3 AS b [STRING]
-| +-$aggregate.$agg1#2 AS `$col2` [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.b#3, $aggregate.$agg1#2]
@@ -4961,7 +4961,7 @@ FROM (SELECT a
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -4986,7 +4986,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5040,7 +5040,7 @@ FROM (SELECT COUNT(*), a
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -5070,7 +5070,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -5128,7 +5128,7 @@ FROM (SELECT COUNT(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5142,7 +5142,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#2]
         |       +-input_scan=
-        |       | +-TableScan(table=TestStructWithUidValueTable, alias="t")
+        |       | +-TableScan(table=TestStructWithUidValueTable, alias='t')
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -5164,7 +5164,7 @@ from
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#29 AS `$col1` [INT64]
+| +-$aggregate.$agg1#29 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#29]
@@ -5223,7 +5223,7 @@ from
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#17 AS `$col1` [INT64]
+| +-$aggregate.$agg1#17 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#17]
@@ -5273,9 +5273,9 @@ select * from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.uid#14 AS uid [INT64]
-| +-$aggregate.$agg1#27 AS `$col1` [INT64]
+| +-$aggregate.$agg1#27 AS "$col1" [INT64]
 | +-$groupby.uid#28 AS uid [INT64]
 +-query=
   +-ProjectScan
@@ -5317,9 +5317,9 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 | +-$groupby.uid#14 AS uid [INT64]
-| +-$aggregate.$agg1#27 AS `$col1` [INT64]
+| +-$aggregate.$agg1#27 AS "$col1" [INT64]
 | +-$groupby.uid#28 AS uid [INT64]
 +-query=
   +-ProjectScan
@@ -5455,7 +5455,7 @@ select with anonymization anon_count(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5470,7 +5470,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5524,7 +5524,7 @@ select with anonymization anon_count(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5539,7 +5539,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5597,7 +5597,7 @@ select with anonymization anon_count(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -5619,7 +5619,7 @@ select with anonymization anon_count(*)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5630,9 +5630,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=TestWithDoublyNestedStructUidValueTable.[value#1, value#2]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t1")
+        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t2")
+        |   | +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
         |       +-GetStructField
@@ -5667,7 +5667,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5699,7 +5699,7 @@ QueryStmt
         |   |   |   |     |   +-field_idx=1
         |   |   |   |     +-field_idx=0
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t1")
+        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#1], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[TestWithDoublyNestedStructUidValueTable.value#2, $project.$a#9]
@@ -5719,7 +5719,7 @@ QueryStmt
         |   |   |   |     |   +-field_idx=1
         |   |   |   |     +-field_idx=0
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias="t2")
+        |   |   |     +-TableScan(column_list=[TestWithDoublyNestedStructUidValueTable.value#2], table=TestWithDoublyNestedStructUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
         |   |       +-GetStructField
@@ -5774,7 +5774,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -5793,7 +5793,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -5846,8 +5846,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5868,8 +5868,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5927,8 +5927,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -5950,8 +5950,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6017,7 +6017,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6038,7 +6038,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6093,7 +6093,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6112,7 +6112,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6165,8 +6165,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6188,8 +6188,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6255,8 +6255,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6277,8 +6277,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6336,8 +6336,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6358,8 +6358,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6426,8 +6426,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6451,8 +6451,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6522,8 +6522,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6551,8 +6551,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#14 AS `$col2` [DOUBLE]
+| +-$aggregate.$agg1#13 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#14 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6626,8 +6626,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [ARRAY<DOUBLE>]
-| +-$aggregate.$agg2#14 AS `$col2` [ARRAY<DOUBLE>]
+| +-$aggregate.$agg1#13 AS "$col1" [ARRAY<DOUBLE>]
+| +-$aggregate.$agg2#14 AS "$col2" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6655,8 +6655,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [ARRAY<DOUBLE>]
-| +-$aggregate.$agg2#14 AS `$col2` [ARRAY<DOUBLE>]
+| +-$aggregate.$agg1#13 AS "$col1" [ARRAY<DOUBLE>]
+| +-$aggregate.$agg2#14 AS "$col2" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -6834,7 +6834,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6851,7 +6851,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6889,7 +6889,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6906,7 +6906,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6944,7 +6944,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -6963,7 +6963,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7003,7 +7003,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7022,7 +7022,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7062,7 +7062,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7080,7 +7080,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7119,7 +7119,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7138,7 +7138,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7178,7 +7178,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7195,7 +7195,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7233,7 +7233,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7250,7 +7250,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7288,7 +7288,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7307,7 +7307,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7347,7 +7347,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7366,7 +7366,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7406,7 +7406,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7421,7 +7421,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7457,7 +7457,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7472,7 +7472,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7508,7 +7508,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7526,7 +7526,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7564,7 +7564,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7582,7 +7582,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7712,8 +7712,8 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
-| +-$aggregate.$agg2#14 AS `$col2` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg2#14 AS "$col2" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -7741,8 +7741,8 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
-| +-$aggregate.$agg2#14 AS `$col2` [JSON]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg2#14 AS "$col2" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#13, $agg2#14]
@@ -7815,7 +7815,7 @@ FROM SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7827,12 +7827,12 @@ QueryStmt
         +-aggregate_list=
         | +-$agg1#13 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
         +-anonymization_option_list=
-          +-custom_option := Literal(type=STRING, value="option_value")
+          +-custom_option := Literal(type=STRING, value='option_value')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7860,7 +7860,7 @@ QueryStmt
         +-k_threshold_expr=
         | +-ColumnRef(type=INT64, column=$anon.$k_threshold_col#20)
         +-anonymization_option_list=
-          +-custom_option := Literal(type=STRING, value="option_value")
+          +-custom_option := Literal(type=STRING, value='option_value')
 ==
 
 [no_run_unparser]
@@ -7871,7 +7871,7 @@ from SimpleTypesWithAnonymizationUid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7889,7 +7889,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [PROTO<zetasql.AnonOutputWithReport>]
+| +-$aggregate.$agg1#13 AS "$col1" [PROTO<zetasql.AnonOutputWithReport>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -7961,8 +7961,8 @@ GROUP BY 1, 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$groupby.$col2#17 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$groupby.$col2#17 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-163
@@ -8014,8 +8014,8 @@ GROUP BY 1, 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$groupby.$col2#17 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$groupby.$col2#17 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-163
@@ -8088,7 +8088,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
 | +-$query.x#22 AS x [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-223
@@ -8165,7 +8165,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
 | +-$query.x#22 AS x [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-223
@@ -8261,8 +8261,8 @@ GROUP BY 1, 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#15 AS int32 [INT32]
-| +-$groupby.$col2#16 AS `$col2` [STRING]
-| +-$aggregate.$agg1#14 AS `$col3` [INT64]
+| +-$groupby.$col2#16 AS "$col2" [STRING]
+| +-$aggregate.$agg1#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#15, $groupby.$col2#16, $aggregate.$agg1#14]
@@ -8278,7 +8278,7 @@ QueryStmt
         |     +-FunctionCall(ZetaSQL:array_filter(ARRAY<STRING> array_to_filter, FUNCTION<STRING->BOOL> condition) -> ARRAY<STRING>)
         |     | +-FunctionArgument
         |     | | +-expr=
-        |     | |   +-Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |     | |   +-Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |     | +-FunctionArgument
         |     |   +-inline_lambda=
         |     |     +-InlineLambda
@@ -8286,8 +8286,8 @@ QueryStmt
         |     |       +-body=
         |     |         +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |     |           +-ColumnRef(type=STRING, column=$lambda_arg.e#13)
-        |     |           +-Literal(type=STRING, value="x")
-        |     +-Literal(type=STRING, value=",")
+        |     |           +-Literal(type=STRING, value='x')
+        |     +-Literal(type=STRING, value=',')
         +-aggregate_list=
           +-$agg1#14 :=
             +-AggregateFunctionCall(ZetaSQL:anon_sum(INT64, optional(0) INT64, optional(0) INT64) -> INT64)
@@ -8297,8 +8297,8 @@ QueryStmt
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#15 AS int32 [INT32]
-| +-$groupby.$col2#16 AS `$col2` [STRING]
-| +-$aggregate.$agg1#14 AS `$col3` [INT64]
+| +-$groupby.$col2#16 AS "$col2" [STRING]
+| +-$aggregate.$agg1#14 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#15, $groupby.$col2#16, $aggregate.$agg1#14]
@@ -8349,7 +8349,7 @@ QueryStmt
         |   | |   |     |           |   +-filter_expr=
         |   | |   |     |           |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   | |   |     |           |       +-ColumnRef(type=STRING, column=$array.element#27)
-        |   | |   |     |           |       +-Literal(type=STRING, value="x")
+        |   | |   |     |           |       +-Literal(type=STRING, value='x')
         |   | |   |     |           +-order_by_item_list=
         |   | |   |     |             +-OrderByItem
         |   | |   |     |               +-column_ref=
@@ -8358,10 +8358,10 @@ QueryStmt
         |   | |   |       +-ProjectScan
         |   | |   |         +-column_list=[$subquery1.array_to_filter#26]
         |   | |   |         +-expr_list=
-        |   | |   |         | +-array_to_filter#26 := Literal(type=ARRAY<STRING>, value=["a", "b", "c"])
+        |   | |   |         | +-array_to_filter#26 := Literal(type=ARRAY<STRING>, value=['a', 'b', 'c'])
         |   | |   |         +-input_scan=
         |   | |   |           +-SingleRowScan
-        |   | |   +-Literal(type=STRING, value=",")
+        |   | |   +-Literal(type=STRING, value=',')
         |   | +-$uid#22 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#17)
         |   +-aggregate_list=
         |     +-$agg1_partial#19 :=
@@ -8398,8 +8398,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.s#16 AS s [STRING]
-| +-$query.$col2#18 AS `$col2` [ARRAY<STRING>]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#18 AS "$col2" [ARRAY<STRING>]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-172
@@ -8420,7 +8420,7 @@ QueryStmt
     |           +-body=
     |             +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |               +-ColumnRef(parse_location=61-62, type=STRING, column=$lambda_arg.e#17)
-    |               +-Literal(parse_location=65-68, type=STRING, value="x")
+    |               +-Literal(parse_location=65-68, type=STRING, value='x')
     +-input_scan=
       +-AnonymizedAggregateScan
         +-column_list=[$groupby.s#16, $aggregate.$agg1#15]
@@ -8429,7 +8429,7 @@ QueryStmt
         |   +-parse_location=95-160
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int32#1, SimpleTypesWithAnonymizationUid.int64#2, SimpleTypesWithAnonymizationUid.uint32#3, SimpleTypesWithAnonymizationUid.uint64#4, SimpleTypesWithAnonymizationUid.string#5, SimpleTypesWithAnonymizationUid.bytes#6, SimpleTypesWithAnonymizationUid.bool#7, SimpleTypesWithAnonymizationUid.float#8, SimpleTypesWithAnonymizationUid.double#9, SimpleTypesWithAnonymizationUid.date#10, SimpleTypesWithAnonymizationUid.uid#11, SimpleTypesWithAnonymizationUid.numeric#12, $subquery1.s#13]
         |   +-expr_list=
-        |   | +-s#13 := Literal(parse_location=105-112, type=STRING, value="a,b,c")
+        |   | +-s#13 := Literal(parse_location=105-112, type=STRING, value='a,b,c')
         |   +-input_scan=
         |     +-TableScan(parse_location=129-160, column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
         +-group_by_list=
@@ -8452,8 +8452,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.s#16 AS s [STRING]
-| +-$query.$col2#18 AS `$col2` [ARRAY<STRING>]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#18 AS "$col2" [ARRAY<STRING>]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-172
@@ -8497,7 +8497,7 @@ QueryStmt
     |         |           |   +-filter_expr=
     |         |           |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
     |         |           |       +-ColumnRef(type=STRING, column=$array.element#27)
-    |         |           |       +-Literal(parse_location=65-68, type=STRING, value="x")
+    |         |           |       +-Literal(parse_location=65-68, type=STRING, value='x')
     |         |           +-order_by_item_list=
     |         |             +-OrderByItem
     |         |               +-column_ref=
@@ -8523,7 +8523,7 @@ QueryStmt
         |   |   +-parse_location=95-160
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.int32#1, SimpleTypesWithAnonymizationUid.int64#2, SimpleTypesWithAnonymizationUid.uint32#3, SimpleTypesWithAnonymizationUid.uint64#4, SimpleTypesWithAnonymizationUid.string#5, SimpleTypesWithAnonymizationUid.bytes#6, SimpleTypesWithAnonymizationUid.bool#7, SimpleTypesWithAnonymizationUid.float#8, SimpleTypesWithAnonymizationUid.double#9, SimpleTypesWithAnonymizationUid.date#10, SimpleTypesWithAnonymizationUid.uid#11, SimpleTypesWithAnonymizationUid.numeric#12, $subquery1.s#13]
         |   |   +-expr_list=
-        |   |   | +-s#13 := Literal(parse_location=105-112, type=STRING, value="a,b,c")
+        |   |   | +-s#13 := Literal(parse_location=105-112, type=STRING, value='a,b,c')
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=129-160, column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, uid#11, numeric#12], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
         |   +-group_by_list=
@@ -8561,8 +8561,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$query.$col2#19 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#19 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-160
@@ -8615,8 +8615,8 @@ GROUP BY 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#16 AS int32 [INT32]
-| +-$query.$col2#19 AS `$col2` [INT64]
-| +-$aggregate.$agg1#15 AS `$col3` [INT64]
+| +-$query.$col2#19 AS "$col2" [INT64]
+| +-$aggregate.$agg1#15 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-160

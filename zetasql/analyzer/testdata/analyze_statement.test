@@ -2,8 +2,8 @@ analyze OPTIONS(p1=a1,p2=a2) SimpleTypes(int32,int64,double)
 --
 AnalyzeStmt
 +-option_list=
-| +-p1 := Literal(type=STRING, value="a1")
-| +-p2 := Literal(type=STRING, value="a2")
+| +-p1 := Literal(type=STRING, value='a1')
+| +-p2 := Literal(type=STRING, value='a2')
 +-table_and_column_index_list=
   +-TableAndColumnInfo(table=SimpleTypes, column_index_list=[0, 1, 8])
 ==
@@ -12,8 +12,8 @@ analyze OPTIONS(p1=a1,p2=a2) SimpleTypes(int32,int64,double), SimpleTypesWithAno
 --
 AnalyzeStmt
 +-option_list=
-| +-p1 := Literal(type=STRING, value="a1")
-| +-p2 := Literal(type=STRING, value="a2")
+| +-p1 := Literal(type=STRING, value='a1')
+| +-p2 := Literal(type=STRING, value='a2')
 +-table_and_column_index_list=
   +-TableAndColumnInfo(table=SimpleTypes, column_index_list=[0, 1, 8])
   +-TableAndColumnInfo(table=SimpleTypesWithAnonymizationUid, column_index_list=[4, 8])
@@ -37,8 +37,8 @@ analyze OPTIONS(p1=a1,p2=a2) SimpleTypes, SimpleTypesWithAnonymizationUid(string
 --
 AnalyzeStmt
 +-option_list=
-| +-p1 := Literal(type=STRING, value="a1")
-| +-p2 := Literal(type=STRING, value="a2")
+| +-p1 := Literal(type=STRING, value='a1')
+| +-p2 := Literal(type=STRING, value='a2')
 +-table_and_column_index_list=
   +-TableAndColumnInfo(table=SimpleTypes)
   +-TableAndColumnInfo(table=SimpleTypesWithAnonymizationUid, column_index_list=[4, 8])
@@ -96,8 +96,8 @@ analyze OPTIONS(p1=a1,p2=a2)
 --
 AnalyzeStmt
 +-option_list=
-  +-p1 := Literal(type=STRING, value="a1")
-  +-p2 := Literal(type=STRING, value="a2")
+  +-p1 := Literal(type=STRING, value='a1')
+  +-p2 := Literal(type=STRING, value='a2')
 ==
 
 analyze
@@ -110,8 +110,8 @@ analyze OPTIONS(p1=a1,p2=a2) AllPseudoColumns(Key, Value)
 --
 AnalyzeStmt
 +-option_list=
-| +-p1 := Literal(type=STRING, value="a1")
-| +-p2 := Literal(type=STRING, value="a2")
+| +-p1 := Literal(type=STRING, value='a1')
+| +-p2 := Literal(type=STRING, value='a2')
 +-table_and_column_index_list=
   +-TableAndColumnInfo(table=AllPseudoColumns, column_index_list=[0, 1])
 ==

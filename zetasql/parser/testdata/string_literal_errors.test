@@ -1,5 +1,5 @@
 # Test unclosed string.
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}
+select {{'a|"a|'''a|'''a'|'''a''}}
 --
 ALTERNATION GROUP: 'a
 --
@@ -9,14 +9,8 @@ select 'a
 --
 ALTERNATION GROUP: "a
 --
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-select "a
-       ^
---
-ALTERNATION GROUP: `a
---
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a
+select "a
        ^
 --
 ALTERNATION GROUP: '''a
@@ -25,34 +19,16 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a
        ^
 --
-ALTERNATION GROUP: """a
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a
-       ^
---
 ALTERNATION GROUP: '''a'
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a'
        ^
 --
-ALTERNATION GROUP: """a"
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a"
-       ^
---
 ALTERNATION GROUP: '''a''
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a''
-       ^
---
-ALTERNATION GROUP: """a""
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a""
        ^
 ==
 
@@ -265,7 +241,7 @@ select br"""a""
 ==
 
 # Test unclosed string with a trailing backslash.
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\
+select {{'a|"a|'''a|'''a'|'''a''}}\
 --
 ALTERNATION GROUP: 'a
 --
@@ -275,14 +251,8 @@ select 'a\
 --
 ALTERNATION GROUP: "a
 --
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-select "a\
-       ^
---
-ALTERNATION GROUP: `a
---
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a\
+select "a\
        ^
 --
 ALTERNATION GROUP: '''a
@@ -291,34 +261,16 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a\
        ^
 --
-ALTERNATION GROUP: """a
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a\
-       ^
---
 ALTERNATION GROUP: '''a'
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a'\
        ^
 --
-ALTERNATION GROUP: """a"
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a"\
-       ^
---
 ALTERNATION GROUP: '''a''
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a''\
-       ^
---
-ALTERNATION GROUP: """a""
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a""\
        ^
 ==
 
@@ -532,7 +484,7 @@ select br"""a""\
 
 # Test unclosed string with a trailing backslash and no newline.
 [strip_trailing_newline]
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\
+select {{'a|"a|'''a|'''a'|'''a''}}\
 --
 ALTERNATION GROUP: 'a
 --
@@ -542,14 +494,8 @@ select 'a\
 --
 ALTERNATION GROUP: "a
 --
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-select "a\
-       ^
---
-ALTERNATION GROUP: `a
---
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a\
+select "a\
        ^
 --
 ALTERNATION GROUP: '''a
@@ -558,34 +504,16 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a\
        ^
 --
-ALTERNATION GROUP: """a
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a\
-       ^
---
 ALTERNATION GROUP: '''a'
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a'\
        ^
 --
-ALTERNATION GROUP: """a"
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a"\
-       ^
---
 ALTERNATION GROUP: '''a''
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a''\
-       ^
---
-ALTERNATION GROUP: """a""
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a""\
        ^
 ==
 
@@ -803,24 +731,12 @@ select br"""a""\
 
 # Test closed string with a trailing backslash and no newline.
 [strip_trailing_newline]
-select {{'a'|"a"|`a`|'''a'''||"""a"""}}\
+select {{'a'|'''a'''|}}\
 --
 ALTERNATION GROUP: 'a'
 --
 ERROR: Syntax error: Illegal input character "\\" [at 1:11]
 select 'a'\
-          ^
---
-ALTERNATION GROUP: "a"
---
-ERROR: Syntax error: Illegal input character "\\" [at 1:11]
-select "a"\
-          ^
---
-ALTERNATION GROUP: `a`
---
-ERROR: Syntax error: Illegal input character "\\" [at 1:11]
-select `a`\
           ^
 --
 ALTERNATION GROUP: '''a'''
@@ -834,12 +750,6 @@ ALTERNATION GROUP: <empty>
 ERROR: Syntax error: Illegal input character "\\" [at 1:8]
 select \
        ^
---
-ALTERNATION GROUP: """a"""
---
-ERROR: Syntax error: Illegal input character "\\" [at 1:15]
-select """a"""\
-              ^
 ==
 
 # Test closed bytes with a trailing backslash and no newline.
@@ -873,7 +783,7 @@ select b"""a"""\
 
 # Test closed raw string with a trailing backlash and no newline.
 [strip_trailing_newline]
-select r{{'a'|"a"|'''a'''|"""a"""}}\
+select r{{'a'|'''a'''}}\
 --
 ALTERNATION GROUP: 'a'
 --
@@ -881,22 +791,10 @@ ERROR: Syntax error: Illegal input character "\\" [at 1:12]
 select r'a'\
            ^
 --
-ALTERNATION GROUP: "a"
---
-ERROR: Syntax error: Illegal input character "\\" [at 1:12]
-select r"a"\
-           ^
---
 ALTERNATION GROUP: '''a'''
 --
 ERROR: Syntax error: Illegal input character "\\" [at 1:16]
 select r'''a'''\
-               ^
---
-ALTERNATION GROUP: """a"""
---
-ERROR: Syntax error: Illegal input character "\\" [at 1:16]
-select r"""a"""\
                ^
 ==
 
@@ -959,7 +857,7 @@ select br"""a"""\
 ==
 
 # Test unclosed string with a trailing illegal escape.
-select {{'a|"a|`a|'''a|"""a|'''a'|"""a"|'''a''|"""a""}}\e
+select {{'a|"a|'''a|'''a'|'''a''}}\e
 --
 ALTERNATION GROUP: 'a
 --
@@ -969,14 +867,8 @@ select 'a\e
 --
 ALTERNATION GROUP: "a
 --
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-select "a\e
-       ^
---
-ALTERNATION GROUP: `a
---
 ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `a\e
+select "a\e
        ^
 --
 ALTERNATION GROUP: '''a
@@ -985,34 +877,16 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a\e
        ^
 --
-ALTERNATION GROUP: """a
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a\e
-       ^
---
 ALTERNATION GROUP: '''a'
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a'\e
        ^
 --
-ALTERNATION GROUP: """a"
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a"\e
-       ^
---
 ALTERNATION GROUP: '''a''
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''a''\e
-       ^
---
-ALTERNATION GROUP: """a""
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """a""\e
        ^
 ==
 
@@ -1230,7 +1104,7 @@ select
 --
 ALTERNATION GROUP: "
 --
-ERROR: Syntax error: Unclosed string literal [at 2:1]
+ERROR: Syntax error: Unclosed identifier literal [at 2:1]
 "
 ^
 --
@@ -1248,7 +1122,7 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:1]
 --
 ALTERNATION GROUP: """
 --
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:1]
+ERROR: Syntax error: Invalid empty identifier [at 2:1]
 """
 ^
 --
@@ -1260,7 +1134,7 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:1]
 --
 ALTERNATION GROUP: """"
 --
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:1]
+ERROR: Syntax error: Invalid empty identifier [at 2:1]
 """"
 ^
 --
@@ -1272,7 +1146,7 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:1]
 --
 ALTERNATION GROUP: """""
 --
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:1]
+ERROR: Syntax error: Invalid empty identifier [at 2:1]
 """""
 ^
 --
@@ -1284,9 +1158,9 @@ ERROR: Syntax error: Unclosed string literal [at 2:7]
 --
 ALTERNATION GROUP: """""""
 --
-ERROR: Syntax error: Unclosed string literal [at 2:7]
+ERROR: Syntax error: Invalid empty identifier [at 2:1]
 """""""
-      ^
+^
 --
 ALTERNATION GROUP: ''''''''
 --
@@ -1296,9 +1170,9 @@ ERROR: Syntax error: Expected end of input but got string literal '' [at 2:7]
 --
 ALTERNATION GROUP: """"""""
 --
-ERROR: Syntax error: Expected end of input but got string literal "" [at 2:7]
+ERROR: Syntax error: Invalid empty identifier [at 2:1]
 """"""""
-      ^
+^
 --
 ALTERNATION GROUP: '''''''''
 --
@@ -1308,47 +1182,14 @@ ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:7]
 --
 ALTERNATION GROUP: """""""""
 --
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 2:7]
+ERROR: Syntax error: Invalid empty identifier [at 2:1]
 """""""""
-      ^
-==
-
-select {{"a"a"|""""a""""|"""a"""a"""|''a''|""a""}}
---
-ALTERNATION GROUP: "a"a"
---
-ERROR: Syntax error: Unclosed string literal [at 1:12]
-select "a"a"
-           ^
---
-ALTERNATION GROUP: """"a""""
---
-ERROR: Syntax error: Unclosed string literal [at 1:16]
-select """"a""""
-               ^
---
-ALTERNATION GROUP: """a"""a"""
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:16]
-select """a"""a"""
-               ^
---
-ALTERNATION GROUP: ''a''
---
-ERROR: Syntax error: Expected end of input but got string literal '' [at 1:11]
-select ''a''
-          ^
---
-ALTERNATION GROUP: ""a""
---
-ERROR: Syntax error: Expected end of input but got string literal "" [at 1:11]
-select ""a""
-          ^
+^
 ==
 
 # Illegal escape (\e) inside string literals.
 select
-{{'a\e'|'\ea'|"a\e"|"\ea"|`a\e`|`\ea`|'''a\e'''|'''\ea'''|"""a\e"""|"""\ea"""}}
+{{'a\e'|'\ea'|'''a\e'''|'''\ea'''}}
 --
 ALTERNATION GROUP: 'a\e'
 --
@@ -1362,30 +1203,6 @@ ERROR: Syntax error: Illegal escape sequence: \e [at 2:2]
 '\ea'
  ^
 --
-ALTERNATION GROUP: "a\e"
---
-ERROR: Syntax error: Illegal escape sequence: \e [at 2:3]
-"a\e"
-  ^
---
-ALTERNATION GROUP: "\ea"
---
-ERROR: Syntax error: Illegal escape sequence: \e [at 2:2]
-"\ea"
- ^
---
-ALTERNATION GROUP: `a\e`
---
-ERROR: Syntax error: Illegal escape sequence: \e [at 2:3]
-`a\e`
-  ^
---
-ALTERNATION GROUP: `\ea`
---
-ERROR: Syntax error: Illegal escape sequence: \e [at 2:2]
-`\ea`
- ^
---
 ALTERNATION GROUP: '''a\e'''
 --
 ERROR: Syntax error: Illegal escape sequence: \e [at 2:5]
@@ -1396,18 +1213,6 @@ ALTERNATION GROUP: '''\ea'''
 --
 ERROR: Syntax error: Illegal escape sequence: \e [at 2:4]
 '''\ea'''
-   ^
---
-ALTERNATION GROUP: """a\e"""
---
-ERROR: Syntax error: Illegal escape sequence: \e [at 2:5]
-"""a\e"""
-    ^
---
-ALTERNATION GROUP: """\ea"""
---
-ERROR: Syntax error: Illegal escape sequence: \e [at 2:4]
-"""\ea"""
    ^
 ==
 
@@ -1465,7 +1270,7 @@ b"""\ea"""
 ==
 
 # Illegal escape (\) inside string literals.
-select {{'\'|"\"|`\`|'''\'''|"""\"""}}
+select {{'\'|'''\'''}}
 --
 ALTERNATION GROUP: '\'
 --
@@ -1473,28 +1278,10 @@ ERROR: Syntax error: Unclosed string literal [at 1:8]
 select '\'
        ^
 --
-ALTERNATION GROUP: "\"
---
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-select "\"
-       ^
---
-ALTERNATION GROUP: `\`
---
-ERROR: Syntax error: Unclosed identifier literal [at 1:8]
-select `\`
-       ^
---
 ALTERNATION GROUP: '''\'''
 --
 ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
 select '''\'''
-       ^
---
-ALTERNATION GROUP: """\"""
---
-ERROR: Syntax error: Unclosed triple-quoted string literal [at 1:8]
-select """\"""
        ^
 ==
 
@@ -1612,7 +1399,7 @@ select br"""\"""
 
 # No gap allowed among the prefix {b, r, rb, br} and the string content.
 select
-{{b 'a'|r 'a'|rb 'a'|br 'a'|b "a"|r "a"|rb "a"|br "a"|b '''a'''|r '''a'''|rb '''a'''|br '''a'''|b """a"""|r """a"""|rb """a"""|br """a"""}}
+{{b 'a'|r 'a'|rb 'a'|br 'a'|b '''a'''|r '''a'''|rb '''a'''|br '''a'''}}
 --
 ALTERNATION GROUP: b 'a'
 --
@@ -1638,30 +1425,6 @@ ERROR: Syntax error: Expected end of input but got string literal 'a' [at 2:4]
 br 'a'
    ^
 --
-ALTERNATION GROUP: b "a"
---
-ERROR: Syntax error: Expected end of input but got string literal "a" [at 2:3]
-b "a"
-  ^
---
-ALTERNATION GROUP: r "a"
---
-ERROR: Syntax error: Expected end of input but got string literal "a" [at 2:3]
-r "a"
-  ^
---
-ALTERNATION GROUP: rb "a"
---
-ERROR: Syntax error: Expected end of input but got string literal "a" [at 2:4]
-rb "a"
-   ^
---
-ALTERNATION GROUP: br "a"
---
-ERROR: Syntax error: Expected end of input but got string literal "a" [at 2:4]
-br "a"
-   ^
---
 ALTERNATION GROUP: b '''a'''
 --
 ERROR: Syntax error: Expected end of input but got string literal '''a''' [at 2:3]
@@ -1684,30 +1447,6 @@ ALTERNATION GROUP: br '''a'''
 --
 ERROR: Syntax error: Expected end of input but got string literal '''a''' [at 2:4]
 br '''a'''
-   ^
---
-ALTERNATION GROUP: b """a"""
---
-ERROR: Syntax error: Expected end of input but got string literal """a""" [at 2:3]
-b """a"""
-  ^
---
-ALTERNATION GROUP: r """a"""
---
-ERROR: Syntax error: Expected end of input but got string literal """a""" [at 2:3]
-r """a"""
-  ^
---
-ALTERNATION GROUP: rb """a"""
---
-ERROR: Syntax error: Expected end of input but got string literal """a""" [at 2:4]
-rb """a"""
-   ^
---
-ALTERNATION GROUP: br """a"""
---
-ERROR: Syntax error: Expected end of input but got string literal """a""" [at 2:4]
-br """a"""
    ^
 ==
 
@@ -1779,41 +1518,6 @@ QueryStatement [0-15] [SELECT b''' ''']
 SELECT
   b'''
 '''
-==
-
-# Illegal newline in double quoted string literal.
-SELECT "
-"
---
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-SELECT "
-       ^
-==
-
-# Illegal newline in raw double quoted string literal.
-SELECT "
-"
---
-ERROR: Syntax error: Unclosed string literal [at 1:8]
-SELECT "
-       ^
-==
-
-# Legal newline in triple double quoted string literal.
-SELECT """
-"""
---
-QueryStatement [0-14] [SELECT """ """]
-  Query [0-14] [SELECT """ """]
-    Select [0-14] [SELECT """ """]
-      SelectList [7-14] [""" """]
-        SelectColumn [7-14] [""" """]
-          StringLiteral("""
-""") [7-14] [""" """]
---
-SELECT
-  """
-"""
 ==
 
 # Illegal newline in double quoted bytes literal.
@@ -1929,15 +1633,6 @@ SELECT "abc\
 ERROR: Syntax error: Illegal escaped newline [at 1:12]
 SELECT "abc\
            ^
-==
-
-# Illegal escaped newline in triple double quoted string literal.
-SELECT """abc\
-"""
---
-ERROR: Syntax error: Illegal escaped newline [at 1:14]
-SELECT """abc\
-             ^
 ==
 
 # Illegal escaped newline in double quoted bytes literal.

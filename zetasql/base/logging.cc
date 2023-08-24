@@ -42,6 +42,7 @@ ABSL_CONST_INIT std::string *log_basename = nullptr;
 
 // The ZETASQL_VLOG level, only ZETASQL_VLOG with level equal to or below this
 // level is logged.
+// ABSL_CONST_INIT int vlog_level = 10;
 ABSL_CONST_INIT int vlog_level = 0;
 
 const char *GetBasename(const char *file_path) {

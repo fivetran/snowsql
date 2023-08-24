@@ -192,7 +192,7 @@ CREATE ROW POLICY ON t1 TO @@sysvar USING (true)
 ==
 
 # Grantee list edge cases.
-create row policy on t1 to {{|concat("mdbuser/", "foo")|NULL|""|1}} using(true);
+create row policy on t1 to {{|concat('mdbuser/', "foo")|NULL|''|1}} using(true);
 --
 ALTERNATION GROUP: <empty>
 --
@@ -200,10 +200,10 @@ ERROR: Syntax error: Expected "@" or "@@" or string literal but got keyword USIN
 create row policy on t1 to  using(true);
                             ^
 --
-ALTERNATION GROUP: concat("mdbuser/", "foo")
+ALTERNATION GROUP: concat('mdbuser/', "foo")
 --
 ERROR: Syntax error: Expected "@" or "@@" or string literal but got identifier "concat" [at 1:28]
-create row policy on t1 to concat("mdbuser/", "foo") using(true);
+create row policy on t1 to concat('mdbuser/', "foo") using(true);
                            ^
 --
 ALTERNATION GROUP: NULL
@@ -212,18 +212,18 @@ ERROR: Syntax error: Expected "@" or "@@" or string literal but got keyword NULL
 create row policy on t1 to NULL using(true);
                            ^
 --
-ALTERNATION GROUP: ""
+ALTERNATION GROUP: ''
 --
 CreateRowAccessPolicyStatement [0-41] [create row...using(true)]
   PathExpression [21-23] [t1]
     Identifier(t1) [21-23] [t1]
-  GrantToClause [24-29] [to ""]
-    GranteeList [27-29] [""]
-      StringLiteral("") [27-29] [""]
+  GrantToClause [24-29] [to '']
+    GranteeList [27-29] ['']
+      StringLiteral('') [27-29] ['']
   FilterUsingClause [29-41] [using(true)]
     BooleanLiteral(true) [36-40] [true]
 --
-CREATE ROW POLICY ON t1 TO "" USING (true)
+CREATE ROW POLICY ON t1 TO '' USING (true)
 --
 ALTERNATION GROUP: 1
 --

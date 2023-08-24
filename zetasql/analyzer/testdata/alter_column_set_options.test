@@ -8,9 +8,9 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnOptionsAction
-    +-column="key"
+    +-column='key'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 --
 ALTERNATION GROUP: view
 --
@@ -18,9 +18,9 @@ AlterViewStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnOptionsAction
-    +-column="key"
+    +-column='key'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 --
 ALTERNATION GROUP: model
 --
@@ -39,9 +39,9 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-AlterColumnOptionsAction
-|   +-column="key"
+|   +-column='key'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: view
@@ -50,9 +50,9 @@ AlterViewStmt
 +-name_path=KeyValue
 +-alter_action_list=
 | +-AlterColumnOptionsAction
-|   +-column="key"
+|   +-column='key'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 ==
@@ -66,13 +66,13 @@ AlterTableStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnOptionsAction
-  | +-column="key"
+  | +-column='key'
   | +-option_list=
-  |   +-description := Literal(type=STRING, value="description1")
+  |   +-description := Literal(type=STRING, value='description1')
   +-AlterColumnOptionsAction
-    +-column="value"
+    +-column='value'
     +-option_list=
-      +-description := Literal(type=STRING, value="description2")
+      +-description := Literal(type=STRING, value='description2')
 --
 ALTERNATION GROUP: view
 --
@@ -80,13 +80,13 @@ AlterViewStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnOptionsAction
-  | +-column="key"
+  | +-column='key'
   | +-option_list=
-  |   +-description := Literal(type=STRING, value="description1")
+  |   +-description := Literal(type=STRING, value='description1')
   +-AlterColumnOptionsAction
-    +-column="value"
+    +-column='value'
     +-option_list=
-      +-description := Literal(type=STRING, value="description2")
+      +-description := Literal(type=STRING, value='description2')
 
 ==
 
@@ -156,9 +156,9 @@ AlterTableStmt
 +-alter_action_list=
   +-AlterColumnOptionsAction
     +-is_if_exists=TRUE
-    +-column="key"
+    +-column='key'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 
 --
 ALTERNATION GROUP: view
@@ -168,9 +168,9 @@ AlterViewStmt
 +-alter_action_list=
   +-AlterColumnOptionsAction
     +-is_if_exists=TRUE
-    +-column="key"
+    +-column='key'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 
 ==
 
@@ -184,9 +184,9 @@ AlterTableStmt
 +-alter_action_list=
   +-AlterColumnOptionsAction
     +-is_if_exists=TRUE
-    +-column="not_a_column"
+    +-column='not_a_column'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 
 --
 ALTERNATION GROUP: view
@@ -196,9 +196,9 @@ AlterViewStmt
 +-alter_action_list=
   +-AlterColumnOptionsAction
     +-is_if_exists=TRUE
-    +-column="not_a_column"
+    +-column='not_a_column'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 
 ==
 
@@ -212,9 +212,9 @@ AlterTableStmt
 +-alter_action_list=
 | +-AlterColumnOptionsAction
 |   +-is_if_exists=TRUE
-|   +-column="key"
+|   +-column='key'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 --
@@ -225,9 +225,9 @@ AlterViewStmt
 +-alter_action_list=
 | +-AlterColumnOptionsAction
 |   +-is_if_exists=TRUE
-|   +-column="key"
+|   +-column='key'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 ==
@@ -242,9 +242,9 @@ AlterTableStmt
 +-alter_action_list=
 | +-AlterColumnOptionsAction
 |   +-is_if_exists=TRUE
-|   +-column="not_a_column"
+|   +-column='not_a_column'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 --
@@ -255,9 +255,9 @@ AlterViewStmt
 +-alter_action_list=
 | +-AlterColumnOptionsAction
 |   +-is_if_exists=TRUE
-|   +-column="not_a_column"
+|   +-column='not_a_column'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 ==
@@ -272,9 +272,9 @@ AlterTableStmt
 +-alter_action_list=
 | +-AlterColumnOptionsAction
 |   +-is_if_exists=TRUE
-|   +-column="key"
+|   +-column='key'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 --
@@ -285,9 +285,9 @@ AlterViewStmt
 +-alter_action_list=
 | +-AlterColumnOptionsAction
 |   +-is_if_exists=TRUE
-|   +-column="key"
+|   +-column='key'
 |   +-option_list=
-|     +-description := Literal(type=STRING, value="new description")
+|     +-description := Literal(type=STRING, value='new description')
 +-is_if_exists=TRUE
 
 ==
@@ -303,9 +303,9 @@ AlterViewStmt
 +-name_path=KeyValue
 +-alter_action_list=
   +-AlterColumnOptionsAction
-    +-column="key"
+    +-column='key'
     +-option_list=
-      +-description := Literal(type=STRING, value="new description")
+      +-description := Literal(type=STRING, value='new description')
 --
 ALTERNATION GROUP: <empty>
 --

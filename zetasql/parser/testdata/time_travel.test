@@ -156,7 +156,7 @@ QueryStatement [0-111] [SELECT * FROM...EPEATABLE (10)]
           ForSystemTime [24-63] [FOR SYSTEM_TIME...NT_TIMESTAMP]
             FunctionCall [46-63] [CURRENT_TIMESTAMP]
               PathExpression [46-63] [CURRENT_TIMESTAMP]
-                Identifier(`CURRENT_TIMESTAMP`) [46-63] [CURRENT_TIMESTAMP]
+                Identifier("CURRENT_TIMESTAMP") [46-63] [CURRENT_TIMESTAMP]
           SampleClause [64-111] [TABLESAMPLE...REPEATABLE (10)]
             Identifier(RESERVOIR) [76-85] [RESERVOIR]
             SampleSize [86-94] [100 ROWS]
@@ -168,7 +168,7 @@ QueryStatement [0-111] [SELECT * FROM...EPEATABLE (10)]
 SELECT
   *
 FROM
-  a.b.c.d.e FOR SYSTEM_TIME AS OF `CURRENT_TIMESTAMP`() TABLESAMPLE RESERVOIR(100 ROWS) REPEATABLE (10)
+  a.b.c.d.e FOR SYSTEM_TIME AS OF "CURRENT_TIMESTAMP"() TABLESAMPLE RESERVOIR(100 ROWS) REPEATABLE (10)
 ==
 
 SELECT * FROM a.b.c @{key=value} AS y FOR SYSTEM_TIME AS OF ts

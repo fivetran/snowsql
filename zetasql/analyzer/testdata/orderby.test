@@ -2,9 +2,9 @@ select 1, 2, 3 from KeyValue order by 2 desc, 3, 1 asc;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
-| +-$query.$col2#4 AS `$col2` [INT64]
-| +-$query.$col3#5 AS `$col3` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
+| +-$query.$col2#4 AS "$col2" [INT64]
+| +-$query.$col3#5 AS "$col3" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=$query.[$col1#3, $col2#4, $col3#5]
@@ -94,7 +94,7 @@ select key, min(value) from KeyValue group by key having key > 5 order by 1;
 QueryStmt
 +-output_column_list=
 | +-$groupby.key#4 AS key [INT64]
-| +-$aggregate.$agg1#3 AS `$col2` [STRING]
+| +-$aggregate.$agg1#3 AS "$col2" [STRING]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
@@ -128,7 +128,7 @@ select key, min(value) from KeyValue group by key having key > 5 order by 2;
 QueryStmt
 +-output_column_list=
 | +-$groupby.key#4 AS key [INT64]
-| +-$aggregate.$agg1#3 AS `$col2` [STRING]
+| +-$aggregate.$agg1#3 AS "$col2" [STRING]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.key#4, $aggregate.$agg1#3]
@@ -162,7 +162,7 @@ select as struct key, value from KeyValue order by 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#3 AS `$struct` [STRUCT<key INT64, value STRING>]
+| +-$make_struct.$struct#3 AS "$struct" [STRUCT<key INT64, value STRING>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -407,8 +407,8 @@ order by 3
 QueryStmt
 +-output_column_list=
 | +-$union_all.key#11 AS key [INT32]
-| +-$union_all.$col2#12 AS `$col2` [INT64]
-| +-$union_all.$col3#13 AS `$col3` [INT64]
+| +-$union_all.$col2#12 AS "$col2" [INT64]
+| +-$union_all.$col3#13 AS "$col3" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=$union_all.[key#11, $col2#12, $col3#13]
@@ -645,10 +645,10 @@ order by 1.0;
 ==
 
 select * from TestTable
-order by "foo";
+order by 'foo';
 --
 ERROR: Cannot ORDER BY literal values [at 2:10]
-order by "foo";
+order by 'foo';
          ^
 ==
 
@@ -716,7 +716,7 @@ order by key + 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [INT64]
+| +-$query.$col1#3 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#3]
@@ -1109,7 +1109,7 @@ order by Sum(key);
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#4 AS value [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col2" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.value#4, $aggregate.$agg1#3]
@@ -2061,7 +2061,7 @@ order by 1, key, value
 --
 QueryStmt
 +-output_column_list=
-| +-$make_struct.$struct#5 AS `$struct` [STRUCT<key INT64, value STRING>]
+| +-$make_struct.$struct#5 AS "$struct" [STRUCT<key INT64, value STRING>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2104,7 +2104,7 @@ order by 1, key, KeyValue.key
 --
 QueryStmt
 +-output_column_list=
-| +-$distinct.Key#3 AS `$value_column` [INT64]
+| +-$distinct.Key#3 AS "$value_column" [INT64]
 +-is_value_table=TRUE
 +-query=
   +-OrderByScan
@@ -2129,13 +2129,13 @@ QueryStmt
           +-ColumnRef(type=INT64, column=$distinct.Key#3)
 ==
 
-select distinct as `zetasql_test__.KeyValueStruct` key, value
+select distinct as "zetasql_test__.KeyValueStruct" key, value
 from KeyValue
 order by 1, key, value, KeyValue.key, KeyValue.value
 --
 QueryStmt
 +-output_column_list=
-| +-$make_proto.$proto#5 AS `$proto` [PROTO<zetasql_test__.KeyValueStruct>]
+| +-$make_proto.$proto#5 AS "$proto" [PROTO<zetasql_test__.KeyValueStruct>]
 +-is_value_table=TRUE
 +-query=
   +-ProjectScan
@@ -2492,7 +2492,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[$union_all.key#5, $orderby.$orderbycol1#6]
     |   +-expr_list=
-    |   | +-$orderbycol1#6 := Parameter(type=INT32, name="test_param_int32")
+    |   | +-$orderbycol1#6 := Parameter(type=INT32, name='test_param_int32')
     |   +-input_scan=
     |     +-SetOperationScan
     |       +-column_list=[$union_all.key#5]
@@ -2519,11 +2519,11 @@ QueryStmt
 ==
 
 # Can order by a subquery.
-select "a" from KeyValue order by (select count(*) from TestTable)
+select 'a' from KeyValue order by (select count(*) from TestTable)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#3]
@@ -2550,7 +2550,7 @@ QueryStmt
     |     +-ProjectScan
     |       +-column_list=[$query.$col1#3]
     |       +-expr_list=
-    |       | +-$col1#3 := Literal(type=STRING, value="a")
+    |       | +-$col1#3 := Literal(type=STRING, value='a')
     |       +-input_scan=
     |         +-TableScan(table=KeyValue)
     +-order_by_item_list=
@@ -2584,7 +2584,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=[KeyValue.Key#1, $orderby.$orderbycol1#3]
     |   +-expr_list=
-    |   | +-$orderbycol1#3 := Parameter(type=INT32, name="test_param_int32")
+    |   | +-$orderbycol1#3 := Parameter(type=INT32, name='test_param_int32')
     |   +-input_scan=
     |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
     +-order_by_item_list=
@@ -2626,7 +2626,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [INT64]
+| +-$query.$col1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -2675,7 +2675,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [INT64]
+| +-$query.$col1#8 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -2734,7 +2734,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#10 AS `$col1` [INT64]
+| +-$query.$col1#10 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#10]
@@ -2968,7 +2968,7 @@ QueryStmt
 # This was originally b/20529177, which failed with an internal error about
 # an incorrect column reference.
 select string_agg(ex)
-from UNNEST(["a", "b", "c"]) ex
+from UNNEST(['a', 'b', 'c']) ex
 order by ex;
 --
 ERROR: ORDER BY clause expression references table alias ex which is neither grouped nor aggregated [at 3:10]
@@ -2977,7 +2977,7 @@ order by ex;
 ==
 
 select string_agg(ex.a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 order by ex
 --
 ERROR: ORDER BY clause expression references table alias ex which is neither grouped nor aggregated [at 3:10]
@@ -2986,7 +2986,7 @@ order by ex
 ==
 
 select string_agg({{ex.|}}a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 order by ex.a
 --
 ERROR: ORDER BY clause expression references ex.a which is neither grouped nor aggregated [at 3:10]
@@ -2995,7 +2995,7 @@ order by ex.a
 ==
 
 select string_agg({{ex.|}}a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 order by a
 --
 ERROR: ORDER BY clause expression references column a which is neither grouped nor aggregated [at 3:10]
@@ -3004,13 +3004,13 @@ order by a
 ==
 
 select string_agg(ex.a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 group by ex.b
 order by ex.b
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [STRING]
+| +-$aggregate.$agg1#2 AS "$col1" [STRING]
 +-query=
   +-OrderByScan
     +-column_list=[$aggregate.$agg1#2]
@@ -3022,7 +3022,7 @@ QueryStmt
     |   | +-ArrayScan
     |   |   +-column_list=[$array.ex#1]
     |   |   +-array_expr=
-    |   |   | +-Literal(type=ARRAY<STRUCT<a STRING, b INT32>>, value=[{a:"a", b:1}, {a:"b", b:2}], has_explicit_type=TRUE)
+    |   |   | +-Literal(type=ARRAY<STRUCT<a STRING, b INT32>>, value=[{a:'a', b:1}, {a:'b', b:2}], has_explicit_type=TRUE)
     |   |   +-element_column=$array.ex#1
     |   +-group_by_list=
     |   | +-b#3 :=
@@ -3046,7 +3046,7 @@ QueryStmt
 ==
 
 select string_agg(ex.a)
-from unnest([struct<a string, b int32>("a", 1), ("b", 2)]) ex
+from unnest([struct<a string, b int32>('a', 1), ('b', 2)]) ex
 group by ex.b
 order by ex.b, ex.a
 --
@@ -3154,7 +3154,7 @@ QueryStmt
     |       |   |     | +-ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
     |       |   |     +-field_idx=1
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+    |       |     +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
     |       +-group_by_list=
     |         +-TestStruct#8 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=$pre_groupby.TestStruct#7)
     |         +-TestStruct#9 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)

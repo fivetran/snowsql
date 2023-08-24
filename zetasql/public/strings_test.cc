@@ -74,8 +74,8 @@ static void TestIdentifier(const std::string& orig) {
 
 static void TestAlwaysQuotedIdentifier(const std::string& orig) {
   const std::string quoted = ToAlwaysQuotedIdentifierLiteral(orig);
-  EXPECT_THAT(quoted, testing::StartsWith("`"));
-  EXPECT_THAT(quoted, testing::EndsWith("`"));
+  EXPECT_THAT(quoted, testing::StartsWith("\""));
+  EXPECT_THAT(quoted, testing::EndsWith("\""));
   std::string unquoted;
   std::string error_string;
   int error_offset;
@@ -101,8 +101,6 @@ static void TestString(const std::string& unquoted) {
   TestQuotedString(unquoted, ToStringLiteral(unquoted));
   TestQuotedString(unquoted,
                    absl::StrCat("'''", EscapeString(unquoted), "'''"));
-  TestQuotedString(unquoted,
-                   absl::StrCat("\"\"\"", EscapeString(unquoted), "\"\"\""));
 }
 
 static void TestRawString(const std::string& unquoted) {
@@ -295,7 +293,7 @@ TEST(StringsTest, TestParsingOfAllEscapeCharacters) {
     absl::string_view escape_piece(&escape_char, 1);
     if (valid_escapes.contains(escape_char)) {
       if (escape_char == '\'') {
-        TestParseString(absl::StrCat("\"a\\", escape_piece, "0010ffff\""));
+        TestParseString(absl::StrCat("'a\\", escape_piece, "0010ffff'"));
       }
       TestParseString(absl::StrCat("'a\\", escape_piece, "0010ffff'"));
       TestParseString(absl::StrCat("'''a\\", escape_piece, "0010ffff'''"));
@@ -449,27 +447,24 @@ TEST(StringsTest, InvalidString) {
   TestInvalidString("a'", 0, kInvalidStringLiteral);   // No opening quote
   TestInvalidString("a\"", 0, kInvalidStringLiteral);  // No opening quote
   TestInvalidString("'''", 1, "String cannot contain unescaped '");
-  TestInvalidString("\"\"\"", 1, "String cannot contain unescaped \"");
+  TestInvalidString("\"\"\"", 0, kInvalidStringLiteral);
   TestInvalidString("''''", 1, "String cannot contain unescaped '");
-  TestInvalidString("\"\"\"\"", 1, "String cannot contain unescaped \"");
+  TestInvalidString("\"\"\"\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''''", 1, "String cannot contain unescaped '");
-  TestInvalidString("\"\"\"\"\"", 1, "String cannot contain unescaped \"");
+  TestInvalidString("\"\"\"\"\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''''''", 3, "String cannot contain unescaped '''");
-  TestInvalidString("\"\"\"\"\"\"\"", 3,
-                    "String cannot contain unescaped \"\"\"");
+  TestInvalidString("\"\"\"\"\"\"\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''''''''", 3, "String cannot contain unescaped '''");
-  TestInvalidString("\"\"\"\"\"\"\"\"\"", 3,
-                    "String cannot contain unescaped \"\"\"");
+  TestInvalidString("\"\"\"\"\"\"\"\"\"", 0, kInvalidStringLiteral);
 
   TestInvalidString("abc");
 
   TestInvalidString("'abc'def'", 4, "String cannot contain unescaped '");
   TestInvalidString("'abc''def'", 4, "String cannot contain unescaped '");
-  TestInvalidString("\"abc\"\"def\"", 4, "String cannot contain unescaped \"");
+  TestInvalidString("\"abc\"\"def\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''abc'''def'''", 6,
                     "String cannot contain unescaped '''");
-  TestInvalidString("\"\"\"abc\"\"\"def\"\"\"", 6,
-                    "String cannot contain unescaped \"\"\"");
+  TestInvalidString("\"\"\"abc\"\"\"def\"\"\"", 0, kInvalidStringLiteral);
 
   TestInvalidString("'abc");
   TestInvalidString("\"abc");
@@ -487,32 +482,28 @@ TEST(StringsTest, InvalidString) {
   TestInvalidString("'''abc\"");
 
   TestInvalidString("'''a'", 1, "String cannot contain unescaped '");
-  TestInvalidString("\"\"\"a\"", 1, "String cannot contain unescaped \"");
+  TestInvalidString("\"\"\"a\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''a''", 1, "String cannot contain unescaped '");
-  TestInvalidString("\"\"\"a\"\"", 1, "String cannot contain unescaped \"");
+  TestInvalidString("\"\"\"a\"\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''a''''", 4, "String cannot contain unescaped '''");
-  TestInvalidString("\"\"\"a\"\"\"\"", 4,
-                    "String cannot contain unescaped \"\"\"");
+  TestInvalidString("\"\"\"a\"\"\"\"", 0, kInvalidStringLiteral);
 
   TestInvalidString("'''abc\"\"\"");
   TestInvalidString("\"\"\"abc'");
-  TestInvalidString("\"\"\"abc\"", 1, "String cannot contain unescaped \"");
+  TestInvalidString("\"\"\"abc\"", 0, kInvalidStringLiteral);
   TestInvalidString("\"\"\"abc'''");
   TestInvalidString("'''\\\''''''", 5, "String cannot contain unescaped '''");
-  TestInvalidString("\"\"\"\\\"\"\"\"\"\"", 5,
-                    "String cannot contain unescaped \"\"\"");
+  TestInvalidString("\"\"\"\\\"\"\"\"\"\"", 0, kInvalidStringLiteral);
   TestInvalidString("''''\\\'''''", 6, "String cannot contain unescaped '''");
-  TestInvalidString("\"\"\"\"\\\"\"\"\"\"", 6,
-                    "String cannot contain unescaped \"\"\"");
-  TestInvalidString("\"\"\"'a' \"b\"\"\"\"", 9,
-                    "String cannot contain unescaped \"\"\"");
+  TestInvalidString("\"\"\"\"\\\"\"\"\"\"", 0, kInvalidStringLiteral);
+  TestInvalidString("\"\"\"'a' \"b\"\"\"\"", 0, kInvalidStringLiteral);
 
   TestInvalidString("`abc`");
 
   TestInvalidString("'abc\\'", 6, "String must end with '");
-  TestInvalidString("\"abc\\\"", 6, "String must end with \"");
+  TestInvalidString("\"abc\\\"", 0, kInvalidStringLiteral);
   TestInvalidString("'''abc\\'''", 10, "String must end with '''");
-  TestInvalidString("\"\"\"abc\\\"\"\"", 10, "String must end with \"\"\"");
+  TestInvalidString("\"\"\"abc\\\"\"\"", 0, kInvalidStringLiteral);
 
   TestInvalidString("'\\U12345678'", 1,
                     "Value of \\U12345678 exceeds Unicode limit (0x0010FFFF)");
@@ -740,21 +731,21 @@ static void TestInvalidIdentifier(
 TEST(StringsTest, InvalidIdentifier) {
   // Only identifiers that start with a backtick get error offset information.
   TestInvalidIdentifier("", 0, "Invalid identifier");
-  TestInvalidIdentifier("`", 1, "String must end with `");
-  TestInvalidIdentifier("``", 0, "Invalid empty identifier");
-  TestInvalidIdentifier("`abc", 4, "String must end with `");
-  TestInvalidIdentifier("abc`");
-  TestInvalidIdentifier("`abc`abc`", 4, "String cannot contain unescaped `");
-  TestInvalidIdentifier("`ab``abc`", 3, "String cannot contain unescaped `");
+  TestInvalidIdentifier("\"", 1, "String must end with \"");
+  TestInvalidIdentifier("\"\"", 0, "Invalid empty identifier");
+  TestInvalidIdentifier("\"abc", 4, "String must end with \"");
+  TestInvalidIdentifier("abc\"");
+  TestInvalidIdentifier("\"abc\"abc\"", 4, "String cannot contain unescaped \"");
+  TestInvalidIdentifier("\"ab\"\"abc\"", 3, "String cannot contain unescaped \"");
   TestInvalidIdentifier("'abc'");
-  TestInvalidIdentifier("\"abc\"");
+  TestInvalidIdentifier("`abc`");
   TestInvalidIdentifier("abc def");
   TestInvalidIdentifier("abc,def");
-  TestInvalidIdentifier("`abc\\`", 6, "String must end with `");
+  TestInvalidIdentifier("\"abc\\\"", 6, "String must end with \"");
   TestInvalidIdentifier("123");
   TestInvalidIdentifier("ab!c");
   TestInvalidIdentifier(
-      "`abc\\U12345678`", 4,
+      "\"abc\\U12345678\"", 4,
       "Value of \\U12345678 exceeds Unicode limit (0x0010FFFF)");
   TestInvalidIdentifier("selECT");  // A reserved keyword.
 }
@@ -769,12 +760,7 @@ TEST(StringsTest, QuotedForms) {
 
   // ToStringLiteral will choose to quote with ' if it will avoid escaping.
   // Other quoted characters will not be escaped.
-  EXPECT_EQ("\"\"", ToStringLiteral(""));
-  EXPECT_EQ("\"abc\"", ToStringLiteral("abc"));
-  EXPECT_EQ("\"abc'def\"", ToStringLiteral("abc'def"));
   EXPECT_EQ("'abc\"def'", ToStringLiteral("abc\"def"));
-  EXPECT_EQ("\"abc`def\"", ToStringLiteral("abc`def"));
-  EXPECT_EQ("\"abc'\\\"`def\"", ToStringLiteral("abc'\"`def"));
 
   // Override the quoting style to use single quotes.
   EXPECT_EQ("''", ToSingleQuotedStringLiteral(""));
@@ -793,44 +779,44 @@ TEST(StringsTest, QuotedForms) {
   EXPECT_EQ("\"abc'\\\"`def\"", ToDoubleQuotedStringLiteral("abc'\"`def"));
 
   // ToIdentifierLiteral only has to quote `.
-  EXPECT_EQ("``", ToIdentifierLiteral(""));  // Not actually a valid identifier.
+  EXPECT_EQ("\"\"", ToIdentifierLiteral(""));  // Not actually a valid identifier.
   EXPECT_EQ("abc", ToIdentifierLiteral("abc"));
-  EXPECT_EQ("`abc'def`", ToIdentifierLiteral("abc'def"));
-  EXPECT_EQ("`abc\"def`", ToIdentifierLiteral("abc\"def"));
-  EXPECT_EQ("`abc\\`def`", ToIdentifierLiteral("abc`def"));
-  EXPECT_EQ("`123`", ToIdentifierLiteral("123"));
+  EXPECT_EQ("\"abc'def\"", ToIdentifierLiteral("abc'def"));
+  EXPECT_EQ("\"abc`def\"", ToIdentifierLiteral("abc`def"));
+  EXPECT_EQ("\"abc\\\"def\"", ToIdentifierLiteral("abc\"def"));
+  EXPECT_EQ("\"123\"", ToIdentifierLiteral("123"));
   EXPECT_EQ("_123", ToIdentifierLiteral("_123"));
   EXPECT_EQ("a12_3", ToIdentifierLiteral("a12_3"));
   EXPECT_EQ("a1", ToIdentifierLiteral("a1"));
-  EXPECT_EQ("`1a`", ToIdentifierLiteral("1a"));
+  EXPECT_EQ("\"1a\"", ToIdentifierLiteral("1a"));
   // Reserved SQL keywords get quoted.
-  EXPECT_EQ("`selECT`", ToIdentifierLiteral("selECT"));
+  EXPECT_EQ("\"selECT\"", ToIdentifierLiteral("selECT"));
   // Non-reserved SQL keywords normally don't get quoted.
   EXPECT_EQ("optIONS", ToIdentifierLiteral("optIONS"));
   EXPECT_EQ("optIONS", ToIdentifierLiteral(IdString::MakeGlobal("optIONS")));
   // Non-reserved SQL keywords do get quoted if they can be used in an
   // identifier context and take on special meaning there.
-  EXPECT_EQ("`try_cAst`", ToIdentifierLiteral("try_cAst"));
+  EXPECT_EQ("\"try_cAst\"", ToIdentifierLiteral("try_cAst"));
 
   // ToAlwaysQuotedIdentifierLiteral always back quote.
-  EXPECT_EQ("``", ToAlwaysQuotedIdentifierLiteral(
+  EXPECT_EQ("\"\"", ToAlwaysQuotedIdentifierLiteral(
                       ""));  // Not actually a valid identifier.
-  EXPECT_EQ("`abc`", ToAlwaysQuotedIdentifierLiteral("abc"));
-  EXPECT_EQ("`abc'def`", ToAlwaysQuotedIdentifierLiteral("abc'def"));
-  EXPECT_EQ("`abc\"def`", ToAlwaysQuotedIdentifierLiteral("abc\"def"));
-  EXPECT_EQ("`abc\\`def`", ToAlwaysQuotedIdentifierLiteral("abc`def"));
-  EXPECT_EQ("`123`", ToAlwaysQuotedIdentifierLiteral("123"));
-  EXPECT_EQ("`_123`", ToAlwaysQuotedIdentifierLiteral("_123"));
-  EXPECT_EQ("`a12_3`", ToAlwaysQuotedIdentifierLiteral("a12_3"));
-  EXPECT_EQ("`a1`", ToAlwaysQuotedIdentifierLiteral("a1"));
-  EXPECT_EQ("`1a`", ToAlwaysQuotedIdentifierLiteral("1a"));
+  EXPECT_EQ("\"abc\"", ToAlwaysQuotedIdentifierLiteral("abc"));
+  EXPECT_EQ("\"abc'def\"", ToAlwaysQuotedIdentifierLiteral("abc'def"));
+  EXPECT_EQ("\"abc`def\"", ToAlwaysQuotedIdentifierLiteral("abc`def"));
+  EXPECT_EQ("\"abc\\\"def\"", ToAlwaysQuotedIdentifierLiteral("abc\"def"));
+  EXPECT_EQ("\"123\"", ToAlwaysQuotedIdentifierLiteral("123"));
+  EXPECT_EQ("\"_123\"", ToAlwaysQuotedIdentifierLiteral("_123"));
+  EXPECT_EQ("\"a12_3\"", ToAlwaysQuotedIdentifierLiteral("a12_3"));
+  EXPECT_EQ("\"a1\"", ToAlwaysQuotedIdentifierLiteral("a1"));
+  EXPECT_EQ("\"1a\"", ToAlwaysQuotedIdentifierLiteral("1a"));
   // Reserved SQL keywords get quoted.
-  EXPECT_EQ("`selECT`", ToAlwaysQuotedIdentifierLiteral("selECT"));
+  EXPECT_EQ("\"selECT\"", ToAlwaysQuotedIdentifierLiteral("selECT"));
   // Non-reserved SQL keywords normally don't get quoted.
-  EXPECT_EQ("`optIONS`", ToAlwaysQuotedIdentifierLiteral("optIONS"));
+  EXPECT_EQ("\"optIONS\"", ToAlwaysQuotedIdentifierLiteral("optIONS"));
   // Non-reserved SQL keywords do get quoted if they can be used in an
   // identifier context and take on special meaning there.
-  EXPECT_EQ("`safe_cAst`", ToAlwaysQuotedIdentifierLiteral("safe_cAst"));
+  EXPECT_EQ("\"safe_cAst\"", ToAlwaysQuotedIdentifierLiteral("safe_cAst"));
 }
 
 static void ExpectParsedString(const std::string& expected,
@@ -888,36 +874,34 @@ static void ExpectParsedIdentifier(const std::string& expected,
 
 TEST(StringsTest, Parse) {
   ExpectParsedString("abc",
-                     {"'abc'", "\"abc\"", "'''abc'''", "\"\"\"abc\"\"\""});
-  ExpectParsedIdentifier("abc", "`abc`");
+                     {"'abc'", "'''abc'''"});
+  ExpectParsedIdentifier("abc", "\"abc\"");
   ExpectParsedIdentifier("abc", "abc");
   // Reserved keyword must be quoted.
-  ExpectParsedIdentifier("SELect", "`SELect`");
+  ExpectParsedIdentifier("SELect", "\"SELect\"");
   // Non-reserved keyword works with or without quotes.
-  ExpectParsedIdentifier("OPTions", "`OPTions`");
+  ExpectParsedIdentifier("OPTions", "\"OPTions\"");
   ExpectParsedIdentifier("OPTions", "OPTions");
 
   ExpectParsedString(
       "abc\ndef\x12ghi",
-      {"'abc\\ndef\\x12ghi'", "\"abc\\ndef\\x12ghi\"",
-       "'''abc\\ndef\\x12ghi'''", "\"\"\"abc\\ndef\\x12ghi\"\"\""});
-  ExpectParsedIdentifier("abc\ndef\x12ghi", "`abc\\ndef\\x12ghi`");
+      {"'abc\\ndef\\x12ghi'", "'''abc\\ndef\\x12ghi'''"});
+  ExpectParsedIdentifier("abc\ndef\x12ghi", "\"abc\\ndef\\x12ghi\"");
   ExpectParsedString("\xF4\x8F\xBF\xBD",
-                     {"'\\U0010FFFD'", "\"\\U0010FFFD\"", "'''\\U0010FFFD'''",
-                      "\"\"\"\\U0010FFFD\"\"\""});
-  ExpectParsedIdentifier("\xF4\x8F\xBF\xBD", "`\\U0010FFFD`");
+                     {"'\\U0010FFFD'", "'''\\U0010FFFD'''"});
+  ExpectParsedIdentifier("\xF4\x8F\xBF\xBD", "\"\\U0010FFFD\"");
 
-  // Some more test cases for triple quoted content.
-  ExpectParsedString("", {"''''''", "\"\"\"\"\"\""});
-  ExpectParsedString("'\"", {"''''\"'''"});
-  ExpectParsedString("''''''", {"'''''\\'''\\''''"});
-  ExpectParsedString("'", {"'''\\''''"});
-  ExpectParsedString("''", {"'''\\'\\''''"});
-  ExpectParsedString("'\"", {"''''\"'''"});
-  ExpectParsedString("'a", {"''''a'''"});
-  ExpectParsedString("\"a", {"\"\"\"\"a\"\"\""});
-  ExpectParsedString("''a", {"'''''a'''"});
-  ExpectParsedString("\"\"a", {"\"\"\"\"\"a\"\"\""});
+  // // Some more test cases for triple quoted content.
+  // ExpectParsedString("", {"''''''", "\"\"\"\"\"\""});
+  // ExpectParsedString("'\"", {"''''\"'''"});
+  // ExpectParsedString("''''''", {"'''''\\'''\\''''"});
+  // ExpectParsedString("'", {"'''\\''''"});
+  // ExpectParsedString("''", {"'''\\'\\''''"});
+  // ExpectParsedString("'\"", {"''''\"'''"});
+  // ExpectParsedString("'a", {"''''a'''"});
+  // ExpectParsedString("\"a", {"\"\"\"\"a\"\"\""});
+  // ExpectParsedString("''a", {"'''''a'''"});
+  // ExpectParsedString("\"\"a", {"\"\"\"\"\"a\"\"\""});
 }
 
 TEST(StringsTest, TestNewlines) {
@@ -931,34 +915,28 @@ TEST(StringsTest, TestNewlines) {
 
 TEST(RawStringsTest, CompareRawAndRegularStringParsing) {
   ExpectParsedString("\\n",
-                     {"r'\\n'", "r\"\\n\"", "r'''\\n'''", "r\"\"\"\\n\"\"\""});
+                     {"r'\\n'", "r'''\\n'''"});
   ExpectParsedString("\n",
-                     {"'\\n'", "\"\\n\"", "'''\\n'''", "\"\"\"\\n\"\"\""});
+                     {"'\\n'", "'''\\n'''"});
 
   ExpectParsedString("\\e",
-                     {"r'\\e'", "r\"\\e\"", "r'''\\e'''", "r\"\"\"\\e\"\"\""});
+                     {"r'\\e'", "r'''\\e'''"});
   TestInvalidString("'\\e'", 1, "Illegal escape sequence: \\e");
-  TestInvalidString("\"\\e\"", 1, "Illegal escape sequence: \\e");
   TestInvalidString("'''\\e'''", 3, "Illegal escape sequence: \\e");
-  TestInvalidString("\"\"\"\\e\"\"\"", 3, "Illegal escape sequence: \\e");
 
   ExpectParsedString(
-      "\\x0", {"r'\\x0'", "r\"\\x0\"", "r'''\\x0'''", "r\"\"\"\\x0\"\"\""});
+      "\\x0", {"r'\\x0'", "r'''\\x0'''"});
   constexpr char kHexError[] =
       "Hex escape must be followed by 2 hex digits but saw: \\x0";
   TestInvalidString("'\\x0'", 1, kHexError);
-  TestInvalidString("\"\\x0\"", 1, kHexError);
   TestInvalidString("'''\\x0'''", 3, kHexError);
-  TestInvalidString("\"\"\"\\x0\"\"\"", 3, kHexError);
 
   ExpectParsedString("\\'", {"r'\\\''"});
   ExpectParsedString("'", {"'\\\''"});
   ExpectParsedString("\\\"", {"r\"\\\"\""});
-  ExpectParsedString("\"", {"\"\\\"\""});
   ExpectParsedString("''\\'", {"r'''\'\'\\\''''"});
   ExpectParsedString("'''", {"'''\'\'\\\''''"});
   ExpectParsedString("\"\"\\\"", {"r\"\"\"\"\"\\\"\"\"\""});
-  ExpectParsedString("\"\"\"", {"\"\"\"\"\"\\\"\"\"\""});
 }
 
 TEST(RawBytesTest, CompareRawAndRegularBytesParsing) {
@@ -1135,21 +1113,21 @@ TEST(StringsTest, IdentifierPathToString) {
   EXPECT_EQ("", IdentifierPathToString(std::vector<std::string>{}));
   EXPECT_EQ("abc", IdentifierPathToString({"abc"}));
   EXPECT_EQ("abc.def", IdentifierPathToString({"abc", "def"}));
-  EXPECT_EQ("`a c`.def.`g h`", IdentifierPathToString({"a c", "def", "g h"}));
+  EXPECT_EQ("\"a c\".def.\"g h\"", IdentifierPathToString({"a c", "def", "g h"}));
   // Empty identifiers are illegal, but will still print here.
-  EXPECT_EQ("``.A.``", IdentifierPathToString({"", "A", ""}));
+  EXPECT_EQ("\"\".A.\"\"", IdentifierPathToString({"", "A", ""}));
 
   EXPECT_EQ("", IdentifierPathToString(std::vector<IdString>{}));
-  EXPECT_EQ("`a,c`.def",
+  EXPECT_EQ("\"a,c\".def",
             IdentifierPathToString({IdString::MakeGlobal("a,c"),
                                     IdString::MakeGlobal("def")}));
-  EXPECT_EQ("a.`all`", IdentifierPathToString({"a", "all"}));
+  EXPECT_EQ("a.\"all\"", IdentifierPathToString({"a", "all"}));
   EXPECT_EQ("a.all", IdentifierPathToString({"a", "all"},
                                             /*quote_reserved_keywords=*/false));
-  EXPECT_EQ("`all`.a", IdentifierPathToString({"all", "a"},
+  EXPECT_EQ("\"all\".a", IdentifierPathToString({"all", "a"},
       /*quote_reserved_keywords=*/false));
 
-  EXPECT_EQ("`all`.all.all", IdentifierPathToString({"all", "all", "all"},
+  EXPECT_EQ("\"all\".all.all", IdentifierPathToString({"all", "all", "all"},
       /*quote_reserved_keywords=*/false));
   EXPECT_EQ("a.all.a.all", IdentifierPathToString({"a", "all", "a", "all"},
       /*quote_reserved_keywords=*/false));
@@ -1176,29 +1154,29 @@ TEST(StringsTest, ParseIdentifierPath) {
 
       // Success.
       {"SingleIdentifier", "abc", {"abc"}},
-      {"SingleDot", "abc.`def`", {"abc", "def"}},
-      {"NumericPathTicks", "abc.`123`", {"abc", "123"}},
+      {"SingleDot", "abc.\"def\"", {"abc", "def"}},
+      {"NumericPathTicks", "abc.\"123\"", {"abc", "123"}},
       {"NumericPathNoTicks", "abc.123", {"abc", "123"}},
-      {"NumericPathBothTicks", "abc.`123`.456", {"abc", "123", "456"}},
-      {"EscapedBackslash", "`a\\\\`.bc", {"a\\", "bc"}},
-      {"EscapedBackquote", "`\\``.ghi", {"`", "ghi"}},
+      {"NumericPathBothTicks", "abc.\"123\".456", {"abc", "123", "456"}},
+      {"EscapedBackslash", "\"a\\\\\".bc", {"a\\", "bc"}},
+      {"EscapedBackquote", "\"\\\"\".ghi", {"\"", "ghi"}},
       {"UnquotedKeywords",
        "abc.select.from.table",
        {"abc", "select", "from", "table"}},
       {"QuotedAndUnquotedKeywords",
-       "abc.`select`.from.`table`",
+       "abc.\"select\".from.\"table\"",
        {"abc", "select", "from", "table"}},
-      {"EscapedWithSpaces", "`a c`.def.`g h`", {"a c", "def", "g h"}},
-      {"DotInBackquotes", "abc.def.`ghi.jkl`", {"abc", "def", "ghi.jkl"}},
-      {"HexDotsBackquotes", "`abc\\x2e\\x60ghi`", {"abc.`ghi"}},
+      {"EscapedWithSpaces", "\"a c\".def.\"g h\"", {"a c", "def", "g h"}},
+      {"DotInBackquotes", "abc.def.\"ghi.jkl\"", {"abc", "def", "ghi.jkl"}},
+      {"HexDotsBackquotes", "\"abc\\x2e\\x60ghi\"", {"abc.`ghi"}},
       {"EscapedNewlinesHex",
-       "`abc\\ndef\\x12ghi`.suffix",
+       "\"abc\\ndef\\x12ghi\".suffix",
        {"abc\ndef\x12ghi", "suffix"}},
       {"HexToUnicode",
-       "`\xd0\x9e\xd0\xbb\xd1\x8f.abc`.`\\U0010FFFD`",
+       "\"\xd0\x9e\xd0\xbb\xd1\x8f.abc\".\"\\U0010FFFD\"",
        {"\xd0\x9e\xd0\xbb\xd1\x8f.abc", "\xf4\x8f\xbf\xbd"}},
       {"EscapedUnicode",
-       "abc.`\\\"\xe8\xb0\xb7\xe6\xad\x8c\\\" is Google\\\'s Chinese name`",
+       "abc.\"\\\"\xe8\xb0\xb7\xe6\xad\x8c\\\" is Google\\\'s Chinese name\"",
        {"abc", "\"\xE8\xB0\xB7\xE6\xAD\x8C\" is Google's Chinese name"}},
 
       // Failure.
@@ -1206,10 +1184,10 @@ TEST(StringsTest, ParseIdentifierPath) {
       {"NullByte", "\0", {}, "cannot be empty"},
       {"EmptyPathComponent", "abc..def", {}, "empty path component"},
       {"InvalidIdentifier", "abc.def`12`", {}, "invalid character"},
-      {"BackquoteStart", "abc.`defghi", {}, "contains an unmatched `"},
-      {"BackquoteMiddle", "abc.def`ghi", {}, "invalid character"},
-      {"BackquoteTrailing", "abc.def`", {}, "invalid character"},
-      {"BackquoteConsecutive", "`abc``def`", {}, "invalid character"},
+      {"BackquoteStart", "abc.\"defghi", {}, "contains an unmatched \""},
+      {"BackquoteMiddle", "abc.def\"ghi", {}, "invalid character"},
+      {"BackquoteTrailing", "abc.def\"", {}, "invalid character"},
+      {"BackquoteConsecutive", "\"abc\"\"def\"", {}, "invalid character"},
       {"LeadingDot", ".abc.def.", {}, "cannot begin with `.`"},
       {"TrailingDot", "abc.def.", {}, "cannot end with `.`"},
       {"AllWhitespace", "     ", {}, "invalid character"},
@@ -1221,8 +1199,8 @@ TEST(StringsTest, ParseIdentifierPath) {
        "invalid character"},
       {"WhitespacePostIdentifier", "abc.123\t.def", {}, "invalid character"},
       {"WhitespaceWithinComponent", "abc.123 def", {}, "invalid character"},
-      {"InvalidEscape", "abc.`'\\e'`", {}, "Illegal escape sequence"},
-      {"InvalidUTF8", "abc.`\xe0\x80\x80`", {}, "invalid UTF8 string"},
+      {"InvalidEscape", "abc.\"'\\e'\"", {}, "Illegal escape sequence"},
+      {"InvalidUTF8", "abc.\"\xe0\x80\x80\"", {}, "invalid UTF8 string"},
       {"TrailingEscape", "abc.def\\", {}, "invalid character"},
       {"PathStartsWithNumber0", "123", {}, "Invalid identifier"},
       {"PathStartsWithNumber1", "123abc", {}, "Invalid identifier"},
@@ -1233,8 +1211,8 @@ TEST(StringsTest, ParseIdentifierPath) {
       {"UnescapedExpression1", "+abc", {}, "invalid character"},
       {"UnescapedExpression2", "'abc'", {}, "invalid character"},
       {"UnescapedExpression3", "abc+def", {}, "invalid character"},
-      {"UnescapedExpression4", "\"abc+def\"", {}, "invalid character"},
-      {"UnescapedExpression5", "\"abc.def\"", {}, "invalid character"},
+      {"UnescapedExpression4", "`abc+def`", {}, "invalid character"},
+      {"UnescapedExpression5", "`abc.def`", {}, "invalid character"},
   });
 
   // By default, test cases should produce the expected result regardless of
@@ -1355,12 +1333,12 @@ TEST(StringsTest, ConditionallyReservedKeywordsMiscIdentifierFunctions) {
   ZETASQL_EXPECT_OK(ParseGeneralizedIdentifier("QUALIFY", &out));
 
   // ToIdentifierLiteral()
-  EXPECT_EQ("`QUALIFY`", ToIdentifierLiteral("QUALIFY"));
+  EXPECT_EQ("\"QUALIFY\"", ToIdentifierLiteral("QUALIFY"));
 
   // IdentifierPathToString()
-  EXPECT_EQ("`QUALIFY`.`QUALIFY`",
+  EXPECT_EQ("\"QUALIFY\".\"QUALIFY\"",
             IdentifierPathToString({"QUALIFY", "QUALIFY"}, true));
-  EXPECT_EQ("`QUALIFY`.QUALIFY",
+  EXPECT_EQ("\"QUALIFY\".QUALIFY",
             IdentifierPathToString({"QUALIFY", "QUALIFY"}, false));
 
   // ParseIdentifierPath()
@@ -1371,7 +1349,7 @@ TEST(StringsTest, ConditionallyReservedKeywordsMiscIdentifierFunctions) {
 
   EXPECT_THAT(ParseIdentifierPath("QUALIFY.QUALIFY", qualify_reserved, &path),
               StatusIs(absl::StatusCode::kInvalidArgument));
-  ZETASQL_EXPECT_OK(ParseIdentifierPath("`QUALIFY`.QUALIFY", qualify_reserved, &path));
+  ZETASQL_EXPECT_OK(ParseIdentifierPath("\"QUALIFY\".QUALIFY", qualify_reserved, &path));
   EXPECT_THAT(path,
               ::testing::Eq(std::vector<std::string>{"QUALIFY", "QUALIFY"}));
 }

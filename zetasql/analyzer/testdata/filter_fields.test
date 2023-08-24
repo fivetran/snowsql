@@ -14,7 +14,7 @@ ALTERNATION GROUP: V_1_3_FILTER_FIELDS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -45,7 +45,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -69,7 +69,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -96,7 +96,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -124,7 +124,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -150,7 +150,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -175,7 +175,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -281,7 +281,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -304,7 +304,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -328,7 +328,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -349,7 +349,7 @@ SELECT FILTER_FIELDS(RecursivePB, +(zetasql_test__.RecursivePB.repeated_recursiv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [PROTO<zetasql_test__.RecursivePB>]
+| +-$query.$col1#2 AS "$col1" [PROTO<zetasql_test__.RecursivePB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -370,7 +370,7 @@ SELECT FILTER_FIELDS(RecursivePB, +(zetasql_test__.RecursivePB.repeated_recursiv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [PROTO<zetasql_test__.RecursivePB>]
+| +-$query.$col1#2 AS "$col1" [PROTO<zetasql_test__.RecursivePB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -482,7 +482,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]

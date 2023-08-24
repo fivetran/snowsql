@@ -23,18 +23,18 @@
 [default also_show_signature_mismatch_details]
 [default language_features=NAMED_ARGUMENTS]
 SELECT
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1", 1, 3.14)
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1', 1, 3.14)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_opt_args_nonnull_nonnegative_constraints(optional(1) STRING o1_string, optional(1) INT64 o2_int64, optional(1) DOUBLE o3_double) -> BOOL)
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='o1')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=DOUBLE, value=3.14)
     +-input_scan=
@@ -45,18 +45,18 @@ QueryStmt
 # This should produce the same AST.
 SELECT
   fn_named_opt_args_nonnull_nonnegative_constraints(
-      o3_double => 3.14, o1_string => "o1", o2_int64 => 1)
+      o3_double => 3.14, o1_string => 'o1', o2_int64 => 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_named_opt_args_nonnull_nonnegative_constraints(optional(1) STRING o1_string, optional(1) INT64 o2_int64, optional(1) DOUBLE o3_double) -> BOOL)
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='o1')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=DOUBLE, value=3.14)
     +-input_scan=
@@ -68,7 +68,7 @@ QueryStmt
 # constraints.
 SELECT
   fn_named_opt_args_nonnull_nonnegative_constraints(
-      o3_double => 3.14, o1_string => "o1", o2_int64 => -1)
+      o3_double => 3.14, o1_string => 'o1', o2_int64 => -1)
 --
 ERROR: Argument o2_int64 must not be negative [at 2:3]
   fn_named_opt_args_nonnull_nonnegative_constraints(
@@ -82,10 +82,10 @@ ERROR: Argument o2_int64 must not be negative [at 2:3]
 # TODO: Fix this failed case once the representation of omitted
 # args is fixed.
 SELECT
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1')
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS for argument types: STRING. Supported signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([STRING], [INT64], [DOUBLE]) [at 2:3]
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1')
   ^
 --
 Signature Mismatch Details:
@@ -93,7 +93,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
   Argument types: STRING
   Signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([STRING], [INT64], [DOUBLE])
     Argument constraints are not satisfied [at 2:3]
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1')
   ^
 ==
 
@@ -102,10 +102,10 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
 # TODO: Fix this failed case once the representation of omitted
 # args is fixed.
 SELECT
-  fn_named_opt_args_nonnull_nonnegative_constraints(o1_string => "o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints(o1_string => 'o1')
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS for argument types: o1_string => STRING. Supported signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([[o1_string=>]STRING], [[o2_int64=>]INT64], [[o3_double=>]DOUBLE]) [at 2:3]
-  fn_named_opt_args_nonnull_nonnegative_constraints(o1_string => "o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints(o1_string => 'o1')
   ^
 --
 Signature Mismatch Details:
@@ -113,7 +113,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
   Argument types: o1_string => STRING
   Signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([[o1_string=>]STRING], [[o2_int64=>]INT64], [[o3_double=>]DOUBLE])
     Argument constraints are not satisfied [at 2:3]
-  fn_named_opt_args_nonnull_nonnegative_constraints(o1_string => "o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints(o1_string => 'o1')
   ^
 ==
 
@@ -122,7 +122,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
 # TODO: Fix this failed case once the representation of omitted
 # args is fixed.
 SELECT
-  fn_named_opt_args_nonnull_nonnegative_constraints(o2_int64 => 1, o1_string => "o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints(o2_int64 => 1, o1_string => 'o1')
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS for argument types: o2_int64 => INT64, o1_string => STRING. Supported signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([[o1_string=>]STRING], [[o2_int64=>]INT64], [[o3_double=>]DOUBLE]) [at 2:3]
   fn_named_opt_args_nonnull_nonnegative_constraints(o2_int64 => 1, o1_string ...
@@ -142,7 +142,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
 # TODO: Fix this failed case once the representation of omitted
 # args is fixed.
 SELECT
-  fn_named_opt_args_nonnull_nonnegative_constraints(o2_int64 => 1, o1_string => "o1")
+  fn_named_opt_args_nonnull_nonnegative_constraints(o2_int64 => 1, o1_string => 'o1')
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS for argument types: o2_int64 => INT64, o1_string => STRING. Supported signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([[o1_string=>]STRING], [[o2_int64=>]INT64], [[o3_double=>]DOUBLE]) [at 2:3]
   fn_named_opt_args_nonnull_nonnegative_constraints(o2_int64 => 1, o1_string ...
@@ -162,10 +162,10 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
 # TODO: Fix this failed case once the representation of omitted
 # args is fixed.
 SELECT
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1", o3_double => 3.14)
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1', o3_double => 3.14)
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS for argument types: STRING, o3_double => DOUBLE. Supported signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([[o1_string=>]STRING], [[o2_int64=>]INT64], [[o3_double=>]DOUBLE]) [at 2:3]
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1", o3_double => 3.14)
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1', o3_double => 3.14)
   ^
 --
 Signature Mismatch Details:
@@ -173,7 +173,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
   Argument types: STRING, o3_double => DOUBLE
   Signature: FN_NAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([[o1_string=>]STRING], [[o2_int64=>]INT64], [[o3_double=>]DOUBLE])
     Argument constraints are not satisfied [at 2:3]
-  fn_named_opt_args_nonnull_nonnegative_constraints("o1", o3_double => 3.14)
+  fn_named_opt_args_nonnull_nonnegative_constraints('o1', o3_double => 3.14)
   ^
 ==
 
@@ -225,29 +225,29 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_NAMED_OPT_ARGS_NON
 #                                                       optional INT64,
 #                                                       optional DOUBLE)
 SELECT
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1"),
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", 1),
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", 1, 3.14)
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1'),
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', 1),
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', 1, 3.14)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_unnamed_opt_args_nonnull_nonnegative_constraints(optional(1) STRING, optional(0) INT64, optional(0) DOUBLE) -> BOOL)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_unnamed_opt_args_nonnull_nonnegative_constraints(optional(1) STRING, optional(1) INT64, optional(0) DOUBLE) -> BOOL)
-    | |   +-Literal(type=STRING, value="o1")
+    | |   +-Literal(type=STRING, value='o1')
     | |   +-Literal(type=INT64, value=1)
     | +-$col3#3 :=
     |   +-FunctionCall(sample_functions:fn_unnamed_opt_args_nonnull_nonnegative_constraints(optional(1) STRING, optional(1) INT64, optional(1) DOUBLE) -> BOOL)
-    |     +-Literal(type=STRING, value="o1")
+    |     +-Literal(type=STRING, value='o1')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=DOUBLE, value=3.14)
     +-input_scan=
@@ -257,20 +257,20 @@ QueryStmt
 # Tests with the same function signature, but setting 'o2_int64' with zero and
 # thus the call violates the functions' post resolution argument constratins.
 SELECT
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", -1)
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', -1)
 --
 ERROR: Argument 2 must not be negative [at 2:3]
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", -1)
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', -1)
   ^
 ==
 
 # The argument constraints callback is trigger to return false because of an
 # explicit NULL argument.
 SELECT
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", NULL)
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', NULL)
 --
 ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_UNNAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS for argument types: STRING, NULL. Supported signature: FN_UNNAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([STRING], [INT64], [DOUBLE]) [at 2:3]
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", NULL)
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', NULL)
   ^
 --
 Signature Mismatch Details:
@@ -278,7 +278,7 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_UNNAMED_OPT_ARGS_N
   Argument types: STRING, NULL
   Signature: FN_UNNAMED_OPT_ARGS_NONNULL_NONNEGATIVE_CONSTRAINTS([STRING], [INT64], [DOUBLE])
     Argument constraints are not satisfied [at 2:3]
-  fn_unnamed_opt_args_nonnull_nonnegative_constraints("o1", NULL)
+  fn_unnamed_opt_args_nonnull_nonnegative_constraints('o1', NULL)
   ^
 ==
 
@@ -288,37 +288,37 @@ ERROR: No matching signature for function SAMPLE_FUNCTIONS:FN_UNNAMED_OPT_ARGS_N
 # The result type is determined by the arg value of 'type_name'.
 [no_enable_literal_replacement]
 SELECT
-  fn_result_type_from_arg("zetasql_test__.TestEnum", "int64"),
-  fn_result_type_from_arg("int64", "zetasql_test__.TestEnum"),
-  fn_result_type_from_arg(type_name => "double", o1 => "int64"),
-  fn_result_type_from_arg(type_name => "string");
+  fn_result_type_from_arg('zetasql_test__.TestEnum', 'int64'),
+  fn_result_type_from_arg('int64', 'zetasql_test__.TestEnum'),
+  fn_result_type_from_arg(type_name => 'double', o1 => 'int64'),
+  fn_result_type_from_arg(type_name => 'string');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
     +-expr_list=
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_result_type_from_arg(optional(1) STRING o1, optional(1) STRING type_name) -> INT64)
-    | |   +-Literal(type=STRING, value="zetasql_test__.TestEnum")
-    | |   +-Literal(type=STRING, value="int64")
+    | |   +-Literal(type=STRING, value='zetasql_test__.TestEnum')
+    | |   +-Literal(type=STRING, value='int64')
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_result_type_from_arg(optional(1) STRING o1, optional(1) STRING type_name) -> ENUM<zetasql_test__.TestEnum>)
-    | |   +-Literal(type=STRING, value="int64")
-    | |   +-Literal(type=STRING, value="zetasql_test__.TestEnum")
+    | |   +-Literal(type=STRING, value='int64')
+    | |   +-Literal(type=STRING, value='zetasql_test__.TestEnum')
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_result_type_from_arg(optional(1) STRING o1, optional(1) STRING type_name) -> DOUBLE)
-    | |   +-Literal(type=STRING, value="int64")
-    | |   +-Literal(type=STRING, value="double")
+    | |   +-Literal(type=STRING, value='int64')
+    | |   +-Literal(type=STRING, value='double')
     | +-$col4#4 :=
     |   +-FunctionCall(sample_functions:fn_result_type_from_arg(optional(1) STRING o1, optional(1) STRING type_name) -> STRING)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Literal(type=STRING, value="string")
+    |     +-Literal(type=STRING, value='string')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -328,18 +328,18 @@ QueryStmt
 # TODO: Update the case with once we do not fill NULL values for
 # omitted arguments.
 [no_enable_literal_replacement]
-SELECT fn_result_type_from_arg("zetasql_test__.TestEnum");
+SELECT fn_result_type_from_arg('zetasql_test__.TestEnum');
 --
 ERROR: Argument 'type_name' cannot be NULL [at 1:8]
-SELECT fn_result_type_from_arg("zetasql_test__.TestEnum");
+SELECT fn_result_type_from_arg('zetasql_test__.TestEnum');
        ^
 ==
 
 # Tests with the same 'fn_result_type_from_arg' function but specifies the
 # 'type_name' argument with an invalid type name.
 [no_enable_literal_replacement]
-SELECT fn_result_type_from_arg(type_name => "InvalidType");
+SELECT fn_result_type_from_arg(type_name => 'InvalidType');
 --
 ERROR: Invalid type name provided: InvalidType [at 1:8]
-SELECT fn_result_type_from_arg(type_name => "InvalidType");
+SELECT fn_result_type_from_arg(type_name => 'InvalidType');
        ^

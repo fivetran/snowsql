@@ -5,7 +5,7 @@ select 1 from TestTable where KitchenSink.bool_val = @test_param_bool;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -24,22 +24,22 @@ QueryStmt
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=bool_val
             | +-default_value=false
-            +-Parameter(type=BOOL, name="test_param_bool")
+            +-Parameter(type=BOOL, name='test_param_bool')
 ==
 
 # This test is here to document current behavior and notice regressions in case
 # some customer has started doing this. We suspect the authors never intended
-# the `@` token to be separated from the variable name by whitespace.
+# the "@" token to be separated from the variable name by whitespace.
 SELECT @ test_param_bool;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=BOOL, name="test_param_bool")
+    | +-$col1#1 := Parameter(type=BOOL, name='test_param_bool')
     +-input_scan=
       +-SingleRowScan
 
@@ -47,18 +47,18 @@ QueryStmt
 
 # This test is here to document current behavior and notice regressions in case
 # some customer has started doing this. We suspect the authors never intended
-# the `@` token to be separated from the variable name by whitespace.
+# the "@" token to be separated from the variable name by whitespace.
 SELECT @
   SELECT
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=BOOL, name="select")
+    | +-$col1#1 := Parameter(type=BOOL, name='select')
     +-input_scan=
       +-SingleRowScan
 
@@ -68,7 +68,7 @@ select 1 + @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -77,7 +77,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |     +-Literal(type=INT64, value=1)
     |     +-Cast(INT32 -> INT64)
-    |       +-Parameter(type=INT32, name="test_param_int32")
+    |       +-Parameter(type=INT32, name='test_param_int32')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -93,7 +93,7 @@ select 1 from TestTable where @test_param_array[DEFAULT_OFFSET(@test_param_int32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -106,9 +106,9 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
             +-FunctionCall(ZetaSQL:$array_at_offset(ARRAY<INT32>, INT64) -> INT32)
-            | +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+            | +-Parameter(type=ARRAY<INT32>, name='test_param_array')
             | +-Cast(INT32 -> INT64)
-            |   +-Parameter(type=INT32, name="test_param_int32")
+            |   +-Parameter(type=INT32, name='test_param_int32')
             +-Literal(type=INT32, value=1)
 ==
 
@@ -139,7 +139,7 @@ QueryStmt
             +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
             | +-Literal(type=INT64, value=1)
             | +-Cast(INT32 -> INT64)
-            |   +-Parameter(type=INT32, name="test_param_int32")
+            |   +-Parameter(type=INT32, name='test_param_int32')
             +-Literal(type=INT64, value=5)
 ==
 
@@ -182,11 +182,11 @@ QueryStmt
           +-ProjectScan
             +-column_list=t.[bool_#1, int32_#2, bytes_#3, string_#4, array_#5]
             +-expr_list=
-            | +-bool_#1 := Parameter(type=BOOL, name="test_param_bool")
-            | +-int32_#2 := Parameter(type=INT32, name="test_param_int32")
-            | +-bytes_#3 := Parameter(type=BYTES, name="test_param_bytes")
-            | +-string_#4 := Parameter(type=STRING, name="test_param_string")
-            | +-array_#5 := Parameter(type=ARRAY<INT32>, name="test_param_array")
+            | +-bool_#1 := Parameter(type=BOOL, name='test_param_bool')
+            | +-int32_#2 := Parameter(type=INT32, name='test_param_int32')
+            | +-bytes_#3 := Parameter(type=BYTES, name='test_param_bytes')
+            | +-string_#4 := Parameter(type=STRING, name='test_param_string')
+            | +-array_#5 := Parameter(type=ARRAY<INT32>, name='test_param_array')
             +-input_scan=
               +-SingleRowScan
 ==
@@ -195,7 +195,7 @@ select 5 from KeyValue group by @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -206,7 +206,7 @@ QueryStmt
         +-input_scan=
         | +-TableScan(table=KeyValue)
         +-group_by_list=
-          +-$groupbycol1#3 := Parameter(type=INT32, name="test_param_int32")
+          +-$groupbycol1#3 := Parameter(type=INT32, name='test_param_int32')
 ==
 
 select key, value from KeyValue group by 1, 2 order by 1
@@ -238,9 +238,9 @@ QueryStmt
     |       +-column_ref=
     |         +-ColumnRef(type=INT64, column=$groupby.key#3)
     +-limit=
-    | +-Parameter(type=INT64, name="test_param_int64")
+    | +-Parameter(type=INT64, name='test_param_int64')
     +-offset=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 select key, value from KeyValue group by 1, 2 order by 1
@@ -272,7 +272,7 @@ QueryStmt
     |         +-ColumnRef(type=INT64, column=$groupby.key#3)
     +-limit=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 # Only integer parameters are allowed in limit.
@@ -286,7 +286,7 @@ limit @test_param_double
 
 select @test_param_proto.int64_val,
        (@test_param_proto.int64_val),
-       @ `test_param_proto`.int64_val;
+       @ "test_param_proto".int64_val;
 --
 QueryStmt
 +-output_column_list=
@@ -301,21 +301,21 @@ QueryStmt
     | | +-GetProtoField
     | |   +-type=INT64
     | |   +-expr=
-    | |   | +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | |   | +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     | |   +-field_descriptor=int64_val
     | |   +-default_value=0
     | +-int64_val#2 :=
     | | +-GetProtoField
     | |   +-type=INT64
     | |   +-expr=
-    | |   | +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | |   | +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     | |   +-field_descriptor=int64_val
     | |   +-default_value=0
     | +-int64_val#3 :=
     |   +-GetProtoField
     |     +-type=INT64
     |     +-expr=
-    |     | +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    |     | +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     |     +-field_descriptor=int64_val
     |     +-default_value=0
     +-input_scan=
@@ -330,18 +330,18 @@ select @test_param_mixedcase,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=STRING, name="test_param_mixedcase")
-    | +-$col2#2 := Parameter(type=STRING, name="test_param_mixedcase")
-    | +-$col3#3 := Parameter(type=STRING, name="test_param_mixedcase")
-    | +-$col4#4 := Parameter(type=STRING, name="test_param_mixedcase")
+    | +-$col1#1 := Parameter(type=STRING, name='test_param_mixedcase')
+    | +-$col2#2 := Parameter(type=STRING, name='test_param_mixedcase')
+    | +-$col3#3 := Parameter(type=STRING, name='test_param_mixedcase')
+    | +-$col4#4 := Parameter(type=STRING, name='test_param_mixedcase')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -360,10 +360,10 @@ select fn_on_TestEnum(@test_param_int32),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [BOOL]
-| +-$query.$col4#4 AS `$col4` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
+| +-$query.$col4#4 AS "$col4" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -371,18 +371,18 @@ QueryStmt
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_on_TestEnum(ENUM<zetasql_test__.TestEnum>) -> BOOL)
     | |   +-Cast(INT32 -> ENUM<zetasql_test__.TestEnum>)
-    | |     +-Parameter(type=INT32, name="test_param_int32")
+    | |     +-Parameter(type=INT32, name='test_param_int32')
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_on_TestEnum(ENUM<zetasql_test__.TestEnum>) -> BOOL)
     | |   +-Cast(INT64 -> ENUM<zetasql_test__.TestEnum>)
-    | |     +-Parameter(type=INT64, name="test_param_int64")
+    | |     +-Parameter(type=INT64, name='test_param_int64')
     | +-$col3#3 :=
     | | +-FunctionCall(sample_functions:fn_on_TestEnum(ENUM<zetasql_test__.TestEnum>) -> BOOL)
     | |   +-Cast(STRING -> ENUM<zetasql_test__.TestEnum>)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col4#4 :=
     |   +-FunctionCall(sample_functions:fn_on_TestEnum(ENUM<zetasql_test__.TestEnum>) -> BOOL)
-    |     +-Parameter(type=ENUM<zetasql_test__.TestEnum>, name="test_param_enum")
+    |     +-Parameter(type=ENUM<zetasql_test__.TestEnum>, name='test_param_enum')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -393,9 +393,9 @@ select fn_on_KitchenSinkPB(@test_param_string),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -403,14 +403,14 @@ QueryStmt
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_on_KitchenSinkPB(PROTO<zetasql_test__.KitchenSinkPB>) -> BOOL)
     | |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col2#2 :=
     | | +-FunctionCall(sample_functions:fn_on_KitchenSinkPB(PROTO<zetasql_test__.KitchenSinkPB>) -> BOOL)
     | |   +-Cast(BYTES -> PROTO<zetasql_test__.KitchenSinkPB>)
-    | |     +-Parameter(type=BYTES, name="test_param_bytes")
+    | |     +-Parameter(type=BYTES, name='test_param_bytes')
     | +-$col3#3 :=
     |   +-FunctionCall(sample_functions:fn_on_KitchenSinkPB(PROTO<zetasql_test__.KitchenSinkPB>) -> BOOL)
-    |     +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    |     +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -420,8 +420,8 @@ select fn_on_DATE(@test_param_string),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -429,11 +429,11 @@ QueryStmt
     | +-$col1#1 :=
     | | +-FunctionCall(sample_functions:fn_on_date(DATE) -> BOOL)
     | |   +-Cast(STRING -> DATE)
-    | |     +-Parameter(type=STRING, name="test_param_string")
+    | |     +-Parameter(type=STRING, name='test_param_string')
     | +-$col2#2 :=
     |   +-FunctionCall(sample_functions:fn_on_timestamp(TIMESTAMP) -> BOOL)
     |     +-Cast(STRING -> TIMESTAMP)
-    |       +-Parameter(type=STRING, name="test_param_string")
+    |       +-Parameter(type=STRING, name='test_param_string')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -523,12 +523,12 @@ ALTERNATION GROUP: KitchenSinkPB
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -548,7 +548,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -556,7 +556,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_on_int64_array_returns_int64(ARRAY<INT64>) -> INT64)
     |     +-Cast(ARRAY<INT32> -> ARRAY<INT64>)
-    |       +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+    |       +-Parameter(type=ARRAY<INT32>, name='test_param_array')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -584,7 +584,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -594,7 +594,7 @@ QueryStmt
     |     +-FunctionCall(ZetaSQL:$make_array(repeated(1) ENUM<zetasql_test__.TestEnum>) -> ARRAY<ENUM<zetasql_test__.TestEnum>>)
     |     | +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=EnumTable.TestEnum#2)
     |     +-Cast(ARRAY<INT64> -> ARRAY<ENUM<zetasql_test__.TestEnum>>)
-    |       +-Parameter(type=ARRAY<INT64>, name="test_param_array_int64")
+    |       +-Parameter(type=ARRAY<INT64>, name='test_param_array_int64')
     +-input_scan=
       +-TableScan(column_list=[EnumTable.TestEnum#2], table=EnumTable, column_index_list=[1])
 ==
@@ -605,7 +605,7 @@ select struct(cast(1 as int32)) IN UNNEST(@test_param_array_struct_int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -613,7 +613,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(STRUCT<INT64>, ARRAY<STRUCT<INT64>>) -> BOOL)
     |     +-Literal(type=STRUCT<INT64>, value={1}, has_explicit_type=TRUE)
-    |     +-Parameter(type=ARRAY<STRUCT<INT64>>, name="test_param_array_struct_int64")
+    |     +-Parameter(type=ARRAY<STRUCT<INT64>>, name='test_param_array_struct_int64')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -634,7 +634,7 @@ select cast(1 as int32) IN UNNEST(@test_param_array_int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -642,18 +642,18 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(INT64, ARRAY<INT64>) -> BOOL)
     |     +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
-    |     +-Parameter(type=ARRAY<INT64>, name="test_param_array_int64")
+    |     +-Parameter(type=ARRAY<INT64>, name='test_param_array_int64')
     +-input_scan=
       +-SingleRowScan
 ==
 
 # Another test involving IN UNNEST inspired by b/24130693 (fixed).
 [language_features={{|V_1_1_CAST_DIFFERENT_ARRAY_TYPES}}]
-select "TESTENUM0" IN UNNEST(@test_param_array_enum)
+select 'TESTENUM0' IN UNNEST(@test_param_array_enum)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -661,7 +661,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(ENUM<zetasql_test__.TestEnum>, ARRAY<ENUM<zetasql_test__.TestEnum>>) -> BOOL)
     |     +-Literal(type=ENUM<zetasql_test__.TestEnum>, value=TESTENUM0)
-    |     +-Parameter(type=ARRAY<ENUM<zetasql_test__.TestEnum>>, name="test_param_array_enum")
+    |     +-Parameter(type=ARRAY<ENUM<zetasql_test__.TestEnum>>, name='test_param_array_enum')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -695,7 +695,7 @@ select TestEnum in unnest(@test_param_array_enum) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -703,7 +703,7 @@ QueryStmt
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:$in_array(ENUM<zetasql_test__.TestEnum>, ARRAY<ENUM<zetasql_test__.TestEnum>>) -> BOOL)
     |     +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#2)
-    |     +-Parameter(type=ARRAY<ENUM<zetasql_test__.TestEnum>>, name="test_param_array_enum")
+    |     +-Parameter(type=ARRAY<ENUM<zetasql_test__.TestEnum>>, name='test_param_array_enum')
     +-input_scan=
       +-TableScan(column_list=[TestTable.TestEnum#2], table=TestTable, column_index_list=[1])
 ==
@@ -713,7 +713,7 @@ select @test_param_int64 in unnest(array_concat([TestEnum], [])) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [BOOL]
+| +-$query.$col1#4 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -721,7 +721,7 @@ QueryStmt
     | +-$col1#4 :=
     |   +-FunctionCall(ZetaSQL:$in_array(ENUM<zetasql_test__.TestEnum>, ARRAY<ENUM<zetasql_test__.TestEnum>>) -> BOOL)
     |     +-Cast(INT64 -> ENUM<zetasql_test__.TestEnum>)
-    |     | +-Parameter(type=INT64, name="test_param_int64")
+    |     | +-Parameter(type=INT64, name='test_param_int64')
     |     +-FunctionCall(ZetaSQL:array_concat(ARRAY<ENUM<zetasql_test__.TestEnum>>, repeated(1) ARRAY<ENUM<zetasql_test__.TestEnum>>) -> ARRAY<ENUM<zetasql_test__.TestEnum>>)
     |       +-FunctionCall(ZetaSQL:$make_array(repeated(1) ENUM<zetasql_test__.TestEnum>) -> ARRAY<ENUM<zetasql_test__.TestEnum>>)
     |       | +-ColumnRef(type=ENUM<zetasql_test__.TestEnum>, column=TestTable.TestEnum#2)
@@ -736,7 +736,7 @@ select null in unnest(@test_param_array_int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -744,7 +744,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(INT64, ARRAY<INT64>) -> BOOL)
     |     +-Literal(type=INT64, value=NULL)
-    |     +-Parameter(type=ARRAY<INT64>, name="test_param_array_int64")
+    |     +-Parameter(type=ARRAY<INT64>, name='test_param_array_int64')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -755,7 +755,7 @@ select null in unnest(@test_param_array_string)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -763,7 +763,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:$in_array(STRING, ARRAY<STRING>) -> BOOL)
     |     +-Literal(type=STRING, value=NULL)
-    |     +-Parameter(type=ARRAY<STRING>, name="test_param_array_string")
+    |     +-Parameter(type=ARRAY<STRING>, name='test_param_array_string')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -780,12 +780,12 @@ ALTERNATION GROUP: TestEnum
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=ENUM<zetasql_test__.TestEnum>, name="test_param_enum")
+    | +-$col1#1 := Parameter(type=ENUM<zetasql_test__.TestEnum>, name='test_param_enum')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -802,14 +802,14 @@ ALTERNATION GROUP: struct<int32,string>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT32, STRING>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT32, STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<INT32, STRING>)
-    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -818,14 +818,14 @@ select cast(@test_param_struct as struct<int64,date>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRUCT<INT64, DATE>]
+| +-$query.$col1#1 AS "$col1" [STRUCT<INT64, DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<INT64, DATE>)
-    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -841,14 +841,14 @@ ALTERNATION GROUP: fn_on_struct_int32_string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_on_struct_int32_string(STRUCT<a INT32, b STRING>) -> BOOL)
-    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |     +-Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     +-input_scan=
       +-SingleRowScan
 --
@@ -856,7 +856,7 @@ ALTERNATION GROUP: fn_on_struct_int64_string
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -864,7 +864,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_on_struct_int64_string(STRUCT<a INT64, b STRING>) -> BOOL)
     |     +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<a INT64, b STRING>)
-    |       +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |       +-Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     +-input_scan=
       +-SingleRowScan
 --
@@ -872,7 +872,7 @@ ALTERNATION GROUP: fn_on_struct_int32_date
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -880,7 +880,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(sample_functions:fn_on_struct_int32_date(STRUCT<a INT32, b DATE>) -> BOOL)
     |     +-Cast(STRUCT<a INT32, b STRING> -> STRUCT<a INT32, b DATE>)
-    |       +-Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |       +-Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -892,14 +892,14 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,array<string>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<INT32> -> ARRAY<STRING>)
-    |     +-Parameter(type=ARRAY<INT32>, name="test_param_array")
+    |     +-Parameter(type=ARRAY<INT32>, name='test_param_array')
     +-input_scan=
       +-SingleRowScan
 --
@@ -909,12 +909,12 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=ARRAY<INT32>, name="test_param_array")
+    | +-$col1#1 := Parameter(type=ARRAY<INT32>, name='test_param_array')
     +-input_scan=
       +-SingleRowScan
 --
@@ -931,22 +931,22 @@ select cast(@test_param_proto as string),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [BYTES]
-| +-$query.$col3#3 AS `$col3` [INT64]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [BYTES]
+| +-$query.$col3#3 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
     +-expr_list=
     | +-$col1#1 :=
     | | +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> STRING)
-    | |   +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | |   +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     | +-$col2#2 :=
     | | +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> BYTES)
-    | |   +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | |   +-Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     | +-$col3#3 :=
     |   +-Cast(ENUM<zetasql_test__.TestEnum> -> INT64)
-    |     +-Parameter(type=ENUM<zetasql_test__.TestEnum>, name="test_param_enum")
+    |     +-Parameter(type=ENUM<zetasql_test__.TestEnum>, name='test_param_enum')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -960,16 +960,16 @@ select cast(@test_param_proto as date)
 
 # @select is a BOOL parameter.  It behaves the same way back-ticked or not
 # back-ticked.
-select @{{select|`select`}};
+select @{{select|"select"}};
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=BOOL, name="select")
+    | +-$col1#1 := Parameter(type=BOOL, name='select')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -979,14 +979,14 @@ select @proto, @test_param_proto;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$query.$col2#2 AS `$col2` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col2#2 AS "$col2" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="proto")
-    | +-$col2#2 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name="test_param_proto")
+    | +-$col1#1 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='proto')
+    | +-$col2#2 := Parameter(type=PROTO<zetasql_test__.KitchenSinkPB>, name='test_param_proto')
     +-input_scan=
       +-SingleRowScan
 ==

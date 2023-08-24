@@ -6,7 +6,7 @@ SELECT ARRAY_OFFSETS([], 'hello')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -14,14 +14,14 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -76,7 +76,7 @@ QueryStmt
     |             +-column_list=$subquery1.[input_array#2, target_element#3]
     |             +-expr_list=
     |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#3 := Literal(type=STRING, value="hello")
+    |             | +-target_element#3 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -91,7 +91,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -99,14 +99,14 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -163,7 +163,7 @@ QueryStmt
     |             +-column_list=$subquery1.[input_array#2, target_element#3]
     |             +-expr_list=
     |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#3 := Literal(type=STRING, value="hello")
+    |             | +-target_element#3 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -176,7 +176,7 @@ ALTERNATION GROUPS:
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -184,7 +184,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
@@ -198,7 +198,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -206,14 +206,14 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_find_all(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<STRING>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -268,7 +268,7 @@ QueryStmt
     |             +-column_list=$subquery1.[input_array#2, target_element#3]
     |             +-expr_list=
     |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#3 := Literal(type=STRING, value="hello")
+    |             | +-target_element#3 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -278,7 +278,7 @@ ALTERNATION GROUP: SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -286,14 +286,14 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_find_all(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<STRING>)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     +-input_scan=
       +-SingleRowScan
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -350,7 +350,7 @@ QueryStmt
     |             +-column_list=$subquery1.[input_array#2, target_element#3]
     |             +-expr_list=
     |             | +-input_array#2 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#3 := Literal(type=STRING, value="hello")
+    |             | +-target_element#3 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=

@@ -187,7 +187,7 @@ static absl::Status ConvertBisonToken(int bison_token,
     }
 
     case BisonParserImpl::token::IDENTIFIER:
-      if (image[0] == '`') {
+      if (image[0] == '"') {
         std::string identifier;
         int error_offset;
         std::string error_message;

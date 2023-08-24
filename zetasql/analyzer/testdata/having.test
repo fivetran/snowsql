@@ -14,7 +14,7 @@ having sum(key) > 5;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -50,13 +50,13 @@ having sum(key) > 5;
 ==
 
 # No GROUP BY, aggregation in HAVING but different aggregation in SELECT list.
-select count(`int32`)
+select count("int32")
 from SimpleTypes
-having sum(`int64`) > 5;
+having sum("int64") > 5;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -83,14 +83,14 @@ QueryStmt
 
 # No GROUP BY, aggregation in HAVING and SELECT list along with other
 # aggregation.
-select count(`int32`), sum(`int64`)
+select count("int32"), sum("int64")
 from SimpleTypes
-having sum(`int64`) > 5;
+having sum("int64") > 5;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -119,7 +119,7 @@ QueryStmt
 ==
 
 # No GROUP BY, HAVING clause has no aggregation
-select sum(`int64`) as a
+select sum("int64") as a
 from SimpleTypes
 having true;
 --
@@ -166,15 +166,15 @@ having true;
 ==
 
 # GROUP BY, HAVING references GROUP BY column but has no aggregation
-select `int64`, sum(`int32`)
+select "int64", sum("int32")
 from SimpleTypes
-group by `int64`
-having `int64` < 5;
+group by "int64"
+having "int64" < 5;
 --
 QueryStmt
 +-output_column_list=
 | +-$groupby.int64#20 AS int64 [INT64]
-| +-$aggregate.$agg1#19 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int64#20, $aggregate.$agg1#19]
@@ -201,14 +201,14 @@ QueryStmt
 
 # GROUP BY, HAVING has more complex expression that is derived from GROUP
 # BY columns.
-select sum(`int32`)
+select sum("int32")
 from SimpleTypes
-group by `int64`
-having `int64` + 2 < 5;
+group by "int64"
+having "int64" + 2 < 5;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -236,15 +236,15 @@ QueryStmt
 ==
 
 # GROUP BY, HAVING has aggregation and group by reference.
-select `int32`, sum(`int64`)
+select "int32", sum("int64")
 from SimpleTypes
-group by `int32`
-having sum(`int64`) > 5 and `int32` + 5 < 10;
+group by "int32"
+having sum("int64") > 5 and "int32" + 5 < 10;
 --
 QueryStmt
 +-output_column_list=
 | +-$groupby.int32#20 AS int32 [INT32]
-| +-$aggregate.$agg1#19 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.int32#20, $aggregate.$agg1#19]
@@ -289,7 +289,7 @@ having sum(key) > 5 and key < 10;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -336,7 +336,7 @@ select * from (select value, sum(key)
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#4 AS value [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#4, $aggregate.$agg1#3]
@@ -360,7 +360,7 @@ QueryStmt
             +-filter_expr=
               +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, column=$groupby.value#4)
-                +-Literal(type=STRING, value="foo")
+                +-Literal(type=STRING, value='foo')
 ==
 
 # HAVING clause aggregation functions can reference columns not available in
@@ -425,46 +425,46 @@ QueryStmt
         +-filter_expr=
           +-FunctionCall(ZetaSQL:$greater(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=$aggregate.$agg1#4)
-            +-Literal(type=STRING, value="foo")
+            +-Literal(type=STRING, value='foo')
 ==
 
 # ERROR cases.
 
 # HAVING cannot reference pre-aggregate columns.
-select `int64`
+select "int64"
 from SimpleTypes
-group by `int64`
-having `int32` < 5;
+group by "int64"
+having "int32" < 5;
 --
 ERROR: HAVING clause expression references column int32 which is neither grouped nor aggregated [at 4:8]
-having `int32` < 5;
+having "int32" < 5;
        ^
 ==
 
 # HAVING cannot reference pre-aggregate columns.
-select sum(`int64`) as a
+select sum("int64") as a
 from SimpleTypes
-group by `int64`
-having `int64` > 5 and `int32` < 5;
+group by "int64"
+having "int64" > 5 and "int32" < 5;
 --
 ERROR: HAVING clause expression references column int32 which is neither grouped nor aggregated [at 4:24]
-having `int64` > 5 and `int32` < 5;
+having "int64" > 5 and "int32" < 5;
                        ^
 ==
 
 # HAVING clause must be a boolean expression.
-select `int64`
+select "int64"
 from SimpleTypes
-group by `int64`
-having `int64`;
+group by "int64"
+having "int64";
 --
 ERROR: HAVING clause should return type BOOL, but returns INT64 [at 4:8]
-having `int64`;
+having "int64";
        ^
 ==
 
 # HAVING can reference select list aliases.
-select sum(`int64`) as a
+select sum("int64") as a
 from SimpleTypes
 having a > 5;
 --
@@ -538,13 +538,13 @@ QueryStmt
               +-Literal(type=UINT32, value=100)
 ==
 
-select countif(`int32` > 0)
+select countif("int32" > 0)
 from SimpleTypes
-having countif(`int64` > 0) > 5;
+having countif("int64" > 0) > 5;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#19]
@@ -955,7 +955,7 @@ having NULL
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]

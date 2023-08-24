@@ -53,12 +53,12 @@ ASSERT_ROWS_MODIFIED 1;
 ==
 
 INSERT KeyValue (key, value)
-VALUES (1, "one"), (2, DEFAULT), (3, NULL)
+VALUES (1, 'one'), (2, DEFAULT), (3, NULL)
 --
 [UNPARSED_SQL]
 INSERT INTO KeyValue(Key, Value)
 VALUES
-  (1, "one"),
+  (1, 'one'),
   (2, DEFAULT),
   (3, CAST(NULL AS STRING));
 ==
@@ -81,7 +81,7 @@ FROM
 
 UPDATE KeyValue SET
   key=1,
-  value="a"
+  value='a'
 WHERE key > 10
 ASSERT_ROWS_MODIFIED @test_param_int64
 --
@@ -89,7 +89,7 @@ ASSERT_ROWS_MODIFIED @test_param_int64
 UPDATE KeyValue AS keyvalue_1
 SET
   keyvalue_1.Key = 1,
-  keyvalue_1.Value = "a"
+  keyvalue_1.Value = 'a'
 WHERE
   (keyvalue_1.Key) > 10
 ASSERT_ROWS_MODIFIED @test_param_int64;
@@ -234,64 +234,64 @@ WHERE
   true;
 ==
 
-DELETE ` Value`
-WHERE ` Value`.` Value` = "true"
+DELETE " Value"
+WHERE " Value"." Value" = 'true'
 --
 [UNPARSED_SQL]
-DELETE ` Value` AS ` value_1`
+DELETE " Value" AS " value_1"
 WHERE
-  (` value_1`.` Value`) = "true";
+  (" value_1"." Value") = 'true';
 ==
 
-UPDATE ` Value` SET
-  ` Value`.` Value` = "true"
-WHERE ` Key` > 1
+UPDATE " Value" SET
+  " Value"." Value" = 'true'
+WHERE " Key" > 1
 --
 [UNPARSED_SQL]
-UPDATE ` Value` AS ` value_1`
+UPDATE " Value" AS " value_1"
 SET
-  ` value_1`.` Value` = "true"
+  " value_1"." Value" = 'true'
 WHERE
-  (` value_1`.` Key`) > 1;
+  (" value_1"." Key") > 1;
 ==
 
-INSERT ` Value` (` Key`, ` Value`)
-select * from ` Value`
+INSERT " Value" (" Key", " Value")
+select * from " Value"
 --
 [UNPARSED_SQL]
-INSERT INTO ` Value`(` Key`, ` Value`)
+INSERT INTO " Value"(" Key", " Value")
 SELECT
-  ` value_4`.a_2 AS a_2,
-  ` value_4`.a_3 AS a_3
+  " value_4".a_2 AS a_2,
+  " value_4".a_3 AS a_3
 FROM
   (
     SELECT
-      ` value_1`.` Key` AS a_2,
-      ` value_1`.` Value` AS a_3
+      " value_1"." Key" AS a_2,
+      " value_1"." Value" AS a_3
     FROM
-      ` Value` AS ` value_1`
-  ) AS ` value_4`;
+      " Value" AS " value_1"
+  ) AS " value_4";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
-INSERT INTO nested_catalog.KeyValueNested(key, value) VALUES (1, "2")
+INSERT INTO nested_catalog.KeyValueNested(key, value) VALUES (1, '2')
 --
 [UNPARSED_SQL]
 INSERT INTO nested_catalog.KeyValueNested(Key, Value)
 VALUES
-  (1, "2");
+  (1, '2');
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
 UPDATE nested_catalog.KeyValueNested
-SET value = "3" WHERE key = 1
+SET value = '3' WHERE key = 1
 --
 [UNPARSED_SQL]
 UPDATE nested_catalog.KeyValueNested AS keyvaluenested_1
 SET
-  keyvaluenested_1.Value = "3"
+  keyvaluenested_1.Value = '3'
 WHERE
   (keyvaluenested_1.Key) = 1;
 ==
@@ -310,32 +310,32 @@ WHERE
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
 [language_features=V_1_3_DML_RETURNING]
-INSERT INTO nested_catalog.KeyValueNested (key, value) VALUES (1, "one")
+INSERT INTO nested_catalog.KeyValueNested (key, value) VALUES (1, 'one')
 THEN RETURN key+1
 --
 [UNPARSED_SQL]
 INSERT INTO nested_catalog.KeyValueNested(Key, Value)
 VALUES
-  (1, "one")
+  (1, 'one')
 THEN RETURN
-  (KeyValueNested.Key) + 1 AS `$col1`;
+  (KeyValueNested.Key) + 1 AS "$col1";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
 # SQLBuilder is overriden to do so, but we should have a more general solution.
 [language_features=V_1_3_DML_RETURNING]
 UPDATE nested_catalog.KeyValueNested
-SET value = "3" WHERE key = 1
+SET value = '3' WHERE key = 1
 THEN RETURN key+1
 --
 [UNPARSED_SQL]
 UPDATE nested_catalog.KeyValueNested AS keyvaluenested_1
 SET
-  keyvaluenested_1.Value = "3"
+  keyvaluenested_1.Value = '3'
 WHERE
   (keyvaluenested_1.Key) = 1
 THEN RETURN
-  (keyvaluenested_1.Key) + 1 AS `$col1`;
+  (keyvaluenested_1.Key) + 1 AS "$col1";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when
@@ -350,7 +350,7 @@ DELETE nested_catalog.KeyValueNested AS keyvaluenested_1
 WHERE
   (keyvaluenested_1.Key) = 1
 THEN RETURN
-  (keyvaluenested_1.Key) + 1 AS `$col1`;
+  (keyvaluenested_1.Key) + 1 AS "$col1";
 ==
 
 # TODO: Catalog qualifiers can be printed for tables when

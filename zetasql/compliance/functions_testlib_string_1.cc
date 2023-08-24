@@ -299,25 +299,25 @@ std::vector<FunctionTestCall> GetFunctionTestsTranslate() {
        {"unused", "aa", "bc"},
        NullString(),
        absl::OutOfRangeError(
-           "Duplicate character \"a\" in TRANSLATE source characters")},
+           "Duplicate character 'a' in TRANSLATE source characters")},
       // Error even if the duplicate character doesn't have a corresponding
       // target character.
       {"translate",
        {"unused", "aa", "bc"},
        NullString(),
        absl::OutOfRangeError(
-           "Duplicate character \"a\" in TRANSLATE source characters")},
+           "Duplicate character 'a' in TRANSLATE source characters")},
       // Make sure characters are correctly escaped.
       {"translate",
        {"unused", "ab\nd\n", "vwxyz"},
        NullString(),
        absl::OutOfRangeError(
-           "Duplicate character \"\\n\" in TRANSLATE source characters")},
+           "Duplicate character '\\n' in TRANSLATE source characters")},
       {"translate",
        {"unused", "ab'd'", "vwxyz"},
        NullString(),
        absl::OutOfRangeError(
-           "Duplicate character \"'\" in TRANSLATE source characters")},
+           "Duplicate character '\\'' in TRANSLATE source characters")},
       {"translate",
        {"unused", "ab\"d\"", "vwxyz"},
        NullString(),

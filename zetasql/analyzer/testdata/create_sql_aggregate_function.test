@@ -42,8 +42,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="count(*)"
++-language='SQL'
++-code='count(*)'
 +-aggregate_expression_list=
 | +-$agg1#1 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-function_expression=
@@ -60,13 +60,13 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT32 x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum(x)"
++-language='SQL'
++-code='sum(x)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
 |     +-Cast(INT32 -> INT64)
-|       +-ArgumentRef(parse_location=65-66, type=INT32, name="x", argument_kind=AGGREGATE)
+|       +-ArgumentRef(parse_location=65-66, type=INT32, name='x', argument_kind=AGGREGATE)
 +-function_expression=
   +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 ==
@@ -95,8 +95,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="count(*)"
++-language='SQL'
++-code='count(*)'
 +-aggregate_expression_list=
 | +-$agg1#1 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-function_expression=
@@ -110,8 +110,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="count(*)"
++-language='SQL'
++-code='count(*)'
 +-aggregate_expression_list=
 | +-$agg1#1 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-function_expression=
@@ -128,10 +128,10 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT32 {is_not_aggregate: true} x) -> INT32
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="x"
++-language='SQL'
++-code='x'
 +-function_expression=
-  +-ArgumentRef(type=INT32, name="x", argument_kind=NOT_AGGREGATE)
+  +-ArgumentRef(type=INT32, name='x', argument_kind=NOT_AGGREGATE)
 ==
 
 create aggregate function sumcount(x int64) as (sum(x) + count(*))
@@ -142,12 +142,12 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum(x) + count(*)"
++-language='SQL'
++-code='sum(x) + count(*)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 | | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-| |   +-ArgumentRef(parse_location=52-53, type=INT64, name="x", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=52-53, type=INT64, name='x', argument_kind=AGGREGATE)
 | +-$agg2#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -163,15 +163,15 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 x) -> DOUBLE
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum(x) / count(x)"
++-language='SQL'
++-code='sum(x) / count(x)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 | | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-| |   +-ArgumentRef(parse_location=47-48, type=INT64, name="x", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=47-48, type=INT64, name='x', argument_kind=AGGREGATE)
 | +-$agg2#2 :=
 |   +-AggregateFunctionCall(ZetaSQL:count(INT64) -> INT64)
-|     +-ArgumentRef(parse_location=58-59, type=INT64, name="x", argument_kind=AGGREGATE)
+|     +-ArgumentRef(parse_location=58-59, type=INT64, name='x', argument_kind=AGGREGATE)
 +-function_expression=
   +-FunctionCall(ZetaSQL:$divide(DOUBLE, DOUBLE) -> DOUBLE)
     +-Cast(INT64 -> DOUBLE)
@@ -195,16 +195,16 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 {is_not_aggregate: true} x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum(x) + x"
++-language='SQL'
++-code='sum(x) + x'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-|     +-ArgumentRef(type=INT64, name="x", argument_kind=NOT_AGGREGATE)
+|     +-ArgumentRef(type=INT64, name='x', argument_kind=NOT_AGGREGATE)
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
-    +-ArgumentRef(type=INT64, name="x", argument_kind=NOT_AGGREGATE)
+    +-ArgumentRef(type=INT64, name='x', argument_kind=NOT_AGGREGATE)
 ==
 
 create aggregate function f(x int64) as (sum(x) + x)
@@ -228,21 +228,21 @@ CreateFunctionStmt
 +-argument_name_list=[x, y]
 +-signature=(INT64 x, DOUBLE y) -> DOUBLE
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sqrt(sum(x)*sum(X) + sum(y)*sum(y))"
++-language='SQL'
++-code='sqrt(sum(x)*sum(X) + sum(y)*sum(y))'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 | | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-| |   +-ArgumentRef(parse_location=73-74, type=INT64, name="x", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=73-74, type=INT64, name='x', argument_kind=AGGREGATE)
 | +-$agg2#2 :=
 | | +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-| |   +-ArgumentRef(parse_location=80-81, type=INT64, name="x", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=80-81, type=INT64, name='x', argument_kind=AGGREGATE)
 | +-$agg3#3 :=
 | | +-AggregateFunctionCall(ZetaSQL:sum(DOUBLE) -> DOUBLE)
-| |   +-ArgumentRef(parse_location=89-90, type=DOUBLE, name="y", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=89-90, type=DOUBLE, name='y', argument_kind=AGGREGATE)
 | +-$agg4#4 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(DOUBLE) -> DOUBLE)
-|     +-ArgumentRef(parse_location=96-97, type=DOUBLE, name="y", argument_kind=AGGREGATE)
+|     +-ArgumentRef(parse_location=96-97, type=DOUBLE, name='y', argument_kind=AGGREGATE)
 +-function_expression=
   +-FunctionCall(ZetaSQL:sqrt(DOUBLE) -> DOUBLE)
     +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
@@ -275,8 +275,8 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 {is_not_aggregate: true} x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="(select sum(x) from (select 1))"
++-language='SQL'
++-code='(select sum(x) from (select 1))'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -297,7 +297,7 @@ CreateFunctionStmt
             +-aggregate_list=
               +-$agg1#2 :=
                 +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
-                  +-ArgumentRef(type=INT64, name="x", argument_kind=NOT_AGGREGATE)
+                  +-ArgumentRef(type=INT64, name='x', argument_kind=NOT_AGGREGATE)
 --
 ALTERNATION GROUP: <empty>
 --
@@ -320,8 +320,8 @@ CreateFunctionStmt
 +-argument_name_list=[a]
 +-signature=(ARRAY<INT64> {is_not_aggregate: true} a) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="(select count(*) from unnest(a))"
++-language='SQL'
++-code='(select count(*) from unnest(a))'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -335,7 +335,7 @@ CreateFunctionStmt
             +-input_scan=
             | +-ArrayScan
             |   +-array_expr=
-            |   | +-ArgumentRef(type=ARRAY<INT64>, name="a", argument_kind=NOT_AGGREGATE)
+            |   | +-ArgumentRef(type=ARRAY<INT64>, name='a', argument_kind=NOT_AGGREGATE)
             |   +-element_column=$array.$unnest1#1
             +-aggregate_list=
               +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
@@ -363,8 +363,8 @@ CreateFunctionStmt
 +-argument_name_list=[a, b]
 +-signature=(ARRAY<INT64> {is_not_aggregate: true} a, INT64 b) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum((select count(*) from unnest(a)) + b)"
++-language='SQL'
++-code='sum((select count(*) from unnest(a)) + b)'
 +-aggregate_expression_list=
 | +-$agg1#3 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -381,11 +381,11 @@ CreateFunctionStmt
 |       |         +-input_scan=
 |       |         | +-ArrayScan
 |       |         |   +-array_expr=
-|       |         |   | +-ArgumentRef(type=ARRAY<INT64>, name="a", argument_kind=NOT_AGGREGATE)
+|       |         |   | +-ArgumentRef(type=ARRAY<INT64>, name='a', argument_kind=NOT_AGGREGATE)
 |       |         |   +-element_column=$array.$unnest1#1
 |       |         +-aggregate_list=
 |       |           +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-|       +-ArgumentRef(parse_location=153-154, type=INT64, name="b", argument_kind=AGGREGATE)
+|       +-ArgumentRef(parse_location=153-154, type=INT64, name='b', argument_kind=AGGREGATE)
 +-function_expression=
   +-ColumnRef(type=INT64, column=$aggregate.$agg1#3)
 --
@@ -397,8 +397,8 @@ CreateFunctionStmt
 +-argument_name_list=[a, b]
 +-signature=(ARRAY<INT64> a, INT64 b) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum((select count(*) from unnest(a)) + b)"
++-language='SQL'
++-code='sum((select count(*) from unnest(a)) + b)'
 +-aggregate_expression_list=
 | +-$agg1#3 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
@@ -415,11 +415,11 @@ CreateFunctionStmt
 |       |         +-input_scan=
 |       |         | +-ArrayScan
 |       |         |   +-array_expr=
-|       |         |   | +-ArgumentRef(parse_location=134-135, type=ARRAY<INT64>, name="a", argument_kind=AGGREGATE)
+|       |         |   | +-ArgumentRef(parse_location=134-135, type=ARRAY<INT64>, name='a', argument_kind=AGGREGATE)
 |       |         |   +-element_column=$array.$unnest1#1
 |       |         +-aggregate_list=
 |       |           +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
-|       +-ArgumentRef(parse_location=140-141, type=INT64, name="b", argument_kind=AGGREGATE)
+|       +-ArgumentRef(parse_location=140-141, type=INT64, name='b', argument_kind=AGGREGATE)
 +-function_expression=
   +-ColumnRef(type=INT64, column=$aggregate.$agg1#3)
 ==
@@ -455,8 +455,8 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="5"
++-language='SQL'
++-code='5'
 +-function_expression=
   +-Literal(type=INT64, value=5)
 ==
@@ -470,10 +470,10 @@ CreateFunctionStmt
 +-argument_name_list=[y, x]
 +-signature=(STRING {is_not_aggregate: true} y, INT64 x) -> STRING
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="y"
++-language='SQL'
++-code='y'
 +-function_expression=
-  +-ArgumentRef(type=STRING, name="y", argument_kind=NOT_AGGREGATE)
+  +-ArgumentRef(type=STRING, name='y', argument_kind=NOT_AGGREGATE)
 ==
 
 
@@ -488,8 +488,8 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="(select count(*) over () from (select 1))"
++-language='SQL'
++-code='(select count(*) over () from (select 1))'
 +-function_expression=
   +-SubqueryExpr
     +-type=INT64
@@ -550,12 +550,12 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(BYTES x) -> ARRAY<BYTES>
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="array_agg(x limit 10)"
++-language='SQL'
++-code='array_agg(x limit 10)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:array_agg(BYTES) -> ARRAY<BYTES>)
-|     +-ArgumentRef(parse_location=57-58, type=BYTES, name="x", argument_kind=AGGREGATE)
+|     +-ArgumentRef(parse_location=57-58, type=BYTES, name='x', argument_kind=AGGREGATE)
 |     +-limit=
 |       +-Literal(type=INT64, value=10)
 +-function_expression=
@@ -583,20 +583,20 @@ CreateFunctionStmt
 +-argument_name_list=[x, y, z]
 +-signature=(INT64 x, STRING y, DOUBLE z) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="count(distinct x) + count(distinct y) + array_length(array_agg(distinct z))"
++-language='SQL'
++-code='count(distinct x) + count(distinct y) + array_length(array_agg(distinct z))'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 | | +-AggregateFunctionCall(ZetaSQL:count(INT64) -> INT64)
-| |   +-ArgumentRef(parse_location=84-85, type=INT64, name="x", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=84-85, type=INT64, name='x', argument_kind=AGGREGATE)
 | |   +-distinct=TRUE
 | +-$agg2#2 :=
 | | +-AggregateFunctionCall(ZetaSQL:count(STRING) -> INT64)
-| |   +-ArgumentRef(parse_location=104-105, type=STRING, name="y", argument_kind=AGGREGATE)
+| |   +-ArgumentRef(parse_location=104-105, type=STRING, name='y', argument_kind=AGGREGATE)
 | |   +-distinct=TRUE
 | +-$agg3#3 :=
 |   +-AggregateFunctionCall(ZetaSQL:array_agg(DOUBLE) -> ARRAY<DOUBLE>)
-|     +-ArgumentRef(parse_location=141-142, type=DOUBLE, name="z", argument_kind=AGGREGATE)
+|     +-ArgumentRef(parse_location=141-142, type=DOUBLE, name='z', argument_kind=AGGREGATE)
 |     +-distinct=TRUE
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -630,18 +630,18 @@ CreateFunctionStmt
 +-argument_name_list=[x, y, z]
 +-signature=(INT64 x, INT64 {is_not_aggregate: true} y, INT64 {is_not_aggregate: true} z) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="sum(x*y) + z"
++-language='SQL'
++-code='sum(x*y) + z'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
 |     +-FunctionCall(ZetaSQL:$multiply(INT64, INT64) -> INT64)
-|       +-ArgumentRef(parse_location=119-120, type=INT64, name="x", argument_kind=AGGREGATE)
-|       +-ArgumentRef(type=INT64, name="y", argument_kind=NOT_AGGREGATE)
+|       +-ArgumentRef(parse_location=119-120, type=INT64, name='x', argument_kind=AGGREGATE)
+|       +-ArgumentRef(type=INT64, name='y', argument_kind=NOT_AGGREGATE)
 +-function_expression=
   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
-    +-ArgumentRef(type=INT64, name="z", argument_kind=NOT_AGGREGATE)
+    +-ArgumentRef(type=INT64, name='z', argument_kind=NOT_AGGREGATE)
 
 [UNPARSED_SQL]
 CREATE AGGREGATE FUNCTION IF NOT EXISTS myfunc(x INT64, y INT64 NOT AGGREGATE, z INT64 NOT AGGREGATE)
@@ -663,8 +663,8 @@ CreateFunctionStmt
 +-return_type=INT64
 +-signature=() -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="count(*)"
++-language='SQL'
++-code='count(*)'
 +-aggregate_expression_list=
 | +-$agg1#1 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-function_expression=
@@ -678,8 +678,8 @@ CreateFunctionStmt
 +-return_type=DOUBLE
 +-signature=() -> DOUBLE
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="count(*)"
++-language='SQL'
++-code='count(*)'
 +-aggregate_expression_list=
 | +-$agg1#1 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 +-function_expression=
@@ -711,13 +711,13 @@ CreateFunctionStmt
 +-argument_name_list=[s, sep]
 +-signature=(STRING s, STRING {is_not_aggregate: true} sep) -> STRING
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="string_agg(s, sep)"
++-language='SQL'
++-code='string_agg(s, sep)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:string_agg(STRING, STRING) -> STRING)
-|     +-ArgumentRef(parse_location=91-92, type=STRING, name="s", argument_kind=AGGREGATE)
-|     +-ArgumentRef(type=STRING, name="sep", argument_kind=NOT_AGGREGATE)
+|     +-ArgumentRef(parse_location=91-92, type=STRING, name='s', argument_kind=AGGREGATE)
+|     +-ArgumentRef(type=STRING, name='sep', argument_kind=NOT_AGGREGATE)
 +-function_expression=
   +-ColumnRef(type=STRING, column=$aggregate.$agg1#1)
 ==
@@ -766,19 +766,19 @@ create aggregate function fn(r ANY TYPE as T, s ANY TYPE as T2 NOT AGGREGATE)
 # case.
 create aggregate function f(x any type) as (count(*));
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="count(*)")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x], signature=(ANY TYPE x) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code='count(*)')
 ==
 
 # Multiple arguments of type ANY TYPE.
 create aggregate function f(x any type, y any type) as (count(*));
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, ANY TYPE y) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="count(*)")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, ANY TYPE y) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code='count(*)')
 ==
 
 # The SQL body can refer to the names of function arguments of type ANY TYPE.
 create aggregate function f(x any type, y int64) as (count(x + y));
 --
-CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> ANY TYPE, is_aggregate=TRUE, language="SQL", code="count(x + y)")
+CreateFunctionStmt(name_path=f, return_type=STRUCT<>, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> ANY TYPE, is_aggregate=TRUE, language='SQL', code='count(x + y)')
 ==
 
 # ANY TYPE parameters are allowed with the RETURNS clause.
@@ -786,48 +786,48 @@ create aggregate function f(x any type, y int64)
   returns int64
   as (count(x + y));
 --
-CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=INT64, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> INT64, is_aggregate=TRUE, language="SQL", code="count(x + y)")
+CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=INT64, argument_name_list=[x, y], signature=(ANY TYPE x, INT64 y) -> INT64, is_aggregate=TRUE, language='SQL', code='count(x + y)')
 ==
 
 # ANY TYPE parameters are allowed with the LANGUAGE clause.
 create aggregate function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
-    """
+    '''
 --
-CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x], signature=(ANY TYPE x) -> STRING, is_aggregate=TRUE, language="testlang", code=" return\n      \"presto!\" + s + '\n';\n    ")
+CreateFunctionStmt(name_path=f, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x], signature=(ANY TYPE x) -> STRING, is_aggregate=TRUE, language='testlang', code=' return\n      "presto!" + s + \'\n\';\n    ')
 ==
 
 # ANY TYPE parameters are allowed with CREATE OR REPLACE and the LANGUAGE
 # clause.
 create or replace aggregate function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
-    """
+    '''
 --
-CreateFunctionStmt(name_path=f, create_mode=CREATE_OR_REPLACE, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x], signature=(ANY TYPE x) -> STRING, is_aggregate=TRUE, language="testlang", code=" return\n      \"presto!\" + s + '\n';\n    ")
+CreateFunctionStmt(name_path=f, create_mode=CREATE_OR_REPLACE, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x], signature=(ANY TYPE x) -> STRING, is_aggregate=TRUE, language='testlang', code=' return\n      "presto!" + s + \'\n\';\n    ')
 ==
 
 # ANY TYPE parameters are allowed with IF NOT EXISTS and the LANGUAGE
 # clause.
 create aggregate function if not exists f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
-    """
+    '''
 --
-CreateFunctionStmt(name_path=f, create_mode=CREATE_IF_NOT_EXISTS, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x], signature=(ANY TYPE x) -> STRING, is_aggregate=TRUE, language="testlang", code=" return\n      \"presto!\" + s + '\n';\n    ")
+CreateFunctionStmt(name_path=f, create_mode=CREATE_IF_NOT_EXISTS, has_explicit_return_type=TRUE, return_type=STRING, argument_name_list=[x], signature=(ANY TYPE x) -> STRING, is_aggregate=TRUE, language='testlang', code=' return\n      "presto!" + s + \'\n\';\n    ')
 ==
 
 # ANY TYPE parameters are allowed with the OPTIONS clause and the LANGUAGE
 # clause.
 create aggregate function f(x any type)
   returns string language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
-    """
+    '''
    options ( a=b, bruce=lee ) ;
 --
 CreateFunctionStmt
@@ -837,19 +837,19 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(ANY TYPE x) -> STRING
 +-is_aggregate=TRUE
-+-language="testlang"
-+-code=" return\n      \"presto!\" + s + '\n';\n    "
++-language='testlang'
++-code=' return\n      "presto!" + s + \'\n\';\n    '
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-bruce := Literal(type=STRING, value="lee")
+  +-a := Literal(type=STRING, value='b')
+  +-bruce := Literal(type=STRING, value='lee')
 ==
 
 # The LANGUAGE clause is not allowed without the RETURNS <type> clause.
 create aggregate function f(x any type)
   language testlang
-    as """ return
+    as ''' return
       "presto!" + s + '\n';
-    """
+    '''
 --
 ERROR: Non-SQL functions must specify a return type [at 1:1]
 create aggregate function f(x any type)
@@ -886,16 +886,16 @@ CreateFunctionStmt
 +-argument_name_list=[x]
 +-signature=(INT64 x) -> INT64
 +-is_aggregate=TRUE
-+-language="SQL"
-+-code="COUNT(x)"
++-language='SQL'
++-code='COUNT(x)'
 +-aggregate_expression_list=
 | +-$agg1#1 :=
 |   +-AggregateFunctionCall(ZetaSQL:count(INT64) -> INT64)
-|     +-ArgumentRef(parse_location=61-62, type=INT64, name="x", argument_kind=AGGREGATE)
+|     +-ArgumentRef(parse_location=61-62, type=INT64, name='x', argument_kind=AGGREGATE)
 +-function_expression=
 | +-ColumnRef(type=INT64, column=$aggregate.$agg1#1)
 +-option_list=
-  +-a := Literal(type=STRING, value="x")
+  +-a := Literal(type=STRING, value='x')
 ==
 
 # A SQL body is not allowed with the LANGUAGE clause.
@@ -922,7 +922,7 @@ create aggregate function f(x any type, y int64) as (count(x + y));
 create aggregate function myfunc()
   returns int64
   language SQL
-    as """5""";
+    as '''5''';
 --
 ERROR: To write SQL functions, omit the LANGUAGE clause and write the function body using 'AS (expression)' [at 3:12]
   language SQL

@@ -69,7 +69,7 @@ CREATE TABLE ProtoTable AS
 SELECT cast(1 as int64) as primary_key,
        cast('''int64_key_1: 11
                int64_key_2: 12'''
-            as `zetasql_test__.KitchenSinkPB`) as proto_value
+            as "zetasql_test__.KitchenSinkPB") as proto_value
 UNION ALL
 SELECT 2,
   '''

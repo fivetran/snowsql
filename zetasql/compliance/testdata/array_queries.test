@@ -15,12 +15,12 @@ CREATE TABLE AllArraysTable AS
     ARRAY<DOUBLE>[1.1, 0.0, -1.1] double_arrcol,
     ARRAY<STRING>['σ', 'π', '⨝'] string_arrcol,
     ARRAY<BYTES>[b"a", b"b", b"c"] bytes_arrcol,
-    ARRAY<DATE>["1984-08-02", "2000-01-01", "2014-09-11"] date_arrcol,
-    ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC",
-                     "2000-01-01 01:01:01.001001 UTC",
-                     "2014-09-11 01:01:01.001001 UTC"] micros_arrcol,
+    ARRAY<DATE>['1984-08-02', '2000-01-01', '2014-09-11'] date_arrcol,
+    ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC',
+                     '2000-01-01 01:01:01.001001 UTC',
+                     '2014-09-11 01:01:01.001001 UTC'] micros_arrcol,
     ARRAY<zetasql_test__.TestEnum>[
-      "TESTENUM0", "TESTENUM1", "TESTENUM2"] enum_arrcol,
+      'TESTENUM0', 'TESTENUM1', 'TESTENUM2'] enum_arrcol,
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11
@@ -47,10 +47,10 @@ UNION ALL
     ARRAY<DOUBLE>[1.1, NULL, -1.1],
     ARRAY<STRING>['σ', NULL, '⨝'],
     ARRAY<BYTES>[b"a", NULL, b"c"],
-    ARRAY<DATE>["1984-08-02", NULL, "2014-09-11"],
-    ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC", NULL,
-                     "2014-09-11 01:01:01.001001 UTC"],
-    ARRAY<zetasql_test__.TestEnum>["TESTENUM0", NULL, "TESTENUM2"],
+    ARRAY<DATE>['1984-08-02', NULL, '2014-09-11'],
+    ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC', NULL,
+                     '2014-09-11 01:01:01.001001 UTC'],
+    ARRAY<zetasql_test__.TestEnum>['TESTENUM0', NULL, 'TESTENUM2'],
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11
@@ -74,9 +74,9 @@ UNION ALL
     ARRAY<DOUBLE>[NULL, -1.1],
     ARRAY<STRING>[NULL, '⨝'],
     ARRAY<BYTES>[NULL, b"c"],
-    ARRAY<DATE>[NULL, "2014-09-11"],
-    ARRAY<TIMESTAMP>[NULL, "2014-09-11 01:01:01.001001 UTC"],
-    ARRAY<zetasql_test__.TestEnum>[NULL, "TESTENUM2"],
+    ARRAY<DATE>[NULL, '2014-09-11'],
+    ARRAY<TIMESTAMP>[NULL, '2014-09-11 01:01:01.001001 UTC'],
+    ARRAY<zetasql_test__.TestEnum>[NULL, 'TESTENUM2'],
     ARRAY<zetasql_test__.KitchenSinkPB>[
       NULL,
       '''
@@ -96,9 +96,9 @@ UNION ALL
     ARRAY<DOUBLE>[1.1, NULL],
     ARRAY<STRING>['σ', NULL],
     ARRAY<BYTES>[b"a", NULL],
-    ARRAY<DATE>["1984-08-02", NULL],
-    ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC", NULL],
-    ARRAY<zetasql_test__.TestEnum>["TESTENUM0", NULL],
+    ARRAY<DATE>['1984-08-02', NULL],
+    ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC', NULL],
+    ARRAY<zetasql_test__.TestEnum>['TESTENUM0', NULL],
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11
@@ -151,9 +151,9 @@ UNION ALL
     ARRAY<DOUBLE>[1.1],
     ARRAY<STRING>['σ'],
     ARRAY<BYTES>[b"a"],
-    ARRAY<DATE>["1984-08-02"],
-    ARRAY<TIMESTAMP>["1984-08-02 01:01:01.001001 UTC"],
-    ARRAY<zetasql_test__.TestEnum>["TESTENUM0"],
+    ARRAY<DATE>['1984-08-02'],
+    ARRAY<TIMESTAMP>['1984-08-02 01:01:01.001001 UTC'],
+    ARRAY<zetasql_test__.TestEnum>['TESTENUM0'],
     ARRAY<zetasql_test__.KitchenSinkPB>[
       '''
         int64_key_1: 11

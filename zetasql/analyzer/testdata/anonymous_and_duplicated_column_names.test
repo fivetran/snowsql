@@ -14,7 +14,7 @@ SELECT * FROM TableWithAnonymousAndDuplicatedColumnNames;
 QueryStmt
 +-output_column_list=
 | +-TableWithAnonymousAndDuplicatedColumnNames.key#1 AS key [INT32]
-| +-TableWithAnonymousAndDuplicatedColumnNames.$col2#2 AS `$col2` [INT32]
+| +-TableWithAnonymousAndDuplicatedColumnNames.$col2#2 AS "$col2" [INT32]
 | +-TableWithAnonymousAndDuplicatedColumnNames.DuplicatedColumnName#3 AS DuplicatedColumnName [INT32]
 | +-TableWithAnonymousAndDuplicatedColumnNames.DuplicatedColumnName#4 AS DuplicatedColumnName [INT32]
 +-query=
@@ -39,17 +39,17 @@ select DuplicatedColumnName from TableWithAnonymousAndDuplicatedColumnNames;
        ^
 ==
 
-select `$col2` from TableWithAnonymousAndDuplicatedColumnNames;
+select "$col2" from TableWithAnonymousAndDuplicatedColumnNames;
 --
-ERROR: Unrecognized name: `$col2` [at 1:8]
-select `$col2` from TableWithAnonymousAndDuplicatedColumnNames;
+ERROR: Unrecognized name: "$col2" [at 1:8]
+select "$col2" from TableWithAnonymousAndDuplicatedColumnNames;
        ^
 ==
 
-select `` from TableWithAnonymousAndDuplicatedColumnNames;
+select "" from TableWithAnonymousAndDuplicatedColumnNames;
 --
 ERROR: Syntax error: Invalid empty identifier [at 1:8]
-select `` from TableWithAnonymousAndDuplicatedColumnNames;
+select "" from TableWithAnonymousAndDuplicatedColumnNames;
        ^
 ==
 
@@ -58,8 +58,8 @@ select * from TableWithTwoAnonymousColumns;
 QueryStmt
 +-output_column_list=
 | +-TableWithTwoAnonymousColumns.key#1 AS key [INT32]
-| +-TableWithTwoAnonymousColumns.$col2#2 AS `$col2` [INT32]
-| +-TableWithTwoAnonymousColumns.$col3#3 AS `$col3` [INT32]
+| +-TableWithTwoAnonymousColumns.$col2#2 AS "$col2" [INT32]
+| +-TableWithTwoAnonymousColumns.$col3#3 AS "$col3" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=TableWithTwoAnonymousColumns.[key#1, $col2#2, $col3#3]

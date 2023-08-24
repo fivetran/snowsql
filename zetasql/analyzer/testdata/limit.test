@@ -3,7 +3,7 @@ SELECT 1 LIMIT 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -97,7 +97,7 @@ SELECT 1 LIMIT 1 OFFSET 1;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -118,7 +118,7 @@ SELECT 1 LIMIT @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -131,14 +131,14 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 SELECT 1 LIMIT @test_param_int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -150,14 +150,14 @@ QueryStmt
     |   +-input_scan=
     |     +-SingleRowScan
     +-limit=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 SELECT 1 LIMIT @test_param_uint32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -170,14 +170,14 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(UINT32 -> INT64)
-        +-Parameter(type=UINT32, name="test_param_uint32")
+        +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 SELECT 1 LIMIT @test_param_uint64;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -190,14 +190,14 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(UINT64 -> INT64)
-        +-Parameter(type=UINT64, name="test_param_uint64")
+        +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_int32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -212,14 +212,14 @@ QueryStmt
     | +-Literal(type=INT64, value=1)
     +-offset=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -233,14 +233,14 @@ QueryStmt
     +-limit=
     | +-Literal(type=INT64, value=1)
     +-offset=
-      +-Parameter(type=INT64, name="test_param_int64")
+      +-Parameter(type=INT64, name='test_param_int64')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_uint32;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -255,14 +255,14 @@ QueryStmt
     | +-Literal(type=INT64, value=1)
     +-offset=
       +-Cast(UINT32 -> INT64)
-        +-Parameter(type=UINT32, name="test_param_uint32")
+        +-Parameter(type=UINT32, name='test_param_uint32')
 ==
 
 SELECT 1 LIMIT 1 OFFSET @test_param_uint64;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -277,7 +277,7 @@ QueryStmt
     | +-Literal(type=INT64, value=1)
     +-offset=
       +-Cast(UINT64 -> INT64)
-        +-Parameter(type=UINT64, name="test_param_uint64")
+        +-Parameter(type=UINT64, name='test_param_uint64')
 ==
 
 # Casting of literals to integer and parameters to int64 works.
@@ -285,7 +285,7 @@ select 1 limit cast(1 as int32) offset cast(@test_param_int32 as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -300,14 +300,14 @@ QueryStmt
     | +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
     +-offset=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select 1 limit cast(@test_param_int32 as int32)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-LimitOffsetScan
     +-column_list=[$query.$col1#1]
@@ -320,7 +320,7 @@ QueryStmt
     |     +-SingleRowScan
     +-limit=
       +-Cast(INT32 -> INT64)
-        +-Parameter(type=INT32, name="test_param_int32")
+        +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 select 1 limit cast(@test_param_int64 as int32)
@@ -331,11 +331,11 @@ select 1 limit cast(@test_param_int64 as int32)
 ==
 
 # Casting of other expressions does not work.
-select 1 limit cast(`key` as int64)
+select 1 limit cast("key" as int64)
 from KeyValue
 --
-ERROR: Syntax error: Expected "@" or "@@" or integer literal but got identifier `key` [at 1:21]
-select 1 limit cast(`key` as int64)
+ERROR: Syntax error: Expected "@" or "@@" or integer literal but got identifier "key" [at 1:21]
+select 1 limit cast("key" as int64)
                     ^
 ==
 
@@ -386,7 +386,7 @@ QueryStmt
     | +-ProjectScan
     |   +-column_list=KeyValue.[Key#1, Value#2]
     |   +-input_scan=
-    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+    |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
     +-limit=
     | +-Literal(type=INT64, value=1)
     +-offset=
@@ -415,14 +415,14 @@ QueryStmt
     |     | | +-ProjectScan
     |     | |   +-column_list=KeyValue.[Key#1, Value#2]
     |     | |   +-input_scan=
-    |     | |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+    |     | |     +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
     |     | +-output_column_list=KeyValue.[Key#1, Value#2]
     |     +-SetOperationItem
     |       +-scan=
     |       | +-ProjectScan
     |       |   +-column_list=KeyValue.[Key#3, Value#4]
     |       |   +-input_scan=
-    |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+    |       |     +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
     |       +-output_column_list=KeyValue.[Key#3, Value#4]
     +-limit=
     | +-Literal(type=INT64, value=5)

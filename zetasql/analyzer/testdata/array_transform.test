@@ -5,7 +5,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], e -> e>0);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -29,7 +29,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -92,7 +92,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e, i) -> e>i);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -116,7 +116,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#3 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -179,7 +179,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], e -> e > Key) FROM KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -205,7 +205,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -271,7 +271,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], (e,i) -> (e+i) > Key) FROM KeyValue;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -299,7 +299,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -368,7 +368,7 @@ SELECT ARRAY_TRANSFORM([1,Key], e-> e>0) FROM KeyValue;
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -394,7 +394,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -457,12 +457,12 @@ QueryStmt
       +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0])
 ==
 
-# Lambda argument `Key` shadowing KeyValue.Key.
+# Lambda argument "Key" shadowing KeyValue.Key.
 SELECT ARRAY_TRANSFORM([1,2, Key], Key-> Key>kv.Key) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -486,12 +486,12 @@ QueryStmt
     |               +-ColumnRef(type=INT64, column=$lambda_arg.Key#3)
     |               +-ColumnRef(type=INT64, column=KeyValue.Key#1, is_correlated=TRUE)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#4 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -553,7 +553,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Array input has ARRAY_TRANSFORM and column ref.
@@ -562,7 +562,7 @@ SELECT ARRAY_TRANSFORM(ARRAY_TRANSFORM([1,2,Key], e->e+1), e->e>1) FROM KeyValue
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -595,12 +595,12 @@ QueryStmt
     |               +-ColumnRef(type=INT64, column=$lambda_arg.e#4)
     |               +-Literal(type=INT64, value=1)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -711,7 +711,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Array input has ARRAY_TRANSFORM and correlated column ref.
@@ -720,7 +720,7 @@ SELECT (SELECT(ARRAY_TRANSFORM(ARRAY_TRANSFORM([1,2,Key], e->e+10), e->e>1))) FR
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -765,12 +765,12 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -893,7 +893,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda body has ARRAY_TRANSFORM and column ref.
@@ -902,7 +902,7 @@ SELECT ARRAY_TRANSFORM([1,2,3], e-> e + ARRAY_LENGTH(ARRAY_TRANSFORM([1,2,Key], 
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -938,12 +938,12 @@ QueryStmt
     |                             +-ColumnRef(type=INT64, column=$lambda_arg.e#4)
     |                             +-Literal(type=INT64, value=0)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1055,7 +1055,7 @@ QueryStmt
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda body has ARRAY_TRANSFORM and correlated column ref.
@@ -1063,7 +1063,7 @@ SELECT (SELECT ARRAY_TRANSFORM([1,2,3], e-> e > ARRAY_LENGTH(ARRAY_TRANSFORM([1,
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1111,12 +1111,12 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#6 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -1240,7 +1240,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda arg has with same name as a potential correlated column.
@@ -1249,7 +1249,7 @@ SELECT (SELECT(ARRAY_TRANSFORM([1,2,Key], Key->Key+1))) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1283,12 +1283,12 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1361,7 +1361,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 # Lambda arg has with same name as a potential correlated column. Lambda body
@@ -1370,7 +1370,7 @@ SELECT (SELECT(ARRAY_TRANSFORM([1,2,Key], Key->kv.Key>Key))) FROM KeyValue as kv
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1406,12 +1406,12 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#5 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1485,7 +1485,7 @@ QueryStmt
     |         +-input_scan=
     |           +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 ==
 
 SELECT SAFE.ARRAY_TRANSFORM([1,2,3], e -> e>0);

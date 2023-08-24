@@ -14,7 +14,7 @@ SELECT CAST(1 AS int64) as row_id,
        CAST("1" AS BYTES) as bytes_val,
        CAST('2014-01-01' AS DATE) as date_val,
        TIMESTAMP '2014-01-01 00:00:01 UTC' as timestamp_val,
-       cast(null as `zetasql_test__.TestEnum`) as enum_val,
+       cast(null as "zetasql_test__.TestEnum") as enum_val,
        cast(struct(2, 4) as struct<a int64, b int64>) as struct_val,
        NEW zetasql_test__.KitchenSinkPB(5 AS int64_key_1,
                                         7 AS int64_key_2) as proto_val UNION ALL
@@ -288,12 +288,12 @@ ARRAY<STRUCT<TIMESTAMP>>[{2000-01-23 07:13:14+00}]
 [name=timestamp_to_string]
 SELECT CAST(timestamp '2000-01-23 12:13:14+05' AS string)
 --
-ARRAY<STRUCT<STRING>>[{"2000-01-22 23:13:14-08"}]
+ARRAY<STRUCT<STRING>>[{'2000-01-22 23:13:14-08'}]
 ==
 [name=timestamp_to_string_2]
 SELECT CAST(timestamp '2000-01-23 07:13:14+00' AS string)
 --
-ARRAY<STRUCT<STRING>>[{"2000-01-22 23:13:14-08"}]
+ARRAY<STRUCT<STRING>>[{'2000-01-22 23:13:14-08'}]
 ==
 [name=null_to_datetime]
 [required_features=V_1_2_CIVIL_TIME]
@@ -320,8 +320,8 @@ ARRAY<STRUCT<TIME, TIME, STRING, STRING, STRING, TIME>>[
   {NULL,
    12:34:56.123456,
    NULL,
-   "12:34:56.123456",
-   "12:34:56.123456",
+   '12:34:56.123456',
+   '12:34:56.123456',
    12:34:56.123456}
 ]
 ==
@@ -357,8 +357,8 @@ ARRAY<STRUCT<DATETIME, DATETIME, STRING, STRING, STRING, DATETIME>>[
     NULL,
     2006-01-02 03:04:05.123456,
     NULL,
-    "2006-01-02 03:04:05.123456",
-    "2006-01-02 03:04:05.123456",
+    '2006-01-02 03:04:05.123456',
+    '2006-01-02 03:04:05.123456',
     2006-01-02 03:04:05.123456
   }
 ]
@@ -377,8 +377,8 @@ ARRAY<STRUCT<DATETIME, DATETIME, STRING, STRING, STRING, DATETIME>>[
     NULL,
     2006-01-02 03:04:05.123456789,
     NULL,
-    "2006-01-02 03:04:05.123456789",
-    "2006-01-02 03:04:05.123456789",
+    '2006-01-02 03:04:05.123456789',
+    '2006-01-02 03:04:05.123456789',
     2006-01-02 03:04:05.123456789
   }
 ]
@@ -524,7 +524,7 @@ ERROR: generic::out_of_range: Bad int64 value: 0xFFFFFFFFFFFFFFFF
 ==
 
 [name=cast_proto_to_bytes]
-SELECT CAST(NEW zetasql_test__.NullableDate(DATE "1707-04-05" AS value)
+SELECT CAST(NEW zetasql_test__.NullableDate(DATE '1707-04-05' AS value)
             AS BYTES)
 --
 ARRAY<STRUCT<BYTES>>[{b"\x08\xa3\x92\xfa\xff\xff\xff\xff\xff\xff\x01"}]
@@ -545,7 +545,7 @@ ARRAY<STRUCT<BYTES>>[{b"\x08\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01"}]
 
 # the enum value is supposed to be all capitals.
 [name=enums_are_case_sensitive]
-SELECT CAST(CAST('TestEnum1' as `zetasql_test__.TestEnum`) as STRING)
+SELECT CAST(CAST('TestEnum1' as "zetasql_test__.TestEnum") as STRING)
 --
 ERROR: generic::out_of_range: Out of range cast of string 'TestEnum1' to enum type zetasql_test__.TestEnum; Did you mean 'TESTENUM1'? (Note: ENUM values are case sensitive)
 ==
@@ -553,7 +553,7 @@ ERROR: generic::out_of_range: Out of range cast of string 'TestEnum1' to enum ty
 # ignoring the packed annotation. We should eventually add framework support
 # for recommended tests. b/75304074
 [name=cast_to_bytes_packed_repeated]
-SELECT CAST(NEW `zetasql_test__.PackedRepeatablePB`(
+SELECT CAST(NEW "zetasql_test__.PackedRepeatablePB"(
     ARRAY<BOOL>[true] AS repeated_bool_packed) AS BYTES);
 --
 ARRAY<STRUCT<BYTES>>[{b":\x01\x01"}]
@@ -563,7 +563,7 @@ ARRAY<STRUCT<BYTES>>[{b":\x01\x01"}]
 # ignoring the packed annotation. We should eventually add framework support
 # for recommended tests. b/75304074
 [name=cast_to_bytes_packed_repeated_multiple]
-SELECT CAST(NEW `zetasql_test__.PackedRepeatablePB`(
+SELECT CAST(NEW "zetasql_test__.PackedRepeatablePB"(
     ARRAY<BOOL>[true, false, true] AS repeated_bool_packed) AS BYTES);
 --
 ARRAY<STRUCT<BYTES>>[{b":\x03\x01\x00\x01"}]
@@ -1004,7 +1004,7 @@ ARRAY<STRUCT<STRING, STRING, STRING, STRING>>[
   {
     "06-05 1234",
     "07:08:09 AM 06/05/1234",
-    "07:08:09",
+    '07:08:09',
     "09:08:09 AM 06/05/1234  -08:00"
   }
 ]
@@ -1288,7 +1288,7 @@ ARRAY<STRUCT<BOOL>>[{true}]
 
 [name=cast_string_as_bool_2]
 select CAST(string_val as BOOL)
-FROM (SELECT "abc" as string_val);
+FROM (SELECT 'abc' as string_val);
 --
 ERROR: generic::out_of_range: Bad bool value: abc
 ==
@@ -1326,31 +1326,31 @@ ERROR: generic::out_of_range: Bad bool value: A
 ==
 
 [name=cast_invalid_int_to_enum]
-select cast(1000 AS `zetasql_test__.TestEnum`);
+select cast(1000 AS "zetasql_test__.TestEnum");
 --
 ERROR: generic::out_of_range: Out of range cast of integer 1000 to enum type zetasql_test__.TestEnum
 ==
 
 [name=try_cast_invalid_int_to_enum]
-select try_cast(1000 AS `zetasql_test__.TestEnum`);
+select try_cast(1000 AS "zetasql_test__.TestEnum");
 --
 ARRAY<STRUCT<ENUM<zetasql_test__.TestEnum>>>[{NULL}]
 ==
 
 [name=cast_string_to_enum_with_different_case]
-select cast('TestEnum0' AS `zetasql_test__.TestEnum`)
+select cast('TestEnum0' AS "zetasql_test__.TestEnum")
 --
 ERROR: generic::out_of_range: Out of range cast of string 'TestEnum0' to enum type zetasql_test__.TestEnum; Did you mean 'TESTENUM0'? (Note: ENUM values are case sensitive)
 ==
 
 [name=cast_invalid_string_literal_to_enum]
-select cast('TESTENUM1000' AS `zetasql_test__.TestEnum`)
+select cast('TESTENUM1000' AS "zetasql_test__.TestEnum")
 --
 ERROR: generic::out_of_range: Out of range cast of string 'TESTENUM1000' to enum type zetasql_test__.TestEnum; Did you mean 'TESTENUM0'?
 ==
 
 [name=try_cast_invalid_string_literal_to_enum]
-select try_cast('TESTENUM1000' AS `zetasql_test__.TestEnum`)
+select try_cast('TESTENUM1000' AS "zetasql_test__.TestEnum")
 --
 ARRAY<STRUCT<ENUM<zetasql_test__.TestEnum>>>[{NULL}]
 ==
@@ -1362,13 +1362,13 @@ ERROR: generic::out_of_range: Bad int32 value: abc
 ==
 
 [name=cast_int_into_proto3_unknown_enum]
-select cast(7 as `zetasql_test__.TestProto3Enum`) AS e
+select cast(7 as "zetasql_test__.TestProto3Enum") AS e
 --
 ARRAY<STRUCT<e ENUM<zetasql_test__.TestProto3Enum>>>[{7}]
 ==
 
 [name=cast_out_of_range_int_into_proto3_unknown_enum]
-select cast(7777777777 as `zetasql_test__.TestProto3Enum`) AS e
+select cast(7777777777 as "zetasql_test__.TestProto3Enum") AS e
 --
 ERROR: generic::out_of_range: Out of range cast of integer 7777777777 to enum type zetasql_test__.TestProto3Enum
 ==
@@ -1409,7 +1409,7 @@ ERROR: generic::out_of_range: Invalid time string "abc"
 [required_features=V_1_2_CIVIL_TIME]
 select cast('24:00:00' as time)
 --
-ERROR: generic::out_of_range: Invalid time string "24:00:00"
+ERROR: generic::out_of_range: Invalid time string '24:00:00'
 ==
 
 [name=cast_invalid_literal_to_datetime_with_civil_time_enabled]
@@ -1423,14 +1423,14 @@ ERROR: generic::out_of_range: Invalid datetime string "abc"
 [required_features=V_1_2_CIVIL_TIME]
 select cast('2015-13-05 01:02:03' as datetime)
 --
-ERROR: generic::out_of_range: Invalid datetime string "2015-13-05 01:02:03"
+ERROR: generic::out_of_range: Invalid datetime string '2015-13-05 01:02:03'
 ==
 
 [name=cast_utc_timestamp_to_datetime_with_civil_time_enabled]
 [required_features=V_1_2_CIVIL_TIME]
 select cast('2006-01-02 01:02:03.123456 UTC' as datetime)
 --
-ERROR: generic::out_of_range: Invalid datetime string "2006-01-02 01:02:03.123456 UTC"
+ERROR: generic::out_of_range: Invalid datetime string '2006-01-02 01:02:03.123456 UTC'
 ==
 
 [name=cast_array_with_literals_larger_than_target_element_type]
@@ -1734,7 +1734,7 @@ ERROR: generic::out_of_range: Invalid date: '2023-13-01'
 [required_features=RANGE_TYPE,V_1_2_CIVIL_TIME]
 select cast('[2022-01-01 12:00:00, 2023-13-01 24:00:00)' as RANGE<DATETIME>);
 --
-ERROR: generic::out_of_range: Invalid datetime string "2023-13-01 24:00:00"
+ERROR: generic::out_of_range: Invalid datetime string '2023-13-01 24:00:00'
 
 
 ==

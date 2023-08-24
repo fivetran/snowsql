@@ -498,7 +498,7 @@ void GetArraySlicingFunctions(TypeFactory* type_factory,
           THEN NULL
         WHEN n < 0
           THEN
-            ERROR("The n argument to ARRAY_FIRST_N must not be negative.")
+            ERROR('The n argument to ARRAY_FIRST_N must not be negative.')
         ELSE
           ARRAY(
             SELECT e
@@ -521,7 +521,7 @@ void GetArraySlicingFunctions(TypeFactory* type_factory,
         WHEN input_array IS NULL OR n IS NULL
           THEN NULL
         WHEN n < 0
-          THEN ERROR("The n argument to ARRAY_LAST_N must not be negative.")
+          THEN ERROR('The n argument to ARRAY_LAST_N must not be negative.')
         ELSE
           WITH (
             start_offset AS ARRAY_LENGTH(input_array) - n,
@@ -548,7 +548,7 @@ void GetArraySlicingFunctions(TypeFactory* type_factory,
           THEN NULL
         WHEN n < 0
           THEN ERROR(
-            "The n argument to ARRAY_REMOVE_FIRST_N must not be negative.")
+            'The n argument to ARRAY_REMOVE_FIRST_N must not be negative.')
         ELSE
           ARRAY(
             SELECT e
@@ -572,7 +572,7 @@ void GetArraySlicingFunctions(TypeFactory* type_factory,
           THEN NULL
         WHEN n < 0
           THEN ERROR(
-            "The n argument to ARRAY_REMOVE_LAST_N must not be negative.")
+            'The n argument to ARRAY_REMOVE_LAST_N must not be negative.')
         ELSE
           WITH (
             end_offset AS ARRAY_LENGTH(input_array) - n,

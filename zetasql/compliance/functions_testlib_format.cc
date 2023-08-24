@@ -222,13 +222,13 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       R"(repeated_string_val: "foo\\bar")"
       "\n";
   const std::string escape_chars_proto_sql_literal =
-      R"("int64_key_1: 1 int64_key_2: 2 )"
-      R"(repeated_string_val: \"foo\\'bar\" )"
-      R"(repeated_string_val: \"foo\\'\\'bar\" )"
-      R"(repeated_string_val: \"foo`bar\" )"
-      R"(repeated_string_val: \"foo``bar\" )"
-      R"(repeated_string_val: \"foo\\\"bar\" )"
-      R"(repeated_string_val: \"foo\\\\bar\"")";
+      R"('int64_key_1: 1 int64_key_2: 2 )"
+      R"(repeated_string_val: "foo\\\'bar" )"
+      R"(repeated_string_val: "foo\\\'\\\'bar" )"
+      R"(repeated_string_val: "foo`bar" )"
+      R"(repeated_string_val: "foo``bar" )"
+      R"(repeated_string_val: "foo\\"bar" )"
+      R"(repeated_string_val: "foo\\\\bar"')";
 
   const Value date = DateFromStr("2001-05-21");
   const Value date_null = Value::Null(types::DateType());
@@ -460,19 +460,19 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       // Dates
       {"format", {"%t", date}, "2001-05-21"},
       {"format", {"%t", date_null}, "NULL"},
-      {"format", {"%T", date}, "DATE \"2001-05-21\""},
+      {"format", {"%T", date}, "DATE '2001-05-21'"},
       {"format", {"%T", date_null}, "NULL"},
 
       // Timestamps
       {"format", {"%t", timestamp}, "2001-05-21 13:51:36+00"},
       {"format", {"%t", timestamp_null}, "NULL"},
-      {"format", {"%T", timestamp}, "TIMESTAMP \"2001-05-21 13:51:36+00\""},
+      {"format", {"%T", timestamp}, "TIMESTAMP '2001-05-21 13:51:36+00'"},
       {"format", {"%T", timestamp_null}, "NULL"},
 
       // Enums
       {"format", {"%t", enum_value}, "TESTENUM1"},
       {"format", {"%t", enum_null}, "NULL"},
-      {"format", {"%T", enum_value}, "\"TESTENUM1\""},
+      {"format", {"%T", enum_value}, "'TESTENUM1'"},
       {"format", {"%T", enum_null}, "NULL"},
 
       // Structs
@@ -481,12 +481,12 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       {"format", {"%t", struct2}, "(foo, 0)"},
       {"format", {"%t", struct2_null}, "NULL"},
       {"format", {"%T", struct0}, "STRUCT()"},
-      {"format", {"%T", struct1}, "STRUCT(\"foo\")"},
-      {"format", {"%T", struct2}, "(\"foo\", 0)"},
+      {"format", {"%T", struct1}, "STRUCT('foo')"},
+      {"format", {"%T", struct2}, "('foo', 0)"},
       {"format", {"%T", struct2_null}, "NULL"},
-      {"format", {"%T", struct_anonymous1}, "STRUCT(\"foo\")"},
-      {"format", {"%T", struct_anonymous2}, "(\"foo\", 0)"},
-      {"format", {"%T", struct_anonymous3}, "(\"foo\", 0)"},
+      {"format", {"%T", struct_anonymous1}, "STRUCT('foo')"},
+      {"format", {"%T", struct_anonymous2}, "('foo', 0)"},
+      {"format", {"%T", struct_anonymous3}, "('foo', 0)"},
 
       // Arrays
       {"format", {"%t", array_value}, "[0, 1]"},
@@ -512,7 +512,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       {"format", {"%t", proto_civil_time_value}, civil_time_proto_str},
       {"format",
        {"%T", proto_civil_time_value},
-       absl::StrCat("\"", civil_time_proto_str, "\"")},
+       absl::StrCat("'", civil_time_proto_str, "'")},
       {"format", {"%p", proto_civil_time_value}, civil_time_proto_str},
       {"format",
        {"%P", proto_civil_time_value},
@@ -546,7 +546,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       {"format", {"%T", Double(15.5)}, "15.5"},
       {"format", {"%T", Float(15.0)}, "15.0"},
       {"format", {"%T", Double(15.0)}, "15.0"},
-      {"format", {"%T", String("abc")}, "\"abc\""},
+      {"format", {"%T", String("abc")}, "'abc'"},
       {"format", {"%T", Bytes("abc")}, "b\"abc\""},
 
       // Width formatting on %t follows same rules as %s.
@@ -560,7 +560,7 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
       {"format", {"%-6.3t", enum_value}, "TES   "},
       {"format", {"%+#06.3t", enum_value}, "   TES"},
       {"format", {"%*.*t", 6, 3, enum_value}, "   TES"},
-      {"format", {"%*.*T", 6, 3, enum_value}, "   \"TE"},
+      {"format", {"%*.*T", 6, 3, enum_value}, "   'TE"},
       // Same applies even for integers formatted with %t.
       {"format", {"%6.3t", 10000}, "   100"},
       {"format", {"%6.3d", 10000}, " 10000"},
@@ -626,29 +626,29 @@ std::vector<FunctionTestCall> GetFunctionTestsFormat() {
   const std::vector<CivilTimeTestCase> civil_time_test_cases({
       {{{"%t", datetime_micros}}, String("2016-04-26 15:23:27.123456")},
       {{{"%T", datetime_micros}},
-       String("DATETIME \"2016-04-26 15:23:27.123456\"")},
+       String("DATETIME '2016-04-26 15:23:27.123456'")},
       {{{"%t", Value::NullDatetime()}}, String("NULL")},
       {{{"%T", Value::NullDatetime()}}, String("NULL")},
 
       {{{"%t", time_micros}}, String("15:23:27.123456")},
-      {{{"%T", time_micros}}, String("TIME \"15:23:27.123456\"")},
+      {{{"%T", time_micros}}, String("TIME '15:23:27.123456'")},
       {{{"%t", Value::NullTime()}}, String("NULL")},
       {{{"%T", Value::NullTime()}}, String("NULL")},
 
       {{{"%t", struct3_civil_time}},
        String("(bar, 2016-04-26 15:23:27.123456, 15:23:27.123456)")},
       {{{"%T", struct3_civil_time}},
-       String("(\"bar\", DATETIME \"2016-04-26 15:23:27.123456\", "
-              "TIME \"15:23:27.123456\")")},
+       String("('bar', DATETIME '2016-04-26 15:23:27.123456', "
+              "TIME '15:23:27.123456')")},
 
       {{{"%t", array_datetime}},
        String("[1970-01-01 00:00:00, 2016-04-26 15:23:27.123456]")},
       {{{"%T", array_datetime}},
-       String("[DATETIME \"1970-01-01 00:00:00\","
-              " DATETIME \"2016-04-26 15:23:27.123456\"]")},
+       String("[DATETIME '1970-01-01 00:00:00',"
+              " DATETIME '2016-04-26 15:23:27.123456']")},
       {{{"%t", array_time}}, String("[00:00:00, 15:23:27.123456]")},
       {{{"%T", array_time}},
-       String("[TIME \"00:00:00\", TIME \"15:23:27.123456\"]")},
+       String("[TIME '00:00:00', TIME '15:23:27.123456']")},
   });
   for (const auto& each : civil_time_test_cases) {
     AddTestCaseWithWrappedResultForCivilTimeAndNanos(each, "format",

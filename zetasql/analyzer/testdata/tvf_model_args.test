@@ -261,7 +261,7 @@ QueryStmt
     +-input_scan=
       +-TVFScan
         +-column_list=tvf_model_optional_table_named_string_default.[column_bool#2, column_bytes#3]
-        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: "default"} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: 'default'} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(ANY MODEL, TABLE<$col1 STRING>, literal STRING) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
         | +-FunctionArgument
@@ -272,13 +272,13 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.$col1#1]
         | | |   +-expr_list=
-        | | |   | +-$col1#1 := Literal(type=STRING, value="abc")
+        | | |   | +-$col1#1 := Literal(type=STRING, value='abc')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.$col1#1]
         | +-FunctionArgument
         |   +-expr=
-        |     +-Literal(type=STRING, value="default")
+        |     +-Literal(type=STRING, value='default')
         +-column_index_list=[0, 1]
 ==
 
@@ -297,7 +297,7 @@ QueryStmt
     +-input_scan=
       +-TVFScan
         +-column_list=tvf_model_optional_table_named_string_default.[column_bool#3, column_bytes#4]
-        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: "default"} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
+        +-tvf=tvf_model_optional_table_named_string_default((ANY MODEL, optional ANY TABLE, optional STRING {default_value: 'default'} foobar) -> TABLE<column_bool BOOL, column_bytes BYTES>)
         +-signature=(ANY MODEL, TABLE<$col1 STRING>, STRING) -> TABLE<column_bool BOOL, column_bytes BYTES>
         +-argument_list=
         | +-FunctionArgument
@@ -308,7 +308,7 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=[$subquery1.$col1#1]
         | | |   +-expr_list=
-        | | |   | +-$col1#1 := Literal(type=STRING, value="abc")
+        | | |   | +-$col1#1 := Literal(type=STRING, value='abc')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-argument_column_list=[$subquery1.$col1#1]
@@ -321,7 +321,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[$expr_subquery.$col1#2]
         |           +-expr_list=
-        |           | +-$col1#2 := Literal(type=STRING, value="abc")
+        |           | +-$col1#2 := Literal(type=STRING, value='abc')
         |           +-input_scan=
         |             +-SingleRowScan
         +-column_index_list=[0, 1]
@@ -358,7 +358,7 @@ QueryStmt
         | |       +-ProjectScan
         | |         +-column_list=[$expr_subquery.$col1#1]
         | |         +-expr_list=
-        | |         | +-$col1#1 := Literal(type=STRING, value="abc")
+        | |         | +-$col1#1 := Literal(type=STRING, value='abc')
         | |         +-input_scan=
         | |           +-SingleRowScan
         | +-FunctionArgument
@@ -366,7 +366,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$subquery1.$col1#2]
         |   |   +-expr_list=
-        |   |   | +-$col1#2 := Literal(type=STRING, value="abc")
+        |   |   | +-$col1#2 := Literal(type=STRING, value='abc')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=[$subquery1.$col1#2]
@@ -404,7 +404,7 @@ QueryStmt
         | |       +-ProjectScan
         | |         +-column_list=[$expr_subquery.$col1#1]
         | |         +-expr_list=
-        | |         | +-$col1#1 := Literal(type=STRING, value="abc")
+        | |         | +-$col1#1 := Literal(type=STRING, value='abc')
         | |         +-input_scan=
         | |           +-SingleRowScan
         | +-FunctionArgument
@@ -412,8 +412,8 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=$subquery1.[$col1#2, $col2#3]
         |   |   +-expr_list=
-        |   |   | +-$col1#2 := Literal(type=STRING, value="abc")
-        |   |   | +-$col2#3 := Literal(type=STRING, value="def")
+        |   |   | +-$col1#2 := Literal(type=STRING, value='abc')
+        |   |   | +-$col2#3 := Literal(type=STRING, value='def')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-argument_column_list=$subquery1.[$col1#2, $col2#3]
@@ -451,7 +451,7 @@ QueryStmt
         | |       +-ProjectScan
         | |         +-column_list=[$expr_subquery.$col1#1]
         | |         +-expr_list=
-        | |         | +-$col1#1 := Literal(type=STRING, value="abc")
+        | |         | +-$col1#1 := Literal(type=STRING, value='abc')
         | |         +-input_scan=
         | |           +-SingleRowScan
         | +-FunctionArgument
@@ -491,7 +491,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[$expr_subquery.$col1#1]
         |           +-expr_list=
-        |           | +-$col1#1 := Literal(type=STRING, value="abc")
+        |           | +-$col1#1 := Literal(type=STRING, value='abc')
         |           +-input_scan=
         |             +-SingleRowScan
         +-column_index_list=[0, 1]
@@ -718,6 +718,6 @@ Signature Mismatch Details:
 ERROR: No matching signature for tvf_optional_scalar_named_model_named_table
   Argument types: DOUBLE, NULL, TABLE<$col1 INT64>
   Signature: TVF_OPTIONAL_SCALAR_NAMED_MODEL_NAMED_TABLE([ANY], [foobar => MODEL], [barfoo => TABLE])
-    Named argument `foobar`: expected MODEL, found NULL [at 1:15]
+    Named argument "foobar": expected MODEL, found NULL [at 1:15]
 select * from tvf_optional_scalar_named_model_named_table(1.0,
               ^

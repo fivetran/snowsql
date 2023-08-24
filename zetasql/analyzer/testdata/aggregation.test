@@ -46,7 +46,7 @@ select 1 from KeyValue group by key+1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -69,7 +69,7 @@ select key+1 from KeyValue group by key+1
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol1#3 AS `$col1` [INT64]
+| +-$groupby.$groupbycol1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$groupbycol1#3]
@@ -90,7 +90,7 @@ select CAST(value AS INT64) from KeyValue group by cast(value as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol1#3 AS `$col1` [INT64]
+| +-$groupby.$groupbycol1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$groupbycol1#3]
@@ -112,7 +112,7 @@ group by substr(value, @test_param_int32)
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol1#3 AS `$col1` [STRING]
+| +-$groupby.$groupbycol1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$groupbycol1#3]
@@ -126,7 +126,7 @@ QueryStmt
             +-FunctionCall(ZetaSQL:substr(STRING, INT64, optional(0) INT64) -> STRING)
               +-ColumnRef(type=STRING, column=KeyValue.Value#2)
               +-Cast(INT32 -> INT64)
-                +-Parameter(type=INT32, name="test_param_int32")
+                +-Parameter(type=INT32, name='test_param_int32')
 ==
 
 # Different parameters in GROUP BY expression
@@ -147,8 +147,8 @@ group by regexp_extract(value, 'foo'), key / 10
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol2#4 AS `$col1` [DOUBLE]
-| +-$groupby.$groupbycol1#3 AS `$col2` [STRING]
+| +-$groupby.$groupbycol2#4 AS "$col1" [DOUBLE]
+| +-$groupby.$groupbycol1#3 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$groupby.[$groupbycol2#4, $groupbycol1#3]
@@ -161,7 +161,7 @@ QueryStmt
           +-$groupbycol1#3 :=
           | +-FunctionCall(ZetaSQL:regexp_extract(STRING, STRING) -> STRING)
           |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-          |   +-Literal(type=STRING, value="foo")
+          |   +-Literal(type=STRING, value='foo')
           +-$groupbycol2#4 :=
             +-FunctionCall(ZetaSQL:$divide(DOUBLE, DOUBLE) -> DOUBLE)
               +-Cast(INT64 -> DOUBLE)
@@ -172,11 +172,11 @@ QueryStmt
 [no_enable_literal_replacement]
 select concat(cast(key as string), '.', value)
 from KeyValue
-group by Concat(CAST(key as STRING), ".", value)
+group by Concat(CAST(key as STRING), '.', value)
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol1#3 AS `$col1` [STRING]
+| +-$groupby.$groupbycol1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$groupbycol1#3]
@@ -190,7 +190,7 @@ QueryStmt
             +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
               +-Cast(INT64 -> STRING)
               | +-ColumnRef(type=INT64, column=KeyValue.Key#1)
-              +-Literal(type=STRING, value=".")
+              +-Literal(type=STRING, value='.')
               +-ColumnRef(type=STRING, column=KeyValue.Value#2)
 ==
 
@@ -202,7 +202,7 @@ group by KitchenSink.has_bool_val, KitchenSink.Bool_val
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -242,13 +242,13 @@ select key * rand()
 # Struct fields
 [no_enable_literal_replacement]
 select s.x + 1, string_agg(s.y)
-from (select struct<x int64, y string>(1, "foo") s)
+from (select struct<x int64, y string>(1, 'foo') s)
 group by s.x+1
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol1#3 AS `$col1` [INT64]
-| +-$aggregate.$agg1#2 AS `$col2` [STRING]
+| +-$groupby.$groupbycol1#3 AS "$col1" [INT64]
+| +-$aggregate.$agg1#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$groupbycol1#3, $aggregate.$agg1#2]
@@ -259,7 +259,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=[$subquery1.s#1]
         |   +-expr_list=
-        |   | +-s#1 := Literal(type=STRUCT<x INT64, y STRING>, value={x:1, y:"foo"}, has_explicit_type=TRUE)
+        |   | +-s#1 := Literal(type=STRUCT<x INT64, y STRING>, value={x:1, y:'foo'}, has_explicit_type=TRUE)
         |   +-input_scan=
         |     +-SingleRowScan
         +-group_by_list=
@@ -365,7 +365,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.key#3]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-group_by_list=
           +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -391,7 +391,7 @@ select count(*) from KeyValue kv1, KeyValue kv2 GROUP BY kv1.key;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -402,9 +402,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(table=KeyValue, alias="kv2")
+        |     +-TableScan(table=KeyValue, alias='kv2')
         +-group_by_list=
         | +-key#6 := ColumnRef(type=INT64, column=KeyValue.Key#1)
         +-aggregate_list=
@@ -428,9 +428,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(table=KeyValue, alias="kv2")
+        |     +-TableScan(table=KeyValue, alias='kv2')
         +-group_by_list=
           +-key#5 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -451,9 +451,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[KeyValue.Key#1]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   +-right_scan=
-        |     +-TableScan(table=KeyValue, alias="kv2")
+        |     +-TableScan(table=KeyValue, alias='kv2')
         +-group_by_list=
           +-foo#5 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
@@ -487,25 +487,25 @@ select key, value from KeyValue group by -1
                                          ^
 ==
 
-select "a" from KeyValue group by -1
+select 'a' from KeyValue group by -1
 --
 ERROR: GROUP BY is out of SELECT column number range: -1 [at 1:35]
-select "a" from KeyValue group by -1
+select 'a' from KeyValue group by -1
                                   ^
 ==
 
 # Expression in group by is not evaluated during analyze, hence we don't report
 # error of index out of column number range.
-select "a" from KeyValue group by 1+2
+select 'a' from KeyValue group by 1+2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRING]
+| +-$query.$col1#4 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
     +-expr_list=
-    | +-$col1#4 := Literal(type=STRING, value="a")
+    | +-$col1#4 := Literal(type=STRING, value='a')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -517,16 +517,16 @@ QueryStmt
               +-Literal(type=INT64, value=2)
 ==
 
-select "a" from KeyValue group by - -1
+select 'a' from KeyValue group by - -1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRING]
+| +-$query.$col1#4 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
     +-expr_list=
-    | +-$col1#4 := Literal(type=STRING, value="a")
+    | +-$col1#4 := Literal(type=STRING, value='a')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -537,16 +537,16 @@ QueryStmt
               +-Literal(type=INT64, value=-1)
 ==
 
-select "a" from KeyValue group by cast(1 as int64)
+select 'a' from KeyValue group by cast(1 as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [STRING]
+| +-$query.$col1#4 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
     +-expr_list=
-    | +-$col1#4 := Literal(type=STRING, value="a")
+    | +-$col1#4 := Literal(type=STRING, value='a')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -556,16 +556,16 @@ QueryStmt
 ==
 
 # Can group by a subquery.
-select "a" from KeyValue group by (select count(*) from TestTable)
+select 'a' from KeyValue group by (select count(*) from TestTable)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRING]
+| +-$query.$col1#8 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
     +-expr_list=
-    | +-$col1#8 := Literal(type=STRING, value="a")
+    | +-$col1#8 := Literal(type=STRING, value='a')
     +-input_scan=
       +-AggregateScan
         +-input_scan=
@@ -618,7 +618,7 @@ select 1 from KeyValue group by key+1, key+2, key+1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -736,7 +736,7 @@ select key, 10 from KeyValue group by 1
 QueryStmt
 +-output_column_list=
 | +-$groupby.key#3 AS key [INT64]
-| +-$query.$col2#4 AS `$col2` [INT64]
+| +-$query.$col2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.key#3, $query.$col2#4]
@@ -778,9 +778,9 @@ group by key, 2, k2, 4, eleven
 QueryStmt
 +-output_column_list=
 | +-$groupby.key#3 AS key [INT64]
-| +-$groupby.$col2#4 AS `$col2` [INT64]
+| +-$groupby.$col2#4 AS "$col2" [INT64]
 | +-$groupby.k2#5 AS k2 [INT64]
-| +-$groupby.$col4#6 AS `$col4` [INT64]
+| +-$groupby.$col4#6 AS "$col4" [INT64]
 | +-$groupby.eleven#7 AS eleven [INT64]
 +-query=
   +-ProjectScan
@@ -804,10 +804,10 @@ QueryStmt
           +-eleven#7 := Literal(type=INT64, value=11)
 ==
 
-# We can group by `k1` because it's exactly an alias - it doesn't get
-# treated like an expression.  `k2`+1 does get treated as an expression,
+# We can group by "k1" because it's exactly an alias - it doesn't get
+# treated like an expression.  "k2"+1 does get treated as an expression,
 # and k2 is not visible to use in an expression.
-# The `k1` alias case is a special case similar to GROUP BY 1.
+# The "k1" alias case is a special case similar to GROUP BY 1.
 select key+1 as k1, key+2 as k2 from KeyValue group by k1, k2+1
 --
 ERROR: Unrecognized name: k2 [at 1:60]
@@ -878,7 +878,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.c1#3 AS c1 [INT64]
 | +-$groupby.value#4 AS value [STRING]
-| +-$query.$col3#6 AS `$col3` [INT64]
+| +-$query.$col3#6 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.c1#3, $groupby.value#4, $query.$col3#6]
@@ -938,8 +938,8 @@ select key+1, key+key from KeyValue group by key
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
-| +-$query.$col2#5 AS `$col2` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
+| +-$query.$col2#5 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -961,12 +961,12 @@ QueryStmt
           +-key#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
 
-# All instances of `key` get rewritten to the same aggregate column.
+# All instances of "key" get rewritten to the same aggregate column.
 select key+1, key, key k, key+2 as k2 from KeyValue group by k
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 | +-$groupby.k#3 AS key [INT64]
 | +-$groupby.k#3 AS k [INT64]
 | +-$query.k2#5 AS k2 [INT64]
@@ -991,12 +991,12 @@ QueryStmt
           +-k#3 := ColumnRef(type=INT64, column=KeyValue.Key#1)
 ==
 
-# All instances of `key` get rewritten to the same aggregate column.
+# All instances of "key" get rewritten to the same aggregate column.
 select key+1, key, key k, key+2 as k2 from KeyValue group by 2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 | +-$groupby.key#3 AS key [INT64]
 | +-$groupby.key#3 AS k [INT64]
 | +-$query.k2#5 AS k2 [INT64]
@@ -1070,9 +1070,9 @@ group by 2
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 | +-$groupby.foo#5 AS foo [INT32]
-| +-$query.$col3#6 AS `$col3` [INT64]
+| +-$query.$col3#6 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4, $groupby.foo#5, $query.$col3#6]
@@ -1105,8 +1105,8 @@ select count(*), count(value) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
-| +-$aggregate.$agg2#4 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
+| +-$aggregate.$agg2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#3, $agg2#4]
@@ -1133,7 +1133,7 @@ select cast(count(*) as double) from KeyValue group by value
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [DOUBLE]
+| +-$query.$col1#5 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1163,7 +1163,7 @@ select cast(key as double) from KeyValue group by key
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [DOUBLE]
+| +-$query.$col1#4 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -1185,7 +1185,7 @@ select 1+sum(2+key)+count(*) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1216,7 +1216,7 @@ group by key;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1250,8 +1250,8 @@ select value, sum(key), count(*) from KeyValue group by value
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#5 AS value [STRING]
-| +-$aggregate.$agg1#3 AS `$col2` [INT64]
-| +-$aggregate.$agg2#4 AS `$col3` [INT64]
+| +-$aggregate.$agg1#3 AS "$col2" [INT64]
+| +-$aggregate.$agg2#4 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#5, $aggregate.$agg1#3, $aggregate.$agg2#4]
@@ -1288,7 +1288,7 @@ from (select count(*) cnt, sum(key), sum(1+key) as sk from KeyValue)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#6 AS `$col1` [INT64]
+| +-$aggregate.$agg1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#6]
@@ -1404,7 +1404,7 @@ group by 3
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#8 AS `$col1` [INT64]
+| +-$aggregate.$agg1#8 AS "$col1" [INT64]
 | +-$query.multisum#12 AS multisum [INT64]
 | +-$groupby.value#11 AS value [STRING]
 +-query=
@@ -1475,11 +1475,11 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
-| +-$aggregate.$agg2#5 AS `$col2` [INT64]
-| +-$aggregate.$agg3#6 AS `$col3` [INT64]
-| +-$aggregate.$agg4#7 AS `$col4` [INT64]
-| +-$aggregate.$agg5#8 AS `$col5` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
+| +-$aggregate.$agg2#5 AS "$col2" [INT64]
+| +-$aggregate.$agg3#6 AS "$col3" [INT64]
+| +-$aggregate.$agg4#7 AS "$col4" [INT64]
+| +-$aggregate.$agg5#8 AS "$col5" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#4, $agg2#5, $agg3#6, $agg4#7, $agg5#8]
@@ -1535,11 +1535,11 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [BYTES]
-| +-$aggregate.$agg2#5 AS `$col2` [ARRAY<DOUBLE>]
-| +-$aggregate.$agg3#6 AS `$col3` [ENUM<zetasql_test__.TestEnum>]
-| +-$aggregate.$agg4#7 AS `$col4` [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
-| +-$aggregate.$agg5#8 AS `$col5` [ARRAY<PROTO<zetasql_test__.RepeatedHolderPB>>]
+| +-$aggregate.$agg1#4 AS "$col1" [BYTES]
+| +-$aggregate.$agg2#5 AS "$col2" [ARRAY<DOUBLE>]
+| +-$aggregate.$agg3#6 AS "$col3" [ENUM<zetasql_test__.TestEnum>]
+| +-$aggregate.$agg4#7 AS "$col4" [PROTO<zetasql_test__.KitchenSinkPB.Nested>]
+| +-$aggregate.$agg5#8 AS "$col5" [ARRAY<PROTO<zetasql_test__.RepeatedHolderPB>>]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#4, $agg2#5, $agg3#6, $agg4#7, $agg5#8]
@@ -1625,34 +1625,34 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
-| +-$aggregate.$agg2#5 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#6 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#7 AS `$col4` [DOUBLE]
-| +-$aggregate.$agg5#8 AS `$col5` [INT64]
-| +-$aggregate.$agg6#9 AS `$col6` [DOUBLE]
-| +-$aggregate.$agg7#10 AS `$col7` [STRING]
-| +-$aggregate.$agg8#11 AS `$col8` [ENUM<zetasql_test__.TestEnum>]
-| +-$aggregate.$agg9#12 AS `$col9` [INT64]
-| +-$aggregate.$agg10#13 AS `$col10` [DOUBLE]
-| +-$aggregate.$agg11#14 AS `$col11` [STRING]
-| +-$aggregate.$agg12#15 AS `$col12` [ENUM<zetasql_test__.TestEnum>]
-| +-$aggregate.$agg13#16 AS `$col13` [STRING]
-| +-$aggregate.$agg14#17 AS `$col14` [BYTES]
-| +-$aggregate.$agg15#18 AS `$col15` [INT32]
-| +-$aggregate.$agg16#19 AS `$col16` [INT64]
-| +-$aggregate.$agg17#20 AS `$col17` [UINT32]
-| +-$aggregate.$agg18#21 AS `$col18` [UINT64]
-| +-$aggregate.$agg19#22 AS `$col19` [INT32]
-| +-$aggregate.$agg20#23 AS `$col20` [INT64]
-| +-$aggregate.$agg21#24 AS `$col21` [UINT32]
-| +-$aggregate.$agg22#25 AS `$col22` [UINT64]
-| +-$aggregate.$agg23#26 AS `$col23` [INT32]
-| +-$aggregate.$agg24#27 AS `$col24` [INT64]
-| +-$aggregate.$agg25#28 AS `$col25` [UINT32]
-| +-$aggregate.$agg26#29 AS `$col26` [UINT64]
-| +-$aggregate.$agg27#30 AS `$col27` [BOOL]
-| +-$aggregate.$agg28#31 AS `$col28` [BOOL]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
+| +-$aggregate.$agg2#5 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#6 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#7 AS "$col4" [DOUBLE]
+| +-$aggregate.$agg5#8 AS "$col5" [INT64]
+| +-$aggregate.$agg6#9 AS "$col6" [DOUBLE]
+| +-$aggregate.$agg7#10 AS "$col7" [STRING]
+| +-$aggregate.$agg8#11 AS "$col8" [ENUM<zetasql_test__.TestEnum>]
+| +-$aggregate.$agg9#12 AS "$col9" [INT64]
+| +-$aggregate.$agg10#13 AS "$col10" [DOUBLE]
+| +-$aggregate.$agg11#14 AS "$col11" [STRING]
+| +-$aggregate.$agg12#15 AS "$col12" [ENUM<zetasql_test__.TestEnum>]
+| +-$aggregate.$agg13#16 AS "$col13" [STRING]
+| +-$aggregate.$agg14#17 AS "$col14" [BYTES]
+| +-$aggregate.$agg15#18 AS "$col15" [INT32]
+| +-$aggregate.$agg16#19 AS "$col16" [INT64]
+| +-$aggregate.$agg17#20 AS "$col17" [UINT32]
+| +-$aggregate.$agg18#21 AS "$col18" [UINT64]
+| +-$aggregate.$agg19#22 AS "$col19" [INT32]
+| +-$aggregate.$agg20#23 AS "$col20" [INT64]
+| +-$aggregate.$agg21#24 AS "$col21" [UINT32]
+| +-$aggregate.$agg22#25 AS "$col22" [UINT64]
+| +-$aggregate.$agg23#26 AS "$col23" [INT32]
+| +-$aggregate.$agg24#27 AS "$col24" [INT64]
+| +-$aggregate.$agg25#28 AS "$col25" [UINT32]
+| +-$aggregate.$agg26#29 AS "$col26" [UINT64]
+| +-$aggregate.$agg27#30 AS "$col27" [BOOL]
+| +-$aggregate.$agg28#31 AS "$col28" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#4, $agg2#5, $agg3#6, $agg4#7, $agg5#8, $agg6#9, $agg7#10, $agg8#11, $agg9#12, $agg10#13, $agg11#14, $agg12#15, $agg13#16, $agg14#17, $agg15#18, $agg16#19, $agg17#20, $agg18#21, $agg19#22, $agg20#23, $agg21#24, $agg22#25, $agg23#26, $agg24#27, $agg25#28, $agg26#29, $agg27#30, $agg28#31]
@@ -1717,7 +1717,7 @@ QueryStmt
           |     +-expr=
           |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
           |     +-field_descriptor=string_val
-          |     +-default_value="default_name"
+          |     +-default_value='default_name'
           +-$agg8#11 :=
           | +-AggregateFunctionCall(ZetaSQL:min(ENUM<zetasql_test__.TestEnum>) -> ENUM<zetasql_test__.TestEnum>)
           |   +-GetProtoField
@@ -1749,7 +1749,7 @@ QueryStmt
           |     +-expr=
           |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
           |     +-field_descriptor=string_val
-          |     +-default_value="default_name"
+          |     +-default_value='default_name'
           +-$agg12#15 :=
           | +-AggregateFunctionCall(ZetaSQL:max(ENUM<zetasql_test__.TestEnum>) -> ENUM<zetasql_test__.TestEnum>)
           |   +-GetProtoField
@@ -1765,7 +1765,7 @@ QueryStmt
           |     +-expr=
           |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
           |     +-field_descriptor=string_val
-          |     +-default_value="default_name"
+          |     +-default_value='default_name'
           +-$agg14#17 :=
           | +-AggregateFunctionCall(ZetaSQL:string_agg(BYTES) -> BYTES)
           |   +-GetProtoField
@@ -1892,7 +1892,7 @@ select sum(KitchenSink.string_val) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [DOUBLE]
+| +-$aggregate.$agg1#4 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1910,7 +1910,7 @@ QueryStmt
                   +-expr=
                   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                   +-field_descriptor=string_val
-                  +-default_value="default_name"
+                  +-default_value='default_name'
 ==
 
 # Note that int32_val is widened to INT64 before doing the SUM in order to
@@ -1919,7 +1919,7 @@ select sum(KitchenSink.int32_val) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1944,8 +1944,8 @@ select COunt(key), coUnT(*) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
-| +-$aggregate.$agg2#4 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
+| +-$aggregate.$agg2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#3, $agg2#4]
@@ -2014,7 +2014,7 @@ select count(*) from (select 1)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -2036,9 +2036,9 @@ select count(*), count(distinct key), sum(distinct key) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
-| +-$aggregate.$agg2#4 AS `$col2` [INT64]
-| +-$aggregate.$agg3#5 AS `$col3` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
+| +-$aggregate.$agg2#4 AS "$col2" [INT64]
+| +-$aggregate.$agg3#5 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#3, $agg2#4, $agg3#5]
@@ -2066,10 +2066,10 @@ from KeyValue group by value
 QueryStmt
 +-output_column_list=
 | +-$groupby.value#8 AS value [STRING]
-| +-$query.$col2#9 AS `$col2` [INT64]
-| +-$aggregate.$agg2#4 AS `$col3` [INT64]
-| +-$aggregate.$agg3#5 AS `$col4` [INT64]
-| +-$query.$col5#10 AS `$col5` [INT64]
+| +-$query.$col2#9 AS "$col2" [INT64]
+| +-$aggregate.$agg2#4 AS "$col3" [INT64]
+| +-$aggregate.$agg3#5 AS "$col4" [INT64]
+| +-$query.$col5#10 AS "$col5" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.value#8, $query.$col2#9, $aggregate.$agg2#4, $aggregate.$agg3#5, $query.$col5#10]
@@ -2117,7 +2117,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -2139,7 +2139,7 @@ group by Key
 QueryStmt
 +-output_column_list=
 | +-$groupby.Key#5 AS Key [INT32]
-| +-$aggregate.$agg1#4 AS `$col2` [ARRAY<DATE>]
+| +-$aggregate.$agg1#4 AS "$col2" [ARRAY<DATE>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.Key#5, $aggregate.$agg1#4]
@@ -2202,14 +2202,14 @@ QueryStmt
         +-element_column=$array.k#4
 ==
 
-select key, string_agg(value, 'a'), string_agg(cast(value as bytes), b'b')
+select key, string_agg(value, 'a'), string_agg(cast(value as bytes), b"b")
 from KeyValue group by key
 --
 QueryStmt
 +-output_column_list=
 | +-$groupby.key#5 AS key [INT64]
-| +-$aggregate.$agg1#3 AS `$col2` [STRING]
-| +-$aggregate.$agg2#4 AS `$col3` [BYTES]
+| +-$aggregate.$agg1#3 AS "$col2" [STRING]
+| +-$aggregate.$agg2#4 AS "$col3" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.key#5, $aggregate.$agg1#3, $aggregate.$agg2#4]
@@ -2224,7 +2224,7 @@ QueryStmt
           +-$agg1#3 :=
           | +-AggregateFunctionCall(ZetaSQL:string_agg(STRING, STRING) -> STRING)
           |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-          |   +-Literal(type=STRING, value="a")
+          |   +-Literal(type=STRING, value='a')
           +-$agg2#4 :=
             +-AggregateFunctionCall(ZetaSQL:string_agg(BYTES, BYTES) -> BYTES)
               +-Cast(STRING -> BYTES)
@@ -2263,8 +2263,8 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [STRING]
-| +-$aggregate.$agg2#4 AS `$col2` [BYTES]
+| +-$aggregate.$agg1#3 AS "$col1" [STRING]
+| +-$aggregate.$agg2#4 AS "$col2" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#3, $agg2#4]
@@ -2277,12 +2277,12 @@ QueryStmt
           +-$agg1#3 :=
           | +-AggregateFunctionCall(ZetaSQL:string_agg(STRING, STRING) -> STRING)
           |   +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-          |   +-Parameter(type=STRING, name="test_param_string")
+          |   +-Parameter(type=STRING, name='test_param_string')
           +-$agg2#4 :=
             +-AggregateFunctionCall(ZetaSQL:string_agg(BYTES, BYTES) -> BYTES)
               +-Cast(STRING -> BYTES)
               | +-ColumnRef(type=STRING, column=KeyValue.Value#2)
-              +-Parameter(type=BYTES, name="test_param_bytes")
+              +-Parameter(type=BYTES, name='test_param_bytes')
 ==
 
 select string_agg(value, @test_param_int32)
@@ -2294,18 +2294,18 @@ select string_agg(value, @test_param_int32)
 ==
 
 # string_agg(string, bytes) is not supported
-SELECT string_agg(value, b"foo") from KeyValue;
+SELECT string_agg(value, b'foo') from KeyValue;
 --
 ERROR: No matching signature for aggregate function STRING_AGG for argument types: STRING, BYTES. Supported signatures: STRING_AGG(STRING); STRING_AGG(STRING, STRING); STRING_AGG(BYTES); STRING_AGG(BYTES, BYTES) [at 1:8]
-SELECT string_agg(value, b"foo") from KeyValue;
+SELECT string_agg(value, b'foo') from KeyValue;
        ^
 ==
 
 # string_agg(bytes, string) is not supported
-SELECT string_agg(cast(value as bytes), "foo") from KeyValue;
+SELECT string_agg(cast(value as bytes), 'foo') from KeyValue;
 --
 ERROR: No matching signature for aggregate function STRING_AGG for argument types: BYTES, STRING. Supported signatures: STRING_AGG(STRING); STRING_AGG(STRING, STRING); STRING_AGG(BYTES); STRING_AGG(BYTES, BYTES) [at 1:8]
-SELECT string_agg(cast(value as bytes), "foo") from KeyValue;
+SELECT string_agg(cast(value as bytes), 'foo') from KeyValue;
        ^
 ==
 
@@ -2346,7 +2346,7 @@ select array_agg(NULL) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -2374,8 +2374,8 @@ select count(*), (select 1) from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
-| +-$query.$col2#7 AS `$col2` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
+| +-$query.$col2#7 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4, $query.$col2#7]
@@ -2405,14 +2405,14 @@ QueryStmt
 select count(*),
       (select count(*) from (select 1)),
       (select as STRUCT 1 a, 2 b).b,
-      (select as `zetasql_test__.KitchenSinkPB`
+      (select as "zetasql_test__.KitchenSinkPB"
               7 int64_key_1, 9 int64_key_2).int64_key_2
 from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
-| +-$query.$col2#15 AS `$col2` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
+| +-$query.$col2#15 AS "$col2" [INT64]
 | +-$query.b#19 AS b [INT64]
 | +-$query.int64_key_2#23 AS int64_key_2 [INT64]
 +-query=
@@ -2507,16 +2507,16 @@ select (select count(*) c, 1 a) from KeyValue
 ==
 
 # Grouping by all the supported types.
-Select `bool`,
-       `int32`,
-       `int64`,
-       `uint32`,
-       `uint64`,
-       `float`,
-       `double`,
-       `string`,
-       `bytes`,
-       `date`,
+Select "bool",
+       "int32",
+       "int64",
+       "uint32",
+       "uint64",
+       "float",
+       "double",
+       "string",
+       "bytes",
+       "date",
        timestamp,
        TestEnum
 FROM SimpleTypes cross join ComplexTypes
@@ -2606,7 +2606,7 @@ select 10 from ArrayTypes group by
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#32 AS `$col1` [INT64]
+| +-$query.$col1#32 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#32]
@@ -2656,7 +2656,7 @@ ALTERNATION GROUP: V_1_2_GROUP_BY_STRUCT,V_1_2_GROUP_BY_ARRAY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [INT64]
+| +-$query.$col1#19 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -2716,13 +2716,13 @@ select TestStruct from ComplexTypes group by 1;
 ==
 
 # Note the duplicate aggregate column being produced.
-select sum(`int64`), sum(`int64`)
+select sum("int64"), sum("int64")
 from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -2757,18 +2757,18 @@ from SimpleTypes, ComplexTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
-| +-$aggregate.$agg2#26 AS `$col2` [INT64]
-| +-$aggregate.$agg3#27 AS `$col3` [INT64]
-| +-$aggregate.$agg4#28 AS `$col4` [INT64]
-| +-$aggregate.$agg5#29 AS `$col5` [INT64]
-| +-$aggregate.$agg6#30 AS `$col6` [INT64]
-| +-$aggregate.$agg7#31 AS `$col7` [INT64]
-| +-$aggregate.$agg8#32 AS `$col8` [INT64]
-| +-$aggregate.$agg9#33 AS `$col9` [INT64]
-| +-$aggregate.$agg10#34 AS `$col10` [INT64]
-| +-$aggregate.$agg11#35 AS `$col11` [INT64]
-| +-$aggregate.$agg12#36 AS `$col12` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
+| +-$aggregate.$agg2#26 AS "$col2" [INT64]
+| +-$aggregate.$agg3#27 AS "$col3" [INT64]
+| +-$aggregate.$agg4#28 AS "$col4" [INT64]
+| +-$aggregate.$agg5#29 AS "$col5" [INT64]
+| +-$aggregate.$agg6#30 AS "$col6" [INT64]
+| +-$aggregate.$agg7#31 AS "$col7" [INT64]
+| +-$aggregate.$agg8#32 AS "$col8" [INT64]
+| +-$aggregate.$agg9#33 AS "$col9" [INT64]
+| +-$aggregate.$agg10#34 AS "$col10" [INT64]
+| +-$aggregate.$agg11#35 AS "$col11" [INT64]
+| +-$aggregate.$agg12#36 AS "$col12" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#25, $agg2#26, $agg3#27, $agg4#28, $agg5#29, $agg6#30, $agg7#31, $agg8#32, $agg9#33, $agg10#34, $agg11#35, $agg12#36]
@@ -2854,7 +2854,7 @@ ALTERNATION GROUP: V_1_2_GROUP_BY_STRUCT
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#7]
@@ -2924,7 +2924,7 @@ order by KitchenSink.nested_value.nested_int64 +2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#5]
@@ -2987,7 +2987,7 @@ order by {{T.|}}KitchenSink.nested_value.nested_int64 + 2
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [INT64]
+| +-$query.$col1#5 AS "$col1" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$query.$col1#5]
@@ -3015,7 +3015,7 @@ QueryStmt
     |       |     +-AggregateScan
     |       |       +-column_list=[$groupby.nested_int64#4]
     |       |       +-input_scan=
-    |       |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+    |       |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
     |       |       +-group_by_list=
     |       |         +-nested_int64#4 :=
     |       |           +-GetProtoField
@@ -3048,7 +3048,7 @@ order by {{T.|}}KitchenSink.nested_value.nested_int64 + 2
 QueryStmt
 +-output_column_list=
 | +-$groupby.nested_int64#7 AS nested_int64 [INT64]
-| +-$aggregate.$agg1#5 AS `$col2` [INT64]
+| +-$aggregate.$agg1#5 AS "$col2" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.nested_int64#7, $aggregate.$agg1#5]
@@ -3087,7 +3087,7 @@ QueryStmt
     |       |   |     +-ArrayScan
     |       |   |       +-column_list=[TestTable.KitchenSink#3, $array.n#4]
     |       |   |       +-input_scan=
-    |       |   |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+    |       |   |       | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
     |       |   |       +-array_expr=
     |       |   |       | +-GetProtoField
     |       |   |       |   +-type=ARRAY<DOUBLE>
@@ -3910,8 +3910,8 @@ from (select (1, 1) as structval
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$field1#5 AS `$field1` [INT64]
-| +-$query.$field2#6 AS `$field2` [INT64]
+| +-$query.$field1#5 AS "$field1" [INT64]
+| +-$query.$field2#6 AS "$field2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$field1#5, $field2#6]
@@ -4006,8 +4006,8 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [INT64]
-| +-$aggregate.$agg2#20 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col1" [INT64]
+| +-$aggregate.$agg2#20 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20]
@@ -4041,7 +4041,7 @@ ALTERNATION GROUP: <empty>
 QueryStmt
 +-output_column_list=
 | +-$groupby.double#20 AS double [DOUBLE]
-| +-$aggregate.$agg1#19 AS `$col2` [INT64]
+| +-$aggregate.$agg1#19 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.double#20, $aggregate.$agg1#19]
@@ -4060,8 +4060,8 @@ select count(*), count(CAST(NULL AS STRUCT<a INT32>)) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
-| +-$aggregate.$agg2#4 AS `$col2` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
+| +-$aggregate.$agg2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#3, $agg2#4]
@@ -4142,7 +4142,7 @@ from (select as struct 1 as a, 2 as b) foo
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<c INT64, INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<c INT64, INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -4214,7 +4214,7 @@ from (select as struct 1 as a, 2 as b) foo
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<c INT64, a INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<c INT64, a INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -4297,7 +4297,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#8 AS `$col1` [STRUCT<c INT64, foo_a INT64>]
+| +-$query.$col1#8 AS "$col1" [STRUCT<c INT64, foo_a INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#8]
@@ -4362,7 +4362,7 @@ ALTERNATION GROUP: foo.a
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<c INT64, foo_a INT64>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<c INT64, foo_a INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -4439,7 +4439,7 @@ from (select 1 as a, 2 as b) foo
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<c INT64, a INT64>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<c INT64, a INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -4498,7 +4498,7 @@ from (select 1 as a, 2 as b) foo
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#9 AS `$col1` [STRUCT<c INT64, a INT64>]
+| +-$query.$col1#9 AS "$col1" [STRUCT<c INT64, a INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#9]
@@ -4633,15 +4633,15 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#20 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#22 AS `$col4` [DOUBLE]
-| +-$aggregate.$agg5#23 AS `$col5` [DOUBLE]
-| +-$aggregate.$agg6#24 AS `$col6` [DOUBLE]
-| +-$aggregate.$agg7#25 AS `$col7` [DOUBLE]
-| +-$aggregate.$agg8#26 AS `$col8` [DOUBLE]
-| +-$aggregate.$agg9#27 AS `$col9` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#20 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#22 AS "$col4" [DOUBLE]
+| +-$aggregate.$agg5#23 AS "$col5" [DOUBLE]
+| +-$aggregate.$agg6#24 AS "$col6" [DOUBLE]
+| +-$aggregate.$agg7#25 AS "$col7" [DOUBLE]
+| +-$aggregate.$agg8#26 AS "$col8" [DOUBLE]
+| +-$aggregate.$agg9#27 AS "$col9" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21, $agg4#22, $agg5#23, $agg6#24, $agg7#25, $agg8#26, $agg9#27]
@@ -4699,9 +4699,9 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#20 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#20 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21]
@@ -4735,12 +4735,12 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#19 AS `$col1` [DOUBLE]
-| +-$aggregate.$agg2#20 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#21 AS `$col3` [DOUBLE]
-| +-$aggregate.$agg4#22 AS `$col4` [DOUBLE]
-| +-$aggregate.$agg5#23 AS `$col5` [DOUBLE]
-| +-$aggregate.$agg6#24 AS `$col6` [DOUBLE]
+| +-$aggregate.$agg1#19 AS "$col1" [DOUBLE]
+| +-$aggregate.$agg2#20 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#21 AS "$col3" [DOUBLE]
+| +-$aggregate.$agg4#22 AS "$col4" [DOUBLE]
+| +-$aggregate.$agg5#23 AS "$col5" [DOUBLE]
+| +-$aggregate.$agg6#24 AS "$col6" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#19, $agg2#20, $agg3#21, $agg4#22, $agg5#23, $agg6#24]
@@ -4809,7 +4809,7 @@ from (select [1, 2] x union all select [] x) foo;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -4847,11 +4847,11 @@ QueryStmt
 ==
 
 select array_concat_agg(x)
-from (select ["a", "b"] x union all select [] x) foo;
+from (select ['a', 'b'] x union all select [] x) foo;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<STRING>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -4868,7 +4868,7 @@ QueryStmt
         |     | | +-ProjectScan
         |     | |   +-column_list=[$union_all1.x#1]
         |     | |   +-expr_list=
-        |     | |   | +-x#1 := Literal(type=ARRAY<STRING>, value=["a", "b"])
+        |     | |   | +-x#1 := Literal(type=ARRAY<STRING>, value=['a', 'b'])
         |     | |   +-input_scan=
         |     | |     +-SingleRowScan
         |     | +-output_column_list=[$union_all1.x#1]
@@ -4900,7 +4900,7 @@ group by w;
 QueryStmt
 +-output_column_list=
 | +-$groupby.w#10 AS w [INT64]
-| +-$aggregate.$agg1#9 AS `$col2` [ARRAY<INT64>]
+| +-$aggregate.$agg1#9 AS "$col2" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.w#10, $aggregate.$agg1#9]
@@ -5037,7 +5037,7 @@ QueryStmt
                   +-expr=
                   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
                   +-field_descriptor=string_val
-                  +-default_value="default_name"
+                  +-default_value='default_name'
 ==
 
 [language_features={{V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE|}}]
@@ -5047,7 +5047,7 @@ ALTERNATION GROUP: V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5076,7 +5076,7 @@ ALTERNATION GROUP: V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5103,7 +5103,7 @@ select array_agg(Key) from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5126,7 +5126,7 @@ ALTERNATION GROUP: V_1_1_LIMIT_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -5157,7 +5157,7 @@ ALTERNATION GROUP: V_1_1_LIMIT_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -5231,7 +5231,7 @@ ALTERNATION GROUP: V_1_1_LIMIT_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -5246,7 +5246,7 @@ QueryStmt
               +-ColumnRef(type=INT32, column=TestTable.key#1)
               +-limit=
                 +-Cast(INT32 -> INT64)
-                  +-Parameter(type=INT32, name="test_param_int32")
+                  +-Parameter(type=INT32, name='test_param_int32')
 --
 ALTERNATION GROUP: <empty>
 --
@@ -5281,7 +5281,7 @@ ALTERNATION GROUP: V_1_1_HAVING_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5315,7 +5315,7 @@ ALTERNATION GROUP: V_1_1_HAVING_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5349,7 +5349,7 @@ ALTERNATION GROUP: V_1_1_HAVING_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5381,7 +5381,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5410,7 +5410,7 @@ ALTERNATION GROUP: V_1_1_HAVING_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5442,7 +5442,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#3 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5501,7 +5501,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5526,7 +5526,7 @@ from KeyValue
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5568,7 +5568,7 @@ ALTERNATION GROUP: V_1_1_HAVING_IN_AGGREGATE
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5650,7 +5650,7 @@ ALTERNATION GROUP: V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE,ignore
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5669,7 +5669,7 @@ ALTERNATION GROUP: V_1_1_NULL_HANDLING_MODIFIER_IN_AGGREGATE,respect
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5694,7 +5694,7 @@ ALTERNATION GROUP: ignore,max
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5725,7 +5725,7 @@ ALTERNATION GROUP: ignore,min
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5756,7 +5756,7 @@ ALTERNATION GROUP: respect,max
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -5787,7 +5787,7 @@ ALTERNATION GROUP: respect,min
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -6003,7 +6003,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
           +-d#8 :=
@@ -6077,7 +6077,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=$groupby.[TestStruct#7, TestStruct#8]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 :=
           | +-GetStructField
@@ -6312,7 +6312,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.TestStruct#7]
         +-input_scan=
-        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias="ct")
+        | +-TableScan(column_list=[ComplexTypes.TestStruct#5], table=ComplexTypes, column_index_list=[4], alias='ct')
         +-group_by_list=
           +-TestStruct#7 := ColumnRef(type=STRUCT<c INT32, d STRUCT<a INT32, b STRING>>, column=ComplexTypes.TestStruct#5)
 ==
@@ -6366,7 +6366,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.foo#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
         +-group_by_list=
           +-foo#2 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 --
@@ -6390,7 +6390,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.vt#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
         +-group_by_list=
           +-vt#2 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 ==
@@ -6409,7 +6409,7 @@ ALTERNATION GROUP: V_1_3_ARRAY_ORDERING
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [ARRAY<INT64>]
+| +-$aggregate.$agg1#2 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -6461,13 +6461,13 @@ HAVING sum(b) > 5;
 QueryStmt
 +-output_column_list=
 | +-$query.b#8 AS b [INT64]
-| +-$aggregate.$agg1#5 AS `$col2` [INT64]
+| +-$aggregate.$agg1#5 AS "$col2" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$query.b#8, $aggregate.$agg1#5]
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="x"
+    |   +-with_query_name='x'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=x.[a#1, b#2]
@@ -6502,7 +6502,7 @@ QueryStmt
             |       |   |     +-ColumnRef(type=INT64, column=x.a#3)
             |       |   |     +-Literal(type=INT64, value=1)
             |       |   +-input_scan=
-            |       |     +-WithRefScan(column_list=x.[a#3, b#4], with_query_name="x")
+            |       |     +-WithRefScan(column_list=x.[a#3, b#4], with_query_name='x')
             |       +-group_by_list=
             |       | +-a#7 := ColumnRef(type=INT64, column=x.a#3)
             |       +-aggregate_list=
@@ -6525,17 +6525,17 @@ select a.*, count(*) from t group by 1,2,3 order by 4 limit 3;
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$field1#6 AS `$field1` [INT64]
-| +-$groupby.$field2#7 AS `$field2` [INT64]
-| +-$groupby.$field3#8 AS `$field3` [INT64]
-| +-$aggregate.$agg1#5 AS `$col2` [INT64]
+| +-$groupby.$field1#6 AS "$field1" [INT64]
+| +-$groupby.$field2#7 AS "$field2" [INT64]
+| +-$groupby.$field3#8 AS "$field3" [INT64]
+| +-$aggregate.$agg1#5 AS "$col2" [INT64]
 +-query=
   +-WithScan
     +-column_list=[$groupby.$field1#6, $groupby.$field2#7, $groupby.$field3#8, $aggregate.$agg1#5]
     +-is_ordered=TRUE
     +-with_entry_list=
     | +-WithEntry
-    |   +-with_query_name="t"
+    |   +-with_query_name='t'
     |   +-with_subquery=
     |     +-ProjectScan
     |       +-column_list=t.[a#1, b#2]
@@ -6556,7 +6556,7 @@ QueryStmt
         |   | +-AggregateScan
         |   |   +-column_list=[$groupby.$field1#6, $groupby.$field2#7, $groupby.$field3#8, $aggregate.$agg1#5]
         |   |   +-input_scan=
-        |   |   | +-WithRefScan(column_list=t.[a#3, b#4], with_query_name="t")
+        |   |   | +-WithRefScan(column_list=t.[a#3, b#4], with_query_name='t')
         |   |   +-group_by_list=
         |   |   | +-$field1#6 :=
         |   |   | | +-GetStructField
@@ -6598,7 +6598,7 @@ QueryStmt
 | +-$groupby.int32_val1#11 AS int32_val1 [INT32]
 | +-$groupby.int32_val2#12 AS int32_val2 [INT32]
 | +-$groupby.str_value#13 AS str_value [ARRAY<STRING>]
-| +-$aggregate.$agg1#7 AS `$col2` [INT64]
+| +-$aggregate.$agg1#7 AS "$col2" [INT64]
 +-query=
   +-OrderByScan
     +-column_list=[$groupby.int32_val1#11, $groupby.int32_val2#12, $groupby.str_value#13, $aggregate.$agg1#7]
@@ -6681,8 +6681,8 @@ GROUP BY JSON_VALUE(json_col.c)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
-| +-$groupby.$groupbycol1#3 AS `$col2` [STRING]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
+| +-$groupby.$groupbycol1#3 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2, $groupby.$groupbycol1#3]
@@ -6698,8 +6698,8 @@ QueryStmt
         |     | +-type=JSON
         |     | +-expr=
         |     | | +-ColumnRef(type=JSON, column=JSONTable.json_col#1)
-        |     | +-field_name="c"
-        |     +-Literal(type=STRING, value="$")
+        |     | +-field_name='c'
+        |     +-Literal(type=STRING, value='$')
         +-aggregate_list=
           +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==
@@ -6735,7 +6735,7 @@ GROUP BY PROTO_DEFAULT_IF_NULL(KitchenSink.int32_val)
 --
 QueryStmt
 +-output_column_list=
-| +-$groupby.$groupbycol1#4 AS `$col1` [INT32]
+| +-$groupby.$groupbycol1#4 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.$groupbycol1#4]
@@ -6764,7 +6764,7 @@ FROM TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [ARRAY<INT32>]
+| +-$aggregate.$agg1#5 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]

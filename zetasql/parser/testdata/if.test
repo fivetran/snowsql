@@ -420,7 +420,7 @@ Script [0-60] [if if(cond...2; end if;]
     IfStatement [0-58] [if if(cond...2; end if]
       FunctionCall [3-17] [if(cond, x, y)]
         PathExpression [3-5] [if]
-          Identifier(`if`) [3-5] [if]
+          Identifier("if") [3-5] [if]
         PathExpression [6-10] [cond]
           Identifier(cond) [6-10] [cond]
         PathExpression [12-13] [x]
@@ -442,7 +442,7 @@ Script [0-60] [if if(cond...2; end if;]
                 SelectColumn [49-50] [2]
                   IntLiteral(2) [49-50] [2]
 --
-IF `if`(cond, x, y) THEN
+IF "if"(cond, x, y) THEN
   SELECT
     1
   ;
@@ -571,7 +571,7 @@ Script [0-38] [if if(a, b...1; end if]
     IfStatement [0-38] [if if(a, b...1; end if]
       FunctionCall [3-14] [if(a, b, c)]
         PathExpression [3-5] [if]
-          Identifier(`if`) [3-5] [if]
+          Identifier("if") [3-5] [if]
         PathExpression [6-7] [a]
           Identifier(a) [6-7] [a]
         PathExpression [9-10] [b]
@@ -586,7 +586,7 @@ Script [0-38] [if if(a, b...1; end if]
                 SelectColumn [29-30] [1]
                   IntLiteral(1) [29-30] [1]
 --
-IF `if`(a, b, c) THEN
+IF "if"(a, b, c) THEN
   SELECT
     1
   ;

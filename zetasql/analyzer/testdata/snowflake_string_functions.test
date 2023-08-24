@@ -7,7 +7,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -19,8 +19,8 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
-    |     +-Literal(type=STRING, value="[[:punct:]][[:alnum:]]+[[:punct:]]")
+    |     | +-default_value='default_name'
+    |     +-Literal(type=STRING, value='[[:punct:]][[:alnum:]]+[[:punct:]]')
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 --
@@ -28,7 +28,7 @@ ALTERNATION GROUP: , 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -40,8 +40,8 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
-    |     +-Literal(type=STRING, value="[[:punct:]][[:alnum:]]+[[:punct:]]")
+    |     | +-default_value='default_name'
+    |     +-Literal(type=STRING, value='[[:punct:]][[:alnum:]]+[[:punct:]]')
     |     +-Literal(type=INT64, value=1)
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
@@ -50,7 +50,7 @@ ALTERNATION GROUP: , 1, 'i'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [INT64]
+| +-$query.$col1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -62,10 +62,10 @@ QueryStmt
     |     | +-expr=
     |     | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |     | +-field_descriptor=string_val
-    |     | +-default_value="default_name"
-    |     +-Literal(type=STRING, value="[[:punct:]][[:alnum:]]+[[:punct:]]")
+    |     | +-default_value='default_name'
+    |     +-Literal(type=STRING, value='[[:punct:]][[:alnum:]]+[[:punct:]]')
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="i")
+    |     +-Literal(type=STRING, value='i')
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
@@ -99,8 +99,8 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
-            +-Literal(type=STRING, value="san.*")
+            | +-default_value='default_name'
+            +-Literal(type=STRING, value='san.*')
 --
 ALTERNATION GROUPS:
     regexp_like,, 'i'
@@ -126,9 +126,9 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
-            +-Literal(type=STRING, value="san.*")
-            +-Literal(type=STRING, value="i")
+            | +-default_value='default_name'
+            +-Literal(type=STRING, value='san.*')
+            +-Literal(type=STRING, value='i')
 ==
 
 #
@@ -147,8 +147,8 @@ QueryStmt
     +-expr_list=
     | +-matches#1 :=
     |   +-FunctionCall(ZetaSQL:regexp_substr_all(STRING, STRING, optional(0) INT64, optional(0) INT64, optional(0) STRING, optional(0) INT64) -> ARRAY<STRING>)
-    |     +-Literal(type=STRING, value="a1_a2a3_a4A5a6")
-    |     +-Literal(type=STRING, value="(a)([[:digit:]])")
+    |     +-Literal(type=STRING, value='a1_a2a3_a4A5a6')
+    |     +-Literal(type=STRING, value='(a)([[:digit:]])')
     +-input_scan=
       +-SingleRowScan
 --
@@ -163,11 +163,11 @@ QueryStmt
     +-expr_list=
     | +-matches#1 :=
     |   +-FunctionCall(ZetaSQL:regexp_substr_all(STRING, STRING, optional(1) INT64, optional(1) INT64, optional(1) STRING, optional(0) INT64) -> ARRAY<STRING>)
-    |     +-Literal(type=STRING, value="a1_a2a3_a4A5a6")
-    |     +-Literal(type=STRING, value="(a)([[:digit:]])")
+    |     +-Literal(type=STRING, value='a1_a2a3_a4A5a6')
+    |     +-Literal(type=STRING, value='(a)([[:digit:]])')
     |     +-Literal(type=INT64, value=1)
     |     +-Literal(type=INT64, value=1)
-    |     +-Literal(type=STRING, value="ie")
+    |     +-Literal(type=STRING, value='ie')
     +-input_scan=
       +-SingleRowScan
 ==

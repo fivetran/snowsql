@@ -193,13 +193,13 @@ ARRAY<STRUCT<int_val INT64, INT64>>[unknown order:
 
 [name=partitionby_enum]
 SELECT enum_val, COUNT(enum_val) OVER (PARTITION BY enum_val)
-FROM (SELECT CAST(0 AS `zetasql_test__.TestEnum`) enum_val UNION ALL
-      SELECT CAST(1 AS `zetasql_test__.TestEnum`) UNION ALL
-      SELECT CAST(1 AS `zetasql_test__.TestEnum`) UNION ALL
-      SELECT CAST(2 AS `zetasql_test__.TestEnum`) UNION ALL
-      SELECT CAST(2 AS `zetasql_test__.TestEnum`) UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`) UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`))
+FROM (SELECT CAST(0 AS "zetasql_test__.TestEnum") enum_val UNION ALL
+      SELECT CAST(1 AS "zetasql_test__.TestEnum") UNION ALL
+      SELECT CAST(1 AS "zetasql_test__.TestEnum") UNION ALL
+      SELECT CAST(2 AS "zetasql_test__.TestEnum") UNION ALL
+      SELECT CAST(2 AS "zetasql_test__.TestEnum") UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum") UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum"))
 --
 ARRAY<STRUCT<
         enum_val ENUM<zetasql_test__.TestEnum>,
@@ -508,13 +508,13 @@ ARRAY<STRUCT<float_val FLOAT, INT64>>[unknown order:
 
 [name=orderby_enum]
 SELECT enum_val, RANK() OVER (ORDER BY enum_val DESC)
-FROM (SELECT CAST(0 AS `zetasql_test__.TestEnum`) as enum_val UNION ALL
+FROM (SELECT CAST(0 AS "zetasql_test__.TestEnum") as enum_val UNION ALL
       SELECT 1 UNION ALL
       SELECT 1 UNION ALL
       SELECT 2 UNION ALL
       SELECT 2 UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`) UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`))
+      SELECT CAST(null AS "zetasql_test__.TestEnum") UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum"))
 --
 ARRAY<STRUCT<
         enum_val ENUM<zetasql_test__.TestEnum>,
@@ -551,7 +551,7 @@ ARRAY<STRUCT<array_val ARRAY<>, INT64>>[unknown order:
 [name=orderby_collate_binary_us]
 SELECT str_val,
        RANK() OVER (ORDER BY str_val COLLATE "binary"),
-       RANK() OVER (ORDER BY str_val COLLATE "en_US")
+       RANK() OVER (ORDER BY str_val COLLATE 'en_US')
 FROM unnest(['A', 'e', 'a', 'b', 'C', 'd', 'A']) as str_val
 --
 ARRAY<STRUCT<str_val STRING, INT64, INT64>>[unknown order:
@@ -568,7 +568,7 @@ ARRAY<STRUCT<str_val STRING, INT64, INT64>>[unknown order:
 [required_features=ANALYTIC_FUNCTIONS,V_1_1_ORDER_BY_COLLATE]
 [name=orderby_collate_und_ci]
 SELECT str_val,
-       RANK() OVER (ORDER BY str_val COLLATE "und:ci"),
+       RANK() OVER (ORDER BY str_val COLLATE 'und:ci'),
        RANK() OVER (ORDER BY str_val)
 FROM unnest(['A', 'e', 'a', 'b', 'C', 'd', 'A']) as str_val
 --

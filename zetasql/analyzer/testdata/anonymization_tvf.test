@@ -19,7 +19,7 @@ from tvf_no_args();
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-84
@@ -51,7 +51,7 @@ from tvf_one_templated_arg_with_anonymization_uid(
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -81,7 +81,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#13]
@@ -134,7 +134,7 @@ from tvf_one_templated_arg_with_anonymization_uid(
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -164,7 +164,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -217,7 +217,7 @@ from tvf_one_relation_arg_with_anonymization_uid(
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#30 AS `$col1` [INT64]
+| +-$aggregate.$agg1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#30]
@@ -242,7 +242,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#30 AS `$col1` [INT64]
+| +-$aggregate.$agg1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#30]
@@ -289,7 +289,7 @@ from tvf_one_relation_arg_with_anonymization_uid(TABLE SimpleTypes)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#30 AS `$col1` [INT64]
+| +-$aggregate.$agg1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#30]
@@ -311,7 +311,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#30 AS `$col1` [INT64]
+| +-$aggregate.$agg1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#30]
@@ -356,7 +356,7 @@ from tvf_one_relation_arg_with_anonymization_uid(
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#14]
@@ -381,7 +381,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#14 AS `$col1` [INT64]
+| +-$aggregate.$agg1#14 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#14]
@@ -431,7 +431,7 @@ from tvf_one_relation_arg_with_anonymization_uid(
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -468,7 +468,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -531,7 +531,7 @@ from tvf_one_relation_arg_with_fixed_output(
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-135
@@ -575,7 +575,7 @@ from tvf_one_relation_arg_with_fixed_output(
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-125
@@ -615,7 +615,7 @@ from tvf_one_relation_arg_with_anonymization_uid(
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-171
@@ -664,7 +664,7 @@ select count(*) from tvf_one_relation_arg_with_fixed_output(
 --
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#30 AS `$col1` [INT64]
+| +-$union_all.$col1#30 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#30]
@@ -710,7 +710,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$union_all.$col1#30 AS `$col1` [INT64]
+| +-$union_all.$col1#30 AS "$col1" [INT64]
 +-query=
   +-SetOperationScan
     +-column_list=[$union_all.$col1#30]
@@ -780,7 +780,7 @@ from tvf_one_relation_arg_with_anonymization_uid(
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-151
@@ -825,7 +825,7 @@ from tvf_no_args_with_anonymization_uid();
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#12 AS `$col1` [INT64]
+| +-$aggregate.$agg1#12 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#12]
@@ -840,7 +840,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#12 AS `$col1` [INT64]
+| +-$aggregate.$agg1#12 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#12]
@@ -878,7 +878,7 @@ from NullarySelectWithUserId();
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -893,7 +893,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -934,7 +934,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.column_int32#13 AS column_int32 [INT32]
 | +-$groupby.column_string#14 AS column_string [STRING]
-| +-$aggregate.$agg1#12 AS `$col3` [INT64]
+| +-$aggregate.$agg1#12 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.column_int32#13, $groupby.column_string#14, $aggregate.$agg1#12]
@@ -954,7 +954,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.column_int32#13 AS column_int32 [INT32]
 | +-$groupby.column_string#14 AS column_string [STRING]
-| +-$aggregate.$agg1#12 AS `$col3` [INT64]
+| +-$aggregate.$agg1#12 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.column_int32#13, $groupby.column_string#14, $aggregate.$agg1#12]
@@ -995,7 +995,7 @@ from tvf_no_args_with_anonymization_uid();
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#12 AS `$col1` [INT64]
+| +-$aggregate.$agg1#12 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#12]
@@ -1012,7 +1012,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#12 AS `$col1` [INT64]
+| +-$aggregate.$agg1#12 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#12]
@@ -1050,7 +1050,7 @@ inner join SimpleTypesWithAnonymizationUid b on a.column_int64 = b.uid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#24 AS `$col1` [INT64]
+| +-$aggregate.$agg1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#24]
@@ -1061,9 +1061,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[tvf_no_args_with_anonymization_uid.column_int64#7, SimpleTypesWithAnonymizationUid.uid#22]
         |   +-left_scan=
-        |   | +-TVFScan(column_list=[tvf_no_args_with_anonymization_uid.column_int64#7], tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, column_index_list=[6], alias="a")
+        |   | +-TVFScan(column_list=[tvf_no_args_with_anonymization_uid.column_int64#7], tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, column_index_list=[6], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#22], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#22], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=tvf_no_args_with_anonymization_uid.column_int64#7)
@@ -1074,7 +1074,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#24 AS `$col1` [INT64]
+| +-$aggregate.$agg1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#24]
@@ -1088,9 +1088,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[tvf_no_args_with_anonymization_uid.column_int64#7, SimpleTypesWithAnonymizationUid.uid#22]
         |   |   +-left_scan=
-        |   |   | +-TVFScan(column_list=[tvf_no_args_with_anonymization_uid.column_int64#7], tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, column_index_list=[6], alias="a")
+        |   |   | +-TVFScan(column_list=[tvf_no_args_with_anonymization_uid.column_int64#7], tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, column_index_list=[6], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#22], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#22], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=tvf_no_args_with_anonymization_uid.column_int64#7)
@@ -1122,7 +1122,7 @@ cross join SimpleTypesWithAnonymizationUid b;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#24 AS `$col1` [INT64]
+| +-$aggregate.$agg1#24 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-128
@@ -1134,9 +1134,9 @@ QueryStmt
         | +-JoinScan
         |   +-parse_location=84-94
         |   +-left_scan=
-        |   | +-TVFScan(parse_location=45-79, tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, alias="a")
+        |   | +-TVFScan(parse_location=45-79, tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, alias='a')
         |   +-right_scan=
-        |     +-TableScan(parse_location=95-126, table=SimpleTypesWithAnonymizationUid, alias="b")
+        |     +-TableScan(parse_location=95-126, table=SimpleTypesWithAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#24 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)(parse_location=26-36)
 [REPLACED_LITERALS]
@@ -1156,7 +1156,7 @@ cross join SimpleTypes b;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#30 AS `$col1` [INT64]
+| +-$aggregate.$agg1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#30]
@@ -1166,16 +1166,16 @@ QueryStmt
         +-input_scan=
         | +-JoinScan
         |   +-left_scan=
-        |   | +-TVFScan(tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, alias="a")
+        |   | +-TVFScan(tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, alias='a')
         |   +-right_scan=
-        |     +-TableScan(table=SimpleTypes, alias="b")
+        |     +-TableScan(table=SimpleTypes, alias='b')
         +-aggregate_list=
           +-$agg1#30 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#30 AS `$col1` [INT64]
+| +-$aggregate.$agg1#30 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#30]
@@ -1189,9 +1189,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[tvf_no_args_with_anonymization_uid.column_int64#31]
         |   |   +-left_scan=
-        |   |   | +-TVFScan(column_list=[tvf_no_args_with_anonymization_uid.column_int64#31], tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, column_index_list=[6], alias="a")
+        |   |   | +-TVFScan(column_list=[tvf_no_args_with_anonymization_uid.column_int64#31], tvf=tvf_no_args_with_anonymization_uid(() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES, column_date DATE, column_double DOUBLE, column_float FLOAT, column_int32 INT32, column_int64 INT64, column_string STRING, column_time TIME, column_uint32 UINT32, column_uint64 UINT64>, column_index_list=[6], alias='a')
         |   |   +-right_scan=
-        |   |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |     +-TableScan(table=SimpleTypes, alias='b')
         |   +-group_by_list=
         |   | +-$uid#34 := ColumnRef(type=INT64, column=tvf_no_args_with_anonymization_uid.column_int64#31)
         |   +-aggregate_list=
@@ -1216,7 +1216,7 @@ cross join SimpleTypesWithAnonymizationUid b;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#15]
@@ -1226,16 +1226,16 @@ QueryStmt
         +-input_scan=
         | +-JoinScan
         |   +-left_scan=
-        |   | +-TVFScan(tvf=tvf_no_args(() -> TABLE<column_bool BOOL, column_bytes BYTES>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>, alias="a")
+        |   | +-TVFScan(tvf=tvf_no_args(() -> TABLE<column_bool BOOL, column_bytes BYTES>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>, alias='a')
         |   +-right_scan=
-        |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="b")
+        |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#15 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#15]
@@ -1249,9 +1249,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#16]
         |   |   +-left_scan=
-        |   |   | +-TVFScan(tvf=tvf_no_args(() -> TABLE<column_bool BOOL, column_bytes BYTES>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>, alias="a")
+        |   |   | +-TVFScan(tvf=tvf_no_args(() -> TABLE<column_bool BOOL, column_bytes BYTES>), signature=() -> TABLE<column_bool BOOL, column_bytes BYTES>, alias='a')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#16], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-group_by_list=
         |   | +-$uid#19 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#16)
         |   +-aggregate_list=
@@ -1277,7 +1277,7 @@ from tvf_no_args_with_nested_anonymization_uid();
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-88
@@ -1304,7 +1304,7 @@ from tvf_no_args_value_table_with_anonymization_uid();
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1319,7 +1319,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1365,7 +1365,7 @@ from tvf_no_args_value_table_with_nested_anonymization_uid();
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1380,7 +1380,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1433,9 +1433,9 @@ select with anonymization anon_sum(nested_value.nested_int64),
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
-| +-$aggregate.$agg2#3 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#4 AS `$col3` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
+| +-$aggregate.$agg2#3 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#4 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#2, $agg2#3, $agg3#4]
@@ -1485,9 +1485,9 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
-| +-$aggregate.$agg2#3 AS `$col2` [DOUBLE]
-| +-$aggregate.$agg3#4 AS `$col3` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
+| +-$aggregate.$agg2#3 AS "$col2" [DOUBLE]
+| +-$aggregate.$agg3#4 AS "$col3" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#2, $agg2#3, $agg3#4]
@@ -1581,7 +1581,7 @@ from (select count(*), int32_val1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1612,7 +1612,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1671,7 +1671,7 @@ from (select count(*), int32_val1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1707,7 +1707,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -1770,7 +1770,7 @@ from (select count(*), nested_value.nested_int64
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1806,7 +1806,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#4]
@@ -1869,7 +1869,7 @@ from (select count(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1883,7 +1883,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#2]
         |       +-input_scan=
-        |       | +-TVFScan(tvf=tvf_no_args_value_table_with_anonymization_uid(() -> TABLE<PROTO<zetasql_test__.TestExtraPB>>), signature=() -> TABLE<PROTO<zetasql_test__.TestExtraPB>>, alias="t")
+        |       | +-TVFScan(tvf=tvf_no_args_value_table_with_anonymization_uid(() -> TABLE<PROTO<zetasql_test__.TestExtraPB>>), signature=() -> TABLE<PROTO<zetasql_test__.TestExtraPB>>, alias='t')
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -1900,7 +1900,7 @@ from (select count(*)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#3]
@@ -1914,7 +1914,7 @@ QueryStmt
         |     +-AggregateScan
         |       +-column_list=[$aggregate.$agg1#2]
         |       +-input_scan=
-        |       | +-TVFScan(tvf=tvf_no_args_value_table_with_nested_anonymization_uid(() -> TABLE<PROTO<zetasql_test__.KitchenSinkPB>>), signature=() -> TABLE<PROTO<zetasql_test__.KitchenSinkPB>>, alias="t")
+        |       | +-TVFScan(tvf=tvf_no_args_value_table_with_nested_anonymization_uid(() -> TABLE<PROTO<zetasql_test__.KitchenSinkPB>>), signature=() -> TABLE<PROTO<zetasql_test__.KitchenSinkPB>>, alias='t')
         |       +-aggregate_list=
         |         +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
         +-aggregate_list=
@@ -1932,7 +1932,7 @@ from tvf_no_args_value_table_with_invalid_nested_anonymization_uid();
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#2 AS `$col1` [INT64]
+| +-$aggregate.$agg1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#2]
@@ -1944,7 +1944,7 @@ QueryStmt
         +-aggregate_list=
           +-$agg1#2 := AggregateFunctionCall(ZetaSQL:$anon_count_star(optional(0) INT64, optional(0) INT64) -> INT64)
 
-Rewrite ERROR: Unable to find anonymization user ID column `nested_value.nested_int64` in value table fields
+Rewrite ERROR: Unable to find anonymization user ID column "nested_value.nested_int64" in value table fields
 ==
 
 # Count (*) counting unique users.
@@ -1959,7 +1959,7 @@ from tvf_one_templated_arg_with_anonymization_uid(
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-158
@@ -2001,7 +2001,7 @@ from tvf_one_templated_arg_with_anonymization_uid(
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#13 AS `$col1` [INT64]
+| +-$aggregate.$agg1#13 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-158

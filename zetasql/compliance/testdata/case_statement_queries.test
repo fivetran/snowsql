@@ -175,7 +175,7 @@ SELECT COALESCE(NULL, CAST(-0.43 AS DOUBLE))
 ARRAY<STRUCT<DOUBLE>>[{-0.43}]
 ==
 [name=coalesce_null_enum]
-SELECT COALESCE(NULL, CAST(0 AS `zetasql_test__.TestEnum`))
+SELECT COALESCE(NULL, CAST(0 AS "zetasql_test__.TestEnum"))
 --
 ARRAY<STRUCT<ENUM<zetasql_test__.TestEnum>>>[{TESTENUM0}]
 ==
@@ -205,7 +205,7 @@ SELECT COALESCE(NULL, STRUCT("a" AS s, -33 AS i))
 ARRAY<STRUCT<STRUCT<s STRING, i INT64>>>[{{"a", -33}}]
 ==
 [name=coalesce_null_proto]
-SELECT COALESCE(NULL, (SELECT AS `zetasql_test__.TestExtraPB` 5 int32_val1, 6 int32_val2))
+SELECT COALESCE(NULL, (SELECT AS "zetasql_test__.TestExtraPB" 5 int32_val1, 6 int32_val2))
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.TestExtraPB>>>[
   {{

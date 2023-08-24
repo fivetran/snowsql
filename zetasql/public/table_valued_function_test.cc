@@ -506,7 +506,7 @@ TEST(TVFTest, TestGetSQLDeclarationForTableWithReservedColumnNames) {
 
   std::string sql_declaration =
       tvf_relation.GetSQLDeclaration(ProductMode::PRODUCT_EXTERNAL);
-  EXPECT_EQ(sql_declaration, "TABLE<`window` INT64, `from` FLOAT64>");
+  EXPECT_EQ(sql_declaration, "TABLE<\"window\" INT64, \"from\" FLOAT64>");
 }
 
 TEST(TVFTest, TestGetSQLDeclarationForTableWithEmptyColumnName) {

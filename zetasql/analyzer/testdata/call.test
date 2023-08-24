@@ -33,7 +33,7 @@ CallStmt
   +-Literal(type=DOUBLE, value=1)
 ==
 
-call proc_on_TestEnum("TESTENUM0")
+call proc_on_TestEnum('TESTENUM0')
 --
 CallStmt
 +-procedure=proc_on_TestEnum
@@ -42,7 +42,7 @@ CallStmt
   +-Literal(type=ENUM<zetasql_test__.TestEnum>, value=TESTENUM0)
 ==
 
-call proc_on_Date("2016-01-01")
+call proc_on_Date('2016-01-01')
 --
 CallStmt
 +-procedure=proc_on_date
@@ -88,7 +88,7 @@ CallStmt
 +-procedure=proc_on_bool
 +-signature=(BOOL) -> BOOL
 +-argument_list=
-  +-Parameter(type=BOOL, name="test_param_bool")
+  +-Parameter(type=BOOL, name='test_param_bool')
 ==
 
 # Calling procedure with one optional argument.
@@ -149,10 +149,10 @@ CallStmt
   +-Literal(type=DOUBLE, value=1)
 ==
 
-call proc_on_any_any(1, "a")
+call proc_on_any_any(1, 'a')
 --
-ERROR: Could not cast literal "a" to type INT64 [at 1:25]
-call proc_on_any_any(1, "a")
+ERROR: Could not cast literal 'a' to type INT64 [at 1:25]
+call proc_on_any_any(1, 'a')
                         ^
 ==
 
@@ -240,10 +240,10 @@ call unknown_catalog.uknown_procedure()
 ==
 
 # Calling procedure with incorrect number of arguments.
-call proc_on_string("one", "two")
+call proc_on_string('one', 'two')
 --
 ERROR: No matching signature for procedure proc_on_string for argument types: STRING, STRING. Supported signature: proc_on_string(STRING) [at 1:6]
-call proc_on_string("one", "two")
+call proc_on_string('one', 'two')
      ^
 ==
 

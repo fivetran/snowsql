@@ -83,13 +83,13 @@ ERROR: WITH is not supported on subqueries in this language version [at 5:4]
 # The second WITH name is chosen to match the implementation detail.
 # Note that we get the suffix _2_2 on the renamed inner clause.
 WITH TTtt as (select 1 a),
-     `tTTt_2` as (select 2 a)
+     "tTTt_2" as (select 2 a)
 select *
 from
-  (WITH TtTt as (select 3 c) select * from ttTT, `tttT_2`)
+  (WITH TtTt as (select 3 c) select * from ttTT, "tttT_2")
 --
 ERROR: WITH is not supported on subqueries in this language version [at 5:4]
-  (WITH TtTt as (select 3 c) select * from ttTT, `tttT_2`)
+  (WITH TtTt as (select 3 c) select * from ttTT, "tttT_2")
    ^
 ==
 

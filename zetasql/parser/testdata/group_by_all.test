@@ -23,8 +23,8 @@ GROUP BY ALL
 ==
 
 SELECT *
-FROM table AS {{T|`ALL`}}
-GROUP BY {{ALL|`ALL`}}
+FROM table AS {{T|"ALL"}}
+GROUP BY {{ALL|"ALL"}}
 --
 ALTERNATION GROUP: T,ALL
 --
@@ -49,11 +49,11 @@ FROM
   table AS T
 GROUP BY ALL
 --
-ALTERNATION GROUP: T,`ALL`
+ALTERNATION GROUP: T,"ALL"
 --
-QueryStatement [0-39] [SELECT * FROM...GROUP BY `ALL`]
-  Query [0-39] [SELECT * FROM...GROUP BY `ALL`]
-    Select [0-39] [SELECT * FROM...GROUP BY `ALL`]
+QueryStatement [0-39] [SELECT * FROM...GROUP BY "ALL"]
+  Query [0-39] [SELECT * FROM...GROUP BY "ALL"]
+    Select [0-39] [SELECT * FROM...GROUP BY "ALL"]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
@@ -63,18 +63,18 @@ QueryStatement [0-39] [SELECT * FROM...GROUP BY `ALL`]
             Identifier(table) [14-19] [table]
           Alias [20-24] [AS T]
             Identifier(T) [23-24] [T]
-      GroupBy [25-39] [GROUP BY `ALL`]
-        GroupingItem [34-39] [`ALL`]
-          PathExpression [34-39] [`ALL`]
-            Identifier(`ALL`) [34-39] [`ALL`]
+      GroupBy [25-39] [GROUP BY "ALL"]
+        GroupingItem [34-39] ["ALL"]
+          PathExpression [34-39] ["ALL"]
+            Identifier("ALL") [34-39] ["ALL"]
 --
 SELECT
   *
 FROM
   table AS T
-GROUP BY `ALL`
+GROUP BY "ALL"
 --
-ALTERNATION GROUP: `ALL`,ALL
+ALTERNATION GROUP: "ALL",ALL
 --
 QueryStatement [0-41] [SELECT * FROM...GROUP BY ALL]
   Query [0-41] [SELECT * FROM...GROUP BY ALL]
@@ -82,45 +82,45 @@ QueryStatement [0-41] [SELECT * FROM...GROUP BY ALL]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-28] [FROM table AS `ALL`]
-        TablePathExpression [14-28] [table AS `ALL`]
+      FromClause [9-28] [FROM table AS "ALL"]
+        TablePathExpression [14-28] [table AS "ALL"]
           PathExpression [14-19] [table]
             Identifier(table) [14-19] [table]
-          Alias [20-28] [AS `ALL`]
-            Identifier(`ALL`) [23-28] [`ALL`]
+          Alias [20-28] [AS "ALL"]
+            Identifier("ALL") [23-28] ["ALL"]
       GroupBy [29-41] [GROUP BY ALL]
         GroupByAll [38-41] [ALL]
 --
 SELECT
   *
 FROM
-  table AS `ALL`
+  table AS "ALL"
 GROUP BY ALL
 --
-ALTERNATION GROUP: `ALL`,`ALL`
+ALTERNATION GROUP: "ALL","ALL"
 --
-QueryStatement [0-43] [SELECT * FROM...GROUP BY `ALL`]
-  Query [0-43] [SELECT * FROM...GROUP BY `ALL`]
-    Select [0-43] [SELECT * FROM...GROUP BY `ALL`]
+QueryStatement [0-43] [SELECT * FROM...GROUP BY "ALL"]
+  Query [0-43] [SELECT * FROM...GROUP BY "ALL"]
+    Select [0-43] [SELECT * FROM...GROUP BY "ALL"]
       SelectList [7-8] [*]
         SelectColumn [7-8] [*]
           Star(*) [7-8] [*]
-      FromClause [9-28] [FROM table AS `ALL`]
-        TablePathExpression [14-28] [table AS `ALL`]
+      FromClause [9-28] [FROM table AS "ALL"]
+        TablePathExpression [14-28] [table AS "ALL"]
           PathExpression [14-19] [table]
             Identifier(table) [14-19] [table]
-          Alias [20-28] [AS `ALL`]
-            Identifier(`ALL`) [23-28] [`ALL`]
-      GroupBy [29-43] [GROUP BY `ALL`]
-        GroupingItem [38-43] [`ALL`]
-          PathExpression [38-43] [`ALL`]
-            Identifier(`ALL`) [38-43] [`ALL`]
+          Alias [20-28] [AS "ALL"]
+            Identifier("ALL") [23-28] ["ALL"]
+      GroupBy [29-43] [GROUP BY "ALL"]
+        GroupingItem [38-43] ["ALL"]
+          PathExpression [38-43] ["ALL"]
+            Identifier("ALL") [38-43] ["ALL"]
 --
 SELECT
   *
 FROM
-  table AS `ALL`
-GROUP BY `ALL`
+  table AS "ALL"
+GROUP BY "ALL"
 ==
 
 SELECT *

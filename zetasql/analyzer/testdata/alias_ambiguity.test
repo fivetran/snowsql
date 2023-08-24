@@ -755,7 +755,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.kv#4]
         +-input_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
         +-group_by_list=
           +-kv#4 :=
             +-MakeStruct
@@ -797,7 +797,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.vt#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
         +-group_by_list=
           +-vt#2 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 --
@@ -821,7 +821,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.vt#2]
         +-input_scan=
-        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias="vt")
+        | +-TableScan(column_list=[TestStructValueTable.value#1], table=TestStructValueTable, column_index_list=[0], alias='vt')
         +-group_by_list=
           +-vt#2 := ColumnRef(type=STRUCT<a INT32, b STRING>, column=TestStructValueTable.value#1)
 --
@@ -926,7 +926,7 @@ QueryStmt
       +-AggregateScan
         +-column_list=[$groupby.kv#3]
         +-input_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
         +-group_by_list=
           +-kv#3 :=
             +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -1043,7 +1043,7 @@ QueryStmt
     |       |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |       |       +-ColumnRef(type=STRING, column=KeyValue.Value#2)
     |       +-input_scan=
-    |         +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv")
+    |         +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv')
     +-order_by_item_list=
       +-OrderByItem
         +-column_ref=
@@ -1113,7 +1113,7 @@ QueryStmt
     |   |     +-ColumnRef(type=INT64, column=KeyValue.Key#1)
     |   |     +-Literal(type=INT64, value=1)
     |   +-input_scan=
-    |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+    |     +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
     +-order_by_item_list=
       +-OrderByItem
         +-column_ref=
@@ -1266,7 +1266,7 @@ QueryStmt
     | +-ArrayScan
     |   +-column_list=[TestTable.key#1, TestTable.TestEnum#2, TestTable.KitchenSink#3, $array.v#4]
     |   +-input_scan=
-    |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias="t")
+    |   | +-TableScan(column_list=TestTable.[key#1, TestEnum#2, KitchenSink#3], table=TestTable, column_index_list=[0, 1, 2], alias='t')
     |   +-array_expr=
     |   | +-GetProtoField
     |   |   +-type=ARRAY<INT32>
@@ -1317,7 +1317,7 @@ QueryStmt
     | +-ArrayScan
     |   +-column_list=[TestTable.KitchenSink#3, $array.v#4]
     |   +-input_scan=
-    |   | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+    |   | +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
     |   +-array_expr=
     |   | +-GetProtoField
     |   |   +-type=ARRAY<INT32>
@@ -1338,7 +1338,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a1#2 AS a1 [INT64]
 | +-$groupby.a1#2 AS a2 [INT64]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.a1#2, $groupby.a1#2, $query.$col3#3]
@@ -1368,7 +1368,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a1#2 AS a1 [INT64]
 | +-$groupby.a1#2 AS a2 [INT64]
-| +-$query.$col3#3 AS `$col3` [BOOL]
+| +-$query.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$groupby.a1#2, $groupby.a1#2, $query.$col3#3]
@@ -1397,7 +1397,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a2#2 AS a1 [INT64]
 | +-$groupby.a2#2 AS a2 [INT64]
-| +-$groupby.$col3#3 AS `$col3` [BOOL]
+| +-$groupby.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$groupby.[a2#2, a2#2, $col3#3]
@@ -1425,7 +1425,7 @@ QueryStmt
 +-output_column_list=
 | +-$groupby.a1#2 AS a1 [INT64]
 | +-$groupby.a1#2 AS a2 [INT64]
-| +-$groupby.$col3#3 AS `$col3` [BOOL]
+| +-$groupby.$col3#3 AS "$col3" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$groupby.[a1#2, a1#2, $col3#3]

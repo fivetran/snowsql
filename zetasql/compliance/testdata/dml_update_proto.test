@@ -9,7 +9,7 @@ CREATE TABLE BasicProtoTable AS
 SELECT cast(1 as int64) as primary_key,
        cast('''int64_key_1: 11
                int64_key_2: 12'''
-            as `zetasql_test__.KitchenSinkPB`) as proto_value
+            as "zetasql_test__.KitchenSinkPB") as proto_value
 UNION ALL
 SELECT 2,
   '''
@@ -46,7 +46,7 @@ ARRAY<STRUCT<
 [prepare_database]
 CREATE Table NullProtoTable AS
 SELECT cast(1 as int64) as primary_key,
-       cast(NULL as `zetasql_test__.KitchenSinkPB`) as proto_value
+       cast(NULL as "zetasql_test__.KitchenSinkPB") as proto_value
 --
 ARRAY<STRUCT<
         primary_key INT64,
@@ -59,7 +59,7 @@ CREATE TABLE NestedProtoTable AS
 SELECT cast(1 as int64) as primary_key,
        cast('''int64_key_1: 11
                int64_key_2: 12'''
-            as `zetasql_test__.KitchenSinkPB`) as proto_value
+            as "zetasql_test__.KitchenSinkPB") as proto_value
 UNION ALL
 SELECT 2,
   '''
@@ -118,7 +118,7 @@ CREATE TABLE NullableProtoTable AS
 SELECT cast(1 as int64) as primary_key,
        cast('''int64_key_1: 11
                int64_key_2: 12'''
-            as `zetasql_test__.KitchenSinkPB`) as proto_value
+            as "zetasql_test__.KitchenSinkPB") as proto_value
 UNION ALL
 SELECT 2,
   '''
@@ -165,7 +165,7 @@ CREATE TABLE KeyValueProtoTable AS
 SELECT cast(1 as int64) as primary_key,
        cast('''int64_key_1: 11
                int64_key_2: 12'''
-            as `zetasql_test__.KitchenSinkPB`) as proto_value
+            as "zetasql_test__.KitchenSinkPB") as proto_value
 UNION ALL
 SELECT 2,
   '''
@@ -218,7 +218,7 @@ CREATE Table ExtensionProtoTable AS
 SELECT cast(1 as int64) as primary_key,
        cast('''int64_key_1: 11
                int64_key_2: 12'''
-            as `zetasql_test__.KitchenSinkPB`) as proto_value
+            as "zetasql_test__.KitchenSinkPB") as proto_value
 UNION ALL
 SELECT 2,
   '''
@@ -369,15 +369,15 @@ SELECT cast(1 as int64) as primary_key,
          cast('''int64_key_1: 111
                  int64_key_2: 112
                  int64_val: 113'''
-              as `zetasql_test__.KitchenSinkPB`),
+              as "zetasql_test__.KitchenSinkPB"),
          cast('''int64_key_1: 121
                  int64_key_2: 122
                  int64_val: 123'''
-              as `zetasql_test__.KitchenSinkPB`),
+              as "zetasql_test__.KitchenSinkPB"),
          cast('''int64_key_1: 131
                  int64_key_2: 132
                  int64_val: 133'''
-              as `zetasql_test__.KitchenSinkPB`)
+              as "zetasql_test__.KitchenSinkPB")
        ] as array_value
 UNION ALL
 SELECT 2,
@@ -385,15 +385,15 @@ SELECT 2,
          cast('''int64_key_1: 211
                  int64_key_2: 212
                  int64_val: 213'''
-              as `zetasql_test__.KitchenSinkPB`),
+              as "zetasql_test__.KitchenSinkPB"),
          cast('''int64_key_1: 221
                  int64_key_2: 222
                  int64_val: 223'''
-              as `zetasql_test__.KitchenSinkPB`),
+              as "zetasql_test__.KitchenSinkPB"),
          cast('''int64_key_1: 321
                  int64_key_2: 322
                  int64_val: 323'''
-              as `zetasql_test__.KitchenSinkPB`)
+              as "zetasql_test__.KitchenSinkPB")
        ]
 UNION ALL
 SELECT 3, NULL
@@ -460,7 +460,7 @@ SELECT cast(1 as int64) primary_key,
                  nested_repeated_value {
                    nested_int64: 203
                  }'''
-              as `zetasql_test__.KitchenSinkPB`),
+              as "zetasql_test__.KitchenSinkPB"),
          NULL
        ] as array_value
 --
@@ -546,7 +546,7 @@ STRUCT<
 [name=assign_null_proto_column_subfield]
 UPDATE NullProtoTable SET proto_value.int64_key_1 = 10 WHERE True
 --
-ERROR: generic::out_of_range: Cannot set field of NULL `zetasql_test__.KitchenSinkPB`
+ERROR: generic::out_of_range: Cannot set field of NULL "zetasql_test__.KitchenSinkPB"
 ==
 
 [name=assign_required_proto_field]
@@ -1119,7 +1119,7 @@ UPDATE NestedProtoTable
 SET proto_value.nested_value.nested_repeated_int64[OFFSET(0)] = 1000
 WHERE primary_key = 1
 --
-ERROR: generic::out_of_range: Cannot set field of NULL `zetasql_test__.KitchenSinkPB.Nested`
+ERROR: generic::out_of_range: Cannot set field of NULL "zetasql_test__.KitchenSinkPB.Nested"
 ==
 
 # Repeated fields cannot represent NULL elements.
@@ -1551,7 +1551,7 @@ SET proto_value.nested_repeated_value[OFFSET(0)]
                .nested_repeated_int64 = [20000]
 WHERE primary_key = 2
 --
-ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<`zetasql_test__.KitchenSinkPB.Nested`>
+ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<"zetasql_test__.KitchenSinkPB.Nested">
 ==
 
 # TODO: Ideally the spec would allow this. See the comments for
@@ -1564,7 +1564,7 @@ SET proto_value.nested_repeated_value[OFFSET(0)]
     proto_value.nested_repeated_value[OFFSET(0)].nested_int64 = 20000
 WHERE primary_key = 2
 --
-ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<`zetasql_test__.KitchenSinkPB.Nested`>
+ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<"zetasql_test__.KitchenSinkPB.Nested">
 ==
 
 [name=update_element_in_repeated_field_of_proto_type_with_set_null_index]
@@ -1573,7 +1573,7 @@ UPDATE NestedProtoTable
 SET proto_value.nested_repeated_value[OFFSET(NULL)].nested_int64 = 10000
 WHERE primary_key = 2
 --
-ERROR: generic::out_of_range: Cannot SET a NULL offset of an ARRAY<`zetasql_test__.KitchenSinkPB.Nested`>
+ERROR: generic::out_of_range: Cannot SET a NULL offset of an ARRAY<"zetasql_test__.KitchenSinkPB.Nested">
 ==
 
 [name=update_element_in_repeated_field_of_proto_type_with_set_negative_index]
@@ -1582,7 +1582,7 @@ UPDATE NestedProtoTable
 SET proto_value.nested_repeated_value[OFFSET(-1)].nested_int64 = 1000
 WHERE primary_key = 2
 --
-ERROR: generic::out_of_range: Cannot SET array offset -1 of an ARRAY<`zetasql_test__.KitchenSinkPB.Nested`> of size 3
+ERROR: generic::out_of_range: Cannot SET array offset -1 of an ARRAY<"zetasql_test__.KitchenSinkPB.Nested"> of size 3
 ==
 
 [name=update_element_in_repeated_field_of_proto_type_with_set_index_too_large]
@@ -1591,7 +1591,7 @@ UPDATE NestedProtoTable
 SET proto_value.nested_repeated_value[OFFSET(1000)].nested_int64 = 1000
 WHERE primary_key = 2
 --
-ERROR: generic::out_of_range: Cannot SET array offset 1000 of an ARRAY<`zetasql_test__.KitchenSinkPB.Nested`> of size 3
+ERROR: generic::out_of_range: Cannot SET array offset 1000 of an ARRAY<"zetasql_test__.KitchenSinkPB.Nested"> of size 3
 ==
 
 [name=update_element_in_repeated_of_proto_type_with_set_index_barely_too_large]
@@ -1600,7 +1600,7 @@ UPDATE NestedProtoTable
 SET proto_value.nested_repeated_value[OFFSET(3)].nested_int64 = 1000
 WHERE primary_key = 2
 --
-ERROR: generic::out_of_range: Cannot SET array offset 3 of an ARRAY<`zetasql_test__.KitchenSinkPB.Nested`> of size 3
+ERROR: generic::out_of_range: Cannot SET array offset 3 of an ARRAY<"zetasql_test__.KitchenSinkPB.Nested"> of size 3
 ==
 
 [name=update_repeated_proto_field_complex_long_path_with_set]
@@ -1927,7 +1927,7 @@ SET array_value[OFFSET(0)].int64_key_1 = 1000,
     array_value[OFFSET(0)].int64_key_1 = 2000
 WHERE primary_key != 3
 --
-ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<`zetasql_test__.KitchenSinkPB`>
+ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<"zetasql_test__.KitchenSinkPB">
 ==
 
 # TODO: Ideally the spec would allow this. See the comments for
@@ -1939,7 +1939,7 @@ SET array_value[OFFSET(0)].int64_key_1 = 1000,
     array_value[OFFSET(0)].int64_key_2 = 2000
 WHERE primary_key != 3
 --
-ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<`zetasql_test__.KitchenSinkPB`>
+ERROR: generic::out_of_range: Cannot perform multiple updates to offset 0 of an ARRAY<"zetasql_test__.KitchenSinkPB">
 ==
 
 [name=update_null_element_in_array_of_protos_with_set]
@@ -1948,7 +1948,7 @@ UPDATE ArrayOfProtosTable
 SET array_value[OFFSET(0)].int64_key_1 = 1000
 WHERE True
 --
-ERROR: generic::out_of_range: Cannot use [] to modify a NULL array of type ARRAY<`zetasql_test__.KitchenSinkPB`>
+ERROR: generic::out_of_range: Cannot use [] to modify a NULL array of type ARRAY<"zetasql_test__.KitchenSinkPB">
 ==
 
 [name=update_element_in_array_of_protos_with_set_null_index]
@@ -1957,7 +1957,7 @@ UPDATE ArrayOfProtosTable
 SET array_value[OFFSET(NULL)].int64_key_1 = 1000
 WHERE primary_key != 3
 --
-ERROR: generic::out_of_range: Cannot SET a NULL offset of an ARRAY<`zetasql_test__.KitchenSinkPB`>
+ERROR: generic::out_of_range: Cannot SET a NULL offset of an ARRAY<"zetasql_test__.KitchenSinkPB">
 ==
 
 [name=update_element_in_array_of_protos_with_set_negative_index]
@@ -1966,7 +1966,7 @@ UPDATE ArrayOfProtosTable
 SET array_value[OFFSET(-1)].int64_key_1 = 1000
 WHERE primary_key != 3
 --
-ERROR: generic::out_of_range: Cannot SET array offset -1 of an ARRAY<`zetasql_test__.KitchenSinkPB`> of size 3
+ERROR: generic::out_of_range: Cannot SET array offset -1 of an ARRAY<"zetasql_test__.KitchenSinkPB"> of size 3
 ==
 
 [name=update_element_in_array_of_protos_with_set_index_too_large]
@@ -1975,7 +1975,7 @@ UPDATE ArrayOfProtosTable
 SET array_value[OFFSET(1000)].int64_key_1 = 1000
 WHERE primary_key != 3
 --
-ERROR: generic::out_of_range: Cannot SET array offset 1000 of an ARRAY<`zetasql_test__.KitchenSinkPB`> of size 3
+ERROR: generic::out_of_range: Cannot SET array offset 1000 of an ARRAY<"zetasql_test__.KitchenSinkPB"> of size 3
 ==
 
 [name=update_element_in_array_of_protos_with_set_index_barely_too_large]
@@ -1984,7 +1984,7 @@ UPDATE ArrayOfProtosTable
 SET array_value[OFFSET(3)].int64_key_1 = 1000
 WHERE primary_key != 3
 --
-ERROR: generic::out_of_range: Cannot SET array offset 3 of an ARRAY<`zetasql_test__.KitchenSinkPB`> of size 3
+ERROR: generic::out_of_range: Cannot SET array offset 3 of an ARRAY<"zetasql_test__.KitchenSinkPB"> of size 3
 ==
 
 # A brief, somewhat tortuous test involving an array of protos wrapping a
@@ -2214,7 +2214,7 @@ UPDATE NestedProtoTable
 SET proto_value.nested_value.nested_int64 = 1000
 WHERE True
 --
-ERROR: generic::out_of_range: Cannot set field of NULL `zetasql_test__.KitchenSinkPB.Nested`
+ERROR: generic::out_of_range: Cannot set field of NULL "zetasql_test__.KitchenSinkPB.Nested"
 ==
 
 [name=assign_proto_subfield]
@@ -2460,9 +2460,9 @@ STRUCT<
 
 [name=assign_repeated_proto_message_field]
 UPDATE NestedProtoTable SET proto_value.nested_repeated_value =
-  [CAST("nested_int64: 50" AS `zetasql_test__.KitchenSinkPB.Nested`),
-   CAST("nested_int64: 51" AS `zetasql_test__.KitchenSinkPB.Nested`),
-   CAST("nested_int64: 52" AS `zetasql_test__.KitchenSinkPB.Nested`)]
+  [CAST("nested_int64: 50" AS "zetasql_test__.KitchenSinkPB.Nested"),
+   CAST("nested_int64: 51" AS "zetasql_test__.KitchenSinkPB.Nested"),
+   CAST("nested_int64: 52" AS "zetasql_test__.KitchenSinkPB.Nested")]
 WHERE True
 --
 STRUCT<
@@ -2751,9 +2751,9 @@ STRUCT<
 # Wire format annotations have no effect on statement semantics.
 [name=assign_repeated_proto_wrapper_message]
 UPDATE NullableProtoTable SET proto_value.nullable_int_array =
-  [CAST("value: 100" AS `zetasql_test__.NullableInt`),
-   CAST("value: 101" AS `zetasql_test__.NullableInt`),
-   CAST("value: 102" AS `zetasql_test__.NullableInt`)]
+  [CAST("value: 100" AS "zetasql_test__.NullableInt"),
+   CAST("value: 101" AS "zetasql_test__.NullableInt"),
+   CAST("value: 102" AS "zetasql_test__.NullableInt")]
 WHERE True
 --
 STRUCT<
@@ -3019,9 +3019,9 @@ STRUCT<
 # Wire format annotations have no effect on statement semantics.
 [name=assign_repeated_proto_struct_message]
 UPDATE KeyValueProtoTable SET proto_value.key_value_array =
-  [CAST('key: "foo1" value:1000' AS `zetasql_test__.KeyValueStruct`),
-   CAST('key: "foo2" value:2000' AS `zetasql_test__.KeyValueStruct`),
-   CAST('key: "foo3" value:3000' AS `zetasql_test__.KeyValueStruct`)]
+  [CAST('key: "foo1" value:1000' AS "zetasql_test__.KeyValueStruct"),
+   CAST('key: "foo2" value:2000' AS "zetasql_test__.KeyValueStruct"),
+   CAST('key: "foo3" value:3000' AS "zetasql_test__.KeyValueStruct")]
 WHERE True
 --
 STRUCT<

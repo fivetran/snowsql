@@ -913,7 +913,7 @@ select collate('abc', CAST(NULL AS STRING));
 ==
 
 [name=collate_function_with_second_argument_being_parameter]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select collate('abc', @test_param_string);
 --
 ERROR: generic::invalid_argument: The second argument of COLLATE() must be a string literal [at 1:8]
@@ -922,7 +922,7 @@ select collate('abc', @test_param_string);
 ==
 
 [name=inner_join_with_column_collation]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select a.primary_Key, a.col_ci, b.primary_Key, b.col_no_collation
 from StringTable as a join StringTableToJoin as b
 on a.col_ci = b.col_no_collation
@@ -947,7 +947,7 @@ ARRAY<STRUCT<
 ==
 
 [name=inner_join_using_with_column_collation]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select a.primary_Key,
 cast(col_ci AS BYTES) in (b"hello", b"Hello", b"hel۝lo", b"h܏ello") as group_hello,
 cast(col_ci AS BYTES) in (b"case sensitive", b"Case sensitive") as group_case_sensitive,
@@ -980,7 +980,7 @@ ARRAY<STRUCT<
 ==
 
 [name=cross_join_with_column_collation]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select a.primary_Key, a.col_binary, b.primary_Key, b.col_no_collation
 from StringTable as a, StringTableToJoin as b
 where a.col_binary = b.col_no_collation
@@ -999,7 +999,7 @@ ARRAY<STRUCT<
 ==
 
 [name=full_join_with_column_collation]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select a.primary_Key, a.col_ci, b.primary_Key, b.col_no_collation
 from StringTable as a full join StringTableToJoin as b
 on a.col_ci = b.col_no_collation
@@ -1035,7 +1035,7 @@ ARRAY<STRUCT<
 ==
 
 [name=left_join_with_column_collation]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select a.primary_Key, a.col_ci, b.primary_Key, b.col_no_collation
 from StringTable as a left join StringTableToJoin as b
 on a.col_ci = b.col_no_collation
@@ -1070,7 +1070,7 @@ ARRAY<STRUCT<
 ==
 
 [name=right_join_with_column_collation]
-[parameters="und:ci" as test_param_string]
+[parameters='und:ci' as test_param_string]
 select b.primary_Key, b.col_no_collation, a.primary_Key, a.col_ci
 from StringTable as a right join StringTableToJoin as b
 on a.col_ci = b.col_no_collation
@@ -1139,7 +1139,7 @@ select 'hel\u06DDlo'
 select
   collate('a', 'binary') in (select collate(col, 'und:ci') from TestTable)
 --
-ERROR: generic::invalid_argument: Collation conflict: "binary" vs. "und:ci". Collation for IN operator is different on input expr ("binary") and subquery column ("und:ci") [at 6:30]
+ERROR: generic::invalid_argument: Collation conflict: "binary" vs. 'und:ci'. Collation for IN operator is different on input expr ("binary") and subquery column ('und:ci') [at 6:30]
   collate('a', 'binary') in (select collate(col, 'und:ci') from TestTable)
                              ^
 ==
@@ -1168,7 +1168,7 @@ ARRAY<STRUCT<BOOL, BOOL, BOOL, BOOL>>[{false, true, false, true}]
 select
   collate('a', 'und:ci') in unnest([collate('A', 'binary'), collate('b', 'binary')])
 --
-ERROR: generic::invalid_argument: Collation conflict: "binary" vs. "und:ci". Collation on argument 2 ("binary") in function IN UNNEST is not compatible with other arguments [at 2:26]
+ERROR: generic::invalid_argument: Collation conflict: "binary" vs. 'und:ci'. Collation on argument 2 ("binary") in function IN UNNEST is not compatible with other arguments [at 2:26]
   collate('a', 'und:ci') in unnest([collate('A', 'binary'), collate('b', 'bin...
                          ^
 ==
@@ -1199,7 +1199,7 @@ select lower(col_ci), col_binary from (
 --
 ARRAY<STRUCT<STRING, col_binary STRING>>[unknown order:
   {"ab", "DEf"},
-  {"abc", "def"},
+  {"abc", 'def'},
   {"ab", "DEF"},
   {"abc", "DEF"},
   {"abc", "xyz"}
@@ -1235,7 +1235,7 @@ select lower(col_ci), col_binary from (
 )
 --
 ARRAY<STRUCT<STRING, col_binary STRING>>[unknown order:
-  {"abc", "def"},
+  {"abc", 'def'},
   {"ab", "DEf"},
   {"abcd", "xyz"}
 ]
@@ -1274,13 +1274,13 @@ ARRAY<STRUCT<STRING, col_binary STRING>>[{"abcd", "XyZ"}]
 
 # TODO: Add more ARRAY built-in functions
 [name=array_first_collation_ci_string]
-SELECT 'HellO' = ARRAY_FIRST([collate("hello", "und:ci"), collate("zetasql", "und:ci")])
+SELECT 'HellO' = ARRAY_FIRST([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')])
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 
 [name=array_last_collation_ci_string]
-SELECT 'ZetaSQL' = ARRAY_LAST([collate("hello", "und:ci"), collate("zetasql", "und:ci")])
+SELECT 'ZetaSQL' = ARRAY_LAST([collate("hello", 'und:ci'), collate("zetasql", 'und:ci')])
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
@@ -1288,7 +1288,7 @@ ARRAY<STRUCT<BOOL>>[{true}]
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT]
 [forbidden_features=DISABLE_ARRAY_MIN_AND_MAX]
 [name=array_min_collation_ci_string_1]
-SELECT ARRAY_MIN([collate("c", "und:ci"), collate("a", "und:ci"), collate("A", "und:ci")])
+SELECT ARRAY_MIN([collate("c", 'und:ci'), collate("a", 'und:ci'), collate("A", 'und:ci')])
 --
 ARRAY<STRUCT<STRING>>[{"a"}]
 ==
@@ -1296,7 +1296,7 @@ ARRAY<STRUCT<STRING>>[{"a"}]
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT]
 [forbidden_features=DISABLE_ARRAY_MIN_AND_MAX]
 [name=array_min_collation_ci_string_2]
-SELECT ARRAY_MIN([collate("c", "und:ci"), collate("A", "und:ci"), collate("a", "und:ci")])
+SELECT ARRAY_MIN([collate("c", 'und:ci'), collate("A", 'und:ci'), collate("a", 'und:ci')])
 --
 ARRAY<STRUCT<STRING>>[{"A"}]
 ==
@@ -1304,7 +1304,7 @@ ARRAY<STRUCT<STRING>>[{"A"}]
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT]
 [forbidden_features=DISABLE_ARRAY_MIN_AND_MAX]
 [name=array_max_collation_ci_string_1]
-SELECT ARRAY_MAX([collate("C", "und:ci"), collate("c", "und:ci"), collate("a", "und:ci")])
+SELECT ARRAY_MAX([collate("C", 'und:ci'), collate("c", 'und:ci'), collate("a", 'und:ci')])
 --
 ARRAY<STRUCT<STRING>>[{"C"}]
 ==
@@ -1312,91 +1312,91 @@ ARRAY<STRUCT<STRING>>[{"C"}]
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT]
 [forbidden_features=DISABLE_ARRAY_MIN_AND_MAX]
 [name=array_max_collation_ci_string_2]
-SELECT ARRAY_MAX([collate("c", "und:ci"), collate("C", "und:ci"), collate("a", "und:ci")])
+SELECT ARRAY_MAX([collate("c", 'und:ci'), collate("C", 'und:ci'), collate("a", 'und:ci')])
 --
 ARRAY<STRUCT<STRING>>[{"c"}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offset_collation_ci_string_1]
-SELECT ARRAY_OFFSET([collate("a", "und:ci"), collate("c", "und:ci"), collate("C", "und:ci")], "C")
+SELECT ARRAY_OFFSET([collate("a", 'und:ci'), collate("c", 'und:ci'), collate("C", 'und:ci')], "C")
 --
 ARRAY<STRUCT<INT64>>[{1}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offset_collation_ci_string_2]
-SELECT ARRAY_OFFSET(["a", "c", "C"], collate("C", "und:ci"))
+SELECT ARRAY_OFFSET(["a", "c", "C"], collate("C", 'und:ci'))
 --
 ARRAY<STRUCT<INT64>>[{1}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offset_collation_ci_string_3]
-SELECT ARRAY_OFFSET(["a", "c", "C"], collate("C", "und:ci"), "LAST")
+SELECT ARRAY_OFFSET(["a", "c", "C"], collate("C", 'und:ci'), "LAST")
 --
 ARRAY<STRUCT<INT64>>[{2}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_find_collation_ci_string_1]
-SELECT ARRAY_FIND([collate("a", "und:ci"), collate("c", "und:ci"), collate("C", "und:ci")], "C")
+SELECT ARRAY_FIND([collate("a", 'und:ci'), collate("c", 'und:ci'), collate("C", 'und:ci')], "C")
 --
 ARRAY<STRUCT<STRING>>[{"c"}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_find_collation_ci_string_2]
-SELECT ARRAY_FIND(["a", "c", "C"], collate("C", "und:ci"))
+SELECT ARRAY_FIND(["a", "c", "C"], collate("C", 'und:ci'))
 --
 ARRAY<STRUCT<STRING>>[{"c"}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_find_collation_ci_string_3]
-SELECT ARRAY_FIND(["a", "c", "C"], collate("C", "und:ci"), "LAST")
+SELECT ARRAY_FIND(["a", "c", "C"], collate("C", 'und:ci'), "LAST")
 --
 ARRAY<STRUCT<STRING>>[{"C"}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offsets_collation_ci_string_1]
-SELECT ARRAY_OFFSETS([collate("a", "und:ci"), collate("c", "und:ci"), collate("C", "und:ci")], "C")
+SELECT ARRAY_OFFSETS([collate("a", 'und:ci'), collate("c", 'und:ci'), collate("C", 'und:ci')], "C")
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<INT64>[known order:1, 2]}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offsets_collation_ci_string_2]
-SELECT ARRAY_OFFSETS(["c", "a", "C"], collate("C", "und:ci"))
+SELECT ARRAY_OFFSETS(["c", "a", "C"], collate("C", 'und:ci'))
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<INT64>[known order:0, 2]}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offsets_collation_ci_string_null_1]
-SELECT ARRAY_OFFSETS(["c", NULL, "C"], collate("C", "und:ci"))
+SELECT ARRAY_OFFSETS(["c", NULL, "C"], collate("C", 'und:ci'))
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<INT64>[known order:0, 2]}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_offsets_collation_ci_string_null_2]
-SELECT ARRAY_OFFSETS([collate("a", "und:ci"), NULL, collate("C", "und:ci")], "C")
+SELECT ARRAY_OFFSETS([collate("a", 'und:ci'), NULL, collate("C", 'und:ci')], "C")
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<INT64>[2]}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_find_all_collation_ci_string_1]
-SELECT ARRAY_FIND_ALL([collate("a", "und:ci"), collate("c", "und:ci"), collate("C", "und:ci")], "C")
+SELECT ARRAY_FIND_ALL([collate("a", 'und:ci'), collate("c", 'und:ci'), collate("C", 'und:ci')], "C")
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"c", "C"]}]
 ==
 
 [required_features=V_1_3_ANNOTATION_FRAMEWORK,V_1_3_COLLATION_SUPPORT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [name=array_find_all_collation_ci_string_2]
-SELECT ARRAY_FIND_ALL(["c", "a", "C"], collate("C", "und:ci"))
+SELECT ARRAY_FIND_ALL(["c", "a", "C"], collate("C", 'und:ci'))
 --
 ARRAY<STRUCT<ARRAY<>>>[{ARRAY<STRING>[known order:"c", "C"]}]
 ==

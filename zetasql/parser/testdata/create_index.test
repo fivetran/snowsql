@@ -1161,7 +1161,7 @@ create index SimpleTypesStoringZeroValues on SimpleTypes(int32) STORING ();
                                                                          ^
 ==
 
-CREATE SEARCH INDEX i1 ON t1 (`ALL COLUMNS`) OPTIONS();
+CREATE SEARCH INDEX i1 ON t1 ("ALL COLUMNS") OPTIONS();
 --
 
 CreateIndexStatement(SEARCH) [0-54] [CREATE SEARCH...OPTIONS()]
@@ -1169,13 +1169,13 @@ CreateIndexStatement(SEARCH) [0-54] [CREATE SEARCH...OPTIONS()]
     Identifier(i1) [20-22] [i1]
   PathExpression [26-28] [t1]
     Identifier(t1) [26-28] [t1]
-  IndexItemList [29-44] [(`ALL COLUMNS`)]
-    OrderingExpression(ASC) [30-43] [`ALL COLUMNS`]
-      PathExpression [30-43] [`ALL COLUMNS`]
-        Identifier(`ALL COLUMNS`) [30-43] [`ALL COLUMNS`]
+  IndexItemList [29-44] [("ALL COLUMNS")]
+    OrderingExpression(ASC) [30-43] ["ALL COLUMNS"]
+      PathExpression [30-43] ["ALL COLUMNS"]
+        Identifier("ALL COLUMNS") [30-43] ["ALL COLUMNS"]
   OptionsList [52-54] [()]
 --
-CREATE SEARCH INDEX i1 ON t1(`ALL COLUMNS`)
+CREATE SEARCH INDEX i1 ON t1("ALL COLUMNS")
 OPTIONS()
 ==
 

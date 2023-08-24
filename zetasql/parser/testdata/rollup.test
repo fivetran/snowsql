@@ -32,13 +32,13 @@ GROUP BY ROLLUP(x)
 
 ==
 
-SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, "foo", "bar")
+SELECT x, y, GROUPING(x) = 1, IF(GROUPING(y) = 0, 'foo', 'bar')
 FROM T GROUP BY ROLLUP(x, y);
 --
 QueryStatement [0-92] [SELECT x,...ROLLUP(x, y)]
   Query [0-92] [SELECT x,...ROLLUP(x, y)]
     Select [0-92] [SELECT x,...ROLLUP(x, y)]
-      SelectList [7-63] [x, y, GROUPING...foo", "bar")]
+      SelectList [7-63] [x, y, GROUPING...foo', 'bar')]
         SelectColumn [7-8] [x]
           PathExpression [7-8] [x]
             Identifier(x) [7-8] [x]
@@ -49,23 +49,23 @@ QueryStatement [0-92] [SELECT x,...ROLLUP(x, y)]
           BinaryExpression(=) [13-28] [GROUPING(x) = 1]
             FunctionCall [13-24] [GROUPING(x)]
               PathExpression [13-21] [GROUPING]
-                Identifier(`GROUPING`) [13-21] [GROUPING]
+                Identifier("GROUPING") [13-21] [GROUPING]
               PathExpression [22-23] [x]
                 Identifier(x) [22-23] [x]
             IntLiteral(1) [27-28] [1]
-        SelectColumn [30-63] [IF(GROUPING...foo", "bar")]
-          FunctionCall [30-63] [IF(GROUPING...foo", "bar")]
+        SelectColumn [30-63] [IF(GROUPING...foo', 'bar')]
+          FunctionCall [30-63] [IF(GROUPING...foo', 'bar')]
             PathExpression [30-32] [IF]
-              Identifier(`IF`) [30-32] [IF]
+              Identifier("IF") [30-32] [IF]
             BinaryExpression(=) [33-48] [GROUPING(y) = 0]
               FunctionCall [33-44] [GROUPING(y)]
                 PathExpression [33-41] [GROUPING]
-                  Identifier(`GROUPING`) [33-41] [GROUPING]
+                  Identifier("GROUPING") [33-41] [GROUPING]
                 PathExpression [42-43] [y]
                   Identifier(y) [42-43] [y]
               IntLiteral(0) [47-48] [0]
-            StringLiteral("foo") [50-55] ["foo"]
-            StringLiteral("bar") [57-62] ["bar"]
+            StringLiteral('foo') [50-55] ['foo']
+            StringLiteral('bar') [57-62] ['bar']
       FromClause [64-70] [FROM T]
         TablePathExpression [69-70] [T]
           PathExpression [69-70] [T]
@@ -81,8 +81,8 @@ QueryStatement [0-92] [SELECT x,...ROLLUP(x, y)]
 SELECT
   x,
   y,
-  `GROUPING`(x) = 1,
-  `IF`(`GROUPING`(y) = 0, "foo", "bar")
+  "GROUPING"(x) = 1,
+  "IF"("GROUPING"(y) = 0, 'foo', 'bar')
 FROM
   T
 GROUP BY ROLLUP(x, y)
@@ -150,7 +150,7 @@ QueryStatement [0-102] [select x,...ROLLUP(y, x )]
         SelectColumn [16-29] [GROUPING ( x)]
           FunctionCall [16-29] [GROUPING ( x)]
             PathExpression [16-24] [GROUPING]
-              Identifier(`GROUPING`) [16-24] [GROUPING]
+              Identifier("GROUPING") [16-24] [GROUPING]
             PathExpression [27-28] [x]
               Identifier(x) [27-28] [x]
       FromClause [30-36] [FROM T]
@@ -191,7 +191,7 @@ SELECT
   x,
   y,
   z,
-  `GROUPING`(x)
+  "GROUPING"(x)
 FROM
   T
 GROUP BY 1, 2, ROLLUP(x + 2, y = 'foo', z), z, x, ROLLUP(y, x)
@@ -235,11 +235,11 @@ QueryStatement [0-57] [select x,...GROUP BY x]
         SelectColumn [10-20] [GROUPING()]
           FunctionCall [10-20] [GROUPING()]
             PathExpression [10-18] [GROUPING]
-              Identifier(`GROUPING`) [10-18] [GROUPING]
+              Identifier("GROUPING") [10-18] [GROUPING]
         SelectColumn [22-39] [GROUPING(x, y, z)]
           FunctionCall [22-39] [GROUPING(x, y, z)]
             PathExpression [22-30] [GROUPING]
-              Identifier(`GROUPING`) [22-30] [GROUPING]
+              Identifier("GROUPING") [22-30] [GROUPING]
             PathExpression [31-32] [x]
               Identifier(x) [31-32] [x]
             PathExpression [34-35] [y]
@@ -258,8 +258,8 @@ QueryStatement [0-57] [select x,...GROUP BY x]
 --
 SELECT
   x,
-  `GROUPING`(),
-  `GROUPING`(x, y, z)
+  "GROUPING"(),
+  "GROUPING"(x, y, z)
 FROM
   T
 GROUP BY x
@@ -294,26 +294,26 @@ select x FROM T GROUP BY x, y WITH ROLLUP;
                               ^
 ==
 
-select `rollup` FROM T GROUP BY `rollup`;
+select "rollup" FROM T GROUP BY "rollup";
 --
-QueryStatement [0-40] [select `rollup...BY `rollup`]
-  Query [0-40] [select `rollup...BY `rollup`]
-    Select [0-40] [select `rollup...BY `rollup`]
-      SelectList [7-15] [`rollup`]
-        SelectColumn [7-15] [`rollup`]
-          PathExpression [7-15] [`rollup`]
-            Identifier(`rollup`) [7-15] [`rollup`]
+QueryStatement [0-40] [select "rollup...BY "rollup"]
+  Query [0-40] [select "rollup...BY "rollup"]
+    Select [0-40] [select "rollup...BY "rollup"]
+      SelectList [7-15] ["rollup"]
+        SelectColumn [7-15] ["rollup"]
+          PathExpression [7-15] ["rollup"]
+            Identifier("rollup") [7-15] ["rollup"]
       FromClause [16-22] [FROM T]
         TablePathExpression [21-22] [T]
           PathExpression [21-22] [T]
             Identifier(T) [21-22] [T]
-      GroupBy [23-40] [GROUP BY `rollup`]
-        GroupingItem [32-40] [`rollup`]
-          PathExpression [32-40] [`rollup`]
-            Identifier(`rollup`) [32-40] [`rollup`]
+      GroupBy [23-40] [GROUP BY "rollup"]
+        GroupingItem [32-40] ["rollup"]
+          PathExpression [32-40] ["rollup"]
+            Identifier("rollup") [32-40] ["rollup"]
 --
 SELECT
-  `rollup`
+  "rollup"
 FROM
   T
-GROUP BY `rollup`
+GROUP BY "rollup"

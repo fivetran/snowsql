@@ -178,7 +178,7 @@ UpdateStmt
 UPDATE TestTable SET
   (DELETE
    KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension) elt
-   WHERE elt.value = "foo")
+   WHERE elt.value = 'foo')
 WHERE true
 --
 UpdateStmt
@@ -207,8 +207,8 @@ UpdateStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkExtension>, column=$array.elt#4)
             | +-field_descriptor=value
-            | +-default_value=""
-            +-Literal(type=STRING, value="foo")
+            | +-default_value=''
+            +-Literal(type=STRING, value='foo')
 ==
 
 # Nested DELETE inside an array element.
@@ -344,7 +344,7 @@ WHERE target.KitchenSink.bool_val
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="target")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='target')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-GetProtoField
@@ -607,7 +607,7 @@ UpdateStmt
 UPDATE TestTable SET
   (UPDATE
    KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension)
-   SET value = "foo"
+   SET value = 'foo'
    WHERE true)
 WHERE true
 --
@@ -648,11 +648,11 @@ UpdateStmt
             |   +-expr=
             |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkExtension>, column=$array.$element#4)
             |   +-field_descriptor=value
-            |   +-default_value=""
+            |   +-default_value=''
             +-set_value=
               +-DMLValue
                 +-value=
-                  +-Literal(type=STRING, value="foo")
+                  +-Literal(type=STRING, value='foo')
 ==
 
 # Nested UPDATE on a subfield of an extension field.
@@ -661,7 +661,7 @@ UPDATE TestTable SET
   (UPDATE KitchenSink
           .(zetasql_test__.KitchenSinkExtension.optional_extension)
           .repeated_value
-   SET repeated_value = "foo"
+   SET repeated_value = 'foo'
    WHERE true)
 WHERE true
 --
@@ -698,7 +698,7 @@ UpdateStmt
             +-set_value=
               +-DMLValue
                 +-value=
-                  +-Literal(type=STRING, value="foo")
+                  +-Literal(type=STRING, value='foo')
 ==
 
 # Nested UPDATE on an extension field with an alias.
@@ -706,7 +706,7 @@ UpdateStmt
 UPDATE TestTable SET
   (UPDATE
    KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension) elt
-   SET elt = ""
+   SET elt = ''
    WHERE true)
 WHERE true
 --
@@ -958,7 +958,7 @@ WHERE target.KitchenSink.bool_val
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="target")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='target')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-GetProtoField
@@ -1273,7 +1273,7 @@ ERROR: Syntax error: INSERT target cannot have an alias [at 2:42]
 [language_features={{|V_1_2_PROTO_EXTENSIONS_WITH_SET}}]
 UPDATE TestTable SET
   (INSERT KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_extension)
-   VALUES (""))
+   VALUES (''))
 WHERE true
 --
 ALTERNATION GROUP: <empty>
@@ -1317,7 +1317,7 @@ UPDATE TestTable SET
   (INSERT KitchenSink
           .(zetasql_test__.KitchenSinkExtension.optional_extension)
           .repeated_value
-   VALUES ("foo"))
+   VALUES ('foo'))
 WHERE true
 --
 UpdateStmt
@@ -1349,7 +1349,7 @@ UpdateStmt
             +-value_list=
               +-DMLValue
                 +-value=
-                  +-Literal(type=STRING, value="foo")
+                  +-Literal(type=STRING, value='foo')
 ==
 
 # Nested INSERT inside an array element.
@@ -1731,11 +1731,11 @@ ERROR: Inserted row has wrong column count; Has 2, expected 1 [at 2:49]
 ==
 
 UPDATE TestTable SET
-  (INSERT KitchenSink.repeated_int64_val VALUES ("one"))
+  (INSERT KitchenSink.repeated_int64_val VALUES ('one'))
 WHERE true
 --
-ERROR: Could not cast literal "one" to type INT64 [at 2:50]
-  (INSERT KitchenSink.repeated_int64_val VALUES ("one"))
+ERROR: Could not cast literal 'one' to type INT64 [at 2:50]
+  (INSERT KitchenSink.repeated_int64_val VALUES ('one'))
                                                  ^
 ==
 
@@ -1986,7 +1986,7 @@ ERROR: Update item KitchenSink.(zetasql_test__.KitchenSinkExtension.repeated_ext
 ==
 
 UPDATE TestTable SET
-  KitchenSink = "int64_key_1: 1 int64_key_2: 2",
+  KitchenSink = 'int64_key_1: 1 int64_key_2: 2',
   (DELETE KitchenSink.repeated_int64_val WHERE true)
 WHERE true
 --
@@ -2062,7 +2062,7 @@ WHERE true
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2155,7 +2155,7 @@ WHERE true
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="T")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='T')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2227,7 +2227,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias="t")
+| +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2], alias='t')
 +-column_access_list=READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2295,7 +2295,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Key#1, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[0, 2], alias="t")
+| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Key#1, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[0, 2], alias='t')
 +-column_access_list=READ,READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2348,7 +2348,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias="t")
+| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias='t')
 +-column_access_list=READ,READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)
@@ -2405,7 +2405,7 @@ ALTERNATION GROUPS:
 --
 UpdateStmt
 +-table_scan=
-| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias="t")
+| +-TableScan(column_list=AllPseudoColumnsWithRepeated.[Value#2, RepeatedValue#3], table=AllPseudoColumnsWithRepeated, column_index_list=[1, 2], alias='t')
 +-column_access_list=READ,READ_WRITE
 +-where_expr=
 | +-Literal(type=BOOL, value=true)

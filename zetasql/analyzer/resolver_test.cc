@@ -549,7 +549,7 @@ TEST_F(ResolverTest, TestResolveTypeName) {
   EXPECT_THAT(type, NotNull());
   EXPECT_TRUE(type->IsRange()) << type->DebugString();
 
-  ZETASQL_EXPECT_OK(resolver_->ResolveTypeName("`zetasql_test__.KitchenSinkPB`",
+  ZETASQL_EXPECT_OK(resolver_->ResolveTypeName("\"zetasql_test__.KitchenSinkPB\"",
                                        &type));
   EXPECT_THAT(type, NotNull());
   EXPECT_TRUE(type->IsProto()) << type->DebugString();
@@ -564,7 +564,7 @@ TEST_F(ResolverTest, TestResolveTypeName) {
       StatusIs(_,
                HasSubstr("Type not found: zetasql_test__.KitchenSinkPBXXX")));
 
-  ZETASQL_EXPECT_OK(resolver_->ResolveTypeName("`zetasql_test__.TestEnum`",
+  ZETASQL_EXPECT_OK(resolver_->ResolveTypeName("\"zetasql_test__.TestEnum\"",
                                        &type));
   EXPECT_THAT(type, NotNull());
   EXPECT_TRUE(type->IsEnum()) << type->DebugString();
@@ -575,8 +575,8 @@ TEST_F(ResolverTest, TestResolveTypeName) {
   EXPECT_TRUE(type->IsEnum()) << type->DebugString();
 
   EXPECT_THAT(
-      resolver_->ResolveTypeName("`zetasql_TEST__.TeSTeNum`", &type),
-      StatusIs(_, HasSubstr("Type not found: `zetasql_TEST__.TeSTeNum`")));
+      resolver_->ResolveTypeName("\"zetasql_TEST__.TeSTeNum\"", &type),
+      StatusIs(_, HasSubstr("Type not found: \"zetasql_TEST__.TeSTeNum\"")));
   EXPECT_EQ(type, nullptr);
 }
 
@@ -715,7 +715,7 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
   TestCastExpression("CAST(1.0 as STRING)", types::StringType());
 
   TestCastExpression(
-      "CAST(CAST('TESTENUM1' as `zetasql_test__.TestEnum`) as STRING)",
+      "CAST(CAST('TESTENUM1' as \"zetasql_test__.TestEnum\") as STRING)",
       types::StringType());
 
   // Enum value names are case-sensitive, 'TESTENUM1' is good, 'TestEnum1' is
@@ -723,16 +723,16 @@ TEST_F(ResolverTest, TestResolveCastExpression) {
   // constant folding fail compilation. See `cast_function.test` in compliance
   // tests.
   TestCastExpression(
-      "CAST(CAST('TestEnum1' as `zetasql_test__.TestEnum`) as STRING)",
+      "CAST(CAST('TestEnum1' as \"zetasql_test__.TestEnum\") as STRING)",
       types::StringType());
 
-  TestCastExpression("CAST(CAST(1 as `zetasql_test__.TestEnum`) as INT32)",
+  TestCastExpression("CAST(CAST(1 as \"zetasql_test__.TestEnum\") as INT32)",
                      types::Int32Type());
-  TestCastExpression("CAST(CAST(1 as `zetasql_test__.TestEnum`) as INT64)",
+  TestCastExpression("CAST(CAST(1 as \"zetasql_test__.TestEnum\") as INT64)",
                      types::Int64Type());
-  TestCastExpression("CAST(CAST(1 as `zetasql_test__.TestEnum`) as UINT32)",
+  TestCastExpression("CAST(CAST(1 as \"zetasql_test__.TestEnum\") as UINT32)",
                      types::Uint32Type());
-  TestCastExpression("CAST(CAST(1 as `zetasql_test__.TestEnum`) as UINT64)",
+  TestCastExpression("CAST(CAST(1 as \"zetasql_test__.TestEnum\") as UINT64)",
                      types::Uint64Type());
   
   // Snowflake VARIANT type
@@ -921,7 +921,7 @@ TEST_F(ResolverTest, ResolvingSafeScalarFunctionsSucceed) {
   ParseAndResolveFunction("SAFE.CONCAT('a', 'b', 'c', 'd')",
                           "ZetaSQL:concat");
   ParseAndResolveFunction(
-      "safe.timestamp_add(TIMESTAMP \"2017-09-15 23:59:59.999999 UTC\", "
+      "safe.timestamp_add(TIMESTAMP '2017-09-15 23:59:59.999999 UTC', "
       "INTERVAL 10 DAY)",
       "ZetaSQL:timestamp_add");
   ParseAndResolveFunction("SAFE.GENERATE_ARRAY(11, 33, 2)",
@@ -1976,65 +1976,65 @@ TEST_F(ResolverTest, TestIntervalLiteral) {
 TEST_F(ResolverTest, TestRangeLiteral) {
   // Test ranges of supported types
   TestRangeLiteral("[2022-01-01, 2022-02-02)",
-                   R"sql(RANGE<DATE> "[2022-01-01, 2022-02-02)")sql");
+                   R"sql(RANGE<DATE> '[2022-01-01, 2022-02-02)')sql");
   TestRangeLiteral(
       "[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)",
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, 2022-09-13 16:37:11.000000001)')sql");
   TestRangeLiteral(
       "[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)",
-      R"sql(RANGE<TIMESTAMP> "[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)")sql");
+      R"sql(RANGE<TIMESTAMP> '[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)')sql");
 
   // Test ranges with UNBOUNDED
   TestRangeLiteral("[NULL, 2022-02-02)",
-                   R"sql(RANGE<DATE> "[UNBOUNDED, 2022-02-02)")sql");
+                   R"sql(RANGE<DATE> '[UNBOUNDED, 2022-02-02)')sql");
   TestRangeLiteral(
       "[2022-09-13 16:36:11.000000001, NULL)",
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, unbounded)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, unbounded)')sql");
   TestRangeLiteral("[NULL, NULL)",
-                   R"sql(RANGE<TIMESTAMP> "[Unbounded, Unbounded)")sql");
+                   R"sql(RANGE<TIMESTAMP> '[Unbounded, Unbounded)')sql");
 
   // Test ranges with NULL. NULL could be used instead of UNBOUNDED
   TestRangeLiteral("[NULL, 2022-02-02)",
-                   R"sql(RANGE<DATE> "[NULL, 2022-02-02)")sql");
+                   R"sql(RANGE<DATE> '[NULL, 2022-02-02)')sql");
   TestRangeLiteral(
       "[2022-09-13 16:36:11.000000001, NULL)",
-      R"sql(RANGE<DATETIME> "[2022-09-13 16:36:11.000000001, null)")sql");
-  TestRangeLiteral("[NULL, NULL)", R"sql(RANGE<TIMESTAMP> "[Null, Null)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-13 16:36:11.000000001, null)')sql");
+  TestRangeLiteral("[NULL, NULL)", R"sql(RANGE<TIMESTAMP> '[Null, Null)')sql");
 
   // Test invalid ranges
   // Supplied start and end values have type different than specified
   TestRangeLiteralError(
-      R"sql(RANGE<DATE> "[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)")sql");
+      R"sql(RANGE<DATE> '[0001-01-01 00:00:00+00, 9999-12-31 23:59:59.999999999+00)')sql");
   // Supplied start and end values have different types
   TestRangeLiteralError(
-      R"sql(RANGE<DATE> "[2022-01-01, 2022-09-13 16:37:11.000000001)")sql");
+      R"sql(RANGE<DATE> '[2022-01-01, 2022-09-13 16:37:11.000000001)')sql");
   // Unsupported type
-  TestRangeLiteralError(R"sql(RANGE<INT64> "[1, 100)")sql");
+  TestRangeLiteralError(R"sql(RANGE<INT64> '[1, 100)')sql");
   // Literal with more than two parts
   TestRangeLiteralError(
-      R"sql(RANGE<DATE> "[2022-01-01, 2022-02-02, 2022-03-02)")sql");
+      R"sql(RANGE<DATE> '[2022-01-01, 2022-02-02, 2022-03-02)')sql");
   // Literal with less than two parts
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[)")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[2022-01-01)")sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[)')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[2022-01-01)')sql");
   // Literal with incorrect values
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[01/01/2022, 02/02/2022)")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[,)")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[2022-01-01, )")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[, 2022-01-01)")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[0000-01-01, 0000-01-02)")sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[01/01/2022, 02/02/2022)')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[,)')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[2022-01-01, )')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[, 2022-01-01)')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[0000-01-01, 0000-01-02)')sql");
   // Literal with invalid brackets
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[2022-01-01, 2022-02-02]")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "(2022-01-01, 2022-02-02]")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "(2022-01-01, 2022-02-02)")sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[2022-01-01, 2022-02-02]')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '(2022-01-01, 2022-02-02]')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '(2022-01-01, 2022-02-02)')sql");
   // Start <= end
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[2022-01-02, 2022-01-01)")sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[2022-01-02, 2022-01-01)')sql");
   TestRangeLiteralError(
-      R"sql(RANGE<DATETIME> "[2022-09-19 00:01:00.0, 2022-09-19 00:00:00.0)")sql");
+      R"sql(RANGE<DATETIME> '[2022-09-19 00:01:00.0, 2022-09-19 00:00:00.0)')sql");
   TestRangeLiteralError(
-      R"sql(RANGE<TIMESTAMP> "[0001-01-01 00:00:00+00, 0001-01-01 00:00:00+00)")sql");
+      R"sql(RANGE<TIMESTAMP> '[0001-01-01 00:00:00+00, 0001-01-01 00:00:00+00)')sql");
   // Range literal must have exactly one space after , and no other spaces
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[2022-01-01,2022-02-02)")sql");
-  TestRangeLiteralError(R"sql(RANGE<DATE> "[ 2022-01-01 , 2022-02-02 )")sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[2022-01-01,2022-02-02)')sql");
+  TestRangeLiteralError(R"sql(RANGE<DATE> '[ 2022-01-01 , 2022-02-02 )')sql");
 }
 
 TEST_F(ResolverTest, TestSpecialFunctionName) {

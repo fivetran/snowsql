@@ -141,7 +141,7 @@ CREATE TABLE StringComparisons AS (
 ));
 --
 ARRAY<STRUCT<rowid INT64, a STRING, b STRING>>[
-  {0, "abc", "abc"},
+  {0, "abc", 'abc'},
   {1, "abc", "abcd"},
   {2, NULL, ""},
   {3, NULL, NULL}
@@ -173,12 +173,12 @@ SELECT NULL IS NOT NULL
 ARRAY<STRUCT<BOOL>>[{false}]
 ==
 [name=comparison_functions_6]
-SELECT "a" IN ("a")
+SELECT 'a' IN ("a")
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 [name=comparison_functions_7]
-SELECT "a" IN ("b")
+SELECT 'a' IN ("b")
 --
 ARRAY<STRUCT<BOOL>>[{false}]
 ==
@@ -198,22 +198,22 @@ SELECT NULL IN ("a", "b", "c", NULL)
 ARRAY<STRUCT<BOOL>>[{NULL}]
 ==
 [name=comparison_functions_11]
-SELECT "a" IN (NULL, "a", NULL)
+SELECT 'a' IN (NULL, "a", NULL)
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 [name=comparison_functions_12]
-SELECT "a" IN (NULL, "b", NULL)
+SELECT 'a' IN (NULL, "b", NULL)
 --
 ARRAY<STRUCT<BOOL>>[{NULL}]
 ==
 [name=comparison_function_in_array_1]
-SELECT "a" IN UNNEST(["a"])
+SELECT 'a' IN UNNEST(['a'])
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 [name=comparison_function_in_array_2]
-SELECT "a" IN UNNEST(["b"])
+SELECT 'a' IN UNNEST(['b'])
 --
 ARRAY<STRUCT<BOOL>>[{false}]
 ==
@@ -267,12 +267,12 @@ SELECT @string_param IN UNNEST(cast(NULL as array<string>))
 ARRAY<STRUCT<BOOL>>[{false}]
 ==
 [name=comparison_function_in_array_6]
-SELECT "a" IN UNNEST([NULL, "a", NULL])
+SELECT 'a' IN UNNEST([NULL, "a", NULL])
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 [name=comparison_function_in_array_7]
-SELECT "a" IN UNNEST([NULL, "b", NULL])
+SELECT 'a' IN UNNEST([NULL, "b", NULL])
 --
 ARRAY<STRUCT<BOOL>>[{NULL}]
 ==
@@ -337,17 +337,17 @@ SELECT 1 IN (SELECT NULL UNION ALL SELECT NULL)
 ARRAY<STRUCT<BOOL>>[{NULL}]
 ==
 [name=comparison_functions_20]
-SELECT "a" IN (SELECT NULL UNION ALL SELECT "a" UNION ALL SELECT NULL)
+SELECT 'a' IN (SELECT NULL UNION ALL SELECT 'a' UNION ALL SELECT NULL)
 --
 ARRAY<STRUCT<BOOL>>[{true}]
 ==
 [name=comparison_functions_21]
-SELECT "a" IN (SELECT NULL UNION ALL SELECT "b" UNION ALL SELECT NULL)
+SELECT 'a' IN (SELECT NULL UNION ALL SELECT "b" UNION ALL SELECT NULL)
 --
 ARRAY<STRUCT<BOOL>>[{NULL}]
 ==
 [name=comparison_functions_22]
-SELECT "a" IN (SELECT "b" UNION ALL SELECT "c" UNION ALL SELECT "d")
+SELECT 'a' IN (SELECT "b" UNION ALL SELECT "c" UNION ALL SELECT "d")
 --
 ARRAY<STRUCT<BOOL>>[{false}]
 ==

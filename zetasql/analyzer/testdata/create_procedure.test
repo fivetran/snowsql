@@ -3,7 +3,7 @@ CREATE PROCEDURE procedure_name()
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[], signature=() -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[], signature=() -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # valid mininum statement with all optional clause
@@ -12,7 +12,7 @@ OPTIONS()
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, create_scope=CREATE_TEMP, create_mode=CREATE_IF_NOT_EXISTS, argument_name_list=[], signature=() -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, create_scope=CREATE_TEMP, create_mode=CREATE_IF_NOT_EXISTS, argument_name_list=[], signature=() -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # valid statement with options and RETURN
@@ -29,8 +29,8 @@ CreateProcedureStmt
 +-signature=() -> <void>
 +-option_list=
 | +-a := Literal(type=INT64, value=1)
-| +-b := Literal(type=STRING, value="2")
-+-procedure_body="BEGIN\n  SELECT 1;\n  RETURN;\nEND"
+| +-b := Literal(type=STRING, value='2')
++-procedure_body='BEGIN\n  SELECT 1;\n  RETURN;\nEND'
 ==
 
 # valid statement with multiple arguments
@@ -43,7 +43,7 @@ CREATE PROCEDURE procedure_name(
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a, param_b, param_c, param_e], signature=(STRING param_a, INT32 param_b, DOUBLE param_c, ANY TYPE param_e) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a, param_b, param_c, param_e], signature=(STRING param_a, INT32 param_b, DOUBLE param_c, ANY TYPE param_e) -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # valid statement with table-valued arguments
@@ -56,7 +56,7 @@ CREATE PROCEDURE procedure_name(
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_d, param_f], signature=(TABLE<col_a INT32, col_b INT32> param_d, ANY TABLE param_f) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_d, param_f], signature=(TABLE<col_a INT32, col_b INT32> param_d, ANY TABLE param_f) -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # valid statement with procedure body
@@ -82,18 +82,18 @@ CreateProcedureStmt
 +-argument_name_list=[param_a]
 +-signature=(STRING {procedure_argument_mode: OUT} param_a) -> <void>
 +-option_list=
-| +-a := Literal(type=STRING, value="option a")
+| +-a := Literal(type=STRING, value='option a')
 | +-b := Literal(type=INT64, value=100)
-| +-c := Parameter(type=STRING, name="test_param_string")
+| +-c := Parameter(type=STRING, name='test_param_string')
 +-procedure_body='BEGIN\n  SET param_a = "test";\nEND'
 ==
 
 # valid parameter with empty mode and backtick-quoted parameter name
-CREATE PROCEDURE procedure_name (`OUT` int32)
+CREATE PROCEDURE procedure_name ("OUT" int32)
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[`OUT`], signature=(INT32 OUT) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=["OUT"], signature=(INT32 OUT) -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # valid parameter with mode and "OUT" as parameter name
@@ -101,7 +101,7 @@ CREATE PROCEDURE procedure_name (OUT OUT int32)
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[`OUT`], signature=(INT32 {procedure_argument_mode: OUT} OUT) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=["OUT"], signature=(INT32 {procedure_argument_mode: OUT} OUT) -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # valid parameter with IN/OUT/INOUT and empty mode
@@ -111,19 +111,19 @@ END;
 --
 ALTERNATION GROUP: IN
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 {procedure_argument_mode: IN} param_a) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 {procedure_argument_mode: IN} param_a) -> <void>, procedure_body='BEGIN\nEND')
 --
 ALTERNATION GROUP: OUT
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 {procedure_argument_mode: OUT} param_a) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 {procedure_argument_mode: OUT} param_a) -> <void>, procedure_body='BEGIN\nEND')
 --
 ALTERNATION GROUP: INOUT
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 {procedure_argument_mode: INOUT} param_a) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 {procedure_argument_mode: INOUT} param_a) -> <void>, procedure_body='BEGIN\nEND')
 --
 ALTERNATION GROUP: <empty>
 --
-CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 param_a) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path=procedure_name, argument_name_list=[param_a], signature=(INT32 param_a) -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # Procedure name being OUT
@@ -131,7 +131,7 @@ CREATE PROCEDURE OUT(param_1 INT32)
 BEGIN
 END;
 --
-CreateProcedureStmt(name_path=`OUT`, argument_name_list=[param_1], signature=(INT32 param_1) -> <void>, procedure_body="BEGIN\nEND")
+CreateProcedureStmt(name_path="OUT", argument_name_list=[param_1], signature=(INT32 param_1) -> <void>, procedure_body='BEGIN\nEND')
 ==
 
 # invalid statement with unknown type

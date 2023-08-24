@@ -1540,7 +1540,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
 
 TEST_F(ZetaSqlLocalServiceImplTest, EvaluateWithDescriptorPoolList) {
   EvaluateRequest evaluate_request;
-  evaluate_request.set_sql(R"(DATE "2020-10-20")");
+  evaluate_request.set_sql(R"(DATE '2020-10-20')");
 
   // Note, it is always recommended to include at least the
   // builtin descriptor pool, but it shouldn't be necessary for this particular
@@ -1565,7 +1565,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
        PrepareAndEvaluateWithDescriptorPoolList) {
   // PREPARE
   PrepareRequest prepare_request;
-  prepare_request.set_sql(R"(DATE "2020-10-20")");
+  prepare_request.set_sql(R"(DATE '2020-10-20')");
 
   // Note, it is always recommended to include at least the
   // builtin descriptor pool, but it shouldn't be necessary for this particular
@@ -2575,7 +2575,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
        PrepareQueryNoCatalogWithDescriptorPoolListProto) {
   // Prepare Query
   PrepareQueryRequest prepare_request;
-  prepare_request.set_sql(R"(SELECT "apple" AS fruit)");
+  prepare_request.set_sql(R"(SELECT 'apple' AS fruit)");
   prepare_request.mutable_descriptor_pool_list();
 
   PrepareQueryResponse prepare_response;
@@ -2619,7 +2619,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Prepare Query
   PrepareQueryRequest prepare_request;
   prepare_request.set_registered_catalog_id(catalog_id);
-  prepare_request.set_sql(R"(SELECT "apple" AS fruit)");
+  prepare_request.set_sql(R"(SELECT 'apple' AS fruit)");
 
   AddRegisteredDescriptorPool(prepare_request.mutable_descriptor_pool_list(),
                               empty_descriptor_pool_id);
@@ -2649,7 +2649,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
        PrepareQueryFullCatalogNoTableDataWithDescriptorPoolListProto) {
   // Prepare Query
   PrepareQueryRequest prepare_request;
-  prepare_request.set_sql(R"(SELECT "apple" AS fruit)");
+  prepare_request.set_sql(R"(SELECT 'apple' AS fruit)");
   prepare_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(prepare_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -2679,7 +2679,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
        PrepareQueryFullCatalogTableDataWithDescriptorPoolListProto) {
   // Prepare Query
   PrepareQueryRequest prepare_request;
-  prepare_request.set_sql(R"(SELECT "apple" AS fruit)");
+  prepare_request.set_sql(R"(SELECT 'apple' AS fruit)");
   prepare_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(prepare_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -2711,7 +2711,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   PrepareQueryRequest request;
   PrepareQueryResponse response;
 
-  request.set_sql(R"(SELECT "apple" AS fruit)");
+  request.set_sql(R"(SELECT 'apple' AS fruit)");
 
   // Fails on deserializing 3rd pool
   AddBuiltin(request.mutable_descriptor_pool_list());
@@ -2930,7 +2930,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, UnprepareModifyUnknownId) {
 TEST_F(ZetaSqlLocalServiceImplTest, EvaluateQueryWithSql) {
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
-  evaluate_request.set_sql(R"(SELECT "apple" AS fruit)");
+  evaluate_request.set_sql(R"(SELECT 'apple' AS fruit)");
 
   EvaluateQueryResponse evaluate_response;
   ZETASQL_EXPECT_OK(EvaluateQuery(evaluate_request, &evaluate_response));
@@ -2986,7 +2986,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
        EvaluateQueryWithDescriptorPoolListProto) {
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
-  evaluate_request.set_sql(R"(SELECT "apple" AS fruit)");
+  evaluate_request.set_sql(R"(SELECT 'apple' AS fruit)");
 
   // fake empty pool to ensure '0' isn't magic
   AddEmptyFileDescriptorSet(evaluate_request.mutable_descriptor_pool_list());
@@ -3065,7 +3065,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, EvaluateQueryErrors) {
   // No prepared state saved on failure.
   EXPECT_EQ(0, NumSavedPreparedQueries());
 
-  request.set_sql(R"(SELECT "apple" AS fruit)");
+  request.set_sql(R"(SELECT 'apple' AS fruit)");
 
   // Fails on deserializing 3rd pool
   AddBuiltin(request.mutable_descriptor_pool_list());
@@ -3140,7 +3140,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, EvaluateQueryWithFullCatalogTableData) {
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(SELECT column_int FROM TestTable WHERE column_str = "string_1")");
+      R"(SELECT column_int FROM TestTable WHERE column_str = 'string_1')");
   evaluate_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(evaluate_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -3171,7 +3171,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(SELECT column_int FROM TestTable WHERE column_str = "string_1")");
+      R"(SELECT column_int FROM TestTable WHERE column_str = 'string_1')");
   evaluate_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(evaluate_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -3317,7 +3317,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(SELECT * FROM TestTable WHERE column_str = "string_1")");
+      R"(SELECT * FROM TestTable WHERE column_str = 'string_1')");
   evaluate_request.set_registered_catalog_id(catalog_id);
 
   EvaluateQueryResponse evaluate_response;
@@ -3366,7 +3366,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(SELECT * FROM TestTable WHERE column_str = "@str")");
+      R"(SELECT * FROM TestTable WHERE column_str = '@str')");
   evaluate_request.set_registered_catalog_id(catalog_id);
 
   auto* str_query_param =
@@ -3498,7 +3498,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Query
   EvaluateQueryRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(SELECT * FROM TestTable WHERE column_str = "string_1")");
+      R"(SELECT * FROM TestTable WHERE column_str = 'string_1')");
   evaluate_request.set_registered_catalog_id(catalog_id);
   InsertTestTableContent(evaluate_request.mutable_table_content(), "TestTable");
 
@@ -3628,7 +3628,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   PrepareQueryRequest prepare_request;
   prepare_request.set_registered_catalog_id(catalog_id);
   prepare_request.set_sql(
-      R"(SELECT * FROM TestTable WHERE column_str = "string_1")");
+      R"(SELECT * FROM TestTable WHERE column_str = 'string_1')");
 
   PrepareQueryResponse prepare_response;
   ZETASQL_EXPECT_OK(PrepareQuery(prepare_request, &prepare_response));
@@ -3684,7 +3684,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   PrepareQueryRequest prepare_request;
   prepare_request.set_registered_catalog_id(catalog_id);
   prepare_request.set_sql(
-      R"(SELECT * FROM TestTable WHERE column_str = "@str")");
+      R"(SELECT * FROM TestTable WHERE column_str = '@str')");
   auto* str_query_param =
       prepare_request.mutable_options()->add_query_parameters();
   str_query_param->set_name("str");
@@ -3806,7 +3806,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   PrepareQueryRequest prepare_request;
   prepare_request.set_registered_catalog_id(catalog_id);
   prepare_request.set_sql(
-      R"(SELECT * FROM TestTable WHERE column_str = "string_1")");
+      R"(SELECT * FROM TestTable WHERE column_str = 'string_1')");
 
   PrepareQueryResponse prepare_response;
   ZETASQL_EXPECT_OK(PrepareQuery(prepare_request, &prepare_response));
@@ -3877,7 +3877,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Modify
   EvaluateModifyRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(DELETE FROM TestTable WHERE column_str = "string_1")");
+      R"(DELETE FROM TestTable WHERE column_str = 'string_1')");
   evaluate_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(evaluate_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -3909,7 +3909,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Modify
   EvaluateModifyRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(UPDATE TestTable SET column_int = 333 WHERE column_str = "string_1")");
+      R"(UPDATE TestTable SET column_int = 333 WHERE column_str = 'string_1')");
   evaluate_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(evaluate_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -3945,7 +3945,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   EvaluateModifyRequest evaluate_request;
   evaluate_request.set_sql(
       R"(INSERT INTO TestTable (column_str, column_bool, column_int)
-      VALUES ("string_4", false, 444))");
+      VALUES ('string_4', false, 444))");
   evaluate_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(evaluate_request.mutable_simple_catalog()->add_table(),
                "TestTable");
@@ -3980,7 +3980,7 @@ TEST_F(ZetaSqlLocalServiceImplTest,
   // Evaluate Modify
   EvaluateModifyRequest evaluate_request;
   evaluate_request.set_sql(
-      R"(DELETE FROM TestTable WHERE column_str = "string_1")");
+      R"(DELETE FROM TestTable WHERE column_str = 'string_1')");
   evaluate_request.mutable_simple_catalog()->mutable_builtin_function_options();
   AddTestTable(evaluate_request.mutable_simple_catalog()->add_table(),
                "TestTable");

@@ -5,7 +5,7 @@ SELECT 0.23 AS probability, 100 * probability
 QueryStmt
 +-output_column_list=
 | +-$query.probability#1 AS probability [DOUBLE]
-| +-$query.$col2#2 AS `$col2` [DOUBLE]
+| +-$query.$col2#2 AS "$col2" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[probability#1, $col2#2]
@@ -25,7 +25,7 @@ QueryStmt
 +-output_column_list=
 | +-$query.a#1 AS a [DOUBLE]
 | +-$query.b#2 AS b [DOUBLE]
-| +-$query.$col3#3 AS `$col3` [DOUBLE]
+| +-$query.$col3#3 AS "$col3" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[a#1, b#2, $col3#3]

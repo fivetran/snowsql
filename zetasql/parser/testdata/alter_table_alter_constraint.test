@@ -110,7 +110,7 @@ ALTER TABLE foo-123.bar ALTER CONSTRAINT baz ENFORCED
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-123.bar` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-123.bar" [at 1:13]
 ALTER TABLE foo-123.bar ALTER CONSTRAINT baz ENFORCED
             ^
 --
@@ -118,10 +118,10 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 AlterTableStatement [0-53]
   PathExpression [12-23]
-    Identifier(`foo-123`) [12-23]
+    Identifier("foo-123") [12-23]
     Identifier(bar) [12-23]
   AlterActionList [24-53]
     AlterConstraintEnforcementAction [24-53]
       Identifier(baz) [41-44]
 --
-ALTER TABLE `foo-123`.bar ALTER CONSTRAINT baz ENFORCED
+ALTER TABLE "foo-123".bar ALTER CONSTRAINT baz ENFORCED

@@ -9,10 +9,10 @@ select
     y.all,
     # 'all' in the middle of path expression
     z.all.good,
-    # quoted identifier `all`
-    `all`,
+    # quoted identifier "all"
+    "all",
     # Only prefix needs to be quoted
-    `all`.all,
+    "all".all,
     # all (no pun) magic suffixes together
     x.123.all.y.2daysago.all
 from x.all;
@@ -27,42 +27,42 @@ QueryStatement [0-366] [select   #...from x.all]
         SelectColumn [123-128] [y.all]
           PathExpression [123-128] [y.all]
             Identifier(y) [123-124] [y]
-            Identifier(`all`) [125-128] [all]
+            Identifier("all") [125-128] [all]
         SelectColumn [179-189] [z.all.good]
           PathExpression [179-189] [z.all.good]
             Identifier(z) [179-180] [z]
-            Identifier(`all`) [181-184] [all]
+            Identifier("all") [181-184] [all]
             Identifier(good) [185-189] [good]
-        SelectColumn [225-230] [`all`]
-          PathExpression [225-230] [`all`]
-            Identifier(`all`) [225-230] [`all`]
-        SelectColumn [273-282] [`all`.all]
-          PathExpression [273-282] [`all`.all]
-            Identifier(`all`) [273-278] [`all`]
-            Identifier(`all`) [279-282] [all]
+        SelectColumn [225-230] ["all"]
+          PathExpression [225-230] ["all"]
+            Identifier("all") [225-230] ["all"]
+        SelectColumn [273-282] ["all".all]
+          PathExpression [273-282] ["all".all]
+            Identifier("all") [273-278] ["all"]
+            Identifier("all") [279-282] [all]
         SelectColumn [331-355] [x.123.all.y.2daysago.all]
           PathExpression [331-355] [x.123.all.y.2daysago.all]
             Identifier(x) [331-332] [x]
-            Identifier(`123`) [333-336] [123]
-            Identifier(`all`) [337-340] [all]
+            Identifier("123") [333-336] [123]
+            Identifier("all") [337-340] [all]
             Identifier(y) [341-342] [y]
-            Identifier(`2daysago`) [343-351] [2daysago]
-            Identifier(`all`) [352-355] [all]
+            Identifier("2daysago") [343-351] [2daysago]
+            Identifier("all") [352-355] [all]
       FromClause [356-366] [from x.all]
         TablePathExpression [361-366] [x.all]
           PathExpression [361-366] [x.all]
             Identifier(x) [361-362] [x]
-            Identifier(`all`) [363-366] [all]
+            Identifier("all") [363-366] [all]
 --
 SELECT
   x,
-  y.`all`,
-  z.`all`.good,
-  `all`,
-  `all`.`all`,
-  x.`123`.`all`.y.`2daysago`.`all`
+  y."all",
+  z."all".good,
+  "all",
+  "all"."all",
+  x."123"."all".y."2daysago"."all"
 FROM
-  x.`all`
+  x."all"
 ==
 
 select all from t;
@@ -526,14 +526,14 @@ SELECT AS VALUE
 # identifier and not as a keyword and should be unparsed with backquotes so
 # that it does not get treated as a keyword here.
 [no_test_unparse][no_test_get_parse_tokens]
-select as `value` 5
+select as "value" 5
 --
-QueryStatement [0-19] [select as `value` 5]
-  Query [0-19] [select as `value` 5]
-    Select [0-19] [select as `value` 5]
-      SelectAs [7-17] [as `value`]
-        PathExpression [10-17] [`value`]
-          Identifier(value) [10-17] [`value`]
+QueryStatement [0-19] [select as "value" 5]
+  Query [0-19] [select as "value" 5]
+    Select [0-19] [select as "value" 5]
+      SelectAs [7-17] [as "value"]
+        PathExpression [10-17] ["value"]
+          Identifier(value) [10-17] ["value"]
       SelectList [18-19] [5]
         SelectColumn [18-19] [5]
           IntLiteral(5) [18-19] [5]

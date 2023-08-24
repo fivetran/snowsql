@@ -21,7 +21,7 @@ SELECT
 SELECT
   (
     SELECT
-      `IF`((a_2) IS NULL, CAST(NULL AS ARRAY< INT64 >), ARRAY(
+      "IF"((a_2) IS NULL, CAST(NULL AS ARRAY< INT64 >), ARRAY(
           SELECT
             projectscan_6.a_5 AS a_5
           FROM
@@ -47,7 +47,7 @@ SELECT
 SELECT
   (
     SELECT
-      `IF`((projectscan_3.a_2) IS NULL, CAST(NULL AS ARRAY< INT64 >), ARRAY(
+      "IF"((projectscan_3.a_2) IS NULL, CAST(NULL AS ARRAY< INT64 >), ARRAY(
           SELECT
             projectscan_8.a_7 AS a_7
           FROM

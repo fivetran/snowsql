@@ -15,7 +15,7 @@ ALTERNATION GROUP: NULL
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -29,7 +29,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -37,7 +37,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |     +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |     +-Cast(BOOL -> STRING)
     |       +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |         +-Literal(type=INT64, value=NULL)
@@ -48,7 +48,7 @@ ALTERNATION GROUP: 1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -62,7 +62,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -70,7 +70,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |     +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |     +-Cast(BOOL -> STRING)
     |       +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |         +-Literal(type=INT64, value=1)
@@ -81,7 +81,7 @@ ALTERNATION GROUP: 1+1
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -97,7 +97,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -105,7 +105,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |     +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |     +-Cast(BOOL -> STRING)
     |       +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |         +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
@@ -119,7 +119,7 @@ SELECT TYPEOF(1) || TYPEOF(1);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -136,7 +136,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -145,13 +145,13 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
     |     +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |     | +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |     | +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |     | +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |     | +-Cast(BOOL -> STRING)
     |     |   +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |     |     +-Literal(type=INT64, value=1)
     |     +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |       +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |       +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |       +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |       +-Cast(BOOL -> STRING)
     |         +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |           +-Literal(type=INT64, value=1)
@@ -163,7 +163,7 @@ SELECT TYPEOF(TYPEOF(1))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -178,7 +178,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -186,12 +186,12 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |     +-Literal(type=STRING, value="STRING", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='STRING', has_explicit_type=TRUE)
     |     +-Cast(BOOL -> STRING)
     |       +-FunctionCall(ZetaSQL:$is_null(STRING) -> BOOL)
     |         +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |           +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |           +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |           +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |           +-Cast(BOOL -> STRING)
     |             +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |               +-Literal(type=INT64, value=1)
@@ -204,7 +204,7 @@ SELECT SAFE.TYPEOF(1);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -218,7 +218,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -226,7 +226,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:if(BOOL, STRING, STRING) -> STRING)
     |     +-Literal(type=BOOL, value=true, has_explicit_type=TRUE)
-    |     +-Literal(type=STRING, value="INT64", has_explicit_type=TRUE)
+    |     +-Literal(type=STRING, value='INT64', has_explicit_type=TRUE)
     |     +-Cast(BOOL -> STRING)
     |       +-FunctionCall(ZetaSQL:$is_null(INT64) -> BOOL)
     |         +-Literal(type=INT64, value=1)
@@ -239,7 +239,7 @@ SELECT TYPEOF(1)@{in64_hint=1};
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

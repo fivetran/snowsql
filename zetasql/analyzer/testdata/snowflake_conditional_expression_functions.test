@@ -15,7 +15,7 @@ QueryStmt
     | +-booland#1 :=
     |   +-FunctionCall(ZetaSQL:booland(INT64, STRING) -> BOOL)
     |     +-Literal(type=INT64, value=1234)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 --
@@ -131,7 +131,7 @@ QueryStmt
     +-expr_list=
     | +-boolnot#1 :=
     |   +-FunctionCall(ZetaSQL:boolnot(STRING) -> BOOL)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 --
@@ -183,7 +183,7 @@ QueryStmt
     | +-boolor#1 :=
     |   +-FunctionCall(ZetaSQL:boolor(INT64, STRING) -> BOOL)
     |     +-Literal(type=INT64, value=1234)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 --
@@ -285,7 +285,7 @@ QueryStmt
     | +-boolxor#1 :=
     |   +-FunctionCall(ZetaSQL:boolxor(INT64, STRING) -> BOOL)
     |     +-Literal(type=INT64, value=1234)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     +-input_scan=
       +-SingleRowScan
 --

@@ -20,7 +20,7 @@ SELECT ARRAY_SLICE([1, 2], 0, -1)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -36,7 +36,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -157,7 +157,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -173,7 +173,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -295,7 +295,7 @@ ALTERNATION GROUPS:
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -320,7 +320,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -328,7 +328,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_offset(ARRAY<STRING> input_array, STRING target_element, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> INT64)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     +-input_scan=
       +-SingleRowScan
@@ -336,7 +336,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -434,17 +434,17 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#2)
-    |         |           +-Literal(type=STRING, value=" in ARRAY_OFFSET is unsupported.")
+    |         |           +-Literal(type=STRING, value=' in ARRAY_OFFSET is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#2, input_array#3, target_element#4]
     |             +-expr_list=
     |             | +-find_mode#2 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |             | +-input_array#3 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#4 := Literal(type=STRING, value="hello")
+    |             | +-target_element#4 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -454,7 +454,7 @@ ALTERNATION GROUP: SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -462,7 +462,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_offset(ARRAY<STRING> input_array, STRING target_element, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> INT64)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     +-input_scan=
       +-SingleRowScan
@@ -470,7 +470,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -569,10 +569,10 @@ QueryStmt
     |         |     |   |       +-Literal(type=INT64, value=1)
     |         |     |   +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |     |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |     |       +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |     |       +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |     |       +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |     |       | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#2)
-    |         |     |       +-Literal(type=STRING, value=" in ARRAY_OFFSET is unsupported.")
+    |         |     |       +-Literal(type=STRING, value=' in ARRAY_OFFSET is unsupported.')
     |         |     +-Literal(type=INT64, value=NULL, has_explicit_type=TRUE)
     |         +-input_scan=
     |           +-ProjectScan
@@ -580,7 +580,7 @@ QueryStmt
     |             +-expr_list=
     |             | +-find_mode#2 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |             | +-input_array#3 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#4 := Literal(type=STRING, value="hello")
+    |             | +-target_element#4 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -596,7 +596,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -604,7 +604,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_find(ARRAY<STRING> input_array, STRING target_element, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> STRING)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     +-input_scan=
       +-SingleRowScan
@@ -612,7 +612,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -711,17 +711,17 @@ QueryStmt
     |         |       +-Cast(STRING -> STRING)
     |         |         +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
     |         |           +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |             +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |             +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |             +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |             | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#2)
-    |         |             +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |             +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#2, input_array#3, target_element#4]
     |             +-expr_list=
     |             | +-find_mode#2 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |             | +-input_array#3 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#4 := Literal(type=STRING, value="hello")
+    |             | +-target_element#4 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -731,7 +731,7 @@ ALTERNATION GROUP: SAFE.
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -739,7 +739,7 @@ QueryStmt
     | +-$col1#1 :=
     |   +-FunctionCall({SAFE_ERROR_MODE} ZetaSQL:array_find(ARRAY<STRING> input_array, STRING target_element, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> STRING)
     |     +-Literal(type=ARRAY<STRING>, value=[])
-    |     +-Literal(type=STRING, value="hello")
+    |     +-Literal(type=STRING, value='hello')
     |     +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     +-input_scan=
       +-SingleRowScan
@@ -747,7 +747,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -847,10 +847,10 @@ QueryStmt
     |         |     |   +-Cast(STRING -> STRING)
     |         |     |     +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
     |         |     |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |     |         +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |     |         +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |     |         +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |     |         | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#2)
-    |         |     |         +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |     |         +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         |     +-Literal(type=STRING, value=NULL, has_explicit_type=TRUE)
     |         +-input_scan=
     |           +-ProjectScan
@@ -858,7 +858,7 @@ QueryStmt
     |             +-expr_list=
     |             | +-find_mode#2 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     |             | +-input_array#3 := Literal(type=ARRAY<STRING>, value=[])
-    |             | +-target_element#4 := Literal(type=STRING, value="hello")
+    |             | +-target_element#4 := Literal(type=STRING, value='hello')
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=

@@ -157,24 +157,24 @@ SELECT
 
 ==
 
-select 1 + new `x y`().field
+select 1 + new "x y"().field
 --
-QueryStatement [0-28] [select 1 + new `x y`().field]
-  Query [0-28] [select 1 + new `x y`().field]
-    Select [0-28] [select 1 + new `x y`().field]
-      SelectList [7-28] [1 + new `x y`().field]
-        SelectColumn [7-28] [1 + new `x y`().field]
-          BinaryExpression(+) [7-28] [1 + new `x y`().field]
+QueryStatement [0-28] [select 1 + new "x y"().field]
+  Query [0-28] [select 1 + new "x y"().field]
+    Select [0-28] [select 1 + new "x y"().field]
+      SelectList [7-28] [1 + new "x y"().field]
+        SelectColumn [7-28] [1 + new "x y"().field]
+          BinaryExpression(+) [7-28] [1 + new "x y"().field]
             IntLiteral(1) [7-8] [1]
-            DotIdentifier [11-28] [new `x y`().field]
-              NewConstructor [11-22] [new `x y`()]
-                SimpleType [15-20] [`x y`]
-                  PathExpression [15-20] [`x y`]
-                    Identifier(`x y`) [15-20] [`x y`]
+            DotIdentifier [11-28] [new "x y"().field]
+              NewConstructor [11-22] [new "x y"()]
+                SimpleType [15-20] ["x y"]
+                  PathExpression [15-20] ["x y"]
+                    Identifier("x y") [15-20] ["x y"]
               Identifier(field) [23-28] [field]
 --
 SELECT
-  1 + NEW `x y`().field
+  1 + NEW "x y"().field
 ==
 
 select new abc

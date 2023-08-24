@@ -43,7 +43,7 @@ END
 
 # valid statement with options
 CREATE PROCEDURE procedure_name()
-OPTIONS(a=1, b="2")
+OPTIONS(a=1, b='2')
 BEGIN
 END;
 --
@@ -51,13 +51,13 @@ CreateProcedureStatement [0-63] [CREATE PROCEDURE...BEGIN END]
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
   FunctionParameters [31-33] [()]
-  OptionsList [41-53] [(a=1, b="2")]
+  OptionsList [41-53] [(a=1, b='2')]
     OptionsEntry [42-45] [a=1]
       Identifier(a) [42-43] [a]
       IntLiteral(1) [44-45] [1]
-    OptionsEntry [47-52] [b="2"]
+    OptionsEntry [47-52] [b='2']
       Identifier(b) [47-48] [b]
-      StringLiteral("2") [49-52] ["2"]
+      StringLiteral('2') [49-52] ['2']
   Script [54-63] [BEGIN END]
     StatementList [54-63] [BEGIN END]
       BeginEndBlock [54-63] [BEGIN END]
@@ -65,7 +65,7 @@ CreateProcedureStatement [0-63] [CREATE PROCEDURE...BEGIN END]
 --
 CREATE PROCEDURE procedure_name()
 OPTIONS
-  (a = 1, b = "2")
+  (a = 1, b = '2')
 BEGIN
 END
 ==
@@ -142,10 +142,10 @@ CREATE PROCEDURE procedure_name(OUT param_a string)
 BEGIN
   DECLARE a int32;
   SET a = 1;
-  SET param_a = "test";
+  SET param_a = 'test';
 END;
 --
-CreateProcedureStatement [0-117] [CREATE PROCEDURE...test"; END]
+CreateProcedureStatement [0-117] [CREATE PROCEDURE...test'; END]
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
   FunctionParameters [31-51] [(OUT param_a string)]
@@ -154,10 +154,10 @@ CreateProcedureStatement [0-117] [CREATE PROCEDURE...test"; END]
       SimpleType [44-50] [string]
         PathExpression [44-50] [string]
           Identifier(string) [44-50] [string]
-  Script [52-117] [BEGIN   DECLARE...test"; END]
-    StatementList [52-117] [BEGIN   DECLARE...test"; END]
-      BeginEndBlock [52-117] [BEGIN   DECLARE...test"; END]
-        StatementList [60-114] [DECLARE a...= "test";]
+  Script [52-117] [BEGIN   DECLARE...test'; END]
+    StatementList [52-117] [BEGIN   DECLARE...test'; END]
+      BeginEndBlock [52-117] [BEGIN   DECLARE...test'; END]
+        StatementList [60-114] [DECLARE a...= 'test';]
           VariableDeclaration [60-75] [DECLARE a int32]
             IdentifierList [68-69] [a]
               Identifier(a) [68-69] [a]
@@ -167,29 +167,29 @@ CreateProcedureStatement [0-117] [CREATE PROCEDURE...test"; END]
           SingleAssignment [79-88] [SET a = 1]
             Identifier(a) [83-84] [a]
             IntLiteral(1) [87-88] [1]
-          SingleAssignment [92-112] [SET param_a = "test"]
+          SingleAssignment [92-112] [SET param_a = 'test']
             Identifier(param_a) [96-103] [param_a]
-            StringLiteral("test") [106-112] ["test"]
+            StringLiteral('test') [106-112] ['test']
 --
 CREATE PROCEDURE procedure_name(OUT param_a string)
 BEGIN
   DECLARE a int32 ;
   SET a = 1 ;
-  SET param_a = "test" ;
+  SET param_a = 'test' ;
 END
 ==
 
 # valid parameter with empty mode and backtick-quoted parameter name
-CREATE PROCEDURE procedure_name (`OUT` int32)
+CREATE PROCEDURE procedure_name ("OUT" int32)
 BEGIN
 END;
 --
 CreateProcedureStatement [0-55] [CREATE PROCEDURE...BEGIN END]
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
-  FunctionParameters [32-45] [(`OUT` int32)]
-    FunctionParameter [33-44] [`OUT` int32]
-      Identifier(`OUT`) [33-38] [`OUT`]
+  FunctionParameters [32-45] [("OUT" int32)]
+    FunctionParameter [33-44] ["OUT" int32]
+      Identifier("OUT") [33-38] ["OUT"]
       SimpleType [39-44] [int32]
         PathExpression [39-44] [int32]
           Identifier(int32) [39-44] [int32]
@@ -198,7 +198,7 @@ CreateProcedureStatement [0-55] [CREATE PROCEDURE...BEGIN END]
       BeginEndBlock [46-55] [BEGIN END]
         StatementList [51-51] []
 --
-CREATE PROCEDURE procedure_name(`OUT` int32)
+CREATE PROCEDURE procedure_name("OUT" int32)
 BEGIN
 END
 ==
@@ -213,7 +213,7 @@ CreateProcedureStatement [0-57] [CREATE PROCEDURE...BEGIN END]
     Identifier(procedure_name) [17-31] [procedure_name]
   FunctionParameters [32-47] [(OUT OUT int32)]
     FunctionParameter(mode=OUT) [33-46] [OUT OUT int32]
-      Identifier(`OUT`) [37-40] [OUT]
+      Identifier("OUT") [37-40] [OUT]
       SimpleType [41-46] [int32]
         PathExpression [41-46] [int32]
           Identifier(int32) [41-46] [int32]
@@ -222,7 +222,7 @@ CreateProcedureStatement [0-57] [CREATE PROCEDURE...BEGIN END]
       BeginEndBlock [48-57] [BEGIN END]
         StatementList [53-53] []
 --
-CREATE PROCEDURE procedure_name(OUT `OUT` int32)
+CREATE PROCEDURE procedure_name(OUT "OUT" int32)
 BEGIN
 END
 ==
@@ -320,7 +320,7 @@ END;
 --
 CreateProcedureStatement [0-45] [CREATE PROCEDURE...BEGIN END]
   PathExpression [17-20] [OUT]
-    Identifier(`OUT`) [17-20] [OUT]
+    Identifier("OUT") [17-20] [OUT]
   FunctionParameters [20-35] [(param_1 INT32)]
     FunctionParameter [21-34] [param_1 INT32]
       Identifier(param_1) [21-28] [param_1]
@@ -332,7 +332,7 @@ CreateProcedureStatement [0-45] [CREATE PROCEDURE...BEGIN END]
       BeginEndBlock [36-45] [BEGIN END]
         StatementList [41-41] []
 --
-CREATE PROCEDURE `OUT`(param_1 INT32)
+CREATE PROCEDURE "OUT"(param_1 INT32)
 BEGIN
 END
 ==
@@ -548,7 +548,7 @@ CreateProcedureStatement [0-67] [CREATE PROCEDURE...TERVAL; END]
               Identifier(ABC) [50-53] [ABC]
             SimpleType [54-62] [INTERVAL]
               PathExpression [54-62] [INTERVAL]
-                Identifier(`INTERVAL`) [54-62] [INTERVAL]
+                Identifier("INTERVAL") [54-62] [INTERVAL]
 --
 CREATE PROCEDURE procedure_name()
 BEGIN
@@ -563,9 +563,9 @@ CREATE PROCEDURE procedure_name(
   INOUT param_c ANY TYPE)
 WITH CONNECTION connection_id
 OPTIONS(a = b, c = d)
-LANGUAGE PYTHON AS "python code"
+LANGUAGE PYTHON AS 'python code'
 --
-CreateProcedureStatement [0-182] [CREATE PROCEDURE...ython code"]
+CreateProcedureStatement [0-182] [CREATE PROCEDURE...ython code']
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
   FunctionParameters [31-97] [(   param_a...ANY TYPE)]
@@ -596,12 +596,12 @@ CreateProcedureStatement [0-182] [CREATE PROCEDURE...ython code"]
       PathExpression [114-127] [connection_id]
         Identifier(connection_id) [114-127] [connection_id]
   Identifier(PYTHON) [159-165] [PYTHON]
-  StringLiteral("python code") [169-182] ["python code"]
+  StringLiteral('python code') [169-182] ['python code']
 --
 CREATE PROCEDURE procedure_name(param_a int32, OUT param_b string, INOUT param_c ANY TYPE)
 WITH CONNECTION connection_id OPTIONS
   (a = b, c = d)
-LANGUAGE PYTHON AS "python code"
+LANGUAGE PYTHON AS 'python code'
 ==
 
 # Valid procedure with the connection and language as clause and empty options
@@ -611,9 +611,9 @@ CREATE PROCEDURE procedure_name(
   INOUT param_c ANY TYPE)
 WITH CONNECTION connection_id
 OPTIONS()
-LANGUAGE PYTHON AS "python code"
+LANGUAGE PYTHON AS 'python code'
 --
-CreateProcedureStatement [0-170] [CREATE PROCEDURE...ython code"]
+CreateProcedureStatement [0-170] [CREATE PROCEDURE...ython code']
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
   FunctionParameters [31-97] [(   param_a...ANY TYPE)]
@@ -636,12 +636,12 @@ CreateProcedureStatement [0-170] [CREATE PROCEDURE...ython code"]
       PathExpression [114-127] [connection_id]
         Identifier(connection_id) [114-127] [connection_id]
   Identifier(PYTHON) [147-153] [PYTHON]
-  StringLiteral("python code") [157-170] ["python code"]
+  StringLiteral('python code') [157-170] ['python code']
 --
 CREATE PROCEDURE procedure_name(param_a int32, OUT param_b string, INOUT param_c ANY TYPE)
 WITH CONNECTION connection_id OPTIONS
   ()
-LANGUAGE PYTHON AS "python code"
+LANGUAGE PYTHON AS 'python code'
 ==
 
 # Valid procedure with the language as clause
@@ -650,9 +650,9 @@ CREATE PROCEDURE procedure_name(
   OUT param_b string,
   INOUT param_c ANY TYPE)
 OPTIONS(a = b, c = d)
-LANGUAGE PYTHON AS "python code"
+LANGUAGE PYTHON AS 'python code'
 --
-CreateProcedureStatement [0-152] [CREATE PROCEDURE...ython code"]
+CreateProcedureStatement [0-152] [CREATE PROCEDURE...ython code']
   PathExpression [17-31] [procedure_name]
     Identifier(procedure_name) [17-31] [procedure_name]
   FunctionParameters [31-97] [(   param_a...ANY TYPE)]
@@ -679,12 +679,12 @@ CreateProcedureStatement [0-152] [CREATE PROCEDURE...ython code"]
       PathExpression [117-118] [d]
         Identifier(d) [117-118] [d]
   Identifier(PYTHON) [129-135] [PYTHON]
-  StringLiteral("python code") [139-152] ["python code"]
+  StringLiteral('python code') [139-152] ['python code']
 --
 CREATE PROCEDURE procedure_name(param_a int32, OUT param_b string, INOUT param_c ANY TYPE)
 OPTIONS
   (a = b, c = d)
-LANGUAGE PYTHON AS "python code"
+LANGUAGE PYTHON AS 'python code'
 ==
 
 # Valid procedure with the language clause
@@ -731,10 +731,10 @@ LANGUAGE PYTHON
 
 # Invalid procedure with AS clause but without the language clause
 CREATE PROCEDURE procedure_name()
-AS "python code"
+AS 'python code'
 --
 ERROR: Syntax error: Expected keyword BEGIN or keyword LANGUAGE but got keyword AS [at 2:1]
-AS "python code"
+AS 'python code'
 ^
 ==
 

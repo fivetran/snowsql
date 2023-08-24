@@ -303,8 +303,8 @@ ALTER TABLE foo ADD COLUMN bar STRING FILL USING a + b, ADD COLUMN baz INT64
 
 # ALTER TABLE several add column actions with special names
 ALTER TABLE foo ADD COLUMN column STRING FILL USING a + b,
-                ADD COLUMN `column` STRING PRIMARY KEY,
-                ADD COLUMN `union` INT64;
+                ADD COLUMN "column" STRING PRIMARY KEY,
+                ADD COLUMN "union" INT64;
 --
 AlterTableStatement [0-155]
   PathExpression [12-15]
@@ -331,12 +331,12 @@ AlterTableStatement [0-155]
             PrimaryKeyColumnAttribute(ENFORCED) [102-113]
     AddColumnAction [131-155]
       ColumnDefinition [142-155]
-        Identifier(`union`) [142-149]
+        Identifier("union") [142-149]
         SimpleColumnSchema [150-155]
           PathExpression [150-155]
             Identifier(INT64) [150-155]
 --
-ALTER TABLE foo ADD COLUMN column STRING FILL USING a + b, ADD COLUMN column STRING PRIMARY KEY, ADD COLUMN `union` INT64
+ALTER TABLE foo ADD COLUMN column STRING FILL USING a + b, ADD COLUMN column STRING PRIMARY KEY, ADD COLUMN "union" INT64
 ==
 
 # ALTER TABLE several add column actions with special name, unquoted
@@ -353,7 +353,7 @@ ALTER TABLE foo-bar-123 ADD COLUMN baz STRING;
 --
 ALTERNATION GROUP: <empty>
 --
-ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: `foo-bar-123` [at 1:13]
+ERROR: Syntax error: Table name contains '-' character. It needs to be quoted: "foo-bar-123" [at 1:13]
 ALTER TABLE foo-bar-123 ADD COLUMN baz STRING;
             ^
 --
@@ -361,7 +361,7 @@ ALTERNATION GROUP: V_1_3_ALLOW_DASHES_IN_TABLE_NAME
 --
 AlterTableStatement [0-45]
   PathExpression [12-23]
-    Identifier(`foo-bar-123`) [12-23]
+    Identifier("foo-bar-123") [12-23]
   AlterActionList [24-45]
     AddColumnAction [24-45]
       ColumnDefinition [35-45]
@@ -370,7 +370,7 @@ AlterTableStatement [0-45]
           PathExpression [39-45]
             Identifier(STRING) [39-45]
 --
-ALTER TABLE `foo-bar-123` ADD COLUMN baz STRING
+ALTER TABLE "foo-bar-123" ADD COLUMN baz STRING
 ==
 
 # ALTER TABLE add column with COLLATE
@@ -461,7 +461,7 @@ ALTER TABLE foo ADD COLUMN column STRING COLLATE CONCAT('unicode', ':', 'ci');
 ==
 
 # ALTER TABLE add column with default static value
-ALTER TABLE foo ADD COLUMN bar STRING DEFAULT "default string";
+ALTER TABLE foo ADD COLUMN bar STRING DEFAULT 'default string';
 --
 AlterTableStatement [0-62]
   PathExpression [12-15]
@@ -473,9 +473,9 @@ AlterTableStatement [0-62]
         SimpleColumnSchema [31-62]
           PathExpression [31-37]
             Identifier(STRING) [31-37]
-          StringLiteral("default string") [46-62]
+          StringLiteral('default string') [46-62]
 --
-ALTER TABLE foo ADD COLUMN bar STRING DEFAULT "default string"
+ALTER TABLE foo ADD COLUMN bar STRING DEFAULT 'default string'
 ==
 
 # ALTER TABLE add column with default function

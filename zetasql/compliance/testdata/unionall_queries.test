@@ -186,9 +186,9 @@ ARRAY<STRUCT<str_val STRING>>[unknown order:{"2"}, {"1"}, {"4"}, {"3"}]
 ==
 # SELECT enum column.
 [name=unionall_datatype_enum]
-SELECT CAST(0 AS `zetasql_test__.TestEnum`) as enum_val
+SELECT CAST(0 AS "zetasql_test__.TestEnum") as enum_val
 UNION ALL
-SELECT CAST(1 AS `zetasql_test__.TestEnum`);
+SELECT CAST(1 AS "zetasql_test__.TestEnum");
 --
 ARRAY<STRUCT<enum_val ENUM<zetasql_test__.TestEnum>>>[unknown order:
   {TESTENUM0},
@@ -197,9 +197,9 @@ ARRAY<STRUCT<enum_val ENUM<zetasql_test__.TestEnum>>>[unknown order:
 ==
 # SELECT proto column.
 [name=unionall_datatype_proto]
-SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2
 UNION ALL
-SELECT AS `zetasql_test__.KitchenSinkPB` 7 int64_key_1, 8 int64_key_2
+SELECT AS "zetasql_test__.KitchenSinkPB" 7 int64_key_1, 8 int64_key_2
 --
 ARRAY<PROTO<zetasql_test__.KitchenSinkPB>>[unknown order:
   {
@@ -295,7 +295,7 @@ ARRAY<STRUCT<array_val ARRAY<>>>[unknown order:
 ==
 # UNION ALL over NULL and non-NULL enum values
 [name=unionall_nulls_enum]
-SELECT CAST(0 as `zetasql_test__.TestEnum`) AS enum_val
+SELECT CAST(0 as "zetasql_test__.TestEnum") AS enum_val
 UNION ALL
 SELECT NULL
 --
@@ -314,11 +314,11 @@ ARRAY<STRUCT<INT64>>[unknown order:{NULL}, {3}]
 ==
 # UNION ALL over NULL and non-NULL proto columns.
 [name=unionall_nulls_proto]
-SELECT (SELECT AS `zetasql_test__.KitchenSinkPB` 5 int64_key_1, 6 int64_key_2)
+SELECT (SELECT AS "zetasql_test__.KitchenSinkPB" 5 int64_key_1, 6 int64_key_2)
 UNION ALL
-SELECT (SELECT AS `zetasql_test__.KitchenSinkPB` 7 int64_key_1, 8 int64_key_2)
+SELECT (SELECT AS "zetasql_test__.KitchenSinkPB" 7 int64_key_1, 8 int64_key_2)
 UNION ALL
-SELECT NULL AS `zetasql_test__.KitchenSinkPB`
+SELECT NULL AS "zetasql_test__.KitchenSinkPB"
 --
 ARRAY<STRUCT<PROTO<zetasql_test__.KitchenSinkPB>>>[unknown order:
   {{
@@ -458,8 +458,8 @@ SELECT date_val,
        timestamp_val
        FROM TableDataTypes
 UNION ALL
-SELECT "2015-01-17",
-       "2015-01-17 00:00:00.123456 UTC"
+SELECT '2015-01-17',
+       '2015-01-17 00:00:00.123456 UTC'
 --
 ARRAY<STRUCT<
         date_val DATE,

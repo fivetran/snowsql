@@ -8,7 +8,7 @@ ALTERNATION GROUP: <empty>
 QueryStmt
 +-output_column_list=
 | +-$analytic.afn_agg#5 AS afn_agg [INT64]
-| +-$analytic.$analytic2#6 AS `$col2` [INT64]
+| +-$analytic.$analytic2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[afn_agg#5, $analytic2#6]
@@ -44,7 +44,7 @@ ALTERNATION GROUP: [no_preserve_column_aliases]
 QueryStmt
 +-output_column_list=
 | +-$analytic.$analytic1#5 AS afn_agg [INT64]
-| +-$analytic.$analytic2#6 AS `$col2` [INT64]
+| +-$analytic.$analytic2#6 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$analytic.[$analytic1#5, $analytic2#6]
@@ -85,7 +85,7 @@ ALTERNATION GROUP: <empty>
 QueryStmt
 +-output_column_list=
 | +-$aggregate.sum#3 AS sum [INT64]
-| +-$aggregate.$agg2#4 AS `$col2` [INT64]
+| +-$aggregate.$agg2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[sum#3, $agg2#4]
@@ -107,7 +107,7 @@ ALTERNATION GROUP: [no_preserve_column_aliases]
 QueryStmt
 +-output_column_list=
 | +-$aggregate.$agg1#3 AS sum [INT64]
-| +-$aggregate.$agg2#4 AS `$col2` [INT64]
+| +-$aggregate.$agg2#4 AS "$col2" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=$aggregate.[$agg1#3, $agg2#4]

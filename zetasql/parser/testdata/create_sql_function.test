@@ -264,7 +264,7 @@ CreateFunctionStatement [0-63] [create function...a, -1 ) )]
   SqlFunctionBody [40-63] [( if ( a > 0, a, -1 ) )]
     FunctionCall [42-61] [if ( a > 0, a, -1 )]
       PathExpression [42-44] [if]
-        Identifier(`if`) [42-44] [if]
+        Identifier("if") [42-44] [if]
       BinaryExpression(>) [47-52] [a > 0]
         PathExpression [47-48] [a]
           Identifier(a) [47-48] [a]
@@ -276,7 +276,7 @@ CreateFunctionStatement [0-63] [create function...a, -1 ) )]
 --
 CREATE FUNCTION myfunc(a int64)
 AS (
-  `if`(a > 0, a, -1)
+  "if"(a > 0, a, -1)
 )
 ==
 
@@ -301,7 +301,7 @@ CreateFunctionStatement [0-79] [create function...a, -1 ) )]
   SqlFunctionBody [56-79] [( if ( a > 0, a, -1 ) )]
     FunctionCall [58-77] [if ( a > 0, a, -1 )]
       PathExpression [58-60] [if]
-        Identifier(`if`) [58-60] [if]
+        Identifier("if") [58-60] [if]
       BinaryExpression(>) [63-68] [a > 0]
         PathExpression [63-64] [a]
           Identifier(a) [63-64] [a]
@@ -313,7 +313,7 @@ CreateFunctionStatement [0-79] [create function...a, -1 ) )]
 --
 CREATE FUNCTION myfunc(a int32)
 RETURNS int32 AS (
-  `if`(a > 0, a, -1)
+  "if"(a > 0, a, -1)
 )
 ==
 
@@ -690,10 +690,10 @@ CreateFunctionStatement [0-58] [create function...erval as (x)]
         Identifier(x) [23-24] [x]
         SimpleType [25-33] [interval]
           PathExpression [25-33] [interval]
-            Identifier(`interval`) [25-33] [interval]
+            Identifier("interval") [25-33] [interval]
   SimpleType [43-51] [interval]
     PathExpression [43-51] [interval]
-      Identifier(`interval`) [43-51] [interval]
+      Identifier("interval") [43-51] [interval]
   SqlFunctionBody [55-58] [(x)]
     PathExpression [56-57] [x]
       Identifier(x) [56-57] [x]

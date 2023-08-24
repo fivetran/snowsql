@@ -8521,7 +8521,7 @@ identifier:
         const absl::string_view identifier_text = parser->GetInputText(@1);
         // The tokenizer rule already validates that the identifier is valid,
         // except for backquoted identifiers.
-        if (identifier_text[0] == '`') {
+        if (identifier_text[0] == '"') {
           std::string str;
           std::string error_string;
           int error_offset;

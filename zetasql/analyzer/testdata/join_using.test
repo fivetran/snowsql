@@ -13,9 +13,9 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -38,9 +38,9 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         +-join_type=LEFT
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -50,7 +50,7 @@ QueryStmt
 # Things to note, and compare to other versions:
 # 1. Output columns have join columns, then the non-join columns from the
 #    left, then non-join columns from the right.
-# 2. Join column `value` is the rhs version because this is RIGHT JOIN.
+# 2. Join column "value" is the rhs version because this is RIGHT JOIN.
 select *
 from KeyValue kv1 right join KeyValue kv2 using (value)
 --
@@ -67,9 +67,9 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         +-join_type=RIGHT
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -102,9 +102,9 @@ QueryStmt
             +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
             +-join_type=FULL
             +-left_scan=
-            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
             +-right_scan=
-            | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+            | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
                 +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -118,22 +118,22 @@ QueryStmt
 +-output_column_list=
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col2#5 AS `$col2` [STRING]
+| +-$query.$col2#5 AS "$col2" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, $query.$col2#5, KeyValue.Key#3, KeyValue.Value#4]
     +-expr_list=
-    | +-$col2#5 := Literal(type=STRING, value="---")
+    | +-$col2#5 := Literal(type=STRING, value='---')
     +-input_scan=
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         +-join_type=RIGHT
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
             +-ColumnRef(type=STRING, column=KeyValue.Value#2)
@@ -160,7 +160,7 @@ select value1
        ^
 ==
 
-# `key` is the column from the right with RIGHT JOIN USING (key).
+# "key" is the column from the right with RIGHT JOIN USING (key).
 select key, kv1.value, kv2.value, kv1.key, kv2.key
 from KeyValue kv1 right join KeyValue kv2 using (key)
 where key=5
@@ -183,9 +183,9 @@ QueryStmt
         |   +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         |   +-join_type=RIGHT
         |   +-left_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |   | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -196,7 +196,7 @@ QueryStmt
             +-Literal(type=INT64, value=5)
 ==
 
-# `key` is the column from the left with JOIN USING (key).
+# "key" is the column from the left with JOIN USING (key).
 select key from KeyValue kv1 join KeyValue kv2 using (key)
 --
 QueryStmt
@@ -209,16 +209,16 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Key#3]
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
             +-ColumnRef(type=INT64, column=KeyValue.Key#3)
 ==
 
-# `key` is the column from the left with LEFT JOIN USING (key).
+# "key" is the column from the left with LEFT JOIN USING (key).
 select key from KeyValue kv1 left join KeyValue kv2 using (key)
 --
 QueryStmt
@@ -232,9 +232,9 @@ QueryStmt
         +-column_list=KeyValue.[Key#1, Key#3]
         +-join_type=LEFT
         +-left_scan=
-        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -262,9 +262,9 @@ QueryStmt
             +-column_list=KeyValue.[Key#1, Key#3]
             +-join_type=FULL
             +-left_scan=
-            | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+            | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
             +-right_scan=
-            | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+            | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
                 +-ColumnRef(type=INT64, column=KeyValue.Key#1)
@@ -282,18 +282,18 @@ QueryStmt
 | +-$full_join.value#5 AS value [STRING]
 | +-KeyValue.Key#1 AS key [INT64]
 | +-KeyValue.Key#3 AS key [INT64]
-| +-$query.$col5#7 AS `$col5` [STRING]
+| +-$query.$col5#7 AS "$col5" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col7#8 AS `$col7` [STRING]
+| +-$query.$col7#8 AS "$col7" [STRING]
 | +-$full_join.value#5 AS value [STRING]
 | +-$full_join.key#6 AS key [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$full_join.key#6, $full_join.value#5, KeyValue.Key#1, KeyValue.Key#3, $query.$col5#7, KeyValue.Key#1, KeyValue.Value#2, $query.$col7#8, $full_join.value#5, $full_join.key#6]
     +-expr_list=
-    | +-$col5#7 := Literal(type=STRING, value="--")
-    | +-$col7#8 := Literal(type=STRING, value="--")
+    | +-$col5#7 := Literal(type=STRING, value='--')
+    | +-$col7#8 := Literal(type=STRING, value='--')
     +-input_scan=
       +-ProjectScan
         +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue.Key#3, KeyValue.Value#4, $full_join.value#5, $full_join.key#6]
@@ -311,9 +311,9 @@ QueryStmt
             +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
             +-join_type=FULL
             +-left_scan=
-            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+            | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
             +-right_scan=
-            | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+            | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
                 +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
@@ -393,7 +393,7 @@ select 1 from KeyValue join TestTable using (key)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#6 AS `$col1` [INT64]
+| +-$query.$col1#6 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#6]
@@ -559,8 +559,8 @@ QueryStmt
 | +-q1.a1#1 AS a1 [STRING]
 | +-q1.a4#4 AS a4 [STRING]
 | +-q1.a2#2 AS a2 [INT64]
-| +-q2.$col2#6 AS `$col2` [INT64]
-| +-q2.$col3#7 AS `$col3` [STRING]
+| +-q2.$col2#6 AS "$col2" [INT64]
+| +-q2.$col3#7 AS "$col3" [STRING]
 | +-q2.a2#9 AS a2 [STRING]
 +-query=
   +-ProjectScan
@@ -572,10 +572,10 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=q1.[a1#1, a2#2, a3#3, a4#4]
         |   +-expr_list=
-        |   | +-a1#1 := Literal(type=STRING, value="abc")
+        |   | +-a1#1 := Literal(type=STRING, value='abc')
         |   | +-a2#2 := Literal(type=INT64, value=123)
         |   | +-a3#3 := Literal(type=INT64, value=456)
-        |   | +-a4#4 := Literal(type=STRING, value="def")
+        |   | +-a4#4 := Literal(type=STRING, value='def')
         |   +-input_scan=
         |     +-SingleRowScan
         +-right_scan=
@@ -584,10 +584,10 @@ QueryStmt
         |   +-expr_list=
         |   | +-a3#5 := Literal(type=INT64, value=333)
         |   | +-$col2#6 := Literal(type=INT64, value=17)
-        |   | +-$col3#7 := Literal(type=STRING, value="xxx")
-        |   | +-a1#8 := Literal(type=STRING, value="aaa")
-        |   | +-a2#9 := Literal(type=STRING, value="def")
-        |   | +-a4#10 := Literal(type=STRING, value="z")
+        |   | +-$col3#7 := Literal(type=STRING, value='xxx')
+        |   | +-a1#8 := Literal(type=STRING, value='aaa')
+        |   | +-a2#9 := Literal(type=STRING, value='def')
+        |   | +-a4#10 := Literal(type=STRING, value='z')
         |   +-input_scan=
         |     +-SingleRowScan
         +-join_expr=
@@ -648,7 +648,7 @@ ERROR: Column key in USING clause is ambiguous on right side of join [at 3:57]
                                                         ^
 ==
 
-# `key` propagates as the leftmost column through all the joins.
+# "key" propagates as the leftmost column through all the joins.
 select *, '--', kv1.*, '--', kv2.*, '--', kv3.*, '--', key
 from KeyValue kv1
 join KeyValue kv2 using (key)
@@ -660,25 +660,25 @@ QueryStmt
 | +-KeyValue.Value#2 AS Value [STRING]
 | +-KeyValue.Value#4 AS Value [STRING]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col2#7 AS `$col2` [STRING]
+| +-$query.$col2#7 AS "$col2" [STRING]
 | +-KeyValue.Key#1 AS Key [INT64]
 | +-KeyValue.Value#2 AS Value [STRING]
-| +-$query.$col4#8 AS `$col4` [STRING]
+| +-$query.$col4#8 AS "$col4" [STRING]
 | +-KeyValue.Key#3 AS Key [INT64]
 | +-KeyValue.Value#4 AS Value [STRING]
-| +-$query.$col6#9 AS `$col6` [STRING]
+| +-$query.$col6#9 AS "$col6" [STRING]
 | +-KeyValue.Key#5 AS Key [INT64]
 | +-KeyValue.Value#6 AS Value [STRING]
-| +-$query.$col8#10 AS `$col8` [STRING]
+| +-$query.$col8#10 AS "$col8" [STRING]
 | +-KeyValue.Key#1 AS key [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[KeyValue.Key#1, KeyValue.Value#2, KeyValue.Value#4, KeyValue.Value#6, $query.$col2#7, KeyValue.Key#1, KeyValue.Value#2, $query.$col4#8, KeyValue.Key#3, KeyValue.Value#4, $query.$col6#9, KeyValue.Key#5, KeyValue.Value#6, $query.$col8#10, KeyValue.Key#1]
     +-expr_list=
-    | +-$col2#7 := Literal(type=STRING, value="--")
-    | +-$col4#8 := Literal(type=STRING, value="--")
-    | +-$col6#9 := Literal(type=STRING, value="--")
-    | +-$col8#10 := Literal(type=STRING, value="--")
+    | +-$col2#7 := Literal(type=STRING, value='--')
+    | +-$col4#8 := Literal(type=STRING, value='--')
+    | +-$col6#9 := Literal(type=STRING, value='--')
+    | +-$col8#10 := Literal(type=STRING, value='--')
     +-input_scan=
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4, Key#5, Value#6]
@@ -686,22 +686,22 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         |   +-left_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        |   | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         |   +-right_scan=
-        |   | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        |   | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#3)
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias="kv3")
+        | +-TableScan(column_list=KeyValue.[Key#5, Value#6], table=KeyValue, column_index_list=[0, 1], alias='kv3')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=KeyValue.Key#1)
             +-ColumnRef(type=INT64, column=KeyValue.Key#5)
 ==
 
-# `key` is the column from the third join since the inner joins take
+# "key" is the column from the third join since the inner joins take
 # the key from the left.
 select key
 from KeyValue kv1
@@ -730,21 +730,21 @@ QueryStmt
         |   |   | +-JoinScan
         |   |   |   +-column_list=KeyValue.[Key#1, Key#3]
         |   |   |   +-left_scan=
-        |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv1")
+        |   |   |   | +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv1')
         |   |   |   +-right_scan=
-        |   |   |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias="kv2")
+        |   |   |   | +-TableScan(column_list=[KeyValue.Key#3], table=KeyValue, column_index_list=[0], alias='kv2')
         |   |   |   +-join_expr=
         |   |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |   |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   |   |       +-ColumnRef(type=INT64, column=KeyValue.Key#3)
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0], alias="kv3")
+        |   |   | +-TableScan(column_list=[KeyValue.Key#5], table=KeyValue, column_index_list=[0], alias='kv3')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=KeyValue.Key#1)
         |   |       +-ColumnRef(type=INT64, column=KeyValue.Key#5)
         |   +-right_scan=
-        |   | +-TableScan(column_list=[KeyValue.Key#7], table=KeyValue, column_index_list=[0], alias="kv4")
+        |   | +-TableScan(column_list=[KeyValue.Key#7], table=KeyValue, column_index_list=[0], alias='kv4')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=KeyValue.Key#5)
@@ -780,9 +780,9 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Key#3, Value#4]
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="kv1")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='kv1')
         +-right_scan=
-        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias="kv2")
+        | +-TableScan(column_list=KeyValue.[Key#3, Value#4], table=KeyValue, column_index_list=[0, 1], alias='kv2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(3) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -799,7 +799,7 @@ QueryStmt
               +-ColumnRef(type=INT64, column=KeyValue.Key#3)
 ==
 
-# We resolve `key` on the lhs of the join, opaquely, and it resolves to a scan.
+# We resolve "key" on the lhs of the join, opaquely, and it resolves to a scan.
 # If we forced it to resolve only as a column, then the query would work.
 select 1
 from KeyValue key
@@ -816,7 +816,7 @@ join KeyValue kv2 using(key)
 # name from both sides of the join (lhs.int32_val1, rhs.int32_val1).
 select int32_val1, lhs, '--', rhs, '--', lhs.*, '--', rhs.*, '--', *
 from
-     (select "xxx" xxx, 15 int32_val1) lhs
+     (select 'xxx' xxx, 15 int32_val1) lhs
   join TestExtraValueTable rhs
      using (int32_val1)
 --
@@ -824,16 +824,16 @@ QueryStmt
 +-output_column_list=
 | +-lhs.int32_val1#2 AS int32_val1 [INT64]
 | +-$query.lhs#8 AS lhs [STRUCT<xxx STRING, int32_val1 INT64>]
-| +-$query.$col3#9 AS `$col3` [STRING]
+| +-$query.$col3#9 AS "$col3" [STRING]
 | +-TestExtraValueTable.value#3 AS rhs [PROTO<zetasql_test__.TestExtraPB>]
-| +-$query.$col5#10 AS `$col5` [STRING]
+| +-$query.$col5#10 AS "$col5" [STRING]
 | +-lhs.xxx#1 AS xxx [STRING]
 | +-lhs.int32_val1#2 AS int32_val1 [INT64]
-| +-$query.$col7#11 AS `$col7` [STRING]
+| +-$query.$col7#11 AS "$col7" [STRING]
 | +-$query.int32_val1#12 AS int32_val1 [INT32]
 | +-$query.int32_val2#13 AS int32_val2 [INT32]
 | +-$query.str_value#14 AS str_value [ARRAY<STRING>]
-| +-$query.$col9#15 AS `$col9` [STRING]
+| +-$query.$col9#15 AS "$col9" [STRING]
 | +-lhs.int32_val1#2 AS int32_val1 [INT64]
 | +-lhs.xxx#1 AS xxx [STRING]
 | +-$query.int32_val2#16 AS int32_val2 [INT32]
@@ -848,9 +848,9 @@ QueryStmt
     | |   +-field_list=
     | |     +-ColumnRef(type=STRING, column=lhs.xxx#1)
     | |     +-ColumnRef(type=INT64, column=lhs.int32_val1#2)
-    | +-$col3#9 := Literal(type=STRING, value="--")
-    | +-$col5#10 := Literal(type=STRING, value="--")
-    | +-$col7#11 := Literal(type=STRING, value="--")
+    | +-$col3#9 := Literal(type=STRING, value='--')
+    | +-$col5#10 := Literal(type=STRING, value='--')
+    | +-$col7#11 := Literal(type=STRING, value='--')
     | +-int32_val1#12 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -872,7 +872,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#3)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col9#15 := Literal(type=STRING, value="--")
+    | +-$col9#15 := Literal(type=STRING, value='--')
     | +-int32_val2#16 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -894,7 +894,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=lhs.[xxx#1, int32_val1#2]
         |   +-expr_list=
-        |   | +-xxx#1 := Literal(type=STRING, value="xxx")
+        |   | +-xxx#1 := Literal(type=STRING, value='xxx')
         |   | +-int32_val1#2 := Literal(type=INT64, value=15)
         |   +-input_scan=
         |     +-SingleRowScan
@@ -910,7 +910,7 @@ QueryStmt
         |   |     +-field_descriptor=int32_val1
         |   |     +-default_value=0
         |   +-input_scan=
-        |     +-TableScan(column_list=[TestExtraValueTable.value#3], table=TestExtraValueTable, column_index_list=[0], alias="rhs")
+        |     +-TableScan(column_list=[TestExtraValueTable.value#3], table=TestExtraValueTable, column_index_list=[0], alias='rhs')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
             +-ColumnRef(type=INT64, column=lhs.int32_val1#2)
@@ -963,7 +963,7 @@ QueryStmt
         |   |     +-field_descriptor=bool_val
         |   |     +-default_value=false
         |   +-input_scan=
-        |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="k1")
+        |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='k1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=[KitchenSinkValueTable.value#2, $join_right.int64_key_1#4, $join_right.date#6, $join_right.bool_val#8]
@@ -990,7 +990,7 @@ QueryStmt
         |   |     +-field_descriptor=bool_val
         |   |     +-default_value=false
         |   +-input_scan=
-        |     +-TableScan(column_list=[KitchenSinkValueTable.value#2], table=KitchenSinkValueTable, column_index_list=[0], alias="k2")
+        |     +-TableScan(column_list=[KitchenSinkValueTable.value#2], table=KitchenSinkValueTable, column_index_list=[0], alias='k2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(2) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -1028,7 +1028,7 @@ ALTERNATION GROUP: V_1_1_ARRAY_EQUALITY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [INT64]
+| +-$query.$col1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1055,7 +1055,7 @@ QueryStmt
         |   |     +-field_descriptor=repeated_bool_val
         |   |     +-default_value=[]
         |   +-input_scan=
-        |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="k1")
+        |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='k1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=[KitchenSinkValueTable.value#2, $join_right.int64_key_1#4, $join_right.repeated_bool_val#6]
@@ -1074,7 +1074,7 @@ QueryStmt
         |   |     +-field_descriptor=repeated_bool_val
         |   |     +-default_value=[]
         |   +-input_scan=
-        |     +-TableScan(column_list=[KitchenSinkValueTable.value#2], table=KitchenSinkValueTable, column_index_list=[0], alias="k2")
+        |     +-TableScan(column_list=[KitchenSinkValueTable.value#2], table=KitchenSinkValueTable, column_index_list=[0], alias='k2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
             +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -1110,15 +1110,15 @@ QueryStmt
 +-output_column_list=
 | +-TestExtraValueTable.value#1 AS t1 [PROTO<zetasql_test__.TestExtraPB>]
 | +-TestExtraValueTable.value#4 AS t2 [PROTO<zetasql_test__.TestExtraPB>]
-| +-$query.$col3#10 AS `$col3` [STRING]
+| +-$query.$col3#10 AS "$col3" [STRING]
 | +-$query.int32_val1#11 AS int32_val1 [INT32]
 | +-$query.int32_val2#12 AS int32_val2 [INT32]
 | +-$query.str_value#13 AS str_value [ARRAY<STRING>]
-| +-$query.$col5#14 AS `$col5` [STRING]
+| +-$query.$col5#14 AS "$col5" [STRING]
 | +-$query.int32_val1#15 AS int32_val1 [INT32]
 | +-$query.int32_val2#16 AS int32_val2 [INT32]
 | +-$query.str_value#17 AS str_value [ARRAY<STRING>]
-| +-$query.$col7#18 AS `$col7` [STRING]
+| +-$query.$col7#18 AS "$col7" [STRING]
 | +-$full_join.int32_val1#9 AS int32_val1 [INT32]
 | +-$query.int32_val2#19 AS int32_val2 [INT32]
 | +-$query.str_value#20 AS str_value [ARRAY<STRING>]
@@ -1128,7 +1128,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[TestExtraValueTable.value#1, TestExtraValueTable.value#4, $query.$col3#10, $query.int32_val1#11, $query.int32_val2#12, $query.str_value#13, $query.$col5#14, $query.int32_val1#15, $query.int32_val2#16, $query.str_value#17, $query.$col7#18, $full_join.int32_val1#9, $query.int32_val2#19, $query.str_value#20, $query.int32_val2#21, $query.str_value#22]
     +-expr_list=
-    | +-$col3#10 := Literal(type=STRING, value="--")
+    | +-$col3#10 := Literal(type=STRING, value='--')
     | +-int32_val1#11 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1150,7 +1150,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#1)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col5#14 := Literal(type=STRING, value="--")
+    | +-$col5#14 := Literal(type=STRING, value='--')
     | +-int32_val1#15 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1172,7 +1172,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#4)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-$col7#18 := Literal(type=STRING, value="--")
+    | +-$col7#18 := Literal(type=STRING, value='--')
     | +-int32_val2#19 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1225,7 +1225,7 @@ QueryStmt
             |   |     +-field_descriptor=int32_val1
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="t1")
+            |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[TestExtraValueTable.value#4, $join_right.int32_val1#8]
@@ -1238,7 +1238,7 @@ QueryStmt
             |   |     +-field_descriptor=int32_val1
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias="t2")
+            |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
                 +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1279,7 +1279,7 @@ QueryStmt
             |   |     +-field_descriptor=int32_val1
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="t1")
+            |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[TestExtraValueTable.value#4, $join_right.int32_val1#8]
@@ -1292,7 +1292,7 @@ QueryStmt
             |   |     +-field_descriptor=int32_val1
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias="t2")
+            |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
                 +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1360,7 +1360,7 @@ QueryStmt
         |   |     +-field_descriptor=int32_val1
         |   |     +-default_value=0
         |   +-input_scan=
-        |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="t1")
+        |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='t1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=[TestExtraValueTable.value#4, $join_right.int32_val1#8]
@@ -1373,7 +1373,7 @@ QueryStmt
         |   |     +-field_descriptor=int32_val1
         |   |     +-default_value=0
         |   +-input_scan=
-        |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias="t2")
+        |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias='t2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
             +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1441,7 +1441,7 @@ QueryStmt
             |   |     +-field_descriptor=int32_val1
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="t1")
+            |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[TestExtraValueTable.value#4, $join_right.int32_val1#8]
@@ -1454,7 +1454,7 @@ QueryStmt
             |   |     +-field_descriptor=int32_val1
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias="t2")
+            |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
                 +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1466,9 +1466,9 @@ QueryStmt
 # all the fields of t2 except the using column.  Additionally, we still
 # get all the USING fields of t1 and t2 if we select t1.* and t2.*, and
 # we get the using columns directly as t1.int32_val1 and t2.int32_val1.
-select *, "----------------------------" as separator1,
-       t1.*, "----------------------------" as separator2,
-       t2.*, "----------------------------" as separator3,
+select *, '----------------------------' as separator1,
+       t1.*, '----------------------------' as separator2,
+       t2.*, '----------------------------' as separator3,
        t1.int32_val1,
        t2.int32_val1
 from TestExtraValueTable t1 JOIN
@@ -1524,7 +1524,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#4)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-separator1#13 := Literal(type=STRING, value="----------------------------")
+    | +-separator1#13 := Literal(type=STRING, value='----------------------------')
     | +-int32_val1#14 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1546,7 +1546,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#1)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-separator2#17 := Literal(type=STRING, value="----------------------------")
+    | +-separator2#17 := Literal(type=STRING, value='----------------------------')
     | +-int32_val1#18 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1568,7 +1568,7 @@ QueryStmt
     | |   | +-ColumnRef(type=PROTO<zetasql_test__.TestExtraPB>, column=TestExtraValueTable.value#4)
     | |   +-field_descriptor=str_value
     | |   +-default_value=[]
-    | +-separator3#21 := Literal(type=STRING, value="----------------------------")
+    | +-separator3#21 := Literal(type=STRING, value='----------------------------')
     | +-int32_val1#22 :=
     | | +-GetProtoField
     | |   +-type=INT32
@@ -1598,7 +1598,7 @@ QueryStmt
         |   |     +-field_descriptor=int32_val1
         |   |     +-default_value=0
         |   +-input_scan=
-        |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="t1")
+        |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='t1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=[TestExtraValueTable.value#4, $join_right.int32_val1#8]
@@ -1611,7 +1611,7 @@ QueryStmt
         |   |     +-field_descriptor=int32_val1
         |   |     +-default_value=0
         |   +-input_scan=
-        |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias="t2")
+        |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias='t2')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
             +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1650,7 +1650,7 @@ QueryStmt
         |   |   |     +-field_descriptor=int32_val1
         |   |   |     +-default_value=0
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias="t1")
+        |   |     +-TableScan(column_list=[TestExtraValueTable.value#1], table=TestExtraValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[TestExtraValueTable.value#4, $join_right.int32_val1#8]
@@ -1663,7 +1663,7 @@ QueryStmt
         |   |   |     +-field_descriptor=int32_val1
         |   |   |     +-default_value=0
         |   |   +-input_scan=
-        |   |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias="t2")
+        |   |     +-TableScan(column_list=[TestExtraValueTable.value#4], table=TestExtraValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
         |       +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1680,7 +1680,7 @@ QueryStmt
         |   |     +-field_descriptor=int32_val1
         |   |     +-default_value=0
         |   +-input_scan=
-        |     +-TableScan(column_list=[TestExtraValueTable.value#9], table=TestExtraValueTable, column_index_list=[0], alias="t3")
+        |     +-TableScan(column_list=[TestExtraValueTable.value#9], table=TestExtraValueTable, column_index_list=[0], alias='t3')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(INT32, INT32) -> BOOL)
             +-ColumnRef(type=INT32, column=$join_left.int32_val1#7)
@@ -1728,7 +1728,7 @@ QueryStmt
       +-JoinScan
         +-column_list=[Int32ValueTable.value#1, KitchenSinkValueTable.value#2, $join_right.int64_key_1#3]
         +-left_scan=
-        | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias="int64_key_1")
+        | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias='int64_key_1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=[KitchenSinkValueTable.value#2, $join_right.int64_key_1#3]
@@ -1761,7 +1761,7 @@ QueryStmt
         +-column_list=[Int32ValueTable.value#1, KitchenSinkValueTable.value#2, $join_right.int64_key_1#3]
         +-join_type=LEFT
         +-left_scan=
-        | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias="int64_key_1")
+        | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias='int64_key_1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=[KitchenSinkValueTable.value#2, $join_right.int64_key_1#3]
@@ -1796,11 +1796,11 @@ QueryStmt
 +-output_column_list=
 | +-Int32ValueTable.value#1 AS t1 [INT32]
 | +-$query.t2#6 AS t2 [STRUCT<x INT64, t1 INT64, y INT64>]
-| +-$query.$col3#7 AS `$col3` [STRING]
+| +-$query.$col3#7 AS "$col3" [STRING]
 | +-t2.x#2 AS x [INT64]
 | +-t2.t1#3 AS t1 [INT64]
 | +-t2.y#4 AS y [INT64]
-| +-$query.$col5#8 AS `$col5` [STRING]
+| +-$query.$col5#8 AS "$col5" [STRING]
 | +-Int32ValueTable.value#1 AS t1 [INT32]
 | +-t2.x#2 AS x [INT64]
 | +-t2.y#4 AS y [INT64]
@@ -1815,13 +1815,13 @@ QueryStmt
     | |     +-ColumnRef(type=INT64, column=t2.x#2)
     | |     +-ColumnRef(type=INT64, column=t2.t1#3)
     | |     +-ColumnRef(type=INT64, column=t2.y#4)
-    | +-$col3#7 := Literal(type=STRING, value="--")
-    | +-$col5#8 := Literal(type=STRING, value="--")
+    | +-$col3#7 := Literal(type=STRING, value='--')
+    | +-$col5#8 := Literal(type=STRING, value='--')
     +-input_scan=
       +-JoinScan
         +-column_list=[Int32ValueTable.value#1, t2.x#2, t2.t1#3, t2.y#4]
         +-left_scan=
-        | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias="t1")
+        | +-TableScan(column_list=[Int32ValueTable.value#1], table=Int32ValueTable, column_index_list=[0], alias='t1')
         +-right_scan=
         | +-ProjectScan
         |   +-column_list=t2.[x#2, t1#3, y#4]
@@ -1849,14 +1849,14 @@ QueryStmt
 +-output_column_list=
 | +-$array.t1#1 AS t1 [INT64]
 | +-$array.t2#5 AS t2 [STRUCT<a STRING, t1 INT64>]
-| +-$query.$col3#7 AS `$col3` [STRING]
+| +-$query.$col3#7 AS "$col3" [STRING]
 | +-$array.t1#1 AS t1 [INT64]
 | +-$query.a#8 AS a [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$array.t1#1, $array.t2#5, $query.$col3#7, $array.t1#1, $query.a#8]
     +-expr_list=
-    | +-$col3#7 := Literal(type=STRING, value="--")
+    | +-$col3#7 := Literal(type=STRING, value='--')
     | +-a#8 :=
     |   +-GetStructField
     |     +-type=STRING
@@ -1891,7 +1891,7 @@ QueryStmt
         |           +-ProjectScan
         |             +-column_list=$expr_subquery.[a#2, t1#3]
         |             +-expr_list=
-        |             | +-a#2 := Literal(type=STRING, value="x")
+        |             | +-a#2 := Literal(type=STRING, value='x')
         |             | +-t1#3 := Literal(type=INT64, value=2)
         |             +-input_scan=
         |               +-SingleRowScan
@@ -1959,7 +1959,7 @@ QueryStmt
         |       |           +-ProjectScan
         |       |             +-column_list=$expr_subquery.[a#1, b#2]
         |       |             +-expr_list=
-        |       |             | +-a#1 := Literal(type=STRING, value="x")
+        |       |             | +-a#1 := Literal(type=STRING, value='x')
         |       |             | +-b#2 := Literal(type=INT64, value=2)
         |       |             +-input_scan=
         |       |               +-SingleRowScan
@@ -1968,7 +1968,7 @@ QueryStmt
         | +-ProjectScan
         |   +-column_list=$subquery1.[c#5, b#6]
         |   +-expr_list=
-        |   | +-c#5 := Literal(type=STRING, value="y")
+        |   | +-c#5 := Literal(type=STRING, value='y')
         |   | +-b#6 := Literal(type=INT64, value=4)
         |   +-input_scan=
         |     +-SingleRowScan
@@ -2232,7 +2232,7 @@ QueryStmt
             |   |     +-field_descriptor=int64_val
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias="t1")
+            |     +-TableScan(column_list=[KitchenSinkValueTable.value#1], table=KitchenSinkValueTable, column_index_list=[0], alias='t1')
             +-right_scan=
             | +-ProjectScan
             |   +-column_list=[KitchenSinkValueTable.value#2, $join_right.int64_val#4]
@@ -2245,7 +2245,7 @@ QueryStmt
             |   |     +-field_descriptor=int64_val
             |   |     +-default_value=0
             |   +-input_scan=
-            |     +-TableScan(column_list=[KitchenSinkValueTable.value#2], table=KitchenSinkValueTable, column_index_list=[0], alias="t2")
+            |     +-TableScan(column_list=[KitchenSinkValueTable.value#2], table=KitchenSinkValueTable, column_index_list=[0], alias='t2')
             +-join_expr=
               +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
                 +-ColumnRef(type=INT64, column=$join_left.int64_val#3)
@@ -2271,14 +2271,14 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$array.t1#1, $query.separator1#7, $array.t1#1, $query.t3#8, $query.separator2#9, $array.t2#5, $query.t1#10, $query.t3#11, $query.t3#12]
     +-expr_list=
-    | +-separator1#7 := Literal(type=STRING, value="---")
+    | +-separator1#7 := Literal(type=STRING, value='---')
     | +-t3#8 :=
     | | +-GetStructField
     | |   +-type=INT64
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<t1 INT64, t3 INT64>, column=$array.t2#5)
     | |   +-field_idx=1
-    | +-separator2#9 := Literal(type=STRING, value="---")
+    | +-separator2#9 := Literal(type=STRING, value='---')
     | +-t1#10 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2355,7 +2355,7 @@ QueryStmt
   +-ProjectScan
     +-column_list=[$array.t1#1, $query.separator1#3, $array.t1#1]
     +-expr_list=
-    | +-separator1#3 := Literal(type=STRING, value="---")
+    | +-separator1#3 := Literal(type=STRING, value='---')
     +-input_scan=
       +-ArrayScan
         +-column_list=$array.[t1#1, t1#2]
@@ -2596,9 +2596,9 @@ QueryStmt
       +-JoinScan
         +-column_list=ComplexTypes.[key#1, Int32Array#4, Int32Array#10]
         +-left_scan=
-        | +-TableScan(column_list=ComplexTypes.[key#1, Int32Array#4], table=ComplexTypes, column_index_list=[0, 3], alias="a")
+        | +-TableScan(column_list=ComplexTypes.[key#1, Int32Array#4], table=ComplexTypes, column_index_list=[0, 3], alias='a')
         +-right_scan=
-        | +-TableScan(column_list=[ComplexTypes.Int32Array#10], table=ComplexTypes, column_index_list=[3], alias="b")
+        | +-TableScan(column_list=[ComplexTypes.Int32Array#10], table=ComplexTypes, column_index_list=[3], alias='b')
         +-join_expr=
           +-FunctionCall(ZetaSQL:$equal(ARRAY<INT32>, ARRAY<INT32>) -> BOOL)
             +-ColumnRef(type=ARRAY<INT32>, column=ComplexTypes.Int32Array#4)
@@ -2861,10 +2861,10 @@ QueryStmt
 # struct fields, and different qualifiers for 'a'.
 select
   {{|t1.|t2.|t3.}}a, t1.b, {{|t1.}}c, {{|t2.}}d, {{|t3.}}e,
-  "---" as sep1, *,
-  "---" as sep2, t1.*,
-  "---" as sep3, t2.*,
-  "---" as sep4, t3.*
+  '---' as sep1, *,
+  '---' as sep2, t1.*,
+  '---' as sep3, t2.*,
+  '---' as sep4, t3.*
 FROM
   (UNNEST([struct(0 as a, 1 as b, 2 as c)]) t1
    JOIN
@@ -2937,7 +2937,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#14 := Literal(type=STRING, value="---")
+    | +-sep1#14 := Literal(type=STRING, value='---')
     | +-c#15 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2956,7 +2956,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#18 := Literal(type=STRING, value="---")
+    | +-sep2#18 := Literal(type=STRING, value='---')
     | +-a#19 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2975,7 +2975,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#22 := Literal(type=STRING, value="---")
+    | +-sep3#22 := Literal(type=STRING, value='---')
     | +-a#23 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -2994,7 +2994,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#26 := Literal(type=STRING, value="---")
+    | +-sep4#26 := Literal(type=STRING, value='---')
     | +-a#27 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3149,7 +3149,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#15 := Literal(type=STRING, value="---")
+    | +-sep1#15 := Literal(type=STRING, value='---')
     | +-c#16 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3168,7 +3168,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#19 := Literal(type=STRING, value="---")
+    | +-sep2#19 := Literal(type=STRING, value='---')
     | +-a#20 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3187,7 +3187,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#23 := Literal(type=STRING, value="---")
+    | +-sep3#23 := Literal(type=STRING, value='---')
     | +-a#24 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3206,7 +3206,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#27 := Literal(type=STRING, value="---")
+    | +-sep4#27 := Literal(type=STRING, value='---')
     | +-a#28 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3361,7 +3361,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#15 := Literal(type=STRING, value="---")
+    | +-sep1#15 := Literal(type=STRING, value='---')
     | +-c#16 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3380,7 +3380,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#19 := Literal(type=STRING, value="---")
+    | +-sep2#19 := Literal(type=STRING, value='---')
     | +-a#20 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3399,7 +3399,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#23 := Literal(type=STRING, value="---")
+    | +-sep3#23 := Literal(type=STRING, value='---')
     | +-a#24 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3418,7 +3418,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#27 := Literal(type=STRING, value="---")
+    | +-sep4#27 := Literal(type=STRING, value='---')
     | +-a#28 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3573,7 +3573,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep1#15 := Literal(type=STRING, value="---")
+    | +-sep1#15 := Literal(type=STRING, value='---')
     | +-c#16 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3592,7 +3592,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, e INT64>, column=$array.t3#7)
     | |   +-field_idx=2
-    | +-sep2#19 := Literal(type=STRING, value="---")
+    | +-sep2#19 := Literal(type=STRING, value='---')
     | +-a#20 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3611,7 +3611,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, c INT64>, column=$array.t1#1)
     | |   +-field_idx=2
-    | +-sep3#23 := Literal(type=STRING, value="---")
+    | +-sep3#23 := Literal(type=STRING, value='---')
     | +-a#24 :=
     | | +-GetStructField
     | |   +-type=INT64
@@ -3630,7 +3630,7 @@ QueryStmt
     | |   +-expr=
     | |   | +-ColumnRef(type=STRUCT<a INT64, b INT64, d INT64>, column=$array.t2#2)
     | |   +-field_idx=2
-    | +-sep4#27 := Literal(type=STRING, value="---")
+    | +-sep4#27 := Literal(type=STRING, value='---')
     | +-a#28 :=
     | | +-GetStructField
     | |   +-type=INT64

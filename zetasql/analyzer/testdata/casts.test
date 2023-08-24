@@ -4,16 +4,16 @@ select cast(true as BOOL), cast(1 AS INT32), cast(1 AS INT64),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [INT32]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [UINT32]
-| +-$query.$col5#5 AS `$col5` [UINT64]
-| +-$query.$col6#6 AS `$col6` [FLOAT]
-| +-$query.$col7#7 AS `$col7` [FLOAT]
-| +-$query.$col8#8 AS `$col8` [DOUBLE]
-| +-$query.$col9#9 AS `$col9` [DOUBLE]
-| +-$query.$col10#10 AS `$col10` [STRING]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [INT32]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [UINT32]
+| +-$query.$col5#5 AS "$col5" [UINT64]
+| +-$query.$col6#6 AS "$col6" [FLOAT]
+| +-$query.$col7#7 AS "$col7" [FLOAT]
+| +-$query.$col8#8 AS "$col8" [DOUBLE]
+| +-$query.$col9#9 AS "$col9" [DOUBLE]
+| +-$query.$col10#10 AS "$col10" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10]
@@ -27,7 +27,7 @@ QueryStmt
     | +-$col7#7 := Literal(type=FLOAT, value=1, has_explicit_type=TRUE)
     | +-$col8#8 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
     | +-$col9#9 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
-    | +-$col10#10 := Literal(type=STRING, value="foo", has_explicit_type=TRUE)
+    | +-$col10#10 := Literal(type=STRING, value='foo', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
@@ -38,14 +38,14 @@ select cast(true as bool), cast(1 as int32), cast(1 as inT64),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
-| +-$query.$col2#2 AS `$col2` [INT32]
-| +-$query.$col3#3 AS `$col3` [INT64]
-| +-$query.$col4#4 AS `$col4` [UINT32]
-| +-$query.$col5#5 AS `$col5` [UINT64]
-| +-$query.$col6#6 AS `$col6` [FLOAT]
-| +-$query.$col7#7 AS `$col7` [DOUBLE]
-| +-$query.$col8#8 AS `$col8` [STRING]
+| +-$query.$col1#1 AS "$col1" [BOOL]
+| +-$query.$col2#2 AS "$col2" [INT32]
+| +-$query.$col3#3 AS "$col3" [INT64]
+| +-$query.$col4#4 AS "$col4" [UINT32]
+| +-$query.$col5#5 AS "$col5" [UINT64]
+| +-$query.$col6#6 AS "$col6" [FLOAT]
+| +-$query.$col7#7 AS "$col7" [DOUBLE]
+| +-$query.$col8#8 AS "$col8" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8]
@@ -57,31 +57,31 @@ QueryStmt
     | +-$col5#5 := Literal(type=UINT64, value=1, has_explicit_type=TRUE)
     | +-$col6#6 := Literal(type=FLOAT, value=1, has_explicit_type=TRUE)
     | +-$col7#7 := Literal(type=DOUBLE, value=1, has_explicit_type=TRUE)
-    | +-$col8#8 := Literal(type=STRING, value="foo", has_explicit_type=TRUE)
+    | +-$col8#8 := Literal(type=STRING, value='foo', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
 
-select cast(`bool` as string), cast(`bool` as int32), cast(`bool` as int64),
-       cast(`bool` as uint32), cast(`bool` as uint64),
-       "-------------------------------------------" as separator,
-       cast(`string` as bool), cast(`int32` as bool), cast(`int64` as bool),
-       cast(`uint32` as bool), cast(`uint64` as bool)
+select cast("bool" as string), cast("bool" as int32), cast("bool" as int64),
+       cast("bool" as uint32), cast("bool" as uint64),
+       '-------------------------------------------' as separator,
+       cast("string" as bool), cast("int32" as bool), cast("int64" as bool),
+       cast("uint32" as bool), cast("uint64" as bool)
 from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRING]
-| +-$query.$col2#20 AS `$col2` [INT32]
-| +-$query.$col3#21 AS `$col3` [INT64]
-| +-$query.$col4#22 AS `$col4` [UINT32]
-| +-$query.$col5#23 AS `$col5` [UINT64]
+| +-$query.$col1#19 AS "$col1" [STRING]
+| +-$query.$col2#20 AS "$col2" [INT32]
+| +-$query.$col3#21 AS "$col3" [INT64]
+| +-$query.$col4#22 AS "$col4" [UINT32]
+| +-$query.$col5#23 AS "$col5" [UINT64]
 | +-$query.separator#24 AS separator [STRING]
-| +-$query.$col7#25 AS `$col7` [BOOL]
-| +-$query.$col8#26 AS `$col8` [BOOL]
-| +-$query.$col9#27 AS `$col9` [BOOL]
-| +-$query.$col10#28 AS `$col10` [BOOL]
-| +-$query.$col11#29 AS `$col11` [BOOL]
+| +-$query.$col7#25 AS "$col7" [BOOL]
+| +-$query.$col8#26 AS "$col8" [BOOL]
+| +-$query.$col9#27 AS "$col9" [BOOL]
+| +-$query.$col10#28 AS "$col10" [BOOL]
+| +-$query.$col11#29 AS "$col11" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, $col3#21, $col4#22, $col5#23, separator#24, $col7#25, $col8#26, $col9#27, $col10#28, $col11#29]
@@ -101,7 +101,7 @@ QueryStmt
     | +-$col5#23 :=
     | | +-Cast(BOOL -> UINT64)
     | |   +-ColumnRef(type=BOOL, column=SimpleTypes.bool#7)
-    | +-separator#24 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#24 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col7#25 :=
     | | +-Cast(STRING -> BOOL)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
@@ -121,30 +121,30 @@ QueryStmt
       +-TableScan(column_list=SimpleTypes.[int32#1, int64#2, uint32#3, uint64#4, string#5, bool#7], table=SimpleTypes, column_index_list=[0, 1, 2, 3, 4, 6])
 ==
 
-select cast(`int32` as string), cast(`int64` as string),
-       cast(`uint32` as string), cast(`uint64` as string),
-       cast(`float` as string), cast(`double` as string),
-       "-------------------------------------------" as separator,
-       cast(`string` as int32), cast(`string` as int64),
-       cast(`string` as uint32), cast(`string` as uint64),
-       cast(`string` as float), cast(`string` as double)
+select cast("int32" as string), cast("int64" as string),
+       cast("uint32" as string), cast("uint64" as string),
+       cast("float" as string), cast("double" as string),
+       '-------------------------------------------' as separator,
+       cast("string" as int32), cast("string" as int64),
+       cast("string" as uint32), cast("string" as uint64),
+       cast("string" as float), cast("string" as double)
 from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRING]
-| +-$query.$col2#20 AS `$col2` [STRING]
-| +-$query.$col3#21 AS `$col3` [STRING]
-| +-$query.$col4#22 AS `$col4` [STRING]
-| +-$query.$col5#23 AS `$col5` [STRING]
-| +-$query.$col6#24 AS `$col6` [STRING]
+| +-$query.$col1#19 AS "$col1" [STRING]
+| +-$query.$col2#20 AS "$col2" [STRING]
+| +-$query.$col3#21 AS "$col3" [STRING]
+| +-$query.$col4#22 AS "$col4" [STRING]
+| +-$query.$col5#23 AS "$col5" [STRING]
+| +-$query.$col6#24 AS "$col6" [STRING]
 | +-$query.separator#25 AS separator [STRING]
-| +-$query.$col8#26 AS `$col8` [INT32]
-| +-$query.$col9#27 AS `$col9` [INT64]
-| +-$query.$col10#28 AS `$col10` [UINT32]
-| +-$query.$col11#29 AS `$col11` [UINT64]
-| +-$query.$col12#30 AS `$col12` [FLOAT]
-| +-$query.$col13#31 AS `$col13` [DOUBLE]
+| +-$query.$col8#26 AS "$col8" [INT32]
+| +-$query.$col9#27 AS "$col9" [INT64]
+| +-$query.$col10#28 AS "$col10" [UINT32]
+| +-$query.$col11#29 AS "$col11" [UINT64]
+| +-$query.$col12#30 AS "$col12" [FLOAT]
+| +-$query.$col13#31 AS "$col13" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, $col3#21, $col4#22, $col5#23, $col6#24, separator#25, $col8#26, $col9#27, $col10#28, $col11#29, $col12#30, $col13#31]
@@ -167,7 +167,7 @@ QueryStmt
     | +-$col6#24 :=
     | | +-Cast(DOUBLE -> STRING)
     | |   +-ColumnRef(type=DOUBLE, column=SimpleTypes.double#9)
-    | +-separator#25 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#25 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col8#26 :=
     | | +-Cast(STRING -> INT32)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
@@ -190,19 +190,19 @@ QueryStmt
       +-TableScan(column_list=SimpleTypes.[int32#1, int64#2, uint32#3, uint64#4, string#5, float#8, double#9], table=SimpleTypes, column_index_list=[0, 1, 2, 3, 4, 7, 8])
 ==
 
-select cast(`string` as bytes format 'hex') from SimpleTypes;
+select cast("string" as bytes format 'hex') from SimpleTypes;
 --
 ERROR: CAST with FORMAT is not supported [at 1:31]
-select cast(`string` as bytes format 'hex') from SimpleTypes;
+select cast("string" as bytes format 'hex') from SimpleTypes;
                               ^
 ==
 
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bytes format 'hex') from SimpleTypes;
+select cast("string" as bytes format 'hex') from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -211,18 +211,18 @@ QueryStmt
     |   +-Cast(STRING -> BYTES)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |       +-Literal(type=STRING, value="hex")
+    |       +-Literal(type=STRING, value='hex')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
 
 # Test the case when format is an explicitly-typed null.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bytes format CAST(NULL as STRING)) from SimpleTypes;
+select cast("string" as bytes format CAST(NULL as STRING)) from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -238,11 +238,11 @@ QueryStmt
 
 # Test the case when format is untyped null.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bytes format NULL) from SimpleTypes;
+select cast("string" as bytes format NULL) from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -258,39 +258,39 @@ QueryStmt
 
 # Test the case when format is null with explicit type int64
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bytes format CAST(NULL as int64)) from SimpleTypes;
+select cast("string" as bytes format CAST(NULL as int64)) from SimpleTypes;
 --
 ERROR: FORMAT expression should return type STRING, but returns INT64 [at 1:38]
-select cast(`string` as bytes format CAST(NULL as int64)) from SimpleTypes;
+select cast("string" as bytes format CAST(NULL as int64)) from SimpleTypes;
                                      ^
 ==
 
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bytes format 123) from SimpleTypes;
+select cast("string" as bytes format 123) from SimpleTypes;
 --
 ERROR: FORMAT expression should return type STRING, but returns INT64 [at 1:38]
-select cast(`string` as bytes format 123) from SimpleTypes;
+select cast("string" as bytes format 123) from SimpleTypes;
                                      ^
 ==
 
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bool format 'hex') from SimpleTypes;
+select cast("string" as bool format 'hex') from SimpleTypes;
 --
 ERROR: FORMAT is not allowed for cast from STRING to BOOL [at 1:30]
-select cast(`string` as bool format 'hex') from SimpleTypes;
+select cast("string" as bool format 'hex') from SimpleTypes;
                              ^
 ==
 
 # When format is a literal, it is validated at analysis time.
 # Error is generated for cast(), while null is generated by  try_cast.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select {{cast| try_cast}}(`string` as bytes format 'abc') from SimpleTypes;
+select {{cast| try_cast}}("string" as bytes format 'abc') from SimpleTypes;
 --
 ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -299,7 +299,7 @@ QueryStmt
     |   +-Cast(STRING -> BYTES)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 --
@@ -307,7 +307,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -317,18 +317,18 @@ QueryStmt
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-return_null_on_error=TRUE
     |     +-format=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
 
 # Test format with type parameters on format string
 [language_features=V_1_3_FORMAT_IN_CAST,PARAMETERIZED_TYPES,NUMERIC_TYPE]
-select cast(`string` as bytes format CAST(123 as STRING(MAX))) from SimpleTypes;
+select cast("string" as bytes format CAST(123 as STRING(MAX))) from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -338,7 +338,7 @@ QueryStmt
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
     |       +-Cast(STRING -> STRING)
-    |         +-Literal(type=STRING, value="123", has_explicit_type=TRUE)
+    |         +-Literal(type=STRING, value='123', has_explicit_type=TRUE)
     |         +-type_modifiers=type_parameters:(max_length=MAX)
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
@@ -346,11 +346,11 @@ QueryStmt
 
 # Test format with type parameters
 [language_features=V_1_3_FORMAT_IN_CAST,V_1_3_COLLATION_SUPPORT,V_1_3_ANNOTATION_FRAMEWORK,PARAMETERIZED_TYPES,NUMERIC_TYPE]
-select cast(`string` as BYTES(10) format 'hex') from SimpleTypes;
+select cast("string" as BYTES(10) format 'hex') from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BYTES]
+| +-$query.$col1#19 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -359,7 +359,7 @@ QueryStmt
     |   +-Cast(STRING -> BYTES)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="hex")
+    |     | +-Literal(type=STRING, value='hex')
     |     +-type_modifiers=type_parameters:(max_length=10)
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
@@ -383,12 +383,12 @@ select cast('a' as STRING collate 'und:ci');
 
 # Test format with AT TIME ZONE
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'yyyy' at time zone 'UTC') from SimpleTypes;
+select cast("string" as timestamp format 'yyyy' at time zone 'UTC') from SimpleTypes;
 --
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -397,42 +397,42 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="UTC")
+    |       +-Literal(type=STRING, value='UTC')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
 
 # Test that AT TIME ZONE is only allowed for cast from/to timestamp
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as bytes format 'hex' at time zone 'UTC') from SimpleTypes;
+select cast("string" as bytes format 'hex' at time zone 'UTC') from SimpleTypes;
 --
 
 ERROR: AT TIME ZONE is not allowed for cast from STRING to BYTES [at 1:57]
-select cast(`string` as bytes format 'hex' at time zone 'UTC') from SimpleTypes;
+select cast("string" as bytes format 'hex' at time zone 'UTC') from SimpleTypes;
                                                         ^
 ==
 
 # Test that AT TIME ZONE expression has to be a string
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'abc' at time zone 1) from SimpleTypes;
+select cast("string" as timestamp format 'abc' at time zone 1) from SimpleTypes;
 --
 ERROR: AT TIME ZONE expression should return type STRING, but returns INT64 [at 1:61]
-select cast(`string` as timestamp format 'abc' at time zone 1) from SimpleTypes;
+select cast("string" as timestamp format 'abc' at time zone 1) from SimpleTypes;
                                                             ^
 ==
 
 # Test that format literal is validated in cast from/to timestamp
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'abc' {{at time zone 'UTC'|}}) from SimpleTypes;
+select cast("string" as timestamp format 'abc' {{at time zone 'UTC'|}}) from SimpleTypes;
 --
 
 ALTERNATION GROUP: at time zone 'UTC'
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -441,9 +441,9 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="abc")
+    |     | +-Literal(type=STRING, value='abc')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="UTC")
+    |       +-Literal(type=STRING, value='UTC')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 --
@@ -451,7 +451,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -460,7 +460,7 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -472,7 +472,7 @@ select cast(date'1234-05-06' as string format 'HH');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -481,7 +481,7 @@ QueryStmt
     |   +-Cast(DATE -> STRING)
     |     +-Literal(type=DATE, value=1234-05-06, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="HH")
+    |       +-Literal(type=STRING, value='HH')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -493,7 +493,7 @@ select cast(datetime '1234-05-06 07:08:09' as string format 'TZH');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -502,7 +502,7 @@ QueryStmt
     |   +-Cast(DATETIME -> STRING)
     |     +-Literal(type=DATETIME, value=1234-05-06 07:08:09, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="TZH")
+    |       +-Literal(type=STRING, value='TZH')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -514,7 +514,7 @@ select cast(time '07:08:09' as string format 'MM');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -523,7 +523,7 @@ QueryStmt
     |   +-Cast(TIME -> STRING)
     |     +-Literal(type=TIME, value=07:08:09, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="MM")
+    |       +-Literal(type=STRING, value='MM')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -535,7 +535,7 @@ select cast(timestamp '1234-05-06 07:08:09-10' as string format 'a');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -544,7 +544,7 @@ QueryStmt
     |   +-Cast(TIMESTAMP -> STRING)
     |     +-Literal(type=TIMESTAMP, value=1234-05-06 17:08:09+00, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="a")
+    |       +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -558,10 +558,10 @@ select cast(date'1234-05-06' as string format 'YYYY'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4]
@@ -570,33 +570,33 @@ QueryStmt
     | | +-Cast(DATE -> STRING)
     | |   +-Literal(type=DATE, value=1234-05-06, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="YYYY")
+    | |     +-Literal(type=STRING, value='YYYY')
     | +-$col2#2 :=
     | | +-Cast(DATETIME -> STRING)
     | |   +-Literal(type=DATETIME, value=1234-05-06 07:08:09, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="HH")
+    | |     +-Literal(type=STRING, value='HH')
     | +-$col3#3 :=
     | | +-Cast(TIME -> STRING)
     | |   +-Literal(type=TIME, value=07:08:09, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="MI")
+    | |     +-Literal(type=STRING, value='MI')
     | +-$col4#4 :=
     |   +-Cast(TIMESTAMP -> STRING)
     |     +-Literal(type=TIMESTAMP, value=1234-05-06 17:08:09+00, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="MM")
+    |       +-Literal(type=STRING, value='MM')
     +-input_scan=
       +-SingleRowScan
 ==
 
 # Test the case when time zone expression is null string.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'yyyy' at time zone CAST(NULL as STRING)) from SimpleTypes;
+select cast("string" as timestamp format 'yyyy' at time zone CAST(NULL as STRING)) from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -605,7 +605,7 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
     |       +-Literal(type=STRING, value=NULL, has_explicit_type=TRUE)
     +-input_scan=
@@ -614,11 +614,11 @@ QueryStmt
 
 # Test the case when time zone expression is untyped null.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'yyyy' at time zone NULL) from SimpleTypes;
+select cast("string" as timestamp format 'yyyy' at time zone NULL) from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -627,7 +627,7 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
     |       +-Literal(type=STRING, value=NULL)
     +-input_scan=
@@ -637,20 +637,20 @@ QueryStmt
 # Test the case when time zone expression is null with explicit type int64,
 # error is generated.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'yyyy' at time zone CAST(NULL as int64)) from SimpleTypes;
+select cast("string" as timestamp format 'yyyy' at time zone CAST(NULL as int64)) from SimpleTypes;
 --
 ERROR: AT TIME ZONE expression should return type STRING, but returns INT64 [at 1:62]
-...string` as timestamp format 'yyyy' at time zone CAST(NULL as int64)) from ...
+...string" as timestamp format 'yyyy' at time zone CAST(NULL as int64)) from ...
                                                    ^
 ==
 
 # Test that the time zone expression is validated at analysis time.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select cast(`string` as timestamp format 'yyyy' at time zone 'xyz') from SimpleTypes;
+select cast("string" as timestamp format 'yyyy' at time zone 'xyz') from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -659,20 +659,20 @@ QueryStmt
     |   +-Cast(STRING -> TIMESTAMP)
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="xyz")
+    |       +-Literal(type=STRING, value='xyz')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
 
 # Test that the  try_cast expression is resolved to NULL if the time zone literal is not valid.
 [language_features=V_1_3_FORMAT_IN_CAST]
-select  try_cast(`string` as timestamp format 'yyyy' at time zone 'xyz') from SimpleTypes;
+select  try_cast("string" as timestamp format 'yyyy' at time zone 'xyz') from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -682,9 +682,9 @@ QueryStmt
     |     +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     |     +-return_null_on_error=TRUE
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="xyz")
+    |       +-Literal(type=STRING, value='xyz')
     +-input_scan=
       +-TableScan(column_list=[SimpleTypes.string#5], table=SimpleTypes, column_index_list=[4])
 ==
@@ -696,16 +696,16 @@ select cast('1234' as date format 'hh24');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
+| +-$query.$col1#1 AS "$col1" [DATE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATE)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="hh24")
+    |       +-Literal(type=STRING, value='hh24')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -717,16 +717,16 @@ select cast('1234' as datetime format 'tzh');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="tzh")
+    |       +-Literal(type=STRING, value='tzh')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -738,16 +738,16 @@ select cast('1234' as time format 'yyyy');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIME)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="yyyy")
+    |       +-Literal(type=STRING, value='yyyy')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -759,16 +759,16 @@ select cast('1234' as timestamp format 'a');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |       +-Literal(type=STRING, value="a")
+    |       +-Literal(type=STRING, value='a')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -780,18 +780,18 @@ select cast('1234' as timestamp format 'yyyy' at time zone 'abc');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234")
+    |     +-Literal(type=STRING, value='1234')
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy")
+    |     | +-Literal(type=STRING, value='yyyy')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="abc")
+    |       +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -806,42 +806,42 @@ select cast('1234' as date format 'yyyy'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
-| +-$query.$col2#2 AS `$col2` [DATETIME]
-| +-$query.$col3#3 AS `$col3` [TIME]
-| +-$query.$col4#4 AS `$col4` [TIMESTAMP]
-| +-$query.$col5#5 AS `$col5` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [DATE]
+| +-$query.$col2#2 AS "$col2" [DATETIME]
+| +-$query.$col3#3 AS "$col3" [TIME]
+| +-$query.$col4#4 AS "$col4" [TIMESTAMP]
+| +-$query.$col5#5 AS "$col5" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
     +-expr_list=
     | +-$col1#1 :=
     | | +-Cast(STRING -> DATE)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="yyyy")
+    | |     +-Literal(type=STRING, value='yyyy')
     | +-$col2#2 :=
     | | +-Cast(STRING -> DATETIME)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="yyyy")
+    | |     +-Literal(type=STRING, value='yyyy')
     | +-$col3#3 :=
     | | +-Cast(STRING -> TIME)
-    | |   +-Literal(type=STRING, value="01:02:03")
+    | |   +-Literal(type=STRING, value='01:02:03')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="hh24:mi:ss")
+    | |     +-Literal(type=STRING, value='hh24:mi:ss')
     | +-$col4#4 :=
     | | +-Cast(STRING -> TIMESTAMP)
-    | |   +-Literal(type=STRING, value="1234 01:02:03")
+    | |   +-Literal(type=STRING, value='1234 01:02:03')
     | |   +-format=
-    | |     +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    | |     +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     | +-$col5#5 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234 01:02:03")
+    |     +-Literal(type=STRING, value='1234 01:02:03')
     |     +-format=
-    |     | +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    |     | +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     |     +-time_zone=
-    |       +-Literal(type=STRING, value="+7:00")
+    |       +-Literal(type=STRING, value='+7:00')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -858,54 +858,54 @@ select cast('1234' as date format 'invalid' || 'yyyy'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATE]
-| +-$query.$col2#2 AS `$col2` [DATETIME]
-| +-$query.$col3#3 AS `$col3` [TIME]
-| +-$query.$col4#4 AS `$col4` [TIMESTAMP]
-| +-$query.$col5#5 AS `$col5` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [DATE]
+| +-$query.$col2#2 AS "$col2" [DATETIME]
+| +-$query.$col3#3 AS "$col3" [TIME]
+| +-$query.$col4#4 AS "$col4" [TIMESTAMP]
+| +-$query.$col5#5 AS "$col5" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5]
     +-expr_list=
     | +-$col1#1 :=
     | | +-Cast(STRING -> DATE)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="yyyy")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='yyyy')
     | +-$col2#2 :=
     | | +-Cast(STRING -> DATETIME)
-    | |   +-Literal(type=STRING, value="1234")
+    | |   +-Literal(type=STRING, value='1234')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="yyyy")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='yyyy')
     | +-$col3#3 :=
     | | +-Cast(STRING -> TIME)
-    | |   +-Literal(type=STRING, value="01:02:03")
+    | |   +-Literal(type=STRING, value='01:02:03')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="hh24:mi:ss")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='hh24:mi:ss')
     | +-$col4#4 :=
     | | +-Cast(STRING -> TIMESTAMP)
-    | |   +-Literal(type=STRING, value="1234 01:02:03")
+    | |   +-Literal(type=STRING, value='1234 01:02:03')
     | |   +-format=
     | |     +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    | |       +-Literal(type=STRING, value="invalid")
-    | |       +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    | |       +-Literal(type=STRING, value='invalid')
+    | |       +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     | +-$col5#5 :=
     |   +-Cast(STRING -> TIMESTAMP)
-    |     +-Literal(type=STRING, value="1234 01:02:03")
+    |     +-Literal(type=STRING, value='1234 01:02:03')
     |     +-format=
     |     | +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |     |   +-Literal(type=STRING, value="invalid")
-    |     |   +-Literal(type=STRING, value="yyyy hh24:mi:ss")
+    |     |   +-Literal(type=STRING, value='invalid')
+    |     |   +-Literal(type=STRING, value='yyyy hh24:mi:ss')
     |     +-time_zone=
     |       +-FunctionCall(ZetaSQL:concat(STRING, repeated(1) STRING) -> STRING)
-    |         +-Literal(type=STRING, value="invalid")
-    |         +-Literal(type=STRING, value="+7:00")
+    |         +-Literal(type=STRING, value='invalid')
+    |         +-Literal(type=STRING, value='+7:00')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -923,14 +923,14 @@ select cast(cast(1.23 as int32) as STRING format '99'),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8]
@@ -939,42 +939,42 @@ QueryStmt
     | | +-Cast(INT32 -> STRING)
     | |   +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col2#2 :=
     | | +-Cast(UINT32 -> STRING)
     | |   +-Literal(type=UINT32, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col3#3 :=
     | | +-Cast(INT64 -> STRING)
     | |   +-Literal(type=INT64, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col4#4 :=
     | | +-Cast(UINT64 -> STRING)
     | |   +-Literal(type=UINT64, value=1, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col5#5 :=
     | | +-Cast(FLOAT -> STRING)
     | |   +-Literal(type=FLOAT, value=1.23, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col6#6 :=
     | | +-Cast(DOUBLE -> STRING)
     | |   +-Literal(type=DOUBLE, value=1.23, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col7#7 :=
     | | +-Cast(NUMERIC -> STRING)
     | |   +-Literal(type=NUMERIC, value=1.23, has_explicit_type=TRUE)
     | |   +-format=
-    | |     +-Literal(type=STRING, value="99")
+    | |     +-Literal(type=STRING, value='99')
     | +-$col8#8 :=
     |   +-Cast(BIGNUMERIC -> STRING)
     |     +-Literal(type=BIGNUMERIC, value=1.23, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value="99")
+    |       +-Literal(type=STRING, value='99')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -985,7 +985,7 @@ select cast(cast(1.23 as int32) as STRING format ',99');
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -994,7 +994,7 @@ QueryStmt
     |   +-Cast(INT32 -> STRING)
     |     +-Literal(type=INT32, value=1, has_explicit_type=TRUE)
     |     +-format=
-    |       +-Literal(type=STRING, value=",99")
+    |       +-Literal(type=STRING, value=',99')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -1029,96 +1029,96 @@ select  try_cast(1 as DATE)
                  ^
 ==
 
-select {{cast| try_cast}}(`int32` as date)
+select {{cast| try_cast}}("int32" as date)
 from SimpleTypes;
 --
 ALTERNATION GROUP: cast
 --
 ERROR: Invalid cast from INT32 to DATE [at 1:13]
-select cast(`int32` as date)
+select cast("int32" as date)
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Invalid cast from INT32 to DATE [at 1:18]
-select  try_cast(`int32` as date)
+select  try_cast("int32" as date)
                  ^
 ==
 
-select {{cast| try_cast}}(`int64` as date)
+select {{cast| try_cast}}("int64" as date)
 from SimpleTypes;
 --
 ALTERNATION GROUP: cast
 --
 ERROR: Invalid cast from INT64 to DATE [at 1:13]
-select cast(`int64` as date)
+select cast("int64" as date)
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Invalid cast from INT64 to DATE [at 1:18]
-select  try_cast(`int64` as date)
+select  try_cast("int64" as date)
                  ^
 ==
 
-select {{cast| try_cast}}(`date` as int32)
+select {{cast| try_cast}}("date" as int32)
 from SimpleTypes;
 --
 ALTERNATION GROUP: cast
 --
 ERROR: Invalid cast from DATE to INT32 [at 1:13]
-select cast(`date` as int32)
+select cast("date" as int32)
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Invalid cast from DATE to INT32 [at 1:18]
-select  try_cast(`date` as int32)
+select  try_cast("date" as int32)
                  ^
 ==
 
-select {{cast| try_cast}}(`date` as int64)
+select {{cast| try_cast}}("date" as int64)
 from SimpleTypes;
 --
 ALTERNATION GROUP: cast
 --
 ERROR: Invalid cast from DATE to INT64 [at 1:13]
-select cast(`date` as int64)
+select cast("date" as int64)
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Invalid cast from DATE to INT64 [at 1:18]
-select  try_cast(`date` as int64)
+select  try_cast("date" as int64)
                  ^
 ==
 
-select cast(`date` as string),
+select cast("date" as string),
        cast(timestamp as string),
-       "-------------------------------------------" as separator,
-       cast(`string` as date),
+       '-------------------------------------------' as separator,
+       cast("string" as date),
        cast(string as timestamp),
-       "-------------------------------------------" as separator2,
+       '-------------------------------------------' as separator2,
        cast(TIMESTAMP '2012-02-29 01:23:45' AS STRING),
        cast(DATE '2012-02-29' AS STRING),
-       "-------------------------------------------" as separator3,
+       '-------------------------------------------' as separator3,
        cast('2012-02-29' as DATE),
        cast('2012-02-29 01:23:45' AS TIMESTAMP)
 from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRING]
-| +-$query.$col2#20 AS `$col2` [STRING]
+| +-$query.$col1#19 AS "$col1" [STRING]
+| +-$query.$col2#20 AS "$col2" [STRING]
 | +-$query.separator#21 AS separator [STRING]
-| +-$query.$col4#22 AS `$col4` [DATE]
-| +-$query.$col5#23 AS `$col5` [TIMESTAMP]
+| +-$query.$col4#22 AS "$col4" [DATE]
+| +-$query.$col5#23 AS "$col5" [TIMESTAMP]
 | +-$query.separator2#24 AS separator2 [STRING]
-| +-$query.$col7#25 AS `$col7` [STRING]
-| +-$query.$col8#26 AS `$col8` [STRING]
+| +-$query.$col7#25 AS "$col7" [STRING]
+| +-$query.$col8#26 AS "$col8" [STRING]
 | +-$query.separator3#27 AS separator3 [STRING]
-| +-$query.$col10#28 AS `$col10` [DATE]
-| +-$query.$col11#29 AS `$col11` [TIMESTAMP]
+| +-$query.$col10#28 AS "$col10" [DATE]
+| +-$query.$col11#29 AS "$col11" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, separator#21, $col4#22, $col5#23, separator2#24, $col7#25, $col8#26, separator3#27, $col10#28, $col11#29]
@@ -1129,49 +1129,49 @@ QueryStmt
     | +-$col2#20 :=
     | | +-Cast(TIMESTAMP -> STRING)
     | |   +-ColumnRef(type=TIMESTAMP, column=SimpleTypes.timestamp#15)
-    | +-separator#21 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#21 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col4#22 :=
     | | +-Cast(STRING -> DATE)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     | +-$col5#23 :=
     | | +-Cast(STRING -> TIMESTAMP)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
-    | +-separator2#24 := Literal(type=STRING, value="-------------------------------------------")
-    | +-$col7#25 := Literal(type=STRING, value="2012-02-29 01:23:45-08", has_explicit_type=TRUE)
-    | +-$col8#26 := Literal(type=STRING, value="2012-02-29", has_explicit_type=TRUE)
-    | +-separator3#27 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator2#24 := Literal(type=STRING, value='-------------------------------------------')
+    | +-$col7#25 := Literal(type=STRING, value='2012-02-29 01:23:45-08', has_explicit_type=TRUE)
+    | +-$col8#26 := Literal(type=STRING, value='2012-02-29', has_explicit_type=TRUE)
+    | +-separator3#27 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col10#28 := Literal(type=DATE, value=2012-02-29, has_explicit_type=TRUE)
     | +-$col11#29 := Literal(type=TIMESTAMP, value=2012-02-29 09:23:45+00, has_explicit_type=TRUE)
     +-input_scan=
       +-TableScan(column_list=SimpleTypes.[string#5, date#10, timestamp#15], table=SimpleTypes, column_index_list=[4, 9, 14])
 ==
 
-select  try_cast(`date` as string),
+select  try_cast("date" as string),
         try_cast(timestamp as string),
-       "-------------------------------------------" as separator,
-        try_cast(`string` as date),
+       '-------------------------------------------' as separator,
+        try_cast("string" as date),
         try_cast(string as timestamp),
-       "-------------------------------------------" as separator2,
+       '-------------------------------------------' as separator2,
         try_cast(TIMESTAMP '2012-02-29 01:23:45' AS STRING),
         try_cast(DATE '2012-02-29' AS STRING),
-       "-------------------------------------------" as separator3,
+       '-------------------------------------------' as separator3,
         try_cast('2012-02-29' as DATE),
         try_cast('2012-02-29 01:23:45' AS TIMESTAMP)
 from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [STRING]
-| +-$query.$col2#20 AS `$col2` [STRING]
+| +-$query.$col1#19 AS "$col1" [STRING]
+| +-$query.$col2#20 AS "$col2" [STRING]
 | +-$query.separator#21 AS separator [STRING]
-| +-$query.$col4#22 AS `$col4` [DATE]
-| +-$query.$col5#23 AS `$col5` [TIMESTAMP]
+| +-$query.$col4#22 AS "$col4" [DATE]
+| +-$query.$col5#23 AS "$col5" [TIMESTAMP]
 | +-$query.separator2#24 AS separator2 [STRING]
-| +-$query.$col7#25 AS `$col7` [STRING]
-| +-$query.$col8#26 AS `$col8` [STRING]
+| +-$query.$col7#25 AS "$col7" [STRING]
+| +-$query.$col8#26 AS "$col8" [STRING]
 | +-$query.separator3#27 AS separator3 [STRING]
-| +-$query.$col10#28 AS `$col10` [DATE]
-| +-$query.$col11#29 AS `$col11` [TIMESTAMP]
+| +-$query.$col10#28 AS "$col10" [DATE]
+| +-$query.$col11#29 AS "$col11" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, separator#21, $col4#22, $col5#23, separator2#24, $col7#25, $col8#26, separator3#27, $col10#28, $col11#29]
@@ -1184,7 +1184,7 @@ QueryStmt
     | | +-Cast(TIMESTAMP -> STRING)
     | |   +-ColumnRef(type=TIMESTAMP, column=SimpleTypes.timestamp#15)
     | |   +-return_null_on_error=TRUE
-    | +-separator#21 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#21 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col4#22 :=
     | | +-Cast(STRING -> DATE)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
@@ -1193,10 +1193,10 @@ QueryStmt
     | | +-Cast(STRING -> TIMESTAMP)
     | |   +-ColumnRef(type=STRING, column=SimpleTypes.string#5)
     | |   +-return_null_on_error=TRUE
-    | +-separator2#24 := Literal(type=STRING, value="-------------------------------------------")
-    | +-$col7#25 := Literal(type=STRING, value="2012-02-29 01:23:45-08", has_explicit_type=TRUE)
-    | +-$col8#26 := Literal(type=STRING, value="2012-02-29", has_explicit_type=TRUE)
-    | +-separator3#27 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator2#24 := Literal(type=STRING, value='-------------------------------------------')
+    | +-$col7#25 := Literal(type=STRING, value='2012-02-29 01:23:45-08', has_explicit_type=TRUE)
+    | +-$col8#26 := Literal(type=STRING, value='2012-02-29', has_explicit_type=TRUE)
+    | +-separator3#27 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col10#28 := Literal(type=DATE, value=2012-02-29, has_explicit_type=TRUE)
     | +-$col11#29 := Literal(type=TIMESTAMP, value=2012-02-29 09:23:45+00, has_explicit_type=TRUE)
     +-input_scan=
@@ -1222,51 +1222,51 @@ select cast(TIMESTAMP '2012-02-29 01:23:45' AS STRING),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [STRING]
-| +-$query.$col4#4 AS `$col4` [STRING]
-| +-$query.$col5#5 AS `$col5` [STRING]
-| +-$query.$col6#6 AS `$col6` [STRING]
-| +-$query.$col7#7 AS `$col7` [STRING]
-| +-$query.$col8#8 AS `$col8` [STRING]
-| +-$query.$col9#9 AS `$col9` [STRING]
-| +-$query.$col10#10 AS `$col10` [STRING]
-| +-$query.$col11#11 AS `$col11` [STRING]
-| +-$query.$col12#12 AS `$col12` [STRING]
-| +-$query.$col13#13 AS `$col13` [STRING]
-| +-$query.$col14#14 AS `$col14` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [STRING]
+| +-$query.$col4#4 AS "$col4" [STRING]
+| +-$query.$col5#5 AS "$col5" [STRING]
+| +-$query.$col6#6 AS "$col6" [STRING]
+| +-$query.$col7#7 AS "$col7" [STRING]
+| +-$query.$col8#8 AS "$col8" [STRING]
+| +-$query.$col9#9 AS "$col9" [STRING]
+| +-$query.$col10#10 AS "$col10" [STRING]
+| +-$query.$col11#11 AS "$col11" [STRING]
+| +-$query.$col12#12 AS "$col12" [STRING]
+| +-$query.$col13#13 AS "$col13" [STRING]
+| +-$query.$col14#14 AS "$col14" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10, $col11#11, $col12#12, $col13#13, $col14#14]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="2012-02-29 01:23:45-08", has_explicit_type=TRUE)
-    | +-$col2#2 := Literal(type=STRING, value="2012-02-29 01:23:45.100-08", has_explicit_type=TRUE)
-    | +-$col3#3 := Literal(type=STRING, value="2012-02-29 01:23:45.120-08", has_explicit_type=TRUE)
-    | +-$col4#4 := Literal(type=STRING, value="2012-02-29 01:23:45.123-08", has_explicit_type=TRUE)
-    | +-$col5#5 := Literal(type=STRING, value="2012-02-29 01:23:45.123400-08", has_explicit_type=TRUE)
-    | +-$col6#6 := Literal(type=STRING, value="2012-02-29 01:23:45.123450-08", has_explicit_type=TRUE)
-    | +-$col7#7 := Literal(type=STRING, value="2012-02-29 01:23:45.123456-08", has_explicit_type=TRUE)
-    | +-$col8#8 := Literal(type=STRING, value="2012-02-29 01:23:45.000001-08", has_explicit_type=TRUE)
-    | +-$col9#9 := Literal(type=STRING, value="2012-02-29 01:23:45.000010-08", has_explicit_type=TRUE)
-    | +-$col10#10 := Literal(type=STRING, value="2012-02-29 01:23:45.000100-08", has_explicit_type=TRUE)
-    | +-$col11#11 := Literal(type=STRING, value="2012-02-29 01:23:45.001-08", has_explicit_type=TRUE)
-    | +-$col12#12 := Literal(type=STRING, value="2012-02-29 01:23:45.010-08", has_explicit_type=TRUE)
-    | +-$col13#13 := Literal(type=STRING, value="2012-02-29 01:23:45.100-08", has_explicit_type=TRUE)
-    | +-$col14#14 := Literal(type=STRING, value="2012-02-29 01:23:45-08", has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRING, value='2012-02-29 01:23:45-08', has_explicit_type=TRUE)
+    | +-$col2#2 := Literal(type=STRING, value='2012-02-29 01:23:45.100-08', has_explicit_type=TRUE)
+    | +-$col3#3 := Literal(type=STRING, value='2012-02-29 01:23:45.120-08', has_explicit_type=TRUE)
+    | +-$col4#4 := Literal(type=STRING, value='2012-02-29 01:23:45.123-08', has_explicit_type=TRUE)
+    | +-$col5#5 := Literal(type=STRING, value='2012-02-29 01:23:45.123400-08', has_explicit_type=TRUE)
+    | +-$col6#6 := Literal(type=STRING, value='2012-02-29 01:23:45.123450-08', has_explicit_type=TRUE)
+    | +-$col7#7 := Literal(type=STRING, value='2012-02-29 01:23:45.123456-08', has_explicit_type=TRUE)
+    | +-$col8#8 := Literal(type=STRING, value='2012-02-29 01:23:45.000001-08', has_explicit_type=TRUE)
+    | +-$col9#9 := Literal(type=STRING, value='2012-02-29 01:23:45.000010-08', has_explicit_type=TRUE)
+    | +-$col10#10 := Literal(type=STRING, value='2012-02-29 01:23:45.000100-08', has_explicit_type=TRUE)
+    | +-$col11#11 := Literal(type=STRING, value='2012-02-29 01:23:45.001-08', has_explicit_type=TRUE)
+    | +-$col12#12 := Literal(type=STRING, value='2012-02-29 01:23:45.010-08', has_explicit_type=TRUE)
+    | +-$col13#13 := Literal(type=STRING, value='2012-02-29 01:23:45.100-08', has_explicit_type=TRUE)
+    | +-$col14#14 := Literal(type=STRING, value='2012-02-29 01:23:45-08', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
 
 # Timestamp() is a conversion function with an optional second timezone argument.
-select timestamp(`string`),
+select timestamp("string"),
        timestamp(string, string)
 from SimpleTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
-| +-$query.$col2#20 AS `$col2` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
+| +-$query.$col2#20 AS "$col2" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20]
@@ -1292,12 +1292,12 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
-| +-$query.$col2#20 AS `$col2` [TIMESTAMP]
-| +-SimpleTypes.date#10 AS `$col3` [DATE]
-| +-$query.$col4#21 AS `$col4` [DATE]
-| +-$query.$col5#22 AS `$col5` [DATE]
-| +-SimpleTypes.timestamp#15 AS `$col6` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
+| +-$query.$col2#20 AS "$col2" [TIMESTAMP]
+| +-SimpleTypes.date#10 AS "$col3" [DATE]
+| +-$query.$col4#21 AS "$col4" [DATE]
+| +-$query.$col5#22 AS "$col5" [DATE]
+| +-SimpleTypes.timestamp#15 AS "$col6" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19, $query.$col2#20, SimpleTypes.date#10, $query.$col4#21, $query.$col5#22, SimpleTypes.timestamp#15]
@@ -1335,7 +1335,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1348,7 +1348,7 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1360,14 +1360,14 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select {{ try_cast|cast}}(`int64` as timestamp)
+select {{ try_cast|cast}}("int64" as timestamp)
 from SimpleTypes;
 --
 ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -1383,7 +1383,7 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -1411,14 +1411,14 @@ select cast(timestamp as int64)
             ^
 ==
 
-select {{ try_cast|cast}}(`int32` as timestamp)
+select {{ try_cast|cast}}("int32" as timestamp)
 from SimpleTypes;
 --
 ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -1434,7 +1434,7 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#19 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#19]
@@ -1468,7 +1468,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1481,7 +1481,7 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIMESTAMP]
+| +-$query.$col1#1 AS "$col1" [TIMESTAMP]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1692,7 +1692,7 @@ select {{ try_cast|cast}}(NULL AS ARRAY<INT32>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1731,7 +1731,7 @@ select {{ try_cast|cast}}([1,2,3] as ARRAY<INT64>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1745,7 +1745,7 @@ select cast(cast(null as ARRAY<INT32>) as ARRAY<INT32>);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1760,7 +1760,7 @@ select  try_cast( try_cast(null as ARRAY<INT32>) as ARRAY<INT32>);
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1775,7 +1775,7 @@ from ComplexTypes;
 --
 QueryStmt
 +-output_column_list=
-| +-ComplexTypes.Int32Array#4 AS `$col1` [ARRAY<INT32>]
+| +-ComplexTypes.Int32Array#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[ComplexTypes.Int32Array#4]
@@ -1792,7 +1792,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<BOOL>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1805,7 +1805,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<DOUBLE>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1818,7 +1818,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<zetasql_test__.TestEnu
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1831,7 +1831,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<FLOAT>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<FLOAT>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<FLOAT>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1844,7 +1844,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<INT32>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1859,7 +1859,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1872,12 +1872,12 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<STRING>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=ARRAY<STRING>, value=["0", "1", "2"], has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=ARRAY<STRING>, value=['0', '1', '2'], has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -1885,7 +1885,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<UINT32>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1898,7 +1898,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<UINT64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1964,7 +1964,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<BOOL>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1979,7 +1979,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<DOUBLE>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -1994,7 +1994,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<zetasql_test__.TestEnu
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2009,7 +2009,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<FLOAT>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<FLOAT>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<FLOAT>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2026,7 +2026,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-ComplexTypes.Int32Array#4 AS `$col1` [ARRAY<INT32>]
+| +-ComplexTypes.Int32Array#4 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[ComplexTypes.Int32Array#4]
@@ -2037,7 +2037,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<INT64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2052,7 +2052,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<STRING>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2067,7 +2067,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<UINT32>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<UINT32>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2082,7 +2082,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<UINT64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#7 AS `$col1` [ARRAY<UINT64>]
+| +-$query.$col1#7 AS "$col1" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#7]
@@ -2146,19 +2146,19 @@ select cast(Int32Array as ARRAY<UINT64>)
 # Cast is allowed between structs with equivalent field types.
 select cast(coalesce(array<zetasql_test__.TestEnum>[1]) AS
             array<alt_descriptor_pool.zetasql_test__.TestEnum>),
-       cast(coalesce(array<zetasql_test__.TestExtraPB>[""]) AS
+       cast(coalesce(array<zetasql_test__.TestExtraPB>['']) AS
             array<alt_descriptor_pool.zetasql_test__.TestExtraPB>),
        cast(coalesce(struct(false,
-                            array<zetasql_test__.TestExtraPB>[""],
+                            array<zetasql_test__.TestExtraPB>[''],
                             CAST(1 AS zetasql_test__.TestEnum))) AS
             STRUCT<BOOL, ARRAY<alt_descriptor_pool.zetasql_test__.TestExtraPB>,
                    alt_descriptor_pool.zetasql_test__.TestEnum>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<PROTO<zetasql_test__.TestExtraPB>>]
-| +-$query.$col3#3 AS `$col3` [STRUCT<BOOL, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<PROTO<zetasql_test__.TestExtraPB>>]
+| +-$query.$col3#3 AS "$col3" [STRUCT<BOOL, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -2186,19 +2186,19 @@ QueryStmt
 
 select  try_cast(coalesce(array<zetasql_test__.TestEnum>[1]) AS
                  array<alt_descriptor_pool.zetasql_test__.TestEnum>),
-        try_cast(coalesce(array<zetasql_test__.TestExtraPB>[""]) AS
+        try_cast(coalesce(array<zetasql_test__.TestExtraPB>['']) AS
                  array<alt_descriptor_pool.zetasql_test__.TestExtraPB>),
         try_cast(coalesce(struct(false,
-                                 array<zetasql_test__.TestExtraPB>[""],
+                                 array<zetasql_test__.TestExtraPB>[''],
                                  CAST(1 AS zetasql_test__.TestEnum))) AS
            STRUCT<BOOL, ARRAY<alt_descriptor_pool.zetasql_test__.TestExtraPB>,
                   alt_descriptor_pool.zetasql_test__.TestEnum>)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
-| +-$query.$col2#2 AS `$col2` [ARRAY<PROTO<zetasql_test__.TestExtraPB>>]
-| +-$query.$col3#3 AS `$col3` [STRUCT<BOOL, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col2#2 AS "$col2" [ARRAY<PROTO<zetasql_test__.TestExtraPB>>]
+| +-$query.$col3#3 AS "$col3" [STRUCT<BOOL, ARRAY<PROTO<zetasql_test__.TestExtraPB>>, ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3]
@@ -2255,18 +2255,18 @@ select cast(1 AS TestEnum);
                  ^
 ==
 
-select cast(1.0 AS `zetasql_test__.TestEnum`);
+select cast(1.0 AS "zetasql_test__.TestEnum");
 --
 ERROR: Invalid cast from DOUBLE to zetasql_test__.TestEnum [at 1:13]
-select cast(1.0 AS `zetasql_test__.TestEnum`);
+select cast(1.0 AS "zetasql_test__.TestEnum");
             ^
 ==
 
-select cast(1 AS `zetasql_test__.TestEnum`);
+select cast(1 AS "zetasql_test__.TestEnum");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2276,14 +2276,14 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select {{cast| try_cast}}(1000 AS `zetasql_test__.TestEnum`);
+select {{cast| try_cast}}(1000 AS "zetasql_test__.TestEnum");
 --
 
 ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2298,7 +2298,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2308,11 +2308,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast(NULL AS `zetasql_test__.TestEnum`);
+select cast(NULL AS "zetasql_test__.TestEnum");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2326,7 +2326,7 @@ select cast(1 AS zetasql_test__.TestEnum);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2336,7 +2336,7 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast(1 AS `zetasql_test__.TestEnum`);
+select cast(1 AS "zetasql_test__.TestEnum");
 --
 [SAME AS PREVIOUS]
 ==
@@ -2348,18 +2348,18 @@ select ENUM<zetasql_test__.TestEnum>(1);
        ^
 ==
 
-select `zetasql_test__.TestEnum`(1);
+select "zetasql_test__.TestEnum"(1);
 --
-ERROR: Function not found: `zetasql_test__.TestEnum` [at 1:8]
-select `zetasql_test__.TestEnum`(1);
+ERROR: Function not found: "zetasql_test__.TestEnum" [at 1:8]
+select "zetasql_test__.TestEnum"(1);
        ^
 ==
 
-select cast('TESTENUM0' AS `zetasql_test__.TestEnum`)
+select cast('TESTENUM0' AS "zetasql_test__.TestEnum")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2370,37 +2370,37 @@ QueryStmt
 ==
 
 # Same as above, but with different case string literal.
-select cast('TestEnum0' AS `zetasql_test__.TestEnum`)
+select cast('TestEnum0' AS "zetasql_test__.TestEnum")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> ENUM<zetasql_test__.TestEnum>)
-    |     +-Literal(type=STRING, value="TestEnum0")
+    |     +-Literal(type=STRING, value='TestEnum0')
     +-input_scan=
       +-SingleRowScan
 ==
 
-select {{cast| try_cast}}('TESTENUM1000' AS `zetasql_test__.TestEnum`)
+select {{cast| try_cast}}('TESTENUM1000' AS "zetasql_test__.TestEnum")
 --
 
 ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> ENUM<zetasql_test__.TestEnum>)
-    |     +-Literal(type=STRING, value="TESTENUM1000")
+    |     +-Literal(type=STRING, value='TESTENUM1000')
     +-input_scan=
       +-SingleRowScan
 --
@@ -2408,7 +2408,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#1 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2418,43 +2418,43 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast(cast('TESTENUM0' AS `zetasql_test__.TestEnum`) as string);
+select cast(cast('TESTENUM0' AS "zetasql_test__.TestEnum") as string);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="TESTENUM0", has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRING, value='TESTENUM0', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
 
-select  try_cast( try_cast('TESTENUM0' AS `zetasql_test__.TestEnum`) as string);
+select  try_cast( try_cast('TESTENUM0' AS "zetasql_test__.TestEnum") as string);
 --
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="TESTENUM0", has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRING, value='TESTENUM0', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
 
-select cast(KitchenSink.string_val AS `zetasql_test__.TestEnum`),
+select cast(KitchenSink.string_val AS "zetasql_test__.TestEnum"),
        cast(KitchenSink.test_enum AS STRING)
   FROM TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col2#5 AS `$col2` [STRING]
+| +-$query.$col1#4 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col2#5 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -2466,7 +2466,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col2#5 :=
     |   +-Cast(ENUM<zetasql_test__.TestEnum> -> STRING)
     |     +-GetProtoField
@@ -2479,14 +2479,14 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select  try_cast(KitchenSink.string_val AS `zetasql_test__.TestEnum`),
+select  try_cast(KitchenSink.string_val AS "zetasql_test__.TestEnum"),
         try_cast(KitchenSink.test_enum AS STRING)
   FROM TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col2#5 AS `$col2` [STRING]
+| +-$query.$col1#4 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col2#5 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5]
@@ -2498,7 +2498,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | |   +-return_null_on_error=TRUE
     | +-$col2#5 :=
     |   +-Cast(ENUM<zetasql_test__.TestEnum> -> STRING)
@@ -2513,11 +2513,11 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select cast(KitchenSink.int32_val AS `zetasql_test__.TestEnum`),
-       cast(KitchenSink.int64_val AS `zetasql_test__.TestEnum`),
-       cast(KitchenSink.uint32_val AS `zetasql_test__.TestEnum`),
-       cast(KitchenSink.uint64_val AS `zetasql_test__.TestEnum`),
-       "-------------------------------------------" as separator,
+select cast(KitchenSink.int32_val AS "zetasql_test__.TestEnum"),
+       cast(KitchenSink.int64_val AS "zetasql_test__.TestEnum"),
+       cast(KitchenSink.uint32_val AS "zetasql_test__.TestEnum"),
+       cast(KitchenSink.uint64_val AS "zetasql_test__.TestEnum"),
+       '-------------------------------------------' as separator,
        cast(KitchenSink.test_enum AS INT32),
        cast(KitchenSink.test_enum AS INT64),
        cast(KitchenSink.test_enum AS UINT32),
@@ -2526,15 +2526,15 @@ select cast(KitchenSink.int32_val AS `zetasql_test__.TestEnum`),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col2#5 AS `$col2` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col3#6 AS `$col3` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col4#7 AS `$col4` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#4 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col2#5 AS "$col2" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col3#6 AS "$col3" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col4#7 AS "$col4" [ENUM<zetasql_test__.TestEnum>]
 | +-$query.separator#8 AS separator [STRING]
-| +-$query.$col6#9 AS `$col6` [INT32]
-| +-$query.$col7#10 AS `$col7` [INT64]
-| +-$query.$col8#11 AS `$col8` [UINT32]
-| +-$query.$col9#12 AS `$col9` [UINT64]
+| +-$query.$col6#9 AS "$col6" [INT32]
+| +-$query.$col7#10 AS "$col7" [INT64]
+| +-$query.$col8#11 AS "$col8" [UINT32]
+| +-$query.$col9#12 AS "$col9" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7, separator#8, $col6#9, $col7#10, $col8#11, $col9#12]
@@ -2571,7 +2571,7 @@ QueryStmt
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=uint64_val
     | |     +-default_value=0
-    | +-separator#8 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#8 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col6#9 :=
     | | +-Cast(ENUM<zetasql_test__.TestEnum> -> INT32)
     | |   +-GetProtoField
@@ -2608,11 +2608,11 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select  try_cast(KitchenSink.int32_val AS `zetasql_test__.TestEnum`),
-        try_cast(KitchenSink.int64_val AS `zetasql_test__.TestEnum`),
-        try_cast(KitchenSink.uint32_val AS `zetasql_test__.TestEnum`),
-        try_cast(KitchenSink.uint64_val AS `zetasql_test__.TestEnum`),
-       "-------------------------------------------" as separator,
+select  try_cast(KitchenSink.int32_val AS "zetasql_test__.TestEnum"),
+        try_cast(KitchenSink.int64_val AS "zetasql_test__.TestEnum"),
+        try_cast(KitchenSink.uint32_val AS "zetasql_test__.TestEnum"),
+        try_cast(KitchenSink.uint64_val AS "zetasql_test__.TestEnum"),
+       '-------------------------------------------' as separator,
         try_cast(KitchenSink.test_enum AS INT32),
         try_cast(KitchenSink.test_enum AS INT64),
         try_cast(KitchenSink.test_enum AS UINT32),
@@ -2621,15 +2621,15 @@ select  try_cast(KitchenSink.int32_val AS `zetasql_test__.TestEnum`),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col2#5 AS `$col2` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col3#6 AS `$col3` [ENUM<zetasql_test__.TestEnum>]
-| +-$query.$col4#7 AS `$col4` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#4 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col2#5 AS "$col2" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col3#6 AS "$col3" [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col4#7 AS "$col4" [ENUM<zetasql_test__.TestEnum>]
 | +-$query.separator#8 AS separator [STRING]
-| +-$query.$col6#9 AS `$col6` [INT32]
-| +-$query.$col7#10 AS `$col7` [INT64]
-| +-$query.$col8#11 AS `$col8` [UINT32]
-| +-$query.$col9#12 AS `$col9` [UINT64]
+| +-$query.$col6#9 AS "$col6" [INT32]
+| +-$query.$col7#10 AS "$col7" [INT64]
+| +-$query.$col8#11 AS "$col8" [UINT32]
+| +-$query.$col9#12 AS "$col9" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7, separator#8, $col6#9, $col7#10, $col8#11, $col9#12]
@@ -2670,7 +2670,7 @@ QueryStmt
     | |     +-field_descriptor=uint64_val
     | |     +-default_value=0
     | |   +-return_null_on_error=TRUE
-    | +-separator#8 := Literal(type=STRING, value="-------------------------------------------")
+    | +-separator#8 := Literal(type=STRING, value='-------------------------------------------')
     | +-$col6#9 :=
     | | +-Cast(ENUM<zetasql_test__.TestEnum> -> INT32)
     | |   +-GetProtoField
@@ -2711,12 +2711,12 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select {{cast| try_cast}}(KitchenSink.test_enum AS `zetasql_test__.TestEnum`)
+select {{cast| try_cast}}(KitchenSink.test_enum AS "zetasql_test__.TestEnum")
 from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#4 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -2733,7 +2733,7 @@ QueryStmt
 ==
 
 select {{cast| try_cast}}(KitchenSink.test_enum
-    AS `zetasql_test__.AnotherTestEnum`)
+    AS "zetasql_test__.AnotherTestEnum")
 from TestTable
 --
 ALTERNATION GROUP: cast
@@ -2756,11 +2756,11 @@ select cast('1' AS KitchenSinkPB);
                    ^
 ==
 
-select {{cast| try_cast}}(NULL as `zetasql_test__.KitchenSinkPB`);
+select {{cast| try_cast}}(NULL as "zetasql_test__.KitchenSinkPB");
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2770,18 +2770,18 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select {{cast| try_cast}}(1 AS `zetasql_test__.KitchenSinkPB`);
+select {{cast| try_cast}}(1 AS "zetasql_test__.KitchenSinkPB");
 --
 ALTERNATION GROUP: cast
 --
 ERROR: Invalid cast from INT64 to zetasql_test__.KitchenSinkPB [at 1:13]
-select cast(1 AS `zetasql_test__.KitchenSinkPB`);
+select cast(1 AS "zetasql_test__.KitchenSinkPB");
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Invalid cast from INT64 to zetasql_test__.KitchenSinkPB [at 1:18]
-select  try_cast(1 AS `zetasql_test__.KitchenSinkPB`);
+select  try_cast(1 AS "zetasql_test__.KitchenSinkPB");
                  ^
 ==
 
@@ -2815,27 +2815,27 @@ select  try_cast(1 AS zetasql_test__.KitchenSinkPB.XXX);
                       ^
 ==
 
-select cast({{'1'|'''1'''}} AS `zetasql_test__.KitchenSinkPB`)
+select cast({{'1'|'''1'''}} AS "zetasql_test__.KitchenSinkPB")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     +-input_scan=
       +-SingleRowScan
 ==
 
-select cast({{b"1"|b"""1"""}} AS `zetasql_test__.KitchenSinkPB`)
+select cast({{b"1"|b"""1"""}} AS "zetasql_test__.KitchenSinkPB")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -2853,14 +2853,14 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     +-input_scan=
       +-SingleRowScan
 --
@@ -2868,14 +2868,14 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     |     +-return_null_on_error=TRUE
     +-input_scan=
       +-SingleRowScan
@@ -2887,14 +2887,14 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     +-input_scan=
       +-SingleRowScan
 --
@@ -2902,20 +2902,20 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    |     +-Literal(type=STRING, value="1")
+    |     +-Literal(type=STRING, value='1')
     |     +-return_null_on_error=TRUE
     +-input_scan=
       +-SingleRowScan
 ==
 
-select {{cast| try_cast}}('1' AS nested_catalog.`zetasql_test__.KitchenSinkPB`);
+select {{cast| try_cast}}('1' AS nested_catalog."zetasql_test__.KitchenSinkPB");
 --
 [SAME AS PREVIOUS]
 ==
@@ -2927,20 +2927,20 @@ select PROTO<zetasql_test__.KitchenSinkPB>("1")
        ^
 ==
 
-select `zetasql_test__.KitchenSinkPB`("1")
+select "zetasql_test__.KitchenSinkPB"("1")
 --
-ERROR: Function not found: `zetasql_test__.KitchenSinkPB` [at 1:8]
-select `zetasql_test__.KitchenSinkPB`("1")
+ERROR: Function not found: "zetasql_test__.KitchenSinkPB" [at 1:8]
+select "zetasql_test__.KitchenSinkPB"("1")
        ^
 ==
 
-select cast(cast('1' AS `zetasql_test__.KitchenSinkPB`) as string),
-       cast(cast(b'1' AS `zetasql_test__.KitchenSinkPB`) as bytes);
+select cast(cast('1' AS "zetasql_test__.KitchenSinkPB") as string),
+       cast(cast(b'1' AS "zetasql_test__.KitchenSinkPB") as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [BYTES]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -2948,7 +2948,7 @@ QueryStmt
     | +-$col1#1 :=
     | | +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> STRING)
     | |   +-Cast(STRING -> PROTO<zetasql_test__.KitchenSinkPB>)
-    | |     +-Literal(type=STRING, value="1")
+    | |     +-Literal(type=STRING, value='1')
     | +-$col2#2 :=
     |   +-Cast(PROTO<zetasql_test__.KitchenSinkPB> -> BYTES)
     |     +-Cast(BYTES -> PROTO<zetasql_test__.KitchenSinkPB>)
@@ -2957,12 +2957,12 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select {{cast| try_cast}}(KitchenSink as `zetasql_test__.KitchenSinkPB`)
+select {{cast| try_cast}}(KitchenSink as "zetasql_test__.KitchenSinkPB")
 from TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-TestTable.KitchenSink#3 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-TestTable.KitchenSink#3 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[TestTable.KitchenSink#3]
@@ -2970,18 +2970,18 @@ QueryStmt
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 ==
 
-select cast(KitchenSink.string_val AS `zetasql_test__.KitchenSinkPB`),
-       cast(KitchenSink.bytes_val AS `zetasql_test__.KitchenSinkPB`),
+select cast(KitchenSink.string_val AS "zetasql_test__.KitchenSinkPB"),
+       cast(KitchenSink.bytes_val AS "zetasql_test__.KitchenSinkPB"),
        cast(KitchenSink.nested_value AS STRING),
        cast(KitchenSink.nested_value AS BYTES)
 from TestTable;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$query.$col2#5 AS `$col2` [PROTO<zetasql_test__.KitchenSinkPB>]
-| +-$query.$col3#6 AS `$col3` [STRING]
-| +-$query.$col4#7 AS `$col4` [BYTES]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col2#5 AS "$col2" [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col3#6 AS "$col3" [STRING]
+| +-$query.$col4#7 AS "$col4" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7]
@@ -2993,7 +2993,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col2#5 :=
     | | +-Cast(BYTES -> PROTO<zetasql_test__.KitchenSinkPB>)
     | |   +-GetProtoField
@@ -3033,7 +3033,7 @@ select {{cast| try_cast}}('abc' as bytes);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BYTES]
+| +-$query.$col1#1 AS "$col1" [BYTES]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3048,7 +3048,7 @@ select cast(cast(1 as int32) as uint32)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT32]
+| +-$query.$col1#1 AS "$col1" [UINT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3063,7 +3063,7 @@ select cast(1 as int32) + cast(2 as int32)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3081,7 +3081,7 @@ select  try_cast(1 as int32) +  try_cast(2 as int32)
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3094,12 +3094,12 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select  try_cast("abc" as int32) +  try_cast(2 as int32)
+select  try_cast('abc' as int32) +  try_cast(2 as int32)
 --
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3112,12 +3112,12 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select  try_cast("abc" as int32) +  try_cast("def" as int32)
+select  try_cast('abc' as int32) +  try_cast('def' as int32)
 --
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3130,12 +3130,12 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("abc" as int32) + cast("def" as int32)
+select cast('abc' as int32) + cast('def' as int32)
 --
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3144,10 +3144,10 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     |     +-Cast(INT32 -> INT64)
     |     | +-Cast(STRING -> INT32)
-    |     |   +-Literal(type=STRING, value="abc")
+    |     |   +-Literal(type=STRING, value='abc')
     |     +-Cast(INT32 -> INT64)
     |       +-Cast(STRING -> INT32)
-    |         +-Literal(type=STRING, value="def")
+    |         +-Literal(type=STRING, value='def')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -3161,7 +3161,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3176,7 +3176,7 @@ ALTERNATION GROUP: cast,9999999999
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3199,7 +3199,7 @@ ALTERNATION GROUP:  try_cast,9999999999
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3224,7 +3224,7 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3240,7 +3240,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3259,8 +3259,8 @@ select cast(cast(1 as uint64) as int64),
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [UINT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -3278,8 +3278,8 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [UINT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -3295,8 +3295,8 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [UINT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -3312,7 +3312,7 @@ select {{cast| try_cast}}(TRUE AS BOOLEAN)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BOOL]
+| +-$query.$col1#1 AS "$col1" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3349,10 +3349,10 @@ select int32(1)
 ==
 
 # TODO: Provide a better error message here.
-select string("zzz")
+select string('zzz')
 --
-ERROR: Could not cast literal "zzz" to type TIMESTAMP [at 1:15]
-select string("zzz")
+ERROR: Could not cast literal 'zzz' to type TIMESTAMP [at 1:15]
+select string('zzz')
               ^
 ==
 
@@ -3360,7 +3360,7 @@ select cast(cast(null as int32) as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3374,7 +3374,7 @@ select cast(cast(null as int64) as int64)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3393,7 +3393,7 @@ ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -3408,7 +3408,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#4 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -3444,7 +3444,7 @@ from TestTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [ENUM<zetasql_test__.TestEnum>]
+| +-$query.$col1#4 AS "$col1" [ENUM<zetasql_test__.TestEnum>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#4]
@@ -3484,7 +3484,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3507,7 +3507,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3530,14 +3530,14 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIME)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3555,14 +3555,14 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [TIME]
+| +-$query.$col1#1 AS "$col1" [TIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> TIME)
-    |     +-Literal(type=STRING, value="24:00:00")
+    |     +-Literal(type=STRING, value='24:00:00')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3596,7 +3596,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3619,7 +3619,7 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3642,14 +3642,14 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3667,14 +3667,14 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="2015-13-05 01:02:03")
+    |     +-Literal(type=STRING, value='2015-13-05 01:02:03')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3692,14 +3692,14 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DATETIME]
+| +-$query.$col1#1 AS "$col1" [DATETIME]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> DATETIME)
-    |     +-Literal(type=STRING, value="2006-01-02 01:02:03.123456 UTC")
+    |     +-Literal(type=STRING, value='2006-01-02 01:02:03.123456 UTC')
     +-input_scan=
       +-SingleRowScan
 --
@@ -3717,12 +3717,12 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="01:02:03.123456", has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRING, value='01:02:03.123456', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -3740,12 +3740,12 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="2006-01-02 03:04:05.123456", has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRING, value='2006-01-02 03:04:05.123456', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 --
@@ -3768,10 +3768,10 @@ ALTERNATION GROUP: V_1_2_CIVIL_TIME
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#4 AS `$col1` [TIME]
-| +-$query.$col2#5 AS `$col2` [DATETIME]
-| +-$query.$col3#6 AS `$col3` [STRING]
-| +-$query.$col4#7 AS `$col4` [STRING]
+| +-$query.$col1#4 AS "$col1" [TIME]
+| +-$query.$col2#5 AS "$col2" [DATETIME]
+| +-$query.$col3#6 AS "$col3" [STRING]
+| +-$query.$col4#7 AS "$col4" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#4, $col2#5, $col3#6, $col4#7]
@@ -3783,7 +3783,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col2#5 :=
     | | +-Cast(STRING -> DATETIME)
     | |   +-GetProtoField
@@ -3791,7 +3791,7 @@ QueryStmt
     | |     +-expr=
     | |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |     +-field_descriptor=string_val
-    | |     +-default_value="default_name"
+    | |     +-default_value='default_name'
     | +-$col3#6 :=
     | | +-Cast(TIME -> STRING)
     | |   +-Cast(STRING -> TIME)
@@ -3800,7 +3800,7 @@ QueryStmt
     | |       +-expr=
     | |       | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     | |       +-field_descriptor=string_val
-    | |       +-default_value="default_name"
+    | |       +-default_value='default_name'
     | +-$col4#7 :=
     |   +-Cast(DATETIME -> STRING)
     |     +-Cast(STRING -> DATETIME)
@@ -3809,7 +3809,7 @@ QueryStmt
     |         +-expr=
     |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
     |         +-field_descriptor=string_val
-    |         +-default_value="default_name"
+    |         +-default_value='default_name'
     +-input_scan=
       +-TableScan(column_list=[TestTable.KitchenSink#3], table=TestTable, column_index_list=[2])
 --
@@ -3828,7 +3828,7 @@ ALTERNATION GROUP: GEOGRAPHY
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [GEOGRAPHY]
+| +-$query.$col1#1 AS "$col1" [GEOGRAPHY]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3851,7 +3851,7 @@ ALTERNATION GROUP: ARRAY<BOOL>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<BOOL>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<BOOL>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3864,7 +3864,7 @@ ALTERNATION GROUP: ARRAY<INT32>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3877,7 +3877,7 @@ ALTERNATION GROUP: ARRAY<INT64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3890,7 +3890,7 @@ ALTERNATION GROUP: ARRAY<UINT32>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3903,7 +3903,7 @@ ALTERNATION GROUP: ARRAY<UINT64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<UINT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<UINT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3918,7 +3918,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<FLOAT>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<FLOAT>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3933,7 +3933,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3946,7 +3946,7 @@ ALTERNATION GROUP: ARRAY<STRING>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3984,7 +3984,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<int64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -3999,7 +3999,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4012,7 +4012,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<string>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<STRING>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<STRING>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4043,7 +4043,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4056,7 +4056,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,ARRAY<INT64>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4079,7 +4079,7 @@ ALTERNATION GROUP: []
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<ENUM<zetasql_test__.TestEnum>>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<ENUM<zetasql_test__.TestEnum>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4108,7 +4108,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4132,7 +4132,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4155,7 +4155,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,-21474836480
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4170,7 +4170,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,21474836470
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4204,7 +4204,7 @@ ALTERNATION GROUPS:
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT32>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT32>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4226,20 +4226,20 @@ select  try_cast(ARRAY<INT64>[21474836470] as ARRAY<INT32>)
                  ^
 ==
 
-select {{cast| try_cast}}("abc" as INT64)
+select {{cast| try_cast}}('abc' as INT64)
 --
 ALTERNATION GROUP: cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> INT64)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 --
@@ -4247,7 +4247,7 @@ ALTERNATION GROUP:  try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4258,20 +4258,20 @@ QueryStmt
 ==
 
 [language_features={{V_1_1_CAST_DIFFERENT_ARRAY_TYPES|}}]
-select {{cast| try_cast}}(["100", "abc"] as ARRAY<INT64>);
+select {{cast| try_cast}}(['100', 'abc'] as ARRAY<INT64>);
 --
 ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES,cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(ARRAY<STRING> -> ARRAY<INT64>)
-    |     +-Literal(type=ARRAY<STRING>, value=["100", "abc"])
+    |     +-Literal(type=ARRAY<STRING>, value=['100', 'abc'])
     +-input_scan=
       +-SingleRowScan
 --
@@ -4279,7 +4279,7 @@ ALTERNATION GROUP: V_1_1_CAST_DIFFERENT_ARRAY_TYPES, try_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4291,13 +4291,13 @@ QueryStmt
 ALTERNATION GROUP: cast
 --
 ERROR: Casting between arrays with incompatible element types is not supported: Invalid cast from ARRAY<STRING> to ARRAY<INT64> [at 1:13]
-select cast(["100", "abc"] as ARRAY<INT64>);
+select cast(['100', 'abc'] as ARRAY<INT64>);
             ^
 --
 ALTERNATION GROUP:  try_cast
 --
 ERROR: Casting between arrays with incompatible element types is not supported: Invalid cast from ARRAY<STRING> to ARRAY<INT64> [at 1:18]
-select  try_cast(["100", "abc"] as ARRAY<INT64>);
+select  try_cast(['100', 'abc'] as ARRAY<INT64>);
                  ^
 ==
 
@@ -4307,7 +4307,7 @@ ALTERNATION GROUP: INT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4320,7 +4320,7 @@ ALTERNATION GROUP: UINT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT32]
+| +-$query.$col1#1 AS "$col1" [UINT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4333,7 +4333,7 @@ ALTERNATION GROUP: INT64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4346,7 +4346,7 @@ ALTERNATION GROUP: UINT64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT64]
+| +-$query.$col1#1 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4362,7 +4362,7 @@ ALTERNATION GROUP: INT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4375,14 +4375,14 @@ ALTERNATION GROUP: UINT32
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT32]
+| +-$query.$col1#1 AS "$col1" [UINT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> UINT32)
-    |     +-Literal(type=STRING, value="-0x100")
+    |     +-Literal(type=STRING, value='-0x100')
     +-input_scan=
       +-SingleRowScan
 --
@@ -4390,7 +4390,7 @@ ALTERNATION GROUP: INT64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4403,14 +4403,14 @@ ALTERNATION GROUP: UINT64
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [UINT64]
+| +-$query.$col1#1 AS "$col1" [UINT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> UINT64)
-    |     +-Literal(type=STRING, value="-0x100")
+    |     +-Literal(type=STRING, value='-0x100')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -4419,14 +4419,14 @@ select cast('- 0x10' AS INT32)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> INT32)
-    |     +-Literal(type=STRING, value="- 0x10")
+    |     +-Literal(type=STRING, value='- 0x10')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -4437,7 +4437,7 @@ ALTERNATION GROUP: cast('010' AS INT32)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4450,7 +4450,7 @@ ALTERNATION GROUP: cast('-010' AS INT32)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT32]
+| +-$query.$col1#1 AS "$col1" [INT32]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4476,7 +4476,7 @@ ALTERNATION GROUP: NUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4500,18 +4500,18 @@ select cast(cast(1 as int32) as NUMERIC),
        cast(cast(5 as NUMERIC) as NUMERIC),
        cast(cast(1.5 as float) as NUMERIC),
        cast(2.5 as NUMERIC),
-       cast("123.4" as NUMERIC)
+       cast('123.4' as NUMERIC)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
-| +-$query.$col3#3 AS `$col3` [NUMERIC]
-| +-$query.$col4#4 AS `$col4` [NUMERIC]
-| +-$query.$col5#5 AS `$col5` [NUMERIC]
-| +-$query.$col6#6 AS `$col6` [NUMERIC]
-| +-$query.$col7#7 AS `$col7` [NUMERIC]
-| +-$query.$col8#8 AS `$col8` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
+| +-$query.$col3#3 AS "$col3" [NUMERIC]
+| +-$query.$col4#4 AS "$col4" [NUMERIC]
+| +-$query.$col5#5 AS "$col5" [NUMERIC]
+| +-$query.$col6#6 AS "$col6" [NUMERIC]
+| +-$query.$col7#7 AS "$col7" [NUMERIC]
+| +-$query.$col8#8 AS "$col8" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8]
@@ -4529,48 +4529,48 @@ QueryStmt
 ==
 
 [language_features=NUMERIC_TYPE]
-select cast("abc" as NUMERIC)
+select cast('abc' as NUMERIC)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> NUMERIC)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
 
 [language_features=NUMERIC_TYPE,PARAMETERIZED_TYPES]
-select cast("abc" as NUMERIC(2))
+select cast('abc' as NUMERIC(2))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> NUMERIC)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     |     +-type_modifiers=type_parameters:(precision=2,scale=0)
     +-input_scan=
       +-SingleRowScan
 ==
 
 [language_features=NUMERIC_TYPE]
-select cast("99999999999999999999999999999.999999999" as NUMERIC),
-       cast("-99999999999999999999999999999.999999999" as NUMERIC)
+select cast('99999999999999999999999999999.999999999' as NUMERIC),
+       cast('-99999999999999999999999999999.999999999' as NUMERIC)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -4582,15 +4582,15 @@ QueryStmt
 ==
 
 [language_features={{NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|NUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
-select cast("99999999999999999999999999999.999999999" as DECIMAL),
-       cast("-99999999999999999999999999999.999999999" as DECIMAL)
+select cast('99999999999999999999999999999.999999999' as DECIMAL),
+       cast('-99999999999999999999999999999.999999999' as DECIMAL)
 --
 ALTERNATION GROUP: NUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [NUMERIC]
-| +-$query.$col2#2 AS `$col2` [NUMERIC]
+| +-$query.$col1#1 AS "$col1" [NUMERIC]
+| +-$query.$col2#2 AS "$col2" [NUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -4606,15 +4606,15 @@ ALTERNATION GROUPS:
     <empty>
 --
 ERROR: Type not found: DECIMAL [at 1:58]
-select cast("99999999999999999999999999999.999999999" as DECIMAL),
+select cast('99999999999999999999999999999.999999999' as DECIMAL),
                                                          ^
 ==
 
-select cast("123" as SMALLINT)
+select cast('123' as SMALLINT)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4624,11 +4624,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as BIGINT)
+select cast('123' as BIGINT)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4638,11 +4638,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as INT)
+select cast('123' as INT)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4652,11 +4652,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as INTEGER)
+select cast('123' as INTEGER)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4666,11 +4666,11 @@ QueryStmt
       +-SingleRowScan
 ==
 
-select cast("123" as INT64AliasType)
+select cast('123' as INT64AliasType)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4681,15 +4681,15 @@ QueryStmt
 ==
 
 [language_features={{BIGNUMERIC_TYPE,V_1_3_DECIMAL_ALIAS|BIGNUMERIC_TYPE|V_1_3_DECIMAL_ALIAS|}}]
-select cast("1e-38" as BIGDECIMAL),
-       cast("-1e-38" as BIGDECIMAL)
+select cast('1e-38' as BIGDECIMAL),
+       cast('-1e-38' as BIGDECIMAL)
 --
 ALTERNATION GROUP: BIGNUMERIC_TYPE,V_1_3_DECIMAL_ALIAS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
-| +-$query.$col2#2 AS `$col2` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
+| +-$query.$col2#2 AS "$col2" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -4705,16 +4705,16 @@ ALTERNATION GROUPS:
     <empty>
 --
 ERROR: Type not found: BIGDECIMAL [at 1:24]
-select cast("1e-38" as BIGDECIMAL),
+select cast('1e-38' as BIGDECIMAL),
                        ^
 ==
 
 [language_features=NUMERIC_TYPE]
-select cast(numeric_col as `zetasql_test__.TestEnum`)
+select cast(numeric_col as "zetasql_test__.TestEnum")
 from NumericTypeTable
 --
 ERROR: Invalid cast from NUMERIC to zetasql_test__.TestEnum [at 1:13]
-select cast(numeric_col as `zetasql_test__.TestEnum`)
+select cast(numeric_col as "zetasql_test__.TestEnum")
             ^
 ==
 
@@ -4740,14 +4740,14 @@ from NumericTypeTable
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT32]
-| +-$query.$col2#3 AS `$col2` [INT64]
-| +-$query.$col3#4 AS `$col3` [UINT32]
-| +-$query.$col4#5 AS `$col4` [UINT64]
-| +-NumericTypeTable.numeric_col#1 AS `$col5` [NUMERIC]
-| +-$query.$col6#6 AS `$col6` [FLOAT]
-| +-$query.$col7#7 AS `$col7` [DOUBLE]
-| +-$query.$col8#8 AS `$col8` [STRING]
+| +-$query.$col1#2 AS "$col1" [INT32]
+| +-$query.$col2#3 AS "$col2" [INT64]
+| +-$query.$col3#4 AS "$col3" [UINT32]
+| +-$query.$col4#5 AS "$col4" [UINT64]
+| +-NumericTypeTable.numeric_col#1 AS "$col5" [NUMERIC]
+| +-$query.$col6#6 AS "$col6" [FLOAT]
+| +-$query.$col7#7 AS "$col7" [DOUBLE]
+| +-$query.$col8#8 AS "$col8" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2, $query.$col2#3, $query.$col3#4, $query.$col4#5, NumericTypeTable.numeric_col#1, $query.$col6#6, $query.$col7#7, $query.$col8#8]
@@ -4785,7 +4785,7 @@ ALTERNATION GROUP: BIGNUMERIC_TYPE,NUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [BIGNUMERIC]
+| +-$query.$col1#2 AS "$col1" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -4814,10 +4814,10 @@ select cast(KitchenSink.test_enum AS NUMERIC) from TestTable;
 ==
 
 [language_features=NUMERIC_TYPE]
-select cast(`bool` as NUMERIC) from SimpleTypes;
+select cast("bool" as NUMERIC) from SimpleTypes;
 --
 ERROR: Invalid cast from BOOL to NUMERIC [at 1:13]
-select cast(`bool` as NUMERIC) from SimpleTypes;
+select cast("bool" as NUMERIC) from SimpleTypes;
             ^
 ==
 
@@ -4828,7 +4828,7 @@ ALTERNATION GROUP: BIGNUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -4853,21 +4853,21 @@ select cast(cast(1 as int32) as BIGNUMERIC),
        cast(cast(6 as BIGNUMERIC) as BIGNUMERIC),
        cast(cast(1.5 as float) as BIGNUMERIC),
        cast(2.5 as BIGNUMERIC),
-       cast("123.4" as BIGNUMERIC)
+       cast('123.4' as BIGNUMERIC)
 --
 ALTERNATION GROUP: BIGNUMERIC_TYPE,NUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
-| +-$query.$col2#2 AS `$col2` [BIGNUMERIC]
-| +-$query.$col3#3 AS `$col3` [BIGNUMERIC]
-| +-$query.$col4#4 AS `$col4` [BIGNUMERIC]
-| +-$query.$col5#5 AS `$col5` [BIGNUMERIC]
-| +-$query.$col6#6 AS `$col6` [BIGNUMERIC]
-| +-$query.$col7#7 AS `$col7` [BIGNUMERIC]
-| +-$query.$col8#8 AS `$col8` [BIGNUMERIC]
-| +-$query.$col9#9 AS `$col9` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
+| +-$query.$col2#2 AS "$col2" [BIGNUMERIC]
+| +-$query.$col3#3 AS "$col3" [BIGNUMERIC]
+| +-$query.$col4#4 AS "$col4" [BIGNUMERIC]
+| +-$query.$col5#5 AS "$col5" [BIGNUMERIC]
+| +-$query.$col6#6 AS "$col6" [BIGNUMERIC]
+| +-$query.$col7#7 AS "$col7" [BIGNUMERIC]
+| +-$query.$col8#8 AS "$col8" [BIGNUMERIC]
+| +-$query.$col9#9 AS "$col9" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9]
@@ -4892,30 +4892,30 @@ select cast(cast(1 as int32) as BIGNUMERIC),
 ==
 
 [language_features=BIGNUMERIC_TYPE]
-select cast("abc" as BIGNUMERIC)
+select cast('abc' as BIGNUMERIC)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-Cast(STRING -> BIGNUMERIC)
-    |     +-Literal(type=STRING, value="abc")
+    |     +-Literal(type=STRING, value='abc')
     +-input_scan=
       +-SingleRowScan
 ==
 
 [language_features=BIGNUMERIC_TYPE]
-select cast("578960446186580977117854925043439539266.34992332820282019728792003956564819967" as BIGNUMERIC),
-       cast("-578960446186580977117854925043439539266.34992332820282019728792003956564819968" as BIGNUMERIC)
+select cast('578960446186580977117854925043439539266.34992332820282019728792003956564819967' as BIGNUMERIC),
+       cast('-578960446186580977117854925043439539266.34992332820282019728792003956564819968' as BIGNUMERIC)
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [BIGNUMERIC]
-| +-$query.$col2#2 AS `$col2` [BIGNUMERIC]
+| +-$query.$col1#1 AS "$col1" [BIGNUMERIC]
+| +-$query.$col2#2 AS "$col2" [BIGNUMERIC]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
@@ -4927,11 +4927,11 @@ QueryStmt
 ==
 
 [language_features=BIGNUMERIC_TYPE]
-select cast(bignumeric_col as `zetasql_test__.TestEnum`)
+select cast(bignumeric_col as "zetasql_test__.TestEnum")
 from BigNumericTypeTable
 --
 ERROR: Invalid cast from BIGNUMERIC to zetasql_test__.TestEnum [at 1:13]
-select cast(bignumeric_col as `zetasql_test__.TestEnum`)
+select cast(bignumeric_col as "zetasql_test__.TestEnum")
             ^
 ==
 
@@ -4960,15 +4960,15 @@ ALTERNATION GROUP: BIGNUMERIC_TYPE,NUMERIC_TYPE
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT32]
-| +-$query.$col2#3 AS `$col2` [INT64]
-| +-$query.$col3#4 AS `$col3` [UINT32]
-| +-$query.$col4#5 AS `$col4` [UINT64]
-| +-$query.$col5#6 AS `$col5` [NUMERIC]
-| +-BigNumericTypeTable.bignumeric_col#1 AS `$col6` [BIGNUMERIC]
-| +-$query.$col7#7 AS `$col7` [FLOAT]
-| +-$query.$col8#8 AS `$col8` [DOUBLE]
-| +-$query.$col9#9 AS `$col9` [STRING]
+| +-$query.$col1#2 AS "$col1" [INT32]
+| +-$query.$col2#3 AS "$col2" [INT64]
+| +-$query.$col3#4 AS "$col3" [UINT32]
+| +-$query.$col4#5 AS "$col4" [UINT64]
+| +-$query.$col5#6 AS "$col5" [NUMERIC]
+| +-BigNumericTypeTable.bignumeric_col#1 AS "$col6" [BIGNUMERIC]
+| +-$query.$col7#7 AS "$col7" [FLOAT]
+| +-$query.$col8#8 AS "$col8" [DOUBLE]
+| +-$query.$col9#9 AS "$col9" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2, $query.$col2#3, $query.$col3#4, $query.$col4#5, $query.$col5#6, BigNumericTypeTable.bignumeric_col#1, $query.$col7#7, $query.$col8#8, $query.$col9#9]
@@ -5088,10 +5088,10 @@ select cast(JSON '1' as STRING)
 ==
 
 [language_features=JSON_TYPE]
-select cast("str" as JSON)
+select cast('str' as JSON)
 --
 ERROR: Invalid cast from STRING to JSON [at 1:13]
-select cast("str" as JSON)
+select cast('str' as JSON)
             ^
 ==
 
@@ -5101,7 +5101,7 @@ from JSONTable
 --
 QueryStmt
 +-output_column_list=
-| +-JSONTable.json_col#1 AS `$col1` [JSON]
+| +-JSONTable.json_col#1 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[JSONTable.json_col#1]
@@ -5116,7 +5116,7 @@ from JSONTable
 --
 QueryStmt
 +-output_column_list=
-| +-JSONTable.json_col#1 AS `$col1` [JSON]
+| +-JSONTable.json_col#1 AS "$col1" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=[JSONTable.json_col#1]
@@ -5363,19 +5363,19 @@ select cast(cast(null as struct<a int64>) as array<int64>);
             ^
 ==
 
-select {{ try_|}}cast(struct<a string, b bool>("a", NULL) AS
+select {{ try_|}}cast(struct<a string, b bool>('a', NULL) AS
                      struct<a string, b zetasql_test__.TestEnum>);
 --
 ALTERNATION GROUP:  try_
 --
 ERROR: Invalid cast from STRUCT<a STRING, b BOOL> to STRUCT<a STRING, b zetasql_test__.TestEnum> [at 1:18]
-select  try_cast(struct<a string, b bool>("a", NULL) AS
+select  try_cast(struct<a string, b bool>('a', NULL) AS
                  ^
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Invalid cast from STRUCT<a STRING, b BOOL> to STRUCT<a STRING, b zetasql_test__.TestEnum> [at 1:13]
-select cast(struct<a string, b bool>("a", NULL) AS
+select cast(struct<a string, b bool>('a', NULL) AS
             ^
 ==
 
@@ -5400,40 +5400,40 @@ select cast(cast(NULL as zetasql_test__.KitchenSinkPB) as
 [language_features=NUMERIC_TYPE,BIGNUMERIC_TYPE,JSON_TYPE]
 [{{preserve_unnecessary_cast|no_preserve_unnecessary_cast}}]
 select
-  cast(`int32` as int32),
-  cast(`int64` as int64),
-  cast(`uint32` as uint32),
-  cast(`uint64` as uint64),
-  cast(`string` as STRING),
-  cast(`bytes` as bytes),
-  cast(`bool` as bool),
-  cast(`float` as float),
-  cast(`double` as double),
-  cast(`date` as date),
-  cast(`timestamp` as timestamp),
-  cast(`numeric` as numeric),
-  cast(`bignumeric` as bignumeric),
-  cast(`json` as json)
+  cast("int32" as int32),
+  cast("int64" as int64),
+  cast("uint32" as uint32),
+  cast("uint64" as uint64),
+  cast("string" as STRING),
+  cast("bytes" as bytes),
+  cast("bool" as bool),
+  cast("float" as float),
+  cast("double" as double),
+  cast("date" as date),
+  cast("timestamp" as timestamp),
+  cast("numeric" as numeric),
+  cast("bignumeric" as bignumeric),
+  cast("json" as json)
 from SimpleTypes;
 --
 ALTERNATION GROUP: preserve_unnecessary_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [INT32]
-| +-$query.$col2#20 AS `$col2` [INT64]
-| +-$query.$col3#21 AS `$col3` [UINT32]
-| +-$query.$col4#22 AS `$col4` [UINT64]
-| +-$query.$col5#23 AS `$col5` [STRING]
-| +-$query.$col6#24 AS `$col6` [BYTES]
-| +-$query.$col7#25 AS `$col7` [BOOL]
-| +-$query.$col8#26 AS `$col8` [FLOAT]
-| +-$query.$col9#27 AS `$col9` [DOUBLE]
-| +-$query.$col10#28 AS `$col10` [DATE]
-| +-$query.$col11#29 AS `$col11` [TIMESTAMP]
-| +-$query.$col12#30 AS `$col12` [NUMERIC]
-| +-$query.$col13#31 AS `$col13` [BIGNUMERIC]
-| +-$query.$col14#32 AS `$col14` [JSON]
+| +-$query.$col1#19 AS "$col1" [INT32]
+| +-$query.$col2#20 AS "$col2" [INT64]
+| +-$query.$col3#21 AS "$col3" [UINT32]
+| +-$query.$col4#22 AS "$col4" [UINT64]
+| +-$query.$col5#23 AS "$col5" [STRING]
+| +-$query.$col6#24 AS "$col6" [BYTES]
+| +-$query.$col7#25 AS "$col7" [BOOL]
+| +-$query.$col8#26 AS "$col8" [FLOAT]
+| +-$query.$col9#27 AS "$col9" [DOUBLE]
+| +-$query.$col10#28 AS "$col10" [DATE]
+| +-$query.$col11#29 AS "$col11" [TIMESTAMP]
+| +-$query.$col12#30 AS "$col12" [NUMERIC]
+| +-$query.$col13#31 AS "$col13" [BIGNUMERIC]
+| +-$query.$col14#32 AS "$col14" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, $col3#21, $col4#22, $col5#23, $col6#24, $col7#25, $col8#26, $col9#27, $col10#28, $col11#29, $col12#30, $col13#31, $col14#32]
@@ -5487,20 +5487,20 @@ ALTERNATION GROUP: no_preserve_unnecessary_cast
 --
 QueryStmt
 +-output_column_list=
-| +-SimpleTypes.int32#1 AS `$col1` [INT32]
-| +-SimpleTypes.int64#2 AS `$col2` [INT64]
-| +-SimpleTypes.uint32#3 AS `$col3` [UINT32]
-| +-SimpleTypes.uint64#4 AS `$col4` [UINT64]
-| +-SimpleTypes.string#5 AS `$col5` [STRING]
-| +-SimpleTypes.bytes#6 AS `$col6` [BYTES]
-| +-SimpleTypes.bool#7 AS `$col7` [BOOL]
-| +-SimpleTypes.float#8 AS `$col8` [FLOAT]
-| +-SimpleTypes.double#9 AS `$col9` [DOUBLE]
-| +-SimpleTypes.date#10 AS `$col10` [DATE]
-| +-SimpleTypes.timestamp#15 AS `$col11` [TIMESTAMP]
-| +-SimpleTypes.numeric#16 AS `$col12` [NUMERIC]
-| +-SimpleTypes.bignumeric#17 AS `$col13` [BIGNUMERIC]
-| +-SimpleTypes.json#18 AS `$col14` [JSON]
+| +-SimpleTypes.int32#1 AS "$col1" [INT32]
+| +-SimpleTypes.int64#2 AS "$col2" [INT64]
+| +-SimpleTypes.uint32#3 AS "$col3" [UINT32]
+| +-SimpleTypes.uint64#4 AS "$col4" [UINT64]
+| +-SimpleTypes.string#5 AS "$col5" [STRING]
+| +-SimpleTypes.bytes#6 AS "$col6" [BYTES]
+| +-SimpleTypes.bool#7 AS "$col7" [BOOL]
+| +-SimpleTypes.float#8 AS "$col8" [FLOAT]
+| +-SimpleTypes.double#9 AS "$col9" [DOUBLE]
+| +-SimpleTypes.date#10 AS "$col10" [DATE]
+| +-SimpleTypes.timestamp#15 AS "$col11" [TIMESTAMP]
+| +-SimpleTypes.numeric#16 AS "$col12" [NUMERIC]
+| +-SimpleTypes.bignumeric#17 AS "$col13" [BIGNUMERIC]
+| +-SimpleTypes.json#18 AS "$col14" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=SimpleTypes.[int32#1, int64#2, uint32#3, uint64#4, string#5, bytes#6, bool#7, float#8, double#9, date#10, timestamp#15, numeric#16, bignumeric#17, json#18]
@@ -5527,16 +5527,16 @@ ALTERNATION GROUP: preserve_unnecessary_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BOOL]
-| +-$query.$col5#5 AS `$col5` [DOUBLE]
-| +-$query.$col6#6 AS `$col6` [DATE]
-| +-$query.$col7#7 AS `$col7` [TIMESTAMP]
-| +-$query.$col8#8 AS `$col8` [NUMERIC]
-| +-$query.$col9#9 AS `$col9` [BIGNUMERIC]
-| +-$query.$col10#10 AS `$col10` [JSON]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BOOL]
+| +-$query.$col5#5 AS "$col5" [DOUBLE]
+| +-$query.$col6#6 AS "$col6" [DATE]
+| +-$query.$col7#7 AS "$col7" [TIMESTAMP]
+| +-$query.$col8#8 AS "$col8" [NUMERIC]
+| +-$query.$col9#9 AS "$col9" [BIGNUMERIC]
+| +-$query.$col10#10 AS "$col10" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10]
@@ -5546,7 +5546,7 @@ QueryStmt
     | |   +-Literal(type=INT64, value=77, has_explicit_type=TRUE)
     | +-$col2#2 :=
     | | +-Cast(STRING -> STRING)
-    | |   +-Literal(type=STRING, value="string", has_explicit_type=TRUE)
+    | |   +-Literal(type=STRING, value='string', has_explicit_type=TRUE)
     | +-$col3#3 :=
     | | +-Cast(BYTES -> BYTES)
     | |   +-Literal(type=BYTES, value=b"bytes", has_explicit_type=TRUE)
@@ -5578,22 +5578,22 @@ ALTERNATION GROUP: no_preserve_unnecessary_cast
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
-| +-$query.$col2#2 AS `$col2` [STRING]
-| +-$query.$col3#3 AS `$col3` [BYTES]
-| +-$query.$col4#4 AS `$col4` [BOOL]
-| +-$query.$col5#5 AS `$col5` [DOUBLE]
-| +-$query.$col6#6 AS `$col6` [DATE]
-| +-$query.$col7#7 AS `$col7` [TIMESTAMP]
-| +-$query.$col8#8 AS `$col8` [NUMERIC]
-| +-$query.$col9#9 AS `$col9` [BIGNUMERIC]
-| +-$query.$col10#10 AS `$col10` [JSON]
+| +-$query.$col1#1 AS "$col1" [INT64]
+| +-$query.$col2#2 AS "$col2" [STRING]
+| +-$query.$col3#3 AS "$col3" [BYTES]
+| +-$query.$col4#4 AS "$col4" [BOOL]
+| +-$query.$col5#5 AS "$col5" [DOUBLE]
+| +-$query.$col6#6 AS "$col6" [DATE]
+| +-$query.$col7#7 AS "$col7" [TIMESTAMP]
+| +-$query.$col8#8 AS "$col8" [NUMERIC]
+| +-$query.$col9#9 AS "$col9" [BIGNUMERIC]
+| +-$query.$col10#10 AS "$col10" [JSON]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2, $col3#3, $col4#4, $col5#5, $col6#6, $col7#7, $col8#8, $col9#9, $col10#10]
     +-expr_list=
     | +-$col1#1 := Literal(type=INT64, value=77, has_explicit_type=TRUE)
-    | +-$col2#2 := Literal(type=STRING, value="string", has_explicit_type=TRUE)
+    | +-$col2#2 := Literal(type=STRING, value='string', has_explicit_type=TRUE)
     | +-$col3#3 := Literal(type=BYTES, value=b"bytes", has_explicit_type=TRUE)
     | +-$col4#4 := Literal(type=BOOL, value=true, has_explicit_type=TRUE)
     | +-$col5#5 := Literal(type=DOUBLE, value=3.14, has_explicit_type=TRUE)
@@ -5607,11 +5607,11 @@ QueryStmt
 ==
 
 # Nested safe and unsafe casts with protobufs
-SELECT {{ TRY_CAST|CAST}}({{ TRY_CAST|CAST}}(NULL AS `zetasql_test__.KitchenSinkPB`) AS `zetasql_test__.KitchenSinkPB`)
+SELECT {{ TRY_CAST|CAST}}({{ TRY_CAST|CAST}}(NULL AS "zetasql_test__.KitchenSinkPB") AS "zetasql_test__.KitchenSinkPB")
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [PROTO<zetasql_test__.KitchenSinkPB>]
+| +-$query.$col1#1 AS "$col1" [PROTO<zetasql_test__.KitchenSinkPB>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -5622,37 +5622,37 @@ QueryStmt
 ==
 
 # NOOP Cast makes the type explicit
-select "a", CAST("b" AS STRING);
+SELECT 'a', CAST('b' AS STRING);
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [STRING]
-| +-$query.$col2#2 AS `$col2` [STRING]
+| +-$query.$col1#1 AS "$col1" [STRING]
+| +-$query.$col2#2 AS "$col2" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#1, $col2#2]
     +-expr_list=
-    | +-$col1#1 := Literal(type=STRING, value="a")
-    | +-$col2#2 := Literal(type=STRING, value="b", has_explicit_type=TRUE)
+    | +-$col1#1 := Literal(type=STRING, value='a')
+    | +-$col2#2 := Literal(type=STRING, value='b', has_explicit_type=TRUE)
     +-input_scan=
       +-SingleRowScan
 ==
 
 [language_features=NUMERIC_TYPE,ROUND_WITH_ROUNDING_MODE]
 [no_java]
-select CAST(CAST(1 as ROUNDING_MODE) as `zetasql.functions.RoundingMode`);
+select CAST(CAST(1 as ROUNDING_MODE) as "zetasql.functions.RoundingMode");
 --
 ERROR: Invalid cast from ROUNDING_MODE to zetasql.functions.RoundingMode [at 1:13]
-select CAST(CAST(1 as ROUNDING_MODE) as `zetasql.functions.RoundingMode`);
+select CAST(CAST(1 as ROUNDING_MODE) as "zetasql.functions.RoundingMode");
             ^
 ==
 
 [language_features=NUMERIC_TYPE,ROUND_WITH_ROUNDING_MODE]
 [no_java]
-select CAST(CAST(1 as `zetasql.functions.RoundingMode`) as ROUNDING_MODE);
+select CAST(CAST(1 as "zetasql.functions.RoundingMode") as ROUNDING_MODE);
 --
 ERROR: Invalid cast from zetasql.functions.RoundingMode to ROUNDING_MODE [at 1:13]
-select CAST(CAST(1 as `zetasql.functions.RoundingMode`) as ROUNDING_MODE);
+select CAST(CAST(1 as "zetasql.functions.RoundingMode") as ROUNDING_MODE);
             ^
 
 ==

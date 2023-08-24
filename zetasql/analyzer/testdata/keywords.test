@@ -5,7 +5,7 @@ from (select 1 as row);
 --
 QueryStmt
 +-output_column_list=
-| +-$subquery1.row#1 AS `row` [INT64]
+| +-$subquery1.row#1 AS "row" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$subquery1.row#1]

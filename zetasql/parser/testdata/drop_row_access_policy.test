@@ -9,15 +9,15 @@ DropRowAccessPolicyStatement [0-32] [drop row access...foo on t1]
 DROP ROW ACCESS POLICY foo ON t1
 ==
 
-drop row access policy `all` on t1;
+drop row access policy "all" on t1;
 --
-DropRowAccessPolicyStatement [0-34] [drop row access...all` on t1]
-  PathExpression [23-28] [`all`]
-    Identifier(`all`) [23-28] [`all`]
+DropRowAccessPolicyStatement [0-34] [drop row access...all" on t1]
+  PathExpression [23-28] ["all"]
+    Identifier("all") [23-28] ["all"]
   PathExpression [32-34] [t1]
     Identifier(t1) [32-34] [t1]
 --
-DROP ROW ACCESS POLICY `all` ON t1
+DROP ROW ACCESS POLICY "all" ON t1
 ==
 
 drop row access policy namespace.foo on t1;
@@ -27,17 +27,17 @@ drop row access policy namespace.foo on t1;
                                 ^
 ==
 
-drop row access policy foo on namespace.`all`.t1;
+drop row access policy foo on namespace."all".t1;
 --
-DropRowAccessPolicyStatement [0-48] [drop row access...ace.`all`.t1]
+DropRowAccessPolicyStatement [0-48] [drop row access...ace."all".t1]
   PathExpression [23-26] [foo]
     Identifier(foo) [23-26] [foo]
-  PathExpression [30-48] [namespace.`all`.t1]
+  PathExpression [30-48] [namespace."all".t1]
     Identifier(namespace) [30-39] [namespace]
-    Identifier(`all`) [40-45] [`all`]
+    Identifier("all") [40-45] ["all"]
     Identifier(t1) [46-48] [t1]
 --
-DROP ROW ACCESS POLICY foo ON namespace.`all`.t1
+DROP ROW ACCESS POLICY foo ON namespace."all".t1
 ==
 
 drop row access policy if exists foo on t1;
@@ -51,28 +51,28 @@ DropRowAccessPolicyStatement(is_if_exists) [0-42] [drop row access...foo on t1]
 DROP ROW ACCESS POLICY IF EXISTS foo ON t1
 ==
 
-drop row access policy if exists foo on namespace.`all`.t1;
+drop row access policy if exists foo on namespace."all".t1;
 --
-DropRowAccessPolicyStatement(is_if_exists) [0-58] [drop row access...ace.`all`.t1]
+DropRowAccessPolicyStatement(is_if_exists) [0-58] [drop row access...ace."all".t1]
   PathExpression [33-36] [foo]
     Identifier(foo) [33-36] [foo]
-  PathExpression [40-58] [namespace.`all`.t1]
+  PathExpression [40-58] [namespace."all".t1]
     Identifier(namespace) [40-49] [namespace]
-    Identifier(`all`) [50-55] [`all`]
+    Identifier("all") [50-55] ["all"]
     Identifier(t1) [56-58] [t1]
 --
-DROP ROW ACCESS POLICY IF EXISTS foo ON namespace.`all`.t1
+DROP ROW ACCESS POLICY IF EXISTS foo ON namespace."all".t1
 ==
 
-drop row access policy `if exists foo` on t1;
+drop row access policy "if exists foo" on t1;
 --
-DropRowAccessPolicyStatement [0-44] [drop row access...foo` on t1]
-  PathExpression [23-38] [`if exists foo`]
-    Identifier(`if exists foo`) [23-38] [`if exists foo`]
+DropRowAccessPolicyStatement [0-44] [drop row access...foo" on t1]
+  PathExpression [23-38] ["if exists foo"]
+    Identifier("if exists foo") [23-38] ["if exists foo"]
   PathExpression [42-44] [t1]
     Identifier(t1) [42-44] [t1]
 --
-DROP ROW ACCESS POLICY `if exists foo` ON t1
+DROP ROW ACCESS POLICY "if exists foo" ON t1
 ==
 
 drop all row policies on t1;
@@ -120,84 +120,84 @@ drop row access policy foo
 # Only the exact words "drop row access policy" will trigger the "drop row
 # access policy" interpretation. When one of the words is escaped, or when IF
 # EXISTS is present, the statement is interpreted as a regular DROP statement.
-drop {{`row`|row}} {{`access`|access}} {{if exists|}} {{`policy`|policy}}
+drop {{"row"|row}} {{"access"|access}} {{if exists|}} {{"policy"|policy}}
 --
-ALTERNATION GROUP: `row`,`access`,if exists,`policy`
+ALTERNATION GROUP: "row","access",if exists,"policy"
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` `access` if exists `policy`
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" "access" if exists "policy"
      ^
 --
-ALTERNATION GROUP: `row`,`access`,if exists,policy
+ALTERNATION GROUP: "row","access",if exists,policy
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` `access` if exists policy
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" "access" if exists policy
      ^
 --
-ALTERNATION GROUP: `row`,`access`,,`policy`
+ALTERNATION GROUP: "row","access",,"policy"
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` `access`  `policy`
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" "access"  "policy"
      ^
 --
-ALTERNATION GROUP: `row`,`access`,,policy
+ALTERNATION GROUP: "row","access",,policy
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` `access`  policy
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" "access"  policy
      ^
 --
-ALTERNATION GROUP: `row`,access,if exists,`policy`
+ALTERNATION GROUP: "row",access,if exists,"policy"
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` access if exists `policy`
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" access if exists "policy"
      ^
 --
-ALTERNATION GROUP: `row`,access,if exists,policy
+ALTERNATION GROUP: "row",access,if exists,policy
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` access if exists policy
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" access if exists policy
      ^
 --
-ALTERNATION GROUP: `row`,access,,`policy`
+ALTERNATION GROUP: "row",access,,"policy"
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` access  `policy`
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" access  "policy"
      ^
 --
-ALTERNATION GROUP: `row`,access,,policy
+ALTERNATION GROUP: "row",access,,policy
 --
-ERROR: `row` is not a supported object type [at 1:6]
-drop `row` access  policy
+ERROR: "row" is not a supported object type [at 1:6]
+drop "row" access  policy
      ^
 --
-ALTERNATION GROUP: row,`access`,if exists,`policy`
+ALTERNATION GROUP: row,"access",if exists,"policy"
 --
-ERROR: Syntax error: Expected keyword ACCESS but got identifier `access` [at 1:10]
-drop row `access` if exists `policy`
+ERROR: Syntax error: Expected keyword ACCESS but got identifier "access" [at 1:10]
+drop row "access" if exists "policy"
          ^
 --
-ALTERNATION GROUP: row,`access`,if exists,policy
+ALTERNATION GROUP: row,"access",if exists,policy
 --
-ERROR: Syntax error: Expected keyword ACCESS but got identifier `access` [at 1:10]
-drop row `access` if exists policy
+ERROR: Syntax error: Expected keyword ACCESS but got identifier "access" [at 1:10]
+drop row "access" if exists policy
          ^
 --
-ALTERNATION GROUP: row,`access`,,`policy`
+ALTERNATION GROUP: row,"access",,"policy"
 --
-ERROR: Syntax error: Expected keyword ACCESS but got identifier `access` [at 1:10]
-drop row `access`  `policy`
+ERROR: Syntax error: Expected keyword ACCESS but got identifier "access" [at 1:10]
+drop row "access"  "policy"
          ^
 --
-ALTERNATION GROUP: row,`access`,,policy
+ALTERNATION GROUP: row,"access",,policy
 --
-ERROR: Syntax error: Expected keyword ACCESS but got identifier `access` [at 1:10]
-drop row `access`  policy
+ERROR: Syntax error: Expected keyword ACCESS but got identifier "access" [at 1:10]
+drop row "access"  policy
          ^
 --
-ALTERNATION GROUP: row,access,if exists,`policy`
+ALTERNATION GROUP: row,access,if exists,"policy"
 --
 ERROR: Syntax error: Expected keyword POLICY but got keyword IF [at 1:17]
-drop row access if exists `policy`
+drop row access if exists "policy"
                 ^
 --
 ALTERNATION GROUP: row,access,if exists,policy
@@ -206,10 +206,10 @@ ERROR: Syntax error: Expected keyword POLICY but got keyword IF [at 1:17]
 drop row access if exists policy
                 ^
 --
-ALTERNATION GROUP: row,access,,`policy`
+ALTERNATION GROUP: row,access,,"policy"
 --
-ERROR: Syntax error: Expected keyword POLICY but got identifier `policy` [at 1:18]
-drop row access  `policy`
+ERROR: Syntax error: Expected keyword POLICY but got identifier "policy" [at 1:18]
+drop row access  "policy"
                  ^
 --
 ALTERNATION GROUP: row,access,,policy

@@ -443,7 +443,7 @@ AllDepthLimitDetectorTestCases() {
           {.depth_limit_test_case_name = "nested_replace_fields",
            .depth_limit_template = {"SELECT ", R({"REPLACE_FIELDS("}),
                                     "CAST('int64_key_1: 1 int64_key_2: 2' AS "
-                                    "`zetasql_test__.KitchenSinkPB`)",
+                                    "\"zetasql_test__.KitchenSinkPB\")",
                                     R({", 1 AS int64_key_1)"}), "AS c"},
            .depth_limit_required_features =
                {

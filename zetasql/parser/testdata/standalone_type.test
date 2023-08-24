@@ -20,19 +20,19 @@ SimpleType [0-5] [a.b.c]
 a.b.c
 ==
 
-`a.b.c`
+"a.b.c"
 --
-SimpleType [0-7] [`a.b.c`]
-  PathExpression [0-7] [`a.b.c`]
-    Identifier(`a.b.c`) [0-7] [`a.b.c`]
+SimpleType [0-7] ["a.b.c"]
+  PathExpression [0-7] ["a.b.c"]
+    Identifier("a.b.c") [0-7] ["a.b.c"]
 --
-`a.b.c`
+"a.b.c"
 ==
 
-proto<`a.b.c`>
+proto<"a.b.c">
 --
 ERROR: Syntax error: Unexpected keyword PROTO [at 1:1]
-proto<`a.b.c`>
+proto<"a.b.c">
 ^
 ==
 
@@ -281,15 +281,15 @@ numeric(1.1)
 ==
 
 # String literal parameter
-numeric("MAX")
+numeric('MAX')
 --
-SimpleType [0-14] [numeric("MAX")]
+SimpleType [0-14] [numeric('MAX')]
   PathExpression [0-7] [numeric]
     Identifier(numeric) [0-7] [numeric]
-  TypeParameterList [7-13] [("MAX"]
-    StringLiteral("MAX") [8-13] ["MAX"]
+  TypeParameterList [7-13] [('MAX']
+    StringLiteral('MAX') [8-13] ['MAX']
 --
-numeric("MAX")
+numeric('MAX')
 ==
 
 # Bytes literal parameter

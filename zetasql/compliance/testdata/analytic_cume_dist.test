@@ -162,9 +162,9 @@ ARRAY<STRUCT<str_val STRING, int64_val INT64, DOUBLE>>[unknown order:
 [required_features=ANALYTIC_FUNCTIONS,V_1_1_ORDER_BY_COLLATE]
 [name=cume_dist_collate]
 SELECT str_val, int64_val,
-       CUME_DIST() OVER (ORDER BY str_val COLLATE "en_US", int64_val DESC)
+       CUME_DIST() OVER (ORDER BY str_val COLLATE 'en_US', int64_val DESC)
 FROM TestTable
-ORDER BY str_val COLLATE "en_US"
+ORDER BY str_val COLLATE 'en_US'
 --
 ARRAY<STRUCT<str_val STRING, int64_val INT64, DOUBLE>>[unknown order:
   {NULL, NULL, 0.2},
@@ -220,13 +220,13 @@ ARRAY<STRUCT<UINT32, int64_val INT64, DOUBLE>>[unknown order:
 
 [name=cume_dist_enum]
 SELECT enum_val, CUME_DIST() OVER (ORDER BY enum_val DESC)
-FROM (SELECT CAST(0 AS `zetasql_test__.TestEnum`) as enum_val UNION ALL
-      SELECT CAST(1 AS `zetasql_test__.TestEnum`)             UNION ALL
-      SELECT CAST(1 AS `zetasql_test__.TestEnum`)             UNION ALL
-      SELECT CAST(2 AS `zetasql_test__.TestEnum`)             UNION ALL
-      SELECT CAST(2 AS `zetasql_test__.TestEnum`)             UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`)          UNION ALL
-      SELECT CAST(null AS `zetasql_test__.TestEnum`))
+FROM (SELECT CAST(0 AS "zetasql_test__.TestEnum") as enum_val UNION ALL
+      SELECT CAST(1 AS "zetasql_test__.TestEnum")             UNION ALL
+      SELECT CAST(1 AS "zetasql_test__.TestEnum")             UNION ALL
+      SELECT CAST(2 AS "zetasql_test__.TestEnum")             UNION ALL
+      SELECT CAST(2 AS "zetasql_test__.TestEnum")             UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum")          UNION ALL
+      SELECT CAST(null AS "zetasql_test__.TestEnum"))
 --
 ARRAY<STRUCT<
         enum_val ENUM<zetasql_test__.TestEnum>,

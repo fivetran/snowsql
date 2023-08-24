@@ -84,14 +84,14 @@ QueryStmt
             | +-expr=
             | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
             | +-field_descriptor=string_val
-            | +-default_value="default_name"
-            +-Literal(type=STRING, value="A")
-            +-Literal(type=STRING, value="Z")
+            | +-default_value='default_name'
+            +-Literal(type=STRING, value='A')
+            +-Literal(type=STRING, value='Z')
 ==
 
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
 --
-ERROR: Could not cast literal "Z" to type INT64 [at 1:67]
+ERROR: Could not cast literal 'Z' to type INT64 [at 1:67]
 select * from TestTable where KitchenSink.int64_val BETWEEN 1 AND 'Z';
                                                                   ^
 ==
@@ -126,8 +126,8 @@ QueryStmt
               | +-expr=
               | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=TestTable.KitchenSink#3)
               | +-field_descriptor=string_val
-              | +-default_value="default_name"
-              +-Literal(type=STRING, value="A")
+              | +-default_value='default_name'
+              +-Literal(type=STRING, value='A')
               +-Literal(type=STRING, value=NULL)
 ==
 
@@ -237,10 +237,10 @@ from SimpleTypes
 QueryStmt
 +-output_column_list=
 | +-SimpleTypes.int64#2 AS int64 [INT64]
-| +-$query.$col2#19 AS `$col2` [BOOL]
-| +-$query.$col3#20 AS `$col3` [BOOL]
-| +-$query.$col4#21 AS `$col4` [BOOL]
-| +-$query.$col5#22 AS `$col5` [BOOL]
+| +-$query.$col2#19 AS "$col2" [BOOL]
+| +-$query.$col3#20 AS "$col3" [BOOL]
+| +-$query.$col4#21 AS "$col4" [BOOL]
+| +-$query.$col5#22 AS "$col5" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=[SimpleTypes.int64#2, $query.$col2#19, $query.$col3#20, $query.$col4#21, $query.$col5#22]
@@ -286,10 +286,10 @@ from SimpleTypes
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#19 AS `$col1` [BOOL]
-| +-$query.$col2#20 AS `$col2` [BOOL]
-| +-$query.$col3#21 AS `$col3` [BOOL]
-| +-$query.$col4#22 AS `$col4` [BOOL]
+| +-$query.$col1#19 AS "$col1" [BOOL]
+| +-$query.$col2#20 AS "$col2" [BOOL]
+| +-$query.$col3#21 AS "$col3" [BOOL]
+| +-$query.$col4#22 AS "$col4" [BOOL]
 +-query=
   +-ProjectScan
     +-column_list=$query.[$col1#19, $col2#20, $col3#21, $col4#22]

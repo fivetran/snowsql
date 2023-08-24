@@ -404,9 +404,9 @@ ALTERNATION GROUP: TABLE
 --
 DropTableFunctionStatement [0-31] [DROP TABLE...foo-bar-123]
   PathExpression [20-31] [foo-bar-123]
-    Identifier(`foo-bar-123`) [20-31] [foo-bar-123]
+    Identifier("foo-bar-123") [20-31] [foo-bar-123]
 --
-DROP TABLE FUNCTION `foo-bar-123`
+DROP TABLE FUNCTION "foo-bar-123"
 ==
 
 [no_test_get_parse_tokens]
@@ -423,10 +423,10 @@ ALTERNATION GROUP: TABLE
 --
 DropTableFunctionStatement [0-35] [DROP TABLE...bar-123.baz]
   PathExpression [20-35] [foo-bar-123.baz]
-    Identifier(`foo-bar-123`) [20-35] [foo-bar-123.baz]
+    Identifier("foo-bar-123") [20-35] [foo-bar-123.baz]
     Identifier(baz) [20-35] [foo-bar-123.baz]
 --
-DROP TABLE FUNCTION `foo-bar-123`.baz
+DROP TABLE FUNCTION "foo-bar-123".baz
 ==
 
 [no_test_get_parse_tokens]
@@ -507,6 +507,6 @@ drop function function
 --
 DropFunctionStatement [0-22] [drop function function]
   PathExpression [14-22] [function]
-    Identifier(`function`) [14-22] [function]
+    Identifier("function") [14-22] [function]
 --
-DROP FUNCTION `function`
+DROP FUNCTION "function"

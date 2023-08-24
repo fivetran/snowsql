@@ -268,7 +268,7 @@ bool ZetaSqlFlexTokenizer::IsReservedKeyword(absl::string_view text) const {
 }
 
 int ZetaSqlFlexTokenizer::GetIdentifierLength(absl::string_view text) {
-  if (text[0] == '`') {
+  if (text[0] == '"') {
     // Identifier is backquoted. Find the closing quote, accounting for escape
     // sequences.
     for (int i = 1; i < text.size(); ++i) {
@@ -277,7 +277,7 @@ int ZetaSqlFlexTokenizer::GetIdentifierLength(absl::string_view text) {
           // Next character is a literal - ignore it
           ++i;
           continue;
-        case '`':
+        case '"':
           // Reached the end of the backquoted string
           return i + 1;
         default:

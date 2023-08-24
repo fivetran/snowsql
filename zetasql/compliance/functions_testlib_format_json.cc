@@ -85,13 +85,13 @@ std::vector<FunctionTestCall> GetFunctionTestsFormatJson() {
   "string_val_6": "foo\\bar"
 })";
   const std::string escape_chars_json_sql_literal =
-      R"(JSON "{\"int64_val'_1\":1,)"
-      R"(\"string_val_1\":\"foo'bar\",)"
-      R"(\"string_val_2\":\"foo''bar\",)"
-      R"(\"string_val_3\":\"foo`bar\",)"
-      R"(\"string_val_4\":\"foo``bar\",)"
-      R"(\"string_val_5\":\"foo\\\"bar\",)"
-      R"(\"string_val_6\":\"foo\\\\bar\"}")";
+      R"(JSON '{"int64_val\'_1":1,)"
+      R"("string_val_1":"foo\'bar",)"
+      R"("string_val_2":"foo\'\'bar",)"
+      R"("string_val_3":"foo`bar",)"
+      R"("string_val_4":"foo``bar",)"
+      R"("string_val_5":"foo\\"bar",)"
+      R"("string_val_6":"foo\\\\bar"}')";
 
   std::vector<FunctionTestCall> test_cases = {
       // Invalid formats for JSON.

@@ -490,11 +490,11 @@ QueryStatement [0-121] [select * from...t_timestamp())]
           TVFArgument [65-79] [current_date()]
             FunctionCall [65-79] [current_date()]
               PathExpression [65-77] [current_date]
-                Identifier(`current_date`) [65-77] [current_date]
+                Identifier("current_date") [65-77] [current_date]
           TVFArgument [101-120] [current_timestamp()]
             FunctionCall [101-120] [current_timestamp()]
               PathExpression [101-118] [current_timestamp]
-                Identifier(`current_timestamp`) [101-118] [current_timestamp]
+                Identifier("current_timestamp") [101-118] [current_timestamp]
 --
 SELECT
   *
@@ -504,7 +504,7 @@ FROM
       1
     FROM
       mytvf()
-  ), `current_date`(), `current_timestamp`())
+  ), "current_date"(), "current_timestamp"())
 ==
 
 # A TVF has a correlated reference to the enclosing query.
@@ -729,7 +729,7 @@ QueryStatement [0-63] [select * from...keyvalue))]
         TVF [14-63] [my.42.dot....keyvalue))]
           PathExpression [14-37] [my.42.dot.separated.tvf]
             Identifier(my) [14-16] [my]
-            Identifier(`42`) [17-19] [42]
+            Identifier("42") [17-19] [42]
             Identifier(dot) [20-23] [dot]
             Identifier(separated) [24-33] [separated]
             Identifier(tvf) [34-37] [tvf]
@@ -748,7 +748,7 @@ QueryStatement [0-63] [select * from...keyvalue))]
 SELECT
   *
 FROM
-  my.`42`.dot.separated.tvf((
+  my."42".dot.separated.tvf((
     SELECT
       *
     FROM
@@ -769,7 +769,7 @@ QueryStatement [0-62] [select * from...keyvalue))]
         TVF [14-62] [my.42dot.separate...keyvalue))]
           PathExpression [14-36] [my.42dot.separated.tvf]
             Identifier(my) [14-16] [my]
-            Identifier(`42dot`) [17-22] [42dot]
+            Identifier("42dot") [17-22] [42dot]
             Identifier(separated) [23-32] [separated]
             Identifier(tvf) [33-36] [tvf]
           TVFArgument [37-61] [(select * from keyvalue)]
@@ -787,7 +787,7 @@ QueryStatement [0-62] [select * from...keyvalue))]
 SELECT
   *
 FROM
-  my.`42dot`.separated.tvf((
+  my."42dot".separated.tvf((
     SELECT
       *
     FROM
@@ -849,7 +849,7 @@ QueryStatement [0-59] [select * from...keyvalue))]
             Identifier(my) [14-16] [my]
             Identifier(dot) [17-20] [dot]
             Identifier(separated) [21-30] [separated]
-            Identifier(`42`) [31-33] [42]
+            Identifier("42") [31-33] [42]
           TVFArgument [34-58] [(select * from keyvalue)]
             ExpressionSubquery [34-58] [(select * from keyvalue)]
               Query [35-57] [select * from keyvalue]
@@ -865,7 +865,7 @@ QueryStatement [0-59] [select * from...keyvalue))]
 SELECT
   *
 FROM
-  my.dot.separated.`42`((
+  my.dot.separated."42"((
     SELECT
       *
     FROM
@@ -1429,7 +1429,7 @@ QueryStatement [0-46] [select * from...select 2))]
       FromClause [9-46] [from if(true...select 2))]
         TVF [14-46] [if(true, (...select 2))]
           PathExpression [14-16] [if]
-            Identifier(`if`) [14-16] [if]
+            Identifier("if") [14-16] [if]
           TVFArgument [17-21] [true]
             BooleanLiteral(true) [17-21] [true]
           TVFArgument [23-33] [(select 1)]
@@ -1450,7 +1450,7 @@ QueryStatement [0-46] [select * from...select 2))]
 SELECT
   *
 FROM
-  `if`(true, (
+  "if"(true, (
     SELECT
       1
   ), (
@@ -1473,7 +1473,7 @@ QueryStatement [0-52] [select * from...select 2))]
       FromClause [9-52] [from try_cast...select 2))]
         TVF [14-52] [try_cast(true...select 2))]
           PathExpression [14-22] [try_cast]
-            Identifier(`try_cast`) [14-22] [try_cast]
+            Identifier("try_cast") [14-22] [try_cast]
           TVFArgument [23-27] [true]
             BooleanLiteral(true) [23-27] [true]
           TVFArgument [29-39] [(select 1)]
@@ -1494,7 +1494,7 @@ QueryStatement [0-52] [select * from...select 2))]
 SELECT
   *
 FROM
-  `try_cast`(true, (
+  "try_cast"(true, (
     SELECT
       1
   ), (
@@ -1984,7 +1984,7 @@ FROM
 
 # Valid "TABLE path(arguments...)" syntax for table-valued function call:
 # multiple arguments in argument list.
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, "abc", [true]));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, 'abc', [true]));
 --
 QueryStatement [0-79] [select * from..., [true]))]
   Query [0-79] [select * from..., [true]))]
@@ -1996,15 +1996,15 @@ QueryStatement [0-79] [select * from..., [true]))]
         TVF [14-79] [tvf_one_relation_..., [true]))]
           PathExpression [14-52] [tvf_one_relation_...xed_output]
             Identifier(tvf_one_relation_arg_with_fixed_output) [14-52] [tvf_one_relation_...xed_output]
-          TVFArgument [53-78] [table t(1, "abc", [true])]
-            TableClause [53-78] [table t(1, "abc", [true])]
-              TVF [59-78] [t(1, "abc", [true])]
+          TVFArgument [53-78] [table t(1, 'abc', [true])]
+            TableClause [53-78] [table t(1, 'abc', [true])]
+              TVF [59-78] [t(1, 'abc', [true])]
                 PathExpression [59-60] [t]
                   Identifier(t) [59-60] [t]
                 TVFArgument [61-62] [1]
                   IntLiteral(1) [61-62] [1]
-                TVFArgument [64-69] ["abc"]
-                  StringLiteral("abc") [64-69] ["abc"]
+                TVFArgument [64-69] ['abc']
+                  StringLiteral('abc') [64-69] ['abc']
                 TVFArgument [71-77] [[true]]
                   ArrayConstructor [71-77] [[true]]
                     BooleanLiteral(true) [72-76] [true]
@@ -2012,7 +2012,7 @@ QueryStatement [0-79] [select * from..., [true]))]
 SELECT
   *
 FROM
-  tvf_one_relation_arg_with_fixed_output(TABLE t(1, "abc", ARRAY[true]))
+  tvf_one_relation_arg_with_fixed_output(TABLE t(1, 'abc', ARRAY[true]))
 ==
 
 # Valid "TABLE path(arguments...)" syntax for table-valued function call:
@@ -2102,7 +2102,7 @@ QueryStatement [0-100] [select * from...repeatable(10)]
       FromClause [9-100] [from try_cast...repeatable(10)]
         TVF [14-100] [try_cast(true...repeatable(10)]
           PathExpression [14-22] [try_cast]
-            Identifier(`try_cast`) [14-22] [try_cast]
+            Identifier("try_cast") [14-22] [try_cast]
           TVFArgument [23-27] [true]
             BooleanLiteral(true) [23-27] [true]
           TVFArgument [29-39] [(select 1)]
@@ -2130,7 +2130,7 @@ QueryStatement [0-100] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, (
+  "try_cast"(true, (
     SELECT
       1
   ), (
@@ -2153,7 +2153,7 @@ QueryStatement [0-108] [select * from...repeatable(10)]
       FromClause [9-108] [from try_cast...repeatable(10)]
         TVF [14-108] [try_cast(true...repeatable(10)]
           PathExpression [14-22] [try_cast]
-            Identifier(`try_cast`) [14-22] [try_cast]
+            Identifier("try_cast") [14-22] [try_cast]
           TVFArgument [23-27] [true]
             BooleanLiteral(true) [23-27] [true]
           TVFArgument [29-43] [table keyvalue]
@@ -2175,7 +2175,7 @@ QueryStatement [0-108] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
@@ -2193,7 +2193,7 @@ QueryStatement [0-126] [select * from...repeatable(10)]
       FromClause [9-126] [from try_cast...repeatable(10)]
         TVF [14-126] [try_cast(true...repeatable(10)]
           PathExpression [14-22] [try_cast]
-            Identifier(`try_cast`) [14-22] [try_cast]
+            Identifier("try_cast") [14-22] [try_cast]
           TVFArgument [23-27] [true]
             BooleanLiteral(true) [23-27] [true]
           TVFArgument [29-43] [table keyvalue]
@@ -2219,7 +2219,7 @@ QueryStatement [0-126] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
@@ -2237,7 +2237,7 @@ QueryStatement [0-119] [select * from...repeatable(10)]
       FromClause [9-119] [from try_cast...repeatable(10)]
         TVF [14-119] [try_cast(true...repeatable(10)]
           PathExpression [14-22] [try_cast]
-            Identifier(`try_cast`) [14-22] [try_cast]
+            Identifier("try_cast") [14-22] [try_cast]
           TVFArgument [23-27] [true]
             BooleanLiteral(true) [23-27] [true]
           TVFArgument [29-43] [table keyvalue]
@@ -2261,7 +2261,7 @@ QueryStatement [0-119] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Valid TABLESAMPLE clause for table-valued function call using the TABLE
@@ -2279,7 +2279,7 @@ QueryStatement [0-137] [select * from...repeatable(10)]
       FromClause [9-137] [from try_cast...repeatable(10)]
         TVF [14-137] [try_cast(true...repeatable(10)]
           PathExpression [14-22] [try_cast]
-            Identifier(`try_cast`) [14-22] [try_cast]
+            Identifier("try_cast") [14-22] [try_cast]
           TVFArgument [23-27] [true]
             BooleanLiteral(true) [23-27] [true]
           TVFArgument [29-43] [table keyvalue]
@@ -2307,7 +2307,7 @@ QueryStatement [0-137] [select * from...repeatable(10)]
 SELECT
   *
 FROM
-  `try_cast`(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
+  "try_cast"(true, TABLE keyvalue, TABLE keyvalue) @{ num_workers = 42 } AS myalias TABLESAMPLE reservoir(100 ROWS) REPEATABLE (10)
 ==
 
 # Invalid TABLESAMPLE clause for table-valued function call using subqueries to
@@ -2368,49 +2368,49 @@ ERROR: Syntax error: Expected end of input but got "@" [at 3:1]
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call:
 # missing argument between commas.
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, , "abc"));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, , 'abc'));
 --
 ERROR: Syntax error: Unexpected "," [at 1:65]
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, , "abc"));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, , 'abc'));
                                                                 ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call:
 # extra comma after arguments.
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, "abc",));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, 'abc',));
 --
 ERROR: Syntax error: Unexpected ")" [at 1:71]
-select * from tvf_one_relation_arg_with_fixed_output(table t(1, "abc",));
+select * from tvf_one_relation_arg_with_fixed_output(table t(1, 'abc',));
                                                                       ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call.
 # the ORDER BY clause is not supported.
 select * from tvf_one_relation_arg_with_fixed_output(
-    table t(1, "abc" order by 1));
+    table t(1, 'abc' order by 1));
 --
 ERROR: Syntax error: Expected ")" or "," but got keyword ORDER [at 2:22]
-    table t(1, "abc" order by 1));
+    table t(1, 'abc' order by 1));
                      ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call.
 # the LIMIT clause is not supported.
 select * from tvf_one_relation_arg_with_fixed_output(
-    table t(1, "abc" limit 10));
+    table t(1, 'abc' limit 10));
 --
 ERROR: Syntax error: Expected ")" or "," but got keyword LIMIT [at 2:22]
-    table t(1, "abc" limit 10));
+    table t(1, 'abc' limit 10));
                      ^
 ==
 
 # Invalid "TABLE path(arguments...)" syntax for table-valued function call.
 # the HAVING clause is not supported.
 select * from tvf_one_relation_arg_with_fixed_output(
-    table t(1, "abc" having true));
+    table t(1, 'abc' having true));
 --
 ERROR: Syntax error: Expected ")" or "," but got keyword HAVING [at 2:22]
-    table t(1, "abc" having true));
+    table t(1, 'abc' having true));
                      ^
 ==
 

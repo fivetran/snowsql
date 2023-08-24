@@ -397,7 +397,7 @@ TEST_F(EvalTest, NewStructExpr) {
       "NewStructExpr(\n"
       "+-type: STRUCT<a INT64, b STRING>,\n"
       "+-0 a: ConstExpr(1),\n"
-      "+-1 b: ConstExpr(\"foo\"))",
+      "+-1 b: ConstExpr('foo'))",
       struct_op->DebugString());
   Value result = Struct({"a", "b"}, {Int64(1), String("foo")});
   ZETASQL_ASSERT_OK_AND_ASSIGN(auto value, EvalExpr(*struct_op, EmptyParams()));

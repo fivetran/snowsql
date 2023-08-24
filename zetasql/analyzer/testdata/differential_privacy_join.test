@@ -8,7 +8,7 @@ from SimpleTypesWithAnonymizationUid a,
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -18,9 +18,9 @@ QueryStmt
         +-input_scan=
         | +-JoinScan
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="b")
+        |     +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#25 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -37,7 +37,7 @@ inner join SimpleTypesWithAnonymizationUid b on a.uid = b.uid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -48,9 +48,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -63,7 +63,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -77,9 +77,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -111,7 +111,7 @@ inner join SimpleTypesWithAnonymizationUid b on a.uid = a.uid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-185
@@ -124,9 +124,9 @@ QueryStmt
         |   +-parse_location=124-134
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#11]
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-121, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(parse_location=90-121, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=135-166, table=SimpleTypesWithAnonymizationUid, alias="b")
+        |   | +-TableScan(parse_location=135-166, table=SimpleTypesWithAnonymizationUid, alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=172-177, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -156,7 +156,7 @@ inner join SimpleTypesWithAnonymizationUid b on (a.uid = a.uid or a.int64 = b.in
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-208
@@ -169,9 +169,9 @@ QueryStmt
         |   +-parse_location=124-134
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11, int64#14]
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-121, column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |   | +-TableScan(parse_location=90-121, column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=135-166, column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=135-166, column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$or(BOOL, repeated(1) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -205,7 +205,7 @@ inner join SimpleTypesWithAnonymizationUid b on b.uid = b.uid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-185
@@ -218,9 +218,9 @@ QueryStmt
         |   +-parse_location=124-134
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#23]
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-121, table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(parse_location=90-121, table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=135-166, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(parse_location=135-166, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=172-177, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#23)
@@ -250,7 +250,7 @@ inner join SimpleTypesWithAnonymizationUid b on
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -261,9 +261,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-Cast(INT64 -> STRING)
@@ -289,7 +289,7 @@ cross join SimpleTypesWithAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#37 AS `$col1` [INT64]
+| +-$aggregate.$agg1#37 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#37]
@@ -304,9 +304,9 @@ QueryStmt
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-join_type=FULL
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -329,7 +329,7 @@ inner join SimpleTypesWithAnonymizationUid b using(uid);
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -340,9 +340,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -355,7 +355,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -369,9 +369,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -402,7 +402,7 @@ where a.uid=b.uid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -416,9 +416,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -440,7 +440,7 @@ where SimpleTypesWithAnonymizationUid.uid=b.uid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -456,7 +456,7 @@ QueryStmt
         |   |   +-left_scan=
         |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10])
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-filter_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -477,7 +477,7 @@ from T1StringAnonymizationUid, T2StringAnonymizationUid;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#5]
@@ -508,7 +508,7 @@ from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#61 AS `$col1` [INT64]
+| +-$aggregate.$agg1#61 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#61]
@@ -524,13 +524,13 @@ QueryStmt
         |   |   +-left_scan=
         |   |   | +-JoinScan
         |   |   |   +-left_scan=
-        |   |   |   | +-TableScan(table=SimpleTypes, alias="a")
+        |   |   |   | +-TableScan(table=SimpleTypes, alias='a')
         |   |   |   +-right_scan=
-        |   |   |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="c")
+        |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='c')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="d")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='d')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#47)
@@ -543,7 +543,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#61 AS `$col1` [INT64]
+| +-$aggregate.$agg1#61 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#61]
@@ -562,13 +562,13 @@ QueryStmt
         |   |   |   +-left_scan=
         |   |   |   | +-JoinScan
         |   |   |   |   +-left_scan=
-        |   |   |   |   | +-TableScan(table=SimpleTypes, alias="a")
+        |   |   |   |   | +-TableScan(table=SimpleTypes, alias='a')
         |   |   |   |   +-right_scan=
-        |   |   |   |     +-TableScan(table=SimpleTypes, alias="b")
+        |   |   |   |     +-TableScan(table=SimpleTypes, alias='b')
         |   |   |   +-right_scan=
-        |   |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="c")
+        |   |   |     +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#47], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='c')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="d")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#59], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='d')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#47)
@@ -599,7 +599,7 @@ inner join SimpleTypesWithAnonymizationUid b on a.int64 = b.int64;
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -610,9 +610,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int64#2, int64#14]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -634,7 +634,7 @@ a.int32 = b.int32 and (a.string = b.string and a.uid = b.uid));
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -645,9 +645,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11, int32#13, int64#14, string#17, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="a")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="b")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(2) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -671,7 +671,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -685,9 +685,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11, int32#13, int64#14, string#17, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="a")
+        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, string#5, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias="b")
+        |   |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14, string#17, uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1, 4, 10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(2) BOOL) -> BOOL)
         |   |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -728,7 +728,7 @@ inner join SimpleTypesWithAnonymizationUid b on (a.uid = b.uid and a.uid = b.uid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -739,9 +739,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -758,7 +758,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -772,9 +772,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
         |   |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -809,7 +809,7 @@ inner join SimpleTypesWithAnonymizationUid b on (a.int64 = b.int64 and a.int32 =
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -820,9 +820,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2, int32#13, int64#14]
         |   +-left_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias="a")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#1, int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias="b")
+        |   | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int32#13, int64#14], table=SimpleTypesWithAnonymizationUid, column_index_list=[0, 1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$and(BOOL, repeated(1) BOOL) -> BOOL)
         |       +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
@@ -849,7 +849,7 @@ right join SimpleTypes b on a.int64 = b.int64
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-169
@@ -863,9 +863,9 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypes.int64#14]
         |   +-join_type=RIGHT
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-121, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=90-121, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=135-146, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=135-146, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=152-159, type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -896,7 +896,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -911,9 +911,9 @@ QueryStmt
         |       +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20, SimpleTypesWithAnonymizationUid.uid#29]
         |       +-join_type=RIGHT
         |       +-left_scan=
-        |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="b")
+        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -926,7 +926,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -944,9 +944,9 @@ QueryStmt
         |   |       +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20, SimpleTypesWithAnonymizationUid.uid#29]
         |   |       +-join_type=RIGHT
         |   |       +-left_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |   |       | +-TableScan(column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |   |       +-right_scan=
-        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="b")
+        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#20, uid#29], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='b')
         |   |       +-join_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-ColumnRef(type=INT64, column=SimpleTypes.int64#2)
@@ -982,7 +982,7 @@ from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-220
@@ -1000,9 +1000,9 @@ QueryStmt
         |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |       +-join_type=RIGHT
         |       +-left_scan=
-        |       | +-TableScan(parse_location=118-149, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=118-149, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(parse_location=167-198, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |       | +-TableScan(parse_location=167-198, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(parse_location=204-209, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1036,7 +1036,7 @@ from (
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -1051,9 +1051,9 @@ QueryStmt
         |       +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypesWithAnonymizationUid.uid#11, SimpleTypes.int64#14]
         |       +-join_type=LEFT
         |       +-left_scan=
-        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -1066,7 +1066,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -1084,9 +1084,9 @@ QueryStmt
         |   |       +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypesWithAnonymizationUid.uid#11, SimpleTypes.int64#14]
         |   |       +-join_type=LEFT
         |   |       +-left_scan=
-        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias="a")
+        |   |       | +-TableScan(column_list=SimpleTypesWithAnonymizationUid.[int64#2, uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[1, 10], alias='a')
         |   |       +-right_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   |       | +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   |       +-join_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -1118,7 +1118,7 @@ left join SimpleTypesWithAnonymizationUid b on a.int64 = b.int64
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-168
@@ -1132,9 +1132,9 @@ QueryStmt
         |   +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20]
         |   +-join_type=LEFT
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-101, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=90-101, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=114-145, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=114-145, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=151-158, type=INT64, column=SimpleTypes.int64#2)
@@ -1168,7 +1168,7 @@ from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-219
@@ -1186,9 +1186,9 @@ QueryStmt
         |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |       +-join_type=LEFT
         |       +-left_scan=
-        |       | +-TableScan(parse_location=118-149, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=118-149, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(parse_location=166-197, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |       | +-TableScan(parse_location=166-197, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(parse_location=203-208, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1221,7 +1221,7 @@ full outer join SimpleTypesWithAnonymizationUid b on a.int64 = b.int64
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-174
@@ -1235,9 +1235,9 @@ QueryStmt
         |   +-column_list=[SimpleTypes.int64#2, SimpleTypesWithAnonymizationUid.int64#20]
         |   +-join_type=FULL
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-101, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=90-101, column_list=[SimpleTypes.int64#2], table=SimpleTypes, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=120-151, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=120-151, column_list=[SimpleTypesWithAnonymizationUid.int64#20], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=157-164, type=INT64, column=SimpleTypes.int64#2)
@@ -1267,7 +1267,7 @@ full outer join SimpleTypes b on a.int64 = b.int64
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-174
@@ -1281,9 +1281,9 @@ QueryStmt
         |   +-column_list=[SimpleTypesWithAnonymizationUid.int64#2, SimpleTypes.int64#14]
         |   +-join_type=FULL
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-121, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="a")
+        |   | +-TableScan(parse_location=90-121, column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=140-151, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   | +-TableScan(parse_location=140-151, column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(parse_location=157-164, type=INT64, column=SimpleTypesWithAnonymizationUid.int64#2)
@@ -1311,7 +1311,7 @@ full outer join SimpleTypesWithAnonymizationUid b on a.uid = b.uid
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -1323,9 +1323,9 @@ QueryStmt
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-join_type=FULL
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1338,7 +1338,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -1361,9 +1361,9 @@ QueryStmt
         |   |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23, uid#11, uid#23]
         |   |       +-join_type=FULL
         |   |       +-left_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |       +-right_scan=
-        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |       | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |       +-join_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1400,7 +1400,7 @@ from (
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-234
@@ -1418,9 +1418,9 @@ QueryStmt
         |       +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |       +-join_type=FULL
         |       +-left_scan=
-        |       | +-TableScan(parse_location=127-158, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |       | +-TableScan(parse_location=127-158, column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |       +-right_scan=
-        |       | +-TableScan(parse_location=181-212, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |       | +-TableScan(parse_location=181-212, column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |       +-join_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-ColumnRef(parse_location=218-223, type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -1453,7 +1453,7 @@ from SimpleTypesWithAnonymizationUid a, T1StringAnonymizationUid b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#15 AS `$col1` [INT64]
+| +-$aggregate.$agg1#15 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-151
@@ -1465,9 +1465,9 @@ QueryStmt
         | +-JoinScan
         |   +-parse_location=123-124
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-121, table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(parse_location=90-121, table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(parse_location=125-149, table=T1StringAnonymizationUid, alias="b")
+        |     +-TableScan(parse_location=125-149, table=T1StringAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#15 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -1491,7 +1491,7 @@ from ProtoAnonymizationUid a, ProtoAnonymizationUid b
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-138
@@ -1503,9 +1503,9 @@ QueryStmt
         | +-JoinScan
         |   +-parse_location=113-114
         |   +-left_scan=
-        |   | +-TableScan(parse_location=90-111, table=ProtoAnonymizationUid, alias="a")
+        |   | +-TableScan(parse_location=90-111, table=ProtoAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(parse_location=115-136, table=ProtoAnonymizationUid, alias="b")
+        |     +-TableScan(parse_location=115-136, table=ProtoAnonymizationUid, alias='b')
         +-aggregate_list=
           +-$agg1#3 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_count_star(optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -1531,7 +1531,7 @@ from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#29 AS `$col1` [INT64]
+| +-$aggregate.$agg1#29 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#29]
@@ -1577,7 +1577,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#29 AS `$col1` [INT64]
+| +-$aggregate.$agg1#29 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#29]
@@ -1646,7 +1646,7 @@ from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#27 AS `$col1` [INT64]
+| +-$aggregate.$agg1#27 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#27]
@@ -1657,7 +1657,7 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#11, $aggregate.$agg1#25, $groupby.uid#26]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[$aggregate.$agg1#25, $groupby.uid#26]
@@ -1682,7 +1682,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#27 AS `$col1` [INT64]
+| +-$aggregate.$agg1#27 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#27]
@@ -1696,7 +1696,7 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[SimpleTypesWithAnonymizationUid.uid#11, $aggregate.$agg1#25, $groupby.uid#26]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[$aggregate.$agg1#25, $groupby.uid#26]
@@ -1740,7 +1740,7 @@ from
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#34 AS `$col1` [INT64]
+| +-$aggregate.$agg1#34 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#34]
@@ -1780,7 +1780,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#34 AS `$col1` [INT64]
+| +-$aggregate.$agg1#34 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#34]
@@ -1840,7 +1840,7 @@ group by b.int64;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -1851,9 +1851,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=[SimpleTypes.int64#14]
         |   +-left_scan=
-        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias="a")
+        |   | +-TableScan(table=SimpleTypesWithAnonymizationUid, alias='a')
         |   +-right_scan=
-        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         +-group_by_list=
         | +-int64#32 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         +-aggregate_list=
@@ -1864,7 +1864,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#31 AS `$col1` [INT64]
+| +-$aggregate.$agg1#31 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#31]
@@ -1878,9 +1878,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=[SimpleTypes.int64#14, SimpleTypesWithAnonymizationUid.uid#33]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#33], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias="b")
+        |   |     +-TableScan(column_list=[SimpleTypes.int64#14], table=SimpleTypes, column_index_list=[1], alias='b')
         |   +-group_by_list=
         |   | +-int64_partial#36 := ColumnRef(type=INT64, column=SimpleTypes.int64#14)
         |   | +-$uid#37 := ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#33)
@@ -1911,7 +1911,7 @@ FROM KitchenSinkWithUidValueTable t1
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-172
@@ -1925,9 +1925,9 @@ QueryStmt
         |   +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
         |   +-join_type=LEFT
         |   +-left_scan=
-        |   | +-TableScan(parse_location=56-84, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   | +-TableScan(parse_location=56-84, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
-        |   | +-TableScan(parse_location=106-134, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   | +-TableScan(parse_location=106-134, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-GetProtoField
@@ -1936,14 +1936,14 @@ QueryStmt
         |       | +-expr=
         |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       | +-field_descriptor=string_val
-        |       | +-default_value="default_name"
+        |       | +-default_value='default_name'
         |       +-GetProtoField
         |         +-parse_location=162-172
         |         +-type=STRING
         |         +-expr=
         |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |         +-field_descriptor=string_val
-        |         +-default_value="default_name"
+        |         +-default_value='default_name'
         +-aggregate_list=
           +-$agg1#3 :=
             +-AggregateFunctionCall(ZetaSQL:$differential_privacy_sum(INT64, optional(1) STRUCT<INT64, INT64> contribution_bounds_per_group) -> INT64)
@@ -1965,7 +1965,7 @@ FROM KitchenSinkWithUidValueTable t1
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#3 AS `$col1` [INT64]
+| +-$aggregate.$agg1#3 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-172
@@ -1991,9 +1991,9 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(parse_location=56-84, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |   |     +-TableScan(parse_location=56-84, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $project.$string_val#5]
@@ -2004,9 +2004,9 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
-        |   |   |     +-TableScan(parse_location=106-134, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |   |     +-TableScan(parse_location=106-134, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   |       +-GetProtoField
@@ -2015,14 +2015,14 @@ QueryStmt
         |   |       | +-expr=
         |   |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       | +-field_descriptor=string_val
-        |   |       | +-default_value="default_name"
+        |   |       | +-default_value='default_name'
         |   |       +-GetProtoField
         |   |         +-parse_location=162-172
         |   |         +-type=STRING
         |   |         +-expr=
         |   |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |         +-field_descriptor=string_val
-        |   |         +-default_value="default_name"
+        |   |         +-default_value='default_name'
         |   +-group_by_list=
         |   | +-$uid#8 := ColumnRef(type=STRING, column=$project.$string_val#4)
         |   +-aggregate_list=
@@ -2063,7 +2063,7 @@ FROM
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-252
@@ -2083,7 +2083,7 @@ QueryStmt
         |   | |   +-expr=
         |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   | |   +-field_descriptor=string_val
-        |   | |   +-default_value="default_name"
+        |   | |   +-default_value='default_name'
         |   | +-n#4 :=
         |   |   +-GetProtoField
         |   |     +-parse_location=78-87
@@ -2100,9 +2100,9 @@ QueryStmt
         |       |   +-parse_location=138-142
         |       |   +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
         |       |   +-left_scan=
-        |       |   | +-TableScan(parse_location=102-130, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |       |   | +-TableScan(parse_location=102-130, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |       |   +-right_scan=
-        |       |   | +-TableScan(parse_location=143-171, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |       |   | +-TableScan(parse_location=143-171, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |       |   +-join_expr=
         |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       |       +-GetProtoField
@@ -2111,14 +2111,14 @@ QueryStmt
         |       |       | +-expr=
         |       |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       |       | +-field_descriptor=string_val
-        |       |       | +-default_value="default_name"
+        |       |       | +-default_value='default_name'
         |       |       +-GetProtoField
         |       |         +-parse_location=203-213
         |       |         +-type=STRING
         |       |         +-expr=
         |       |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |       |         +-field_descriptor=string_val
-        |       |         +-default_value="default_name"
+        |       |         +-default_value='default_name'
         |       +-filter_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-FunctionCall(ZetaSQL:mod(INT64, INT64) -> INT64)
@@ -2153,7 +2153,7 @@ FROM
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-252
@@ -2195,9 +2195,9 @@ QueryStmt
         |   |       |   |   |     +-expr=
         |   |       |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       |   |   |     +-field_descriptor=string_val
-        |   |       |   |   |     +-default_value="default_name"
+        |   |       |   |   |     +-default_value='default_name'
         |   |       |   |   +-input_scan=
-        |   |       |   |     +-TableScan(parse_location=102-130, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |       |   |     +-TableScan(parse_location=102-130, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |       |   +-right_scan=
         |   |       |   | +-ProjectScan
         |   |       |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $project.$string_val#7]
@@ -2208,9 +2208,9 @@ QueryStmt
         |   |       |   |   |     +-expr=
         |   |       |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |       |   |   |     +-field_descriptor=string_val
-        |   |       |   |   |     +-default_value="default_name"
+        |   |       |   |   |     +-default_value='default_name'
         |   |       |   |   +-input_scan=
-        |   |       |   |     +-TableScan(parse_location=143-171, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |       |   |     +-TableScan(parse_location=143-171, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |       |   +-join_expr=
         |   |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   |       |       +-GetProtoField
@@ -2219,14 +2219,14 @@ QueryStmt
         |   |       |       | +-expr=
         |   |       |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |       |       | +-field_descriptor=string_val
-        |   |       |       | +-default_value="default_name"
+        |   |       |       | +-default_value='default_name'
         |   |       |       +-GetProtoField
         |   |       |         +-parse_location=203-213
         |   |       |         +-type=STRING
         |   |       |         +-expr=
         |   |       |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |       |         +-field_descriptor=string_val
-        |   |       |         +-default_value="default_name"
+        |   |       |         +-default_value='default_name'
         |   |       +-filter_expr=
         |   |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |           +-FunctionCall(ZetaSQL:mod(INT64, INT64) -> INT64)
@@ -2278,7 +2278,7 @@ FROM
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#4 AS `$col1` [INT64]
+| +-$aggregate.$agg1#4 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-214
@@ -2298,7 +2298,7 @@ QueryStmt
         |   |     +-expr=
         |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |     +-field_descriptor=string_val
-        |   |     +-default_value="default_name"
+        |   |     +-default_value='default_name'
         |   +-input_scan=
         |     +-FilterScan
         |       +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
@@ -2307,9 +2307,9 @@ QueryStmt
         |       |   +-parse_location=121-125
         |       |   +-column_list=KitchenSinkWithUidValueTable.[value#1, value#2]
         |       |   +-left_scan=
-        |       |   | +-TableScan(parse_location=85-113, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |       |   | +-TableScan(parse_location=85-113, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |       |   +-right_scan=
-        |       |   | +-TableScan(parse_location=126-154, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |       |   | +-TableScan(parse_location=126-154, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |       |   +-join_expr=
         |       |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       |       +-GetProtoField
@@ -2318,14 +2318,14 @@ QueryStmt
         |       |       | +-expr=
         |       |       | | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |       |       | +-field_descriptor=string_val
-        |       |       | +-default_value="default_name"
+        |       |       | +-default_value='default_name'
         |       |       +-GetProtoField
         |       |         +-parse_location=186-196
         |       |         +-type=STRING
         |       |         +-expr=
         |       |         | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |       |         +-field_descriptor=string_val
-        |       |         +-default_value="default_name"
+        |       |         +-default_value='default_name'
         |       +-filter_expr=
         |         +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |           +-Literal(parse_location=207-208, type=INT64, value=1)
@@ -2361,7 +2361,7 @@ JOIN KitchenSinkWithUidValueTable t2
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-135
@@ -2384,9 +2384,9 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |     +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $join_right.string_val#4]
@@ -2398,9 +2398,9 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |     +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |       +-ColumnRef(type=STRING, column=$join_left.string_val#3)
@@ -2419,7 +2419,7 @@ JOIN KitchenSinkWithUidValueTable t2
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-135
@@ -2449,9 +2449,9 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
-        |   |   |         +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |   |         +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   |   +-right_scan=
         |   |   | +-ProjectScan
         |   |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $join_right.string_val#4]
@@ -2467,9 +2467,9 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#2)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
-        |   |   |         +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |   |         +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(STRING, STRING) -> BOOL)
         |   |       +-ColumnRef(type=STRING, column=$join_left.string_val#3)
@@ -2505,7 +2505,7 @@ JOIN KitchenSinkWithUidValueTable t2
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#5 AS `$col1` [INT64]
+| +-$aggregate.$agg1#5 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-134
@@ -2530,7 +2530,7 @@ QueryStmt
         |   |   |     +-field_descriptor=int64_val
         |   |   |     +-default_value=0
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t1")
+        |   |     +-TableScan(parse_location=47-75, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t1')
         |   +-right_scan=
         |   | +-ProjectScan
         |   |   +-column_list=[KitchenSinkWithUidValueTable.value#2, $join_right.int64_val#4]
@@ -2544,7 +2544,7 @@ QueryStmt
         |   |   |     +-field_descriptor=int64_val
         |   |   |     +-default_value=0
         |   |   +-input_scan=
-        |   |     +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias="t2")
+        |   |     +-TableScan(parse_location=84-112, column_list=[KitchenSinkWithUidValueTable.value#2], table=KitchenSinkWithUidValueTable, column_index_list=[0], alias='t2')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=$join_left.int64_val#3)
@@ -2576,7 +2576,7 @@ JOIN (SELECT string_val as x, string_val as y FROM KitchenSinkWithUidValueTable)
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-220
@@ -2600,7 +2600,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#3 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=72-82
@@ -2608,7 +2608,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=93-121, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-right_scan=
@@ -2623,7 +2623,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#6 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=156-166
@@ -2631,7 +2631,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=177-205, column_list=[KitchenSinkWithUidValueTable.value#4], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-join_expr=
@@ -2652,7 +2652,7 @@ JOIN (SELECT string_val as x, string_val as y FROM KitchenSinkWithUidValueTable)
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-220
@@ -2680,7 +2680,7 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
         |   |   |     +-ProjectScan
         |   |   |       +-column_list=[KitchenSinkWithUidValueTable.value#1, $project.$string_val#8]
@@ -2691,7 +2691,7 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
         |   |   |         +-TableScan(parse_location=93-121, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   |   +-right_scan=
@@ -2707,7 +2707,7 @@ QueryStmt
         |   |   |   |     +-expr=
         |   |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |   |     +-field_descriptor=string_val
-        |   |   |   |     +-default_value="default_name"
+        |   |   |   |     +-default_value='default_name'
         |   |   |   +-input_scan=
         |   |   |     +-ProjectScan
         |   |   |       +-column_list=[KitchenSinkWithUidValueTable.value#4, $project.$string_val#9]
@@ -2718,7 +2718,7 @@ QueryStmt
         |   |   |       |     +-expr=
         |   |   |       |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |       |     +-field_descriptor=string_val
-        |   |   |       |     +-default_value="default_name"
+        |   |   |       |     +-default_value='default_name'
         |   |   |       +-input_scan=
         |   |   |         +-TableScan(parse_location=177-205, column_list=[KitchenSinkWithUidValueTable.value#4], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   |   +-join_expr=
@@ -2754,7 +2754,7 @@ JOIN (SELECT string_val as x, string_val as y FROM KitchenSinkWithUidValueTable)
 [PRE-REWRITE AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#7 AS `$col1` [INT64]
+| +-$aggregate.$agg1#7 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-parse_location=0-220
@@ -2778,7 +2778,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#3 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=72-82
@@ -2786,7 +2786,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#1)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=93-121, column_list=[KitchenSinkWithUidValueTable.value#1], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-right_scan=
@@ -2801,7 +2801,7 @@ QueryStmt
         |   |   | |   +-expr=
         |   |   | |   | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   | |   +-field_descriptor=string_val
-        |   |   | |   +-default_value="default_name"
+        |   |   | |   +-default_value='default_name'
         |   |   | +-y#6 :=
         |   |   |   +-GetProtoField
         |   |   |     +-parse_location=156-166
@@ -2809,7 +2809,7 @@ QueryStmt
         |   |   |     +-expr=
         |   |   |     | +-ColumnRef(type=PROTO<zetasql_test__.KitchenSinkPB>, column=KitchenSinkWithUidValueTable.value#4)
         |   |   |     +-field_descriptor=string_val
-        |   |   |     +-default_value="default_name"
+        |   |   |     +-default_value='default_name'
         |   |   +-input_scan=
         |   |     +-TableScan(parse_location=177-205, column_list=[KitchenSinkWithUidValueTable.value#4], table=KitchenSinkWithUidValueTable, column_index_list=[0])
         |   +-join_expr=
@@ -2843,7 +2843,7 @@ inner join SimpleTypesWithAnonymizationUid b on a.uid = b.uid;
 --
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -2854,9 +2854,9 @@ QueryStmt
         | +-JoinScan
         |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   +-left_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   +-right_scan=
-        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   +-join_expr=
         |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)
@@ -2869,7 +2869,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$aggregate.$agg1#25 AS `$col1` [INT64]
+| +-$aggregate.$agg1#25 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$aggregate.$agg1#25]
@@ -2883,9 +2883,9 @@ QueryStmt
         |   | +-JoinScan
         |   |   +-column_list=SimpleTypesWithAnonymizationUid.[uid#11, uid#23]
         |   |   +-left_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="a")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#11], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='a')
         |   |   +-right_scan=
-        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias="b")
+        |   |   | +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.uid#23], table=SimpleTypesWithAnonymizationUid, column_index_list=[10], alias='b')
         |   |   +-join_expr=
         |   |     +-FunctionCall(ZetaSQL:$equal(INT64, INT64) -> BOOL)
         |   |       +-ColumnRef(type=INT64, column=SimpleTypesWithAnonymizationUid.uid#11)

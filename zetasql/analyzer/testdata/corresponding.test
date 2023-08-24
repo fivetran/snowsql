@@ -653,10 +653,10 @@ SELECT *, 1 AS a
 ==
 
 # CORRESPONDING: same column with different alias within a query is allowed.
-SELECT `int32` AS col1, `int32` AS col2
+SELECT "int32" AS col1, "int32" AS col2
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `float` AS col2, `float` AS col1
+SELECT "float" AS col2, "float" AS col1
 FROM SimpleTypes
 --
 QueryStmt
@@ -755,9 +755,9 @@ QueryStmt
 ==
 
 # CORRESPONDING: same column with and without alias.
-SELECT `int32` AS col, `int32` FROM SimpleTypes
+SELECT "int32" AS col, "int32" FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `float`, `float` AS col FROM SimpleTypes
+SELECT "float", "float" AS col FROM SimpleTypes
 --
 QueryStmt
 +-output_column_list=
@@ -867,8 +867,8 @@ QueryStmt
         | | | +-ProjectScan
         | | |   +-column_list=$union_all1.[col#1, extra_col#2]
         | | |   +-expr_list=
-        | | |   | +-col#1 := Literal(type=STRING, value="abc")
-        | | |   | +-extra_col#2 := Literal(type=STRING, value="bcd")
+        | | |   | +-col#1 := Literal(type=STRING, value='abc')
+        | | |   | +-extra_col#2 := Literal(type=STRING, value='bcd')
         | | |   +-input_scan=
         | | |     +-SingleRowScan
         | | +-output_column_list=[$union_all1.col#1]
@@ -877,7 +877,7 @@ QueryStmt
         |   | +-ProjectScan
         |   |   +-column_list=[$union_all2.col#3]
         |   |   +-expr_list=
-        |   |   | +-col#3 := Literal(type=STRING, value="def")
+        |   |   | +-col#3 := Literal(type=STRING, value='def')
         |   |   +-input_scan=
         |   |     +-SingleRowScan
         |   +-output_column_list=[$union_all2.col#3]
@@ -904,8 +904,8 @@ QueryStmt
           | |     +-ProjectScan
           | |       +-column_list=$union_all1.[col#1, extra_col#2]
           | |       +-expr_list=
-          | |       | +-col#1 := Literal(type=STRING, value="abc")
-          | |       | +-extra_col#2 := Literal(type=STRING, value="bcd")
+          | |       | +-col#1 := Literal(type=STRING, value='abc')
+          | |       | +-extra_col#2 := Literal(type=STRING, value='bcd')
           | |       +-input_scan=
           | |         +-SingleRowScan
           | +-output_column_list=[$union_all1.col#1]
@@ -914,7 +914,7 @@ QueryStmt
             | +-ProjectScan
             |   +-column_list=[$union_all2.col#3]
             |   +-expr_list=
-            |   | +-col#3 := Literal(type=STRING, value="def")
+            |   | +-col#3 := Literal(type=STRING, value='def')
             |   +-input_scan=
             |     +-SingleRowScan
             +-output_column_list=[$union_all2.col#3]
@@ -925,7 +925,7 @@ select 1 AS col
 union all CORRESPONDING
 select 'abc' AS col
 --
-ERROR: Could not cast literal "abc" to type INT64 [at 3:8]
+ERROR: Could not cast literal 'abc' to type INT64 [at 3:8]
 select 'abc' AS col
        ^
 ==
@@ -956,7 +956,7 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=$union_all1.[a#1, v1#2]
     | | |       +-expr_list=
-    | | |       | +-a#1 := Literal(type=STRING, value="a")
+    | | |       | +-a#1 := Literal(type=STRING, value='a')
     | | |       | +-v1#2 :=
     | | |       |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
     | | |       |     +-Literal(type=INT64, value=1)
@@ -969,7 +969,7 @@ QueryStmt
     |   | +-ProjectScan
     |   |   +-column_list=$union_all2.[b#3, v1#4]
     |   |   +-expr_list=
-    |   |   | +-b#3 := Literal(type=STRING, value="a")
+    |   |   | +-b#3 := Literal(type=STRING, value='a')
     |   |   | +-v1#4 :=
     |   |   |   +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
     |   |   |     +-Literal(type=DOUBLE, value=1)
@@ -1004,7 +1004,7 @@ QueryStmt
       | |         +-ProjectScan
       | |           +-column_list=$union_all1.[a#1, v1#2]
       | |           +-expr_list=
-      | |           | +-a#1 := Literal(type=STRING, value="a")
+      | |           | +-a#1 := Literal(type=STRING, value='a')
       | |           | +-v1#2 :=
       | |           |   +-FunctionCall(ZetaSQL:$add(INT64, INT64) -> INT64)
       | |           |     +-Literal(type=INT64, value=1)
@@ -1020,7 +1020,7 @@ QueryStmt
         |     +-ProjectScan
         |       +-column_list=$union_all2.[b#3, v1#4]
         |       +-expr_list=
-        |       | +-b#3 := Literal(type=STRING, value="a")
+        |       | +-b#3 := Literal(type=STRING, value='a')
         |       | +-v1#4 :=
         |       |   +-FunctionCall(ZetaSQL:$add(DOUBLE, DOUBLE) -> DOUBLE)
         |       |     +-Literal(type=DOUBLE, value=1)
@@ -1031,13 +1031,13 @@ QueryStmt
 ==
 
 # CORRESPONDING: Extra columns are omitted from table scan.
-SELECT `uint32`, `float`
+SELECT "uint32", "float"
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `uint32`, `json`
+SELECT "uint32", "json"
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `json`, `uint32`
+SELECT "json", "uint32"
 FROM SimpleTypes
 --
 QueryStmt
@@ -1576,7 +1576,7 @@ QueryStmt
 # CORRESPONDING: Union two of the same proto and proto + string literal.
 select KitchenSink AS col, KitchenSink from TestTable
 union all CORRESPONDING
-select KitchenSink, "int64_key_1: 1, int64_key_2: 2" AS col from TestTable
+select KitchenSink, 'int64_key_1: 1, int64_key_2: 2' AS col from TestTable
 --
 QueryStmt
 +-output_column_list=
@@ -1604,7 +1604,7 @@ QueryStmt
     |   |     +-ProjectScan
     |   |       +-column_list=[TestTable.KitchenSink#6, $union_all2.col#7]
     |   |       +-expr_list=
-    |   |       | +-col#7 := Literal(type=STRING, value="int64_key_1: 1, int64_key_2: 2")
+    |   |       | +-col#7 := Literal(type=STRING, value='int64_key_1: 1, int64_key_2: 2')
     |   |       +-input_scan=
     |   |         +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2])
     |   +-output_column_list=[$union_all2_cast.col#10, TestTable.KitchenSink#6]
@@ -1641,7 +1641,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=[TestTable.KitchenSink#6, $union_all2.col#7]
         |           +-expr_list=
-        |           | +-col#7 := Literal(type=STRING, value="int64_key_1: 1, int64_key_2: 2")
+        |           | +-col#7 := Literal(type=STRING, value='int64_key_1: 1, int64_key_2: 2')
         |           +-input_scan=
         |             +-TableScan(column_list=[TestTable.KitchenSink#6], table=TestTable, column_index_list=[2])
         +-output_column_list=[$union_all2_cast.col#10, TestTable.KitchenSink#6]
@@ -1853,9 +1853,9 @@ QueryStmt
 ==
 
 # CORRESPONDING: Multiple columns, some of which have to get widened in either direction.
-select `int32` AS col1, `uint32` AS col2, `string` AS col3 from SimpleTypes s1
+select "int32" AS col1, "uint32" AS col2, "string" AS col3 from SimpleTypes s1
 union all CORRESPONDING
-select `string` AS col3, `int32` AS col2, `int64` AS col1, from SimpleTypes s2
+select "string" AS col3, "int32" AS col2, "int64" AS col1, from SimpleTypes s2
 --
 QueryStmt
 +-output_column_list=
@@ -1882,7 +1882,7 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=SimpleTypes.[int32#1, uint32#3, string#5]
     | | |       +-input_scan=
-    | | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias="s1")
+    | | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias='s1')
     | | +-output_column_list=[$union_all1_cast.int32#40, $union_all1_cast.uint32#41, SimpleTypes.string#5]
     | +-SetOperationItem
     |   +-scan=
@@ -1896,7 +1896,7 @@ QueryStmt
     |   |     +-ProjectScan
     |   |       +-column_list=SimpleTypes.[string#23, int32#19, int64#20]
     |   |       +-input_scan=
-    |   |         +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias="s2")
+    |   |         +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias='s2')
     |   +-output_column_list=[SimpleTypes.int64#20, $union_all2_cast.int32#42, SimpleTypes.string#23]
     +-column_match_mode=CORRESPONDING
     +-column_propagation_mode=INNER
@@ -1927,7 +1927,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=SimpleTypes.[int32#1, uint32#3, string#5]
       | |       +-input_scan=
-      | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias="s1")
+      | |         +-TableScan(column_list=SimpleTypes.[int32#1, uint32#3, string#5], table=SimpleTypes, column_index_list=[0, 2, 4], alias='s1')
       | +-output_column_list=[$union_all1_cast.int32#40, $union_all1_cast.uint32#41, SimpleTypes.string#5]
       +-SetOperationItem
         +-scan=
@@ -1944,7 +1944,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=SimpleTypes.[string#23, int32#19, int64#20]
         |           +-input_scan=
-        |             +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias="s2")
+        |             +-TableScan(column_list=SimpleTypes.[int32#19, int64#20, string#23], table=SimpleTypes, column_index_list=[0, 1, 4], alias='s2')
         +-output_column_list=[SimpleTypes.int64#20, $union_all2_cast.int32#42, SimpleTypes.string#23]
 ==
 
@@ -2763,7 +2763,7 @@ QueryStmt
 ==
 
 # CORRESPONDING: UNION of struct parameters.
-(select struct(1, "abc") AS col)
+(select struct(1, 'abc') AS col)
 union all CORRESPONDING
 (select @test_param_struct AS col limit 1)
 --
@@ -2780,12 +2780,12 @@ QueryStmt
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1_cast.col#4]
     | | |   +-expr_list=
-    | | |   | +-col#4 := Literal(type=STRUCT<INT32, STRING>, value={1, "abc"})
+    | | |   | +-col#4 := Literal(type=STRUCT<INT32, STRING>, value={1, 'abc'})
     | | |   +-input_scan=
     | | |     +-ProjectScan
     | | |       +-column_list=[$union_all1.col#1]
     | | |       +-expr_list=
-    | | |       | +-col#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+    | | |       | +-col#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
     | | |       +-input_scan=
     | | |         +-SingleRowScan
     | | +-output_column_list=[$union_all1_cast.col#4]
@@ -2804,7 +2804,7 @@ QueryStmt
     |   |       | +-ProjectScan
     |   |       |   +-column_list=[$union_all2.col#2]
     |   |       |   +-expr_list=
-    |   |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+    |   |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
     |   |       |   +-input_scan=
     |   |       |     +-SingleRowScan
     |   |       +-limit=
@@ -2827,12 +2827,12 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.col#4]
       | |   +-expr_list=
-      | |   | +-col#4 := Literal(type=STRUCT<INT32, STRING>, value={1, "abc"})
+      | |   | +-col#4 := Literal(type=STRUCT<INT32, STRING>, value={1, 'abc'})
       | |   +-input_scan=
       | |     +-ProjectScan
       | |       +-column_list=[$union_all1.col#1]
       | |       +-expr_list=
-      | |       | +-col#1 := Literal(type=STRUCT<INT64, STRING>, value={1, "abc"})
+      | |       | +-col#1 := Literal(type=STRUCT<INT64, STRING>, value={1, 'abc'})
       | |       +-input_scan=
       | |         +-SingleRowScan
       | +-output_column_list=[$union_all1_cast.col#4]
@@ -2851,7 +2851,7 @@ QueryStmt
         |       | +-ProjectScan
         |       |   +-column_list=[$union_all2.col#2]
         |       |   +-expr_list=
-        |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name="test_param_struct")
+        |       |   | +-col#2 := Parameter(type=STRUCT<a INT32, b STRING>, name='test_param_struct')
         |       |   +-input_scan=
         |       |     +-SingleRowScan
         |       +-limit=
@@ -2860,10 +2860,10 @@ QueryStmt
 ==
 
 # CORRESPONDING: with a group by.
-select `uint64` from SimpleTypes
+select "uint64" from SimpleTypes
 union all CORRESPONDING
-select CAST(1 AS UINT64) as `uint64` from SimpleTypes
-group by `uint64`
+select CAST(1 AS UINT64) as "uint64" from SimpleTypes
+group by "uint64"
 --
 QueryStmt
 +-output_column_list=
@@ -2926,13 +2926,13 @@ QueryStmt
 ==
 
 # CORRESPONDING: Type coercing in multiple operations of columns from table scans.
-SELECT `uint32` AS col
+SELECT "uint32" AS col
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `int32` AS col
+SELECT "int32" AS col
 FROM SimpleTypes
 UNION ALL CORRESPONDING
-SELECT `float` AS col
+SELECT "float" AS col
 FROM SimpleTypes
 --
 QueryStmt
@@ -3042,11 +3042,11 @@ QueryStmt
 ==
 
 # CORRESPONDING: nested set operations with type coercing.
-select `uint32` AS col from SimpleTypes s1
+select "uint32" AS col from SimpleTypes s1
 UNION ALL CORRESPONDING
-(select `int32` AS col from SimpleTypes s2
+(select "int32" AS col from SimpleTypes s2
  INTERSECT ALL CORRESPONDING
- (select `float` AS col from SimpleTypes s3 EXCEPT ALL CORRESPONDING select 1 AS col));
+ (select "float" AS col from SimpleTypes s3 EXCEPT ALL CORRESPONDING select 1 AS col));
 --
 QueryStmt
 +-output_column_list=
@@ -3068,7 +3068,7 @@ QueryStmt
     | | |     +-ProjectScan
     | | |       +-column_list=[SimpleTypes.uint32#3]
     | | |       +-input_scan=
-    | | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias="s1")
+    | | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias='s1')
     | | +-output_column_list=[$union_all1_cast.uint32#62]
     | +-SetOperationItem
     |   +-scan=
@@ -3088,7 +3088,7 @@ QueryStmt
     |   |   | | |     +-ProjectScan
     |   |   | | |       +-column_list=[SimpleTypes.int32#19]
     |   |   | | |       +-input_scan=
-    |   |   | | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias="s2")
+    |   |   | | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias='s2')
     |   |   | | +-output_column_list=[$intersect_all1_cast.int32#59]
     |   |   | +-SetOperationItem
     |   |   |   +-scan=
@@ -3108,7 +3108,7 @@ QueryStmt
     |   |   |   |       | | | +-ProjectScan
     |   |   |   |       | | |   +-column_list=[SimpleTypes.float#44]
     |   |   |   |       | | |   +-input_scan=
-    |   |   |   |       | | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias="s3")
+    |   |   |   |       | | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias='s3')
     |   |   |   |       | | +-output_column_list=[SimpleTypes.float#44]
     |   |   |   |       | +-SetOperationItem
     |   |   |   |       |   +-scan=
@@ -3154,7 +3154,7 @@ QueryStmt
       | |     +-ProjectScan
       | |       +-column_list=[SimpleTypes.uint32#3]
       | |       +-input_scan=
-      | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias="s1")
+      | |         +-TableScan(column_list=[SimpleTypes.uint32#3], table=SimpleTypes, column_index_list=[2], alias='s1')
       | +-output_column_list=[$union_all1_cast.uint32#62]
       +-SetOperationItem
         +-scan=
@@ -3174,7 +3174,7 @@ QueryStmt
         |     | |     +-ProjectScan
         |     | |       +-column_list=[SimpleTypes.int32#19]
         |     | |       +-input_scan=
-        |     | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias="s2")
+        |     | |         +-TableScan(column_list=[SimpleTypes.int32#19], table=SimpleTypes, column_index_list=[0], alias='s2')
         |     | +-output_column_list=[$intersect_all1_cast.int32#59]
         |     +-SetOperationItem
         |       +-scan=
@@ -3194,7 +3194,7 @@ QueryStmt
         |       |         | | +-ProjectScan
         |       |         | |   +-column_list=[SimpleTypes.float#44]
         |       |         | |   +-input_scan=
-        |       |         | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias="s3")
+        |       |         | |     +-TableScan(column_list=[SimpleTypes.float#44], table=SimpleTypes, column_index_list=[7], alias='s3')
         |       |         | +-output_column_list=[SimpleTypes.float#44]
         |       |         +-SetOperationItem
         |       |           +-scan=
@@ -3337,10 +3337,10 @@ QueryStmt
 ==
 
 # CORRESPONDING: Subqueries with SELECT *.
-select "abc" c1, cast(1 as int64) c2
+select 'abc' c1, cast(1 as int64) c2
 union all CORRESPONDING
 select * from (
-  select "def" c1, cast(1 as int32) c2
+  select 'def' c1, cast(1 as int32) c2
 )
 --
 QueryStmt
@@ -3357,7 +3357,7 @@ QueryStmt
     | | | +-ProjectScan
     | | |   +-column_list=$union_all1.[c1#1, c2#2]
     | | |   +-expr_list=
-    | | |   | +-c1#1 := Literal(type=STRING, value="abc")
+    | | |   | +-c1#1 := Literal(type=STRING, value='abc')
     | | |   | +-c2#2 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
     | | |   +-input_scan=
     | | |     +-SingleRowScan
@@ -3377,7 +3377,7 @@ QueryStmt
     |   |         +-ProjectScan
     |   |           +-column_list=$subquery1.[c1#3, c2#4]
     |   |           +-expr_list=
-    |   |           | +-c1#3 := Literal(type=STRING, value="def")
+    |   |           | +-c1#3 := Literal(type=STRING, value='def')
     |   |           | +-c2#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
     |   |           +-input_scan=
     |   |             +-SingleRowScan
@@ -3400,7 +3400,7 @@ QueryStmt
       | | +-ProjectScan
       | |   +-column_list=$union_all1.[c1#1, c2#2]
       | |   +-expr_list=
-      | |   | +-c1#1 := Literal(type=STRING, value="abc")
+      | |   | +-c1#1 := Literal(type=STRING, value='abc')
       | |   | +-c2#2 := Literal(type=INT64, value=1, has_explicit_type=TRUE)
       | |   +-input_scan=
       | |     +-SingleRowScan
@@ -3420,7 +3420,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=$subquery1.[c1#3, c2#4]
         |           +-expr_list=
-        |           | +-c1#3 := Literal(type=STRING, value="def")
+        |           | +-c1#3 := Literal(type=STRING, value='def')
         |           | +-c2#4 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
         |           +-input_scan=
         |             +-SingleRowScan
@@ -3536,7 +3536,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1.a#1, $null_column_for_outer_set_op.b#5]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-b#5 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -3551,7 +3551,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#6, $union_all2.b#2]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#6 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -3580,7 +3580,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1.a#1, $null_column_for_outer_set_op.b#5]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-b#5 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -3595,7 +3595,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#6, $union_all2.b#2]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#6 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -3626,7 +3626,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[SimpleTypes.int64#2, $null_column_for_outer_set_op.int32#39]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-int32#39 := Literal(type=INT32, value=NULL)
     | | |   +-input_scan=
@@ -3660,7 +3660,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[SimpleTypes.int64#2, $null_column_for_outer_set_op.int32#39]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-int32#39 := Literal(type=INT32, value=NULL)
       | |   +-input_scan=
@@ -3706,7 +3706,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.int64#39, SimpleTypes.int32#19]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-int64#39 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -3740,7 +3740,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.int64#39, SimpleTypes.int32#19]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-int64#39 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -3770,7 +3770,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1.c#1, $union_all1.a#2, $null_column_for_outer_set_op.b#8]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-b#8 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -3786,7 +3786,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.c#9, $union_all2.a#3, $union_all2.b#4]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-c#9 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -3817,7 +3817,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1.c#1, $union_all1.a#2, $null_column_for_outer_set_op.b#8]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-b#8 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -3833,7 +3833,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.c#9, $union_all2.a#3, $union_all2.b#4]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-c#9 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -3941,7 +3941,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int32#1, $null_column_for_outer_set_op.uint64#58]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-uint64#58 := Literal(type=UINT64, value=NULL)
     | | |   +-input_scan=
@@ -3954,7 +3954,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.int64#59, SimpleTypes.int32#19, SimpleTypes.uint64#22]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-int64#59 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -3967,7 +3967,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.int64#60, SimpleTypes.int32#37, SimpleTypes.uint64#40]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-int64#60 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -3995,7 +3995,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int32#1, $null_column_for_outer_set_op.uint64#58]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-uint64#58 := Literal(type=UINT64, value=NULL)
       | |   +-input_scan=
@@ -4008,7 +4008,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.int64#59, SimpleTypes.int32#19, SimpleTypes.uint64#22]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-int64#59 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -4021,7 +4021,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.int64#60, SimpleTypes.int32#37, SimpleTypes.uint64#40]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-int64#60 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -4055,7 +4055,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int32#1, $null_column_for_outer_set_op.uint64#59, $null_column_for_outer_set_op.float#60]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-uint64#59 := Literal(type=UINT64, value=NULL)
     | | |   | +-float#60 := Literal(type=FLOAT, value=NULL)
@@ -4069,7 +4069,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.int64#61, SimpleTypes.int32#19, SimpleTypes.uint64#22, $null_column_for_outer_set_op.float#62]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-int64#61 := Literal(type=INT64, value=NULL)
     | | |   | +-float#62 := Literal(type=FLOAT, value=NULL)
@@ -4083,7 +4083,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.int64#63, SimpleTypes.int32#37, $null_column_for_outer_set_op.uint64#64, SimpleTypes.float#44]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-int64#63 := Literal(type=INT64, value=NULL)
     |   |   | +-uint64#64 := Literal(type=UINT64, value=NULL)
@@ -4113,7 +4113,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int32#1, $null_column_for_outer_set_op.uint64#59, $null_column_for_outer_set_op.float#60]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-uint64#59 := Literal(type=UINT64, value=NULL)
       | |   | +-float#60 := Literal(type=FLOAT, value=NULL)
@@ -4127,7 +4127,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.int64#61, SimpleTypes.int32#19, SimpleTypes.uint64#22, $null_column_for_outer_set_op.float#62]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-int64#61 := Literal(type=INT64, value=NULL)
       | |   | +-float#62 := Literal(type=FLOAT, value=NULL)
@@ -4141,7 +4141,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.int64#63, SimpleTypes.int32#37, $null_column_for_outer_set_op.uint64#64, SimpleTypes.float#44]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-int64#63 := Literal(type=INT64, value=NULL)
         |   | +-uint64#64 := Literal(type=UINT64, value=NULL)
@@ -4191,7 +4191,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#62, $intersect_all2_cast.int32#59]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#62 := Literal(type=DOUBLE, value=NULL)
     | | |   +-input_scan=
@@ -4259,7 +4259,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#62, $intersect_all2_cast.int32#59]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#62 := Literal(type=DOUBLE, value=NULL)
       | |   +-input_scan=
@@ -4316,7 +4316,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int64#2, $null_column_for_outer_set_op.c#41]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-c#41 := Literal(type=INT32, value=NULL)
     | | |   +-input_scan=
@@ -4329,7 +4329,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#42, $union_all2_cast.int32#40, SimpleTypes.int32#19]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#42 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -4364,7 +4364,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int64#2, $null_column_for_outer_set_op.c#41]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-c#41 := Literal(type=INT32, value=NULL)
       | |   +-input_scan=
@@ -4377,7 +4377,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#42, $union_all2_cast.int32#40, SimpleTypes.int32#19]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#42 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -4416,7 +4416,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int64#2, SimpleTypes.int32#1, SimpleTypes.int64#2, $null_column_for_outer_set_op.e#44]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-e#44 := Literal(type=INT32, value=NULL)
     | | |   +-input_scan=
@@ -4429,7 +4429,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#45, $union_all2_cast.int32#42, $null_column_for_outer_set_op.c#46, $union_all2_cast.int32#43, SimpleTypes.int32#19]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#45 := Literal(type=INT64, value=NULL)
     |   |   | +-c#46 := Literal(type=INT32, value=NULL)
@@ -4470,7 +4470,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int64#2, SimpleTypes.int32#1, SimpleTypes.int64#2, $null_column_for_outer_set_op.e#44]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-e#44 := Literal(type=INT32, value=NULL)
       | |   +-input_scan=
@@ -4483,7 +4483,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#45, $union_all2_cast.int32#42, $null_column_for_outer_set_op.c#46, $union_all2_cast.int32#43, SimpleTypes.int32#19]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#45 := Literal(type=INT64, value=NULL)
         |   | +-c#46 := Literal(type=INT32, value=NULL)
@@ -4529,7 +4529,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int32#1, $null_column_for_outer_set_op.float#68, $null_column_for_outer_set_op.double#69, $null_column_for_outer_set_op.bool#70]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-float#68 := Literal(type=DOUBLE, value=NULL)
     | | |   | +-double#69 := Literal(type=DOUBLE, value=NULL)
@@ -4544,7 +4544,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$intersect_all.int64#57, $null_column_for_outer_set_op.int32#71, $intersect_all.float#55, $intersect_all.double#56, $intersect_all.bool#58]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-int32#71 := Literal(type=INT32, value=NULL)
     |   |   +-input_scan=
@@ -4556,7 +4556,7 @@ QueryStmt
     |   |       | | +-scan=
     |   |       | | | +-ProjectScan
     |   |       | | |   +-column_list=[$intersect_all1_cast.float#59, SimpleTypes.double#27, SimpleTypes.int64#20, $null_column_for_outer_set_op.bool#60]
-    |   |       | | |   +-node_source="resolver_set_operation_corresponding"
+    |   |       | | |   +-node_source='resolver_set_operation_corresponding'
     |   |       | | |   +-expr_list=
     |   |       | | |   | +-bool#60 := Literal(type=BOOL, value=NULL)
     |   |       | | |   +-input_scan=
@@ -4576,7 +4576,7 @@ QueryStmt
     |   |       |   +-scan=
     |   |       |   | +-ProjectScan
     |   |       |   |   +-column_list=[SimpleTypes.double#45, $null_column_for_outer_set_op.double#61, $null_column_for_outer_set_op.int64#62, SimpleTypes.bool#43]
-    |   |       |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |       |   |   +-node_source='resolver_set_operation_corresponding'
     |   |       |   |   +-expr_list=
     |   |       |   |   | +-double#61 := Literal(type=DOUBLE, value=NULL)
     |   |       |   |   | +-int64#62 := Literal(type=INT64, value=NULL)
@@ -4610,7 +4610,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[SimpleTypes.int64#2, SimpleTypes.int32#1, $null_column_for_outer_set_op.float#68, $null_column_for_outer_set_op.double#69, $null_column_for_outer_set_op.bool#70]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-float#68 := Literal(type=DOUBLE, value=NULL)
       | |   | +-double#69 := Literal(type=DOUBLE, value=NULL)
@@ -4625,7 +4625,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$intersect_all.int64#57, $null_column_for_outer_set_op.int32#71, $intersect_all.float#55, $intersect_all.double#56, $intersect_all.bool#58]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-int32#71 := Literal(type=INT32, value=NULL)
         |   +-input_scan=
@@ -4637,7 +4637,7 @@ QueryStmt
         |         | +-scan=
         |         | | +-ProjectScan
         |         | |   +-column_list=[$intersect_all1_cast.float#59, SimpleTypes.double#27, SimpleTypes.int64#20, $null_column_for_outer_set_op.bool#60]
-        |         | |   +-node_source="resolver_set_operation_corresponding"
+        |         | |   +-node_source='resolver_set_operation_corresponding'
         |         | |   +-expr_list=
         |         | |   | +-bool#60 := Literal(type=BOOL, value=NULL)
         |         | |   +-input_scan=
@@ -4657,7 +4657,7 @@ QueryStmt
         |           +-scan=
         |           | +-ProjectScan
         |           |   +-column_list=[SimpleTypes.double#45, $null_column_for_outer_set_op.double#61, $null_column_for_outer_set_op.int64#62, SimpleTypes.bool#43]
-        |           |   +-node_source="resolver_set_operation_corresponding"
+        |           |   +-node_source='resolver_set_operation_corresponding'
         |           |   +-expr_list=
         |           |   | +-double#61 := Literal(type=DOUBLE, value=NULL)
         |           |   | +-int64#62 := Literal(type=INT64, value=NULL)
@@ -4695,7 +4695,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$intersect_all.float#37, $intersect_all.double#38, $intersect_all.int64#39, $intersect_all.bool#40, $null_column_for_outer_set_op.int32#68]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-int32#68 := Literal(type=INT32, value=NULL)
     | | |   +-input_scan=
@@ -4707,7 +4707,7 @@ QueryStmt
     | | |       | | +-scan=
     | | |       | | | +-ProjectScan
     | | |       | | |   +-column_list=[$intersect_all1_cast.float#41, SimpleTypes.double#9, SimpleTypes.int64#2, $null_column_for_outer_set_op.bool#42]
-    | | |       | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |       | | |   +-node_source='resolver_set_operation_corresponding'
     | | |       | | |   +-expr_list=
     | | |       | | |   | +-bool#42 := Literal(type=BOOL, value=NULL)
     | | |       | | |   +-input_scan=
@@ -4727,7 +4727,7 @@ QueryStmt
     | | |       |   +-scan=
     | | |       |   | +-ProjectScan
     | | |       |   |   +-column_list=[SimpleTypes.double#27, $null_column_for_outer_set_op.double#43, $null_column_for_outer_set_op.int64#44, SimpleTypes.bool#25]
-    | | |       |   |   +-node_source="resolver_set_operation_corresponding"
+    | | |       |   |   +-node_source='resolver_set_operation_corresponding'
     | | |       |   |   +-expr_list=
     | | |       |   |   | +-double#43 := Literal(type=DOUBLE, value=NULL)
     | | |       |   |   | +-int64#44 := Literal(type=INT64, value=NULL)
@@ -4744,7 +4744,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.float#69, $null_column_for_outer_set_op.double#70, SimpleTypes.int64#46, $null_column_for_outer_set_op.bool#71, SimpleTypes.int32#45]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-float#69 := Literal(type=DOUBLE, value=NULL)
     |   |   | +-double#70 := Literal(type=DOUBLE, value=NULL)
@@ -4776,7 +4776,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$intersect_all.float#37, $intersect_all.double#38, $intersect_all.int64#39, $intersect_all.bool#40, $null_column_for_outer_set_op.int32#68]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-int32#68 := Literal(type=INT32, value=NULL)
       | |   +-input_scan=
@@ -4788,7 +4788,7 @@ QueryStmt
       | |         | +-scan=
       | |         | | +-ProjectScan
       | |         | |   +-column_list=[$intersect_all1_cast.float#41, SimpleTypes.double#9, SimpleTypes.int64#2, $null_column_for_outer_set_op.bool#42]
-      | |         | |   +-node_source="resolver_set_operation_corresponding"
+      | |         | |   +-node_source='resolver_set_operation_corresponding'
       | |         | |   +-expr_list=
       | |         | |   | +-bool#42 := Literal(type=BOOL, value=NULL)
       | |         | |   +-input_scan=
@@ -4808,7 +4808,7 @@ QueryStmt
       | |           +-scan=
       | |           | +-ProjectScan
       | |           |   +-column_list=[SimpleTypes.double#27, $null_column_for_outer_set_op.double#43, $null_column_for_outer_set_op.int64#44, SimpleTypes.bool#25]
-      | |           |   +-node_source="resolver_set_operation_corresponding"
+      | |           |   +-node_source='resolver_set_operation_corresponding'
       | |           |   +-expr_list=
       | |           |   | +-double#43 := Literal(type=DOUBLE, value=NULL)
       | |           |   | +-int64#44 := Literal(type=INT64, value=NULL)
@@ -4823,7 +4823,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.float#69, $null_column_for_outer_set_op.double#70, SimpleTypes.int64#46, $null_column_for_outer_set_op.bool#71, SimpleTypes.int32#45]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-float#69 := Literal(type=DOUBLE, value=NULL)
         |   | +-double#70 := Literal(type=DOUBLE, value=NULL)
@@ -4945,7 +4945,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all2.a#3, $null_column_for_outer_set_op.b#6]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#6 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -4984,7 +4984,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all2.a#3, $null_column_for_outer_set_op.b#6]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#6 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5025,7 +5025,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#6, $union_all2.b#3]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#6 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5064,7 +5064,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#6, $union_all2.b#3]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#6 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5105,7 +5105,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#7, $union_all2.b#3]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#7 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5145,7 +5145,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#7, $union_all2.b#3]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#7 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5262,7 +5262,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#3]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#9 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -5278,7 +5278,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all3.a#6, $null_column_for_outer_set_op.b#10]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#10 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5318,7 +5318,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#3]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#9 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -5334,7 +5334,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all3.a#6, $null_column_for_outer_set_op.b#10]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#10 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5402,7 +5402,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#3]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#9 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -5418,7 +5418,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#10, $union_all3.b#6]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#10 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5458,7 +5458,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#9, $union_all2.b#3]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#9 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -5474,7 +5474,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#10, $union_all3.b#6]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#10 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5515,7 +5515,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.int64#57, SimpleTypes.int32#19]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-int64#57 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -5528,7 +5528,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.int64#58, SimpleTypes.int32#37]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-int64#58 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5562,7 +5562,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.int64#57, SimpleTypes.int32#19]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-int64#57 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -5575,7 +5575,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.int64#58, SimpleTypes.int32#37]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-int64#58 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5624,7 +5624,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#62, $intersect_all2_cast.int32#59]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#62 := Literal(type=DOUBLE, value=NULL)
     | | |   +-input_scan=
@@ -5692,7 +5692,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#62, $intersect_all2_cast.int32#59]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#62 := Literal(type=DOUBLE, value=NULL)
       | |   +-input_scan=
@@ -5768,7 +5768,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$null_column_for_outer_set_op.a#61, $intersect_all2_cast.uint32#59]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-a#61 := Literal(type=DOUBLE, value=NULL)
     | | |   +-input_scan=
@@ -5788,7 +5788,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$intersect_all3_cast.float#60, $null_column_for_outer_set_op.b#62]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-b#62 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5839,7 +5839,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$null_column_for_outer_set_op.a#61, $intersect_all2_cast.uint32#59]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-a#61 := Literal(type=DOUBLE, value=NULL)
       | |   +-input_scan=
@@ -5859,7 +5859,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$intersect_all3_cast.float#60, $null_column_for_outer_set_op.b#62]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-b#62 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5902,7 +5902,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#40, $union_all2_cast.int32#39]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#40 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -5943,7 +5943,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#40, $union_all2_cast.int32#39]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#40 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -5988,7 +5988,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.a#43, $union_all2_cast.int32#41, $null_column_for_outer_set_op.c#44, $union_all2_cast.int32#42]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-a#43 := Literal(type=INT64, value=NULL)
     |   |   | +-c#44 := Literal(type=INT32, value=NULL)
@@ -6035,7 +6035,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.a#43, $union_all2_cast.int32#41, $null_column_for_outer_set_op.c#44, $union_all2_cast.int32#42]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-a#43 := Literal(type=INT64, value=NULL)
         |   | +-c#44 := Literal(type=INT32, value=NULL)
@@ -6085,7 +6085,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$intersect_all.int64#57, $null_column_for_outer_set_op.int32#63]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-int32#63 := Literal(type=INT32, value=NULL)
     |   |   +-input_scan=
@@ -6111,7 +6111,7 @@ QueryStmt
     |   |       |   +-scan=
     |   |       |   | +-ProjectScan
     |   |       |   |   +-column_list=[SimpleTypes.double#45, $null_column_for_outer_set_op.double#59, $null_column_for_outer_set_op.int64#60]
-    |   |       |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |       |   |   +-node_source='resolver_set_operation_corresponding'
     |   |       |   |   +-expr_list=
     |   |       |   |   | +-double#59 := Literal(type=DOUBLE, value=NULL)
     |   |       |   |   | +-int64#60 := Literal(type=INT64, value=NULL)
@@ -6149,7 +6149,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$intersect_all.int64#57, $null_column_for_outer_set_op.int32#63]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-int32#63 := Literal(type=INT32, value=NULL)
         |   +-input_scan=
@@ -6175,7 +6175,7 @@ QueryStmt
         |           +-scan=
         |           | +-ProjectScan
         |           |   +-column_list=[SimpleTypes.double#45, $null_column_for_outer_set_op.double#59, $null_column_for_outer_set_op.int64#60]
-        |           |   +-node_source="resolver_set_operation_corresponding"
+        |           |   +-node_source='resolver_set_operation_corresponding'
         |           |   +-expr_list=
         |           |   | +-double#59 := Literal(type=DOUBLE, value=NULL)
         |           |   | +-int64#60 := Literal(type=INT64, value=NULL)
@@ -6231,7 +6231,7 @@ QueryStmt
     | | |   |   +-scan=
     | | |   |   | +-ProjectScan
     | | |   |   |   +-column_list=[SimpleTypes.double#27, $null_column_for_outer_set_op.double#41, $null_column_for_outer_set_op.int64#42]
-    | | |   |   |   +-node_source="resolver_set_operation_corresponding"
+    | | |   |   |   +-node_source='resolver_set_operation_corresponding'
     | | |   |   |   +-expr_list=
     | | |   |   |   | +-double#41 := Literal(type=DOUBLE, value=NULL)
     | | |   |   |   | +-int64#42 := Literal(type=INT64, value=NULL)
@@ -6248,7 +6248,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.float#64, $null_column_for_outer_set_op.double#65, SimpleTypes.int64#44]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-float#64 := Literal(type=DOUBLE, value=NULL)
     |   |   | +-double#65 := Literal(type=DOUBLE, value=NULL)
@@ -6297,7 +6297,7 @@ QueryStmt
       | |       +-scan=
       | |       | +-ProjectScan
       | |       |   +-column_list=[SimpleTypes.double#27, $null_column_for_outer_set_op.double#41, $null_column_for_outer_set_op.int64#42]
-      | |       |   +-node_source="resolver_set_operation_corresponding"
+      | |       |   +-node_source='resolver_set_operation_corresponding'
       | |       |   +-expr_list=
       | |       |   | +-double#41 := Literal(type=DOUBLE, value=NULL)
       | |       |   | +-int64#42 := Literal(type=INT64, value=NULL)
@@ -6312,7 +6312,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.float#64, $null_column_for_outer_set_op.double#65, SimpleTypes.int64#44]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-float#64 := Literal(type=DOUBLE, value=NULL)
         |   | +-double#65 := Literal(type=DOUBLE, value=NULL)
@@ -6425,7 +6425,7 @@ QueryStmt
 # Literal coercion is correctly handled: INNER mode.
 SELECT CAST(1 AS INT32) AS A, NULL AS B
 INTERSECT ALL CORRESPONDING
-SELECT CAST("STRING_VAL" AS STRING) AS B, 100 AS A
+SELECT CAST('STRING_VAL' AS STRING) AS B, 100 AS A
 --
 QueryStmt
 +-output_column_list=
@@ -6461,7 +6461,7 @@ QueryStmt
     |   |     +-ProjectScan
     |   |       +-column_list=$intersect_all2.[B#3, A#4]
     |   |       +-expr_list=
-    |   |       | +-B#3 := Literal(type=STRING, value="STRING_VAL", has_explicit_type=TRUE)
+    |   |       | +-B#3 := Literal(type=STRING, value='STRING_VAL', has_explicit_type=TRUE)
     |   |       | +-A#4 := Literal(type=INT64, value=100)
     |   |       +-input_scan=
     |   |         +-SingleRowScan
@@ -6508,7 +6508,7 @@ QueryStmt
         |         +-ProjectScan
         |           +-column_list=$intersect_all2.[B#3, A#4]
         |           +-expr_list=
-        |           | +-B#3 := Literal(type=STRING, value="STRING_VAL", has_explicit_type=TRUE)
+        |           | +-B#3 := Literal(type=STRING, value='STRING_VAL', has_explicit_type=TRUE)
         |           | +-A#4 := Literal(type=INT64, value=100)
         |           +-input_scan=
         |             +-SingleRowScan
@@ -6534,7 +6534,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_all1_cast.A#6, $null_column_for_outer_set_op.B#7]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-B#7 := Literal(type=INT64, value=NULL)
     | | |   +-input_scan=
@@ -6578,7 +6578,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_all1_cast.A#6, $null_column_for_outer_set_op.B#7]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-B#7 := Literal(type=INT64, value=NULL)
       | |   +-input_scan=
@@ -6645,7 +6645,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all2.A#5, $union_all2.B#4, $null_column_for_outer_set_op.C#10]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-C#10 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -6692,7 +6692,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all2.A#5, $union_all2.B#4, $null_column_for_outer_set_op.C#10]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-C#10 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -6708,7 +6708,7 @@ QueryStmt
 
 # Literal coercion is correctly handled when NULL columns are padded for FULL
 # mode.
-SELECT CAST(1 AS INT32) AS A, "STRING_VAL" AS B
+SELECT CAST(1 AS INT32) AS A, 'STRING_VAL' AS B
 FULL UNION DISTINCT CORRESPONDING
 SELECT NULL AS B
 --
@@ -6727,7 +6727,7 @@ QueryStmt
     | | |   +-column_list=$union_distinct1.[A#1, B#2]
     | | |   +-expr_list=
     | | |   | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    | | |   | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+    | | |   | +-B#2 := Literal(type=STRING, value='STRING_VAL')
     | | |   +-input_scan=
     | | |     +-SingleRowScan
     | | +-output_column_list=$union_distinct1.[A#1, B#2]
@@ -6735,7 +6735,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$null_column_for_outer_set_op.A#7, $union_distinct2_cast.B#6]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-A#7 := Literal(type=INT32, value=NULL)
     |   |   +-input_scan=
@@ -6771,7 +6771,7 @@ QueryStmt
       | |   +-column_list=$union_distinct1.[A#1, B#2]
       | |   +-expr_list=
       | |   | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-      | |   | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+      | |   | +-B#2 := Literal(type=STRING, value='STRING_VAL')
       | |   +-input_scan=
       | |     +-SingleRowScan
       | +-output_column_list=$union_distinct1.[A#1, B#2]
@@ -6779,7 +6779,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$null_column_for_outer_set_op.A#7, $union_distinct2_cast.B#6]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-A#7 := Literal(type=INT32, value=NULL)
         |   +-input_scan=
@@ -6799,9 +6799,9 @@ QueryStmt
 
 # Literal coercion is correctly handled when NULL columns are padded for FULL
 # mode.
-SELECT CAST(1 AS INT32) AS A, "STRING_VAL" AS B
+SELECT CAST(1 AS INT32) AS A, 'STRING_VAL' AS B
 FULL UNION DISTINCT CORRESPONDING
-SELECT NULL AS B, 1 AS A, "NO_MATCHING" AS C
+SELECT NULL AS B, 1 AS A, 'NO_MATCHING' AS C
 --
 QueryStmt
 +-output_column_list=
@@ -6817,7 +6817,7 @@ QueryStmt
     | | +-scan=
     | | | +-ProjectScan
     | | |   +-column_list=[$union_distinct1.A#1, $union_distinct1.B#2, $null_column_for_outer_set_op.C#11]
-    | | |   +-node_source="resolver_set_operation_corresponding"
+    | | |   +-node_source='resolver_set_operation_corresponding'
     | | |   +-expr_list=
     | | |   | +-C#11 := Literal(type=STRING, value=NULL)
     | | |   +-input_scan=
@@ -6825,7 +6825,7 @@ QueryStmt
     | | |       +-column_list=$union_distinct1.[A#1, B#2]
     | | |       +-expr_list=
     | | |       | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-    | | |       | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+    | | |       | +-B#2 := Literal(type=STRING, value='STRING_VAL')
     | | |       +-input_scan=
     | | |         +-SingleRowScan
     | | +-output_column_list=[$union_distinct1.A#1, $union_distinct1.B#2, $null_column_for_outer_set_op.C#11]
@@ -6842,7 +6842,7 @@ QueryStmt
     |   |       +-expr_list=
     |   |       | +-B#3 := Literal(type=INT64, value=NULL)
     |   |       | +-A#4 := Literal(type=INT64, value=1)
-    |   |       | +-C#5 := Literal(type=STRING, value="NO_MATCHING")
+    |   |       | +-C#5 := Literal(type=STRING, value='NO_MATCHING')
     |   |       +-input_scan=
     |   |         +-SingleRowScan
     |   +-output_column_list=[$union_distinct2_cast.A#10, $union_distinct2_cast.B#9, $union_distinct2.C#5]
@@ -6865,7 +6865,7 @@ QueryStmt
       | +-scan=
       | | +-ProjectScan
       | |   +-column_list=[$union_distinct1.A#1, $union_distinct1.B#2, $null_column_for_outer_set_op.C#11]
-      | |   +-node_source="resolver_set_operation_corresponding"
+      | |   +-node_source='resolver_set_operation_corresponding'
       | |   +-expr_list=
       | |   | +-C#11 := Literal(type=STRING, value=NULL)
       | |   +-input_scan=
@@ -6873,7 +6873,7 @@ QueryStmt
       | |       +-column_list=$union_distinct1.[A#1, B#2]
       | |       +-expr_list=
       | |       | +-A#1 := Literal(type=INT32, value=1, has_explicit_type=TRUE)
-      | |       | +-B#2 := Literal(type=STRING, value="STRING_VAL")
+      | |       | +-B#2 := Literal(type=STRING, value='STRING_VAL')
       | |       +-input_scan=
       | |         +-SingleRowScan
       | +-output_column_list=[$union_distinct1.A#1, $union_distinct1.B#2, $null_column_for_outer_set_op.C#11]
@@ -6893,7 +6893,7 @@ QueryStmt
         |           +-expr_list=
         |           | +-B#3 := Literal(type=INT64, value=NULL)
         |           | +-A#4 := Literal(type=INT64, value=1)
-        |           | +-C#5 := Literal(type=STRING, value="NO_MATCHING")
+        |           | +-C#5 := Literal(type=STRING, value='NO_MATCHING')
         |           +-input_scan=
         |             +-SingleRowScan
         +-output_column_list=[$union_distinct2_cast.A#10, $union_distinct2_cast.B#9, $union_distinct2.C#5]
@@ -6933,7 +6933,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all2.A#3, $null_column_for_outer_set_op.B#7]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-B#7 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -6977,7 +6977,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all2.A#3, $null_column_for_outer_set_op.B#7]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-B#7 := Literal(type=INT64, value=NULL)
         |   +-input_scan=
@@ -7019,7 +7019,7 @@ QueryStmt
     |   +-scan=
     |   | +-ProjectScan
     |   |   +-column_list=[$union_all2_cast.A#6, $null_column_for_outer_set_op.B#7]
-    |   |   +-node_source="resolver_set_operation_corresponding"
+    |   |   +-node_source='resolver_set_operation_corresponding'
     |   |   +-expr_list=
     |   |   | +-B#7 := Literal(type=INT64, value=NULL)
     |   |   +-input_scan=
@@ -7063,7 +7063,7 @@ QueryStmt
         +-scan=
         | +-ProjectScan
         |   +-column_list=[$union_all2_cast.A#6, $null_column_for_outer_set_op.B#7]
-        |   +-node_source="resolver_set_operation_corresponding"
+        |   +-node_source='resolver_set_operation_corresponding'
         |   +-expr_list=
         |   | +-B#7 := Literal(type=INT64, value=NULL)
         |   +-input_scan=

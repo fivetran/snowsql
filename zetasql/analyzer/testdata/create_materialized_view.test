@@ -17,11 +17,11 @@ CreateMaterializedViewStmt
 |   +-column_list=SimpleTypes.[timestamp#15, string#5, int32#1]
 |   +-input_scan=
 |     +-TableScan(column_list=SimpleTypes.[int32#1, string#5, timestamp#15], table=SimpleTypes, column_index_list=[0, 4, 14])
-+-sql="select timestamp as c1, string as c2, int32 as c3 from SimpleTypes"
++-sql='select timestamp as c1, string as c2, int32 as c3 from SimpleTypes'
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=TIMESTAMP, column=mv.c1#19)
-| +-ColumnDefinition(name="c2", type=STRING, column=mv.c2#20)
-| +-ColumnDefinition(name="c3", type=INT32, column=mv.c3#21)
+| +-ColumnDefinition(name='c1', type=TIMESTAMP, column=mv.c1#19)
+| +-ColumnDefinition(name='c2', type=STRING, column=mv.c2#20)
+| +-ColumnDefinition(name='c3', type=INT32, column=mv.c3#21)
 +-partition_by_list=
 | +-ColumnRef(type=TIMESTAMP, column=mv.c1#19)
 +-cluster_by_list=
@@ -38,7 +38,7 @@ as select timestamp as c1, string as c2, int32 as c3 from SimpleTypes
 CreateMaterializedViewStmt
 +-name_path=mv
 +-option_list=
-| +-abc := Literal(type=STRING, value="def")
+| +-abc := Literal(type=STRING, value='def')
 +-output_column_list=
 | +-SimpleTypes.timestamp#15 AS c1 [TIMESTAMP]
 | +-SimpleTypes.string#5 AS c2 [STRING]
@@ -48,11 +48,11 @@ CreateMaterializedViewStmt
 |   +-column_list=SimpleTypes.[timestamp#15, string#5, int32#1]
 |   +-input_scan=
 |     +-TableScan(column_list=SimpleTypes.[int32#1, string#5, timestamp#15], table=SimpleTypes, column_index_list=[0, 4, 14])
-+-sql="select timestamp as c1, string as c2, int32 as c3 from SimpleTypes"
++-sql='select timestamp as c1, string as c2, int32 as c3 from SimpleTypes'
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=TIMESTAMP, column=mv.c1#19)
-| +-ColumnDefinition(name="c2", type=STRING, column=mv.c2#20)
-| +-ColumnDefinition(name="c3", type=INT32, column=mv.c3#21)
+| +-ColumnDefinition(name='c1', type=TIMESTAMP, column=mv.c1#19)
+| +-ColumnDefinition(name='c2', type=STRING, column=mv.c2#20)
+| +-ColumnDefinition(name='c3', type=INT32, column=mv.c3#21)
 +-partition_by_list=
 | +-ColumnRef(type=TIMESTAMP, column=mv.c1#19)
 +-cluster_by_list=
@@ -88,11 +88,11 @@ CreateMaterializedViewStmt
 |   |     +-Literal(type=INT64, value=1)
 |   +-input_scan=
 |     +-TableScan(column_list=SimpleTypes.[int32#1, string#5, timestamp#15], table=SimpleTypes, column_index_list=[0, 4, 14])
-+-sql="select timestamp_add(timestamp, interval 1 minute) as c1, string as c2,\n  int32+1 as c3 from SimpleTypes"
++-sql='select timestamp_add(timestamp, interval 1 minute) as c1, string as c2,\n  int32+1 as c3 from SimpleTypes'
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=TIMESTAMP, column=mv.c1#21)
-| +-ColumnDefinition(name="c2", type=STRING, column=mv.c2#22)
-| +-ColumnDefinition(name="c3", type=INT64, column=mv.c3#23)
+| +-ColumnDefinition(name='c1', type=TIMESTAMP, column=mv.c1#21)
+| +-ColumnDefinition(name='c2', type=STRING, column=mv.c2#22)
+| +-ColumnDefinition(name='c3', type=INT64, column=mv.c3#23)
 +-partition_by_list=
 | +-ColumnRef(type=TIMESTAMP, column=mv.c1#21)
 +-cluster_by_list=
@@ -116,11 +116,11 @@ CreateMaterializedViewStmt
 |   +-column_list=SimpleTypes.[timestamp#15, string#5, int32#1]
 |   +-input_scan=
 |     +-TableScan(column_list=SimpleTypes.[int32#1, string#5, timestamp#15], table=SimpleTypes, column_index_list=[0, 4, 14])
-+-sql="select timestamp as c1, string as c2, int32 as c3 from SimpleTypes"
++-sql='select timestamp as c1, string as c2, int32 as c3 from SimpleTypes'
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=TIMESTAMP, column=mv.c1#19)
-| +-ColumnDefinition(name="c2", type=STRING, column=mv.c2#20)
-| +-ColumnDefinition(name="c3", type=INT32, column=mv.c3#21)
+| +-ColumnDefinition(name='c1', type=TIMESTAMP, column=mv.c1#19)
+| +-ColumnDefinition(name='c2', type=STRING, column=mv.c2#20)
+| +-ColumnDefinition(name='c3', type=INT32, column=mv.c3#21)
 +-partition_by_list=
 | +-FunctionCall(ZetaSQL:timestamp_add(TIMESTAMP, INT64, ENUM<zetasql.functions.DateTimestampPart>) -> TIMESTAMP)
 |   +-ColumnRef(type=TIMESTAMP, column=mv.c1#19)
@@ -187,11 +187,11 @@ CreateMaterializedViewStmt
 |   +-column_list=SimpleTypes.[timestamp#15, string#5, int32#1]
 |   +-input_scan=
 |     +-TableScan(column_list=SimpleTypes.[int32#1, string#5, timestamp#15], table=SimpleTypes, column_index_list=[0, 4, 14])
-+-sql="select timestamp as c1, string as c2, int32 as c3 from SimpleTypes"
++-sql='select timestamp as c1, string as c2, int32 as c3 from SimpleTypes'
 +-column_definition_list=
-| +-ColumnDefinition(name="c1", type=TIMESTAMP, column=mv.c1#19)
-| +-ColumnDefinition(name="c2", type=STRING, column=mv.c2#20)
-| +-ColumnDefinition(name="c3", type=INT32, column=mv.c3#21)
+| +-ColumnDefinition(name='c1', type=TIMESTAMP, column=mv.c1#19)
+| +-ColumnDefinition(name='c2', type=STRING, column=mv.c2#20)
+| +-ColumnDefinition(name='c3', type=INT32, column=mv.c3#21)
 +-partition_by_list=
 | +-ColumnRef(type=TIMESTAMP, column=mv.c1#19)
 +-cluster_by_list=

@@ -25,10 +25,10 @@ CREATE CONSTANT a.b.c = 'str'
 # therefore that SQL is actually valid and parses ok (even though the
 # original SQL did not parse ok).
 [no_test_get_parse_tokens]
-create `constant` a.b.c = 'str';
+create "constant" a.b.c = 'str';
 --
-ERROR: `constant` is not a supported object type [at 1:8]
-create `constant` a.b.c = 'str';
+ERROR: "constant" is not a supported object type [at 1:8]
+create "constant" a.b.c = 'str';
        ^
 ==
 
@@ -353,10 +353,10 @@ create constant function = 5;
 --
 CreateConstantStatement [0-28] [create constant function = 5]
   PathExpression [16-24] [function]
-    Identifier(`function`) [16-24] [function]
+    Identifier("function") [16-24] [function]
   IntLiteral(5) [27-28] [5]
 --
-CREATE CONSTANT `function` = 5
+CREATE CONSTANT "function" = 5
 ==
 
 create constant table = 'a';
@@ -429,11 +429,11 @@ create constant @@a = 1;
 ==
 
 # Can create a constant whose name could be interpreted as a system variable.
-create constant `@@a` = 1;
+create constant "@@a" = 1;
 --
-CreateConstantStatement [0-25] [create constant `@@a` = 1]
-  PathExpression [16-21] [`@@a`]
-    Identifier(`@@a`) [16-21] [`@@a`]
+CreateConstantStatement [0-25] [create constant "@@a" = 1]
+  PathExpression [16-21] ["@@a"]
+    Identifier("@@a") [16-21] ["@@a"]
   IntLiteral(1) [24-25] [1]
 --
-CREATE CONSTANT `@@a` = 1
+CREATE CONSTANT "@@a" = 1

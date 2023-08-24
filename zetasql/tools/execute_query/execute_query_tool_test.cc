@@ -541,7 +541,7 @@ TEST(ExecuteQuery, ResolveQuery) {
   ZETASQL_EXPECT_OK(ExecuteQuery("select 1", config, output));
   EXPECT_EQ(output.str(), R"(QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]

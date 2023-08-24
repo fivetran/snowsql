@@ -308,7 +308,7 @@ WHEN MATCHED THEN UPDATE SET int64 = (SELECT anon_count(*) AS int64
 --
 MergeStmt
 +-table_scan=
-| +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="t1")
+| +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='t1')
 +-column_access_list=READ_WRITE
 +-from_scan=
 | +-ProjectScan
@@ -352,7 +352,7 @@ MergeStmt
 [REWRITTEN AST]
 MergeStmt
 +-table_scan=
-| +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias="t1")
+| +-TableScan(column_list=[SimpleTypesWithAnonymizationUid.int64#2], table=SimpleTypesWithAnonymizationUid, column_index_list=[1], alias='t1')
 +-column_access_list=READ_WRITE
 +-from_scan=
 | +-ProjectScan

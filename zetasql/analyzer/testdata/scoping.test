@@ -45,9 +45,9 @@ QueryStmt
       +-JoinScan
         +-column_list=KeyValue.[Key#1, Value#2, Value#4]
         +-left_scan=
-        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias="value")
+        | +-TableScan(column_list=KeyValue.[Key#1, Value#2], table=KeyValue, column_index_list=[0, 1], alias='value')
         +-right_scan=
-          +-TableScan(column_list=[KeyValue.Value#4], table=KeyValue, column_index_list=[1], alias="kv")
+          +-TableScan(column_list=[KeyValue.Value#4], table=KeyValue, column_index_list=[1], alias='kv')
 ==
 
 # Duplicate range variables are never allowed.

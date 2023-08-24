@@ -3,7 +3,7 @@
 
 CREATE RESERVATION myProject.myReservation
 --
-CreateEntityStmt(name_path=myProject.myReservation, entity_type="RESERVATION")
+CreateEntityStmt(name_path=myProject.myReservation, entity_type='RESERVATION')
 ==
 
 CREATE OR REPLACE RESERVATION myProject.myReservation
@@ -13,44 +13,44 @@ AS JSON '{"key": "value"}'
 CreateEntityStmt
 +-name_path=myProject.myReservation
 +-create_mode=CREATE_OR_REPLACE
-+-entity_type="RESERVATION"
++-entity_type='RESERVATION'
 +-entity_body_json='{"key":"value"}'
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-c := Literal(type=STRING, value="d")
+  +-a := Literal(type=STRING, value='b')
+  +-c := Literal(type=STRING, value='d')
 ==
 
 CREATE OR REPLACE EXPLORE myProject.myExplore
 OPTIONS(a=b, c=d)
-AS """ explore: test_explore { } """
+AS ' explore: test_explore { } '
 --
 CreateEntityStmt
 +-name_path=myProject.myExplore
 +-create_mode=CREATE_OR_REPLACE
-+-entity_type="EXPLORE"
-+-entity_body_text=" explore: test_explore { } "
++-entity_type='EXPLORE'
++-entity_body_text=' explore: test_explore { } '
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-c := Literal(type=STRING, value="d")
+  +-a := Literal(type=STRING, value='b')
+  +-c := Literal(type=STRING, value='d')
 ==
 
 CREATE RESERVATION IF NOT EXISTS myProject.myReservation
 OPTIONS(a=b, c=d)
 AS JSON
-"""
+'''
 {
   "key": "value"
 }
-"""
+'''
 --
 CreateEntityStmt
 +-name_path=myProject.myReservation
 +-create_mode=CREATE_IF_NOT_EXISTS
-+-entity_type="RESERVATION"
++-entity_type='RESERVATION'
 +-entity_body_json='{"key":"value"}'
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-c := Literal(type=STRING, value="d")
+  +-a := Literal(type=STRING, value='b')
+  +-c := Literal(type=STRING, value='d')
 ==
 
 ALTER RESERVATION myProject.myReservation SET OPTIONS (a="b")
@@ -60,8 +60,8 @@ AlterEntityStmt
 +-alter_action_list=
 | +-SetOptionsAction
 |   +-option_list=
-|     +-a := Literal(type=STRING, value="b")
-+-entity_type="RESERVATION"
+|     +-a := Literal(type=STRING, value='b')
++-entity_type='RESERVATION'
 ==
 
 ALTER RESERVATION myProject.myReservation
@@ -78,17 +78,17 @@ AlterEntityStmt
 +-name_path=myProject.myReservation
 +-alter_action_list=
 | +-SetAsAction(entity_body_json='{"key":"value"}')
-+-entity_type="RESERVATION"
++-entity_type='RESERVATION'
 ==
 
 [language_features=]
 CREATE RESERVATION IF NOT EXISTS myProject.myReservation
 AS JSON
-"""
+'''
 {
   key: "value"
 }
-"""
+'''
 --
 ERROR: Invalid JSON literal: syntax error while parsing object key - invalid literal; last read: '<U+000A>{<U+000A>  k'; expected string literal [at 2:4]
 AS JSON
@@ -98,20 +98,20 @@ AS JSON
 CREATE RESERVATION IF NOT EXISTS myProject.myReservation
 OPTIONS(a=b, c=d)
 AS JSON
-"""
+'''
 {
   "key": "value"
 }
-"""
+'''
 --
 CreateEntityStmt
 +-name_path=myProject.myReservation
 +-create_mode=CREATE_IF_NOT_EXISTS
-+-entity_type="RESERVATION"
++-entity_type='RESERVATION'
 +-entity_body_json='{"key":"value"}'
 +-option_list=
-  +-a := Literal(type=STRING, value="b")
-  +-c := Literal(type=STRING, value="d")
+  +-a := Literal(type=STRING, value='b')
+  +-c := Literal(type=STRING, value='d')
 ==
 
 # Only JSON literal is supported
@@ -134,19 +134,19 @@ AS JSON '{key: "value"}'
    ^
 ==
 
-ALTER EXPLORE myProject.myExplore SET AS " explore: test_explore { } "
+ALTER EXPLORE myProject.myExplore SET AS ' explore: test_explore { } '
 --
 AlterEntityStmt
 +-name_path=myProject.myExplore
 +-alter_action_list=
-| +-SetAsAction(entity_body_text=" explore: test_explore { } ")
-+-entity_type="EXPLORE"
+| +-SetAsAction(entity_body_text=' explore: test_explore { } ')
++-entity_type='EXPLORE'
 ==
 
-ALTER EXPLORE myProject.myExplore SET AS ""
+ALTER EXPLORE myProject.myExplore SET AS ''
 --
 ERROR: ALTER SET AS requires JSON or TEXT body literal [at 1:35]
-ALTER EXPLORE myProject.myExplore SET AS ""
+ALTER EXPLORE myProject.myExplore SET AS ''
                                   ^
 ==
 
@@ -169,12 +169,12 @@ ERROR: ALTER VIEW does not support SET AS [at 2:3]
 
 DROP RESERVATION myProject.myReservation
 --
-DropStmt(object_type="RESERVATION", is_if_exists=FALSE, name_path=myProject.myReservation)
+DropStmt(object_type='RESERVATION', is_if_exists=FALSE, name_path=myProject.myReservation)
 ==
 
 DROP RESERVATION IF EXISTS myProject.myReservation
 --
-DropStmt(object_type="RESERVATION", is_if_exists=TRUE, name_path=myProject.myReservation)
+DropStmt(object_type='RESERVATION', is_if_exists=TRUE, name_path=myProject.myReservation)
 
 ==
 
@@ -187,8 +187,8 @@ AlterEntityStmt
 +-alter_action_list=
 | +-SetOptionsAction
 |   +-option_list=
-|     +-foo := Literal(type=STRING, value="bar")
-+-entity_type="PROJECT"
+|     +-foo := Literal(type=STRING, value='bar')
++-entity_type='PROJECT'
 
 ==
 
@@ -201,11 +201,11 @@ AlterEntityStmt
 +-alter_action_list=
 | +-SetOptionsAction
 | | +-option_list=
-| |   +-foo := Literal(type=STRING, value="bar")
+| |   +-foo := Literal(type=STRING, value='bar')
 | +-SetOptionsAction
 |   +-option_list=
-|     +-baz := Literal(type=STRING, value="bat")
-+-entity_type="PROJECT"
+|     +-baz := Literal(type=STRING, value='bat')
++-entity_type='PROJECT'
 
 ==
 
@@ -216,8 +216,8 @@ ALTER PROJECT SET AS JSON '{}'
 --
 AlterEntityStmt
 +-alter_action_list=
-| +-SetAsAction(entity_body_json="{}")
-+-entity_type="PROJECT"
+| +-SetAsAction(entity_body_json='{}')
++-entity_type='PROJECT'
 
 ==
 
@@ -228,7 +228,7 @@ AlterEntityStmt
 [supported_generic_entity_types=PROJECT]
 [language_features=ALLOW_MISSING_PATH_EXPRESSION_IN_ALTER_DDL]
 
-ALTER PROJECT {{ADD CHECK (true)|ADD PRIMARY KEY ()|ADD CONSTRAINT foo CHECK (true)|DROP CONSTRAINT foo|DROP PRIMARY KEY|ALTER CONSTRAINT foo ENFORCED|ALTER CONSTRAINT foo SET OPTIONS (foo='bar')|ADD COLUMN foo INTERVAL|DROP COLUMN foo|RENAME COLUMN foo TO bar|ALTER COLUMN foo SET DATA TYPE INTERVAL|ALTER COLUMN foo SET OPTIONS (foo='bar')|ALTER COLUMN foo SET DEFAULT true|ALTER COLUMN foo DROP DEFAULT|ALTER COLUMN foo DROP NOT NULL|RENAME TO foo|SET DEFAULT COLLATE "foo"}}
+ALTER PROJECT {{ADD CHECK (true)|ADD PRIMARY KEY ()|ADD CONSTRAINT foo CHECK (true)|DROP CONSTRAINT foo|DROP PRIMARY KEY|ALTER CONSTRAINT foo ENFORCED|ALTER CONSTRAINT foo SET OPTIONS (foo='bar')|ADD COLUMN foo INTERVAL|DROP COLUMN foo|RENAME COLUMN foo TO bar|ALTER COLUMN foo SET DATA TYPE INTERVAL|ALTER COLUMN foo SET OPTIONS (foo='bar')|ALTER COLUMN foo SET DEFAULT true|ALTER COLUMN foo DROP DEFAULT|ALTER COLUMN foo DROP NOT NULL|RENAME TO foo|SET DEFAULT COLLATE 'foo'}}
 --
 ALTERNATION GROUP: ADD CHECK (true)
 --
@@ -326,10 +326,10 @@ ERROR: ALTER PROJECT does not support RENAME TO [at 1:15]
 ALTER PROJECT RENAME TO foo
               ^
 --
-ALTERNATION GROUP: SET DEFAULT COLLATE "foo"
+ALTERNATION GROUP: SET DEFAULT COLLATE 'foo'
 --
 ERROR: ALTER PROJECT does not support SET DEFAULT COLLATE [at 1:15]
-ALTER PROJECT SET DEFAULT COLLATE "foo"
+ALTER PROJECT SET DEFAULT COLLATE 'foo'
               ^
 ==
 
@@ -343,10 +343,10 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AddSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-options_list=
-    | +-a := Literal(type=STRING, value="b")
+    | +-a := Literal(type=STRING, value='b')
     +-is_if_not_exists=TRUE
 --
 ALTERNATION GROUP: IF NOT EXISTS,
@@ -354,7 +354,7 @@ ALTERNATION GROUP: IF NOT EXISTS,
 AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
-  +-AddSubEntityAction(entity_type="REPLICA", name="replica_name", is_if_not_exists=TRUE)
+  +-AddSubEntityAction(entity_type='REPLICA', name='replica_name', is_if_not_exists=TRUE)
 --
 ALTERNATION GROUP: OPTIONS (a=b)
 --
@@ -362,17 +362,17 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AddSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-options_list=
-      +-a := Literal(type=STRING, value="b")
+      +-a := Literal(type=STRING, value='b')
 --
 ALTERNATION GROUP: <empty>
 --
 AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
-  +-AddSubEntityAction(entity_type="REPLICA", name="replica_name")
+  +-AddSubEntityAction(entity_type='REPLICA', name='replica_name')
 ==
 
 # Multiple nested ADD actions.
@@ -384,15 +384,15 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AddSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_name1"
+  | +-entity_type='REPLICA'
+  | +-name='replica_name1'
   | +-options_list=
-  |   +-a := Literal(type=STRING, value="b")
+  |   +-a := Literal(type=STRING, value='b')
   +-AddSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name2"
+    +-entity_type='REPLICA'
+    +-name='replica_name2'
     +-options_list=
-      +-c := Literal(type=STRING, value="d")
+      +-c := Literal(type=STRING, value='d')
 ==
 
 ALTER SCHEMA schema_name
@@ -403,14 +403,14 @@ ALTERNATION GROUP: IF EXISTS
 AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
-  +-DropSubEntityAction(entity_type="REPLICA", name="replica_name", is_if_exists=TRUE)
+  +-DropSubEntityAction(entity_type='REPLICA', name='replica_name', is_if_exists=TRUE)
 --
 ALTERNATION GROUP: <empty>
 --
 AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
-  +-DropSubEntityAction(entity_type="REPLICA", name="replica_name")
+  +-DropSubEntityAction(entity_type='REPLICA', name='replica_name')
 ==
 
 # Multiple nested DROP actions.
@@ -421,8 +421,8 @@ DROP REPLICA replica_name2
 AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
-  +-DropSubEntityAction(entity_type="REPLICA", name="replica_name1")
-  +-DropSubEntityAction(entity_type="REPLICA", name="replica_name2")
+  +-DropSubEntityAction(entity_type='REPLICA', name='replica_name1')
+  +-DropSubEntityAction(entity_type='REPLICA', name='replica_name2')
 ==
 
 ALTER SCHEMA schema_name
@@ -435,12 +435,12 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-alter_action=
     | +-SetOptionsAction
     |   +-option_list=
-    |     +-a := Literal(type=STRING, value="b")
+    |     +-a := Literal(type=STRING, value='b')
     +-is_if_exists=TRUE
 --
 ALTERNATION GROUP: <empty>
@@ -449,12 +449,12 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-alter_action=
       +-SetOptionsAction
         +-option_list=
-          +-a := Literal(type=STRING, value="b")
+          +-a := Literal(type=STRING, value='b')
 ==
 
 # Multiple nested ALTER actions.
@@ -466,19 +466,19 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_name1"
+  | +-entity_type='REPLICA'
+  | +-name='replica_name1'
   | +-alter_action=
   |   +-SetOptionsAction
   |     +-option_list=
-  |       +-a := Literal(type=STRING, value="b")
+  |       +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name2"
+    +-entity_type='REPLICA'
+    +-name='replica_name2'
     +-alter_action=
       +-SetOptionsAction
         +-option_list=
-          +-c := Literal(type=STRING, value="d")
+          +-c := Literal(type=STRING, value='d')
 ==
 
 # Multiple doubly nested ADD actions. Since sub_entity alter statements
@@ -492,23 +492,23 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_name1"
+  | +-entity_type='REPLICA'
+  | +-name='replica_name1'
   | +-alter_action=
   |   +-AddSubEntityAction
-  |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="child_1"
+  |     +-entity_type='CHILD_OF_REPLICA'
+  |     +-name='child_1'
   |     +-options_list=
-  |       +-a := Literal(type=STRING, value="b")
+  |       +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name1"
+    +-entity_type='REPLICA'
+    +-name='replica_name1'
     +-alter_action=
       +-AddSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="child_2"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='child_2'
         +-options_list=
-          +-c := Literal(type=STRING, value="d")
+          +-c := Literal(type=STRING, value='d')
 ==
 
 ALTER SCHEMA schema_name
@@ -520,16 +520,16 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_name"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='replica_child_name'
         +-alter_action=
           +-SetOptionsAction
             +-option_list=
-              +-a := Literal(type=STRING, value="b")
+              +-a := Literal(type=STRING, value='b')
 ==
 
 ALTER SCHEMA schema_name
@@ -540,27 +540,27 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_name"
+  | +-entity_type='REPLICA'
+  | +-name='replica_name'
   | +-alter_action=
   |   +-AlterSubEntityAction
-  |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="replica_child_name"
+  |     +-entity_type='CHILD_OF_REPLICA'
+  |     +-name='replica_child_name'
   |     +-alter_action=
   |       +-SetOptionsAction
   |         +-option_list=
-  |           +-a := Literal(type=STRING, value="b")
+  |           +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name2"
+    +-entity_type='REPLICA'
+    +-name='replica_name2'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_name2"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='replica_child_name2'
         +-alter_action=
           +-SetOptionsAction
             +-option_list=
-              +-c := Literal(type=STRING, value="d")
+              +-c := Literal(type=STRING, value='d')
 ==
 
 # ADD inside doubly nested ALTER sub-entity.
@@ -573,14 +573,14 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="child_name"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='child_name'
         +-alter_action=
-          +-AddSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name")
+          +-AddSubEntityAction(entity_type='GRANDCHILD_OF_REPLICA', name='grandchild_name')
 ==
 
 # DROP inside doubly nested ALTER sub-entity.
@@ -593,14 +593,14 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="child_name"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='child_name'
         +-alter_action=
-          +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name")
+          +-DropSubEntityAction(entity_type='GRANDCHILD_OF_REPLICA', name='grandchild_name')
 ==
 
 # Repeated ADD Grandchild actions.
@@ -612,27 +612,27 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_1"
+  | +-entity_type='REPLICA'
+  | +-name='replica_1'
   | +-alter_action=
   |   +-AlterSubEntityAction
-  |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="replica_child_1"
+  |     +-entity_type='CHILD_OF_REPLICA'
+  |     +-name='replica_child_1'
   |     +-alter_action=
-  |       +-AddSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_1")
+  |       +-AddSubEntityAction(entity_type='GRANDCHILD_OF_REPLICA', name='grandchild_name_1')
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_2"
+    +-entity_type='REPLICA'
+    +-name='replica_2'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_2"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='replica_child_2'
         +-alter_action=
           +-AddSubEntityAction
-            +-entity_type="GRANDCHILD_OF_REPLICA"
-            +-name="grandchild_name_2"
+            +-entity_type='GRANDCHILD_OF_REPLICA'
+            +-name='grandchild_name_2'
             +-options_list=
-              +-a := Literal(type=STRING, value="b")
+              +-a := Literal(type=STRING, value='b')
 ==
 
 # Repeated DROP Grandchild actions.
@@ -644,23 +644,23 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_1"
+  | +-entity_type='REPLICA'
+  | +-name='replica_1'
   | +-alter_action=
   |   +-AlterSubEntityAction
-  |     +-entity_type="CHILD_OF_REPLICA"
-  |     +-name="replica_child_1"
+  |     +-entity_type='CHILD_OF_REPLICA'
+  |     +-name='replica_child_1'
   |     +-alter_action=
-  |       +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_1")
+  |       +-DropSubEntityAction(entity_type='GRANDCHILD_OF_REPLICA', name='grandchild_name_1')
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_2"
+    +-entity_type='REPLICA'
+    +-name='replica_2'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_2"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='replica_child_2'
         +-alter_action=
-          +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_2")
+          +-DropSubEntityAction(entity_type='GRANDCHILD_OF_REPLICA', name='grandchild_name_2')
 ==
 
 # Multiple actions at multiple levels of nesting
@@ -673,26 +673,26 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_1"
+  | +-entity_type='REPLICA'
+  | +-name='replica_1'
   | +-alter_action=
   |   +-SetOptionsAction
   |     +-option_list=
-  |       +-a := Literal(type=STRING, value="b")
+  |       +-a := Literal(type=STRING, value='b')
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="replica_2"
+  | +-entity_type='REPLICA'
+  | +-name='replica_2'
   | +-alter_action=
-  |   +-AddSubEntityAction(entity_type="CHILD_OF_REPLICA", name="replica_child_2")
+  |   +-AddSubEntityAction(entity_type='CHILD_OF_REPLICA', name='replica_child_2')
   +-AlterSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_3"
+    +-entity_type='REPLICA'
+    +-name='replica_3'
     +-alter_action=
       +-AlterSubEntityAction
-        +-entity_type="CHILD_OF_REPLICA"
-        +-name="replica_child_3"
+        +-entity_type='CHILD_OF_REPLICA'
+        +-name='replica_child_3'
         +-alter_action=
-          +-DropSubEntityAction(entity_type="GRANDCHILD_OF_REPLICA", name="grandchild_name_3")
+          +-DropSubEntityAction(entity_type='GRANDCHILD_OF_REPLICA', name='grandchild_name_3')
 ==
 
 ALTER SCHEMA schema_name
@@ -702,10 +702,10 @@ AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
   +-AddSubEntityAction
-    +-entity_type="REPLICA"
-    +-name="replica_name"
+    +-entity_type='REPLICA'
+    +-name='replica_name'
     +-options_list=
-      +-a := Literal(type=STRING, value="b")
+      +-a := Literal(type=STRING, value='b')
 ==
 
 ALTER SCHEMA schema_name
@@ -714,7 +714,7 @@ DROP REPLICA replica_name
 AlterSchemaStmt
 +-name_path=schema_name
 +-alter_action_list=
-  +-DropSubEntityAction(entity_type="REPLICA", name="replica_name")
+  +-DropSubEntityAction(entity_type='REPLICA', name='replica_name')
 ==
 
 # When only SET OPTIONS alter actions are present, options are combined to a
@@ -743,7 +743,7 @@ AlterTableStmt
   +-AddColumnAction
   | +-is_if_not_exists=FALSE
   | +-column_definition=
-  |   +-ColumnDefinition(name="bar", type=STRING, column=KeyValue.bar#1)
+  |   +-ColumnDefinition(name='bar', type=STRING, column=KeyValue.bar#1)
   +-SetOptionsAction
   | +-option_list=
   |   +-a := Literal(type=INT64, value=1)
@@ -762,12 +762,12 @@ AlterTableStmt
 +-name_path=a.T
 +-alter_action_list=
   +-AlterSubEntityAction
-  | +-entity_type="REPLICA"
-  | +-name="r"
+  | +-entity_type='REPLICA'
+  | +-name='r'
   | +-alter_action=
   |   +-SetOptionsAction
   |     +-option_list=
-  |       +-c := Literal(type=STRING, value="a")
+  |       +-c := Literal(type=STRING, value='a')
   +-SetOptionsAction
   | +-option_list=
   |   +-a := Literal(type=INT64, value=1)

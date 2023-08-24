@@ -35,7 +35,7 @@ ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -51,11 +51,11 @@ QueryStmt
 
 [no_java]
 # TODO: Enable this test when enum debug string is fixed in Java
-SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), "LAST")
+SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), 'LAST')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -71,11 +71,11 @@ QueryStmt
 
 [no_java]
 # TODO: Enable this test when enum debug string is fixed in Java
-SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), CAST("LAST" AS ARRAY_FIND_MODE))
+SELECT ARRAY_OFFSET([STRUCT(1 AS a), STRUCT(2), STRUCT(3)], STRUCT(3 AS a), CAST('LAST' AS ARRAY_FIND_MODE))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [INT64]
+| +-$query.$col1#1 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -85,7 +85,7 @@ QueryStmt
     |     +-Literal(type=ARRAY<STRUCT<a INT64>>, value=[{a:1}, {a:2}, {a:3}])
     |     +-Literal(type=STRUCT<a INT64>, value={a:3})
     |     +-Cast(STRING -> ENUM<ARRAY_FIND_MODE>)
-    |       +-Literal(type=STRING, value="LAST")
+    |       +-Literal(type=STRING, value='LAST')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -98,27 +98,27 @@ SELECT ARRAY_OFFSETS([new zetasql_test__.EmptyMessage()], new zetasql_test__....
 ==
 
 [language_features={{|V_1_4_ARRAY_FIND_FUNCTIONS}}]
-SELECT ARRAY_OFFSETS([""], "")
+SELECT ARRAY_OFFSETS([''], '')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Function not found: ARRAY_OFFSETS [at 1:8]
-SELECT ARRAY_OFFSETS([""], "")
+SELECT ARRAY_OFFSETS([''], '')
        ^
 --
 ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
     +-expr_list=
     | +-$col1#1 :=
     |   +-FunctionCall(ZetaSQL:array_offsets(ARRAY<STRING> input_array, STRING target_element) -> ARRAY<INT64>)
-    |     +-Literal(type=ARRAY<STRING>, value=[""])
-    |     +-Literal(type=STRING, value="")
+    |     +-Literal(type=ARRAY<STRING>, value=[''])
+    |     +-Literal(type=STRING, value='')
     +-input_scan=
       +-SingleRowScan
 ==
@@ -133,19 +133,19 @@ SELECT ARRAY_FIND([4, 5.0], CAST(5 AS FLOAT))
 [language_features={{|V_1_4_ARRAY_FIND_FUNCTIONS}}]
 [no_java]
 # TODO: Enable this test when enum debug string is fixed in Java
-SELECT ARRAY_FIND([4, 5.0], 5, "LAST")
+SELECT ARRAY_FIND([4, 5.0], 5, 'LAST')
 --
 ALTERNATION GROUP: <empty>
 --
 ERROR: Function not found: ARRAY_FIND; Did you mean array_min? [at 2:8]
-SELECT ARRAY_FIND([4, 5.0], 5, "LAST")
+SELECT ARRAY_FIND([4, 5.0], 5, 'LAST')
        ^
 --
 ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -180,7 +180,7 @@ ALTERNATION GROUP: V_1_4_ARRAY_FIND_FUNCTIONS
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<DOUBLE>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<DOUBLE>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -238,7 +238,7 @@ ALTERNATION GROUP: <empty>
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [DOUBLE]
+| +-$query.$col1#1 AS "$col1" [DOUBLE]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -270,7 +270,7 @@ SELECT ARRAY_OFFSET([1, 4, 4, 6], e -> e = 4, 'FIRST')
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -297,7 +297,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -391,10 +391,10 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#3)
-    |         |           +-Literal(type=STRING, value=" in ARRAY_OFFSET is unsupported.")
+    |         |           +-Literal(type=STRING, value=' in ARRAY_OFFSET is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#3, input_array#4]
@@ -414,7 +414,7 @@ SELECT ARRAY_OFFSET([1, 4, 4, 6], e -> e > 2 AND e < 5, 'LAST')
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -445,7 +445,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -547,10 +547,10 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#3)
-    |         |           +-Literal(type=STRING, value=" in ARRAY_OFFSET is unsupported.")
+    |         |           +-Literal(type=STRING, value=' in ARRAY_OFFSET is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#3, input_array#4]
@@ -582,7 +582,7 @@ SELECT ARRAY_FIND([1, 4, 4, 6], e -> e > 7, 'FIRST')
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -609,7 +609,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [INT64]
+| +-$query.$col1#2 AS "$col1" [INT64]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -703,10 +703,10 @@ QueryStmt
     |         |       |       +-Literal(type=INT64, value=1)
     |         |       +-FunctionCall(ZetaSQL:error(STRING) -> INT64)
     |         |         +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |           +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |           +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |           +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |           | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#3)
-    |         |           +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |           +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#3, input_array#4]
@@ -726,7 +726,7 @@ SELECT ARRAY_FIND_ALL([STRUCT(1 AS a, 2 AS b), STRUCT(3 AS a, 4 AS b)], e -> e.a
 
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<STRUCT<a INT64, b INT64>>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<STRUCT<a INT64, b INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -754,7 +754,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#2 AS `$col1` [ARRAY<STRUCT<a INT64, b INT64>>]
+| +-$query.$col1#2 AS "$col1" [ARRAY<STRUCT<a INT64, b INT64>>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#2]
@@ -846,7 +846,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -861,7 +861,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -887,7 +887,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_FIRST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_FIRST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=ARRAY
@@ -944,7 +944,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -959,7 +959,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -985,7 +985,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_LAST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_LAST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=SCALAR
@@ -1064,7 +1064,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1079,7 +1079,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1105,7 +1105,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_REMOVE_FIRST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_REMOVE_FIRST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=ARRAY
@@ -1162,7 +1162,7 @@ ALTERNATION GROUP: V_1_4_FIRST_AND_LAST_N
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1177,7 +1177,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#1 AS `$col1` [ARRAY<INT64>]
+| +-$query.$col1#1 AS "$col1" [ARRAY<INT64>]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#1]
@@ -1203,7 +1203,7 @@ QueryStmt
     |         |     | +-Literal(type=INT64, value=0)
     |         |     +-Cast(ARRAY<INT64> -> ARRAY<INT64>)
     |         |     | +-FunctionCall(ZetaSQL:error(STRING) -> ARRAY<INT64>)
-    |         |     |   +-Literal(type=STRING, value="The n argument to ARRAY_REMOVE_LAST_N must not be negative.")
+    |         |     |   +-Literal(type=STRING, value='The n argument to ARRAY_REMOVE_LAST_N must not be negative.')
     |         |     +-SubqueryExpr
     |         |       +-type=ARRAY<INT64>
     |         |       +-subquery_type=SCALAR
@@ -1276,11 +1276,11 @@ SELECT ARRAY_REMOVE_LAST_N([1, 2, 3], 1);
 [language_features=V_1_3_INLINE_LAMBDA_ARGUMENT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [enabled_ast_rewrites=DEFAULTS]
 # Substitution template invokes lambda more than once and there is a ResolvedColumn internal to the lambda body
-SELECT ARRAY_FIND(["A"], e -> exists (select 1))
+SELECT ARRAY_FIND(['A'], e -> exists (select 1))
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1289,7 +1289,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:array_find(ARRAY<STRING> input_array, FUNCTION<STRING->BOOL> condition, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> STRING)
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=ARRAY<STRING>, value=["A"])
+    |     |   +-Literal(type=ARRAY<STRING>, value=['A'])
     |     +-FunctionArgument
     |     | +-inline_lambda=
     |     |   +-InlineLambda
@@ -1314,7 +1314,7 @@ QueryStmt
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#3 AS `$col1` [STRING]
+| +-$query.$col1#3 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#3]
@@ -1423,16 +1423,16 @@ QueryStmt
     |         |       +-Cast(STRING -> STRING)
     |         |         +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
     |         |           +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |             +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |             +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |             +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |             | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#4)
-    |         |             +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |             +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#4, input_array#5]
     |             +-expr_list=
     |             | +-find_mode#4 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
-    |             | +-input_array#5 := Literal(type=ARRAY<STRING>, value=["A"])
+    |             | +-input_array#5 := Literal(type=ARRAY<STRING>, value=['A'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
@@ -1442,11 +1442,11 @@ QueryStmt
 [language_features=V_1_3_INLINE_LAMBDA_ARGUMENT,V_1_4_ARRAY_FIND_FUNCTIONS]
 [enabled_ast_rewrites=DEFAULTS]
 # Substitution template invokes lambda more than once there is Correlated column ref in lambda body
-SELECT (ARRAY_FIND(["A"], e -> exists (select Key))) FROM KeyValue as kv;
+SELECT (ARRAY_FIND(['A'], e -> exists (select Key))) FROM KeyValue as kv;
 --
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1455,7 +1455,7 @@ QueryStmt
     |   +-FunctionCall(ZetaSQL:array_find(ARRAY<STRING> input_array, FUNCTION<STRING->BOOL> condition, optional(1) ENUM<ARRAY_FIND_MODE> find_mode) -> STRING)
     |     +-FunctionArgument
     |     | +-expr=
-    |     |   +-Literal(type=ARRAY<STRING>, value=["A"])
+    |     |   +-Literal(type=ARRAY<STRING>, value=['A'])
     |     +-FunctionArgument
     |     | +-inline_lambda=
     |     |   +-InlineLambda
@@ -1479,12 +1479,12 @@ QueryStmt
     |       +-expr=
     |         +-Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
 
 [REWRITTEN AST]
 QueryStmt
 +-output_column_list=
-| +-$query.$col1#5 AS `$col1` [STRING]
+| +-$query.$col1#5 AS "$col1" [STRING]
 +-query=
   +-ProjectScan
     +-column_list=[$query.$col1#5]
@@ -1601,17 +1601,17 @@ QueryStmt
     |         |       +-Cast(STRING -> STRING)
     |         |         +-FunctionCall(ZetaSQL:error(STRING) -> STRING)
     |         |           +-FunctionCall(ZetaSQL:concat(STRING, repeated(2) STRING) -> STRING)
-    |         |             +-Literal(type=STRING, value="ARRAY_FIND_MODE ")
+    |         |             +-Literal(type=STRING, value='ARRAY_FIND_MODE ')
     |         |             +-Cast(ENUM<ARRAY_FIND_MODE> -> STRING)
     |         |             | +-ColumnRef(type=ENUM<ARRAY_FIND_MODE>, column=$subquery1.find_mode#6)
-    |         |             +-Literal(type=STRING, value=" ARRAY_FIND_MODE in ARRAY_FIND is unsupported.")
+    |         |             +-Literal(type=STRING, value=' ARRAY_FIND_MODE in ARRAY_FIND is unsupported.')
     |         +-input_scan=
     |           +-ProjectScan
     |             +-column_list=$subquery1.[find_mode#6, input_array#7]
     |             +-expr_list=
     |             | +-find_mode#6 := Literal(type=ENUM<ARRAY_FIND_MODE>, value=FIRST)
-    |             | +-input_array#7 := Literal(type=ARRAY<STRING>, value=["A"])
+    |             | +-input_array#7 := Literal(type=ARRAY<STRING>, value=['A'])
     |             +-input_scan=
     |               +-SingleRowScan
     +-input_scan=
-      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias="kv")
+      +-TableScan(column_list=[KeyValue.Key#1], table=KeyValue, column_index_list=[0], alias='kv')
