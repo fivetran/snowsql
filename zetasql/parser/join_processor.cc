@@ -436,20 +436,6 @@ ASTNode* JoinRuleAction(const zetasql_bison_parser::location& start_location,
     unmatched_join_count++;
   }
 
-  if (clause_count >= 2) {
-    // Our decision is not to support mixing consecutive ON/USING clauses with
-    // COMMA JOINs. Generate error if they are used together.
-    if (ContainsCommaJoin(lhs)) {
-      auto* error_node = clause_list->child(1);
-      return MakeSyntaxError(
-          error_info,
-          parser->GetBisonLocation(error_node->GetParseLocationRange()),
-          absl::StrCat(
-              "Unexpected keyword ",
-              (error_node->node_kind() == AST_ON_CLAUSE ? "ON" : "USING")));
-    }
-  }
-
   // Create the JOIN node
   ASTJoin* join;
   if (clause_count == 0 || clause_count == 1) {

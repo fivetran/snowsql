@@ -8043,13 +8043,6 @@ absl::Status Resolver::ResolveJoin(
                                         &join_condition));
       ZETASQL_RETURN_IF_ERROR(CoerceExprToBool(join->on_clause()->expression(),
                                        kJoinOnClause, &join_condition));
-    } else {
-      // No ON or USING clause.
-      if (expect_join_condition) {
-        return MakeSqlErrorAtLocalNode(join->join_location())
-               << natural_str << join_type_name
-               << " must have an immediately following ON or USING clause";
-      }
     }
   }
 
