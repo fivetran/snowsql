@@ -205,16 +205,39 @@ select 1 from KeyValue kv1 natural cross join KeyValue kv2;
 
 select 1 from KeyValue kv1 join KeyValue kv2;
 --
-ERROR: INNER JOIN must have an immediately following ON or USING clause [at 1:28]
-select 1 from KeyValue kv1 join KeyValue kv2;
-                           ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#5 AS "$col1" [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#5]
+    +-expr_list=
+    | +-$col1#5 := Literal(type=INT64, value=1)
+    +-input_scan=
+      +-JoinScan
+        +-left_scan=
+        | +-TableScan(table=KeyValue, alias='kv1')
+        +-right_scan=
+          +-TableScan(table=KeyValue, alias='kv2')
 ==
 
 select 1 from KeyValue kv1 right join KeyValue kv2;
 --
-ERROR: RIGHT JOIN must have an immediately following ON or USING clause [at 1:28]
-select 1 from KeyValue kv1 right join KeyValue kv2;
-                           ^
+QueryStmt
++-output_column_list=
+| +-$query.$col1#5 AS "$col1" [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$query.$col1#5]
+    +-expr_list=
+    | +-$col1#5 := Literal(type=INT64, value=1)
+    +-input_scan=
+      +-JoinScan
+        +-join_type=RIGHT
+        +-left_scan=
+        | +-TableScan(table=KeyValue, alias='kv1')
+        +-right_scan=
+          +-TableScan(table=KeyValue, alias='kv2')
 ==
 
 # There are more tests with non-left-deep joins in join_parenthesized.test.

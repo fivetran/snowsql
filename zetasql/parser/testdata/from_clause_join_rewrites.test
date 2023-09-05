@@ -861,7 +861,7 @@ FROM
 # Test that consecutive ON/USING clauses cannot be mixed with COMMA JOINs
 select * from a join b, c join d on cond1 on cond2
 --
-ERROR: Syntax error: Unexpected keyword ON [at 1:43]
+ERROR: Syntax error: The number of join conditions is 2 but the number of joins that require a join condition is only 1. Unexpected keyword ON [at 1:43]
 select * from a join b, c join d on cond1 on cond2
                                           ^
 ==
