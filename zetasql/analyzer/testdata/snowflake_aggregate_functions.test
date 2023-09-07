@@ -7,7 +7,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS "$col1" [ARRAY<STRUCT<value INT64, count INT64>>]
+| +-$analytic.$analytic1#4 AS "$col1" [ARRAY<VARIANT>]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -20,7 +20,7 @@ QueryStmt
           +-AnalyticFunctionGroup
             +-analytic_function_list=
               +-$analytic1#4 :=
-                +-AnalyticFunctionCall(ZetaSQL:approx_top_k(INT64, optional(1) INT64, optional(1) INT64) -> ARRAY<STRUCT<value INT64, count INT64>>)
+                +-AnalyticFunctionCall(ZetaSQL:approx_top_k(INT64, optional(1) INT64, optional(1) INT64) -> ARRAY<VARIANT>)
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
                   +-Literal(type=INT64, value=4)
                   +-Literal(type=INT64, value=10000)

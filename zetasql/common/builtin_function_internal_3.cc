@@ -4076,6 +4076,10 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   const Type* bytes_type = type_factory->get_bytes();
   const Type* float_type = type_factory->get_float();
   const Type* string_type = type_factory->get_string();
+  const Type* variant_type = type_factory->get_variant();
+
+  const ArrayType* array_of_arrays_type;
+  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_of_arrays_type));
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
@@ -4091,7 +4095,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // APPROX_TOP_K
   InsertFunction(
       functions, options, "approx_top_k", AGGREGATE,
-      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+      {{array_of_arrays_type,
         {{ARG_TYPE_ANY_1, supports_grouping},
          {int64_type,
           FunctionArgumentTypeOptions()
@@ -4110,8 +4114,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
             .set_rejects_collation()}},
-      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopStruct, "count")));
+            DefaultAggregateFunctionOptions());
 
   // APPROX_TOP_K_ACCUMULATE
   InsertFunction(
@@ -4470,7 +4473,6 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
                                                 const ZetaSQLBuiltinFunctionOptions& options,
                                                 NameToFunctionMap* functions) {
   const Type* bool_type = type_factory->get_bool();
-  const Type* double_type = type_factory->get_double();
 
   FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
   has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
