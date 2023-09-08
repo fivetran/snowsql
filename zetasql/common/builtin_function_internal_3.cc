@@ -4193,11 +4193,11 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLXOR_AGG}},
       DefaultAggregateFunctionOptions());
 
-  // GROUPING_ID
+  // GROUPING, GROUPING_ID
   InsertFunction(
-      functions, options, "grouping_id", AGGREGATE,
-      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_GROUPING_ID}},
-      DefaultAggregateFunctionOptions());
+      functions, options, "grouping", AGGREGATE,
+      {{numeric_type, {ARG_TYPE_ARBITRARY, {ARG_TYPE_ARBITRARY, REPEATED}}, FN_GROUPING_ID}},
+      DefaultAggregateFunctionOptions().set_alias_name("grouping_id"));
 
   // HASH_AGG
   InsertFunction(

@@ -1489,22 +1489,6 @@ void GetAggregateFunctions(TypeFactory* type_factory,
       DefaultAggregateFunctionOptions().set_pre_resolution_argument_constraint(
           absl::bind_front(&CheckMinMaxArguments, "MAX")));
 
-  if (options.language_options.LanguageFeatureEnabled(
-          FEATURE_V_1_4_GROUPING_BUILTIN)) {
-    InsertFunction(
-        functions, options, "grouping", AGGREGATE,
-        {{int64_type, {ARG_TYPE_ANY_1}, FN_GROUPING}},
-        DefaultAggregateFunctionOptions()
-            .set_post_resolution_argument_constraint(
-                absl::bind_front(&CheckArgumentsSupportGrouping, "Grouping"))
-            .set_supports_safe_error_mode(false)
-            .set_supports_over_clause(false)
-            .set_supports_distinct_modifier(false)
-            .set_supports_window_framing(false)
-            .set_window_ordering_support(FunctionOptions::ORDER_UNSUPPORTED)
-            .set_supports_having_modifier(false));
-  }
-
   FunctionArgumentTypeOptions non_null_non_agg;
   non_null_non_agg.set_is_not_aggregate();
   non_null_non_agg.set_must_be_non_null();

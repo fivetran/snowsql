@@ -1336,7 +1336,8 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "booland_agg(column_1), booland_agg(bool_column),"
       "boolor_agg(column_1), boolor_agg(bool_column),"
       "boolxor_agg(column_1), boolxor_agg(bool_column),"
-      "grouping_id(column_1), grouping_id(column_1, column_2)," // TODO: grouping_id(column_1, column_2, bool_column)
+      "grouping_id(column_1), grouping_id(column_1, column_2, bool_column),"
+      "grouping(column_1), grouping(column_1, column_2, bool_column),"
       "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2)," // TODO: hash_agg(*), hash_agg(column_1, column_2, bool_column)
       "hll(column_1), hll(column_1, column_2),"
       "hll_accumulate(column_1)," // TODO: hll_accumulate(*)
