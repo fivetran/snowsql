@@ -4202,7 +4202,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // HASH_AGG
   InsertFunction(
       functions, options, "hash_agg", AGGREGATE,
-      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_HASH_AGG}},
+      {{numeric_type, {ARG_TYPE_ARBITRARY, {ARG_TYPE_ARBITRARY, REPEATED}}, FN_HASH_AGG}},
       DefaultAggregateFunctionOptions());
 
   // HLL
