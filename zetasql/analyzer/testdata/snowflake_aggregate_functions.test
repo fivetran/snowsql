@@ -38,7 +38,7 @@ from keyvalue
 --
 QueryStmt
 +-output_column_list=
-| +-$analytic.$analytic1#4 AS "$col1" [STRUCT<counters INT64, datatype STRING, precision INT64, scale INT64, state ARRAY<STRUCT<value INT64, count INT64>>, type STRING>]
+| +-$analytic.$analytic1#4 AS "$col1" [VARIANT]
 +-query=
   +-ProjectScan
     +-column_list=[$analytic.$analytic1#4]
@@ -51,7 +51,7 @@ QueryStmt
           +-AnalyticFunctionGroup
             +-analytic_function_list=
               +-$analytic1#4 :=
-                +-AnalyticFunctionCall(ZetaSQL:approx_top_k_accumulate(INT64, INT64) -> STRUCT<counters INT64, datatype STRING, precision INT64, scale INT64, state ARRAY<STRUCT<value INT64, count INT64>>, type STRING>)
+                +-AnalyticFunctionCall(ZetaSQL:approx_top_k_accumulate(INT64, INT64) -> VARIANT)
                   +-ColumnRef(type=INT64, column=KeyValue.Key#1)
                   +-Literal(type=INT64, value=4)
                   +-window_frame=

@@ -4119,7 +4119,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // APPROX_TOP_K_ACCUMULATE
   InsertFunction(
       functions, options, "approx_top_k_accumulate", AGGREGATE,
-      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+      {{variant_type,
         {{ARG_TYPE_ANY_1, supports_grouping},
          {int64_type,
           FunctionArgumentTypeOptions()
@@ -4131,8 +4131,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
             .set_rejects_collation()}},
-      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
+      DefaultAggregateFunctionOptions());
 
   // APPROX_TOP_K_COMBINE
   InsertFunction(
