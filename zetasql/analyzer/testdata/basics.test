@@ -54,9 +54,21 @@ select 1 where true;
 
 SELECT SUM(1);
 --
-ERROR: SELECT without FROM clause cannot use aggregation [at 1:1]
-SELECT SUM(1);
-^
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#1 AS "$col1" [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#1]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#1]
+        +-input_scan=
+        | +-SingleRowScan
+        +-aggregate_list=
+          +-$agg1#1 :=
+            +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
+              +-Literal(type=INT64, value=1)
 ==
 
 [language_features={{|ANALYTIC_FUNCTIONS}}]
