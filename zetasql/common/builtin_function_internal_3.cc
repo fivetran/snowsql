@@ -4478,6 +4478,7 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
+  const FunctionArgumentType::ArgumentCardinality REPEATED = FunctionArgumentType::REPEATED;
 
   // BOOLAND
   InsertFunction(
@@ -4512,6 +4513,12 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
        {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
         FN_BOOLXOR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       fn_options);
+
+    // DECODE
+    InsertFunction(
+        functions, options, "decode", SCALAR,
+        {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, REPEATED}}, FN_DECODE}},
+        fn_options);
 }
 
 void GetSnowflakeConversionFunctions(TypeFactory* type_factory,

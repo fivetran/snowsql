@@ -63,7 +63,7 @@ enum FunctionSignatureId {
   //
   // 100000-100099 Snowflake Aggregate functions                (NextId: 100008)
   // 100100-100199 Snowflake Bitwise functions                  (NextId: 100109)
-  // 100200-100299 Snowflake Conditional expression functions   (NextId: 100208)
+  // 100200-100299 Snowflake Conditional expression functions   (NextId: 100209)
   // 100300-100399 Snowflake Conversion functions               (NextId: 100330)
   // 100400-100499 Snowflake Data generation functions          (NextId: 100407)
   // 100500-100599 Snowflake String and binary functions        (NextId: 100505)
@@ -1370,6 +1370,7 @@ enum FunctionSignatureId {
   FN_BOOLXOR_SAME_ARGS = 100205;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> bool
   FN_BOOLXOR_DIFF_ARGS = 100206;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
   FN_ZEROIFNULL = 100207;               // zeroifnull(ARG_TYPE_ANY_1) -> double
+  FN_DECODE = 100208;                   // decode(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, [ARG_TYPE_ANY_1, ...]) -> ARG_TYPE_ANY_1
 
   // Snowflake Conversion functions
   FN_TO_BOOLEAN_INT64 = 100300;           // to_boolean(INT64) -> bool
