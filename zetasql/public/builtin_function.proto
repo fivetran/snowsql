@@ -1371,6 +1371,7 @@ enum FunctionSignatureId {
   FN_BOOLXOR_DIFF_ARGS = 100206;        // boolxor(ARG_TYPE_ANY_1, ARG_TYPE_ANY_2) -> bool
   FN_ZEROIFNULL = 100207;               // zeroifnull(ARG_TYPE_ANY_1) -> double
   FN_DECODE = 100208;                   // decode(ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, [ARG_TYPE_ANY_1, ...]) -> ARG_TYPE_ANY_1
+  FN_IFF = 100209;                      // iff(bool, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1) -> ARG_TYPE_ANY_1
 
   // Snowflake Conversion functions
   FN_TO_BOOLEAN_INT64 = 100300;           // to_boolean(INT64) -> bool
