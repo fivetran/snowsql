@@ -4472,6 +4472,8 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
                                                 const ZetaSQLBuiltinFunctionOptions& options,
                                                 NameToFunctionMap* functions) {
   const Type* bool_type = type_factory->get_bool();
+  const Type* double_type = type_factory->get_double();
+  const Type* variant_type = type_factory->get_variant();
 
   FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
   has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
@@ -4529,13 +4531,29 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
     // NVL
     InsertFunction(
         functions, options, "nvl", SCALAR,
-        {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_NVL}},
+        {{variant_type, {ARG_TYPE_ARBITRARY, ARG_TYPE_ARBITRARY}, FN_NVL}},
         fn_options);
 
     // NVL2
     InsertFunction(
         functions, options, "nvl2", SCALAR,
-        {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_NVL2}},
+        {{variant_type, {ARG_TYPE_ARBITRARY, ARG_TYPE_ARBITRARY, ARG_TYPE_ARBITRARY}, FN_NVL2}},
+        fn_options);
+
+    // REGR_VALX
+    InsertFunction(
+        functions, options, "regr_valx", SCALAR,
+        {{double_type,
+          {double_type, double_type},
+          FN_REGR_VALX}},
+        fn_options);
+
+    // REGR_VALY
+    InsertFunction(
+        functions, options, "regr_valy", SCALAR,
+        {{double_type,
+          {double_type, double_type},
+          FN_REGR_VALY}},
         fn_options);
 }
 
