@@ -4531,6 +4531,12 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
         functions, options, "nvl", SCALAR,
         {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_NVL}},
         fn_options);
+
+    // NVL2
+    InsertFunction(
+        functions, options, "nvl2", SCALAR,
+        {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_NVL2}},
+        fn_options);
 }
 
 void GetSnowflakeConversionFunctions(TypeFactory* type_factory,
