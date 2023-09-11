@@ -1376,6 +1376,7 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "zeroifnull(null),"
       "decode('a', 'a', 'first', 'b', 'second', 'unknown'), decode('a', 'a', 'first', 'b', 'second', 'c', 'third', 'unknown'), decode('a', 'a', 'first', 'b', 'second', 'c', 'third', 'd', 'fourth', 'unknown'),"
       "iff(false, true, false), iff(false, 'true', false), iff(bool_column, 't', 'f'), iff(bool_column = false, 't', 'f'), iff(2 > 1, 't', 'f'),"
+      "nvl(null, 1), nvl(null, 1.1), nvl(null, 'str'), nvl(null, true), nvl(bool_column, true), nvl(column_2, 'a'),"
       "from table_1"
     },
     {"Conversion", 
