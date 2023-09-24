@@ -1558,6 +1558,10 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "3%2, 3 % 2,"
       "'1' + '5', 1 + '5', 1 + null, +'5', + '5', +null,"
       "'1' - '5', 1 - '5', 1 - null, -'5', - '5', -null,"
+      "to_variant(1) + 1, to_variant(1) - 1, to_variant(1) * 1, to_variant(1) / 1,"
+      "1 + to_variant(1), 1 - to_variant(1), 1 * to_variant(1), 1 / to_variant(1),"
+      "to_variant(1) + '1', to_variant(1) - '1', to_variant(1) * '1', to_variant(1) / '1',"
+      "'1' + to_variant(1), '1' - to_variant(1), '1' * to_variant(1), '1' / to_variant(1),"
     },
     {"except",
       "select 1 except select 2"
