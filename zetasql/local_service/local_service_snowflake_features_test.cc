@@ -1336,8 +1336,9 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "booland_agg(column_1), booland_agg(bool_column),"
       "boolor_agg(column_1), boolor_agg(bool_column),"
       "boolxor_agg(column_1), boolxor_agg(bool_column),"
-      "grouping_id(column_1), grouping_id(column_1, column_2)," // TODO: grouping_id(column_1, column_2, bool_column)
-      "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2)," // TODO: hash_agg(*), hash_agg(column_1, column_2, bool_column)
+      "grouping_id(column_1), grouping_id(column_1, column_2, bool_column),"
+      "grouping(column_1), grouping(column_1, column_2, bool_column),"
+      "hash_agg(null), hash_agg(null, null), hash_agg(null, null, null), hash_agg(column_1), hash_agg(column_1, column_2, bool_column)," // TODO: hash_agg(*)
       "hll(column_1), hll(column_1, column_2),"
       "hll_accumulate(column_1)," // TODO: hll_accumulate(*)
       "hll_combine(column_1), hll_combine(column_2),"
@@ -1373,6 +1374,12 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "booland(1, 0), boolnot(1),"
       "boolor(1, 0), boolxor(1, 0),"
       "zeroifnull(null),"
+      "decode('a', 'a', 'first', 'b', 'second', 'unknown'), decode('a', 'a', 'first', 'b', 'second', 'c', 'third', 'unknown'), decode('a', 'a', 'first', 'b', 'second', 'c', 'third', 'd', 'fourth', 'unknown'),"
+      "iff(false, true, false), iff(false, 'true', false), iff(bool_column, 't', 'f'), iff(bool_column = false, 't', 'f'), iff(2 > 1, 't', 'f'),"
+      "nvl(null, 1), nvl(null, 1.1), nvl(null, 'str'), nvl(null, true), nvl(bool_column, true), nvl(column_2, 'a'),"
+      "nvl2(null, 1, 2), nvl2(null, 1.1, 2.2), nvl2(null, 'str', 'str2'), nvl2(null, true, false), nvl2(bool_column, column_2, bool_column), nvl2(column_2, 'a', 'b'),"
+      "regr_valx(null, 10), regr_valx(1, null), regr_valx(1, 10),"
+      "from table_1"
     },
     {"Conversion", 
       "select "
@@ -1551,6 +1558,10 @@ TEST_F(ZetaSqlLocalServiceImplTest, AnalyzeExpressionWithSnowflakeFunctions) {
       "3%2, 3 % 2,"
       "'1' + '5', 1 + '5', 1 + null, +'5', + '5', +null,"
       "'1' - '5', 1 - '5', 1 - null, -'5', - '5', -null,"
+      "to_variant(1) + 1, to_variant(1) - 1, to_variant(1) * 1, to_variant(1) / 1,"
+      "1 + to_variant(1), 1 - to_variant(1), 1 * to_variant(1), 1 / to_variant(1),"
+      "to_variant(1) + '1', to_variant(1) - '1', to_variant(1) * '1', to_variant(1) / '1',"
+      "'1' + to_variant(1), '1' - to_variant(1), '1' * to_variant(1), '1' / to_variant(1),"
     },
     {"except",
       "select 1 except select 2"

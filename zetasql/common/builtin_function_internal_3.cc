@@ -4076,6 +4076,10 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   const Type* bytes_type = type_factory->get_bytes();
   const Type* float_type = type_factory->get_float();
   const Type* string_type = type_factory->get_string();
+  const Type* variant_type = type_factory->get_variant();
+
+  const ArrayType* array_of_arrays_type;
+  ZETASQL_CHECK_OK(type_factory->MakeArrayType(variant_type, &array_of_arrays_type));
 
   const Function::Mode AGGREGATE = Function::AGGREGATE;
   const FunctionArgumentType::ArgumentCardinality REPEATED =
@@ -4091,7 +4095,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
   // APPROX_TOP_K
   InsertFunction(
       functions, options, "approx_top_k", AGGREGATE,
-      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+      {{array_of_arrays_type,
         {{ARG_TYPE_ANY_1, supports_grouping},
          {int64_type,
           FunctionArgumentTypeOptions()
@@ -4110,13 +4114,12 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
             .set_rejects_collation()}},
-      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopStruct, "count")));
+            DefaultAggregateFunctionOptions());
 
   // APPROX_TOP_K_ACCUMULATE
   InsertFunction(
       functions, options, "approx_top_k_accumulate", AGGREGATE,
-      {{ARG_TYPE_ANY_1,  // Return type will be overridden.
+      {{variant_type,
         {{ARG_TYPE_ANY_1, supports_grouping},
          {int64_type,
           FunctionArgumentTypeOptions()
@@ -4128,8 +4131,7 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
         FunctionSignatureOptions()
             .set_uses_operation_collation()
             .set_rejects_collation()}},
-      DefaultAggregateFunctionOptions().set_compute_result_type_callback(
-          absl::bind_front(&ComputeResultTypeForTopAccumulateStruct, "count")));
+      DefaultAggregateFunctionOptions());
 
   // APPROX_TOP_K_COMBINE
   InsertFunction(
@@ -4191,16 +4193,16 @@ void GetSnowflakeAggregateFunctions(TypeFactory* type_factory,
       {{bool_type, {ARG_TYPE_ANY_1}, FN_BOOLXOR_AGG}},
       DefaultAggregateFunctionOptions());
 
-  // GROUPING_ID
+  // GROUPING, GROUPING_ID
   InsertFunction(
-      functions, options, "grouping_id", AGGREGATE,
-      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_GROUPING_ID}},
-      DefaultAggregateFunctionOptions());
+      functions, options, "grouping", AGGREGATE,
+      {{numeric_type, {ARG_TYPE_ARBITRARY, {ARG_TYPE_ARBITRARY, REPEATED}}, FN_GROUPING_ID}},
+      DefaultAggregateFunctionOptions().set_alias_name("grouping_id"));
 
   // HASH_AGG
   InsertFunction(
       functions, options, "hash_agg", AGGREGATE,
-      {{numeric_type, {ARG_TYPE_ANY_1, {ARG_TYPE_ANY_2, REPEATED}}, FN_HASH_AGG}},
+      {{numeric_type, {ARG_TYPE_ARBITRARY, {ARG_TYPE_ARBITRARY, REPEATED}}, FN_HASH_AGG}},
       DefaultAggregateFunctionOptions());
 
   // HLL
@@ -4471,12 +4473,14 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
                                                 NameToFunctionMap* functions) {
   const Type* bool_type = type_factory->get_bool();
   const Type* double_type = type_factory->get_double();
+  const Type* variant_type = type_factory->get_variant();
 
   FunctionSignatureOptions has_all_evaluated_to_numeric_arguments;
   has_all_evaluated_to_numeric_arguments.set_constraints(&HasAllEvaluatedToNumericArguments);
 
   const Function::Mode SCALAR = Function::SCALAR;
   const FunctionOptions fn_options;
+  const FunctionArgumentType::ArgumentCardinality REPEATED = FunctionArgumentType::REPEATED;
 
   // BOOLAND
   InsertFunction(
@@ -4511,6 +4515,46 @@ void GetSnowflakeConditionalExpressionFunctions(TypeFactory* type_factory,
        {bool_type, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_2},
         FN_BOOLXOR_DIFF_ARGS, has_all_evaluated_to_numeric_arguments}},
       fn_options);
+
+    // DECODE
+    InsertFunction(
+        functions, options, "decode", SCALAR,
+        {{ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1, {ARG_TYPE_ANY_1, REPEATED}}, FN_DECODE}},
+        fn_options);
+
+    // IFF
+    InsertFunction(
+        functions, options, "iff", SCALAR,
+        {{ARG_TYPE_ANY_1, {bool_type, ARG_TYPE_ANY_1, ARG_TYPE_ANY_1}, FN_IFF}},
+        fn_options);
+
+    // NVL
+    InsertFunction(
+        functions, options, "nvl", SCALAR,
+        {{variant_type, {ARG_TYPE_ARBITRARY, ARG_TYPE_ARBITRARY}, FN_NVL}},
+        fn_options);
+
+    // NVL2
+    InsertFunction(
+        functions, options, "nvl2", SCALAR,
+        {{variant_type, {ARG_TYPE_ARBITRARY, ARG_TYPE_ARBITRARY, ARG_TYPE_ARBITRARY}, FN_NVL2}},
+        fn_options);
+
+    // REGR_VALX
+    InsertFunction(
+        functions, options, "regr_valx", SCALAR,
+        {{double_type,
+          {double_type, double_type},
+          FN_REGR_VALX}},
+        fn_options);
+
+    // REGR_VALY
+    InsertFunction(
+        functions, options, "regr_valy", SCALAR,
+        {{double_type,
+          {double_type, double_type},
+          FN_REGR_VALY}},
+        fn_options);
 }
 
 void GetSnowflakeConversionFunctions(TypeFactory* type_factory,

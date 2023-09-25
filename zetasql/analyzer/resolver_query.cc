@@ -1644,11 +1644,11 @@ absl::Status Resolver::ResolveSelect(
   // clause, so even though aggregation or analytic can appear there
   // we do not have to wait until we analyze those clauses to check for
   // this error condition.
-  if (query_resolution_info->HasGroupByOrAggregation() &&
-      select->from_clause() == nullptr) {
-    return MakeSqlErrorAt(select)
-           << "SELECT without FROM clause cannot use aggregation";
-  }
+  // if (query_resolution_info->HasGroupByOrAggregation() &&
+  //     select->from_clause() == nullptr) {
+  //   return MakeSqlErrorAt(select)
+  //          << "SELECT without FROM clause cannot use aggregation";
+  // }
 
   if (query_resolution_info->HasAnalytic() &&
       select->from_clause() == nullptr) {

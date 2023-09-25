@@ -125,7 +125,7 @@ select unknown_fn() over ()
 
 select int32(key) over () from keyvalue
 --
-ERROR: Function not found: int32 [at 1:8]
+ERROR: Function not found: int32; Did you mean nvl2? [at 1:8]
 select int32(key) over () from keyvalue
        ^
 ==

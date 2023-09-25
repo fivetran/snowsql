@@ -1998,16 +1998,38 @@ select count(distinct) from KeyValue
 
 select count(*)
 --
-ERROR: SELECT without FROM clause cannot use aggregation [at 1:1]
-select count(*)
-^
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#1 AS "$col1" [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#1]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#1]
+        +-input_scan=
+        | +-SingleRowScan
+        +-aggregate_list=
+          +-$agg1#1 := AggregateFunctionCall(ZetaSQL:$count_star() -> INT64)
 ==
 
 select sum(5)
 --
-ERROR: SELECT without FROM clause cannot use aggregation [at 1:1]
-select sum(5)
-^
+QueryStmt
++-output_column_list=
+| +-$aggregate.$agg1#1 AS "$col1" [INT64]
++-query=
+  +-ProjectScan
+    +-column_list=[$aggregate.$agg1#1]
+    +-input_scan=
+      +-AggregateScan
+        +-column_list=[$aggregate.$agg1#1]
+        +-input_scan=
+        | +-SingleRowScan
+        +-aggregate_list=
+          +-$agg1#1 :=
+            +-AggregateFunctionCall(ZetaSQL:sum(INT64) -> INT64)
+              +-Literal(type=INT64, value=5)
 ==
 
 select count(*) from (select 1)
@@ -2501,9 +2523,9 @@ QueryStmt
 
 select (select count(*) c, 1 a) from KeyValue
 --
-ERROR: SELECT without FROM clause cannot use aggregation [at 1:9]
+ERROR: Scalar subquery cannot have more than one column unless using SELECT AS STRUCT to build STRUCT values [at 1:8]
 select (select count(*) c, 1 a) from KeyValue
-        ^
+       ^
 ==
 
 # Grouping by all the supported types.
